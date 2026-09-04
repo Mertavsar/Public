@@ -18,6 +18,25 @@ Bu sistem reklam hesaplarında (Meta, Google veya başka bir panel) **kendi baş
 işlem yapmaz.** Ajans sahibinin o işlem için açıkça verdiği onay olmadan hesapta hiçbir
 şey değişmez.
 
+### Hangi hesaba bakılır — kapsam kilidi
+
+Meta bağlantısı ajans sahibinin erişebildiği **tüm** hesapları görür. Bu, hepsine
+bakılacağı anlamına gelmez.
+
+**Kural:** Yalnızca `clients/<slug>/client.md` dosyasında **ID'si yazılı** hesaplardan
+veri çek. Listede görünen ama hiçbir müşteri dosyasında tanımlı olmayan hesaplara
+dokunma — okuma amacıyla bile.
+
+- Bir hesabın verisine ilk kez erişmeden önce ID'nin `client.md`'de yazılı olduğunu
+  doğrula. Yazılı değilse **önce ajans sahibinden onay al**, sonra ID'yi dosyaya yaz.
+- Hesap listesini çekmek serbesttir (yeni müşteri eklerken hesabı bulmak için).
+  Listeyi çekmek ile bir hesabın verisini çekmek farklı şeylerdir.
+- **İsimle eşleştirme yapma, ID ile çalış.** Benzer isimli hesaplar birbirine karışır
+  (ör. `valenstrendonline`, `Valens Collection`, `ValoraTrend` — üçü ayrı hesap).
+  İsim benzerliğine dayanarak hesap seçme; ID'yi teyit ettir.
+- Yanlış müşterinin verisini analiz etmek, veri sızıntısı ve yanlış tavsiye demektir.
+  Emin değilsen sor.
+
 ### Kesinlikle yasak — onay olmadan asla
 
 - Kampanya, ad set veya reklam **oluşturmak**
