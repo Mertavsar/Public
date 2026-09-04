@@ -19,6 +19,7 @@ Sistemin beyni. Diğer skill'lerin bulgularını tek bir karara bağlarsın.
 5. Bu haftanın verisi (`templates/weekly-input.md` formatında).
 6. `meta-ads` → reklam teşhisi.
 7. `google-ads` → varsa.
+7b. `media-buyer` → reklam tarafında ne kurulacak, hangi kreatif, ölçek/kesme kararı.
 8. `cro` → site dönüşümü.
 9. `sales` → mesaj/DM satış süreci.
 10. `account-manager` → müşteri iletişimi.

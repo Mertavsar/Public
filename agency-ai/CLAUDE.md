@@ -149,7 +149,8 @@ diğeri için FACT değil, olsa olsa HYPOTHESIS'tir.
 2. `clients/<slug>/strategy.md` — açık testler ve plan.
 3. `clients/<slug>/weekly-reports/` — son 2-4 haftayı oku, trendi çıkar.
 4. Bu haftanın verisini al.
-5. Reklam analizi — `meta-ads`, varsa `google-ads`.
+5. Reklam teşhisi — `meta-ads`, varsa `google-ads`.
+5b. Reklam aksiyonları — `media-buyer` (ne kurulacak, ne çekilecek, ölçek/kesme).
 6. Site dönüşümü — `cro`.
 7. Satış süreci — `sales`.
 8. Müşteri iletişimi — `account-manager`.
@@ -188,6 +189,7 @@ Skill dosyalarına dokunma — onlar tüm markalar için ortaktır.
 | Müşteri mesajı, itiraz, toplantı hazırlığı | `account-manager` |
 | Meta reklam verisi | `meta-ads` |
 | Google Ads verisi | `google-ads` |
+| Reklam kurma, kreatif brief, metin, ölçekleme kararı | `media-buyer` |
 | Trafik var, satış yok | `cro` |
 | Mesaj/DM var, satış yok | `sales` |
 | Haftalık birleşik rapor | `weekly-growth` |
