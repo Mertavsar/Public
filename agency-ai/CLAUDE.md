@@ -205,6 +205,39 @@ Nihai çıktı formatı `weekly-growth` skill'inde tanımlıdır (15 bölüm). R
 `clients/<slug>/weekly-reports/YYYY-MM-DD.md` altına yazılır ve **"BU HAFTANIN 5 KARARI"**
 ile biter.
 
+
+### Zorunlu okuma kuralı
+
+Bir müşteri için analiz veya rapor üretmeden **önce**, o analizin kapsadığı her alanın
+skill dosyasını **fiilen oku**. Hafızadan veya genel bilgiyle yazma.
+
+- Reklam verisi yorumlanacaksa → `meta-ads` (ve varsa `google-ads`) okunur.
+- Reklam tarafında aksiyon/kreatif/ölçekleme önerilecekse → `media-buyer` okunur.
+- Site dönüşümü konuşulacaksa → `cro` okunur.
+- Mesaj/DM satışı konuşulacaksa → `sales` okunur.
+- Müşteriye söylenecek bir şey yazılacaksa → `account-manager` okunur.
+- Müşteri ilişkisi değerlendirilecekse → `agency-ceo` okunur.
+- Haftalık/birleşik rapor isteniyorsa → `weekly-growth` **ve** kapsadığı tüm skill'ler okunur.
+
+Bir skill'i okumadıysan o alanda hüküm verme. İki seçeneğin var: ya dosyayı oku, ya da
+raporda **"bu alanı incelemedim"** yaz. Üçüncü seçenek — okumadan yorum yapmak — yasaktır.
+
+### Şeffaflık satırı
+
+Her analiz veya raporun **en sonuna** şu bloğu ekle:
+
+```
+---
+OKUNAN DOSYALAR
+Skill'ler:   (fiilen okuduklarının listesi)
+Müşteri:     (client.md, strategy.md, geçmiş raporlar — okuduysan)
+Veri kaynağı: (elle girilen veri / Meta API / ekran görüntüsü / vb.)
+Okunmayan ve bu yüzden değerlendirilmeyen alanlar: (varsa)
+```
+
+Bu blok zorunludur. Ajans sahibi sistemin tam mı yarım mı çalıştığını buradan görür.
+Okumadığın bir dosyayı okudum diye yazmak, sistemin en ağır ihlalidir.
+
 ### Acil müşteri mesajı
 
 Müşteri *"satış yok", "para kazanamıyorum", "bu kadar harcadım", "artık yeter",

@@ -1,6 +1,6 @@
 ---
 name: weekly-growth
-description: Haftalık growth raporu. Bir markanın haftalık verisi verildiğinde diğer tüm analizleri birleştirip 15 bölümlü haftalık raporu, ajans ve müşteri aksiyon listelerini, test planını, bütçe kararını ve toplantı metnini üretir.
+description: Bir marka için birleşik analiz veya rapor. "<Marka> analizini yap", "haftalık rapor", "hesabı değerlendir", "durum ne", "genel bir bakış çıkar" gibi tek bir alana sıkışmayan her istekte kullan. Reklam, site, satış ve müşteri ilişkisi bulgularını birleştirip 15 bölümlü raporu, ajans ve müşteri aksiyon listelerini, test planını, bütçe kararını, toplantı metnini ve haftanın 5 kararını üretir.
 ---
 
 # Weekly Growth Manager
@@ -26,6 +26,9 @@ Sistemin beyni. Diğer skill'lerin bulgularını tek bir karara bağlarsın.
 11. `agency-ceo` → ilişki sürdürülebilirliği.
 
 Rapor `agency-ai/clients/<slug>/weekly-reports/YYYY-MM-DD.md` altına yazılır.
+
+**Bu sıradaki skill dosyalarını fiilen oku.** Hafızadan yazma. Okumadığın alanı raporda
+"incelenmedi" olarak işaretle ve sonundaki şeffaflık satırına yaz (`CLAUDE.md` §8).
 
 **Eksik veri varsa rapor yine üretilir** — eksik bölümler `MISSING` işaretlenir ve
 "bu bölümü doldurmak için gereken veri" yazılır. Veri yok diye rapor üretmeyi reddetme,
@@ -97,3 +100,7 @@ okunmalı. Rapor bununla biter.
 - Rapor ajans içidir. Müşteriye gidecek dil sadece 11. ve 12. bölümdedir.
 - Geçen haftanın 5 kararı uygulanmadıysa bunu 1. bölümde yaz. Uygulanmayan kararı
   sessizce tekrar listeleme — neden uygulanmadığını sor.
+
+---
+
+Raporun en sonuna `CLAUDE.md` §8'deki **şeffaflık satırını** eklemeyi unutma.
