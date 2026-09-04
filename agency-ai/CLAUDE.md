@@ -288,16 +288,47 @@ Müşteri *"satış yok", "para kazanamıyorum", "bu kadar harcadım", "artık y
 
 ## 9. Yeni müşteri ekleme
 
-```
-mkdir -p agency-ai/clients/<slug>/{weekly-reports,conversations}
-cp agency-ai/templates/client.md   agency-ai/clients/<slug>/client.md
-cp agency-ai/templates/strategy.md agency-ai/clients/<slug>/strategy.md
-```
+Ajans sahibi *"yeni müşteri ekle"*, *"<Marka> diye bir müşteri açalım"* dediğinde
+**sen halledersin.** Ona komut ezberletme.
 
-`slug` = küçük harf, tire ile (`qassa-shal`). Sonra `client.md`'yi doldur.
-Skill dosyalarına dokunma — onlar tüm markalar için ortaktır.
+### Adımlar
 
----
+1. Marka adından bir `slug` üret: küçük harf, Türkçe karakter yok, tire ile.
+   `Qassa Shal` → `qassa-shal`. Slug'ı ona **teyit ettir** — yanlış yazım sonraki
+   haftalarda veriyi ikiye böler.
+2. Aynı isimde klasör var mı bak. Varsa yenisini açma, mevcut olanı kullan.
+3. Klasörü ve alt klasörleri oluştur:
+   `clients/<slug>/` içine `weekly-reports/` ve `conversations/`
+4. `templates/client.md` → `clients/<slug>/client.md`
+   `templates/strategy.md` → `clients/<slug>/strategy.md`
+   Başlıklardaki `<MARKA ADI>` yerine gerçek adı yaz.
+5. Bilgileri **sohbet ederek** topla (aşağıda).
+6. Doldur, kaydet, commit et.
+
+### Bilgi toplama — nasıl sorulur
+
+Uzun form dayatma. **Küçük gruplar halinde sor**, cevaplandıkça yaz.
+
+**Önce şu dördü** (bunlar olmadan sistem çalışmaz):
+1. Ne satıyor, ortalama ürün fiyatı kaç?
+2. **Brüt kâr marjı yüzde kaç?** — En kritik alan. Başabaş ROAS = 1 ÷ marj.
+   Bilmiyorsa "yaklaşık" iste; hiç bilmiyorsa `BİLİNMİYOR` yaz ve öğrenmesi
+   gerektiğini söyle — bu bilgi olmadan hiçbir ROAS yorumu anlamlı değildir.
+3. Aylık reklam bütçesi ne kadar, hangi kanallarda?
+4. Satış nereden geliyor — web sitesi mi, WhatsApp/DM mi, ikisi de mi?
+
+**Sonra** hedef, satış süreci, kim cevaplıyor, kargo/iade, geçmişte ne denenmiş.
+
+Bilinmeyen alanı **silme**, `BİLİNMİYOR` yaz. Sonradan doldurulur.
+Bir seferde bitirmeye çalışma; ilk dört soruyla bile sistem çalışmaya başlar.
+
+### Bittiğinde
+
+Neyin eksik kaldığını tek listede söyle ve şunu hatırlat: haftalık veri
+`templates/weekly-input.md` kopyalanarak `clients/<slug>/weekly-reports/YYYY-MM-DD.md`
+olarak girilir.
+
+Skill dosyalarına **dokunma**. Onlar tüm markalar için ortaktır.
 
 ## 10. Skill haritası
 
