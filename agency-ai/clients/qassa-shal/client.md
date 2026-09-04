@@ -20,6 +20,16 @@
 - **Başabaş ROAS:**
 - **Stok / tedarik durumu:**
 
+## Hesap kimlikleri
+> Bir kere yazılır, her hafta tekrar aranmaz. Meta hesabı MCP ile otomatik bulunur.
+- **Meta reklam hesabı ID:** 546687459562204
+- **Meta hesap adı:** Qassa Shal
+- **Business ID:** 738421977092280
+- **Not:** Aynı business altında "Yedek Hesap" (1138563301069620) da var — analizde kullanılmıyor.
+- **Facebook sayfası:**
+- **Instagram hesabı:**
+- **Google Ads müşteri ID:**
+
 ## Reklam
 - **Aktif kanallar:** (Meta / Google / TikTok / …)
 - **Aylık reklam bütçesi:**

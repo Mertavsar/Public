@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agency AI</title>
+<style>
+  :root{
+    --bg:#f6f6f4; --card:#fff; --ink:#1c1b19; --muted:#6b6a66;
+    --line:#e3e2de; --accent:#b5561a; --ok:#2f7a4a; --err:#b3261e;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#1a1a18;--card:#232320;--ink:#eceae5;--muted:#9b9992;
+          --line:#35342f;--accent:#e2803f;--ok:#5fbb84;--err:#e8695f;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+  .wrap{max-width:940px;margin:0 auto;padding:32px 20px 80px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+  h1{font-size:21px;margin:0;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:13px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;
+         padding:20px;margin-top:24px}
+  label{display:block;font-size:12px;font-weight:600;color:var(--muted);
+        text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+  select,input,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);
+        border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+  textarea{min-height:88px;resize:vertical}
+  .row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+  .row>div{flex:1;min-width:150px}
+  .opts{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  .opts label{display:flex;align-items:center;gap:7px;text-transform:none;
+        font-size:14px;font-weight:400;color:var(--ink);letter-spacing:0;margin:0}
+  .opts input{width:auto}
+  button{background:var(--accent);color:#fff;border:0;border-radius:8px;
+         padding:11px 22px;font:600 15px/1 inherit;cursor:pointer}
+  button:disabled{opacity:.5;cursor:default}
+  .steps{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        overflow:hidden}
+  .step.pending{opacity:.55}
+  .head{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer}
+  .head h2{font-size:15px;margin:0;flex:1;font-weight:600}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex:none}
+  .running .dot{background:var(--accent);animation:pulse 1.1s infinite}
+  .done .dot{background:var(--ok)} .error .dot{background:var(--err)}
+  @keyframes pulse{50%{opacity:.25}}
+  .tag{font-size:12px;color:var(--muted)}
+  .body{padding:0 18px 18px;border-top:1px solid var(--line);
+        white-space:pre-wrap;font-size:14px;overflow-x:auto}
+  .body.err{color:var(--err)}
+  .hidden{display:none}
+  .done-box{margin-top:24px;padding:16px 18px;border:1px solid var(--ok);
+        border-radius:12px;background:var(--card);font-size:14px}
+  code{background:var(--bg);padding:2px 5px;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>Agency AI</h1><span class="sub">yerel panel</span></header>
+  <div class="sub">Tüm uzmanlar sırayla çalışır. Her birinin çıktısını ayrı görürsün.</div>
+
+  <div class="panel" id="form">
+    <div class="row">
+      <div>
+        <label for="client">Marka</label>
+        <select id="client"></select>
+      </div>
+      <div>
+        <label for="from">Başlangıç</label>
+        <input type="date" id="from">
+      </div>
+      <div>
+        <label for="to">Bitiş</label>
+        <input type="date" id="to">
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <label for="notes">Bu hafta ne oldu? Müşteri ne dedi?</label>
+      <textarea id="notes" placeholder="Müşteri aradı, satış olmadığını söyledi. Geçen hafta 3 yeni kreatif yayına aldık..."></textarea>
+    </div>
+    <div style="margin-bottom:16px">
+      <label for="data">Ham veri <span style="text-transform:none;font-weight:400">— panelden kopyala-yapıştır. Meta bağlantısı çalışıyorsa boş bırak.</span></label>
+      <textarea id="data" placeholder="Harcama: 14.000 TL&#10;Ciro: 31.500 TL&#10;Purchase: 22&#10;CTR: %1,4&#10;Add To Cart: 180&#10;Checkout: 44"></textarea>
+    </div>
+    <div class="opts" id="opts"></div>
+    <button id="go">Analizi başlat</button>
+    <span class="tag" id="hint" style="margin-left:12px"></span>
+  </div>
+
+  <div class="steps" id="steps"></div>
+  <div id="finish"></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let steps = [], timer = null;
+
+async function init(){
+  const d = await (await fetch('/api/init')).json();
+  steps = d.steps;
+  $('from').value = d.date_from;
+  $('to').value = d.date_to;
+  if(!d.clients.length){
+    $('client').innerHTML = '<option>— müşteri yok —</option>';
+    $('hint').textContent = 'Önce Claude Code\'da "Yeni müşteri ekle: <Marka>" de.';
+    $('go').disabled = true;
+  } else {
+    $('client').innerHTML = d.clients.map(c =>
+      `<option value="${c.slug}">${c.name}${c.account?'':'  (hesap ID yok)'}</option>`
+    ).join('');
+  }
+  $('opts').innerHTML = steps.filter(s=>s.optional).map(s =>
+    `<label><input type="checkbox" value="${s.key}"> ${s.title}</label>`).join('');
+}
+
+function render(run){
+  $('steps').innerHTML = run.steps.map((s,i) => {
+    const open = s.status === 'done' || s.status === 'error';
+    const label = {pending:'bekliyor',running:'çalışıyor…',done:'',error:'hata'}[s.status];
+    return `<div class="step ${s.status}">
+      <div class="head" onclick="this.nextElementSibling?.classList.toggle('hidden')">
+        <span class="dot"></span><h2>${s.title}</h2><span class="tag">${label}</span>
+      </div>
+      ${open ? `<div class="body ${s.status==='error'?'err':''}">${
+        esc(s.status==='error' ? s.error : s.output)}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  if(run.status === 'done'){
+    clearInterval(timer); timer = null;
+    $('go').disabled = false; $('go').textContent = 'Analizi başlat';
+    const bad = run.steps.filter(s => s.status === 'error').length;
+    $('finish').innerHTML = `<div class="done-box">
+      <strong>Analiz bitti.</strong>
+      ${run.report_path ? `Rapor kaydedildi: <code>${run.report_path}</code>` : ''}
+      ${bad ? `<br>${bad} adım hata verdi — yukarıda kırmızı işaretli.` : ''}
+    </div>`;
+  }
+}
+
+function esc(t){ return (t||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+$('go').onclick = async () => {
+  $('go').disabled = true; $('go').textContent = 'Çalışıyor…';
+  $('finish').innerHTML = '';
+  const body = {
+    client: $('client').value,
+    date_from: $('from').value,
+    date_to: $('to').value,
+    notes: $('notes').value,
+    data: $('data').value,
+    steps: [...document.querySelectorAll('#opts input:checked')].map(i => i.value),
+  };
+  const r = await (await fetch('/api/run', {method:'POST', body: JSON.stringify(body)})).json();
+  if(r.error){ alert(r.error); $('go').disabled = false; return; }
+  const poll = async () => render(await (await fetch('/api/run/' + r.id)).json());
+  await poll();
+  timer = setInterval(poll, 2000);
+};
+
+init();
+</script>
+</body>
+</html>
