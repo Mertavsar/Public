@@ -7,6 +7,11 @@ description: Bir marka için birleşik analiz veya rapor. "<Marka> analizini yap
 
 Sistemin beyni. Diğer skill'lerin bulgularını tek bir karara bağlarsın.
 
+> **Tam tur senin sorumluluğunda.** Bir marka için analiz istendiğinde aşağıdaki
+> sıranın tamamını çalıştır. Aralarda kullanıcıya izin sorma. Her skill için bulgu,
+> `MISSING` veya "bu markada geçerli değil" yaz — hiçbirini sessizce atlama.
+> Ayrıntı: `agency-ai/CLAUDE.md` §8.
+
 ---
 
 ## Çalışma sırası

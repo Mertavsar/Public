@@ -187,7 +187,10 @@ diğeri için FACT değil, olsa olsa HYPOTHESIS'tir.
 
 ## 8. Çalışma akışı
 
-### Haftalık analiz ("<Marka> haftalık analizini yap")
+### Tam tur sırası
+
+Tetikleyen istekler: *"<Marka> analizini yap"*, *"dünkü reklamlarına bak"*,
+*"haftalık rapor"*, *"hesap ne durumda"*, *"değerlendir"* — ve benzeri her istek.
 
 1. `clients/<slug>/client.md` — bağlamı oku.
 2. `clients/<slug>/strategy.md` — açık testler ve plan.
@@ -205,6 +208,43 @@ Nihai çıktı formatı `weekly-growth` skill'inde tanımlıdır (15 bölüm). R
 `clients/<slug>/weekly-reports/YYYY-MM-DD.md` altına yazılır ve **"BU HAFTANIN 5 KARARI"**
 ile biter.
 
+
+### TAM TUR — varsayılan davranış
+
+Bir müşteri için herhangi bir analiz, rapor veya değerlendirme istendiğinde varsayılan
+davranış **tam tur**dur. İstek dar görünse bile (*"dünkü reklamları analiz et"*,
+*"hesaba bir bak"*) zincirin tamamı çalışır.
+
+**Aralarda izin isteme.** Şu cümleleri kurma:
+
+> "İstersen site tarafına da bakayım" · "CRO analizini de yapmamı ister misin?"
+> "Devam edeyim mi?" · "Önce şu veriyi verir misin?"
+
+Sorma, yap. Kullanıcı tur'u başlattığında hepsini onaylamış sayılır.
+
+**Her skill üç sonuçtan birini üretir:**
+
+1. **Bulgu** — veri var, teşhis var.
+2. **Veri yok** — `MISSING` + bu alanı açmak için gereken tam veri listesi.
+3. **Geçerli değil** — bu markada bu alan yok (ör. sadece WhatsApp'tan satan markada `cro`).
+
+Üçünden biri **mutlaka** yazılır. Bir skill'in sessizce atlanması yasaktır.
+
+**Eksik veri turu durdurmaz.** Elde ne varsa onunla git, boşlukları işaretle, eksikleri
+sonunda tek listede topla. "Veri gelsin sonra bakarım" deme — bugünkü veriyle bugünkü
+en iyi teşhisi ver.
+
+**Kısa dönem uyarısı.** Tek günlük veya çok kısa dönem istenirse analizi yine yap, ama
+başına şunu yaz: *"Tek günlük veri istatistiksel olarak zayıftır; buradaki bulgular
+eğilim değil gözlemdir."* İstenen dönemi reddetme, sınırını söyle.
+
+**Dar tur ne zaman?** Kullanıcı açıkça daraltırsa: *"sadece Meta'ya bak"*,
+*"sadece müşteriye cevap yaz"*. O zaman istenen kadarını yap ve sonunda
+"tam tur istersen söyle" diye tek satır ekle.
+
+**İstisna — reklam hesabı.** Tam tur *analiz* ve *öneri* üretir. Reklam hesabında
+işlem yapmaz. §0 her koşulda geçerlidir: okuma serbest, yazma onaya tabidir. Tur'un
+otomatik olması, aksiyonların otomatik olduğu anlamına gelmez.
 
 ### Zorunlu okuma kuralı
 
