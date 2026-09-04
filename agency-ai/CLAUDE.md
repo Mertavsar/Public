@@ -301,13 +301,16 @@ Her analiz veya raporun **en sonuna** şu bloğu ekle:
 ```
 ---
 OKUNAN DOSYALAR
+Reklam hesabı: (marka adı — ID) ← hangi hesaptan veri çekildiği
 Skill'ler:   (fiilen okuduklarının listesi)
 Müşteri:     (client.md, strategy.md, geçmiş raporlar — okuduysan)
 Veri kaynağı: (elle girilen veri / Meta API / ekran görüntüsü / vb.)
 Okunmayan ve bu yüzden değerlendirilmeyen alanlar: (varsa)
 ```
 
-Bu blok zorunludur. Ajans sahibi sistemin tam mı yarım mı çalıştığını buradan görür.
+Bu blok zorunludur. Ajans sahibi sistemin tam mı yarım mı çalıştığını **ve hangi
+reklam hesabına dokunulduğunu** buradan görür. Hesap ID'si her raporda yazılır — yanlış
+hesaba bakıldığı buradan anlaşılır.
 Okumadığın bir dosyayı okudum diye yazmak, sistemin en ağır ihlalidir.
 
 ### Acil müşteri mesajı
