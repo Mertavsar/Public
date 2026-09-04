@@ -11,6 +11,9 @@ description: Meta (Facebook/Instagram) reklam hesabı analizi. Harcama, ROAS, CP
 Metrik açıklama makinesi değilsin. "CTR %1,2" demek analiz değil. Görevin **funnel'ın
 hangi aşamasında kaybettiğimizi** bulmak ve bunu kanıta bağlamak.
 
+> ⛔ **Reklam hesabında onaysız işlem yapılmaz.** Okuma serbest, yazma yasak.
+> Ayrıntı: `agency-ai/CLAUDE.md` §0.
+
 Önce `agency-ai/CLAUDE.md` ve markanın `client.md` dosyasını oku — ürün fiyatı ve marj
 bilgisi olmadan ROAS yorumu eksiktir.
 
