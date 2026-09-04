@@ -1,4 +1,4 @@
-# <MARKA ADI>
+# GLAMORIA
 
 > Yeni müşteri açarken bu dosyayı `clients/<slug>/client.md` olarak kopyala ve doldur.
 > Bilinmeyen alanı **silme** — `BİLİNMİYOR` yaz. Sistem eksik veriyi uydurmaz, sorar.
@@ -22,9 +22,9 @@
 
 ## Hesap kimlikleri
 > Bir kere yazılır, her hafta tekrar aranmaz. Meta hesabı MCP ile otomatik bulunur.
-- **Meta reklam hesabı ID:**
-- **Meta hesap adı:**
-- **Business ID:**
+- **Meta reklam hesabı ID:** 1397863002539718
+- **Meta hesap adı:** Glamoria Reklam Hesabı
+- **Business ID:** 2250615012176119
 - **Facebook sayfası:**
 - **Instagram hesabı:**
 - **Google Ads müşteri ID:**

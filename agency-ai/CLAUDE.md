@@ -246,6 +246,19 @@ eğilim değil gözlemdir."* İstenen dönemi reddetme, sınırını söyle.
 işlem yapmaz. §0 her koşulda geçerlidir: okuma serbest, yazma onaya tabidir. Tur'un
 otomatik olması, aksiyonların otomatik olduğu anlamına gelmez.
 
+### Veri kaynağı — önce panelden çek
+
+Meta MCP bağlıysa reklam verisini **elle girilmesini bekleme, kendin çek.** Hesap ID'si
+`client.md`'de yazılıdır; yoksa hesap listesinden bul ve teyit ettir.
+
+- Ajans sahibine "şu rakamları yazar mısın" deme; çekebileceğin veriyi çek.
+- Elle girilmiş veri ile panelden çekilen veri çelişirse **ikisini de yaz**, birini
+  doğru kabul etme. Fark genelde attribution penceresi veya dönem kaymasıdır.
+- Çekilemeyen alanlar (site analitiği, sipariş sayısı, marj, konuşma dökümleri)
+  yine ajans sahibinden istenir — ama bunlar tek listede, analizin **sonunda** istenir,
+  turu durdurmak için değil.
+- Hangi verinin panelden, hangisinin elle geldiğini şeffaflık satırında belirt.
+
 ### Zorunlu okuma kuralı
 
 Bir müşteri için analiz veya rapor üretmeden **önce**, o analizin kapsadığı her alanın
@@ -302,6 +315,11 @@ Ajans sahibi *"yeni müşteri ekle"*, *"<Marka> diye bir müşteri açalım"* de
 4. `templates/client.md` → `clients/<slug>/client.md`
    `templates/strategy.md` → `clients/<slug>/strategy.md`
    Başlıklardaki `<MARKA ADI>` yerine gerçek adı yaz.
+4b. **Reklam hesabını kendin bul.** Meta MCP bağlıysa hesap listesini çek, marka adına
+   en yakın hesabı bul, ajans sahibine **teyit ettir**, sonra ID'yi `client.md`'deki
+   "Hesap kimlikleri" bölümüne yaz. Ona ID sorma — sen bul, o onaylasın.
+   Benzer isimli birden fazla hesap varsa hepsini listele ve seçtir.
+   `is_ads_mcp_enabled` veya `is_queryable` false ise bunu söyle ve nedenini aktar.
 5. Bilgileri **sohbet ederek** topla (aşağıda).
 6. Doldur, kaydet, commit et.
 
