@@ -64,7 +64,8 @@
 
 ## Değerlendirme
 - **Güçlü yönleri:**
-  - Site zaten satıyor: ~34 sipariş / 7 gün (pixel, 28 Ağu – 4 Eyl) ✅
+  - Site zaten satıyor: **~19 sipariş / 7 gün** (~2,7/gün) — pixel, 28 Ağu – 4 Eyl ✅
+    *(Olaylar web+CAPI olarak çift gönderiliyor; tekilleştirilmiş rakam budur.)*
   - Ciddi organik trafik: 3 Eylül'de 5.690 PageView ✅
   - Trafiğin ~%85-90'ı mobil ✅
   - Reklam üst funnel'ı sağlıklı: CTR %4,12, link tıklama→LPV %85, LPV→ATC %18,8 ✅
