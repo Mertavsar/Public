@@ -1,0 +1,25 @@
+; Survivor3D - 3D roguelite survivor
+; Engine configuration. Text format on purpose: every scene and setting in
+; this project is diffable and editable without opening the editor.
+
+config_version=5
+
+[application]
+
+config/name="Survivor3D"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/handheld/orientation=1
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
