@@ -78,3 +78,33 @@ Düşman hızını arıyor ama kazanma oranı hızla birlikte **artıyor** (%83 
 hızlı düşmanlar topluca geliyor, silah onları daha verimli biçiyor. İkili arama
 tek yönlü değişim varsayar, o yüzden bu kol geçersiz. Zorluk kolu düşman canı
 olmalı — model tarafında zaten öyle çalışıyor.
+
+## Kadro (Aşama 2b)
+
+Dört oynanabilir karakter, her biri tek bir dürüst takas üzerine kurulu.
+"Dengeli ama farklı tatta" bir kadro oyuncuya kilit açacak bir sebep vermez,
+o yüzden her karakter bir şeyde gerçekten iyi, başka bir şeyde gerçekten kötü.
+
+| Karakter | Takas | Kilit |
+|---|---|---|
+| Nöbetçi | Dengeli başlangıç. Hiçbir yönü uç değil. | Açık |
+| Avcı | Uzun menzil, hızlı hafif atış. Düşman sertleşince zorlanır. | 800 |
+| Koruyucu | Yavaş ve dayanıklı, mermileri sırayı deler. | 1600 |
+| Sürgün | Çok hızlı, çok kırılgan, geniş saçma. | 2600 |
+
+Modeller `art/roster.glb` içinde, Blender'da prosedürel olarak üretildi.
+Her biri 130-300 poligon. Okunabilirlik bütün oranları belirledi: oyuncu
+kalabalık bir arenaya yukarıdan bakarken yüz değil siluet ve renk görür.
+
+    godot --headless --path game --script res://sim/roster_test.gd    # kadro dengeli mi
+    godot --headless --path game --script res://sim/tune_roster.gd    # her karakteri ayrı ayarla
+
+### Kadroyu elle dengelemek iki kez başarısız oldu
+
+Birinci denemede Koruyucu dört stat birden kaybetti ve %88'den %38'e düştü;
+Sürgün üç stat birden kazandı ve %50'den %100'e çıktı. Aynı anda birden fazla
+kolu çevirince hiçbir değişiklik tek bir sebebe bağlanamıyor.
+
+Karakterler bir run'da birbirleriyle hiç karşılaşmadığı için her biri bağımsız
+tek boyutlu bir problem, ve hasar kazanma oranını tek yönde hareket ettiriyor.
+`tune_roster.gd` bu yüzden her karakteri ayrı ayrı, aynı hedefe ayarlıyor.

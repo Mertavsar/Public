@@ -20,6 +20,9 @@ var positions: PackedVector3Array = PackedVector3Array()
 var healths: PackedFloat32Array = PackedFloat32Array()
 var count := 0
 
+## Tuner hook. 0 means use the curve in Balance.
+var hp_growth_override := 0.0
+
 var _spawn_accumulator := 0.0
 var _rng := RandomNumberGenerator.new()
 var _multimesh: MultiMesh
@@ -72,7 +75,7 @@ func update(delta: float, elapsed: float, player_pos: Vector3, speed: float,
 
 func _spawn(delta: float, elapsed: float, player_pos: Vector3, facing: Vector3) -> void:
 	_spawn_accumulator += B.spawn_rate_at(elapsed) * delta
-	var hp := B.enemy_hp_at(elapsed)
+	var hp := _enemy_hp_at(elapsed)
 	while _spawn_accumulator >= 1.0 and count < MAX_ENEMIES:
 		_spawn_accumulator -= 1.0
 		# Spawn on a ring outside the camera so they walk into view. Most of them
@@ -85,6 +88,11 @@ func _spawn(delta: float, elapsed: float, player_pos: Vector3, facing: Vector3) 
 		positions[count] = player_pos + Vector3(cos(angle), 0.0, sin(angle)) * dist
 		healths[count] = hp
 		count += 1
+
+func _enemy_hp_at(elapsed: float) -> float:
+	if hp_growth_override > 0.0:
+		return B.ENEMY.base_hp * pow(hp_growth_override, elapsed / 10.0)
+	return B.enemy_hp_at(elapsed)
 
 func _move(delta: float, player_pos: Vector3, speed: float) -> void:
 	for i in count:

@@ -10,6 +10,7 @@ signal died()
 
 const B := preload("res://autoload/balance.gd")
 const Pool := preload("res://scripts/combat/upgrade_pool.gd")
+const Roster := preload("res://autoload/characters.gd")
 
 var rng := RandomNumberGenerator.new()
 var stats := {}
@@ -21,13 +22,18 @@ var gold := 0.0
 var elapsed := 0.0
 var alive := true
 var taken := {}
+var character := {}
 
-func _init(meta_level: int = 0) -> void:
+## Tuner hook. 1.0 means use the character's own weapon damage.
+var damage_scale := 1.0
+
+func _init(meta_level: int = 0, character_id: String = "") -> void:
 	rng.randomize()
+	character = Roster.by_id(character_id if character_id != "" else Roster.default_id())
 	stats = {
 		"damage_mult": 1.0 + B.META.damage_per_level * meta_level,
 		"attack_speed_mult": 1.0,
-		"projectiles": float(B.WEAPON.projectiles),
+		"projectiles": float(character.weapon.projectiles),
 		"bonus_hp": B.META.hp_per_level * meta_level,
 		"move_mult": 1.0 + B.META.speed_per_level * meta_level,
 		"pickup_mult": 1.0,
@@ -37,19 +43,29 @@ func _init(meta_level: int = 0) -> void:
 	hp = max_hp()
 
 func max_hp() -> float:
-	return B.PLAYER.max_hp + stats.bonus_hp
+	return character.hp + stats.bonus_hp
 
 func move_speed() -> float:
-	return B.PLAYER.move_speed * stats.move_mult
+	return character.move_speed * stats.move_mult
 
 func pickup_radius() -> float:
 	return B.PLAYER.pickup_radius * stats.pickup_mult
 
 func weapon_damage() -> float:
-	return B.WEAPON.damage * stats.damage_mult
+	return character.weapon.damage * damage_scale * stats.damage_mult
 
 func weapon_cooldown() -> float:
-	return B.WEAPON.cooldown / stats.attack_speed_mult
+	return character.weapon.cooldown / stats.attack_speed_mult
+
+func weapon_range() -> float:
+	return character.weapon.range
+
+func weapon_spread() -> float:
+	return character.weapon.spread
+
+## How many extra enemies a single shot passes through before it is spent.
+func weapon_pierce() -> int:
+	return character.weapon.pierce
 
 func projectile_count() -> int:
 	return int(stats.projectiles)

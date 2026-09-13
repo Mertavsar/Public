@@ -10,6 +10,11 @@ class_name Characters
 ##
 ## Readability first: at this camera height a player sees a silhouette and a
 ## colour, not a face. Each one is a different shape and a different hue.
+##
+## Damage values come from sim/tune_roster.gd, which tunes each character
+## independently to the same win rate. Do not hand-edit them: two attempts at
+## balancing this roster by eye both made the spread worse, because several
+## stats moved at once and nothing could be attributed.
 
 const ROSTER := [
 	{
@@ -22,7 +27,7 @@ const ROSTER := [
 		"hp": 100.0,
 		"move_speed": 5.0,
 		"weapon": {
-			"damage": 15.0, "cooldown": 0.34, "projectiles": 1,
+			"damage": 18.2, "cooldown": 0.34, "projectiles": 1,
 			"range": 9.5, "spread": 1.0, "pierce": 0,
 		},
 	},
@@ -36,7 +41,7 @@ const ROSTER := [
 		"hp": 80.0,
 		"move_speed": 5.3,
 		"weapon": {
-			"damage": 9.5, "cooldown": 0.20, "projectiles": 1,
+			"damage": 8.4, "cooldown": 0.20, "projectiles": 1,
 			"range": 13.0, "spread": 1.0, "pierce": 0,
 		},
 	},
@@ -50,7 +55,7 @@ const ROSTER := [
 		"hp": 148.0,
 		"move_speed": 4.2,
 		"weapon": {
-			"damage": 27.0, "cooldown": 0.78, "projectiles": 1,
+			"damage": 29.9, "cooldown": 0.78, "projectiles": 1,
 			"range": 7.0, "spread": 1.0, "pierce": 2,
 		},
 	},
@@ -64,7 +69,7 @@ const ROSTER := [
 		"hp": 76.0,
 		"move_speed": 6.1,
 		"weapon": {
-			"damage": 12.0, "cooldown": 0.45, "projectiles": 3,
+			"damage": 7.4, "cooldown": 0.45, "projectiles": 3,
 			"range": 8.5, "spread": 1.45, "pierce": 2,
 		},
 	},

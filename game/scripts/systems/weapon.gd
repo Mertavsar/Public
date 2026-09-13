@@ -17,6 +17,7 @@ const SPREAD := 0.22              ## Radians between extra projectiles.
 var positions: PackedVector3Array = PackedVector3Array()
 var velocities: PackedVector3Array = PackedVector3Array()
 var lifetimes: PackedFloat32Array = PackedFloat32Array()
+var pierces: PackedInt32Array = PackedInt32Array()
 var count := 0
 
 var _cooldown := 0.0
@@ -34,6 +35,7 @@ func ensure_ready() -> void:
 	positions.resize(MAX_PROJECTILES)
 	velocities.resize(MAX_PROJECTILES)
 	lifetimes.resize(MAX_PROJECTILES)
+	pierces.resize(MAX_PROJECTILES)
 	_setup_multimesh()
 
 func _setup_multimesh() -> void:
@@ -62,10 +64,10 @@ func update(delta: float, state: RunState, swarm: Swarm, origin: Vector3,
 	ensure_ready()
 	_cooldown -= delta
 	if _cooldown <= 0.0:
-		var target := swarm.nearest(origin, B.WEAPON.range)
+		var target := swarm.nearest(origin, state.weapon_range())
 		if target >= 0:
 			var aim := _lead(origin, swarm, target, enemy_speed)
-			_fire(origin, aim, state.projectile_count())
+			_fire(origin, aim, state)
 			_cooldown = state.weapon_cooldown()
 	_advance(delta, state, swarm)
 	_render()
@@ -78,7 +80,9 @@ func _lead(origin: Vector3, swarm: Swarm, index: int, enemy_speed: float) -> Vec
 	var flight := origin.distance_to(target) / SPEED
 	return target + swarm.velocity_of(index, origin, enemy_speed) * flight
 
-func _fire(origin: Vector3, target: Vector3, shots: int) -> void:
+func _fire(origin: Vector3, target: Vector3, state: RunState) -> void:
+	var shots := state.projectile_count()
+	var arc := SPREAD * state.weapon_spread()
 	var dir := (target - origin)
 	dir.y = 0.0
 	if dir.length() < 0.001:
@@ -89,11 +93,12 @@ func _fire(origin: Vector3, target: Vector3, shots: int) -> void:
 	for s in shots:
 		if count >= MAX_PROJECTILES:
 			return
-		var offset := (float(s) - float(shots - 1) * 0.5) * SPREAD
+		var offset := (float(s) - float(shots - 1) * 0.5) * arc
 		var a := base_angle + offset
 		positions[count] = origin
 		velocities[count] = Vector3(cos(a), 0.0, sin(a)) * SPEED
-		lifetimes[count] = B.WEAPON.range / SPEED
+		lifetimes[count] = state.weapon_range() / SPEED
+		pierces[count] = state.weapon_pierce()
 		count += 1
 
 func _advance(delta: float, state: RunState, swarm: Swarm) -> void:
@@ -107,8 +112,12 @@ func _advance(delta: float, state: RunState, swarm: Swarm) -> void:
 		if hit >= 0:
 			if swarm.damage(hit, damage):
 				state.add_kill()
-			_remove(i)
-			continue
+			# A piercing shot keeps going; a spent one stops here.
+			if pierces[i] > 0:
+				pierces[i] -= 1
+			else:
+				_remove(i)
+				continue
 		if lifetimes[i] <= 0.0:
 			_remove(i)
 			continue
@@ -126,6 +135,7 @@ func _remove(index: int) -> void:
 	positions[index] = positions[count]
 	velocities[index] = velocities[count]
 	lifetimes[index] = lifetimes[count]
+	pierces[index] = pierces[count]
 
 func _render() -> void:
 	if _multimesh == null:

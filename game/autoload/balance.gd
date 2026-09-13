@@ -28,7 +28,7 @@ const WEAPON := {
 ## Enemies get tougher over time rather than being hand-placed per wave.
 const ENEMY := {
 	"base_hp": 14.0,
-	"hp_growth_per_10s": 1.0902,   ## Auto-tuned. Do not hand-edit; run sim/tune.gd.
+	"hp_growth_per_10s": 1.1380,   ## Auto-tuned against the real game; run sim/tune_game.gd.
 	"contact_dps": 7.0,               ## Damage one touching enemy deals per second.
 	"speed_factor": 0.80,             ## Enemy speed as a fraction of the player's.
 	"xp_value": 1.0,

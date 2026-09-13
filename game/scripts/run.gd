@@ -10,10 +10,13 @@ extends Node3D
 
 const B := preload("res://autoload/balance.gd")
 const RunStateScript := preload("res://scripts/systems/run_state.gd")
+const Roster := preload("res://autoload/characters.gd")
 
+@export var character_id := "sentinel"
 @export var meta_level := 0
 @export var run_seed := 0        ## 0 means randomise.
-@export var enemy_speed_override := 0.0   ## Tuner hook; 0 means use Balance.
+@export var hp_growth_override := 0.0     ## Tuner hook; 0 means use Balance.
+@export var damage_scale := 1.0           ## Tuner hook; 1.0 means use the character.
 @export var headless_input := Vector3.ZERO   ## Test hook; see sim/play_test.gd.
 @export var auto_kite := false               ## Test hook: flee the nearest enemy.
 
@@ -44,7 +47,10 @@ func begin() -> void:
 	swarm = get_node("Swarm")
 	weapon = get_node("Weapon")
 	orbs = get_node("Orbs")
-	state = RunStateScript.new(meta_level)
+	player.apply_character(Roster.by_id(character_id))
+	state = RunStateScript.new(meta_level, character_id)
+	swarm.hp_growth_override = hp_growth_override
+	state.damage_scale = damage_scale
 	if run_seed != 0:
 		state.rng.seed = run_seed
 		swarm.set_seed(run_seed)
@@ -80,9 +86,7 @@ func step(delta: float) -> void:
 
 ## Enemies move slower than the player so kiting is possible but costly.
 func _enemy_speed() -> float:
-	var factor: float = enemy_speed_override if enemy_speed_override > 0.0 \
-		else B.ENEMY.speed_factor
-	return B.PLAYER.move_speed * factor
+	return B.PLAYER.move_speed * B.ENEMY.speed_factor
 
 ## The arena has an edge. Running in a straight line forever is not a strategy.
 func _clamp_to_arena() -> void:
