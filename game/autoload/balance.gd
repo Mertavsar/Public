@@ -13,7 +13,7 @@ const BOSS_AT := 270.0               ## Boss spawns in the final thirty seconds.
 const PLAYER := {
 	"max_hp": 100.0,
 	"move_speed": 5.0,
-	"pickup_radius": 2.5,
+	"pickup_radius": 4.5,
 	"contact_armor": 0.0,
 }
 
@@ -30,6 +30,7 @@ const ENEMY := {
 	"base_hp": 14.0,
 	"hp_growth_per_10s": 1.0902,   ## Auto-tuned. Do not hand-edit; run sim/tune.gd.
 	"contact_dps": 7.0,               ## Damage one touching enemy deals per second.
+	"speed_factor": 0.80,             ## Enemy speed as a fraction of the player's.
 	"xp_value": 1.0,
 	"gold_per_kill": 0.35,
 }
@@ -38,10 +39,16 @@ const ENEMY := {
 ## This is the knob that decides whether low DPS actually kills you.
 const KITE_CAPACITY := 12.0
 
+## The arena is bounded. Without a wall, a player who simply runs in a straight
+## line is untouchable no matter how many enemies spawn, which is what the first
+## play test proved.
+const ARENA_RADIUS := 28.0
+
 const SPAWN := {
 	"base_rate": 2.0,                 ## Enemies per second at t=0.
 	"ramp_per_second": 0.020,         ## Linear ramp across the run.
 	"max_rate": 8.0,
+	"forward_bias": 0.65,             ## Share of spawns placed where you are heading.
 }
 
 ## XP needed to reach the next level: xp_base * level ^ xp_exponent

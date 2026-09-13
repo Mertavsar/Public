@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/run.gd" id="1_run"]
+[ext_resource type="Script" path="res://scripts/entities/player.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/swarm.gd" id="3_swarm"]
+[ext_resource type="Script" path="res://scripts/systems/weapon.gd" id="4_weapon"]
+[ext_resource type="Script" path="res://scripts/systems/orbs.gd" id="5_orbs"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(400, 400)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.16, 0.18, 0.22, 1)
+roughness = 0.95
+
+[sub_resource type="Environment" id="Environment_run"]
+background_mode = 1
+background_color = Color(0.07, 0.08, 0.11, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.45, 0.5, 0.6, 1)
+ambient_light_energy = 0.6
+
+[node name="Run" type="Node3D"]
+script = ExtResource("1_run")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+surface_material_override/0 = SubResource("Material_ground")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866, 0, -0.866, 0.5, 0, 20, 0)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_run")
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("2_player")
+
+[node name="Camera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.5736, -0.8192, 0, 0.8192, 0.5736, 0, 16, 11)
+fov = 60.0
+
+[node name="Swarm" type="Node3D" parent="."]
+script = ExtResource("3_swarm")
+
+[node name="Weapon" type="Node3D" parent="."]
+script = ExtResource("4_weapon")
+
+[node name="Orbs" type="Node3D" parent="."]
+script = ExtResource("5_orbs")
