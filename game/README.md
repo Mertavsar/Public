@@ -108,3 +108,25 @@ kolu çevirince hiçbir değişiklik tek bir sebebe bağlanamıyor.
 Karakterler bir run'da birbirleriyle hiç karşılaşmadığı için her biri bağımsız
 tek boyutlu bir problem, ve hasar kazanma oranını tek yönde hareket ettiriyor.
 `tune_roster.gd` bu yüzden her karakteri ayrı ayrı, aynı hedefe ayarlıyor.
+
+## Juice katmanı (Aşama 2c)
+
+Modeller hâlâ blockout, ama geri bildirim katmanı eklendi. Bir oyunun
+profesyonel hissettirmesinin çoğu modelden değil buradan gelir:
+
+- İsabet eden düşman bir kare beyaza patlıyor ve %35 büyüyor (MultiMesh
+  instance rengi). Bu olmadan isabet eden atışla ıskalayan atış aynı görünüyor.
+- Ölen düşman parçalanıyor — `debris.gd`, havuzlanmış, yerçekimli, tek draw call.
+- Silah her atışta zemine ışık düşürüyor (`Player/Muzzle`).
+- Hasar alınca kamera sarsılıyor ve oyun 50 ms duraklıyor (hit-stop).
+- Ortamda glow, ACES tonemap ve hafif kontrast/doygunluk ayarı var.
+
+Hiçbiri tek bir denge sayısını değiştirmiyor; hepsi oyunun okunuşunu değiştiriyor.
+
+### Karakter modelleri için engel
+
+`quaternius.com` ve `poly.pizza` ortamın ağ politikası tarafından engelli
+(proxy 403 döndürüyor). Hazır riglenmiş/animasyonlu paket buradan indirilemiyor.
+İki yol var: paketi indirip repoya koymak, ya da ortamın ağ erişimini
+genişletmek. Paket geldiğinde bağlanacak sıra: animasyon state machine
+(idle / koşu / atış / hasar / ölüm), sonra kalıcı upgrade ekranı.

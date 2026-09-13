@@ -18,7 +18,12 @@ const SEPARATION := 0.85          ## Enemies push apart so they don't stack.
 
 var positions: PackedVector3Array = PackedVector3Array()
 var healths: PackedFloat32Array = PackedFloat32Array()
+var flashes: PackedFloat32Array = PackedFloat32Array()
 var count := 0
+
+const FLASH_TIME := 0.09
+const BASE_COLOR := Color(0.88, 0.27, 0.35)
+const HIT_COLOR := Color(1.0, 0.92, 0.93)
 
 ## Tuner hook. 0 means use the curve in Balance.
 var hp_growth_override := 0.0
@@ -45,17 +50,22 @@ func ensure_ready() -> void:
 	_rng.randomize()
 	positions.resize(MAX_ENEMIES)
 	healths.resize(MAX_ENEMIES)
+	flashes.resize(MAX_ENEMIES)
 	_setup_multimesh()
 
 func _setup_multimesh() -> void:
 	var mesh := BoxMesh.new()
 	mesh.size = Vector3(0.7, 0.9, 0.7)
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.85, 0.25, 0.3)
+	mat.albedo_color = Color.WHITE
+	# Per-instance colour is what makes a hit visible inside a crowd. Without
+	# this the frame a shot lands looks identical to the frame it misses.
+	mat.vertex_color_use_as_albedo = true
 	mesh.material = mat
 
 	_multimesh = MultiMesh.new()
 	_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	_multimesh.use_colors = true
 	_multimesh.mesh = mesh
 	_multimesh.instance_count = MAX_ENEMIES
 	_multimesh.visible_instance_count = 0
@@ -71,6 +81,9 @@ func update(delta: float, elapsed: float, player_pos: Vector3, speed: float,
 	ensure_ready()
 	_spawn(delta, elapsed, player_pos, facing)
 	_move(delta, player_pos, speed)
+	for i in count:
+		if flashes[i] > 0.0:
+			flashes[i] = maxf(0.0, flashes[i] - delta)
 	_render()
 
 func _spawn(delta: float, elapsed: float, player_pos: Vector3, facing: Vector3) -> void:
@@ -87,6 +100,7 @@ func _spawn(delta: float, elapsed: float, player_pos: Vector3, facing: Vector3) 
 		var dist := _rng.randf_range(16.0, 20.0)
 		positions[count] = player_pos + Vector3(cos(angle), 0.0, sin(angle)) * dist
 		healths[count] = hp
+		flashes[count] = 0.0
 		count += 1
 
 func _enemy_hp_at(elapsed: float) -> float:
@@ -126,6 +140,7 @@ func damage(index: int, amount: float) -> bool:
 	if index < 0 or index >= count:
 		return false
 	healths[index] -= amount
+	flashes[index] = FLASH_TIME
 	if healths[index] <= 0.0:
 		enemy_killed.emit(positions[index])
 		_remove(index)
@@ -136,6 +151,7 @@ func _remove(index: int) -> void:
 	count -= 1
 	positions[index] = positions[count]
 	healths[index] = healths[count]
+	flashes[index] = flashes[count]
 
 ## Where enemy `index` will be heading this frame. The weapon needs this to
 ## lead its shots; firing at where a target currently stands misses almost
@@ -175,7 +191,12 @@ func _render() -> void:
 		return
 	_multimesh.visible_instance_count = count
 	for i in count:
-		_multimesh.set_instance_transform(i, Transform3D(Basis(), positions[i]))
+		# A struck body swells for the frame it flashes: colour alone is easy
+		# to lose in a field of two hundred.
+		var f := flashes[i] / FLASH_TIME
+		var basis := Basis().scaled(Vector3(1.0 + f * 0.25, 1.0 + f * 0.35, 1.0 + f * 0.25))
+		_multimesh.set_instance_transform(i, Transform3D(basis, positions[i]))
+		_multimesh.set_instance_color(i, BASE_COLOR.lerp(HIT_COLOR, f))
 
 func set_seed(value: int) -> void:
 	ensure_ready()

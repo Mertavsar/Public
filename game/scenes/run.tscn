@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/run.gd" id="1_run"]
 [ext_resource type="Script" path="res://scripts/entities/player.gd" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/swarm.gd" id="3_swarm"]
 [ext_resource type="Script" path="res://scripts/systems/weapon.gd" id="4_weapon"]
 [ext_resource type="Script" path="res://scripts/systems/orbs.gd" id="5_orbs"]
+[ext_resource type="Script" path="res://scripts/systems/debris.gd" id="6_debris"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
 size = Vector2(400, 400)
@@ -19,6 +20,14 @@ background_color = Color(0.07, 0.08, 0.11, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.45, 0.5, 0.6, 1)
 ambient_light_energy = 0.6
+tonemap_mode = 3
+glow_enabled = true
+glow_intensity = 0.55
+glow_bloom = 0.12
+glow_hdr_threshold = 0.85
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.12
 
 [node name="Run" type="Node3D"]
 script = ExtResource("1_run")
@@ -38,6 +47,12 @@ environment = SubResource("Environment_run")
 [node name="Player" type="Node3D" parent="."]
 script = ExtResource("2_player")
 
+[node name="Muzzle" type="OmniLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+light_color = Color(1, 0.85, 0.54, 1)
+light_energy = 0.0
+omni_range = 9.0
+
 [node name="Camera" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.5736, -0.8192, 0, 0.8192, 0.5736, 0, 16, 11)
 fov = 60.0
@@ -50,3 +65,6 @@ script = ExtResource("4_weapon")
 
 [node name="Orbs" type="Node3D" parent="."]
 script = ExtResource("5_orbs")
+
+[node name="Debris" type="Node3D" parent="."]
+script = ExtResource("6_debris")
