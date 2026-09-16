@@ -29,7 +29,20 @@ oradadır. Bu log tutulmazsa sistem hiçbir zaman tahminden öteye geçmez.
 tarih,lead_id,egitim,kaynak,meslek,yas,sehir,ilk_cevap_dk,temsilci,kart_kullanildi,ilk_itiraz,dokunus_sayisi,sonuc,tutar,kayip_sebebi
 ```
 
-## Kart etkisini ölçme (T2 testi)
+## Sıfırdan projede: önce log, sonra test
+
+Marka yeni. İlk 150 leadde kartlı/kartsız testi **kurulmaz** — hacim yok ve gelen az
+sayıda leadin yarısını hazırlıksız harcamak pahalıdır. Bu fazda kart **herkese**
+uygulanır, log **lead #1'den** itibaren tutulur.
+
+Logun ilk işi kartı ölçmek değil, şu dört sayıyı hiç yoktan var etmek:
+lead maliyeti · lead kalitesi · ilk cevap süresi · lead→satış dönüşümü.
+Bu dördü elde olmadan hiçbir karar veriye dayanmaz.
+
+İlk 30 günün en değerli çıktısı ise bir sayı değil, bir liste: **en sık gelen üç
+itiraz.** Teklif ve reklam mesajı ona göre yeniden yazılır.
+
+## Kart etkisini ölçme (T1 testi — 150 lead biriktikten sonra)
 
 İki hafta boyunca leadler ikiye ayrılır: **tek numaralı lead_id → kartlı**,
 **çift numaralı → kartsız.** Temsilciler karışık olmalı, yoksa ölçtüğün şey kart değil

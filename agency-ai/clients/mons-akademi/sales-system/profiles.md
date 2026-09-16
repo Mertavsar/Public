@@ -2,7 +2,9 @@
 
 > **Tamamı HYPOTHESIS.** Bu dosyadaki hiçbir satır Mons Akademi verisiyle
 > doğrulanmadı; ürün kategorisi ve satış deneyimi genellemesinden yazıldı.
-> `outcome-log.md` dolmaya başladıkça her madde ya **FACT** olur ya silinir.
+> Marka sıfırdan kurulduğu için doğrulayacak geçmiş veri de yok — ilk 30 günün işi
+> bu dosyayı sınamaktır. `outcome-log.md` dolmaya başladıkça her madde ya **FACT**
+> olur ya silinir.
 > Eminlik seviyeleri satır satır yazılıdır.
 
 ---

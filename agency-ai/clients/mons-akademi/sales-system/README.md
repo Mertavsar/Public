@@ -57,6 +57,12 @@ Kartın her satırı **hipotezdir.** Kişi konuşmaya başladığı an kart gün
 
 ## Olgunluk seviyeleri
 
+**Sıfırdan projede kartın asıl işi:** ekip de yeni olduğu için kart bir satış hilesi
+değil, **onboarding materyalidir.** Yeni temsilci ilk günden dört eğitimin farkını,
+hangi itirazın nereden geldiğini ve neyin söylenemeyeceğini buradan öğrenir. İlk 20
+konuşma kaydedilir veya dökülür (`conversations/`) ve kartla karşılaştırılır — gerçek
+eğitim orada olur.
+
 - **Seviye 0 (bugün, maliyetsiz):** `profiles.md` + `objections.md` basılı/açık durur,
   temsilci leadin eğitimine ve mesleğine bakıp kartı kendi doldurur.
 - **Seviye 1:** Tek sayfalık araç — bilgiler girilir, kart otomatik çıkar. Kural tabanlı,

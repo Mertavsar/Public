@@ -6,6 +6,9 @@
 ## Temel bilgiler
 - **Marka:** Mons Akademi
 - **Sektör:** Online eğitim (dijital ürün / sertifika programı)
+- **Proje aşaması:** **Sıfırdan kurulum.** Satış geçmişi, dönüşüm verisi ve sosyal kanıt
+  yok. Bu dosyadaki her BİLİNMİYOR gerçekten bilinmiyor demektir — "bulunamadı" değil,
+  "henüz oluşmadı".
 - **Web sitesi:** BİLİNMİYOR
 - **Instagram:** BİLİNMİYOR
 - **İlgili kişi / karar verici:** Ajans sahibi (markanın sahibi kendisi)
@@ -51,16 +54,19 @@
   aranıyor/yazılıyor. Kanalın WhatsApp mı, telefon mu, DM mi olduğu BİLİNMİYOR.
 - **Lead formatı (ajans sahibinin beyanı — FACT):** gelen datada telefon, ad, soyad,
   meslek, yaş, şehir alanları bulunuyor.
-- **Mesajları kim cevaplıyor:** Satış ekibi (kişi sayısı BİLİNMİYOR)
+- **Mesajları kim cevaplıyor:** Satış ekibi (kişi sayısı BİLİNMİYOR; ekibin bu işte
+  deneyimli olup olmadığı da BİLİNMİYOR — sıfırdan projede bu ayrım kritiktir)
 - **Cevap saatleri:** BİLİNMİYOR
 - **Ortalama ilk cevap süresi:** BİLİNMİYOR ← *sistemin en kritik ölçüsü, ilk ölçülecek*
 - **Kargo ve iade koşulları:** Kargo yok. İade/cayma politikası BİLİNMİYOR.
 - **Ödeme seçenekleri:** BİLİNMİYOR (taksit var mı — satış konuşmasını doğrudan etkiler)
 
 ## Değerlendirme
-- **Güçlü yönleri:** Dijital ürün — stok, kargo, iade lojistiği yok. Dört ayrı eğitim
-  dört ayrı kitle demek: test alanı geniş.
-- **Zayıf yönleri:** BİLİNMİYOR
+- **Güçlü yönleri:** Dijital ürün — stok, kargo, iade lojistiği yok. Marj yüksek
+  olabilir. Sıfırdan kurulduğu için düzeltilecek kötü alışkanlık da yok.
+- **Zayıf yönleri:** Sosyal kanıt yok (yorum, referans, öğrenci hikâyesi). Marka
+  bilinirliği yok. Baz çizgisi yok — hiçbir rakam henüz kanıtlanmadı. Dört eğitim dört
+  ayrı kitle demek: ortak reklam mesajı kurulamaz.
 - **Geçmiş problemler:** BİLİNMİYOR
 - **Alınmış kararlar:** Satış ekibi için lead ön-analiz sistemi kurulacak
   (bkz. `sales-system/`)
