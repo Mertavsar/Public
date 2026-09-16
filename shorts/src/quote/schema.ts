@@ -21,6 +21,8 @@ export const quoteSchema = z.object({
   accent: zColor(),
   /** Son satir ekranda kaldiktan sonraki bekleme. */
   holdSeconds: z.number().min(0.5).max(8),
+  /** Metnin arkasina yuvarlatilmis koyu panel koyar (hareketli b-roll'da okunurlugu artirir). */
+  panel: z.boolean().optional(),
   showSafeArea: z.boolean(),
 });
 

@@ -1,69 +1,64 @@
 {
-  "_not": "Her kayit bir Short. quote icindeki \\n satir sonlari ekranda ayri aciliste gelir - ilk satir hook'tur, kaydirmayi durduracak sekilde yazilmali.",
+  "_not": "Her kayit bir Short. quote icindeki satir sonlari ekranda ayri aciliste gelir. Ilk satir hook'tur, kaydirmayi durduracak sekilde yazilmali. Basina '>' konan satir vurgulanir - punchline'a koy.",
   "defaults": {
     "handle": "@30adogru",
-    "holdSeconds": 2.2,
-    "background": null,
+    "holdSeconds": 2.4,
+    "background": "bg/bugday-ruzgar.mp4",
+    "panel": true,
+    "accent": "#e0a45c",
     "showSafeArea": false,
-    "author": "",
-    "scene": "bozkir"
+    "author": ""
   },
   "quotes": [
     {
-      "id": "bozkir-01",
-      "quote": "Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\n> O ev kapısını kilitlemedi hiç.",
-      "cta": "Seni bekleyen bir kapı var mı?",
-      "accent": "#e0a45c",
-      "scene": "bozkir",
-      "background": "bg/bugday-ruzgar.mp4"
+      "id": "veda-01",
+      "quote": "Bazı vedalar sessiz olur.\n> En çok onlar acıtır.",
+      "cta": "Sessiz bir vedan var mı?"
     },
     {
-      "id": "gurbet-01",
-      "quote": "Gurbet, memleketin adını duyunca\nsusmayı öğrenmektir.\nSen susarsın, için konuşur.",
-      "cta": "Sen kaç yıldır gurbettesin?",
-      "accent": "#c9873f"
+      "id": "unutmak-01",
+      "quote": "Unutmak istediğin insanı\n> en çok o yüzden hatırlarsın.",
+      "cta": "Kimi unutmaya çalışıyorsun?"
     },
     {
-      "id": "gurbet-02",
-      "quote": "En uzun yol,\neve giden yoldur.\nÇünkü her adımda\nbir hatıra durdurur seni.",
-      "cta": "Memleketin neresi?",
-      "accent": "#b5733a"
+      "id": "yokluk-01",
+      "quote": "Herkes gidebilir.\nMesele kimin yokluğunun\n> ev gibi kokması.",
+      "cta": "Kimin yokluğu ev gibi kokuyor?"
+    },
+    {
+      "id": "aglamak-01",
+      "quote": "Bazı insanlar için ağlamazsın.\n> Sadece bir daha aynı olmazsın.",
+      "cta": "Seni değiştiren kimdi?"
+    },
+    {
+      "id": "veda-02",
+      "quote": "En zor veda,\n> hiç yapılmayandır.",
+      "cta": "Yarım kalan bir vedan var mı?"
+    },
+    {
+      "id": "yorgun-01",
+      "quote": "Sen hep “iyiyim” dedin.\n> Kimse ne kadar yorgun olduğunu sormadı.",
+      "cta": "Bugün sana kim sordu?"
+    },
+    {
+      "id": "sarki-01",
+      "quote": "Yıllar geçti.\nO şarkı çalınca\n> hâlâ aynı yerde duruyorsun.",
+      "cta": "Hangi şarkı?"
+    },
+    {
+      "id": "kapi-01",
+      "quote": "Bazı kapılar kapanmaz.\n> Sen geçmemeyi öğrenirsin.",
+      "cta": "Hangi kapının önünde duruyorsun?"
+    },
+    {
+      "id": "degisim-01",
+      "quote": "Kimseye anlatamadığın şeyler,\n> seni en çok değiştirenlerdir.",
+      "cta": "Kimseye anlatamadığın ne var?"
     },
     {
       "id": "ozlem-01",
-      "quote": "Özlemek,\nbir insanın olmadığı yerde\nonu görmeye devam etmektir.",
-      "cta": "Şu an kimi özlüyorsun?",
-      "accent": "#a8613f"
-    },
-    {
-      "id": "sila-01",
-      "quote": "Sıla, bir yer değil.\nSıla, seni bekleyen birinin\nolduğu yerdir.",
-      "cta": "Seni bekleyen var mı?",
-      "accent": "#c9873f"
-    },
-    {
-      "id": "gurbet-03",
-      "quote": "Giderken \"iki yıl\" dedik.\nYirmi yıl oldu.\nHâlâ giderken bıraktığımız\nçocuk sanıyoruz kendimizi.",
-      "cta": "Kaçıncı yılındasın?",
-      "accent": "#8f5a3c"
-    },
-    {
-      "id": "ozlem-02",
-      "quote": "Bazı kokular vardır,\nbir anda seni\non beş yıl öncesine götürür.\nİşte o, özlemdir.",
-      "cta": "Seni hangi koku götürüyor?",
-      "accent": "#b5733a"
-    },
-    {
-      "id": "ozlu-01",
-      "quote": "İnsan doğduğu yeri değil,\nsevildiği yeri özler.",
-      "cta": "Katılıyor musun?",
-      "accent": "#c9873f"
-    },
-    {
-      "id": "sila-02",
-      "quote": "Telefonda \"iyiyim anne\" demek,\ngurbetçilerin\nen çok söylediği yalandır.",
-      "cta": "Bugün aradın mı?",
-      "accent": "#a8613f"
+      "quote": "Özlemek, bir insanın\nolmadığı yerde\n> onu görmeye devam etmektir.",
+      "cta": "Şu an kimi özlüyorsun?"
     }
   ]
 }
