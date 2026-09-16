@@ -1,0 +1,674 @@
+<title>Mons Akademi Lead Kartı</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root {
+    --paper:      #EFF2F1;
+    --surface:    #FFFFFF;
+    --surface-2:  #E4E9E8;
+    --ink:        #14262B;
+    --ink-soft:   #4E6166;
+    --ink-faint:  #7C8C90;
+    --line:       #D2DAD9;
+    --accent:     #1F6F5C;
+    --accent-ink: #FFFFFF;
+    --warn:       #A8481B;
+    --warn-bg:    #F7E9E0;
+    --hyp:        #6B5A8E;
+    --hyp-bg:     #EDE9F3;
+
+    --f-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --r: 6px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0F1618;
+      --surface:    #172023;
+      --surface-2:  #202C2F;
+      --ink:        #E4EBE9;
+      --ink-soft:   #A3B3B6;
+      --ink-faint:  #7A8B8E;
+      --line:       #2C393C;
+      --accent:     #55B598;
+      --accent-ink: #0F1618;
+      --warn:       #E39468;
+      --warn-bg:    #2E211A;
+      --hyp:        #B5A6D6;
+      --hyp-bg:     #241F2E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #0F1618;
+    --surface:    #172023;
+    --surface-2:  #202C2F;
+    --ink:        #E4EBE9;
+    --ink-soft:   #A3B3B6;
+    --ink-faint:  #7A8B8E;
+    --line:       #2C393C;
+    --accent:     #55B598;
+    --accent-ink: #0F1618;
+    --warn:       #E39468;
+    --warn-bg:    #2E211A;
+    --hyp:        #B5A6D6;
+    --hyp-bg:     #241F2E;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 28px 56px;
+  }
+
+  header { margin-bottom: 24px; }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 6px;
+  }
+  h1 {
+    font-size: clamp(24px, 5vw, 32px);
+    font-weight: 600;
+    letter-spacing: -.02em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .lede {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 800px) {
+    .cols { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* ---- form ---- */
+  form {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  legend, .lbl {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0;
+  }
+  .courses { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .courses label {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 9px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.25;
+    cursor: pointer;
+    background: var(--surface);
+  }
+  .courses input { position: absolute; opacity: 0; pointer-events: none; }
+  .courses input:checked + span { color: var(--accent-ink); }
+  .courses label:has(input:checked) { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .courses label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  input[type="text"], input[type="number"], textarea {
+    font: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 8px 10px;
+    width: 100%;
+  }
+  textarea { resize: vertical; min-height: 62px; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .hint { font-size: 12px; color: var(--ink-faint); margin: 0; }
+
+  /* ---- card ---- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+  .card-head {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    align-items: baseline;
+  }
+  .card-head .who {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .card-head .meta {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 12px;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .step:last-child { border-bottom: 0; }
+  .step .n {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-top: 2px;
+  }
+  .step h3 {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .step p { margin: 0 0 6px; }
+  .step p:last-child { margin-bottom: 0; }
+  .serif { font-family: var(--f-serif); font-size: 16px; line-height: 1.45; }
+  .quote {
+    font-family: var(--f-serif);
+    font-size: 16px;
+    line-height: 1.5;
+    background: var(--surface-2);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 var(--r) var(--r) 0;
+    padding: 10px 12px;
+    margin: 0;
+  }
+  ul.plain { margin: 0; padding-left: 18px; }
+  ul.plain li { margin-bottom: 4px; }
+  ul.plain li:last-child { margin-bottom: 0; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--hyp-bg);
+    color: var(--hyp);
+    vertical-align: 2px;
+    margin-left: 6px;
+  }
+  .gap {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    background: var(--warn-bg);
+    color: var(--warn);
+    padding: 1px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .warnline {
+    background: var(--warn-bg);
+    color: var(--warn);
+    border-radius: var(--r);
+    padding: 9px 11px;
+    font-size: 13.5px;
+  }
+  .obj { margin: 0 0 8px; }
+  .obj:last-child { margin-bottom: 0; }
+  .obj b { font-weight: 600; }
+  .obj span { display: block; color: var(--ink-soft); font-size: 14px; }
+
+  .timeline { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--f-mono); font-size: 12px; }
+  .timeline span {
+    background: var(--surface-2);
+    border-radius: 3px;
+    padding: 3px 7px;
+    color: var(--ink-soft);
+  }
+
+  button.copy {
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  button.copy:hover { border-color: var(--accent); }
+
+  footer {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint);
+    font-size: 13px;
+    max-width: 70ch;
+  }
+  footer p { margin: 0 0 8px; }
+  footer b { color: var(--ink-soft); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Mons Akademi · Satış</p>
+    <h1>Lead kartı</h1>
+    <p class="lede">Aramadan veya yazmadan önce 30 saniyede oku. Kart bir <b>hipotezdir</b> — kişi
+      kendini anlattığı an kart değişir. Kartla kişinin söylediği çelişirse kişi haklıdır.</p>
+  </header>
+
+  <div class="cols">
+    <form id="leadForm" autocomplete="off">
+      <fieldset>
+        <legend>Eğitim</legend>
+        <div class="courses" id="courses"></div>
+      </fieldset>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl" for="ad">Ad</label>
+          <input type="text" id="ad" value="Ayşe">
+        </div>
+        <div class="field">
+          <label class="lbl" for="yas">Yaş</label>
+          <input type="number" id="yas" min="14" max="90" value="34">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl" for="meslek">Meslek</label>
+          <input type="text" id="meslek" value="Öğretmen">
+        </div>
+        <div class="field">
+          <label class="lbl" for="sehir">Şehir</label>
+          <input type="text" id="sehir" value="Konya">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="kaynak">Kaynak — hangi reklam / form</label>
+        <input type="text" id="kaynak" value="Form — Diksiyon kampanyası">
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="mesaj">İlk mesajı (varsa)</label>
+        <textarea id="mesaj">fiyat bilgisi alabilir miyim</textarea>
+        <p class="hint">Yazdığı şey, mesleğinden daha değerlidir. Varsa kart onu esas alır.</p>
+      </div>
+
+      <p class="hint">Bilmediğin alanı boş bırak. Boş alan tahminle doldurulmaz —
+        kart o satırda “ilk soruyla öğren” der.</p>
+    </form>
+
+    <main class="card" id="card" aria-live="polite"></main>
+  </div>
+
+  <footer>
+    <p><b>Kartın sınırı.</b> Meslek, yaş ve şehir zayıf sinyallerdir. Kart ilk iki mesajı ve
+      itiraz cevaplarını şekillendirir; konuşmanın tamamını değil. Metni olduğu gibi okuyan
+      temsilci robot gibi duyulur.</p>
+    <p><b>Değişmez kurallar.</b> Etiket fiyatı değiştirmez — indirim yetkisi kartlardan gelmez.
+      İlk mesajda fiyat verilmez. İş garantisi, gelir garantisi, “devlet onaylı” gibi
+      belgelenemeyen hiçbir vaat kurulmaz. Cinsiyet isimden tahmin edilmez; kişiye adıyla hitap edilir.</p>
+    <p><b>Eksik bilgi.</b> Turuncu işaretli alanlar (fiyat, taksit, sertifika, süre) henüz
+      sistemde tanımlı değil. Tanımlanana kadar temsilci o konuda kendi cümlesini kurmaz.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var GAP = function (t) { return '<span class="gap">' + t + '</span>'; };
+  var HYP = '<span class="tag">hipotez</span>';
+
+  var COURSES = {
+    hikaye: {
+      label: "Hikâye Anlatıcılığı",
+      motive: "Kendini ifade etme ve görünür olma. Bazen içerikle gelir elde etme.",
+      watch: "Dört eğitim içinde çıktısı en soyut olan bu. “Bu benim ne işime yarayacak” sorusu buradan gelir — satış, somut çıktıyı anlatabildiğin kadar olur.",
+      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Hikâye anlatıcılığı eğitimi için bilgi bırakmışsınız. Kısaca sorayım: hikâyeyi nerede kullanmak istiyorsunuz — kendi markanızda mı, işinizde mi, yazmak için mi?",
+      asks: [
+        "Şu an içerik üretiyor musun, yoksa yeni mi başlayacaksın?",
+        "Eğitim bitince ne yapabiliyor olmak istersin?"
+      ],
+      objections: [
+        ["“Ne işime yarayacak?”", "Soyut cevap verme. Eğitimin sonunda elinde ne olacağını tek cümleyle söyle, sonra onun kendi alanına bağla."],
+        ["“Düşüneyim”", "Bu itiraz değil, cevaplanmamış bir sorudur: “Aklında kalan tek bir soru olsa, o ne olurdu?” Sonra takip gününü birlikte belirle."]
+      ],
+      price: "Ne için kullanacağı netleştikten sonra. Önce değil."
+    },
+    pilates: {
+      label: "Pilates Uzmanlığı",
+      motive: "Para ve meslek. Bu bir kurs değil, yatırım kararı — konuşma “ne öğreneceğim” değil, “bu bana ne kazandırır” ekseninde geçer.",
+      watch: "Sertifika ve istihdam sorusu net cevaplanmazsa satış olmaz. Abartılı vaat burada en pahalı hatadır: iade, şikâyet ve itibar kaybı üretir.",
+      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Pilates uzmanlığı eğitimi için bilgi bırakmışsınız. Önce şunu sorayım: bu eğitimi kendinizi geliştirmek için mi, yoksa bu işi meslek olarak yapmak için mi düşünüyorsunuz?",
+      asks: [
+        "Şu an spor/hareket alanında bir geçmişin var mı?",
+        "Eğitimden sonra nerede çalışmayı düşünüyorsun — stüdyo mu, kendi grubun mu?"
+      ],
+      objections: [
+        ["“Sertifika geçerli mi?”", "Sertifikanın ne olduğunu olduğu gibi söyle: " + GAP("kurum / tür / geçerlilik tanımlı değil") + ". “Devlet onaylı”, “uluslararası geçerli” denmez."],
+        ["“İş bulabilir miyim?”", "Garanti verme. “Garanti veremem, verirsem doğru olmaz” de, sonra somut çıktıyı ve kendi şehrindeki alanı konuş."],
+        ["“Online olur mu?”", "Pratiğin nasıl çözüldüğünü anlat: " + GAP("pratik / geri bildirim / canlı seans tanımlı değil") + ". Yoksa yok de."]
+      ],
+      price: "Sertifika ve “nerede çalışırım” sorusu cevaplandıktan sonra. Bu eğitimde fiyat, maliyet değil yatırım olarak konuşulur."
+    },
+    siddetsiz: {
+      label: "Şiddetsiz İletişim",
+      motive: "Acıyı azaltmak. Evde kavga, çocukla kopukluk, iş yerinde çatışma. Mahrem bir alan.",
+      watch: "Satış temposu yüksek açılış burada ters teper. Kişi derdini anlatmadan fiyat konuşulursa konuşma biter. Önce dinle, sonra sat.",
+      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Şiddetsiz iletişim eğitimi için bilgi bırakmışsınız. Şunu sorabilir miyim: bu eğitim aklınıza gelirken kafanızda somut bir ilişki var mıydı — çocuk, eş, iş?",
+      asks: [
+        "En çok hangi durumda tıkanıyorsun?",
+        "Daha önce bu konuda bir şey denedin mi — kitap, terapi, eğitim?"
+      ],
+      objections: [
+        ["“Eğitimle çözülür mü?”", "Abartma. Eğitimin ne yaptığını (bir yöntem öğretir, uygulaması kişide) net söyle; mucize vaat etme."],
+        ["“Zamanım yok”", "Bu çoğu zaman “öncelik değil” demektir. Fiyatla değil, yaşadığı durumla dön. Haftalık süre: " + GAP("süre tanımlı değil") + "."]
+      ],
+      price: "Durumunu anlattıktan sonra. Derdini anlatan kişiye fiyatla cevap verme."
+    },
+    diksiyon: {
+      label: "Diksiyon",
+      motive: "Özgüven ve somut bir olay: mülakat, sunum, sınav, yeni iş, sahne.",
+      watch: "Konu utançtır. “Konuşmanda sorun mu var” gibi bir cümle kişiyi kaçırır. Dil hep hedefe bakar, eksiğe değil.",
+      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Diksiyon eğitimi için bilgi bırakmışsınız. Kısaca sorayım: sizi bu eğitime yönlendiren somut bir durum var mı — sunum, görüşme, sınıf?",
+      asks: [
+        "Şu an en çok hangi durumda zorlanıyorsun?",
+        "Haftada kaç saat ayırabilirsin?"
+      ],
+      objections: [
+        ["“Pahalı”", "İndirime atlama. Önce ayır: fiyatın kendisi mi zor geliyor, yoksa “bu parayı verir miyim” tereddüdü mü? Taksit: " + GAP("taksit tanımlı değil") + "."],
+        ["“Zamanım yok”", "Haftalık süre ve kayıt erişimini söyle: " + GAP("süre / erişim tanımlı değil") + "."]
+      ],
+      price: "İki soru cevaplandıktan sonra. Bu grupta fiyat hassasiyeti en yüksek olabilir — erken verilen rakam konuşmayı bitirir."
+    }
+  };
+
+  var JOBS = [
+    { keys: ["öğretmen","ogretmen","akademisyen","öğretim","ogretim","okul","öğr. gör"], name: "Öğretmen / akademisyen",
+      note: "Program ve zaman kısıtı sorar, içerik detayı ister, sertifikanın resmî statüsünü sorar, taksite duyarlıdır." },
+    { keys: ["fizyoterapist","hemşire","hemsire","doktor","diyetisyen","ebe","sağlık","saglik"], name: "Sağlık mesleği",
+      note: "Pilates'te en yüksek uyum. Teknik derinlik ve kaynak sorar; yüzeysel cevap güven kaybettirir." },
+    { keys: ["psikolog","pdr","danışman","danisman","sosyal hizmet"], name: "Psikoloji / danışmanlık",
+      note: "Şiddetsiz iletişimde yöntemin kaynağını sorar. Genel geçer cümle tutmaz." },
+    { keys: ["öğrenci","ogrenci","üniversite","universite","lise"], name: "Öğrenci",
+      note: "Bütçe kısıtlı; taksit sorar, karar ailede olabilir. Yazışmayı aramaya tercih eder." },
+    { keys: ["eğitmen","egitmen","antrenör","antrenor","yoga","dans","fitness","pilates","spor"], name: "Eğitmen / spor",
+      note: "Pilates'te en sıcak lead. Doğrudan mesleki kazanç ve sertifika konuşulur." },
+    { keys: ["satış","satis","çağrı","cagri","müşteri temsilcisi","musteri temsilcisi","pazarlama","sunucu","spiker"], name: "Satış / sesle çalışan",
+      note: "Diksiyonda somut iş gerekçesi var: ses günlük aracı. Sonucu ölçülebilir anlat." },
+    { keys: ["ev hanımı","ev hanimi","ev kadını","ev kadini"], name: "Ev hanımı / kariyer değiştiren",
+      note: "Asıl itiraz fiyat değil yeterlilik: “ben yapabilir miyim, geç mi kaldım”. Güven ve örnek gerekir." },
+    { keys: ["esnaf","kendi işim","kendi isim","serbest","kuaför","kuafor","terzi","emlak","işletme","isletme","girişimci","girisimci"], name: "Esnaf / serbest",
+      note: "Hızlı karar verir, “bana ne kazandırır” sorar. Gündüz meşgul; akşam ara." },
+    { keys: ["mühendis","muhendis","avukat","muhasebe","bankacı","bankaci","yazılım","yazilim","müdür","mudur","insan kaynakları","ik ","uzman","memur"], name: "Kurumsal çalışan",
+      note: "Akşam saatlerinde ulaşılır. Erişim süresi ve fatura sorar; hızlı, net cevap ister." }
+  ];
+
+  function normalize(s) {
+    return (s || "").toLocaleLowerCase("tr-TR").trim();
+  }
+
+  function jobProfile(meslek) {
+    var m = normalize(meslek);
+    if (!m) return null;
+    for (var i = 0; i < JOBS.length; i++) {
+      for (var k = 0; k < JOBS[i].keys.length; k++) {
+        if (m.indexOf(JOBS[i].keys[k]) !== -1) return JOBS[i];
+      }
+    }
+    return { name: meslek, note: "Bu meslek için tanımlı bir not yok. Varsayım yapma — ilk soruyla ne iş yaptığını ve neden ilgilendiğini öğren." };
+  }
+
+  function ageNote(yas) {
+    var y = parseInt(yas, 10);
+    if (!y) return null;
+    if (y < 25) return "18-24: yazışmayı tercih eder, sesli mesaj olur. Bütçe kısıtlı olabilir, karar desteği (aile) devreye girebilir.";
+    if (y < 35) return "25-34: kariyer ve gelir motivasyonu belirgin. Mesai içinde yazışır, akşam konuşur.";
+    if (y < 45) return "35-44: zaman kısıtı gerçek (çocuk/iş). Akşam saatlerinde ara, haftalık süreyi net söyle.";
+    return "45+: telefonla konuşmayı tercih edebilir. Sadelik ve güven arar; platforma nasıl gireceğini sorabilir.";
+  }
+
+  var BIG = ["istanbul","ankara","izmir","bursa","antalya","adana","konya","gaziantep"];
+
+  function cityNote(sehir, courseKey) {
+    var s = normalize(sehir);
+    if (!s) return null;
+    var big = BIG.indexOf(s) !== -1;
+    if (courseKey === "pilates" && !big) {
+      return "Küçük şehir + Pilates: “şehrinde stüdyo var mı, kime çalışacaksın” konuşmasını sen aç. Yerel iş imkânı sorusu buradan gelir.";
+    }
+    if (!big) {
+      return "Küçük şehir: online'ın avantajını vurgula — “buraya gelmene gerek yok”.";
+    }
+    return null;
+  }
+
+  var state = {
+    course: "diksiyon",
+    ad: "Ayşe", yas: "34", meslek: "Öğretmen", sehir: "Konya",
+    kaynak: "Form — Diksiyon kampanyası",
+    mesaj: "fiyat bilgisi alabilir miyim"
+  };
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c];
+    });
+  }
+
+  function messageRead(mesaj, course) {
+    var m = normalize(mesaj);
+    if (!m) return null;
+    if (m.indexOf("fiyat") !== -1 || m.indexOf("ücret") !== -1 || m.indexOf("ucret") !== -1 || m.indexOf("kaç para") !== -1) {
+      return "İlk mesajında fiyat sordu. Bu <b>ilgi</b> işaretidir, fiyat itirazı değil. Rakamla cevap verme: “Hemen söyleyeyim, ama size doğru paketi söyleyebilmem için tek bir şey sorayım…” diye ihtiyacı öğren, sonra fiyatı ver.";
+    }
+    if (m.indexOf("bilgi") !== -1 || m.indexOf("detay") !== -1) {
+      return "Genel bilgi istedi — henüz niyeti belirsiz. Kartın açılış sorusunu olduğu gibi kullan, niyeti oradan çıkar.";
+    }
+    if (m.indexOf("sertifika") !== -1) {
+      return "Sertifikayı ilk mesajda sordu: bu kişi eğitimi <b>meslek/istihdam</b> için düşünüyor. Sertifikanın ne olduğunu net söyle, abartma.";
+    }
+    if (m.indexOf("taksit") !== -1 || m.indexOf("indirim") !== -1 || m.indexOf("kampanya") !== -1) {
+      return "Ödeme koşulunu ilk mesajda sordu. Bütçe konusu açık — ama indirime atlama; önce eğitimin ne getireceğini konuş.";
+    }
+    return "Yazdığı şeyi kartın önüne koy: açılışta kendi cümlesine dön (“…diye yazmışsınız”). Bu, hazır metinden daha çok dönüştürür.";
+  }
+
+  function render() {
+    var c = COURSES[state.course];
+    var ad = state.ad.trim();
+    var job = jobProfile(state.meslek);
+    var age = ageNote(state.yas);
+    var city = cityNote(state.sehir, state.course);
+    var msg = messageRead(state.mesaj, state.course);
+
+    var head = [];
+    if (state.yas) head.push(esc(state.yas));
+    if (state.meslek.trim()) head.push(esc(state.meslek.trim()));
+    if (state.sehir.trim()) head.push(esc(state.sehir.trim()));
+
+    var opening = c.open.replace("{ad}", ad ? ad : "");
+    if (!ad) opening = opening.replace("Merhaba , ", "Merhaba, ");
+
+    var html = "";
+    html += '<div class="card-head">';
+    html += '<p class="who">' + (ad ? esc(ad) : "İsim yok") + ' · ' + esc(c.label) + '</p>';
+    html += '<p class="meta">' + (head.length ? head.join(" · ") : "meslek/yaş/şehir boş") + '</p>';
+    var src = [];
+    if (state.kaynak.trim()) src.push("Kaynak: " + esc(state.kaynak.trim()));
+    if (state.mesaj.trim()) src.push("Yazdı: “" + esc(state.mesaj.trim()) + "”");
+    if (src.length) html += '<p class="meta" style="flex:1 1 100%">' + src.join(" · ") + '</p>';
+    html += '</div>';
+
+    html += '<ol class="steps">';
+
+    // 1 — motivasyon
+    html += '<li class="step"><div class="n">1</div><div>';
+    html += '<h3>Muhtemel motivasyon' + HYP + '</h3>';
+    html += '<p class="serif">' + esc(c.motive) + '</p>';
+    if (msg) html += '<p style="color:var(--ink-soft);font-size:14px">' + msg + '</p>';
+    html += '</div></li>';
+
+    // 2 — açılış
+    html += '<li class="step"><div class="n">2</div><div>';
+    html += '<h3>Açılış — kelimesi kelimesine okuma, kendi ağzınla söyle</h3>';
+    html += '<p class="quote" id="openingText">' + esc(opening) + '</p>';
+    html += '<button class="copy" type="button" id="copyBtn">Açılışı kopyala</button>';
+    html += '</div></li>';
+
+    // 3 — sorular
+    html += '<li class="step"><div class="n">3</div><div>';
+    html += '<h3>Sorulacak iki soru</h3><ul class="plain">';
+    for (var i = 0; i < c.asks.length; i++) html += '<li>' + esc(c.asks[i]) + '</li>';
+    html += '</ul></div></li>';
+
+    // 4 — kişi notları
+    html += '<li class="step"><div class="n">4</div><div>';
+    html += '<h3>Kişiye göre ne değişir' + HYP + '</h3>';
+    if (job) html += '<p class="obj"><b>' + esc(job.name) + '</b><span>' + esc(job.note) + '</span></p>';
+    else html += '<p class="obj"><b>Meslek boş</b><span>Varsayım yapma. İlk soruyla ne iş yaptığını öğren, açılışı nötr tut.</span></p>';
+    if (age) html += '<p class="obj"><b>Ton ve kanal</b><span>' + esc(age) + '</span></p>';
+    if (city) html += '<p class="obj"><b>Şehir</b><span>' + esc(city) + '</span></p>';
+    html += '</div></li>';
+
+    // 5 — itirazlar
+    html += '<li class="step"><div class="n">5</div><div>';
+    html += '<h3>Beklenen itirazlar</h3>';
+    for (var j = 0; j < c.objections.length; j++) {
+      html += '<p class="obj"><b>' + c.objections[j][0] + '</b><span>' + c.objections[j][1] + '</span></p>';
+    }
+    html += '</div></li>';
+
+    // 6 — fiyat
+    html += '<li class="step"><div class="n">6</div><div>';
+    html += '<h3>Fiyatı ne zaman söyle</h3>';
+    html += '<p>' + esc(c.price) + '</p>';
+    html += '<p style="font-size:13.5px;color:var(--ink-soft)">Rakam: ' + GAP("fiyat tanımlı değil") + ' — marka sahibi girmeden temsilci fiyat söylemez.</p>';
+    html += '</div></li>';
+
+    // 7 — takip
+    html += '<li class="step"><div class="n">7</div><div>';
+    html += '<h3>Takip planı — cevap gelmezse</h3>';
+    html += '<div class="timeline">';
+    html += '<span>1 · ilk 5 dk</span><span>2 · +2 saat</span><span>3 · ertesi gün</span><span>4 · 3. gün — kanal değiştir</span><span>5 · 7. gün — kapat</span>';
+    html += '</div>';
+    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">5 dokunuştan sonra bırak ve loga kayıp sebebini yaz. Takipsiz bırakılan lead en pahalı kayıptır: reklamın parası ödenmiş, satış hiç denenmemiştir.</p>';
+    html += '</div></li>';
+
+    // 8 — dikkat
+    html += '<li class="step"><div class="n">!</div><div>';
+    html += '<h3>Dikkat</h3>';
+    html += '<p class="warnline">' + esc(c.watch) + '</p>';
+    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">Yasak: iş garantisi, gelir garantisi, “devlet onaylı”, olmayan canlı destek, tanımlı olmayan indirim.</p>';
+    html += '</div></li>';
+
+    html += '</ol>';
+
+    document.getElementById("card").innerHTML = html;
+
+    var btn = document.getElementById("copyBtn");
+    btn.addEventListener("click", function () {
+      var text = document.getElementById("openingText").textContent;
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = "Kopyalandı";
+          setTimeout(function () { btn.textContent = "Açılışı kopyala"; }, 1600);
+        }, selectFallback);
+      } catch (e) { selectFallback(); }
+    });
+
+    function selectFallback() {
+      var node = document.getElementById("openingText");
+      var range = document.createRange();
+      range.selectNodeContents(node);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      btn.textContent = "Metin seçildi — kopyala";
+      setTimeout(function () { btn.textContent = "Açılışı kopyala"; }, 2200);
+    }
+  }
+
+  // course selector
+  var cw = document.getElementById("courses");
+  Object.keys(COURSES).forEach(function (key) {
+    var id = "course-" + key;
+    var label = document.createElement("label");
+    label.setAttribute("for", id);
+    label.innerHTML = '<input type="radio" name="course" id="' + id + '" value="' + key + '"' +
+      (key === state.course ? " checked" : "") + '><span>' + COURSES[key].label + '</span>';
+    cw.appendChild(label);
+  });
+
+  document.getElementById("leadForm").addEventListener("input", function (e) {
+    var t = e.target;
+    if (t.name === "course") { state.course = t.value; }
+    else if (t.id === "ad") state.ad = t.value;
+    else if (t.id === "yas") state.yas = t.value;
+    else if (t.id === "meslek") state.meslek = t.value;
+    else if (t.id === "sehir") state.sehir = t.value;
+    else if (t.id === "kaynak") state.kaynak = t.value;
+    else if (t.id === "mesaj") state.mesaj = t.value;
+    render();
+  });
+  document.getElementById("leadForm").addEventListener("change", function (e) {
+    if (e.target.name === "course") { state.course = e.target.value; render(); }
+  });
+
+  render();
+})();
+</script>
