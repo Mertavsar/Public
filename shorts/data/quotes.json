@@ -11,10 +11,11 @@
   "quotes": [
     {
       "id": "bozkir-01",
-      "quote": "Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\nO ev kapısını kilitlemedi hiç.",
+      "quote": "Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\n> O ev kapısını kilitlemedi hiç.",
       "cta": "Seni bekleyen bir kapı var mı?",
       "accent": "#e0a45c",
-      "scene": "bozkir"
+      "scene": "bozkir",
+      "background": "bg/bugday-ruzgar.mp4"
     },
     {
       "id": "gurbet-01",

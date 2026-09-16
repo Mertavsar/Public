@@ -1,10 +1,13 @@
 import {z} from 'zod';
 import {zColor} from '@remotion/zod-types';
 import {FPS, TIMING} from '../theme';
-import {splitLines} from './fitQuote';
+import {parseQuote} from './fitQuote';
 
 export const quoteSchema = z.object({
-  /** Her satir ayri bir aciliste ekrana gelir. Ilk satir hook'tur. */
+  /**
+   * Her satir ayri bir aciliste ekrana gelir. Ilk satir hook'tur.
+   * Basina ">" konan satir vurgulanir (buyuk punto + vurgu rengi).
+   */
   quote: z.string(),
   author: z.string().optional(),
   /** Yorum yemi. Bos birakilirsa gosterilmez. */
@@ -29,10 +32,11 @@ export type QuoteProps = z.infer<typeof quoteSchema>;
  * Olcum gerektirmedigi icin Node tarafinda da calisir (calculateMetadata).
  */
 export const quoteDurationInFrames = (props: QuoteProps): number => {
-  const lines = Math.max(1, splitLines(props.quote).length);
+  const lines = Math.max(1, parseQuote(props.quote).length);
   return (
     TIMING.firstLineAt +
     lines * TIMING.lineStagger +
+    TIMING.intraGroupTail +
     TIMING.authorDelay +
     Math.round(props.holdSeconds * FPS) +
     TIMING.outro

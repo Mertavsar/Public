@@ -29,6 +29,10 @@ Yeni söz eklemek için `data/quotes.json` dosyasına bir kayıt ekle, `npm run 
 ```
 
 - `\n` = ekranda **ayrı açılışta** gelen satır. Şiirsel kırılımlar korunur.
+- Satır başına `>` koyarsan o satır **vurgulanır**: tam punto, italik, vurgu
+  rengi. Diğer satırlar %82 puntoda kalır. Ölçek kontrastı hiyerarşi kurar --
+  her satır aynı boyutta olduğunda metin jenerik görünüyordu. Vurguyu
+  punchline'a koy.
 - **İlk satır hook'tur.** 8. karede (0,27 sn) ekrana gelir — Shorts'ta kaydırma kararı
   ilk 1-2 saniyede verildiği için hook kasıtlı olarak geciktirilmez. İlk satırı
   kaydırmayı durduracak şekilde yaz; gerisi ancak o tutarsa izlenir.
@@ -59,6 +63,21 @@ kayar. Düz `div` + açık `width`/`height` kullanılıyor.
 sarar ve sığmazsa puntoyu kademeli düşürür. Sabit punto ile 50 söz basılsa uzun olanlar
 ekrandan taşar ve bunu ancak yükledikten sonra fark ederdin. En küçük puntoda bile
 sığmayan söz olursa toplu render sonunda `UYARI - metni kısalt: <id>` satırı basılır.
+
+**Film dokusu.** `FilmLook` katmanı görüntüyü "çekilmiş" hissettiren kusurları
+ekler: negatifin kapıda mikroskobik oynaması (gate weave), pozlama titremesi,
+sıcak ışık / soğuk gölge grade'i, kaldırılmış siyahlar (filmde siyah asla #000
+değildir), merkezden hafif kaçık kenar karartması. Hiçbiri "efekt" gibi
+görünmemeli -- fark edilirse fazla kaçmış demektir. Düz render ile gerçek
+görüntü arasındaki farkın büyük kısmı içerik değil, bu kusurlardır.
+
+**Maskeli açılış.** Satırlar görünmez bir çizginin ardından yukarı kayarak
+girer (`overflow: hidden` + `translateY`). Düz opacity geçişine göre çok daha
+tasarlanmış hissettirir; hareketin bir yönü ve ağırlığı olur.
+
+**B-roll döngüsü.** Üretilen b-roll neredeyse her zaman Short'tan kısadır.
+Döngüye alınmazsa video son karesinde donar ve geri kalan süre fotoğraf gibi
+görünür. `LoopedVideo` süreyi okuyup `<Loop>` ile sarar.
 
 **Loop.** Sonda karartma (fade to black) yok. Shorts videoyu döngüye aldığı için
 karartma retention'ı boşa harcar; sert kesişle başa dönmek daha iyi çalışır.

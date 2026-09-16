@@ -101,7 +101,9 @@ export const Bozkir: React.FC = () => {
   const t = interpolate(frame, [0, durationInFrames], [0, 1], {extrapolateRight: 'clamp'});
   const drift = t * 46;
 
-  const sunY = HORIZON - 96 + t * 10;
+  const sunY = HORIZON - 4 + t * 12;
+  // Huzmeler cok yavas doner: sabit kalsa cizim gibi gorunur.
+  const rayDrift = t * 2.4;
 
   return (
     <AbsoluteFill>
@@ -124,6 +126,9 @@ export const Bozkir: React.FC = () => {
             <stop offset="45%" stopColor="#e8873f" stopOpacity="0.34" />
             <stop offset="100%" stopColor="#e8873f" stopOpacity="0" />
           </radialGradient>
+          <filter id="huzmeBulanik" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="34" />
+          </filter>
           <linearGradient id="pus" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#e0a05c" stopOpacity="0" />
             <stop offset="100%" stopColor="#e0a05c" stopOpacity="0.30" />
@@ -133,9 +138,26 @@ export const Bozkir: React.FC = () => {
         {/* Gokyuzu */}
         <rect x="0" y="0" width={WIDTH} height={HORIZON + 8} fill="url(#gokyuzu)" />
 
-        {/* Gunes ve halesi */}
-        <circle cx={186} cy={sunY} r={430} fill="url(#gunesHale)" />
-        <circle cx={186} cy={sunY} r={58} fill="#ffe6bd" opacity="1" />
+        {/* Gunes, halesi ve isik huzmeleri */}
+        <circle cx={186} cy={sunY} r={520} fill="url(#gunesHale)" />
+        <g filter="url(#huzmeBulanik)" opacity="0.22">
+          {[-34, -17, 2, 21, 40].map((deg, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <rect
+              key={i}
+              x={186 - 16}
+              y={sunY}
+              width={32 + i * 9}
+              height={1500}
+              fill="#ffd9a0"
+              transform={`rotate(${deg + rayDrift} 186 ${sunY})`}
+            />
+          ))}
+        </g>
+        {/* Bloom: parlak kaynak cevresine tasan isik */}
+        <circle cx={186} cy={sunY} r={150} fill="#ffb862" opacity="0.26" />
+        <circle cx={186} cy={sunY} r={92} fill="#ffcf85" opacity="0.40" />
+        <circle cx={186} cy={sunY} r={60} fill="#ffe3ab" opacity="1" />
 
         {/* Ufuk pusu: tepelerin dibini yumusatir, derinlik hissini artirir */}
         <rect x="0" y={HORIZON - 230} width={WIDTH} height={238} fill="url(#pus)" />

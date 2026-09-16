@@ -20,11 +20,11 @@ export const RemotionRoot: React.FC = () => {
       })}
       defaultProps={{
         quote:
-          'Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\nO ev kapısını kilitlemedi hiç.',
+          'Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\n> O ev kapısını kilitlemedi hiç.',
         author: '',
         cta: 'Seni bekleyen bir kapı var mı?',
         handle: '@30adogru',
-        background: undefined,
+        background: 'bg/bugday-ruzgar.mp4',
         scene: 'bozkir' as const,
         accent: '#e0a45c',
         holdSeconds: 2.2,

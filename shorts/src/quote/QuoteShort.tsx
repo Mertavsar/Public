@@ -3,30 +3,62 @@ import {AbsoluteFill, spring, staticFile, useCurrentFrame, useVideoConfig} from 
 import {FONT_BODY, FONT_UI, SAFE, SAFE_HEIGHT, SAFE_WIDTH, TIMING, palette} from '../theme';
 import {useFontsReady} from '../useFontsReady';
 import {Background} from './Background';
+import {FilmLook} from './FilmLook';
 import {Grain} from './Grain';
 import {SafeAreaGuide} from './SafeAreaGuide';
 import {fitQuote} from './fitQuote';
 import type {QuoteProps} from './schema';
 
 const QUOTE_WEIGHT = 500;
-const LINE_HEIGHT = 1.34;
-/** Buyukten kucuge denenir; ilk sigan secilir. */
-const SIZE_STEPS = [84, 76, 70, 64, 58, 52, 46, 41, 36];
-
-/** Sozun altindaki yazar + yorum yemi icin ayrilan dikey pay. */
-const FOOTER_RESERVE = 230;
+const LINE_HEIGHT = 1.3;
+/** Vurgulu satirin puntosu. Buyukten kucuge denenir; ilk sigan secilir. */
+const SIZE_STEPS = [92, 84, 76, 70, 64, 58, 52, 46, 41, 36];
 /** Metin guvenli kutunun kenarina yapismasin; nefes payi. */
 const INNER_PAD = 0.94;
+/** Sozun altindaki yazar + yorum yemi icin ayrilan dikey pay. */
+const FOOTER_RESERVE = 230;
 
-type RevealArgs = {frame: number; startsAt: number; fps: number};
-
-const reveal = ({frame, startsAt, fps}: RevealArgs) =>
+const reveal = (frame: number, startsAt: number, fps: number) =>
   spring({
     frame: frame - startsAt,
     fps,
     durationInFrames: TIMING.lineReveal,
     config: {damping: 200},
   });
+
+/**
+ * Maskeli aciliş: satir gorunmez bir cizginin ardindan yukari kayarak girer.
+ * Duz opacity gecisine gore cok daha "tasarlanmis" hissettirir -- hareketin
+ * bir yonu ve agirligi olur.
+ */
+const MaskedLine: React.FC<{
+  children: React.ReactNode;
+  progress: number;
+  fontSize: number;
+  style?: React.CSSProperties;
+}> = ({children, progress, fontSize, style}) => {
+  // Alt tasma payi: overflow hidden olmasa "g, y, ş" kuyruklari kesilirdi.
+  const bleed = Math.round(fontSize * 0.22);
+  return (
+    <div
+      style={{
+        overflow: 'hidden',
+        paddingBottom: bleed,
+        marginBottom: -bleed,
+      }}
+    >
+      <div
+        style={{
+          transform: `translateY(${(1 - progress) * 104}%)`,
+          opacity: Math.min(1, progress * 1.4),
+          ...style,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export const QuoteShort: React.FC<QuoteProps> = ({
   quote,
@@ -70,139 +102,136 @@ export const QuoteShort: React.FC<QuoteProps> = ({
     TIMING.firstLineAt + groups.length * TIMING.lineStagger + TIMING.authorDelay;
   const ctaAt = authorAt + 12;
 
-  const authorP = reveal({frame, startsAt: authorAt, fps});
-  const ctaP = reveal({frame, startsAt: ctaAt, fps});
-  const handleP = reveal({frame, startsAt: 4, fps});
+  const authorP = reveal(frame, authorAt, fps);
+  const ctaP = reveal(frame, ctaAt, fps);
+  const handleP = reveal(frame, 4, fps);
 
   return (
-    <AbsoluteFill style={{backgroundColor: palette.base}}>
-      <Background src={bgSrc} scene={scene} />
-      <Grain />
+    <FilmLook>
+      <AbsoluteFill style={{backgroundColor: palette.base}}>
+        <Background src={bgSrc} scene={scene} />
+        <Grain />
 
-      {/* Fontlar hazir olana kadar metin cizilmez; olculer yanlis cikardi. */}
-      {fitted ? (
-        <div
-          // AbsoluteFill KULLANILMAZ: o bilesen width/height 100% dayatir,
-          // top/left/right/bottom verince kutu daralmaz, tasar. Duz div ile
-          // inset vererek gercek guvenli alani elde ediyoruz.
-          style={{
-            position: 'absolute',
-            top: SAFE.top,
-            left: SAFE.left,
-            width: SAFE_WIDTH,
-            height: SAFE_HEIGHT,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          {handle ? (
-            <div
-              lang="tr"
-              style={{
-                position: 'absolute',
-                top: 0,
-                fontFamily: FONT_UI,
-                fontSize: 26,
-                letterSpacing: 3,
-                textTransform: 'uppercase',
-                color: palette.inkDim,
-                opacity: handleP * 0.9,
-              }}
-            >
-              {handle}
-            </div>
-          ) : null}
-
+        {/* Fontlar hazir olana kadar metin cizilmez; olculer yanlis cikardi. */}
+        {fitted ? (
           <div
+            // AbsoluteFill KULLANILMAZ: o bilesen width/height 100% dayatir,
+            // inset verince kutu daralmaz ve metin sagdaki buton sutununun
+            // altina kayar. Duz div ile gercek guvenli alani elde ediyoruz.
             style={{
-              width: 64,
-              height: 3,
-              borderRadius: 2,
-              backgroundColor: accent,
-              opacity: reveal({frame, startsAt: 2, fps}) * 0.85,
-              marginBottom: 48,
+              position: 'absolute',
+              top: SAFE.top,
+              left: SAFE.left,
+              width: SAFE_WIDTH,
+              height: SAFE_HEIGHT,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-          />
-
-          {groups.map((visualLines, i) => {
-            const p = reveal({
-              frame,
-              startsAt: TIMING.firstLineAt + i * TIMING.lineStagger,
-              fps,
-            });
-            return (
+          >
+            {handle ? (
               <div
-                // eslint-disable-next-line react/no-array-index-key
-                key={i}
+                lang="tr"
                 style={{
-                  opacity: p,
-                  transform: `translateY(${(1 - p) * 30}px)`,
-                  filter: `blur(${(1 - p) * 7}px)`,
-                  willChange: 'transform, opacity, filter',
+                  position: 'absolute',
+                  top: 0,
+                  fontFamily: FONT_UI,
+                  fontSize: 24,
+                  letterSpacing: 4,
+                  textTransform: 'uppercase',
+                  color: palette.inkDim,
+                  opacity: handleP * 0.75,
                 }}
               >
-                {visualLines.map((line, j) => (
-                  <div
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={j}
-                    style={{
-                      fontFamily: FONT_BODY,
-                      fontWeight: QUOTE_WEIGHT,
-                      fontSize: fitted.fontSize,
-                      lineHeight: LINE_HEIGHT,
-                      color: palette.ink,
-                      textAlign: 'center',
-                      textShadow: '0 2px 26px rgba(0,0,0,0.78), 0 1px 3px rgba(0,0,0,0.6)',
-                      whiteSpace: 'pre',
-                    }}
-                  >
-                    {line}
-                  </div>
-                ))}
+                {handle}
               </div>
-            );
-          })}
+            ) : null}
 
-          {author ? (
             <div
               style={{
-                marginTop: 44,
-                fontFamily: FONT_UI,
-                fontSize: 30,
-                letterSpacing: 2,
-                color: accent,
-                opacity: authorP * 0.95,
-                transform: `translateY(${(1 - authorP) * 16}px)`,
+                width: 56,
+                height: 2,
+                borderRadius: 2,
+                backgroundColor: accent,
+                opacity: reveal(frame, 2, fps) * 0.7,
+                marginBottom: 52,
               }}
-            >
-              {author}
-            </div>
-          ) : null}
+            />
 
-          {cta ? (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 18,
-                fontFamily: FONT_UI,
-                fontSize: 32,
-                fontWeight: 600,
-                color: palette.ink,
-                textAlign: 'center',
-                textShadow: '0 2px 18px rgba(0,0,0,0.8)',
-                opacity: ctaP,
-                transform: `translateY(${(1 - ctaP) * 18}px)`,
-              }}
-            >
-              {cta}
-            </div>
-          ) : null}
-        </div>
-      ) : null}
+            {groups.map((group, i) => {
+              const groupStart = TIMING.firstLineAt + i * TIMING.lineStagger;
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={i} style={{marginBottom: group.emphasis ? 6 : 2}}>
+                  {group.visual.map((line, j) => (
+                    <MaskedLine
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={j}
+                      fontSize={group.fontSize}
+                      progress={reveal(frame, groupStart + j * TIMING.intraGroupStagger, fps)}
+                      style={{
+                        fontFamily: FONT_BODY,
+                        fontWeight: QUOTE_WEIGHT,
+                        fontStyle: group.emphasis ? 'italic' : 'normal',
+                        fontSize: group.fontSize,
+                        lineHeight: LINE_HEIGHT,
+                        color: group.emphasis ? accent : palette.ink,
+                        textAlign: 'center',
+                        // Sicak halation: isigin harflerden tasmasi. Alttaki
+                        // koyu golge okunabilirlik, ustteki sicak parilti doku.
+                        textShadow: group.emphasis
+                          ? `0 0 42px ${accent}55, 0 2px 22px rgba(0,0,0,0.72)`
+                          : '0 0 38px rgba(255,214,160,0.20), 0 2px 22px rgba(0,0,0,0.76)',
+                        whiteSpace: 'pre',
+                      }}
+                    >
+                      {line}
+                    </MaskedLine>
+                  ))}
+                </div>
+              );
+            })}
 
-      {showSafeArea ? <SafeAreaGuide /> : null}
-    </AbsoluteFill>
+            {author ? (
+              <div
+                style={{
+                  marginTop: 46,
+                  fontFamily: FONT_UI,
+                  fontSize: 28,
+                  letterSpacing: 2,
+                  color: accent,
+                  opacity: authorP * 0.9,
+                  transform: `translateY(${(1 - authorP) * 14}px)`,
+                }}
+              >
+                {author}
+              </div>
+            ) : null}
+
+            {cta ? (
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 18,
+                  fontFamily: FONT_UI,
+                  fontSize: 31,
+                  fontWeight: 600,
+                  color: palette.ink,
+                  textAlign: 'center',
+                  textShadow: '0 2px 20px rgba(0,0,0,0.85)',
+                  opacity: ctaP * 0.94,
+                  transform: `translateY(${(1 - ctaP) * 16}px)`,
+                }}
+              >
+                {cta}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
+        {showSafeArea ? <SafeAreaGuide /> : null}
+      </AbsoluteFill>
+    </FilmLook>
   );
 };

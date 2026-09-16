@@ -21,7 +21,11 @@ export const SAFE_HEIGHT = HEIGHT - SAFE.top - SAFE.bottom;
 export const TIMING = {
   firstLineAt: 8,
   lineStagger: 26,
-  lineReveal: 22,
+  lineReveal: 26,
+  /** Bir grup icindeki gorsel satirlarin birbirini kovalama gecikmesi. */
+  intraGroupStagger: 5,
+  /** Sure hesabina eklenen pay: gorsel satir sayisi Node tarafinda bilinmiyor. */
+  intraGroupTail: 14,
   authorDelay: 18,
   outro: 20,
 } as const;
