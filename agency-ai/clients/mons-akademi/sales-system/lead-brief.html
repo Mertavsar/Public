@@ -67,6 +67,16 @@
   button.primary[disabled] { opacity: .55; cursor: default; }
 
   .card { display: flex; flex-direction: column; gap: 12px; }
+  .status {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
+    background: var(--surface-2); border-radius: var(--r); padding: 10px 14px;
+    font-size: 14px; color: var(--ink-soft);
+  }
+  .status b { color: var(--ink); font-weight: 600; }
+  .status .sm { font-size: 12.5px; color: var(--ink-faint); flex: 1 1 100%; }
+  @keyframes flash { from { background: var(--accent); } to { background: var(--surface-2); } }
+  .status.changed { animation: flash .5s ease-out; }
+  @media (prefers-reduced-motion: reduce) { .status.changed { animation: none; } }
   .blk { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; }
   .blk h2 {
     font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
@@ -267,6 +277,18 @@
 
     var h = [];
 
+    // 0 — bu kart kimin için
+    var who = [];
+    if (state.meslek.trim()) who.push(esc(state.meslek.trim()));
+    who.push(esc(c.label));
+    h.push('<div class="status" id="status"><b>' + who.join(" · ") + '</b>');
+    if (ai) h.push('<span>bu kişiye özel yazıldı</span>');
+    else if (cell) h.push('<span>hazır kart — ' + esc(prof.name) + '</span>');
+    else if (state.meslek.trim()) h.push('<span>bu meslek listede yok — genel kart</span>');
+    else h.push('<span>meslek yazılmadı — genel kart</span>');
+    h.push('<span class="sm" id="aiState"></span>');
+    h.push('</div>');
+
     // 1 — söyleyeceği
     h.push('<div class="blk">');
     h.push('<h2>Aç ve şunu söyle</h2>');
@@ -324,8 +346,27 @@
     if (c.eslestirme_kurali) b.push('<p><b>Dikkat.</b> ' + esc(c.eslestirme_kurali) + '</p>');
     document.getElementById("bilgi").innerHTML = b.join("");
 
+    var st = document.getElementById("status");
+    if (st && rendered) {
+      st.classList.add("changed");
+      setTimeout(function () { st.classList.remove("changed"); }, 600);
+    }
+    rendered = true;
+    writeAiState();
     wireCopies();
     refreshLog();
+  }
+
+  var rendered = false;
+  var aiState = "bekleniyor";
+  function writeAiState() {
+    var el = document.getElementById("aiState");
+    if (!el) return;
+    if (aiState === "bekleniyor") el.textContent = "";
+    else if (aiState === "yok") el.textContent = "Kişiye özel yazma bu ekranda açılamadı — hazır kart gösteriliyor.";
+    else if (aiState === "hazir") el.textContent = "Daha da kişiselleştirmek için yukarıdaki butona bas.";
+    else if (aiState === "yaziliyor") el.textContent = "Claude bu kişi için yazıyor…";
+    else el.textContent = aiState;
   }
 
   function wireCopies() {
@@ -422,8 +463,17 @@
     ? window.claude.use("sample") : Promise.resolve(null);
   use.then(function (fn) {
     sampleFn = fn;
-    if (fn) document.getElementById("aiBtn").hidden = false;
-  }, function () {});
+    if (fn) {
+      document.getElementById("aiBtn").hidden = false;
+      aiState = "hazir";
+    } else {
+      aiState = "yok";
+    }
+    writeAiState();
+  }, function () { aiState = "yok"; writeAiState(); });
+  setTimeout(function () {
+    if (!sampleFn && aiState === "bekleniyor") { aiState = "yok"; writeAiState(); }
+  }, 11000);
 
   function buildPrompt() {
     var c = COURSES[state.course];
@@ -465,11 +515,13 @@
     if (!sampleFn) return;
     btn.disabled = true;
     btn.textContent = "Yazılıyor…";
+    aiState = "yaziliyor"; writeAiState();
     if (ctl) ctl.abort();
     ctl = new AbortController();
     sampleFn.json(buildPrompt(), { signal: ctl.signal, cache: false })
       .then(function (data) {
         aiCard = data; aiUsed = true;
+        aiState = "hazir";
         render();
         btn.textContent = "Yeniden yaz";
       })
@@ -477,8 +529,13 @@
         var code = e && e.code;
         if (code === "not_granted" || code === "sampling_disabled" || code === "not_declared") {
           btn.hidden = true;
+          aiState = "yok"; writeAiState();
           return;
         }
+        aiState = code === "rate_limited"
+          ? "Çok fazla istek oldu, birkaç dakika sonra dene. Hazır kart geçerli."
+          : "Yazılamadı — hazır kart geçerli, tekrar deneyebilirsin.";
+        writeAiState();
         btn.textContent = code === "rate_limited" ? "Biraz sonra dene" : "Olmadı — tekrar dene";
       })
       .then(function () { btn.disabled = false; });
