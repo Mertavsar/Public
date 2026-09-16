@@ -65,8 +65,20 @@ karartma retention'ı boşa harcar; sert kesişle başa dönmek daha iyi çalı�
 
 ## Arka plan
 
-`background` boşsa animasyonlu sepya gradyan kullanılır — hiçbir varlık gerekmeden
-çalışır. Kendi görselini/videonu koymak için dosyayı `public/` altına at ve yolu ver:
+İki yol var: hazır sahne veya kendi dosyan.
+
+**Hazır sahne** — `scene` alanı:
+
+- `"bozkir"`: kodla çizilmiş Anadolu bozkırı (gün batımı, dört katmanlı tepe
+  silueti, yalnız ağaç, süzülen toz). Katmanlar farklı paralaks hızında kaydığı
+  için derinlik hissi var. Fotoğraf değil, silüet illüstrasyon -- ama telif riski
+  sıfır ve tepe hattı/ışık her videoda değiştirilebilir.
+- `"gradient"` (varsayılan): animasyonlu sepya gradyan.
+
+**Kendi dosyan** — `background` alanı. Verilirse `scene` yok sayılır.
+
+
+Kendi görselini/videonu koymak için dosyayı `public/` altına at ve yolu ver:
 
 ```json
 "background": "bg/tren-penceresi.mp4"
