@@ -1,0 +1,60 @@
+{
+  "_not": "Her kayit bir Short. quote icindeki \\n satir sonlari ekranda ayri aciliste gelir - ilk satir hook'tur, kaydirmayi durduracak sekilde yazilmali.",
+  "defaults": {
+    "handle": "@30adogru",
+    "holdSeconds": 2.2,
+    "background": null,
+    "showSafeArea": false,
+    "author": ""
+  },
+  "quotes": [
+    {
+      "id": "gurbet-01",
+      "quote": "Gurbet, memleketin adını duyunca\nsusmayı öğrenmektir.\nSen susarsın, için konuşur.",
+      "cta": "Sen kaç yıldır gurbettesin?",
+      "accent": "#c9873f"
+    },
+    {
+      "id": "gurbet-02",
+      "quote": "En uzun yol,\neve giden yoldur.\nÇünkü her adımda\nbir hatıra durdurur seni.",
+      "cta": "Memleketin neresi?",
+      "accent": "#b5733a"
+    },
+    {
+      "id": "ozlem-01",
+      "quote": "Özlemek,\nbir insanın olmadığı yerde\nonu görmeye devam etmektir.",
+      "cta": "Şu an kimi özlüyorsun?",
+      "accent": "#a8613f"
+    },
+    {
+      "id": "sila-01",
+      "quote": "Sıla, bir yer değil.\nSıla, seni bekleyen birinin\nolduğu yerdir.",
+      "cta": "Seni bekleyen var mı?",
+      "accent": "#c9873f"
+    },
+    {
+      "id": "gurbet-03",
+      "quote": "Giderken \"iki yıl\" dedik.\nYirmi yıl oldu.\nHâlâ giderken bıraktığımız\nçocuk sanıyoruz kendimizi.",
+      "cta": "Kaçıncı yılındasın?",
+      "accent": "#8f5a3c"
+    },
+    {
+      "id": "ozlem-02",
+      "quote": "Bazı kokular vardır,\nbir anda seni\non beş yıl öncesine götürür.\nİşte o, özlemdir.",
+      "cta": "Seni hangi koku götürüyor?",
+      "accent": "#b5733a"
+    },
+    {
+      "id": "ozlu-01",
+      "quote": "İnsan doğduğu yeri değil,\nsevildiği yeri özler.",
+      "cta": "Katılıyor musun?",
+      "accent": "#c9873f"
+    },
+    {
+      "id": "sila-02",
+      "quote": "Telefonda \"iyiyim anne\" demek,\ngurbetçilerin\nen çok söylediği yalandır.",
+      "cta": "Bugün aradın mı?",
+      "accent": "#a8613f"
+    }
+  ]
+}
