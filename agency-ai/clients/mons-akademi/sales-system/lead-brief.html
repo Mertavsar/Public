@@ -77,11 +77,26 @@
 
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-  input[type="text"], input[type="number"], select {
+  input[type="text"], input[type="number"], select, textarea {
     font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
     border: 1px solid var(--line); border-radius: var(--r); padding: 8px 10px; width: 100%;
   }
   select { appearance: none; }
+  textarea { resize: vertical; min-height: 64px; font-family: var(--f-sans); }
+  button.primary {
+    font: inherit; font-size: 14px; font-weight: 600; color: var(--accent-ink); background: var(--accent);
+    border: 1px solid var(--accent); border-radius: var(--r); padding: 9px 12px; cursor: pointer; width: 100%;
+  }
+  button.primary[disabled] { opacity: .55; cursor: default; }
+  .ai-badge {
+    display: inline-block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em;
+    text-transform: uppercase; padding: 2px 6px; border-radius: 3px;
+    background: var(--accent); color: var(--accent-ink); margin-left: 6px; vertical-align: 2px;
+  }
+  .ai-note { font-size: 12.5px; color: var(--ink-faint); margin: 10px 18px 0; }
+  .logbox { margin-top: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; }
+  .logbox h2 { font-size: 15px; margin: 0 0 4px; }
+  .logrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 12px; }
   input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .hint { font-size: 12px; color: var(--ink-faint); margin: 0; }
   datalist { display: none; }
@@ -128,6 +143,10 @@
     font-family: var(--f-mono); font-size: 12.5px; line-height: 1.5;
     background: var(--surface-2); border-radius: var(--r); padding: 8px 10px; color: var(--ink-soft);
   }
+  .obj { margin: 0 0 8px; }
+  .obj:last-child { margin-bottom: 0; }
+  .obj b { font-weight: 600; }
+  .obj span { display: block; color: var(--ink-soft); font-size: 14px; }
   .timeline { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--f-mono); font-size: 12px; }
   .timeline span { background: var(--surface-2); border-radius: 3px; padding: 3px 7px; color: var(--ink-soft); }
 
@@ -201,11 +220,56 @@
         <input type="text" id="temsilci" value="Zeynep">
       </div>
 
+      <div class="field">
+        <label class="lbl" for="notlar">Not — formda ne yazdı, önceki aramada ne dedi</label>
+        <textarea id="notlar" rows="3" placeholder="Örn: geçen aramada 'eşime danışayım' dedi, mülakatı 2 hafta sonra"></textarea>
+        <p class="hint">Burası doldukça kart kişiselleşir. Kişinin kendi cümlesi, mesleğinden değerlidir.</p>
+      </div>
+
+      <div class="field" id="aiBox" hidden>
+        <button type="button" class="primary" id="aiBtn">Bu kişiye özel kart yaz</button>
+        <p class="hint" id="aiHint">Kart Claude tarafından bu kişi için yazılır — listede olmayan meslekler dahil.</p>
+      </div>
+
       <p class="hint">Meslek boşsa tahmin etme — kart sana soracağın üç soruyu verir.</p>
     </form>
 
     <main class="card" id="card" aria-live="polite"></main>
   </div>
+
+  <section class="logbox">
+    <h2>Arama sonucu — her lead için doldur</h2>
+    <p class="hint">Sistemin öğrenmesini sağlayan tek şey bu. Satır kopyalanıp Sheets'e yapıştırılır.
+      Telefon ve soyadı yazılmaz; lead ID yeter (KVKK).</p>
+    <div class="logrow">
+      <div class="field">
+        <label class="lbl" for="leadId">Lead ID</label>
+        <input type="text" id="leadId" placeholder="formdaki sıra no">
+      </div>
+      <div class="field">
+        <label class="lbl" for="sonuc">Sonuç</label>
+        <select id="sonuc">
+          <option value="takipte">takipte</option>
+          <option value="satildi">satıldı</option>
+          <option value="kayip">kayıp</option>
+          <option value="ulasilamadi">ulaşılamadı</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="lbl" for="itiraz">İlk itiraz</label>
+        <input type="text" id="itiraz" placeholder="fiyat / zaman / sertifika / ekipman …">
+      </div>
+      <div class="field">
+        <label class="lbl" for="kartKullanildi">Kart kullanıldı mı</label>
+        <select id="kartKullanildi">
+          <option value="E">Evet</option>
+          <option value="H">Hayır</option>
+        </select>
+      </div>
+    </div>
+    <p class="quote" id="logLine" style="margin-top:12px"></p>
+    <button class="copy" type="button" id="logCopy" data-copy="logLine" data-label="Satırı kopyala">Satırı kopyala</button>
+  </section>
 
   <footer>
     <p><b>Kart hipotezdir.</b> Kesişim cümlesini soru olarak sor. “Evet, aynen” gelirse konuşma
@@ -290,6 +354,8 @@
 
     var prof = matchProf(state.meslek);
     var cell = prof && c.cells ? c.cells[prof.key] : null;
+    var ai = aiCard;
+    var AIB = '<span class="ai-badge">bu kişiye özel</span>';
     var ad = state.ad.trim();
     var rep = state.temsilci.trim();
 
@@ -323,8 +389,10 @@
 
     // 1 — kesişim
     h.push('<li class="step"><div class="n">1</div><div>');
-    h.push('<h3>Mesleğiyle kesişimi<span class="tag">hipotez</span></h3>');
-    if (cell) {
+    h.push('<h3>Mesleğiyle kesişimi' + (ai ? AIB : '<span class="tag">hipotez</span>') + '</h3>');
+    if (ai && ai.kesisim) {
+      h.push('<p class="serif">' + esc(ai.kesisim) + '</p>');
+    } else if (cell) {
       h.push('<p class="serif">' + esc(cell.kesisim) + '</p>');
     } else {
       h.push('<p class="serif">' + esc(c.eksen) + '</p>');
@@ -347,7 +415,14 @@
     // 3 — kesişim sorusu
     h.push('<li class="step"><div class="n">3</div><div>');
     h.push('<h3>Sonra sor — kesişim sorusu</h3>');
-    if (cell) {
+    if (ai && ai.giris) {
+      h.push('<p class="quote">' + esc(ai.giris) + '</p>');
+      if (ai.sorular && ai.sorular.length) {
+        h.push('<p class="soft" style="margin-top:8px">Devamında:</p><ul class="plain">');
+        for (var q = 0; q < ai.sorular.length; q++) h.push('<li>' + esc(ai.sorular[q]) + '</li>');
+        h.push('</ul>');
+      }
+    } else if (cell) {
       h.push('<p class="quote">' + esc(cell.giris) + '</p>');
     } else {
       h.push('<p class="quote">Bu eğitimi kendiniz için mi düşünüyorsunuz, işiniz için mi? Ona göre anlatayım.</p>');
@@ -355,7 +430,29 @@
     h.push('</div></li>');
 
     // 4 — iki çıktı
-    if (cell) {
+    if (ai) {
+      if (ai.ciktilar && ai.ciktilar.length) {
+        h.push('<li class="step"><div class="n">4</div><div>');
+        h.push('<h3>Ona değecek çıktılar' + AIB + '</h3><ul class="plain">');
+        for (var a1 = 0; a1 < ai.ciktilar.length; a1++) h.push('<li>' + esc(ai.ciktilar[a1]) + '</li>');
+        h.push('</ul></div></li>');
+      }
+      if (ai.ders) {
+        h.push('<li class="step"><div class="n">5</div><div>');
+        h.push('<h3>Kanıt — ona gösterilecek ders</h3>');
+        h.push('<p class="ders">' + esc(ai.ders) + '</p>');
+        h.push('</div></li>');
+      }
+      if (ai.itirazlar && ai.itirazlar.length) {
+        h.push('<li class="step"><div class="n">6</div><div>');
+        h.push('<h3>Beklenen itirazlar' + AIB + '</h3>');
+        for (var a2 = 0; a2 < ai.itirazlar.length; a2++) {
+          var it = ai.itirazlar[a2] || {};
+          h.push('<p class="obj"><b>' + esc(it.itiraz || "") + '</b><span>' + esc(it.cevap || "") + '</span></p>');
+        }
+        h.push('</div></li>');
+      }
+    } else if (cell) {
       h.push('<li class="step"><div class="n">4</div><div>');
       h.push('<h3>Ona değecek iki çıktı</h3><ul class="plain">');
       for (var i = 0; i < cell.ciktilar.length; i++) h.push('<li>' + esc(cell.ciktilar[i]) + '</li>');
@@ -408,6 +505,7 @@
       h.push('<p class="warnline" style="margin-top:8px">' + esc(c.eslestirme_kurali) + '</p>');
     var cn = cityNote(state.sehir, state.course);
     if (cn) h.push('<p class="soft" style="margin-top:8px">' + esc(cn) + '</p>');
+    if (ai && ai.dikkat) h.push('<p class="warnline" style="margin-top:8px">' + esc(ai.dikkat) + '</p>');
     h.push('<p class="soft" style="margin-top:8px">Yasak: iş garantisi, gelir garantisi, “devlet onaylı”, akreditasyon kurumu adı verilmeden “uluslararası geçerli”, tanımlı olmayan indirim.</p>');
     h.push('</div></li>');
 
@@ -473,6 +571,7 @@
     else if (t.id === "sehir") state.sehir = t.value;
     else if (t.id === "temsilci") state.temsilci = t.value;
     else if (t.id === "deneme") state.deneme = t.value;
+    if (t.id !== "notlar" && t.id !== "temsilci") staleAi();
     render();
   });
   form.addEventListener("change", function (e) {
@@ -481,5 +580,137 @@
   });
 
   render();
+
+  // ---------------------------------------------------------------- sonuç logu
+  var LOG_FIELDS = ["leadId", "sonuc", "itiraz", "kartKullanildi"];
+  function logLine() {
+    var g = function (id) { var el = document.getElementById(id); return el ? el.value.replace(/[,\n]/g, " ").trim() : ""; };
+    var d = new Date().toISOString().slice(0, 10);
+    return [d, g("leadId"), state.course, (state.meslek || "").trim(), state.yas,
+            (state.sehir || "").trim(), state.deneme, g("kartKullanildi"),
+            aiUsed ? "dinamik" : "statik", g("itiraz"), g("sonuc"),
+            (state.temsilci || "").trim()].join(",");
+  }
+  function refreshLog() {
+    var el = document.getElementById("logLine");
+    if (el) el.textContent = logLine();
+  }
+  LOG_FIELDS.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) { el.addEventListener("input", refreshLog); el.addEventListener("change", refreshLog); }
+  });
+  form.addEventListener("input", refreshLog);
+  refreshLog();
+  wireCopy(document.getElementById("logCopy"));
+
+  // ---------------------------------------------------------------- Claude'a sor
+  var aiUsed = false;
+  var aiCard = null;
+  function staleAi() {
+    if (!aiCard) return;
+    aiCard = null; aiUsed = false;
+    var b = document.getElementById("aiBtn");
+    if (b) b.textContent = "Bu kişiye özel kart yaz";
+    var hn = document.getElementById("aiHint");
+    if (hn) hn.textContent = "Lead değişti — kartı bu kişi için yeniden yazdır.";
+  }
+  var sampleFn = null;
+  var ctl = null;
+
+  var useFn = (window.claude && typeof window.claude.use === "function")
+    ? window.claude.use("sample")
+    : Promise.resolve(null);
+  useFn.then(function (fn) {
+    sampleFn = fn;
+    var box = document.getElementById("aiBox");
+    if (fn && box) box.hidden = false;
+  }, function () { /* yoksa statik kart kalır */ });
+
+  function prompt_() {
+    var c = COURSES[state.course];
+    var prof = matchProf(state.meslek);
+    var cell = prof && c.cells ? c.cells[prof.key] : null;
+    var ai = aiCard;
+    var AIB = '<span class="ai-badge">bu kişiye özel</span>';
+    var u = MATRIX.urun || {};
+    var notlar = (document.getElementById("notlar") || {}).value || "";
+
+    var p = [];
+    p.push("Türkiye'de bir online eğitim markasının (Mons Akademi) telefonla satış yapan temsilcisi için hazırlık kartı yazacaksın.");
+    p.push("Temsilci, Meta reklam formundan gelen kişiyi ARAYACAK. Kişi henüz hiçbir mesaj yazmadı.");
+    p.push("");
+    p.push("ÜRÜN GERÇEKLERİ (sadece bunları kullan, başka özellik uydurma):");
+    p.push("- Eğitim: " + c.label);
+    p.push("- Ders içeriği: " + (c.dersler || []).join(", "));
+    if (c.kazanimlar) p.push("- Kazanımlar: " + c.kazanimlar.join(", "));
+    p.push("- Format: " + (u.format || ""));
+    p.push("- Canlı yayın: " + (u.canli || ""));
+    p.push("- Sınav/sertifika: " + (u.sinav || "") + " " + (u.sertifika || ""));
+    p.push("- Eğitmen: " + (egitmenFor(state.course) || ""));
+    p.push("");
+    p.push("LEAD:");
+    p.push("- Ad: " + (state.ad || "bilinmiyor"));
+    p.push("- Meslek: " + (state.meslek || "BOŞ — meslek bilinmiyor"));
+    p.push("- Yaş: " + (state.yas || "bilinmiyor") + " | Şehir: " + (state.sehir || "bilinmiyor"));
+    p.push("- Kaçıncı arama: " + state.deneme);
+    p.push("- Temsilcinin notu: " + (notlar.trim() || "yok"));
+    if (cell) {
+      p.push("");
+      p.push("BU MESLEK İÇİN ELDEKİ HAZIR ANALİZ (başlangıç noktan, aynen kopyalama — nota ve kişiye göre geliştir):");
+      p.push("- Kesişim: " + cell.kesisim);
+      p.push("- Giriş sorusu: " + cell.giris);
+      p.push("- Çıktılar: " + cell.ciktilar.join(" | "));
+      p.push("- İtiraz: " + cell.itiraz);
+    } else {
+      p.push("");
+      p.push("Bu meslek için hazır analiz YOK. Kesişimi kendin kur: bu meslek gün içinde kiminle konuşuyor, bedenini nasıl yoruyor, bu eğitimden somut olarak ne kazanır?");
+    }
+    p.push("");
+    p.push("KURALLAR — ihlal etme:");
+    p.push("1. FİYAT, taksit, indirim, kampanya, eğitim süresi ASLA yazma. Bunlar sistemde tanımlı değil.");
+    p.push("2. İş garantisi, gelir garantisi, 'devlet onaylı', 'MEB onaylı' yazma. Akreditasyon kurumunun adı bilinmiyor; 'uluslararası geçerli' deme.");
+    p.push("3. Olmayan özellik uydurma (birebir koçluk, staj, iş yerleştirme, ekipman gönderimi yok).");
+    p.push("4. Pilates'te Reformer ve Cadillac ekipman ister; kişinin pratiği nerede yapacağını SORMASINI söyle, çözülmüş gibi anlatma.");
+    p.push("5. Kesişim bir iddia değil SORU olarak kurulur; kişi 'alakası yok' derse temsilci dinler.");
+    p.push("6. Türkçe, kısa, konuşma dili. Temsilci bunu telefonda söyleyecek; yazı dili kurma, süslü cümle kurma.");
+    p.push("7. Kişiyi yaşından veya şehrinden yargılama. Cinsiyet tahmini yapma; adıyla hitap et.");
+    p.push("");
+    p.push("Yalnızca şu JSON'u döndür:");
+    p.push('{"kesisim":"1-2 cümle, bu mesleğin bu eğitimle gerçek kesişimi","giris":"telefonda soracağı tek soru","sorular":["ikinci soru","üçüncü soru"],"ciktilar":["bu kişiye değecek çıktı","ikinci çıktı"],"ders":"ders içeriğinden ona gösterilecek 2-3 ders adı","itirazlar":[{"itiraz":"beklenen itiraz","cevap":"kısa cevap"},{"itiraz":"ikinci itiraz","cevap":"kısa cevap"}],"dikkat":"bu konuşmada dikkat edilecek tek şey"}');
+    return p.join("\n");
+  }
+
+  var aiBtn = document.getElementById("aiBtn");
+  aiBtn.addEventListener("click", function () {
+    if (!sampleFn) return;
+    var hint = document.getElementById("aiHint");
+    aiBtn.disabled = true;
+    aiBtn.textContent = "Yazılıyor…";
+    hint.textContent = "Claude bu kişi için kartı yazıyor, birkaç saniye sürebilir.";
+    if (ctl) ctl.abort();
+    ctl = new AbortController();
+
+    sampleFn.json(prompt_(), { signal: ctl.signal, cache: false, modelTier: "default" })
+      .then(function (data) {
+        aiCard = data;
+        aiUsed = true;
+        render();
+        refreshLog();
+        hint.textContent = "Kart bu kişi için yazıldı. Değiştirmek istersen notu güncelle, tekrar bas.";
+        aiBtn.textContent = "Kartı yeniden yaz";
+      })
+      .catch(function (e) {
+        var code = e && e.code;
+        if (code === "not_granted" || code === "sampling_disabled" || code === "not_declared") {
+          document.getElementById("aiBox").hidden = true;
+          return;
+        }
+        if (code === "rate_limited") hint.textContent = "Çok fazla istek oldu, birkaç dakika sonra dene. Statik kart hazır.";
+        else if (code === "cancelled") hint.textContent = "İptal edildi.";
+        else hint.textContent = "Yazılamadı. Statik kart geçerli; tekrar deneyebilirsin.";
+        aiBtn.textContent = "Bu kişiye özel kart yaz";
+      })
+      .then(function () { aiBtn.disabled = false; });
+  });
 })();
 </script>
