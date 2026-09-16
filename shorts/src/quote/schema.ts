@@ -11,8 +11,10 @@ export const quoteSchema = z.object({
   cta: z.string().optional(),
   /** Kanal etiketi, ornegin @30adogru */
   handle: z.string().optional(),
-  /** public/ altindaki video veya gorsel. Bos ise animasyonlu gradyan kullanilir. */
+  /** public/ altindaki video veya gorsel. Verilirse scene yok sayilir. */
   background: z.string().optional(),
+  /** Hazir arka plan sahnesi. background bos oldugunda kullanilir. */
+  scene: z.enum(['gradient', 'bozkir']).optional(),
   accent: zColor(),
   /** Son satir ekranda kaldiktan sonraki bekleme. */
   holdSeconds: z.number().min(0.5).max(8),

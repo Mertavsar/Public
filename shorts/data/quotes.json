@@ -5,9 +5,17 @@
     "holdSeconds": 2.2,
     "background": null,
     "showSafeArea": false,
-    "author": ""
+    "author": "",
+    "scene": "bozkir"
   },
   "quotes": [
+    {
+      "id": "bozkir-01",
+      "quote": "Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\nO ev kapısını kilitlemedi hiç.",
+      "cta": "Seni bekleyen bir kapı var mı?",
+      "accent": "#e0a45c",
+      "scene": "bozkir"
+    },
     {
       "id": "gurbet-01",
       "quote": "Gurbet, memleketin adını duyunca\nsusmayı öğrenmektir.\nSen susarsın, için konuşur.",

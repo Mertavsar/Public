@@ -34,6 +34,7 @@ export const QuoteShort: React.FC<QuoteProps> = ({
   cta,
   handle,
   background,
+  scene,
   accent,
   showSafeArea,
 }) => {
@@ -75,7 +76,7 @@ export const QuoteShort: React.FC<QuoteProps> = ({
 
   return (
     <AbsoluteFill style={{backgroundColor: palette.base}}>
-      <Background src={bgSrc} />
+      <Background src={bgSrc} scene={scene} />
       <Grain />
 
       {/* Fontlar hazir olana kadar metin cizilmez; olculer yanlis cikardi. */}

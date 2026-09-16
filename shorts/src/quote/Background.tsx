@@ -8,6 +8,8 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {palette} from '../theme';
+import {Bozkir} from './scenes/Bozkir';
+import type {QuoteProps} from './schema';
 
 const isVideo = (src: string) => /\.(mp4|mov|webm|mkv)$/i.test(src);
 
@@ -48,14 +50,28 @@ const GradientFallback: React.FC = () => {
   );
 };
 
-export const Background: React.FC<{src?: string}> = ({src}) => {
+type Props = {src?: string; scene?: QuoteProps['scene']};
+
+export const Background: React.FC<Props> = ({src, scene}) => {
   const scale = useKenBurns();
+
+  // Perde siddeti arka plana gore ayarlanir: fotograf/video metinle yarisir,
+  // cizilmis sahne orta siddet ister, duz gradyan zaten sonuk.
+  const scrim = src
+    ? 'linear-gradient(180deg, rgba(6,4,3,0.72) 0%, rgba(6,4,3,0.34) 32%, rgba(6,4,3,0.52) 68%, rgba(6,4,3,0.88) 100%)'
+    : scene === 'bozkir'
+      ? 'linear-gradient(180deg, rgba(6,4,3,0.60) 0%, rgba(6,4,3,0.30) 30%, rgba(8,5,4,0.34) 62%, rgba(8,5,4,0.52) 100%)'
+      : 'linear-gradient(180deg, rgba(6,4,3,0.42) 0%, rgba(6,4,3,0.10) 34%, rgba(6,4,3,0.22) 66%, rgba(6,4,3,0.62) 100%)';
 
   return (
     <AbsoluteFill style={{overflow: 'hidden', backgroundColor: palette.base}}>
       <AbsoluteFill style={{transform: `scale(${scale})`}}>
         {!src ? (
-          <GradientFallback />
+          scene === 'bozkir' ? (
+            <Bozkir />
+          ) : (
+            <GradientFallback />
+          )
         ) : isVideo(src) ? (
           <OffthreadVideo
             src={src}
@@ -73,9 +89,7 @@ export const Background: React.FC<{src?: string}> = ({src}) => {
       */}
       <AbsoluteFill
         style={{
-          backgroundImage: src
-            ? 'linear-gradient(180deg, rgba(6,4,3,0.72) 0%, rgba(6,4,3,0.34) 32%, rgba(6,4,3,0.52) 68%, rgba(6,4,3,0.88) 100%)'
-            : 'linear-gradient(180deg, rgba(6,4,3,0.42) 0%, rgba(6,4,3,0.10) 34%, rgba(6,4,3,0.22) 66%, rgba(6,4,3,0.62) 100%)',
+          backgroundImage: scrim,
         }}
       />
       {/* Vinyet */}

@@ -20,12 +20,13 @@ export const RemotionRoot: React.FC = () => {
       })}
       defaultProps={{
         quote:
-          'Gurbet, memleketin adını duyunca\nsusmayı öğrenmektir.\nSen susarsın, için konuşur.',
+          'Anam hâlâ tabağımı koyuyormuş sofraya.\nYirmi yıl oldu gideli.\nO ev kapısını kilitlemedi hiç.',
         author: '',
-        cta: 'Sen kaç yıldır gurbettesin?',
+        cta: 'Seni bekleyen bir kapı var mı?',
         handle: '@30adogru',
         background: undefined,
-        accent: '#c9873f',
+        scene: 'bozkir' as const,
+        accent: '#e0a45c',
         holdSeconds: 2.2,
         showSafeArea: false,
       }}
