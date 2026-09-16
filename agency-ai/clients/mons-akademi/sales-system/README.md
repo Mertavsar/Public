@@ -5,7 +5,10 @@ Satış temsilcisinin **leade dokunmadan önce** 30 saniyede okuduğu hazırlık
 
 ## Bu sistem ne yapar, ne yapmaz
 
-**Yapar:** Gelen lead bilgisinden (eğitim, meslek, yaş, şehir, kaynak, ilk mesaj)
+Satış kanalı: **Meta lead formu → telefonla arama.** Kişi bir mesaj yazmadı, form
+doldurdu ve tanımadığı bir numaradan aranacak. Kart bu aramanın hazırlığıdır.
+
+**Yapar:** Lead bilgisinden (eğitim, meslek, yaş, şehir, kaynak, kaçıncı arama)
 bir *hazırlık kartı* üretir: muhtemel motivasyon, açılış cümlesi, sorulacak iki soru,
 beklenen itirazlar ve cevapları, fiyatın ne zaman söyleneceği, takip planı.
 
@@ -51,6 +54,7 @@ Kartın her satırı **hipotezdir.** Kişi konuşmaya başladığı an kart gün
 | Dosya | İçerik |
 |---|---|
 | `lead-brief.md` | Kartın formatı ve nasıl doldurulacağı |
+| `call-flow.md` | Telefon akışı: hız, ilk 10 saniye, açmayan lead, numara itibarı, KVKK |
 | `profiles.md` | Eğitim bazlı alıcı hipotezleri + meslek/yaş/şehir düzelticileri |
 | `objections.md` | İtiraz → cevap kalıpları ve yasak vaatler |
 | `outcome-log.md` | Sonuç logu — sistemin öğrenmesini sağlayan tek şey |

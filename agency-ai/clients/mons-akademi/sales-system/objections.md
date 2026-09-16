@@ -21,6 +21,30 @@
 
 ---
 
+## 0. Telefona özel dört itiraz
+
+Bunlar ürün itirazı değil, **arama** itirazıdır. Ürün cevabı verilirse konuşma kapanır.
+
+**"Şu an müsaitim değilim."**
+Israr etme, randevu al: "Tabii, ne zaman uygun olur — akşam 7 gibi arayayım mı?"
+Saat alınmadan kapatılan telefon, kaybedilmiş leaddir.
+
+**"Ben form doldurmadım / numaramı nereden buldunuz?"**
+Savunmaya geçme, net ol: hangi platform, hangi form, ne zaman.
+> "Instagram'da {eğitim} reklamımızda bilgi formu doldurulmuş, o yüzden arıyorum.
+> Yanlışlık olduysa numaranızı hemen listeden çıkarayım."
+Çıkarmayı gerçekten yap ve loga yaz.
+
+**"Bilgi gönderin, bakayım."**
+Bu bir kapanış değil, kibar bir bitiştir. Gönder ama tek soruyla bağla:
+> "Hemen gönderiyorum. Göndermeden önce tek şey sorayım ki doğru bilgiyi göndereyim:
+> bu eğitimi ne için düşünüyorsunuz?"
+Sonra takip saati belirlenir: "yarın 18:00'de bakmış olur musunuz, o saatte arayayım."
+
+**"Sonra konuşalım / düşüneyim."**
+Cevaplanmamış bir soru vardır: "Aklınızda kalan tek bir soru olsa, o ne olurdu?"
+Sonra **tarih ve saat** belirlenir. Belirsiz takip yapılmaz.
+
 ## 1. "Pahalı" / "Bütçem yok"
 
 **Yapma:** Hemen indirim önerme. İlk itirazda inen fiyat, fiyatın gerçek olmadığını söyler.
@@ -76,19 +100,13 @@ edilir" — belgeyle kanıtlanamıyorsa hiçbiri söylenmez.
 > `<gerçek, doğrulanabilir bir çıktı>`. Senin durumunda `<şehir/mevcut iş>` ne kadar
 > alan var, onu birlikte konuşalım."
 
-## 7. Cevap vermiyor / okuyup geçiyor
+## 7. Telefonu açmıyor
 
-Takip planı (hepsi için ortak):
+Arama planı ve açmayan leade gönderilecek mesaj `call-flow.md` §8'de. Özet: beş deneme,
+**farklı saat dilimlerinde**, aralarda WhatsApp'tan tek soruluk mesaj. Aynı saatte beş
+kez aramak bir denemedir, beş değil.
 
-| Dokunuş | Zaman | İçerik |
-|---|---|---|
-| 1 | İlk 5 dakika | Açılış |
-| 2 | +2 saat | Kısa, tek soru |
-| 3 | Ertesi gün | Farklı açı — içerik/örnek |
-| 4 | 3. gün | Kanal değiştir (yazı → arama) |
-| 5 | 7. gün | Kapanış: "şimdilik kapatayım mı, yoksa ileride mi?" |
-
-5 dokunuştan sonra bırakılır ve loga **kayıp sebebi** yazılır. Takipsiz bırakılan lead,
+5 denemeden sonra bırakılır ve loga **kayıp sebebi** yazılır. Takipsiz bırakılan lead
 en pahalı kayıptır — reklamın parası ödenmiş, satış hiç denenmemiştir.
 
 ---

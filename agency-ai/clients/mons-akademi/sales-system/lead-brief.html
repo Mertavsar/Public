@@ -144,7 +144,7 @@
 
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-  input[type="text"], input[type="number"], textarea {
+  input[type="text"], input[type="number"], select, textarea {
     font: inherit;
     font-size: 14px;
     color: var(--ink);
@@ -155,7 +155,8 @@
     width: 100%;
   }
   textarea { resize: vertical; min-height: 62px; }
-  input:focus-visible, textarea:focus-visible, button:focus-visible {
+  select { appearance: none; background-image: none; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 1px;
   }
@@ -303,7 +304,7 @@
   <header>
     <p class="eyebrow">Mons Akademi · Satış</p>
     <h1>Lead kartı</h1>
-    <p class="lede">Aramadan veya yazmadan önce 30 saniyede oku. Kart bir <b>hipotezdir</b> — kişi
+    <p class="lede">Telefonu açmadan önce 30 saniyede oku. Kart bir <b>hipotezdir</b> — kişi
       kendini anlattığı an kart değişir. Kartla kişinin söylediği çelişirse kişi haklıdır.</p>
   </header>
 
@@ -327,6 +328,23 @@
 
       <div class="row">
         <div class="field">
+          <label class="lbl" for="temsilci">Seni arayan kişi (sen)</label>
+          <input type="text" id="temsilci" value="Zeynep">
+        </div>
+        <div class="field">
+          <label class="lbl" for="deneme">Kaçıncı arama</label>
+          <select id="deneme">
+            <option value="1">1 — ilk arama</option>
+            <option value="2" selected>2 — açmadı, tekrar</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 — son deneme</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
           <label class="lbl" for="meslek">Meslek</label>
           <input type="text" id="meslek" value="Öğretmen">
         </div>
@@ -338,13 +356,14 @@
 
       <div class="field">
         <label class="lbl" for="kaynak">Kaynak — hangi reklam / form</label>
-        <input type="text" id="kaynak" value="Form — Diksiyon kampanyası">
+        <input type="text" id="kaynak" value="Meta formu — Diksiyon kampanyası">
       </div>
 
       <div class="field">
-        <label class="lbl" for="mesaj">İlk mesajı (varsa)</label>
-        <textarea id="mesaj">fiyat bilgisi alabilir miyim</textarea>
-        <p class="hint">Yazdığı şey, mesleğinden daha değerlidir. Varsa kart onu esas alır.</p>
+        <label class="lbl" for="mesaj">Formdaki ek soruya cevabı (varsa)</label>
+        <textarea id="mesaj">Mülakata hazırlanıyorum</textarea>
+        <p class="hint">Kişinin kendi cümlesi, mesleğinden değerlidir. Formda ek soru yoksa
+          boş bırak — o eksik reklam tarafında düzeltilir.</p>
       </div>
 
       <p class="hint">Bilmediğin alanı boş bırak. Boş alan tahminle doldurulmaz —
@@ -361,6 +380,10 @@
     <p><b>Değişmez kurallar.</b> Etiket fiyatı değiştirmez — indirim yetkisi kartlardan gelmez.
       İlk mesajda fiyat verilmez. İş garantisi, gelir garantisi, “devlet onaylı” gibi
       belgelenemeyen hiçbir vaat kurulmaz. Cinsiyet isimden tahmin edilmez; kişiye adıyla hitap edilir.</p>
+    <p><b>Telefon kuralları.</b> Form dolar dolmaz ara — beklemiş lead soğur.
+      “Numaramı nereden buldunuz?” sorusunun tek doğru cevabı var: hangi platformda, hangi
+      formu, ne zaman doldurduğunu söylemek. “Bir daha aranmak istemiyorum” diyen kişi aynı
+      gün listeden çıkarılır, tartışılmaz.</p>
     <p><b>Eksik bilgi.</b> Turuncu işaretli alanlar (fiyat, taksit, sertifika, süre) henüz
       sistemde tanımlı değil. Tanımlanana kadar temsilci o konuda kendi cümlesini kurmaz.</p>
   </footer>
@@ -376,9 +399,10 @@
   var COURSES = {
     hikaye: {
       label: "Hikâye Anlatıcılığı",
+      formName: "hikâye anlatıcılığı eğitimi",
       motive: "Kendini ifade etme ve görünür olma. Bazen içerikle gelir elde etme.",
       watch: "Dört eğitim içinde çıktısı en soyut olan bu. “Bu benim ne işime yarayacak” sorusu buradan gelir — satış, somut çıktıyı anlatabildiğin kadar olur.",
-      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Hikâye anlatıcılığı eğitimi için bilgi bırakmışsınız. Kısaca sorayım: hikâyeyi nerede kullanmak istiyorsunuz — kendi markanızda mı, işinizde mi, yazmak için mi?",
+      firstQ: "Kısaca sorayım: hikâyeyi nerede kullanmak istiyorsunuz — kendi markanızda mı, işinizde mi, yazmak için mi?",
       asks: [
         "Şu an içerik üretiyor musun, yoksa yeni mi başlayacaksın?",
         "Eğitim bitince ne yapabiliyor olmak istersin?"
@@ -390,10 +414,11 @@
       price: "Ne için kullanacağı netleştikten sonra. Önce değil."
     },
     pilates: {
-      label: "Pilates Uzmanlığı",
-      motive: "Para ve meslek. Bu bir kurs değil, yatırım kararı — konuşma “ne öğreneceğim” değil, “bu bana ne kazandırır” ekseninde geçer.",
-      watch: "Sertifika ve istihdam sorusu net cevaplanmazsa satış olmaz. Abartılı vaat burada en pahalı hatadır: iade, şikâyet ve itibar kaybı üretir.",
-      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Pilates uzmanlığı eğitimi için bilgi bırakmışsınız. Önce şunu sorayım: bu eğitimi kendinizi geliştirmek için mi, yoksa bu işi meslek olarak yapmak için mi düşünüyorsunuz?",
+      label: "Pilates",
+      formName: "pilates eğitimi",
+      motive: "İki ayrı alıcı var ve ilk soruyla ayrılır: (a) kendi için yapmak isteyen — sağlık, form, ağrı; (b) bu işi meslek olarak yapmak isteyen — o zaman konuşma “ne kazandırır” ekseninde geçer.",
+      watch: "Meslek için arayan kişide sertifika ve istihdam sorusu net cevaplanmazsa satış olmaz. Abartılı vaat burada en pahalı hatadır: iade, şikâyet ve itibar kaybı üretir. Kendi için arayan kişiye ise sertifika anlatmak konuyu dağıtır.",
+      firstQ: "Önce şunu sorayım: bu eğitimi kendiniz için mi düşünüyorsunuz, yoksa bu işi yapmak, ders vermek için mi?",
       asks: [
         "Şu an spor/hareket alanında bir geçmişin var mı?",
         "Eğitimden sonra nerede çalışmayı düşünüyorsun — stüdyo mu, kendi grubun mu?"
@@ -407,9 +432,10 @@
     },
     siddetsiz: {
       label: "Şiddetsiz İletişim",
+      formName: "şiddetsiz iletişim eğitimi",
       motive: "Acıyı azaltmak. Evde kavga, çocukla kopukluk, iş yerinde çatışma. Mahrem bir alan.",
       watch: "Satış temposu yüksek açılış burada ters teper. Kişi derdini anlatmadan fiyat konuşulursa konuşma biter. Önce dinle, sonra sat.",
-      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Şiddetsiz iletişim eğitimi için bilgi bırakmışsınız. Şunu sorabilir miyim: bu eğitim aklınıza gelirken kafanızda somut bir ilişki var mıydı — çocuk, eş, iş?",
+      firstQ: "Şunu sorabilir miyim: bu eğitim aklınıza gelirken kafanızda somut bir ilişki var mıydı — çocuk, eş, iş?",
       asks: [
         "En çok hangi durumda tıkanıyorsun?",
         "Daha önce bu konuda bir şey denedin mi — kitap, terapi, eğitim?"
@@ -421,10 +447,11 @@
       price: "Durumunu anlattıktan sonra. Derdini anlatan kişiye fiyatla cevap verme."
     },
     diksiyon: {
-      label: "Diksiyon",
+      label: "Diksiyon ve Hitabet",
+      formName: "diksiyon ve hitabet eğitimi",
       motive: "Özgüven ve somut bir olay: mülakat, sunum, sınav, yeni iş, sahne.",
       watch: "Konu utançtır. “Konuşmanda sorun mu var” gibi bir cümle kişiyi kaçırır. Dil hep hedefe bakar, eksiğe değil.",
-      open: "Merhaba {ad}, Mons Akademi'den arıyorum. Diksiyon eğitimi için bilgi bırakmışsınız. Kısaca sorayım: sizi bu eğitime yönlendiren somut bir durum var mı — sunum, görüşme, sınıf?",
+      firstQ: "Kısaca sorayım: sizi bu eğitime yönlendiren somut bir durum var mı — sunum, görüşme, sınıf?",
       asks: [
         "Şu an en çok hangi durumda zorlanıyorsun?",
         "Haftada kaç saat ayırabilirsin?"
@@ -500,8 +527,9 @@
   var state = {
     course: "diksiyon",
     ad: "Ayşe", yas: "34", meslek: "Öğretmen", sehir: "Konya",
-    kaynak: "Form — Diksiyon kampanyası",
-    mesaj: "fiyat bilgisi alabilir miyim"
+    temsilci: "Zeynep", deneme: "2",
+    kaynak: "Meta formu — Diksiyon kampanyası",
+    mesaj: "Mülakata hazırlanıyorum"
   };
 
   function esc(s) {
@@ -510,9 +538,9 @@
     });
   }
 
-  function messageRead(mesaj, course) {
+  function formRead(mesaj) {
     var m = normalize(mesaj);
-    if (!m) return null;
+    if (!m) return "Formda ek soru cevabı yok — niyeti bilmiyoruz. İlk soruyu atlama, konuşmanın yönü oradan çıkacak.";
     if (m.indexOf("fiyat") !== -1 || m.indexOf("ücret") !== -1 || m.indexOf("ucret") !== -1 || m.indexOf("kaç para") !== -1) {
       return "İlk mesajında fiyat sordu. Bu <b>ilgi</b> işaretidir, fiyat itirazı değil. Rakamla cevap verme: “Hemen söyleyeyim, ama size doğru paketi söyleyebilmem için tek bir şey sorayım…” diye ihtiyacı öğren, sonra fiyatı ver.";
     }
@@ -525,7 +553,15 @@
     if (m.indexOf("taksit") !== -1 || m.indexOf("indirim") !== -1 || m.indexOf("kampanya") !== -1) {
       return "Ödeme koşulunu ilk mesajda sordu. Bütçe konusu açık — ama indirime atlama; önce eğitimin ne getireceğini konuş.";
     }
-    return "Yazdığı şeyi kartın önüne koy: açılışta kendi cümlesine dön (“…diye yazmışsınız”). Bu, hazır metinden daha çok dönüştürür.";
+    return "Kendi cümlesini kartın önüne koy: “…diye yazmışsınız” diyerek aç. Hazır metinden daha çok dönüştürür.";
+  }
+
+  function callNote(n) {
+    if (n === "1") return "İlk arama. Form daha yeni dolduysa ilgi sıcak — vakit kaybetme.";
+    if (n === "2") return "İkinci deneme: <b>farklı bir saat dilimi</b> seç. Aynı saatte tekrar aramak yeni bir deneme sayılmaz.";
+    if (n === "3") return "Üçüncü deneme. Açılışa “birkaç kez denedim, rahatsız etmeyeyim” dürüstlüğünü kat — baskı değil, nezaket.";
+    if (n === "4") return "Dördüncü deneme, akşam saati. Açmazsa mesajı gönder ve son denemeye bırak.";
+    return "Son deneme. Açarsa net kapat: devam mı, kapatalım mı? Açmazsa loga “ulaşılamadı” yaz ve bırak.";
   }
 
   function render() {
@@ -534,15 +570,22 @@
     var job = jobProfile(state.meslek);
     var age = ageNote(state.yas);
     var city = cityNote(state.sehir, state.course);
-    var msg = messageRead(state.mesaj, state.course);
+    var msg = formRead(state.mesaj);
+    var call = callNote(state.deneme);
 
     var head = [];
     if (state.yas) head.push(esc(state.yas));
     if (state.meslek.trim()) head.push(esc(state.meslek.trim()));
     if (state.sehir.trim()) head.push(esc(state.sehir.trim()));
 
-    var opening = c.open.replace("{ad}", ad ? ad : "");
-    if (!ad) opening = opening.replace("Merhaba , ", "Merhaba, ");
+    var rep = state.temsilci.trim();
+    var opening = "Merhaba" + (ad ? " " + ad : "") + ", ben Mons Akademi'den" +
+      (rep ? " " + rep : "") + ". " + c.formName.charAt(0).toLocaleUpperCase("tr-TR") +
+      c.formName.slice(1) + " için bilgi formu doldurmuşsunuz, onun için arıyorum. " +
+      "Şu an 2 dakika müsait misiniz?";
+    var waMsg = "Merhaba" + (ad ? " " + ad : "") + ", Mons Akademi'den" + (rep ? " " + rep : "") +
+      ". " + c.formName.charAt(0).toLocaleUpperCase("tr-TR") + c.formName.slice(1) +
+      " formunuz için aradım, ulaşamadım. Sizin için uygun bir saat söylerseniz o saatte arayayım.";
 
     var html = "";
     html += '<div class="card-head">';
@@ -550,7 +593,8 @@
     html += '<p class="meta">' + (head.length ? head.join(" · ") : "meslek/yaş/şehir boş") + '</p>';
     var src = [];
     if (state.kaynak.trim()) src.push("Kaynak: " + esc(state.kaynak.trim()));
-    if (state.mesaj.trim()) src.push("Yazdı: “" + esc(state.mesaj.trim()) + "”");
+    src.push(esc(state.deneme) + ". arama");
+    if (state.mesaj.trim()) src.push("Formda: “" + esc(state.mesaj.trim()) + "”");
     if (src.length) html += '<p class="meta" style="flex:1 1 100%">' + src.join(" · ") + '</p>';
     html += '</div>';
 
@@ -561,12 +605,16 @@
     html += '<h3>Muhtemel motivasyon' + HYP + '</h3>';
     html += '<p class="serif">' + esc(c.motive) + '</p>';
     if (msg) html += '<p style="color:var(--ink-soft);font-size:14px">' + msg + '</p>';
+    html += '<p style="color:var(--ink-soft);font-size:14px">' + call + '</p>';
     html += '</div></li>';
 
     // 2 — açılış
     html += '<li class="step"><div class="n">2</div><div>';
-    html += '<h3>Açılış — kelimesi kelimesine okuma, kendi ağzınla söyle</h3>';
+    html += '<h3>İlk 10 saniye — kim · neden · izin</h3>';
     html += '<p class="quote" id="openingText">' + esc(opening) + '</p>';
+    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">İzin sorusu atlanmaz. “Müsait değilim” de bilgidir: saat al, numara ölmesin. İlk 10 saniyede fiyat, kampanya, özellik yok.</p>';
+    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">Sonra ilk soru:</p>';
+    html += '<p class="quote">' + esc(c.firstQ) + '</p>';
     html += '<button class="copy" type="button" id="copyBtn">Açılışı kopyala</button>';
     html += '</div></li>';
 
@@ -602,11 +650,14 @@
 
     // 7 — takip
     html += '<li class="step"><div class="n">7</div><div>';
-    html += '<h3>Takip planı — cevap gelmezse</h3>';
+    html += '<h3>Açmazsa</h3>';
     html += '<div class="timeline">';
-    html += '<span>1 · ilk 5 dk</span><span>2 · +2 saat</span><span>3 · ertesi gün</span><span>4 · 3. gün — kanal değiştir</span><span>5 · 7. gün — kapat</span>';
+    html += '<span>1 · hemen</span><span>2 · 2-3 saat sonra, farklı saat</span><span>3 · ertesi gün öğle</span><span>4 · 3. gün akşam</span><span>5 · 7. gün — kapat</span>';
     html += '</div>';
-    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">5 dokunuştan sonra bırak ve loga kayıp sebebini yaz. Takipsiz bırakılan lead en pahalı kayıptır: reklamın parası ödenmiş, satış hiç denenmemiştir.</p>';
+    html += '<p style="margin-top:10px;font-size:13.5px;color:var(--ink-soft)">Açmadığında gönder — hem konuşmayı açar hem numaran tanınır:</p>';
+    html += '<p class="quote" id="waText">' + esc(waMsg) + '</p>';
+    html += '<button class="copy" type="button" id="copyWa">Mesajı kopyala</button>';
+    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">Aynı saatte beş kez aramak bir denemedir, beş değil. Aynı kişiye günde ikiden fazla arama yok — numaran spam yer.</p>';
     html += '</div></li>';
 
     // 8 — dikkat
@@ -620,26 +671,32 @@
 
     document.getElementById("card").innerHTML = html;
 
-    var btn = document.getElementById("copyBtn");
+    wireCopy("copyBtn", "openingText", "Açılışı kopyala");
+    wireCopy("copyWa", "waText", "Mesajı kopyala");
+  }
+
+  function wireCopy(btnId, textId, labelText) {
+    var btn = document.getElementById(btnId);
+    if (!btn) return;
     btn.addEventListener("click", function () {
-      var text = document.getElementById("openingText").textContent;
+      var text = document.getElementById(textId).textContent;
       try {
         navigator.clipboard.writeText(text).then(function () {
           btn.textContent = "Kopyalandı";
-          setTimeout(function () { btn.textContent = "Açılışı kopyala"; }, 1600);
+          setTimeout(function () { btn.textContent = labelText; }, 1600);
         }, selectFallback);
       } catch (e) { selectFallback(); }
     });
 
     function selectFallback() {
-      var node = document.getElementById("openingText");
+      var node = document.getElementById(textId);
       var range = document.createRange();
       range.selectNodeContents(node);
       var sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
       btn.textContent = "Metin seçildi — kopyala";
-      setTimeout(function () { btn.textContent = "Açılışı kopyala"; }, 2200);
+      setTimeout(function () { btn.textContent = labelText; }, 2200);
     }
   }
 
@@ -663,10 +720,13 @@
     else if (t.id === "sehir") state.sehir = t.value;
     else if (t.id === "kaynak") state.kaynak = t.value;
     else if (t.id === "mesaj") state.mesaj = t.value;
+    else if (t.id === "temsilci") state.temsilci = t.value;
+    else if (t.id === "deneme") state.deneme = t.value;
     render();
   });
   document.getElementById("leadForm").addEventListener("change", function (e) {
     if (e.target.name === "course") { state.course = e.target.value; render(); }
+    else if (e.target.id === "deneme") { state.deneme = e.target.value; render(); }
   });
 
   render();
