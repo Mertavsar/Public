@@ -22,13 +22,41 @@
 
 ## Ürün ve ekonomi
 - **Ürünler / kategoriler:**
-  1. Hikâye Anlatıcılığı (Storytelling) Uzmanlık Eğitimi
-  2. Diksiyon Uzmanlığı ve Hitabet Sanatı Eğitimi
-  3. Şiddetsiz İletişim Eğitimi
-  4. Pilates Eğitimi
-  - *Açık soru: Pilates tarafı bir **uzmanlık/eğitmenlik** programı mı, yoksa kişinin
-    kendisi için aldığı bir eğitim mi? Sayfa adı "Pilates Eğitimi" diyor. İkisi tamamen
-    farklı satış konuşmasıdır — teyit edilecek.*
+  1. Hikâye Anlatıcılığı (Storytelling) Uzmanlık Eğitimi — 15 ders
+  2. Diksiyon Uzmanlığı ve Hitabet Sanatı Eğitimi — 14 ders
+  3. Şiddetsiz İletişim Eğitimi — 10 ders (Rosenberg / NVC)
+  4. Temel Pilates Eğitimi — Mat, Reformer, Duvar, Cadillac + güvenli egzersiz
+  5. Pilates Uzmanlık Eğitimi — ileri seriler, akış ve kombinasyonlar
+  - *Pilates **iki ayrı üründür** ve hedef kitlesi eğitmenlik/profesyonel uygulama yönlüdür
+    (dosyada "pilates eğitmeni olmak isteyenler" ilk sırada). Seviye tespiti yapılmadan
+    satılmaz.*
+
+## Ürün gerçekleri (eğitim içerik dosyalarından — FACT)
+- **Format:** Online video + öğrenci paneli. Eğitim danışmanı paneli aktif eder; her
+  cihazdan, kendi hızında izlenir.
+- **Canlı yayın:** Ayda bir ZOOM canlı yayın dersi, eğitmene doğrudan soru.
+- **Doküman:** Panelden erişim, çıktı alınabilir.
+- **Sınav:** Videolar bitince her ayın son hafta sonu 25 soruluk online sınav; %60 ile
+  sertifika. Pilates Uzmanlık'ta videoların %80'i bitince sınav otomatik açılır.
+- **Sertifika:** Dosyalarda "Uluslararası Akrediteli … Sertifikası" ibaresi geçiyor.
+  **Akreditasyon kurumunun adı hiçbir dosyada yazmıyor — kritik boşluk.** Pilates
+  Uzmanlık dosyasında "uluslararası akrediteli" ibaresi yok.
+- **Eğitmenler:** Diksiyon — Burçin Karaca Tabur (TRT İzmir Radyosu, 1994'ten beri
+  radyo/TV). Hikâye — Sıla Topçam (sahne sanatları, masal anlatıcılığı YL, Sıla Masal
+  Okulu kurucusu). Şiddetsiz İletişim — Doç. Dr. Mehmet Ozan Aşık (Uludağ Üniversitesi
+  Sosyoloji, Cambridge doktora). Pilates — Elif Pankudus (Panem Pilates kurucusu, TCF
+  1-2-3. kademe pilates antrenörlüğü).
+
+## Tespit edilen içerik hataları (düzeltilmeli)
+1. **Diksiyon içerik dosyası, "Bu eğitime kimler katılabilir?" sayfasının özet
+   paragrafında hikâye anlatıcılığından kopyalanmış metin taşıyor** ("…hikaye
+   anlatıcılığının dönüştürücü gücünden yararlanmalıdır"). Aynı dosya satış ekibine ve
+   müşteriye gidiyor.
+2. **Pilates Uzmanlık dosyasında sertifika "Uluslararası Akrediteli" olarak anılmıyor**,
+   diğer dördünde anılıyor. Bu fark bilinçli değilse tutarsızlık, bilinçliyse satış
+   ekibine ayrıca anlatılmalı.
+3. Şiddetsiz İletişim ders listesinde numaralandırma kayması var (3. maddenin içinde
+   "4. Güven Meditasyonu" yazıyor).
 - **Ortalama ürün fiyatı:** BİLİNMİYOR — *her eğitim için ayrı ayrı gerekli*
 - **Ortalama sepet tutarı:** BİLİNMİYOR
 - **Brüt marj (%):** BİLİNMİYOR — *dijital üründe marj yüksektir ama reklam + komisyon +

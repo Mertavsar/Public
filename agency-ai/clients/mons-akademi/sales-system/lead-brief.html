@@ -20,281 +20,126 @@
     --f-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --f-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
     --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-
     --r: 6px;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper:      #0F1618;
-      --surface:    #172023;
-      --surface-2:  #202C2F;
-      --ink:        #E4EBE9;
-      --ink-soft:   #A3B3B6;
-      --ink-faint:  #7A8B8E;
-      --line:       #2C393C;
-      --accent:     #55B598;
-      --accent-ink: #0F1618;
-      --warn:       #E39468;
-      --warn-bg:    #2E211A;
-      --hyp:        #B5A6D6;
-      --hyp-bg:     #241F2E;
+      --paper: #0F1618; --surface: #172023; --surface-2: #202C2F;
+      --ink: #E4EBE9; --ink-soft: #A3B3B6; --ink-faint: #7A8B8E; --line: #2C393C;
+      --accent: #55B598; --accent-ink: #0F1618;
+      --warn: #E39468; --warn-bg: #2E211A; --hyp: #B5A6D6; --hyp-bg: #241F2E;
     }
   }
   :root[data-theme="dark"] {
-    --paper:      #0F1618;
-    --surface:    #172023;
-    --surface-2:  #202C2F;
-    --ink:        #E4EBE9;
-    --ink-soft:   #A3B3B6;
-    --ink-faint:  #7A8B8E;
-    --line:       #2C393C;
-    --accent:     #55B598;
-    --accent-ink: #0F1618;
-    --warn:       #E39468;
-    --warn-bg:    #2E211A;
-    --hyp:        #B5A6D6;
-    --hyp-bg:     #241F2E;
+    --paper: #0F1618; --surface: #172023; --surface-2: #202C2F;
+    --ink: #E4EBE9; --ink-soft: #A3B3B6; --ink-faint: #7A8B8E; --line: #2C393C;
+    --accent: #55B598; --accent-ink: #0F1618;
+    --warn: #E39468; --warn-bg: #2E211A; --hyp: #B5A6D6; --hyp-bg: #241F2E;
   }
 
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--f-sans);
-    font-size: 15px;
-    line-height: 1.5;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--f-sans); font-size: 15px; line-height: 1.5;
     -webkit-text-size-adjust: 100%;
   }
-  .wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding-inline: 16px;
-    padding-block: 28px 56px;
-  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; }
 
   header { margin-bottom: 24px; }
   .eyebrow {
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin: 0 0 6px;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px;
   }
-  h1 {
-    font-size: clamp(24px, 5vw, 32px);
-    font-weight: 600;
-    letter-spacing: -.02em;
-    margin: 0 0 8px;
-    text-wrap: balance;
-  }
-  .lede {
-    margin: 0;
-    max-width: 62ch;
-    color: var(--ink-soft);
-    font-size: 14.5px;
-  }
+  h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 600; letter-spacing: -.02em; margin: 0 0 8px; text-wrap: balance; }
+  .lede { margin: 0; max-width: 64ch; color: var(--ink-soft); font-size: 14.5px; }
 
-  .cols {
-    display: grid;
-    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
-    gap: 24px;
-    align-items: start;
-  }
-  @media (max-width: 800px) {
-    .cols { grid-template-columns: minmax(0, 1fr); }
-  }
+  .cols { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 820px) { .cols { grid-template-columns: minmax(0, 1fr); } }
 
-  /* ---- form ---- */
   form {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 18px; display: flex; flex-direction: column; gap: 14px;
   }
   fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   legend, .lbl {
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    padding: 0;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-faint); padding: 0;
   }
-  .courses { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .courses { display: flex; flex-direction: column; gap: 6px; }
   .courses label {
-    display: block;
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 9px 10px;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.25;
-    cursor: pointer;
-    background: var(--surface);
+    display: block; border: 1px solid var(--line); border-radius: var(--r);
+    padding: 9px 11px; font-size: 13.5px; font-weight: 500; line-height: 1.3;
+    cursor: pointer; background: var(--surface);
   }
   .courses input { position: absolute; opacity: 0; pointer-events: none; }
-  .courses input:checked + span { color: var(--accent-ink); }
   .courses label:has(input:checked) { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .courses label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-  input[type="text"], input[type="number"], select, textarea {
-    font: inherit;
-    font-size: 14px;
-    color: var(--ink);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 8px 10px;
-    width: 100%;
+  input[type="text"], input[type="number"], select {
+    font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--r); padding: 8px 10px; width: 100%;
   }
-  textarea { resize: vertical; min-height: 62px; }
-  select { appearance: none; background-image: none; }
-  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-  }
+  select { appearance: none; }
+  input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .hint { font-size: 12px; color: var(--ink-faint); margin: 0; }
+  datalist { display: none; }
 
-  /* ---- card ---- */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    overflow: hidden;
-  }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
   .card-head {
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--line);
-    background: var(--surface-2);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 14px;
-    align-items: baseline;
+    padding: 16px 18px; border-bottom: 1px solid var(--line); background: var(--surface-2);
+    display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline;
   }
-  .card-head .who {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    margin: 0;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  .card-head .meta {
-    font-family: var(--f-mono);
-    font-size: 12px;
-    color: var(--ink-soft);
-  }
+  .card-head .who { font-size: 18px; font-weight: 600; letter-spacing: -.01em; margin: 0; flex: 1 1 auto; min-width: 0; }
+  .card-head .meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-soft); margin: 0; }
+
   .steps { list-style: none; margin: 0; padding: 0; }
-  .step {
-    display: grid;
-    grid-template-columns: 26px minmax(0, 1fr);
-    gap: 12px;
-    padding: 15px 18px;
-    border-bottom: 1px solid var(--line);
-  }
+  .step { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; padding: 15px 18px; border-bottom: 1px solid var(--line); }
   .step:last-child { border-bottom: 0; }
-  .step .n {
-    font-family: var(--f-mono);
-    font-size: 12px;
-    color: var(--ink-faint);
-    padding-top: 2px;
-  }
+  .step .n { font-family: var(--f-mono); font-size: 12px; color: var(--ink-faint); padding-top: 2px; }
   .step h3 {
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    font-weight: 500;
-    margin: 0 0 6px;
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 500; margin: 0 0 6px;
   }
   .step p { margin: 0 0 6px; }
   .step p:last-child { margin-bottom: 0; }
   .serif { font-family: var(--f-serif); font-size: 16px; line-height: 1.45; }
   .quote {
-    font-family: var(--f-serif);
-    font-size: 16px;
-    line-height: 1.5;
-    background: var(--surface-2);
-    border-left: 2px solid var(--accent);
-    border-radius: 0 var(--r) var(--r) 0;
-    padding: 10px 12px;
-    margin: 0;
+    font-family: var(--f-serif); font-size: 16px; line-height: 1.5; background: var(--surface-2);
+    border-left: 2px solid var(--accent); border-radius: 0 var(--r) var(--r) 0; padding: 10px 12px; margin: 0;
   }
   ul.plain { margin: 0; padding-left: 18px; }
   ul.plain li { margin-bottom: 4px; }
   ul.plain li:last-child { margin-bottom: 0; }
+  .soft { color: var(--ink-soft); font-size: 13.5px; }
 
   .tag {
-    display: inline-block;
-    font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 3px;
-    background: var(--hyp-bg);
-    color: var(--hyp);
-    vertical-align: 2px;
-    margin-left: 6px;
+    display: inline-block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em;
+    text-transform: uppercase; padding: 2px 6px; border-radius: 3px;
+    background: var(--hyp-bg); color: var(--hyp); vertical-align: 2px; margin-left: 6px;
   }
   .gap {
-    font-family: var(--f-mono);
-    font-size: 12px;
-    background: var(--warn-bg);
-    color: var(--warn);
-    padding: 1px 5px;
-    border-radius: 3px;
-    white-space: nowrap;
+    font-family: var(--f-mono); font-size: 12px; background: var(--warn-bg); color: var(--warn);
+    padding: 1px 5px; border-radius: 3px;
   }
-  .warnline {
-    background: var(--warn-bg);
-    color: var(--warn);
-    border-radius: var(--r);
-    padding: 9px 11px;
-    font-size: 13.5px;
+  .warnline { background: var(--warn-bg); color: var(--warn); border-radius: var(--r); padding: 9px 11px; font-size: 13.5px; }
+  .ders {
+    font-family: var(--f-mono); font-size: 12.5px; line-height: 1.5;
+    background: var(--surface-2); border-radius: var(--r); padding: 8px 10px; color: var(--ink-soft);
   }
-  .obj { margin: 0 0 8px; }
-  .obj:last-child { margin-bottom: 0; }
-  .obj b { font-weight: 600; }
-  .obj span { display: block; color: var(--ink-soft); font-size: 14px; }
-
   .timeline { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--f-mono); font-size: 12px; }
-  .timeline span {
-    background: var(--surface-2);
-    border-radius: 3px;
-    padding: 3px 7px;
-    color: var(--ink-soft);
-  }
+  .timeline span { background: var(--surface-2); border-radius: 3px; padding: 3px 7px; color: var(--ink-soft); }
 
   button.copy {
-    font: inherit;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--accent);
-    background: transparent;
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 8px;
+    font: inherit; font-size: 12.5px; font-weight: 500; color: var(--accent); background: transparent;
+    border: 1px solid var(--line); border-radius: var(--r); padding: 5px 10px; cursor: pointer; margin-top: 8px;
   }
   button.copy:hover { border-color: var(--accent); }
 
   footer {
-    margin-top: 22px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    color: var(--ink-faint);
-    font-size: 13px;
-    max-width: 70ch;
+    margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line);
+    color: var(--ink-faint); font-size: 13px; max-width: 74ch;
   }
   footer p { margin: 0 0 8px; }
   footer b { color: var(--ink-soft); font-weight: 600; }
@@ -304,14 +149,15 @@
   <header>
     <p class="eyebrow">Mons Akademi · Satış</p>
     <h1>Lead kartı</h1>
-    <p class="lede">Telefonu açmadan önce 30 saniyede oku. Kart bir <b>hipotezdir</b> — kişi
-      kendini anlattığı an kart değişir. Kartla kişinin söylediği çelişirse kişi haklıdır.</p>
+    <p class="lede">Telefonu açmadan önce 30 saniyede oku. Kartın söylediği bir <b>hipotezdir</b>:
+      kesişim cümlesi iddia değil sorudur. Karşı taraf “yok, alakası yok” derse kart çöpe gider,
+      kişiyi dinlersin.</p>
   </header>
 
   <div class="cols">
     <form id="leadForm" autocomplete="off">
       <fieldset>
-        <legend>Eğitim</legend>
+        <legend>Hangi eğitim için form doldurdu</legend>
         <div class="courses" id="courses"></div>
       </fieldset>
 
@@ -326,10 +172,17 @@
         </div>
       </div>
 
+      <div class="field">
+        <label class="lbl" for="meslek">Meslek — en büyük koz</label>
+        <input type="text" id="meslek" value="Öğretmen" list="meslekler">
+        <datalist id="meslekler"></datalist>
+        <p class="hint" id="meslekEsleme"></p>
+      </div>
+
       <div class="row">
         <div class="field">
-          <label class="lbl" for="temsilci">Seni arayan kişi (sen)</label>
-          <input type="text" id="temsilci" value="Zeynep">
+          <label class="lbl" for="sehir">Şehir</label>
+          <input type="text" id="sehir" value="Konya">
         </div>
         <div class="field">
           <label class="lbl" for="deneme">Kaçıncı arama</label>
@@ -343,388 +196,286 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="field">
-          <label class="lbl" for="meslek">Meslek</label>
-          <input type="text" id="meslek" value="Öğretmen">
-        </div>
-        <div class="field">
-          <label class="lbl" for="sehir">Şehir</label>
-          <input type="text" id="sehir" value="Konya">
-        </div>
-      </div>
-
       <div class="field">
-        <label class="lbl" for="kaynak">Kaynak — hangi reklam / form</label>
-        <input type="text" id="kaynak" value="Meta formu — Diksiyon kampanyası">
+        <label class="lbl" for="temsilci">Arayan kişi (sen)</label>
+        <input type="text" id="temsilci" value="Zeynep">
       </div>
 
-      <div class="field">
-        <label class="lbl" for="mesaj">Formdaki ek soruya cevabı (varsa)</label>
-        <textarea id="mesaj">Mülakata hazırlanıyorum</textarea>
-        <p class="hint">Kişinin kendi cümlesi, mesleğinden değerlidir. Formda ek soru yoksa
-          boş bırak — o eksik reklam tarafında düzeltilir.</p>
-      </div>
-
-      <p class="hint">Bilmediğin alanı boş bırak. Boş alan tahminle doldurulmaz —
-        kart o satırda “ilk soruyla öğren” der.</p>
+      <p class="hint">Meslek boşsa tahmin etme — kart sana soracağın üç soruyu verir.</p>
     </form>
 
     <main class="card" id="card" aria-live="polite"></main>
   </div>
 
   <footer>
-    <p><b>Kartın sınırı.</b> Meslek, yaş ve şehir zayıf sinyallerdir. Kart ilk iki mesajı ve
-      itiraz cevaplarını şekillendirir; konuşmanın tamamını değil. Metni olduğu gibi okuyan
-      temsilci robot gibi duyulur.</p>
-    <p><b>Değişmez kurallar.</b> Etiket fiyatı değiştirmez — indirim yetkisi kartlardan gelmez.
-      İlk mesajda fiyat verilmez. İş garantisi, gelir garantisi, “devlet onaylı” gibi
-      belgelenemeyen hiçbir vaat kurulmaz. Cinsiyet isimden tahmin edilmez; kişiye adıyla hitap edilir.</p>
-    <p><b>Telefon kuralları.</b> Form dolar dolmaz ara — beklemiş lead soğur.
-      “Numaramı nereden buldunuz?” sorusunun tek doğru cevabı var: hangi platformda, hangi
-      formu, ne zaman doldurduğunu söylemek. “Bir daha aranmak istemiyorum” diyen kişi aynı
-      gün listeden çıkarılır, tartışılmaz.</p>
-    <p><b>Eksik bilgi.</b> Turuncu işaretli alanlar (fiyat, taksit, sertifika, süre) henüz
-      sistemde tanımlı değil. Tanımlanana kadar temsilci o konuda kendi cümlesini kurmaz.</p>
+    <p><b>Kart hipotezdir.</b> Kesişim cümlesini soru olarak sor. “Evet, aynen” gelirse konuşma
+      açılmıştır; gelmezse kişi ne diyorsa o doğrudur. Metni olduğu gibi okuma, kendi ağzınla söyle.</p>
+    <p><b>Sertifika.</b> Eğitim dosyalarında “Uluslararası Akrediteli … Sertifikası” yazıyor ama
+      <b>akreditasyon kurumunun adı hiçbir dosyada geçmiyor.</b> Kurum adı netleşene kadar
+      “uluslararası geçerli”, “devlet onaylı”, “her yerde kabul edilir” denmez; dosyadaki ibare
+      olduğu gibi söylenir. İş garantisi ve gelir garantisi her koşulda yasaktır.</p>
+    <p><b>Telefon kuralları.</b> Form dolar dolmaz ara. “Numaramı nereden buldunuz?” sorusunun tek
+      doğru cevabı var: hangi platformda, hangi formu, ne zaman doldurduğunu söylemek. “Bir daha
+      aranmak istemiyorum” diyen kişi aynı gün listeden çıkarılır.</p>
+    <p><b>Eksik bilgi.</b> Fiyat, taksit, eğitim süresi ve panel erişim süresi sistemde tanımlı
+      değil. Tanımlanana kadar temsilci bu konularda kendi cümlesini kurmaz.</p>
   </footer>
 </div>
 
 <script>
+  /* MATRIX:START — build.py üretir, elle düzenleme */
+  var MATRIX = {"urun":{"format":"Online video + öğrenci paneli. Eğitim danışmanı paneli aktif eder; videolar dilediğin zaman, dilediğin cihazdan (tablet/telefon/bilgisayar) izlenir, tamamen kendi hızında. (FACT — eğitim içerik dosyaları)","canli":"Ayda bir ZOOM canlı yayın dersi; eğitmenle doğrudan soru-cevap. Satışta en güçlü ikinci koz budur: 'ben yapabilir miyim' kaygısını kapatan şey budur.","dokuman":"Panelden basılı/dijital dokümanlara erişim, çıktı alınabilir.","sinav":"Videolar bittikten sonra her ayın son hafta sonu panelde açılan 25 soruluk online sınav; %60 başarı → sertifika. (Pilates Uzmanlık'ta fark: videoların %80'i tamamlanınca sınav otomatik açılır, dilediğin zaman girilir.)","sertifika":"Diksiyon, Hikâye Anlatıcılığı, Şiddetsiz İletişim ve Temel Pilates dosyalarında 'Uluslararası Akrediteli … Sertifikası' ibaresi geçiyor. Pilates Uzmanlık dosyasında ise yalnızca 'Pilates Uzmanlık Eğitimi Sertifikası' yazıyor — 'uluslararası akrediteli' ibaresi yok.","sertifika_acik_soru":"Hiçbir dosyada akreditasyon kurumunun adı yazmıyor. Satış ekibi 'hangi kurum akredite ediyor?' sorusunu kesin alacak. Kurum adı netleşene kadar temsilci 'uluslararası geçerli' cümlesini kurmaz; dosyada yazan ibareyi olduğu gibi söyler.","fiyat":"BİLİNMİYOR — dosyalarda fiyat, taksit, eğitim süresi ve panel erişim süresi yazmıyor."},"profs":[{"key":"ogretmen","name":"Öğretmen / akademisyen","match":["öğretmen","ogretmen","akademisyen","öğretim","ogretim","okul","anaokulu","rehber öğretmen","eğitimci"]},{"key":"ogrenci","name":"Öğrenci / yeni mezun","match":["öğrenci","ogrenci","üniversite","universite","lise","yeni mezun","stajyer"]},{"key":"avukat","name":"Avukat / hukukçu","match":["avukat","hukuk","stajyer avukat","hâkim","hakim","savcı","savci"]},{"key":"hemsire","name":"Hemşire / sağlık çalışanı","match":["hemşire","hemsire","ebe","sağlık memuru","saglik memuru","paramedik","atk","sağlık","saglik"]},{"key":"doktor","name":"Doktor / diş hekimi","match":["doktor","hekim","diş hekimi","dis hekimi","dr."]},{"key":"fizyoterapist","name":"Fizyoterapist","match":["fizyoterapist","fizyoterapi","fzt"]},{"key":"psikolog","name":"Psikolog / PDR / danışman","match":["psikolog","pdr","psikolojik danışman","danışman","danisman","sosyal hizmet","koç","koc"]},{"key":"diyetisyen","name":"Diyetisyen","match":["diyetisyen","beslenme"]},{"key":"sporegitmeni","name":"Spor eğitmeni / antrenör / yoga-dans","match":["spor eğitmeni","antrenör","antrenor","fitness","yoga","dans","pilates eğitmeni","zumba","personal trainer","pt"]},{"key":"ofis","name":"Ofis çalışanı (mühendis, muhasebeci, bankacı, yazılım)","match":["mühendis","muhendis","muhasebe","bankacı","bankaci","yazılım","yazilim","finans","memur","büro","buro","sekreter","asistan","veri","analist"]},{"key":"yonetici","name":"Yönetici / müdür","match":["yönetici","yonetici","müdür","mudur","direktör","direktor","şef","sef","koordinatör","koordinator","patron"]},{"key":"ik","name":"İK uzmanı","match":["insan kaynakları","insan kaynaklari","ik uzmanı","ik uzmani"," ik","işe alım","ise alim"]},{"key":"satis","name":"Satış / emlak / sigorta","match":["satış","satis","emlak","sigorta","pazarlamacı","pazarlamaci","müşteri temsilcisi","musteri temsilcisi","saha"]},{"key":"cagri","name":"Çağrı merkezi / müşteri hizmetleri","match":["çağrı","cagri","call center","müşteri hizmetleri","musteri hizmetleri","operatör","operator"]},{"key":"sosyalmedya","name":"Sosyal medya / içerik üreticisi","match":["sosyal medya","içerik","icerik","influencer","youtuber","fenomen","dijital pazarlama","reklamcı","reklamci"]},{"key":"pazarlama","name":"Pazarlama / marka","match":["pazarlama","marka","reklam","ajans","iletişim uzmanı","iletisim uzmani","halkla ilişkiler","halkla iliskiler"]},{"key":"girisimci","name":"Girişimci / işletme sahibi / esnaf","match":["girişimci","girisimci","işletme","isletme","esnaf","kendi işim","kendi isim","serbest","şirket sahibi","sirket sahibi","tüccar","tuccar","ticaret"]},{"key":"kuafor","name":"Kuaför / güzellik uzmanı","match":["kuaför","kuafor","güzellik","guzellik","estetisyen","berber","makyaj","cilt bakım","cilt bakim"]},{"key":"evhanimi","name":"Ev hanımı","match":["ev hanımı","ev hanimi","ev kadını","ev kadini","çalışmıyorum","calismiyorum","iş arıyorum","is ariyorum"]},{"key":"emekli","name":"Emekli","match":["emekli"]},{"key":"turizm","name":"Rehber / turizm","match":["rehber","turizm","otel","tur "]},{"key":"yazar","name":"Yazar / gazeteci / metin yazarı","match":["yazar","gazeteci","editör","editor","metin yazarı","metin yazari","muhabir","copywriter"]}],"courses":{"diksiyon":{"label":"Diksiyon Uzmanlığı ve Hitabet Sanatı","eksen":"Bu eğitimin alıcısı, sesiyle iş yapan insandır. Kesişim aramanın kuralı: bu meslek günde kaç saat konuşuyor, kiminle konuşuyor, konuşurken ne kaybediyor?","cells":{"ogretmen":{"kesisim":"Günde 5-6 saat kesintisiz ses kullanıyor. Ses kısılması ve boğaz yorgunluğu öğretmenlerde mesleki bir sorundur; ayrıca sınıfı bağırarak değil ses tonuyla toplamak doğrudan disiplin meselesi.","giris":"Öğretmensiniz — günde kaç saat ders anlatıyorsunuz? Akşama doğru sesiniz kısılıyor mu, yoksa asıl derdiniz sınıfın dikkatini toplamak mı?","ciktilar":["Sesi yormadan kullanma — gün sonunda sesin hâlâ duruyor","Sınıfı bağırmadan toplayan ses tonu ve vurgu; veli toplantısında net konuşma"],"itiraz":"\"Ders yoğunluğundan vakit bulamam\" → Eğitim online, kendi saatinde izliyorsun; ayda bir canlı yayında kendi sınıfındaki durumu doğrudan sorabiliyorsun.","ders":"Sesin Nitelikleri ve Rezonans · Nefes Kontrolü · Vurgu-Tonlama-Ezgi"},"ogrenci":{"kesisim":"Yakın bir tarih var: sunum, mülakat, sözlü sınav, staj görüşmesi. Aciliyet burada gerçek ve satışın motorudur.","giris":"Yakın zamanda sizi zorlayacak bir sunum ya da mülakat var mı? Genelde bu eğitimi arayanların bir tarihi oluyor.","ciktilar":["Mülakatta ve sunumda ses titrememesi, nefes kontrolü","Hazırlıksız söz alındığında toparlayabilme"],"itiraz":"\"Bütçem kısıtlı\" → Ödeme seçeneğini net söyle, indirime atlama. Fiyattan önce tarihi hatırlat: o mülakat bir kez oluyor.","ders":"Topluluk Önünde Konuşurken Nefes Kontrolü · Topluluk Önünde Etkili Konuşma"},"avukat":{"kesisim":"Duruşmada ve müvekkil görüşmesinde haklı olmak yetmiyor; ikna eden şey ses tonu, tempo ve duruş. Ayrıca hazırlıklı konuşma ile ayaküstü cevap vermek iki ayrı beceri.","giris":"Duruşmada mı daha çok zorlanıyorsunuz, yoksa müvekkille ilk görüşmede anlatırken mi? İkisi için çalıştığımız yer farklı.","ciktilar":["Kürsüde tempo ve vurgu — dinleyeni yormadan ikna","Ayaküstü soruya toparlanmadan cevap verebilme"],"itiraz":"\"Benim mesleğimde bu zaten var\" → Tam da bu yüzden: aletini bileyen kişi, aleti olmayan değil.","ders":"İkna ve Algı Yönetimi · Vurgu-Tonlama-Ezgi · Beden Dilinde Sık Yapılan Hatalar"},"satis":{"kesisim":"Telefonda sesten başka hiçbir aracı yok. İlk 10 saniyede karşı taraf ya dinliyor ya kapatıyor; bunu belirleyen kelime değil ses.","giris":"Satışın çoğunu telefonda mı yapıyorsunuz, yüz yüze mi? Telefondaysa ilk 10 saniyede kaç kişi kapatıyor?","ciktilar":["Telefonda güven veren ses — kapanma oranını düşüren açılış","Fiyat söylerken sesin titrememesi; itirazda tonun düşmemesi"],"itiraz":"\"Zamanım yok, sahadayım\" → Dersler kayıtlı, araba beklerken bile izlenir; canlı yayın ayda bir.","ders":"Sesin Nitelikleri ve Rezonans · İkna ve Algı Yönetimi"},"cagri":{"kesisim":"Gün boyu kulaklıkla konuşuyor ve konuşması puanlanıyor. Ses yorgunluğu, tekdüze ton ve öfkeli müşteride tonu kaçırmak doğrudan kalite puanına yazıyor.","giris":"Kalite puanınızda en çok hangi kritikten kırılıyorsunuz — ton mu, anlaşılırlık mı, süre mi?","ciktilar":["Gün sonuna kadar dayanan ses, tekdüzelikten çıkan ton","Öfkeli müşteride sesi yükseltmeden yönetme"],"itiraz":"\"Vardiyalıyım\" → Online ve kayıtlı; vardiya dışında izleniyor.","ders":"Artikülasyon · Ağız Tembelliği · Sesin Nitelikleri ve Rezonans"},"yonetici":{"kesisim":"Toplantıda söz alıyor, üst yönetime rapor sunuyor, ekibe karar anlatıyor. Haklı olmak yetmez; odayı tutabilmek gerekir.","giris":"Toplantıda söz aldığınızda odayı tutabiliyor musunuz, yoksa sözünüz bölünüyor mu?","ciktilar":["Sunumda ilk 30 saniyede dikkati alma","Karar anlatırken itiraz karşısında tonu koruma"],"itiraz":"\"Bu yaştan sonra mı?\" → Bu eğitimi alanların çoğu sıfırdan değil, iyiyi daha iyiye taşımak için geliyor.","ders":"Topluluk Önünde Etkili Konuşma · Sözsüz İletişim ve Karizma"},"doktor":{"kesisim":"Hasta bilgilendirmesi, kötü haber verme ve kongre sunumu. Anlaşılmayan doktor, güven kaybeder; hasta uyumu doğrudan anlatıma bağlı.","giris":"Hastaya anlatırken mi, yoksa kongrede sunum yaparken mi daha çok zorlanıyorsunuz?","ciktilar":["Tıbbi bilgiyi hastanın anlayacağı tempoda anlatma","Kongre/sunum önünde nefes ve ses kontrolü"],"itiraz":"\"Nöbetim var, program tutmam\" → Sabit saat yok; kayıtlar duruyor, canlı yayın ayda bir.","ders":"Yazı Dili ile Konuşma Dili Arasındaki Farklar · Topluluk Önünde Etkili Konuşma"},"ik":{"kesisim":"Mülakat yönetiyor, oryantasyon sunumu yapıyor, zor konuşmaları o taşıyor. Sesin tonu şirketin tonu olarak algılanıyor.","giris":"Mülakat mı, yoksa kalabalığa sunum mu daha zorlayıcı sizin için?","ciktilar":["Kalabalık önünde sunum — oryantasyon ve eğitim anlatımı","Zor konuşmada sesi sabit tutma"],"itiraz":"\"Kurumumuz eğitim veriyor\" → Kurumsal eğitim genel olur; bu, kendi sesin üstünde bireysel çalışma.","ders":"Topluluk Önünde Etkili Konuşma · Beden Dilinin Doğru ve Etkin Kullanılması"},"sosyalmedya":{"kesisim":"Kameraya konuşuyor. İlk üç saniyede izleyici kalıyor ya da kayıyor; bunu belirleyen enerji, tempo ve nefes.","giris":"Kameraya konuşurken mi zorlanıyorsunuz, yoksa çekim bitince sesinizi dinlediğinizde mi rahatsız oluyorsunuz?","ciktilar":["Kamera önünde doğal ve enerjik ses — ilk 3 saniyeyi tutma","Uzun çekimde tempoyu düşürmeme"],"itiraz":"\"Ben zaten konuşuyorum\" → Konuşmak ayrı, izletmek ayrı. Fark tempoda ve vurguda.","ders":"Artikülasyon · Vurgu-Tonlama-Ezgi · Beden Dilinde Sık Yapılan Hatalar"},"turizm":{"kesisim":"Gün boyu grup önünde anlatıyor, çoğu zaman açık havada ve mikrofonsuz. Ses dayanıklılığı doğrudan iş kapasitesi.","giris":"Günde kaç saat grup önünde anlatıyorsunuz? Sezonun ortasında sesiniz dayanıyor mu?","ciktilar":["Açık havada yormadan duyurabilen ses","Uzun anlatımda dikkati düşürmeyen tempo"],"itiraz":"\"Sezonda hiç vaktim yok\" → Sezon dışında izlenir; canlı yayın kaçarsa kaydı kalır.","ders":"Nefes Kontrolü · Sesin Nitelikleri ve Rezonans"},"ofis":{"kesisim":"Teknik bilgiyi teknik olmayan insana anlatmak zorunda; ayrıca toplantıda söz alamamak yaygın ve kariyeri doğrudan etkiliyor.","giris":"Toplantılarda söz almakta mı zorlanıyorsunuz, yoksa anlattığınız teknik şey karşıda anlaşılmıyor mu?","ciktilar":["Teknik konuyu sade anlatma","Toplantıda söz alma ve sözü bitirebilme"],"itiraz":"\"İşimde konuşma gerekmiyor\" → Terfi eden kişi anlatabilen kişidir; yazıyla yükselen az.","ders":"Konuşma Sanatı · Topluluk Önünde Etkili Konuşma"},"evhanimi":{"kesisim":"Çoğu zaman mesele iş değil özgüven: kalabalıkta konuşamamak, telefonda resmi görüşmede tıkanmak, çocuğun okulunda söz alamamak. Ayrıca iş hayatına dönüş hazırlığı olabilir.","giris":"Bu eğitimi kendiniz için mi düşünüyorsunuz, yoksa iş hayatına dönmeyi mi planlıyorsunuz? İkisinde de çalıştığımız yer var, ama başlangıç farklı.","ciktilar":["Kalabalıkta konuşurken sesin titrememesi","Mülakat ve resmi görüşmede kendini anlatabilme"],"itiraz":"\"Ben yapabilir miyim, geç mi kaldım?\" → En sık gelen soru bu. Yaş değil tekrar mesele; ayda bir canlı yayında doğrudan soru sorabiliyorsun.","ders":"Topluluk Önünde Etkili Konuşma · Beden Dilinin Doğru ve Etkin Kullanılması"}},"dersler":["Diksiyon Eğitimine Giriş","Topluluk Önünde Konuşurken Nefes Kontrolü","Artikülasyon","Sesin Nitelikleri ve Rezonans","Vurgu-Tonlama-Ezgi","Ağız Tembelliği","Ünsüzler","Ünlü Harfler 1-2","Yazı Dili ile Konuşma Dili Arasındaki Farklar","Topluluk Önünde Etkili Konuşma","Konuşma Sanatı","Beden Dilinin Doğru ve Etkin Kullanılması","Beden Dilinde Sık Yapılan Hatalar"],"kazanimlar":["Doğru ve Etkili Ses Kullanımı","Hitabet Sanatı ve Topluluk Önünde Konuşma","Sözsüz İletişim ve Karizma","İkna ve Algı Yönetimi"],"formAdi":"diksiyon uzmanlığı ve hitabet sanatı eğitimi","fiyat_ne_zaman":"Tetikleyici olay ve zorlandığı durum netleştikten sonra.","dikkat":"Konu utançtır. “Konuşmanızda sorun mu var” gibi bir cümle kişiyi kaçırır; dil hep hedefe bakar, eksiğe değil."},"hikaye":{"label":"Hikâye Anlatıcılığı (Storytelling) Uzmanlık","eksen":"Bu eğitimin alıcısı, bir şeyi birine anlatıp karşılığında bir şey isteyen insandır: izlenme, ikna, satın alma, akılda kalma. Kesişim aramanın kuralı: bu meslek neyi anlatıyor ve anlattığı şey neden akılda kalmıyor?","cells":{"sosyalmedya":{"kesisim":"İçerik üretiyor ama izlenmiyor. Sorun çoğu zaman kamera veya kurgu değil, kurgusuz anlatım: girişin izleyiciyi tutmaması ve videonun ortasında hikâyenin dağılması.","giris":"İçeriklerinizde insanlar nerede kopuyor — ilk üç saniyede mi, ortasında mı? Genelde ikisi ayrı sorun oluyor.","ciktilar":["İlk 3 saniyeyi tutan giriş kurgusu","Bir ürünü/fikri hikâyeye bağlayarak anlatma — kaydedilen ve paylaşılan içerik"],"itiraz":"\"Ben zaten içerik üretiyorum\" → Üretmek ayrı, izletmek ayrı. Bu eğitim kamerayı değil kurguyu düzeltir.","ders":"Hikaye Yazmanın Aşamaları · Çatışma ve Çözüm · Görsel ve Duyusal Dil"},"pazarlama":{"kesisim":"Kampanya mesajı yazıyor ama mesaj özellik listesine dönüyor. Marka hikâyesi olmayan kampanya, bütçesi bitince unutuluyor.","giris":"Kampanyalarınızda mesajı kurarken ürünün özelliklerinden mi başlıyorsunuz, yoksa müşterinin hikâyesinden mi?","ciktilar":["Marka hikâyesi kurma — kampanyadan uzun ömürlü mesaj","Brief ve sunumda fikri satabilme"],"itiraz":"\"Bu ajans işi, bende teori var\" → Teori değil kurgu öğretiyoruz: hangi sahne önce, hangi bilgi sonra.","ders":"İş Yaşamında Hikayeleştirmenin Önemi · Kurumsal Marka ile Kişisel Marka Arasındaki Farklar"},"ogretmen":{"kesisim":"Anlattığı konu akılda kalmıyor ve sınıfın dikkati dağılıyor. Hikâyeyle anlatılan ders hem dikkati toplar hem sınav sonrası unutulmaz — bu, öğretmen için doğrudan mesleki performans.","giris":"Dersi anlattıktan bir hafta sonra sınıfta ne kadarı kalıyor? Hikâyeyle anlatılan konular genelde farklı davranır.","ciktilar":["Konuyu hikâyeye bağlayarak akılda kalıcı hale getirme","Dikkati dağılan sınıfı anlatımla toplama"],"itiraz":"\"Müfredat yetişmiyor\" → Hikâye süre eklemez, aynı süreyi kurgular. Tekrar ihtiyacını azaltır.","ders":"Sözlü Kültür ve Anlatı Türleri · Hayatımızda Hikayeleri Nasıl Kullanırız?"},"girisimci":{"kesisim":"Ürünü anlatırken özellik sayıyor; yatırımcı, müşteri ve çalışan ise 'neden bu iş' sorusunun cevabını arıyor. Marka hikâyesi olmayan işletme, fiyatla yarışmak zorunda kalıyor.","giris":"Birisi 'ne iş yapıyorsunuz' dediğinde ne kadar sürüyor anlatmanız? Uzun sürüyorsa hikâye eksiktir.","ciktilar":["İşini 30 saniyede anlatan kuruluş hikâyesi","Müşteriyi fiyattan çıkarıp hikâyeye bağlama"],"itiraz":"\"Vaktim yok, iş başımdan aşkın\" → Online ve kayıtlı; ayda bir canlı yayında kendi markanı sorabiliyorsun.","ders":"Kurumsal Marka ile Kişisel Marka Farkı · Kendi Hikayeni Dokumak Egzersizi"},"satis":{"kesisim":"Özellik anlatan satışçı fiyat kırar, hikâye anlatan satışçı ikna eder. Referans vakayı anlatabilmek, en güçlü kapanış aracıdır.","giris":"Müşteriye anlatırken ürünün özelliklerinden mi gidiyorsunuz, yoksa daha önce benzer bir müşterinin hikâyesinden mi?","ciktilar":["Referans vakayı ikna eden bir hikâyeye çevirme","İtiraz anında örnekle karşılık verme"],"itiraz":"\"Benim mesleğim zaten konuşmak\" → Konuşmak ayrı, kurgulamak ayrı. Fark, hangi bilginin ne zaman verildiğinde.","ders":"İkna ve İknanın Yöntemleri · İkna Psikolojisinde Kral Çıplak Masalı"},"psikolog":{"kesisim":"Danışana kavramı doğrudan anlatmak direnç üretir; metafor ve hikâye direnci düşürür. Ayrıca eğitim/seminer veren danışmanlar için doğrudan mesleki araç.","giris":"Danışanlarınıza kavramı doğrudan mı anlatıyorsunuz, yoksa örnek ve benzetmeyle mi? İkincisinde direnç düşüyor.","ciktilar":["Metafor ve vaka anlatımıyla direnci düşürme","Seminer/atölye anlatımını kurgulama"],"itiraz":"\"Bu benim alanımda zaten var\" → Yöntemi biliyorsun, kurguyu ekliyoruz: aynı içeriğin farklı sırayla anlatımı.","ders":"Masallara Jungiyen Bakış ve İçsel Kuraklık · Anlatıcılıkta Duygu Durum Yönetimi"},"avukat":{"kesisim":"Mahkeme bir olay dinler, madde dinlemez. Dosyayı kronolojik değil anlatı olarak kurmak, aynı delille farklı etki üretir. Müvekkile anlatımda da aynı şey geçerli.","giris":"Dosyayı anlatırken olayı kronolojik mi kuruyorsunuz? Sıralama değiştiğinde dinleyenin algısı da değişir.","ciktilar":["Dosyayı ikna eden bir anlatıya çevirme","Müvekkile süreci anlatırken güven verme"],"itiraz":"\"Hukukta duygu işi yok\" → Duygu değil sıralama meselesi: hangi bilgi önce.","ders":"İkna ve İknanın Yöntemleri · Hikaye Yazmanın Aşamaları"},"yazar":{"kesisim":"En doğrudan alıcı. Derdi teknik: karakteri kurmak, sahneyi seçmek, okuru tutmak ve bitirebilmek.","giris":"Yazmaya başlıyor ama bitiremiyor musunuz, yoksa yazdığınızın tutmadığını mı düşünüyorsunuz?","ciktilar":["Yapı kurma — başlanan işin bitmesi","Sahne seçimi ve karakter kurma"],"itiraz":"\"Eğitimle yazarlık olmaz\" → Yetenek öğretilmez, yapı öğretilir. Eksik olan genelde ikincisidir.","ders":"Hikaye Yazmanın Aşamaları · Anlatmak ve Yazmak Arasındaki Farklar"},"yonetici":{"kesisim":"Ekibe strateji anlatıyor ama slaytta kalıyor. Değişimi anlatan yönetici hikâyeyle anlatır; rakam ikna eder, hikâye harekete geçirir.","giris":"Ekibe yeni bir kararı anlattığınızda sahiplenme oluyor mu, yoksa uygulama mı kalıyor?","ciktilar":["Stratejiyi ekibin sahipleneceği hikâyeye çevirme","Üst yönetime sunumda fikri satabilme"],"itiraz":"\"Bizde veri konuşur\" → Veri kararı doğrular, hikâye kararı yürütür. İkisi rakip değil.","ders":"İş Yaşamında Hikayeleştirmenin Önemi · İkna ve İknanın Yöntemleri"},"diyetisyen":{"kesisim":"Danışan bilgiyi biliyor ama uygulamıyor. Uyum sorunu bilgi eksikliği değil motivasyon eksikliği; hikâye burada devreye giriyor.","giris":"Danışanlarınızda asıl sorun bilgi eksikliği mi, yoksa bildiğini uygulamaması mı?","ciktilar":["Danışan uyumunu artıran anlatım","Sosyal medyada anlatılan vaka içerikleri"],"itiraz":"\"Bilimsel anlatmam gerekiyor\" → Bilimi bozmadan anlatmak; hikâye içeriğin yerine değil önüne geçer.","ders":"Hayatımızda Hikayeleri Nasıl Kullanırız? · Görsel ve Duyusal Dil"},"ogrenci":{"kesisim":"Sunum, bitirme projesi, mülakatta 'kendinizi anlatın' sorusu. Üçü de aynı beceri: kendi hikâyeni kurmak.","giris":"Mülakatta 'kendinizi anlatın' dendiğinde ne kadar sürüyor cevabınız? Orası aslında bir hikâye sorusu.","ciktilar":["Kendini anlatan 60 saniyelik hikâye","Sunumu akılda kalıcı kurgulama"],"itiraz":"\"Bütçem yok\" → Ödeme seçeneğini net söyle; rakamdan sonra sus.","ders":"Kendi Hikayeni Dokumak Egzersizi · Anlatıcılıkta Sahne Korkusu ve Egzersizler"}},"dersler":["Hikaye Anlatıcılığına Giriş","Sözlü Kültürün İnsanlık Tarihindeki Yeri","Sözlü Kültür ve Anlatı Türlerinin Ayrımı","Hikaye Yazmanın Aşamaları","Anlatmak ve Yazmak Arasındaki Farklar","Anlatıcılıkta Duygu Durum Yönetimi","İş Yaşamında Hikayeleştirmenin Önemi","Kurumsal Marka ile Kişisel Marka Arasındaki Farklar","Kendi Hikayeni Dokumak Egzersizi","Masallara Jungiyen Bakış","Anlatıcılıkta Sahne Korkusu ve Egzersizler","Anlatıcılıkta Bedenin Rahatlığı","İkna ve İknanın Yöntemleri","İkna Psikolojisinde Kral Çıplak Masalı","Hayatımızda Hikayeleri Nasıl Kullanırız?"],"kazanimlar":["Kahramanın Yolculuğu / üç perdeli yapı ile kurgu","Duygusal bağ: kırılganlık ve samimiyet","Çatışma ve çözüm tasarımı","Görsel ve duyusal dil, metafor","Beden dili ve ses yönetimi"],"formAdi":"hikâye anlatıcılığı eğitimi","fiyat_ne_zaman":"Hikâyeyi nerede kullanacağı (kendi markası / işi / yazmak) netleştikten sonra.","dikkat":"Dört eğitim içinde çıktısı en soyut olanı. Somut çıktı anlatılmazsa “bu ne işime yarayacak” itirazı kesin gelir."},"siddetsiz":{"label":"Şiddetsiz İletişim","eksen":"Bu eğitimin alıcısı bir acıyla arıyor: evde kavga, sınıfta çatışma, iş yerinde gerilim, kendi iç sesi. Kesişim aramanın kuralı: bu meslek kiminle çatışıyor ve o çatışmanın bedelini nasıl ödüyor?","dersler":["Şiddetsiz İletişim Nedir?","Duyguların Farkındalığı","Beden Farkındalığı","Güven Meditasyonu","İhtiyaçlar","Çakal ve Zürafa Dilleri","Rica Dili","Temel Düşünsel İlkeler ve Toplumsal Barışa Etkisi","Doğal Nefes","Şiddetsiz İletişim Egzersizleri"],"kazanimlar":["Kendini İfade Etme ve Netlik","Empati ve Dinleme Becerileri","Çatışma Yönetimi ve İlişki Kalitesi","Öz-Farkındalık ve Duygusal Düzenleme"],"evrensel_sorular":"Eğitim dosyasının kendi dört sorusu her meslekte kullanılabilir ve çok iyi çalışır: (1) 'Hayır' demekte zorlanıyor musunuz? (2) Eleştiri alınca savunmaya mı geçiyorsunuz, öfkeyi tutmak zor mu? (3) İç sesiniz sizi sürekli yargılıyor mu? (4) İnsanları kırmadan sınır çizebiliyor musunuz? Biri 'evet' alırsa konuşma açılmıştır.","cells":{"ogretmen":{"kesisim":"Sınıfta disiplin ve veli iletişimi. Bağırarak kurulan otorite yorucu ve kısa ömürlü; öğretmenin asıl yükü tükenmişlik. Velinin suçlayıcı diline karşı savunmaya geçmeden cevap verebilmek ayrı bir beceri.","giris":"Sınıfta mı daha çok zorlanıyorsunuz, veli görüşmelerinde mi? İkisinde de çalıştığımız yer var ama başlangıç farklı.","ciktilar":["Suçlamadan, yorum katmadan durumu ifade etme (gözlem dili)","Veli görüşmesinde savunmaya geçmeden sınır koyma"],"itiraz":"\"Bunu okulda zaten anlatıyorlar\" → Seminer ayrı, uygulama ayrı. Burada egzersiz var ve ayda bir canlı yayında kendi sınıfındaki olayı sorabiliyorsun.","ders":"Çakal ve Zürafa Dilleri · Rica Dili · Gözlem (Yorumsuz İfade)"},"evhanimi":{"kesisim":"Anne-baba grubu bu eğitimin resmî hedef kitlesinde. Somut dert nettir: çocukla tekrar eden kavga, ergenle kopan iletişim, kendi öfkesine sonradan pişman olmak.","giris":"Bu eğitim aklınıza gelirken kafanızda somut bir ilişki var mıydı — çocuk, eş? İsterseniz oradan konuşalım.","ciktilar":["Çocukla tekrar eden kavgayı kıran dil: gözlem, duygu, ihtiyaç, rica","Öfke anında bedeni ve nefesi fark etme"],"itiraz":"\"Eğitimle çözülür mü?\" → Mucize vaat etme. Bu bir yöntem eğitimi: Rosenberg'in 4 adımı ve egzersizleri. Uygulaması kişide.","ders":"İhtiyaçlar · Rica Dili · Duyguların Farkındalığı · Doğal Nefes"},"hemsire":{"kesisim":"Hasta yakınıyla gerilim ve nöbet yorgunluğu. Sağlıkta sözlü şiddet gerçek bir mesleki risk; kişi çoğu zaman öfkeyi yutup eve taşıyor.","giris":"Hasta yakınıyla gerilim yaşadığınızda o gerginliği eve taşıyor musunuz? Bu eğitimi arayan sağlıkçıların çoğu oradan geliyor.","ciktilar":["Öfkeli kişiyle konuşurken kendi sınırını koruma","Vardiya sonrası biriken öfkeyi ayrıştırma (öz-empati)"],"itiraz":"\"Bizim ortamda bu işe yaramaz\" → Karşı tarafı değiştirme vaadi yok; kendi tepkini yönetme vaadi var. Fark bu.","ders":"Öz-Empati · Duyguların Farkındalığı · Çakal ve Zürafa Dilleri"},"psikolog":{"kesisim":"Hedef kitlede açıkça var. NVC onun için hem kişisel araç hem mesleki teknik: danışanla empatik dinleme ve ihtiyaç dili doğrudan seans pratiğine giriyor.","giris":"Kendiniz için mi bakıyorsunuz, yoksa danışanlarınızla kullanmak için mi? Eğitimin ikisine de karşılığı var.","ciktilar":["Empatik dinleme ve ihtiyaç dilini seansta kullanma","Kendi öz-empatisi: mesleki tükenmişliğe karşı"],"itiraz":"\"Rosenberg'i biliyorum\" → Bilmek ayrı, uygulatmak ayrı. Buradaki ağırlık egzersizlerde; eğitmen Doç. Dr. Mehmet Ozan Aşık.","ders":"Empatiyle Alımlama · İhtiyaçlar · Egzersizler"},"ik":{"kesisim":"Performans görüşmesi, işten çıkarma, ekip içi çatışma — üçü de İK'nın taşıdığı zor konuşmalar. Yanlış cümle hem insanı kırar hem kuruma dönüp zarar verir.","giris":"Zor konuşmalar sizde mi kalıyor — performans, çıkış görüşmeleri? En çok hangisi yoruyor?","ciktilar":["Zor geri bildirimi suçlamadan verme","Çatışan iki tarafı ihtiyaç dilinde buluşturma"],"itiraz":"\"Kurumsal eğitim alıyoruz\" → Kurumsal eğitim genel olur; bu, senin kendi cümlelerin üzerinde çalışma.","ders":"Rica Dili · Çatışma Yönetimi · Gözlem (Yorumsuz İfade)"},"yonetici":{"kesisim":"Ekibe geri bildirim vermek ve çatışma çözmek. Sert yönetici ekibi susturur, yumuşak yönetici sınır koyamaz; ikisi de performans kaybı.","giris":"Ekibinize eleştiri verirken ölçüyü tutturmak zor oluyor mu — ya sert kaçıyor ya da hiç söyleyemiyor musunuz?","ciktilar":["Kırmadan net sınır koyma","Ekip içi çatışmayı ihtiyaç diline çevirme"],"itiraz":"\"Bana lazım olan liderlik eğitimi\" → Liderliğin uygulandığı yer konuşmadır; burada o konuşmanın dili var.","ders":"Rica Dili · Çakal ve Zürafa Dilleri · Empatiyle Alımlama"},"cagri":{"kesisim":"Gün boyu öfkeli müşteri. Kişi hem sakin kalmak hem puan almak zorunda; biriken öfkeyi akşam eve taşıyor.","giris":"Öfkeli müşteriden sonra kendinizi toparlamanız ne kadar sürüyor?","ciktilar":["Karşı tarafın öfkesini üstüne almadan dinleme","Görüşme sonrası kendini toparlama (öz-empati)"],"itiraz":"\"Bize script veriyorlar\" → Script ne diyeceğini söyler, bu eğitim nasıl dayanacağını.","ders":"Empatiyle Alımlama · Öz-Empati · Doğal Nefes"},"avukat":{"kesisim":"Boşanma ve aile dosyalarında duygusal yük müvekkilden avukata geçer. Ayrıca müvekkile 'hayır' diyebilmek ve sınır koyabilmek mesleki bir sorun.","giris":"Müvekkillerin duygusal yükü size geçiyor mu? Özellikle aile dosyalarında bunu çok duyuyoruz.","ciktilar":["Müvekkille empatik ama sınırlı ilişki kurma","Kendi duygusunu dosyadan ayırma"],"itiraz":"\"Hukukta duygu yok\" → Dosyada yok, odada var. Odayı yöneten kişi kazanır.","ders":"Öz-Empati · İhtiyaçlar · Rica Dili"},"doktor":{"kesisim":"Kötü haber vermek ve hasta yakınının tepkisini karşılamak. Yanlış kurulan cümle güveni bitirir, bazen şikâyete döner.","giris":"Hasta yakınına kötü haber verirken mi zorlanıyorsunuz, yoksa tepkiyi karşılarken mi?","ciktilar":["Kötü haberi yumuşatmadan ama kırmadan verme","Tepki karşısında savunmaya geçmeme"],"itiraz":"\"Zamanım yok\" → Kendi hızında; ayda bir canlı yayın var, kaçarsan kaydı kalıyor.","ders":"Gözlem · Empatiyle Alımlama · Duyguların Farkındalığı"},"girisimci":{"kesisim":"Çalışanla, tedarikçiyle ve şikâyet eden müşteriyle konuşma. Küçük işletmede her çatışma doğrudan cebe yazar.","giris":"Sizi en çok hangi konuşma yoruyor — çalışanla mı, müşteriyle mi?","ciktilar":["Şikâyet eden müşteriyi kaybetmeden yönetme","Çalışana net sınır koyarken ilişkiyi bozmama"],"itiraz":"\"Vaktim yok\" → Kendi hızında izleniyor; bir kavganın maliyeti bu eğitimden yüksek.","ders":"Rica Dili · Çatışma Yönetimi"},"ofis":{"kesisim":"Açık ofiste pasif-agresif iletişim, 'hayır' diyememe ve üstlenilen fazladan iş. Tükenmişliğin sessiz sebebi budur.","giris":"İş yerinde 'hayır' demekte zorlanıyor musunuz? Bu eğitimi arayanların çoğunun ilk cümlesi bu oluyor.","ciktilar":["Kırmadan 'hayır' diyebilme","Yazılı ve sözlü iletişimde suçlayıcı dilden çıkma"],"itiraz":"\"Kişisel gelişim kitabı gibi mi?\" → Değil; Rosenberg'in yöntemi, 4 adım ve egzersiz. Eğitmen Uludağ Üniversitesi'nde öğretim üyesi.","ders":"Rica Dili · İhtiyaçlar · Gözlem (Yorumsuz İfade)"}},"formAdi":"şiddetsiz iletişim eğitimi","fiyat_ne_zaman":"Durumunu anlattıktan sonra. Derdini anlatan kişiye fiyatla cevap verilmez.","dikkat":"Mahrem alan. Satış temposu yüksek açılış ters teper; önce dinle, sonra sat."},"pilates-temel":{"label":"Temel Pilates","eksen":"Bu eğitimin resmî hedef kitlesi net: 'pilates eğitmeni olmak isteyenler' listenin ilk sırasında. Yani alıcı çoğunlukla meslek/gelir için arıyor. Kesişim aramanın kuralı: bu meslek pilatesi mevcut işine mi ekleyecek, yoksa yeni bir iş mi kuracak?","dersler":["Pilates Prensipleri","Mat serisi (Pelvic Curl, Hundred Prep, Leg Circles, Spine Stretch, Swan-Swimming, Cat Stretch …)","Reformer (Footwork, Tendon Stretch, Feet in Straps, Roll Down, Knee Stretch-Elephant, Mermaid …)","Duvar Pilatesi ile duruş farkındalığı ve hizalanma","Cadillac tanıtım, güvenlik ve temel egzersizler","Güvenli Egzersiz Uygulamaları"],"kazanimlar":["Mat, Reformer, Duvar ve Cadillac sistemlerini doğru teknikle uygulama","Profesyonel ders planı hazırlayabilme ve öğretim becerisi","Güvenli egzersiz uygulaması"],"eslestirme_kurali":"Kişinin pilates geçmişi yoksa doğru ürün **Temel**'dir. 'Uzmanlık' formu doldurmuş olsa bile geçmişi yoksa Temel'e yönlendir — yanlış seviye satmak iade ve kötü yorum üretir, o da reklamdan pahalıdır.","cells":{"sporegitmeni":{"kesisim":"En sıcak lead. Zaten salonda çalışıyor; pilates, hizmet çeşitlendirmesi ve saat başı gelir artışı demek. Özellikle kadın danışan kitlesine açılım.","giris":"Şu an hangi alanda ders veriyorsunuz? Pilatesi mevcut derslerinize eklemek için mi bakıyorsunuz?","ciktilar":["Mat ve Reformer'ı doğru teknikle ders verecek seviyede öğrenme","Profesyonel ders planı hazırlayabilme"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Reformer serisi · Ders planı ve öğretim becerileri · Güvenli Egzersiz Uygulamaları"},"fizyoterapist":{"kesisim":"Mesleki genişleme. Postür analizi, core stabilizasyon ve omurga sağlığı zaten onun dili; eğitmen Elif Pankudus'un uzmanlık alanı da tam burası. Klinik sonrası egzersiz takibi doğal bir hizmet uzantısı.","giris":"Hastalarınıza klinik sonrası egzersiz veriyor musunuz? Pilatesi o tarafa eklemek için mi bakıyorsunuz?","ciktilar":["Mat ve Reformer akışlarını hasta takibine ekleme","Duruş ve hizalanma çalışmalarını sistemli uygulama"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir. Fizyoterapistte ek soru gelir: bilimsel dayanak. Eğitmenin TCF 1-2-3. kademe antrenörlüğü ve Balanced Body geçmişi söylenir; abartılmaz.","ders":"Pilates Prensipleri · Duvar Pilatesi ile Duruş Farkındalığı · Reformer"},"hemsire":{"kesisim":"İki yol açık: (a) vardiya ve ayakta çalışmanın bel-boyun yükü için kendi bedenine, (b) sağlık geçmişini kullanarak meslek değiştirme. Hangisi olduğu ilk soruyla ayrılır.","giris":"Kendiniz için mi düşünüyorsunuz, yoksa ileride bu işi yapmak için mi? Sağlıkçılardan ikisi de geliyor.","ciktilar":["Kendi bedeni için doğru ve güvenli hareket","Meslek yolu: ders planı ve öğretim becerisi"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Pilates Prensipleri · Güvenli Egzersiz Uygulamaları · Mat serisi"},"diyetisyen":{"kesisim":"Danışanına tamamlayıcı hizmet. Beslenme + hareket paketi hem sonucu hem danışan bağlılığını artırır; ek gelir kalemi olur.","giris":"Danışanlarınıza hareket tarafında da yönlendirme yapıyor musunuz? Çoğu diyetisyen o boşluğu kapatmak için bakıyor.","ciktilar":["Danışana güvenli egzersiz planı sunabilme","Hizmet paketini genişletme"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Mat serisi · Güvenli Egzersiz Uygulamaları · Ders planı"},"evhanimi":{"kesisim":"Hedef kitlenin duygusal merkezi burası: hem kendi bedenine dönmek hem eve bağlı olmayan bir meslek edinmek. Asıl itiraz fiyat değil yeterlilik: 'ben yapabilir miyim, geç mi kaldım'.","giris":"Kendiniz için mi bakıyorsunuz, yoksa ileride ders verebilmek için mi? İkisi de oluyor, ona göre anlatayım.","ciktilar":["Doğru teknikle başlama — sakatlanmadan","Meslek yolu: sertifika ve ders planı becerisi"],"itiraz":"\"Ben yapabilir miyim?\" → En sık gelen soru. Eğitim sıfırdan başlıyor (Pilates Prensipleri) ve ayda bir canlı yayında eğitmene doğrudan soru sorabiliyor. \"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Pilates Prensipleri · Mat serisi · Ayda bir ZOOM canlı yayın"},"ogretmen":{"kesisim":"Ayakta geçen ders saatleri, bel ve boyun. Ayrıca yaz dönemi ve emeklilik sonrası için ikinci meslek arayışı öğretmenlerde yaygın.","giris":"Kendi bel-boyun tarafı için mi bakıyorsunuz, yoksa ileride ders verebilmek için mi?","ciktilar":["Ayakta çalışan beden için duruş ve core","İkinci meslek yolu: sertifika ve ders planı"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Duvar Pilatesi ile Duruş Farkındalığı · Mat serisi"},"ofis":{"kesisim":"Masa başı: boyun, bel, omuz ve duruş bozukluğu. Genelde kendi bedeni için arar; meslek niyeti azdır ama çıkarsa ciddidir (iş değiştirme).","giris":"Gün içinde ne kadar masa başındasınız? Bel ya da boyun ağrısı sizi mi getirdi?","ciktilar":["Masa başı duruşunu düzelten hizalanma çalışmaları","Core stabilizasyon ile ağrı yönetimi"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Duvar Pilatesi · Pilates Prensipleri · Mat serisi"},"kuafor":{"kesisim":"Gün boyu ayakta ve öne eğik çalışma; bel, omuz ve boyun. Ayrıca salonuna ek hizmet kurma fikri çıkabilir.","giris":"Günde kaç saat ayaktasınız? Bel ve omuz tarafı sizi mi zorluyor?","ciktilar":["Öne eğik çalışan beden için duruş düzeltme","İsterse salonuna ek hizmet"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Duvar Pilatesi ile Duruş Farkındalığı · Güvenli Egzersiz"},"ogrenci":{"kesisim":"Spor bilimleri / fizyoterapi öğrencisi için mezuniyet öncesi mesleki avantaj; diğerleri için kendi bedeni ve part-time gelir fikri.","giris":"Bölümünüz bu alanla ilgili mi, yoksa kendiniz için mi bakıyorsunuz?","ciktilar":["Mezuniyet öncesi uygulamalı beceri ve sertifika","Doğru teknikle kendi çalışması"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Pilates Prensipleri · Mat serisi"},"emekli":{"kesisim":"Hareket, denge, ağrı yönetimi ve sosyalleşme. Dil sade tutulur; 'uzmanlık' ve 'kariyer' anlatımı buraya uymaz.","giris":"Daha çok kendi sağlığınız ve hareket için mi düşünüyorsunuz?","ciktilar":["Güvenli ve doğru hareketle günlük yaşam kalitesi","Kendi hızında, evden, tekrar edilebilir çalışma"],"itiraz":"\"Bu yaşta olur mu?\" → Eğitim kendi hızında; güvenli egzersiz bölümü bunun için var. Sağlık sorunu varsa doktoruna danışmasını söyle — bu cümle atlanmaz. \"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Güvenli Egzersiz Uygulamaları · Pilates Prensipleri"}},"formAdi":"temel pilates eğitimi","fiyat_ne_zaman":"Kendi için mi meslek için mi ayrıldıktan ve pratik/ekipman sorusu konuşulduktan sonra.","dikkat":"Reformer ve Cadillac ekipman ister. Pratiği nerede yapacağı konuşulmadan kapanış yapılmaz — olmayan bir imkânı var göstermek iade üretir."},"pilates-uzmanlik":{"label":"Pilates Uzmanlık (ileri)","eksen":"İleri seviye program: Advanced Hip/Core/Arm serileri, Plank, Long Box Rocking, Jackknife, Splits, Star, mobilite akışları, akış-kombinasyonlar. Alıcı zaten pilates yapan/veren kişidir. Geçmişi olmayan kişiye bu ürün satılmaz.","dersler":["İleri Seviye Mat: Advanced Hip Series, Advanced Core Flow, Advanced Arm Series, Adductor Series, Plank Series","Direnç bandı egzersizleri ve stretch çalışmaları","Reformer: Long Box Rocking, Rowing Back, Reverse Abdominals, Jackknife, Thigh/Tendon Stretch, Splits, Star","Duvar Pilatesi, mobilite akışları, Cadillac","Akış ve kombinasyonlar"],"kazanimlar":["İleri seviye hareketleri doğru teknikle uygulama","Mat, Reformer, Duvar ve Cadillac sistemlerine hâkimiyet","Akış ve kombinasyon kurma"],"eslestirme_kurali":"İlk soru her zaman aynı: 'Şu an pilates yapıyor musunuz / ders veriyor musunuz?' Cevap hayırsa **Temel Pilates**'e geç. Sınav farkı da söylenir: burada videoların %80'i bitince sınav otomatik açılır, istediğin zaman girilir.","cells":{"sporegitmeni":{"kesisim":"Ders veriyor ama repertuvarı tıkanmış olabilir: aynı akışlar, sıkılan danışan. İleri seri ve kombinasyonlar doğrudan ders kalitesi ve fiyatlandırma gücü demek.","giris":"Şu an hangi seviyede ders veriyorsunuz? İleri seviye danışanlarınızda repertuvar sıkıntısı oluyor mu?","ciktilar":["İleri seri ve akış-kombinasyonlarla ders repertuvarını genişletme","Reformer'da ileri hareketleri güvenle verebilme"],"itiraz":"\"Ben zaten biliyorum\" → O zaman doğru üründesin: bu eğitim başlangıç değil, ileri seviye. İçerik listesini oku (Jackknife, Star, Splits, akış-kombinasyonlar) — tanımadığı bir şey çıkarsa konuşma açılır.","ders":"Advanced Core Flow · Akış ve Kombinasyonlar · Reformer ileri seri"},"fizyoterapist":{"kesisim":"Klinik dışı ileri seviye takip. Mobilite akışları ve Cadillac, rehabilitasyon sonrası performansa geçiş aşamasında karşılık buluyor.","giris":"Şu an pilatesi hastalarınızla kullanıyor musunuz? Hangi seviyede takıldığınızı söyleyin, doğru programı seçelim.","ciktilar":["İleri mobilite akışları ve Cadillac uygulamaları","Rehabilitasyondan performansa geçiş çalışmaları"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Mobilite Akışları · Cadillac · Advanced Hip Series"},"evhanimi":{"kesisim":"Genelde 'uzmanlık' kelimesi çektiği için bu formu doldurur ama pilates geçmişi olmayabilir. Burada iş, doğru ürünü seçmektir.","giris":"Şu an düzenli pilates yapıyor musunuz? Yapmıyorsanız Temel programla başlamak daha doğru olur, sizi zora sokmayalım.","ciktilar":["(Geçmişi varsa) ileri seviye akışlar","(Yoksa) Temel Pilates'e yönlendirme"],"itiraz":"\"Direkt uzmanlık alayım\" → Geçmişi yoksa kabul etme. Yanlış seviye satmak iade ve kötü yorum üretir; ikisi de reklamdan pahalıdır.","ders":"Önce seviye tespiti · sonra Temel ya da İleri"},"hemsire":{"kesisim":"Sağlık geçmişi var ama pilates geçmişi olmayabilir. Aynı kural: önce seviye tespiti.","giris":"Daha önce pilates yaptınız mı? Ona göre Temel mi İleri mi, birlikte seçelim.","ciktilar":["(Geçmişi varsa) ileri seri ve güvenli ilerleme","(Yoksa) Temel Pilates"],"itiraz":"\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.","ders":"Seviye tespiti · Advanced serileri"},"ogretmen":{"kesisim":"Genelde ikinci meslek niyetiyle gelir; pilates geçmişi çoğunlukla yoktur. Seviye tespiti şart.","giris":"Daha önce düzenli pilates yaptınız mı? Sıfırdansa Temel'den başlayalım, boşa para harcamayın.","ciktilar":["(Geçmişi varsa) ileri seviye","(Yoksa) Temel Pilates"],"itiraz":"\"Uzmanlık daha iyi değil mi?\" → Daha iyi değil, daha ileri. Sıfırdan başlayana zarar verir.","ders":"Seviye tespiti"}},"formAdi":"pilates uzmanlık eğitimi","fiyat_ne_zaman":"Seviye tespitinden sonra. Seviye uymuyorsa değişen şey fiyat değil, üründür.","dikkat":"Pilates geçmişi yoksa bu ürün satılmaz; Temel Pilates'e yönlendirilir."}},"egitmenler":{"diksiyon":"Burçin Karaca Tabur — 1994'ten beri radyo/TV; radyo ve televizyon programı yapım ve sunuculuğu, Gaziantep Büyükşehir'de tiyatro ve gala sunumları, 2019'da Konak Halk Eğitim'de güzel konuşma/diksiyon/hitabet formasyonu, 2015'ten beri TRT İzmir Radyosu TRT Nağme'de bant ve canlı yayın programları.","hikaye":"Sıla Topçam — SDÜ Sahne Sanatları Oyunculuk mezunu; DEÜ'de masal anlatıcılığı üzerine yüksek lisans tezi. İzmir Devlet Tiyatrosu 'Bizden Masallar' projesinde anlatımlar, 2018'de Tayland'da Türkiye'yi temsilen sahne, 2019'da Sıla Masal Okulu kurucusu. Devlet Tiyatroları festivallerinde 'İş Yaşamında Storytelling' atölyeleri.","siddetsiz":"Doç. Dr. Mehmet Ozan Aşık — Uludağ Üniversitesi Sosyoloji Bölümü öğretim üyesi; doktora Cambridge Üniversitesi Sosyoloji. Akademik ağırlık bu eğitimin en güçlü güven unsurudur.","pilates":"Elif Pankudus — 2012'den beri aktif pilates eğitmeni, 2013'te kurduğu Panem Pilates'in kurucusu. Türkiye Cimnastik Federasyonu 1., 2. ve 3. Kademe Pilates Antrenörlüğü, Balanced Body Workshop. Postür analizi, core stabilizasyon, omurga sağlığı."}};
+  /* MATRIX:END */
+
 (function () {
   "use strict";
 
-  var GAP = function (t) { return '<span class="gap">' + t + '</span>'; };
-  var HYP = '<span class="tag">hipotez</span>';
+  var COURSES = MATRIX.courses || {};
+  var PROFS = MATRIX.profs || [];
+  var URUN = MATRIX.urun || {};
+  var EGITMEN = MATRIX.egitmenler || {};
+  var courseKeys = Object.keys(COURSES);
 
-  var COURSES = {
-    hikaye: {
-      label: "Hikâye Anlatıcılığı",
-      formName: "hikâye anlatıcılığı eğitimi",
-      motive: "Kendini ifade etme ve görünür olma. Bazen içerikle gelir elde etme.",
-      watch: "Dört eğitim içinde çıktısı en soyut olan bu. “Bu benim ne işime yarayacak” sorusu buradan gelir — satış, somut çıktıyı anlatabildiğin kadar olur.",
-      firstQ: "Kısaca sorayım: hikâyeyi nerede kullanmak istiyorsunuz — kendi markanızda mı, işinizde mi, yazmak için mi?",
-      asks: [
-        "Şu an içerik üretiyor musun, yoksa yeni mi başlayacaksın?",
-        "Eğitim bitince ne yapabiliyor olmak istersin?"
-      ],
-      objections: [
-        ["“Ne işime yarayacak?”", "Soyut cevap verme. Eğitimin sonunda elinde ne olacağını tek cümleyle söyle, sonra onun kendi alanına bağla."],
-        ["“Düşüneyim”", "Bu itiraz değil, cevaplanmamış bir sorudur: “Aklında kalan tek bir soru olsa, o ne olurdu?” Sonra takip gününü birlikte belirle."]
-      ],
-      price: "Ne için kullanacağı netleştikten sonra. Önce değil."
-    },
-    pilates: {
-      label: "Pilates",
-      formName: "pilates eğitimi",
-      motive: "İki ayrı alıcı var ve ilk soruyla ayrılır: (a) kendi için yapmak isteyen — sağlık, form, ağrı; (b) bu işi meslek olarak yapmak isteyen — o zaman konuşma “ne kazandırır” ekseninde geçer.",
-      watch: "Meslek için arayan kişide sertifika ve istihdam sorusu net cevaplanmazsa satış olmaz. Abartılı vaat burada en pahalı hatadır: iade, şikâyet ve itibar kaybı üretir. Kendi için arayan kişiye ise sertifika anlatmak konuyu dağıtır.",
-      firstQ: "Önce şunu sorayım: bu eğitimi kendiniz için mi düşünüyorsunuz, yoksa bu işi yapmak, ders vermek için mi?",
-      asks: [
-        "Şu an spor/hareket alanında bir geçmişin var mı?",
-        "Eğitimden sonra nerede çalışmayı düşünüyorsun — stüdyo mu, kendi grubun mu?"
-      ],
-      objections: [
-        ["“Sertifika geçerli mi?”", "Sertifikanın ne olduğunu olduğu gibi söyle: " + GAP("kurum / tür / geçerlilik tanımlı değil") + ". “Devlet onaylı”, “uluslararası geçerli” denmez."],
-        ["“İş bulabilir miyim?”", "Garanti verme. “Garanti veremem, verirsem doğru olmaz” de, sonra somut çıktıyı ve kendi şehrindeki alanı konuş."],
-        ["“Online olur mu?”", "Pratiğin nasıl çözüldüğünü anlat: " + GAP("pratik / geri bildirim / canlı seans tanımlı değil") + ". Yoksa yok de."]
-      ],
-      price: "Sertifika ve “nerede çalışırım” sorusu cevaplandıktan sonra. Bu eğitimde fiyat, maliyet değil yatırım olarak konuşulur."
-    },
-    siddetsiz: {
-      label: "Şiddetsiz İletişim",
-      formName: "şiddetsiz iletişim eğitimi",
-      motive: "Acıyı azaltmak. Evde kavga, çocukla kopukluk, iş yerinde çatışma. Mahrem bir alan.",
-      watch: "Satış temposu yüksek açılış burada ters teper. Kişi derdini anlatmadan fiyat konuşulursa konuşma biter. Önce dinle, sonra sat.",
-      firstQ: "Şunu sorabilir miyim: bu eğitim aklınıza gelirken kafanızda somut bir ilişki var mıydı — çocuk, eş, iş?",
-      asks: [
-        "En çok hangi durumda tıkanıyorsun?",
-        "Daha önce bu konuda bir şey denedin mi — kitap, terapi, eğitim?"
-      ],
-      objections: [
-        ["“Eğitimle çözülür mü?”", "Abartma. Eğitimin ne yaptığını (bir yöntem öğretir, uygulaması kişide) net söyle; mucize vaat etme."],
-        ["“Zamanım yok”", "Bu çoğu zaman “öncelik değil” demektir. Fiyatla değil, yaşadığı durumla dön. Haftalık süre: " + GAP("süre tanımlı değil") + "."]
-      ],
-      price: "Durumunu anlattıktan sonra. Derdini anlatan kişiye fiyatla cevap verme."
-    },
-    diksiyon: {
-      label: "Diksiyon ve Hitabet",
-      formName: "diksiyon ve hitabet eğitimi",
-      motive: "Özgüven ve somut bir olay: mülakat, sunum, sınav, yeni iş, sahne.",
-      watch: "Konu utançtır. “Konuşmanda sorun mu var” gibi bir cümle kişiyi kaçırır. Dil hep hedefe bakar, eksiğe değil.",
-      firstQ: "Kısaca sorayım: sizi bu eğitime yönlendiren somut bir durum var mı — sunum, görüşme, sınıf?",
-      asks: [
-        "Şu an en çok hangi durumda zorlanıyorsun?",
-        "Haftada kaç saat ayırabilirsin?"
-      ],
-      objections: [
-        ["“Pahalı”", "İndirime atlama. Önce ayır: fiyatın kendisi mi zor geliyor, yoksa “bu parayı verir miyim” tereddüdü mü? Taksit: " + GAP("taksit tanımlı değil") + "."],
-        ["“Zamanım yok”", "Haftalık süre ve kayıt erişimini söyle: " + GAP("süre / erişim tanımlı değil") + "."]
-      ],
-      price: "İki soru cevaplandıktan sonra. Bu grupta fiyat hassasiyeti en yüksek olabilir — erken verilen rakam konuşmayı bitirir."
-    }
+  var state = {
+    course: courseKeys[0] || "",
+    ad: "Ayşe", yas: "34", meslek: "Öğretmen", sehir: "Konya",
+    temsilci: "Zeynep", deneme: "2"
   };
+  // varsayılan olarak diksiyon seçili gelsin
+  if (COURSES.diksiyon) state.course = "diksiyon";
 
-  var JOBS = [
-    { keys: ["öğretmen","ogretmen","akademisyen","öğretim","ogretim","okul","öğr. gör"], name: "Öğretmen / akademisyen",
-      note: "Program ve zaman kısıtı sorar, içerik detayı ister, sertifikanın resmî statüsünü sorar, taksite duyarlıdır." },
-    { keys: ["fizyoterapist","hemşire","hemsire","doktor","diyetisyen","ebe","sağlık","saglik"], name: "Sağlık mesleği",
-      note: "Pilates'te en yüksek uyum. Teknik derinlik ve kaynak sorar; yüzeysel cevap güven kaybettirir." },
-    { keys: ["psikolog","pdr","danışman","danisman","sosyal hizmet"], name: "Psikoloji / danışmanlık",
-      note: "Şiddetsiz iletişimde yöntemin kaynağını sorar. Genel geçer cümle tutmaz." },
-    { keys: ["öğrenci","ogrenci","üniversite","universite","lise"], name: "Öğrenci",
-      note: "Bütçe kısıtlı; taksit sorar, karar ailede olabilir. Yazışmayı aramaya tercih eder." },
-    { keys: ["eğitmen","egitmen","antrenör","antrenor","yoga","dans","fitness","pilates","spor"], name: "Eğitmen / spor",
-      note: "Pilates'te en sıcak lead. Doğrudan mesleki kazanç ve sertifika konuşulur." },
-    { keys: ["satış","satis","çağrı","cagri","müşteri temsilcisi","musteri temsilcisi","pazarlama","sunucu","spiker"], name: "Satış / sesle çalışan",
-      note: "Diksiyonda somut iş gerekçesi var: ses günlük aracı. Sonucu ölçülebilir anlat." },
-    { keys: ["ev hanımı","ev hanimi","ev kadını","ev kadini"], name: "Ev hanımı / kariyer değiştiren",
-      note: "Asıl itiraz fiyat değil yeterlilik: “ben yapabilir miyim, geç mi kaldım”. Güven ve örnek gerekir." },
-    { keys: ["esnaf","kendi işim","kendi isim","serbest","kuaför","kuafor","terzi","emlak","işletme","isletme","girişimci","girisimci"], name: "Esnaf / serbest",
-      note: "Hızlı karar verir, “bana ne kazandırır” sorar. Gündüz meşgul; akşam ara." },
-    { keys: ["mühendis","muhendis","avukat","muhasebe","bankacı","bankaci","yazılım","yazilim","müdür","mudur","insan kaynakları","ik ","uzman","memur"], name: "Kurumsal çalışan",
-      note: "Akşam saatlerinde ulaşılır. Erişim süresi ve fatura sorar; hızlı, net cevap ister." }
-  ];
-
-  function normalize(s) {
-    return (s || "").toLocaleLowerCase("tr-TR").trim();
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c];
+    });
   }
+  function norm(s) { return (s || "").toLocaleLowerCase("tr-TR").trim(); }
 
-  function jobProfile(meslek) {
-    var m = normalize(meslek);
+  function matchProf(meslek) {
+    var m = norm(meslek);
     if (!m) return null;
-    for (var i = 0; i < JOBS.length; i++) {
-      for (var k = 0; k < JOBS[i].keys.length; k++) {
-        if (m.indexOf(JOBS[i].keys[k]) !== -1) return JOBS[i];
+    for (var i = 0; i < PROFS.length; i++) {
+      var keys = PROFS[i].match || [];
+      for (var k = 0; k < keys.length; k++) {
+        if (m.indexOf(norm(keys[k])) !== -1) return PROFS[i];
       }
-    }
-    return { name: meslek, note: "Bu meslek için tanımlı bir not yok. Varsayım yapma — ilk soruyla ne iş yaptığını ve neden ilgilendiğini öğren." };
-  }
-
-  function ageNote(yas) {
-    var y = parseInt(yas, 10);
-    if (!y) return null;
-    if (y < 25) return "18-24: yazışmayı tercih eder, sesli mesaj olur. Bütçe kısıtlı olabilir, karar desteği (aile) devreye girebilir.";
-    if (y < 35) return "25-34: kariyer ve gelir motivasyonu belirgin. Mesai içinde yazışır, akşam konuşur.";
-    if (y < 45) return "35-44: zaman kısıtı gerçek (çocuk/iş). Akşam saatlerinde ara, haftalık süreyi net söyle.";
-    return "45+: telefonla konuşmayı tercih edebilir. Sadelik ve güven arar; platforma nasıl gireceğini sorabilir.";
-  }
-
-  var BIG = ["istanbul","ankara","izmir","bursa","antalya","adana","konya","gaziantep"];
-
-  function cityNote(sehir, courseKey) {
-    var s = normalize(sehir);
-    if (!s) return null;
-    var big = BIG.indexOf(s) !== -1;
-    if (courseKey === "pilates" && !big) {
-      return "Küçük şehir + Pilates: “şehrinde stüdyo var mı, kime çalışacaksın” konuşmasını sen aç. Yerel iş imkânı sorusu buradan gelir.";
-    }
-    if (!big) {
-      return "Küçük şehir: online'ın avantajını vurgula — “buraya gelmene gerek yok”.";
     }
     return null;
   }
 
-  var state = {
-    course: "diksiyon",
-    ad: "Ayşe", yas: "34", meslek: "Öğretmen", sehir: "Konya",
-    temsilci: "Zeynep", deneme: "2",
-    kaynak: "Meta formu — Diksiyon kampanyası",
-    mesaj: "Mülakata hazırlanıyorum"
-  };
-
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) {
-      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c];
-    });
-  }
-
-  function formRead(mesaj) {
-    var m = normalize(mesaj);
-    if (!m) return "Formda ek soru cevabı yok — niyeti bilmiyoruz. İlk soruyu atlama, konuşmanın yönü oradan çıkacak.";
-    if (m.indexOf("fiyat") !== -1 || m.indexOf("ücret") !== -1 || m.indexOf("ucret") !== -1 || m.indexOf("kaç para") !== -1) {
-      return "İlk mesajında fiyat sordu. Bu <b>ilgi</b> işaretidir, fiyat itirazı değil. Rakamla cevap verme: “Hemen söyleyeyim, ama size doğru paketi söyleyebilmem için tek bir şey sorayım…” diye ihtiyacı öğren, sonra fiyatı ver.";
-    }
-    if (m.indexOf("bilgi") !== -1 || m.indexOf("detay") !== -1) {
-      return "Genel bilgi istedi — henüz niyeti belirsiz. Kartın açılış sorusunu olduğu gibi kullan, niyeti oradan çıkar.";
-    }
-    if (m.indexOf("sertifika") !== -1) {
-      return "Sertifikayı ilk mesajda sordu: bu kişi eğitimi <b>meslek/istihdam</b> için düşünüyor. Sertifikanın ne olduğunu net söyle, abartma.";
-    }
-    if (m.indexOf("taksit") !== -1 || m.indexOf("indirim") !== -1 || m.indexOf("kampanya") !== -1) {
-      return "Ödeme koşulunu ilk mesajda sordu. Bütçe konusu açık — ama indirime atlama; önce eğitimin ne getireceğini konuş.";
-    }
-    return "Kendi cümlesini kartın önüne koy: “…diye yazmışsınız” diyerek aç. Hazır metinden daha çok dönüştürür.";
+  function egitmenFor(courseKey) {
+    if (courseKey.indexOf("pilates") === 0) return EGITMEN.pilates;
+    return EGITMEN[courseKey];
   }
 
   function callNote(n) {
-    if (n === "1") return "İlk arama. Form daha yeni dolduysa ilgi sıcak — vakit kaybetme.";
+    if (n === "1") return "İlk arama. Form yeni dolduysa ilgi sıcak — vakit kaybetme.";
     if (n === "2") return "İkinci deneme: <b>farklı bir saat dilimi</b> seç. Aynı saatte tekrar aramak yeni bir deneme sayılmaz.";
-    if (n === "3") return "Üçüncü deneme. Açılışa “birkaç kez denedim, rahatsız etmeyeyim” dürüstlüğünü kat — baskı değil, nezaket.";
-    if (n === "4") return "Dördüncü deneme, akşam saati. Açmazsa mesajı gönder ve son denemeye bırak.";
-    return "Son deneme. Açarsa net kapat: devam mı, kapatalım mı? Açmazsa loga “ulaşılamadı” yaz ve bırak.";
+    if (n === "3") return "Üçüncü deneme. “Birkaç kez denedim, rahatsız etmeyeyim” dürüstlüğünü kat — baskı değil, nezaket.";
+    if (n === "4") return "Dördüncü deneme, akşam saati. Açmazsa mesajı gönder, son denemeye bırak.";
+    return "Son deneme. Açarsa net kapat: devam mı, kapatalım mı? Açmazsa loga “ulaşılamadı” yaz.";
+  }
+
+  function cityNote(sehir, courseKey) {
+    var s = norm(sehir);
+    if (!s) return null;
+    if (courseKey.indexOf("pilates") === 0)
+      return "Pilateste şehir tek bir şey için sorulur: pratiği ve ekipmanı nerede bulacağı. Şehrinde stüdyo var mı?";
+    return "Eğitim online — şehir satışı değiştirmez. Uzaktaysa avantaj olarak söyle: “bir yere gitmenize gerek yok.”";
   }
 
   function render() {
     var c = COURSES[state.course];
-    var ad = state.ad.trim();
-    var job = jobProfile(state.meslek);
-    var age = ageNote(state.yas);
-    var city = cityNote(state.sehir, state.course);
-    var msg = formRead(state.mesaj);
-    var call = callNote(state.deneme);
+    if (!c) { document.getElementById("card").innerHTML = "<div class='step'><div></div><div>Eğitim seçilmedi.</div></div>"; return; }
 
+    var prof = matchProf(state.meslek);
+    var cell = prof && c.cells ? c.cells[prof.key] : null;
+    var ad = state.ad.trim();
+    var rep = state.temsilci.trim();
+
+    document.getElementById("meslekEsleme").innerHTML = state.meslek.trim()
+      ? (cell ? "Eşleşti: <b>" + esc(prof.name) + "</b>"
+              : (prof ? "Eşleşti: <b>" + esc(prof.name) + "</b> — bu eğitimde tanımlı kesişim yok, üç soru kartta."
+                      : "Bu meslek için tanımlı kesişim yok — kart sana üç soruyu veriyor."))
+      : "Meslek boş — kart üç soruyla ilerler.";
+
+    var opening = "Merhaba" + (ad ? " " + ad : "") + ", ben Mons Akademi'den" + (rep ? " " + rep : "") +
+      ". " + c.formAdi.charAt(0).toLocaleUpperCase("tr-TR") + c.formAdi.slice(1) +
+      " için bilgi formu doldurmuşsunuz, onun için arıyorum. Şu an 2 dakika müsait misiniz?";
+
+    var waMsg = "Merhaba" + (ad ? " " + ad : "") + ", Mons Akademi'den" + (rep ? " " + rep : "") +
+      ". " + c.formAdi.charAt(0).toLocaleUpperCase("tr-TR") + c.formAdi.slice(1) +
+      " formunuz için aradım, ulaşamadım. Sizin için uygun bir saat söylerseniz o saatte arayayım.";
+
+    var h = [];
     var head = [];
     if (state.yas) head.push(esc(state.yas));
     if (state.meslek.trim()) head.push(esc(state.meslek.trim()));
     if (state.sehir.trim()) head.push(esc(state.sehir.trim()));
 
-    var rep = state.temsilci.trim();
-    var opening = "Merhaba" + (ad ? " " + ad : "") + ", ben Mons Akademi'den" +
-      (rep ? " " + rep : "") + ". " + c.formName.charAt(0).toLocaleUpperCase("tr-TR") +
-      c.formName.slice(1) + " için bilgi formu doldurmuşsunuz, onun için arıyorum. " +
-      "Şu an 2 dakika müsait misiniz?";
-    var waMsg = "Merhaba" + (ad ? " " + ad : "") + ", Mons Akademi'den" + (rep ? " " + rep : "") +
-      ". " + c.formName.charAt(0).toLocaleUpperCase("tr-TR") + c.formName.slice(1) +
-      " formunuz için aradım, ulaşamadım. Sizin için uygun bir saat söylerseniz o saatte arayayım.";
+    h.push('<div class="card-head">');
+    h.push('<p class="who">' + (ad ? esc(ad) : "İsim yok") + '</p>');
+    h.push('<p class="meta">' + (head.length ? head.join(" · ") : "meslek/yaş/şehir boş") + '</p>');
+    h.push('<p class="meta" style="flex:1 1 100%">' + esc(c.label) + ' · Meta formu · ' + esc(state.deneme) + '. arama</p>');
+    h.push('</div>');
 
-    var html = "";
-    html += '<div class="card-head">';
-    html += '<p class="who">' + (ad ? esc(ad) : "İsim yok") + ' · ' + esc(c.label) + '</p>';
-    html += '<p class="meta">' + (head.length ? head.join(" · ") : "meslek/yaş/şehir boş") + '</p>';
-    var src = [];
-    if (state.kaynak.trim()) src.push("Kaynak: " + esc(state.kaynak.trim()));
-    src.push(esc(state.deneme) + ". arama");
-    if (state.mesaj.trim()) src.push("Formda: “" + esc(state.mesaj.trim()) + "”");
-    if (src.length) html += '<p class="meta" style="flex:1 1 100%">' + src.join(" · ") + '</p>';
-    html += '</div>';
+    h.push('<ol class="steps">');
 
-    html += '<ol class="steps">';
-
-    // 1 — motivasyon
-    html += '<li class="step"><div class="n">1</div><div>';
-    html += '<h3>Muhtemel motivasyon' + HYP + '</h3>';
-    html += '<p class="serif">' + esc(c.motive) + '</p>';
-    if (msg) html += '<p style="color:var(--ink-soft);font-size:14px">' + msg + '</p>';
-    html += '<p style="color:var(--ink-soft);font-size:14px">' + call + '</p>';
-    html += '</div></li>';
-
-    // 2 — açılış
-    html += '<li class="step"><div class="n">2</div><div>';
-    html += '<h3>İlk 10 saniye — kim · neden · izin</h3>';
-    html += '<p class="quote" id="openingText">' + esc(opening) + '</p>';
-    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">İzin sorusu atlanmaz. “Müsait değilim” de bilgidir: saat al, numara ölmesin. İlk 10 saniyede fiyat, kampanya, özellik yok.</p>';
-    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">Sonra ilk soru:</p>';
-    html += '<p class="quote">' + esc(c.firstQ) + '</p>';
-    html += '<button class="copy" type="button" id="copyBtn">Açılışı kopyala</button>';
-    html += '</div></li>';
-
-    // 3 — sorular
-    html += '<li class="step"><div class="n">3</div><div>';
-    html += '<h3>Sorulacak iki soru</h3><ul class="plain">';
-    for (var i = 0; i < c.asks.length; i++) html += '<li>' + esc(c.asks[i]) + '</li>';
-    html += '</ul></div></li>';
-
-    // 4 — kişi notları
-    html += '<li class="step"><div class="n">4</div><div>';
-    html += '<h3>Kişiye göre ne değişir' + HYP + '</h3>';
-    if (job) html += '<p class="obj"><b>' + esc(job.name) + '</b><span>' + esc(job.note) + '</span></p>';
-    else html += '<p class="obj"><b>Meslek boş</b><span>Varsayım yapma. İlk soruyla ne iş yaptığını öğren, açılışı nötr tut.</span></p>';
-    if (age) html += '<p class="obj"><b>Ton ve kanal</b><span>' + esc(age) + '</span></p>';
-    if (city) html += '<p class="obj"><b>Şehir</b><span>' + esc(city) + '</span></p>';
-    html += '</div></li>';
-
-    // 5 — itirazlar
-    html += '<li class="step"><div class="n">5</div><div>';
-    html += '<h3>Beklenen itirazlar</h3>';
-    for (var j = 0; j < c.objections.length; j++) {
-      html += '<p class="obj"><b>' + c.objections[j][0] + '</b><span>' + c.objections[j][1] + '</span></p>';
+    // 1 — kesişim
+    h.push('<li class="step"><div class="n">1</div><div>');
+    h.push('<h3>Mesleğiyle kesişimi<span class="tag">hipotez</span></h3>');
+    if (cell) {
+      h.push('<p class="serif">' + esc(cell.kesisim) + '</p>');
+    } else {
+      h.push('<p class="serif">' + esc(c.eksen) + '</p>');
+      h.push('<p class="soft">Bu meslek için tanımlı kesişim yok. Varsayım üretme, sor:</p>');
+      h.push('<ul class="plain"><li>Bu işte gün içinde kiminle konuşuyorsunuz?</li>' +
+             '<li>Bu iş bedeninizi nasıl yoruyor — ayakta mı, masa başında mı?</li>' +
+             '<li>Bu eğitimi kendiniz için mi, işiniz için mi düşünüyorsunuz?</li></ul>');
     }
-    html += '</div></li>';
+    h.push('<p class="soft">' + callNote(state.deneme) + '</p>');
+    h.push('</div></li>');
 
-    // 6 — fiyat
-    html += '<li class="step"><div class="n">6</div><div>';
-    html += '<h3>Fiyatı ne zaman söyle</h3>';
-    html += '<p>' + esc(c.price) + '</p>';
-    html += '<p style="font-size:13.5px;color:var(--ink-soft)">Rakam: ' + GAP("fiyat tanımlı değil") + ' — marka sahibi girmeden temsilci fiyat söylemez.</p>';
-    html += '</div></li>';
+    // 2 — ilk 10 saniye
+    h.push('<li class="step"><div class="n">2</div><div>');
+    h.push('<h3>İlk 10 saniye — kim · neden · izin</h3>');
+    h.push('<p class="quote" id="openingText">' + esc(opening) + '</p>');
+    h.push('<button class="copy" type="button" data-copy="openingText" data-label="Açılışı kopyala">Açılışı kopyala</button>');
+    h.push('<p class="soft" style="margin-top:8px">İzin sorusu atlanmaz. “Müsait değilim” de bilgidir: saat al, numara ölmesin. İlk 10 saniyede fiyat, kampanya, özellik yok.</p>');
+    h.push('</div></li>');
 
-    // 7 — takip
-    html += '<li class="step"><div class="n">7</div><div>';
-    html += '<h3>Açmazsa</h3>';
-    html += '<div class="timeline">';
-    html += '<span>1 · hemen</span><span>2 · 2-3 saat sonra, farklı saat</span><span>3 · ertesi gün öğle</span><span>4 · 3. gün akşam</span><span>5 · 7. gün — kapat</span>';
-    html += '</div>';
-    html += '<p style="margin-top:10px;font-size:13.5px;color:var(--ink-soft)">Açmadığında gönder — hem konuşmayı açar hem numaran tanınır:</p>';
-    html += '<p class="quote" id="waText">' + esc(waMsg) + '</p>';
-    html += '<button class="copy" type="button" id="copyWa">Mesajı kopyala</button>';
-    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">Aynı saatte beş kez aramak bir denemedir, beş değil. Aynı kişiye günde ikiden fazla arama yok — numaran spam yer.</p>';
-    html += '</div></li>';
+    // 3 — kesişim sorusu
+    h.push('<li class="step"><div class="n">3</div><div>');
+    h.push('<h3>Sonra sor — kesişim sorusu</h3>');
+    if (cell) {
+      h.push('<p class="quote">' + esc(cell.giris) + '</p>');
+    } else {
+      h.push('<p class="quote">Bu eğitimi kendiniz için mi düşünüyorsunuz, işiniz için mi? Ona göre anlatayım.</p>');
+    }
+    h.push('</div></li>');
 
-    // 8 — dikkat
-    html += '<li class="step"><div class="n">!</div><div>';
-    html += '<h3>Dikkat</h3>';
-    html += '<p class="warnline">' + esc(c.watch) + '</p>';
-    html += '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-soft)">Yasak: iş garantisi, gelir garantisi, “devlet onaylı”, olmayan canlı destek, tanımlı olmayan indirim.</p>';
-    html += '</div></li>';
+    // 4 — iki çıktı
+    if (cell) {
+      h.push('<li class="step"><div class="n">4</div><div>');
+      h.push('<h3>Ona değecek iki çıktı</h3><ul class="plain">');
+      for (var i = 0; i < cell.ciktilar.length; i++) h.push('<li>' + esc(cell.ciktilar[i]) + '</li>');
+      h.push('</ul></div></li>');
 
-    html += '</ol>';
+      // 5 — kanıt: ders
+      if (cell.ders) {
+        h.push('<li class="step"><div class="n">5</div><div>');
+        h.push('<h3>Kanıt — ona gösterilecek ders</h3>');
+        h.push('<p class="ders">' + esc(cell.ders) + '</p>');
+        h.push('<p class="soft" style="margin-top:8px">“Sizin durumunuz için şu ders var” demek, eğitimi genel övmekten güçlüdür.</p>');
+        h.push('</div></li>');
+      }
 
-    document.getElementById("card").innerHTML = html;
+      // 6 — itiraz
+      h.push('<li class="step"><div class="n">6</div><div>');
+      h.push('<h3>Beklenen itiraz</h3>');
+      h.push('<p>' + cell.itiraz.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>") + '</p>');
+      h.push('</div></li>');
+    }
 
-    wireCopy("copyBtn", "openingText", "Açılışı kopyala");
-    wireCopy("copyWa", "waText", "Mesajı kopyala");
+    // 7 — güven: eğitmen + format
+    h.push('<li class="step"><div class="n">7</div><div>');
+    h.push('<h3>Güven — eğitmen ve format</h3>');
+    h.push('<p class="soft">' + esc(egitmenFor(state.course) || "") + '</p>');
+    h.push('<p class="soft">Format: kendi hızında video + <b>ayda bir ZOOM canlı yayın</b> (eğitmene doğrudan soru) + panelde doküman + 25 soruluk sınav, %60 ile sertifika. “Ben yapabilir miyim” kaygısını kapatan şey canlı yayındır.</p>');
+    h.push('</div></li>');
+
+    // 8 — fiyat
+    h.push('<li class="step"><div class="n">8</div><div>');
+    h.push('<h3>Fiyatı ne zaman</h3>');
+    h.push('<p>' + esc(c.fiyat_ne_zaman) + '</p>');
+    h.push('<p class="soft">Rakam: <span class="gap">fiyat tanımlı değil</span> — marka sahibi girmeden temsilci fiyat söylemez. Rakamdan sonra sus; ilk konuşan indirim verir.</p>');
+    h.push('</div></li>');
+
+    // 9 — açmazsa
+    h.push('<li class="step"><div class="n">9</div><div>');
+    h.push('<h3>Açmazsa</h3>');
+    h.push('<div class="timeline"><span>1 · hemen</span><span>2 · 2-3 saat sonra, farklı saat</span><span>3 · ertesi gün öğle</span><span>4 · 3. gün akşam</span><span>5 · 7. gün — kapat</span></div>');
+    h.push('<p class="soft" style="margin-top:10px">Açmadığında gönder — hem konuşmayı açar hem numaran tanınır:</p>');
+    h.push('<p class="quote" id="waText">' + esc(waMsg) + '</p>');
+    h.push('<button class="copy" type="button" data-copy="waText" data-label="Mesajı kopyala">Mesajı kopyala</button>');
+    h.push('</div></li>');
+
+    // 10 — dikkat
+    h.push('<li class="step"><div class="n">!</div><div>');
+    h.push('<h3>Dikkat</h3>');
+    h.push('<p class="warnline">' + esc(c.dikkat) + '</p>');
+    if (c.eslestirme_kurali)
+      h.push('<p class="warnline" style="margin-top:8px">' + esc(c.eslestirme_kurali) + '</p>');
+    var cn = cityNote(state.sehir, state.course);
+    if (cn) h.push('<p class="soft" style="margin-top:8px">' + esc(cn) + '</p>');
+    h.push('<p class="soft" style="margin-top:8px">Yasak: iş garantisi, gelir garantisi, “devlet onaylı”, akreditasyon kurumu adı verilmeden “uluslararası geçerli”, tanımlı olmayan indirim.</p>');
+    h.push('</div></li>');
+
+    h.push('</ol>');
+    document.getElementById("card").innerHTML = h.join("");
+
+    var btns = document.querySelectorAll("button.copy");
+    for (var b = 0; b < btns.length; b++) wireCopy(btns[b]);
   }
 
-  function wireCopy(btnId, textId, labelText) {
-    var btn = document.getElementById(btnId);
-    if (!btn) return;
+  function wireCopy(btn) {
+    var textId = btn.getAttribute("data-copy");
+    var label = btn.getAttribute("data-label");
     btn.addEventListener("click", function () {
-      var text = document.getElementById(textId).textContent;
+      var node = document.getElementById(textId);
+      if (!node) return;
+      var text = node.textContent;
       try {
         navigator.clipboard.writeText(text).then(function () {
           btn.textContent = "Kopyalandı";
-          setTimeout(function () { btn.textContent = labelText; }, 1600);
-        }, selectFallback);
-      } catch (e) { selectFallback(); }
-    });
+          setTimeout(function () { btn.textContent = label; }, 1600);
+        }, fallback);
+      } catch (e) { fallback(); }
 
-    function selectFallback() {
-      var node = document.getElementById(textId);
-      var range = document.createRange();
-      range.selectNodeContents(node);
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-      btn.textContent = "Metin seçildi — kopyala";
-      setTimeout(function () { btn.textContent = labelText; }, 2200);
-    }
+      function fallback() {
+        var range = document.createRange();
+        range.selectNodeContents(node);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        btn.textContent = "Metin seçildi — kopyala";
+        setTimeout(function () { btn.textContent = label; }, 2200);
+      }
+    });
   }
 
-  // course selector
+  // eğitim seçici
   var cw = document.getElementById("courses");
-  Object.keys(COURSES).forEach(function (key) {
+  courseKeys.forEach(function (key) {
     var id = "course-" + key;
     var label = document.createElement("label");
     label.setAttribute("for", id);
     label.innerHTML = '<input type="radio" name="course" id="' + id + '" value="' + key + '"' +
-      (key === state.course ? " checked" : "") + '><span>' + COURSES[key].label + '</span>';
+      (key === state.course ? " checked" : "") + '><span>' + esc(COURSES[key].label) + '</span>';
     cw.appendChild(label);
   });
 
-  document.getElementById("leadForm").addEventListener("input", function (e) {
+  // meslek önerileri
+  var dl = document.getElementById("meslekler");
+  PROFS.forEach(function (p) {
+    var o = document.createElement("option");
+    o.value = p.name;
+    dl.appendChild(o);
+  });
+
+  var form = document.getElementById("leadForm");
+  form.addEventListener("input", function (e) {
     var t = e.target;
-    if (t.name === "course") { state.course = t.value; }
+    if (t.name === "course") state.course = t.value;
     else if (t.id === "ad") state.ad = t.value;
     else if (t.id === "yas") state.yas = t.value;
     else if (t.id === "meslek") state.meslek = t.value;
     else if (t.id === "sehir") state.sehir = t.value;
-    else if (t.id === "kaynak") state.kaynak = t.value;
-    else if (t.id === "mesaj") state.mesaj = t.value;
     else if (t.id === "temsilci") state.temsilci = t.value;
     else if (t.id === "deneme") state.deneme = t.value;
     render();
   });
-  document.getElementById("leadForm").addEventListener("change", function (e) {
+  form.addEventListener("change", function (e) {
     if (e.target.name === "course") { state.course = e.target.value; render(); }
     else if (e.target.id === "deneme") { state.deneme = e.target.value; render(); }
   });

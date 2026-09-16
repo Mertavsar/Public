@@ -1,0 +1,948 @@
+{
+ "urun": {
+  "format": "Online video + öğrenci paneli. Eğitim danışmanı paneli aktif eder; videolar dilediğin zaman, dilediğin cihazdan (tablet/telefon/bilgisayar) izlenir, tamamen kendi hızında. (FACT — eğitim içerik dosyaları)",
+  "canli": "Ayda bir ZOOM canlı yayın dersi; eğitmenle doğrudan soru-cevap. Satışta en güçlü ikinci koz budur: 'ben yapabilir miyim' kaygısını kapatan şey budur.",
+  "dokuman": "Panelden basılı/dijital dokümanlara erişim, çıktı alınabilir.",
+  "sinav": "Videolar bittikten sonra her ayın son hafta sonu panelde açılan 25 soruluk online sınav; %60 başarı → sertifika. (Pilates Uzmanlık'ta fark: videoların %80'i tamamlanınca sınav otomatik açılır, dilediğin zaman girilir.)",
+  "sertifika": "Diksiyon, Hikâye Anlatıcılığı, Şiddetsiz İletişim ve Temel Pilates dosyalarında 'Uluslararası Akrediteli … Sertifikası' ibaresi geçiyor. Pilates Uzmanlık dosyasında ise yalnızca 'Pilates Uzmanlık Eğitimi Sertifikası' yazıyor — 'uluslararası akrediteli' ibaresi yok.",
+  "sertifika_acik_soru": "Hiçbir dosyada akreditasyon kurumunun adı yazmıyor. Satış ekibi 'hangi kurum akredite ediyor?' sorusunu kesin alacak. Kurum adı netleşene kadar temsilci 'uluslararası geçerli' cümlesini kurmaz; dosyada yazan ibareyi olduğu gibi söyler.",
+  "fiyat": "BİLİNMİYOR — dosyalarda fiyat, taksit, eğitim süresi ve panel erişim süresi yazmıyor."
+ },
+ "profs": [
+  {
+   "key": "ogretmen",
+   "name": "Öğretmen / akademisyen",
+   "match": [
+    "öğretmen",
+    "ogretmen",
+    "akademisyen",
+    "öğretim",
+    "ogretim",
+    "okul",
+    "anaokulu",
+    "rehber öğretmen",
+    "eğitimci"
+   ]
+  },
+  {
+   "key": "ogrenci",
+   "name": "Öğrenci / yeni mezun",
+   "match": [
+    "öğrenci",
+    "ogrenci",
+    "üniversite",
+    "universite",
+    "lise",
+    "yeni mezun",
+    "stajyer"
+   ]
+  },
+  {
+   "key": "avukat",
+   "name": "Avukat / hukukçu",
+   "match": [
+    "avukat",
+    "hukuk",
+    "stajyer avukat",
+    "hâkim",
+    "hakim",
+    "savcı",
+    "savci"
+   ]
+  },
+  {
+   "key": "hemsire",
+   "name": "Hemşire / sağlık çalışanı",
+   "match": [
+    "hemşire",
+    "hemsire",
+    "ebe",
+    "sağlık memuru",
+    "saglik memuru",
+    "paramedik",
+    "atk",
+    "sağlık",
+    "saglik"
+   ]
+  },
+  {
+   "key": "doktor",
+   "name": "Doktor / diş hekimi",
+   "match": [
+    "doktor",
+    "hekim",
+    "diş hekimi",
+    "dis hekimi",
+    "dr."
+   ]
+  },
+  {
+   "key": "fizyoterapist",
+   "name": "Fizyoterapist",
+   "match": [
+    "fizyoterapist",
+    "fizyoterapi",
+    "fzt"
+   ]
+  },
+  {
+   "key": "psikolog",
+   "name": "Psikolog / PDR / danışman",
+   "match": [
+    "psikolog",
+    "pdr",
+    "psikolojik danışman",
+    "danışman",
+    "danisman",
+    "sosyal hizmet",
+    "koç",
+    "koc"
+   ]
+  },
+  {
+   "key": "diyetisyen",
+   "name": "Diyetisyen",
+   "match": [
+    "diyetisyen",
+    "beslenme"
+   ]
+  },
+  {
+   "key": "sporegitmeni",
+   "name": "Spor eğitmeni / antrenör / yoga-dans",
+   "match": [
+    "spor eğitmeni",
+    "antrenör",
+    "antrenor",
+    "fitness",
+    "yoga",
+    "dans",
+    "pilates eğitmeni",
+    "zumba",
+    "personal trainer",
+    "pt"
+   ]
+  },
+  {
+   "key": "ofis",
+   "name": "Ofis çalışanı (mühendis, muhasebeci, bankacı, yazılım)",
+   "match": [
+    "mühendis",
+    "muhendis",
+    "muhasebe",
+    "bankacı",
+    "bankaci",
+    "yazılım",
+    "yazilim",
+    "finans",
+    "memur",
+    "büro",
+    "buro",
+    "sekreter",
+    "asistan",
+    "veri",
+    "analist"
+   ]
+  },
+  {
+   "key": "yonetici",
+   "name": "Yönetici / müdür",
+   "match": [
+    "yönetici",
+    "yonetici",
+    "müdür",
+    "mudur",
+    "direktör",
+    "direktor",
+    "şef",
+    "sef",
+    "koordinatör",
+    "koordinator",
+    "patron"
+   ]
+  },
+  {
+   "key": "ik",
+   "name": "İK uzmanı",
+   "match": [
+    "insan kaynakları",
+    "insan kaynaklari",
+    "ik uzmanı",
+    "ik uzmani",
+    " ik",
+    "işe alım",
+    "ise alim"
+   ]
+  },
+  {
+   "key": "satis",
+   "name": "Satış / emlak / sigorta",
+   "match": [
+    "satış",
+    "satis",
+    "emlak",
+    "sigorta",
+    "pazarlamacı",
+    "pazarlamaci",
+    "müşteri temsilcisi",
+    "musteri temsilcisi",
+    "saha"
+   ]
+  },
+  {
+   "key": "cagri",
+   "name": "Çağrı merkezi / müşteri hizmetleri",
+   "match": [
+    "çağrı",
+    "cagri",
+    "call center",
+    "müşteri hizmetleri",
+    "musteri hizmetleri",
+    "operatör",
+    "operator"
+   ]
+  },
+  {
+   "key": "sosyalmedya",
+   "name": "Sosyal medya / içerik üreticisi",
+   "match": [
+    "sosyal medya",
+    "içerik",
+    "icerik",
+    "influencer",
+    "youtuber",
+    "fenomen",
+    "dijital pazarlama",
+    "reklamcı",
+    "reklamci"
+   ]
+  },
+  {
+   "key": "pazarlama",
+   "name": "Pazarlama / marka",
+   "match": [
+    "pazarlama",
+    "marka",
+    "reklam",
+    "ajans",
+    "iletişim uzmanı",
+    "iletisim uzmani",
+    "halkla ilişkiler",
+    "halkla iliskiler"
+   ]
+  },
+  {
+   "key": "girisimci",
+   "name": "Girişimci / işletme sahibi / esnaf",
+   "match": [
+    "girişimci",
+    "girisimci",
+    "işletme",
+    "isletme",
+    "esnaf",
+    "kendi işim",
+    "kendi isim",
+    "serbest",
+    "şirket sahibi",
+    "sirket sahibi",
+    "tüccar",
+    "tuccar",
+    "ticaret"
+   ]
+  },
+  {
+   "key": "kuafor",
+   "name": "Kuaför / güzellik uzmanı",
+   "match": [
+    "kuaför",
+    "kuafor",
+    "güzellik",
+    "guzellik",
+    "estetisyen",
+    "berber",
+    "makyaj",
+    "cilt bakım",
+    "cilt bakim"
+   ]
+  },
+  {
+   "key": "evhanimi",
+   "name": "Ev hanımı",
+   "match": [
+    "ev hanımı",
+    "ev hanimi",
+    "ev kadını",
+    "ev kadini",
+    "çalışmıyorum",
+    "calismiyorum",
+    "iş arıyorum",
+    "is ariyorum"
+   ]
+  },
+  {
+   "key": "emekli",
+   "name": "Emekli",
+   "match": [
+    "emekli"
+   ]
+  },
+  {
+   "key": "turizm",
+   "name": "Rehber / turizm",
+   "match": [
+    "rehber",
+    "turizm",
+    "otel",
+    "tur "
+   ]
+  },
+  {
+   "key": "yazar",
+   "name": "Yazar / gazeteci / metin yazarı",
+   "match": [
+    "yazar",
+    "gazeteci",
+    "editör",
+    "editor",
+    "metin yazarı",
+    "metin yazari",
+    "muhabir",
+    "copywriter"
+   ]
+  }
+ ],
+ "courses": {
+  "diksiyon": {
+   "label": "Diksiyon Uzmanlığı ve Hitabet Sanatı",
+   "eksen": "Bu eğitimin alıcısı, sesiyle iş yapan insandır. Kesişim aramanın kuralı: bu meslek günde kaç saat konuşuyor, kiminle konuşuyor, konuşurken ne kaybediyor?",
+   "cells": {
+    "ogretmen": {
+     "kesisim": "Günde 5-6 saat kesintisiz ses kullanıyor. Ses kısılması ve boğaz yorgunluğu öğretmenlerde mesleki bir sorundur; ayrıca sınıfı bağırarak değil ses tonuyla toplamak doğrudan disiplin meselesi.",
+     "giris": "Öğretmensiniz — günde kaç saat ders anlatıyorsunuz? Akşama doğru sesiniz kısılıyor mu, yoksa asıl derdiniz sınıfın dikkatini toplamak mı?",
+     "ciktilar": [
+      "Sesi yormadan kullanma — gün sonunda sesin hâlâ duruyor",
+      "Sınıfı bağırmadan toplayan ses tonu ve vurgu; veli toplantısında net konuşma"
+     ],
+     "itiraz": "\"Ders yoğunluğundan vakit bulamam\" → Eğitim online, kendi saatinde izliyorsun; ayda bir canlı yayında kendi sınıfındaki durumu doğrudan sorabiliyorsun.",
+     "ders": "Sesin Nitelikleri ve Rezonans · Nefes Kontrolü · Vurgu-Tonlama-Ezgi"
+    },
+    "ogrenci": {
+     "kesisim": "Yakın bir tarih var: sunum, mülakat, sözlü sınav, staj görüşmesi. Aciliyet burada gerçek ve satışın motorudur.",
+     "giris": "Yakın zamanda sizi zorlayacak bir sunum ya da mülakat var mı? Genelde bu eğitimi arayanların bir tarihi oluyor.",
+     "ciktilar": [
+      "Mülakatta ve sunumda ses titrememesi, nefes kontrolü",
+      "Hazırlıksız söz alındığında toparlayabilme"
+     ],
+     "itiraz": "\"Bütçem kısıtlı\" → Ödeme seçeneğini net söyle, indirime atlama. Fiyattan önce tarihi hatırlat: o mülakat bir kez oluyor.",
+     "ders": "Topluluk Önünde Konuşurken Nefes Kontrolü · Topluluk Önünde Etkili Konuşma"
+    },
+    "avukat": {
+     "kesisim": "Duruşmada ve müvekkil görüşmesinde haklı olmak yetmiyor; ikna eden şey ses tonu, tempo ve duruş. Ayrıca hazırlıklı konuşma ile ayaküstü cevap vermek iki ayrı beceri.",
+     "giris": "Duruşmada mı daha çok zorlanıyorsunuz, yoksa müvekkille ilk görüşmede anlatırken mi? İkisi için çalıştığımız yer farklı.",
+     "ciktilar": [
+      "Kürsüde tempo ve vurgu — dinleyeni yormadan ikna",
+      "Ayaküstü soruya toparlanmadan cevap verebilme"
+     ],
+     "itiraz": "\"Benim mesleğimde bu zaten var\" → Tam da bu yüzden: aletini bileyen kişi, aleti olmayan değil.",
+     "ders": "İkna ve Algı Yönetimi · Vurgu-Tonlama-Ezgi · Beden Dilinde Sık Yapılan Hatalar"
+    },
+    "satis": {
+     "kesisim": "Telefonda sesten başka hiçbir aracı yok. İlk 10 saniyede karşı taraf ya dinliyor ya kapatıyor; bunu belirleyen kelime değil ses.",
+     "giris": "Satışın çoğunu telefonda mı yapıyorsunuz, yüz yüze mi? Telefondaysa ilk 10 saniyede kaç kişi kapatıyor?",
+     "ciktilar": [
+      "Telefonda güven veren ses — kapanma oranını düşüren açılış",
+      "Fiyat söylerken sesin titrememesi; itirazda tonun düşmemesi"
+     ],
+     "itiraz": "\"Zamanım yok, sahadayım\" → Dersler kayıtlı, araba beklerken bile izlenir; canlı yayın ayda bir.",
+     "ders": "Sesin Nitelikleri ve Rezonans · İkna ve Algı Yönetimi"
+    },
+    "cagri": {
+     "kesisim": "Gün boyu kulaklıkla konuşuyor ve konuşması puanlanıyor. Ses yorgunluğu, tekdüze ton ve öfkeli müşteride tonu kaçırmak doğrudan kalite puanına yazıyor.",
+     "giris": "Kalite puanınızda en çok hangi kritikten kırılıyorsunuz — ton mu, anlaşılırlık mı, süre mi?",
+     "ciktilar": [
+      "Gün sonuna kadar dayanan ses, tekdüzelikten çıkan ton",
+      "Öfkeli müşteride sesi yükseltmeden yönetme"
+     ],
+     "itiraz": "\"Vardiyalıyım\" → Online ve kayıtlı; vardiya dışında izleniyor.",
+     "ders": "Artikülasyon · Ağız Tembelliği · Sesin Nitelikleri ve Rezonans"
+    },
+    "yonetici": {
+     "kesisim": "Toplantıda söz alıyor, üst yönetime rapor sunuyor, ekibe karar anlatıyor. Haklı olmak yetmez; odayı tutabilmek gerekir.",
+     "giris": "Toplantıda söz aldığınızda odayı tutabiliyor musunuz, yoksa sözünüz bölünüyor mu?",
+     "ciktilar": [
+      "Sunumda ilk 30 saniyede dikkati alma",
+      "Karar anlatırken itiraz karşısında tonu koruma"
+     ],
+     "itiraz": "\"Bu yaştan sonra mı?\" → Bu eğitimi alanların çoğu sıfırdan değil, iyiyi daha iyiye taşımak için geliyor.",
+     "ders": "Topluluk Önünde Etkili Konuşma · Sözsüz İletişim ve Karizma"
+    },
+    "doktor": {
+     "kesisim": "Hasta bilgilendirmesi, kötü haber verme ve kongre sunumu. Anlaşılmayan doktor, güven kaybeder; hasta uyumu doğrudan anlatıma bağlı.",
+     "giris": "Hastaya anlatırken mi, yoksa kongrede sunum yaparken mi daha çok zorlanıyorsunuz?",
+     "ciktilar": [
+      "Tıbbi bilgiyi hastanın anlayacağı tempoda anlatma",
+      "Kongre/sunum önünde nefes ve ses kontrolü"
+     ],
+     "itiraz": "\"Nöbetim var, program tutmam\" → Sabit saat yok; kayıtlar duruyor, canlı yayın ayda bir.",
+     "ders": "Yazı Dili ile Konuşma Dili Arasındaki Farklar · Topluluk Önünde Etkili Konuşma"
+    },
+    "ik": {
+     "kesisim": "Mülakat yönetiyor, oryantasyon sunumu yapıyor, zor konuşmaları o taşıyor. Sesin tonu şirketin tonu olarak algılanıyor.",
+     "giris": "Mülakat mı, yoksa kalabalığa sunum mu daha zorlayıcı sizin için?",
+     "ciktilar": [
+      "Kalabalık önünde sunum — oryantasyon ve eğitim anlatımı",
+      "Zor konuşmada sesi sabit tutma"
+     ],
+     "itiraz": "\"Kurumumuz eğitim veriyor\" → Kurumsal eğitim genel olur; bu, kendi sesin üstünde bireysel çalışma.",
+     "ders": "Topluluk Önünde Etkili Konuşma · Beden Dilinin Doğru ve Etkin Kullanılması"
+    },
+    "sosyalmedya": {
+     "kesisim": "Kameraya konuşuyor. İlk üç saniyede izleyici kalıyor ya da kayıyor; bunu belirleyen enerji, tempo ve nefes.",
+     "giris": "Kameraya konuşurken mi zorlanıyorsunuz, yoksa çekim bitince sesinizi dinlediğinizde mi rahatsız oluyorsunuz?",
+     "ciktilar": [
+      "Kamera önünde doğal ve enerjik ses — ilk 3 saniyeyi tutma",
+      "Uzun çekimde tempoyu düşürmeme"
+     ],
+     "itiraz": "\"Ben zaten konuşuyorum\" → Konuşmak ayrı, izletmek ayrı. Fark tempoda ve vurguda.",
+     "ders": "Artikülasyon · Vurgu-Tonlama-Ezgi · Beden Dilinde Sık Yapılan Hatalar"
+    },
+    "turizm": {
+     "kesisim": "Gün boyu grup önünde anlatıyor, çoğu zaman açık havada ve mikrofonsuz. Ses dayanıklılığı doğrudan iş kapasitesi.",
+     "giris": "Günde kaç saat grup önünde anlatıyorsunuz? Sezonun ortasında sesiniz dayanıyor mu?",
+     "ciktilar": [
+      "Açık havada yormadan duyurabilen ses",
+      "Uzun anlatımda dikkati düşürmeyen tempo"
+     ],
+     "itiraz": "\"Sezonda hiç vaktim yok\" → Sezon dışında izlenir; canlı yayın kaçarsa kaydı kalır.",
+     "ders": "Nefes Kontrolü · Sesin Nitelikleri ve Rezonans"
+    },
+    "ofis": {
+     "kesisim": "Teknik bilgiyi teknik olmayan insana anlatmak zorunda; ayrıca toplantıda söz alamamak yaygın ve kariyeri doğrudan etkiliyor.",
+     "giris": "Toplantılarda söz almakta mı zorlanıyorsunuz, yoksa anlattığınız teknik şey karşıda anlaşılmıyor mu?",
+     "ciktilar": [
+      "Teknik konuyu sade anlatma",
+      "Toplantıda söz alma ve sözü bitirebilme"
+     ],
+     "itiraz": "\"İşimde konuşma gerekmiyor\" → Terfi eden kişi anlatabilen kişidir; yazıyla yükselen az.",
+     "ders": "Konuşma Sanatı · Topluluk Önünde Etkili Konuşma"
+    },
+    "evhanimi": {
+     "kesisim": "Çoğu zaman mesele iş değil özgüven: kalabalıkta konuşamamak, telefonda resmi görüşmede tıkanmak, çocuğun okulunda söz alamamak. Ayrıca iş hayatına dönüş hazırlığı olabilir.",
+     "giris": "Bu eğitimi kendiniz için mi düşünüyorsunuz, yoksa iş hayatına dönmeyi mi planlıyorsunuz? İkisinde de çalıştığımız yer var, ama başlangıç farklı.",
+     "ciktilar": [
+      "Kalabalıkta konuşurken sesin titrememesi",
+      "Mülakat ve resmi görüşmede kendini anlatabilme"
+     ],
+     "itiraz": "\"Ben yapabilir miyim, geç mi kaldım?\" → En sık gelen soru bu. Yaş değil tekrar mesele; ayda bir canlı yayında doğrudan soru sorabiliyorsun.",
+     "ders": "Topluluk Önünde Etkili Konuşma · Beden Dilinin Doğru ve Etkin Kullanılması"
+    }
+   },
+   "dersler": [
+    "Diksiyon Eğitimine Giriş",
+    "Topluluk Önünde Konuşurken Nefes Kontrolü",
+    "Artikülasyon",
+    "Sesin Nitelikleri ve Rezonans",
+    "Vurgu-Tonlama-Ezgi",
+    "Ağız Tembelliği",
+    "Ünsüzler",
+    "Ünlü Harfler 1-2",
+    "Yazı Dili ile Konuşma Dili Arasındaki Farklar",
+    "Topluluk Önünde Etkili Konuşma",
+    "Konuşma Sanatı",
+    "Beden Dilinin Doğru ve Etkin Kullanılması",
+    "Beden Dilinde Sık Yapılan Hatalar"
+   ],
+   "kazanimlar": [
+    "Doğru ve Etkili Ses Kullanımı",
+    "Hitabet Sanatı ve Topluluk Önünde Konuşma",
+    "Sözsüz İletişim ve Karizma",
+    "İkna ve Algı Yönetimi"
+   ],
+   "formAdi": "diksiyon uzmanlığı ve hitabet sanatı eğitimi",
+   "fiyat_ne_zaman": "Tetikleyici olay ve zorlandığı durum netleştikten sonra.",
+   "dikkat": "Konu utançtır. “Konuşmanızda sorun mu var” gibi bir cümle kişiyi kaçırır; dil hep hedefe bakar, eksiğe değil."
+  },
+  "hikaye": {
+   "label": "Hikâye Anlatıcılığı (Storytelling) Uzmanlık",
+   "eksen": "Bu eğitimin alıcısı, bir şeyi birine anlatıp karşılığında bir şey isteyen insandır: izlenme, ikna, satın alma, akılda kalma. Kesişim aramanın kuralı: bu meslek neyi anlatıyor ve anlattığı şey neden akılda kalmıyor?",
+   "cells": {
+    "sosyalmedya": {
+     "kesisim": "İçerik üretiyor ama izlenmiyor. Sorun çoğu zaman kamera veya kurgu değil, kurgusuz anlatım: girişin izleyiciyi tutmaması ve videonun ortasında hikâyenin dağılması.",
+     "giris": "İçeriklerinizde insanlar nerede kopuyor — ilk üç saniyede mi, ortasında mı? Genelde ikisi ayrı sorun oluyor.",
+     "ciktilar": [
+      "İlk 3 saniyeyi tutan giriş kurgusu",
+      "Bir ürünü/fikri hikâyeye bağlayarak anlatma — kaydedilen ve paylaşılan içerik"
+     ],
+     "itiraz": "\"Ben zaten içerik üretiyorum\" → Üretmek ayrı, izletmek ayrı. Bu eğitim kamerayı değil kurguyu düzeltir.",
+     "ders": "Hikaye Yazmanın Aşamaları · Çatışma ve Çözüm · Görsel ve Duyusal Dil"
+    },
+    "pazarlama": {
+     "kesisim": "Kampanya mesajı yazıyor ama mesaj özellik listesine dönüyor. Marka hikâyesi olmayan kampanya, bütçesi bitince unutuluyor.",
+     "giris": "Kampanyalarınızda mesajı kurarken ürünün özelliklerinden mi başlıyorsunuz, yoksa müşterinin hikâyesinden mi?",
+     "ciktilar": [
+      "Marka hikâyesi kurma — kampanyadan uzun ömürlü mesaj",
+      "Brief ve sunumda fikri satabilme"
+     ],
+     "itiraz": "\"Bu ajans işi, bende teori var\" → Teori değil kurgu öğretiyoruz: hangi sahne önce, hangi bilgi sonra.",
+     "ders": "İş Yaşamında Hikayeleştirmenin Önemi · Kurumsal Marka ile Kişisel Marka Arasındaki Farklar"
+    },
+    "ogretmen": {
+     "kesisim": "Anlattığı konu akılda kalmıyor ve sınıfın dikkati dağılıyor. Hikâyeyle anlatılan ders hem dikkati toplar hem sınav sonrası unutulmaz — bu, öğretmen için doğrudan mesleki performans.",
+     "giris": "Dersi anlattıktan bir hafta sonra sınıfta ne kadarı kalıyor? Hikâyeyle anlatılan konular genelde farklı davranır.",
+     "ciktilar": [
+      "Konuyu hikâyeye bağlayarak akılda kalıcı hale getirme",
+      "Dikkati dağılan sınıfı anlatımla toplama"
+     ],
+     "itiraz": "\"Müfredat yetişmiyor\" → Hikâye süre eklemez, aynı süreyi kurgular. Tekrar ihtiyacını azaltır.",
+     "ders": "Sözlü Kültür ve Anlatı Türleri · Hayatımızda Hikayeleri Nasıl Kullanırız?"
+    },
+    "girisimci": {
+     "kesisim": "Ürünü anlatırken özellik sayıyor; yatırımcı, müşteri ve çalışan ise 'neden bu iş' sorusunun cevabını arıyor. Marka hikâyesi olmayan işletme, fiyatla yarışmak zorunda kalıyor.",
+     "giris": "Birisi 'ne iş yapıyorsunuz' dediğinde ne kadar sürüyor anlatmanız? Uzun sürüyorsa hikâye eksiktir.",
+     "ciktilar": [
+      "İşini 30 saniyede anlatan kuruluş hikâyesi",
+      "Müşteriyi fiyattan çıkarıp hikâyeye bağlama"
+     ],
+     "itiraz": "\"Vaktim yok, iş başımdan aşkın\" → Online ve kayıtlı; ayda bir canlı yayında kendi markanı sorabiliyorsun.",
+     "ders": "Kurumsal Marka ile Kişisel Marka Farkı · Kendi Hikayeni Dokumak Egzersizi"
+    },
+    "satis": {
+     "kesisim": "Özellik anlatan satışçı fiyat kırar, hikâye anlatan satışçı ikna eder. Referans vakayı anlatabilmek, en güçlü kapanış aracıdır.",
+     "giris": "Müşteriye anlatırken ürünün özelliklerinden mi gidiyorsunuz, yoksa daha önce benzer bir müşterinin hikâyesinden mi?",
+     "ciktilar": [
+      "Referans vakayı ikna eden bir hikâyeye çevirme",
+      "İtiraz anında örnekle karşılık verme"
+     ],
+     "itiraz": "\"Benim mesleğim zaten konuşmak\" → Konuşmak ayrı, kurgulamak ayrı. Fark, hangi bilginin ne zaman verildiğinde.",
+     "ders": "İkna ve İknanın Yöntemleri · İkna Psikolojisinde Kral Çıplak Masalı"
+    },
+    "psikolog": {
+     "kesisim": "Danışana kavramı doğrudan anlatmak direnç üretir; metafor ve hikâye direnci düşürür. Ayrıca eğitim/seminer veren danışmanlar için doğrudan mesleki araç.",
+     "giris": "Danışanlarınıza kavramı doğrudan mı anlatıyorsunuz, yoksa örnek ve benzetmeyle mi? İkincisinde direnç düşüyor.",
+     "ciktilar": [
+      "Metafor ve vaka anlatımıyla direnci düşürme",
+      "Seminer/atölye anlatımını kurgulama"
+     ],
+     "itiraz": "\"Bu benim alanımda zaten var\" → Yöntemi biliyorsun, kurguyu ekliyoruz: aynı içeriğin farklı sırayla anlatımı.",
+     "ders": "Masallara Jungiyen Bakış ve İçsel Kuraklık · Anlatıcılıkta Duygu Durum Yönetimi"
+    },
+    "avukat": {
+     "kesisim": "Mahkeme bir olay dinler, madde dinlemez. Dosyayı kronolojik değil anlatı olarak kurmak, aynı delille farklı etki üretir. Müvekkile anlatımda da aynı şey geçerli.",
+     "giris": "Dosyayı anlatırken olayı kronolojik mi kuruyorsunuz? Sıralama değiştiğinde dinleyenin algısı da değişir.",
+     "ciktilar": [
+      "Dosyayı ikna eden bir anlatıya çevirme",
+      "Müvekkile süreci anlatırken güven verme"
+     ],
+     "itiraz": "\"Hukukta duygu işi yok\" → Duygu değil sıralama meselesi: hangi bilgi önce.",
+     "ders": "İkna ve İknanın Yöntemleri · Hikaye Yazmanın Aşamaları"
+    },
+    "yazar": {
+     "kesisim": "En doğrudan alıcı. Derdi teknik: karakteri kurmak, sahneyi seçmek, okuru tutmak ve bitirebilmek.",
+     "giris": "Yazmaya başlıyor ama bitiremiyor musunuz, yoksa yazdığınızın tutmadığını mı düşünüyorsunuz?",
+     "ciktilar": [
+      "Yapı kurma — başlanan işin bitmesi",
+      "Sahne seçimi ve karakter kurma"
+     ],
+     "itiraz": "\"Eğitimle yazarlık olmaz\" → Yetenek öğretilmez, yapı öğretilir. Eksik olan genelde ikincisidir.",
+     "ders": "Hikaye Yazmanın Aşamaları · Anlatmak ve Yazmak Arasındaki Farklar"
+    },
+    "yonetici": {
+     "kesisim": "Ekibe strateji anlatıyor ama slaytta kalıyor. Değişimi anlatan yönetici hikâyeyle anlatır; rakam ikna eder, hikâye harekete geçirir.",
+     "giris": "Ekibe yeni bir kararı anlattığınızda sahiplenme oluyor mu, yoksa uygulama mı kalıyor?",
+     "ciktilar": [
+      "Stratejiyi ekibin sahipleneceği hikâyeye çevirme",
+      "Üst yönetime sunumda fikri satabilme"
+     ],
+     "itiraz": "\"Bizde veri konuşur\" → Veri kararı doğrular, hikâye kararı yürütür. İkisi rakip değil.",
+     "ders": "İş Yaşamında Hikayeleştirmenin Önemi · İkna ve İknanın Yöntemleri"
+    },
+    "diyetisyen": {
+     "kesisim": "Danışan bilgiyi biliyor ama uygulamıyor. Uyum sorunu bilgi eksikliği değil motivasyon eksikliği; hikâye burada devreye giriyor.",
+     "giris": "Danışanlarınızda asıl sorun bilgi eksikliği mi, yoksa bildiğini uygulamaması mı?",
+     "ciktilar": [
+      "Danışan uyumunu artıran anlatım",
+      "Sosyal medyada anlatılan vaka içerikleri"
+     ],
+     "itiraz": "\"Bilimsel anlatmam gerekiyor\" → Bilimi bozmadan anlatmak; hikâye içeriğin yerine değil önüne geçer.",
+     "ders": "Hayatımızda Hikayeleri Nasıl Kullanırız? · Görsel ve Duyusal Dil"
+    },
+    "ogrenci": {
+     "kesisim": "Sunum, bitirme projesi, mülakatta 'kendinizi anlatın' sorusu. Üçü de aynı beceri: kendi hikâyeni kurmak.",
+     "giris": "Mülakatta 'kendinizi anlatın' dendiğinde ne kadar sürüyor cevabınız? Orası aslında bir hikâye sorusu.",
+     "ciktilar": [
+      "Kendini anlatan 60 saniyelik hikâye",
+      "Sunumu akılda kalıcı kurgulama"
+     ],
+     "itiraz": "\"Bütçem yok\" → Ödeme seçeneğini net söyle; rakamdan sonra sus.",
+     "ders": "Kendi Hikayeni Dokumak Egzersizi · Anlatıcılıkta Sahne Korkusu ve Egzersizler"
+    }
+   },
+   "dersler": [
+    "Hikaye Anlatıcılığına Giriş",
+    "Sözlü Kültürün İnsanlık Tarihindeki Yeri",
+    "Sözlü Kültür ve Anlatı Türlerinin Ayrımı",
+    "Hikaye Yazmanın Aşamaları",
+    "Anlatmak ve Yazmak Arasındaki Farklar",
+    "Anlatıcılıkta Duygu Durum Yönetimi",
+    "İş Yaşamında Hikayeleştirmenin Önemi",
+    "Kurumsal Marka ile Kişisel Marka Arasındaki Farklar",
+    "Kendi Hikayeni Dokumak Egzersizi",
+    "Masallara Jungiyen Bakış",
+    "Anlatıcılıkta Sahne Korkusu ve Egzersizler",
+    "Anlatıcılıkta Bedenin Rahatlığı",
+    "İkna ve İknanın Yöntemleri",
+    "İkna Psikolojisinde Kral Çıplak Masalı",
+    "Hayatımızda Hikayeleri Nasıl Kullanırız?"
+   ],
+   "kazanimlar": [
+    "Kahramanın Yolculuğu / üç perdeli yapı ile kurgu",
+    "Duygusal bağ: kırılganlık ve samimiyet",
+    "Çatışma ve çözüm tasarımı",
+    "Görsel ve duyusal dil, metafor",
+    "Beden dili ve ses yönetimi"
+   ],
+   "formAdi": "hikâye anlatıcılığı eğitimi",
+   "fiyat_ne_zaman": "Hikâyeyi nerede kullanacağı (kendi markası / işi / yazmak) netleştikten sonra.",
+   "dikkat": "Dört eğitim içinde çıktısı en soyut olanı. Somut çıktı anlatılmazsa “bu ne işime yarayacak” itirazı kesin gelir."
+  },
+  "siddetsiz": {
+   "label": "Şiddetsiz İletişim",
+   "eksen": "Bu eğitimin alıcısı bir acıyla arıyor: evde kavga, sınıfta çatışma, iş yerinde gerilim, kendi iç sesi. Kesişim aramanın kuralı: bu meslek kiminle çatışıyor ve o çatışmanın bedelini nasıl ödüyor?",
+   "dersler": [
+    "Şiddetsiz İletişim Nedir?",
+    "Duyguların Farkındalığı",
+    "Beden Farkındalığı",
+    "Güven Meditasyonu",
+    "İhtiyaçlar",
+    "Çakal ve Zürafa Dilleri",
+    "Rica Dili",
+    "Temel Düşünsel İlkeler ve Toplumsal Barışa Etkisi",
+    "Doğal Nefes",
+    "Şiddetsiz İletişim Egzersizleri"
+   ],
+   "kazanimlar": [
+    "Kendini İfade Etme ve Netlik",
+    "Empati ve Dinleme Becerileri",
+    "Çatışma Yönetimi ve İlişki Kalitesi",
+    "Öz-Farkındalık ve Duygusal Düzenleme"
+   ],
+   "evrensel_sorular": "Eğitim dosyasının kendi dört sorusu her meslekte kullanılabilir ve çok iyi çalışır: (1) 'Hayır' demekte zorlanıyor musunuz? (2) Eleştiri alınca savunmaya mı geçiyorsunuz, öfkeyi tutmak zor mu? (3) İç sesiniz sizi sürekli yargılıyor mu? (4) İnsanları kırmadan sınır çizebiliyor musunuz? Biri 'evet' alırsa konuşma açılmıştır.",
+   "cells": {
+    "ogretmen": {
+     "kesisim": "Sınıfta disiplin ve veli iletişimi. Bağırarak kurulan otorite yorucu ve kısa ömürlü; öğretmenin asıl yükü tükenmişlik. Velinin suçlayıcı diline karşı savunmaya geçmeden cevap verebilmek ayrı bir beceri.",
+     "giris": "Sınıfta mı daha çok zorlanıyorsunuz, veli görüşmelerinde mi? İkisinde de çalıştığımız yer var ama başlangıç farklı.",
+     "ciktilar": [
+      "Suçlamadan, yorum katmadan durumu ifade etme (gözlem dili)",
+      "Veli görüşmesinde savunmaya geçmeden sınır koyma"
+     ],
+     "itiraz": "\"Bunu okulda zaten anlatıyorlar\" → Seminer ayrı, uygulama ayrı. Burada egzersiz var ve ayda bir canlı yayında kendi sınıfındaki olayı sorabiliyorsun.",
+     "ders": "Çakal ve Zürafa Dilleri · Rica Dili · Gözlem (Yorumsuz İfade)"
+    },
+    "evhanimi": {
+     "kesisim": "Anne-baba grubu bu eğitimin resmî hedef kitlesinde. Somut dert nettir: çocukla tekrar eden kavga, ergenle kopan iletişim, kendi öfkesine sonradan pişman olmak.",
+     "giris": "Bu eğitim aklınıza gelirken kafanızda somut bir ilişki var mıydı — çocuk, eş? İsterseniz oradan konuşalım.",
+     "ciktilar": [
+      "Çocukla tekrar eden kavgayı kıran dil: gözlem, duygu, ihtiyaç, rica",
+      "Öfke anında bedeni ve nefesi fark etme"
+     ],
+     "itiraz": "\"Eğitimle çözülür mü?\" → Mucize vaat etme. Bu bir yöntem eğitimi: Rosenberg'in 4 adımı ve egzersizleri. Uygulaması kişide.",
+     "ders": "İhtiyaçlar · Rica Dili · Duyguların Farkındalığı · Doğal Nefes"
+    },
+    "hemsire": {
+     "kesisim": "Hasta yakınıyla gerilim ve nöbet yorgunluğu. Sağlıkta sözlü şiddet gerçek bir mesleki risk; kişi çoğu zaman öfkeyi yutup eve taşıyor.",
+     "giris": "Hasta yakınıyla gerilim yaşadığınızda o gerginliği eve taşıyor musunuz? Bu eğitimi arayan sağlıkçıların çoğu oradan geliyor.",
+     "ciktilar": [
+      "Öfkeli kişiyle konuşurken kendi sınırını koruma",
+      "Vardiya sonrası biriken öfkeyi ayrıştırma (öz-empati)"
+     ],
+     "itiraz": "\"Bizim ortamda bu işe yaramaz\" → Karşı tarafı değiştirme vaadi yok; kendi tepkini yönetme vaadi var. Fark bu.",
+     "ders": "Öz-Empati · Duyguların Farkındalığı · Çakal ve Zürafa Dilleri"
+    },
+    "psikolog": {
+     "kesisim": "Hedef kitlede açıkça var. NVC onun için hem kişisel araç hem mesleki teknik: danışanla empatik dinleme ve ihtiyaç dili doğrudan seans pratiğine giriyor.",
+     "giris": "Kendiniz için mi bakıyorsunuz, yoksa danışanlarınızla kullanmak için mi? Eğitimin ikisine de karşılığı var.",
+     "ciktilar": [
+      "Empatik dinleme ve ihtiyaç dilini seansta kullanma",
+      "Kendi öz-empatisi: mesleki tükenmişliğe karşı"
+     ],
+     "itiraz": "\"Rosenberg'i biliyorum\" → Bilmek ayrı, uygulatmak ayrı. Buradaki ağırlık egzersizlerde; eğitmen Doç. Dr. Mehmet Ozan Aşık.",
+     "ders": "Empatiyle Alımlama · İhtiyaçlar · Egzersizler"
+    },
+    "ik": {
+     "kesisim": "Performans görüşmesi, işten çıkarma, ekip içi çatışma — üçü de İK'nın taşıdığı zor konuşmalar. Yanlış cümle hem insanı kırar hem kuruma dönüp zarar verir.",
+     "giris": "Zor konuşmalar sizde mi kalıyor — performans, çıkış görüşmeleri? En çok hangisi yoruyor?",
+     "ciktilar": [
+      "Zor geri bildirimi suçlamadan verme",
+      "Çatışan iki tarafı ihtiyaç dilinde buluşturma"
+     ],
+     "itiraz": "\"Kurumsal eğitim alıyoruz\" → Kurumsal eğitim genel olur; bu, senin kendi cümlelerin üzerinde çalışma.",
+     "ders": "Rica Dili · Çatışma Yönetimi · Gözlem (Yorumsuz İfade)"
+    },
+    "yonetici": {
+     "kesisim": "Ekibe geri bildirim vermek ve çatışma çözmek. Sert yönetici ekibi susturur, yumuşak yönetici sınır koyamaz; ikisi de performans kaybı.",
+     "giris": "Ekibinize eleştiri verirken ölçüyü tutturmak zor oluyor mu — ya sert kaçıyor ya da hiç söyleyemiyor musunuz?",
+     "ciktilar": [
+      "Kırmadan net sınır koyma",
+      "Ekip içi çatışmayı ihtiyaç diline çevirme"
+     ],
+     "itiraz": "\"Bana lazım olan liderlik eğitimi\" → Liderliğin uygulandığı yer konuşmadır; burada o konuşmanın dili var.",
+     "ders": "Rica Dili · Çakal ve Zürafa Dilleri · Empatiyle Alımlama"
+    },
+    "cagri": {
+     "kesisim": "Gün boyu öfkeli müşteri. Kişi hem sakin kalmak hem puan almak zorunda; biriken öfkeyi akşam eve taşıyor.",
+     "giris": "Öfkeli müşteriden sonra kendinizi toparlamanız ne kadar sürüyor?",
+     "ciktilar": [
+      "Karşı tarafın öfkesini üstüne almadan dinleme",
+      "Görüşme sonrası kendini toparlama (öz-empati)"
+     ],
+     "itiraz": "\"Bize script veriyorlar\" → Script ne diyeceğini söyler, bu eğitim nasıl dayanacağını.",
+     "ders": "Empatiyle Alımlama · Öz-Empati · Doğal Nefes"
+    },
+    "avukat": {
+     "kesisim": "Boşanma ve aile dosyalarında duygusal yük müvekkilden avukata geçer. Ayrıca müvekkile 'hayır' diyebilmek ve sınır koyabilmek mesleki bir sorun.",
+     "giris": "Müvekkillerin duygusal yükü size geçiyor mu? Özellikle aile dosyalarında bunu çok duyuyoruz.",
+     "ciktilar": [
+      "Müvekkille empatik ama sınırlı ilişki kurma",
+      "Kendi duygusunu dosyadan ayırma"
+     ],
+     "itiraz": "\"Hukukta duygu yok\" → Dosyada yok, odada var. Odayı yöneten kişi kazanır.",
+     "ders": "Öz-Empati · İhtiyaçlar · Rica Dili"
+    },
+    "doktor": {
+     "kesisim": "Kötü haber vermek ve hasta yakınının tepkisini karşılamak. Yanlış kurulan cümle güveni bitirir, bazen şikâyete döner.",
+     "giris": "Hasta yakınına kötü haber verirken mi zorlanıyorsunuz, yoksa tepkiyi karşılarken mi?",
+     "ciktilar": [
+      "Kötü haberi yumuşatmadan ama kırmadan verme",
+      "Tepki karşısında savunmaya geçmeme"
+     ],
+     "itiraz": "\"Zamanım yok\" → Kendi hızında; ayda bir canlı yayın var, kaçarsan kaydı kalıyor.",
+     "ders": "Gözlem · Empatiyle Alımlama · Duyguların Farkındalığı"
+    },
+    "girisimci": {
+     "kesisim": "Çalışanla, tedarikçiyle ve şikâyet eden müşteriyle konuşma. Küçük işletmede her çatışma doğrudan cebe yazar.",
+     "giris": "Sizi en çok hangi konuşma yoruyor — çalışanla mı, müşteriyle mi?",
+     "ciktilar": [
+      "Şikâyet eden müşteriyi kaybetmeden yönetme",
+      "Çalışana net sınır koyarken ilişkiyi bozmama"
+     ],
+     "itiraz": "\"Vaktim yok\" → Kendi hızında izleniyor; bir kavganın maliyeti bu eğitimden yüksek.",
+     "ders": "Rica Dili · Çatışma Yönetimi"
+    },
+    "ofis": {
+     "kesisim": "Açık ofiste pasif-agresif iletişim, 'hayır' diyememe ve üstlenilen fazladan iş. Tükenmişliğin sessiz sebebi budur.",
+     "giris": "İş yerinde 'hayır' demekte zorlanıyor musunuz? Bu eğitimi arayanların çoğunun ilk cümlesi bu oluyor.",
+     "ciktilar": [
+      "Kırmadan 'hayır' diyebilme",
+      "Yazılı ve sözlü iletişimde suçlayıcı dilden çıkma"
+     ],
+     "itiraz": "\"Kişisel gelişim kitabı gibi mi?\" → Değil; Rosenberg'in yöntemi, 4 adım ve egzersiz. Eğitmen Uludağ Üniversitesi'nde öğretim üyesi.",
+     "ders": "Rica Dili · İhtiyaçlar · Gözlem (Yorumsuz İfade)"
+    }
+   },
+   "formAdi": "şiddetsiz iletişim eğitimi",
+   "fiyat_ne_zaman": "Durumunu anlattıktan sonra. Derdini anlatan kişiye fiyatla cevap verilmez.",
+   "dikkat": "Mahrem alan. Satış temposu yüksek açılış ters teper; önce dinle, sonra sat."
+  },
+  "pilates-temel": {
+   "label": "Temel Pilates",
+   "eksen": "Bu eğitimin resmî hedef kitlesi net: 'pilates eğitmeni olmak isteyenler' listenin ilk sırasında. Yani alıcı çoğunlukla meslek/gelir için arıyor. Kesişim aramanın kuralı: bu meslek pilatesi mevcut işine mi ekleyecek, yoksa yeni bir iş mi kuracak?",
+   "dersler": [
+    "Pilates Prensipleri",
+    "Mat serisi (Pelvic Curl, Hundred Prep, Leg Circles, Spine Stretch, Swan-Swimming, Cat Stretch …)",
+    "Reformer (Footwork, Tendon Stretch, Feet in Straps, Roll Down, Knee Stretch-Elephant, Mermaid …)",
+    "Duvar Pilatesi ile duruş farkındalığı ve hizalanma",
+    "Cadillac tanıtım, güvenlik ve temel egzersizler",
+    "Güvenli Egzersiz Uygulamaları"
+   ],
+   "kazanimlar": [
+    "Mat, Reformer, Duvar ve Cadillac sistemlerini doğru teknikle uygulama",
+    "Profesyonel ders planı hazırlayabilme ve öğretim becerisi",
+    "Güvenli egzersiz uygulaması"
+   ],
+   "eslestirme_kurali": "Kişinin pilates geçmişi yoksa doğru ürün **Temel**'dir. 'Uzmanlık' formu doldurmuş olsa bile geçmişi yoksa Temel'e yönlendir — yanlış seviye satmak iade ve kötü yorum üretir, o da reklamdan pahalıdır.",
+   "cells": {
+    "sporegitmeni": {
+     "kesisim": "En sıcak lead. Zaten salonda çalışıyor; pilates, hizmet çeşitlendirmesi ve saat başı gelir artışı demek. Özellikle kadın danışan kitlesine açılım.",
+     "giris": "Şu an hangi alanda ders veriyorsunuz? Pilatesi mevcut derslerinize eklemek için mi bakıyorsunuz?",
+     "ciktilar": [
+      "Mat ve Reformer'ı doğru teknikle ders verecek seviyede öğrenme",
+      "Profesyonel ders planı hazırlayabilme"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Reformer serisi · Ders planı ve öğretim becerileri · Güvenli Egzersiz Uygulamaları"
+    },
+    "fizyoterapist": {
+     "kesisim": "Mesleki genişleme. Postür analizi, core stabilizasyon ve omurga sağlığı zaten onun dili; eğitmen Elif Pankudus'un uzmanlık alanı da tam burası. Klinik sonrası egzersiz takibi doğal bir hizmet uzantısı.",
+     "giris": "Hastalarınıza klinik sonrası egzersiz veriyor musunuz? Pilatesi o tarafa eklemek için mi bakıyorsunuz?",
+     "ciktilar": [
+      "Mat ve Reformer akışlarını hasta takibine ekleme",
+      "Duruş ve hizalanma çalışmalarını sistemli uygulama"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir. Fizyoterapistte ek soru gelir: bilimsel dayanak. Eğitmenin TCF 1-2-3. kademe antrenörlüğü ve Balanced Body geçmişi söylenir; abartılmaz.",
+     "ders": "Pilates Prensipleri · Duvar Pilatesi ile Duruş Farkındalığı · Reformer"
+    },
+    "hemsire": {
+     "kesisim": "İki yol açık: (a) vardiya ve ayakta çalışmanın bel-boyun yükü için kendi bedenine, (b) sağlık geçmişini kullanarak meslek değiştirme. Hangisi olduğu ilk soruyla ayrılır.",
+     "giris": "Kendiniz için mi düşünüyorsunuz, yoksa ileride bu işi yapmak için mi? Sağlıkçılardan ikisi de geliyor.",
+     "ciktilar": [
+      "Kendi bedeni için doğru ve güvenli hareket",
+      "Meslek yolu: ders planı ve öğretim becerisi"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Pilates Prensipleri · Güvenli Egzersiz Uygulamaları · Mat serisi"
+    },
+    "diyetisyen": {
+     "kesisim": "Danışanına tamamlayıcı hizmet. Beslenme + hareket paketi hem sonucu hem danışan bağlılığını artırır; ek gelir kalemi olur.",
+     "giris": "Danışanlarınıza hareket tarafında da yönlendirme yapıyor musunuz? Çoğu diyetisyen o boşluğu kapatmak için bakıyor.",
+     "ciktilar": [
+      "Danışana güvenli egzersiz planı sunabilme",
+      "Hizmet paketini genişletme"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Mat serisi · Güvenli Egzersiz Uygulamaları · Ders planı"
+    },
+    "evhanimi": {
+     "kesisim": "Hedef kitlenin duygusal merkezi burası: hem kendi bedenine dönmek hem eve bağlı olmayan bir meslek edinmek. Asıl itiraz fiyat değil yeterlilik: 'ben yapabilir miyim, geç mi kaldım'.",
+     "giris": "Kendiniz için mi bakıyorsunuz, yoksa ileride ders verebilmek için mi? İkisi de oluyor, ona göre anlatayım.",
+     "ciktilar": [
+      "Doğru teknikle başlama — sakatlanmadan",
+      "Meslek yolu: sertifika ve ders planı becerisi"
+     ],
+     "itiraz": "\"Ben yapabilir miyim?\" → En sık gelen soru. Eğitim sıfırdan başlıyor (Pilates Prensipleri) ve ayda bir canlı yayında eğitmene doğrudan soru sorabiliyor. \"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Pilates Prensipleri · Mat serisi · Ayda bir ZOOM canlı yayın"
+    },
+    "ogretmen": {
+     "kesisim": "Ayakta geçen ders saatleri, bel ve boyun. Ayrıca yaz dönemi ve emeklilik sonrası için ikinci meslek arayışı öğretmenlerde yaygın.",
+     "giris": "Kendi bel-boyun tarafı için mi bakıyorsunuz, yoksa ileride ders verebilmek için mi?",
+     "ciktilar": [
+      "Ayakta çalışan beden için duruş ve core",
+      "İkinci meslek yolu: sertifika ve ders planı"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Duvar Pilatesi ile Duruş Farkındalığı · Mat serisi"
+    },
+    "ofis": {
+     "kesisim": "Masa başı: boyun, bel, omuz ve duruş bozukluğu. Genelde kendi bedeni için arar; meslek niyeti azdır ama çıkarsa ciddidir (iş değiştirme).",
+     "giris": "Gün içinde ne kadar masa başındasınız? Bel ya da boyun ağrısı sizi mi getirdi?",
+     "ciktilar": [
+      "Masa başı duruşunu düzelten hizalanma çalışmaları",
+      "Core stabilizasyon ile ağrı yönetimi"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Duvar Pilatesi · Pilates Prensipleri · Mat serisi"
+    },
+    "kuafor": {
+     "kesisim": "Gün boyu ayakta ve öne eğik çalışma; bel, omuz ve boyun. Ayrıca salonuna ek hizmet kurma fikri çıkabilir.",
+     "giris": "Günde kaç saat ayaktasınız? Bel ve omuz tarafı sizi mi zorluyor?",
+     "ciktilar": [
+      "Öne eğik çalışan beden için duruş düzeltme",
+      "İsterse salonuna ek hizmet"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Duvar Pilatesi ile Duruş Farkındalığı · Güvenli Egzersiz"
+    },
+    "ogrenci": {
+     "kesisim": "Spor bilimleri / fizyoterapi öğrencisi için mezuniyet öncesi mesleki avantaj; diğerleri için kendi bedeni ve part-time gelir fikri.",
+     "giris": "Bölümünüz bu alanla ilgili mi, yoksa kendiniz için mi bakıyorsunuz?",
+     "ciktilar": [
+      "Mezuniyet öncesi uygulamalı beceri ve sertifika",
+      "Doğru teknikle kendi çalışması"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Pilates Prensipleri · Mat serisi"
+    },
+    "emekli": {
+     "kesisim": "Hareket, denge, ağrı yönetimi ve sosyalleşme. Dil sade tutulur; 'uzmanlık' ve 'kariyer' anlatımı buraya uymaz.",
+     "giris": "Daha çok kendi sağlığınız ve hareket için mi düşünüyorsunuz?",
+     "ciktilar": [
+      "Güvenli ve doğru hareketle günlük yaşam kalitesi",
+      "Kendi hızında, evden, tekrar edilebilir çalışma"
+     ],
+     "itiraz": "\"Bu yaşta olur mu?\" → Eğitim kendi hızında; güvenli egzersiz bölümü bunun için var. Sağlık sorunu varsa doktoruna danışmasını söyle — bu cümle atlanmaz. \"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Güvenli Egzersiz Uygulamaları · Pilates Prensipleri"
+    }
+   },
+   "formAdi": "temel pilates eğitimi",
+   "fiyat_ne_zaman": "Kendi için mi meslek için mi ayrıldıktan ve pratik/ekipman sorusu konuşulduktan sonra.",
+   "dikkat": "Reformer ve Cadillac ekipman ister. Pratiği nerede yapacağı konuşulmadan kapanış yapılmaz — olmayan bir imkânı var göstermek iade üretir."
+  },
+  "pilates-uzmanlik": {
+   "label": "Pilates Uzmanlık (ileri)",
+   "eksen": "İleri seviye program: Advanced Hip/Core/Arm serileri, Plank, Long Box Rocking, Jackknife, Splits, Star, mobilite akışları, akış-kombinasyonlar. Alıcı zaten pilates yapan/veren kişidir. Geçmişi olmayan kişiye bu ürün satılmaz.",
+   "dersler": [
+    "İleri Seviye Mat: Advanced Hip Series, Advanced Core Flow, Advanced Arm Series, Adductor Series, Plank Series",
+    "Direnç bandı egzersizleri ve stretch çalışmaları",
+    "Reformer: Long Box Rocking, Rowing Back, Reverse Abdominals, Jackknife, Thigh/Tendon Stretch, Splits, Star",
+    "Duvar Pilatesi, mobilite akışları, Cadillac",
+    "Akış ve kombinasyonlar"
+   ],
+   "kazanimlar": [
+    "İleri seviye hareketleri doğru teknikle uygulama",
+    "Mat, Reformer, Duvar ve Cadillac sistemlerine hâkimiyet",
+    "Akış ve kombinasyon kurma"
+   ],
+   "eslestirme_kurali": "İlk soru her zaman aynı: 'Şu an pilates yapıyor musunuz / ders veriyor musunuz?' Cevap hayırsa **Temel Pilates**'e geç. Sınav farkı da söylenir: burada videoların %80'i bitince sınav otomatik açılır, istediğin zaman girilir.",
+   "cells": {
+    "sporegitmeni": {
+     "kesisim": "Ders veriyor ama repertuvarı tıkanmış olabilir: aynı akışlar, sıkılan danışan. İleri seri ve kombinasyonlar doğrudan ders kalitesi ve fiyatlandırma gücü demek.",
+     "giris": "Şu an hangi seviyede ders veriyorsunuz? İleri seviye danışanlarınızda repertuvar sıkıntısı oluyor mu?",
+     "ciktilar": [
+      "İleri seri ve akış-kombinasyonlarla ders repertuvarını genişletme",
+      "Reformer'da ileri hareketleri güvenle verebilme"
+     ],
+     "itiraz": "\"Ben zaten biliyorum\" → O zaman doğru üründesin: bu eğitim başlangıç değil, ileri seviye. İçerik listesini oku (Jackknife, Star, Splits, akış-kombinasyonlar) — tanımadığı bir şey çıkarsa konuşma açılır.",
+     "ders": "Advanced Core Flow · Akış ve Kombinasyonlar · Reformer ileri seri"
+    },
+    "fizyoterapist": {
+     "kesisim": "Klinik dışı ileri seviye takip. Mobilite akışları ve Cadillac, rehabilitasyon sonrası performansa geçiş aşamasında karşılık buluyor.",
+     "giris": "Şu an pilatesi hastalarınızla kullanıyor musunuz? Hangi seviyede takıldığınızı söyleyin, doğru programı seçelim.",
+     "ciktilar": [
+      "İleri mobilite akışları ve Cadillac uygulamaları",
+      "Rehabilitasyondan performansa geçiş çalışmaları"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Mobilite Akışları · Cadillac · Advanced Hip Series"
+    },
+    "evhanimi": {
+     "kesisim": "Genelde 'uzmanlık' kelimesi çektiği için bu formu doldurur ama pilates geçmişi olmayabilir. Burada iş, doğru ürünü seçmektir.",
+     "giris": "Şu an düzenli pilates yapıyor musunuz? Yapmıyorsanız Temel programla başlamak daha doğru olur, sizi zora sokmayalım.",
+     "ciktilar": [
+      "(Geçmişi varsa) ileri seviye akışlar",
+      "(Yoksa) Temel Pilates'e yönlendirme"
+     ],
+     "itiraz": "\"Direkt uzmanlık alayım\" → Geçmişi yoksa kabul etme. Yanlış seviye satmak iade ve kötü yorum üretir; ikisi de reklamdan pahalıdır.",
+     "ders": "Önce seviye tespiti · sonra Temel ya da İleri"
+    },
+    "hemsire": {
+     "kesisim": "Sağlık geçmişi var ama pilates geçmişi olmayabilir. Aynı kural: önce seviye tespiti.",
+     "giris": "Daha önce pilates yaptınız mı? Ona göre Temel mi İleri mi, birlikte seçelim.",
+     "ciktilar": [
+      "(Geçmişi varsa) ileri seri ve güvenli ilerleme",
+      "(Yoksa) Temel Pilates"
+     ],
+     "itiraz": "\"Online pilates olur mu, ekipmanım yok?\" → **En kritik itiraz.** Eğitim Mat, Reformer, Duvar ve Cadillac sistemlerini kapsıyor; Reformer ve Cadillac ekipman gerektirir. Pratiği nerede yapacağı (stüdyo/ev/kurs) açıkça konuşulur. Ekipmana erişimi yoksa bunu söyle — olmayan bir şeyi var gösterme, iade ve şikâyet üretir.",
+     "ders": "Seviye tespiti · Advanced serileri"
+    },
+    "ogretmen": {
+     "kesisim": "Genelde ikinci meslek niyetiyle gelir; pilates geçmişi çoğunlukla yoktur. Seviye tespiti şart.",
+     "giris": "Daha önce düzenli pilates yaptınız mı? Sıfırdansa Temel'den başlayalım, boşa para harcamayın.",
+     "ciktilar": [
+      "(Geçmişi varsa) ileri seviye",
+      "(Yoksa) Temel Pilates"
+     ],
+     "itiraz": "\"Uzmanlık daha iyi değil mi?\" → Daha iyi değil, daha ileri. Sıfırdan başlayana zarar verir.",
+     "ders": "Seviye tespiti"
+    }
+   },
+   "formAdi": "pilates uzmanlık eğitimi",
+   "fiyat_ne_zaman": "Seviye tespitinden sonra. Seviye uymuyorsa değişen şey fiyat değil, üründür.",
+   "dikkat": "Pilates geçmişi yoksa bu ürün satılmaz; Temel Pilates'e yönlendirilir."
+  }
+ },
+ "egitmenler": {
+  "diksiyon": "Burçin Karaca Tabur — 1994'ten beri radyo/TV; radyo ve televizyon programı yapım ve sunuculuğu, Gaziantep Büyükşehir'de tiyatro ve gala sunumları, 2019'da Konak Halk Eğitim'de güzel konuşma/diksiyon/hitabet formasyonu, 2015'ten beri TRT İzmir Radyosu TRT Nağme'de bant ve canlı yayın programları.",
+  "hikaye": "Sıla Topçam — SDÜ Sahne Sanatları Oyunculuk mezunu; DEÜ'de masal anlatıcılığı üzerine yüksek lisans tezi. İzmir Devlet Tiyatrosu 'Bizden Masallar' projesinde anlatımlar, 2018'de Tayland'da Türkiye'yi temsilen sahne, 2019'da Sıla Masal Okulu kurucusu. Devlet Tiyatroları festivallerinde 'İş Yaşamında Storytelling' atölyeleri.",
+  "siddetsiz": "Doç. Dr. Mehmet Ozan Aşık — Uludağ Üniversitesi Sosyoloji Bölümü öğretim üyesi; doktora Cambridge Üniversitesi Sosyoloji. Akademik ağırlık bu eğitimin en güçlü güven unsurudur.",
+  "pilates": "Elif Pankudus — 2012'den beri aktif pilates eğitmeni, 2013'te kurduğu Panem Pilates'in kurucusu. Türkiye Cimnastik Federasyonu 1., 2. ve 3. Kademe Pilates Antrenörlüğü, Balanced Body Workshop. Postür analizi, core stabilizasyon, omurga sağlığı."
+ }
+}

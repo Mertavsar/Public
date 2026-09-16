@@ -53,6 +53,10 @@ Kartın her satırı **hipotezdir.** Kişi konuşmaya başladığı an kart gün
 
 | Dosya | İçerik |
 |---|---|
+| `meslek-matrisi.md` | **Ana ürün:** 5 eğitim × 49 meslek kesişimi — kesişim, giriş cümlesi, iki çıktı, itiraz, gösterilecek ders |
+| `meslek-matrisi.json` | Matrisin tek kaynağı. Değişiklik buraya yazılır |
+| `build.py` | JSON'dan hem `meslek-matrisi.md` hem `lead-brief.html` üretir |
+| `lead-brief.html` | Satış ekibinin telefondan kullandığı araç |
 | `lead-brief.md` | Kartın formatı ve nasıl doldurulacağı |
 | `call-flow.md` | Telefon akışı: hız, ilk 10 saniye, açmayan lead, numara itibarı, KVKK |
 | `profiles.md` | Eğitim bazlı alıcı hipotezleri + meslek/yaş/şehir düzelticileri |

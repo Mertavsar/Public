@@ -4,20 +4,28 @@
 > işaretli her yer marka sahibi tarafından doldurulmadan bu dosya satış ekibine
 > verilmez. Temsilci bu dosyada yazmayan hiçbir vaadi kuramaz.
 
-## Önce doldurulacak boşluklar
+## Bilinenler (eğitim içerik dosyalarından — FACT)
+
+| Alan | Gerçek |
+|---|---|
+| Format | Online video + öğrenci paneli; her cihazdan, kendi hızında |
+| Canlı destek | **Ayda bir ZOOM canlı yayın dersi**, eğitmene doğrudan soru |
+| Doküman | Panelden erişim, çıktı alınabilir |
+| Sınav | Videolar bitince, her ayın son hafta sonu 25 soruluk online sınav; %60 ile sertifika |
+| Sınav (Pilates Uzmanlık) | Videoların %80'i bitince otomatik açılır, istenildiği zaman girilir |
+| Sertifika ibaresi | "Uluslararası Akrediteli … Sertifikası" (Pilates Uzmanlık dosyasında bu ibare **yok**) |
+
+## Hâlâ boş — doldurulmadan satış ekibine verilmez
 
 | Alan | Değer |
 |---|---|
-| Hikâye Anlatıcılığı fiyatı | `<FİYAT>` |
-| Pilates Uzmanlığı fiyatı | `<FİYAT>` |
-| Şiddetsiz İletişim fiyatı | `<FİYAT>` |
-| Diksiyon fiyatı | `<FİYAT>` |
+| Fiyatlar (5 program ayrı ayrı) | `<FİYAT>` |
 | Taksit imkânı | `<VAR/YOK — kaç taksit>` |
-| Eğitim süresi / saat | `<EĞİTİM BAŞINA>` |
-| Erişim süresi | `<NE KADAR İZLENEBİLİR>` |
-| Sertifika — tam olarak ne veriliyor | `<KURUM, TÜR, GEÇERLİLİK>` |
-| Canlı destek / soru sorma imkânı | `<VAR/YOK>` |
+| Eğitim süresi / toplam saat | `<BİLİNMİYOR>` |
+| Panel erişim süresi | `<NE KADAR AÇIK KALIYOR>` |
+| **Akreditasyon kurumunun adı** | `<HANGİ KURUM>` ← en kritik boşluk |
 | İade / cayma hakkı | `<KOŞUL>` |
+| Reformer/Cadillac pratiği | `<KATILIMCI EKİPMANA NASIL ERİŞECEK>` |
 
 ---
 
@@ -79,18 +87,42 @@ Gerçek soru: haftada kaç saat gerekiyor?
 Şiddetsiz İletişim'de bu itiraz çoğu zaman "öncelik değil" demektir; oraya fiyatla
 değil, yaşadığı durumla dönülür.
 
-## 4. "Online olur mu, yüz yüze olmadan öğrenir miyim?" (özellikle Pilates)
+## 4. "Online olur mu?"
 
-Savunmaya geçme. Neyin nasıl çözüldüğünü anlat: `<pratik/geri bildirim/canlı seans
-var mı>`. Yoksa **yok de.** Olmayan bir şeyi var göstermek iade üretir.
+**Diksiyon / Hikâye / Şiddetsiz İletişim:** Cevap net. Videolar kendi hızında, panelde
+doküman var ve **ayda bir ZOOM canlı yayında eğitmene doğrudan soru soruluyor.** Bu üç
+eğitimde "yalnız kalırım" kaygısını kapatan şey canlı yayındır.
+
+**Pilates:** Burada dürüst olmak zorundayız. Eğitim Mat, Reformer, Duvar ve Cadillac
+sistemlerini kapsıyor; **Reformer ve Cadillac ekipman ister.** Kişi bu ekipmana nerede
+erişecek — stüdyoda mı çalışıyor, kursa mı gidiyor? Erişimi yoksa bunu söyle. Olmayan
+bir imkânı var göstermek iade, şikâyet ve kötü yorum üretir; üçü de reklamdan pahalıdır.
 
 ## 5. "Sertifika geçerli mi?" (Pilates'te her konuşmada gelir)
 
-Tek doğru cevap: sertifikanın **ne olduğunu olduğu gibi söylemek.** `<KURUM, TÜR,
-GEÇERLİLİK>`.
+Söylenebilecek olan: eğitim videoları tamamlandıktan sonra panelde açılan **25 soruluk
+sınavdan %60** alan katılımcı sertifikayı almaya hak kazanır. Dosyalarda sertifikanın
+adı "Uluslararası Akrediteli … Sertifikası" olarak geçer.
 
-**Yasak:** "devlet onaylı", "MEB onaylı", "uluslararası geçerli", "her yerde kabul
-edilir" — belgeyle kanıtlanamıyorsa hiçbiri söylenmez.
+**Açık risk:** Hiçbir dosyada **akreditasyon kurumunun adı yazmıyor.** "Hangi kurum
+akredite ediyor?" sorusu kesin gelecek. Kurum adı netleşene kadar temsilci:
+
+- Dosyadaki ibareyi olduğu gibi söyler.
+- "Hangi kurum" sorusuna **"öğrenip size döneceğim"** der — uydurmaz.
+- "Uluslararası geçerli", "devlet onaylı", "MEB onaylı", "her yerde kabul edilir"
+  cümlelerinin hiçbirini kurmaz.
+
+Ayrıca Pilates Uzmanlık dosyasında "uluslararası akrediteli" ibaresi geçmiyor; o programda
+sertifika "Pilates Uzmanlık Eğitimi Sertifikası" olarak anılıyor. İki programı karıştırma.
+
+## 5b. "Hangi seviyeyi almalıyım?" (Pilates)
+
+İki ayrı ürün var: **Temel Pilates** (prensipler + Mat + Reformer + Duvar + Cadillac
+tanıtım + güvenli egzersiz) ve **Pilates Uzmanlık** (ileri seriler, akış-kombinasyonlar).
+
+Tek soru karar verir: **"Şu an pilates yapıyor musunuz ya da ders veriyor musunuz?"**
+Cevap hayırsa doğru ürün Temel'dir — kişi Uzmanlık formu doldurmuş olsa bile. Yanlış
+seviye satmak iade ve kötü yorum üretir.
 
 ## 6. "İş bulabilir miyim / para kazanır mıyım?"
 
