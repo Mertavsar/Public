@@ -5,20 +5,21 @@
 > Bu dosya nadiren değişir. Sık değişen plan ve testler `strategy.md` içindedir.
 
 ## Temel bilgiler
-- **Marka:**
-- **Sektör:**
-- **Web sitesi:**
-- **Instagram:**
-- **İlgili kişi / karar verici:**
-- **Ajansla çalışmaya başlangıç:**
+- **Marka:** Qassa Shal
+- **Sektör:** Şal / eşarp — hem perakende (web sitesi) hem toptan (B2B, WhatsApp). *(Kaynak: reklam metinleri, Meta API)*
+- **Web sitesi:** BİLİNMİYOR — URL alınmalı
+- **Instagram:** qassashal *(reklam metinlerindeki marka etiketi)*
+- **İlgili kişi / karar verici:** BİLİNMİYOR
+- **Ajansla çalışmaya başlangıç:** BİLİNMİYOR (hesapta veri en az Haziran 2026'ya kadar gidiyor)
+- **Konum:** Bursa / Mudanya — üreticiden direkt satış *(reklam metni)*
 
 ## Ürün ve ekonomi
-- **Ürünler / kategoriler:**
-- **Ortalama ürün fiyatı:**
-- **Ortalama sepet tutarı:**
-- **Brüt marj (%):**  ← *Bu alan kritiktir. Başabaş ROAS = 1 ÷ marj*
-- **Başabaş ROAS:**
-- **Stok / tedarik durumu:**
+- **Ürünler / kategoriler:** Şal ve eşarp. Öne çıkan seriler: Ayrobin Jakar, Kırmızı Şal, Dubai İpek *(reklam adları ve kreatif metinleri)*
+- **Ortalama ürün fiyatı:** BİLİNMİYOR
+- **Ortalama sepet tutarı:** ~₺1.200 *(Meta'nın raporladığı ciro ÷ satış, son 30 gün — panel verisiyle teyit edilmeli)*
+- **Brüt marj (%):** **BİLİNMİYOR — KRİTİK EKSİK.** Bu bilgi olmadan hiçbir ROAS yorumu kârlılık anlamına gelmez.
+- **Başabaş ROAS:** Hesaplanamıyor (marj yok). Referans: marj %50 → 2,00 · %60 → 1,67 · %70 → 1,43
+- **Stok / tedarik durumu:** BİLİNMİYOR — Meta katalog tarafında "no available inventory" hatası var, kontrol edilmeli
 
 ## Hesap kimlikleri
 > Bir kere yazılır, her hafta tekrar aranmaz. Meta hesabı MCP ile otomatik bulunur.
@@ -31,11 +32,11 @@
 - **Google Ads müşteri ID:**
 
 ## Reklam
-- **Aktif kanallar:** (Meta / Google / TikTok / …)
-- **Aylık reklam bütçesi:**
-- **Günlük ortalama harcama:**
-- **Reklam hesabı erişimi:**
-- **Ölçüm kurulumu:** (Pixel, CAPI, GA4 — kurulu mu, doğrulanmış mı)
+- **Aktif kanallar:** Meta (Facebook/Instagram). Google Ads tanımlı değil.
+- **Aylık reklam bütçesi:** BİLİNMİYOR (anlaşılan tutar). Fiili: Tem ₺55.485 · Ağu ₺38.550 · 1-17 Eyl ₺31.713
+- **Günlük ortalama harcama:** ~₺1.865 (Eylül) — Ağustos'ta ~₺1.243
+- **Reklam hesabı erişimi:** Var, MCP üzerinden okunabiliyor (is_ads_mcp_enabled: true, is_queryable: true)
+- **Ölçüm kurulumu:** Veri seti **949798553159798 (Qassa Shal Veri Seti)** — aktif, first-party cookie açık, sunucu tarafı (CAPI) saatlik akıyor. Purchase olayı EMQ **9,3/10**, InitiateCheckout 9,3. **Ölçüm sağlıklı.** GA4 durumu BİLİNMİYOR.
 
 ## Hedefler ve beklenti
 - **Müşterinin sözlü hedefi:**
@@ -44,7 +45,7 @@
 - **Müşterinin beklentisi:**
 
 ## Satış süreci
-- **Satış kanalı:** (web sitesi / WhatsApp / DM / telefon / mağaza)
+- **Satış kanalı:** İki ayrı hat — (1) web sitesi / perakende, (2) WhatsApp üzerinden **toptan (B2B)**. Bütçenin ~%29'u toptan hattına gidiyor ve bu hattın sonucu Meta'da görünmüyor.
 - **Mesajları kim cevaplıyor:**
 - **Cevap saatleri:**
 - **Ortalama ilk cevap süresi:**
@@ -52,6 +53,8 @@
 - **Ödeme seçenekleri:**
 
 ## Değerlendirme
+- **Panelden görülen güçlü yönler (2026-09-18):** Ölçüm kurulumu sağlam; kreatif seviyesinde kazananlar var (Kırmızı Şal ROAS 3,38 · Ayrobin Şal ROAS 2,24); Ağustos'ta ROAS 3,12 üreten bir yapı kurulabilmiş.
+- **Panelden görülen zayıf yönler (2026-09-18):** Aşırı ad set bölünmesi ve günlük müdahale; Purchase dışı optimizasyon denemeleri; reklam metinlerinde teklif yok; toptan hattı ölçülmüyor. Ayrıntı: `weekly-reports/2026-09-18.md`
 - **Güçlü yönleri:**
 - **Zayıf yönleri:**
 - **Geçmiş problemler:**
