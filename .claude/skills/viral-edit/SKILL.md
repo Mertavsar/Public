@@ -1,31 +1,49 @@
 ---
 name: viral-edit
-description: Dikey kısa video kurgusu (TikTok / Reels / Shorts). Kullanıcı ham klip ve seslendirme attığında; "bunu editle", "viral video yap", "şu videodaki gibi edit", "altyazı ekle", "geçiş efekti koy", "ok işareti koy", "izlenme almıyor" dediğinde kullan. Referans bir videonun stilini ölçüp birebir uygular; kesim, altyazı, grafik, ses masteri ve kalite kontrolünü yürütür.
+description: Dikey kısa video (TikTok / Reels / Shorts) için seslendirme metni yazımı ve kurgu. Kullanıcı ham klip attığında; "bunu editle", "özgün hale getir", "buna metin yaz", "seslendirme metni", "viral video yap", "şu videodaki gibi edit", "altyazı ekle", "geçiş efekti koy", "ok işareti koy", "izlenme almıyor" dediğinde kullan. Videoyu okuyup ona özel metni üretir; ses geldiğinde kesim, altyazı, grafik, ses masteri ve kalite kontrolünü yürütür.
 ---
 
-# Viral Edit — Dikey Kısa Video Kurgusu
+# Viral Edit — Metin Yazımı ve Dikey Video Kurgusu
 
-Kullanıcı klip + ses atar, sen yayına hazır dikey video çıkarırsın.
+Kullanıcı ham klip atar; sen önce ona özel seslendirme metnini yazarsın, ses gelince
+yayına hazır dikey videoyu çıkarırsın.
 
 Varsayılan hedef **referans stil**: `reference/style-profile.md`. O dosya tahmin değil,
 milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce onu oku.
 
 ---
 
-## 0. Önce şunları netleştir
+## 0. Hangi aşamadayız
 
-Eksik bilgiyle başlama, yanlış yöne 20 dakika render etme.
+İş iki turda yürür. Kullanıcı hangi turu istiyorsa onu yap, ikisini karıştırma.
+
+```
+TUR 1   Kullanıcı ham video atar
+        -> videoyu oku, ona özel seslendirme metnini yaz
+        -> metni kopyalanmaya hazır tek blok halinde ver (reference/script-writing.md)
+        -> kullanıcı metni ElevenLabs'e yapıştırıp sesi üretir
+
+TUR 2   Kullanıcı sesi atar
+        -> kurgu, altyazı, grafik, master, teslim (§1'den itibaren)
+```
+
+Kullanıcı video + ses birlikte attıysa doğrudan Tur 2.
+Sadece video attıysa **metni yazmadan kurguya başlama** — ses olmadan kesim ritmi kurulamaz.
+
+### Tur 2 için gerekenler
 
 | Gereken | Neden | Yoksa |
 |---|---|---|
-| **Seslendirme metni** (.txt) | Tek kelimelik altyazının tek kaynağı | Altyazı yapılamaz — **iste** |
+| Seslendirme sesi | Kesim ritmi buna oturur | Tur 1'e dön |
+| **Seslendirme metni** (.txt) | Tek kelimelik altyazının tek kaynağı | Sen yazdıysan zaten var |
 | Müzik yatağı | Referans stilde sessizlik ölümcül | Sentezlenebilir ama zayıf kalır |
 | Dolgu (arka plan) videosu | Kartın altındaki alanı doldurur | Ana klibin bulanık hali kullanılır |
 | Platform + hedef süre | Kesim yoğunluğunu belirler | 35–45s varsay |
 
 > **ASR yok.** Bu ortamda konuşma tanıma modelleri ağ politikasıyla kapalı
-> (huggingface, openaipublic, alphacephei → 403). Metni uydurma. Kullanıcıdan iste.
-> Tek istisna: kaynak videoda **gömülü altyazı** varsa kareleri okuyup çıkarabilirsin.
+> (huggingface, openaipublic, alphacephei → 403). Metni uydurma. Sen yazdıysan elinde
+> zaten var; kullanıcı kendi metnini kullandıysa **iste**. Tek istisna: kaynak videoda
+> **gömülü altyazı** varsa kareleri okuyup çıkarabilirsin.
 
 ---
 
@@ -42,6 +60,10 @@ ffmpeg -nostdin -y -v error -i IN.mp4 -vf "fps=1/2,scale=150:-1,drawtext=text='%
 
 Sonra `map.jpg` dosyasını **gözle oku**. Sahne listesi çıkar: hangi saniyede ne var,
 hangisi güçlü, hangisi bulanık/boş.
+
+Bu adım Tur 1'de de yapılır: metni yazmadan önce videoyu okuman gerekir.
+Metin yazımı: `reference/script-writing.md` (uzunluk formülü: **2.18 kelime/saniye**,
+40 saniye ≈ 87 kelime — referans videodan ölçüldü).
 
 ### Temizlik kontrolü — atlanırsa videoya gömülür
 
