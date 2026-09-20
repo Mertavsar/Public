@@ -158,9 +158,13 @@ uygulanır**; teslimden önce tek tek doğrula.
 İzleyicinin gözü aynı görüntüde 3 saniyeden fazla kalmamalı. Plan uzunsa
 böl: yakınlaş/uzaklaş değişimi, farklı kadraj, başka bir an.
 
+`build.py` bunu zaten doğruluyor ve uyarı varsa başlamıyor. Elle bakmak
+istersen (alan numaraları `-v` ile veriliyor — gövdedeki çıplak `$1` skill
+argümanlarıyla değiştirilebiliyor):
+
 ```bash
-awk -F'\t' '{d=$2-$1; if(d>3.0) print "UZUN PLAN:",NR,d"s",$NF}' edl.tsv
-awk -F'\t' '{d=$2-$1;s+=d;n++}END{printf "ort %.2fs · %d plan · %.2f kesim/s\n",s/n,n,n/s}' edl.tsv
+awk -F'\t' -v a=1 -v b=2 '!/^#/{d=$(b)-$(a); if(d>3.0) print "UZUN PLAN:",NR,d"s",$NF}' edl.tsv
+awk -F'\t' -v a=1 -v b=2 '!/^#/{d=$(b)-$(a);s+=d;n++}END{printf "ort %.2fs · %d plan · %.2f kesim/s\n",s/n,n,n/s}' edl.tsv
 ```
 
 Ortalama plan **1.2–1.6s** olmalı (referansta 1.55s). 2s'yi geçen ortalama
@@ -327,7 +331,8 @@ dönemine göre kırpma orijini seçince (5.20 sonrası `crop x=40`, öncesi `x=
 özne kadrajın ortasına geldi. EDL'ye `crop_x` sütunu koy ve şunu doğrula:
 
 ```bash
-awk -F'\t' '{e=$3+($2-$1)/$4; if($9==40 && $3<5.15) print "HATA sol filigran:",NR}' edl.tsv
+awk -F'\t' -v a=1 -v b=2 -v c=3 -v d=4 -v x=9 '!/^#/{e=$(c)+($(b)-$(a))/$(d);
+  if($(x)==40 && $(c)<5.15) print "HATA sol filigran:",NR}' edl.tsv
 ```
 
 Kırparken en-boyu koru: 9:16 için `genişlik / 0.5625 = yükseklik`. Boyu 9:16'ya
