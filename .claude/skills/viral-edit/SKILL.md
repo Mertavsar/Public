@@ -85,6 +85,24 @@ bir ön plan ya da boş zemin olan 2 saniye. Kontak sayfasında iyi görünen bi
 - Uzun bir duyguyu üç sahte kesimle bölme. Tek kesintisiz plan daha güçlüdür.
 - Finali hareketin **yükseldiği** yerden seç. Baş düşüyorsa, göz kaçıyorsa o plan kapanış olmaz.
 
+### Her cümle anlattığı şeyi göstermeli
+
+Planları önce görsel güce göre dizip sonra altyazıyı üstüne bindirme. Altyazı
+"gagası gözüne birkaç santim kalmış" derken ekranda kuş yoksa video çöker.
+Plan listesini **cümle cümle** kur: her bloğun metnini yaz, karşısına o cümleyi
+gösteren kaynak aralığını koy.
+
+### Hook: en güçlü an değil, en OKUNABİLİR an
+
+Aksiyonun tepe noktası genelde okunaksızdır — kadrajı dolduran bir kanat, bulanık
+bir kütle. İzleyici ilk karede ne gördüğünü anlayamazsa kaydırır.
+
+Kaynağı 0.2 saniye aralıkla tara, kadrajlanmış halleriyle yan yana koy ve
+**tek bakışta anlaşılan** kareyi seç. Genelde bu, aksiyonun tepe noktasından
+yarım saniye önce ya da sonra olur.
+
+İlk kareye flash koyma — görüntüyü yakar. Açılışta darbe sesi ve sarsıntı yeterli.
+
 ---
 
 ## 3. Kesim ritmi
@@ -146,6 +164,11 @@ hatayı **0.58s'den 0.011s'ye** indirdi — hizalamanın tek kritik parametresi.
 Referansta **58 saniyede 2 kez, toplam 1.8 saniye**. Sürekli ok koymak stili taklit
 etmez, bozar. Tek bir kritik anı işaretle.
 
+Ama koyduğun ok **büyük olmalı**: kart genişliğinin yarısı kadar (780px kartta
+`len` ≈ 430), kalın siyah konturlu, `pulse: 0.07` ile nabız atan. Küçük ok fark
+edilmez — konmamış sayılır. Okun ucunu ızgara (`drawgrid`) ile doğrula, tahminle
+yerleştirme.
+
 ### Sayaç
 
 `N/30` açık döngü kurar ama **içerikte gerçekten o kadar madde yoksa boş vaattir**;
@@ -165,6 +188,24 @@ izleyici fark edince yorumlara yazar. Kullanıcıya kaç madde olduğunu sor.
 **ölç ve sabit kazanç uygula**, ardından limitle.
 
 `amix` varsayılan olarak girdi sayısına böler; `normalize=0` vermezsen miks 6 dB düşer.
+
+### Müzik ve efekt sesi — atlanamaz
+
+Referansta **görsel** geçiş efekti yok; bunu sese uygulama. Referansın altında
+baştan sona müzik var ve sessizliği sıfır. Müziksiz ve efektsiz bir kurguda
+kesimler çıplak kalır, video "berbat" hissi verir.
+
+- **Müzik gelmediyse sentezle** ama drone değil: tempolu bir yatak kur (kick, sub
+  bass, hi-hat, pad). Ham gürültü + sinüs ucuz duruyor ve videoyu aşağı çeker.
+  Gerçek parça her zaman daha iyi — kullanıcıdan iste, gelmezse sentezini ver ve
+  değiştirilebileceğini söyle.
+- **Müziği konuşmanın altına duck et:**
+  `sidechaincompress=threshold=0.05:ratio=7:attack=8:release=280`
+  Konuşma anında ~9 dB aşağı inmeli. Ölçerek doğrula.
+- **Efekt sesleri** `scripts/sfx.py` ile: büyük kesimlerde boom + whoosh, ara
+  kesimlerde tik, ödül anından önce riser + sub-drop.
+- Her darbeye görsel karşılık ver: flash (0.13s) ve kamera sarsıntısı (6–10px,
+  0.28s'de sönen).
 
 ---
 
@@ -201,7 +242,9 @@ izleyici fark edince yorumlara yazar. Kullanıcıya kaç madde olduğunu sor.
 İki ayrı stil var, talep hangisiyse onu uygula:
 
 **Referans stil (bilgi aktarımı)** — kart düzeni, sayaç, tek kelimelik altyazı, dolgu
-arka plan, 1.5s kesim, **hiç geçiş efekti yok**. Tutunma grafiklerden gelir.
+arka plan, 1.5s kesim, **hiç görsel geçiş efekti yok** (flash/whip/glitch). Tutunma
+grafiklerden gelir. Bu kural SESE UYGULANMAZ: altta kesintisiz müzik ve kesimlerde
+darbe sesi vardır.
 
 **Sinematik stil** — tam ekran, yavaş zoom (`zoompan`), ışık geçişi, darbe sesi,
 kamera sarsıntısı, ağır çekim final, dramatik sessizlik. Tutunma atmosferden gelir.

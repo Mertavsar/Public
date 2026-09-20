@@ -153,11 +153,16 @@ def build(spec, out):
             tipx = card["x"] + a["x"] * card["w"]
             tipy = card["y"] + a["y"] * card["h"]
             ln = a.get("len", 340)
-            poly = arrow_polygon(tipx, tipy, a["angle"], ln)
             dr = a.get("draw", 0.0)
             frac = 1.0 if dr <= 0 else min(1.0, (t - a["t"]) / dr)
+            # çizildikten sonra nabız gibi atsın — göz oku kaçırmasın
+            pulse = a.get("pulse", 0.0)
+            if pulse and frac >= 1.0:
+                ln *= 1.0 + pulse * math.sin(2 * math.pi * a.get("pulse_hz", 3.2)
+                                             * (t - a["t"] - dr))
+            poly = arrow_polygon(tipx, tipy, a["angle"], ln)
             poly = clip_polygon_progress(poly, (tipx, tipy), frac)
-            d.polygon(poly, fill=RED, outline=BLACK, width=max(6, int(ln * 0.035)))
+            d.polygon(poly, fill=RED, outline=BLACK, width=max(8, int(ln * 0.045)))
 
         if cval is not None:
             stroked_text(d, (cx, cnt_y), f"{cval}/{counter['total']}", nfont,
