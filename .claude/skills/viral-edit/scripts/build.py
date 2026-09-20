@@ -79,7 +79,7 @@ def check_edl(edl, src_dur, crop_w, usable_end):
     return bad
 
 
-def cut(src, edl, crop, work, fps=30):
+def cut(src, edl, crop, work, fps=30, cropy=0):
     cw, ch = crop
     os.makedirs(f"{work}/clips", exist_ok=True)
     lst = f"{work}/concat.txt"
@@ -92,7 +92,7 @@ def cut(src, edl, crop, work, fps=30):
             if abs(r["slow"] - 1.0) > 1e-3:
                 slo = (f"setpts={r['slow']}*PTS,minterpolate=fps={fps}:mi_mode=mci:"
                        f"mc_mode=aobmc:me_mode=bidir:vsbmc=1,")
-            vf = (f"crop={cw}:{ch}:{r['cropx']}:30,{slo}fps={fps},"
+            vf = (f"crop={cw}:{ch}:{r['cropx']}:{cropy},{slo}fps={fps},"
                   f"scale=1080:1920:flags=lanczos,setsar=1,"
                   f"zoompan=z='{r['z0']}+({r['z1']}-{r['z0']})*on/{nf}':"
                   f"x='(iw-iw/zoom)*{r['cx']}':y='(ih-ih/zoom)*{r['cy']}':"
@@ -188,6 +188,8 @@ def main():
     ap.add_argument("--spec", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--work", default=None)
     ap.add_argument("--crop", default="416:740", help="kaynaktan kırpma GxY (9:16 olmalı)")
+    ap.add_argument("--crop-y", type=int, default=0,
+                    help="kırpmanın üst kenarı (kaynak piksel)")
     ap.add_argument("--usable-end", type=float, default=1e9,
                     help="kaynakta kullanılabilir son an (end card öncesi)")
     ap.add_argument("--emphasis", nargs="*", default=[])
@@ -202,9 +204,15 @@ def main():
     if abs(cw / ch - 1080 / 1920) > 0.005:
         raise SystemExit(f"crop {a.crop} 9:16 değil — görüntü dikey esner.")
 
-    src_dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries",
-                                    "format=duration", "-of", "csv=p=0", a.src],
-                                   capture_output=True, text=True).stdout)
+    info = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
+                           "-show_entries", "stream=width,height:format=duration",
+                           "-of", "csv=p=0", a.src],
+                          capture_output=True, text=True).stdout.split()
+    sw, sh = (int(v) for v in info[0].split(",")[:2])
+    src_dur = float(info[-1])
+    if a.crop_y + ch > sh:
+        raise SystemExit(f"crop {cw}x{ch} +{a.crop_y} kaynağı ({sw}x{sh}) aşıyor. "
+                         f"--crop-y küçült veya --crop daralt.")
     edl = read_edl(a.edl)
     bad = check_edl(edl, src_dur, cw, min(a.usable_end, src_dur))
     if bad and not a.force:
@@ -222,7 +230,7 @@ def main():
         print(f"banner {a.banner_words} kelimeyi kapsıyor, altyazıdan düşüldü")
 
     print("\n2/5 planlar")
-    content = cut(a.src, edl, (cw, ch), work)
+    content = cut(a.src, edl, (cw, ch), work, cropy=a.crop_y)
 
     print("\n3/5 ses")
     mix = audio(edl, dur, a.vo, work)

@@ -17,6 +17,8 @@ major   ana vuruş (anlatının döndüğü kesim). t:genlik, genlik 0.4–0.75.
 minor   klink (diğer kesimler). Genliği sabit.
 riser   o ana doğru tırmanan gerilim + sub-drop.
 duck    o andan sonra müzik yatağını kıs (ödül cümlesi nefes alsın).
+warm-at anlatı döndüğü an: yatak gerginden (minör, hi-hat'li) sıcağa
+        (majör altılı, pad öne çıkmış, vuruş yumuşamış) döner.
 
 Not: 45 Hz altı kesiliyor. Telefon hoparlöründe duyulmuyor ama master
 limiterini boşuna çalıştırıp sesi kısıyor.
@@ -121,9 +123,15 @@ def build_sfx(dur, major, minor, risers, out):
           f"{len(major)} vuruş + {len(minor)} klink + {len(risers)} riser")
 
 
-def build_music(dur, out, bpm=102.0, peak_at=None, duck=()):
+def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
     """Kesintisiz yatak. Referans stilde 58 saniyede sıfır sessizlik var:
-    boşluk bırakmak bu formatta izleyiciyi kaydırtıyor."""
+    boşluk bırakmak bu formatta izleyiciyi kaydırtıyor.
+
+    warm_at: anlatı döndüğü an (s). O ana kadar gergin — dar, minör, tok bir
+    yatak; sonrasında sıcak — pad öne çıkıyor, majör altılı açılıyor, vuruş
+    yumuşuyor. Kullanıcının istediği "gerilimden duygusal sinematiğe geçiş"
+    budur; ayrı iki parça yerine tek yatağın rengi değişiyor, böylece geçişte
+    dikiş duyulmuyor."""
     rng = np.random.default_rng(5)
     bus = Bus(dur)
     beat = 60.0 / bpm
@@ -158,16 +166,27 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=()):
         lfo = 0.55 + 0.45 * np.sin(2 * np.pi * tt / 7.0)
         return _norm(s, 1.0) * amp * lfo * env(n, 1.2, 1.5)
 
-    bus.place(pad([110.0, 130.81, 164.81], dur - 0.2, 0.085), 0.1)
+    # A-bölümü: Am (gergin, dar).  B-bölümü: F-majör altılı (sıcak, açık).
+    TENSE = [110.0, 130.81, 164.81]          # A  C  E
+    WARM = [87.31, 130.81, 174.61, 220.0]    # F  C  F  A
+    if warm_at and 0 < warm_at < dur:
+        bus.place(pad(TENSE, warm_at + 0.6, 0.085), 0.1)
+        bus.place(pad(WARM, dur - warm_at - 0.1, 0.135), warm_at - 0.5)
+    else:
+        bus.place(pad(TENSE, dur - 0.2, 0.085), 0.1)
+
     k, t = 0, 0.0
     while t < dur - 0.5:
         I = 0.52 + 0.48 * min(1.0, (t / peak_at) ** 1.3)
+        warm = warm_at is not None and t >= warm_at
         if k % 2 == 0:
-            bus.place(kick(0.50 * I), t)
-        bus.place(sub(55.0 if (k // 2) % 4 < 2 else 65.41, beat * 0.46, 0.30 * I), t)
-        bus.place(hat(0.055 * I), t + beat * 0.5)
-        if k % 8 == 7:
-            bus.place(hat(0.075 * I, 0.09), t + beat * 0.75)
+            bus.place(kick((0.34 if warm else 0.50) * I), t)
+        bus.place(sub(55.0 if (k // 2) % 4 < 2 else 65.41, beat * 0.46,
+                      (0.22 if warm else 0.30) * I), t)
+        if not warm:                          # hi-hat gerilimi taşıyor,
+            bus.place(hat(0.055 * I), t + beat * 0.5)   # sıcak bölümde susuyor
+            if k % 8 == 7:
+                bus.place(hat(0.075 * I, 0.09), t + beat * 0.75)
         t += beat; k += 1
 
     tt = np.arange(bus.n) / SR
@@ -192,13 +211,15 @@ def main():
                     help="müziğin doruğa çıktığı an (s)")
     ap.add_argument("--duck", nargs="*", default=[],
                     help="t:kazanç — o andan sonra müzik yatağını çarp (0.78 iyi)")
+    ap.add_argument("--warm-at", type=float, default=None,
+                    help="bu andan sonra yatak gerginden sıcağa döner (s)")
     ap.add_argument("--out-sfx", default="sfx.wav")
     ap.add_argument("--out-music", default="music.wav")
     a = ap.parse_args()
     major = [(float(s.split(":")[0]), float(s.split(":")[1])) for s in a.major]
     build_sfx(a.dur, major, a.minor, a.riser, a.out_sfx)
     duck = [(float(d.split(":")[0]), float(d.split(":")[1])) for d in a.duck]
-    build_music(a.dur, a.out_music, a.bpm, a.peak_at, duck)
+    build_music(a.dur, a.out_music, a.bpm, a.peak_at, duck, a.warm_at)
 
 
 if __name__ == "__main__":
