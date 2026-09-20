@@ -108,7 +108,7 @@ def cut(src, edl, crop, work, fps=30, cropy=0):
     return content
 
 
-def audio(edl, dur, vo, work):
+def audio(edl, dur, vo, work, warm_at=None):
     major = [f"{r['o0']:.2f}:{BOOM_AMP[r['beat']]}" for r in edl if r["beat"] in BOOM_AMP]
     minor = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "m"]
     risers = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "R"]
@@ -120,6 +120,8 @@ def audio(edl, dur, vo, work):
     if risers:
         cmd += ["--riser"] + risers
         cmd += ["--duck"] + [f"{t}:0.78" for t in risers[:1]]
+    if warm_at is not None:
+        cmd += ["--warm-at", f"{warm_at:.2f}"]
     run(cmd)
 
     raw, mix = f"{work}/mix_raw.wav", f"{work}/mix.wav"
@@ -184,12 +186,17 @@ def qc(out, dur):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True); ap.add_argument("--edl", required=True)
-    ap.add_argument("--vo", required=True); ap.add_argument("--script", required=True)
+    ap.add_argument("--vo", required=True)
+    ap.add_argument("--script", default=None,
+                    help="seslendirme metni. YOKSA altyazı üretilmez — "
+                         "metin gelince aynı komutu --script ile tekrar çalıştır")
     ap.add_argument("--spec", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--work", default=None)
     ap.add_argument("--crop", default="416:740", help="kaynaktan kırpma GxY (9:16 olmalı)")
     ap.add_argument("--crop-y", type=int, default=0,
                     help="kırpmanın üst kenarı (kaynak piksel)")
+    ap.add_argument("--warm-at", type=float, default=None,
+                    help="bu andan sonra müzik gerginden sıcağa döner (s)")
     ap.add_argument("--usable-end", type=float, default=1e9,
                     help="kaynakta kullanılabilir son an (end card öncesi)")
     ap.add_argument("--emphasis", nargs="*", default=[])
@@ -219,26 +226,30 @@ def main():
         raise SystemExit("EDL uyarıları var. Düzelt veya --force ver.")
     dur = edl[-1]["o1"]
 
-    print("\n1/5 hizalama")
-    caps = f"{work}/captions.json"
-    run([sys.executable, f"{HERE}/align.py", "--audio", a.vo, "--text", a.script,
-         "--out", caps, "--check"] + (["--emphasis"] + a.emphasis if a.emphasis else []))
-    if a.banner_words:
-        c = json.load(open(caps, encoding="utf-8"))
-        json.dump(c[a.banner_words:], open(caps, "w", encoding="utf-8"),
-                  ensure_ascii=False, indent=1)
-        print(f"banner {a.banner_words} kelimeyi kapsıyor, altyazıdan düşüldü")
+    caps = None
+    if a.script:
+        print("\n1/5 hizalama")
+        caps = f"{work}/captions.json"
+        run([sys.executable, f"{HERE}/align.py", "--audio", a.vo, "--text", a.script,
+             "--out", caps, "--check"] + (["--emphasis"] + a.emphasis if a.emphasis else []))
+        if a.banner_words:
+            c = json.load(open(caps, encoding="utf-8"))
+            json.dump(c[a.banner_words:], open(caps, "w", encoding="utf-8"),
+                      ensure_ascii=False, indent=1)
+            print(f"banner {a.banner_words} kelimeyi kapsıyor, altyazıdan düşüldü")
+    else:
+        print("\n1/5 hizalama ATLANDI — metin verilmedi, ALTYAZI YOK")
 
     print("\n2/5 planlar")
     content = cut(a.src, edl, (cw, ch), work, cropy=a.crop_y)
 
     print("\n3/5 ses")
-    mix = audio(edl, dur, a.vo, work)
+    mix = audio(edl, dur, a.vo, work, a.warm_at)
 
     print("\n4/5 grafik")
     spec = json.load(open(a.spec, encoding="utf-8"))
     spec.update(canvas=[1080, 1920], fps=30, duration=round(dur, 2),
-                card={"x": 0, "y": 0, "w": 1080, "h": 1920}, captions=caps)
+                card={"x": 0, "y": 0, "w": 1080, "h": 1920}, captions=caps or "")
     sp = f"{work}/spec.resolved.json"
     json.dump(spec, open(sp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     ov = f"{work}/overlay.mov"
