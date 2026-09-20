@@ -140,7 +140,8 @@ Bu satırların hepsini gör. Biri eksikse veya `UYARI` varsa teslim etme.
    "len": 300
   }
  ]
-}```
+}
+```
 
 ```bash
 python3 scripts/cover.py --frame kare.png --spec kapak.json --out kapak.png
