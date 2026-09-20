@@ -214,10 +214,36 @@ izleyici fark edince yorumlara yazar. Kullanıcıya kaç madde olduğunu sor.
 | Tepe | -1.0 dB |
 | Sessizlik | **sıfır** — altta kesintisiz müzik |
 
-`loudnorm` tek geçişte hedefi tutturamaz (2–3 dB altta kalır). Önce miksle, sonra
-**ölç ve sabit kazanç uygula**, ardından limitle.
-
 `amix` varsayılan olarak girdi sayısına böler; `normalize=0` vermezsen miks 6 dB düşer.
+
+### Master — `volume + alimiter` KULLANMA
+
+`volume=XdB,alimiter=...` zinciri güvenilir değil: **alimiter keskin transientleri
+kaçırıyor**, sinyal tavanı aşıyor ve 16-bit PCM'e yazılırken sert kırpılıyor.
+Bir videoda 459 kırpılma platosu oluştu ve baştan sona duyulur distorsiyon verdi.
+
+Bunun yerine `scripts/master.py` kullan:
+
+```bash
+python3 scripts/master.py mix_raw.wav mix.wav -14.0 -3.5
+```
+
+**Tavan -3.5 dBFS olmalı.** AAC kodlayıcı WAV tepesinin ~3.5 dB üstüne çıkabiliyor.
+Ölçüldü: tavan -1.2 → AAC +1.96 dBFS (kırpık), tavan -3.5 → AAC -0.28 dBFS (temiz).
+
+Ayrıca SFX ve müziği `highpass=f=50` ile süz: duyulmayan sub enerji tüm tavanı yiyor.
+
+### Teslimden önce ZORUNLU kırpılma kontrolü
+
+Kodlanmış videonun sesini çözüp ölç. Sıfır tolerans:
+
+```bash
+ffmpeg -v error -i OUT.mp4 -ac 1 -ar 48000 -f f32le - | \
+python3 -c "import sys,numpy as np; x=np.frombuffer(sys.stdin.buffer.read(),dtype=np.float32); \
+print('tepe %.2f dBFS, >0dBFS ornek: %d'%(20*np.log10(abs(x).max()), (abs(x)>1.0).sum()))"
+```
+
+`>0dBFS örnek` **0 olmalı**. Değilse tavanı düşür ve yeniden master'la.
 
 ### Müzik ve efekt sesi — atlanamaz
 
