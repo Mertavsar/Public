@@ -23,6 +23,8 @@ spec.json
   "captions": "captions.json",
   "caption_size": 74,
   "caption_y": 0.86,          // kartın içinde, üstten oran
+  "caption_pop": 0.16,        // beliriş büyümesi (0 = kapalı)
+  "caption_pop_tau": 0.055,   // büyümenin sönme süresi (s)
 
   "arrows": [
     {"t": 15.4, "dur": 1.2, "x": 0.72, "y": 0.34, "angle": 215, "len": 340, "draw": 0.18}
@@ -51,6 +53,12 @@ from PIL import Image, ImageDraw, ImageFont
 RED = (228, 26, 28, 255)
 BLACK = (0, 0, 0, 255)
 WHITE = (255, 255, 255, 255)
+YELLOW = (255, 214, 0, 255)
+GREEN = (60, 230, 90, 255)
+
+# Anahtar kelime vurgusu. Sessiz izleyen kitlenin gözü renk değişimine takılıyor;
+# düz beyaz akan altyazıda hiçbir kelime öne çıkmıyor.
+PALETTE = {"white": WHITE, "yellow": YELLOW, "red": RED, "green": GREEN}
 
 FONT_CANDIDATES = [
     "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
@@ -59,10 +67,17 @@ FONT_CANDIDATES = [
 ]
 
 
+_FONTS = {}
+
+
 def load_font(size):
+    size = int(size)
+    if size in _FONTS:
+        return _FONTS[size]
     for p in FONT_CANDIDATES:
         if os.path.exists(p):
-            return ImageFont.truetype(p, size)
+            _FONTS[size] = ImageFont.truetype(p, size)
+            return _FONTS[size]
     raise SystemExit("Kalın sans-serif font bulunamadı. DejaVu veya Liberation kur.")
 
 
@@ -123,7 +138,10 @@ def build(spec, out):
     if spec.get("captions"):
         caps = json.load(open(spec["captions"], encoding="utf-8"))
 
-    cfont = load_font(spec.get("caption_size", 74))
+    base_cap = spec.get("caption_size", 74)
+    cfont = load_font(base_cap)
+    pop = spec.get("caption_pop", 0.16)
+    pop_tau = spec.get("caption_pop_tau", 0.055)
     nfont = load_font(spec.get("counter", {}).get("size", 82))
 
     cap_y = card["y"] + int(card["h"] * spec.get("caption_y", 0.86))
@@ -189,8 +207,14 @@ def build(spec, out):
                          RED, BLACK, max(4, nfont.size // 14))
 
         if word:
-            stroked_text(d, (cx, cap_y), word, cfont,
-                         WHITE, BLACK, max(5, cfont.size // 9))
+            # Kelime belirirken hafifçe büyüyüp yerine oturur ("yanma").
+            # Sabit duran altyazı göz için durağan görüntüyle aynı şey.
+            age = t - caps[ci]["s"]
+            m = 1.0 + pop * math.exp(-age / pop_tau) if pop else 1.0
+            wf = load_font(round(base_cap * m / 2) * 2)
+            col = PALETTE.get(caps[ci].get("c", "white"), WHITE)
+            stroked_text(d, (cx, cap_y), word, wf,
+                         col, BLACK, max(5, wf.size // 9))
 
         for b in ban:
             bf = bfonts[b.get("size", 96)]

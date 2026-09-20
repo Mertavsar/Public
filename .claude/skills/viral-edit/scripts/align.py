@@ -42,6 +42,15 @@ SR = 22050
 HOP = 0.010                      # 10 ms
 VOWELS = "aeıioöuüAEIİOÖUÜ"
 
+# Anahtar kelime vurgusu. Sessiz izleyen kitle altyazıyı tarar, okumaz —
+# rengi değişen kelime taramada gözü durduran tek şey. Sayılar ve ölçüler
+# kendiliğinden sarıya boyanır; tehlike/şaşırtma kelimelerini --emphasis ile ver.
+# "bir" listede yok: Türkçe'de ezici çoğunlukla belirsiz artikel, sayı değil.
+# Hepsini sarıya boyamak vurguyu anlamsızlaştırır.
+NUMBERS = ("iki üç dört beş altı yedi sekiz dokuz yirmi otuz kırk elli "
+           "altmış yetmiş seksen doksan bin milyon ton tonluk kilo kiloluk "
+           "metre metrelik santim saniye saniyede dakika kat misli").split()
+
 
 def load_audio(path):
     raw = subprocess.run(
@@ -132,6 +141,31 @@ def syllable_peaks(x, lo=300.0, hi=900.0, thr=0.015, min_dist=0.06):
 def syllables(w):
     """Türkçe'de hece sayısı = sesli harf sayısı. Yeterince doğru bir yaklaşım."""
     return max(1, sum(1 for c in w if c in VOWELS))
+
+
+def colorize(items, emphasis=(), number_color="yellow", emph_color="red"):
+    """Kelimelere renk etiketi yazar. Renk `overlay.py`nin PALETTE'inden gelir."""
+    emph = {strip_word(w) for w in emphasis}
+    out = []
+    for w, a, b in items:
+        k = strip_word(w)
+        if k in emph:
+            c = emph_color
+        elif k in NUMBERS or any(ch.isdigit() for ch in w):
+            c = number_color
+        else:
+            c = "white"
+        out.append((w, a, b, c))
+    return out
+
+
+def strip_word(w):
+    """Noktalama at, Türkçe'ye göre küçült.
+
+    Python'un lower()'ı "İ" için birleşik noktalı bir i üretiyor ve kelime
+    listeyle eşleşmiyor — "İki" sayı olarak tanınmıyordu."""
+    w = w.replace("İ", "i").replace("I", "ı")
+    return re.sub(r"[^0-9a-zçğıöşüA-ZÇĞİÖŞÜ]", "", w).lower()
 
 
 def split_sentences(text):
@@ -283,6 +317,8 @@ def main():
                     help="kelime en fazla bu kadar erken görünür (s)")
     ap.add_argument("--peak-thr", type=float, default=0.015)
     ap.add_argument("--peak-dist", type=float, default=0.06)
+    ap.add_argument("--emphasis", nargs="*", default=[],
+                    help="kırmızı vurgulanacak kelimeler (tehlike, şaşırtma)")
     a = ap.parse_args()
 
     text = open(a.text, encoding="utf-8").read()
@@ -291,8 +327,12 @@ def main():
                              min_block=a.min_block, lead=a.lead,
                              peak_thr=a.peak_thr, peak_dist=a.peak_dist)
 
-    json.dump([{"w": w, "s": round(s, 3), "e": round(e, 3)} for w, s, e in items],
+    colored = colorize(items, a.emphasis)
+    json.dump([{"w": w, "s": round(s, 3), "e": round(e, 3), "c": c}
+               for w, s, e, c in colored],
               open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    nc = sum(1 for *_, c in colored if c != "white")
+    print(f"vurgulu kelime: {nc}/{len(colored)}")
 
     d = [e - s for _, s, e in items]
     print(f"{len(items)} kelime  ·  ses {dur:.2f}s  ·  {len(blocks)} konuşma bloğu")

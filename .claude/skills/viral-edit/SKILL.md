@@ -46,6 +46,53 @@ Sadece video attıysa **metni yazmadan kurguya başlama** — ses olmadan kesim 
 
 ---
 
+## 0b. İzleyici elde tutma kontrol listesi
+
+YouTube'un kanala verdiği geri bildirimden çıkarıldı. **Her videoda hepsi
+uygulanır**; teslimden önce tek tek doğrula.
+
+| # | Kural | Nerede uygulanır | Nasıl doğrulanır |
+|---|---|---|---|
+| 1 | İlk karede hareket + ses | EDL plan 0, `audiobed --major 0.00:0.72` | Kare 0'ı çıkar: durağan mı? |
+| 2 | İlk saniyede ekranda iddia/soru | `spec.banners[0]`, `t: 0` | Kare 0'da yazı okunuyor mu? |
+| 3 | Selamlaşma yok, doğrudan olaydan gir | Metin | İlk cümle olayın içinde mi? |
+| 4 | **3 saniye kuralı** — hiçbir plan 3s'yi geçmez | EDL | aşağıdaki awk |
+| 5 | Ölü zaman yok | Kesim + müzik yatağı | `silencedetect` |
+| 6 | Kelime kelime yanan, renk vurgulu altyazı | `align.py --emphasis`, `caption_pop` | Renk oranı %10–20 |
+| 7 | **Sonsuz döngü** — son cümle ilk cümleye bağlanır | Metin | Son + ilk cümleyi arka arkaya oku |
+| 8 | İkiye bölen soru (yorum tetikleyici) | Metin, kapanıştan önce | Net bir ikilem var mı? |
+
+### 3 saniye kuralı
+
+İzleyicinin gözü aynı görüntüde 3 saniyeden fazla kalmamalı. Plan uzunsa
+böl: yakınlaş/uzaklaş değişimi, farklı kadraj, başka bir an.
+
+```bash
+awk -F'\t' '{d=$2-$1; if(d>3.0) print "UZUN PLAN:",NR,d"s",$NF}' edl.tsv
+awk -F'\t' '{d=$2-$1;s+=d;n++}END{printf "ort %.2fs · %d plan · %.2f kesim/s\n",s/n,n,n/s}' edl.tsv
+```
+
+Ortalama plan **1.2–1.6s** olmalı (referansta 1.55s). 2s'yi geçen ortalama
+tempoyu düşürüyor.
+
+### Sonsuz döngü kurgusu
+
+Son cümle, videonun ilk cümlesine **anlamca bağlanacak** şekilde biter —
+izleyici bittiğini fark etmeden ikinci tura başlar, izlenme yüzdesi %100'ü
+aşar.
+
+En sağlam kalıp: **son cümle sebebi yarım bırakır, ilk cümle sebebi verir.**
+
+```
+son:  "... Sebebi tek şey:"
+ilk:  "Gergedan onu görmüyor."
+```
+
+Kapanışta son kare ile ilk kare arasında sert kesim olmalı; fade **yapma**,
+fade döngüyü görünür kılar.
+
+---
+
 ## 1. Kaynağı söküp analiz et
 
 Hiçbir şey kesmeden önce ölç. Her adımda `-nostdin` kullan, yoksa ffmpeg döngüdeki
@@ -214,6 +261,25 @@ dağıtılıyor, böylece bir bloktaki hata sonrakine geçmiyor.
 `overlay.py` sayaç + tek kelimelik altyazı + okları saydam bir katman olarak üretir.
 Tam ekranda spec'teki `card` alanına tuvalin tamamını ver:
 `{"x": 0, "y": 0, "w": 1080, "h": 1920}`, `caption_y` ≈ 0.78–0.80 (TikTok arayüzünün üstünde).
+
+### Renk vurgusu ve beliriş (zorunlu)
+
+```bash
+python3 scripts/align.py --audio vo.mp3 --text script.txt --out captions.json \
+    --emphasis kıpırdamıyor biterdi tehlike --check
+```
+
+`--emphasis` verilen kelimeleri **kırmızı**, sayı ve ölçüleri (`iki`, `ton`,
+`seksen`, `saniye`, rakamlar) kendiliğinden **sarı** yapar. Gerisi beyaz.
+Sessiz izleyen kitle altyazıyı okumaz, tarar; renk değişimi taramada gözü
+durduran tek şey.
+
+**Vurgulu kelime oranı %10–20 olmalı.** Hepsini boyamak hiçbirini boyamakla
+aynı şey. `--emphasis`'e 3–5 kelimeden fazla verme.
+
+`spec.json`'daki `caption_pop` (varsayılan 0.16) kelimeyi belirirken hafifçe
+büyütüp yerine oturtur. Sabit duran altyazı göz için durağan görüntüyle aynı
+şey — kapatma.
 
 **`--check` çıktısını oku.** İki sayı önemli:
 

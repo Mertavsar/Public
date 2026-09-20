@@ -36,10 +36,37 @@ kalırsa sonda boşluk oluşur. **Boşluk bu formatta ölümcül.**
 3–10s   KURULUM     Konuyu tek cümlede oturt. "Bu şu."
 10–30s  TIRMANMA    Madde madde ilerle. Her cümle bir öncekinden ağır olsun.
 30–38s  DÖNÜŞ       "Ama" anı. İzleyicinin beklemediği bilgi veya bakış.
-38–45s  KAPANIŞ     Tek cümlelik vuruş. Soru bırak veya net bir yargı.
+38–42s  SORU        İkiye bölen ikilem. Yorumu tetikleyen yer burası.
+42–45s  DÖNGÜ       Sebebi yarım bırak — ilk cümle onu tamamlasın.
 ```
 
-Kapanışta soru bırakmak yorumu artırır: `Sence bu bir çözüm mü?`
+### Kapanış iki parçadır
+
+**1. İkiye bölen soru.** İzleyicinin kendi cevabı olan, basit bir ikilem.
+Bilgi sormaz, taraf tutturur.
+
+| Zayıf | Güçlü |
+|---|---|
+| `Sence bu bir çözüm mü?` | `Sen olsan kaçar mıydın, beklerdin mi?` |
+| `Ne düşünüyorsun?` | `Haklı olan hangisi?` |
+| `Yorumlara yaz` | `Kaç saniye dayanırdın?` |
+
+**2. Döngü cümlesi.** Son cümle videonun İLK cümlesine anlamca bağlanır.
+İzleyici bittiğini fark etmeden ikinci tura başlar.
+
+En sağlam kalıp: son cümle **sebebi yarım bırakır**, ilk cümle sebebi verir.
+
+```
+ilk:  "Gergedan onu görmüyor."
+...
+son:  "Ve o domuz hâlâ hayatta. Sebebi tek şey:"
+```
+
+Metni yazdıktan sonra **son cümleyi ilk cümlenin önüne koyup oku.** Cümle
+gibi akmıyorsa döngü yoktur, yeniden yaz.
+
+Yasak: kapanışta "abone ol", "beğen", "takip et". İzlenme yüzdesini düşürür
+ve döngüyü kırar.
 
 ## 4. Cümle biçimi
 
@@ -65,6 +92,20 @@ Bu format **kısa cümle** ister. Tek kelimelik altyazıda uzun cümle dağılı
 | Zaman baskısı | `On saniye. Sonra bir daha aynı gözle bakamayacaksın.` |
 
 İlk cümle **dört kelimeden uzun olmasın**. İzleyici ilk saniyede karar veriyor.
+
+### Hook'un ekranda da olması gerekir
+
+Seslendirme tek başına yetmez: kitlenin büyük kısmı sessiz izliyor. İlk
+cümlenin kısaltılmış hâli **kare sıfırdan itibaren banner olarak** ekranda
+durur (`spec.banners[0]`, `t: 0`). İki–üç kelime, büyük, yüksek kontrast.
+
+İlk kare ayrıca **hareketli** olmalı ve üstünde bir vuruş sesi bulunmalı.
+Durağan, sessiz açılış kaydırma oranını yükseltiyor.
+
+### Girişte yasak
+
+`Merhaba`, `Bugün size`, `Bu videoda`, `Biliyor muydunuz` — hepsi zaman
+harcar ve hiçbir vaat taşımaz. Olayın ortasından başla.
 
 ## 6. ElevenLabs'e hazır olma kuralları
 
