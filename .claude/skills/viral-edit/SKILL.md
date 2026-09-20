@@ -13,6 +13,25 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 
 ---
 
+## Dosyalar
+
+| Dosya | İş |
+|---|---|
+| `scripts/build.py` | **Giriş noktası.** Uçtan uca kurgu + doğrulama + kalite kontrol |
+| `scripts/analyze.py` | Referans videoyu ölç (ritim, ses, kadraj) — tahminle taklit etme |
+| `scripts/align.py` | Metni sese kelime kelime hizalar (ASR yok), renk vurgusu |
+| `scripts/overlay.py` | Altyazı, banner, ok — saydam katman |
+| `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
+| `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
+| `scripts/cover.py` | Dikey kapak görseli |
+| `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
+| `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
+| `reference/script-writing.md` | Metin yapısı, hook kalıpları, döngü kurgusu |
+| `reference/voice-settings.md` | Ses seçimi ve ElevenLabs ayar standardı |
+| `reference/style-profile.md` | Referans videodan ölçülen sayılar |
+
+---
+
 ## 0. Hangi aşamadayız
 
 İş iki turda yürür. Kullanıcı hangi turu istiyorsa onu yap, ikisini karıştırma.
@@ -43,6 +62,78 @@ Sadece video attıysa **metni yazmadan kurguya başlama** — ses olmadan kesim 
 > (huggingface, openaipublic, alphacephei → 403). Metni uydurma. Sen yazdıysan elinde
 > zaten var; kullanıcı kendi metnini kullandıysa **iste**. Tek istisna: kaynak videoda
 > **gömülü altyazı** varsa kareleri okuyup çıkarabilirsin.
+
+---
+
+## 0a. Çalıştırma — TEK KOMUT
+
+> Kurguyu elle ffmpeg komutlarıyla kurma. Yirmi adım sürüyor ve her seferinde
+> bir adım atlanıyor: ses yatağı eski kesimlere göre kalıyor, kırpılma kontrolü
+> unutuluyor, altyazı eski sesle hizalı kalıyor. `build.py` sırayı sabitliyor.
+
+```bash
+python3 scripts/build.py \
+  --src ham.mp4 --edl edl.tsv --vo ses.mp3 --script metin.txt \
+  --spec spec.json --out video.mp4 \
+  --usable-end 13.0 --banner-words 3 --emphasis kör hayatta
+```
+
+`hizalama → planlar → ses yatağı → mix → master → grafik → birleştirme → kalite kontrol`
+
+| Bayrak | Ne işe yarar |
+|---|---|
+| `--usable-end` | Kaynakta kullanılabilir son an (end card / logo öncesi) |
+| `--banner-words` | Banner'ın kapsadığı kelime sayısı — altyazıdan düşülür |
+| `--emphasis` | Kırmızı vurgulanacak kelimeler (3–5 tane, fazlası vurguyu öldürür) |
+| `--crop` | Kaynaktan kırpma `GxY`, 9:16 olmalı (varsayılan `416:740`) |
+| `--force` | EDL uyarılarına rağmen devam et — **kullanma**, uyarıyı düzelt |
+
+EDL uyarısı varsa **başlamadan duruyor**; çıkışta kırpılma bulursa dosyayı
+reddediyor. Uyarıyı susturma, sebebini düzelt.
+
+### EDL biçimi
+
+Sekmeyle ayrılmış, `#` yorum satırı. Her satır bir plan.
+
+```
+# out0	out1	src	slow	z0	z1	cx	cy	cropx	beat	not
+0.00	1.73	5.55	1.60	1.45	1.58	0.32	0.76	40	R	HOOK
+1.73	3.10	5.90	2.00	1.55	1.70	0.34	0.78	40	m	bir karis otesinde
+```
+
+| Sütun | Anlam |
+|---|---|
+| `out0` `out1` | Planın videodaki yeri (s). **Cümle sınırlarına oturur.** |
+| `src` | Kaynaktaki başlangıç (s) |
+| `slow` | Ağır çekim çarpanı. Kaynaktan çekilen süre `(out1-out0)/slow` |
+| `z0` `z1` | Zoom başı/sonu. `1.00` = tam kare. Her planda hafif hareket olsun. |
+| `cx` `cy` | Kadraj konumu 0–1 (`0.5` = orta). Özneyi ortala. |
+| `cropx` | Kaynaktan kırpmanın sol kenarı — filigran dönemine göre (§4) |
+| `beat` | `R` vuruş+riser · `M` ana vuruş · `m` klink · `-` ses yok |
+
+`beat` ses yatağını ve ışık parlamasını belirliyor — elle yazma, buradan türüyor.
+`R`'yi anlatının döndüğü 2–3 ana koy (açılış, ödül cümlesi, kapanış sorusu).
+
+### spec.json
+
+```json
+{
+ "caption_size": 94, "caption_y": 0.80, "caption_pop": 0.16,
+ "banners": [{"t": 0.0, "dur": 1.73, "text": "GERGEDAN ONU|GÖRMÜYOR",
+              "y": 0.135, "size": 104}],
+ "arrows": [{"t": 0.28, "dur": 1.40, "x": 0.295, "y": 0.555, "angle": 135,
+             "len": 410, "draw": 0.20, "pulse": 0.07, "pulse_hz": 3.2}]
+}
+```
+
+`canvas`, `fps`, `duration`, `card`, `captions` alanlarını yazma — `build.py`
+dolduruyor.
+
+### Eksiksiz örnek
+
+`reference/example-gergedan.md` — yayınlanmış bir videonun **tamamı**: metin,
+EDL'nin 25 satırı, spec, komut, çıkan ölçümler. Yeni videoda oradan kopyala,
+sayıları değiştir. Biçim orada donmuş durumda.
 
 ---
 
@@ -175,15 +266,15 @@ yeni görüntüyle açılır. `silencedetect` ile boşlukları çıkar:
 ffmpeg -nostdin -i vo.mp3 -af "silencedetect=noise=-32dB:d=0.25" -f null - 2>&1 | grep silence_
 ```
 
-### ⛔ Seslendirmeyi KESME — `retime.py` kullanma
+### ⛔ Seslendirmeyi KESME
 
-ElevenLabs çıktılarında %30'a varan sessizlik olabilir ve `scripts/retime.py`
-bunu kısaltmak için yazıldı. **Çalışmıyor, kullanma.**
+ElevenLabs çıktılarında %30'a varan sessizlik olabilir. Bunu kısaltmak için bir
+script yazılmıştı (`retime.py`); **çalışmadığı için silindi, yeniden yazma.**
 
-Sebep ölçüldü: retime enerji bloklarına göre kesiyor, ama enerji bloğu cümle
+Sebep ölçüldü: enerji bloklarına göre kesiyordu, ama enerji bloğu cümle
 sınırı değil. 24.35s'lik 12 cümlelik bir seslendirmede 20 blok çıktı; 19 aranın
 6'sı 0.25s'den kısaydı ve bunlar cümle sonu değil, **kelime ortasındaki ünsüz
-kapanışlarıydı** (0.09s, 0.10s'lik parçalar). retime o noktalardan kesip araya
+kapanışlarıydı** (0.09s, 0.10s'lik parçalar). O noktalardan kesip araya
 0.15s sessizlik koyunca kelimeler parçalandı — kullanıcının duyduğu "anlamsız
 sesler" buydu.
 
@@ -339,6 +430,10 @@ izleyici fark edince yorumlara yazar. Kullanıcıya kaç madde olduğunu sor.
 
 ## 6. Ses masteri
 
+> Seslendirme **seçimi** ve ElevenLabs ayarları ayrı dosyada:
+> `reference/voice-settings.md`. Kullanıcı "ses kötü" derse önce oradaki
+> ölçümü yap — ölçüm temizse ayar kurcalama, sesi değiştir.
+
 | Hedef | Değer |
 |---|---|
 | Integrated loudness | **-14 LUFS** (referans -14.6) |
@@ -389,7 +484,7 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 - **Müziği konuşmanın altına duck et:**
   `sidechaincompress=threshold=0.05:ratio=7:attack=8:release=280`
   Konuşma anında ~9 dB aşağı inmeli. Ölçerek doğrula.
-- **Efekt sesleri** `scripts/sfx.py` ile: büyük kesimlerde boom + whoosh, ara
+- **Efekt sesleri** `scripts/audiobed.py` ile: büyük kesimlerde boom + whoosh, ara
   kesimlerde tik, ödül anından önce riser + sub-drop.
 - Her darbeye görsel karşılık ver: flash (0.13s) ve kamera sarsıntısı (6–10px,
   0.28s'de sönen).
@@ -398,11 +493,19 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 
 ## 7. Render ve kalite kontrolü
 
+`build.py` render'ı da yapıyor; aşağıdakiler onun kullandığı değerler, elle
+müdahale gerekmiyor.
+
 ```bash
--c:v libx264 -preset slower -crf 21 -profile:v high -pix_fmt yuv420p
--x264-params "keyint=60:min-keyint=30" -movflags +faststart
--c:a aac -b:a 160k -ar 48000 -ac 2
+-c:v libx264 -preset slow -crf 18 -profile:v high -level 4.0 -pix_fmt yuv420p
+-r 30 -movflags +faststart -c:a aac -b:a 192k -ar 48000 -ac 2
 ```
+
+**30 MiB sınırı.** Teslim yolu 30 MiB'ı aşan dosyayı reddediyor. 33 saniyelik
+bir video crf 18'de 31 MiB çıktı. Aşarsan `content.mp4` + `overlay.mov` +
+`mix.wav`'dan yeniden birleştir (ikinci kayıplı kodlama olmasın), `crf 22` ve
+`-maxrate 6500k -bufsize 13000k` ekle — 19 MiB'a iniyor, gözle fark yok.
+`build.py --work` klasörü bu üç dosyayı bırakıyor, tekrar üretmen gerekmiyor.
 
 **Teslimden önce her seferinde:**
 

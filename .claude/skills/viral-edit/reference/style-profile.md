@@ -2,7 +2,7 @@
 
 Ölçüm kaynağı: `Şehrin ANLATILMAYAN Hikayesi` (YouTube Shorts), 720x1280, 58.15s, 30fps.
 Aşağıdaki sayılar tahmin değil, kare kare ölçüldü. Yeni bir referans video gelirse
-`scripts/analyze.py` ile aynı ölçümleri çıkar ve bu dosyayı güncelle.
+`python3 scripts/analyze.py yeni-referans.mp4` ile aynı ölçümleri çıkar ve bu dosyayı güncelle.
 
 ---
 
