@@ -309,6 +309,27 @@ Ama koyduğun ok **büyük olmalı**: kadraj genişliğinin ~%45'i (1080'de `len
 kalın siyah konturlu, `pulse: 0.07` ile nabız atan. Küçük ok fark edilmez —
 konmamış sayılır. Okun ucunu ızgara (`drawgrid`) ile doğrula, tahminle yerleştirme.
 
+### Kapak görseli
+
+```bash
+python3 scripts/cover.py --frame kare.png --spec kapak.json --out kapak.png
+```
+
+Shorts akışında video otomatik oynuyor, kapak orada görünmüyor — ama **kanal
+sayfasında ve Shorts rafında** görünüyor ve orada genişliği ~150 piksel.
+`cover.py` her kapağın 150px sürümünü de yazıyor; **ona bak**, büyük hâline
+değil. Okunmuyorsa kapak yok demektir.
+
+Kurallar:
+- **Tek fikir.** İki-üç kelimelik başlık. Cümle kurma.
+- Videonun ilk karesindeki yazıyı **tekrarlama** — ayrı bir açı ver, iki kanca olsun.
+- Sayı kontrastı en hızlı okunan şey: özneleri etiketle (`2 TON` / `80 KİLO`).
+- Kırmızı ok kanalın imzası; videodakiyle aynı biçimde kullan.
+- Açık gökyüzünde beyaz yazı kayboluyor — `top_shade` ile üstü koyulaştır.
+
+Kare seçimi: en güçlü an değil, **en okunabilir** an. Öznelerin üst üste
+binmediği, ikisinin de siluetiyle tanındığı kare.
+
 ### Sayaç
 
 `N/30` açık döngü kurar ama **içerikte gerçekten o kadar madde yoksa boş vaattir**;
