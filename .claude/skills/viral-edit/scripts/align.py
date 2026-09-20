@@ -94,6 +94,37 @@ def split_sentences(text):
     return [p.strip() for p in parts if p.strip()]
 
 
+def phrases(blocks, sentence_gap=0.28):
+    """
+    Blokları CÜMLE öbeklerine birleştirir.
+
+    Enerji tabanlı blok tespiti kelime ortasındaki ünsüz kapanışlarını da ara
+    sanıyor: 12 cümlelik bir seslendirmede 20 blok, bazıları 0.09s'lik parçalar.
+    O parçalara kelime dağıtmak altyazıyı kaydırıyor. Sadece cümle sonu kadar
+    uzun aralar (>= sentence_gap) öbek sınırı sayılır.
+    """
+    out = [list(blocks[0])]
+    for b0, b1 in blocks[1:]:
+        if b0 - out[-1][1] < sentence_gap:
+            out[-1][1] = b1
+        else:
+            out.append([b0, b1])
+    return out
+
+
+def align_sentences(sentences, ph):
+    """Cümle sayısı ile öbek sayısını eşitler. Metni bölmek yerine ÖBEK birleştirir
+    — metni bölmek cümle yapısını bozuyor, öbek birleştirmek zararsız."""
+    sentences = list(sentences); ph = [list(p) for p in ph]
+    while len(ph) > len(sentences):                      # en kısa iki öbeği birleştir
+        i = int(np.argmin([ph[k+1][1] - ph[k][0] for k in range(len(ph)-1)]))
+        ph[i] = [ph[i][0], ph[i+1][1]]; del ph[i+1]
+    while len(sentences) > len(ph):                      # en kısa iki cümleyi birleştir
+        c = [syllables(a) + syllables(b) for a, b in zip(sentences, sentences[1:])]
+        i = int(np.argmin(c)); sentences[i] += " " + sentences[i+1]; del sentences[i+1]
+    return sentences, ph
+
+
 def allocate(words, blocks):
     """
     Kelimeleri bloklara paylaştırır: her blok, süresiyle orantılı hece alır.
@@ -151,7 +182,8 @@ def snap_to_valleys(items, db, radius=0.06):
     return out
 
 
-def align(audio, text, min_dur=0.18, floor_off=18.0, min_gap=0.12, min_block=0.08):
+def align(audio, text, min_dur=0.18, floor_off=18.0, min_gap=0.12, min_block=0.08,
+          sentence_gap=0.28):
     x = load_audio(audio)
     db = envelope(x)
     dur = len(x) / SR
@@ -159,11 +191,18 @@ def align(audio, text, min_dur=0.18, floor_off=18.0, min_gap=0.12, min_block=0.0
     if not blocks:
         blocks = [[0.0, dur]]
 
-    words = [w for s in split_sentences(text) for w in s.split()]
-    if not words:
+    sents = split_sentences(text)
+    if not sents:
         raise SystemExit("Metin boş.")
 
-    items = allocate(words, blocks)
+    # Cümle -> öbek eşlemesi. Böylece bir kelime en fazla kendi cümlesi içinde
+    # kayar; yanlış cümleye düşmez.
+    ph = phrases(blocks, sentence_gap)
+    sents, ph = align_sentences(sents, ph)
+    items = []
+    for sent, (p0, p1) in zip(sents, ph):
+        inner = [b for b in blocks if b[0] >= p0 - 1e-6 and b[1] <= p1 + 1e-6] or [[p0, p1]]
+        items += allocate(sent.split(), inner)
     items = snap_to_valleys(items, db)
 
     # çok kısa kelimeleri komşudan zaman alarak uzat
@@ -186,11 +225,14 @@ def main():
     ap.add_argument("--min-block", type=float, default=0.08)
     ap.add_argument("--min-gap", type=float, default=0.12)
     ap.add_argument("--floor-off", type=float, default=18.0)
+    ap.add_argument("--sentence-gap", type=float, default=0.28,
+                    help="bu kadar uzun ara cümle sınırı sayılır")
     a = ap.parse_args()
 
     text = open(a.text, encoding="utf-8").read()
     items, blocks, db, thr, dur = align(a.audio, text, floor_off=a.floor_off,
-                                        min_gap=a.min_gap, min_block=a.min_block)
+                                        min_gap=a.min_gap, min_block=a.min_block,
+                                        sentence_gap=a.sentence_gap)
 
     json.dump([{"w": w, "s": round(s, 3), "e": round(e, 3)} for w, s, e in items],
               open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
