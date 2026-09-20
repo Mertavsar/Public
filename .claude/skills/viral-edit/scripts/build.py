@@ -155,6 +155,90 @@ def fx_expr(edl):
     return flash, "14+" + sh(10.0, 43, "sin"), "24+" + sh(8.0, 35, "cos")
 
 
+
+def shot_words(edl, caps_path):
+    """Her planın üstünde O AN NE SÖYLENDİĞİNİ bas.
+
+    Bu oturumda iki kez aynı hata yapıldı: "Gergedan ot yiyor" cümlesinin
+    altında domuz yürüyordu; fil videosunda "akıntıda kapana kısılan bu adam"
+    denirken ekranda fil vardı. İkisi de ancak kontakt sayfasına gözle
+    bakarken fark edildi — yani atlanabilirdi.
+
+    Tablo planın notunu ve o an konuşulan kelimeleri yan yana koyuyor.
+    İkisi birbirini tutmuyorsa EDL yanlıştır.
+    """
+    if not caps_path or not os.path.exists(caps_path):
+        return
+    caps = json.load(open(caps_path, encoding="utf-8"))
+    print("\nPLAN ↔ SÖZ  (notu ve sözü karşılaştır; tutmuyorsa EDL yanlış)")
+    for i, r in enumerate(edl):
+        said = " ".join(c["w"] for c in caps if c["s"] < r["o1"] and c["e"] > r["o0"])
+        print(f"{i:3d} {r['o0']:6.2f}-{r['o1']:6.2f}  {r['note'][:28]:28s} | {said[:58]}")
+
+
+def check_cuts_on_pauses(edl, vo, min_ratio=0.40):
+    """Kesimler konuşmanın duraklamalarına oturuyor mu?
+
+    İlk sürüm kesimi KELİME sınırıyla karşılaştırıyordu ve 15 kesimin 7'sine
+    yanlış uyarı verdi. Yanlıştı: referans stilde altyazı kesimin üstünden
+    devam ediyor (style-profile.md), kelime ortasında kesmek kusur değil.
+
+    Asıl kural SKILL.md §3'te: kesimleri DURAKLAMALARIN içine yerleştir, her
+    cümle yeni görüntüyle açılsın. Ölçülen şey o: kaç kesim sessizliğe denk
+    geliyor."""
+    sys.path.insert(0, HERE)
+    import align as A
+    x = A.load_audio(vo)
+    blocks, _ = A.speech_blocks(A.envelope(x))
+    gaps = [(blocks[i][1], blocks[i + 1][0]) for i in range(len(blocks) - 1)]
+    cuts = [r["o0"] for r in edl[1:]]
+    if not cuts:
+        return []
+    on_pause = sum(any(g0 - 0.10 <= t <= g1 + 0.10 for g0, g1 in gaps) for t in cuts)
+    ratio = on_pause / len(cuts)
+    print(f"\nKESİM–DURAKLAMA: {on_pause}/{len(cuts)} kesim sessizliğe oturuyor (%{ratio*100:.0f})")
+    if ratio < min_ratio:
+        return [f"kesimlerin sadece %{ratio*100:.0f}'i duraklamaya oturuyor "
+                f"(hedef %{min_ratio*100:.0f}+). Plan sınırlarını cümle aralarına taşı; "
+                f"araları `silencedetect` ile çıkar."]
+    return []
+
+
+def qc_sheet(out, edl, caps_path, path):
+    """Teslim öncesi zorunlu görsel kontrol: her planın orta karesi + o anki altyazı.
+
+    Elle üretiliyordu ve bu yüzden bazen atlanıyordu. Artık boru hattının
+    parçası — dosya her zaman yazılıyor, BAKMAK zorunlu."""
+    try:
+        from PIL import Image, ImageDraw
+    except ImportError:
+        print("  (PIL yok, kontrol sayfası atlandı)")
+        return
+    caps = json.load(open(caps_path, encoding="utf-8")) if (
+        caps_path and os.path.exists(caps_path)) else []
+    tmp = os.path.join(os.path.dirname(path) or ".", "_qc")
+    os.makedirs(tmp, exist_ok=True)
+    ims = []
+    for i, r in enumerate(edl):
+        t = (r["o0"] + r["o1"]) / 2
+        f = f"{tmp}/s{i:02d}.png"
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-ss", f"{t:.2f}",
+                        "-i", out, "-frames:v", "1", "-vf", "scale=170:302", f], check=True)
+        w = next((c["w"] for c in caps if c["s"] <= t < c["e"]), "")
+        im = Image.open(f).convert("RGB")
+        d = ImageDraw.Draw(im)
+        d.text((4, 3), f"{i} {t:.1f}s", fill=(255, 60, 60))
+        d.text((4, 286), w, fill=(0, 255, 255))
+        ims.append(im)
+    cols = min(9, len(ims))
+    rows = (len(ims) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * 170, rows * 302))
+    for i, im in enumerate(ims):
+        sheet.paste(im, ((i % cols) * 170, (i // cols) * 302))
+    sheet.save(path)
+    print(f"  kontrol sayfası -> {path}   ** BAK: her planın altyazısı görüntüyle uyuyor mu? **")
+
+
 def qc(out, dur):
     import numpy as np
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", out, "-ac", "2", "-ar", "48000",
@@ -267,7 +351,12 @@ def main():
          "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
          "-movflags", "+faststart", a.out])
 
-    if not qc(a.out, dur):
+    ok = qc(a.out, dur)
+    shot_words(edl, caps)
+    for b in check_cuts_on_pauses(edl, a.vo):
+        print("  UYARI:", b)
+    qc_sheet(a.out, edl, caps, os.path.splitext(a.out)[0] + "_kontrol.png")
+    if not ok:
         raise SystemExit("Kırpılma var — teslim etme.")
     print(f"\n-> {a.out}")
 

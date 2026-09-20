@@ -19,6 +19,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 |---|---|
 | `scripts/build.py` | **Giriş noktası.** Uçtan uca kurgu + doğrulama + kalite kontrol |
 | `scripts/analyze.py` | Referans videoyu ölç (ritim, ses, kadraj) — tahminle taklit etme |
+| `scripts/track.py` | Özneyi renkten takip eder, plan başına `cropx` önerir |
 | `scripts/align.py` | Metni sese kelime kelime hizalar (ASR yok), renk vurgusu |
 | `scripts/overlay.py` | Altyazı, banner, ok — saydam katman |
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
@@ -29,6 +30,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `reference/script-writing.md` | Metin yapısı, hook kalıpları, döngü kurgusu |
 | `reference/voice-settings.md` | Ses seçimi ve ElevenLabs ayar standardı |
 | `reference/style-profile.md` | Referans videodan ölçülen sayılar |
+| `reference/performance-log.md` | **Yayınlanan videoların gerçek verisi** — her videodan sonra doldur |
 
 ---
 
@@ -188,6 +190,32 @@ uygulanır**; teslimden önce tek tek doğrula.
 | 6 | Kelime kelime yanan, renk vurgulu altyazı | `align.py --emphasis`, `caption_pop` | Renk oranı %10–20 |
 | 7 | **Sonsuz döngü** — son cümle ilk cümleye bağlanır | Metin | Son + ilk cümleyi arka arkaya oku |
 | 8 | İkiye bölen soru (yorum tetikleyici) | Metin, kapanıştan önce | Net bir ikilem var mı? |
+
+### Referansla kıyas — ölçüldü, üç açık bulundu
+
+Çıkardığımız iki video milyonlar izlenen referansla yan yana ölçüldü:
+
+| | Referans | Gergedan | Fil |
+|---|---|---|---|
+| LUFS · sessizlik | −14.6 · %14 | −14.3 · %14 | −14.3 · %15 |
+| Kesim/s | 0.62 | 0.85 | 0.71 |
+| Ortalama plan | **1.57s** | 1.14s | 1.33s |
+| Süre | 58.2s | 33.0s | 22.7s |
+| Sayaç (açık döngü) | **VAR** | yok | yok |
+
+**Teknik eşleşti, hatta geçildi.** Kalan üç açık:
+
+1. **Hızlı kesim tercih değil, mecburiyet.** Plan süresi kısa çünkü kaynak
+   kısa (gergedan 13s, ayı 7.7s kullanılabilir). Fil'de 24.6s vardı ve plan
+   hemen 1.33'e çıktı. **20–40 saniye gerçek aksiyon içeren kaynak ara** —
+   bu, kurguda yapılabilecek her şeyden fazla fark eder.
+2. **Açık döngü yok.** Referansta `N/30` sayacı videonun TAMAMINA yayılan bir
+   vaat kuruyor; izleyici otuzunu da görmek için kalıyor. Bizde döngü sadece
+   son cümlede kapanıyor. `overlay.py`'deki sayaç duruyor, kullanılmıyor —
+   içerik sayılabilir bir yapıya uyuyorsa kullan (vaat gerçek olmalı).
+3. **Tavan çekingen.** Referansın tepesi +0.3 dBFS, bizimki −3.1. LUFS aynı
+   ama referans daha sıkıştırılmış, telefonda daha önde. −2.0 tavanı test
+   edilebilir; AAC taşmasını ölçerek doğrula, tahminle yükseltme.
 
 ### 3 saniye kuralı
 
@@ -549,6 +577,17 @@ bir video crf 18'de 31 MiB çıktı. Aşarsan `content.mp4` + `overlay.mov` +
 `build.py --work` klasörü bu üç dosyayı bırakıyor, tekrar üretmen gerekmiyor.
 
 **Teslimden önce her seferinde:**
+
+`build.py` artık şunları kendiliğinden basıyor — **üçünü de oku**:
+
+- **PLAN ↔ SÖZ tablosu**: her planın notu ve o an konuşulan kelimeler yan yana.
+  Tutmuyorsa EDL yanlış. Bu oturumda iki kez aynı hata yapıldı ("ot yiyor"
+  derken ekranda domuz yürüyordu; "akıntıda kapana kısılan bu adam" derken
+  ekranda fil vardı) — tablo o hatayı görünür kılıyor.
+- **Kesim sınırı uyarıları**: kesim kelimenin ortasına denk geliyorsa uyarır.
+- **`<çıktı>_kontrol.png`**: her planın orta karesi + o anki altyazı. **BAK.**
+
+Sonra:
 
 1. Kare sayısı ve süre beklenen mi
 2. Her planın orta karesini tam boyutta aç — boş/netsiz plan var mı
