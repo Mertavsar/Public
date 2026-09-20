@@ -1,5 +1,11 @@
 # Seslendirme Metni Yazımı
 
+> ⛔ **Bu dosya metin YAZMAK için değil.** Seslendirme metnini kullanıcı yazar —
+> sebebi `SKILL.md` §0'da: video izleyemiyorsun, kareden hikâye uydurmak yanlış
+> çıkıyor. Burası kullanıcının getirdiği metni değerlendirmek, uzunluğunu
+> doğrulamak ve ElevenLabs biçimine sokmak için.
+
+
 Kullanıcı ham video atar, metni sen yazarsın. Metin **doğrudan ElevenLabs'e
 yapıştırılacak** — düzeltme gerektirmeyecek halde teslim et.
 

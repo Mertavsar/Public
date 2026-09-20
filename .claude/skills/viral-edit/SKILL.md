@@ -1,12 +1,12 @@
 ---
 name: viral-edit
-description: Dikey kısa video (TikTok / Reels / Shorts) için seslendirme metni yazımı ve kurgu. Kullanıcı ham klip attığında; "bunu editle", "özgün hale getir", "buna metin yaz", "seslendirme metni", "viral video yap", "şu videodaki gibi edit", "altyazı ekle", "geçiş efekti koy", "ok işareti koy", "izlenme almıyor" dediğinde kullan. Videoyu okuyup ona özel metni üretir; ses geldiğinde kesim, altyazı, grafik, ses masteri ve kalite kontrolünü yürütür.
+description: Dikey kısa video (TikTok / Reels / Shorts) kurgusu. Kullanıcı ham klip attığında; "bunu editle", "özgün hale getir", "viral video yap", "şu videodaki gibi edit", "altyazı ekle", "geçiş efekti koy", "ok işareti koy", "kapak yap", "izlenme almıyor" dediğinde kullan. Kaynağı ölçer ve raporlar; metin ile ses geldiğinde kesim, altyazı, grafik, ses masteri, kapak ve kalite kontrolünü yürütür. SESLENDİRME METNİNİ YAZMAZ — video izleyemediği için metni kullanıcı verir.
 ---
 
-# Viral Edit — Metin Yazımı ve Dikey Video Kurgusu
+# Viral Edit — Dikey Video Kurgusu
 
-Kullanıcı ham klip atar; sen önce ona özel seslendirme metnini yazarsın, ses gelince
-yayına hazır dikey videoyu çıkarırsın.
+Kullanıcı ham klip atar; sen ölçersin. **Seslendirme metnini kullanıcı verir** (§0 —
+video izleyemiyorsun). Metin ve ses gelince yayına hazır dikey videoyu çıkarırsın.
 
 Varsayılan hedef **referans stil**: `reference/style-profile.md`. O dosya tahmin değil,
 milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce onu oku.
@@ -32,22 +32,58 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 
 ---
 
-## 0. Hangi aşamadayız
+## 0. ⛔ SESLENDİRME METNİNİ SEN YAZMA
 
-İş iki turda yürür. Kullanıcı hangi turu istiyorsa onu yap, ikisini karıştırma.
+> **Kullanıcının kuralı, istisnası yok.** Ham klip gelince metin önerme,
+> taslak verme, "şöyle olabilir" deme. Metni kullanıcı yazar veya verir.
+
+Sebep teknik: **video izleyemiyorsun.** Elinde sadece `ffmpeg` ile çıkardığın
+durağan kareler var — hareketi görmüyorsun, kaynaktaki konuşmayı duymuyorsun.
+Kareye bakıp hikâye kurmak tahmindir ve iki kez yanlış çıktı:
+
+- Gergedan klibinde kullanıcı "gergedan boynuzuyla odunu kaldırıp domuzu
+  kurtardı" metnini getirdi; kareler bunu yalanladı (odun hiç oynamıyor,
+  domuz kendi yürüyerek gidiyor). Yalanı yakalamak doğruydu.
+- Ayı klibinde **bu kez ben uydurdum**: iki fotoğraftaki boyut farkına bakıp
+  "ayı hemen arkasında" dedim. Ölçünce ayı karenin sağ kenarındaydı ve hemen
+  sonra kareden çıkıyordu. Kullanıcı haklı olarak "metinler saçma" dedi.
+
+Kareden çıkarılabilen şey **ölçüm**dür, hikâye değil: "ayı 3.4–4.4 arası 8
+pikselden 19 piksele büyüyor" doğrulanabilir; "ayı ona saldırmak üzere"
+uydurmadır.
+
+### Bunun yerine ne yap
+
+Kullanıcı ham klip atarsa:
+
+1. **Ölç ve raporla** — `scripts/analyze.py`, kontak sayfası, filigran dönemleri,
+   kullanılabilir süre, kadraj planı. Bunlar senin işin.
+2. **Gördüğün şeyi say, yorumlama.** "0–1.5s adam lens kuruyor", "3.4–4.4s
+   kadrajda 8–19 piksellik kahverengi bir cisim" gibi.
+3. **Metni iste.** Videoda ne olduğunu ve varsa kaynaktaki konuşmanın ne
+   dediğini kullanıcıdan öğren.
+4. Kullanıcı isterse getirdiği metni **ElevenLabs biçimine sok**, uzunluğunu
+   hece sayısıyla doğrula, cümleleri altyazıya uygun kısalt. Yeni cümle
+   uydurma.
+
+`reference/script-writing.md` bu iş için duruyor — kullanıcının metnini
+değerlendirmek ve biçimlendirmek için, sıfırdan yazmak için değil.
+
+---
+
+## 0-1. Hangi aşamadayız
 
 ```
 TUR 1   Kullanıcı ham video atar
-        -> videoyu oku, ona özel seslendirme metnini yaz
-        -> metni kopyalanmaya hazır tek blok halinde ver (reference/script-writing.md)
-        -> kullanıcı metni ElevenLabs'e yapıştırıp sesi üretir
+        -> ölç, raporla, kullanılabilir süreyi ve kadraj planını çıkar
+        -> METNİ İSTE (yukarısı)
 
-TUR 2   Kullanıcı sesi atar
+TUR 2   Kullanıcı metni + sesi verir
         -> kurgu, altyazı, grafik, master, teslim (§1'den itibaren)
 ```
 
 Kullanıcı video + ses birlikte attıysa doğrudan Tur 2.
-Sadece video attıysa **metni yazmadan kurguya başlama** — ses olmadan kesim ritmi kurulamaz.
+**Ses ve metin olmadan kurguya başlama** — kesim ritmi seslendirmeye oturur.
 
 ### Tur 2 için gerekenler
 
