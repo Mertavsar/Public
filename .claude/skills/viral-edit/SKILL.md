@@ -37,7 +37,6 @@ Sadece video attıysa **metni yazmadan kurguya başlama** — ses olmadan kesim 
 | Seslendirme sesi | Kesim ritmi buna oturur | Tur 1'e dön |
 | **Seslendirme metni** (.txt) | Tek kelimelik altyazının tek kaynağı | Sen yazdıysan zaten var |
 | Müzik yatağı | Referans stilde sessizlik ölümcül | Sentezlenebilir ama zayıf kalır |
-| Dolgu (arka plan) videosu | Kartın altındaki alanı doldurur | Ana klibin bulanık hali kullanılır |
 | Platform + hedef süre | Kesim yoğunluğunu belirler | 35–45s varsay |
 
 > **ASR yok.** Bu ortamda konuşma tanıma modelleri ağ politikasıyla kapalı
@@ -124,14 +123,24 @@ cümleleri kes, araları sabit 0.15s'ye (dramatik olanları 0.26s) indir, üstü
 
 ---
 
-## 4. Kompozisyon
+## 4. Kompozisyon — HER ZAMAN TAM EKRAN
 
-**Varsayılan: tam ekran.** Kaynak zaten 9:16 ise (çoğu dikey klip öyledir) hiç
-kırpmadan ekranı doldur — görüntünün tamamı kalır, büyütme oranı en düşük olur ve
-özne çok daha güçlü okunur. Kart düzeni kaynağın en-boyu 9:16 değilse (referans
-videodaki gibi 3:4) ya da kullanıcı özellikle isterse kullanılır.
+> **Kural, istisnası yok:** görüntü 1080x1920'nin tamamını doldurur.
+> Kart yapma. Küçültüp ortaya yerleştirme. Kenarlara bulanık dolgu koyma.
+> Bantlama (pillarbox/letterbox) yapma.
 
-### Tam ekranda watermark
+Referans videoda kart düzeni vardı çünkü o videonun kaynakları 3:4'tü. Bizde
+kullanılmıyor — kullanıcı bunu açıkça reddetti.
+
+**Kaynak 9:16 ise** (çoğu dikey klip öyledir) hiç kırpmadan doldur.
+
+**Kaynak 9:16 değilse** yine tam ekran: kırparak doldur, asla küçültme.
+- Daha geniş kaynak (3:4, 1:1): yanlardan kırp, özneyi kadrajda tut
+- Yatay kaynak (16:9): özneye göre kırp; plan başına farklı yatay konum
+  (pan) seçerek kaybı yönet
+- Kayıp çok büyükse süreyi kısaltıp daha az plan kullan — kart kurma
+
+### Watermark
 
 Kırparak kaçamadığın watermark için `delogo` son çare. İzi, arkası düz olmayan
 yerde (tüy, saç, desen) **çok belirgin** — kuşun kanadının geçtiği bir kutu
@@ -150,25 +159,6 @@ Kırparken en-boyu koru: 9:16 için `genişlik / 0.5625 = yükseklik`. Boyu 9:16
 oturmayan bir kırpımı doğrudan 1080x1920'ye ölçeklersen görüntü dikey esner
 (yüzler uzar) — kırparak düzelt, esneterek değil.
 
-### Kart düzeni (kaynak 9:16 değilse)
-
-Ölçüler `reference/style-profile.md`'de. 1080x1920 için:
-
-```bash
-ffmpeg -nostdin -y -i SRC.mp4 -i overlay.mov -filter_complex "\
-[0:v]crop=W:H:X:Y,split=2[c][b];\
-[b]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,\
-   gblur=sigma=34,eq=brightness=0.10:saturation=0.55[bg];\
-[c]scale=870:1176:flags=lanczos,setsar=1,format=rgba,\
-   rotate=1.4*PI/180:c=none:ow=930:oh=1230[card];\
-[bg][card]overlay=(W-w)/2:236:format=auto[base];\
-[base][1:v]overlay=0:0:format=auto,format=yuv420p[v]" -map "[v]" ...
-```
-
-- Kart genişliği **%80.6**, en-boy **0.74**, üst kenar **%13.7**, eğim **±1–2° ve her planda farklı**
-- Arka plan ayrı dolgu videosuysa `[b]` yerine o klibi kullan
-- `rotate` çıktısı büyür (`ow/oh`), overlay konumunu ona göre kaydır
-
 ---
 
 ## 5. Altyazı ve grafikler
@@ -180,6 +170,8 @@ python3 scripts/overlay.py --spec spec.json --out overlay.mov
 
 `align.py` metni sesin enerjisine hizalar (ASR yok, hece ağırlığı + konuşma blokları).
 `overlay.py` sayaç + tek kelimelik altyazı + okları saydam bir katman olarak üretir.
+Tam ekranda spec'teki `card` alanına tuvalin tamamını ver:
+`{"x": 0, "y": 0, "w": 1080, "h": 1920}`, `caption_y` ≈ 0.76 (TikTok arayüzünün üstünde).
 
 **`--check` çıktısını oku.** Blok başına 6'dan fazla kelime düşüyorsa kısa kelimeler
 eleniyor demektir; `--min-block 0.05` ile tekrar dene. Bu ayar sentetik testte ortalama
@@ -190,10 +182,9 @@ hatayı **0.58s'den 0.011s'ye** indirdi — hizalamanın tek kritik parametresi.
 Referansta **58 saniyede 2 kez, toplam 1.8 saniye**. Sürekli ok koymak stili taklit
 etmez, bozar. Tek bir kritik anı işaretle.
 
-Ama koyduğun ok **büyük olmalı**: kart genişliğinin yarısı kadar (780px kartta
-`len` ≈ 430), kalın siyah konturlu, `pulse: 0.07` ile nabız atan. Küçük ok fark
-edilmez — konmamış sayılır. Okun ucunu ızgara (`drawgrid`) ile doğrula, tahminle
-yerleştirme.
+Ama koyduğun ok **büyük olmalı**: kadraj genişliğinin ~%45'i (1080'de `len` ≈ 470),
+kalın siyah konturlu, `pulse: 0.07` ile nabız atan. Küçük ok fark edilmez —
+konmamış sayılır. Okun ucunu ızgara (`drawgrid`) ile doğrula, tahminle yerleştirme.
 
 ### Sayaç
 
@@ -267,12 +258,11 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 
 İki ayrı stil var, talep hangisiyse onu uygula:
 
-**Referans stil (bilgi aktarımı)** — sayaç, tek kelimelik altyazı, 1.5s kesim,
-(kaynak 9:16 değilse kart düzeni + dolgu arka plan), **hiç görsel geçiş efekti yok** (flash/whip/glitch). Tutunma
+**Referans stil (bilgi aktarımı)** — tam ekran, sayaç, tek kelimelik altyazı, 1.5s kesim, **hiç görsel geçiş efekti yok** (flash/whip/glitch). Tutunma
 grafiklerden gelir. Bu kural SESE UYGULANMAZ: altta kesintisiz müzik ve kesimlerde
 darbe sesi vardır.
 
-**Sinematik stil** — tam ekran, yavaş zoom (`zoompan`), ışık geçişi, darbe sesi,
+**Sinematik stil** — yavaş zoom (`zoompan`), ışık geçişi, darbe sesi,
 kamera sarsıntısı, ağır çekim final, dramatik sessizlik. Tutunma atmosferden gelir.
 
 İkisini karıştırma. Sinematik videoya sayaç koymak da, referans stile ışık patlaması

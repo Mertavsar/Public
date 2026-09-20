@@ -8,7 +8,11 @@ Aşağıdaki sayılar tahmin değil, kare kare ölçüldü. Yeni bir referans vi
 
 ## Düzen
 
-Kaynak klip **tam ekran değil**. Ortada duran bir kart.
+> ⛔ **Bu bölüm sadece kayıt amaçlıdır — kart düzeni KULLANILMIYOR.**
+> Kullanıcı tam ekran istiyor. Ölçüler burada duruyor çünkü referans videonun
+> stilini belgeliyorlar, uygulanacak düzen `SKILL.md` §4'te: her zaman tam ekran.
+
+Referans klip **tam ekran değil**. Ortada duran bir kart.
 
 | Öğe | Ölçüm | 1080x1920'ye oran |
 |---|---|---|
