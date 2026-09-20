@@ -124,7 +124,33 @@ cümleleri kes, araları sabit 0.15s'ye (dramatik olanları 0.26s) indir, üstü
 
 ---
 
-## 4. Kompozisyon — kart düzeni
+## 4. Kompozisyon
+
+**Varsayılan: tam ekran.** Kaynak zaten 9:16 ise (çoğu dikey klip öyledir) hiç
+kırpmadan ekranı doldur — görüntünün tamamı kalır, büyütme oranı en düşük olur ve
+özne çok daha güçlü okunur. Kart düzeni kaynağın en-boyu 9:16 değilse (referans
+videodaki gibi 3:4) ya da kullanıcı özellikle isterse kullanılır.
+
+### Tam ekranda watermark
+
+Kırparak kaçamadığın watermark için `delogo` son çare. İzi, arkası düz olmayan
+yerde (tüy, saç, desen) **çok belirgin** — kuşun kanadının geçtiği bir kutu
+kabul edilemez bir leke bırakır.
+
+Önce şunları dene:
+1. Watermark hangi zaman aralığında nerede? Ölç (genelde belli bir saniyede
+   köşe değiştirir).
+2. Bir dönemdeki watermark kenardaysa, **o dönemin planlarını ayrı kadrajla** —
+   `crop` ile tamamen dışarıda bırak. Kadraj planlar arası değişebilir, bu doğal
+   bir çeşitlilik olarak okunur.
+3. Kalan planları tek bir watermark dönemine kaydır, böylece tek kutu kalır.
+4. Ancak düz zemin üzerinde kalan kutuya `delogo` uygula.
+
+Kırparken en-boyu koru: 9:16 için `genişlik / 0.5625 = yükseklik`. Boyu 9:16'ya
+oturmayan bir kırpımı doğrudan 1080x1920'ye ölçeklersen görüntü dikey esner
+(yüzler uzar) — kırparak düzelt, esneterek değil.
+
+### Kart düzeni (kaynak 9:16 değilse)
 
 Ölçüler `reference/style-profile.md`'de. 1080x1920 için:
 
@@ -241,8 +267,8 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 
 İki ayrı stil var, talep hangisiyse onu uygula:
 
-**Referans stil (bilgi aktarımı)** — kart düzeni, sayaç, tek kelimelik altyazı, dolgu
-arka plan, 1.5s kesim, **hiç görsel geçiş efekti yok** (flash/whip/glitch). Tutunma
+**Referans stil (bilgi aktarımı)** — sayaç, tek kelimelik altyazı, 1.5s kesim,
+(kaynak 9:16 değilse kart düzeni + dolgu arka plan), **hiç görsel geçiş efekti yok** (flash/whip/glitch). Tutunma
 grafiklerden gelir. Bu kural SESE UYGULANMAZ: altta kesintisiz müzik ve kesimlerde
 darbe sesi vardır.
 
