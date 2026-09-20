@@ -102,6 +102,19 @@ yarım saniye önce ya da sonra olur.
 
 İlk kareye flash koyma — görüntüyü yakar. Açılışta darbe sesi ve sarsıntı yeterli.
 
+### Kare sıfırda vaat olmalı
+
+YouTube Shorts'un "izlemeye devam edenler / izlemeden geçti" metriği ilk 1-2 saniyede
+belirlenir. İzleyici o anda tek bir soruya cevap arar: **bunu neden izleyeyim.**
+
+Tek kelimelik altyazı bu cevabı veremez — "Gözüne" tek başına hiçbir vaat taşımaz.
+Bu yüzden **kare sıfırdan itibaren duran, iki satırlık büyük bir hook yazısı** koy
+(`overlay.py` → `banners`). Ok da kare sıfırda olmalı, 0.85'te değil; kaydıranların
+çoğu o ana kadar gitmiş olur.
+
+Kontrol: ilk kareyi **170 piksel genişliğe** küçültüp bak. Yazı okunmuyorsa ve
+görüntüde ne olduğu anlaşılmıyorsa feed'de de anlaşılmaz.
+
 ---
 
 ## 3. Kesim ritmi

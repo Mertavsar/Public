@@ -26,12 +26,22 @@ spec.json
 
   "arrows": [
     {"t": 15.4, "dur": 1.2, "x": 0.72, "y": 0.34, "angle": 215, "len": 340, "draw": 0.18}
+  ],
+
+  "banners": [
+    {"t": 0, "dur": 1.8, "text": "GÖZÜNE BİR|SANTİM KALDI", "y": 0.22, "size": 104}
   ]
 }
 
-arrows: x/y kart içinde 0–1 oranı (okun SİVRİ UCU oraya bakar).
-        angle = okun geldiği yön, derece (0=sağdan, 90=alttan, 180=soldan, 270=üstten).
-        draw  = çizilerek beliriş süresi (saniye). 0 ise anında görünür.
+arrows:  x/y kart içinde 0–1 oranı (okun SİVRİ UCU oraya bakar).
+         angle = okun geldiği yön, derece (0=sağdan, 90=alttan, 180=soldan, 270=üstten).
+         draw  = çizilerek beliriş süresi (saniye). 0 ise anında görünür.
+         pulse = tam çizildikten sonra nabız genliği (0.07 iyi çalışıyor).
+
+banners: kare sıfırdan itibaren SABİT duran hook yazısı. Tek kelimelik altyazı
+         hook için yetmez — "Gözüne" tek başına hiçbir vaat taşımaz. İzleyici ilk
+         saniyede "neden izleyeyim" sorusunun cevabını arar; banner o cevaptır.
+         text içinde | satır kırar. y = kart içinde 0–1 oranı.
 """
 
 import argparse, json, math, os, subprocess, sys
@@ -122,6 +132,15 @@ def build(spec, out):
 
     arrows = spec.get("arrows", [])
     counter = spec.get("counter")
+    # Hook yazısı: kare sıfırdan itibaren ekranda duran, birden fazla kelimelik vaat.
+    # Tek kelimelik altyazı hook için işe yaramaz — "Gözüne" tek başına hiçbir şey
+    # söylemez. İzleyici ilk saniyede "bunu neden izleyeyim" sorusuna cevap arar.
+    banners = spec.get("banners", [])
+    bfonts = {}
+    for b in banners:
+        sz = b.get("size", 96)
+        if sz not in bfonts:
+            bfonts[sz] = load_font(sz)
 
     p = subprocess.Popen(
         ["ffmpeg", "-nostdin", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgba",
@@ -141,8 +160,9 @@ def build(spec, out):
             word = caps[ci]["w"]
         cval = counter_value(counter["steps"], t) if counter else None
         act = [a for a in arrows if a["t"] <= t < a["t"] + a["dur"]]
+        ban = [b for b in banners if b["t"] <= t < b["t"] + b["dur"]]
 
-        if word is None and cval is None and not act:
+        if word is None and cval is None and not act and not ban:
             p.stdin.write(blank.tobytes())
             continue
 
@@ -171,6 +191,16 @@ def build(spec, out):
         if word:
             stroked_text(d, (cx, cap_y), word, cfont,
                          WHITE, BLACK, max(5, cfont.size // 9))
+
+        for b in ban:
+            bf = bfonts[b.get("size", 96)]
+            by = card["y"] + b.get("y", 0.30) * card["h"]
+            lines = b["text"].split("|")          # | ile satır kır
+            lh = int(bf.size * 1.18)
+            y0 = by - (len(lines) - 1) * lh / 2
+            for k, line in enumerate(lines):
+                stroked_text(d, (cx, y0 + k * lh), line, bf,
+                             b.get("color", WHITE), BLACK, max(6, bf.size // 8))
 
         p.stdin.write(img.tobytes())
 
