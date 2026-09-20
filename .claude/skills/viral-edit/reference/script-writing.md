@@ -76,8 +76,8 @@ Kullanıcı metni **kopyalayıp yapıştıracak**. Aşağıdakiler seslendirmede
 | `30'u` | `otuzu` |
 | `2024` | `iki bin yirmi dört` |
 | `vb.`, `örn.`, `yy.` | açık yaz |
-| `(parantez içi)` | ya cümleye kat ya sil |
-| `[nefes]`, `*vurgulu*` | yazma — sahne yönergesi okunur |
+| `(parantez içi)`, `*vurgulu*` | yazma — sesli okunur |
+| `[whispers]` gibi ses etiketleri | **sadece v3'te** — aşağıya bak |
 | `BÜYÜK HARF` | normal yaz, vurgu için cümleyi kısalt |
 | `emoji` | yazma |
 
@@ -86,6 +86,31 @@ dramatik bekleme. Bu format duraklama istemez — **nokta kullan, üç noktayı 
 
 Metni tek blok halinde ver. Başlık, madde işareti, açıklama ekleme — yapıştırılan
 her karakter seslendirilir.
+
+### Ses etiketleri — model sürümüne bağlı
+
+**Eleven v3** köşeli parantezli ses etiketlerini yönerge olarak yorumlar:
+`[whispers]`, `[curious]`, `[excited]`, `[nervous]`, `[sad]`, `[angry]`,
+`[sarcastic]`, `[laughs]`, `[sighs]`, `[gasps]`.
+
+**v2, Turbo ve Multilingual v2 bunları desteklemez — sesli okur.** Kullanıcı hangi
+modeli kullandığını söylemediyse **iki sürümü birden ver**: etiketli ve etiketsiz.
+Yanlış modelde etiketli metin sesi tamamen bozar.
+
+Kurallar:
+
+- Etiketler **İngilizce** yazılır, metin Türkçe olsa bile
+- Cümlenin **başına** konur, ortasına değil
+- `[whispers]`, `[curious]`, `[excited]` güvenilir; `[urgent]`, `[softly]`, `[warmly]`
+  gibi standart dışı olanlar yok sayılabilir — tutmazsa silinir, cümle bozulmaz
+- Her cümleye etiket koyma; tonlama düzleşir. İniş çıkış yaratacak yerlere koy.
+
+**Süreyi etkiler.** Etiketler seslendirilmez, kelime sayısı değişmez; ama heyecanlı
+okuma hızlanır, fısıltı yavaşlar. 2.18 kelime/saniye tahmini ±%10 kayabilir —
+ses geldiğinde gerçek süreyi ölç, kurguyu ona göre kur.
+
+Tonlama yayı: fısıltıyla aç, merakla kur, ortada yükselt, dönüş anında düşür,
+kapanışta tekrar fısıltıya in.
 
 ## 7. Tek kelimelik altyazıya uygunluk
 
