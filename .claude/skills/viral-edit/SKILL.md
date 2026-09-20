@@ -128,11 +128,25 @@ yeni görüntüyle açılır. `silencedetect` ile boşlukları çıkar:
 ffmpeg -nostdin -i vo.mp3 -af "silencedetect=noise=-32dB:d=0.25" -f null - 2>&1 | grep silence_
 ```
 
-### Seslendirme çok boşluklu geliyorsa sıkıştır
+### ⛔ Seslendirmeyi KESME — `retime.py` kullanma
 
-ElevenLabs çıktılarında %30'a varan sessizlik olabilir. `scripts/` içindeki yöntem:
-cümleleri kes, araları sabit 0.15s'ye (dramatik olanları 0.26s) indir, üstüne
-`atempo=1.06` uygula. Kelime başına/sonuna 45ms pay bırak, yoksa hece kırpılır.
+ElevenLabs çıktılarında %30'a varan sessizlik olabilir ve `scripts/retime.py`
+bunu kısaltmak için yazıldı. **Çalışmıyor, kullanma.**
+
+Sebep ölçüldü: retime enerji bloklarına göre kesiyor, ama enerji bloğu cümle
+sınırı değil. 24.35s'lik 12 cümlelik bir seslendirmede 20 blok çıktı; 19 aranın
+6'sı 0.25s'den kısaydı ve bunlar cümle sonu değil, **kelime ortasındaki ünsüz
+kapanışlarıydı** (0.09s, 0.10s'lik parçalar). retime o noktalardan kesip araya
+0.15s sessizlik koyunca kelimeler parçalandı — kullanıcının duyduğu "anlamsız
+sesler" buydu.
+
+Bunun yerine: **sesi olduğu gibi kullan**, ritmi kesimden çıkar. Sessizlik
+görüntüde boşluk demek değil; duraklamaya bir kesim, bir vuruş ve devam eden
+müzik yatağı koy. Referans videoda da 58 saniyede sıfır sessizlik var — ama bu
+sesi kesmekle değil, altına kesintisiz müzik sermekle sağlanmış.
+
+Boşluklar gerçekten kabul edilemez uzunluktaysa (>1.5s), çözüm metni kısaltıp
+seslendirmeyi **yeniden ürettirmek**; kesmek değil.
 
 ---
 
@@ -168,6 +182,16 @@ kabul edilemez bir leke bırakır.
 3. Kalan planları tek bir watermark dönemine kaydır, böylece tek kutu kalır.
 4. Ancak düz zemin üzerinde kalan kutuya `delogo` uygula.
 
+**Her plana tek bir kırpma dayatma.** Gergedan videosunda watermark 5.00'te
+soldan sağa geçiyordu; her iki dönemi birden kurtaran `crop=...:160:30` özneyi
+(domuzu) kadrajın sol kenarına itiyor, hook okunmuyordu. Plan başına watermark
+dönemine göre kırpma orijini seçince (5.20 sonrası `crop x=40`, öncesi `x=160`)
+özne kadrajın ortasına geldi. EDL'ye `crop_x` sütunu koy ve şunu doğrula:
+
+```bash
+awk -F'\t' '{e=$3+($2-$1)/$4; if($9==40 && $3<5.15) print "HATA sol filigran:",NR}' edl.tsv
+```
+
 Kırparken en-boyu koru: 9:16 için `genişlik / 0.5625 = yükseklik`. Boyu 9:16'ya
 oturmayan bir kırpımı doğrudan 1080x1920'ye ölçeklersen görüntü dikey esner
 (yüzler uzar) — kırparak düzelt, esneterek değil.
@@ -181,14 +205,34 @@ python3 scripts/align.py --audio vo.wav --text script.txt --out captions.json --
 python3 scripts/overlay.py --spec spec.json --out overlay.mov
 ```
 
-`align.py` metni sesin enerjisine hizalar (ASR yok, hece ağırlığı + konuşma blokları).
+`align.py` metni sese hizalar. ASR yok (model sunucuları ağ politikasıyla kapalı),
+onun yerine **hece çekirdeği** okunuyor: Türkçe hece-zamanlı bir dil ve hemen her
+hecenin çekirdeği bir sesli harf; sesli harfler 300–900 Hz bandında belirgin bir
+enerji tepesi yapıyor. Tepeler sayılıp dinamik programlama ile konuşma bloklarına
+dağıtılıyor, böylece bir bloktaki hata sonrakine geçmiyor.
+
 `overlay.py` sayaç + tek kelimelik altyazı + okları saydam bir katman olarak üretir.
 Tam ekranda spec'teki `card` alanına tuvalin tamamını ver:
-`{"x": 0, "y": 0, "w": 1080, "h": 1920}`, `caption_y` ≈ 0.76 (TikTok arayüzünün üstünde).
+`{"x": 0, "y": 0, "w": 1080, "h": 1920}`, `caption_y` ≈ 0.78–0.80 (TikTok arayüzünün üstünde).
 
-**`--check` çıktısını oku.** Blok başına 6'dan fazla kelime düşüyorsa kısa kelimeler
-eleniyor demektir; `--min-block 0.05` ile tekrar dene. Bu ayar sentetik testte ortalama
-hatayı **0.58s'den 0.011s'ye** indirdi — hizalamanın tek kritik parametresi.
+**`--check` çıktısını oku.** İki sayı önemli:
+
+| Gösterge | İyi | Kötüyse |
+|---|---|---|
+| tepe/hece sapması | %0–5 | `--peak-thr` düşür (daha çok tepe) |
+| blok uyumsuzluğu | < %12 | metin sesle birebir aynı mı? eksik/fazla cümle var mı? |
+
+`--check` blok blok hangi kelimelerin nereye düştüğünü basar. **Bu tabloyu oku.**
+Cümleler bloklara mantıklı düşüyorsa hizalama doğrudur; "0.14s'lik bloğa üç kelime"
+gibi bir satır görüyorsan yanlıştır.
+
+Regresyon testi: `python3 scripts/test_align.py` (sentetik seste örtüşme %99.9).
+
+### İlk cümle banner'da ise altyazıdan çıkar
+
+Banner (kare sıfırdan duran hook yazısı) ile tek kelimelik altyazı aynı anda
+akarsa ekran kalabalık olur ve hiçbiri okunmaz. Banner'ın kapsadığı cümlenin
+kelimelerini `captions.json`'dan çıkar, altyazıyı ikinci cümleden başlat.
 
 ### Ok kullanımı
 
