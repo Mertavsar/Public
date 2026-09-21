@@ -395,6 +395,73 @@ yeni görüntüyle açılır. `silencedetect` ile boşlukları çıkar:
 ffmpeg -nostdin -i vo.mp3 -af "silencedetect=noise=-32dB:d=0.25" -f null - 2>&1 | grep silence_
 ```
 
+### ⚠ Derleme kaynakta bölüm sınırını GÖZ KARARI okuma
+
+"8 püf noktası", "10 hile" gibi derleme kaynaklarda her bölümün kaynakta
+nerede başladığını bilmek zorundasın. Bunu kontakt sayfasından göz kararı
+okumak **yetmiyor** — 3 saniyede bir kare alınan bir sayfanın hata payı
+±1.5s ve o hata doğrudan görüntüye yansıyor.
+
+Bu bir kez teslim edildi. Kaynakta "kıymık" bölümü 13.40'ta başlıyordu,
+kontakt sayfasından 12.40 okunmuştu. Sonuç: kıymık anlatımı başlarken
+ekranda hâlâ bir önceki ipucunun poşeti vardı. Kullanıcı *"berbat olmuş
+video ile ses eşleşmiyor, kıymık sesi gelirken poşet videosu görünüyor"*
+dedi. Aynı hata 3., 4. ve 5. ipucunda da vardı (1.0–2.5s).
+
+**Doğru yöntem:** kaynak zaten kurgulanmış bir derleme — bölüm geçişleri
+sahne kesimidir. Sınırı oradan al:
+
+```bash
+ffmpeg -v info -i ham.mp4 -vf "crop=316:562:130:222,select='gt(scene,0.22)',metadata=print:file=-" \
+    -an -f null - 2>/dev/null | grep -o "pts_time:[0-9.]*"
+```
+
+Sonra **kesimin iki yanından 0.1s aralıkla kare çıkar ve BAK** — sahne
+kesimi bölüm geçişi mi, yoksa bölüm içi bir kesim mi, ancak bakarak ayırt
+edilir.
+
+`build.py` artık render'dan ÖNCE `check_src_on_scene_cuts()` çalıştırıyor:
+her bölümün `src` değeri en yakın sahne kesiminden 0.60s'den fazla
+sapıyorsa render durur.
+
+```
+BOLUM                     kaynak  en yakin sahne    fark
+2 kiymik - sicak su        13.40           13.40   +0.00
+3 dis fircasi              22.57           22.57   -0.00
+```
+
+Bölüm başı = `not` sütunundaki etiketi bir öncekinden farklı olan plan.
+Giriş montajı gibi bilerek plan ORTASINDAN alınan teaser kareler bölüm başı
+değildir — onların notunu `~` ile başlat (`~GIRIS 1/4`), kontrol atlar.
+
+**Yan gösterge:** `slow` değerleri bölümden bölüme çok oynuyorsa (biri 1.15,
+diğeri 1.73) kaynak sınırları yanlıştır — kısa ölçülen bir parça anlatımı
+doldurmak için aşırı ağır çekime zorlanıyordur. Doğru sınırlarla hepsi
+0.9–1.35 arasına oturdu.
+
+### ⚠ Paragraf–kesim kontrolü (ikincil)
+
+`build.py` ayrıca `align.paragraph_bounds()` ile metnin noktalama yapısını
+sesin duraklama dizisine oturtup her paragrafın başlangıcını ölçüyor ve
+oraya bir plan kesimi düşüyor mu diye bakıyor.
+
+Bu ölçüm **her seslendirmede çalışmıyor**: noktalama yanlış duraklamaya
+oturduğunda aradaki parça imkânsız bir hızda "okunmuş" görünüyor (ölçülen
+bir vakada 23 hece 1.89 saniyede, 12.2 hece/sn). Fonksiyon bunu kendi
+yakalıyor — 2.5–10.5 hece/sn dışına çıkan parça varsa `None` döner ve
+kontrol atlanır. **Sessizce yanlış sınır vermesindense atlaması iyidir;
+çıktıda "sınırlar KULLANILMADI" görürsen kaynak sınırı kontrolü tek
+güvencendir.**
+
+Asıl sınır ölçüsü `align.py`'nin kelime hizalamasıdır: konuşma bloklarına
+hapsedildiği için global kaymaz. Paragrafların başladığı an oradan okunur:
+
+```python
+import json
+c = json.load(open("_build/captions.json"))
+# her paragrafın ilk kelimesinin "s" değeri = o bölümün anlatım başlangıcı
+```
+
 ### ⛔ Seslendirmeyi KESME
 
 ElevenLabs çıktılarında %30'a varan sessizlik olabilir. Bunu kısaltmak için bir
@@ -688,7 +755,13 @@ bir video crf 18'de 31 MiB çıktı. Aşarsan `content.mp4` + `overlay.mov` +
   Tutmuyorsa EDL yanlış. Bu oturumda iki kez aynı hata yapıldı ("ot yiyor"
   derken ekranda domuz yürüyordu; "akıntıda kapana kısılan bu adam" derken
   ekranda fil vardı) — tablo o hatayı görünür kılıyor.
-- **Kesim sınırı uyarıları**: kesim kelimenin ortasına denk geliyorsa uyarır.
+- **BÖLÜM–SAHNE tablosu**: her bölümün `src` değeri ile kaynağın kendi en
+  yakın sahne kesimi. Sapma 0.60s'yi geçerse render durur (§3). Derleme
+  kaynakta anlatım–görüntü kaymasını yakalayan ASIL kontrol bu.
+- **PARAGRAF–KESİM tablosu**: her paragrafın sesteki başlangıcı ile en yakın
+  plan kesimi. "sınırlar KULLANILMADI" yazıyorsa ölçüm bu seslendirmede
+  güvenilir değil, atlandı (§3).
+- **Kesim–duraklama oranı**: kesimlerin kaçı sessizliğe oturuyor (hedef %40+).
 - **`<çıktı>_kontrol.png`**: her planın orta karesi + o anki altyazı. **BAK.**
 
 Sonra:

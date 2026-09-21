@@ -25,7 +25,7 @@ cropx      kaynaktan kırpmanın sol kenarı. Filigran dönemine göre plan baş
 beat       M ana vuruş · m klink · R vuruş+riser · - ses yok
 """
 
-import argparse, json, os, shlex, subprocess, sys
+import argparse, json, os, re, shlex, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FLASH_AMP = {"R": 0.30, "M": 0.24}
@@ -207,6 +207,97 @@ def check_cuts_on_pauses(edl, vo, min_ratio=0.40):
     return []
 
 
+def scene_cuts(src, crop, cropy, thr=0.22):
+    """Kaynağın KENDİ kurgu kesimleri."""
+    cw, ch = crop
+    out = subprocess.run(
+        ["ffmpeg", "-v", "info", "-i", src, "-vf",
+         f"crop={cw}:{ch}:0:{cropy},select='gt(scene,{thr})',metadata=print:file=-",
+         "-an", "-f", "null", "-"],
+        capture_output=True, text=True).stdout
+    return sorted(float(m) for m in re.findall(r"pts_time:([0-9.]+)", out))
+
+
+def check_src_on_scene_cuts(edl, src, crop, cropy, tol=0.60):
+    """Her bölümün kaynak parçası, kaynağın kendi sahne kesiminde mi başlıyor?
+
+    BU KONTROL NEDEN VAR: derleme videolarda (8 ipucu, 10 hile...) her bölümün
+    kaynakta nerede başladığı KONTAKT SAYFASINDAN göz kararı okunuyordu.
+    3 saniyede bir kare alınan bir sayfada ±1.5s hata payı var ve o hata
+    doğrudan görüntüye yansıyor: "kıymık" anlatımı başlarken ekranda hâlâ
+    bir önceki ipucunun poşeti duruyordu — kullanıcının bildirdiği hata buydu.
+    Kaynak sınırı 12.40 okunmuştu, gerçeği 13.40'tı.
+
+    Kaynak zaten kurgulanmış bir derleme: bölüm geçişleri sahne kesimidir.
+    Bölüm başına denk gelen bir sahne kesimi yoksa sınır yanlıştır. Sınırı
+    göz kararı değil BURADAN al.
+
+    Bölüm başı = `not` sütunundaki etiketi bir öncekinden farklı olan plan.
+    Notu `~` ile başlayan planlar atlanır: giriş montajı gibi bilerek plan
+    ORTASINDAN alınan teaser kareler bölüm başı değildir."""
+    cuts = scene_cuts(src, crop, cropy)
+    if not cuts:
+        print("\nKAYNAK–SAHNE: sahne kesimi bulunamadı, kontrol atlandı")
+        return []
+    heads, prev = [], None
+    for r in edl:
+        key = r["note"].split("[")[0].strip()
+        if key != prev:
+            if not key.startswith("~"):
+                heads.append((key, r["src"]))
+            prev = key
+    bad = []
+    print(f"\n{'BOLUM':24s} {'kaynak':>7s} {'en yakin sahne':>15s} {'fark':>7s}")
+    for key, t in heads:
+        c = min(cuts, key=lambda v: abs(v - t))
+        d = c - t
+        flag = "" if abs(d) <= tol else "   <== KAYIK"
+        print(f"{key:24s} {t:7.2f} {c:15.2f} {d:+7.2f}{flag}")
+        if abs(d) > tol:
+            bad.append(f"'{key}' kaynakta {t:.2f}s'den başlıyor ama en yakın sahne "
+                       f"kesimi {c:.2f}s ({d:+.2f}s) — {abs(d):.2f}s boyunca bir "
+                       f"önceki bölümün görüntüsü kalıyor. src'yi {c:.2f} yap.")
+    return bad
+
+
+def check_segment_sync(edl, vo, script, tol=0.35):
+    """Seslendirmenin her paragrafı kendi görüntüsüyle mi başlıyor?
+
+    BU KONTROL NEDEN VAR: `shot_words()` planları ALTYAZIYLA karşılaştırıyor,
+    altyazı da hizalamadan üretiliyor. Hizalamanın tamamı birlikte kayarsa
+    ikisi birbirini doğruluyor ve hata görünmüyor — kör nokta. Teslim edilen
+    bir videoda kıymık anlatımı 2 saniye boyunca poşet görüntüsünün üstünde
+    kaldı ve tablo "doğru" diyordu.
+
+    Burada ölçüt hizalama değil, sesin kendisi: `align.paragraph_bounds`
+    metnin noktalama yapısını duraklama dizisine oturtur. Her paragraf
+    sınırında bir PLAN KESİMİ olmak zorunda. Yoksa anlatım bir önceki
+    ipucunun görüntüsüne biner."""
+    if not script or not os.path.exists(script):
+        print("\nPARAGRAF–KESİM: metin yok, kontrol atlandı")
+        return []
+    sys.path.insert(0, HERE)
+    import align as A
+    x = A.load_audio(vo)
+    bounds = A.paragraph_bounds(x, open(script, encoding="utf-8").read())
+    if not bounds or len(bounds) < 3:
+        print("  (paragraf sınırı güvenilir ölçülemedi — kontrol atlandı)")
+        return []
+    cuts = [r["o0"] for r in edl] + [edl[-1]["o1"]]
+    bad = []
+    print(f"{'PARAGRAF':>9s} {'ses':>7s} {'en yakin kesim':>15s} {'fark':>7s}")
+    for k, t in enumerate(bounds[1:-1], start=1):
+        c = min(cuts, key=lambda v: abs(v - t))
+        d = c - t
+        flag = "" if abs(d) <= tol else "   <== KAYIK"
+        print(f"{k:9d} {t:7.2f} {c:15.2f} {d:+7.2f}{flag}")
+        if abs(d) > tol:
+            bad.append(f"paragraf {k} seste {t:.2f}s başlıyor ama en yakın kesim "
+                       f"{c:.2f}s ({d:+.2f}s) — {abs(d):.2f}s boyunca yanlış görüntü. "
+                       f"EDL'de o ipucunun out0'ını {t:.2f}s yap.")
+    return bad
+
+
 def qc_sheet(out, edl, caps_path, path):
     """Teslim öncesi zorunlu görsel kontrol: her planın orta karesi + o anki altyazı.
 
@@ -341,6 +432,13 @@ def main():
     if bad and not a.force:
         raise SystemExit("EDL uyarıları var. Düzelt veya --force ver.")
     dur = edl[-1]["o1"]
+
+    for b in (check_segment_sync(edl, a.vo, a.script)
+              + check_src_on_scene_cuts(edl, a.src, (cw, ch), a.crop_y)):
+        print("  UYARI:", b)
+        bad.append(b)
+    if bad and not a.force:
+        raise SystemExit("Anlatım–görüntü uyuşmazlığı. EDL'i düzelt veya --force ver.")
 
     caps = None
     if a.script:

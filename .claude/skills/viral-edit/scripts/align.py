@@ -143,6 +143,171 @@ def syllables(w):
     return max(1, sum(1 for c in w if c in VOWELS))
 
 
+# Noktalama işaretlerinin ürettiği duraklamanın göreli uzunluğu. Paragraf
+# sonu en uzun susar, virgül en kısa. Sayılar ölçümle değil sıralamayla
+# önemli: eşleştirme bunları ağırlık olarak kullanıyor.
+PUNCT_WEIGHT = {"¶": 1.0, "...": 0.9, "…": 0.9, ".": 0.7, "!": 0.7, "?": 0.7,
+                ";": 0.45, ":": 0.45, ",": 0.3}
+_PUNCT_RE = re.compile(r"(\.\.\.|…|[,;:.!?])\s+")
+_DIGIT_SYL = {"0": "sıfır", "1": "bir", "2": "iki", "3": "üç", "4": "dört",
+              "5": "beş", "6": "altı", "7": "yedi", "8": "sekiz", "9": "dokuz"}
+
+
+def syllables_text(t):
+    """Bir metin parçasının hece sayısı. Rakamlar okunuşlarına çevrilir —
+    "99" yazıda sıfır sesli harf, seslendirmede dört hece ("doksan dokuz")."""
+    t = t.replace("İ", "i").replace("I", "ı").lower()
+    t = "".join(_DIGIT_SYL.get(c, c) for c in t)
+    return sum(1 for c in t if c in "aeıioöuüâî")
+
+
+def pauses(x, min_dur=0.13, rel_thr=0.08):
+    """Seslendirmedeki duraklamalar: (baslangic, bitis, sure)."""
+    hop, win = int(SR * HOP), int(SR * 0.025)
+    n = (len(x) - win) // hop
+    e = np.array([np.sqrt(np.mean(x[i * hop:i * hop + win] ** 2)) for i in range(n)])
+    thr = np.percentile(e, 95) * rel_thr
+    out, i = [], 0
+    while i < n:
+        if e[i] < thr:
+            j = i
+            while j < n and e[j] < thr:
+                j += 1
+            if (j - i) * HOP >= min_dur:
+                out.append((i * HOP, j * HOP, (j - i) * HOP))
+            i = j
+        else:
+            i += 1
+    return out
+
+
+def paragraph_bounds(x, text, skip_expected=2.5, skip_observed=2.0, verbose=False):
+    """
+    Metnin her paragrafının sesteki başlangıç anını bulur.
+
+    NEDEN AYRI BİR ÖLÇÜM: `align()` kelimeleri hizalar, ama hizalamanın
+    TAMAMI aynı anda kayarsa altyazı kendi içinde tutarlı kalır ve hata
+    görünmez. Kurgu planları o kayık hizalamaya göre kesilince seslendirme
+    ile görüntü birbirini tutmaz — teslim edilen bir videoda kıymık anlatımı
+    poşet görüntüsünün üstüne bindi. Buradaki ölçüm metnin NOKTALAMA
+    YAPISINI sesin duraklama dizisine oturtur; hece hızına değil sıraya
+    dayandığı için global kaymaya karşı bağışık.
+
+    Yöntem: metindeki her noktalama işareti bir duraklama bekler. Beklenen
+    kesme dizisi ile gözlenen duraklama dizisi monoton olarak eşleştirilir
+    (nefes duraklamaları "fazla", sesletilmeyen işaretler "yok" sayılır).
+    Konum tahmini hece sayısı × konuşma hızı ile yapılır, uzun duraklamalar
+    güçlü noktalamaya çekilir.
+
+    Döner: paragraf başlangıçları [t0, t1, ... , ses_sonu] (len = paragraf+1).
+    """
+    paras = [p.strip() for p in text.split("\n") if p.strip()]
+    if not paras:
+        return []
+    marks, cum = [], 0
+    for pi, p in enumerate(paras):
+        last, segs = 0, []
+        for m in _PUNCT_RE.finditer(p):
+            segs.append((p[last:m.end(1)], m.group(1)))
+            last = m.end()
+        segs.append((p[last:], "¶"))
+        for txt, mk in segs:
+            cum += syllables_text(txt)
+            marks.append((cum, mk, pi if mk == "¶" else -1))
+    total_syl, marks = cum, marks[:-1]        # son ¶ sesin sonu, kesme değil
+
+    dur = len(x) / SR
+    obs = [r for r in pauses(x) if 0.3 < r[0] and r[1] < dur - 0.3]
+    E, O = len(marks), len(obs)
+    if not E or not O:
+        return [0.0] + [dur]
+    t0 = obs[0][0] if obs else 0.0
+    blocks, _ = speech_blocks(envelope(x))
+    t0 = blocks[0][0] if blocks else 0.0
+    speech = (dur - t0) - sum(r[2] for r in obs)
+    rate = total_syl / max(speech, 1e-6)
+
+    INF = float("inf")
+    dp = [[INF] * (O + 1) for _ in range(E + 1)]
+    bk, last_t, last_c = {}, [[0.0] * (O + 1) for _ in range(E + 1)], \
+                             [[0] * (O + 1) for _ in range(E + 1)]
+    dp[0][0] = 0.0
+    last_t[0][0] = t0
+    for i in range(E + 1):
+        for j in range(O + 1):
+            if dp[i][j] == INF:
+                continue
+            base, lt, lc = dp[i][j], last_t[i][j], last_c[i][j]
+            if i < E and j < O:
+                c, mk, _ = marks[i]
+                t = obs[j][0]
+                pred = lt + (c - lc) / rate + sum(r[2] for r in obs if lt <= r[0] < t)
+                cost = base + abs(t - pred) ** 1.6 * 0.8 - PUNCT_WEIGHT[mk] * obs[j][2] * 2.0
+                if cost < dp[i + 1][j + 1]:
+                    dp[i + 1][j + 1] = cost
+                    bk[(i + 1, j + 1)] = (i, j, "M")
+                    last_t[i + 1][j + 1], last_c[i + 1][j + 1] = obs[j][1], c
+            if i < E and base + skip_expected < dp[i + 1][j]:
+                dp[i + 1][j] = base + skip_expected
+                bk[(i + 1, j)] = (i, j, "E")
+                last_t[i + 1][j], last_c[i + 1][j] = lt, lc
+            if j < O and base + skip_observed < dp[i][j + 1]:
+                dp[i][j + 1] = base + skip_observed
+                bk[(i, j + 1)] = (i, j, "O")
+                last_t[i][j + 1], last_c[i][j + 1] = lt, lc
+
+    path, i, j = [], E, O
+    while (i, j) != (0, 0):
+        pi_, pj_, op = bk[(i, j)]
+        path.append((pi_, pj_, op))
+        i, j = pi_, pj_
+    path.reverse()
+
+    found, missed, extra, rates = {}, 0, 0, []
+    _last_c, _last_t = [0], [t0]
+    for pi_, pj_, op in path:
+        if op == "M":
+            c, mk, par = marks[pi_]
+            if par >= 0:
+                found[par] = round((obs[pj_][0] + obs[pj_][1]) / 2, 2)
+            rates.append((c - _last_c[0], obs[pj_][0] - _last_t[0], mk))
+            _last_c[0], _last_t[0] = c, obs[pj_][1]
+            if verbose:
+                print(f"  {c:5d} {mk:>4s} -> {(obs[pj_][0]+obs[pj_][1])/2:7.2f} "
+                      f"({obs[pj_][2]:.2f}s)" + (f"  <== P{par+1}" if par >= 0 else ""))
+        elif op == "E":
+            missed += 1
+            if verbose:
+                print(f"  {marks[pi_][0]:5d} {marks[pi_][1]:>4s} -> SESLETILMEDI")
+        else:
+            extra += 1
+            if verbose:
+                print(f"  {'':5s} {'':>4s} -> FAZLA {(obs[pj_][0]+obs[pj_][1])/2:7.2f} "
+                      f"({obs[pj_][2]:.2f}s)")
+    print(f"PARAGRAF HİZASI: {E - missed}/{E} noktalama eşleşti · "
+          f"{extra} fazla duraklama · konuşma hızı {rate:.2f} hece/sn")
+    if missed > E * 0.15:
+        print(f"  UYARI: {missed} noktalama sesle eşleşmedi — metin sesle aynı mı?")
+
+    # KENDİ KENDİNİ DOĞRULAMA. Eşleştirme yanlış noktalamaya oturduğunda
+    # aradaki parça fiziksel olarak imkânsız bir hızda "okunmuş" görünür —
+    # bir ölçümde 23 hece 1.89 saniyeye sıkışmıştı (12.2 hece/sn). Türkçe
+    # seslendirme 2.5–10.5 hece/sn aralığında kalır. Dışına çıkan varsa
+    # sonuç güvenilmez; sessizce yanlış sınır döndürmektense None döner.
+    bad = [(n, d, mk) for n, d, mk in rates if n >= 6 and d > 0
+           and not (2.5 <= n / d <= 10.5)]
+    if bad:
+        print(f"  UYARI: {len(bad)} parça imkânsız hızda "
+              f"({', '.join(f'{n}/{d:.2f}s={n/d:.1f}' for n, d, mk in bad[:3])}) "
+              f"— noktalama–duraklama eşleşmesi güvenilmez, sınırlar KULLANILMADI.")
+        return None
+    # marks[i] içindeki `par`, O PARAGRAFIN SONU — yani bir sonrakinin başı.
+    out = [t0]
+    for k in range(1, len(paras)):
+        out.append(found.get(k - 1, out[-1]))
+    return out + [round(dur, 2)]
+
+
 def colorize(items, emphasis=(), number_color="yellow", emph_color="red"):
     """Kelimelere renk etiketi yazar. Renk `overlay.py`nin PALETTE'inden gelir."""
     emph = {strip_word(w) for w in emphasis}
