@@ -270,6 +270,30 @@ Bu adım Tur 1'de de yapılır: metni yazmadan önce videoyu okuman gerekir.
 Metin yazımı: `reference/script-writing.md` (uzunluk formülü: **2.18 kelime/saniye**,
 40 saniye ≈ 87 kelime — referans videodan ölçüldü).
 
+### Kaynağı doğrula — kurguya başlamadan önce
+
+Viral hayvan klipleri sık sık **yapay zekâ üretimi** ya da **yanlış
+etiketlenmiş** oluyor. Bir tanesini yayınlamak kanalın güvenilirliğini bitirir.
+
+`WebSearch` bu ortamda çalışıyor (sayfa açma ve video indirme kapalı, sadece
+arama). Kurguya başlamadan önce klibi ara:
+
+```
+<konu> viral video fact check
+<konu> AI generated fake
+<konu> original source
+```
+
+Ölçüldü: "fil sel sularında adamı kurtardı" diye milyonlarca izlenen bir klip
+yapay zekâ üretimi çıktı ve Nepal seliyle hiç ilgisi yokmuş — Snopes, Full Fact
+ve Lead Stories üçü birden doğruladı. Aynı kategoride çalışıyoruz.
+
+İki ayrı kontrol, ikisi de gerekli:
+
+1. **Klip gerçek mi?** Arama ile fact-check var mı bak.
+2. **Metin klibe uyuyor mu?** Kareleri oku (§0). Gergedan klibinde kullanıcının
+   getirdiği "fil odunu kaldırdı" anlatısı kareler tarafından yalanlandı.
+
 ### Temizlik kontrolü — atlanırsa videoya gömülür
 
 - **Gömülü altyazı / watermark**: kadrajı kırparak çıkar. Konumu ölç, tahmin etme.
