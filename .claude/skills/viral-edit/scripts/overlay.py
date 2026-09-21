@@ -18,7 +18,7 @@ spec.json
   "card": {"x": 105, "y": 263, "w": 870, "h": 1169},
 
   "counter": {"total": 30, "steps": [[3.0, 1], [12.0, 6], [24.0, 12], [34.0, 24]],
-              "size": 82},
+              "size": 82, "y": 0.075},   // y: üstten oran (tam ekranda şart)
 
   "captions": "captions.json",
   "caption_size": 74,
@@ -145,7 +145,10 @@ def build(spec, out):
     nfont = load_font(spec.get("counter", {}).get("size", 82))
 
     cap_y = card["y"] + int(card["h"] * spec.get("caption_y", 0.86))
-    cnt_y = card["y"]                                  # kartın üst kenarına oturur
+    # Sayacın dikey yeri. Referansta kart düzeni vardı ve sayaç kartın üst
+    # kenarına oturuyordu; tam ekranda o yer y=0 demek, yazının yarısı kadraj
+    # dışında kalıyor. Artık oran olarak veriliyor.
+    cnt_y = card["y"] + int(card["h"] * spec.get("counter", {}).get("y", 0.075))
     cx = card["x"] + card["w"] // 2
 
     arrows = spec.get("arrows", [])

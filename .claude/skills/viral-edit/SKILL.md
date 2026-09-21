@@ -513,6 +513,17 @@ büyütüp yerine oturtur. Sabit duran altyazı göz için durağan görüntüyl
 Cümleler bloklara mantıklı düşüyorsa hizalama doğrudur; "0.14s'lik bloğa üç kelime"
 gibi bir satır görüyorsan yanlıştır.
 
+**Yüzde tek başına karar verdirmez.** 85 saniyelik, 5.0 hece/sn hızındaki bir
+seslendirmede sapma %11.6 ve blok uyumsuzluğu %12.2 çıktı — iki uyarı da
+ateşledi. Ama tablo baştan sona tutarlıydı ("Anahtarını kirli suya mı" /
+"düşürdün? Sakın panik"), çünkü sebep hata değil **elizyon**: hızlı konuşmada
+heceler birbirine geçiyor ve tepe sayısı düşüyor. `--peak-thr` düşürmek
+çözmedi (en iyi %9.7'de tıkandı).
+
+Uzun ve hızlı seslendirmede yüzde yükselir; karar tabloyla verilir. Tablo
+bozuksa dur, tutarlıysa devam et — kelime hatası zaten her blok sınırında
+sıfırlanıyor.
+
 Regresyon testi: `python3 scripts/test_align.py` (sentetik seste örtüşme %99.9).
 
 ### İlk cümle banner'da ise altyazıdan çıkar
