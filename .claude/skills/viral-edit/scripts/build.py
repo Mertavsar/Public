@@ -126,14 +126,17 @@ def audio(edl, dur, vo, work, warm_at=None):
 
     raw, mix = f"{work}/mix_raw.wav", f"{work}/mix.wav"
     fc = (f"[0:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
-          f"highpass=f=80,apad=whole_dur={dur:.2f}[vo];[vo]asplit=3[vo_out][sc1][sc2];"
+          f"highpass=f=80,apad=whole_dur={dur:.2f}[vo];[vo]asplit=2[vo_out][sc2];"
           f"[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
-          f"highpass=f=45,volume=0.85[sfx];"
+          f"highpass=f=80,volume=0.95[sfx];"
           f"[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
-          f"highpass=f=52,volume=0.52[mus];"
-          f"[sfx][sc1]sidechaincompress=threshold=0.05:ratio=4:attack=8:release=260[sfxd];"
-          f"[mus][sc2]sidechaincompress=threshold=0.035:ratio=8:attack=6:release=300[musd];"
-          f"[vo_out][sfxd][musd]amix=inputs=3:duration=longest:normalize=0[mix]")
+          f"highpass=f=125,volume=0.78[mus];"
+          # Efekt DUCK EDİLMİYOR: vuruş kısa bir geçici, konuşmayı maskelemiyor;
+          # ducking onu amacından ediyordu. Müzikte oran 8 -> 2.5, bırakma
+          # 300 -> 160 ms: ölçümde müzik konuşma aralarında geri gelmiyordu
+          # (sessizlikte -24.2 dB, konuşmada -21.4 dB — tersi olmalı).
+          f"[mus][sc2]sidechaincompress=threshold=0.09:ratio=2.5:attack=8:release=160[musd];"
+          f"[vo_out][sfx][musd]amix=inputs=3:duration=longest:normalize=0[mix]")
     run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", vo, "-i", sfx, "-i", mus,
          "-filter_complex", fc, "-map", "[mix]", "-c:a", "pcm_f32le",
          "-ar", "48000", "-ac", "2", raw])
@@ -237,6 +240,35 @@ def qc_sheet(out, edl, caps_path, path):
         sheet.paste(im, ((i % cols) * 170, (i // cols) * 302))
     sheet.save(path)
     print(f"  kontrol sayfası -> {path}   ** BAK: her planın altyazısı görüntüyle uyuyor mu? **")
+
+
+def band_check(path, label, max_low=0.15):
+    """Enerjinin ne kadarı telefonda duyulmayan banda kaçıyor?
+
+    Kirpi videosunda müziğin %89.6'sı, efektlerin %95.2'si 120 Hz altındaydı.
+    Seviye ölçümü "normal" diyordu ama telefon hoparlörü o bandı çalmıyor —
+    kullanıcı "müzik duyulmuyor, efekt yok" dedi ve haklıydı.
+    Referans videonun profili: 120 Hz altı %1.5, 300 Hz–1 kHz %64."""
+    import numpy as np
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1",
+                          "-ar", "48000", "-f", "f32le", "-"],
+                         capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, dtype=np.float32).astype(float)
+    win = 4096
+    n = len(x) // win
+    if n < 2:
+        return []
+    fr = x[:n * win].reshape(n, win) * np.hanning(win)
+    sp = (np.abs(np.fft.rfft(fr, axis=1)) ** 2).mean(axis=0)
+    f = np.fft.rfftfreq(win, 1 / 48000)
+    tot = sp.sum()
+    low = sp[f < 120].sum() / tot
+    mid = sp[(f >= 300) & (f < 4000)].sum() / tot
+    print(f"  {label:8s} 120Hz altı %{low*100:4.1f}  ·  300Hz–4kHz %{mid*100:4.1f}")
+    if low > max_low:
+        return [f"{label}: enerjinin %{low*100:.0f}'i 120 Hz altında — "
+                f"telefon hoparlöründe duyulmaz (hedef <%{max_low*100:.0f})"]
+    return []
 
 
 def qc(out, dur):
@@ -352,6 +384,10 @@ def main():
          "-movflags", "+faststart", a.out])
 
     ok = qc(a.out, dur)
+    print("\nSPEKTRUM (telefon hoparlörü 120 Hz altını çalmaz)")
+    for lab, p_ in (("müzik", f"{work}/music.wav"), ("efekt", f"{work}/sfx.wav")):
+        for b in band_check(p_, lab):
+            print("  UYARI:", b)
     shot_words(edl, caps)
     for b in check_cuts_on_pauses(edl, a.vo):
         print("  UYARI:", b)

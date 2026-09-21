@@ -60,14 +60,21 @@ class Bus:
         return raw
 
 
-def boom(rng, dur=1.1, f0=95, f1=42, amp=0.55):
+def boom(rng, dur=1.1, f0=320, f1=130, amp=0.55):
+    """Vuruş. Enerjinin çoğu 300–1000 Hz'de olmalı.
+
+    İlk sürüm 95→42 Hz süpürüyordu ve enerjisinin %95'i 120 Hz altındaydı —
+    telefon hoparlöründe hiç duyulmuyordu (ölçüldü). Referans videonun sesinin
+    %64'ü 300 Hz–1 kHz bandında. Gövde o banda taşındı; sub sadece dokunuş
+    olarak kaldı, kulak onu telefonda hissetmese de iyi hoparlörde duyuyor."""
     t = np.arange(int(SR * dur)) / SR
-    f = f1 + (f0 - f1) * np.exp(-t / 0.16)
-    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.22)
-    sub = np.sin(2 * np.pi * 34.0 * t) * np.exp(-t / 0.38) * 0.6
-    cl = sosfilt(butter(2, [120, 2600], btype="band", fs=SR, output="sos"),
-                 rng.standard_normal(len(t)) * np.exp(-t / 0.012)) * 0.35
-    return _norm(body + sub + cl, amp)
+    f = f1 + (f0 - f1) * np.exp(-t / 0.10)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.20)
+    ring = np.sin(2 * np.pi * 520 * t) * np.exp(-t / 0.09) * 0.55
+    crack = sosfilt(butter(2, [400, 2400], btype="band", fs=SR, output="sos"),
+                    rng.standard_normal(len(t)) * np.exp(-t / 0.020)) * 0.85
+    sub = np.sin(2 * np.pi * 55.0 * t) * np.exp(-t / 0.30) * 0.22
+    return _norm(body + ring + crack + sub, amp)
 
 
 def _sweep(rng, n, f_lo, f_hi, power):
@@ -87,12 +94,14 @@ def whoosh(rng, dur=0.40, amp=0.26):
     return _norm(_sweep(rng, n, 350, 3800, 1.5) * env / env.max(), amp)
 
 
-def tick(rng, amp=0.13):
-    """Kesim tıkı — 'klink'. Kısa, parlak, metalik."""
-    n = int(SR * 0.09); t = np.arange(n) / SR
-    c = sosfilt(butter(2, [1400, 7000], btype="band", fs=SR, output="sos"),
-                rng.standard_normal(n) * np.exp(-t / 0.006))
-    return _norm(c + np.sin(2 * np.pi * 2150 * t) * np.exp(-t / 0.028) * 0.5, amp)
+def tick(rng, amp=0.22):
+    """Kesim tıkı — 'klink'. Kısa, parlak, metalik. Zaten duyulur bandda,
+    sadece seviyesi düşüktü."""
+    n = int(SR * 0.10); t = np.arange(n) / SR
+    c = sosfilt(butter(2, [1200, 7000], btype="band", fs=SR, output="sos"),
+                rng.standard_normal(n) * np.exp(-t / 0.007))
+    tone = (np.sin(2 * np.pi * 1180 * t) + 0.7 * np.sin(2 * np.pi * 1760 * t)) * np.exp(-t / 0.035)
+    return _norm(c + tone * 0.8, amp)
 
 
 def riser(rng, dur=1.35, amp=0.26):
@@ -102,9 +111,12 @@ def riser(rng, dur=1.35, amp=0.26):
 
 
 def subdrop(dur=1.6, amp=0.38):
+    """Düşen ton. Sadece sub olursa telefonda yok; duyulur bandda bir eş
+    düşüş ekleniyor."""
     t = np.arange(int(SR * dur)) / SR
-    f = 58 * np.exp(-t / 0.55) + 26
-    return _norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.5), amp)
+    lo = np.sin(2 * np.pi * np.cumsum(58 * np.exp(-t / 0.55) + 26) / SR) * np.exp(-t / 0.5) * 0.35
+    mid = np.sin(2 * np.pi * np.cumsum(660 * np.exp(-t / 0.45) + 180) / SR) * np.exp(-t / 0.42)
+    return _norm(mid + lo, amp)
 
 
 def build_sfx(dur, major, minor, risers, out):
@@ -118,7 +130,7 @@ def build_sfx(dur, major, minor, risers, out):
     for t in risers:
         bus.place(riser(rng, amp=0.28), t - 1.35)
         bus.place(subdrop(amp=0.36), t)
-    raw = bus.write(out, 45)
+    raw = bus.write(out, 80)
     print(f"{out}  {dur:.2f}s  ham tepe {raw:.2f}  "
           f"{len(major)} vuruş + {len(minor)} klink + {len(risers)} riser")
 
@@ -144,9 +156,20 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
         return e
 
     def kick(amp):
-        n = int(SR * 0.38); tt = np.arange(n) / SR
-        f = 44 + 81 * np.exp(-tt / 0.035)
-        return _norm(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt / 0.11), amp)
+        """Kick'e orta bandda bir 'tok' ekleniyor; sadece 44 Hz telefonda yok."""
+        n = int(SR * 0.34); tt = np.arange(n) / SR
+        f = 95 + 260 * np.exp(-tt / 0.028)
+        body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt / 0.10)
+        knock = sosfilt(butter(2, [300, 1600], btype="band", fs=SR, output="sos"),
+                        rng.standard_normal(n) * np.exp(-tt / 0.012)) * 0.6
+        return _norm(body + knock, amp)
+
+    def pluck(freq, amp, d=0.42):
+        """Duyulur banddaki tek kanal. Referansın enerjisinin %64'ü burada."""
+        n = int(SR * d); tt = np.arange(n) / SR
+        s_ = sum(g * np.sin(2 * np.pi * freq * k * tt)
+                 for k, g in ((1, 1.0), (2, 0.5), (3, 0.28), (4, 0.14)))
+        return _norm(s_, amp) * np.exp(-tt / (d * 0.32))
 
     def sub(note, d, amp):
         n = int(SR * d); tt = np.arange(n) / SR
@@ -167,8 +190,9 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
         return _norm(s, 1.0) * amp * lfo * env(n, 1.2, 1.5)
 
     # A-bölümü: Am (gergin, dar).  B-bölümü: F-majör altılı (sıcak, açık).
-    TENSE = [110.0, 130.81, 164.81]          # A  C  E
-    WARM = [87.31, 130.81, 174.61, 220.0]    # F  C  F  A
+    # Pad bir oktav yukari: 110 Hz'lik bir pad telefonda duyulmuyor.
+    TENSE = [220.0, 261.63, 329.63]          # A  C  E
+    WARM = [349.23, 261.63, 440.0, 523.25]   # F  C  A  C
     if warm_at and 0 < warm_at < dur:
         bus.place(pad(TENSE, warm_at + 0.6, 0.085), 0.1)
         bus.place(pad(WARM, dur - warm_at - 0.1, 0.135), warm_at - 0.5)
@@ -181,8 +205,14 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
         warm = warm_at is not None and t >= warm_at
         if k % 2 == 0:
             bus.place(kick((0.34 if warm else 0.50) * I), t)
-        bus.place(sub(55.0 if (k // 2) % 4 < 2 else 65.41, beat * 0.46,
-                      (0.22 if warm else 0.30) * I), t)
+        bus.place(sub(164.81 if (k // 2) % 4 < 2 else 196.0, beat * 0.46,
+                      (0.10 if warm else 0.13) * I), t)
+        # arpej: duyulur banddaki asil tasiyici
+        arp = ([440.0, 523.25, 659.25, 523.25] if warm else
+               [440.0, 523.25, 587.33, 523.25])
+        bus.place(pluck(arp[k % 4], (0.30 if warm else 0.24) * I), t + beat * 0.25)
+        if k % 4 == 2:
+            bus.place(pluck(arp[(k + 2) % 4] * 2, 0.16 * I, 0.30), t + beat * 0.75)
         if not warm:                          # hi-hat gerilimi taşıyor,
             bus.place(hat(0.055 * I), t + beat * 0.5)   # sıcak bölümde susuyor
             if k % 8 == 7:
@@ -196,7 +226,7 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
     for t, gain in duck:
         g *= np.where(tt > t, gain, 1.0)
     bus.x *= g
-    bus.write(out, 52, peak=0.85)
+    bus.write(out, 125, peak=0.85)
     print(f"{out}  {dur:.2f}s  {bpm:.0f} BPM  {k} vuruş")
 
 

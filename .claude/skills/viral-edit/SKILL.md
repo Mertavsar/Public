@@ -540,6 +540,38 @@ print('tepe %.2f dBFS, >0dBFS ornek: %d'%(20*np.log10(abs(x).max()), (abs(x)>1.0
 
 `>0dBFS örnek` **0 olmalı**. Değilse tavanı düşür ve yeniden master'la.
 
+### ⚠ Telefon hoparlörü 120 Hz altını çalmaz
+
+Bu en pahalı hataydı ve seviye ölçümü onu göstermiyordu.
+
+Kirpi videosunda müziğin **%89.6'sı**, efektlerin **%95.2'si** 120 Hz altındaydı.
+RMS "normal" görünüyordu (−21 dB) ama o enerji telefon hoparlöründen çıkmıyor.
+Kullanıcı "müzik duyulmuyor, efekt sesleri yok" dedi ve **haklıydı**.
+
+Referans videonun profili hedeftir:
+
+| Band | Referans | Kötü (eski) | İyi (düzeltilmiş) |
+|---|---|---|---|
+| 20–120 Hz (telefonda yok) | %1.5 | %89.6 | %4 |
+| 120–300 Hz | %23.8 | %9.8 | %40 |
+| **300 Hz–1 kHz** | **%64.1** | %0.6 | %46 |
+| 1–4 kHz | %9.4 | %0.0 | %10 |
+
+`build.py` artık her kurguda bunu basıyor ve %15'i aşarsa uyarıyor. Sentez
+yaparken **gövdeyi 300–1000 Hz'e koy**; sub sadece dokunuş olsun.
+
+### Sidechain müziği öldürmesin
+
+Ölçüldü: `ratio=8, threshold=0.035, release=300` ile müzik konuşma
+aralarında **geri gelmiyordu** — sessizlikte −40.9 dB, konuşmada −30.7 dB.
+Tam tersi olmalı.
+
+Şimdiki değerler: müzik `ratio=2.5, threshold=0.09, release=160`, seviye 0.78.
+Sonuç: aralarda −21.4 dB, konuşmada −23.2 dB. Doğru yön.
+
+**Efekt duck EDİLMİYOR.** Vuruş kısa bir geçici, konuşmayı maskelemiyor;
+ducking onu amacından ediyordu.
+
 ### Müzik ve efekt sesi — atlanamaz
 
 Referansta **görsel** geçiş efekti yok; bunu sese uygulama. Referansın altında
