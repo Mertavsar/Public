@@ -69,8 +69,19 @@ def build(frame, spec, out):
 
     hl = spec.get("headline")
     if hl:
-        f = load_font(spec.get("headline_size", 150))
+        size = spec.get("headline_size", 150)
         lines = hl.split("|")
+        # Taşma kontrolü: uzun satır kadraja sığmazsa punto küçültülür.
+        # Kesik başlık gönderildi bir kez; ölçülebilir bir hata, bir daha olmasın.
+        while size > 40:
+            f = load_font(size)
+            wmax = max(f.getbbox(l)[2] - f.getbbox(l)[0] for l in lines)
+            if wmax + 2 * max(8, size // 9) <= W - 40:
+                break
+            size -= 4
+        if size != spec.get("headline_size", 150):
+            print(f"   başlık {spec.get('headline_size', 150)} → {size} punto (taşıyordu)")
+        f = load_font(size)
         lh = int(f.size * 1.02)
         y0 = spec.get("headline_y", 0.115) * H
         for k, line in enumerate(lines):
