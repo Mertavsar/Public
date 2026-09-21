@@ -25,6 +25,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
 | `scripts/cover.py` | Dikey kapak görseli |
+| `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
 | `reference/script-writing.md` | Metin yapısı, hook kalıpları, döngü kurgusu |
@@ -233,6 +234,42 @@ awk -F'\t' -v a=1 -v b=2 '!/^#/{d=$(b)-$(a);s+=d;n++}END{printf "ort %.2fs · %d
 
 Ortalama plan **1.2–1.6s** olmalı (referansta 1.55s). 2s'yi geçen ortalama
 tempoyu düşürüyor.
+
+### Hook A/B testi — tahmin etme, ölç
+
+Kanalın tutunma oranı **%48.6**: yarısı ilk saniyelerde kaydırıyor. Bugüne
+kadarki her hook kararı teoriden geldi; **aynı videonun iki farklı açılışla
+yayınlanması hiç denenmedi.**
+
+```bash
+python3 scripts/variants.py --work _build --out-dir . --base kirpi \
+    --hook "BU DİKEN|BİNLERCE LİRA" \
+    --hook "BU DİKENLER|NEDEN TOPLANIYOR?" \
+    --hook "ÇÖPE ATTIĞIN ŞEY|BİNLERCE LİRA"
+```
+
+Ucuz: görüntü, ses ve altyazı değişmiyor, sadece banner katmanı yeniden
+çiziliyor. Tam kurgunun beşte biri kadar iş.
+
+Üç kalıp üç ayrı strateji sınar: **değer iddiası** · **soru** · **ters
+beklenti**. Tek değişken değişsin — sadece yazı.
+
+Yöntem: sürümleri aynı anda yayınlama (biri Shorts biri Reels, ya da iki gün
+arayla aynı saatte) → 2-3 gün sonra Studio'dan 2. saniye tutunmasını al →
+`reference/performance-log.md`ye yaz. Beş testten sonra desen görünür.
+
+### Kaynak nereden bulunur
+
+TikTok'tan klip almak her seferinde şu işi getiriyor: filigran taraması, bant
+kırpma, başkasının gömülü yazısı, kısa kullanılabilir süre, telif belirsizliği.
+Kirpi videosunda dördü birden vardı.
+
+Bedava ve temiz alternatifler (klipler 10–60 sn ve 4K — plan süresi 1.5 sn'ye
+çıkar, tekrar biter):
+
+- [Pexels vahşi yaşam](https://www.pexels.com/search/videos/wildlife/) · [hayvanlar](https://www.pexels.com/search/videos/animals/)
+- [Pixabay vahşi yaşam](https://pixabay.com/videos/search/wildlife%20animal/) · [derin deniz](https://pixabay.com/videos/search/deep%20sea/)
+- [NOAA Okyanus Keşfi video portalı](https://oceanexplorer.noaa.gov/data/access/) — **tamamı kamu malı**, ROV dalışları, ProRes'e kadar. "NOAA Ocean Exploration" kredisi yeterli. Başka kanalda olmayan görüntü.
 
 ### Sonsuz döngü kurgusu
 
