@@ -113,7 +113,7 @@ def cut(src, edl, crop, work, fps=30, cropy=0):
     return content
 
 
-def audio(edl, dur, vo, work, warm_at=None):
+def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False):
     major = [f"{r['o0']:.2f}:{BOOM_AMP[r['beat']]}" for r in edl if r["beat"] in BOOM_AMP]
     minor = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "m"]
     risers = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "R"]
@@ -127,7 +127,19 @@ def audio(edl, dur, vo, work, warm_at=None):
         cmd += ["--duck"] + [f"{t}:0.78" for t in risers[:1]]
     if warm_at is not None:
         cmd += ["--warm-at", f"{warm_at:.2f}"]
+    if mood != "drive":
+        cmd += ["--mood", mood]
     run(cmd)
+    if no_music:
+        # Müzik yatağı susturuluyor; efekt sesleri kalıyor. SKILL.md §6 bunu
+        # önermiyor (referansta sessizlik sıfır) ama kullanıcı isteyebiliyor.
+        import wave
+        with wave.open(mus) as r:
+            p_ = r.getparams()
+        with wave.open(mus, "w") as w_:
+            w_.setparams(p_)
+            w_.writeframes(b"\x00" * (p_.nframes * p_.nchannels * p_.sampwidth))
+        print("  müzik yatağı KAPALI (--no-music)")
 
     raw, mix = f"{work}/mix_raw.wav", f"{work}/mix.wav"
     fc = (f"[0:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
@@ -407,6 +419,10 @@ def main():
     ap.add_argument("--crop", default="416:740", help="kaynaktan kırpma GxY (9:16 olmalı)")
     ap.add_argument("--crop-y", type=int, default=0,
                     help="kırpmanın üst kenarı (kaynak piksel)")
+    ap.add_argument("--music-mood", choices=["drive", "sad"], default="drive",
+                    help="müzik yatağının rengi: drive (tempolu) · sad (acıklı)")
+    ap.add_argument("--no-music", action="store_true",
+                    help="müzik yatağını tamamen sustur (efektler kalır)")
     ap.add_argument("--warm-at", type=float, default=None,
                     help="bu andan sonra müzik gerginden sıcağa döner (s)")
     ap.add_argument("--usable-end", type=float, default=1e9,
@@ -469,7 +485,7 @@ def main():
     content = cut(a.src, edl, (cw, ch), work, cropy=a.crop_y)
 
     print("\n3/5 ses")
-    mix = audio(edl, dur, a.vo, work, a.warm_at)
+    mix = audio(edl, dur, a.vo, work, a.warm_at, a.music_mood, a.no_music)
 
     print("\n4/5 grafik")
     spec = json.load(open(a.spec, encoding="utf-8"))

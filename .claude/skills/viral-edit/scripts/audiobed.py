@@ -230,6 +230,75 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
     print(f"{out}  {dur:.2f}s  {bpm:.0f} BPM  {k} vuruş")
 
 
+# Acıklı yatak (mood="sad"). Kurtarma/terk edilme gibi duygusal hikâyelerde
+# tempolu yatak yanlış duruyor — kullanıcı "acıklı bir müzik koy" dedi.
+# Am–F–C–G: klasik hüzün ilerlemesi. Kick ve hi-hat yok; ritmi bas nabzı
+# taşıyor, yoksa drone'a düşer (SKILL.md §6: "drone değil").
+# Frekanslar bilerek 170–800 Hz'de: telefon hoparlörü 120 Hz altını çalmıyor.
+SAD_PROG = [
+    (220.00, [220.00, 261.63, 329.63], [440.00, 523.25, 659.25, 523.25]),  # Am
+    (174.61, [174.61, 220.00, 261.63], [349.23, 440.00, 523.25, 440.00]),  # F
+    (261.63, [261.63, 329.63, 392.00], [523.25, 659.25, 783.99, 659.25]),  # C
+    (196.00, [196.00, 246.94, 293.66], [392.00, 493.88, 587.33, 493.88]),  # G
+]
+
+
+def build_music_sad(dur, out, bpm=64.0, peak_at=None, duck=()):
+    rng = np.random.default_rng(11)
+    bus = Bus(dur)
+    beat = 60.0 / bpm
+    bar = beat * 4
+    peak_at = peak_at if peak_at else dur * 0.88
+
+    def env(n, a, d):
+        e = np.ones(n); na, nd = int(a * SR), int(d * SR)
+        if na: e[:na] = np.linspace(0, 1, na)
+        if nd: e[-nd:] *= np.linspace(1, 0, nd)
+        return e
+
+    def piano(freq, amp, d=1.7):
+        """Yüksek harmonikler önce sönüyor — piyanoyu piyano yapan bu."""
+        n = int(SR * d); tt = np.arange(n) / SR; s_ = np.zeros(n)
+        for k, g in ((1, 1.0), (2, 0.42), (3, 0.20), (4, 0.10), (5, 0.05)):
+            s_ += g * np.sin(2 * np.pi * freq * k * tt) * np.exp(-tt / (d * 0.40 / k ** 0.6))
+        return _norm(s_, amp)
+
+    def strings(freqs, d, amp):
+        n = int(SR * d); tt = np.arange(n) / SR; s_ = np.zeros(n)
+        vib = np.cumsum(1.0 + 0.005 * np.sin(2 * np.pi * 5.1 * tt)) / SR
+        for f in freqs:
+            for k, g in ((1, 1.0), (2, 0.45), (3, 0.22), (4, 0.10)):
+                s_ += g * np.sin(2 * np.pi * f * k * vib + rng.uniform(0, 6.28))
+        return _norm(s_, 1.0) * amp * env(n, 0.9, 1.0)
+
+    def pulse(note, amp, d=0.55):
+        """Kick yerine yumuşak bas nabzı — kalp atışı gibi, vurmuyor."""
+        n = int(SR * d); tt = np.arange(n) / SR
+        s_ = np.sin(2 * np.pi * note * tt) + 0.30 * np.sin(4 * np.pi * note * tt)
+        return _norm(s_, amp) * env(n, 0.02, d * 0.75)
+
+    t, b = 0.0, 0
+    while t < dur - 0.3:
+        root, chord, arp = SAD_PROG[b % len(SAD_PROG)]
+        I = 0.55 + 0.45 * min(1.0, (t / peak_at) ** 1.2)
+        bus.place(strings(chord, min(bar + 0.7, dur - t), 0.115 * I), t)
+        bus.place(pulse(root, 0.13 * I), t)
+        bus.place(pulse(root, 0.085 * I), t + bar * 0.5)
+        for j in range(4):                       # arpej: duyulur banddaki taşıyıcı
+            bus.place(piano(arp[j], (0.26 if j % 2 == 0 else 0.19) * I), t + j * beat)
+        if b % 4 == 3:                           # dönüş öncesi tek yüksek nota
+            bus.place(piano(arp[1] * 2, 0.11 * I, 2.2), t + beat * 3.5)
+        t += bar; b += 1
+
+    tt = np.arange(bus.n) / SR
+    g = np.clip(tt / 1.6, 0, 1) * np.clip((dur - tt) / 1.8, 0, 1)
+    for t_, gain in duck:
+        g *= np.where(tt > t_, gain, 1.0)
+    bus.x *= g
+    bus.write(out, 125, peak=0.85)
+    print(f"{out}  {dur:.2f}s  {bpm:.0f} BPM  {b} bar  (acikli: Am-F-C-G)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dur", type=float, required=True)
@@ -241,6 +310,8 @@ def main():
                     help="müziğin doruğa çıktığı an (s)")
     ap.add_argument("--duck", nargs="*", default=[],
                     help="t:kazanç — o andan sonra müzik yatağını çarp (0.78 iyi)")
+    ap.add_argument("--mood", choices=["drive", "sad"], default="drive",
+                    help="drive: tempolu yatak · sad: acıklı piyano+yaylı (Am-F-C-G)")
     ap.add_argument("--warm-at", type=float, default=None,
                     help="bu andan sonra yatak gerginden sıcağa döner (s)")
     ap.add_argument("--out-sfx", default="sfx.wav")
@@ -249,7 +320,11 @@ def main():
     major = [(float(s.split(":")[0]), float(s.split(":")[1])) for s in a.major]
     build_sfx(a.dur, major, a.minor, a.riser, a.out_sfx)
     duck = [(float(d.split(":")[0]), float(d.split(":")[1])) for d in a.duck]
-    build_music(a.dur, a.out_music, a.bpm, a.peak_at, duck, a.warm_at)
+    if a.mood == "sad":
+        build_music_sad(a.dur, a.out_music, a.bpm if a.bpm != 102.0 else 64.0,
+                        a.peak_at, duck)
+    else:
+        build_music(a.dur, a.out_music, a.bpm, a.peak_at, duck, a.warm_at)
 
 
 if __name__ == "__main__":

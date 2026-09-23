@@ -756,6 +756,14 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 - **Müziği konuşmanın altına duck et:**
   `sidechaincompress=threshold=0.05:ratio=7:attack=8:release=280`
   Konuşma anında ~9 dB aşağı inmeli. Ölçerek doğrula.
+- **Yatağın rengi** `--music-mood` ile seçilir: `drive` (varsayılan, tempolu
+  102 BPM) · `sad` (acıklı — 64 BPM, Am–F–C–G, piyano + yaylı, kick/hi-hat
+  yok, ritmi yumuşak bas nabzı taşır). Kurtarma/terk edilme gibi duygusal
+  hikâyelerde tempolu yatak yanlış duruyor.
+- **`--no-music`** yatağı tamamen susturur, efektler kalır. Referansta
+  sessizlik sıfır olduğu için önerilmez — ama kullanıcı isteyebilir, bir
+  köpek videosunda istedi. Kapattıktan sonra sessizlik oranını ölç:
+  %10'u aşıyorsa kesimler çıplak kalmış demektir.
 - **Efekt sesleri** `scripts/audiobed.py` ile: büyük kesimlerde boom + whoosh, ara
   kesimlerde tik, ödül anından önce riser + sub-drop.
 - Her darbeye görsel karşılık ver: flash (0.13s) ve kamera sarsıntısı (6–10px,
