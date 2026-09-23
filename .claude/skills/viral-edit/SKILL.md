@@ -145,7 +145,7 @@ Sekmeyle ayrılmış, `#` yorum satırı. Her satır bir plan.
 | `out0` `out1` | Planın videodaki yeri (s). **Cümle sınırlarına oturur.** |
 | `src` | Kaynaktaki başlangıç (s) |
 | `slow` | Ağır çekim çarpanı. Kaynaktan çekilen süre `(out1-out0)/slow` |
-| `z0` `z1` | Zoom başı/sonu. `1.00` = tam kare. Her planda hafif hareket olsun. |
+| `z0` `z1` | Zoom başı/sonu. **Dikey kaynakta ikisi de 1.00** (§4). Sadece yatay/kare kaynağı dolduruken kullanılır. |
 | `cx` `cy` | Kadraj konumu 0–1 (`0.5` = orta). Özneyi ortala. |
 | `cropx` | Kaynaktan kırpmanın sol kenarı — filigran dönemine göre (§4) |
 | `beat` | `R` vuruş+riser · `M` ana vuruş · `m` klink · `-` ses yok |
@@ -492,6 +492,18 @@ seslendirmeyi **yeniden ürettirmek**; kesmek değil.
 > Kart yapma. Küçültüp ortaya yerleştirme. Kenarlara bulanık dolgu koyma.
 > Bantlama (pillarbox/letterbox) yapma.
 
+> ## ⛔ DİKEY KAYNAĞI KESME, ZOOM YAPMA
+>
+> **Kullanıcının kuralı.** Kaynak zaten dikey (9:16) ise:
+> - `--crop` kaynağın TAM boyutu olur, bir piksel bile kırpılmaz
+> - EDL'de `z0 = z1 = 1.00` — zoom hareketi yok
+> - `cropx = cropy = 0`
+>
+> Sebep ölçüldü: bir köpek videosunda gömülü yazıdan kaçmak için 576x1024
+> kaynak 378x672'ye kırpılmıştı (kaynağın %66'sı) ve üstüne zoom binince
+> kullanıcı *"video neden zoom yapılmış gibi, çok yakından her şey"* dedi.
+> %75'e genişletmek yetmedi — doğrusu hiç kırpmamak.
+
 Referans videoda kart düzeni vardı çünkü o videonun kaynakları 3:4'tü. Bizde
 kullanılmıyor — kullanıcı bunu açıkça reddetti.
 
@@ -503,7 +515,19 @@ kullanılmıyor — kullanıcı bunu açıkça reddetti.
   (pan) seçerek kaybı yönet
 - Kayıp çok büyükse süreyi kısaltıp daha az plan kullan — kart kurma
 
-### Watermark
+### Watermark — artık kırpma ile çözülmüyor
+
+Kırpma yasak olduğu için (yukarıdaki kural) filigran ve gömülü yazı kendi
+başına çözülemez. Kaynakta bunlardan biri varsa:
+
+1. **Ölç ve RAPORLA** — nerede, hangi saniyelerde, ne kadar yer kaplıyor.
+2. **KULLANICIYA SOR**: filigran/yazı ekranda kalsın mı, yoksa bu videoda
+   kırpmaya izin veriyor mu? Kendi başına kırpma kararı verme.
+3. Kullanıcı "kalsın" derse olduğu gibi bırak — TikTok'tan gelen klipte
+   filigran olması izleyici için sıra dışı değil.
+
+Aşağıdaki kırpma teknikleri **sadece kullanıcı o video için açıkça izin
+verirse** geçerlidir.
 
 Kırparak kaçamadığın watermark için `delogo` son çare. İzi, arkası düz olmayan
 yerde (tüy, saç, desen) **çok belirgin** — kuşun kanadının geçtiği bir kutu

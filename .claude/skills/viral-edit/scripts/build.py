@@ -499,6 +499,29 @@ def main():
         raise SystemExit(f"crop {cw}x{ch} +{a.crop_y} kaynağı ({sw}x{sh}) aşıyor. "
                          f"--crop-y küçült veya --crop daralt.")
     edl = read_edl(a.edl)
+
+    # ⛔ DİKEY KAYNAĞI KESME, ZOOM YAPMA (SKILL.md §4 — kullanıcının kuralı).
+    # Kaynak zaten 9:16 ise tamamı kullanılır. Bir köpek videosunda gömülü
+    # yazıdan kaçmak için 576x1024 kaynak 378x672'ye kırpılmıştı ve kullanıcı
+    # "video neden zoom yapılmış gibi" dedi. Filigran varsa çözüm kırpmak
+    # değil, KULLANICIYA SORMAK.
+    if abs(sw / sh - 1080 / 1920) < 0.01:
+        kural = []
+        if (cw, ch) != (sw, sh):
+            kural.append(f"kaynak zaten dikey ({sw}x{sh}) ama --crop {cw}:{ch} "
+                         f"— kaynağın %{cw*ch/(sw*sh)*100:.0f}'i kullanılıyor. "
+                         f"--crop {sw}:{sh} ver.")
+        z = [i for i, r in enumerate(edl)
+             if abs(r["z0"] - 1.0) > 1e-3 or abs(r["z1"] - 1.0) > 1e-3]
+        if z:
+            kural.append(f"dikey kaynakta {len(z)} planda zoom var "
+                         f"(ilk: plan {z[0]}) — z0/z1 hepsinde 1.00 olmalı.")
+        for b in kural:
+            print("  KURAL:", b)
+        if kural and not a.force:
+            raise SystemExit("Dikey kaynak kesilmez/zoom yapılmaz (SKILL.md §4). "
+                             "Filigran varsa kullanıcıya SOR; izin verirse --force.")
+
     for i, r in enumerate(edl):
         y0 = a.crop_y if r.get("cropy") is None else r["cropy"]
         if y0 < 0 or y0 + ch > sh:
