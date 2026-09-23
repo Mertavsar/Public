@@ -272,6 +272,32 @@ Bedava ve temiz alternatifler (klipler 10–60 sn ve 4K — plan süresi 1.5 sn'
 - [Pexels vahşi yaşam](https://www.pexels.com/search/videos/wildlife/) · [hayvanlar](https://www.pexels.com/search/videos/animals/)
 - [Pixabay vahşi yaşam](https://pixabay.com/videos/search/wildlife%20animal/) · [derin deniz](https://pixabay.com/videos/search/deep%20sea/)
 - [NOAA Okyanus Keşfi video portalı](https://oceanexplorer.noaa.gov/data/access/) — **tamamı kamu malı**, ROV dalışları, ProRes'e kadar. "NOAA Ocean Exploration" kredisi yeterli. Başka kanalda olmayan görüntü.
+- [Vecteezy hayvan kurtarma](https://www.vecteezy.com/free-videos/animal-rescue) · [Videezy hayvanlar](https://www.videezy.com/free-video/animals) — ücretsiz, atıf koşullu
+
+**Bu ortamdan video indirilemez — ölçüldü.** YouTube, Pexels, Pixabay,
+archive.org hepsi `000` dönüyor (ağ politikası). Çalışan tek şey `WebSearch`:
+arama sonucu başlık + URL geliyor, sayfa açılmıyor. Yani klibi **kullanıcı
+indirir ve atar**; buradan yapılabilecek şey arama, ölçüm ve kurgudur.
+
+### ⚠ Sahte kurtarma videosu — bu kategoride para kazanan bir dolandırıcılık var
+
+Hayvan kurtarma içeriği izlenme getirdiği için **sahnelenmiş** klipler
+üretiliyor: hayvan bilerek tehlikeye atılıp "kurtarılıyor". Kampanyacılar
+bunu para amaçlı bir istismar düzeni olarak belgeliyor. Böyle bir klibi
+yayınlamak kanalın güvenilirliğini bitirir.
+
+Kurguya başlamadan ara:
+
+```
+<konu> staged fake rescue
+<konu> animal rescue scam debunked
+<konu> original source
+```
+
+Şüphe işaretleri: hayvanın tehlikeye nasıl girdiği hiç gösterilmiyor ·
+kamera olay başlamadan önce kurulu ve doğru açıda · aynı "kurtarıcı" farklı
+videolarda tekrar ediyor · yılan/timsah gibi yırtıcı ile yavru hayvan aynı
+karede.
 
 ### Sonsuz döngü kurgusu
 
