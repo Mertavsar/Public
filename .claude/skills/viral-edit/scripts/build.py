@@ -113,7 +113,43 @@ def cut(src, edl, crop, work, fps=30, cropy=0):
     return content
 
 
-def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False):
+def source_audio(src, edl, dur, work, fps=30):
+    """Kaynağın KENDİ sesini EDL'ye göre yeniden kurar.
+
+    Planlar kaynaktan farklı sıra ve hızda alındığı için kaynak sesi olduğu
+    gibi altına sermek olmuyor — her plan kendi ses parçasını da getirmeli.
+    Ağır çekim çarpanı sese `atempo` ile uygulanıyor (perde korunur; asetrate
+    perdeyi de kaydırır ve konuşma varsa bozar).
+
+    Ortam sesi, kaynak müziği, hayvan sesi — hepsi buradan gelir. Sentetik
+    yatağın yerine geçebilir: kaynak zaten sahneye ait bir ses taşıyor."""
+    os.makedirs(f"{work}/sa", exist_ok=True)
+    lst = f"{work}/sa_concat.txt"
+    with open(lst, "w") as fh:
+        for i, r in enumerate(edl):
+            d = r["o1"] - r["o0"]
+            take = d / r["slow"]
+            out = f"{work}/sa/a{i:03d}.wav"
+            af = ["aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo"]
+            if abs(r["slow"] - 1.0) > 1e-3:
+                af.append(f"atempo={1.0 / r['slow']:.6f}")
+            af.append(f"apad=whole_dur={d:.4f}")
+            af.append(f"atrim=end={d:.4f}")
+            run(["ffmpeg", "-nostdin", "-v", "error", "-y",
+                 "-ss", f"{r['src']:.4f}", "-t", f"{take + 0.30:.4f}", "-i", src,
+                 "-map", "0:a", "-af", ",".join(af), "-c:a", "pcm_s16le",
+                 "-ar", "48000", "-ac", "2", out])
+            fh.write(f"file '{os.path.abspath(out)}'\n")
+    joined = f"{work}/src_audio.wav"
+    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-f", "concat", "-safe", "0",
+         "-i", lst, "-af", f"apad=whole_dur={dur:.2f},atrim=end={dur:.2f}",
+         "-c:a", "pcm_s16le", "-ar", "48000", "-ac", "2", joined])
+    print(f"  kaynak sesi: {len(edl)} parça -> {joined}")
+    return joined
+
+
+def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False,
+          src_audio=None, src_gain=0.42):
     major = [f"{r['o0']:.2f}:{BOOM_AMP[r['beat']]}" for r in edl if r["beat"] in BOOM_AMP]
     minor = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "m"]
     risers = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "R"]
@@ -152,10 +188,21 @@ def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False):
           # ducking onu amacından ediyordu. Müzikte oran 8 -> 2.5, bırakma
           # 300 -> 160 ms: ölçümde müzik konuşma aralarında geri gelmiyordu
           # (sessizlikte -24.2 dB, konuşmada -21.4 dB — tersi olmalı).
-          f"[mus][sc2]sidechaincompress=threshold=0.09:ratio=2.5:attack=8:release=160[musd];"
-          f"[vo_out][sfx][musd]amix=inputs=3:duration=longest:normalize=0[mix]")
-    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", vo, "-i", sfx, "-i", mus,
-         "-filter_complex", fc, "-map", "[mix]", "-c:a", "pcm_f32le",
+          f"[mus][sc2]sidechaincompress=threshold=0.09:ratio=2.5:attack=8:release=160[musd];")
+    ins = ["-i", vo, "-i", sfx, "-i", mus]
+    if src_audio:
+        # Kaynağın kendi sesi. Müzikle aynı muamele: yüksek geçiren süzgeç
+        # (duyulmayan sub tavanı yiyor) + konuşmanın altına ducking.
+        fc = fc.replace("[vo]asplit=2[vo_out][sc2]", "[vo]asplit=3[vo_out][sc2][sc3]")
+        fc += (f"[3:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
+               f"highpass=f=110,volume={src_gain:.2f}[src];"
+               f"[src][sc3]sidechaincompress=threshold=0.09:ratio=3.0:attack=8:release=200[srcd];"
+               f"[vo_out][sfx][musd][srcd]amix=inputs=4:duration=longest:normalize=0[mix]")
+        ins += ["-i", src_audio]
+    else:
+        fc += "[vo_out][sfx][musd]amix=inputs=3:duration=longest:normalize=0[mix]"
+    run(["ffmpeg", "-nostdin", "-v", "error", "-y"] + ins +
+        ["-filter_complex", fc, "-map", "[mix]", "-c:a", "pcm_f32le",
          "-ar", "48000", "-ac", "2", raw])
     # volume+alimiter KULLANMA — SKILL.md §6. Tavan -3.5: AAC ~3.5 dB taşıyor.
     run([sys.executable, f"{HERE}/master.py", raw, mix, "-14.0", "-3.5"])
@@ -419,6 +466,9 @@ def main():
     ap.add_argument("--crop", default="416:740", help="kaynaktan kırpma GxY (9:16 olmalı)")
     ap.add_argument("--crop-y", type=int, default=0,
                     help="kırpmanın üst kenarı (kaynak piksel)")
+    ap.add_argument("--src-audio", type=float, default=None, metavar="GAIN",
+                    help="kaynağın kendi sesini EDL'ye göre yeniden kurup mikse "
+                         "kat (0.3–0.6 tipik; konuşmanın altına duck edilir)")
     ap.add_argument("--music-mood", choices=["drive", "sad"], default="drive",
                     help="müzik yatağının rengi: drive (tempolu) · sad (acıklı)")
     ap.add_argument("--no-music", action="store_true",
@@ -485,7 +535,9 @@ def main():
     content = cut(a.src, edl, (cw, ch), work, cropy=a.crop_y)
 
     print("\n3/5 ses")
-    mix = audio(edl, dur, a.vo, work, a.warm_at, a.music_mood, a.no_music)
+    sa = source_audio(a.src, edl, dur, work) if a.src_audio is not None else None
+    mix = audio(edl, dur, a.vo, work, a.warm_at, a.music_mood, a.no_music,
+                sa, a.src_audio if a.src_audio is not None else 0.42)
 
     print("\n4/5 grafik")
     spec = json.load(open(a.spec, encoding="utf-8"))

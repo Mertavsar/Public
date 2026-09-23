@@ -756,6 +756,14 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 - **Müziği konuşmanın altına duck et:**
   `sidechaincompress=threshold=0.05:ratio=7:attack=8:release=280`
   Konuşma anında ~9 dB aşağı inmeli. Ölçerek doğrula.
+- **Kaynağın kendi sesi** `--src-audio GAIN` ile geri gelir (0.3–0.6 tipik).
+  Planlar kaynaktan farklı sıra ve hızda alındığı için kaynak sesi olduğu gibi
+  altına sermek olmuyor: `source_audio()` her planın ses parçasını ayrı kesip
+  `atempo` ile ağır çekim çarpanını uyguluyor (perde korunur — `asetrate`
+  perdeyi kaydırır ve kaynakta konuşma varsa bozar), sonra birleştiriyor.
+  Konuşmanın altına duck ediliyor. Ortam sesi, hayvan sesi, kaynağın kendi
+  müziği buradan gelir ve çoğu zaman sentetik yataktan iyidir — sahneye ait.
+  `--no-music` ile birlikte kullanmak temiz bir kombinasyon.
 - **Yatağın rengi** `--music-mood` ile seçilir: `drive` (varsayılan, tempolu
   102 BPM) · `sad` (acıklı — 64 BPM, Am–F–C–G, piyano + yaylı, kick/hi-hat
   yok, ritmi yumuşak bas nabzı taşır). Kurtarma/terk edilme gibi duygusal
