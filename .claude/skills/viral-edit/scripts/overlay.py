@@ -159,7 +159,20 @@ def build(spec, out):
     banners = spec.get("banners", [])
     bfonts = {}
     for b in banners:
+        # Taşan banner sağdan kesiliyordu ve teslim edilen bir videoda hook'un
+        # ilk satırı yarım okunuyordu ("ORKUDAN YAVRUSUN"). Punto, en uzun satır
+        # tuvale sığana kadar küçültülür — kesmektense küçültmek iyidir.
         sz = b.get("size", 96)
+        lines = b["text"].split("|")
+        margin = int(W * 0.055)
+        while sz > 34:
+            f = load_font(sz)
+            if max(f.getbbox(l)[2] - f.getbbox(l)[0] for l in lines) <= W - 2 * margin:
+                break
+            sz -= 2
+        if sz != b.get("size", 96):
+            print(f"   banner {b.get('size', 96)} → {sz} punto (taşıyordu)")
+        b["size"] = sz
         if sz not in bfonts:
             bfonts[sz] = load_font(sz)
 

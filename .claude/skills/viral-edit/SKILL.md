@@ -149,6 +149,8 @@ Sekmeyle ayrılmış, `#` yorum satırı. Her satır bir plan.
 | `cx` `cy` | Kadraj konumu 0–1 (`0.5` = orta). Özneyi ortala. |
 | `cropx` | Kaynaktan kırpmanın sol kenarı — filigran dönemine göre (§4) |
 | `beat` | `R` vuruş+riser · `M` ana vuruş · `m` klink · `-` ses yok |
+| `not` | plan etiketi. `~` ile başlarsa bölüm başı sayılmaz (teaser/süreklilik) |
+| `cropy` | *(isteğe bağlı 12. sütun)* kırpmanın üst kenarı. Boşsa `--crop-y` |
 
 `beat` ses yatağını ve ışık parlamasını belirliyor — elle yazma, buradan türüyor.
 `R`'yi anlatının döndüğü 2–3 ana koy (açılış, ödül cümlesi, kapanış sorusu).
@@ -516,6 +518,30 @@ kabul edilemez bir leke bırakır.
 3. Kalan planları tek bir watermark dönemine kaydır, böylece tek kutu kalır.
 4. Ancak düz zemin üzerinde kalan kutuya `delogo` uygula.
 
+**Gömülü yazı kaynağın ÜSTÜNDE de olabilir.** Köpek videosunda alt bantta
+sürekli bir İngilizce altyazı, 7.5–13.3s arasında ise ÜSTTE ikinci bir yazı
+vardı ("She abandoned the puppy."). Alttan kırpmak ilkini çözdü, ikincisini
+çözmedi. Çözüm: o dönemin planlarına EDL'nin `cropy` sütunuyla kırpmayı aşağı
+kaydırmak — ama o zaman alttaki filigran kadraja girdiğinden `z` ile içeri
+kadraj (1.22) ve `cy=0` ile üste yaslama gerekti.
+
+Yani üç şeyi birlikte çöz: `cropx` (yatay filigran), `cropy` (üst yazı),
+`z`+`cx`/`cy` (kalan köşe). Her birini ayrı ayrı ölç, tahmin etme:
+
+```bash
+# ust yazi kutusu ne zaman gorunuyor (beyaz zemin oranindan)
+python3 - <<'EOF'
+import subprocess, numpy as np
+W,H=576,1024
+raw=subprocess.run(["ffmpeg","-v","error","-t","16","-i","ham.mp4",
+                    "-vf","fps=10,format=gray","-f","rawvideo","-"],capture_output=True).stdout
+n=len(raw)//(W*H); x=np.frombuffer(raw[:n*W*H],dtype=np.uint8).reshape(n,H,W)
+box=(x[:,150:215,150:450]>238).mean(axis=(1,2))
+on=[i/10 for i in range(n) if box[i]>0.35]
+print("ust yazi:", f"{min(on):.1f}-{max(on):.1f}" if on else "yok")
+EOF
+```
+
 **Her plana tek bir kırpma dayatma.** Gergedan videosunda watermark 5.00'te
 soldan sağa geçiyordu; her iki dönemi birden kurtaran `crop=...:160:30` özneyi
 (domuzu) kadrajın sol kenarına itiyor, hook okunmuyordu. Plan başına watermark
@@ -564,6 +590,12 @@ durduran tek şey.
 
 **Vurgulu kelime oranı %10–20 olmalı.** Hepsini boyamak hiçbirini boyamakla
 aynı şey. `--emphasis`'e 3–5 kelimeden fazla verme.
+
+**Banner punto taşmasını `overlay.py` kendisi düzeltiyor** — en uzun satır
+tuvale sığana kadar küçültür ve `banner 96 → 78 punto (taşıyordu)` diye basar.
+Bu eklenmeden önce teslim edilen bir videoda hook'un ilk satırı sağdan kesikti
+("ORKUDAN YAVRUSUN"). Yine de çıktıdaki satırı oku: çok küçülüyorsa metin uzun
+demektir, kısalt.
 
 `spec.json`'daki `caption_pop` (varsayılan 0.16) kelimeyi belirirken hafifçe
 büyütüp yerine oturtur. Sabit duran altyazı göz için durağan görüntüyle aynı

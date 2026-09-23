@@ -23,6 +23,9 @@ cx/cy      kadrajın yatay/dikey konumu, 0–1 (0.5 = orta).
 cropx      kaynaktan kırpmanın sol kenarı. Filigran dönemine göre plan başına
            değişir — SKILL.md "Watermark".
 beat       M ana vuruş · m klink · R vuruş+riser · - ses yok
+not        plan etiketi. `~` ile başlarsa bölüm başı sayılmaz (teaser).
+cropy      (isteğe bağlı 12. sütun) kırpmanın üst kenarı. Boşsa --crop-y.
+           Gömülü yazı kaynağın ÜSTÜNDEYSE plan başına aşağı kaydırmak için.
 """
 
 import argparse, json, os, re, shlex, subprocess, sys
@@ -52,7 +55,8 @@ def read_edl(path):
             raise SystemExit(f"EDL satırı eksik ({len(f)} sütun, 10 gerekli): {ln[:60]}")
         rows.append(dict(o0=float(f[0]), o1=float(f[1]), src=float(f[2]), slow=float(f[3]),
                          z0=float(f[4]), z1=float(f[5]), cx=float(f[6]), cy=float(f[7]),
-                         cropx=int(f[8]), beat=f[9].strip(), note=f[10] if len(f) > 10 else ""))
+                         cropx=int(f[8]), beat=f[9].strip(), note=f[10] if len(f) > 10 else "",
+                         cropy=int(f[11]) if len(f) > 11 and f[11].strip() else None))
     return rows
 
 
@@ -92,7 +96,8 @@ def cut(src, edl, crop, work, fps=30, cropy=0):
             if abs(r["slow"] - 1.0) > 1e-3:
                 slo = (f"setpts={r['slow']}*PTS,minterpolate=fps={fps}:mi_mode=mci:"
                        f"mc_mode=aobmc:me_mode=bidir:vsbmc=1,")
-            vf = (f"crop={cw}:{ch}:{r['cropx']}:{cropy},{slo}fps={fps},"
+            cy0 = cropy if r.get("cropy") is None else r["cropy"]
+            vf = (f"crop={cw}:{ch}:{r['cropx']}:{cy0},{slo}fps={fps},"
                   f"scale=1080:1920:flags=lanczos,setsar=1,"
                   f"zoompan=z='{r['z0']}+({r['z1']}-{r['z0']})*on/{nf}':"
                   f"x='(iw-iw/zoom)*{r['cx']}':y='(ih-ih/zoom)*{r['cy']}':"
@@ -428,6 +433,12 @@ def main():
         raise SystemExit(f"crop {cw}x{ch} +{a.crop_y} kaynağı ({sw}x{sh}) aşıyor. "
                          f"--crop-y küçült veya --crop daralt.")
     edl = read_edl(a.edl)
+    for i, r in enumerate(edl):
+        y0 = a.crop_y if r.get("cropy") is None else r["cropy"]
+        if y0 < 0 or y0 + ch > sh:
+            raise SystemExit(f"plan {i}: cropy {y0} + {ch} kaynağı ({sw}x{sh}) aşıyor.")
+        if r["cropx"] < 0 or r["cropx"] + cw > sw:
+            raise SystemExit(f"plan {i}: cropx {r['cropx']} + {cw} kaynağı ({sw}x{sh}) aşıyor.")
     bad = check_edl(edl, src_dur, cw, min(a.usable_end, src_dur))
     if bad and not a.force:
         raise SystemExit("EDL uyarıları var. Düzelt veya --force ver.")
