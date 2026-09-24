@@ -34,12 +34,12 @@ def probe(path):
     return w, h, float(a) / float(b)
 
 
-def build_mask(F, box, W, H):
+def build_mask(F, box, W, H, grow=7, halo_min=140):
     y0, y1, x0, x1 = box
     mn = F.min(axis=3).astype(int); mx = F.max(axis=3).astype(int)
     hsv = np.stack([cv2.cvtColor(f, cv2.COLOR_BGR2HSV) for f in F])
     core = ((mn > 195) & ((mx - mn) < 40)).mean(0) > 0.8
-    halo = ((mn > 140) & ((mx - mn) < 60)).mean(0) > 0.7
+    halo = ((mn > halo_min) & ((mx - mn) < 60)).mean(0) > 0.7
     h_ = hsv[..., 0]
     icon = ((hsv[..., 1] > 55) & (hsv[..., 2] > 110) &
             (((h_ > 78) & (h_ < 105)) | (h_ > 155) | (h_ < 10))).mean(0) > 0.6
@@ -48,7 +48,7 @@ def build_mask(F, box, W, H):
     sel = core | (halo & near) | (icon & logo)
     m = np.zeros((H, W), np.uint8)
     m[y0:y1, x0:x1] = sel[y0:y1, x0:x1] * 255
-    return cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7)))
+    return cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (grow, grow)))
 
 
 def main():
@@ -57,13 +57,17 @@ def main():
     ap.add_argument("--switch", type=float, required=True, help="filigranın köşe değiştirdiği an")
     ap.add_argument("--box-a", required=True); ap.add_argument("--box-b", required=True)
     ap.add_argument("--until", type=float, default=1e9, help="kapanış kartı başlangıcı")
+    ap.add_argument("--grow", type=int, default=7,
+                    help="maske genişletme (px). Kalın/parlak filigranda hayalet kalırsa 11-13")
+    ap.add_argument("--halo-min", type=int, default=140,
+                    help="hâle eşiği; parlak filtreli kaynakta hayalet kalırsa düşür (110-120)")
     a = ap.parse_args()
     W, H, fps = probe(a.src)
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", a.src, "-t", f"{min(a.until, 1e6)}",
                           "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
     F = np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3); sw = int(a.switch * fps)
     ba = [int(v) for v in a.box_a.split(",")]; bb = [int(v) for v in a.box_b.split(",")]
-    mA = build_mask(F[:sw], ba, W, H); mB = build_mask(F[sw:], bb, W, H); mU = mA | mB
+    mA = build_mask(F[:sw], ba, W, H, a.grow, a.halo_min); mB = build_mask(F[sw:], bb, W, H, a.grow, a.halo_min); mU = mA | mB
     print(f"maske A {int((mA>0).sum())} px · B {int((mB>0).sum())} px")
     del F
     dec = subprocess.Popen(["ffmpeg", "-v", "error", "-i", a.src, "-f", "rawvideo",
