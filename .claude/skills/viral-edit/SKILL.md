@@ -856,6 +856,12 @@ kesimler çıplak kalır, video "berbat" hissi verir.
   sessizlik sıfır olduğu için önerilmez — ama kullanıcı isteyebilir, bir
   köpek videosunda istedi. Kapattıktan sonra sessizlik oranını ölç:
   %10'u aşıyorsa kesimler çıplak kalmış demektir.
+- **Efekt seti** `--sfx-style` (audiobed): **`cinematic` varsayılan** — açılışta
+  darbe + parlak "ding" çanı, bölüm geçişlerinde 0.35s swoosh + katmanlı darbe
+  (2–6 kHz tık, 1200→250 Hz yumruk, metalik parıltı kuyruğu), ara kesimlerde
+  "pop". Kullanıcı eski seti (boom + whoosh + tık) "dikkat çekici değil"
+  diye reddetti. Ölçüldü: darbeler konuşmanın +3…+5 dB üstünde, enerjinin
+  %0.2'si 120 Hz altında. `classic` eski seti verir.
 - **Efekt sesleri** `scripts/audiobed.py` ile: büyük kesimlerde boom + whoosh, ara
   kesimlerde tik, ödül anından önce riser + sub-drop.
 - Her darbeye görsel karşılık ver: flash (0.13s) ve kamera sarsıntısı (6–10px,
