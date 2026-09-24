@@ -26,6 +26,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
 | `scripts/cover.py` | Dikey kapak görseli |
 | `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
+| `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
@@ -579,6 +580,14 @@ geçişiyle yapılır, kenarı orijinale yumuşak karışır. Telea büyük alan
 renk sürüklüyor (pembe/turkuaz leke), dikey geçiş dokuyu çizgi çizgi
 akıtıyor — ikisi de fil klibinde görüldü, düzeltildi. Kendi altyazını o
 bandın üstüne koy (`caption_y` ≈ 0.72); kalan hafif ton farkı kapanır.
+
+**Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
+başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
+0.64 altı %1–7 çıktı: orada görüntü YOK, geri getirilemez. `unfog.py`
+yarı saydam kısmı (içerik ≥ %35) matematiksel olarak geri kazanıyor,
+aşağısını görüntünün alt kenar renginden koyuya inen gradyana çeviriyor.
+Kullanıcı "alt taraf niye beyaz" dedi; beyaz gitti, altyazı koyu zeminde.
+Sırası: `dewatermark.py` → `unfog.py` → `build.py`, `caption_y` ≈ 0.78.
 
 Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
 
