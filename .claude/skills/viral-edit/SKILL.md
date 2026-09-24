@@ -72,6 +72,23 @@ Kullanıcı ham klip atarsa:
 `reference/script-writing.md` bu iş için duruyor — kullanıcının metnini
 değerlendirmek ve biçimlendirmek için, sıfırdan yazmak için değil.
 
+### Kullanıcı AÇIKÇA metin isterse
+
+Kendiliğinden önerme kuralı geçerli. Ama kullanıcı doğrudan "senaryo /
+metin öner" derse yaz — şu şartla:
+
+1. **Her cümle bir kanıt karesine bağlanır.** Metinle birlikte bir tablo
+   ver: cümle → kaynak saniyesi → karede görünen. Kareyi `kanit.png`
+   olarak çıkarıp gönder; kullanıcı her satırı kendisi doğrulayabilsin.
+2. **Niyet ve hikâye yok, ölçülebilir olay var.** "Kaplumbağa ekmeği çalmak
+   istedi" uydurmadır; "kaplumbağa kuşun dibine kadar sokuldu" ölçümdür.
+3. **Bilgi cümleleri kaynaklı.** Tür, davranış, sayı — `WebSearch` ile
+   doğrula ve kaynağı cevapta ver.
+4. **Doğrulayamadığını söyle.** Klibin çekildiği yer, olayın öncesi, kaynak
+   hesabın kim olduğu bilinmiyorsa metne girmez.
+
+Balıkçıl videosunda böyle yapıldı: 6 kare, 3 kaynak, her cümle eşlendi.
+
 ---
 
 ## 0-1. Hangi aşamadayız
