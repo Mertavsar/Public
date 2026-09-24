@@ -25,6 +25,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
 | `scripts/cover.py` | Dikey kapak görseli |
+| `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
@@ -562,6 +563,16 @@ kullanılmıyor — kullanıcı bunu açıkça reddetti.
 
 Kırpma yasak olduğu için (yukarıdaki kural) filigran ve gömülü yazı kendi
 başına çözülemez. Kaynakta bunlardan biri varsa:
+
+**Önce `scripts/dewatermark.py` dene — kırpmadan, bulanıklaştırmadan siler.**
+Kutu değil harf şekli maskeleniyor ("karelerin %80'inde aynı yerde beyaz"),
+her karede çevresinden dolduruluyor. Balıkçıl videosunda TikTok logosu +
+"@natgeography.com" telefon boyutunda iz bırakmadan gitti. Kutuları ve
+köşe değiştirme anını ölç, sonra 3x büyütülmüş önce/sonra karşılaştırmasına
+bak. Kullanıcı "blur görünmesin" dedi — `delogo` ve blur kutusu bu yüzden
+kullanılmıyor. Temiz kaynağı `build.py --src ham_clean.mp4` ile ver.
+
+Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
 
 1. **Ölç ve RAPORLA** — nerede, hangi saniyelerde, ne kadar yer kaplıyor.
 2. **KULLANICIYA SOR**: filigran/yazı ekranda kalsın mı, yoksa bu videoda
