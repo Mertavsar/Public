@@ -572,6 +572,14 @@ köşe değiştirme anını ölç, sonra 3x büyütülmüş önce/sonra karşıl
 bak. Kullanıcı "blur görünmesin" dedi — `delogo` ve blur kutusu bu yüzden
 kullanılmıyor. Temiz kaynağı `build.py --src ham_clean.mp4` ile ver.
 
+**Kaynağın kendi gömülü başlığı** (videonun tamamında duran yazı bloğu,
+genelde alttaki sis/gradyan bandında): `--static-box y0,y1,x0,x1`. Maske
+zaman medyanından çıkar (harf + renkli vurgu kutuları), dolgu satır/sütun
+geçişiyle yapılır, kenarı orijinale yumuşak karışır. Telea büyük alanda
+renk sürüklüyor (pembe/turkuaz leke), dikey geçiş dokuyu çizgi çizgi
+akıtıyor — ikisi de fil klibinde görüldü, düzeltildi. Kendi altyazını o
+bandın üstüne koy (`caption_y` ≈ 0.72); kalan hafif ton farkı kapanır.
+
 Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
 
 1. **Ölç ve RAPORLA** — nerede, hangi saniyelerde, ne kadar yer kaplıyor.
