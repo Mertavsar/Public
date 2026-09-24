@@ -686,6 +686,12 @@ ateşledi. Ama tablo baştan sona tutarlıydı ("Anahtarını kirli suya mı" /
 heceler birbirine geçiyor ve tepe sayısı düşüyor. `--peak-thr` düşürmek
 çözmedi (en iyi %9.7'de tıkandı).
 
+**Yanlış metin de "makul" görünebilir.** Balıkçıl videosunda ses kaydı
+kullanıcının kendi metniyle okunmuştu, hizalama ise benim önerdiğim metinle
+yapıldı — tablo yine de cümle cümle akla yatkın göründü (maliyet 24.6).
+Doğru metinle maliyet 18.1'e düştü ve cümle sonları blok sonlarına tam
+oturdu. **Ses gelince metni kullanıcıdan teyit et**, tahminle hizalama.
+
 Uzun ve hızlı seslendirmede yüzde yükselir; karar tabloyla verilir. Tablo
 bozuksa dur, tutarlıysa devam et — kelime hatası zaten her blok sınırında
 sıfırlanıyor.
