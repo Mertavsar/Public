@@ -20,6 +20,7 @@ Ekim-Kasım 2026 dönem başında Almanca ve çocuk/teen gruplarını doldurmak.
 | wp Mesaj → RT Çocuk-Teen (120250678417950043) | 100 TL | Aynı kitleler, Kırşehir, 25-55. 3 reklam (2+1, Teenglish, 7-14). Ajans sahibi açmıştı; kitle güncellemesi Meta tarafından otomatik PAUSED'a çekildi |
 | İnstagram trafik → RT Almanca Profil Ziyaret (120250678495160043, PAUSED) | 100 TL | RT kitlesi (45G İG + %75 video), reklamlar Reklam Yöneticisi'nde çoğaltılacak (API profil ziyareti reklamı kuramıyor) |
 | İnstagram trafik → RT Çocuk-Teen Profil Ziyaret (120250678495750043, PAUSED) | 100 TL | Aynı |
+| wp Mesaj → Kış Okulu Video Geniş Kitle (120250678515970043, PAUSED) | 500 TL | Kırşehir ili 18-65, Advantage+ açık, müşteri listesi hariç. Video 976007138852673 (50 sn). Açılınca wp Mesaj 2'nin kapatılması önerildi |
 | wp Mesaj 2 (aktif) | 301 TL | Mevcut; Eylül'de 336 TL/konuşma. Sıcak kitleye çevrilmesi öneriliyor |
 
 ## 4. Açık testler
