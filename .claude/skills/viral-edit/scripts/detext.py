@@ -61,29 +61,54 @@ def main():
                             "-s", f"{W}x{H}", "-r", f"{fps}", "-i", "-", "-i", a.src, "-map", "0:v", "-map", "1:a?",
                             "-c:v", "libx264", "-crf", "12", "-preset", "slow", "-pix_fmt", "yuv420p",
                             "-c:a", "copy", a.out], stdin=subprocess.PIPE)
-    i = 0
+    # Yazı belirirken/kaybolurken (fade) harfler yarı saydam ve beyaz eşiğinin
+    # altında kalıyor; ay balığı klibinin ilk 0.3 saniyesinde İngilizce yazı
+    # bu yüzden silinmedi. Her kareye komşu karelerin maskesi de eklenir:
+    # [-back, +ahead] penceresindeki maskelerin birleşimi.
+    from collections import deque
+    back, ahead = 6, 10
+    frames, masks, times = deque(), deque(), deque()
+    red_cfg = extras
+
+    def mask_for(f, t):
+        if t >= a.until:
+            return np.zeros(f.shape[:2], np.uint8)
+        m, hlm = text_mask(f, y0, y1, hue, a.white_min, a.grow)
+        m |= hlm
+        for t0, t1, ey0, ey1, ex0, ex1 in red_cfg:
+            if t0 <= t <= t1:
+                hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
+                red = ((hsv[..., 0] < 12) | (hsv[..., 0] > 168)) & (hsv[..., 1] > 90) & (hsv[..., 2] > 60)
+                r = np.zeros_like(m)
+                r[int(ey0):int(ey1), int(ex0):int(ex1)] = red[int(ey0):int(ey1), int(ex0):int(ex1)] * 255
+                m |= cv2.dilate(r, np.ones((11, 11), np.uint8))
+        return m
+
+    hist = deque(maxlen=back)
+    i = 0; eof = False
+
+    def emit():
+        f = frames.popleft(); m0 = masks[0]; t = times.popleft()
+        u = m0.copy()
+        for k in list(masks)[1:ahead + 1]:
+            u |= k
+        for k in hist:
+            u |= k
+        if t < a.until and u.any():
+            f = cv2.inpaint(f, u, 7, cv2.INPAINT_TELEA)
+        hist.append(masks.popleft())
+        enc.stdin.write(f.tobytes())
+
     while True:
         b = dec.stdout.read(W * H * 3)
         if len(b) < W * H * 3:
             break
         f = np.frombuffer(b, np.uint8).reshape(H, W, 3).copy(); t = i / fps
-        if t < a.until:
-            m, hlm = text_mask(f, y0, y1, hue, a.white_min, a.grow)
-            for t0, t1, ey0, ey1, ex0, ex1 in extras:
-                if t0 <= t <= t1:
-                    hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
-                    red = ((hsv[..., 0] < 10) | (hsv[..., 0] > 170)) & (hsv[..., 1] > 120) & (hsv[..., 2] > 100)
-                    r = np.zeros_like(m)
-                    r[int(ey0):int(ey1), int(ex0):int(ex1)] = red[int(ey0):int(ey1), int(ex0):int(ex1)] * 255
-                    m |= cv2.dilate(r, np.ones((9, 9), np.uint8))
-            # Harf + vurgu kutusu TEK maske olarak doldurulur. Ayrı ayrı
-            # doldurunca kutunun dolgusu yanındaki beyaz harfleri kaynak aldı
-            # ve beyaz şeritler bıraktı. Birlikte doldurunca kenar hep temiz
-            # görüntü oluyor.
-            u = m | hlm
-            if u.any():
-                f = cv2.inpaint(f, u, 7, cv2.INPAINT_TELEA)
-        enc.stdin.write(f.tobytes()); i += 1
+        frames.append(f); times.append(t); masks.append(mask_for(f, t)); i += 1
+        if len(frames) > ahead:
+            emit()
+    while frames:
+        emit()
     enc.stdin.close(); enc.wait()
     print(f"{i} kare -> {a.out}")
 
