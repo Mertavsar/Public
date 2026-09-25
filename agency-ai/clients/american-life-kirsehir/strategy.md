@@ -16,8 +16,8 @@ Ekim-Kasım 2026 dönem başında Almanca ve çocuk/teen gruplarını doldurmak.
 | İnstagram trafik → Almanca ad set (yeni) | 200 TL | Ajans sahibi onayı 2026-09-25 |
 | İnstagram trafik → Çocuk-Teen ad set (yeni) | 200 TL | Ajans sahibi onayı 2026-09-25 |
 | Yeni Yapay zeka Video - Kopya (aktif, yetişkin İngilizce) | 201 TL | Mevcut; frekans takip edilecek |
-| wp Mesaj → RT Almanca (120250678417670043, PAUSED) | 100 TL | Sıcak kitle 365G IG ziyaret + etkileşim + reklam etkileşim, müşteri listesi hariç, ADV kapalı. 2 reklam (2+1, aile birleşimi) |
-| wp Mesaj → RT Çocuk-Teen (120250678417950043, PAUSED) | 100 TL | Aynı sıcak kitle, Kırşehir, 25-55. 3 reklam (2+1, Teenglish, 7-14) |
+| wp Mesaj → RT Almanca (120250678417670043, PAUSED) | 100 TL | 45G İG etkileşim (120250678474230043) + 45G İG profil ziyaret (120250678474480043) + 365G %75 video (2 kitle), müşteri listesi hariç, ADV kapalı. 2 reklam (2+1, aile birleşimi) |
+| wp Mesaj → RT Çocuk-Teen (120250678417950043) | 100 TL | Aynı kitleler, Kırşehir, 25-55. 3 reklam (2+1, Teenglish, 7-14). Ajans sahibi açmıştı; kitle güncellemesi Meta tarafından otomatik PAUSED'a çekildi |
 | wp Mesaj 2 (aktif) | 301 TL | Mevcut; Eylül'de 336 TL/konuşma. Sıcak kitleye çevrilmesi öneriliyor |
 
 ## 4. Açık testler
@@ -40,7 +40,8 @@ Ekim-Kasım 2026 dönem başında Almanca ve çocuk/teen gruplarını doldurmak.
 ## 6. Bilinen kısıtlar
 - Kırşehir küçük bir pazar. Veli kitlesi hızlı doyuyor, bütçe artınca frekans yükseliyor.
 - Kayıt verisi yok. Meta'da sadece ara metrik (ziyaret, konuşma) ölçülüyor.
-- MCP Instagram hesabını göremiyor (instagram_basic izni eksik olabilir).
+- MCP Instagram hesabını göremiyor (instagram_basic izni eksik olabilir). IG business ID kitle kuralından bulundu: 3877593725702436.
+- ThruPlay/video izleyici kitlesi MCP ile oluşturulamıyor (iki kural biçimi de reddedildi). Video kitleleri Reklam Yöneticisi'nden açılmalı.
 
 ## 7. Sıradaki öncelikler
 1. Profil ziyareti reklamları ajans sahibi tarafından Reklam Yöneticisi'nde yayına alındı (Almanca Trafik, Çocuklar Trafik1-3). RT mesaj setlerini 5-7 gün sonra aç (Ajans).
