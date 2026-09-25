@@ -16,13 +16,15 @@ Ekim-Kasım 2026 dönem başında Almanca ve çocuk/teen gruplarını doldurmak.
 | İnstagram trafik → Almanca ad set (yeni) | 200 TL | Ajans sahibi onayı 2026-09-25 |
 | İnstagram trafik → Çocuk-Teen ad set (yeni) | 200 TL | Ajans sahibi onayı 2026-09-25 |
 | Yeni Yapay zeka Video - Kopya (aktif, yetişkin İngilizce) | 201 TL | Mevcut; frekans takip edilecek |
+| wp Mesaj → RT Almanca (120250678417670043, PAUSED) | 100 TL | Sıcak kitle 365G IG ziyaret + etkileşim + reklam etkileşim, müşteri listesi hariç, ADV kapalı. 2 reklam (2+1, aile birleşimi) |
+| wp Mesaj → RT Çocuk-Teen (120250678417950043, PAUSED) | 100 TL | Aynı sıcak kitle, Kırşehir, 25-55. 3 reklam (2+1, Teenglish, 7-14) |
 | wp Mesaj 2 (aktif) | 301 TL | Mevcut; Eylül'de 336 TL/konuşma. Sıcak kitleye çevrilmesi öneriliyor |
 
 ## 4. Açık testler
 | Test | Hipotez | Başlangıç | Bitiş | Başarı kriteri | Durum |
 |---|---|---|---|---|---|
 | Yeni profil ziyareti ad set'leri (aktif `İnstagram trafik` kampanyası içinde, Almanca + Çocuk, her birinde 5 metinli 1 reklam) | Teklifli yeni görseller 2-3 TL/ziyaret bandına döner | Görseller eklenip yayına alınınca | +7 gün | ≤ 3,0 TL/ziyaret ve CTR ≥ %1,0 | Ad set'ler kuruldu (PAUSED). Reklamlar Reklam Yöneticisi'nde eklenecek (bkz. rapor §1) |
-| Sıcak kitleye WP mesaj | Profil ziyaretçisine 2+1 teklifli mesaj reklamı soğuktan ucuzdur | — | — | ≤ 200 TL/konuşma, 7 günde ≥ 5 konuşma | Öneri, onay bekliyor |
+| Sıcak kitleye WP mesaj (2 RT seti) | Profil ziyaretçisine 2+1 teklifli mesaj reklamı soğuktan ucuzdur | Açılınca (öneri: trafik reklamlarından 5-7 gün sonra) | +7 gün | ≤ 200 TL/konuşma, 7 günde ≥ 5 konuşma (set başına) | Kuruldu, PAUSED, hata yok |
 
 *Sonuçlanmamış testi bozma. Test süresi dolmadan strateji değiştirilmez.*
 
@@ -41,7 +43,7 @@ Ekim-Kasım 2026 dönem başında Almanca ve çocuk/teen gruplarını doldurmak.
 - MCP Instagram hesabını göremiyor (instagram_basic izni eksik olabilir).
 
 ## 7. Sıradaki öncelikler
-1. Geçici kampanyadaki 2 reklamı (5 metinli) aktif kampanyadaki yeni ad set'lere çoğalt. IG kimliğini seç, görselleri ekle, yayına al. Sonra geçici kampanya 120250677846010043'ü sil (Ajans; silme ayrı onayla).
+1. Profil ziyareti reklamları ajans sahibi tarafından Reklam Yöneticisi'nde yayına alındı (Almanca Trafik, Çocuklar Trafik1-3). RT mesaj setlerini 5-7 gün sonra aç (Ajans).
 2. Görsel 3 ve 5'teki bozuk yazıları düzelt (Ajans).
 3. 2+1 teklifinin kapsamını, geçerlilik tarihini ve seviye ücretlerini teyit et (Müşteri).
 4. Haftalık kayıt sayısını kaynağa göre (IG DM / WP / telefon) paylaşsın (Müşteri).
