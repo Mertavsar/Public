@@ -130,9 +130,13 @@ def main():
                     help="hâle eşiği; parlak filtreli kaynakta hayalet kalırsa düşür (110-120)")
     a = ap.parse_args()
     W, H, fps = probe(a.src)
+    # Maske için saniyede 10 kare yeter; hepsini okumak 36 s'lik klipte ~2 GB
+    # tutup süreci öldürdü (OOM). Zamanlar örnekleme hızına göre çevriliyor.
+    sfps = min(fps, 10.0)
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", a.src, "-t", f"{min(a.until, 1e6)}",
-                          "-f", "rawvideo", "-pix_fmt", "bgr24", "-"], capture_output=True).stdout
-    F = np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3); sw = int(a.switch * fps)
+                          "-vf", f"fps={sfps}", "-f", "rawvideo", "-pix_fmt", "bgr24", "-"],
+                         capture_output=True).stdout
+    F = np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3); sw = int(a.switch * sfps)
     ba = [int(v) for v in a.box_a.split(",")]; bb = [int(v) for v in a.box_b.split(",")]
     mA = build_mask(F[:sw], ba, W, H, a.grow, a.halo_min); mB = build_mask(F[sw:], bb, W, H, a.grow, a.halo_min)
     mS = np.zeros((H, W), np.uint8)

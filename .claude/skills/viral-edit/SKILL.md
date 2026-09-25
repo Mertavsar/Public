@@ -26,6 +26,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
 | `scripts/cover.py` | Dikey kapak görseli |
 | `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
+| `scripts/detext.py` | Kaynağa gömülü, SÜREKLİ DEĞİŞEN altyazıyı (kelime kelime İngilizce yazı + vurgu kutusu) her karede tespit edip siler |
 | `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
@@ -580,6 +581,20 @@ geçişiyle yapılır, kenarı orijinale yumuşak karışır. Telea büyük alan
 renk sürüklüyor (pembe/turkuaz leke), dikey geçiş dokuyu çizgi çizgi
 akıtıyor — ikisi de fil klibinde görüldü, düzeltildi. Kendi altyazını o
 bandın üstüne koy (`caption_y` ≈ 0.72); kalan hafif ton farkı kapanır.
+
+**Sürekli değişen gömülü altyazı** (her saniye yeni kelime, mor/renkli vurgu
+kutusu): `detext.py --band y0,y1`. Sabit filigran yöntemi burada çalışmaz;
+maske her karede renkten çıkar (beyaz dolgu + vurgu tonu, yatay yoğunluk
+filtresi), harf gölgesi için 15 px genişletilir. Harf ve kutu TEK maske
+olarak Telea ile doldurulur — ayrı doldurunca kutu dolgusu yanındaki beyaz
+harfleri kaynak alıp beyaz şerit bıraktı; 9 px genişletme gölgeyi kaçırıp
+noktalı hayalet bıraktı (ay balığı klibi). Bantta hafif yumuşama kalır;
+kendi altyazını tam o banda koy (`caption_y` = bandın ortası).
+Gömülü kırmızı ok vb. için `--extra t0,t1,y0,y1,x0,x1`.
+
+Sıra: `dewatermark.py` (logo) → `detext.py` (altyazı) → `build.py`.
+`dewatermark.py` maskeyi saniyede 10 kareden çıkarır; hepsini okumak 36
+saniyelik klipte ~2 GB tutup süreci öldürdü.
 
 **Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
 başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
