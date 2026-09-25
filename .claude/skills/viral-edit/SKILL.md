@@ -25,6 +25,9 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
 | `scripts/cover.py` | Dikey kapak görseli |
+| `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
+| `scripts/detext.py` | Kaynağa gömülü, SÜREKLİ DEĞİŞEN altyazıyı (kelime kelime İngilizce yazı + vurgu kutusu) her karede tespit edip siler |
+| `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
@@ -71,6 +74,23 @@ Kullanıcı ham klip atarsa:
 
 `reference/script-writing.md` bu iş için duruyor — kullanıcının metnini
 değerlendirmek ve biçimlendirmek için, sıfırdan yazmak için değil.
+
+### Kullanıcı AÇIKÇA metin isterse
+
+Kendiliğinden önerme kuralı geçerli. Ama kullanıcı doğrudan "senaryo /
+metin öner" derse yaz — şu şartla:
+
+1. **Her cümle bir kanıt karesine bağlanır.** Metinle birlikte bir tablo
+   ver: cümle → kaynak saniyesi → karede görünen. Kareyi `kanit.png`
+   olarak çıkarıp gönder; kullanıcı her satırı kendisi doğrulayabilsin.
+2. **Niyet ve hikâye yok, ölçülebilir olay var.** "Kaplumbağa ekmeği çalmak
+   istedi" uydurmadır; "kaplumbağa kuşun dibine kadar sokuldu" ölçümdür.
+3. **Bilgi cümleleri kaynaklı.** Tür, davranış, sayı — `WebSearch` ile
+   doğrula ve kaynağı cevapta ver.
+4. **Doğrulayamadığını söyle.** Klibin çekildiği yer, olayın öncesi, kaynak
+   hesabın kim olduğu bilinmiyorsa metne girmez.
+
+Balıkçıl videosunda böyle yapıldı: 6 kare, 3 kaynak, her cümle eşlendi.
 
 ---
 
@@ -272,6 +292,32 @@ Bedava ve temiz alternatifler (klipler 10–60 sn ve 4K — plan süresi 1.5 sn'
 - [Pexels vahşi yaşam](https://www.pexels.com/search/videos/wildlife/) · [hayvanlar](https://www.pexels.com/search/videos/animals/)
 - [Pixabay vahşi yaşam](https://pixabay.com/videos/search/wildlife%20animal/) · [derin deniz](https://pixabay.com/videos/search/deep%20sea/)
 - [NOAA Okyanus Keşfi video portalı](https://oceanexplorer.noaa.gov/data/access/) — **tamamı kamu malı**, ROV dalışları, ProRes'e kadar. "NOAA Ocean Exploration" kredisi yeterli. Başka kanalda olmayan görüntü.
+- [Vecteezy hayvan kurtarma](https://www.vecteezy.com/free-videos/animal-rescue) · [Videezy hayvanlar](https://www.videezy.com/free-video/animals) — ücretsiz, atıf koşullu
+
+**Bu ortamdan video indirilemez — ölçüldü.** YouTube, Pexels, Pixabay,
+archive.org hepsi `000` dönüyor (ağ politikası). Çalışan tek şey `WebSearch`:
+arama sonucu başlık + URL geliyor, sayfa açılmıyor. Yani klibi **kullanıcı
+indirir ve atar**; buradan yapılabilecek şey arama, ölçüm ve kurgudur.
+
+### ⚠ Sahte kurtarma videosu — bu kategoride para kazanan bir dolandırıcılık var
+
+Hayvan kurtarma içeriği izlenme getirdiği için **sahnelenmiş** klipler
+üretiliyor: hayvan bilerek tehlikeye atılıp "kurtarılıyor". Kampanyacılar
+bunu para amaçlı bir istismar düzeni olarak belgeliyor. Böyle bir klibi
+yayınlamak kanalın güvenilirliğini bitirir.
+
+Kurguya başlamadan ara:
+
+```
+<konu> staged fake rescue
+<konu> animal rescue scam debunked
+<konu> original source
+```
+
+Şüphe işaretleri: hayvanın tehlikeye nasıl girdiği hiç gösterilmiyor ·
+kamera olay başlamadan önce kurulu ve doğru açıda · aynı "kurtarıcı" farklı
+videolarda tekrar ediyor · yılan/timsah gibi yırtıcı ile yavru hayvan aynı
+karede.
 
 ### Sonsuz döngü kurgusu
 
@@ -520,6 +566,46 @@ kullanılmıyor — kullanıcı bunu açıkça reddetti.
 Kırpma yasak olduğu için (yukarıdaki kural) filigran ve gömülü yazı kendi
 başına çözülemez. Kaynakta bunlardan biri varsa:
 
+**Önce `scripts/dewatermark.py` dene — kırpmadan, bulanıklaştırmadan siler.**
+Kutu değil harf şekli maskeleniyor ("karelerin %80'inde aynı yerde beyaz"),
+her karede çevresinden dolduruluyor. Balıkçıl videosunda TikTok logosu +
+"@natgeography.com" telefon boyutunda iz bırakmadan gitti. Kutuları ve
+köşe değiştirme anını ölç, sonra 3x büyütülmüş önce/sonra karşılaştırmasına
+bak. Kullanıcı "blur görünmesin" dedi — `delogo` ve blur kutusu bu yüzden
+kullanılmıyor. Temiz kaynağı `build.py --src ham_clean.mp4` ile ver.
+
+**Kaynağın kendi gömülü başlığı** (videonun tamamında duran yazı bloğu,
+genelde alttaki sis/gradyan bandında): `--static-box y0,y1,x0,x1`. Maske
+zaman medyanından çıkar (harf + renkli vurgu kutuları), dolgu satır/sütun
+geçişiyle yapılır, kenarı orijinale yumuşak karışır. Telea büyük alanda
+renk sürüklüyor (pembe/turkuaz leke), dikey geçiş dokuyu çizgi çizgi
+akıtıyor — ikisi de fil klibinde görüldü, düzeltildi. Kendi altyazını o
+bandın üstüne koy (`caption_y` ≈ 0.72); kalan hafif ton farkı kapanır.
+
+**Sürekli değişen gömülü altyazı** (her saniye yeni kelime, mor/renkli vurgu
+kutusu): `detext.py --band y0,y1`. Sabit filigran yöntemi burada çalışmaz;
+maske her karede renkten çıkar (beyaz dolgu + vurgu tonu, yatay yoğunluk
+filtresi), harf gölgesi için 15 px genişletilir. Harf ve kutu TEK maske
+olarak Telea ile doldurulur — ayrı doldurunca kutu dolgusu yanındaki beyaz
+harfleri kaynak alıp beyaz şerit bıraktı; 9 px genişletme gölgeyi kaçırıp
+noktalı hayalet bıraktı (ay balığı klibi). Bantta hafif yumuşama kalır;
+kendi altyazını tam o banda koy (`caption_y` = bandın ortası).
+Gömülü kırmızı ok vb. için `--extra t0,t1,y0,y1,x0,x1`.
+
+Sıra: `dewatermark.py` (logo) → `detext.py` (altyazı) → `build.py`.
+`dewatermark.py` maskeyi saniyede 10 kareden çıkarır; hepsini okumak 36
+saniyelik klipte ~2 GB tutup süreci öldürdü.
+
+**Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
+başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
+0.64 altı %1–7 çıktı: orada görüntü YOK, geri getirilemez. `unfog.py`
+yarı saydam kısmı (içerik ≥ %35) matematiksel olarak geri kazanıyor,
+aşağısını görüntünün alt kenar renginden koyuya inen gradyana çeviriyor.
+Kullanıcı "alt taraf niye beyaz" dedi; beyaz gitti, altyazı koyu zeminde.
+Sırası: `dewatermark.py` → `unfog.py` → `build.py`, `caption_y` ≈ 0.78.
+
+Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
+
 1. **Ölç ve RAPORLA** — nerede, hangi saniyelerde, ne kadar yer kaplıyor.
 2. **KULLANICIYA SOR**: filigran/yazı ekranda kalsın mı, yoksa bu videoda
    kırpmaya izin veriyor mu? Kendi başına kırpma kararı verme.
@@ -642,6 +728,12 @@ ateşledi. Ama tablo baştan sona tutarlıydı ("Anahtarını kirli suya mı" /
 "düşürdün? Sakın panik"), çünkü sebep hata değil **elizyon**: hızlı konuşmada
 heceler birbirine geçiyor ve tepe sayısı düşüyor. `--peak-thr` düşürmek
 çözmedi (en iyi %9.7'de tıkandı).
+
+**Yanlış metin de "makul" görünebilir.** Balıkçıl videosunda ses kaydı
+kullanıcının kendi metniyle okunmuştu, hizalama ise benim önerdiğim metinle
+yapıldı — tablo yine de cümle cümle akla yatkın göründü (maliyet 24.6).
+Doğru metinle maliyet 18.1'e düştü ve cümle sonları blok sonlarına tam
+oturdu. **Ses gelince metni kullanıcıdan teyit et**, tahminle hizalama.
 
 Uzun ve hızlı seslendirmede yüzde yükselir; karar tabloyla verilir. Tablo
 bozuksa dur, tutarlıysa devam et — kelime hatası zaten her blok sınırında
@@ -796,6 +888,12 @@ kesimler çıplak kalır, video "berbat" hissi verir.
   sessizlik sıfır olduğu için önerilmez — ama kullanıcı isteyebilir, bir
   köpek videosunda istedi. Kapattıktan sonra sessizlik oranını ölç:
   %10'u aşıyorsa kesimler çıplak kalmış demektir.
+- **Efekt seti** `--sfx-style` (audiobed): **`cinematic` varsayılan** — açılışta
+  darbe + parlak "ding" çanı, bölüm geçişlerinde 0.35s swoosh + katmanlı darbe
+  (2–6 kHz tık, 1200→250 Hz yumruk, metalik parıltı kuyruğu), ara kesimlerde
+  "pop". Kullanıcı eski seti (boom + whoosh + tık) "dikkat çekici değil"
+  diye reddetti. Ölçüldü: darbeler konuşmanın +3…+5 dB üstünde, enerjinin
+  %0.2'si 120 Hz altında. `classic` eski seti verir.
 - **Efekt sesleri** `scripts/audiobed.py` ile: büyük kesimlerde boom + whoosh, ara
   kesimlerde tik, ödül anından önce riser + sub-drop.
 - Her darbeye görsel karşılık ver: flash (0.13s) ve kamera sarsıntısı (6–10px,
