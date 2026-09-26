@@ -526,6 +526,36 @@ başına çözülemez. Kaynakta bunlardan biri varsa:
 3. Kullanıcı "kalsın" derse olduğu gibi bırak — TikTok'tan gelen klipte
    filigran olması izleyici için sıra dışı değil.
 
+### Yabancı altyazı kutusu — kırpma, delogo değil: ÜSTÜNE KENDİ KUTUMUZ
+
+Kaynakta düz zeminli bir yazı kutusu varsa (beyaz kutu + siyah yazı, CapCut /
+TikTok "classic"), en temiz çözüm **aynı stilde Türkçe kutuyu tam üstüne
+koymak**. Kırpma yok, delogo lekesi yok, İngilizce hiç görünmüyor. Ayı
+videosunda kullanıcı bunu istedi: *"yabancı olanı sil, bizim altyazıyı o
+fontta ekle"*.
+
+1. **Kutunun konumunu kare kare ölç.** Tek kareye bakma, kutu dönem dönem yer
+   değiştiriyor (ayıda 0–5.9s altta, 5.9–34.3s üstte, 34.3s–son altta).
+   Yöntem: bir kareden kutuyu şablon olarak al, metin maskesini çıkar
+   (`<100`), her karede `mean(zemin) − mean(metin)` skorunu hesapla. Kutu
+   varken ~210, yokken ~0; eşik 40.
+2. **Kutu genişliğini sabit tut, orijinali her zaman örtsün.** Yükseklik
+   metne göre büyüyebilir ama merkez aynı kalır. Font: Liberation Sans Bold
+   (Arial Bold ile aynı metrikler) + 1 px aynı renkte kontur.
+3. **Konum değiştirdiği karede İKİ kutuyu birden çiz (±1.5 kare).** İlk
+   render'da 5.87s'de üstteki İngilizce kutu sızdı: katman ile video arasında
+   kare sınırında 1 karelik yuvarlama kayması oluyor. İki kutunun birlikte
+   durduğu 0.1–0.17s gözle fark edilmiyor.
+4. **Teslimden önce çıktıyı aynı şablonla tara.** Hiçbir karede skor
+   kaynaktaki seviyeye (~210) yaklaşmamalı. Ayıda en yüksek 47.7 çıktı ve o
+   da bizim yazımızdı.
+
+Altyazı burada tek kelime değil, **cümle parçası** (2 satır, ≤ ~26 karakter).
+Zamanlama kelime hizalamasından değil, **cümle sonu = duraklama** eşlemesinden
+geldi. `align.py` 35 bloğun bazılarında cümle sınırını bir kelime kaydırdı.
+`silencedetect` ise 21 cümle arasındaki 20 sınırın hepsini verdi; her cümle 5.3–7.8 hece/sn
+aralığına oturdu. Parçalar cümle içinde hece oranıyla bölündü.
+
 Aşağıdaki kırpma teknikleri **sadece kullanıcı o video için açıkça izin
 verirse** geçerlidir.
 
