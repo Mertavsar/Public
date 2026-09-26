@@ -20,7 +20,7 @@ kesimin öbür yanından piksel taşımasın). Sadece maskeli satırlar (ROI)
 modele veriliyor — tam kare CPU'da gereksiz yavaş.
 
 KURULUM (bir kez, ~5 dk): scripts/setup_propainter.sh
-CPU'da 576x640 ROI ≈ 1-2 sn/kare. Önce --only t0,t1 ile tek sahnede dene, BAK.
+CPU'da (4 çekirdek) ≈ 1.7 sn/kare → 36 sn'lik klip ~35 dk: arka planda çalıştır. Önce --only t0,t1 ile tek sahnede dene, BAK.
 """
 import argparse, os, shutil, subprocess, sys, tempfile, time
 from collections import deque
@@ -74,7 +74,11 @@ def main():
     ap.add_argument("--scene-thr", type=float, default=0.30)
     ap.add_argument("--max-chunk", type=int, default=150, help="uzun sahneyi bu kadar karede böl")
     ap.add_argument("--margin", type=int, default=64, help="ROI'ye maskenin üstü/altından eklenen bağlam")
-    ap.add_argument("--raft-iter", type=int, default=20, help="akış iterasyonu; 12 ≈ %%30 hızlı")
+    # CPU ölçümü (30 kare, 576x280 ROI): tam çözünürlük 6.3 sn/kare; 0.5 ölçek +
+    # neighbor 20 → 1.7 sn/kare, dolgu gözle aynı (su/deri dokusu zaten yumuşak).
+    ap.add_argument("--scale", type=float, default=0.5, help="modelin işleme ölçeği (1.0 = tam, 4x yavaş)")
+    ap.add_argument("--neighbor", type=int, default=20)
+    ap.add_argument("--raft-iter", type=int, default=12)
     ap.add_argument("--only", help="t0,t1: sadece bu aralığı işle (deneme)")
     ap.add_argument("--keep", action="store_true")
     a = ap.parse_args()
@@ -182,13 +186,16 @@ def main():
         t0 = time.time()
         r = subprocess.run([sys.executable, "inference_propainter.py", "-i", fd, "-m", md,
                             "-o", os.path.join(d, "res"), "--save_frames",
-                            "--raft_iter", str(a.raft_iter)],
+                            "--raft_iter", str(a.raft_iter), "--resize_ratio", str(a.scale),
+                            "--neighbor_length", str(a.neighbor)],
                            cwd=PP, capture_output=True, text=True)
         rd = os.path.join(d, "res", "frames", "frames")
         if r.returncode or not os.path.isdir(rd):
             print(r.stdout[-2000:], r.stderr[-3000:]); sys.exit(f"ProPainter hata: kare {s}-{e}")
         for j in range(s, e):
             p = cv2.imread(os.path.join(rd, f"{j - s:04d}.png"))
+            if p.shape[:2] != (ry1 - ry0, W):
+                p = cv2.resize(p, (W, ry1 - ry0), interpolation=cv2.INTER_CUBIC)
             m = cv2.dilate(masks[j, ry0:ry1], np.ones((13, 13), np.uint8))
             al = cv2.GaussianBlur(m.astype(np.float32) / 255, (0, 0), 2)[..., None]
             roi = out[j, ry0:ry1].astype(np.float32)

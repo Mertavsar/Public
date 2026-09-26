@@ -27,6 +27,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/cover.py` | Dikey kapak görseli |
 | `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
 | `scripts/detext.py` | Kaynağa gömülü, SÜREKLİ DEĞİŞEN altyazıyı (kelime kelime İngilizce yazı + vurgu kutusu) her karede tespit edip siler |
+| `scripts/vinpaint.py` | Logo + değişen altyazı + çizimi ProPainter video onarımıyla siler (yazı hayvanın üstünden geçiyorsa bunu kullan; kurulum `setup_propainter.sh`) |
 | `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
@@ -595,6 +596,25 @@ Gömülü kırmızı ok vb. için `--extra t0,t1,y0,y1,x0,x1`.
 Sıra: `dewatermark.py` (logo) → `detext.py` (altyazı) → `build.py`.
 `dewatermark.py` maskeyi saniyede 10 kareden çıkarır; hepsini okumak 36
 saniyelik klipte ~2 GB tutup süreci öldürdü.
+
+**⛔ Yazı hayvanın / nesnenin ÜSTÜNDEN geçiyorsa Telea'yı teslim etme —
+`vinpaint.py` kullan.** Ay balığı klibinde detext+dewatermark çıktısı
+küçük karelerde "temiz" görünüyordu; bandı büyütüp bakınca balığın, orkanın,
+insanın üstünde köşeli, bulanık yamalar vardı. Kullanıcı: "blurlar berbat
+olmuş". `vinpaint.py` aynı maskeleri (detext + dewatermark + `--extra`)
+ProPainter video onarım modeline veriyor: yazının arkası komşu karelerde
+görünüyorsa oradan optik akışla taşınıyor, balığın gövdesi kesintisiz
+dolduruldu. Tek komutta logo + altyazı + ok:
+
+    bash scripts/setup_propainter.sh        # bir kez (torch + ağırlıklar, github'dan)
+    python3 scripts/vinpaint.py ham.mp4 ham_clean.mp4 --until 36 --band 610,790 \
+        --switch 5.0 --box-a 420,570,0,170 --box-b 770,905,430,576 --extra 14.9,16.6,300,615,0,265
+
+CPU'da ~1.7 sn/kare (0.5 ölçek; tam ölçek 4x yavaş, gözle aynı) → arka
+planda çalıştır, önce `--only t0,t1` ile yazının hayvanı kestiği sahnede dene.
+KALİTE KONTROLÜ: yazı bandını (y0-50…y1+50) tam çözünürlükte, 6+ farklı
+sahneden kırpıp orijinalle yan yana BAK — küçük kontakt sayfası bu hatayı
+göstermez. `detext.py` artık yalnız düz su/gökyüzü üstündeki yazı için.
 
 **Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
 başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
