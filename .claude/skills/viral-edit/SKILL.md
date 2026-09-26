@@ -21,6 +21,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/analyze.py` | Referans videoyu ölç (ritim, ses, kadraj) — tahminle taklit etme |
 | `scripts/track.py` | Özneyi renkten takip eder, plan başına `cropx` önerir |
 | `scripts/align.py` | Metni sese kelime kelime hizalar (ASR yok), renk vurgusu |
+| `scripts/sentalign.py` | Cümle sonlarını duraklamalara oturtup kelimeleri cümle cümle hizalar — align.py kayarsa bunu kullan |
 | `scripts/overlay.py` | Altyazı, banner, ok — saydam katman |
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
@@ -511,6 +512,28 @@ c = json.load(open("_build/captions.json"))
 # her paragrafın ilk kelimesinin "s" değeri = o bölümün anlatım başlangıcı
 ```
 
+### Seslendirme kaynaktan uzunsa: cümle → sahne eşlemesi
+
+Steiner klibi 28.5 s, seslendirme 67.6 s çıktı (2.4 kat). Kullanıcıya üç
+yol soruldu (cümle–sahne eşleme · metni kısaltıp sesi yeniden üretme ·
+eşit ağır çekim) ve eşlemeyi seçti. Nasıl yapıldı:
+
+- Kaynağı 0.5 s aralıkla sahnelere ayır ve adlandır (A fotoğraf, B yüz, …).
+  `sentalign.py` ile cümle başlarını al. Her cümleye onu gösteren sahneyi
+  koy; kesimler cümle aralarına düşer.
+- Tekrar kaçınılmaz (26 s malzeme, 67 s ses). Aynı sahneyi farklı
+  cümlelerde kullan, anlamca geri çağırma olsun: eşinin fotoğrafı hem
+  kancada hem "söz vermişti"de hem de "eşinin fotoğrafı"nda.
+- Farkı sahne başına ağır çekimle kapat. Steiner'de çarpan 1.0–1.97 arası,
+  minterpolate çizgi filmde temiz çıktı. Planı `src0,src1` ile yaz,
+  `slow = süre / (src1 − src0)` hesapla, 1'in altına düşmesin.
+- Notları `~` ile başlat. Plan ortasından alınan sahneler bölüm başı
+  sayılmaz; yoksa `check_src_on_scene_cuts` her planı yanlış bölüm diye durdurur.
+- **Kaynağın müziğini plan plan kesme.** Sahneler yeniden sıralanınca müzik
+  her kesimde atlıyor. `acrossfade` ile döngüye alıp sesin süresine uzat,
+  `audio(..., no_music=True, src_audio=döngü, src_gain=0.30)` ile konuşmanın
+  altına duck et. Kullanıcının "orijinal sesi kıs" isteği buydu.
+
 ### ⛔ Seslendirmeyi KESME
 
 ElevenLabs çıktılarında %30'a varan sessizlik olabilir. Bunu kısaltmak için bir
@@ -615,6 +638,24 @@ planda çalıştır, önce `--only t0,t1` ile yazının hayvanı kestiği sahned
 KALİTE KONTROLÜ: yazı bandını (y0-50…y1+50) tam çözünürlükte, 6+ farklı
 sahneden kırpıp orijinalle yan yana BAK — küçük kontakt sayfası bu hatayı
 göstermez. `detext.py` artık yalnız düz su/gökyüzü üstündeki yazı için.
+
+**Ekran kaydı artığı: SUBSCRIBE butonu + fare imleci** (Steiner). Buton
+kendi bandında duruyordu (y 0–155). Bant, çizgi filmin üst kısmından
+güçlü Gauss bulanıklığıyla yeniden üretildi; orijinal bant da böyle bir
+uzantıydı. İmleç ise butonun etrafında dolaşıp görüntünün içine iniyordu:
+- Top-hat haritasında (ince parlak çerçeve) şablonla aranır, Telea ile
+  doldurulur.
+- **İmleç sabit bir döngüde:** 270 kare, i ile i+270 arasında ortalama
+  0.7 px fark. Zayıf eşleşen karede döngünün aynı fazındaki en iyi eşleşme
+  kullanılır.
+- **Maskeyi bandın içinde de uygula**, bandı sonra değiştir. Yoksa Telea
+  bandın içindeki beyaz imleci dolguya taşıyor ve bant sınırında iz kalıyor.
+
+Gömülü küçük yazı şeridi düz zemin üzerindeyse (Steiner'de alt kutuda ayna
+yazılı "STEINER WAS SITTING…") sütun sütun üst ve alt satır arasında dikey
+geçişle doldur. Önce üst ve alt satırdaki zemin olmayan pikselleri (tabela,
+saç) o satırın zemin medyanıyla değiştir, yoksa renk şeride sızıyor. Kenarı
+28 px'lik bir geçişle orijinale karıştır.
 
 **Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
 başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
@@ -790,6 +831,23 @@ bozuksa dur, tutarlıysa devam et — kelime hatası zaten her blok sınırında
 sıfırlanıyor.
 
 Regresyon testi: `python3 scripts/test_align.py` (sentetik seste örtüşme %99.9).
+
+### align.py kayarsa: `sentalign.py`
+
+`--check` tablosunda cümle sonu blok ortasına düşüyorsa ya da bir blokta
+imkânsız hız varsa ("Sözünü tutmuştu… Keşke" 0.9 saniyede = 8.9 hece/sn)
+align.py bir cümle kaymıştır. Kayma sonraki bloklara taşınır.
+
+```bash
+python3 scripts/sentalign.py --audio vo.mp3 --text metin.txt --out captions.json --emphasis ...
+```
+
+Önce cümle sonlarını duraklamalara oturtur (DP, maliyet = hece hızının
+log-sapması), sonra her cümleyi kendi ses parçasında hizalar. Ölçüldü:
+Steiner'de 27 cümlenin hepsi 4.4–8.2, ayıda 21 cümlenin hepsi 5.3–7.8
+hece/sn'ye oturdu. `<out>.sentences.json` cümle başlarını verir, plan
+kesimlerini oradan al. Bu yöntemle Steiner'de kesimlerin %82'si duraklamaya
+denk geldi.
 
 ### İlk cümle banner'da ise altyazıdan çıkar
 
