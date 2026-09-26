@@ -60,6 +60,9 @@ def main():
     ap.add_argument("--until", type=float, default=1e9, help="kapanış kartı başlangıcı; sonrası dokunulmaz")
     # değişen altyazı (detext)
     ap.add_argument("--band", help="altyazı bandı y0,y1 (yoksa altyazı maskesi yok)")
+    ap.add_argument("--band-at", action="append", default=[],
+                    help="t0,t1,y0,y1: o aralıkta bandı daralt. Ay balığı klibinde balığın gözündeki "
+                         "beyaz halka bantta kalınca yazı sanılıp silindi; göz bandın dışında bırakıldı")
     ap.add_argument("--hl-hue", default="118,150")
     ap.add_argument("--white-min", type=int, default=195)
     ap.add_argument("--grow", type=int, default=11, help="harf + gölge genişletme (model 4 px daha ekler)")
@@ -121,10 +124,16 @@ def main():
     hue = [int(v) for v in a.hl_hue.split(",")]
     extras = [[float(v) for v in e.split(",")] for e in a.extra]
 
+    band_at = [[float(v) for v in b.split(",")] for b in a.band_at]
+
     def raw_mask(f, t):
         m = np.zeros((H, W), np.uint8)
         if band:
-            tm, hlm = text_mask(f, band[0], band[1], hue, a.white_min, a.grow)
+            by0, by1 = band
+            for t0, t1, y0, y1 in band_at:
+                if t0 <= t <= t1:
+                    by0, by1 = int(y0), int(y1)
+            tm, hlm = text_mask(f, by0, by1, hue, a.white_min, a.grow)
             m |= tm | hlm
         for t0, t1, y0, y1, x0, x1 in extras:
             if t0 <= t <= t1:
