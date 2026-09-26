@@ -60,6 +60,9 @@ def main():
     ap.add_argument("--until", type=float, default=1e9, help="kapanış kartı başlangıcı; sonrası dokunulmaz")
     # değişen altyazı (detext)
     ap.add_argument("--band", help="altyazı bandı y0,y1 (yoksa altyazı maskesi yok)")
+    ap.add_argument("--band-at", action="append", default=[],
+                    help="t0,t1,y0,y1: o aralıkta bandı daralt. Ay balığı klibinde balığın gözündeki "
+                         "beyaz halka bantta kalınca yazı sanılıp silindi; göz bandın dışında bırakıldı")
     ap.add_argument("--hl-hue", default="118,150")
     ap.add_argument("--white-min", type=int, default=195)
     ap.add_argument("--grow", type=int, default=11, help="harf + gölge genişletme (model 4 px daha ekler)")
@@ -80,6 +83,7 @@ def main():
     ap.add_argument("--neighbor", type=int, default=20)
     ap.add_argument("--raft-iter", type=int, default=12)
     ap.add_argument("--only", help="t0,t1: sadece bu aralığı işle (deneme)")
+    ap.add_argument("--work", help="kalıcı çalışma klasörü (kesilirse aynı komutla devam)")
     ap.add_argument("--keep", action="store_true")
     a = ap.parse_args()
     if not os.path.exists(os.path.join(PP, "inference_propainter.py")):
@@ -89,7 +93,14 @@ def main():
     dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of",
                                 "csv=p=0", a.src], capture_output=True, text=True).stdout)
     t_end = min(a.until, dur)
-    work = tempfile.mkdtemp(prefix="vinpaint_")
+    # Uzun iş (35+ dk) konteyner yeniden başlayınca yarıda kaldı: --work ile
+    # kalıcı klasör verilirse biten sahneler done.txt'ye yazılır, aynı komut
+    # tekrar çalışınca kaldığı yerden devam eder.
+    work = a.work or tempfile.mkdtemp(prefix="vinpaint_")
+    os.makedirs(work, exist_ok=True)
+    frp, donep = os.path.join(work, "fr.npy"), os.path.join(work, "done.txt")
+    resume = os.path.exists(frp) and os.path.exists(donep)
+    done = {tuple(int(v) for v in l.split()) for l in open(donep)} if resume else set()
 
     # ---- logo maskeleri (zamana göre sabit) ----
     mA = mB = None
@@ -113,10 +124,16 @@ def main():
     hue = [int(v) for v in a.hl_hue.split(",")]
     extras = [[float(v) for v in e.split(",")] for e in a.extra]
 
+    band_at = [[float(v) for v in b.split(",")] for b in a.band_at]
+
     def raw_mask(f, t):
         m = np.zeros((H, W), np.uint8)
         if band:
-            tm, hlm = text_mask(f, band[0], band[1], hue, a.white_min, a.grow)
+            by0, by1 = band
+            for t0, t1, y0, y1 in band_at:
+                if t0 <= t <= t1:
+                    by0, by1 = int(y0), int(y1)
+            tm, hlm = text_mask(f, by0, by1, hue, a.white_min, a.grow)
             m |= tm | hlm
         for t0, t1, y0, y1, x0, x1 in extras:
             if t0 <= t <= t1:
@@ -129,12 +146,17 @@ def main():
 
     # ---- kareleri diske, maskeleri belleğe ----
     n = int(round(t_end * fps))
-    fr = np.lib.format.open_memmap(os.path.join(work, "fr.npy"), "w+", np.uint8, (n, H, W, 3))
+    fr = np.load(frp, mmap_mode="r+") if resume else \
+        np.lib.format.open_memmap(frp, "w+", np.uint8, (n, H, W, 3))
+    if resume:
+        print(f"devam: {len(done)} sahne zaten bitmiş ({work})")
     raw = np.zeros((n, H, W), np.uint8)
     for i, f in enumerate(frames_of(a.src, W, H, t_end)):
         if i >= n:
             break
-        fr[i] = f; raw[i] = raw_mask(f, i / fps)
+        if not resume:
+            fr[i] = f
+        raw[i] = raw_mask(f, i / fps)  # maske hep ORİJİNAL kareden
     n = min(n, i + 1)
     # yazı belirip kaybolurken (fade) yarı saydam harf eşiğin altında kalıyor:
     # komşu karelerin maskesi de eklenir (detext ile aynı pencere)
@@ -175,11 +197,11 @@ def main():
     out = fr  # yerinde güncelle
     t_all = time.time()
     for ci, (s, e) in enumerate(chunks):
-        if e - s < 2 or not masks[s:e].any():
+        if e - s < 2 or not masks[s:e].any() or (s, e) in done:
             continue
         ry0, ry1 = roi_of(masks[s:e])  # sahne başına: ok/logo yalnız kendi sahnesinde büyütsün
         d = os.path.join(work, f"c{ci:03d}"); fd = os.path.join(d, "frames"); md = os.path.join(d, "masks")
-        os.makedirs(fd); os.makedirs(md)
+        shutil.rmtree(d, ignore_errors=True); os.makedirs(fd); os.makedirs(md)
         for j in range(s, e):
             cv2.imwrite(os.path.join(fd, f"{j - s:04d}.png"), fr[j, ry0:ry1])
             cv2.imwrite(os.path.join(md, f"{j - s:04d}.png"), masks[j, ry0:ry1])
@@ -200,6 +222,9 @@ def main():
             al = cv2.GaussianBlur(m.astype(np.float32) / 255, (0, 0), 2)[..., None]
             roi = out[j, ry0:ry1].astype(np.float32)
             out[j, ry0:ry1] = (p * al + roi * (1 - al)).round().astype(np.uint8)
+        fr.flush()
+        with open(donep, "a") as fh:
+            fh.write(f"{s} {e}\n")
         if not a.keep:
             shutil.rmtree(d)
         print(f"sahne {s / fps:6.2f}-{e / fps:6.2f} s ({e - s} kare, y {ry0}-{ry1}) {time.time() - t0:5.0f} sn", flush=True)
