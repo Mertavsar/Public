@@ -40,6 +40,19 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 
 ---
 
+## 0. ⛔ EFEKT SESİ EKLEME — kullanıcı kendisi ekliyor
+
+> **Kullanıcının kuralı:** *"efekt seslerini sen ekleme ben hallederim, sen
+> sadece ses ile videonun ve altyazının senkron olmasına önem ver."*
+>
+> - EDL'de her planın `beat` sütunu `-` olur. Böylece `audiobed` darbe,
+>   pop veya riser koymaz ve `fx_expr` ışık parlaması ya da sarsıntı eklemez.
+> - Ses: seslendirme + kaynağın kendi sesi. Kaynak sesi, seslendirmenin
+>   15 LU altında (§6'daki formül). Sentetik müzik yatağı da yok (`--no-music`).
+> - Bu belgede efekt sesinden bahseden her yer (§0b, §6) bu kuralla geçersiz.
+> - **İşin ağırlığı senkron:** `sentalign.py` cümle zamanları, plan kesimleri
+>   cümle aralarında, PLAN ↔ SÖZ tablosu ve kontrol sayfası.
+
 ## 0. ⛔ SESLENDİRME METNİNİ SEN YAZMA
 
 > **Kullanıcının kuralı, istisnası yok.** Ham klip gelince metin önerme,
