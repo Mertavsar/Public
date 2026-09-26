@@ -639,6 +639,25 @@ KALİTE KONTROLÜ: yazı bandını (y0-50…y1+50) tam çözünürlükte, 6+ far
 sahneden kırpıp orijinalle yan yana BAK — küçük kontakt sayfası bu hatayı
 göstermez. `detext.py` artık yalnız düz su/gökyüzü üstündeki yazı için.
 
+**ProPainter tuzakları (ördek videosu, hepsi ölçüldü):**
+- **Hız:** ölçek 0.4 / `--raft_iter 6` / `--neighbor_length 10` sonuç
+  verdi. 0.5/12/20 ile gözle aynı çıktı ve 2.4 kat hızlı. Süre bölgenin
+  yüksekliğiyle orantılı: 470 satırda kare başına ~4.8 s.
+- **Bölge ölçeklenince ~130 pikselden alçak kalırsa segfault** (torchvision
+  `_C_stable`, RAFT piramidi). 200 satır × 0.5 ve 264 × 0.4 çöktü;
+  336 × 0.4 çalıştı. Bölgeyi en az 336 satıra genişlet.
+- **Maskeler dikeyde uzaksa ayrı işle.** Üstte kutu, altta yazı olunca tek
+  bölge 1520 satır oldu ve bellek taştı (OOM, kod −9). 200 satırdan büyük
+  boşlukta grupları ayır.
+- **Siyaha karartma zehirliyor.** Parçanın içinde fade-through-black
+  varsa, model siyah kareleri komşu karelere taşıyıp yazının yerine siyah
+  leke basıyor (dolgu 21, çevre 130). Parçayı karartmanın iki yanında böl,
+  karanlık karelere Telea yeter.
+- **Tek karelik parça** (sahne kesimi + kutu konum değişimi aynı karede)
+  modele verilemiyor. O kareyi aynı sahnenin sonraki temiz karesinden kopyala.
+- **Teslimden önce otomatik tara:** kutu şablon skoru, yazı rengi oranı ve
+  maske içi/çevre parlaklık oranı. Oran < 0.7 ise siyah dolgu var demektir.
+
 **Ekran kaydı artığı: SUBSCRIBE butonu + fare imleci** (Steiner). Buton
 kendi bandında duruyordu (y 0–155). Bant, çizgi filmin üst kısmından
 güçlü Gauss bulanıklığıyla yeniden üretildi; orijinal bant da böyle bir
@@ -674,6 +693,13 @@ Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
    filigran olması izleyici için sıra dışı değil.
 
 ### Yabancı altyazı kutusu — kırpma, delogo değil: ÜSTÜNE KENDİ KUTUMUZ
+
+> **⛔ Kullanıcının kuralı (ördek videosundan sonra):** düz zeminli yazı
+> kutusu **silinmez, üstü Türkçe kutuyla örtülür.** Ördek videosunda beyaz
+> kutu (1020×126 px, her karede) ProPainter ile silindi. Sonuç temizdi ama
+> CPU'da 1788 kare yaklaşık 3 saat sürdü, üstüne üç çökme geldi. Kullanıcı
+> "6 saattir bununla uğraşıyorsun" dedi ve örtmeyi seçti. ProPainter yalnız
+> kutusuz, küçük yazılar için (sarı başlık, logo) ve kısa aralıklarda.
 
 Kaynakta düz zeminli bir yazı kutusu varsa (beyaz kutu + siyah yazı, CapCut /
 TikTok "classic"), en temiz çözüm **aynı stilde Türkçe kutuyu tam üstüne
