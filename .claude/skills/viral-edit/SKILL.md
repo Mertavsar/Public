@@ -1006,7 +1006,14 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 - **Müziği konuşmanın altına duck et:**
   `sidechaincompress=threshold=0.05:ratio=7:attack=8:release=280`
   Konuşma anında ~9 dB aşağı inmeli. Ölçerek doğrula.
-- **Kaynağın kendi sesi** `--src-audio GAIN` ile geri gelir (0.3–0.6 tipik).
+- **⛔ Kaynak sesinin kazancını sabit verme, seslendirmeye göre hesapla.**
+  ElevenLabs çıktısı çok kısık geliyor (ördekte −25.4 LUFS), kaynak müzik ise
+  −14 LUFS civarında. Sabit 0.30 kazanç müziği −24.8 LUFS'a indirdi, yani
+  seslendirmeyle aynı seviyede kaldı. Kullanıcı "videonun kendi sesi çok ön
+  planda" dedi. Kural: iki sesin integrated LUFS değerini ölç,
+  `kazanç = 10^(((VO − 15) − kaynak) / 20)`. Böylece kaynak, seslendirmenin
+  15 LU altında kalır (ördekte 0.05).
+- **Kaynağın kendi sesi** `--src-audio GAIN` ile geri gelir (yukarıdaki formülle hesapla).
   Planlar kaynaktan farklı sıra ve hızda alındığı için kaynak sesi olduğu gibi
   altına sermek olmuyor: `source_audio()` her planın ses parçasını ayrı kesip
   `atempo` ile ağır çekim çarpanını uyguluyor (perde korunur — `asetrate`
