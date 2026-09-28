@@ -67,6 +67,14 @@ def main():
     ap.add_argument("--white-min", type=int, default=195)
     ap.add_argument("--grow", type=int, default=11, help="harf + gölge genişletme (model 4 px daha ekler)")
     ap.add_argument("--extra", action="append", default=[], help="kırmızı çizim t0,t1,y0,y1,x0,x1")
+    # Kedi-köpek klibinde altyazı beyaz DÜZ KUTU içinde siyah yazıydı (CapCut
+    # "classic"): harf maskesi kutunun kenarını kaçırıyor. Kutu dikdörtgen
+    # olarak bulunup tamamen maskeleniyor.
+    ap.add_argument("--white-box", help="beyaz altyazı kutusunun durabileceği y0,y1 bandı")
+    # Aynı klipte altta soldan sağa kayan bir ikon (kalp + figür) vardı — video
+    # boyunca ilerleyen bir süre göstergesi. Konumu x = x0 + vx*t ile gidiyor.
+    ap.add_argument("--moving", action="append", default=[],
+                    help="kayan ikon t0,t1,x0,vx,y0,y1,sol,sağ: x0+vx*t merkezli kutu")
     # sabit / köşe değiştiren logo (dewatermark)
     ap.add_argument("--box-a", help="logo kutusu y0,y1,x0,x1")
     ap.add_argument("--box-b", help="--switch sonrası logo kutusu")
@@ -106,7 +114,10 @@ def main():
     mA = mB = None
     if a.box_a:
         sfps = min(fps, 10.0)
-        F = np.stack(list(frames_of(a.src, W, H, t_end)))[::max(1, round(fps / sfps))]
+        step = max(1, round(fps / sfps))
+        # önce hepsini listeye alıp sonra seyreltmek 62 sn'lik klipte ~6.6 GB tuttu
+        F = np.stack([f for i, f in enumerate(frames_of(a.src, W, H, t_end)) if i % step == 0])
+        sfps = fps / step
         sw = int(min(a.switch, t_end) * sfps)
         mA = build_mask(F[:max(sw, 1)], [int(v) for v in a.box_a.split(",")], W, H, a.wm_grow, a.halo_min)
         if a.box_b:
@@ -125,9 +136,61 @@ def main():
     extras = [[float(v) for v in e.split(",")] for e in a.extra]
 
     band_at = [[float(v) for v in b.split(",")] for b in a.band_at]
+    wbox = [int(v) for v in a.white_box.split(",")] if a.white_box else None
+    moving = [[float(v) for v in s.split(",")] for s in a.moving]
+
+    def white_boxes(f, y0, y1):
+        """Düz beyaz kutu + koyu yazı: dikdörtgeni bul, tamamını maskele.
+
+        Kutunun üst/alt kenar boşluğu TAM BEYAZ satırlardan oluşur; aynı x
+        aralığına sahip bu satırlar gruplanıp dikdörtgen kuruluyor. Önce
+        bağlantılı bileşenle denendi: kalın yazının satırları beyazı bölüyor,
+        açık renk kanepe / halı kutuya yapışıyordu — 18 karenin 4'ünde kaçtı.
+        Bu yöntemle 61 saniyede yalnız 2 geçiş karesi kaçtı (zaman penceresi
+        onları da kapatıyor). İçerik doğrulaması: kutunun içi beyaz + koyu yazı."""
+        b = f[y0:y1]
+        mn = b.min(2).astype(int); mx = b.max(2).astype(int)
+        wh = ((mn > 232) & (mx - mn < 25)).astype(np.uint8)
+        wh = cv2.morphologyEx(wh, cv2.MORPH_CLOSE, np.ones((1, 5), np.uint8))
+        rows = []
+        for y in range(wh.shape[0]):
+            r = wh[y]
+            if r.sum() < 40:
+                continue
+            d = np.diff(np.concatenate([[0], r, [0]]))
+            s, e = np.nonzero(d == 1)[0], np.nonzero(d == -1)[0]
+            k = np.argmax(e - s)
+            if e[k] - s[k] >= 40:
+                rows.append((y, s[k], e[k]))
+        m = np.zeros((H, W), np.uint8)
+        used = [False] * len(rows)
+        for i, (y, s, e) in enumerate(rows):
+            if used[i]:
+                continue
+            grp = [rows[i]]; used[i] = True
+            for j in range(i + 1, len(rows)):
+                if rows[j][0] - grp[-1][0] > 45:
+                    break
+                if abs(rows[j][1] - s) <= 6 and abs(rows[j][2] - e) <= 6:
+                    grp.append(rows[j]); used[j] = True
+            ya, yb = grp[0][0], grp[-1][0] + 1
+            xa = int(np.median([g[1] for g in grp])); xb = int(np.median([g[2] for g in grp]))
+            if not (12 <= yb - ya <= 70):
+                continue
+            inb, inx = mn[ya:yb, xa:xb], mx[ya:yb, xa:xb]
+            if ((inb > 215) | (inx < 120)).mean() < 0.7 or (inx < 120).mean() < 0.05:
+                continue
+            m[max(0, y0 + ya - 4):y0 + yb + 4, max(0, xa - 5):xb + 5] = 255
+        return m
 
     def raw_mask(f, t):
         m = np.zeros((H, W), np.uint8)
+        if wbox:
+            m |= white_boxes(f, *wbox)
+        for t0, t1, x0, vx, y0, y1, lft, rgt in moving:
+            if t0 <= t <= t1:
+                xc = x0 + vx * t
+                m[int(y0):int(y1), max(0, int(xc - lft)):min(W, int(xc + rgt))] = 255
         if band:
             by0, by1 = band
             for t0, t1, y0, y1 in band_at:
