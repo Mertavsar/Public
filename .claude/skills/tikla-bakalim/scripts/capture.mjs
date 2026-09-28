@@ -25,7 +25,8 @@ const fps = +(args.fps || 30);
 
 
 const browser = await pw.chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
+const [vw, vh] = tl.format === "yatay" ? [1920, 1080] : [1080, 1920];
+const page = await browser.newPage({ viewport: { width: vw, height: vh }, deviceScaleFactor: 1 });
 page.on("pageerror", e => { console.error("SAYFA HATASI:", e.message); process.exit(2); });
 await page.goto(player);
 await page.evaluate(([t, c]) => window.load(t, { cover: c }), [tl, !!args.cover]);

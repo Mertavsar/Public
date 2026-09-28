@@ -31,6 +31,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg0); }
+html.yatay, html.yatay body { width: 1920px; height: 1080px; }
 body { font-family: M, "DejaVu Sans", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
 
 #stage { position: absolute; inset: 0; overflow: hidden;
@@ -71,5 +72,26 @@ body { font-family: M, "DejaVu Sans", sans-serif; color: var(--ink); -webkit-fon
 
 #src { position: absolute; top: 1440px; left: 0; right: 0; text-align: center; font-weight: 600; font-size: 28px; color: rgba(255,255,255,.45); }
 
+/* Dikeyde kullanılmayanlar */
+#capline, #tag, #bar { display: none; }
+
+/* ---------- YATAY (1920x1080) — altın videosunun düzeni ---------- */
+html.yatay #top { top: 44px; left: 56px; right: auto; flex-direction: row; gap: 20px; }
+html.yatay #chip { font-size: 30px; padding: 10px 26px; letter-spacing: 1.5px; }
+html.yatay #prog i { width: 70px; height: 10px; }
+/* sahne kutusu 1300x930, 0.84 ölçekle ~1090x780 görünür; merkez y=520 */
+html.yatay .scene { left: 310px; right: auto; width: 1300px; top: 55px; height: 930px; transform-origin: 50% 50%; }
+html.yatay #cap { display: none; }
+html.yatay #capline { display: block; position: absolute; left: 50%; top: 982px; transform: translateX(-50%);
+  max-width: 1760px; white-space: nowrap; font-weight: 800; font-size: 42px; line-height: 1;
+  padding: 16px 30px; border-radius: 18px; background: rgba(4, 8, 20, .78); color: rgba(244, 246, 251, .45); }
+html.yatay #capline span.done { color: #f4f6fb; }
+html.yatay #capline span.on { color: var(--sari); text-shadow: 0 0 16px rgba(255, 200, 61, .6); }
+html.yatay #tag { display: block; position: absolute; top: 44px; right: 56px; font-weight: 900; font-size: 24px; letter-spacing: 2px;
+  color: var(--sari); padding: 10px 22px; border-radius: 30px; border: 2px solid rgba(255, 200, 61, .6); background: rgba(255, 200, 61, .14); }
+html.yatay #src { top: 104px; left: auto; right: 58px; text-align: right; font-size: 22px; }
+html.yatay #bar { display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(255, 255, 255, .08); }
+html.yatay #bar b { display: block; height: 100%; width: 0; background: var(--sari); box-shadow: 0 0 10px var(--sari); }
+
 /* Kapak kipi */
-#stage.cover #top, #stage.cover #cap, #stage.cover #src { display: none; }
+#stage.cover #top, #stage.cover #cap, #stage.cover #capline, #stage.cover #src, #stage.cover #tag, #stage.cover #bar { display: none; }

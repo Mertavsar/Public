@@ -59,13 +59,15 @@ function slide(e, lt, at, dx = 0, dy = 80, dur = .4) {
 // Tek satıra sığdır: taşarsa yazı boyunu küçült. Ölçüm ancak öğe görünürken
 // yapılabilir (gizli sahnede genişlik 0) — fit() işaretler, seek() sahne ilk
 // açıldığında ölçer. fitNow() görünür öğede hemen ölçer.
-function fitNow(e, base, maxW = 940) {
+// Sahne içeriğinin genişliği: dikey 940, yatay 1300 (load() ayarlar)
+let SCW = 940;
+function fitNow(e, base, maxW = SCW) {
   e.style.whiteSpace = "nowrap";
   e.style.fontSize = base + "px";
   const w = e.scrollWidth;
   if (w > maxW) e.style.fontSize = (base * maxW / w) + "px";
 }
-function fit(e, base, maxW = 940) {
+function fit(e, base, maxW = SCW) {
   e.dataset.fit = base; e.dataset.fitw = maxW;
   e.style.whiteSpace = "nowrap"; e.style.fontSize = base + "px";
 }
@@ -147,7 +149,7 @@ SCENES.sayi = (p, r) => {
     num.textContent = (p.onek || "") + fmt(lerp(from, to, x), dec) + (p.sonek || "");
     // son değere göre sığdır — sayarken boy zıplamasın
     if (!num._fs) { const t = num.textContent; num.textContent = (p.onek || "") + fmt(to, dec) + (p.sonek || "");
-      fitNow(num, nb, 940 - (ar ? 150 : 0)); num._fs = num.style.fontSize; num.textContent = t; }
+      fitNow(num, nb, SCW - (ar ? 150 : 0)); num._fs = num.style.fontSize; num.textContent = t; }
     num.style.fontSize = num._fs;
     pop(num, lt, .15, .35, .7);
     if (x >= 1) num.style.transform = `scale(${1 + .03 * Math.sin((lt - .2 - cd) * 5)})`;
@@ -450,18 +452,25 @@ SCENES.kapanis = (p, r) => {
 };
 
 // Kapak — sadece kapak.png için. Büyük, tek fikir.
+// Dikey: tek sütun. Yatay (YouTube küçük resmi): solda yazı, sağda dev ikon.
 SCENES.kapak = (p, r) => {
-  r.style.top = "200px"; r.style.height = "1300px";
-  const ic = p.ikon ? el("div", "emoji", p.ikon, r) : null;
-  if (ic) { ic.style.fontSize = "300px"; ic.style.marginBottom = "30px"; }
-  const u = el("div", "h", md(p.ust || ""), r); fit(u, 120);
-  const b = el("div", "h", md(p.buyuk || ""), r);
-  fit(b, 250);
+  const yatay = FORMAT === "yatay";
+  if (yatay) Object.assign(r.style, { left: "70px", right: "70px", width: "auto", top: "60px", height: "960px",
+    flexDirection: "row", justifyContent: "space-between", textAlign: "left", transform: "none" });
+  else { r.style.top = "200px"; r.style.height = "1300px"; }
+  const col = yatay ? el("div", null, null, r) : r;
+  if (yatay) Object.assign(col.style, { display: "flex", flexDirection: "column", alignItems: "flex-start", width: "1150px" });
+  const ic = p.ikon ? el("div", "emoji", p.ikon, yatay ? r : col) : null;
+  if (ic) { ic.style.fontSize = yatay ? "560px" : "300px"; ic.style.marginBottom = yatay ? "0" : "30px";
+    if (yatay) ic.style.filter = "drop-shadow(0 30px 60px rgba(0,0,0,.5))"; }
+  const u = el("div", "h", md(p.ust || ""), col); fit(u, yatay ? 170 : 120, yatay ? 1150 : SCW);
+  const b = el("div", "h", md(p.buyuk || ""), col);
+  fit(b, yatay ? 300 : 250, yatay ? 1150 : SCW);
   Object.assign(b.style, { color: "var(--sari)", margin: "10px 0", textShadow: "0 0 80px rgba(255,200,61,.4)" });
-  const a = el("div", "h", md(p.alt || ""), r);
-  Object.assign(a.style, { fontSize: "110px", background: "var(--kirmizi)", padding: "10px 44px", borderRadius: "28px", marginTop: "20px" });
-  const brand = el("div", "h", "TIKLA <span class='sari'>BAKALIM</span> <span class='emoji'>👆</span>", r);
-  Object.assign(brand.style, { fontSize: "54px", marginTop: "80px", opacity: ".85" });
+  const a = el("div", "h", md(p.alt || ""), col);
+  Object.assign(a.style, { fontSize: yatay ? "130px" : "110px", background: "var(--kirmizi)", padding: "10px 44px", borderRadius: "28px", marginTop: "20px" });
+  const brand = el("div", "h", "TIKLA <span class='sari'>BAKALIM</span> <span class='emoji'>👆</span>", col);
+  Object.assign(brand.style, { fontSize: yatay ? "50px" : "54px", marginTop: yatay ? "50px" : "80px", opacity: ".85" });
   return () => {};
 };
 
@@ -471,7 +480,8 @@ const SECTIONS = {
   neden: { i: 1, t: "2 · NEDEN OLDU?" },
   etki: { i: 2, t: "3 · BİZİ NASIL ETKİLER?" },
 };
-let TL = null, BUILT = [], CAP = null, WORDS = [];
+let TL = null, BUILT = [], WORDS = [], LINES = [], FORMAT = "dikey", W = 1080, H = 1920;
+let SCALE = 1;          // sahne kutusunun ölçeği (yatayda 930 px yüksek kutu ekrana sığsın)
 
 function background(stage) {
   const bg = el("div", null, null, stage);
@@ -486,17 +496,95 @@ function background(stage) {
   return t => {
     blobs.forEach((b, i) => {
       const a = t * .11 + i * 1.7;
-      b.style.transform = `translate(${180 + 380 * Math.cos(a) + (i % 2) * 120}px, ${260 + 520 * Math.sin(a * 1.3 + i) + i * 180}px)`;
+      const x = W / 2 - 360 + (W * .36) * Math.cos(a) + (i % 2 ? 1 : -1) * W * .1;
+      const y = H / 2 - 360 + (H * .28) * Math.sin(a * 1.3 + i);
+      b.style.transform = `translate(${x}px, ${y}px)`;
     });
     document.getElementById("grid").style.transform = `translateY(${(t * 18) % 120}px)`;
   };
 }
 
-let BG = null;
+// Sahne geçişi: çapraz altın silme (altın videosundan). Ekran tam t0 anında kapanır.
+function wiper(stage) {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("width", W); svg.setAttribute("height", H);
+  Object.assign(svg.style, { position: "absolute", inset: "0", zIndex: 50, pointerEvents: "none" });
+  const mk = fill => { const p = document.createElementNS(ns, "polygon"); p.setAttribute("fill", fill); svg.appendChild(p); return p; };
+  const body = mk("#0a1330"), e1 = mk("var(--sari)"), e2 = mk("var(--sari)");
+  e1.style.filter = e2.style.filter = "drop-shadow(0 0 18px rgba(255,200,61,.8))";
+  stage.appendChild(svg);
+  const sk = H * .24, span = W + 2 * sk + 200;
+  return t => {
+    svg.style.display = "none";
+    if (TL.gecis === false) return;
+    for (let j = 1; j < TL.scenes.length; j++) {
+      const sw = TL.scenes[j].t0, u = (t - (sw - .2)) / .4;
+      if (u < 0 || u > 1) continue;
+      const lead = -sk - 100 + span * eInOut(clamp(u * 2)), trail = -sk - 100 + span * eInOut(clamp(u * 2 - 1));
+      body.setAttribute("points", `${trail},0 ${lead + sk},0 ${lead - sk},${H} ${trail - 2 * sk},${H}`);
+      e1.setAttribute("points", `${lead + sk - 40},0 ${lead + sk},0 ${lead - sk},${H} ${lead - sk - 40},${H}`);
+      e2.setAttribute("points", `${trail + sk - 40},0 ${trail + sk},0 ${trail - sk},${H} ${trail - sk - 40},${H}`);
+      svg.style.display = "block";
+    }
+  };
+}
+
+// Yatay altyazı: satır satır, konuşulan kelime altın (altın videosundaki gibi)
+function buildLines() {
+  let cur = [];
+  const flush = () => { if (cur.length) { LINES.push(cur); cur = []; } };
+  for (const w of WORDS) {
+    if (cur.length && w.p !== cur[0].p) flush();
+    cur.push(w);
+    const len = cur.map(x => x.w).join(" ").length;
+    const end = /[.?!;:]$/.test(w.w), comma = /,$/.test(w.w);
+    if (len >= 42 || (end && len >= 10) || (comma && len >= 26)) flush();
+  }
+  flush();
+}
+let LINE_I = -1;
+function lineCaption(t) {
+  const box = document.getElementById("capline");
+  let li = -1;
+  for (let i = 0; i < LINES.length; i++) if (t >= LINES[i][0].s - .08) li = i;
+  if (li < 0 || t > LINES[li][LINES[li].length - 1].e + .6) { box.style.opacity = 0; return; }
+  const L = LINES[li];
+  if (li !== LINE_I) {
+    box.innerHTML = L.map(w => `<span>${w.w.replace(/</g, "&lt;")}</span>`).join(" ");
+    LINE_I = li;
+  }
+  box.style.opacity = li === 0 ? 1 : clamp((t - (L[0].s - .08)) / .1);
+  [...box.children].forEach((sp, i) => {
+    const w = L[i];
+    const active = t >= w.s - .03 && (i === L.length - 1 ? t < w.e + .4 : t < L[i + 1].s - .03);
+    sp.className = active ? "on" : t >= w.s ? "done" : "";
+  });
+}
+
+// Dikey altyazı: tek kelime, büyük, konturlu
+function wordCaption(t) {
+  const cap = document.querySelector("#cap span");
+  const w = WORDS.find(w => t >= w.s && t < w.e);
+  if (!w) { cap.style.opacity = 0; return; }
+  cap.textContent = w.w.replace(/[.,!?;:…"]+$/, "").replace(/^["(]+/, "");
+  cap.style.color = { yellow: "var(--sari)", red: "var(--kirmizi)", green: "var(--yesil)" }[w.c] || "#fff";
+  cap.style.transform = `scale(${lerp(.75, 1, eOut(prog(t, w.s, .09)))})`;
+  cap.style.opacity = 1;
+  cap.style.fontSize = "96px";
+  if (cap.scrollWidth > 1000) cap.style.fontSize = (96 * 1000 / cap.scrollWidth) + "px";
+}
+
+let BG = null, WIPE = null;
 window.load = async function (tl, opts = {}) {
   // Fontlar yüklenmeden ölçüm yapılırsa sığdırma yedek fonta göre hesaplanır
   await Promise.all([600, 800, 900].map(w => document.fonts.load(`${w} 60px M`, "AaŞşĞğİıÇçÖöÜü₺0123")));
   TL = tl;
+  FORMAT = tl.format === "yatay" ? "yatay" : "dikey";
+  [W, H] = FORMAT === "yatay" ? [1920, 1080] : [1080, 1920];
+  SCW = FORMAT === "yatay" ? 1300 : 940;
+  SCALE = FORMAT === "yatay" ? .84 : 1;
+  document.documentElement.classList.add(FORMAT);
   const stage = document.getElementById("stage");
   BG = background(stage);
   stage.appendChild(document.getElementById("top"));
@@ -507,10 +595,10 @@ window.load = async function (tl, opts = {}) {
     if (!fn) throw new Error("bilinmeyen sahne tipi: " + s.tip);
     return { s, r, up: fn(s.p || {}, r, s) };
   });
-  stage.appendChild(document.getElementById("cap"));
-  stage.appendChild(document.getElementById("src"));
-  CAP = document.querySelector("#cap span");
+  for (const id of ["cap", "capline", "tag", "src", "bar"]) stage.appendChild(document.getElementById(id));
+  WIPE = wiper(stage);
   WORDS = tl.words || [];
+  if (FORMAT === "yatay") buildLines();
   if (opts.cover) stage.classList.add("cover");
   return document.fonts.ready.then(() => true);
 };
@@ -526,7 +614,10 @@ window.seek = function (t) {
       if (!b.fitted) { b.r.querySelectorAll("[data-fit]").forEach(e => fitNow(e, +e.dataset.fit, +e.dataset.fitw)); b.fitted = true; }
       // İlk sahne boş ekranla açılmasın: akıştaki ilk kare zaten dolu olmalı
       const lead = b === BUILT[0] ? .3 : 0;
-      b.up(t - b.s.t0 + lead, b.s.t1 - b.s.t0 + lead);
+      const d = b.s.t1 - b.s.t0;
+      b.up(t - b.s.t0 + lead, d + lead);
+      // sahne boyunca %3 yavaş yaklaşma — ekran hiç donmasın
+      if (b.s.tip !== "kapak") b.r.style.transform = `scale(${SCALE * (1 + .03 * eInOut(clamp((t - b.s.t0) / Math.max(1, d))))})`;
     }
   });
   // Bölüm şeridi
@@ -545,18 +636,12 @@ window.seek = function (t) {
       b.style.width = (i < sec.i ? 100 : i > sec.i ? 0 : 100 * clamp((t - s0) / (s1 - s0))) + "%";
     });
   }
-  // Altyazı
-  const w = WORDS.find(w => t >= w.s && t < w.e);
-  if (w) {
-    CAP.textContent = w.w.replace(/[.,!?;:…"]+$/, "").replace(/^["(]+/, "");
-    CAP.style.color = { yellow: "var(--sari)", red: "var(--kirmizi)", green: "var(--yesil)" }[w.c] || "#fff";
-    const x = prog(t, w.s, .09);
-    CAP.style.transform = `scale(${lerp(.75, 1, eOut(x))})`;
-    CAP.style.opacity = 1;
-    // taşarsa küçült
-    CAP.style.fontSize = "96px";
-    const maxw = 1000;
-    if (CAP.scrollWidth > maxw) CAP.style.fontSize = (96 * maxw / CAP.scrollWidth) + "px";
-  } else CAP.style.opacity = 0;
+  // Sahne etiketi (sağ üst, yatay) ve alt ilerleme çubuğu
+  const tag = document.getElementById("tag");
+  tag.textContent = cur && cur.s.etiket ? cur.s.etiket : "";
+  tag.style.opacity = cur && cur.s.etiket ? 1 : 0;
+  document.querySelector("#bar b").style.width = (100 * clamp(t / TL.dur)) + "%";
+  if (FORMAT === "yatay") lineCaption(t); else wordCaption(t);
   document.getElementById("src").textContent = cur && cur.s.kaynak ? "Kaynak: " + cur.s.kaynak : "";
+  WIPE(t);
 };

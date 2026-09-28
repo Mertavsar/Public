@@ -1,6 +1,6 @@
 # Sahne tipleri — parametreler
 
-Her sahne: `{ "bolum", "tip", "say", "p": {...}, "kaynak" }`. Aşağıdaki alanlar `p` içindir.
+Her sahne: `{ "bolum", "tip", "say", "p": {...}, "kaynak", "etiket" }`. Aşağıdaki alanlar `p` içindir.
 Metin alanlarında `*sarı*` `~kırmızı~` `+yeşil+` ve `\n` çalışır.
 Renk adları: `sari` `kirmizi` `yesil` `mavi` `mor` `turuncu` `beyaz`.
 

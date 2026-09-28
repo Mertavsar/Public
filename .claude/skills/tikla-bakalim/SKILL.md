@@ -1,6 +1,6 @@
 ---
 name: tikla-bakalim
-description: Tıkla Bakalım kanalı için gündem anlatım videosu (dikey, animasyonlu, 45–60 sn). "Gündemden video yap", "şu konuyu anlat", "Google Trends'te ne var", "Tıkla Bakalım videosu", "bu haberi basitçe anlat", "animasyonlu anlatım", "ne oldu neden oldu" dendiğinde kullan. Konu önerir, kaynaklı araştırır, ne oldu / neden oldu / bizi nasıl etkiler metnini TASLAK olarak yazar, sahne planını (bolum.json) kurar ve animasyonu sıfırdan render eder. Ham klip kurgusu bu skill değil — o viral-edit.
+description: Tıkla Bakalım kanalı için gündem anlatım videosu (animasyonlu; varsayılan yatay 16:9 altın videosu tarzı, istenirse dikey Shorts). "Gündemden video yap", "şu konuyu anlat", "Google Trends'te ne var", "Tıkla Bakalım videosu", "bu haberi basitçe anlat", "animasyonlu anlatım", "ne oldu neden oldu" dendiğinde kullan. Konu önerir, kaynaklı araştırır, ne oldu / neden oldu / bizi nasıl etkiler metnini TASLAK olarak yazar, sahne planını (bolum.json) kurar ve animasyonu sıfırdan render eder. Ham klip kurgusu bu skill değil — o viral-edit.
 ---
 
 # Tıkla Bakalım — Gündem Anlatım Videosu
@@ -10,6 +10,26 @@ description: Tıkla Bakalım kanalı için gündem anlatım videosu (dikey, anim
 
 Kaynak görüntü yok. Her kare kodla çizilir: sayaçlar, grafikler, karşılaştırmalar,
 sebep–sonuç zincirleri. Kullanıcı sadece seslendirmeyi getirir.
+
+**Referans: altın videosu** (`viral-edit/explainer/altin-neden-dusuyor/`, 230 sn,
+yatay). O video tek seferlik elle çizildi; bu skill aynı görünümü hazır sahne
+kalıplarıyla her konuya uygular: yatay 1920×1080, alt satırda karaoke altyazı
+(konuşulan kelime altın), sağ üstte sahne etiketi, altta ilerleme çubuğu,
+sahne geçişinde çapraz altın silme, her sahnede %3 yavaş yaklaşma.
+
+| Format | Ne zaman | Düzen |
+|---|---|---|
+| `yatay` (varsayılan) | YouTube uzun video, altın videosu gibi | yukarıdaki |
+| `dikey` | Shorts / Reels, 45–60 sn | tek kelime altyazı, üstte bölüm şeridi |
+
+## ⛔ Ses — kullanıcı kuralı
+
+> *"Efekt seslerini sen ekleme, ben hallederim."* (viral-edit SKILL.md §0)
+
+Varsayılan: **sadece seslendirme.** Müzik ve efekt yok. Kullanıcı o video için
+açıkça isterse `--muzik` (arkadan yumuşak, seslendirmenin ~18 LU altı) ve/veya
+`--efekt` (geçişlerde whoosh, ekranın kapandığı kareye oturur) — altın videosu
+tarifi.
 
 `viral-edit`'ten farkı: orada kullanıcının klibi kurgulanır ve metni kullanıcı yazar
 (kareden hikâye çıkarılamaz). Burada metin **kaynaklardan** çıkar. O yüzden taslağı
@@ -29,8 +49,8 @@ sen yazarsın, ama kullanıcı onaylamadan ses ürettirilmez (§2).
 | `reference/kimlik.md` | Kanal tonu, dil kuralları, görsel kimlik ölçüleri |
 | `tikla-bakalim/bolumler/*/bolum.json` | Bölümler (repo kökünde). İlk örnek: `2026-09-30-esel-mobil` |
 
-Ses zinciri (hizalama, efekt, müzik, master) `viral-edit/scripts`'ten gelir:
-`align.py`, `audiobed.py`, `master.py`. Oradaki ölçümler burada da geçerli.
+Ses zinciri `viral-edit/scripts`'ten gelir: `sentalign.py` (hizalama — uzun seste
+`align.py` kayıyor), `master.py` (−14 LUFS, tavan −4.5), istenirse `audiobed.py`.
 
 ---
 
@@ -84,7 +104,7 @@ K2  Benzin +12,48 TL (ÖTV 10,40 + %20 KDV)       — yatirimx.com.tr/... ; t24.
 
 Metin yapısı — her cümle bir sahne:
 
-| Bölüm | Süre | İş |
+| Bölüm | Süre (dikey) | İş |
 |---|---|---|
 | `hook` | 0–7 sn | Tek şok bilgi (sayı!) + "Peki neden? Üç soruda anlatayım." |
 | `ne` | ~12 sn | Ne oldu: tarih, sayı, önce/sonra |
@@ -96,7 +116,9 @@ Dil kuralları `reference/kimlik.md`'de. En önemlileri: cümle 12 kelimeyi geç
 terim açıklanmadan kullanılmaz, **seslendirmede rakam yok** (sayılar yazıyla:
 "seksen lira"). Ekranda kesin sayı (80,40 ₺), seste yuvarlak (seksen lira).
 
-Hedef **220–250 hece** (≈ 50–58 sn). `render.py` süreyi ve sahne başına tempoyu basar.
+Hedef uzunluk: **yatay 3–5 dk** (altın videosu 230 sn, 24 sahne — her bölüm
+birkaç sahneye yayılır, tablodaki süreler orantılı uzar) · **dikey 220–250 hece**
+(≈ 50–58 sn, tablodaki süreler). `render.py` süreyi ve sahne başına tempoyu basar.
 
 Taslağı kullanıcıya **kaynak tablosuyla birlikte** göster ve onay iste. Onaylanmamış
 metinle ses ürettirme.
@@ -123,9 +145,13 @@ metinle ses ürettirme.
 | `tip` | Sahne tipi (aşağıda) |
 | `say` | Bu sahnede okunan cümle. Sahne süresi buna oturur. Rakam yok. |
 | `p` | Sahnenin görsel parametreleri — `reference/sahneler.md` |
-| `kaynak` | Ekranın altında küçük "Kaynak: …" satırı |
+| `kaynak` | Küçük "Kaynak: …" satırı |
+| `etiket` | Yatayda sağ üstteki sahne etiketi ("SON TARİH", "DEPO HESABI") |
 | `sure` | Sadece `say` boşsa (sessiz son sahne) |
-| `vurgu` | Altyazıda kırmızı kelimeler (3–5). Sayılar kendiliğinden sarı. |
+| `vurgu` | Dikey altyazıda kırmızı kelimeler (3–5). Sayılar kendiliğinden sarı. |
+| `format` | `yatay` (varsayılan) / `dikey` |
+| `altyazi` | Konuşma → ekran eşlemesi: `{"seksen lira": "80 lira"}`. Seste yazıyla, altyazıda rakam |
+| `gecis` | `false` → sahne geçişinde altın silme yok |
 
 Metin içi renk: `*sarı*` `~kırmızı~` `+yeşil+`, satır sonu `\n`.
 
@@ -150,13 +176,14 @@ Metin içi renk: `*sarı*` `~kırmızı~` `+yeşil+`, satır sonu `\n`.
 ```bash
 python3 .claude/skills/tikla-bakalim/scripts/render.py --bolum <bolum.json> --kareler   # ~10 sn
 python3 .claude/skills/tikla-bakalim/scripts/render.py --bolum <bolum.json>             # ~5 dk / 60 sn video
+# dikey sürüm: --format dikey
 ```
 
 `--kareler` her sahneden bir kare çıkarır (`cikti/kareler/`). **Her kareyi Read ile
 aç ve bak**: taşan yazı, üst üste binen öğe, yanlış sayı. Video render etmeden önce
 düzelt — 5 dakikalık render'ı taşan bir etiket için tekrarlama.
 
-Taslak video sessizdir (sadece müzik + efekt), zamanlama hece sayısından tahmindir.
+Taslak video sessizdir, zamanlama hece sayısından tahmindir.
 Kullanıcı akışı ve görselleri onaylasın; zamanlama ses gelince oturur.
 
 ### Tur 4 — Final
@@ -166,10 +193,16 @@ Metin `cikti/metin.txt`'te — ElevenLabs'a birebir bu metin girilmeli, yoksa hi
 
 ```bash
 python3 .claude/skills/tikla-bakalim/scripts/render.py --bolum <bolum.json> --vo ses.mp3
+#   --sikistir   ≥0.25 sn duraksamaları 0.13 sn'ye indir ("boşluksuz, tek nefeste" isterse)
+#   --muzik --efekt   SADECE kullanıcı o video için isterse
 ```
 
-Çıktılar `cikti/` altında: `video.mp4`, `kapak.png`, `kontrol.jpg` (her sahneden
-bir kare), `cizelge.json` (sahne zamanları), `metin.txt`.
+Çıktılar `cikti/` altında: `video.mp4` (30 MiB'ı aşarsa otomatik iki geçişli
+sıkıştırma — teslim yolu sınırı), `kapak.png` + yatayda `kapak_youtube.jpg`
+(1280×720), `kontrol.jpg` (her sahneden bir kare), `cizelge.json`, `metin.txt`.
+
+Hizalama çıktısında `ŞÜPHELİ HIZ` satırı varsa o cümle sesle uyuşmuyor —
+metin ElevenLabs'a girilenle birebir aynı mı kontrol et.
 
 ---
 
@@ -193,9 +226,10 @@ Bu kanalın tek sermayesi güven. Bir yanlış sayı yorumlarda videoyu bitirir.
 |---|---|---|
 | Bölüm sırası | ne → neden → etki | Formatın omurgası |
 | Seslendirmede rakam | uyarı | ElevenLabs okuyuşu + hece sayımı bozulur |
-| Sahne tempo | 5 sn'den uzun durağan ekran | İzleyici kaydırır |
-| Toplam süre | > 75 sn uyarı | Shorts hedefi 45–60 sn |
+| Sahne tempo | adım başına dikey 5 sn, yatay 9 sn | Ekran donarsa izleyici gider |
+| Toplam süre | dikey > 75 sn, yatay > 10 dk uyarı | |
 | Ses | −14 LUFS, tepe < 0 dBFS | viral-edit master zinciri |
+| Dosya boyu | ≤ 30 MiB | teslim yolu sınırı |
 | Süre eşleşmesi | video = çizelge ± 0.2 sn | |
 
 Elle kontrol: `kontrol.jpg`'i aç. Her karede ana mesaj 1 saniyede okunuyor mu?
@@ -208,9 +242,11 @@ Elle kontrol: `kontrol.jpg`'i aç. Her karede ana mesaj 1 saniyede okunuyor mu?
   zaman aynı kareyi verir → 4 paralel parça, tek kare önizleme.
 - Arka plan sürekli hareket eder (kayan ışık lekeleri + ızgara) — hiçbir kare
   tamamen durağan değil.
-- Yerleşim (1080×1920): bölüm şeridi 150–280, sahne 310–1240, altyazı 1270–1430,
-  kaynak 1440. **1480 altı** Shorts/Reels arayüzünün (başlık, açıklama) altında
-  kalır — oraya bilgi koyma.
+- Dikey yerleşim (1080×1920): bölüm şeridi 150–280, sahne 310–1240, altyazı
+  1270–1430, kaynak 1440. **1480 altı** Shorts/Reels arayüzünün altında kalır.
+- Yatay yerleşim (1920×1080): sol üst bölüm şeridi, sağ üst etiket + kaynak,
+  sahne kutusu 1300×930 ×0.84 ölçekle ortada, altyazı satırı y≈1000, altta
+  ilerleme çubuğu. Sahne tipleri iki formatta aynı — `bolum.json` değişmez.
 - Yeni sahne tipi: `engine.js`'te `SCENES.yeni = (p, r) => (lt, d) => {...}`.
   `lt` sahne içi zaman, `d` sahne süresi. Girişler `pop`/`slide`, sıralama `stagger`.
   Sonra `reference/sahneler.md`'ye ekle.
@@ -219,7 +255,8 @@ Elle kontrol: `kontrol.jpg`'i aç. Her karede ana mesaj 1 saniyede okunuyor mu?
 ## 5. Bilinen sınırlar
 
 - **Google Trends ağda kapalı olabilir** → Tur 1'deki yedek yol.
-- **TTS yok.** Taslak sessiz; ses kullanıcıdan gelir.
+- **TTS yok.** Taslak sessiz; ses kullanıcıdan gelir. Seslendirmeli yol
+  sentetik sesle test edildi, gerçek ElevenLabs sesiyle ilk bölümde ölç.
 - Render ~5 dk / 60 sn (4 çekirdek). Önce `--kareler`.
 - Hizalama ASR'siz (hece tepesi). `LPG`, `ÖTV` gibi kısaltmalar hece sayımını
   şaşırtabilir — seslendirmede okunduğu gibi yaz ("elpiji") ya da ekranda bırak.

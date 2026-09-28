@@ -2,6 +2,7 @@
   "baslik": "Benzine 12 lira zam: Eşel mobil nedir, neden bitiyor?",
   "tarih": "2026-09-28",
   "durum": "TASLAK — metin kullanıcı onayı bekliyor",
+  "format": "yatay",
   "vurgu": [
     "zam",
     "fırladı",
@@ -9,6 +10,15 @@
     "biniyor",
     "bitiyor"
   ],
+  "altyazi": {
+    "on iki buçuk": "12,5",
+    "Üç soruda": "3 soruda",
+    "Otuz Eylül": "30 Eylül",
+    "seksen lira": "80 lira",
+    "doksan iki lirayı": "92 lirayı",
+    "Elli litrelik": "50 litrelik",
+    "altı yüz yirmi dört lira": "624 lira"
+  },
   "kapak": {
     "ikon": "⛽",
     "ust": "BENZİNE",
@@ -31,7 +41,8 @@
         "renk": "kirmizi",
         "sayma": false
       },
-      "kaynak": "basın, ÖTV hesabı (K2)"
+      "kaynak": "basın, ÖTV hesabı (K2)",
+      "etiket": "BEKLENEN ZAM"
     },
     {
       "bolum": "hook",
@@ -40,7 +51,8 @@
       "p": {
         "ikon": "🤔",
         "metin": "NEDEN?\n*3 SORUDA*"
-      }
+      },
+      "etiket": "3 SORU"
     },
     {
       "bolum": "ne",
@@ -53,7 +65,8 @@
         "saat": "GECE",
         "not": "*Eşel mobil* sistemi bitiyor"
       },
-      "kaynak": "Resmi Gazete kararı (K1)"
+      "kaynak": "Resmi Gazete kararı (K1)",
+      "etiket": "SON TARİH"
     },
     {
       "bolum": "ne",
@@ -75,7 +88,8 @@
         "ondalik": 2,
         "fark": "+12,48 ₺"
       },
-      "kaynak": "28 Eylül pompa fiyatı (K3), zam tahmini (K2)"
+      "kaynak": "28 Eylül pompa fiyatı (K3), zam tahmini (K2)",
+      "etiket": "BUGÜN / PERŞEMBE"
     },
     {
       "bolum": "ne",
@@ -105,7 +119,8 @@
         ],
         "not": "ÖTV + KDV dahil"
       },
-      "kaynak": "basın, ÖTV hesabı (K2)"
+      "kaynak": "basın, ÖTV hesabı (K2)",
+      "etiket": "TÜM YAKITLAR"
     },
     {
       "bolum": "neden",
@@ -119,7 +134,8 @@
         ],
         "boy": 104,
         "not": "Fransızca: échelle mobile"
-      }
+      },
+      "etiket": "EŞEL MOBİL"
     },
     {
       "bolum": "neden",
@@ -141,7 +157,8 @@
           }
         ]
       },
-      "kaynak": "basın (K4)"
+      "kaynak": "basın (K4)",
+      "etiket": "SEBEP"
     },
     {
       "bolum": "neden",
@@ -185,7 +202,8 @@
           }
         ]
       },
-      "kaynak": "sistemin işleyişi (K4) · oranlar temsilidir"
+      "kaynak": "sistemin işleyişi (K4) · oranlar temsilidir",
+      "etiket": "VERGİ NASIL İŞLİYOR"
     },
     {
       "bolum": "neden",
@@ -229,7 +247,8 @@
           }
         ]
       },
-      "kaynak": "sistemin işleyişi (K4) · oranlar temsilidir"
+      "kaynak": "sistemin işleyişi (K4) · oranlar temsilidir",
+      "etiket": "1 EKİM"
     },
     {
       "bolum": "etki",
@@ -246,7 +265,8 @@
           "+624 ₺"
         ]
       },
-      "kaynak": "hesap: 50 × 12,48"
+      "kaynak": "hesap: 50 × 12,48",
+      "etiket": "DEPO HESABI"
     },
     {
       "bolum": "etki",
@@ -263,7 +283,8 @@
             "metin": "Zamanla market fiyatlarına *yansıyabilir*"
           }
         ]
-      }
+      },
+      "etiket": "ZİNCİRLEME ETKİ"
     },
     {
       "bolum": "etki",
@@ -279,7 +300,8 @@
         ],
         "boy": 100
       },
-      "kaynak": "basın (K2)"
+      "kaynak": "basın (K2)",
+      "etiket": "ŞART"
     },
     {
       "bolum": "kapanis",

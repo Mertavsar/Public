@@ -35,13 +35,14 @@ olur: "Peki neden? Üç soruda anlatayım."
 
 | Öğe | Değer |
 |---|---|
-| Tuval | 1080×1920, 30 fps |
+| Tuval | yatay 1920×1080 (varsayılan, altın videosu) · dikey 1080×1920 — 30 fps |
 | Zemin | lacivert radyal (`#13294a` → `#0b1626`), kayan renkli ışık lekeleri, ince ızgara |
 | Font | Montserrat 600/800/900 (OFL, `engine/fonts/`) |
 | Vurgu | sarı `#ffc83d` (ana), kırmızı `#ff4d5e` (artış/zarar), yeşil `#2ee59d` (düşüş/iyi) |
 | İkinci renkler | mavi `#4db8ff`, turuncu `#ff9b3d`, mor `#b58cff` |
-| Altyazı | tek kelime, 96 px, 14 px siyah kontur; sayılar sarı, `vurgu` kırmızı |
-| Güvenli alan | bilgi 150–1450 arası; 1480 altı platform arayüzü |
+| Altyazı | yatay: alt satır, 42 px, koyu hap zemin, konuşulan kelime altın · dikey: tek kelime 96 px, kontur |
+| Geçiş | çapraz altın silme (0.4 sn), ekran tam sahne başında kapanır |
+| Güvenli alan | dikey: bilgi 150–1450 arası; 1480 altı platform arayüzü |
 | İkon | Noto Color Emoji |
 
 Renk anlamı sabit: **kırmızı = cebimizden çıkan**, yeşil = lehimize, sarı = dikkat/vurgu.
@@ -49,6 +50,7 @@ Bir videoda anlamı değiştirme.
 
 ## Ses
 
-`viral-edit` zinciri: kesintisiz müzik yatağı (102 BPM), her sahne başında klink,
-bölüm geçişinde tırmanış + vuruş, master −14 LUFS. Seslendirme ayarları:
-`viral-edit/reference/voice-settings.md` (Türkçe ana dilli ses, speed 1.0, stability 65–70).
+Varsayılan **sadece seslendirme** — kullanıcının kuralı: efekt ve müziği o ekler.
+İsterse `--muzik` / `--efekt` (altın videosu tarifi: müzik ~18 LU altta, whoosh
+geçişe kilitli). Seslendirme ayarları: `viral-edit/reference/voice-settings.md`
+(Türkçe ana dilli ses, speed 1.0, stability 65–70).

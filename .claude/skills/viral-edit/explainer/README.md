@@ -4,7 +4,11 @@
 seslendirme + metin verip "animasyon tarzında uzun video" isterse bu klasör
 kullanılır. Görüntü sıfırdan çizilir: 1920x1080, 30 fps, canvas + Playwright.
 
-İlk örnek: `altin-neden-dusuyor/` (230 s, 24 sahne). Yeni videoda klasörü
+İlk örnek: `altin-neden-dusuyor/` (230 s, 24 sahne).
+
+> **Tıkla Bakalım gündem videoları için** tekrar kullanılabilir sürüm:
+> `.claude/skills/tikla-bakalim/` — aynı görünüm, hazır sahne kalıpları,
+> `bolum.json` ile her konuya. Bu klasör tek seferlik özel çizim için duruyor. Yeni videoda klasörü
 kopyala; `anim.js` içindeki `S[k]` sahne fonksiyonlarını ve `TAGS` listesini
 yeniden yaz, gerisi aynen çalışır.
 
