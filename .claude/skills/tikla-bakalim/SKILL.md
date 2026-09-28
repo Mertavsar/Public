@@ -52,6 +52,7 @@ geçişte ses yok.
 | `engine/style.css` | Görsel kimlik: renkler, font, yerleşim |
 | `reference/sahneler.md` | **Her sahne tipinin parametreleri** — bolum.json yazarken aç |
 | `reference/kimlik.md` | Kanal tonu, dil kuralları, görsel kimlik ölçüleri |
+| `reference/sabah-rutini.md` | **Zamanlanmış sabah rutini** — konu keşfi → metin → kareler → ses gelince final |
 | `tikla-bakalim/bolumler/*/bolum.json` | Bölümler (repo kökünde). İlk örnek: `2026-09-30-esel-mobil` |
 
 Ses zinciri `viral-edit/scripts`'ten gelir: `sentalign.py` (hizalama — uzun seste
@@ -117,7 +118,8 @@ Metin yapısı — her cümle bir sahne:
 | `etki` | ~15 sn | Senin cebine/gününe etkisi. Somut hesap (bir depo, bir ay, bir fatura) |
 | `kapanis` | ~3 sn | "Merak ettiysen, tıkla bakalım. Takip et." |
 
-Dil kuralları `reference/kimlik.md`'de. En önemlileri: cümle 12 kelimeyi geçmez,
+Dil kuralları `reference/kimlik.md`'de. **Etkileşim cümleleri (abone / beğen / yorum) her metne
+giydirilir** — yerleri ve kalıpları aynı dosyada. En önemlileri: cümle 12 kelimeyi geçmez,
 terim açıklanmadan kullanılmaz, **seslendirmede rakam yok** (sayılar yazıyla:
 "seksen lira"). Ekranda kesin sayı (80,40 ₺), seste yuvarlak (seksen lira).
 

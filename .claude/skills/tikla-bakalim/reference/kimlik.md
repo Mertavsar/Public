@@ -31,6 +31,24 @@ kaydırmak zor.
 Hook tek bilgi taşır ve bir **sayı** içerir. Soru ile açılan hook ikinci cümle
 olur: "Peki neden? Üç soruda anlatayım."
 
+## Etkileşim cümleleri — metnin içine giydirilir (kullanıcı kuralı)
+
+Her metinde **üç** etkileşim anı var. Reklam gibi değil, anlatının parçası gibi:
+bir önceki cümleye bağlanır, izleyiciye bir sebep verir. Her biri kendi
+sahnesinde (`baslik` veya `soru` tipi, büyük ikon: 🔔 / ❤️ / 💬).
+
+| Yer | Amaç | Örnek kalıplar (her videoda değiştir, aynısını tekrarlama) |
+|---|---|---|
+| **Hook'tan hemen sonra** (ilk ~20 sn) | Abone | "Bu tür konuları basitçe anlatıyoruz; kaçırmamak için abone ol." · "Gündemi her gün sade dille anlatıyoruz, abone olmayı unutma." |
+| **Ortada, en ilginç kısmın başında** (`cta` kartı buraya) | Beğen | "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak." · "Videoyu beğenirsen daha çok kişiye ulaşıyor; kalbe dokunmayı unutma." |
+| **Kapanışta** | Yorum + abone | "Öğrenmek istediğin başka bir konu varsa yorumlara yaz; bir sonraki videoda biz anlatalım." · "Sen ne düşünüyorsun? Yorumlarda buluşalım. Merak ettiysen, tıkla bakalım." |
+
+Kurallar:
+- Toplam etkileşim süresi metnin **%8'ini** geçmez; her biri tek, en fazla iki cümle.
+- İlk 5 saniyede etkileşim cümlesi **yok** — hook bozulmaz.
+- Kapanış her zaman "Merak ettiysen, tıkla bakalım." ile biter (kanal imzası).
+- Orta cümle `bolum.json`'daki `cta` kartıyla aynı sahneye denk gelir.
+
 ## Görsel
 
 | Öğe | Değer |
