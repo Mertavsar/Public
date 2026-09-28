@@ -432,6 +432,21 @@ def qc(out, tl, sheet, has_audio):
     return ok
 
 
+def make_cover(b, fmt, odir, work):
+    """kapak.png (+ yatayda 1280x720 kapak_youtube.jpg)."""
+    if not b.get("kapak"):
+        return
+    ctl = f"{work}/kapak.json"
+    json.dump({"format": fmt, "dur": 1, "scenes": [{"t0": 0, "t1": 1, "tip": "kapak", "bolum": "hook",
+                                                    "p": b["kapak"]}], "words": []},
+              open(ctl, "w"), ensure_ascii=False)
+    kp = os.path.join(odir, "kapak.png")
+    capture_still(ctl, .5, kp, cover=True)
+    if fmt == "yatay":   # YouTube küçük resmi: 1280x720, < 2 MB
+        run(["ffmpeg", "-v", "error", "-y", "-i", kp, "-vf", "scale=1280:720", "-q:v", "2",
+             os.path.join(odir, "kapak_youtube.jpg")])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--bolum", required=True)
@@ -486,7 +501,8 @@ def main():
             list(ex.map(lambda x: capture_still(tl_path, x[1]["t0"] + (x[1]["t1"] - x[1]["t0"]) * .85,
                                                 f"{kd}/{x[0]+1:02d}-{x[1]['tip']}.jpg"),
                         enumerate(tl["scenes"])))
-        print(f"-> {kd}")
+        make_cover(b, fmt, odir, work)
+        print(f"-> {kd} (+ kapak)")
         return
 
     print(f"3/7 kareler ({int(tl['dur']*FPS)} kare, {a.jobs} iş parçacığı)")
@@ -501,16 +517,7 @@ def main():
     mux(silent, mix, out, tl["dur"], work)
 
     print("6/7 kapak")
-    if b.get("kapak"):
-        ctl = f"{work}/kapak.json"
-        json.dump({"format": fmt, "dur": 1, "scenes": [{"t0": 0, "t1": 1, "tip": "kapak", "bolum": "hook",
-                                                        "p": b["kapak"]}], "words": []},
-                  open(ctl, "w"), ensure_ascii=False)
-        kp = os.path.join(odir, "kapak.png")
-        capture_still(ctl, .5, kp, cover=True)
-        if fmt == "yatay":   # YouTube küçük resmi: 1280x720, < 2 MB
-            run(["ffmpeg", "-v", "error", "-y", "-i", kp, "-vf", "scale=1280:720", "-q:v", "2",
-                 os.path.join(odir, "kapak_youtube.jpg")])
+    make_cover(b, fmt, odir, work)
 
     print("7/7 kalite kontrol")
     ok = qc(out, tl, os.path.join(odir, "kontrol.jpg"), bool(vo or a.muzik or a.efekt))

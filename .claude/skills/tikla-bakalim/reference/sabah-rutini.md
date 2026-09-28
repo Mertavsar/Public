@@ -74,8 +74,7 @@ Klasör: `tikla-bakalim/bolumler/<YYYY-AA-GG>-<kisa-konu>/`
    gelen `cta` (`{"sahne": N, "gecikme": 0.3, "sure": 5.5}` — N o cümlenin sahnesi).
 2. `python3 .claude/skills/tikla-bakalim/scripts/render.py --bolum <bolum.json> --kareler`
    → **her kareyi aç ve bak**, taşma/çakışma varsa düzelt, tekrar çalıştır.
-3. Kapak: `--kareler` kapak üretmez; tek kare için kapak zaman çizelgesiyle
-   `capture.mjs --cover` (render.py'deki 6/7 adımı) ya da tam taslak render.
+3. Kapak `--kareler` ile birlikte çıkar (`cikti/kapak.png`, `kapak_youtube.jpg`).
    Sabah tam taslak video **üretme** — ses gelmeden zamanlama tutmaz, 15–20 dk yer.
 4. `metin.txt` (render.py yazar: `cikti/metin.txt`) — bölüm klasörüne de kopyala:
    `tikla-bakalim/bolumler/<…>/metin.txt`.
