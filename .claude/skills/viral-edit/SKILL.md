@@ -32,6 +32,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `reference/voice-settings.md` | Ses seçimi ve ElevenLabs ayar standardı |
 | `reference/style-profile.md` | Referans videodan ölçülen sayılar |
 | `reference/performance-log.md` | **Yayınlanan videoların gerçek verisi** — her videodan sonra doldur |
+| `explainer/README.md` | **Klip yoksa**: seslendirme + metinden yatay (16:9) animasyonlu uzun video |
 
 ---
 
@@ -483,6 +484,12 @@ sesi kesmekle değil, altına kesintisiz müzik sermekle sağlanmış.
 
 Boşluklar gerçekten kabul edilemez uzunluktaysa (>1.5s), çözüm metni kısaltıp
 seslendirmeyi **yeniden ürettirmek**; kesmek değil.
+
+**İstisna — kullanıcı açıkça "duraksamaları kes / tek nefes" derse:** enerji
+bloğuna göre değil, yalnızca −35 dB altında ≥0.25 s süren gerçek sessizlikleri
+0.13 s'ye indir, 12 ms crossfade ile birleştir (`explainer/altin-neden-dusuyor/tighten.py`).
+Ünsüz kapanışları bu eşiğin çok altında kaldığı için kelimeler bölünmez.
+Hizalamayı kısaltılmış ses üzerinde yap.
 
 ---
 
