@@ -230,6 +230,80 @@ def build_music(dur, out, bpm=102.0, peak_at=None, duck=(), warm_at=None):
     print(f"{out}  {dur:.2f}s  {bpm:.0f} BPM  {k} vuruş")
 
 
+# ---------------------------------------------------------------------------
+# SİNEMATİK SET (varsayılan). Kullanıcı: "giriş sesi, geçiş efekt sesleri daha
+# dikkat çekici olsun". Eski set (boom + whoosh + tık) tek katmanlıydı; Shorts'ta
+# dikkat çeken sesler katmanlı: keskin transient + gövde + parlak kuyruk.
+# Hepsinin enerjisi 300–4000 Hz'de — telefon hoparlörünün çaldığı band.
+# ---------------------------------------------------------------------------
+def _sat(x, drive=1.8):
+    """Hafif doyum: tepeyi yükseltmeden algılanan sesi büyütür."""
+    return np.tanh(x * drive) / np.tanh(drive)
+
+
+def impact(rng, amp=0.62):
+    """Sinematik darbe: tık (2–6 kHz) + yumruk (1200→250 Hz) + gövde gürültüsü
+    + metalik parıltı kuyruğu (uyumsuz kısmi tonlar)."""
+    n = int(SR * 1.3); t = np.arange(n) / SR
+    click = sosfilt(butter(2, [2000, 6000], btype="band", fs=SR, output="sos"),
+                    rng.standard_normal(n) * np.exp(-t / 0.004))
+    f = 250 + 950 * np.exp(-t / 0.018)
+    punch = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.16)
+    body = sosfilt(butter(2, [400, 1800], btype="band", fs=SR, output="sos"),
+                   rng.standard_normal(n) * np.exp(-t / 0.09))
+    shimmer = sum(g * np.sin(2 * np.pi * fr * (1 + rng.uniform(-.004, .004)) * t)
+                  * np.exp(-t / d) for fr, g, d in
+                  ((587, .30, .9), (881, .26, .7), (1319, .22, .55), (1976, .16, .4), (2637, .10, .3)))
+    return _norm(_sat(click * 0.9 + punch * 1.0 + body * 0.7 + shimmer * 0.55), amp)
+
+
+def swoosh(rng, dur=0.36, amp=0.34):
+    """Geçiş: bant süpürmesi 500→5000 Hz, sona doğru tepe, altında 'zip' tonu."""
+    n = int(SR * dur); t = np.arange(n) / SR
+    env = (t / dur) ** 1.8 * np.exp(-((t - dur * 0.9) / (dur * 0.35)) ** 2)
+    air = _sweep(rng, n, 500, 5000, 1.3)
+    zip_ = np.sin(2 * np.pi * np.cumsum(np.linspace(380, 2100, n)) / SR) * 0.25
+    return _norm((air + zip_) * env / env.max(), amp)
+
+
+def ding(amp=0.40, f0=2093.0):
+    """Açılış çanı — 'dikkat!' sesi. Parlak, 0.9s sönümlü."""
+    n = int(SR * 1.0); t = np.arange(n) / SR
+    s_ = sum(g * np.sin(2 * np.pi * f0 * k * t) * np.exp(-t / d)
+             for k, g, d in ((1, 1.0, .45), (2.76, .45, .22), (5.4, .20, .10), (0.5, .25, .6)))
+    return _norm(s_ * (1 - np.exp(-t / 0.002)), amp)
+
+
+def pop(rng, amp=0.30):
+    """Ara kesim: yukarı kayan kısa ton + tık — 'klink'ten daha belirgin."""
+    n = int(SR * 0.12); t = np.arange(n) / SR
+    f = 700 + 1500 * (t / t[-1]) ** 0.6
+    tone = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.035)
+    c = sosfilt(butter(2, [1500, 6000], btype="band", fs=SR, output="sos"),
+                rng.standard_normal(n) * np.exp(-t / 0.003)) * 0.6
+    return _norm(tone + c, amp)
+
+
+def build_sfx_cinematic(dur, major, minor, risers, out):
+    rng = np.random.default_rng(777)
+    bus = Bus(dur)
+    for i, (t, a) in enumerate(major):
+        bus.place(impact(rng, amp=min(0.75, a + 0.10)), t - 0.01)
+        if t > 0.4:                          # açılışta önden gelen ses yok
+            bus.place(swoosh(rng, amp=0.36 if a >= 0.58 else 0.30), t - 0.33)
+        if t < 0.05:                         # açılış: darbe + çan
+            bus.place(ding(), 0.03)
+    for t in minor:
+        bus.place(pop(rng), t - 0.01)
+    for t in risers:
+        if t > 1.4:
+            bus.place(riser(rng, amp=0.30), t - 1.35)
+        bus.place(subdrop(amp=0.22), t)
+    raw = bus.write(out, 80)
+    print(f"{out}  {dur:.2f}s  ham tepe {raw:.2f}  SİNEMATİK: "
+          f"{len(major)} darbe + {len(minor)} pop + {len(risers)} riser")
+
+
 # Acıklı yatak (mood="sad"). Kurtarma/terk edilme gibi duygusal hikâyelerde
 # tempolu yatak yanlış duruyor — kullanıcı "acıklı bir müzik koy" dedi.
 # Am–F–C–G: klasik hüzün ilerlemesi. Kick ve hi-hat yok; ritmi bas nabzı
@@ -310,6 +384,8 @@ def main():
                     help="müziğin doruğa çıktığı an (s)")
     ap.add_argument("--duck", nargs="*", default=[],
                     help="t:kazanç — o andan sonra müzik yatağını çarp (0.78 iyi)")
+    ap.add_argument("--sfx-style", choices=["cinematic", "classic"], default="cinematic",
+                    help="cinematic: katmanlı darbe+çan+swoosh+pop · classic: eski boom+tık")
     ap.add_argument("--mood", choices=["drive", "sad"], default="drive",
                     help="drive: tempolu yatak · sad: acıklı piyano+yaylı (Am-F-C-G)")
     ap.add_argument("--warm-at", type=float, default=None,
@@ -318,7 +394,8 @@ def main():
     ap.add_argument("--out-music", default="music.wav")
     a = ap.parse_args()
     major = [(float(s.split(":")[0]), float(s.split(":")[1])) for s in a.major]
-    build_sfx(a.dur, major, a.minor, a.riser, a.out_sfx)
+    (build_sfx_cinematic if a.sfx_style == "cinematic" else build_sfx)(
+        a.dur, major, a.minor, a.riser, a.out_sfx)
     duck = [(float(d.split(":")[0]), float(d.split(":")[1])) for d in a.duck]
     if a.mood == "sad":
         build_music_sad(a.dur, a.out_music, a.bpm if a.bpm != 102.0 else 64.0,

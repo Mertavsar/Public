@@ -1,0 +1,667 @@
+<title>Dr. Hande Video Stratejisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F3; --surface:#FFFFFF; --sunk:#E8EDEB; --ink:#1A2A2E; --muted:#56686B; --line:#D5DDDA;
+  --accent:#7A3E5E; --accent-soft:#F3E8EE; --sage:#35644F; --sage-soft:#E3EFE8;
+  --warn:#A8322A; --warn-soft:#FBECEA; --amber:#8A5A00; --amber-soft:#FBF1DC;
+  --display:"Literata", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#111A1C; --surface:#182326; --sunk:#1F2C30; --ink:#E4EBEA; --muted:#9BAEB0; --line:#2B3B3F;
+    --accent:#DC97BA; --accent-soft:#35202C; --sage:#86C2A6; --sage-soft:#1B3029;
+    --warn:#F2938A; --warn-soft:#3A1F1D; --amber:#E9BE6A; --amber-soft:#342913;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111A1C; --surface:#182326; --sunk:#1F2C30; --ink:#E4EBEA; --muted:#9BAEB0; --line:#2B3B3F;
+  --accent:#DC97BA; --accent-soft:#35202C; --sage:#86C2A6; --sage-soft:#1B3029;
+  --warn:#F2938A; --warn-soft:#3A1F1D; --amber:#E9BE6A; --amber-soft:#342913;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px}
+@media (min-width:980px){.wrap{grid-template-columns:210px minmax(0,1fr)}}
+nav.toc{display:none}
+@media (min-width:980px){
+  nav.toc{display:block;position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;padding-top:40px;font-size:14px}
+}
+nav.toc p{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+nav.toc a{display:block;padding:5px 10px;border-radius:6px;color:var(--muted);text-decoration:none}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--sunk);color:var(--ink);outline:none}
+main{min-width:0;overflow-wrap:break-word}
+code{font-family:var(--mono);font-size:.9em;overflow-wrap:anywhere}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(30px,5vw,46px);font-weight:600;letter-spacing:-.01em}
+h2{font-size:clamp(24px,3.2vw,30px);font-weight:600;margin-bottom:14px}
+h3{font-size:19px;font-weight:600}
+p{margin:0}
+.prose{max-width:68ch;display:grid;gap:12px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+section{padding-top:56px;display:grid;gap:18px;scroll-margin-top:16px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.hero{padding-top:40px;display:grid;gap:18px;border-bottom:1px solid var(--line);padding-bottom:32px}
+.hero .lede{font-size:19px;color:var(--muted);max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600}
+.mobile-toc{display:flex;flex-wrap:wrap;gap:6px}
+.mobile-toc a{font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--muted);background:var(--surface)}
+@media (min-width:980px){.mobile-toc{display:none}}
+
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;padding:1px 7px;border-radius:4px;vertical-align:2px;white-space:nowrap}
+.t-fact{background:var(--sage-soft);color:var(--sage)}
+.t-hyp{background:var(--amber-soft);color:var(--amber)}
+.t-miss{background:var(--warn-soft);color:var(--warn)}
+
+.summary{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))}
+.sum{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start}
+.sum .k{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em}
+.sum h3{font-size:18px}
+.sum.alert{border-color:var(--warn);background:var(--warn-soft)}
+.sum.alert .k{color:var(--warn)}
+
+.facts{display:grid;grid-template-columns:minmax(120px,190px) 1fr;border-top:1px solid var(--line)}
+.facts dt,.facts dd{margin:0;padding:10px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-size:14px;color:var(--muted);padding-right:16px}
+@media (max-width:520px){.facts{grid-template-columns:1fr}.facts dt{border-bottom:0;padding-bottom:0}}
+
+.rules{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.rulebox{border-radius:10px;padding:18px;display:grid;gap:10px;align-content:start}
+.rulebox.no{background:var(--warn-soft)}
+.rulebox.yes{background:var(--sage-soft)}
+.rulebox h3{font-size:17px}
+.rulebox.no h3{color:var(--warn)}
+.rulebox.yes h3{color:var(--sage)}
+.rulebox ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px}
+
+.quote{font-family:var(--display);font-size:clamp(21px,2.6vw,27px);line-height:1.35;border-left:3px solid var(--accent);padding:4px 0 4px 18px;max-width:40ch}
+
+.pillars{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.pillar{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start}
+.pillar .code{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500}
+.pillar .why{font-size:15px;color:var(--muted)}
+.pillar .kw{font-size:13px;font-family:var(--mono);color:var(--muted)}
+.share{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.bar{flex:1;height:6px;background:var(--sunk);border-radius:3px;overflow:hidden;max-width:160px}
+.bar i{display:block;height:100%;background:var(--accent)}
+
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters button{font:inherit;font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+td .hook{font-style:italic}
+.goal{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:4px;border:1px solid var(--line);white-space:nowrap}
+.pri{color:var(--accent);font-weight:600}
+
+.script{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.script-head{padding:18px 20px;display:grid;gap:6px;border-bottom:1px solid var(--line)}
+.script-head .row{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);font-family:var(--mono)}
+.beats{display:grid}
+.beat{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:12px 20px;border-bottom:1px dashed var(--line)}
+.beat:last-child{border-bottom:0}
+.beat .tc{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.beat .tc b{display:block;color:var(--accent);font-weight:500;letter-spacing:.06em}
+.beat .say{font-size:16px}
+.beat .note{font-size:13px;color:var(--muted);margin-top:4px}
+@media (max-width:520px){.beat{grid-template-columns:1fr;gap:4px}}
+.script-foot{padding:14px 20px;background:var(--sunk);font-size:14px;display:grid;gap:4px}
+.script-foot b{font-weight:600}
+.scripts{display:grid;gap:18px}
+
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));counter-reset:s}
+.step{border-top:2px solid var(--ink);padding-top:12px;display:grid;gap:6px;align-content:start}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.step p{font-size:15px}
+
+.list{margin:0;padding-left:20px;display:grid;gap:8px;max-width:70ch}
+.check{list-style:none;padding:0;margin:0;display:grid;gap:8px;max-width:72ch}
+.check li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+.check li::before{content:"";width:14px;height:14px;border:1.5px solid var(--muted);border-radius:3px;margin-top:5px}
+
+.cal{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.week{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px;align-content:start}
+.week h3{font-size:16px}
+.week ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.week li span{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:6px}
+
+.sources{font-size:14px;color:var(--muted)}
+.sources ol{padding-left:20px;display:grid;gap:4px;margin:0}
+.transp{font-family:var(--mono);font-size:12.5px;background:var(--sunk);border-radius:8px;padding:16px;white-space:pre-wrap;color:var(--muted);line-height:1.7;overflow-x:auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="İçindekiler">
+  <p>İçindekiler</p>
+  <ol>
+    <li><a href="#ozet">Özet</a></li>
+    <li><a href="#kim">Dr. Hande kim?</a></li>
+    <li><a href="#kurallar">Yasal çerçeve</a></li>
+    <li><a href="#konum">Konumlanma</a></li>
+    <li><a href="#sutunlar">İçerik sütunları</a></li>
+    <li><a href="#fikirler">30 video fikri</a></li>
+    <li><a href="#senaryolar">Hazır senaryolar</a></li>
+    <li><a href="#formatlar">Formatlar</a></li>
+    <li><a href="#cekim">Çekim günü</a></li>
+    <li><a href="#takvim">İlk 4 hafta</a></li>
+    <li><a href="#donusum">Videodan randevuya</a></li>
+    <li><a href="#olcum">Ölçüm</a></li>
+    <li><a href="#eksik">Eksikler ve sonraki adım</a></li>
+    <li><a href="#kaynak">Kaynaklar</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <span class="eyebrow">Video içerik stratejisi · Bursa</span>
+  <h1>Uzm. Dr. Hande Çelik Mehmetoğlu için video planı</h1>
+  <p class="lede">Aile hekimi, psikoterapist, hipnoterapist ve oyun terapisti. Bu dosya, ilk toplantıdan sonra hangi konuları, hangi sırayla ve hangi cümlelerle çekeceğimizi tek yerde toplar.</p>
+  <div class="meta">
+    <span>Hazırlanma: <b>25 Eylül 2026</b></span>
+    <span>Durum: <b>İlk taslak, toplantı notlarıyla güncellenecek</b></span>
+    <span>Kanal: <b>Instagram Reels, YouTube Shorts ve uzun video</b></span>
+  </div>
+  <div class="mobile-toc">
+    <a href="#ozet">Özet</a><a href="#kurallar">Yasal çerçeve</a><a href="#konum">Konumlanma</a><a href="#fikirler">30 fikir</a><a href="#senaryolar">Senaryolar</a><a href="#cekim">Çekim</a><a href="#takvim">Takvim</a><a href="#eksik">Eksikler</a>
+  </div>
+  <p style="font-size:14px;color:var(--muted)">Etiketler: <span class="tag t-fact">FACT</span> kaynakla doğrulandı · <span class="tag t-hyp">HİPOTEZ</span> mantıklı ama henüz kanıtlanmadı · <span class="tag t-miss">EKSİK</span> bu bilgi elimizde yok</p>
+</header>
+
+<section id="ozet">
+  <span class="eyebrow">Özet</span>
+  <h2>Beş dakikada bilmen gerekenler</h2>
+  <div class="summary">
+    <div class="sum alert">
+      <span class="k">EN KRİTİK BULGU</span>
+      <h3>Türkiye'ye sponsorlu reklam verilemiyor</h3>
+      <p>12 Kasım 2025 tarihli yönetmelikle hekimlerin yurt içine yönelik ücretli/sponsorlu paylaşımı yasak. Büyüme organik videodan gelecek. Video kalitesi bu yüzden her şeyden önemli. <span class="tag t-fact">FACT</span></p>
+    </div>
+    <div class="sum">
+      <span class="k">FARK YARATAN AÇI</span>
+      <h3>"Bedenin dilini bilen hekim"</h3>
+      <p>Psikologların çoğu bedeni, hekimlerin çoğu duyguları anlatamaz. O ikisini birden yapabiliyor: aile hekimi ve psikoterapist. Bütün içerik bu kesişime oturmalı. <span class="tag t-hyp">HİPOTEZ</span></p>
+    </div>
+    <div class="sum">
+      <span class="k">İÇERİK MOTORU</span>
+      <h3>6 sütun, 30 fikir, 8 hazır senaryo</h3>
+      <p>Beden-zihin, kaygı ve panik, hipnoz gerçekleri, çocuk ve ebeveyn, ilişki ve aile, psikodrama. İlk ay haftada 3 Reels ve 1 uzun video.</p>
+    </div>
+    <div class="sum">
+      <span class="k">ÜRETİM MODELİ</span>
+      <h3>Ayda 1 çekim günü, 12–16 video</h3>
+      <p>Doktorun zamanı kısıtlı. Tek günde toplu çekim, 3 kıyafet, 3 mekân. Kurgu ve yayın ajansta.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kim">
+  <span class="eyebrow">Araştırma</span>
+  <h2>Dr. Hande kim?</h2>
+  <p class="prose" style="color:var(--muted)">Açık kaynaklardan derlendi. Toplantıda konuştuklarınla çelişen bir satır varsa senin notun geçerlidir.</p>
+  <dl class="facts">
+    <dt>Eğitim</dt><dd>Uludağ Üniversitesi Tıp Fakültesi, 2001. Aile Hekimliği uzmanlığı, Uludağ Üniversitesi, 2002–2007. <span class="tag t-fact">FACT</span></dd>
+    <dt>Hastane geçmişi</dt><dd>Acıbadem Bursa 2007–2008 ve 2009–2021, arada İvrindi Devlet Hastanesi (zorunlu hizmet). Toplam yaklaşık 13 yıl Acıbadem. <span class="tag t-fact">FACT</span></dd>
+    <dt>Terapi eğitimi</dt><dd>2010'dan beri hipnoz ve psikoterapi. 2021'de Sağlık Bakanlığı onaylı hipnoz eğitimi ve çocuk oyun terapisi eğitimi. Abdülkadir Özbek Enstitüsü'nde 8 yıllık psikodrama eğitimini 2025'te tamamladı; psikodrama temelli grup terapilerine başladı. <span class="tag t-fact">FACT</span></dd>
+    <dt>Yaklaşım</dt><dd>Bütüncül psikoterapi: psikodinamik bakış, bağlanma kuramı, psikodrama, hipnoz ve duygu odaklı teknikler. <span class="tag t-fact">FACT</span></dd>
+    <dt>Kiminle çalışıyor</dt><dd>Çocuk, ergen ve yetişkin; bireysel, çift, aile ve grup. Eylül 2021'den beri kendi kliniğinde. <span class="tag t-fact">FACT</span></dd>
+    <dt>Konum</dt><dd>Efe Kat Plaza, Osmangazi, Bursa. <span class="tag t-fact">FACT</span></dd>
+    <dt>Kişisel</dt><dd>1977 Bandırma doğumlu, evli, iki çocuk annesi. Ebeveyn içeriğinde "anne olarak" konuşabilmesi güven katar. <span class="tag t-fact">FACT</span></dd>
+    <dt>Mevcut dijital varlık</dt><dd>Instagram <b>@drhandecelikmehmetoglu</b>: arama sonucunda yaklaşık 2.077 takipçi, 47 gönderi görünüyor (tarih belirsiz). Web sitesi, blog ve bir YouTube kanalı var. Site "Bursa hipnoz", "çocuk oyun terapisi Bursa" gibi yerel aramalar için sayfalar içeriyor. <span class="tag t-fact">FACT</span> Güncel takipçi sayısı, izlenme ortalaması ve YouTube abone sayısı <span class="tag t-miss">EKSİK</span></dd>
+  </dl>
+</section>
+
+<section id="kurallar">
+  <span class="eyebrow">Önce bunu oku</span>
+  <h2>Yasal çerçeve: neyi yapabiliriz, neyi yapamayız</h2>
+  <div class="prose">
+    <p>Sağlık Hizmetlerinde Tanıtım ve Bilgilendirme Faaliyetleri Hakkında Yönetmelik 12 Kasım 2025'te yürürlüğe girdi. Hekim içeriği artık yalnızca <b>bilgilendirme</b> olabilir. Hipnoz ayrıca Geleneksel ve Tamamlayıcı Tıp (GETAT) Yönetmeliği'ne tabi. Aykırılıkta idari para cezası, erişim engeli ve suç duyurusu var; il komisyonları denetliyor.</p>
+  </div>
+  <div class="rules">
+    <div class="rulebox no">
+      <h3>Yapmıyoruz</h3>
+      <ul>
+        <li>Türkiye'yi hedefleyen sponsorlu reklam, gönderi öne çıkarma (boost), ücretli fenomen iş birliği</li>
+        <li>Hasta yorumu, teşekkür mesajı, "danışanım şöyle iyileşti" hikâyesi</li>
+        <li>Hasta ya da danışan görüntüsü; çocuğun yüzü veya sesi (seans canlandırması dahil)</li>
+        <li>Öncesi/sonrası karşılaştırması</li>
+        <li>Fiyat, kampanya, indirim duyurusu</li>
+        <li>"Tek seansta sigarayı bıraktırıyorum", "kesin çözüm", "en iyi hipnoz uzmanı" gibi garanti ve üstünlük iddiası</li>
+        <li>Hastayı arayarak ya da mesaj atarak hizmet tanıtmak (gelen mesaja cevap vermek serbest)</li>
+      </ul>
+    </div>
+    <div class="rulebox yes">
+      <h3>Yapıyoruz</h3>
+      <ul>
+        <li>Bilimsel doğrulukta, abartısız bilgilendirme videoları</li>
+        <li>Mit ve gerçek, "ne zaman uzmana gitmeli" türü eğitim içeriği</li>
+        <li>Unvan, uzmanlık ve tescilli eğitimlerin doğru biçimde belirtilmesi</li>
+        <li>Doktorun kendi hikâyesi ve çalışma yaklaşımı</li>
+        <li>Kaydet / paylaş / soru sor gibi bilgilendirici çağrılar</li>
+        <li>Profilde iletişim bilgisi, web sitesi, Google İşletme Profili, SEO</li>
+        <li>Yalnızca yurt dışını hedefleyen, Türkçe olmayan sponsorlu içerik (sağlık turizmi istisnası)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="prose">
+    <p><b>Hipnoz için ek dikkat.</b> Tedavi amaçlı hipnozu Sağlık Bakanlığı sertifikalı hekim ve diş hekimi uygular; klinik psikolog ancak sertifikalı hekim gözetiminde. Uygulamanın Bakanlıkça yetkilendirilmiş merkez veya ünitede yapılması esas. Kliniğin GETAT ünite yetkisi olup olmadığını bilmiyoruz <span class="tag t-miss">EKSİK</span>. Hipnozu öne çıkaran videolardan önce bunu doktordan teyit al.</p>
+    <p><b>Kontrendikasyon içeriği güven kazandırır.</b> Şizofreni, psikotik tablolar, alkol veya ilaç etkisi, demans ve intihar düşüncesi olan klinik depresyonda hipnoz uygulanmaz. "Hipnoz kimlere yapılmaz?" videosu hem sorumluluk gösterir hem de rakiplerden ayırır.</p>
+    <p><b>Hukuki not.</b> Buradaki özet haber ve hukuk bürosu yayınlarından derlendi. Google Ads arama reklamının da yasak kapsamında olduğu okuması güçlü, ama ilk yayından önce bir sağlık hukukçusuna 15 dakikalık teyit yaptırmanı öneririm <span class="tag t-hyp">HİPOTEZ</span>. Reklam hesabında hiçbir işlem yapılmadı.</p>
+  </div>
+</section>
+
+<section id="konum">
+  <span class="eyebrow">Konumlanma</span>
+  <h2>Tek cümlelik fikir</h2>
+  <p class="quote">"Tahliller temiz ama sen iyi değilsen, bedeninin söylediğini birlikte dinleyelim."</p>
+  <div class="prose">
+    <p>Instagram'da psikolog içeriği çok. Onları ayıran bir şey yok: aynı "5 toksik davranış" listeleri. Dr. Hande'nin elinde başkasında olmayan üç şey var:</p>
+    <ol class="list">
+      <li><b>Hekim kimliği.</b> "Önce tahlil yaptır, tiroidine, B12'ne baktır" diyebilen bir terapist. Beden belirtileriyle gelen izleyiciye (mide, baş ağrısı, çarpıntı, yorgunluk) en güvenilir sesi o verebilir.</li>
+      <li><b>Hipnoz yetkisi.</b> Merak konusu, izlenme potansiyeli yüksek, yanlış bilgi çok. Mit kıran bir hekim burada otorite olur.</li>
+      <li><b>Psikodrama ve oyun terapisi.</b> Görsel olarak anlatılabilen, sahnesi olan yöntemler. Boş sandalye, oyuncak kutusu, kum tepsisi kamerada iyi durur.</li>
+    </ol>
+    <p>Ton önerisi: sıcak ama net, anne gibi değil hekim gibi. Kısa cümle, günlük dil, "bilimsel olarak şöyle" diye başlamayan ama bilimden şaşmayan bir anlatım. <span class="tag t-hyp">HİPOTEZ</span> Toplantıdaki kamera rahatlığına göre ayarla.</p>
+  </div>
+</section>
+
+<section id="sutunlar">
+  <span class="eyebrow">İçerik sütunları</span>
+  <h2>Altı sütun ve önerilen ağırlık</h2>
+  <p class="prose" style="color:var(--muted)">Ağırlıklar talep ve farklılaşma tahminine dayanıyor <span class="tag t-hyp">HİPOTEZ</span>. Bursa özelinde anahtar kelime hacmi elimizde yok <span class="tag t-miss">EKSİK</span>; ilk 4 haftanın izlenme verisiyle revize edilecek.</p>
+  <div class="pillars">
+    <div class="pillar">
+      <span class="code">BZ · Beden-zihin</span>
+      <h3>Psikosomatik belirtiler</h3>
+      <p class="why">En güçlü farklılaşma. Hem hekim hem terapist olmayı tek videoda gösterir.</p>
+      <p class="kw">tahliller temiz · mide ağrısı stres · boğazda yumru · sürekli yorgunluk · çarpıntı</p>
+      <div class="share"><span>%25</span><div class="bar"><i style="width:100%"></i></div></div>
+    </div>
+    <div class="pillar">
+      <span class="code">KP · Kaygı ve panik</span>
+      <h3>Kaygı, panik atak, uyku</h3>
+      <p class="why">En geniş kitle. "Yakınıma nasıl yardım ederim" aramaları da bu sütunda.</p>
+      <p class="kw">panik atak · gece uyanma · sağlık kaygısı · sürekli kötü bir şey olacak hissi</p>
+      <div class="share"><span>%20</span><div class="bar"><i style="width:80%"></i></div></div>
+    </div>
+    <div class="pillar">
+      <span class="code">HP · Hipnoz gerçekleri</span>
+      <h3>Tıbbi hipnoz, mit ve gerçek</h3>
+      <p class="why">Merak ve yorum getirir. Yerel aramada "Bursa hipnoz" sayfası zaten var; video onu besler.</p>
+      <p class="kw">hipnozda kontrol · uyur muyum · kimlere yapılmaz · sahne hipnozu</p>
+      <div class="share"><span>%20</span><div class="bar"><i style="width:80%"></i></div></div>
+    </div>
+    <div class="pillar">
+      <span class="code">ÇE · Çocuk ve ebeveyn</span>
+      <h3>Oyun terapisi ve anne-baba soruları</h3>
+      <p class="why">Anneler en çok kaydeden ve paylaşan kitle. "İki çocuk annesi hekim" kimliği burada işe yarar.</p>
+      <p class="kw">öfke nöbeti · ekran · okul uyumu · kardeş kıskançlığı · ergen</p>
+      <div class="share"><span>%20</span><div class="bar"><i style="width:80%"></i></div></div>
+    </div>
+    <div class="pillar">
+      <span class="code">İA · İlişki ve aile</span>
+      <h3>Çift ve aile danışmanlığı</h3>
+      <p class="why">Paylaşılabilirliği yüksek, yorumda tartışma açar.</p>
+      <p class="kw">sürekli aynı kavga · "sen hep" · boşanma ve çocuk · aileden gelen kalıplar</p>
+      <div class="share"><span>%10</span><div class="bar"><i style="width:40%"></i></div></div>
+    </div>
+    <div class="pillar">
+      <span class="code">PG · Psikodrama ve grup</span>
+      <h3>Sahne ile terapi</h3>
+      <p class="why">Az konuşulan, görsel, yeni başlayan grup terapilerini tanıtır.</p>
+      <p class="kw">boş sandalye · rol değiştirme · grup terapisi nedir</p>
+      <div class="share"><span>%5</span><div class="bar"><i style="width:20%"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="fikirler">
+  <span class="eyebrow">Fikir havuzu</span>
+  <h2>30 video fikri</h2>
+  <p class="prose" style="color:var(--muted)">Her satırda ilk 3 saniyede söylenecek cümle (hook) hazır. <b class="pri">★</b> işaretliler ilk ay çekilecekler; tam senaryoları aşağıda.</p>
+  <div class="filters" role="group" aria-label="Sütuna göre filtrele">
+    <button type="button" data-f="all" aria-pressed="true">Hepsi</button>
+    <button type="button" data-f="BZ" aria-pressed="false">Beden-zihin</button>
+    <button type="button" data-f="KP" aria-pressed="false">Kaygı ve panik</button>
+    <button type="button" data-f="HP" aria-pressed="false">Hipnoz</button>
+    <button type="button" data-f="ÇE" aria-pressed="false">Çocuk ve ebeveyn</button>
+    <button type="button" data-f="İA" aria-pressed="false">İlişki ve aile</button>
+    <button type="button" data-f="PG" aria-pressed="false">Psikodrama</button>
+  </div>
+  <div class="tablewrap">
+  <table id="ideas">
+    <thead><tr><th>#</th><th>Sütun</th><th>Konu</th><th>Hook (0–3 sn)</th><th>Format</th><th>Amaç</th></tr></thead>
+    <tbody>
+      <tr data-p="BZ"><td class="num">01</td><td>BZ</td><td><b class="pri">★</b> Tahliller temiz, ağrı sürüyor</td><td class="hook">"Bütün tahlilleriniz temiz çıktı ama ağrı hâlâ orada mı?"</td><td>Kameraya konuşma</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="BZ"><td class="num">02</td><td>BZ</td><td>Hafta sonu başlayan baş ağrısı</td><td class="hook">"Baş ağrınız hep cumartesi sabahı mı başlıyor?"</td><td>Kameraya konuşma</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="BZ"><td class="num">03</td><td>BZ</td><td>Boğazda yumru hissi</td><td class="hook">"Boğazınızda bir şey takılı gibi, ama doktor bir şey yok diyor."</td><td>Kameraya konuşma</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="BZ"><td class="num">04</td><td>BZ</td><td>Sekiz saat uyuyup yorgun uyanmak</td><td class="hook">"Sekiz saat uyuyorsunuz, yine de yorgun mu uyanıyorsunuz?"</td><td>Liste (önce tahlil, sonra duygu)</td><td><span class="goal">güven</span></td></tr>
+      <tr data-p="BZ"><td class="num">05</td><td>BZ</td><td>Çarpıntı: kalp mi, kaygı mı?</td><td class="hook">"Kalbiniz çarpıyor ve kardiyoloğunuz 'kalbin sağlam' dedi."</td><td>Kameraya konuşma</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="KP"><td class="num">06</td><td>KP</td><td><b class="pri">★</b> Panik atakta neden öleceğini sanırsın</td><td class="hook">"Kalbin çarpıyor, nefesin daralıyor, öleceğini sanıyorsun. Ölmüyorsun."</td><td>Kameraya konuşma + nefes egzersizi</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="KP"><td class="num">07</td><td>KP</td><td><b class="pri">★</b> Gece 3'te uyanıp düşünmek</td><td class="hook">"Gece 3'te uyanıp tavanı mı izliyorsunuz?"</td><td>Kameraya konuşma</td><td><span class="goal">kaydetme</span></td></tr>
+      <tr data-p="KP"><td class="num">08</td><td>KP</td><td>Her belirtiyi Google'lamak</td><td class="hook">"Bir baş ağrısını Google'a yazıp beyin tümörüne ulaştınız mı?"</td><td>Kameraya konuşma, hafif mizah</td><td><span class="goal">paylaşım</span></td></tr>
+      <tr data-p="KP"><td class="num">09</td><td>KP</td><td>Panik atak geçiren birine ne denmez</td><td class="hook">"Panik atak geçiren birine sakın 'sakin ol' demeyin."</td><td>Yapma / yap listesi</td><td><span class="goal">paylaşım</span></td></tr>
+      <tr data-p="KP"><td class="num">10</td><td>KP</td><td>Sürekli kötü bir şey olacak hissi</td><td class="hook">"Her şey yolundayken bile içinizde bir 'ya olursa' mı var?"</td><td>Kameraya konuşma</td><td><span class="goal">güven</span></td></tr>
+      <tr data-p="HP"><td class="num">11</td><td>HP</td><td><b class="pri">★</b> Hipnozda kontrolü kaybeder miyim?</td><td class="hook">"Hipnozda size tavuk gibi ötürebilir miyim? Hayır."</td><td>Mit / gerçek</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="HP"><td class="num">12</td><td>HP</td><td>Hipnozda uyur musunuz?</td><td class="hook">"Hipnozda uyumazsınız. Aslında hiç olmadığınız kadar uyanıksınız."</td><td>Mit / gerçek</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="HP"><td class="num">13</td><td>HP</td><td>Hipnoz kimlere yapılmaz?</td><td class="hook">"Hipnozu herkese uygulamam. İşte nedeni."</td><td>Liste</td><td><span class="goal">güven</span></td></tr>
+      <tr data-p="HP"><td class="num">14</td><td>HP</td><td>Sahne hipnozu ile tıbbi hipnoz farkı</td><td class="hook">"Televizyonda gördüğünüz hipnoz, benim yaptığım hipnoz değil."</td><td>Karşılaştırma (bölünmüş ekran grafik)</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="HP"><td class="num">15</td><td>HP</td><td>Bir hipnoz seansında ne olur?</td><td class="hook">"Hipnoz koltuğuna oturdunuz. Sonraki 50 dakikada ne oluyor?"</td><td>Adım adım anlatım, boş koltuk B-roll</td><td><span class="goal">randevu niyeti</span></td></tr>
+      <tr data-p="HP"><td class="num">16</td><td>HP</td><td>Sigara ve hipnoz: gerçekçi beklenti</td><td class="hook">"Hipnozla sigara tek seansta biter mi? Dürüst cevap."</td><td>Kameraya konuşma</td><td><span class="goal">güven</span></td></tr>
+      <tr data-p="ÇE"><td class="num">17</td><td>ÇE</td><td><b class="pri">★</b> Markette öfke nöbeti</td><td class="hook">"Markette yere yatıp çığlık atan bir çocuk. Ve herkes size bakıyor."</td><td>Kameraya konuşma + 3 adım grafik</td><td><span class="goal">kaydetme</span></td></tr>
+      <tr data-p="ÇE"><td class="num">18</td><td>ÇE</td><td><b class="pri">★</b> Tableti alınca kıyamet kopması</td><td class="hook">"Tableti elinden aldığınız an kıyamet mi kopuyor?"</td><td>Kameraya konuşma</td><td><span class="goal">paylaşım</span></td></tr>
+      <tr data-p="ÇE"><td class="num">19</td><td>ÇE</td><td>Oyun terapisi nedir?</td><td class="hook">"Çocuklar konuşarak anlatmaz. Oynayarak anlatır."</td><td>Oyun odası B-roll, çocuksuz</td><td><span class="goal">randevu niyeti</span></td></tr>
+      <tr data-p="ÇE"><td class="num">20</td><td>ÇE</td><td>Yeni kardeş ve kıskançlık</td><td class="hook">"Yeni bebek geldi, büyük çocuk yeniden altını ıslatmaya başladı."</td><td>Kameraya konuşma</td><td><span class="goal">kaydetme</span></td></tr>
+      <tr data-p="ÇE"><td class="num">21</td><td>ÇE</td><td>Okula uyum kaygısı (Eylül–Ekim)</td><td class="hook">"Her sabah okul kapısında ağlıyorsa, bunu yapmayı bırakın."</td><td>Kameraya konuşma, mevsimsel</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="ÇE"><td class="num">22</td><td>ÇE</td><td>Gece altını ıslatma</td><td class="hook">"Altı yaşında ve hâlâ geceleri altını ıslatıyor. Önce şuna bakın."</td><td>Hekim + terapist bakışı</td><td><span class="goal">güven</span></td></tr>
+      <tr data-p="ÇE"><td class="num">23</td><td>ÇE</td><td>Odasına kapanan ergen</td><td class="hook">"Ergen çocuğunuz odasının kapısını kapattı. Kapıyı kırmayın."</td><td>Kameraya konuşma</td><td><span class="goal">paylaşım</span></td></tr>
+      <tr data-p="İA"><td class="num">24</td><td>İA</td><td><b class="pri">★</b> Çiftler bulaşık yüzünden kavga etmez</td><td class="hook">"Çiftler bulaşık yüzünden kavga etmez."</td><td>Kameraya konuşma</td><td><span class="goal">paylaşım</span></td></tr>
+      <tr data-p="İA"><td class="num">25</td><td>İA</td><td>"Sen hep" ile başlayan cümle</td><td class="hook">"Kavgayı büyüten iki kelime var: 'Sen hep.'"</td><td>Önce / sonra cümle kartı</td><td><span class="goal">kaydetme</span></td></tr>
+      <tr data-p="İA"><td class="num">26</td><td>İA</td><td>Boşanma çocuğa nasıl söylenir?</td><td class="hook">"Boşanıyorsunuz. Çocuğunuza ilk cümleniz ne olacak?"</td><td>Kameraya konuşma</td><td><span class="goal">güven</span></td></tr>
+      <tr data-p="İA"><td class="num">27</td><td>İA</td><td>Annemden aldığım cümleler</td><td class="hook">"Çocuğunuza bağırırken annenizin sesini mi duyuyorsunuz?"</td><td>Kameraya konuşma</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="PG"><td class="num">28</td><td>PG</td><td><b class="pri">★</b> Boş sandalye</td><td class="hook">"Babanıza hiç söyleyemediğiniz bir cümle var mı?"</td><td>Boş sandalye sahnesi</td><td><span class="goal">erişim</span></td></tr>
+      <tr data-p="PG"><td class="num">29</td><td>PG</td><td>Grup terapisine neden gidilir?</td><td class="hook">"Yabancıların önünde ağlamak neden iyileştirir?"</td><td>Kameraya konuşma</td><td><span class="goal">randevu niyeti</span></td></tr>
+      <tr data-p="PG"><td class="num">30</td><td>PG</td><td><b class="pri">★</b> Neden hem hekim hem terapist oldum</td><td class="hook">"13 yıl hastanede hekimlik yaptım. Bir gün fark ettim ki..."</td><td>Hikâye, profilde sabitlenir</td><td><span class="goal">güven</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="senaryolar">
+  <span class="eyebrow">Senaryolar</span>
+  <h2>Çekime hazır 8 senaryo</h2>
+  <p class="prose" style="color:var(--muted)">Süreler 35–50 saniye. Metinler taslaktır; tıbbi doğruluk ve üslup için <b>her metni Dr. Hande onaylamalı</b>. Doktor ezberlemesin; akışı okuyup kendi cümleleriyle söylemesi daha doğal durur.</p>
+
+  <div class="scripts">
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 1 · BZ · Fikir 01</span>
+      <h3>Tahliller temiz, ağrı sürüyor</h3>
+      <div class="row"><span>~45 sn</span><span>Mekân: muayene masası</span><span>Kapak: "Tahliller temiz ama ağrı geçmiyor"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Bütün tahlilleriniz temiz çıktı ama ağrı hâlâ orada mı?"</p><p class="note">Yakın plan, kameraya doğrudan. Elinde bir tahlil kâğıdı.</p></div></div>
+      <div class="beat"><div class="tc"><b>KİM</b>3–10 sn</div><div><p class="say">"Ben aile hekimiyim, 25 yıldır hasta görüyorum. Öğrendiğim en önemli şey şu: beden, bizim söyleyemediklerimizi söyler."</p></div></div>
+      <div class="beat"><div class="tc"><b>NEDEN</b>10–28 sn</div><div><p class="say">"Beynimizle midemiz arasında sürekli çalışan bir hat var. Sınav sabahı karnınızın ağrıdığını hatırlayın. Stres uzun sürdüğünde bu hat hiç susmaz. Sonuç: mide ağrısı, şişkinlik, hazımsızlık, bağırsak düzensizliği."</p><p class="note">Ekranda basit grafik: beyin ↔ bağırsak oku.</p></div></div>
+      <div class="beat"><div class="tc"><b>AYRIM</b>28–38 sn</div><div><p class="say">"Bu 'hayal ediyorsunuz' demek değil. Ağrı gerçek. Ama tedavisi sadece midede bitmeyebilir."</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>38–45 sn</div><div><p class="say">"Önce mutlaka muayene olun. Tıbbi bir neden bulunmadıysa, bir de duygularınıza bakma zamanı gelmiş olabilir. Bunu ihtiyacı olan birine gönderin."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> "önce muayene" uyarısı var, tanı ve garanti yok.</span><span><b>Seri fikri:</b> "Bedenin dili" serisinin 1. bölümü. 02–05 aynı kalıpla devam eder.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 2 · KP · Fikir 06</span>
+      <h3>Panik atakta neden öleceğini sanırsın</h3>
+      <div class="row"><span>~50 sn</span><span>Mekân: terapi koltuğu</span><span>Kapak: "Panik atakta ölmezsiniz"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Kalbin çarpıyor, nefesin daralıyor, öleceğini sanıyorsun. Ölmüyorsun."</p><p class="note">Hızlı art arda üç kısa kesme, sonra sabit plan.</p></div></div>
+      <div class="beat"><div class="tc"><b>NE OLUYOR</b>3–20 sn</div><div><p class="say">"Panik atak, vücudun yangın alarmının yanlış anda çalmasıdır. Tehlike yok ama beyin 'kaç' komutu veriyor. Adrenalin yükseliyor, kalp hızlanıyor, nefes sıklaşıyor. Hissettiğiniz her şey bu alarmın sesi."</p></div></div>
+      <div class="beat"><div class="tc"><b>GEÇER</b>20–28 sn</div><div><p class="say">"Atak birkaç dakika içinde zirveye çıkar ve sonra iner. Beden bu alarmı sonsuza kadar çalıştıramaz."</p></div></div>
+      <div class="beat"><div class="tc"><b>O AN</b>28–42 sn</div><div><p class="say">"O an şunu deneyin: dört saniye burnunuzdan alın, altı saniye ağzınızdan yavaşça verin. Nefesi vermek, alarmı kısan düğmedir. Birlikte yapalım."</p><p class="note">Doktor bir tur nefesi kamerada yapar. Ekranda sayaç: 4 · 6.</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>42–50 sn</div><div><p class="say">"Göğüs ağrısı ilk kez oluyorsa önce acile gidin. Ataklar tekrarlıyorsa bunu tek başınıza taşımak zorunda değilsiniz. Kaydedin, ihtiyacınız olduğunda açın."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> acil uyarısı var. Nefes tekniği genel bilgi, tedavi vaadi yok.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 3 · HP · Fikir 11</span>
+      <h3>Hipnozda kontrolü kaybeder miyim?</h3>
+      <div class="row"><span>~45 sn</span><span>Mekân: hipnoz koltuğu (boş)</span><span>Kapak: "Hipnozda kontrol kimde?"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Hipnozda size tavuk gibi ötürebilir miyim? Hayır."</p><p class="note">Hafif gülümseme. Mizahla açılış, ciddi devam.</p></div></div>
+      <div class="beat"><div class="tc"><b>MİT</b>3–15 sn</div><div><p class="say">"Televizyonda gördüğünüz sahne hipnozu bir gösteri. Orada gönüllüler zaten sahneye çıkmak isteyen insanlar."</p></div></div>
+      <div class="beat"><div class="tc"><b>GERÇEK</b>15–32 sn</div><div><p class="say">"Tıbbi hipnozda uyumazsınız. Bilinciniz açıktır, sesimi duyarsınız, istediğiniz an gözünüzü açabilirsiniz. Olan şey derin bir odaklanmadır. İstemediğiniz hiçbir şeyi yapmazsınız."</p></div></div>
+      <div class="beat"><div class="tc"><b>KİM YAPAR</b>32–40 sn</div><div><p class="say">"Türkiye'de tedavi amaçlı hipnozu yalnızca Sağlık Bakanlığı sertifikası olan hekimler ve diş hekimleri uygulayabilir. Kime gittiğinizi sorun."</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>40–45 sn</div><div><p class="say">"Hipnozla ilgili en çok merak ettiğiniz soruyu yorumlara yazın. Sonraki videoda cevaplayayım."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> kliniğin GETAT yetkisi teyit edilmeden yayınlama.</span><span><b>Seri motoru:</b> gelen yorumlar 12–16 numaralı videolara dönüşür.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 4 · ÇE · Fikir 17</span>
+      <h3>Markette öfke nöbeti</h3>
+      <div class="row"><span>~45 sn</span><span>Mekân: oyun terapisi odası</span><span>Kapak: "Öfke nöbetinde yapılacak 3 şey"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Markette yere yatıp çığlık atan bir çocuk. Ve herkes size bakıyor."</p></div></div>
+      <div class="beat"><div class="tc"><b>NEDEN</b>3–14 sn</div><div><p class="say">"O an çocuğun beyninde düşünen kısım devre dışı. Duygu direksiyonu almış. Bu yüzden o an yapılan nasihat hiçbir işe yaramaz."</p></div></div>
+      <div class="beat"><div class="tc"><b>3 ADIM</b>14–36 sn</div><div><p class="say">"Bir: güvende tutun, gerekirse kenara alın. İki: siz sakin kalın; çocuk sizin sinir sisteminizi ödünç alır. Üç: duyguyu adlandırın. 'Çok kızgınsın, o oyuncağı çok istedin.' Konuşma, sakinleştikten sonra."</p><p class="note">Ekranda 1 · 2 · 3 grafik kartları.</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>36–45 sn</div><div><p class="say">"Nöbetler yaşına göre çok sık ya da çok şiddetliyse bir uzmana danışmak iyi gelir. Ben de iki çocuk annesiyim; bu sahneyi yaşamayan yok. Bunu bir anneye gönderin."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> çocuk görüntüsü yok. B-roll: oyuncak rafı, boş oyun halısı.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 5 · ÇE · Fikir 18</span>
+      <h3>Tableti alınca kıyamet kopması</h3>
+      <div class="row"><span>~40 sn</span><span>Mekân: oyun odası, elinde tablet</span><span>Kapak: "Ekranı böyle kesmeyin"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Tableti elinden aldığınız an kıyamet mi kopuyor?"</p><p class="note">Doktor tableti masaya kapatarak bırakır.</p></div></div>
+      <div class="beat"><div class="tc"><b>SORUN</b>3–12 sn</div><div><p class="say">"Sorun çoğu zaman ekranın kendisi değil, ekranın aniden kesilmesi. Ani kesinti öfkeyi büyütür."</p></div></div>
+      <div class="beat"><div class="tc"><b>YAPIN</b>12–32 sn</div><div><p class="say">"On dakika kala haber verin, beş dakika kala bir daha. Bittiğinde yerine koyacağınız bir şey hazır olsun: bir oyun, bir yürüyüş, birlikte bir iş. Ve siz de telefonunuzu bırakın. Çocuk söylediğinizi değil, yaptığınızı öğrenir."</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>32–40 sn</div><div><p class="say">"Ekrandan ayrılınca uyku, iştah ve okul da bozuluyorsa bu artık bir alışkanlık değil, destek gerektiren bir tablo olabilir."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> genel bilgi, tanı yok.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 6 · KP · Fikir 07</span>
+      <h3>Gece 3'te uyanıp düşünmek</h3>
+      <div class="row"><span>~40 sn</span><span>Mekân: loş ışık, gece lambası</span><span>Kapak: "Gece 3 uyanışı"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Gece 3'te uyanıp tavanı mı izliyorsunuz?"</p></div></div>
+      <div class="beat"><div class="tc"><b>NEDEN</b>3–12 sn</div><div><p class="say">"Gün içinde bastırdığınız düşünceler, zihin sessizleşince sıraya girer. Gece her sorun olduğundan büyük görünür."</p></div></div>
+      <div class="beat"><div class="tc"><b>2 ŞEY</b>12–32 sn</div><div><p class="say">"Bir: yirmi dakikadan uzun uyanık kaldıysanız yataktan kalkın, loş bir odada sıkıcı bir şey yapın, uykunuz gelince dönün. Yatak, düşünme yeri olmasın. İki: akşamüstü on beş dakika 'endişe defteri' tutun. Aklınızdakileri gündüz kâğıda dökün ki gece size gelmesin."</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>32–40 sn</div><div><p class="say">"Haftalardır böyle uyuyorsanız bunu bir hekimle konuşun. Kaydedin; bu gece lazım olabilir."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yayın saati önerisi:</b> 22:30 civarı <span class="tag t-hyp">HİPOTEZ</span>, ilk verilerle test edilecek.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 7 · PG · Fikir 28</span>
+      <h3>Boş sandalye</h3>
+      <div class="row"><span>~45 sn</span><span>Mekân: psikodrama alanı, iki sandalye</span><span>Kapak: "Söyleyemediğin cümle"</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"Babanıza hiç söyleyemediğiniz bir cümle var mı?"</p><p class="note">Plan: doktor ayakta, yanında boş bir sandalye. Kamera yavaşça sandalyeye kayar.</p></div></div>
+      <div class="beat"><div class="tc"><b>YÖNTEM</b>3–20 sn</div><div><p class="say">"Psikodramada bazen karşınıza boş bir sandalye koyarız. O sandalyede söyleyemediğiniz kişi oturuyor gibi davranırız. Ve o cümle, yıllar sonra ilk kez sesli söylenir."</p></div></div>
+      <div class="beat"><div class="tc"><b>NEDEN İŞE YARAR</b>20–35 sn</div><div><p class="say">"Anlatmak başka, yaşamak başka. Konuşarak yıllarca çözemediğimiz şeyi, sahnede birkaç dakikada görebiliriz. Ben bu yöntemi sekiz yıl boyunca çalıştım."</p></div></div>
+      <div class="beat"><div class="tc"><b>KAPANIŞ</b>35–45 sn</div><div><p class="say">"O cümle neydi? Yazmak zorunda değilsiniz. Ama bu akşam bir kez içinizden söyleyin."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> gerçek seans ya da danışan yok; sadece yöntem anlatımı.</span></div>
+  </article>
+
+  <article class="script">
+    <div class="script-head">
+      <span class="eyebrow">Senaryo 8 · Tanışma · Fikir 30</span>
+      <h3>Neden hem hekim hem terapist oldum</h3>
+      <div class="row"><span>~50 sn</span><span>Mekân: klinik, doğal ışık</span><span>Profilde 1 numaraya sabitlenir</span></div>
+    </div>
+    <div class="beats">
+      <div class="beat"><div class="tc"><b>HOOK</b>0–3 sn</div><div><p class="say">"13 yıl hastanede hekimlik yaptım. Bir gün fark ettim ki..."</p></div></div>
+      <div class="beat"><div class="tc"><b>FARK</b>3–20 sn</div><div><p class="say">"...karşıma gelen hastaların önemli bir kısmının derdi tahlile çıkmıyordu. Mide ağrısı, baş ağrısı, uykusuzluk. İlacı yazıyordum, bir süre sonra aynı kişi aynı şikâyetle geri geliyordu."</p><p class="note">Bu cümleler doktorun kendi deneyimiyle birebir uyuşmalı; toplantıda kendi hikâyesini nasıl anlattıysa o kullanılır.</p></div></div>
+      <div class="beat"><div class="tc"><b>YOL</b>20–38 sn</div><div><p class="say">"2010'da hipnoz ve psikoterapi eğitimine başladım. Sonra oyun terapisi, sonra sekiz yıllık psikodrama. 2021'de hastaneden ayrıldım ve bedeni de ruhu da birlikte dinleyebildiğim kendi kliniğimi açtım."</p></div></div>
+      <div class="beat"><div class="tc"><b>BURADA NE VAR</b>38–50 sn</div><div><p class="say">"Bu sayfada bedenin ve zihnin birbirine ne söylediğini anlatacağım. Aklınıza takılan bir şey olursa yorumlara yazın."</p></div></div>
+    </div>
+    <div class="script-foot"><span><b>Yasal kontrol:</b> eğitim ve unvanlar doğru yazılmalı; sertifika adlarını doktordan al.</span></div>
+  </article>
+
+  </div>
+</section>
+
+<section id="formatlar">
+  <span class="eyebrow">Formatlar</span>
+  <h2>Hangi video tipi, ne için</h2>
+  <div class="tablewrap">
+  <table style="min-width:640px">
+    <thead><tr><th>Format</th><th>Ne zaman</th><th>Üretim notu</th></tr></thead>
+    <tbody>
+      <tr><td><b>Kameraya konuşma</b> (30–50 sn)</td><td>Ana format, haftanın 2 videosu</td><td>Dikey 9:16, göz hizası, yaka mikrofonu. Doktor ekranda; B-roll az.</td></tr>
+      <tr><td><b>Mit / gerçek</b></td><td>Hipnoz sütunu</td><td>Ekranda büyük "MİT" ve "GERÇEK" kartları. Yorumları besler.</td></tr>
+      <tr><td><b>Seri</b> ("Bedenin dili", "Hipnoz soruları")</td><td>Takip ettirmek için</td><td>Aynı açılış, aynı kapak şablonu, bölüm numarası.</td></tr>
+      <tr><td><b>Yorum cevabı</b></td><td>Etkileşim geldikten sonra</td><td>Gelen soruyu ekranda göster, doktor cevaplasın. İsimleri gizle.</td></tr>
+      <tr><td><b>Sahne / nesne</b> (boş sandalye, oyuncak, kum tepsisi)</td><td>Psikodrama ve oyun terapisi</td><td>Danışan yok; nesne ve mekân anlatır.</td></tr>
+      <tr><td><b>Uzun video</b> (YouTube 6–10 dk)</td><td>Ayda 2</td><td>Tek uzun konuşmadan 3–5 kısa video kesilir. SEO için başlıkta "Bursa" gerekmez, konu kelimesi yeter.</td></tr>
+      <tr><td><b>Karusel</b></td><td>Liste içerikleri (belirtiler, yapılacaklar)</td><td>Kaydetme oranı yüksek format. Videonun özetini karusele çevir.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="prose" style="color:var(--muted)">Reklamdaki klasik açılardan <b>sosyal kanıt</b>, <b>öncesi/sonrası</b> ve <b>teklif odaklı</b> açılar bu müşteride yasak. Kullanılabilen açılar: problem-çözüm, eğitici, hikâye/marka.</p>
+  <p class="prose" style="color:var(--muted)">Kurgu tarafı: ham çekimleri attığında repodaki <code>viral-edit</code> akışıyla altyazı, grafik, ses masteri ve kapak yapılır. Seslendirme ve konuşma metnini sen veya doktor onaylarsın.</p>
+</section>
+
+<section id="cekim">
+  <span class="eyebrow">Prodüksiyon</span>
+  <h2>Çekim günü planı</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1 · Önceki hafta</span><h3>Metin onayı</h3><p>12–16 metni doktora gönder. Tıbbi düzeltmeleri al, son hali çekimden 2 gün önce kilitle.</p></div>
+    <div class="step"><span class="n">2 · Çekim sabahı</span><h3>Kurulum (45 dk)</h3><p>Pencere yanı doğal ışık + 1 yumuşak ışık, yaka mikrofonu, telefonda 4K 30fps dikey, sabit tripod.</p></div>
+    <div class="step"><span class="n">3 · 3 blok</span><h3>Mekân ve kıyafet</h3><p>Blok A muayene masası (beden-zihin), Blok B terapi koltuğu (kaygı, hipnoz, ilişki), Blok C oyun odası ve psikodrama alanı. Her blokta farklı kıyafet.</p></div>
+    <div class="step"><span class="n">4 · Her video</span><h3>3 hook, 2 tekrar</h3><p>Her videoda hook'u 3 farklı şekilde çek. Kurguda en güçlüsü seçilir; diğerleri A/B testi olur.</p></div>
+    <div class="step"><span class="n">5 · Sonunda</span><h3>B-roll (30 dk)</h3><p>El yakın planları, not alma, kapı açma, boş koltuk, oyuncak rafı, kum tepsisi, sertifika duvarı. Danışan yok.</p></div>
+  </div>
+  <h3 style="margin-top:8px">Çekim öncesi kontrol listesi</h3>
+  <ul class="check">
+    <li>Metinler doktor tarafından onaylandı</li>
+    <li>Kadrajda hasta dosyası, isim, randevu ekranı yok</li>
+    <li>Kadrajda fiyat listesi, broşür, kampanya yok</li>
+    <li>Unvan grafiği doğru: "Uzm. Dr. Hande Çelik Mehmetoğlu · Aile Hekimliği Uzmanı"</li>
+    <li>Hipnoz videoları için GETAT yetkisi teyit edildi</li>
+    <li>Telefon uçak modunda, klinik telefonu sessizde</li>
+  </ul>
+</section>
+
+<section id="takvim">
+  <span class="eyebrow">Takvim</span>
+  <h2>İlk 4 hafta</h2>
+  <p class="prose" style="color:var(--muted)">Haftada 3 Reels (Salı, Perşembe, Pazar) ve 2 haftada 1 uzun YouTube videosu. Sıralama: önce güven (tanışma), sonra en geniş erişimli konular, sonra seri.</p>
+  <div class="cal">
+    <div class="week"><h3>Hafta 1 · Tanışma</h3><ul><li><span>SAL</span>30 · Neden hem hekim hem terapist</li><li><span>PER</span>01 · Tahliller temiz, ağrı sürüyor</li><li><span>PAZ</span>21 · Okula uyum kaygısı (mevsim)</li></ul></div>
+    <div class="week"><h3>Hafta 2 · Erişim</h3><ul><li><span>SAL</span>06 · Panik atak</li><li><span>PER</span>17 · Markette öfke nöbeti</li><li><span>PAZ</span>11 · Hipnozda kontrol</li><li><span>YT</span>Uzun: Bedenin dili, 8 dk</li></ul></div>
+    <div class="week"><h3>Hafta 3 · Seri başlar</h3><ul><li><span>SAL</span>02 · Hafta sonu baş ağrısı</li><li><span>PER</span>18 · Tablet ve öfke</li><li><span>PAZ</span>24 · Bulaşık kavgası</li></ul></div>
+    <div class="week"><h3>Hafta 4 · Derinlik</h3><ul><li><span>SAL</span>07 · Gece 3 uyanışı</li><li><span>PER</span>28 · Boş sandalye</li><li><span>PAZ</span>Yorum cevabı (hipnoz)</li><li><span>YT</span>Uzun: Hipnoz hakkında 7 soru</li></ul></div>
+  </div>
+  <div class="prose">
+    <p><b>Mevsimsel takvim.</b> Ekim: okul uyumu, ergen. Kasım: sınav kaygısı (LGS/YKS hazırlığı), kış ve ruh hali. Aralık: yılbaşı yalnızlığı, yıl sonu muhasebesi. Ocak: "yeni yıl kararları neden tutmaz", sigara bırakma (gerçekçi beklenti videosu).</p>
+  </div>
+</section>
+
+<section id="donusum">
+  <span class="eyebrow">Dönüşüm</span>
+  <h2>Videodan randevuya: reklamsız yol</h2>
+  <p class="prose">Ücretli reklam yokken izlenmeyi randevuya çeviren şey profilin kendisi ve arama görünürlüğü. Doğrudan "randevu alın" çağrısı yerine izleyicinin kendisi gelsin.</p>
+  <div class="steps">
+    <div class="step"><span class="n">Profil</span><h3>Bio ve sabitlenenler</h3><p>Bio: unvanlar + "Bedenin ve zihnin dili" + web sitesi. Sabitli 3 video: tanışma, hipnoz nedir, oyun terapisi nedir.</p></div>
+    <div class="step"><span class="n">Öne çıkanlar</span><h3>Bilgi hikâyeleri</h3><p>"Hipnoz", "Çocuk", "Çift ve aile", "Grup", "Nasıl çalışıyorum", "İletişim". Yorum ve fiyat yok.</p></div>
+    <div class="step"><span class="n">Arama</span><h3>Google İşletme ve site</h3><p>Google İşletme Profili güncel, fotoğraflı. Her uzun videoyu sitedeki blog yazısına göm. "Bursa hipnoz", "çocuk oyun terapisi Bursa" sayfaları videolarla güçlenir.</p></div>
+    <div class="step"><span class="n">Mesaj</span><h3>Gelen DM'e cevap</h3><p>Sadece gelen mesaja cevap. Klinik için 2 saat içinde cevap standardı ve bilgilendirici şablon (seans süresi, süreç, adres). Kimseye ilk mesaj atılmaz.</p></div>
+  </div>
+</section>
+
+<section id="olcum">
+  <span class="eyebrow">Ölçüm</span>
+  <h2>Neyi izleyeceğiz</h2>
+  <div class="tablewrap">
+  <table style="min-width:600px">
+    <thead><tr><th>Metrik</th><th>Neden</th><th>Başlangıç</th></tr></thead>
+    <tbody>
+      <tr><td>3 sn izlenme oranı</td><td>Hook çalışıyor mu</td><td class="num">EKSİK</td></tr>
+      <tr><td>Kaydetme + paylaşım / erişim</td><td>İçerik değerli mi (organik yayılımın asıl sinyali)</td><td class="num">EKSİK</td></tr>
+      <tr><td>Profil ziyareti ve web tıklaması</td><td>İzleyici doktoru merak ediyor mu</td><td class="num">EKSİK</td></tr>
+      <tr><td>"Randevu / bilgi" amaçlı gelen DM ve telefon</td><td>İş sonucu</td><td class="num">EKSİK</td></tr>
+      <tr><td>Takipçi</td><td>İkincil; tek başına başarı ölçütü değil</td><td class="num">~2.077</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="prose"><b>İlk test.</b> 4 hafta sonunda sütunları kaydetme+paylaşım oranına göre sırala. En zayıf iki sütunun payını yarıya indir, en güçlüsünü artır. Başarı kriteri: 4 haftada en az 3 videonun hesabın kendi ortalamasının 3 katı erişim alması <span class="tag t-hyp">HİPOTEZ</span> (hesabın mevcut ortalaması alınınca netleşir).</p>
+</section>
+
+<section id="eksik">
+  <span class="eyebrow">Sonraki adım</span>
+  <h2>Eksikler ve senden istediklerim</h2>
+  <div class="prose">
+    <p>Toplantı notlarını bu dosyaya göre görmedim. Notları yazarsan fikirleri ve senaryoları onlara göre düzeltirim. Özellikle şunlar lazım:</p>
+  </div>
+  <ol class="list">
+    <li><b>Toplantı notları:</b> doktorun öncelik verdiği hizmetler, konuşmak istemediği konular, kendi anlattığı hikâye ve kullandığı cümleler.</li>
+    <li><b>Kamera rahatlığı:</b> daha önce kameraya konuştu mu, akıcı mı, yoksa soru-cevap formatı mı daha iyi olur?</li>
+    <li><b>GETAT yetkisi:</b> klinikte hipnoz uygulama ünitesi yetkisi var mı?</li>
+    <li><b>Kapasite:</b> haftada kaç yeni danışan alabiliyor? Online seans var mı? (Online varsa Bursa dışı kitle de hedeflenir.)</li>
+    <li><b>Hesap verisi:</b> Instagram ve YouTube istatistik ekran görüntüleri (son 90 gün erişim, izlenme, kaydetme).</li>
+    <li><b>İş birliği modeli:</b> çekimi kim yapacak, kurgu ajansta mı, onay süreci nasıl işleyecek?</li>
+    <li><b>Hukuk teyidi:</b> yönetmelik yorumunu bir sağlık hukukçusuna teyit ettirmek.</li>
+    <li><b>Müşteri klasörü:</b> onaylarsan sistemde <code>agency-ai/clients/hande-celik-mehmetoglu/</code> klasörünü açıp bu bilgileri oraya işlerim.</li>
+  </ol>
+</section>
+
+<section id="kaynak" class="sources">
+  <span class="eyebrow">Kaynaklar</span>
+  <h2 style="color:var(--ink)">Kaynaklar</h2>
+  <ol>
+    <li><a href="https://handecelikmehmetoglu.com.tr/hakkimda/" target="_blank" rel="noopener">handecelikmehmetoglu.com.tr: Hakkımda</a></li>
+    <li><a href="https://handecelikmehmetoglu.com.tr/bursa-hipnoz/" target="_blank" rel="noopener">handecelikmehmetoglu.com.tr: Bursa Hipnoz</a> · <a href="https://handecelikmehmetoglu.com.tr/cocuk-oyun-terapisi-bursa/" target="_blank" rel="noopener">Çocuk Oyun Terapisi Bursa</a></li>
+    <li><a href="https://www.instagram.com/drhandecelikmehmetoglu/" target="_blank" rel="noopener">Instagram @drhandecelikmehmetoglu</a></li>
+    <li><a href="https://www.doktortakvimi.com/hande-celik-mehmetoglu/aile-hekimligi-aile-danismani/bursa" target="_blank" rel="noopener">DoktorTakvimi profili</a></li>
+    <li><a href="https://www.resmigazete.gov.tr/eskiler/2025/11/20251112-2.htm" target="_blank" rel="noopener">Resmî Gazete, 12.11.2025: Sağlık Hizmetlerinde Tanıtım ve Bilgilendirme Faaliyetleri Hakkında Yönetmelik</a></li>
+    <li><a href="https://www.milliyet.com.tr/gundem/saglikta-reklam-donemi-bitiyor-yeni-yonetmelik-sosyal-medyada-paylasim-kurallarini-sikilastirdi-7481738" target="_blank" rel="noopener">Milliyet: Sağlıkta reklam dönemi bitiyor</a></li>
+    <li><a href="https://www.newhealth.media/blog/saglik-hizmetlerinde-tanitim-ve-bilgilendirme-yonetmeligi-12-kasim-2025" target="_blank" rel="noopener">New Health Media: Yönetmelik özeti</a> · <a href="https://www.novavitamedia.com/saglik-sektorunde-reklam-yasaklari/" target="_blank" rel="noopener">Sağlık sektöründe reklam yasakları 2026</a></li>
+    <li><a href="https://shgmgetatdb.saglik.gov.tr/TR,24671/hipnoz-uygulamasi-hakkinda-bilgilendirme.html" target="_blank" rel="noopener">Sağlık Bakanlığı GETAT: Hipnoz uygulaması hakkında bilgilendirme</a></li>
+    <li><a href="https://www.getatakademi.com/yazilar/sagliga-yonelik-uygulamalari-ile-hipnoz" target="_blank" rel="noopener">GETAT Akademi: Sağlığa yönelik uygulamaları ile hipnoz</a></li>
+    <li><a href="https://www.sokgazetesi.com.tr/kimseye-soylemiyorlar-ama-googlea-soruyorlar-iste-ilk-3-soru" target="_blank" rel="noopener">Şok Gazetesi: Google'da en çok sorulan ruh sağlığı soruları</a></li>
+    <li><a href="https://www.medicana.com.tr/psikosomatik-hastalik-zihin-ve-bedenin-ortak-dili/blog/26211" target="_blank" rel="noopener">Medicana: Psikosomatik hastalık</a></li>
+    <li><a href="https://www.yesilay.org.tr/tr/makaleler/cocuklarda-ekran-bagimliligi" target="_blank" rel="noopener">Yeşilay: Çocuklarda ekran bağımlılığı</a></li>
+  </ol>
+</section>
+
+<section>
+  <div class="transp">OKUNAN DOSYALAR
+Reklam hesabı: yok, hiçbir reklam hesabına bakılmadı veya işlem yapılmadı
+Skill'ler:    media-buyer (§3 kreatif: açı, hook, brief), viral-edit (yalnızca açıklaması)
+Müşteri:      henüz client.md yok; müşteri klasörü açılmadı
+Veri kaynağı: web araması (açık kaynak). Bazı siteler doğrudan açılamadı,
+              bilgiler arama sonucu özetlerinden alındı.
+Değerlendirilmeyen alanlar: toplantı notları, hesap istatistikleri,
+              Bursa anahtar kelime hacmi, rakip hesap analizi</div>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.filters button');
+  var rows=document.querySelectorAll('#ideas tbody tr');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var f=b.getAttribute('data-f');
+      btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      rows.forEach(function(r){r.hidden=!(f==='all'||r.getAttribute('data-p')===f)});
+    });
+  });
+})();
+</script>

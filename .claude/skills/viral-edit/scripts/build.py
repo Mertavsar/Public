@@ -132,7 +132,14 @@ def source_audio(src, edl, dur, work, fps=30):
             out = f"{work}/sa/a{i:03d}.wav"
             af = ["aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo"]
             if abs(r["slow"] - 1.0) > 1e-3:
-                af.append(f"atempo={1.0 / r['slow']:.6f}")
+                # atempo tek başına 0.5–2.0 dışını kabul etmiyor; 2.38x ağır
+                # çekimde ffmpeg hata verdi. Çarpanı aralık içine bölerek zincirle.
+                tempo = 1.0 / r["slow"]
+                while tempo < 0.5:
+                    af.append("atempo=0.5"); tempo /= 0.5
+                while tempo > 2.0:
+                    af.append("atempo=2.0"); tempo /= 2.0
+                af.append(f"atempo={tempo:.6f}")
             af.append(f"apad=whole_dur={d:.4f}")
             af.append(f"atrim=end={d:.4f}")
             run(["ffmpeg", "-nostdin", "-v", "error", "-y",
