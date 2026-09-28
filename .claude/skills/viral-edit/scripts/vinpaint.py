@@ -90,6 +90,11 @@ def main():
     ap.add_argument("--scale", type=float, default=0.5, help="modelin işleme ölçeği (1.0 = tam, 4x yavaş)")
     ap.add_argument("--neighbor", type=int, default=20)
     ap.add_argument("--raft-iter", type=int, default=12)
+    # Siyaha karartma (fade-through-black) parçanın içinde kalırsa model siyah
+    # kareleri komşulara taşıyıp yazının yerine siyah leke basıyor (ördek
+    # videosu, ölçüldü). O aralık modelden çıkarılıp Telea ile dolduruluyor.
+    ap.add_argument("--plain", action="append", default=[],
+                    help="t0,t1: bu aralık modele girmez, Telea ile dolar (karartma geçişleri)")
     ap.add_argument("--only", help="t0,t1: sadece bu aralığı işle (deneme)")
     ap.add_argument("--work", help="kalıcı çalışma klasörü (kesilirse aynı komutla devam)")
     ap.add_argument("--keep", action="store_true")
@@ -237,16 +242,22 @@ def main():
         rows = np.nonzero(m.max(axis=(0, 2)))[0]
         y0 = max(0, rows.min() - a.margin)
         y1 = min(H, rows.max() + a.margin)
-        h = -(-(y1 - y0) // 8) * 8
-        y0 = max(0, min(y0, H - h))
-        return y0, min(H, y0 + h)
+        # ölçeklenmiş bölge ~130 pikselden alçaksa RAFT segfault veriyor
+        # (200 satır × 0.5 çöktü, 336 × 0.4 çalıştı) — en az 136 px kalsın
+        h = max(-(-(y1 - y0) // 8) * 8, -(-int(136 / a.scale) // 8) * 8)
+        h = min(h, H // 8 * 8)
+        cy = (y0 + y1) // 2
+        y0 = max(0, min(cy - h // 2, H - h))
+        return y0, y0 + h
 
     if not masks[:n].any():
         sys.exit("maske boş — silinecek bir şey bulunamadı")
     print(f"{n} kare")
 
     # ---- sahnelere böl ----
+    plain = [tuple(int(round(float(v) * fps)) for v in p.split(",")) for p in a.plain]
     cuts = [0] + [int(round(c * fps)) for c in scene_cuts(a.src, a.scene_thr, t_end)] + [n]
+    cuts += [v for p in plain for v in p]           # karartma aralığı kendi parçası olsun
     cuts = sorted(set(c for c in cuts if 0 <= c <= n))
     chunks = []
     for s, e in zip(cuts[:-1], cuts[1:]):
@@ -260,7 +271,17 @@ def main():
     out = fr  # yerinde güncelle
     t_all = time.time()
     for ci, (s, e) in enumerate(chunks):
-        if e - s < 2 or not masks[s:e].any() or (s, e) in done:
+        if not masks[s:e].any() or (s, e) in done:
+            continue
+        if e - s < 2 or any(p0 <= s and e <= p1 for p0, p1 in plain):
+            # karartma geçişi / tek kare: model yerine Telea
+            for j in range(s, e):
+                if masks[j].any():
+                    out[j] = cv2.inpaint(np.ascontiguousarray(fr[j]), masks[j], 5, cv2.INPAINT_TELEA)
+            fr.flush()
+            with open(donep, "a") as fh:
+                fh.write(f"{s} {e}\n")
+            print(f"sahne {s / fps:6.2f}-{e / fps:6.2f} s ({e - s} kare) Telea", flush=True)
             continue
         ry0, ry1 = roi_of(masks[s:e])  # sahne başına: ok/logo yalnız kendi sahnesinde büyütsün
         d = os.path.join(work, f"c{ci:03d}"); fd = os.path.join(d, "frames"); md = os.path.join(d, "masks")
