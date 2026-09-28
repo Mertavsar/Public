@@ -21,10 +21,15 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/analyze.py` | Referans videoyu ölç (ritim, ses, kadraj) — tahminle taklit etme |
 | `scripts/track.py` | Özneyi renkten takip eder, plan başına `cropx` önerir |
 | `scripts/align.py` | Metni sese kelime kelime hizalar (ASR yok), renk vurgusu |
+| `scripts/sentalign.py` | Cümle sonlarını duraklamalara oturtup kelimeleri cümle cümle hizalar — align.py kayarsa bunu kullan |
 | `scripts/overlay.py` | Altyazı, banner, ok — saydam katman |
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
 | `scripts/cover.py` | Dikey kapak görseli |
+| `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
+| `scripts/detext.py` | Kaynağa gömülü, SÜREKLİ DEĞİŞEN altyazıyı (kelime kelime İngilizce yazı + vurgu kutusu) her karede tespit edip siler |
+| `scripts/vinpaint.py` | Logo + değişen altyazı + çizimi ProPainter video onarımıyla siler (yazı hayvanın üstünden geçiyorsa bunu kullan; kurulum `setup_propainter.sh`) |
+| `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
@@ -32,8 +37,30 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `reference/voice-settings.md` | Ses seçimi ve ElevenLabs ayar standardı |
 | `reference/style-profile.md` | Referans videodan ölçülen sayılar |
 | `reference/performance-log.md` | **Yayınlanan videoların gerçek verisi** — her videodan sonra doldur |
+| `explainer/README.md` | **Klip yoksa**: seslendirme + metinden yatay (16:9) animasyonlu uzun video |
 
 ---
+
+## 0. ⛔ EFEKT SESİ EKLEME — kullanıcı kendisi ekliyor
+
+> **Kullanıcının kuralı:** *"efekt seslerini sen ekleme ben hallederim, sen
+> sadece ses ile videonun ve altyazının senkron olmasına önem ver."*
+>
+> - EDL'de her planın `beat` sütunu `-` olur. Böylece `audiobed` darbe,
+>   pop veya riser koymaz ve `fx_expr` ışık parlaması ya da sarsıntı eklemez.
+> - Ses: seslendirme + kaynağın kendi sesi. Kaynak sesi, seslendirmenin
+>   15 LU altında (§6'daki formül). Sentetik müzik yatağı da yok (`--no-music`).
+> - Bu belgede efekt sesinden bahseden her yer (§0b, §6) bu kuralla geçersiz.
+> - **İşin ağırlığı senkron:** `sentalign.py` cümle zamanları, plan kesimleri
+>   cümle aralarında, PLAN ↔ SÖZ tablosu ve kontrol sayfası.
+>
+> **İstisna:** kullanıcı bir videoda açıkça müzik/efekt isterse o video için
+> eklenir. Altın videosunda (explainer/) istedi: *"arka plan müziği çok önde
+> olmasın, arkadan tatlı tatlı gelsin, geçiş efektleri tam uyumlu olsun."*
+> Ölçülen karşılığı: müzik (duck sonrası) seslendirmenin ~18 LU altında
+> (22 LU'da duyulmuyordu), whoosh tepesi görsel geçişin tam kapandığı kareye
+> oturur (ölçüldü: −25 ms), pop tıkı öğenin belirdiği an +30 ms.
+> Tarif: `explainer/altin-neden-dusuyor/audio.py` + `mix.sh`.
 
 ## 0. ⛔ SESLENDİRME METNİNİ SEN YAZMA
 
@@ -71,6 +98,23 @@ Kullanıcı ham klip atarsa:
 
 `reference/script-writing.md` bu iş için duruyor — kullanıcının metnini
 değerlendirmek ve biçimlendirmek için, sıfırdan yazmak için değil.
+
+### Kullanıcı AÇIKÇA metin isterse
+
+Kendiliğinden önerme kuralı geçerli. Ama kullanıcı doğrudan "senaryo /
+metin öner" derse yaz — şu şartla:
+
+1. **Her cümle bir kanıt karesine bağlanır.** Metinle birlikte bir tablo
+   ver: cümle → kaynak saniyesi → karede görünen. Kareyi `kanit.png`
+   olarak çıkarıp gönder; kullanıcı her satırı kendisi doğrulayabilsin.
+2. **Niyet ve hikâye yok, ölçülebilir olay var.** "Kaplumbağa ekmeği çalmak
+   istedi" uydurmadır; "kaplumbağa kuşun dibine kadar sokuldu" ölçümdür.
+3. **Bilgi cümleleri kaynaklı.** Tür, davranış, sayı — `WebSearch` ile
+   doğrula ve kaynağı cevapta ver.
+4. **Doğrulayamadığını söyle.** Klibin çekildiği yer, olayın öncesi, kaynak
+   hesabın kim olduğu bilinmiyorsa metne girmez.
+
+Balıkçıl videosunda böyle yapıldı: 6 kare, 3 kaynak, her cümle eşlendi.
 
 ---
 
@@ -272,6 +316,32 @@ Bedava ve temiz alternatifler (klipler 10–60 sn ve 4K — plan süresi 1.5 sn'
 - [Pexels vahşi yaşam](https://www.pexels.com/search/videos/wildlife/) · [hayvanlar](https://www.pexels.com/search/videos/animals/)
 - [Pixabay vahşi yaşam](https://pixabay.com/videos/search/wildlife%20animal/) · [derin deniz](https://pixabay.com/videos/search/deep%20sea/)
 - [NOAA Okyanus Keşfi video portalı](https://oceanexplorer.noaa.gov/data/access/) — **tamamı kamu malı**, ROV dalışları, ProRes'e kadar. "NOAA Ocean Exploration" kredisi yeterli. Başka kanalda olmayan görüntü.
+- [Vecteezy hayvan kurtarma](https://www.vecteezy.com/free-videos/animal-rescue) · [Videezy hayvanlar](https://www.videezy.com/free-video/animals) — ücretsiz, atıf koşullu
+
+**Bu ortamdan video indirilemez — ölçüldü.** YouTube, Pexels, Pixabay,
+archive.org hepsi `000` dönüyor (ağ politikası). Çalışan tek şey `WebSearch`:
+arama sonucu başlık + URL geliyor, sayfa açılmıyor. Yani klibi **kullanıcı
+indirir ve atar**; buradan yapılabilecek şey arama, ölçüm ve kurgudur.
+
+### ⚠ Sahte kurtarma videosu — bu kategoride para kazanan bir dolandırıcılık var
+
+Hayvan kurtarma içeriği izlenme getirdiği için **sahnelenmiş** klipler
+üretiliyor: hayvan bilerek tehlikeye atılıp "kurtarılıyor". Kampanyacılar
+bunu para amaçlı bir istismar düzeni olarak belgeliyor. Böyle bir klibi
+yayınlamak kanalın güvenilirliğini bitirir.
+
+Kurguya başlamadan ara:
+
+```
+<konu> staged fake rescue
+<konu> animal rescue scam debunked
+<konu> original source
+```
+
+Şüphe işaretleri: hayvanın tehlikeye nasıl girdiği hiç gösterilmiyor ·
+kamera olay başlamadan önce kurulu ve doğru açıda · aynı "kurtarıcı" farklı
+videolarda tekrar ediyor · yılan/timsah gibi yırtıcı ile yavru hayvan aynı
+karede.
 
 ### Sonsuz döngü kurgusu
 
@@ -464,6 +534,28 @@ c = json.load(open("_build/captions.json"))
 # her paragrafın ilk kelimesinin "s" değeri = o bölümün anlatım başlangıcı
 ```
 
+### Seslendirme kaynaktan uzunsa: cümle → sahne eşlemesi
+
+Steiner klibi 28.5 s, seslendirme 67.6 s çıktı (2.4 kat). Kullanıcıya üç
+yol soruldu (cümle–sahne eşleme · metni kısaltıp sesi yeniden üretme ·
+eşit ağır çekim) ve eşlemeyi seçti. Nasıl yapıldı:
+
+- Kaynağı 0.5 s aralıkla sahnelere ayır ve adlandır (A fotoğraf, B yüz, …).
+  `sentalign.py` ile cümle başlarını al. Her cümleye onu gösteren sahneyi
+  koy; kesimler cümle aralarına düşer.
+- Tekrar kaçınılmaz (26 s malzeme, 67 s ses). Aynı sahneyi farklı
+  cümlelerde kullan, anlamca geri çağırma olsun: eşinin fotoğrafı hem
+  kancada hem "söz vermişti"de hem de "eşinin fotoğrafı"nda.
+- Farkı sahne başına ağır çekimle kapat. Steiner'de çarpan 1.0–1.97 arası,
+  minterpolate çizgi filmde temiz çıktı. Planı `src0,src1` ile yaz,
+  `slow = süre / (src1 − src0)` hesapla, 1'in altına düşmesin.
+- Notları `~` ile başlat. Plan ortasından alınan sahneler bölüm başı
+  sayılmaz; yoksa `check_src_on_scene_cuts` her planı yanlış bölüm diye durdurur.
+- **Kaynağın müziğini plan plan kesme.** Sahneler yeniden sıralanınca müzik
+  her kesimde atlıyor. `acrossfade` ile döngüye alıp sesin süresine uzat,
+  `audio(..., no_music=True, src_audio=döngü, src_gain=0.30)` ile konuşmanın
+  altına duck et. Kullanıcının "orijinal sesi kıs" isteği buydu.
+
 ### ⛔ Seslendirmeyi KESME
 
 ElevenLabs çıktılarında %30'a varan sessizlik olabilir. Bunu kısaltmak için bir
@@ -483,6 +575,12 @@ sesi kesmekle değil, altına kesintisiz müzik sermekle sağlanmış.
 
 Boşluklar gerçekten kabul edilemez uzunluktaysa (>1.5s), çözüm metni kısaltıp
 seslendirmeyi **yeniden ürettirmek**; kesmek değil.
+
+**İstisna — kullanıcı açıkça "duraksamaları kes / tek nefes" derse:** enerji
+bloğuna göre değil, yalnızca −35 dB altında ≥0.25 s süren gerçek sessizlikleri
+0.13 s'ye indir, 12 ms crossfade ile birleştir (`explainer/altin-neden-dusuyor/tighten.py`).
+Ünsüz kapanışları bu eşiğin çok altında kaldığı için kelimeler bölünmez.
+Hizalamayı kısaltılmış ses üzerinde yap.
 
 ---
 
@@ -520,11 +618,144 @@ kullanılmıyor — kullanıcı bunu açıkça reddetti.
 Kırpma yasak olduğu için (yukarıdaki kural) filigran ve gömülü yazı kendi
 başına çözülemez. Kaynakta bunlardan biri varsa:
 
+**Önce `scripts/dewatermark.py` dene — kırpmadan, bulanıklaştırmadan siler.**
+Kutu değil harf şekli maskeleniyor ("karelerin %80'inde aynı yerde beyaz"),
+her karede çevresinden dolduruluyor. Balıkçıl videosunda TikTok logosu +
+"@natgeography.com" telefon boyutunda iz bırakmadan gitti. Kutuları ve
+köşe değiştirme anını ölç, sonra 3x büyütülmüş önce/sonra karşılaştırmasına
+bak. Kullanıcı "blur görünmesin" dedi — `delogo` ve blur kutusu bu yüzden
+kullanılmıyor. Temiz kaynağı `build.py --src ham_clean.mp4` ile ver.
+
+**Kaynağın kendi gömülü başlığı** (videonun tamamında duran yazı bloğu,
+genelde alttaki sis/gradyan bandında): `--static-box y0,y1,x0,x1`. Maske
+zaman medyanından çıkar (harf + renkli vurgu kutuları), dolgu satır/sütun
+geçişiyle yapılır, kenarı orijinale yumuşak karışır. Telea büyük alanda
+renk sürüklüyor (pembe/turkuaz leke), dikey geçiş dokuyu çizgi çizgi
+akıtıyor — ikisi de fil klibinde görüldü, düzeltildi. Kendi altyazını o
+bandın üstüne koy (`caption_y` ≈ 0.72); kalan hafif ton farkı kapanır.
+
+**Sürekli değişen gömülü altyazı** (her saniye yeni kelime, mor/renkli vurgu
+kutusu): `detext.py --band y0,y1`. Sabit filigran yöntemi burada çalışmaz;
+maske her karede renkten çıkar (beyaz dolgu + vurgu tonu, yatay yoğunluk
+filtresi), harf gölgesi için 15 px genişletilir. Harf ve kutu TEK maske
+olarak Telea ile doldurulur — ayrı doldurunca kutu dolgusu yanındaki beyaz
+harfleri kaynak alıp beyaz şerit bıraktı; 9 px genişletme gölgeyi kaçırıp
+noktalı hayalet bıraktı (ay balığı klibi). Bantta hafif yumuşama kalır;
+kendi altyazını tam o banda koy (`caption_y` = bandın ortası).
+Gömülü kırmızı ok vb. için `--extra t0,t1,y0,y1,x0,x1`.
+
+Sıra: `dewatermark.py` (logo) → `detext.py` (altyazı) → `build.py`.
+`dewatermark.py` maskeyi saniyede 10 kareden çıkarır; hepsini okumak 36
+saniyelik klipte ~2 GB tutup süreci öldürdü.
+
+**⛔ Yazı hayvanın / nesnenin ÜSTÜNDEN geçiyorsa Telea'yı teslim etme —
+`vinpaint.py` kullan.** Ay balığı klibinde detext+dewatermark çıktısı
+küçük karelerde "temiz" görünüyordu; bandı büyütüp bakınca balığın, orkanın,
+insanın üstünde köşeli, bulanık yamalar vardı. Kullanıcı: "blurlar berbat
+olmuş". `vinpaint.py` aynı maskeleri (detext + dewatermark + `--extra`)
+ProPainter video onarım modeline veriyor: yazının arkası komşu karelerde
+görünüyorsa oradan optik akışla taşınıyor, balığın gövdesi kesintisiz
+dolduruldu. Tek komutta logo + altyazı + ok:
+
+    bash scripts/setup_propainter.sh        # bir kez (torch + ağırlıklar, github'dan)
+    python3 scripts/vinpaint.py ham.mp4 ham_clean.mp4 --until 36 --band 610,790 \
+        --switch 5.0 --box-a 420,570,0,170 --box-b 770,905,430,576 --extra 14.9,16.6,300,615,0,265
+
+CPU'da ~1.7 sn/kare (0.5 ölçek; tam ölçek 4x yavaş, gözle aynı) → arka
+planda çalıştır, önce `--only t0,t1` ile yazının hayvanı kestiği sahnede dene.
+KALİTE KONTROLÜ: yazı bandını (y0-50…y1+50) tam çözünürlükte, 6+ farklı
+sahneden kırpıp orijinalle yan yana BAK — küçük kontakt sayfası bu hatayı
+göstermez. `detext.py` artık yalnız düz su/gökyüzü üstündeki yazı için.
+
+**ProPainter tuzakları (ördek videosu, hepsi ölçüldü):**
+- **Hız:** ölçek 0.4 / `--raft_iter 6` / `--neighbor_length 10` sonuç
+  verdi. 0.5/12/20 ile gözle aynı çıktı ve 2.4 kat hızlı. Süre bölgenin
+  yüksekliğiyle orantılı: 470 satırda kare başına ~4.8 s.
+- **Bölge ölçeklenince ~130 pikselden alçak kalırsa segfault** (torchvision
+  `_C_stable`, RAFT piramidi). 200 satır × 0.5 ve 264 × 0.4 çöktü;
+  336 × 0.4 çalıştı. Bölgeyi en az 336 satıra genişlet.
+- **Maskeler dikeyde uzaksa ayrı işle.** Üstte kutu, altta yazı olunca tek
+  bölge 1520 satır oldu ve bellek taştı (OOM, kod −9). 200 satırdan büyük
+  boşlukta grupları ayır.
+- **Siyaha karartma zehirliyor.** Parçanın içinde fade-through-black
+  varsa, model siyah kareleri komşu karelere taşıyıp yazının yerine siyah
+  leke basıyor (dolgu 21, çevre 130). Parçayı karartmanın iki yanında böl,
+  karanlık karelere Telea yeter.
+- **Tek karelik parça** (sahne kesimi + kutu konum değişimi aynı karede)
+  modele verilemiyor. O kareyi aynı sahnenin sonraki temiz karesinden kopyala.
+- **Teslimden önce otomatik tara:** kutu şablon skoru, yazı rengi oranı ve
+  maske içi/çevre parlaklık oranı. Oran < 0.7 ise siyah dolgu var demektir.
+
+**Ekran kaydı artığı: SUBSCRIBE butonu + fare imleci** (Steiner). Buton
+kendi bandında duruyordu (y 0–155). Bant, çizgi filmin üst kısmından
+güçlü Gauss bulanıklığıyla yeniden üretildi; orijinal bant da böyle bir
+uzantıydı. İmleç ise butonun etrafında dolaşıp görüntünün içine iniyordu:
+- Top-hat haritasında (ince parlak çerçeve) şablonla aranır, Telea ile
+  doldurulur.
+- **İmleç sabit bir döngüde:** 270 kare, i ile i+270 arasında ortalama
+  0.7 px fark. Zayıf eşleşen karede döngünün aynı fazındaki en iyi eşleşme
+  kullanılır.
+- **Maskeyi bandın içinde de uygula**, bandı sonra değiştir. Yoksa Telea
+  bandın içindeki beyaz imleci dolguya taşıyor ve bant sınırında iz kalıyor.
+
+Gömülü küçük yazı şeridi düz zemin üzerindeyse (Steiner'de alt kutuda ayna
+yazılı "STEINER WAS SITTING…") sütun sütun üst ve alt satır arasında dikey
+geçişle doldur. Önce üst ve alt satırdaki zemin olmayan pikselleri (tabela,
+saç) o satırın zemin medyanıyla değiştir, yoksa renk şeride sızıyor. Kenarı
+28 px'lik bir geçişle orijinale karıştır.
+
+**Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
+başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
+0.64 altı %1–7 çıktı: orada görüntü YOK, geri getirilemez. `unfog.py`
+yarı saydam kısmı (içerik ≥ %35) matematiksel olarak geri kazanıyor,
+aşağısını görüntünün alt kenar renginden koyuya inen gradyana çeviriyor.
+Kullanıcı "alt taraf niye beyaz" dedi; beyaz gitti, altyazı koyu zeminde.
+Sırası: `dewatermark.py` → `unfog.py` → `build.py`, `caption_y` ≈ 0.78.
+
+Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
+
 1. **Ölç ve RAPORLA** — nerede, hangi saniyelerde, ne kadar yer kaplıyor.
 2. **KULLANICIYA SOR**: filigran/yazı ekranda kalsın mı, yoksa bu videoda
    kırpmaya izin veriyor mu? Kendi başına kırpma kararı verme.
 3. Kullanıcı "kalsın" derse olduğu gibi bırak — TikTok'tan gelen klipte
    filigran olması izleyici için sıra dışı değil.
+
+### Yabancı altyazı kutusu — kırpma, delogo değil: ÜSTÜNE KENDİ KUTUMUZ
+
+> **⛔ Kullanıcının kuralı (ördek videosundan sonra):** düz zeminli yazı
+> kutusu **silinmez, üstü Türkçe kutuyla örtülür.** Ördek videosunda beyaz
+> kutu (1020×126 px, her karede) ProPainter ile silindi. Sonuç temizdi ama
+> CPU'da 1788 kare yaklaşık 3 saat sürdü, üstüne üç çökme geldi. Kullanıcı
+> "6 saattir bununla uğraşıyorsun" dedi ve örtmeyi seçti. ProPainter yalnız
+> kutusuz, küçük yazılar için (sarı başlık, logo) ve kısa aralıklarda.
+
+Kaynakta düz zeminli bir yazı kutusu varsa (beyaz kutu + siyah yazı, CapCut /
+TikTok "classic"), en temiz çözüm **aynı stilde Türkçe kutuyu tam üstüne
+koymak**. Kırpma yok, delogo lekesi yok, İngilizce hiç görünmüyor. Ayı
+videosunda kullanıcı bunu istedi: *"yabancı olanı sil, bizim altyazıyı o
+fontta ekle"*.
+
+1. **Kutunun konumunu kare kare ölç.** Tek kareye bakma, kutu dönem dönem yer
+   değiştiriyor (ayıda 0–5.9s altta, 5.9–34.3s üstte, 34.3s–son altta).
+   Yöntem: bir kareden kutuyu şablon olarak al, metin maskesini çıkar
+   (`<100`), her karede `mean(zemin) − mean(metin)` skorunu hesapla. Kutu
+   varken ~210, yokken ~0; eşik 40.
+2. **Kutu genişliğini sabit tut, orijinali her zaman örtsün.** Yükseklik
+   metne göre büyüyebilir ama merkez aynı kalır. Font: Liberation Sans Bold
+   (Arial Bold ile aynı metrikler) + 1 px aynı renkte kontur.
+3. **Konum değiştirdiği karede İKİ kutuyu birden çiz (±1.5 kare).** İlk
+   render'da 5.87s'de üstteki İngilizce kutu sızdı: katman ile video arasında
+   kare sınırında 1 karelik yuvarlama kayması oluyor. İki kutunun birlikte
+   durduğu 0.1–0.17s gözle fark edilmiyor.
+4. **Teslimden önce çıktıyı aynı şablonla tara.** Hiçbir karede skor
+   kaynaktaki seviyeye (~210) yaklaşmamalı. Ayıda en yüksek 47.7 çıktı ve o
+   da bizim yazımızdı.
+
+Altyazı burada tek kelime değil, **cümle parçası** (2 satır, ≤ ~26 karakter).
+Zamanlama kelime hizalamasından değil, **cümle sonu = duraklama** eşlemesinden
+geldi. `align.py` 35 bloğun bazılarında cümle sınırını bir kelime kaydırdı.
+`silencedetect` ise 21 cümle arasındaki 20 sınırın hepsini verdi; her cümle 5.3–7.8 hece/sn
+aralığına oturdu. Parçalar cümle içinde hece oranıyla bölündü.
 
 Aşağıdaki kırpma teknikleri **sadece kullanıcı o video için açıkça izin
 verirse** geçerlidir.
@@ -643,11 +874,34 @@ ateşledi. Ama tablo baştan sona tutarlıydı ("Anahtarını kirli suya mı" /
 heceler birbirine geçiyor ve tepe sayısı düşüyor. `--peak-thr` düşürmek
 çözmedi (en iyi %9.7'de tıkandı).
 
+**Yanlış metin de "makul" görünebilir.** Balıkçıl videosunda ses kaydı
+kullanıcının kendi metniyle okunmuştu, hizalama ise benim önerdiğim metinle
+yapıldı — tablo yine de cümle cümle akla yatkın göründü (maliyet 24.6).
+Doğru metinle maliyet 18.1'e düştü ve cümle sonları blok sonlarına tam
+oturdu. **Ses gelince metni kullanıcıdan teyit et**, tahminle hizalama.
+
 Uzun ve hızlı seslendirmede yüzde yükselir; karar tabloyla verilir. Tablo
 bozuksa dur, tutarlıysa devam et — kelime hatası zaten her blok sınırında
 sıfırlanıyor.
 
 Regresyon testi: `python3 scripts/test_align.py` (sentetik seste örtüşme %99.9).
+
+### align.py kayarsa: `sentalign.py`
+
+`--check` tablosunda cümle sonu blok ortasına düşüyorsa ya da bir blokta
+imkânsız hız varsa ("Sözünü tutmuştu… Keşke" 0.9 saniyede = 8.9 hece/sn)
+align.py bir cümle kaymıştır. Kayma sonraki bloklara taşınır.
+
+```bash
+python3 scripts/sentalign.py --audio vo.mp3 --text metin.txt --out captions.json --emphasis ...
+```
+
+Önce cümle sonlarını duraklamalara oturtur (DP, maliyet = hece hızının
+log-sapması), sonra her cümleyi kendi ses parçasında hizalar. Ölçüldü:
+Steiner'de 27 cümlenin hepsi 4.4–8.2, ayıda 21 cümlenin hepsi 5.3–7.8
+hece/sn'ye oturdu. `<out>.sentences.json` cümle başlarını verir, plan
+kesimlerini oradan al. Bu yöntemle Steiner'de kesimlerin %82'si duraklamaya
+denk geldi.
 
 ### İlk cümle banner'da ise altyazıdan çıkar
 
@@ -780,7 +1034,14 @@ kesimler çıplak kalır, video "berbat" hissi verir.
 - **Müziği konuşmanın altına duck et:**
   `sidechaincompress=threshold=0.05:ratio=7:attack=8:release=280`
   Konuşma anında ~9 dB aşağı inmeli. Ölçerek doğrula.
-- **Kaynağın kendi sesi** `--src-audio GAIN` ile geri gelir (0.3–0.6 tipik).
+- **⛔ Kaynak sesinin kazancını sabit verme, seslendirmeye göre hesapla.**
+  ElevenLabs çıktısı çok kısık geliyor (ördekte −25.4 LUFS), kaynak müzik ise
+  −14 LUFS civarında. Sabit 0.30 kazanç müziği −24.8 LUFS'a indirdi, yani
+  seslendirmeyle aynı seviyede kaldı. Kullanıcı "videonun kendi sesi çok ön
+  planda" dedi. Kural: iki sesin integrated LUFS değerini ölç,
+  `kazanç = 10^(((VO − 15) − kaynak) / 20)`. Böylece kaynak, seslendirmenin
+  15 LU altında kalır (ördekte 0.05).
+- **Kaynağın kendi sesi** `--src-audio GAIN` ile geri gelir (yukarıdaki formülle hesapla).
   Planlar kaynaktan farklı sıra ve hızda alındığı için kaynak sesi olduğu gibi
   altına sermek olmuyor: `source_audio()` her planın ses parçasını ayrı kesip
   `atempo` ile ağır çekim çarpanını uyguluyor (perde korunur — `asetrate`
@@ -796,6 +1057,12 @@ kesimler çıplak kalır, video "berbat" hissi verir.
   sessizlik sıfır olduğu için önerilmez — ama kullanıcı isteyebilir, bir
   köpek videosunda istedi. Kapattıktan sonra sessizlik oranını ölç:
   %10'u aşıyorsa kesimler çıplak kalmış demektir.
+- **Efekt seti** `--sfx-style` (audiobed): **`cinematic` varsayılan** — açılışta
+  darbe + parlak "ding" çanı, bölüm geçişlerinde 0.35s swoosh + katmanlı darbe
+  (2–6 kHz tık, 1200→250 Hz yumruk, metalik parıltı kuyruğu), ara kesimlerde
+  "pop". Kullanıcı eski seti (boom + whoosh + tık) "dikkat çekici değil"
+  diye reddetti. Ölçüldü: darbeler konuşmanın +3…+5 dB üstünde, enerjinin
+  %0.2'si 120 Hz altında. `classic` eski seti verir.
 - **Efekt sesleri** `scripts/audiobed.py` ile: büyük kesimlerde boom + whoosh, ara
   kesimlerde tik, ödül anından önce riser + sub-drop.
 - Her darbeye görsel karşılık ver: flash (0.13s) ve kamera sarsıntısı (6–10px,
