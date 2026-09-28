@@ -156,7 +156,7 @@ def source_audio(src, edl, dur, work, fps=30):
 
 
 def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False,
-          src_audio=None, src_gain=0.42, no_sfx=False):
+          src_audio=None, src_gain=0.42, no_sfx=False, music_gain=0.78):
     major = [f"{r['o0']:.2f}:{BOOM_AMP[r['beat']]}" for r in edl if r["beat"] in BOOM_AMP]
     minor = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "m"]
     risers = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "R"]
@@ -200,7 +200,7 @@ def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False,
           f"[1:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
           f"highpass=f=80,volume=0.95[sfx];"
           f"[2:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
-          f"highpass=f=125,volume=0.78[mus];"
+          f"highpass=f=125,volume={music_gain:.2f}[mus];"
           # Efekt DUCK EDİLMİYOR: vuruş kısa bir geçici, konuşmayı maskelemiyor;
           # ducking onu amacından ediyordu. Müzikte oran 8 -> 2.5, bırakma
           # 300 -> 160 ms: ölçümde müzik konuşma aralarında geri gelmiyordu
@@ -228,7 +228,9 @@ def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False,
 
 def fx_expr(edl):
     """Ana vuruşlarda ışık parlaması + hafif sarsıntı. Zamanlar sesle aynı."""
-    beats = [(r["o0"], FLASH_AMP[r["beat"]]) for r in edl if r["beat"] in FLASH_AMP]
+    # İlk kareye flaş konmaz (SKILL.md §2: görüntüyü yakar) — açılış vuruşu sadece ses
+    beats = [(r["o0"], FLASH_AMP[r["beat"]]) for r in edl
+             if r["beat"] in FLASH_AMP and r["o0"] > 0.05]
     if not beats:
         return "0", "14", "24"
     FL, SH = 0.13, 0.28
@@ -490,6 +492,9 @@ def main():
                     help="müzik yatağının rengi: drive (tempolu) · sad (acıklı)")
     ap.add_argument("--no-music", action="store_true",
                     help="müzik yatağını tamamen sustur (efektler kalır)")
+    ap.add_argument("--music-gain", type=float, default=0.78,
+                    help="müzik yatağı seviyesi (0.78 varsayılan). Kullanıcı 'arkada ufak "
+                         "ufak çalsın, biraz duyulsun' dedi → 0.45")
     ap.add_argument("--no-sfx", action="store_true",
                     help="efekt seslerini sustur; beat sütunu yine ışık parlaması/sarsıntı verir")
     ap.add_argument("--warm-at", type=float, default=None,
@@ -579,7 +584,7 @@ def main():
     print("\n3/5 ses")
     sa = source_audio(a.src, edl, dur, work) if a.src_audio is not None else None
     mix = audio(edl, dur, a.vo, work, a.warm_at, a.music_mood, a.no_music,
-                sa, a.src_audio if a.src_audio is not None else 0.42, a.no_sfx)
+                sa, a.src_audio if a.src_audio is not None else 0.42, a.no_sfx, a.music_gain)
 
     print("\n4/5 grafik")
     spec = json.load(open(a.spec, encoding="utf-8"))
