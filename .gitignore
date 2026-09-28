@@ -4,3 +4,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Tıkla Bakalım render çıktıları (video, kare) — büyük, her seferinde yeniden üretilir
+tikla-bakalim/bolumler/*/cikti/

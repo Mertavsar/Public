@@ -8,3 +8,8 @@ sınırları ve kanıt disiplini oradadır. Uzmanlık modülleri `.claude/skills
 
 Video kurgusu ajans akışının dışındadır: kullanıcı klip veya seslendirme attığında
 `.claude/skills/viral-edit/` kullanılır.
+
+**Tıkla Bakalım** kanalı (gündem, ekonomi, teknoloji konularını animasyonla
+anlatan videolar; "ne oldu, neden oldu, bizi nasıl etkiliyor") için
+`.claude/skills/tikla-bakalim/` kullanılır. Ham klip yoktur, her şey sıfırdan
+çizilir. Bölümler `tikla-bakalim/bolumler/` altında durur.

@@ -1,0 +1,300 @@
+{
+  "baslik": "Benzine 12 lira zam: Eşel mobil nedir, neden bitiyor?",
+  "tarih": "2026-09-28",
+  "durum": "TASLAK — metin kullanıcı onayı bekliyor",
+  "vurgu": [
+    "zam",
+    "fırladı",
+    "pahalıya",
+    "biniyor",
+    "bitiyor"
+  ],
+  "kapak": {
+    "ikon": "⛽",
+    "ust": "BENZİNE",
+    "buyuk": "+12,48 ₺",
+    "alt": "NEDEN?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Benzine on iki buçuk liraya yakın zam gelebilir.",
+      "p": {
+        "ikon": "⛽",
+        "etiket": "Benzine beklenen zam (litre)",
+        "deger": 12.48,
+        "onek": "+",
+        "sonek": " ₺",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": false
+      },
+      "kaynak": "basın, ÖTV hesabı (K2)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki neden? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN?\n*3 SORUDA*"
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Otuz Eylül gecesi eşel mobil sistemi bitiyor.",
+      "p": {
+        "gun": "30",
+        "ay": "EYLÜL",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "GECE",
+        "not": "*Eşel mobil* sistemi bitiyor"
+      },
+      "kaynak": "Resmi Gazete kararı (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Bugün seksen lira olan benzin, perşembe doksan iki lirayı geçebilir.",
+      "p": {
+        "baslik": "⛽ Benzin · İstanbul · 1 litre",
+        "sol": {
+          "etiket": "BUGÜN",
+          "deger": 80.4,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "PERŞEMBE\n(tahmini)",
+          "deger": 92.88,
+          "renk": "kirmizi"
+        },
+        "sonek": " ₺",
+        "ondalik": 2,
+        "fark": "+12,48 ₺"
+      },
+      "kaynak": "28 Eylül pompa fiyatı (K3), zam tahmini (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Motorin ve LPG'ye de zam bekleniyor.",
+      "p": {
+        "baslik": "Beklenen zamlar · litre",
+        "satirlar": [
+          {
+            "ikon": "⛽",
+            "metin": "Benzin",
+            "deger": "+12,48 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🚚",
+            "metin": "Motorin",
+            "deger": "+3,60 ₺",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🔵",
+            "metin": "LPG",
+            "deger": "+1,48 ₺",
+            "renk": "sari"
+          }
+        ],
+        "not": "ÖTV + KDV dahil"
+      },
+      "kaynak": "basın, ÖTV hesabı (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Sebep eşel mobil. Adı karışık, mantığı basit.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "EŞEL MOBİL",
+          "= *KAYAN VERGİ*"
+        ],
+        "boy": 104,
+        "not": "Fransızca: échelle mobile"
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Mart'ta Orta Doğu'daki savaş yüzünden petrol fırladı.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💥",
+            "metin": "Mart: Orta Doğu'da savaş"
+          },
+          {
+            "ikon": "🛢️",
+            "metin": "Petrol fiyatı *fırladı*"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Pompaya ~zam~ gelmesi lazım"
+          }
+        ]
+      },
+      "kaynak": "basın (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "yigin",
+      "say": "Devlet, zam pompaya yansımasın diye vergiyi düşürdü. Petrol pahalandı, vergi küçüldü, fiyat aynı kaldı.",
+      "p": {
+        "baslik": "Benzin fiyatının içi",
+        "toplam_etiket": "Pompa fiyatı:",
+        "durumlar": [
+          {
+            "etiket": "Savaştan önce",
+            "toplam_metin": "SABİT",
+            "renk": "beyaz",
+            "parcalar": [
+              {
+                "ad": "Petrol",
+                "deger": 50,
+                "renk": "mavi"
+              },
+              {
+                "ad": "Vergi",
+                "deger": 50,
+                "renk": "sari"
+              }
+            ]
+          },
+          {
+            "etiket": "Petrol ~↑~  vergi +↓+",
+            "toplam_metin": "SABİT",
+            "renk": "yesil",
+            "parcalar": [
+              {
+                "ad": "Petrol",
+                "deger": 68
+              },
+              {
+                "ad": "Vergi",
+                "deger": 32
+              }
+            ]
+          }
+        ]
+      },
+      "kaynak": "sistemin işleyişi (K4) · oranlar temsilidir"
+    },
+    {
+      "bolum": "neden",
+      "tip": "yigin",
+      "say": "Şimdi sistem bitiyor. Vergi geri geliyor, fark da pompaya biniyor.",
+      "p": {
+        "baslik": "1 Ekim'den itibaren",
+        "toplam_etiket": "Pompa fiyatı:",
+        "durumlar": [
+          {
+            "etiket": "Eşel mobil",
+            "toplam_metin": "SABİT",
+            "renk": "yesil",
+            "parcalar": [
+              {
+                "ad": "Petrol",
+                "deger": 68,
+                "renk": "mavi"
+              },
+              {
+                "ad": "Vergi",
+                "deger": 32,
+                "renk": "sari"
+              }
+            ]
+          },
+          {
+            "etiket": "Vergi eski yerine döndü",
+            "toplam_metin": "↑ ZAM",
+            "renk": "kirmizi",
+            "parcalar": [
+              {
+                "ad": "Petrol",
+                "deger": 68
+              },
+              {
+                "ad": "Vergi",
+                "deger": 50
+              }
+            ]
+          }
+        ]
+      },
+      "kaynak": "sistemin işleyişi (K4) · oranlar temsilidir"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Elli litrelik bir depo, altı yüz yirmi dört lira daha pahalıya dolacak.",
+      "p": {
+        "baslik": "Bir depo benzin",
+        "ikon": "🚗",
+        "ogeler": [
+          "50 litre",
+          "×",
+          "12,48 ₺",
+          "=",
+          "+624 ₺"
+        ]
+      },
+      "kaynak": "hesap: 50 × 12,48"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Motorin zammı nakliyeyi pahalandırır, bu da zamanla market fiyatlarına yansıyabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🚚",
+            "metin": "Motorin ~zam~ → nakliye pahalanır"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Zamanla market fiyatlarına *yansıyabilir*"
+          }
+        ]
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Son anda yeni bir karar çıkmazsa, zam perşembe pompada.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "Yeni karar",
+          "çıkmazsa:",
+          "*PERŞEMBE*",
+          "*POMPADA*"
+        ],
+        "boy": 100
+      },
+      "kaynak": "basın (K2)"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Merak ettiysen, tıkla bakalım. Takip et.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Eşel mobil 30 Eylül gecesi sona eriyor — https://www.cumhuriyet.com.tr/ekonomi/akaryakit-fiyatlarina-yapilacak-tarihi-zam-belli-oldu-esel-mobil-sistemi-sona-eriyor-2541733",
+    "K2": "Benzin +12,48 / motorin +3,60 / LPG +1,48 TL (ÖTV 10,40 ve 3 TL + %20 KDV) — https://www.yatirimx.com.tr/gundem/akaryakitta-esel-mobil-alarmi-benzine-1248-tl-zam-gelebilir/25568 ; https://t24.com.tr/ekonomi/akaryakita-otv-zammi-benzin-ve-motorinin-litre-fiyatinda-buyuk-artis-olacak,1350352",
+    "K3": "28 Eylül 2026 İstanbul Avrupa benzin 80,40 TL, motorin 93,50 TL, LPG 34,99 TL — https://www.birgun.net/haber/28-eylul-2026-benzin-ve-motorin-fiyatlarinda-indirim-zam-var-mi-motorin-benzin-ve-lpg-fiyatlari-737341",
+    "K4": "Eşel mobil Mart 2026'da petrol fiyatlarındaki sıçrama nedeniyle devreye alındı; fiyat artışı ÖTV'den karşılanıyor — https://sanayigazetesi.com.tr/akaryakitta-esel-mobil-sistemi/ ; https://www.gzt.com/ekonomi/esel-mobil-sistemi-resmi-gazetede-yayinlandi-akaryakit-fiyatlari-dusecek-mi-esel-sistemi-nedir-ne-ise-yarar-4021648"
+  }
+}

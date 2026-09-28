@@ -1,0 +1,75 @@
+/* Tıkla Bakalım — görsel kimlik. Renkler ve ölçüler reference/kimlik.md'de. */
+
+@font-face { font-family: M; font-weight: 600; src: url(fonts/montserrat-latin-600-normal.woff2);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: M; font-weight: 600; src: url(fonts/montserrat-latin-ext-600-normal.woff2);
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: M; font-weight: 800; src: url(fonts/montserrat-latin-800-normal.woff2);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: M; font-weight: 800; src: url(fonts/montserrat-latin-ext-800-normal.woff2);
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: M; font-weight: 900; src: url(fonts/montserrat-latin-900-normal.woff2);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: M; font-weight: 900; src: url(fonts/montserrat-latin-ext-900-normal.woff2);
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  --bg0: #0b1626;
+  --bg1: #13294a;
+  --ink: #ffffff;
+  --dim: rgba(255, 255, 255, .62);
+  --card: rgba(255, 255, 255, .07);
+  --line: rgba(255, 255, 255, .16);
+  --sari: #ffc83d;
+  --kirmizi: #ff4d5e;
+  --yesil: #2ee59d;
+  --mavi: #4db8ff;
+  --mor: #b58cff;
+  --turuncu: #ff9b3d;
+  --emoji: "Noto Color Emoji";
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg0); }
+body { font-family: M, "DejaVu Sans", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; inset: 0; overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 35%, var(--bg1) 0%, var(--bg0) 70%); }
+
+/* Arka plan: yavaş kayan ışık lekeleri + ızgara. Ekran hiçbir karede durağan kalmaz. */
+.blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .38; will-change: transform; }
+#grid { position: absolute; inset: -120px; opacity: .08;
+  background-image: linear-gradient(var(--ink) 2px, transparent 2px), linear-gradient(90deg, var(--ink) 2px, transparent 2px);
+  background-size: 120px 120px; }
+
+/* Üst şerit: bölüm etiketi + 3 parçalı ilerleme (açık döngü) */
+#top { position: absolute; top: 150px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+#chip { font-weight: 900; font-size: 46px; letter-spacing: 2px; padding: 16px 38px; border-radius: 60px;
+  background: var(--sari); color: #111; white-space: nowrap; }
+#prog { display: flex; gap: 14px; }
+#prog i { display: block; width: 120px; height: 12px; border-radius: 8px; background: var(--line); overflow: hidden; }
+#prog i b { display: block; height: 100%; width: 0; background: var(--sari); }
+
+/* Sahne alanı: 310–1240. 1480 altı Shorts/Reels arayüzünün altında kalır (başlık, açıklama). */
+.scene { position: absolute; left: 70px; right: 70px; top: 310px; height: 930px; display: none;
+  flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.scene.on { display: flex; }
+
+.emoji { font-family: var(--emoji); line-height: 1; }
+.h { font-weight: 900; line-height: 1.04; text-transform: none; }
+.lbl { font-weight: 800; font-size: 54px; color: var(--dim); letter-spacing: 1px; }
+.note { font-weight: 800; font-size: 48px; color: var(--dim); line-height: 1.2; max-width: 900px; }
+.card { background: var(--card); border: 3px solid var(--line); border-radius: 36px; }
+.sari { color: var(--sari); } .kirmizi { color: var(--kirmizi); } .yesil { color: var(--yesil); }
+.mavi { color: var(--mavi); } .beyaz { color: var(--ink); } .mor { color: var(--mor); } .turuncu { color: var(--turuncu); }
+.temsili { position: absolute; bottom: -10px; right: 0; font-weight: 600; font-size: 30px; color: var(--dim); }
+
+/* Altyazı: tek kelime, ağır kontur */
+#cap { position: absolute; left: 40px; right: 40px; top: 1270px; height: 160px; display: flex; align-items: center; justify-content: center; }
+#cap span { font-weight: 900; font-size: 96px; line-height: 1; white-space: nowrap;
+  -webkit-text-stroke: 14px #000; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(0,0,0,.55); }
+
+#src { position: absolute; top: 1440px; left: 0; right: 0; text-align: center; font-weight: 600; font-size: 28px; color: rgba(255,255,255,.45); }
+
+/* Kapak kipi */
+#stage.cover #top, #stage.cover #cap, #stage.cover #src { display: none; }
