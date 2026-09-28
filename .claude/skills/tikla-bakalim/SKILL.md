@@ -15,7 +15,8 @@ sebep–sonuç zincirleri. Kullanıcı sadece seslendirmeyi getirir.
 yatay). O video tek seferlik elle çizildi; bu skill aynı görünümü hazır sahne
 kalıplarıyla her konuya uygular: yatay 1920×1080, alt satırda karaoke altyazı
 (konuşulan kelime altın), sağ üstte sahne etiketi, altta ilerleme çubuğu,
-sahne geçişinde çapraz altın silme, her sahnede %3 yavaş yaklaşma.
+sahneler arası yumuşak çözülme (eski sahne bulanıklaşıp söner), bölüm başlarında
+temiz bölüm kartı ("2 · NEDEN OLDU?"), her sahnede %3 yavaş yaklaşma.
 
 | Format | Ne zaman | Düzen |
 |---|---|---|
@@ -31,15 +32,15 @@ açıkça isterse:
 
 | Bayrak | Ne |
 |---|---|
-| `--muzik` / `--muzik yumusak` | Altın videosu: 92 BPM sıcak yatak, seslendirmenin ~18 LU altı |
-| `--muzik etkili` | 104 BPM, gergin başlar, "bizi nasıl etkiler"de sıcağa döner, ~16 LU altı. Eşel mobil videosunda kullanıcı "farklı, etkili" istedi |
-| `--efekt` | Her geçişte whoosh (tepesi ekranın kapandığı kare) + yumuşak vuruş, bölüm geçişlerinde tırmanış, abone/beğen tıklamasında tık |
+| `--muzik` / `--muzik yumusak` | Altın videosu yatağı: 92 BPM, sıcak |
+| `--muzik etkili` | 104 BPM, gergin başlar, "bizi nasıl etkiler"de sıcağa döner |
+| `--muzik-seviye 21` | Müziğin seslendirmenin kaç LU altında duracağı — **ölçülerek** oturtulur (ducking sonrası). Varsayılan 21 |
+| `--efekt` | Sadece bölüm başlarında yumuşak whoosh (kartın ekranı kapattığı ana) + abone/beğen tıkında yumuşak arayüz tıkı |
 
-`viral-edit`'ten farkı: orada kullanıcının klibi kurgulanır ve metni kullanıcı yazar
-(kareden hikâye çıkarılamaz). Burada metin **kaynaklardan** çıkar. O yüzden taslağı
-sen yazarsın, ama kullanıcı onaylamadan ses ürettirilmez (§2).
-
----
+Seviye geçmişi (tekrar yaşanmasın): altın videosu 18 LU "arkadan tatlı",
+22 LU "duyulmuyor"; eşel mobil ilk sürüm **13 LU → "arka ses çok fazla"**,
+her sahnede whoosh + vuruş → "profesyonel değil". Şimdiki: 21 LU, sahne→sahne
+geçişte ses yok.
 
 ## Dosyalar
 
@@ -155,16 +156,17 @@ metinle ses ürettirme.
 | `vurgu` | Dikey altyazıda kırmızı kelimeler (3–5). Sayılar kendiliğinden sarı. |
 | `format` | `yatay` (varsayılan) / `dikey` |
 | `altyazi` | Konuşma → ekran eşlemesi: `{"seksen lira": "80 lira"}`. Seste yazıyla, altyazıda rakam |
-| `gecis` | `false` → sahne geçişinde altın silme yok |
+| `gecis` | `false` → bölüm kartı yok (sahne çözülmesi kalır) |
 | `cta` | Abone ol / beğen katmanı: `[{"sahne": 6, "gecikme": 0.3, "sure": 5.5}]` — o sahnenin başından `gecikme` sn sonra, `sure` sn boyunca |
 
-**Abone ol / beğen (`cta`)** — kullanıcı istedi: videonun ortasında "buradan abone
-ol, beğen" okları. Yatayda sahne kutusunun iki yanında (içeriği örtmez): solda
-kırmızı ABONE OL, sağda BEĞEN; el gelip tıklar (1.3 sn → ABONE OLUNDU ✓, 2.4 sn →
-BEĞENİLDİ +1), altın oklar aşağıyı (YouTube butonlarını) gösterir. Dikeyde ikisi
-altta. Yer: ilk "neden" sahnesi — izleyici hook'u geçmiş, en ilginç kısım başlıyor.
-Metinde de bir cümle olmalı ("Kaçırmamak için abone ol…") ve katman o cümleye
-denk gelmeli.
+**Abone ol / beğen (`cta`)** — kullanıcı istedi: videonun ortasında abone/beğen
+çağrısı. YouTube tarzı alt bant kartı (yatayda sol alt, dikeyde altta): kanal
+simgesi + "Tıkla Bakalım", beyaz "Abone ol" butonu, zil, beğen. Fare imleci gelir,
+butona tıklar (dalga) → "✓ Abone olundu", zil sallanır; sonra beğen maviye dolar,
+parçacıklar saçılır; ince bir ok kendini çizerek aşağıyı gösterir ("Butonlar
+videonun hemen altında"). İlk sürümdeki emoji el + kalın oklar "profesyonel
+değil" bulundu. Yer: ilk "neden" sahnesi. Metinde de bir cümle olmalı
+("Kaçırmamak için abone ol…") ve kart o cümleye denk gelmeli.
 
 Metin içi renk: `*sarı*` `~kırmızı~` `+yeşil+`, satır sonu `\n`.
 

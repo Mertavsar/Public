@@ -41,7 +41,7 @@ olur: "Peki neden? Üç soruda anlatayım."
 | Vurgu | sarı `#ffc83d` (ana), kırmızı `#ff4d5e` (artış/zarar), yeşil `#2ee59d` (düşüş/iyi) |
 | İkinci renkler | mavi `#4db8ff`, turuncu `#ff9b3d`, mor `#b58cff` |
 | Altyazı | yatay: alt satır, 42 px, koyu hap zemin, konuşulan kelime altın · dikey: tek kelime 96 px, kontur |
-| Geçiş | çapraz altın silme (0.4 sn), ekran tam sahne başında kapanır |
+| Geçiş | sahne→sahne: 0.35 sn çözülme (eski bulanıklaşıp yukarı söner, yeni 0.08 sn sonra gelir) · bölüm başı: koyu panel + "2 · NEDEN OLDU?" kartı, ~1 sn |
 | Güvenli alan | dikey: bilgi 150–1450 arası; 1480 altı platform arayüzü |
 | İkon | Noto Color Emoji |
 
@@ -51,6 +51,6 @@ Bir videoda anlamı değiştirme.
 ## Ses
 
 Varsayılan **sadece seslendirme** — kullanıcının kuralı: efekt ve müziği o ekler.
-İsterse `--muzik` / `--efekt` (altın videosu tarifi: müzik ~18 LU altta, whoosh
-geçişe kilitli). Seslendirme ayarları: `viral-edit/reference/voice-settings.md`
+İsterse `--muzik` / `--efekt`: müzik ölçülerek seslendirmenin 21 LU altında,
+efekt yalnız bölüm geçişi + abone/beğen tıkı. Seslendirme ayarları: `viral-edit/reference/voice-settings.md`
 (Türkçe ana dilli ses, speed 1.0, stability 65–70).

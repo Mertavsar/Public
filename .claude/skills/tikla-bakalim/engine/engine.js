@@ -504,28 +504,50 @@ function background(stage) {
   };
 }
 
-// Sahne geçişi: çapraz altın silme (altın videosundan). Ekran tam t0 anında kapanır.
-function wiper(stage) {
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.setAttribute("width", W); svg.setAttribute("height", H);
-  Object.assign(svg.style, { position: "absolute", inset: "0", zIndex: 50, pointerEvents: "none" });
-  const mk = fill => { const p = document.createElementNS(ns, "polygon"); p.setAttribute("fill", fill); svg.appendChild(p); return p; };
-  const body = mk("#0a1330"), e1 = mk("var(--sari)"), e2 = mk("var(--sari)");
-  e1.style.filter = e2.style.filter = "drop-shadow(0 0 18px rgba(255,200,61,.8))";
-  stage.appendChild(svg);
-  const sk = H * .24, span = W + 2 * sk + 200;
+// Geçişler — iki tür:
+//  * sahne → sahne (aynı bölüm): çapraz çözülme. Eski sahne 0.35 sn boyunca hafif
+//    bulanıklaşıp yukarı kayarak söner, yenisi aşağıdan belirir. Ses yok.
+//  * bölüm → bölüm (ne / neden / etki): temiz bir bölüm kartı. Koyu panel soldan
+//    kayar, ortada "2 · NEDEN OLDU?", ince altın çizgi; sonra sağa açılır.
+//    Kullanıcı altın videosundaki kalın çapraz silmeyi "profesyonel değil" buldu.
+const XF = .35;                       // çözülme süresi
+const CARD = { in: .32, hold: .38, out: .32 };   // bölüm kartı: kapan / bekle / açıl
+function sectionStarts() {
+  const out = [];
+  TL.scenes.forEach((s, i) => {
+    if (SECTIONS[s.bolum] && (i === 0 || TL.scenes[i - 1].bolum !== s.bolum)) out.push({ t: s.t0, sec: SECTIONS[s.bolum] });
+  });
+  return out;
+}
+// Bölüm kartı ekranı tam t0 anında kaplar; sahne animasyonları kart açılınca başlar
+const cardReveal = t0 => t0 + CARD.hold / 2 + CARD.out * .6;
+function sectionCard(stage) {
+  const box = el("div", null, null, stage); box.id = "seccard";
+  const panel = el("div", "scpanel", null, box);
+  const edge = el("div", "scedge", null, panel);
+  const inner = el("div", "scinner", null, panel);
+  const num = el("div", "scnum", "", inner);
+  const ttl = el("div", "scttl", "", inner);
+  const line = el("div", "scline", null, inner);
+  const starts = () => (TL._ss ||= sectionStarts());
   return t => {
-    svg.style.display = "none";
+    box.style.display = "none";
     if (TL.gecis === false) return;
-    for (let j = 1; j < TL.scenes.length; j++) {
-      const sw = TL.scenes[j].t0, u = (t - (sw - .2)) / .4;
-      if (u < 0 || u > 1) continue;
-      const lead = -sk - 100 + span * eInOut(clamp(u * 2)), trail = -sk - 100 + span * eInOut(clamp(u * 2 - 1));
-      body.setAttribute("points", `${trail},0 ${lead + sk},0 ${lead - sk},${H} ${trail - 2 * sk},${H}`);
-      e1.setAttribute("points", `${lead + sk - 40},0 ${lead + sk},0 ${lead - sk},${H} ${lead - sk - 40},${H}`);
-      e2.setAttribute("points", `${trail + sk - 40},0 ${trail + sk},0 ${trail - sk},${H} ${trail - sk - 40},${H}`);
-      svg.style.display = "block";
+    for (const c of starts()) {
+      const a = c.t - CARD.in - CARD.hold / 2, z = c.t + CARD.hold / 2 + CARD.out;
+      if (t < a || t > z) continue;
+      box.style.display = "block";
+      const [n, ...rest] = c.sec.t.split(" · ");
+      num.textContent = n; ttl.textContent = rest.join(" · ");
+      const pin = eInOut(prog(t, a, CARD.in)), pout = eInOut(prog(t, c.t + CARD.hold / 2, CARD.out));
+      // giriş: -100% → 0 ; çıkış: 0 → +100%
+      const x = pout > 0 ? pout * 100 : (pin - 1) * 100;
+      panel.style.transform = `translateX(${x}%)`;
+      edge.style.left = pout > 0 ? "0" : "auto"; edge.style.right = pout > 0 ? "auto" : "0";
+      const ti = prog(t, a + CARD.in * .6, .35);
+      inner.style.opacity = clamp(ti * 1.6) * (1 - clamp(pout * 2.2));
+      inner.style.transform = `translateX(${(1 - eOut(ti)) * -60 + pout * 60}px)`;
+      line.style.transform = `scaleX(${eOut(prog(t, a + CARD.in, .45))})`;
     }
   };
 }
@@ -575,58 +597,87 @@ function wordCaption(t) {
   if (cap.scrollWidth > 1000) cap.style.fontSize = (96 * 1000 / cap.scrollWidth) + "px";
 }
 
-// Abone ol / beğen çağrısı: ekranın yanlarında (sahne içeriğinin dışında) iki buton,
-// tıklayan el, platform butonlarını gösteren oklar. Tıklama anları render.py'den
-// (tl.cta[].abone / .begen) gelir — efekt sesi aynı anlara oturur.
+// Abone ol / beğen çağrısı — YouTube tarzı alt bant kartı. Kanal simgesi + adı,
+// "Abone ol" butonu, zil, beğen. Gerçek fare imleci butona gider ve tıklar
+// (dalga), buton "Abone olundu"ya döner, zil sallanır; sonra beğen maviye
+// dolar, küçük parçacıklar saçılır. İnce bir ok kendini çizerek aşağıyı —
+// oynatıcının altındaki gerçek butonları — gösterir.
+// Tıklama anları render.py'den (tl.cta[].abone / .begen); tık sesi aynı ana oturur.
+const ICON = {
+  bell: "M12 22a2.4 2.4 0 0 0 2.4-2.2H9.6A2.4 2.4 0 0 0 12 22zm6.5-6.2V11a6.5 6.5 0 0 0-4.9-6.3V4a1.6 1.6 0 0 0-3.2 0v.7A6.5 6.5 0 0 0 5.5 11v4.8L3.8 17.5v.9h16.4v-.9z",
+  like: "M2 20.5h3.6V9.3H2zM21.6 11a2 2 0 0 0-2-2h-6.2l.9-4.4v-.3a1.5 1.5 0 0 0-.4-1L13 2.5 7 8.5a1.9 1.9 0 0 0-.6 1.4v9a2 2 0 0 0 2 2h8.5a2 2 0 0 0 1.8-1.2l2.8-6.6a2 2 0 0 0 .1-.7z",
+  check: "M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z",
+  cursor: "M3 2 3 25 9.2 19.3 13.2 28.4 17.3 26.6 13.3 17.7 21.6 17.7z",
+};
+const svgIcon = (d, cls, vb = "0 0 24 24") =>
+  `<svg class="${cls}" viewBox="${vb}"><path d="${d}"/></svg>`;
 function ctaLayer(stage) {
   const box = el("div", null, null, stage); box.id = "cta";
+  const card = el("div", "ctacard", null, box);
+  el("div", "ctaava", "<span class='emoji'>👆</span>", card);
+  el("div", "ctameta", "<b>Tıkla Bakalım</b><span>Gündemi basitçe öğren</span>", card);
+  const sub = el("div", "ctasub", "<span class='t1'>Abone ol</span><span class='t2'>" + svgIcon(ICON.check, "ic") + "Abone olundu</span>", card);
+  const ripple = el("div", "ctaripple", null, sub);
+  const bell = el("div", "ctaicon bell", svgIcon(ICON.bell, "ic"), card);
+  const like = el("div", "ctaicon like", svgIcon(ICON.like, "ic"), card);
+  const parts = [...Array(8)].map(() => el("i", "ctapart", null, like));
   const ns = "http://www.w3.org/2000/svg";
-  const arrow = () => {
-    const svg = document.createElementNS(ns, "svg");
-    svg.setAttribute("viewBox", "0 0 100 160"); svg.setAttribute("class", "ctaarr");
-    const pth = document.createElementNS(ns, "path");
-    pth.setAttribute("d", "M32 0 H68 V96 H96 L50 158 L4 96 H32 Z");
-    svg.appendChild(pth); return svg;
-  };
-  const col = (cls, lbl, txt, done) => {
-    const c = el("div", "ctacol " + cls, null, box);
-    const l = el("div", "ctalbl", lbl, c);
-    const wrap = el("div", "ctawrap", null, c);
-    const pill = el("div", "ctapill " + cls, txt, wrap);
-    const hand = el("div", "emoji ctahand", "👆", wrap);
-    const plus = el("div", "ctaplus", cls === "begen" ? "+1" : "", wrap);
-    const a = arrow(); c.appendChild(a);
-    return { c, l, pill, hand, plus, a, txt, done };
-  };
-  const L = col("abone", "Yeni gündemleri kaçırma", "<span class='emoji'>🔔</span> ABONE OL", "ABONE OLUNDU ✓");
-  const R = col("begen", "İşine yaradıysa", "<span class='emoji'>👍</span> BEĞEN", "<span class='emoji'>👍</span> BEĞENİLDİ");
+  const arr = document.createElementNS(ns, "svg"); arr.setAttribute("class", "ctaarrow"); arr.setAttribute("viewBox", "0 0 60 170");
+  const ap = document.createElementNS(ns, "path"); ap.setAttribute("d", "M30 4 C 30 60, 30 110, 30 150 M 14 134 L 30 152 L 46 134");
+  arr.appendChild(ap); box.appendChild(arr);
+  const hint = el("div", "ctahint", "Butonlar videonun hemen altında", box);
+  const cur = el("div", "ctacursor", svgIcon(ICON.cursor, "ic", "0 0 24 30"), box);
+  let AL = 0;
+  const center = e => { const r = e.getBoundingClientRect(), b = box.getBoundingClientRect();
+    return [r.left - b.left + r.width * .5, r.top - b.top + r.height * .55]; };
   return t => {
     const c = (TL.cta || []).find(c => t >= c.t0 && t < c.t1);
     box.style.display = c ? "block" : "none";
     if (!c) return;
-    const lt = t - c.t0, D = c.t1 - c.t0;
-    [[L, c.abone - c.t0, 1], [R, c.begen - c.t0, -1]].forEach(([o, click, side], i) => {
-      const inn = eOut(prog(lt, i * .15, .45)), out = eInOut(prog(lt, D - .45, .4));
-      const yatay = FORMAT === "yatay";
-      o.c.style.opacity = clamp(inn * 2) * (1 - out);
-      o.c.style.transform = yatay ? `translateX(${-side * 420 * (1 - inn + out)}px)` : `translateY(${500 * (1 - inn + out)}px)`;
-      // el: tıklamadan .35 sn önce gelir, bastırır, çekilir
-      const h = prog(lt, click - .35, .3), press = lt >= click && lt < click + .15;
-      o.hand.style.opacity = lt < click - .35 ? 0 : clamp(1 - prog(lt, click + .5, .3));
-      o.hand.style.transform = `translate(${(1 - eOut(h)) * 60}px, ${(1 - eOut(h)) * 90 + (press ? 10 : 0)}px)`;
-      const done = lt >= click;
-      o.pill.innerHTML = done ? o.done : o.txt;
-      o.pill.classList.toggle("done", done);
-      const pp = prog(lt, click, .35);
-      o.pill.style.transform = `scale(${press ? .9 : done && pp < 1 ? lerp(1.18, 1, eOut(pp)) : 1})`;
-      o.plus.style.opacity = done ? clamp(1 - pp * .9) : 0;
-      o.plus.style.transform = `translateY(${-70 * eOut(pp)}px) scale(${lerp(.6, 1.2, eOut(pp))})`;
-      o.a.style.transform = `translateY(${Math.abs(Math.sin(lt * 4.2)) * 22}px)`;
+    const lt = t - c.t0, D = c.t1 - c.t0, A = c.abone - c.t0, B = c.begen - c.t0;
+    const inn = eOut(prog(lt, 0, .5)), out = eInOut(prog(lt, D - .5, .45));
+    card.style.opacity = clamp(inn * 1.5) * (1 - out);
+    card.style.transform = `translateY(${(1 - inn) * 40 + out * 40}px) scale(${lerp(.96, 1, inn)})`;
+    // abone
+    const subDone = lt >= A;
+    sub.classList.toggle("done", subDone);
+    const pa = prog(lt, A, .5);
+    ripple.style.opacity = subDone ? (1 - pa) * .6 : 0;
+    ripple.style.transform = `translate(-50%,-50%) scale(${eOut(pa) * 3})`;
+    sub.style.transform = `scale(${lt >= A && lt < A + .12 ? .94 : 1})`;
+    // zil: tıklamadan sonra sönümlenen sallanma
+    const rb = lt - A - .15;
+    bell.classList.toggle("on", lt >= A + .15);
+    bell.firstChild.style.transform = rb > 0 ? `rotate(${Math.sin(rb * 22) * 18 * Math.exp(-rb * 3.2)}deg)` : "none";
+    // beğen
+    const likeDone = lt >= B, pb = prog(lt, B, .45);
+    like.classList.toggle("on", likeDone);
+    like.firstChild.style.transform = `scale(${likeDone ? lerp(1.35, 1, eOut(pb)) : (lt >= B - .1 && lt < B ? .9 : 1)})`;
+    parts.forEach((p, i) => {
+      const a = i / parts.length * Math.PI * 2, r = 12 + 34 * eOut(pb);
+      p.style.opacity = likeDone ? (1 - pb) : 0;
+      p.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r}px)`;
     });
+    // imleç: karta girer → abone → beğen → çıkar
+    const pS = center(sub), pL = center(like), pOut = [pL[0] + 160, pL[1] + 140], pIn = [pS[0] + 220, pS[1] + 170];
+    let pos;
+    if (lt < A) pos = [lerp(pIn[0], pS[0], eInOut(prog(lt, A - .75, .6))), lerp(pIn[1], pS[1], eInOut(prog(lt, A - .75, .6)))];
+    else if (lt < B) { const m = eInOut(prog(lt, A + .25, B - A - .4)); pos = [lerp(pS[0], pL[0], m), lerp(pS[1], pL[1], m)]; }
+    else { const m = eInOut(prog(lt, B + .35, .5)); pos = [lerp(pL[0], pOut[0], m), lerp(pL[1], pOut[1], m)]; }
+    const press = (lt >= A && lt < A + .12) || (lt >= B && lt < B + .12);
+    cur.style.opacity = clamp(prog(lt, A - .8, .25)) * (1 - clamp(prog(lt, B + .45, .35)));
+    cur.style.transform = `translate(${pos[0]}px, ${pos[1]}px) scale(${press ? .85 : 1})`;
+    // ok + ipucu: beğenden sonra kendini çizer
+    if (!AL) AL = ap.getTotalLength();
+    const pd = eOut(prog(lt, B + .3, .6));
+    ap.style.strokeDasharray = AL; ap.style.strokeDashoffset = AL * (1 - pd);
+    arr.style.opacity = (pd > 0 ? 1 : 0) * (1 - out);
+    arr.style.transform = `translateY(${Math.sin(lt * 3.5) * 6}px)`;
+    hint.style.opacity = clamp(prog(lt, B + .6, .35)) * (1 - out);
   };
 }
 
-let BG = null, WIPE = null, CTA = null;
+let BG = null, CARDFX = null, CTA = null;
 window.load = async function (tl, opts = {}) {
   // Fontlar yüklenmeden ölçüm yapılırsa sığdırma yedek fonta göre hesaplanır
   await Promise.all([600, 800, 900].map(w => document.fonts.load(`${w} 60px M`, "AaŞşĞğİıÇçÖöÜü₺0123")));
@@ -648,7 +699,7 @@ window.load = async function (tl, opts = {}) {
   });
   for (const id of ["cap", "capline", "tag", "src", "bar"]) stage.appendChild(document.getElementById(id));
   CTA = ctaLayer(stage);
-  WIPE = wiper(stage);
+  CARDFX = sectionCard(stage);
   WORDS = tl.words || [];
   if (FORMAT === "yatay") buildLines();
   if (opts.cover) stage.classList.add("cover");
@@ -658,19 +709,32 @@ window.load = async function (tl, opts = {}) {
 window.seek = function (t) {
   BG(t);
   let cur = null;
-  BUILT.forEach(b => {
-    const on = t >= b.s.t0 && (t < b.s.t1 || b.s === TL.scenes[TL.scenes.length - 1]);
+  const last = TL.scenes[TL.scenes.length - 1];
+  const starts = (TL._ss ||= sectionStarts()).map(c => c.t);
+  BUILT.forEach((b, i) => {
+    const { t0, t1 } = b.s;
+    const secStart = starts.includes(t0) && i > 0;
+    // sahne biraz uzar: çıkarken XF sn boyunca söner (bölüm kartında gerek yok)
+    const nextSec = i + 1 < BUILT.length && starts.includes(BUILT[i + 1].s.t0);
+    const tail = b.s === last || nextSec ? 0 : XF;
+    const on = t >= t0 && (t < t1 + tail || b.s === last);
     b.r.classList.toggle("on", on);
-    if (on) {
-      cur = b;
-      if (!b.fitted) { b.r.querySelectorAll("[data-fit]").forEach(e => fitNow(e, +e.dataset.fit, +e.dataset.fitw)); b.fitted = true; }
-      // İlk sahne boş ekranla açılmasın: akıştaki ilk kare zaten dolu olmalı
-      const lead = b === BUILT[0] ? .3 : 0;
-      const d = b.s.t1 - b.s.t0;
-      b.up(t - b.s.t0 + lead, d + lead);
-      // sahne boyunca %3 yavaş yaklaşma — ekran hiç donmasın
-      if (b.s.tip !== "kapak") b.r.style.transform = `scale(${SCALE * (1 + .03 * eInOut(clamp((t - b.s.t0) / Math.max(1, d))))})`;
-    }
+    if (!on) return;
+    if (t < t1 || b.s === last) cur = b;
+    if (!b.fitted) { b.r.querySelectorAll("[data-fit]").forEach(e => fitNow(e, +e.dataset.fit, +e.dataset.fitw)); b.fitted = true; }
+    // İlk sahne boş ekranla açılmasın; bölüm başı sahnesi kart açılınca başlasın
+    const start = i === 0 ? t0 - .3 : secStart ? cardReveal(t0) : t0;
+    const d = t1 - start;
+    b.up(Math.max(0, t - start), d);
+    const z = 1 + .03 * eInOut(clamp((t - t0) / Math.max(1, t1 - t0)));
+    if (b.s.tip === "kapak") return;
+    // eski sahne önce söner (0.22 sn), yenisi 0.08 sn sonra gelir — iki sahne üst üste okunmasın
+    const fin = secStart || i === 0 ? 1 : eOut(prog(t, t0 + .08, XF - .03));   // giriş
+    const fo = t >= t1 && tail ? eInOut(prog(t, t1, .22)) : 0;           // çıkış
+    b.r.style.zIndex = fo > 0 ? 1 : 2;
+    b.r.style.opacity = fin * (1 - fo);
+    b.r.style.filter = fo > 0 ? `blur(${fo * 10}px)` : fin < 1 ? `blur(${(1 - fin) * 6}px)` : "none";
+    b.r.style.transform = `translateY(${(1 - fin) * 26 - fo * 30}px) scale(${SCALE * z * (1 - .03 * fo)})`;
   });
   // Bölüm şeridi
   const sec = cur && SECTIONS[cur.s.bolum];
@@ -696,5 +760,5 @@ window.seek = function (t) {
   if (FORMAT === "yatay") lineCaption(t); else wordCaption(t);
   document.getElementById("src").textContent = cur && cur.s.kaynak ? "Kaynak: " + cur.s.kaynak : "";
   CTA(t);
-  WIPE(t);
+  CARDFX(t);
 };

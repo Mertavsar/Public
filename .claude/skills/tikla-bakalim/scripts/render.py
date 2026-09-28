@@ -23,9 +23,9 @@ Ses yoksa: hece sayısından tahmin. Tahmini sürüm TASLAKTIR.
 Ses — KULLANICI KURALI (viral-edit SKILL.md §0)
 ------------------------------------------------
 Varsayılan: sadece seslendirme. Müzik ve efekt sesi EKLENMEZ.
-Kullanıcı o video için açıkça isterse --muzik / --efekt. Seviyeler altın
-videosundan ölçülmüş: müzik (duck sonrası) seslendirmenin ~18 LU altında,
-whoosh tepesi geçişin ekranı kapattığı ana oturur.
+Kullanıcı o video için açıkça isterse --muzik / --efekt. Müzik (duck sonrası)
+ölçülerek seslendirmenin 21 LU altına oturtulur (--muzik-seviye); efekt sadece
+bölüm geçişinde yumuşak whoosh + abone/beğen tıkı.
 """
 import argparse, json, os, re, shutil, subprocess, sys, tempfile, wave
 from concurrent.futures import ThreadPoolExecutor
@@ -283,8 +283,35 @@ def silence(path, dur):
     return path
 
 
-def audio(tl, vo, work, muzik=False, efekt=False):
-    """Varsayılan: sadece seslendirme (kullanıcı kuralı). --muzik / --efekt isteğe bağlı."""
+DUCK = "sidechaincompress=threshold=0.05:ratio=2.2:attack=30:release=350"
+# Bölüm kartının ekranı tam kapattığı an = bölüm başı − 0.19 sn (engine.js CARD.hold / 2)
+CARD_CLOSED = 0.19
+
+
+def section_starts(tl):
+    sc = tl["scenes"]
+    return [s["t0"] for i, s in enumerate(sc)
+            if s["bolum"] in ("ne", "neden", "etki") and (i == 0 or sc[i - 1]["bolum"] != s["bolum"])]
+
+
+def ui_click(rng, amp=0.14):
+    """Yumuşak arayüz tıkı — metalik 'klink' değil. 2 ms gürültü + kısa, boğuk ton."""
+    from scipy.signal import butter, sosfilt
+    SR = 44100
+    n = int(SR * 0.06); t = np.arange(n) / SR
+    noise = sosfilt(butter(2, [800, 5000], btype="band", fs=SR, output="sos"),
+                    rng.standard_normal(n) * np.exp(-t / 0.002))
+    tone = np.sin(2 * np.pi * 820 * t) * np.exp(-t / 0.012) * 0.5
+    x = noise + tone
+    return x / np.max(np.abs(x)) * amp
+
+
+def audio(tl, vo, work, muzik=False, efekt=False, seviye=21.0):
+    """Varsayılan: sadece seslendirme (kullanıcı kuralı). --muzik / --efekt isteğe bağlı.
+
+    Müzik seviyesi ÖLÇÜLEREK ayarlanır: ducking sonrası müzik, seslendirmenin
+    `seviye` LU altına oturur. Geçmiş: altın videosunda 18 LU "arkadan tatlı",
+    22 LU'da duyulmuyordu; eşel mobilde ~16 LU "arka ses çok fazla" dendi → 21."""
     dur = tl["dur"]
     draft = vo is None
     vo = vo or silence(f"{work}/sessiz.wav", dur)
@@ -295,51 +322,52 @@ def audio(tl, vo, work, muzik=False, efekt=False):
         import audiobed as ab
     if muzik:
         if muzik == "etkili":
-            # gergin başlar (minör, hi-hat), 'bizi nasıl etkiler' bölümünde sıcağa döner;
-            # yumuşaktan ~2 dB önde (duck sonrası seslendirmenin ~16 LU altı)
+            # gergin başlar (minör), 'bizi nasıl etkiler' bölümünde sıcağa döner
             etki = next((s["t0"] for s in tl["scenes"] if s["bolum"] == "etki"), dur * .7)
             ab.build_music(dur, f"{work}/music_raw.wav", bpm=104.0, peak_at=dur * .86, warm_at=etki)
-            off = 10.5
         else:
-            # altın videosu tarifi: 'warm' yatak, 92 BPM, tizler yumuşak, seslendirmenin ~18 LU altı
+            # altın videosu tarifi: 'warm' yatak, 92 BPM
             ab.build_music(dur, f"{work}/music_raw.wav", bpm=92.0, peak_at=dur * .5, warm_at=3.0)
-            off = 12.5
+        mu = f"{work}/music.wav"
+        # tizleri yumuşat: konuşmanın netlik bandından (2–5 kHz) çekil
         run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-i", f"{work}/music_raw.wav",
-             "-af", "lowpass=f=6000,highpass=f=60", f"{work}/music.wav"])
-        vl = None if draft else lufs(vo)
-        ml = lufs(f"{work}/music.wav")
-        g = 10 ** (((vl if vl is not None else -16.0) - off - ml) / 20)
-        ins += ["-i", f"{work}/music.wav"]
+             "-af", "lowpass=f=4500,highpass=f=70,equalizer=f=3000:t=q:w=1.2:g=-4", mu])
+        vl = -16.0 if draft else lufs(vo)
+        g = 10 ** ((vl - seviye - lufs(mu)) / 20)
+        md = f"{work}/md.wav"
+        for _ in range(3):            # kompresör doğrusal değil — ölç, düzelt
+            run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-i", vo, "-i", mu, "-filter_complex",
+                 f"[0:a]aresample=48000,apad=whole_dur={dur:.3f}[sc];[1:a]aresample=48000,volume={g:.5f}[m];"
+                 f"[m][sc]{DUCK}[md]", "-map", "[md]", "-t", f"{dur:.3f}", md])
+            got = lufs(md)
+            g *= 10 ** (((vl - seviye) - got) / 20)
+        ins += ["-i", mu]
         k = len(ins) // 2 - 1
-        fc.append(f"[{k}:a]aresample=48000,volume={g:.4f}[m]")
-        fc.append("[m][sc]sidechaincompress=threshold=0.05:ratio=2.2:attack=30:release=350[md]")
+        fc.append(f"[{k}:a]aresample=48000,volume={g:.5f}[m]")
+        fc.append(f"[m][sc]{DUCK}[md]")
         mixin.append("[md]")
-        print(f"  müzik ({muzik}): seslendirme {vl} LUFS, müzik {ml:.1f} LUFS -> kazanç {g:.3f}")
+        print(f"  müzik ({muzik}): seslendirme {vl:.1f} LUFS, müzik (duck sonrası) {got:.1f} LUFS "
+              f"-> {vl - got:.1f} LU altta (hedef {seviye:.0f})")
     else:
         fc.append("[sc]anullsink")
     if efekt:
         rng = np.random.default_rng(7)
         bus = ab.Bus(dur)
-        WD = 0.46
-        sw = [s["t0"] for s in tl["scenes"][1:]] if tl.get("gecis", True) else []
-        for t in sw:
-            bus.place(ab.whoosh(rng, dur=WD, amp=0.34), t - 0.88 * WD)       # tepe = ekran kapanışı
-            bus.place(ab.boom(rng, dur=0.55, f0=260, f1=120, amp=0.20), t + 0.02)
-        # bölüm geçişi (neden / etki): tırmanış, geçişin kapandığı ana biter
-        secs = [s["t0"] for i, s in enumerate(tl["scenes"]) if i and s["bolum"] in ("neden", "etki")
-                and tl["scenes"][i - 1]["bolum"] != s["bolum"]]
+        # Sadece bölüm başlarında, yumuşak whoosh — tepesi kartın ekranı kapattığı ana.
+        # Sahne→sahne çözülmelerinde ses yok (her kesimde whoosh+vuruş "fazla" bulundu).
+        secs = section_starts(tl) if tl.get("gecis", True) else []
+        WD = 0.55
         for t in secs:
-            bus.place(ab.riser(rng, dur=1.2, amp=0.20), t - 1.2)
-        # abone / beğen tıklamaları: tık, butonun değiştiği karede
+            bus.place(ab.whoosh(rng, dur=WD, amp=0.16), t - CARD_CLOSED - 0.88 * WD)
         clicks = [c[k] for c in tl.get("cta", []) for k in ("abone", "begen")]
         for t in clicks:
-            bus.place(ab.tick(rng, amp=0.30), t)
+            bus.place(ui_click(rng), t)
         bus.write(f"{work}/sfx.wav", 80, peak=0.8)
         ins += ["-i", f"{work}/sfx.wav"]
         k = len(ins) // 2 - 1
-        fc.append(f"[{k}:a]aresample=48000,highpass=f=60,volume=0.55[fx]")
+        fc.append(f"[{k}:a]aresample=48000,highpass=f=90,lowpass=f=9000,volume=0.40[fx]")
         mixin.append("[fx]")
-        print(f"  efekt: {len(sw)} geçiş · {len(secs)} bölüm tırmanışı · {len(clicks)} tık")
+        print(f"  efekt: {len(secs)} bölüm geçişi · {len(clicks)} tık")
     fc.append(f"{''.join(mixin)}amix=inputs={len(mixin)}:normalize=0:duration=first[a]")
     raw, mix = f"{work}/mix_raw.wav", f"{work}/mix.wav"
     run(["ffmpeg", "-nostdin", "-y", "-v", "error"] + ins + ["-filter_complex", ";".join(fc), "-map", "[a]",
@@ -414,7 +442,9 @@ def main():
     ap.add_argument("--sikistir", action="store_true", help="seslendirmedeki ≥0.25 s duraksamaları 0.13 s'ye indir")
     ap.add_argument("--muzik", nargs="?", const="yumusak", choices=["yumusak", "etkili"],
                     help="SADECE kullanıcı isterse. yumusak: altın videosu (92 BPM, ~18 LU altta) · "
-                         "etkili: 104 BPM, gergin→sıcak, ~16 LU altta")
+                         "etkili: 104 BPM, gergin→sıcak")
+    ap.add_argument("--muzik-seviye", type=float, default=21.0,
+                    help="müziğin seslendirmenin kaç LU altında duracağı (ölçülür). Büyük = daha kısık")
     ap.add_argument("--efekt", action="store_true", help="SADECE kullanıcı isterse: geçişlerde whoosh")
     ap.add_argument("--jobs", type=int, default=max(1, min(4, os.cpu_count() or 1)))
     ap.add_argument("--force", action="store_true")
@@ -465,7 +495,7 @@ def main():
 
     print("4/7 ses" + (" + müzik" if a.muzik else "") + (" + efekt" if a.efekt else "") +
           ("" if vo or a.muzik or a.efekt else " (yok — taslak sessiz)"))
-    mix = audio(tl, vo, work, a.muzik, a.efekt)
+    mix = audio(tl, vo, work, a.muzik, a.efekt, a.muzik_seviye)
 
     print("5/7 birleştirme")
     mux(silent, mix, out, tl["dur"], work)
