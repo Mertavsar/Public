@@ -156,7 +156,7 @@ def source_audio(src, edl, dur, work, fps=30):
 
 
 def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False,
-          src_audio=None, src_gain=0.42):
+          src_audio=None, src_gain=0.42, no_sfx=False):
     major = [f"{r['o0']:.2f}:{BOOM_AMP[r['beat']]}" for r in edl if r["beat"] in BOOM_AMP]
     minor = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "m"]
     risers = [f"{r['o0']:.2f}" for r in edl if r["beat"] == "R"]
@@ -173,6 +173,16 @@ def audio(edl, dur, vo, work, warm_at=None, mood="drive", no_music=False,
     if mood != "drive":
         cmd += ["--mood", mood]
     run(cmd)
+    if no_sfx:
+        # Kullanıcı kuralı: "efekt seslerini sen ekleme ben hallederim". Görsel
+        # geçiş (ışık parlaması + sarsıntı) beat sütunundan gelmeye devam eder.
+        import wave
+        with wave.open(sfx) as r:
+            p_ = r.getparams()
+        with wave.open(sfx, "w") as w_:
+            w_.setparams(p_)
+            w_.writeframes(b"\x00" * (p_.nframes * p_.nchannels * p_.sampwidth))
+        print("  efekt sesleri KAPALI (--no-sfx) — görsel geçişler duruyor")
     if no_music:
         # Müzik yatağı susturuluyor; efekt sesleri kalıyor. SKILL.md §6 bunu
         # önermiyor (referansta sessizlik sıfır) ama kullanıcı isteyebiliyor.
@@ -480,6 +490,8 @@ def main():
                     help="müzik yatağının rengi: drive (tempolu) · sad (acıklı)")
     ap.add_argument("--no-music", action="store_true",
                     help="müzik yatağını tamamen sustur (efektler kalır)")
+    ap.add_argument("--no-sfx", action="store_true",
+                    help="efekt seslerini sustur; beat sütunu yine ışık parlaması/sarsıntı verir")
     ap.add_argument("--warm-at", type=float, default=None,
                     help="bu andan sonra müzik gerginden sıcağa döner (s)")
     ap.add_argument("--usable-end", type=float, default=1e9,
@@ -567,7 +579,7 @@ def main():
     print("\n3/5 ses")
     sa = source_audio(a.src, edl, dur, work) if a.src_audio is not None else None
     mix = audio(edl, dur, a.vo, work, a.warm_at, a.music_mood, a.no_music,
-                sa, a.src_audio if a.src_audio is not None else 0.42)
+                sa, a.src_audio if a.src_audio is not None else 0.42, a.no_sfx)
 
     print("\n4/5 grafik")
     spec = json.load(open(a.spec, encoding="utf-8"))

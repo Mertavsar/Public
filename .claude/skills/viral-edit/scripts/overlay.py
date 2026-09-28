@@ -239,8 +239,9 @@ def build(spec, out):
             lh = int(bf.size * 1.18)
             y0 = by - (len(lines) - 1) * lh / 2
             for k, line in enumerate(lines):
-                stroked_text(d, (cx, y0 + k * lh), line, bf,
-                             b.get("color", WHITE), BLACK, max(6, bf.size // 8))
+                bc = b.get("color", WHITE)
+                bc = PALETTE.get(bc, WHITE) if isinstance(bc, str) else tuple(bc)
+                stroked_text(d, (cx, y0 + k * lh), line, bf, bc, BLACK, max(6, bf.size // 8))
 
         p.stdin.write(img.tobytes())
 
