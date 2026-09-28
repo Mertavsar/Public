@@ -1,5 +1,5 @@
 import json,re
-cap=json.load(open("captions.json"))
+cap=json.load(open("cap_sent.json"))   # sentalign.py çıktısı (align.py uzun seste kaydı)
 paras=[p.split() for p in open("script.txt").read().strip().split("\n\n")]
 assert sum(map(len,paras))==len(cap),(sum(map(len,paras)),len(cap))
 # konusma bicimi -> ekran bicimi (altyazida rakam)

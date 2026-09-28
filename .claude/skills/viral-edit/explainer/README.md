@@ -14,18 +14,30 @@ yeniden yaz, gerisi aynen çalışır.
 cp <seslendirme>.mp3 vo.mp3
 python3 tighten.py            # duraksamaları kısalt  -> vo_tight.wav
 # script.txt: seslendirmenin KONUŞULAN biçimi (rakamlar yazıyla), paragraf = sahne
-python3 ../../scripts/align.py --audio vo_tight.wav --text script.txt --out captions.json --check
+python3 ../../scripts/sentalign.py --audio vo_tight.wav --text script.txt --out cap_sent.json
 python3 words.py              # altyazıda rakam biçimi + paragraf no -> words.json
 python3 -c "import json;open('words.js','w').write('window.WORDS='+json.dumps(json.load(open('words.json')),ensure_ascii=False)+';')"
 export NODE_PATH=/opt/node22/lib/node_modules
 node shot.js 5 40 120         # tek tek kareler -> frames/  (BAK)
 node collect.js               # sahne geçişleri + pop anları -> events.json (eksik cue da burada çıkar)
-python3 audio.py && bash mix.sh      # müzik + efekt + master -> mix.wav (-14 LUFS, tavan -3.5)
+bash mix.sh                   # ses = yalnız seslendirme, master -> mix.wav (-14 LUFS, tavan -4.5)
 for i in 0 1 2 3; do node render.js $i 4 30 & done; wait    # chunks/c0..3.mp4
 node thumb.js                 # YouTube kapağı
 ```
 
 Birleştirme ve teslim sıkıştırması: aşağıda "30 MiB".
+
+## Hizalama: align.py değil sentalign.py
+
+230 s'lik seslendirmede `align.py` paragraf başlarını 1.5 s'ye kadar erken
+koydu (7–9. sahneler). Ölçü: orijinal sesteki uzun duraklamalar (0.35–0.56 s,
+paragraf araları) `sentalign.py` sınırlarıyla 0.1–0.25 s içinde örtüştü,
+`align.py` ile örtüşmedi. Uzun seste doğrudan `sentalign.py` kullan.
+
+## Ses: efekt ve müzik yok
+
+SKILL.md §0 kullanıcı kuralı burada da geçerli: ses = seslendirme. `wipe()`
+görsel geçiştir, ses değil.
 
 ## Zamanlama: her şey kelimeye bağlı
 
@@ -59,13 +71,13 @@ kapanışlarından kesiyordu). Burada kural farklı:
 
 Teslim yolu 30 MiB üstünü reddediyor. 230 s'de bu toplam ~1.05 Mbit/s demek.
 Düz renkli animasyon bunu kaldırıyor: parçaları birleştirip iki geçişli
-`-b:v 880k` ile yeniden kodla (aşağıdaki komut), sesi 128k AAC yap.
+`-b:v 900k` ile yeniden kodla (aşağıdaki komut), sesi 128k AAC yap.
 
 ```bash
 printf "file 'chunks/c%d.mp4'\n" 0 1 2 3 > list.txt
 ffmpeg -f concat -safe 0 -i list.txt -c copy video_hq.mp4
-ffmpeg -y -i video_hq.mp4 -c:v libx264 -preset slow -b:v 880k -pass 1 -an -f null /dev/null
-ffmpeg -y -i video_hq.mp4 -i mix.wav -c:v libx264 -preset slow -b:v 880k -pass 2 \
+ffmpeg -y -i video_hq.mp4 -c:v libx264 -preset slow -b:v 900k -pass 1 -an -f null /dev/null
+ffmpeg -y -i video_hq.mp4 -i mix.wav -c:v libx264 -preset slow -b:v 900k -pass 2 \
        -c:a aac -b:a 128k -ar 48000 -movflags +faststart -shortest video.mp4
 ```
 
