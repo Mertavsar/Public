@@ -53,6 +53,14 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 > - Bu belgede efekt sesinden bahseden her yer (§0b, §6) bu kuralla geçersiz.
 > - **İşin ağırlığı senkron:** `sentalign.py` cümle zamanları, plan kesimleri
 >   cümle aralarında, PLAN ↔ SÖZ tablosu ve kontrol sayfası.
+>
+> **İstisna:** kullanıcı bir videoda açıkça müzik/efekt isterse o video için
+> eklenir. Altın videosunda (explainer/) istedi: *"arka plan müziği çok önde
+> olmasın, arkadan tatlı tatlı gelsin, geçiş efektleri tam uyumlu olsun."*
+> Ölçülen karşılığı: müzik (duck sonrası) seslendirmenin ~18 LU altında
+> (22 LU'da duyulmuyordu), whoosh tepesi görsel geçişin tam kapandığı kareye
+> oturur (ölçüldü: −25 ms), pop tıkı öğenin belirdiği an +30 ms.
+> Tarif: `explainer/altin-neden-dusuyor/audio.py` + `mix.sh`.
 
 ## 0. ⛔ SESLENDİRME METNİNİ SEN YAZMA
 

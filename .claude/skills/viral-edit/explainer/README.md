@@ -20,7 +20,7 @@ python3 -c "import json;open('words.js','w').write('window.WORDS='+json.dumps(js
 export NODE_PATH=/opt/node22/lib/node_modules
 node shot.js 5 40 120         # tek tek kareler -> frames/  (BAK)
 node collect.js               # sahne geçişleri + pop anları -> events.json (eksik cue da burada çıkar)
-bash mix.sh                   # ses = yalnız seslendirme, master -> mix.wav (-14 LUFS, tavan -4.5)
+python3 audio.py && bash mix.sh   # müzik + efekt (istenirse), master -> mix.wav (-14 LUFS, tavan -4.5)
 for i in 0 1 2 3; do node render.js $i 4 30 & done; wait    # chunks/c0..3.mp4
 node thumb.js                 # YouTube kapağı
 ```
@@ -34,10 +34,13 @@ koydu (7–9. sahneler). Ölçü: orijinal sesteki uzun duraklamalar (0.35–0.5
 paragraf araları) `sentalign.py` sınırlarıyla 0.1–0.25 s içinde örtüştü,
 `align.py` ile örtüşmedi. Uzun seste doğrudan `sentalign.py` kullan.
 
-## Ses: efekt ve müzik yok
+## Ses
 
-SKILL.md §0 kullanıcı kuralı burada da geçerli: ses = seslendirme. `wipe()`
-görsel geçiştir, ses değil.
+Varsayılan SKILL.md §0: ses = seslendirme. Kullanıcı isterse (altın videosunda
+istedi) `audio.py` + `mix.sh`: efekt zamanları `events.json`'dan, yani
+görüntüden gelir — whoosh tepesi `wipe()`'ın ekranı kapattığı `SW` anına,
+tık öğenin `pop()` anına. Müzik yumuşak kipte (92 BPM, hi-hat yok) ve
+seslendirmenin ~18 LU altında; kazanç LUFS ölçülerek hesaplanır.
 
 ## Zamanlama: her şey kelimeye bağlı
 
