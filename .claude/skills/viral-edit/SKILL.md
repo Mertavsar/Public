@@ -116,6 +116,16 @@ metin öner" derse yaz — şu şartla:
 
 Balıkçıl videosunda böyle yapıldı: 6 kare, 3 kaynak, her cümle eşlendi.
 
+**Derleme "hikâye" klipleri — tek hikâye gibi anlatma.** Kedi-köpek
+klibinde (TikTok @da.mi.loves) gömülü İngilizce yazı birinci ağızdan tek
+bir hikâye anlatıyordu ("kaldırımın altından kurtardım… köpeğim ona ilgi
+duydu… dost oldular"); kareler en az iki farklı köpek (açık sarı / kızıl),
+farklı evler ve farklı kediler gösterdi. "Bu yavru bu köpekle dost oldu"
+demek yalan olurdu ve yorumlarda yakalanır. Metin bunu açıkça söyleyip
+ters köşeye çevirdi: *"Ama dikkat et. Bunlar aynı köpek değil. Farklı
+evler, farklı köpekler. Ve hepsi aynı şeyi yapıyor."* — yalan yerine merak.
+Kurgu o cümlede farklı köpekleri art arda gösterir ki iddia kanıtlansın.
+
 ---
 
 ## 0-1. Hangi aşamadayız
@@ -703,6 +713,18 @@ yazılı "STEINER WAS SITTING…") sütun sütun üst ve alt satır arasında di
 geçişle doldur. Önce üst ve alt satırdaki zemin olmayan pikselleri (tabela,
 saç) o satırın zemin medyanıyla değiştir, yoksa renk şeride sızıyor. Kenarı
 28 px'lik bir geçişle orijinale karıştır.
+
+**Beyaz kutulu altyazı (CapCut "classic": beyaz kutu, siyah yazı)** harf
+maskesiyle yakalanmıyor: `--white-box y0,y1` kutuyu dikdörtgen olarak bulur
+(üst/alt kenar boşluğu tam beyaz satırlardan oluşur, aynı x aralığıyla
+eşlenir). Kutu klipten klibe yer değiştirebilir (kedi-köpek klibinde 0.57,
+0.63 ve 0.72 yüksekliklerinde), bant geniş verilir. **Altta soldan sağa
+kayan süre ikonu** (kalp + figür) için `--moving t0,t1,x0,vx,y0,y1,sol,sağ`;
+ikonun rengini (kırmızı kalp) takip edip `x = x0 + vx·t` doğrusunu ölç:
+
+    python3 scripts/vinpaint.py ham.mp4 ham_clean.mp4 --until 61.9 --white-box 520,820 \
+        --switch 5.0 --box-a 460,562,0,130 --box-b 768,868,452,576 \
+        --moving 0,61.9,9,8.93,982,1024,22,26 --work vpwork
 
 **Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
 başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
