@@ -93,5 +93,26 @@ html.yatay #src { top: 104px; left: auto; right: 58px; text-align: right; font-s
 html.yatay #bar { display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(255, 255, 255, .08); }
 html.yatay #bar b { display: block; height: 100%; width: 0; background: var(--sari); box-shadow: 0 0 10px var(--sari); }
 
+/* Abone ol / beğen çağrısı — yatayda sahne kutusunun iki yanında, oklar aşağıda
+   (YouTube'da butonlar oynatıcının altında). Dikeyde altta, sol: abone, sağ: beğen. */
+#cta { position: absolute; inset: 0; pointer-events: none; z-index: 40; display: none; }
+.ctacol { position: absolute; width: 380px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+html.yatay .ctacol.abone { left: 18px; top: 470px; }
+html.yatay .ctacol.begen { right: 18px; top: 470px; }
+html.dikey .ctacol.abone { left: 30px; top: 1450px; }
+html.dikey .ctacol.begen { right: 30px; top: 1450px; }
+.ctalbl { font-weight: 800; font-size: 28px; color: var(--sari); text-align: center; text-shadow: 0 3px 0 rgba(0,0,0,.5); }
+.ctawrap { position: relative; }
+.ctapill { font-weight: 900; font-size: 34px; padding: 18px 28px; border-radius: 60px; white-space: nowrap;
+  box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+.ctapill.abone { background: #ff0033; color: #fff; }
+.ctapill.abone.done { background: #3b4150; color: #e8e8e8; }
+.ctapill.begen { background: #fff; color: #111; }
+.ctapill.begen.done { background: var(--mavi); color: #fff; }
+.ctahand { position: absolute; right: -10px; bottom: -70px; font-size: 90px; }
+.ctaplus { position: absolute; left: 50%; top: -30px; margin-left: -30px; font-weight: 900; font-size: 54px; color: var(--sari); }
+.ctaarr { width: 86px; height: 140px; fill: var(--sari); filter: drop-shadow(0 0 16px rgba(255,200,61,.7)); }
+html.dikey .ctacol.begen .ctaarr { transform-origin: 50% 50%; }
+
 /* Kapak kipi */
-#stage.cover #top, #stage.cover #cap, #stage.cover #capline, #stage.cover #src, #stage.cover #tag, #stage.cover #bar { display: none; }
+#stage.cover #cta, #stage.cover #top, #stage.cover #cap, #stage.cover #capline, #stage.cover #src, #stage.cover #tag, #stage.cover #bar { display: none; }

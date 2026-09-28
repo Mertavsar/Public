@@ -218,8 +218,15 @@ def timeline(b, fmt, vo=None, work=None):
             end = t1
         scenes.append({"t0": t0, "t1": t1, "tip": s["tip"], "bolum": s["bolum"],
                        "p": s.get("p", {}), "kaynak": s.get("kaynak"), "etiket": s.get("etiket")})
+    # Abone ol / beğen çağrısı: {"sahne": N (1'den), "gecikme": sn, "sure": sn}
+    cta = []
+    for c in b.get("cta", []):
+        s0 = scenes[int(c["sahne"]) - 1]["t0"] + float(c.get("gecikme", .4))
+        d = float(c.get("sure", 5.0))
+        cta.append({"t0": round(s0, 3), "t1": round(min(s0 + d, end), 3),
+                    "abone": round(s0 + 1.3, 3), "begen": round(s0 + 2.4, 3)})
     return {"format": fmt, "gecis": b.get("gecis", True), "dur": round(end, 3), "scenes": scenes,
-            "words": display_words(tl_words, b.get("altyazi"))}, text
+            "cta": cta, "words": display_words(tl_words, b.get("altyazi"))}, text
 
 
 def tempo_report(tl):
@@ -287,19 +294,27 @@ def audio(tl, vo, work, muzik=False, efekt=False):
     if muzik or efekt:
         import audiobed as ab
     if muzik:
-        # altın videosu tarifi: 'warm' yatak, 92 BPM, tizler yumuşak, seslendirmenin ~18 LU altı
-        ab.build_music(dur, f"{work}/music_raw.wav", bpm=92.0, peak_at=dur * .5, warm_at=3.0)
+        if muzik == "etkili":
+            # gergin başlar (minör, hi-hat), 'bizi nasıl etkiler' bölümünde sıcağa döner;
+            # yumuşaktan ~2 dB önde (duck sonrası seslendirmenin ~16 LU altı)
+            etki = next((s["t0"] for s in tl["scenes"] if s["bolum"] == "etki"), dur * .7)
+            ab.build_music(dur, f"{work}/music_raw.wav", bpm=104.0, peak_at=dur * .86, warm_at=etki)
+            off = 10.5
+        else:
+            # altın videosu tarifi: 'warm' yatak, 92 BPM, tizler yumuşak, seslendirmenin ~18 LU altı
+            ab.build_music(dur, f"{work}/music_raw.wav", bpm=92.0, peak_at=dur * .5, warm_at=3.0)
+            off = 12.5
         run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-i", f"{work}/music_raw.wav",
              "-af", "lowpass=f=6000,highpass=f=60", f"{work}/music.wav"])
         vl = None if draft else lufs(vo)
         ml = lufs(f"{work}/music.wav")
-        g = 10 ** (((vl if vl is not None else -16.0) - 12.5 - ml) / 20)
+        g = 10 ** (((vl if vl is not None else -16.0) - off - ml) / 20)
         ins += ["-i", f"{work}/music.wav"]
         k = len(ins) // 2 - 1
         fc.append(f"[{k}:a]aresample=48000,volume={g:.4f}[m]")
         fc.append("[m][sc]sidechaincompress=threshold=0.05:ratio=2.2:attack=30:release=350[md]")
         mixin.append("[md]")
-        print(f"  müzik: seslendirme {vl} LUFS, müzik {ml:.1f} LUFS -> kazanç {g:.3f}")
+        print(f"  müzik ({muzik}): seslendirme {vl} LUFS, müzik {ml:.1f} LUFS -> kazanç {g:.3f}")
     else:
         fc.append("[sc]anullsink")
     if efekt:
@@ -310,12 +325,21 @@ def audio(tl, vo, work, muzik=False, efekt=False):
         for t in sw:
             bus.place(ab.whoosh(rng, dur=WD, amp=0.34), t - 0.88 * WD)       # tepe = ekran kapanışı
             bus.place(ab.boom(rng, dur=0.55, f0=260, f1=120, amp=0.20), t + 0.02)
+        # bölüm geçişi (neden / etki): tırmanış, geçişin kapandığı ana biter
+        secs = [s["t0"] for i, s in enumerate(tl["scenes"]) if i and s["bolum"] in ("neden", "etki")
+                and tl["scenes"][i - 1]["bolum"] != s["bolum"]]
+        for t in secs:
+            bus.place(ab.riser(rng, dur=1.2, amp=0.20), t - 1.2)
+        # abone / beğen tıklamaları: tık, butonun değiştiği karede
+        clicks = [c[k] for c in tl.get("cta", []) for k in ("abone", "begen")]
+        for t in clicks:
+            bus.place(ab.tick(rng, amp=0.30), t)
         bus.write(f"{work}/sfx.wav", 80, peak=0.8)
         ins += ["-i", f"{work}/sfx.wav"]
         k = len(ins) // 2 - 1
         fc.append(f"[{k}:a]aresample=48000,highpass=f=60,volume=0.55[fx]")
         mixin.append("[fx]")
-        print(f"  efekt: {len(sw)} geçiş")
+        print(f"  efekt: {len(sw)} geçiş · {len(secs)} bölüm tırmanışı · {len(clicks)} tık")
     fc.append(f"{''.join(mixin)}amix=inputs={len(mixin)}:normalize=0:duration=first[a]")
     raw, mix = f"{work}/mix_raw.wav", f"{work}/mix.wav"
     run(["ffmpeg", "-nostdin", "-y", "-v", "error"] + ins + ["-filter_complex", ";".join(fc), "-map", "[a]",
@@ -388,7 +412,9 @@ def main():
     ap.add_argument("--format", choices=["yatay", "dikey"], help="bolum.json'daki formatı ezer")
     ap.add_argument("--kareler", action="store_true", help="sadece her sahneden bir kare (hızlı önizleme)")
     ap.add_argument("--sikistir", action="store_true", help="seslendirmedeki ≥0.25 s duraksamaları 0.13 s'ye indir")
-    ap.add_argument("--muzik", action="store_true", help="SADECE kullanıcı isterse: arkada yumuşak müzik")
+    ap.add_argument("--muzik", nargs="?", const="yumusak", choices=["yumusak", "etkili"],
+                    help="SADECE kullanıcı isterse. yumusak: altın videosu (92 BPM, ~18 LU altta) · "
+                         "etkili: 104 BPM, gergin→sıcak, ~16 LU altta")
     ap.add_argument("--efekt", action="store_true", help="SADECE kullanıcı isterse: geçişlerde whoosh")
     ap.add_argument("--jobs", type=int, default=max(1, min(4, os.cpu_count() or 1)))
     ap.add_argument("--force", action="store_true")

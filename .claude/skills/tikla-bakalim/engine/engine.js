@@ -575,7 +575,58 @@ function wordCaption(t) {
   if (cap.scrollWidth > 1000) cap.style.fontSize = (96 * 1000 / cap.scrollWidth) + "px";
 }
 
-let BG = null, WIPE = null;
+// Abone ol / beğen çağrısı: ekranın yanlarında (sahne içeriğinin dışında) iki buton,
+// tıklayan el, platform butonlarını gösteren oklar. Tıklama anları render.py'den
+// (tl.cta[].abone / .begen) gelir — efekt sesi aynı anlara oturur.
+function ctaLayer(stage) {
+  const box = el("div", null, null, stage); box.id = "cta";
+  const ns = "http://www.w3.org/2000/svg";
+  const arrow = () => {
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 100 160"); svg.setAttribute("class", "ctaarr");
+    const pth = document.createElementNS(ns, "path");
+    pth.setAttribute("d", "M32 0 H68 V96 H96 L50 158 L4 96 H32 Z");
+    svg.appendChild(pth); return svg;
+  };
+  const col = (cls, lbl, txt, done) => {
+    const c = el("div", "ctacol " + cls, null, box);
+    const l = el("div", "ctalbl", lbl, c);
+    const wrap = el("div", "ctawrap", null, c);
+    const pill = el("div", "ctapill " + cls, txt, wrap);
+    const hand = el("div", "emoji ctahand", "👆", wrap);
+    const plus = el("div", "ctaplus", cls === "begen" ? "+1" : "", wrap);
+    const a = arrow(); c.appendChild(a);
+    return { c, l, pill, hand, plus, a, txt, done };
+  };
+  const L = col("abone", "Yeni gündemleri kaçırma", "<span class='emoji'>🔔</span> ABONE OL", "ABONE OLUNDU ✓");
+  const R = col("begen", "İşine yaradıysa", "<span class='emoji'>👍</span> BEĞEN", "<span class='emoji'>👍</span> BEĞENİLDİ");
+  return t => {
+    const c = (TL.cta || []).find(c => t >= c.t0 && t < c.t1);
+    box.style.display = c ? "block" : "none";
+    if (!c) return;
+    const lt = t - c.t0, D = c.t1 - c.t0;
+    [[L, c.abone - c.t0, 1], [R, c.begen - c.t0, -1]].forEach(([o, click, side], i) => {
+      const inn = eOut(prog(lt, i * .15, .45)), out = eInOut(prog(lt, D - .45, .4));
+      const yatay = FORMAT === "yatay";
+      o.c.style.opacity = clamp(inn * 2) * (1 - out);
+      o.c.style.transform = yatay ? `translateX(${-side * 420 * (1 - inn + out)}px)` : `translateY(${500 * (1 - inn + out)}px)`;
+      // el: tıklamadan .35 sn önce gelir, bastırır, çekilir
+      const h = prog(lt, click - .35, .3), press = lt >= click && lt < click + .15;
+      o.hand.style.opacity = lt < click - .35 ? 0 : clamp(1 - prog(lt, click + .5, .3));
+      o.hand.style.transform = `translate(${(1 - eOut(h)) * 60}px, ${(1 - eOut(h)) * 90 + (press ? 10 : 0)}px)`;
+      const done = lt >= click;
+      o.pill.innerHTML = done ? o.done : o.txt;
+      o.pill.classList.toggle("done", done);
+      const pp = prog(lt, click, .35);
+      o.pill.style.transform = `scale(${press ? .9 : done && pp < 1 ? lerp(1.18, 1, eOut(pp)) : 1})`;
+      o.plus.style.opacity = done ? clamp(1 - pp * .9) : 0;
+      o.plus.style.transform = `translateY(${-70 * eOut(pp)}px) scale(${lerp(.6, 1.2, eOut(pp))})`;
+      o.a.style.transform = `translateY(${Math.abs(Math.sin(lt * 4.2)) * 22}px)`;
+    });
+  };
+}
+
+let BG = null, WIPE = null, CTA = null;
 window.load = async function (tl, opts = {}) {
   // Fontlar yüklenmeden ölçüm yapılırsa sığdırma yedek fonta göre hesaplanır
   await Promise.all([600, 800, 900].map(w => document.fonts.load(`${w} 60px M`, "AaŞşĞğİıÇçÖöÜü₺0123")));
@@ -596,6 +647,7 @@ window.load = async function (tl, opts = {}) {
     return { s, r, up: fn(s.p || {}, r, s) };
   });
   for (const id of ["cap", "capline", "tag", "src", "bar"]) stage.appendChild(document.getElementById(id));
+  CTA = ctaLayer(stage);
   WIPE = wiper(stage);
   WORDS = tl.words || [];
   if (FORMAT === "yatay") buildLines();
@@ -643,5 +695,6 @@ window.seek = function (t) {
   document.querySelector("#bar b").style.width = (100 * clamp(t / TL.dur)) + "%";
   if (FORMAT === "yatay") lineCaption(t); else wordCaption(t);
   document.getElementById("src").textContent = cur && cur.s.kaynak ? "Kaynak: " + cur.s.kaynak : "";
+  CTA(t);
   WIPE(t);
 };

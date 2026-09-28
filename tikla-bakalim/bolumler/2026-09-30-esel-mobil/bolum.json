@@ -1,7 +1,7 @@
 {
   "baslik": "Benzine 12 lira zam: Eşel mobil nedir, neden bitiyor?",
   "tarih": "2026-09-28",
-  "durum": "TASLAK — metin kullanıcı onayı bekliyor",
+  "durum": "Ses geldi (ses/vo.mp3, 50.2 sn). Abone/beğen cümlesi seste yok — kullanıcı ekleyecek.",
   "format": "yatay",
   "vurgu": [
     "zam",
@@ -318,5 +318,12 @@
     "K2": "Benzin +12,48 / motorin +3,60 / LPG +1,48 TL (ÖTV 10,40 ve 3 TL + %20 KDV) — https://www.yatirimx.com.tr/gundem/akaryakitta-esel-mobil-alarmi-benzine-1248-tl-zam-gelebilir/25568 ; https://t24.com.tr/ekonomi/akaryakita-otv-zammi-benzin-ve-motorinin-litre-fiyatinda-buyuk-artis-olacak,1350352",
     "K3": "28 Eylül 2026 İstanbul Avrupa benzin 80,40 TL, motorin 93,50 TL, LPG 34,99 TL — https://www.birgun.net/haber/28-eylul-2026-benzin-ve-motorin-fiyatlarinda-indirim-zam-var-mi-motorin-benzin-ve-lpg-fiyatlari-737341",
     "K4": "Eşel mobil Mart 2026'da petrol fiyatlarındaki sıçrama nedeniyle devreye alındı; fiyat artışı ÖTV'den karşılanıyor — https://sanayigazetesi.com.tr/akaryakitta-esel-mobil-sistemi/ ; https://www.gzt.com/ekonomi/esel-mobil-sistemi-resmi-gazetede-yayinlandi-akaryakit-fiyatlari-dusecek-mi-esel-sistemi-nedir-ne-ise-yarar-4021648"
-  }
+  },
+  "cta": [
+    {
+      "sahne": 6,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
 }

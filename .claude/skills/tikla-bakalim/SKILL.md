@@ -27,9 +27,13 @@ sahne geçişinde çapraz altın silme, her sahnede %3 yavaş yaklaşma.
 > *"Efekt seslerini sen ekleme, ben hallederim."* (viral-edit SKILL.md §0)
 
 Varsayılan: **sadece seslendirme.** Müzik ve efekt yok. Kullanıcı o video için
-açıkça isterse `--muzik` (arkadan yumuşak, seslendirmenin ~18 LU altı) ve/veya
-`--efekt` (geçişlerde whoosh, ekranın kapandığı kareye oturur) — altın videosu
-tarifi.
+açıkça isterse:
+
+| Bayrak | Ne |
+|---|---|
+| `--muzik` / `--muzik yumusak` | Altın videosu: 92 BPM sıcak yatak, seslendirmenin ~18 LU altı |
+| `--muzik etkili` | 104 BPM, gergin başlar, "bizi nasıl etkiler"de sıcağa döner, ~16 LU altı. Eşel mobil videosunda kullanıcı "farklı, etkili" istedi |
+| `--efekt` | Her geçişte whoosh (tepesi ekranın kapandığı kare) + yumuşak vuruş, bölüm geçişlerinde tırmanış, abone/beğen tıklamasında tık |
 
 `viral-edit`'ten farkı: orada kullanıcının klibi kurgulanır ve metni kullanıcı yazar
 (kareden hikâye çıkarılamaz). Burada metin **kaynaklardan** çıkar. O yüzden taslağı
@@ -152,6 +156,15 @@ metinle ses ürettirme.
 | `format` | `yatay` (varsayılan) / `dikey` |
 | `altyazi` | Konuşma → ekran eşlemesi: `{"seksen lira": "80 lira"}`. Seste yazıyla, altyazıda rakam |
 | `gecis` | `false` → sahne geçişinde altın silme yok |
+| `cta` | Abone ol / beğen katmanı: `[{"sahne": 6, "gecikme": 0.3, "sure": 5.5}]` — o sahnenin başından `gecikme` sn sonra, `sure` sn boyunca |
+
+**Abone ol / beğen (`cta`)** — kullanıcı istedi: videonun ortasında "buradan abone
+ol, beğen" okları. Yatayda sahne kutusunun iki yanında (içeriği örtmez): solda
+kırmızı ABONE OL, sağda BEĞEN; el gelip tıklar (1.3 sn → ABONE OLUNDU ✓, 2.4 sn →
+BEĞENİLDİ +1), altın oklar aşağıyı (YouTube butonlarını) gösterir. Dikeyde ikisi
+altta. Yer: ilk "neden" sahnesi — izleyici hook'u geçmiş, en ilginç kısım başlıyor.
+Metinde de bir cümle olmalı ("Kaçırmamak için abone ol…") ve katman o cümleye
+denk gelmeli.
 
 Metin içi renk: `*sarı*` `~kırmızı~` `+yeşil+`, satır sonu `\n`.
 
