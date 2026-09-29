@@ -54,6 +54,14 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 > - **İşin ağırlığı senkron:** `sentalign.py` cümle zamanları, plan kesimleri
 >   cümle aralarında, PLAN ↔ SÖZ tablosu ve kontrol sayfası.
 >
+> **Tekrar doğrulandı (kedi-köpek klibi, 29 Eylül):** kullanıcı "müzik + geçiş
+> efekti" istedi, sentetik set iki kez denendi (15 geçiş, sonra 4 geçiş +
+> çok kısık `sad` yatak, `--music-gain 0.14`). İkisi de "berbat — gong
+> sesleri" diye reddedildi, **oklar da**. Sentetik müzik/efekt bu kullanıcıya
+> uymuyor: istense bile önce "sentetik ses kalitesi sınırlı, kendi parçanı
+> atarsan onu kısık yerleştiririm" de. Varsayılan teslim: seslendirme +
+> kelime altyazı, `--no-music --no-sfx`, beat `-`, ok yok.
+>
 > **İstisna:** kullanıcı bir videoda açıkça müzik/efekt isterse o video için
 > eklenir. Altın videosunda (explainer/) istedi: *"arka plan müziği çok önde
 > olmasın, arkadan tatlı tatlı gelsin, geçiş efektleri tam uyumlu olsun."*
