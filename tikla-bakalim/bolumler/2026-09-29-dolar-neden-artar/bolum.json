@@ -1,0 +1,552 @@
+{
+  "baslik": "Dolar neden artar? Kur nedir, dolar nasıl doğdu?",
+  "tarih": "2026-09-29",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "dolar",
+    "kur",
+    "artar",
+    "güven",
+    "talep"
+  ],
+  "altyazi": {
+    "yüzde elli yedisi": "%57'si",
+    "Üç soruda": "3 soruda",
+    "bin yedi yüz doksan iki": "1792",
+    "yüz sent": "100 sent",
+    "Bin dokuz yüz kırk dört'te": "1944'te",
+    "otuz beş dolar": "35 dolar",
+    "bin dokuz yüz yetmiş bir'de": "1971'de",
+    "on beş Ağustos'ta": "15 Ağustos'ta",
+    "beş yüz dolarlık": "500 dolarlık",
+    "kırk lirayken": "40 lirayken",
+    "yirmi bin lira": "20.000 lira",
+    "elli liraya": "50 liraya",
+    "yirmi beş bin lira": "25.000 lira",
+    "Üçüncü": "Üçüncü"
+  },
+  "kapak": {
+    "ikon": "💵",
+    "ust": "DOLAR NEDEN",
+    "buyuk": "ARTAR?",
+    "alt": "3 SORUDA"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Dünyadaki merkez bankası rezervlerinin yaklaşık yüzde elli yedisi dolar.",
+      "p": {
+        "ikon": "🌍",
+        "etiket": "Küresel rezervlerde dolar payı",
+        "deger": 57,
+        "onek": "~%",
+        "sonek": "",
+        "ondalik": 0,
+        "yon": "",
+        "renk": "sari",
+        "sayma": false,
+        "not": "IMF verisi, yaklaşık"
+      },
+      "kaynak": "IMF COFER (K1)",
+      "etiket": "DÜNYANIN REZERV PARASI"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki dolar nedir, nasıl doğdu, neden artar? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "DOLAR\n*NEDEN ARTAR?*"
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür karmaşık konuları sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "KARMAŞIĞI",
+          "*SADE* ANLATIYORUZ"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce kur nedir, onu açıklayayım. Kur, bir paranın başka bir para cinsinden fiyatıdır.",
+      "p": {
+        "ikon": "💱",
+        "satirlar": [
+          "KUR =",
+          "*BİR PARANIN*",
+          "*BAŞKA PARADAKİ FİYATI*"
+        ],
+        "boy": 80
+      },
+      "kaynak": "Gedik Yatırım, Monay (K2)",
+      "etiket": "KUR NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "say": "Yani yurt dışından bir şey alacaksan, önce lirayı dolara çevirirsin. Dolar pahalıysa ürün de pahalıya gelir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🇹🇷",
+            "metin": "Elinde lira var"
+          },
+          {
+            "ikon": "💱",
+            "metin": "Kurla dolara çevirirsin"
+          },
+          {
+            "ikon": "📦",
+            "metin": "Ürünü dolarla *alırsın*"
+          }
+        ]
+      },
+      "etiket": "KUR NE İŞE YARAR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Dolar, bin yedi yüz doksan iki yılında ABD'de çıkan bir yasayla doğdu. Bir dolar, yüz sent olarak tanımlandı.",
+      "p": {
+        "gun": "2",
+        "ay": "NİSAN",
+        "gunadi": "1792",
+        "saat": "",
+        "not": "*Dolar* doğdu · Coinage Act"
+      },
+      "kaynak": "U.S. Mint, Wikipedia (K3)",
+      "etiket": "DOLAR NASIL DOĞDU?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Dolara model olan, o dönemde dünyada yaygın kullanılan İspanyol gümüş parasıydı. Yani dolar sıfırdan icat edilmedi.",
+      "p": {
+        "ikon": "🪙",
+        "satirlar": [
+          "MODEL:",
+          "*İSPANYOL*",
+          "*GÜMÜŞ PARASI*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Wikipedia, U.S. Mint (K3)",
+      "etiket": "İLK MODEL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "say": "Sonra dolar altına bağlandı. Bin dokuz yüz kırk dört'te Bretton Woods'ta bir ons altın otuz beş dolar yapıldı. Diğer ülkelerin paraları da dolara bağlandı.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🤝",
+            "metin": "1944 · Bretton Woods anlaşması"
+          },
+          {
+            "ikon": "🥇",
+            "metin": "1 ons altın = *35 $*"
+          },
+          {
+            "ikon": "🔗",
+            "metin": "Diğer paralar dolara *bağlandı*"
+          }
+        ]
+      },
+      "kaynak": "Vikipedi, Monay (K4)",
+      "etiket": "ALTINA BAĞLANDI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Sonra bin dokuz yüz yetmiş bir'de, on beş Ağustos'ta ABD dolar karşılığı altın vermeyi durdurdu. Buna Nixon şoku deniyor.",
+      "p": {
+        "gun": "15",
+        "ay": "AĞUSTOS",
+        "gunadi": "1971",
+        "saat": "",
+        "not": "Dolar artık altına bağlı *değil*"
+      },
+      "kaynak": "Federal Reserve History, Wikipedia (K5)",
+      "etiket": "NIXON ŞOKU"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Artık dolar altınla değil, güvenle ve talep ile değer taşıyor. Herkes kabul ettiği için değerli.",
+      "p": {
+        "ikon": "🤝",
+        "satirlar": [
+          "DEĞERİ",
+          "*GÜVENDEN*",
+          "GELİYOR"
+        ],
+        "boy": 100
+      },
+      "etiket": "BUGÜN"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu yüzden dolar dünyanın rezerv parası sayılıyor. Yani dünyanın her yerinde dolara talep var.",
+      "p": {
+        "ikon": "🌍",
+        "satirlar": [
+          "DÜNYANIN",
+          "*REZERV PARASI*"
+        ],
+        "boy": 100,
+        "not": "Küresel rezervlerin ~%57'si (IMF)"
+      },
+      "kaynak": "IMF COFER (K1)",
+      "etiket": "REZERV PARASI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Peki dolar neden artar? Temelde tek bir kural var: arz ve talep.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "TEK KURAL:",
+          "*ARZ ve TALEP*"
+        ],
+        "boy": 100
+      },
+      "kaynak": "Gedik, Hesapkurdu (K2)",
+      "etiket": "ANA KURAL"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Dolara talep artarsa, dolar pahalanır. Tıpkı pazarda herkesin aynı domatesi istemesi gibi.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🙋",
+            "metin": "Herkes dolar ister"
+          },
+          {
+            "ikon": "📦",
+            "metin": "Dolar sınırlı kalır"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Dolar *pahalanır*"
+          }
+        ]
+      },
+      "etiket": "TALEP ARTARSA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BEĞENİ",
+          "*BIRAK*"
+        ],
+        "boy": 110
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Birinci sebep enflasyon. Fiyatlar hızlı artınca paranın alım gücü düşer, insanlar daha sağlam bir para arar.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🛒",
+            "metin": "Fiyatlar hızla ~artar~"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Paranın alım gücü düşer"
+          },
+          {
+            "ikon": "💵",
+            "metin": "İnsan dolara *yönelir*"
+          }
+        ]
+      },
+      "kaynak": "Aktif Portföy, Gedik (K2)",
+      "etiket": "1 · ENFLASYON"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "İkinci sebep faiz. Faiz düşerse lirayı bankada tutmak cazip olmaktan çıkar, insanlar dövize kayabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Faiz *düşer*"
+          },
+          {
+            "ikon": "💰",
+            "metin": "Lira mevduatı cazibesini yitirir"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Döviz talebi *artabilir*"
+          }
+        ]
+      },
+      "kaynak": "Hesapkurdu, Monay (K2)",
+      "etiket": "2 · FAİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Üçüncü sebep dış ticaret. Bir ülke sattığından çok alıyorsa, ödemek için dolar gerekir. Bu da dolar talebini artırır.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🚢",
+            "metin": "Alınan mal, satılandan *fazla*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Ödemek için dolar gerekir"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Dolar talebi artar"
+          }
+        ]
+      },
+      "kaynak": "Gedik, Aktif Portföy (K2)",
+      "etiket": "3 · DIŞ TİCARET"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Dördüncü sebep güven. Kriz çıkınca insanlar daha güvenli gördükleri paraya kaçar. Buna güvenli liman denir.",
+      "p": {
+        "ikon": "🛡️",
+        "satirlar": [
+          "KRİZDE:",
+          "*GÜVENLİ LİMAN*"
+        ],
+        "boy": 100
+      },
+      "kaynak": "Gedik, Hesapkurdu (K2)",
+      "etiket": "4 · GÜVEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Özetle dört sebep var: enflasyon, faiz, dış ticaret ve güven.",
+      "p": {
+        "baslik": "Dolar neden artar?",
+        "satirlar": [
+          {
+            "ikon": "🛒",
+            "metin": "Enflasyon",
+            "deger": "Alım gücü",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Faiz",
+            "deger": "Getiri",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🚢",
+            "metin": "Dış ticaret",
+            "deger": "Dolar ihtiyacı",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🛡️",
+            "metin": "Güven",
+            "deger": "Risk",
+            "renk": "turuncu"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Peki döviz yatırımı nedir? Parayı başka bir para cinsinde saklamak. Kazandırabilir de kaybettirebilir de. Bu bir yatırım tavsiyesi değil.",
+      "p": {
+        "ikon": "💼",
+        "satirlar": [
+          "DÖVİZ TUTMAK =",
+          "*PARAYI BAŞKA*",
+          "*PARADA SAKLAMAK*"
+        ],
+        "boy": 80,
+        "not": "Yatırım tavsiyesi değildir"
+      },
+      "etiket": "DÖVİZ YATIRIMI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*"
+      },
+      "etiket": "3 · CEBİNE ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "Diyelim ki beş yüz dolarlık bir ürün alacaksın. Kur kırk lirayken yirmi bin lira, elli liraya çıkarsa yirmi beş bin lira olur.",
+      "p": {
+        "baslik": "500 dolarlık ürün · örnek hesap",
+        "sol": {
+          "etiket": "KUR 40 ₺\n(örnek)",
+          "deger": 20000,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "KUR 50 ₺\n(örnek)",
+          "deger": 25000,
+          "renk": "kirmizi"
+        },
+        "sonek": " ₺",
+        "ondalik": 0,
+        "fark": "+5.000 ₺"
+      },
+      "kaynak": "hesap: 500 × 40 ve 500 × 50 (varsayımsal kur)",
+      "etiket": "KUR FARKI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Kur yükselince ithal maliyet artar. Bu da zamanla fiyat etiketlerine yansıyabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💵",
+            "metin": "Kur ~yükselir~"
+          },
+          {
+            "ikon": "📦",
+            "metin": "İthal maliyet artar"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Zamanla etikete *yansıyabilir*"
+          }
+        ]
+      },
+      "etiket": "ZİNCİRLEME ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Yurt dışı seyahati ve dolar borcu olanlar da etkilenir.",
+      "p": {
+        "baslik": "Kimler etkilenir?",
+        "satirlar": [
+          {
+            "ikon": "✈️",
+            "metin": "Yurt dışı seyahat",
+            "deger": "pahalanır",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "📱",
+            "metin": "İthal ürünler",
+            "deger": "yansıyabilir",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Dolar borcu",
+            "deger": "lira karşılığı artar",
+            "renk": "sari"
+          }
+        ]
+      },
+      "etiket": "KİMLER ETKİLENİR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: kur, doların lira fiyatı. Fiyatını da arz, talep ve güven belirliyor.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "💱",
+            "metin": "Kur",
+            "deger": "Doların lira fiyatı",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🪙",
+            "metin": "Doğum",
+            "deger": "1792 · ABD",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "⚖️",
+            "metin": "Fiyat",
+            "deger": "Arz · talep · güven",
+            "renk": "turuncu"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Öğrenmek istediğin başka bir konu varsa yorumlara yaz. Bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Merak ettiysen, tıkla bakalım. Takip et.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Dolar, küresel döviz rezervlerinin yaklaşık %57'si (2025 Q1 %57,79 · Q2 %56,32 · Q3 %56,92 · 2026 Q1 ~%57) — https://www.imf.org/en/blogs/articles/2025/10/01/dollars-share-of-reserves-held-steady-in-second-quarter-when-adjusted-for-fx-moves ; https://www.bestbrokers.com/forex-trading/us-dollar-share-of-global-currency-reserves/",
+    "K2": "Kur tanımı, arz–talep, enflasyon, faiz, cari açık, jeopolitik risk — https://gedik.com/yatirimci-sozlugu/d/doviz-kuru ; https://www.aktifportfoy.com.tr/blog/dolar-kuru-neden-yukselir-ekonomik-faktorlar-nelerdir ; https://monay.com.tr/blog/dolar-kuru-nedir-dolar-neden-yukselir-veya-duser-160 ; https://www.hesapkurdu.com/doviz-kurlari/rehber/dolar-neden-yukselir-neden-duser",
+    "K3": "Coinage Act, 2 Nisan 1792; ondalık sistem (1 dolar = 100 sent); model İspanyol gümüş doları — https://www.usmint.gov/learn/history/historical-documents/coinage-act-of-april-2-1792 ; https://en.wikipedia.org/wiki/Coinage_Act_of_1792",
+    "K4": "Bretton Woods 1944: 1 ons altın = 35 dolar, diğer paralar dolara sabit — https://tr.wikipedia.org/wiki/Bretton_Woods_Anla%C5%9Fmas%C4%B1 ; https://monay.com.tr/blog/altin-standardi-sistemi-degeri-altina-endeksli-para-birimleri-375",
+    "K5": "15 Ağustos 1971 Nixon şoku: dolar–altın çevrilebilirliği durdu — https://www.federalreservehistory.org/essays/gold-convertibility-ends ; https://en.wikipedia.org/wiki/Nixon_shock"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
