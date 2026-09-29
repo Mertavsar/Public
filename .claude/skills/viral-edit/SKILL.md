@@ -469,9 +469,12 @@ yarım saniye önce ya da sonra olur.
 
 Kalıp, her videoda:
 
-1. **0–1 s: sonucun en çarpıcı karesi (flash-forward).** Videonun sonundaki
-   doruk anı — yangın, kavuşma, kurtuluş — 1 saniye. İzleyici "buraya nasıl
-   gelindi?" diye sorar.
+1. **0–1 s: GERİLİM anı, SONUÇ DEĞİL.** Motor örneğinde ilk saniye motorun
+   yandığı an — sonuç (dava) değil. ⛔ Mutlu sonu / çözümü ilk kareye koyma:
+   kedi-köpek klibinde ilk saniyeye "köpek uyuyan yavruyu yalıyor" kondu,
+   kullanıcı: *"ilk sahnede sonucu vermişsin, izlemeye gerek yok ki, berbat"*.
+   Doğrusu: taşın altında sıkışmış yavru. Sonucu ipucu olarak bile erken
+   gösterme ("iki canın hayatı" cümlesine uyuyan kedi karesi de kaldırıldı).
 2. **1–3 s: başlangıca dönüş.** Olayın ilk anı (duman çıkıyor, taşın altındaki
    yavru). EDL'de bu iki plan ayrı: önce doruk, sonra başlangıç.
 3. **Seslendirme: olay + sonuca dair açık uçlu merak.** "…ama devamında
