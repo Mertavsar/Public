@@ -1,0 +1,517 @@
+{
+  "baslik": "Dolar 49 lirayı gördü: Neden yükseliyor, cebimize etkisi ne?",
+  "tarih": "2026-09-29",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "zirve",
+    "güçleniyor",
+    "rezerv",
+    "pahalı",
+    "yansıyabilir"
+  ],
+  "altyazi": {
+    "kırk dokuz lirayı": "49 lirayı",
+    "Üç soruda": "3 soruda",
+    "yirmi dokuz Eylül'de": "29 Eylül'de",
+    "kırk sekiz lira doksan sekiz kuruş": "48,98 lira",
+    "kırk dokuz lira": "49 lira",
+    "yüz yetmiş dört milyar dolara": "174,4 milyar dolara",
+    "on sekiz Eylül": "18 Eylül",
+    "yüzde otuz yedide": "yüzde 37'de",
+    "yüzde otuz bir buçuk": "yüzde 31,5",
+    "beş yüz dolarlık": "500 dolarlık",
+    "yirmi dört bin beş yüz lira": "24.500 lira",
+    "kırk dokuz liradan": "49 liradan",
+    "beş yüz lira": "500 lira",
+    "Üç sebep": "3 sebep",
+    "bin dolarlık": "1.000 dolarlık",
+    "kırk dokuz bin lira": "49.000 lira"
+  },
+  "kapak": {
+    "ikon": "💵",
+    "ust": "DOLAR",
+    "buyuk": "49 ₺",
+    "alt": "NEDEN?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Dolar ilk kez kırk dokuz lirayı gördü.",
+      "p": {
+        "ikon": "💵",
+        "etiket": "Dolar/TL · 29 Eylül 2026",
+        "deger": 49,
+        "sonek": " ₺",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": false
+      },
+      "kaynak": "NTV, Sözcü (K1)",
+      "etiket": "TARİHİ ZİRVE"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki neden? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN?\n*3 SORUDA*"
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür gündem konularını sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ",
+          "*SADE* ANLATIYORUZ"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Salı günü, yani yirmi dokuz Eylül'de, dolar kuru tarihi zirvesine çıktı.",
+      "p": {
+        "gun": "29",
+        "ay": "EYLÜL",
+        "gunadi": "SALI",
+        "saat": "",
+        "not": "Dolar *tarihi zirvede*"
+      },
+      "kaynak": "Halk TV, NTV (K1)",
+      "etiket": "NE OLDU"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Bankaların ekranında alış fiyatı kırk sekiz lira doksan sekiz kuruş, satış fiyatı tam kırk dokuz lira.",
+      "p": {
+        "baslik": "Dolar/TL · 29 Eylül",
+        "satirlar": [
+          {
+            "ikon": "🟢",
+            "metin": "Alış",
+            "deger": "48,98 ₺",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "🔴",
+            "metin": "Satış",
+            "deger": "49,00 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Gün içi piyasa kuru"
+      },
+      "kaynak": "Nefes, Halk TV (K1)",
+      "etiket": "ALIŞ / SATIŞ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Merkez Bankası bu süreçte piyasaya müdahale etti. Ama yükselişi durduramadı.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "MERKEZ BANKASI",
+          "MÜDAHALE ETTİ",
+          "~YÜKSELİŞ DURMADI~"
+        ],
+        "boy": 80
+      },
+      "kaynak": "Halk TV, ParaAnaliz (K1)",
+      "etiket": "MÜDAHALE"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Kırk dokuz lira, piyasada psikolojik sınır sayılıyordu. Yani rakam, insanların gözünde kritik bir eşikti.",
+      "p": {
+        "ikon": "🎯",
+        "satirlar": [
+          "49 ₺ =",
+          "*PSİKOLOJİK*",
+          "*SINIR*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Halk TV, Nefes (K1)",
+      "etiket": "KRİTİK EŞİK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Önce kur nedir, bir cümleyle açıklayayım. Kur, bir doların kaç lira ettiğidir.",
+      "p": {
+        "ikon": "💱",
+        "satirlar": [
+          "KUR =",
+          "*1 DOLARIN*",
+          "*LİRA FİYATI*"
+        ],
+        "boy": 96
+      },
+      "etiket": "KUR NEDİR?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Birinci sebep dünyada. Yatırımcılar, Amerikan Merkez Bankası'nın faizi uzun süre yüksek tutmasını bekliyor. Faiz yüksek kalınca, parayı dolarda tutmak daha cazip geliyor. Bu yüzden dolar güçleniyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🇺🇸",
+            "metin": "Fed faizi uzun süre yüksek tutabilir"
+          },
+          {
+            "ikon": "💰",
+            "metin": "Yatırımcı dolara yönelir"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Dolar dünyada *güçleniyor*"
+          }
+        ]
+      },
+      "kaynak": "Ekonomi Politikası, Halk TV (K2)",
+      "etiket": "1 · DÜNYA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BEĞENİ",
+          "*BIRAK*"
+        ],
+        "boy": 110
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "İkinci sebep enerji. ABD ile İran arasındaki gerilim, petrol fiyatı endişesini büyütüyor. Enerji pahalanırsa enflasyon riski artıyor, bu da dolara talebi destekliyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💥",
+            "metin": "ABD–İran gerilimi"
+          },
+          {
+            "ikon": "🛢️",
+            "metin": "Enerji fiyatı *endişesi*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Dolara talep ~artıyor~"
+          }
+        ]
+      },
+      "kaynak": "Nefes, Halk TV (K2)",
+      "etiket": "2 · ENERJİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Üçüncü sebep içeride. Merkez Bankası, kuru tutmak için rezervini kullanıyor. Kasadaki rezerv, on sekiz Eylül itibarıyla yüz yetmiş dört milyar dolara indi.",
+      "p": {
+        "ikon": "🏦",
+        "etiket": "Merkez Bankası brüt rezervi · 18 Eylül",
+        "deger": 174.4,
+        "sonek": " milyar $",
+        "ondalik": 1,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": true,
+        "not": "Haftalardır gerileme sürüyor"
+      },
+      "kaynak": "Bloomberg HT, A Para (K3)",
+      "etiket": "3 · REZERV"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Peki faiz ne durumda? Merkez Bankası politika faizini yüzde otuz yedide sabit tuttu. Yıllık enflasyon ise ağustosta yüzde otuz bir buçuk oldu.",
+      "p": {
+        "baslik": "Faiz ve enflasyon",
+        "satirlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Politika faizi · 10 Eylül",
+            "deger": "%37",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Enflasyon · Ağustos",
+            "deger": "%31,51",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Faiz sabit tutuldu"
+      },
+      "kaynak": "Euronews, TCMB (K4) · TÜİK (K5)",
+      "etiket": "FAİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Yani üç sebep var: güçlü dolar, enerji endişesi ve baskı altındaki rezerv.",
+      "p": {
+        "baslik": "Özet · 3 sebep",
+        "satirlar": [
+          {
+            "ikon": "🌍",
+            "metin": "Güçlü dolar",
+            "deger": "Dünya",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Enerji endişesi",
+            "deger": "ABD–İran",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Baskı altında rezerv",
+            "deger": "İçeride",
+            "renk": "kirmizi"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*"
+      },
+      "etiket": "3 · CEBİNE ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Dolara bağlı fiyatlar yükselebilir. Telefon, bilgisayar, akaryakıt ve ithal girdili ürünler bunların başında geliyor.",
+      "p": {
+        "baslik": "Dolara bağlı fiyatlar",
+        "satirlar": [
+          {
+            "ikon": "📱",
+            "metin": "Telefon, bilgisayar",
+            "deger": "yansıyabilir",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Akaryakıt",
+            "deger": "yansıyabilir",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "İthal girdili ürünler",
+            "deger": "yansıyabilir",
+            "renk": "sari"
+          }
+        ]
+      },
+      "etiket": "NELER ETKİLENİR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Diyelim ki beş yüz dolarlık bir telefon alacaksın. Kırk dokuz liradan bu, yaklaşık yirmi dört bin beş yüz lira eder.",
+      "p": {
+        "baslik": "500 dolarlık telefon",
+        "ikon": "📱",
+        "ogeler": [
+          "500 $",
+          "×",
+          "49 ₺",
+          "=",
+          "24.500 ₺"
+        ]
+      },
+      "kaynak": "hesap: 500 × 49",
+      "etiket": "TELEFON HESABI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Kur bir lira daha artarsa, aynı telefon beş yüz lira daha pahalı olur.",
+      "p": {
+        "baslik": "Kur 1 lira artarsa",
+        "ikon": "📈",
+        "ogeler": [
+          "500 $",
+          "×",
+          "+1 ₺",
+          "=",
+          "+500 ₺"
+        ]
+      },
+      "kaynak": "hesap: 500 × 1",
+      "etiket": "1 LİRA FARK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Kur yükselince ithal maliyet artar. Bu da zamanla fiyat etiketlerine yansıyabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💵",
+            "metin": "Kur ~yükselir~"
+          },
+          {
+            "ikon": "📦",
+            "metin": "İthal maliyet artar"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Zamanla etikete *yansıyabilir*"
+          }
+        ]
+      },
+      "etiket": "ZİNCİRLEME ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Petrol dolarla alınıyor. Yani kur artınca akaryakıt maliyeti de artıyor, bu da pompaya yansıyabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💵",
+            "metin": "Kur ~yükselir~"
+          },
+          {
+            "ikon": "🛢️",
+            "metin": "Petrolün lira maliyeti artar"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Pompaya *yansıyabilir*"
+          }
+        ]
+      },
+      "etiket": "AKARYAKIT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Yurt dışı tatili de etkilenir. Bin dolarlık bir harcama, kırk dokuz liradan kırk dokuz bin lira eder.",
+      "p": {
+        "baslik": "1.000 dolarlık tatil harcaması",
+        "ikon": "✈️",
+        "ogeler": [
+          "1.000 $",
+          "×",
+          "49 ₺",
+          "=",
+          "49.000 ₺"
+        ]
+      },
+      "kaynak": "hesap: 1000 × 49",
+      "etiket": "TATİL HESABI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bundan sonrası kimsenin elinde değil. Fed kararlarına, petrol fiyatına ve Merkez Bankası'na bağlı. Kesin bir tahmin yok.",
+      "p": {
+        "ikon": "🔮",
+        "satirlar": [
+          "KESİN TAHMİN",
+          "*YOK*"
+        ],
+        "boy": 100,
+        "not": "Fed · petrol · Merkez Bankası"
+      },
+      "etiket": "SIRADAKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: dolar kırk dokuz lirayı gördü. Sebepleri dünya, enerji ve rezerv. Etkisi ise ithal ürünlerde ve akaryakıtta hissedilebilir.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "💵",
+            "metin": "Dolar",
+            "deger": "49 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🌍",
+            "metin": "Sebep",
+            "deger": "Dünya · enerji · rezerv",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Etki",
+            "deger": "İthal ürün · akaryakıt",
+            "renk": "turuncu"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Öğrenmek istediğin başka bir konu varsa yorumlara yaz. Bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Merak ettiysen, tıkla bakalım. Takip et.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Dolar/TL 29 Eylül 2026'da 49,00 ile rekor; gün içi aralık 48,83–49,00; alış 48,98 / satış 49,00; Merkez Bankası müdahalesine rağmen — https://www.ntv.com.tr/ntvpara/doviz/dolar-49-lirayi-asti-1743376 ; https://www.sozcu.com.tr/dolar-kuru-49-lirayi-asti-p364429 ; https://halktv.com.tr/ekonomi/29-eylul-2026-doviz-kurlari-euro-kac-tl-dolar-kac-tl-sterlin-kac-tl-1058162h ; https://www.nefes.com.tr/gune-dolar-surprizi-dolar-kac-tl-oldu-29-eylul-2026-154403",
+    "K2": "Fed'in yüksek faizi uzun tutma beklentisi, DXY zirvede; ABD–İran belirsizliği enerji fiyatı ve enflasyon baskısı — https://ekonomipolitikasi.com.tr/dolar-tl-49-tlyi-test-etti-dxy-zirvede-tutundu/ ; https://halktv.com.tr/ekonomi/29-eylul-2026-doviz-kurlari-euro-kac-tl-dolar-kac-tl-sterlin-kac-tl-1058162h ; https://www.nefes.com.tr/gune-dolar-surprizi-dolar-kac-tl-oldu-29-eylul-2026-154403",
+    "K3": "TCMB brüt rezervi 18 Eylül haftasında 4,3 milyar dolar düşüşle 174,4 milyar dolar — https://www.apara.com.tr/ekonomi/2026/09/24/merkez-bankasi-rezervleri-1744-milyar-dolar-oldu ; https://bankadunyasi.com/merkez-bankasi-rezervleri-1744-milyar-dolar-oldu/ ; https://www.bloomberght.com/tcmb-rezervlerinde-dusus-suruyor-3789340",
+    "K4": "PPK 10 Eylül 2026: politika faizi %37 sabit — https://tr.euronews.com/business/2026/09/10/merkez-bankasi-politika-faizini-yuzde-37de-sabit-tuttu ; https://www.tcmb.gov.tr/wps/wcm/connect/tr/tcmb+tr/main+menu/duyurular/basin/2026/duy2026-38 ; https://www.ensonhaber.com/son-dakika-tcmb-eylul-2026da-politika-faizini-yuzde-37de-sabit-tuttu-h1564430",
+    "K5": "Ağustos 2026 TÜFE yıllık %31,51 (TÜİK, 3 Eylül) — https://www.cnnturk.com/ekonomi/tuik-agustos-ayi-enflasyon-orani-2026-agustos-enflasyon-orani-ne-zaman-aciklanacak-agustos-enflasyon-beklentisi-ne-kira-artis-orani-3462009 ; https://uzmanpara.milliyet.com.tr/uzmanpara/agustos-2026-enflasyon-rakamlari-tuik-acikladi-enflasyon-oranlari-ne-oldu-iste-agustos-ayi-enflasyon-orani-7653238"
+  },
+  "cta": [
+    {
+      "sahne": 10,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
