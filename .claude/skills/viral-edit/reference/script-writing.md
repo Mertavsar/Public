@@ -89,6 +89,14 @@ Bu format **kısa cümle** ister. Tek kelimelik altyazıda uzun cümle dağılı
 
 ## 5. Hook kalıpları
 
+**Kanalın ana kalıbı (kullanıcının kuralı): olay + sonuca dair açık uçlu merak.**
+Görüntüde ilk 1 saniye sonucun doruk karesi, sonra başlangıç (SKILL.md §2).
+
+| Olay | Merak (sonucu söylemeden) |
+|---|---|
+| `Bu adamın motorundan bir anda duman çıkmaya başladı…` | `ama devamında yaşananlar motor şirketine dava açmasına sebep oldu.` |
+| `Kaldırım taşlarının altından bir ses geliyordu…` | `ama o sesi duyan kişi, bir hayatı tamamen değiştireceğini bilmiyordu.` |
+
 | Kalıp | Örnek |
 |---|---|
 | Sayı + dönüş | `Bunların yüzde doksanı başarısız. Yine de devam ediyor.` |

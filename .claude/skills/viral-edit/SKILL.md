@@ -459,6 +459,27 @@ yarım saniye önce ya da sonra olur.
 
 İlk kareye flash koyma — görüntüyü yakar. Açılışta darbe sesi ve sarsıntı yeterli.
 
+### ⛔ İlk 3 saniye: SONDAN BİR SORU AÇ (kullanıcının kuralı, her videoda)
+
+> Kullanıcı: *"ilk 3 saniye insanların kafasında videonun sonuna göre bir soru
+> bırakmalıyız."* Örneği: motoru yanan adam — ilk saniyeye motorun **yandığı**
+> 1 saniyelik an, ardından **duman çıkmaya başladığı** an; seslendirme:
+> *"Bu adamın motorundan bir anda duman çıkmaya başladı… ama devamında
+> yaşananlar motor şirketine dava açmasına sebep oldu."*
+
+Kalıp, her videoda:
+
+1. **0–1 s: sonucun en çarpıcı karesi (flash-forward).** Videonun sonundaki
+   doruk anı — yangın, kavuşma, kurtuluş — 1 saniye. İzleyici "buraya nasıl
+   gelindi?" diye sorar.
+2. **1–3 s: başlangıca dönüş.** Olayın ilk anı (duman çıkıyor, taşın altındaki
+   yavru). EDL'de bu iki plan ayrı: önce doruk, sonra başlangıç.
+3. **Seslendirme: olay + sonuca dair açık uçlu merak.** "…ama devamında
+   yaşananlar ___ sebep oldu." Sonucu söyleme, sadece var olduğunu söyle.
+   Söz verilen sonuç videoda gerçekten olmalı (kanıt karesi, §0).
+4. Metin kullanıcıdan gelirse ilk cümlesini bu kalıba göre değerlendir;
+   uymuyorsa öner. Metni sen yazıyorsan ilk cümle her zaman bu kalıpta.
+
 ### Kare sıfırda vaat olmalı
 
 YouTube Shorts'un "izlemeye devam edenler / izlemeden geçti" metriği ilk 1-2 saniyede
