@@ -758,6 +758,21 @@ ikonun rengini (kırmızı kalp) takip edip `x = x0 + vx·t` doğrusunu ölç:
         --switch 5.0 --box-a 460,562,0,130 --box-b 768,868,452,576 \
         --moving 0,61.9,9,8.93,982,1024,22,26 --work vpwork
 
+**Önce yazısız kaynağı iste.** Ambergris klibinde (31 sn, üstte logo + altta
+kelime altyazı + yorum balonu + ortada büyük yazılar) ProPainter CPU'da 2+ saat
+sürdü, iki iş paralel çalışınca (4 çekirdek, 8 thread) ikisi de 3 kat yavaşladı,
+her iş videonun tamamını diske 5.8 GB npy yazdığı için disk doldu. Kullanıcı
+orijinali buldu (Facebook, 4:5, yazısız): kurgu 15 dakikada çıktı. Kaynakta
+yazı çoksa temizliğe başlamadan önce kullanıcıya bir cümleyle sor: "altyazısız
+orijinali bulabilir misin?" (Google Lens / Yandex ile tersine arama, klibin
+kendi dilinde arama, lisanslı viral siteleri, Pexels/NOAA ara görüntü).
+ProPainter işlerini ASLA paralel çalıştırma.
+
+**4:5 kaynak (720x900)** tam ekran için 9:16 kırpılır (`--crop 506:900`),
+`cropx` plan başına özneye göre. Köşe filigranı çoğu zaman kırpmanın dışında
+kalır — silmeden önce kırpma ile kurtulup kurtulmadığına bak (hareket eden
+filigranın konumunu şablon eşleştirmeyle kare kare ölç).
+
 **Yorum balonu, sahneye yapışık büyük yazı, yarı saydam watermark** (renk
 eşiği tutmaz, arka plan da beyaz olabilir): `--rect t0,t1,y0,y1,x0,x1`
 dikdörtgenin tamamını o aralıkta maskeler. Maske hem üstte hem altta varsa
