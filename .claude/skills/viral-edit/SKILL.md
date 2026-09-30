@@ -758,6 +758,15 @@ ikonun rengini (kırmızı kalp) takip edip `x = x0 + vx·t` doğrusunu ölç:
         --switch 5.0 --box-a 460,562,0,130 --box-b 768,868,452,576 \
         --moving 0,61.9,9,8.93,982,1024,22,26 --work vpwork
 
+**Yorum balonu, sahneye yapışık büyük yazı, yarı saydam watermark** (renk
+eşiği tutmaz, arka plan da beyaz olabilir): `--rect t0,t1,y0,y1,x0,x1`
+dikdörtgenin tamamını o aralıkta maskeler. Maske hem üstte hem altta varsa
+ROI tüm kareyi kaplar: **iki geçiş yap** (önce üst yazılar, sonra çıktının
+üstünde alt altyazı bandı). Ambergris klibi:
+
+    vinpaint.py ham.mp4 p1.mp4 --rect 0,31,38,98,430,650 --rect 4.0,6.8,700,1075,120,950 ...
+    vinpaint.py p1.mp4 ham_clean.mp4 --band 1425,1580 --grow 15 --rect 0,31,1378,1458,360,725
+
 **Alt beyaz sis şeridi** (kopya hesaplar altyazı için ekliyor): önce satır
 başına ölç — zamansal std / üstteki temiz görüntünün std'si. Fil klibinde
 0.64 altı %1–7 çıktı: orada görüntü YOK, geri getirilemez. `unfog.py`

@@ -70,6 +70,9 @@ def main():
     # Kedi-köpek klibinde altyazı beyaz DÜZ KUTU içinde siyah yazıydı (CapCut
     # "classic"): harf maskesi kutunun kenarını kaçırıyor. Kutu dikdörtgen
     # olarak bulunup tamamen maskeleniyor.
+    ap.add_argument("--rect", action="append", default=[],
+                    help="t0,t1,y0,y1,x0,x1: bu aralıkta dikdörtgenin TAMAMI maskelenir "
+                         "(yorum balonu, sahneye yapışık büyük yazı, sabit watermark)")
     ap.add_argument("--white-box", help="beyaz altyazı kutusunun durabileceği y0,y1 bandı")
     # Aynı klipte altta soldan sağa kayan bir ikon (kalp + figür) vardı — video
     # boyunca ilerleyen bir süre göstergesi. Konumu x = x0 + vx*t ile gidiyor.
@@ -143,6 +146,7 @@ def main():
     band_at = [[float(v) for v in b.split(",")] for b in a.band_at]
     wbox = [int(v) for v in a.white_box.split(",")] if a.white_box else None
     moving = [[float(v) for v in s.split(",")] for s in a.moving]
+    rects = [[float(v) for v in r.split(",")] for r in a.rect]
 
     def white_boxes(f, y0, y1):
         """Düz beyaz kutu + koyu yazı: dikdörtgeni bul, tamamını maskele.
@@ -192,6 +196,9 @@ def main():
         m = np.zeros((H, W), np.uint8)
         if wbox:
             m |= white_boxes(f, *wbox)
+        for t0, t1, y0, y1, x0, x1 in rects:
+            if t0 <= t <= t1:
+                m[int(y0):int(y1), int(x0):int(x1)] = 255
         for t0, t1, x0, vx, y0, y1, lft, rgt in moving:
             if t0 <= t <= t1:
                 xc = x0 + vx * t
