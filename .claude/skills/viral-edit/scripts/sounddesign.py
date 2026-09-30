@@ -91,11 +91,15 @@ def heartbeat(freq=68.0):
     return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.09)
 
 
-def music(dur, reveal, lift, outro, bpm=90.0):
+def music(dur, reveal, lift, outro, bpm=90.0, mood="mystery", build=False):
     beat = 60.0 / bpm
     bar = 4 * beat
-    # Dm – Bb – Gm – A  (i–VI–iv–V): gizem, sonda gerilim çözülmeden döner
-    prog = [(50, [62, 65, 69]), (46, [62, 65, 70]), (43, [62, 67, 70]), (45, [61, 64, 69])]
+    if mood == "warm":
+        # F – C – Am – G (IV–I–vi–V): umut, kurtarma / bakım hikâyesi
+        prog = [(41, [65, 69, 72]), (48, [64, 67, 72]), (45, [64, 69, 72]), (43, [62, 67, 71])]
+    else:
+        # Dm – Bb – Gm – A  (i–VI–iv–V): gizem, sonda gerilim çözülmeden döner
+        prog = [(50, [62, 65, 69]), (46, [62, 65, 70]), (43, [62, 67, 70]), (45, [61, 64, 69])]
     n = int(dur * SR) + SR
     padb, arp, shim, hb, shk = (np.zeros(n) for _ in range(5))
     nb = int(np.ceil(dur / bar)) + 1
@@ -138,7 +142,10 @@ def music(dur, reveal, lift, outro, bpm=90.0):
             g *= np.clip((t_off - tt) / fade, 0, 1)
         return g
     pad_lvl = 0.55 + 0.25 * ramp(lift) * ramp(0, outro)
-    mix = (padb * pad_lvl * 0.9 + arp * 0.55 * ramp(reveal, outro + 0.8)
+    arp_lvl = ramp(reveal, outro + 0.8)
+    if build:   # "müzik giderek yükselsin": reveal'dan lift'e doğrusal tırmanış
+        arp_lvl = arp_lvl * np.clip(0.35 + 0.65 * (tt - reveal) / max(0.1, lift - reveal), 0.35, 1.0)
+    mix = (padb * pad_lvl * 0.9 + arp * 0.55 * arp_lvl
            + shim * 0.22 * ramp(lift, outro + 0.8) + shk * 0.10 * ramp(lift, outro)
            + hb * 0.9)
     # gerilim bölümünde tırmanan hava: reveal'a doğru
@@ -173,9 +180,49 @@ def subbreath(dur=0.45):
     return np.sin(2 * np.pi * 48 * t) * np.exp(-t / 0.14) * env_adsr(n, 0.01, 0.05)
 
 
-def sfx(dur, whooshes, bigs):
+def boom(dur=1.1):
+    """Bas vuruşu: perdesi düşen sub + kısa tık. Tiz çınlama YOK (gong değil)."""
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    f = 42 + 90 * np.exp(-t / 0.05)
+    body = np.tanh(1.6 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.exp(-t / 0.32)
+    # telefon hoparlörü 100 Hz altını çalmaz: 2. harmonik duyulan kısım
+    body += 0.35 * np.sin(4 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.2)
+    click = lp(rng.standard_normal(n), 2500) * np.exp(-t / 0.006)
+    return body + 0.5 * click
+
+
+def rewind(dur):
+    """Kaset geri sarma: hızla titreşen, perdesi yükselen bant gürültüsü."""
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    x = rng.standard_normal(n)
+    out = np.zeros(n)
+    seg = 220
+    for i in range(0, n, seg):
+        u = t[i] / dur
+        fc = 700 + 2600 * u + 500 * np.sin(2 * np.pi * 24 * t[i])
+        out[i:i + seg] = bp(x[max(0, i - 1024):i + seg], fc * 0.7, fc * 1.3, 1)[-len(out[i:i + seg]):]
+    flutter = 0.6 + 0.4 * np.sin(2 * np.pi * 17 * t)
+    return out * flutter * env_adsr(n, 0.03, 0.06)
+
+
+def pop(amp=1.0):
+    n = int(0.05 * SR)
+    t = np.arange(n) / SR
+    f = 300 + 700 * np.exp(-t / 0.01)
+    return amp * np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.015)
+
+
+def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=()):
     n = int(dur * SR)
     bus = np.zeros(n)
+    for t in booms:
+        b = boom(); place(bus, b / np.max(np.abs(b)) * 1.0, t)
+    for t0, t1 in rewinds:
+        r = rewind(t1 - t0); place(bus, r / np.max(np.abs(r)) * 0.55, t0)
+    for t in pops:
+        place(bus, pop(0.35), t)
     for t in whooshes:
         w = whoosh()
         place(bus, w / np.max(np.abs(w)) * 0.55, t - 0.62 * 0.42)
@@ -215,11 +262,18 @@ def main():
     ap.add_argument("--music-db", type=float, default=-19.0, help="müzik, sese göre (konuşmasız an)")
     ap.add_argument("--duck-db", type=float, default=-7.0, help="konuşma varken ek kısma")
     ap.add_argument("--sfx-db", type=float, default=-9.0)
+    ap.add_argument("--mood", choices=["mystery", "warm"], default="mystery")
+    ap.add_argument("--build", action="store_true", help="reveal→lift arası müzik giderek yükselir")
+    ap.add_argument("--boom", nargs="*", type=float, default=[])
+    ap.add_argument("--rewind", nargs="*", default=[], help="t0,t1")
+    ap.add_argument("--pop", nargs="*", type=float, default=[])
+    ap.add_argument("--mute", nargs="*", default=[], help="t0,t1: müziği kes (dramatik boşluk)")
     a = ap.parse_args()
     n = int(a.dur * SR)
     vo = np.zeros(n); v = read_wav(a.vo); vo[:min(n, len(v))] = v[:n]
-    mu = music(a.dur, a.reveal, a.lift, a.outro)
-    fx = sfx(a.dur, a.whoosh, a.big)
+    mu = music(a.dur, a.reveal, a.lift, a.outro, mood=a.mood, build=a.build)
+    fx = sfx(a.dur, a.whoosh, a.big, a.boom,
+             [tuple(float(v) for v in r.split(",")) for r in a.rewind], a.pop)
     vr = rms_db(vo[np.abs(vo) > 0.02]) if np.any(np.abs(vo) > 0.02) else -20
     mu *= 10 ** ((vr + a.music_db - rms_db(mu)) / 20)
     fx *= 10 ** ((vr + a.sfx_db - rms_db(fx[np.abs(fx) > 1e-3])) / 20) if np.any(fx) else 1
@@ -236,6 +290,10 @@ def main():
         s = tgt + (s - tgt) * c ** 64
         g[i:i + 64] = s
     mu *= 10 ** (a.duck_db * g / 20)
+    tt = np.arange(n) / SR
+    for m in a.mute:
+        t0, t1 = (float(v) for v in m.split(","))
+        mu *= np.clip(np.maximum((t0 - tt) / 0.02, (tt - t1) / 0.08), 0, 1)
     mix = vo + mu + fx
     # tepe sınırla, -14 LUFS'a yakın ses ffmpeg loudnorm ile
     write_wav(a.out + ".raw.wav", mix / max(1.0, np.max(np.abs(mix)) / 0.95))
