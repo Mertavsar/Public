@@ -70,6 +70,8 @@ def main():
     # Kedi-köpek klibinde altyazı beyaz DÜZ KUTU içinde siyah yazıydı (CapCut
     # "classic"): harf maskesi kutunun kenarını kaçırıyor. Kutu dikdörtgen
     # olarak bulunup tamamen maskeleniyor.
+    ap.add_argument("--shadow", help="dx,dy: altyazı maskesini bu kadar kaydırıp ekle (yumuşak "
+                    "düşen gölge harf eşiğine takılmıyor, silinince koyu çizgi kalıyor)")
     ap.add_argument("--rect", action="append", default=[],
                     help="t0,t1,y0,y1,x0,x1: bu aralıkta dikdörtgenin TAMAMI maskelenir "
                          "(yorum balonu, sahneye yapışık büyük yazı, sabit watermark)")
@@ -147,6 +149,7 @@ def main():
     wbox = [int(v) for v in a.white_box.split(",")] if a.white_box else None
     moving = [[float(v) for v in s.split(",")] for s in a.moving]
     rects = [[float(v) for v in r.split(",")] for r in a.rect]
+    shadow = [int(v) for v in a.shadow.split(",")] if a.shadow else None
 
     def white_boxes(f, y0, y1):
         """Düz beyaz kutu + koyu yazı: dikdörtgeni bul, tamamını maskele.
@@ -209,6 +212,11 @@ def main():
                 if t0 <= t <= t1:
                     by0, by1 = int(y0), int(y1)
             tm, hlm = text_mask(f, by0, by1, hue, a.white_min, a.grow)
+            if shadow:
+                dx, dy = shadow
+                for k in (0.5, 1.0):
+                    M = np.float32([[1, 0, dx * k], [0, 1, dy * k]])
+                    tm = tm | cv2.warpAffine(tm, M, (W, H))
             m |= tm | hlm
         for t0, t1, y0, y1, x0, x1 in extras:
             if t0 <= t <= t1:
