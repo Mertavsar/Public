@@ -1,0 +1,580 @@
+{
+  "baslik": "Enflasyon %31,5 ama hane halkı %45,6 bekliyor: Neden herkes farklı rakam söylüyor?",
+  "tarih": "2026-09-30",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "beklenti",
+    "fark",
+    "ortalama",
+    "algı",
+    "düşebilir"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "yüzde otuz bir buçuk": "yüzde 31,5",
+    "kırk beş virgül altı": "45,6",
+    "yirmi üç virgül yedi": "23,7",
+    "otuz iki buçuk": "32,5",
+    "iki virgül on sekiz": "2,18",
+    "otuz virgül on altı": "30,16",
+    "otuz virgül on altıya": "30,16'ya",
+    "otuz bir virgül elli bir": "31,51",
+    "üç virgül yirmi üç": "3,23",
+    "beş Ekim": "5 Ekim",
+    "bin iki yüz otuz yedi": "1.237",
+    "bin dört yüz elli altı": "1.456",
+    "iki yüz on dokuz": "219",
+    "Aylık sepetin bin lira": "Aylık sepetin 1.000 lira",
+    "yüzde on bir": "yüzde 11",
+    "yirmi puandan": "20 puandan",
+    "üç sebep": "3 sebep"
+  },
+  "kapak": {
+    "ikon": "🛒",
+    "ust": "ENFLASYON",
+    "buyuk": "31,5 ≠ 45,6",
+    "alt": "NEDEN?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Ağustosta yıllık enflasyon yüzde otuz bir buçuk oldu.",
+      "p": {
+        "ikon": "🛒",
+        "etiket": "Yıllık enflasyon · Ağustos 2026",
+        "deger": 31.51,
+        "onek": "%",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "sari",
+        "sayma": false
+      },
+      "kaynak": "TÜİK, Ağustos TÜFE (K1)",
+      "etiket": "AĞUSTOS ENFLASYONU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Ama hane halkı, önümüzdeki yıl için yüzde kırk beş virgül altı bekliyor.",
+      "p": {
+        "ikon": "🏠",
+        "etiket": "Hane halkı · 12 ay sonrası beklenti",
+        "deger": 45.6,
+        "onek": "%",
+        "ondalik": 1,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": true
+      },
+      "kaynak": "TCMB Sektörel Enflasyon Beklentileri, Eylül (K2)",
+      "etiket": "HANE HALKI BEKLENTİSİ"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki aynı ülkede bu fark neden? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "BU FARK\n*NEDEN?*"
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ",
+          "*SADE* ANLATIYORUZ"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce şunu ayıralım. Enflasyon geçmişi anlatır, beklenti ise geleceği.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "ENFLASYON = *GEÇMİŞ*",
+          "BEKLENTİ = *GELECEK*"
+        ],
+        "boy": 72,
+        "not": "İkisi aynı şey değil"
+      },
+      "etiket": "İKİ FARKLI ŞEY"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Merkez Bankası her ay üç kesime aynı soruyu soruyor: gelecek yıl enflasyon kaç olur?",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "3 KESİME",
+          "*AYNI SORU*"
+        ],
+        "boy": 100,
+        "not": "Önümüzdeki 12 ay için yıllık enflasyon beklentisi"
+      },
+      "kaynak": "K2",
+      "etiket": "MERKEZ BANKASI ANKETİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Piyasa katılımcıları yüzde yirmi üç virgül yedi bekliyor. Şirketler yüzde otuz iki buçuk. Hane halkı ise yüzde kırk beş virgül altı.",
+      "p": {
+        "baslik": "12 ay sonrası enflasyon beklentisi · Eylül",
+        "satirlar": [
+          {
+            "ikon": "📊",
+            "metin": "Piyasa katılımcıları",
+            "deger": "%23,70",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🏭",
+            "metin": "Şirketler (reel sektör)",
+            "deger": "%32,50",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "Hane halkı",
+            "deger": "%45,60",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Beklenti — gerçekleşen değil"
+      },
+      "kaynak": "K2, K3",
+      "etiket": "ÜÇ KESİM ÜÇ CEVAP"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Yani en düşük ile en yüksek beklenti arasında yirmi puandan fazla fark var.",
+      "p": {
+        "baslik": "12 ay sonrası beklenen enflasyon",
+        "sol": {
+          "etiket": "PİYASA\n(beklenti)",
+          "deger": 23.7,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "HANE HALKI\n(beklenti)",
+          "deger": 45.6,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "ondalik": 1,
+        "fark": "+21,9 puan"
+      },
+      "kaynak": "K2, K3 · fark: 45,6 − 23,7",
+      "etiket": "FARK 22 PUAN"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Eylül enflasyonu beş Ekim pazartesi günü açıklanacak.",
+      "p": {
+        "gun": "5",
+        "ay": "EKİM",
+        "gunadi": "PAZARTESİ",
+        "saat": "10.00",
+        "not": "*Eylül* enflasyonu açıklanacak"
+      },
+      "kaynak": "K5",
+      "etiket": "SIRADAKİ VERİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Ekonomistler aylık yüzde iki virgül on sekiz, yıllık yüzde otuz virgül on altı bekliyor.",
+      "p": {
+        "baslik": "Eylül enflasyonu · ekonomist beklentisi",
+        "satirlar": [
+          {
+            "ikon": "📈",
+            "metin": "Aylık (bekleniyor)",
+            "deger": "%2,18",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🧮",
+            "metin": "Yıllık (bekleniyor)",
+            "deger": "%30,16",
+            "renk": "sari"
+          }
+        ],
+        "not": "AA Finans anketi · 20 ekonomist · tahmin"
+      },
+      "kaynak": "K4",
+      "etiket": "EKONOMİST TAHMİNİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Birinci sebep: enflasyon bir ortalamadır. Herkesin sepeti farklı.",
+      "p": {
+        "ikon": "🧺",
+        "satirlar": [
+          "ENFLASYON =",
+          "*ORTALAMA*"
+        ],
+        "boy": 110
+      },
+      "etiket": "1. SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Resmî sepette gıda yaklaşık dörtte bir, ulaştırma altıda bir, konut ise yüzde on bir civarında.",
+      "p": {
+        "baslik": "Resmî enflasyon sepeti · 2026 ağırlıkları",
+        "satirlar": [
+          {
+            "ikon": "🍞",
+            "metin": "Gıda ve alkolsüz içecek",
+            "deger": "%24,44",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🚗",
+            "metin": "Ulaştırma",
+            "deger": "%16,62",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "Konut, su, elektrik, gaz",
+            "deger": "%11,40",
+            "renk": "mavi"
+          }
+        ],
+        "not": "Toplamın yalnızca üç grubu"
+      },
+      "kaynak": "TÜİK 2026 sepeti (K6)",
+      "etiket": "RESMÎ SEPET"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Senin sepetin bundan farklı olabilir. Kiracıysan kira, arabalıysan benzin öne çıkar.",
+      "p": {
+        "ikon": "👛",
+        "satirlar": [
+          "SENİN SEPETİN",
+          "≠ *RESMÎ SEPET*"
+        ],
+        "boy": 92
+      },
+      "etiket": "SENİN SEPETİN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "İkinci sebep algı. Ekmek, benzin, pazar gibi sık aldığın şeylerin zammı daha çok göze batar. Bu bir ölçüm değil, yaygın bir yorum.",
+      "p": {
+        "ikon": "👀",
+        "satirlar": [
+          "SIK ALDIKLARIN",
+          "*GÖZE BATAR*"
+        ],
+        "boy": 100,
+        "not": "Yorum — kesin ölçüm değil"
+      },
+      "etiket": "2. SEBEP · YORUM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BEĞENİ",
+          "*BIRAK*"
+        ],
+        "boy": 110
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Üçüncü sebep baz etkisi. Geçen eylülde aylık artış yüzde üç virgül yirmi üçtü. Bu yıl beklenen artış yüzde iki virgül on sekiz. Bu yüzden yıllık oran düşebilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "⏪",
+            "metin": "Geçen eylül: aylık *%3,23*"
+          },
+          {
+            "ikon": "⏩",
+            "metin": "Bu eylül: aylık *%2,18* (tahmini)"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Yıllık oran +düşebilir+"
+          }
+        ]
+      },
+      "kaynak": "TÜİK Eylül 2025 (K7), AA Finans (K4)",
+      "etiket": "3. SEBEP · BAZ ETKİSİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Ağustosta yüzde otuz bir virgül elli bir olan yıllık oranın, eylülde yüzde otuz virgül on altıya inmesi bekleniyor.",
+      "p": {
+        "baslik": "Yıllık enflasyon",
+        "sol": {
+          "etiket": "AĞUSTOS\n(gerçekleşen)",
+          "deger": 31.51,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "EYLÜL\n(tahmini)",
+          "deger": 30.16,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "ondalik": 2,
+        "fark": "−1,35 puan"
+      },
+      "kaynak": "K1, K4",
+      "etiket": "YILLIK ORAN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Yani üç sebep var: herkesin farklı sepeti, algı ve baz etkisi.",
+      "p": {
+        "baslik": "Özet · 3 sebep",
+        "satirlar": [
+          {
+            "ikon": "🧺",
+            "metin": "Ortalama sepet",
+            "deger": "Herkesinki farklı",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "👀",
+            "metin": "Algı (yorum)",
+            "deger": "Sık alınanlar",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "⏪",
+            "metin": "Baz etkisi",
+            "deger": "Geçen yılın ayı",
+            "renk": "sari"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*"
+      },
+      "etiket": "CEBİNE ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Diyelim ki aylık sepetin bin lira. Piyasanın beklentisi çıkarsa, bir yıl sonra bin iki yüz otuz yedi lira olur.",
+      "p": {
+        "baslik": "Piyasa beklentisi · tahmini",
+        "ikon": "📊",
+        "ogeler": [
+          "1.000 ₺",
+          "×",
+          "1,237",
+          "=",
+          "1.237 ₺"
+        ]
+      },
+      "kaynak": "K3 · 1.000 × 1,237",
+      "etiket": "PİYASA SENARYOSU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Hane halkının beklentisi çıkarsa, aynı sepet bin dört yüz elli altı lira olur.",
+      "p": {
+        "baslik": "Hane halkı beklentisi · tahmini",
+        "ikon": "🏠",
+        "ogeler": [
+          "1.000 ₺",
+          "×",
+          "1,456",
+          "=",
+          "1.456 ₺"
+        ]
+      },
+      "kaynak": "K2 · 1.000 × 1,456",
+      "etiket": "HANE HALKI SENARYOSU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "say": "İki senaryo arasında iki yüz on dokuz lira fark var. Hangisinin çıkacağını kimse bilmiyor.",
+      "p": {
+        "ikon": "⚖️",
+        "etiket": "Senaryolar arası fark · 1.000 ₺'lik sepette",
+        "deger": 219,
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "sari",
+        "renk": "sari",
+        "not": "1.456 − 1.237 · her ikisi de tahmin"
+      },
+      "kaynak": "1.456 − 1.237",
+      "etiket": "İKİ SENARYO"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Beklenti önemli, çünkü fiyat ve zam kararlarını etkileyebilir. Merkez Bankası da anketleri bu yüzden yayımlıyor.",
+      "p": {
+        "ikon": "🧭",
+        "satirlar": [
+          "BEKLENTİ",
+          "*ÖNEMLİ*"
+        ],
+        "boy": 110,
+        "not": "Yorum — beklenti kararları etkileyebilir"
+      },
+      "etiket": "NEDEN ÖNEMLİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Kendi enflasyonunu hesaplamak kolay. Geçen yılki market, fatura ve akaryakıt harcamana bak, bugünle kıyasla.",
+      "p": {
+        "baslik": "Kendi enflasyonunu hesapla",
+        "satirlar": [
+          {
+            "ikon": "🛒",
+            "metin": "Market fişi",
+            "deger": "geçen yıl ↔ bugün",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🧾",
+            "metin": "Faturalar",
+            "deger": "geçen yıl ↔ bugün",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Akaryakıt",
+            "deger": "geçen yıl ↔ bugün",
+            "renk": "turuncu"
+          }
+        ],
+        "not": "Sana özel oran, resmî orandan farklı çıkabilir"
+      },
+      "etiket": "KENDİ ENFLASYONUN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kesin olan tek şey var: gerçek rakam beş Ekim'de belli olacak. Şimdiki sayılar sadece beklenti.",
+      "p": {
+        "ikon": "🔮",
+        "satirlar": [
+          "ŞİMDİKİ SAYILAR",
+          "*SADECE BEKLENTİ*"
+        ],
+        "boy": 84,
+        "not": "Gerçek rakam: 5 Ekim, 10.00"
+      },
+      "kaynak": "K5",
+      "etiket": "KESİN OLAN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: enflasyon geçmiş, beklenti gelecek. Fark üç sebepten çıkıyor. Bu yüzden herkes farklı rakam söylüyor.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "🛒",
+            "metin": "Ağustos enflasyonu",
+            "deger": "%31,51",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "Hane halkı beklentisi",
+            "deger": "%45,6",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🧠",
+            "metin": "Fark",
+            "deger": "Sepet · algı · baz",
+            "renk": "mavi"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen kendi enflasyonunu kaç hissediyorsun? Öğrenmek istediğin başka bir konu varsa yorumlara yaz. Bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Merak ettiysen, tıkla bakalım. Takip et.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Ağustos 2026 TÜFE: yıllık %31,51, aylık %1,84 (TÜİK, 3 Eylül) — https://bigpara.hurriyet.com.tr/haberler/emtia-haberleri/agustos-ayi-enflasyonu-belli-oldu_ID102241364/ ; https://www.sozcu.com.tr/son-dakika-agustos-ayi-enflasyonu-aciklandi-p354983 ; https://www.turkiyeegitim.com/agustos-2026-enflasyon-rakamlari-aciklandi-yillik-enflasyon-yuzde-3151-142820h.htm",
+    "K2": "TCMB Sektörel Enflasyon Beklentileri, Eylül 2026 (23 Eylül): 12 ay sonrası piyasa %23,70, hane halkı %45,60, reel sektör %32,50 — https://www.aa.com.tr/tr/ekonomi/tcmb-sektorel-enflasyon-beklentilerini-yayimladi/4065839 ; https://www.apara.com.tr/ekonomi/2026/09/23/tcmb-sektorel-enflasyon-beklentilerini-acikladi ; https://www.trtv.net/2026/09/23/tcmb-hanehalki-enflasyon-beklentisi-anketi-eylul-2026/",
+    "K3": "TCMB Piyasa Katılımcıları Anketi, Eylül 2026: 12 ay sonrası TÜFE beklentisi %23,70 (yıl sonu %29,61) — https://www.tcmb.gov.tr/wps/wcm/connect/085d78c0-9809-4b33-a6b6-21e0a22a6405/PKA_Rapor.pdf ; https://www.dunya.com/ekonomik-veriler/tcmb-anketinde-enflasyon-beklentisi-yukseldi-dolar-ve-faiz-tahmini-de-belli-oldu-haberi-839608 ; https://www.milliyet.com.tr/bilgi-rehberi/piyasa-katilimcilari-anketi-istatistikleri-eylul-enflasyonu-aciklandi-mi-ne-cikti-2026-eylul-enflasyon-beklentisi-nedir-7669002",
+    "K4": "AA Finans Eylül enflasyon anketi (20 ekonomist): aylık %2,18, yıllık %30,16 beklentisi, baz etkisiyle yıllıkta 1,35 puan düşüş — https://www.aa.com.tr/tr/ekonomi/aa-finansin-eylul-ayi-enflasyon-beklenti-anketi-sonuclandi/4072641 ; https://sanayigazetesi.com.tr/eylul-enflasyonu-beklentisi-belli-oldu-aylik-yuzde-218-yillik-yuzde-3016/ ; https://istanbulticaretgazetesi.com/eylul-enflasyon-2026-anketi-sonuclandi-yillik-135-puan-dusus-bekleniyor",
+    "K5": "TÜİK Eylül enflasyonunu 5 Ekim 2026 Pazartesi 10.00'da açıklayacak — https://www.cnnturk.com/ekonomi/eylul-2026-enflasyon-beklentisi-tuik-eylul-ayi-enflasyon-beklentisi-ne-yonde-enflasyon-rakamlari-ne-zaman-aciklanacak-3473036 ; https://www.sabah.com.tr/yasam/tuik-enflasyon-aciklama-tarihi-2026-eylul-enflasyonu-ne-zaman-saat-kacta-aciklanacak-7669984 ; https://uzmanpara.milliyet.com.tr/uzmanpara/eylul-ayi-enflasyonu-ne-zaman-aciklanacak-2026-eylul-ayi-enflasyon-beklentisi-kac-tuik-enflasyon-aciklama-tarihi-7667341",
+    "K6": "TÜİK 2026 TÜFE sepeti (baz yılı 2025=100): gıda %24,44, ulaştırma %16,62, konut %11,40 — https://www.bloomberght.com/tuik-enflasyon-sepetini-guncelledi-3768108 ; https://tcmbblog.org/wps/wcm/connect/blog/tr/main+menu/analizler/2026+yili+tuketici+fiyat+endeksindeki+guncellemeler+ve+etkileri ; https://www.ekonomigazetesi.com/ekonomi/tuik-enflasyon-sepetini-guncelledi-71613",
+    "K7": "Eylül 2025 TÜFE: aylık %3,23, yıllık %33,29 (TÜİK) — https://tr.euronews.com/business/2025/10/03/eylul-ayinda-yillik-enflasyon-tuik-yuzde-3329-enag-ise-yuzde-6323-acikladi ; https://www.sbb.gov.tr/eylul-2025-enflasyon-verileri/ ; https://ankahaber.net/haber/detay/tuik_eylul_ayi_enflasyonu_yuzde_323_yillik_enflasyon_yuzde_3329_oldu_264855"
+  }
+}
