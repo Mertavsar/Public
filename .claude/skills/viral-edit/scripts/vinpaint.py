@@ -235,10 +235,19 @@ def main():
     n = min(n, i + 1)
     # yazı belirip kaybolurken (fade) yarı saydam harf eşiğin altında kalıyor:
     # komşu karelerin maskesi de eklenir (detext ile aynı pencere)
+    # Pencere sahne kesimini GEÇMEZ: geçince sonraki sahnenin büyük yazısı
+    # önceki sahnenin son karelerine taşındı, ROI 340'tan 1144 satıra çıktı
+    # ve parça 3 kat yavaşladı (ambergris klibi).
     back, ahead = 6, 10
+    plain = [tuple(int(round(float(v) * fps)) for v in p.split(",")) for p in a.plain]
+    cuts = [0] + [int(round(c * fps)) for c in scene_cuts(a.src, a.scene_thr, t_end)] + [n]
+    cuts += [v for p in plain for v in p]           # karartma aralığı kendi parçası olsun
+    cuts = sorted(set(c for c in cuts if 0 <= c <= n))
     masks = np.zeros_like(raw)
     for i in range(n):
-        masks[i] = raw[max(0, i - back):min(n, i + ahead + 1)].max(0)
+        cs = max(c for c in cuts if c <= i)
+        ce = min((c for c in cuts if c > i), default=n)
+        masks[i] = raw[max(cs, i - back):min(ce, i + ahead + 1)].max(0)
         lm = logo_mask(i / fps)
         if lm is not None:
             masks[i] |= lm
@@ -255,17 +264,20 @@ def main():
         h = min(h, H // 8 * 8)
         cy = (y0 + y1) // 2
         y0 = max(0, min(cy - h // 2, H - h))
-        return y0, y0 + h
+        # yatayda da kırp: küçük logo için tam genişlik 3 kat fazla iş
+        cols = np.nonzero(m.max(axis=(0, 1)))[0]
+        x0 = max(0, cols.min() - a.margin); x1 = min(W, cols.max() + a.margin)
+        w = max(-(-(x1 - x0) // 8) * 8, -(-int(136 / a.scale) // 8) * 8)
+        w = min(w, W // 8 * 8)
+        cx = (x0 + x1) // 2
+        x0 = max(0, min(cx - w // 2, W - w))
+        return y0, y0 + h, x0, x0 + w
 
     if not masks[:n].any():
         sys.exit("maske boş — silinecek bir şey bulunamadı")
     print(f"{n} kare")
 
     # ---- sahnelere böl ----
-    plain = [tuple(int(round(float(v) * fps)) for v in p.split(",")) for p in a.plain]
-    cuts = [0] + [int(round(c * fps)) for c in scene_cuts(a.src, a.scene_thr, t_end)] + [n]
-    cuts += [v for p in plain for v in p]           # karartma aralığı kendi parçası olsun
-    cuts = sorted(set(c for c in cuts if 0 <= c <= n))
     chunks = []
     for s, e in zip(cuts[:-1], cuts[1:]):
         k = max(1, -(-(e - s) // a.max_chunk))
@@ -290,12 +302,12 @@ def main():
                 fh.write(f"{s} {e}\n")
             print(f"sahne {s / fps:6.2f}-{e / fps:6.2f} s ({e - s} kare) Telea", flush=True)
             continue
-        ry0, ry1 = roi_of(masks[s:e])  # sahne başına: ok/logo yalnız kendi sahnesinde büyütsün
+        ry0, ry1, rx0, rx1 = roi_of(masks[s:e])  # sahne başına: ok/logo yalnız kendi sahnesinde büyütsün
         d = os.path.join(work, f"c{ci:03d}"); fd = os.path.join(d, "frames"); md = os.path.join(d, "masks")
         shutil.rmtree(d, ignore_errors=True); os.makedirs(fd); os.makedirs(md)
         for j in range(s, e):
-            cv2.imwrite(os.path.join(fd, f"{j - s:04d}.png"), fr[j, ry0:ry1])
-            cv2.imwrite(os.path.join(md, f"{j - s:04d}.png"), masks[j, ry0:ry1])
+            cv2.imwrite(os.path.join(fd, f"{j - s:04d}.png"), fr[j, ry0:ry1, rx0:rx1])
+            cv2.imwrite(os.path.join(md, f"{j - s:04d}.png"), masks[j, ry0:ry1, rx0:rx1])
         t0 = time.time()
         r = subprocess.run([sys.executable, "inference_propainter.py", "-i", fd, "-m", md,
                             "-o", os.path.join(d, "res"), "--save_frames",
@@ -307,18 +319,18 @@ def main():
             print(r.stdout[-2000:], r.stderr[-3000:]); sys.exit(f"ProPainter hata: kare {s}-{e}")
         for j in range(s, e):
             p = cv2.imread(os.path.join(rd, f"{j - s:04d}.png"))
-            if p.shape[:2] != (ry1 - ry0, W):
-                p = cv2.resize(p, (W, ry1 - ry0), interpolation=cv2.INTER_CUBIC)
-            m = cv2.dilate(masks[j, ry0:ry1], np.ones((13, 13), np.uint8))
+            if p.shape[:2] != (ry1 - ry0, rx1 - rx0):
+                p = cv2.resize(p, (rx1 - rx0, ry1 - ry0), interpolation=cv2.INTER_CUBIC)
+            m = cv2.dilate(masks[j, ry0:ry1, rx0:rx1], np.ones((13, 13), np.uint8))
             al = cv2.GaussianBlur(m.astype(np.float32) / 255, (0, 0), 2)[..., None]
-            roi = out[j, ry0:ry1].astype(np.float32)
-            out[j, ry0:ry1] = (p * al + roi * (1 - al)).round().astype(np.uint8)
+            roi = out[j, ry0:ry1, rx0:rx1].astype(np.float32)
+            out[j, ry0:ry1, rx0:rx1] = (p * al + roi * (1 - al)).round().astype(np.uint8)
         fr.flush()
         with open(donep, "a") as fh:
             fh.write(f"{s} {e}\n")
         if not a.keep:
             shutil.rmtree(d)
-        print(f"sahne {s / fps:6.2f}-{e / fps:6.2f} s ({e - s} kare, y {ry0}-{ry1}) {time.time() - t0:5.0f} sn", flush=True)
+        print(f"sahne {s / fps:6.2f}-{e / fps:6.2f} s ({e - s} kare, y {ry0}-{ry1} x {rx0}-{rx1}) {time.time() - t0:5.0f} sn", flush=True)
     print(f"model toplam {time.time() - t_all:.0f} sn")
 
     # ---- yaz: işlenen kareler + (varsa) kapanış kartı olduğu gibi ----
