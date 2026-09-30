@@ -25,8 +25,8 @@
 - **Meta reklam hesabı ID:** 1397863002539718
 - **Meta hesap adı:** Glamoria Reklam Hesabı
 - **Business ID:** 2250615012176119
-- **Facebook sayfası:**
-- **Instagram hesabı:**
+- **Facebook sayfası:** Glamouria Scarf — 1276358758893135
+- **Instagram hesabı:** @glamouriascarf — 17841406029125020
 - **Google Ads müşteri ID:**
 
 ## Reklam
