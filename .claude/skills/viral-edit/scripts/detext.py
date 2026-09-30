@@ -21,11 +21,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from dewatermark import probe, fill_smooth
 
 
-def text_mask(f, y0, y1, hue, white_min, grow=15):
+def text_mask(f, y0, y1, hue, white_min, grow=15, smin=70, vmin=80):
     hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
     mn = f.min(2).astype(int); mx = f.max(2).astype(int)
     white = (mn > white_min) & ((mx - mn) < 45)
-    hl = (hsv[..., 0] >= hue[0]) & (hsv[..., 0] <= hue[1]) & (hsv[..., 1] > 70) & (hsv[..., 2] > 80)
+    hl = (hsv[..., 0] >= hue[0]) & (hsv[..., 0] <= hue[1]) & (hsv[..., 1] > smin) & (hsv[..., 2] > vmin)
     m = np.zeros(f.shape[:2], np.uint8)
     m[y0:y1] = ((white | hl)[y0:y1]) * 255
     # tek tük parlak piksel (su parıltısı, pul) yazı değil: yatay yoğunluk ara

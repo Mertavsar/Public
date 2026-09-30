@@ -64,7 +64,10 @@ def main():
                     help="t0,t1,y0,y1: o aralıkta bandı daralt. Ay balığı klibinde balığın gözündeki "
                          "beyaz halka bantta kalınca yazı sanılıp silindi; göz bandın dışında bırakıldı")
     ap.add_argument("--hl-hue", default="118,150")
-    ap.add_argument("--white-min", type=int, default=195)
+    ap.add_argument("--white-min", type=int, default=195, help="256 = beyaz yazı arama (duman/gökyüzü yazı sanılmasın)")
+    ap.add_argument("--hl-smin", type=int, default=70, help="renkli yazı doygunluk eşiği (turuncu altyazı: 190)")
+    ap.add_argument("--hl-vmin", type=int, default=80)
+    ap.add_argument("--band-x", help="altyazı bandının x0,x1 sınırı (kenardaki çimen/kıyafet yazı sanılmasın)")
     ap.add_argument("--grow", type=int, default=11, help="harf + gölge genişletme (model 4 px daha ekler)")
     ap.add_argument("--extra", action="append", default=[], help="kırmızı çizim t0,t1,y0,y1,x0,x1")
     # Kedi-köpek klibinde altyazı beyaz DÜZ KUTU içinde siyah yazıydı (CapCut
@@ -211,7 +214,10 @@ def main():
             for t0, t1, y0, y1 in band_at:
                 if t0 <= t <= t1:
                     by0, by1 = int(y0), int(y1)
-            tm, hlm = text_mask(f, by0, by1, hue, a.white_min, a.grow)
+            tm, hlm = text_mask(f, by0, by1, hue, a.white_min, a.grow, a.hl_smin, a.hl_vmin)
+            if a.band_x:
+                bx0, bx1 = (int(v) for v in a.band_x.split(","))
+                tm[:, :bx0] = 0; tm[:, bx1:] = 0; hlm[:, :bx0] = 0; hlm[:, bx1:] = 0
             if shadow:
                 dx, dy = shadow
                 for k in (0.5, 1.0):

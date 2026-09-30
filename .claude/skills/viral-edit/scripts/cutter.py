@@ -68,10 +68,15 @@ def main():
         if "rewind" in p:
             s0, s1 = p["rewind"]
             idx = [int(round((s0 + (s1 - s0) * k / max(1, n - 1)) * FPS)) for k in range(n)]
+            wts = [0.0] * n
         else:
-            f0 = int(round(p["src"] * FPS))
-            idx = [f0 + int(k / p.get("slow", 1.0)) for k in range(n)]
-        fr = frames(a.src, idx)
+            # ağır çekimde kare tekrarı takılıyor: ara konumda iki kareyi harmanla
+            pos = [p["src"] * FPS + k / p.get("slow", 1.0) for k in range(n)]
+            idx = [int(q) for q in pos]
+            wts = [q - int(q) for q in pos]
+        fr = frames(a.src, idx + [i + 1 for i in idx])
+        fr, nxt = fr[:n], fr[n:]
+        fr = [f if w < 0.05 else cv2.addWeighted(f, 1 - w, g, w, 0) for f, g, w in zip(fr, nxt, wts)]
         z0, z1 = p.get("z0", 1.0), p.get("z1", 1.0)
         cx, cy = p.get("cx", 0.5) * W, p.get("cy", 0.5) * H
         for k, (si, f) in enumerate(zip(idx, fr)):
