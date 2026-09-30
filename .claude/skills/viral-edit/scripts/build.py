@@ -28,7 +28,7 @@ cropy      (isteğe bağlı 12. sütun) kırpmanın üst kenarı. Boşsa --crop-
            Gömülü yazı kaynağın ÜSTÜNDEYSE plan başına aşağı kaydırmak için.
 """
 
-import argparse, json, os, re, shlex, subprocess, sys
+import argparse, json, os, re, shlex, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FLASH_AMP = {"R": 0.30, "M": 0.24}
@@ -480,6 +480,9 @@ def main():
     ap.add_argument("--script", default=None,
                     help="seslendirme metni. YOKSA altyazı üretilmez — "
                          "metin gelince aynı komutu --script ile tekrar çalıştır")
+    ap.add_argument("--captions", default=None,
+                    help="hazır hizalanmış altyazı (sentalign.py çıktısı). Verilirse align.py "
+                         "çalışmaz — hızlı seste align.py kayıyor, cümle bazlı hizalama tutuyor")
     ap.add_argument("--spec", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--work", default=None)
     ap.add_argument("--crop", default="416:740", help="kaynaktan kırpma GxY (9:16 olmalı)")
@@ -565,7 +568,11 @@ def main():
         raise SystemExit("Anlatım–görüntü uyuşmazlığı. EDL'i düzelt veya --force ver.")
 
     caps = None
-    if a.script:
+    if a.captions:
+        print("\n1/5 hizalama: hazır altyazı", a.captions)
+        caps = f"{work}/captions.json"
+        shutil.copy(a.captions, caps)
+    elif a.script:
         print("\n1/5 hizalama")
         caps = f"{work}/captions.json"
         run([sys.executable, f"{HERE}/align.py", "--audio", a.vo, "--text", a.script,
