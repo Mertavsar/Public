@@ -459,6 +459,22 @@ yarım saniye önce ya da sonra olur.
 
 İlk kareye flash koyma — görüntüyü yakar. Açılışta darbe sesi ve sarsıntı yeterli.
 
+### Kullanıcı açıkça "ok, geçiş efekti, fon müziği" isterse
+
+Varsayılan hâlâ sade (müzik/efekt/ok yok). Açık istekte audiobed.py'nin
+vuruşlarını ve "drive" yatağını KULLANMA ("gong sesleri berbat"). Bunun yerine:
+
+1. `build.py ... --no-music --no-sfx` ile kes, `_b/content.mp4` al.
+2. `transitions.py content.mp4 content_fx.mp4 --at 2.35:zoom 4.10:whip 13.00:big ...`
+   — anlatının döndüğü kesimlere; flaş yok, yazı katmanı sarsılmaz.
+3. Oklar spec'te yalnız kilit nesnede, 5–6 tane. Hareketli nesnede oku kısa
+   parçalara böl (ilk parça `draw`, gerisi 0) ve konumu kare kare ölç.
+   Ok ucu altyazı bandına (0.70–0.76) girmesin.
+4. `sounddesign.py --vo ... --whoosh <kesimler> --big <dönüm> --reveal
+   --lift --outro` — tonsuz whoosh + sub nefes, minör gizem yatağı,
+   konuşmada müzik −26 dB (sidechain).
+5. `overlay.py` ile ok+altyazı, ffmpeg ile birleştir, iki geçişli ≤30 MB.
+
 ### ⛔ İlk 3 saniye: SONDAN BİR SORU AÇ (kullanıcının kuralı, her videoda)
 
 > Kullanıcı: *"ilk 3 saniye insanların kafasında videonun sonuna göre bir soru
