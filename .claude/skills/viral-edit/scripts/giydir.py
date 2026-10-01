@@ -87,6 +87,7 @@ def main():
         e = caps[ch[k + 1][0]]["s"] if k + 1 < len(ch) else caps[c[-1]]["e"] + 0.4
         spans.append((s, e, c))
     cap_y, cap_size = sp.get("cap_y", 0.70) * H, sp.get("cap_size", 84)
+    reveal = sp.get("reveal", True)            # kelimeler söylendikçe belirir
 
     p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgba",
                           "-s", f"{W}x{H}", "-r", str(fps), "-i", "-", "-c:v", "png", a.out],
@@ -141,7 +142,7 @@ def main():
                 f = fit_font(d, txt, W - 120, cap_size)
                 age = t - s
                 m = 1.0 + 0.12 * math.exp(-age / 0.06)
-                if m > 1.001:
+                if m > 1.001 and not reveal:
                     f = fit_font(d, txt, W - 120, int(f.size * m))
                 # kelime kelime yerleştir: konuşulan kelime sarı
                 widths = [d.textlength(w["w"], font=f) for w in words]
@@ -149,9 +150,20 @@ def main():
                 x = W / 2 - (sum(widths) + sp_w * (len(words) - 1)) / 2
                 for w, wd in zip(words, widths):
                     on = w["s"] <= t
+                    # Parçanın tamamı bir anda görünürse yazı sesin ÖNÜNDEN gidiyor
+                    # (baca klibi: "altyazı sesi neden takip etmiyor"). Kelime ancak
+                    # söylendiği an belirir; yer parçanın tam genişliğine göre sabit.
+                    if reveal and not on:
+                        x += wd + sp_w
+                        continue
                     key = re.sub(r"[^\wçğıöşüÇĞİÖŞÜ]", "", w["w"]).lower() in emph
                     col = YELLOW if (on and (key or w["s"] <= t < w["e"] + 0.05)) else WHITE
-                    stroked_text(d, (x + wd / 2, cy_now), w["w"], f, col, BLACK, max(5, f.size // 10))
+                    fw = f
+                    if reveal:
+                        mw = 1.0 + 0.08 * math.exp(-(t - w["s"]) / 0.05)
+                        if mw > 1.005:
+                            fw = load_font(int(f.size * mw))
+                    stroked_text(d, (x + wd / 2, cy_now), w["w"], fw, col, BLACK, max(5, fw.size // 10))
                     x += wd + sp_w
                 break
         p.stdin.write(img.tobytes())
