@@ -464,7 +464,7 @@ yarım saniye önce ya da sonra olur.
 Kullanıcının istemediği büyük vurgu yazısı ("PATLAMA!", "TEK BİR HATA…")
 koyma. Baca klibinde kullanıcı: "Patlama yazmasın … ben demeden bir şey
 yapma". Ekranda yalnız altyazı + kullanıcının açıkça istediği yazı/ok olur.
-Altyazı güvenli bölgede: `cap_y` 0.76. Ok/özne altyazının altında kalırsa o
+Altyazı alt güvenli bölgede: `cap_y` 0.82 (kullanıcı 0.70 ve 0.76 için "daha alta al" dedi). Ok/özne altyazının altında kalırsa o
 parça için `cap_y_at` ile yukarı al (parça ortasında zıplamaz).
 
 ### Kullanıcı açıkça "ok, geçiş efekti, fon müziği" isterse
