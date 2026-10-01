@@ -459,6 +459,14 @@ yarım saniye önce ya da sonra olur.
 
 İlk kareye flash koyma — görüntüyü yakar. Açılışta darbe sesi ve sarsıntı yeterli.
 
+### ⛔ İstenmeyen ekran yazısı EKLEME
+
+Kullanıcının istemediği büyük vurgu yazısı ("PATLAMA!", "TEK BİR HATA…")
+koyma. Baca klibinde kullanıcı: "Patlama yazmasın … ben demeden bir şey
+yapma". Ekranda yalnız altyazı + kullanıcının açıkça istediği yazı/ok olur.
+Altyazı güvenli bölgede: `cap_y` 0.76. Ok/özne altyazının altında kalırsa o
+parça için `cap_y_at` ile yukarı al (parça ortasında zıplamaz).
+
 ### Kullanıcı açıkça "ok, geçiş efekti, fon müziği" isterse
 
 Varsayılan hâlâ sade (müzik/efekt/ok yok). Açık istekte audiobed.py'nin

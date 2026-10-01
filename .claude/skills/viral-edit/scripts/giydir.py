@@ -27,7 +27,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from overlay import load_font, stroked_text
+from overlay import load_font, stroked_text, arrow_polygon, clip_polygon_progress
 
 WHITE = (255, 255, 255, 255)
 YELLOW = (255, 214, 0, 255)
@@ -110,6 +110,17 @@ def main():
                 f = fit_font(d, c["text"], (x1 - x0) - 60, int(round(min(78, (y1 - y0) * 0.62) * m)))
                 d.text(((x0 + x1) / 2, (y0 + y1) / 2), c["text"], font=f,
                        fill=COL.get(c.get("color", "white"), WHITE), anchor="mm")
+        # ---- ok (overlay.py ile aynı biçim) ----
+        for ar in (sp.get("arrows", []) if a.layer != "cards" else []):
+            if ar["t"] <= t < ar["t"] + ar["dur"]:
+                tipx, tipy = ar["x"] * W, ar["y"] * H
+                ln = ar.get("len", 300)
+                dr = ar.get("draw", 0.18)
+                frac = 1.0 if dr <= 0 else min(1.0, (t - ar["t"]) / dr)
+                if ar.get("pulse") and frac >= 1.0:
+                    ln *= 1.0 + ar["pulse"] * math.sin(2 * math.pi * 3.2 * (t - ar["t"] - dr))
+                poly = clip_polygon_progress(arrow_polygon(tipx, tipy, ar["angle"], ln), (tipx, tipy), frac)
+                d.polygon(poly, fill=RED, outline=BLACK, width=max(8, int(ln * 0.045)))
         # ---- büyük vurgu ----
         for b in (bigs if a.layer != "cards" else []):
             if b["t0"] <= t < b["t1"]:
@@ -123,6 +134,9 @@ def main():
         for s, e, c in (spans if a.layer != "cards" else []):
             if s <= t < e and not any(b["t0"] <= t < b["t1"] for b in bigs):
                 words = [caps[j] for j in c]
+                # ok/özne altyazının altında kalıyorsa o parça için yükseklik değişir
+                cy_now = next((y_ * H for t0_, t1_, y_ in sp.get("cap_y_at", [])
+                               if s < t1_ and e > t0_), cap_y)   # parça ortasında zıplamasın
                 txt = " ".join(w["w"] for w in words)
                 f = fit_font(d, txt, W - 120, cap_size)
                 age = t - s
@@ -137,7 +151,7 @@ def main():
                     on = w["s"] <= t
                     key = re.sub(r"[^\wçğıöşüÇĞİÖŞÜ]", "", w["w"]).lower() in emph
                     col = YELLOW if (on and (key or w["s"] <= t < w["e"] + 0.05)) else WHITE
-                    stroked_text(d, (x + wd / 2, cap_y), w["w"], f, col, BLACK, max(5, f.size // 10))
+                    stroked_text(d, (x + wd / 2, cy_now), w["w"], f, col, BLACK, max(5, f.size // 10))
                     x += wd + sp_w
                 break
         p.stdin.write(img.tobytes())

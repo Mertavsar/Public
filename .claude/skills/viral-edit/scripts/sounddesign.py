@@ -207,6 +207,16 @@ def rewind(dur):
     return out * flutter * env_adsr(n, 0.03, 0.06)
 
 
+def clink(amp=1.0):
+    """Kısa metalik tık (ok belirirken). Kısa sönüm: çınlayıp gong olmaz."""
+    n = int(0.22 * SR)
+    t = np.arange(n) / SR
+    s = (np.sin(2 * np.pi * 2637 * t) + 0.6 * np.sin(2 * np.pi * 3951 * t)
+         + 0.3 * np.sin(2 * np.pi * 5274 * t)) * np.exp(-t / 0.045)
+    s += 0.4 * hp(rng.standard_normal(n), 4000) * np.exp(-t / 0.004)
+    return amp * s
+
+
 def pop(amp=1.0):
     n = int(0.05 * SR)
     t = np.arange(n) / SR
@@ -214,7 +224,7 @@ def pop(amp=1.0):
     return amp * np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.015)
 
 
-def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=()):
+def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=(), clinks=()):
     n = int(dur * SR)
     bus = np.zeros(n)
     for t in booms:
@@ -223,6 +233,8 @@ def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=()):
         r = rewind(t1 - t0); place(bus, r / np.max(np.abs(r)) * 0.55, t0)
     for t in pops:
         place(bus, pop(0.35), t)
+    for t in clinks:
+        c = clink(); place(bus, c / np.max(np.abs(c)) * 0.6, t)
     for t in whooshes:
         w = whoosh()
         place(bus, w / np.max(np.abs(w)) * 0.55, t - 0.62 * 0.42)
@@ -267,13 +279,14 @@ def main():
     ap.add_argument("--boom", nargs="*", type=float, default=[])
     ap.add_argument("--rewind", nargs="*", default=[], help="t0,t1")
     ap.add_argument("--pop", nargs="*", type=float, default=[])
+    ap.add_argument("--clink", nargs="*", type=float, default=[], help="ok belirdiği an")
     ap.add_argument("--mute", nargs="*", default=[], help="t0,t1: müziği kes (dramatik boşluk)")
     a = ap.parse_args()
     n = int(a.dur * SR)
     vo = np.zeros(n); v = read_wav(a.vo); vo[:min(n, len(v))] = v[:n]
     mu = music(a.dur, a.reveal, a.lift, a.outro, mood=a.mood, build=a.build)
     fx = sfx(a.dur, a.whoosh, a.big, a.boom,
-             [tuple(float(v) for v in r.split(",")) for r in a.rewind], a.pop)
+             [tuple(float(v) for v in r.split(",")) for r in a.rewind], a.pop, a.clink)
     vr = rms_db(vo[np.abs(vo) > 0.02]) if np.any(np.abs(vo) > 0.02) else -20
     mu *= 10 ** ((vr + a.music_db - rms_db(mu)) / 20)
     fx *= 10 ** ((vr + a.sfx_db - rms_db(fx[np.abs(fx) > 1e-3])) / 20) if np.any(fx) else 1
