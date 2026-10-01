@@ -1,0 +1,580 @@
+{
+  "baslik": "ABD tahvil faizi 24 yılın zirvesinde: Neden yükseliyor, bize etkisi ne?",
+  "tarih": "2026-10-01",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "zirve",
+    "faiz",
+    "enflasyon",
+    "güçlenebilir",
+    "tahmin"
+  ],
+  "altyazi": {
+    "Amerika'nın otuz yıllık": "Amerika'nın 30 yıllık",
+    "otuz yıllık tahvilinde": "30 yıllık tahvilinde",
+    "yüzde beş virgül altıya": "yüzde 5,6'ya",
+    "yüzde beş virgül altı": "yüzde 5,6",
+    "yirmi dört yılın": "24 yılın",
+    "Üç soruda": "3 soruda",
+    "On yıllıkta": "10 yıllıkta",
+    "On yıllık": "10 yıllık",
+    "yüzde beşin": "yüzde 5'in",
+    "iki bin yedi'den": "2007'den",
+    "iki bin yirmi yedi": "2027",
+    "yüzde beş civarına": "yüzde 5 civarına",
+    "Üç sebep": "3 sebep",
+    "Diyelim bin dolarlık": "Diyelim 1.000 dolarlık",
+    "elli altı dolar": "56 dolar",
+    "yüzde altıya": "yüzde 6'ya",
+    "Yani üç sebep": "Yani 3 sebep"
+  },
+  "kapak": {
+    "ikon": "📈",
+    "ust": "ABD BORÇ FAİZİ",
+    "buyuk": "%5,6",
+    "alt": "NEDEN ÖNEMLİ?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Amerika'nın otuz yıllık borç faizi yüzde beş virgül altıya çıktı.",
+      "p": {
+        "ikon": "📈",
+        "etiket": "ABD 30 yıllık tahvil faizi · Eylül sonu 2026",
+        "deger": 5.6,
+        "onek": "%",
+        "ondalik": 1,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "yaklaşık değer · gün içinde değişiyor",
+        "sayma": false
+      },
+      "kaynak": "CNBC, Investing.com (K1)",
+      "etiket": "30 YILLIK TAHVİL FAİZİ"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu, yirmi dört yılın en yüksek seviyesi.",
+      "p": {
+        "ikon": "🏔️",
+        "satirlar": [
+          "24 YILIN",
+          "*ZİRVESİ*"
+        ],
+        "boy": 120
+      },
+      "etiket": "2002'DEN BERİ EN YÜKSEK",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu faiz neden bu kadar önemli? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "BU FAİZ\n*NEDEN ÖNEMLİ?*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları basitçe anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "KONULARI",
+          "*BASİTÇE* ANLATIYORUZ"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce tahvil nedir? Devletin yatırımcıdan aldığı borç senedi.",
+      "p": {
+        "ikon": "📄",
+        "satirlar": [
+          "TAHVİL =",
+          "*DEVLET BORCU*"
+        ],
+        "boy": 104
+      },
+      "etiket": "TAHVİL NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "say": "Yatırımcı devlete parasını verir. Devlet her yıl faiz öder, vade dolunca parayı iade eder.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💵",
+            "metin": "Yatırımcı parayı *verir*"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Devlet her yıl *faiz* öder"
+          },
+          {
+            "ikon": "🔁",
+            "metin": "Vade dolunca para *geri*"
+          }
+        ]
+      },
+      "etiket": "BORÇ NASIL İŞLER"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Amerika'nın otuz yıllık tahvilinde faiz yüzde beş virgül altı. On yıllıkta ise yüzde beşin üzerinde.",
+      "p": {
+        "baslik": "ABD tahvil faizi · Eylül sonu 2026",
+        "satirlar": [
+          {
+            "ikon": "📈",
+            "metin": "30 yıllık",
+            "deger": "≈ %5,6",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "📊",
+            "metin": "10 yıllık",
+            "deger": "> %5",
+            "renk": "turuncu"
+          }
+        ],
+        "not": "Yaklaşık değerler · faiz her gün değişir"
+      },
+      "etiket": "FAİZ SEVİYESİ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "On yıllık faiz de iki bin yedi'den beri bu kadar yükselmemişti.",
+      "p": {
+        "ikon": "🕰️",
+        "satirlar": [
+          "10 YILLIKTA DA",
+          "*2007'DEN BERİ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "19 YILIN ZİRVESİ",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu rakamlar eylülün son günlerine ait. Faiz her gün değişiyor.",
+      "p": {
+        "ikon": "📅",
+        "satirlar": [
+          "RAKAMLAR",
+          "*EYLÜL SONU*"
+        ],
+        "boy": 110,
+        "not": "Faiz her gün değişir"
+      },
+      "etiket": "TARİHE DİKKAT"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "say": "Bir ayrıntı var. Yatırımcılar tahvil satarsa fiyat düşer, faiz yükselir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "📤",
+            "metin": "Satış *artar*"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Tahvil fiyatı *düşer*"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Faiz *yükselir*"
+          }
+        ]
+      },
+      "etiket": "FİYAT DÜŞER FAİZ ÇIKAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Peki yatırımcılar neden satıyor? Üç sebep var.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "SATIŞIN",
+          "*3 SEBEBİ*"
+        ],
+        "boy": 120
+      },
+      "etiket": "3 SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Birinci sebep enflasyon korkusu. Petrol fiyatları yüksek.",
+      "p": {
+        "ikon": "🛢️",
+        "satirlar": [
+          "1. SEBEP:",
+          "*ENFLASYON KORKUSU*"
+        ],
+        "boy": 92,
+        "not": "Petrol fiyatları yüksek"
+      },
+      "etiket": "1. SEBEP",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Haberlere göre bunun arkasında Orta Doğu'daki savaş var. Petrol pahalanınca enflasyon yükselebilir. Enflasyon yükselirse yatırımcı daha yüksek faiz ister.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💥",
+            "metin": "Orta Doğu'da *savaş*"
+          },
+          {
+            "ikon": "🛢️",
+            "metin": "Petrol *pahalı*"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Enflasyon *yükselebilir*"
+          },
+          {
+            "ikon": "💰",
+            "metin": "Yatırımcı *daha yüksek* faiz ister"
+          }
+        ]
+      },
+      "etiket": "1. SEBEP · ENERJİ",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Enerji pahalıysa ulaşım, üretim ve market maliyeti de artabilir.",
+      "p": {
+        "ikon": "🚚",
+        "satirlar": [
+          "ENERJİ PAHALI =",
+          "*HER ŞEY PAHALI*"
+        ],
+        "boy": 80,
+        "not": "Yorum — kesin değil"
+      },
+      "etiket": "ZİNCİRLEME ETKİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa beğen, kalbe dokun.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "KALBE",
+          "*DOKUN*"
+        ],
+        "boy": 120
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "İkinci sebep Fed. Fed, Amerika'nın Merkez Bankası.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "FED =",
+          "*ABD MERKEZ BANKASI*"
+        ],
+        "boy": 96
+      },
+      "etiket": "2. SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Fed faizi yükseltirse, eski düşük faizli tahviller cazibesini kaybeder. Yatırımcı onları satıp yenisini ister.",
+      "p": {
+        "ikon": "🔄",
+        "satirlar": [
+          "ESKİ TAHVİL",
+          "*CAZİBESİNİ KAYBEDER*"
+        ],
+        "boy": 84
+      },
+      "etiket": "NEDEN SATIYORLAR?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Piyasa, Fed'in faizi yükseltmeye devam edeceğini düşünüyor. Kısa vadeli faizin, iki bin yirmi yedi eylülüne kadar yüzde beş civarına çıkması bekleniyor.",
+      "p": {
+        "ikon": "🏦",
+        "etiket": "Kısa vadeli faiz · piyasa beklentisi · Eylül 2027",
+        "deger": 5,
+        "onek": "≈ %",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "sari",
+        "renk": "sari",
+        "not": "Piyasa fiyatlaması — tahmin, kesin değil"
+      },
+      "kaynak": "Bloomberg aktarımları (K4)",
+      "etiket": "FED BEKLENTİSİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Üçüncü sebep devletin borç yükü. Çok tahvil satılınca yatırımcı daha yüksek faiz ister.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "ÇOK BORÇ =",
+          "*YÜKSEK FAİZ*"
+        ],
+        "boy": 92,
+        "not": "Tahvil arzı ve borç endişesi"
+      },
+      "etiket": "3. SEBEP",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Yani üç sebep var: petrol ve enflasyon, Fed beklentisi, borç yükü.",
+      "p": {
+        "baslik": "Özet · 3 sebep",
+        "satirlar": [
+          {
+            "ikon": "🛢️",
+            "metin": "Petrol / enflasyon",
+            "deger": "Fiyat baskısı",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Fed beklentisi",
+            "deger": "Daha yüksek faiz",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Borç yükü",
+            "deger": "Çok tahvil",
+            "renk": "mavi"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*"
+      },
+      "etiket": "CEBİNE ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Çünkü Amerikan tahvil faizi, dünyada kredi faizlerinin de çıtasını belirler.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "DÜNYANIN",
+          "*FAİZ ÇITASI*"
+        ],
+        "boy": 104
+      },
+      "etiket": "NEDEN BU KADAR ÖNEMLİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Diyelim bin dolarlık tahvil aldın. Yüzde beş virgül altı getiriyle, yılda yaklaşık elli altı dolar eder.",
+      "p": {
+        "baslik": "Örnek hesap · yıllık getiri",
+        "ikon": "💵",
+        "ogeler": [
+          "1.000 $",
+          "×",
+          "%5,6",
+          "=",
+          "56 $"
+        ]
+      },
+      "kaynak": "K1 · 1.000 × 0,056 · yaklaşık, örnek",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Amerikan tahvili güvenli sayılır ve iyi getiri veriyor. Yatırımcı riskli ülkelerden para çekebilir.",
+      "p": {
+        "ikon": "💸",
+        "satirlar": [
+          "PARA",
+          "*ÇIKABİLİR*"
+        ],
+        "boy": 120,
+        "not": "Yorum — kesin değil"
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Türkiye gibi ülkelere giden para azalırsa, dolar güçlenebilir. Borçlanma da pahalanabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💸",
+            "metin": "Gelişen ülkelerden *para çıkar*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Dolar *güçlenebilir*"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Borçlanma *pahalanabilir*"
+          }
+        ]
+      },
+      "etiket": "OLASI ZİNCİR · YORUM"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Petrol pahalı kalırsa, akaryakıt fiyatlarına da yansıyabilir.",
+      "p": {
+        "ikon": "⛽",
+        "satirlar": [
+          "AKARYAKIT",
+          "*ETKİLENEBİLİR*"
+        ],
+        "boy": 92,
+        "not": "Yorum — kesin değil"
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu zincirin hiçbir halkası kesin değil. Faizler yeniden düşebilir de.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "HİÇBİRİ",
+          "*KESİN DEĞİL*"
+        ],
+        "boy": 110,
+        "not": "Olasılıklar — gelecek bilinmez"
+      },
+      "etiket": "DÜRÜST NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "say": "Barclays bankası, faizin yüzde altıya çıkabileceğini söylüyor. Bu sadece bir tahmin.",
+      "p": {
+        "ikon": "🔮",
+        "etiket": "Barclays tahmini · 30 yıllık faiz",
+        "deger": 6,
+        "onek": "%",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "sari",
+        "renk": "sari",
+        "not": "Tahmin — kesin değil"
+      },
+      "kaynak": "Bloomberg aktarımları (K4)",
+      "etiket": "TAHMİN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: yatırımcı daha fazla getiri istiyor, faiz de yükseliyor. Etkisi bize dolaylı yoldan gelebilir.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "📈",
+            "metin": "30 yıllık faiz",
+            "deger": "≈ %5,6",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🧠",
+            "metin": "Sebep",
+            "deger": "Enflasyon · Fed · borç",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "👛",
+            "metin": "Bize etkisi",
+            "deger": "Dolaylı, olası",
+            "renk": "sari"
+          }
+        ]
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz. Bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Merak ettiysen, tıkla bakalım. Takip et.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "cta": [
+    {
+      "sahne": 15,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "kaynaklar": {
+    "K1": "ABD 30 yıllık tahvil faizi ~%5,6 ile 2002'den beri en yüksek (29–30 Eylül 2026; kaynaklarda 5,59–5,63 arası) — https://www.cnbc.com/2026/09/29/treasury-yields-bonds.html ; https://seekingalpha.com/news/4648118-us-30-year-treasury-yield-tags-559-its-highest-reading-since-2002 ; https://www.investing.com/analysis/30year-treasury-yield-hits-562-the-bondmarket-signal-the-fed-cannot-ignore-200688677",
+    "K2": "ABD 10 yıllık tahvil faizi %5'in üzerinde, 2007'den beri en yüksek — https://www.ekonomim.net/haber/abdnin-10-yillik-tahvil-faizi-ilk-kez-yuzde-5in-uzerinde-12484 ; https://www.trtv.net/2026/09/24/abd-tahvil-faizleri-19-yilin-zirvesinde/ ; https://www.kobipostasi.net/2026/09/28/abd-10-yillik-tahvil-faizi-19-yilin-zirvesinde-sabit-kaliyor/",
+    "K3": "Yükseliş nedenleri: yüksek petrol (Orta Doğu savaşı), enflasyon endişesi, yoğun tahvil ihracı/borç kaygısı, Fed'in faiz artırabileceği beklentisi — https://www.cnbc.com/2026/09/29/treasury-yields-bonds.html ; https://www.investing.com/analysis/30year-treasury-yield-hits-562-the-bondmarket-signal-the-fed-cannot-ignore-200688677 ; https://finance.biggo.com/news/35a16269-435b-4f40-bace-ad9df58a549d",
+    "K4": "Piyasa kısa vadeli faizi Eylül 2027'ye kadar ~%5'e çıkarken fiyatlıyor; Barclays 30 yıllıkta %6 ihtimalini görüyor (tahmin) — https://www.bloomberg.com/news/articles/2026-09-29/barclays-says-us-30-year-yield-can-reach-6-in-productivity-boom ; https://en.bloomingbit.io/feed/news/121324 ; https://www.investmentwatchblog.com/markets-now-pricing-a-hiking-cycle-that-takes-short-term-rates-to-around-5-september-2027-barclays-u-s-30-year-yield-could-hit-6/"
+  }
+}
