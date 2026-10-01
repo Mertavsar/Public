@@ -470,6 +470,10 @@ vuruşlarını ve "drive" yatağını KULLANMA ("gong sesleri berbat"). Bunun ye
 3. Oklar spec'te yalnız kilit nesnede, 5–6 tane. Hareketli nesnede oku kısa
    parçalara böl (ilk parça `draw`, gerisi 0) ve konumu kare kare ölç.
    Ok ucu altyazı bandına (0.70–0.76) girmesin.
+   **Zoom geçişini olayın kendisine koyma** (patlama, düşüş, sıçrama): zoom
+   1.2–1.45 kat büyütüyor, olay kadrajın dışına taşıyor. Kullanıcı: "zoom
+   yaptığın için olay kaçıyor". Doruk anı sert kesim + bas vuruşu; whip/zoom
+   yalnız olaysız kesimlerde.
 4. `sounddesign.py --vo ... --whoosh <kesimler> --big <dönüm> --reveal
    --lift --outro` — tonsuz whoosh + sub nefes, minör gizem yatağı,
    konuşmada müzik −26 dB (sidechain).
