@@ -91,7 +91,7 @@ def heartbeat(freq=68.0):
     return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.09)
 
 
-def music(dur, reveal, lift, outro, bpm=90.0, mood="mystery", build=False):
+def music(dur, reveal, lift, outro, bpm=90.0, mood="mystery", build=False, resolve=None):
     beat = 60.0 / bpm
     bar = 4 * beat
     if mood == "warm":
@@ -112,19 +112,20 @@ def music(dur, reveal, lift, outro, bpm=90.0, mood="mystery", build=False):
             place(padb, v * (0.55 if m == root else 0.30), t0)
         for k in range(8):                     # 8'lik arpej
             t = t0 + k * beat / 2
-            if reveal <= t < outro:
+            res = resolve is not None and t >= resolve     # çözülme: sıcak yatak geri döner
+            if reveal <= t < outro or res:
                 pat = [ch[0] + 12, ch[1] + 12, ch[2] + 12, ch[1] + 24,
                        ch[2] + 12, ch[0] + 24, ch[1] + 12, ch[2] + 12]
                 place(arp, pluck(nf(pat[k])) * (0.9 if k % 2 == 0 else 0.6), t)
-            if lift <= t < outro and k % 4 == 0:
+            if (lift <= t < outro or res) and k % 4 == 0:
                 place(shim, bell(nf(ch[k // 4 % 3] + 24)), t)
-            if lift <= t < outro:
+            if lift <= t < outro or res:
                 nz = hp(rng.standard_normal(int(0.06 * SR)), 6000) * np.exp(
                     -np.arange(int(0.06 * SR)) / SR / 0.015)
                 place(shk, nz * (0.5 if k % 2 else 0.25), t)
         for k in (0, 2):                       # kalp atışı: gerilim + soru bölümü
             t = t0 + k * beat
-            if t < reveal or t >= outro:
+            if t < reveal or (t >= outro and not (resolve is not None and t >= resolve)):
                 place(hb, heartbeat(), t)
                 place(hb, 0.6 * heartbeat(), t + 0.24)
     padb = lp(padb, 1400)
@@ -143,10 +144,12 @@ def music(dur, reveal, lift, outro, bpm=90.0, mood="mystery", build=False):
         return g
     pad_lvl = 0.55 + 0.25 * ramp(lift) * ramp(0, outro)
     arp_lvl = ramp(reveal, outro + 0.8)
+    if resolve is not None:
+        arp_lvl = np.maximum(arp_lvl, ramp(resolve))
     if build:   # "müzik giderek yükselsin": reveal'dan lift'e doğrusal tırmanış
         arp_lvl = arp_lvl * np.clip(0.35 + 0.65 * (tt - reveal) / max(0.1, lift - reveal), 0.35, 1.0)
     mix = (padb * pad_lvl * 0.9 + arp * 0.55 * arp_lvl
-           + shim * 0.22 * ramp(lift, outro + 0.8) + shk * 0.10 * ramp(lift, outro)
+           + shim * 0.22 * (np.maximum(ramp(lift, outro + 0.8), ramp(resolve)) if resolve is not None else ramp(lift, outro + 0.8)) + shk * 0.10 * ramp(lift, outro)
            + hb * 0.9)
     # gerilim bölümünde tırmanan hava: reveal'a doğru
     rn = int(1.6 * SR)
@@ -207,6 +210,15 @@ def rewind(dur):
     return out * flutter * env_adsr(n, 0.03, 0.06)
 
 
+def water(dur):
+    """Akan su: bant geçiren gürültü + rastgele damla genliği (alçak seviyede kullan)."""
+    n = int(dur * SR)
+    x = bp(rng.standard_normal(n), 500, 6000)
+    am = lp(np.abs(rng.standard_normal(n)), 18)
+    am = am / (am.max() + 1e-9)
+    return x * (0.55 + 0.45 * am) * env_adsr(n, 0.25, 0.35)
+
+
 def clink(amp=1.0):
     """Kısa metalik tık (ok belirirken). Kısa sönüm: çınlayıp gong olmaz."""
     n = int(0.22 * SR)
@@ -224,7 +236,7 @@ def pop(amp=1.0):
     return amp * np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.015)
 
 
-def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=(), clinks=()):
+def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=(), clinks=(), waters=()):
     n = int(dur * SR)
     bus = np.zeros(n)
     for t in booms:
@@ -233,6 +245,8 @@ def sfx(dur, whooshes, bigs, booms=(), rewinds=(), pops=(), clinks=()):
         r = rewind(t1 - t0); place(bus, r / np.max(np.abs(r)) * 0.55, t0)
     for t in pops:
         place(bus, pop(0.35), t)
+    for t0, t1 in waters:
+        w_ = water(t1 - t0); place(bus, w_ / np.max(np.abs(w_)) * 0.25, t0)
     for t in clinks:
         c = clink(); place(bus, c / np.max(np.abs(c)) * 0.6, t)
     for t in whooshes:
@@ -279,14 +293,17 @@ def main():
     ap.add_argument("--boom", nargs="*", type=float, default=[])
     ap.add_argument("--rewind", nargs="*", default=[], help="t0,t1")
     ap.add_argument("--pop", nargs="*", type=float, default=[])
+    ap.add_argument("--water", nargs="*", default=[], help="t0,t1 akan su sesi")
+    ap.add_argument("--resolve", type=float, default=None, help="outro'dan sonra sıcak yatağın geri döndüğü an")
     ap.add_argument("--clink", nargs="*", type=float, default=[], help="ok belirdiği an")
     ap.add_argument("--mute", nargs="*", default=[], help="t0,t1: müziği kes (dramatik boşluk)")
     a = ap.parse_args()
     n = int(a.dur * SR)
     vo = np.zeros(n); v = read_wav(a.vo); vo[:min(n, len(v))] = v[:n]
-    mu = music(a.dur, a.reveal, a.lift, a.outro, mood=a.mood, build=a.build)
+    mu = music(a.dur, a.reveal, a.lift, a.outro, mood=a.mood, build=a.build, resolve=a.resolve)
     fx = sfx(a.dur, a.whoosh, a.big, a.boom,
-             [tuple(float(v) for v in r.split(",")) for r in a.rewind], a.pop, a.clink)
+             [tuple(float(v) for v in r.split(",")) for r in a.rewind], a.pop, a.clink,
+             [tuple(float(v) for v in r.split(",")) for r in a.water])
     vr = rms_db(vo[np.abs(vo) > 0.02]) if np.any(np.abs(vo) > 0.02) else -20
     mu *= 10 ** ((vr + a.music_db - rms_db(mu)) / 20)
     fx *= 10 ** ((vr + a.sfx_db - rms_db(fx[np.abs(fx) > 1e-3])) / 20) if np.any(fx) else 1

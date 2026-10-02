@@ -74,7 +74,7 @@ def main():
             pos = [p["src"] * FPS + k / p.get("slow", 1.0) for k in range(n)]
             idx = [int(q) for q in pos]
             wts = [q - int(q) for q in pos]
-        fr = frames(a.src, idx + [i + 1 for i in idx])
+        fr = frames(p.get("file", a.src), idx + [i + 1 for i in idx])   # plan bazında kaynak
         fr, nxt = fr[:n], fr[n:]
         fr = [f if w < 0.05 else cv2.addWeighted(f, 1 - w, g, w, 0) for f, g, w in zip(fr, nxt, wts)]
         z0, z1 = p.get("z0", 1.0), p.get("z1", 1.0)

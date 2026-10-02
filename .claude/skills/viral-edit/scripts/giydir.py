@@ -145,10 +145,13 @@ def main():
                 if m > 1.001 and not reveal:
                     f = fit_font(d, txt, W - 120, int(f.size * m))
                 # kelime kelime yerleştir: konuşulan kelime sarı
-                widths = [d.textlength(w["w"], font=f) for w in words]
+                esc = sp.get("emph_scale", 1.0)
+                isk = [re.sub(r"[^\wçğıöşüÇĞİÖŞÜ]", "", w["w"]).lower() in emph for w in words]
+                fk = [load_font(int(f.size * esc)) if k and esc != 1.0 else f for k in isk]
+                widths = [d.textlength(w["w"], font=ff) for w, ff in zip(words, fk)]
                 sp_w = d.textlength(" ", font=f)
                 x = W / 2 - (sum(widths) + sp_w * (len(words) - 1)) / 2
-                for w, wd in zip(words, widths):
+                for w, wd, fbase in zip(words, widths, fk):
                     on = w["s"] <= t
                     # Parçanın tamamı bir anda görünürse yazı sesin ÖNÜNDEN gidiyor
                     # (baca klibi: "altyazı sesi neden takip etmiyor"). Kelime ancak
@@ -158,11 +161,11 @@ def main():
                         continue
                     key = re.sub(r"[^\wçğıöşüÇĞİÖŞÜ]", "", w["w"]).lower() in emph
                     col = YELLOW if (on and (key or w["s"] <= t < w["e"] + 0.05)) else WHITE
-                    fw = f
+                    fw = fbase
                     if reveal:
                         mw = 1.0 + 0.08 * math.exp(-(t - w["s"]) / 0.05)
                         if mw > 1.005:
-                            fw = load_font(int(f.size * mw))
+                            fw = load_font(int(fbase.size * mw))
                     stroked_text(d, (x + wd / 2, cy_now), w["w"], fw, col, BLACK, max(5, fw.size // 10))
                     x += wd + sp_w
                 break
