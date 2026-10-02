@@ -1,0 +1,646 @@
+{
+  "baslik": "Merkez Bankası KOBİ kredisi sınırını yükseltti: Kredi musluğu nasıl ayarlanıyor?",
+  "tarih": "2026-10-02",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "kredi",
+    "sınır",
+    "kilitli",
+    "tahmin"
+  ],
+  "altyazi": {
+    "yüzde dört buçuktan yüzde beşe": "%4,5'ten %5'e",
+    "yüzde dört buçuk": "%4,5",
+    "yüzde beşle": "%5'le",
+    "yüzde beş": "%5",
+    "Üç soruda": "3 soruda",
+    "bir Ekim iki bin yirmi altıda": "1 Ekim 2026'da",
+    "sekiz haftalık": "8 haftalık",
+    "sekiz haftada": "8 haftada",
+    "Dört buçuktu, beş oldu": "%4,5'ti, %5 oldu",
+    "yüz milyar liralık": "100 milyar liralık",
+    "beş milyar lira": "5 milyar lira",
+    "dört buçuk milyardı": "4,5 milyardı",
+    "beş yüz milyon lira": "500 milyon lira",
+    "İki sebep": "2 sebep",
+    "beşten dört buçuğa": "%5'ten %4,5'e",
+    "yüzde otuzdan on beşe": "%30'dan %15'e",
+    "kırktan otuz beşe": "%40'tan %35'e",
+    "yirmi iki ekimde": "22 Ekim'de",
+    "Birinci sebep": "1. sebep",
+    "İkinci sebep": "2. sebep",
+    "iki hamle": "2 hamle"
+  },
+  "kapak": {
+    "ikon": "🏪",
+    "ust": "KOBİ KREDİSİ",
+    "buyuk": "%4,5 → %5",
+    "alt": "NE DEĞİŞTİ?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Merkez Bankası, küçük işletme kredisi sınırını yüzde dört buçuktan yüzde beşe çıkardı.",
+      "p": {
+        "ikon": "🏪",
+        "etiket": "KOBİ kredisi · 8 haftalık büyüme sınırı",
+        "deger": 5,
+        "onek": "%",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "önceki sınır %4,5 · 1 Ekim 2026 duyurusu",
+        "sayma": false
+      },
+      "etiket": "KOBİ KREDİ SINIRI",
+      "kaynak": "TCMB duyurusu (K1, K2)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Yani bankalar, esnafa ve küçük firmalara biraz daha fazla kredi verebilecek.",
+      "p": {
+        "ikon": "🏬",
+        "satirlar": [
+          "KÜÇÜK İŞLETMEYE",
+          "*DAHA ÇOK KREDİ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "NE DEĞİŞTİ?",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki Merkez Bankası krediyi nasıl ayarlıyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "KREDİ MUSLUĞU\n*KİMDE?*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları sade dille anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ",
+          "*SADE* ANLATIYORUZ"
+        ],
+        "boy": 96
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Karar bir Ekim iki bin yirmi altıda, Merkez Bankası duyurusuyla açıklandı.",
+      "p": {
+        "gun": "1",
+        "ay": "EKİM",
+        "gunadi": "PERŞEMBE",
+        "not": "2026 · *Merkez Bankası* duyurdu"
+      },
+      "etiket": "KARAR TARİHİ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce KOBİ nedir? Küçük ve orta ölçekli işletme demek. Esnaf, atölye, küçük firma.",
+      "p": {
+        "ikon": "🧰",
+        "satirlar": [
+          "KOBİ =",
+          "*KÜÇÜK İŞLETME*"
+        ],
+        "boy": 104,
+        "not": "Küçük ve Orta Büyüklükteki İşletme"
+      },
+      "etiket": "KOBİ NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "say": "Bankalar bu işletmelere kredi verir. Merkez Bankası da verilecek krediye bir tavan koyar.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Banka *kredi* verir"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Merkez Bankası *tavan* koyar"
+          },
+          {
+            "ikon": "⚠️",
+            "metin": "Aşarsa banka *ek maliyet* öder"
+          }
+        ]
+      },
+      "etiket": "KREDİ TAVANI",
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Bu tavan sekiz haftalık büyüme için geçerli. Dört buçuktu, beş oldu.",
+      "p": {
+        "baslik": "🏪 KOBİ kredisi · 8 haftalık büyüme sınırı",
+        "sol": {
+          "etiket": "ÖNCE",
+          "deger": 4.5,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "ŞİMDİ",
+          "deger": 5,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "+0,5 puan",
+        "not": "Ölçek sıfırdan başlar"
+      },
+      "etiket": "SINIR YÜKSELDİ",
+      "kaynak": "K1, K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Diyelim bir bankanın yüz milyar liralık KOBİ kredisi var. Yüzde beşle sekiz haftada beş milyar lira daha verebilir.",
+      "p": {
+        "baslik": "Örnek hesap · varsayımsal banka",
+        "ikon": "🧮",
+        "ogeler": [
+          "100 milyar ₺",
+          "×",
+          "%5",
+          "=",
+          "5 milyar ₺"
+        ]
+      },
+      "etiket": "ÖRNEK HESAP",
+      "kaynak": "varsayımsal örnek"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Eski sınırla bu rakam dört buçuk milyardı. Yani fark, beş yüz milyon lira.",
+      "p": {
+        "ikon": "➕",
+        "satirlar": [
+          "+500 MİLYON ₺",
+          "*EK KREDİ ALANI*"
+        ],
+        "boy": 84,
+        "not": "Varsayımsal örnek · gerçek rakam bankaya göre değişir"
+      },
+      "etiket": "FARK NE KADAR?",
+      "kaynak": "100 × (0,05 − 0,045) = 0,5 milyar"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Peki Merkez Bankası krediye neden sınır koyuyor? İki sebep var.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "TAVANIN",
+          "*2 SEBEBİ*"
+        ],
+        "boy": 120
+      },
+      "etiket": "2 SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Önce zorunlu karşılık nedir? Bankalar topladığı paranın bir kısmını Merkez Bankası'nda tutar.",
+      "p": {
+        "ikon": "🔒",
+        "satirlar": [
+          "ZORUNLU KARŞILIK",
+          "= *KİLİTLİ PARA*"
+        ],
+        "boy": 76
+      },
+      "etiket": "ZORUNLU KARŞILIK",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Sen bankaya para yatırırsın. Banka bunun hepsini kredi yapamaz. Bir kısmı kilitli bekler.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💵",
+            "metin": "Sen bankaya *para yatırırsın*"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Banka krediye *çevirir*"
+          },
+          {
+            "ikon": "🔒",
+            "metin": "Bir kısmı *kilitli* kalır"
+          }
+        ]
+      },
+      "etiket": "PARA NEREYE GİDER?",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "KALBE",
+          "*DOKUN*"
+        ],
+        "boy": 120
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Birinci sebep fren. Banka sınırı aşarsa ek zorunlu karşılık ayırmak zorunda kalır.",
+      "p": {
+        "ikon": "🚦",
+        "satirlar": [
+          "1. SEBEP:",
+          "*KREDİ FRENİ*"
+        ],
+        "boy": 104
+      },
+      "etiket": "1. SEBEP",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Kredi çok hızlı büyürse harcama artar. Talep artınca fiyatlar yükselebilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💳",
+            "metin": "Kredi *hızlı büyür*"
+          },
+          {
+            "ikon": "🛍️",
+            "metin": "Harcama *artar*"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Fiyatlar *yükselebilir*"
+          }
+        ]
+      },
+      "etiket": "FRENİN MANTIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Merkez Bankası mayısta sınırları sıkılaştırmıştı. KOBİ sınırı beşten dört buçuğa inmişti.",
+      "p": {
+        "baslik": "23 Mayıs 2026 kararı · 8 haftalık sınırlar",
+        "satirlar": [
+          {
+            "ikon": "🏪",
+            "metin": "KOBİ kredisi",
+            "deger": "%5 → %4,5",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🏭",
+            "metin": "KOBİ dışı işletme",
+            "deger": "%3 → %2",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "İhtiyaç kredisi",
+            "deger": "%4 → %3",
+            "renk": "turuncu"
+          }
+        ],
+        "not": "Mayıs kararı · sonradan değişmiş olabilir"
+      },
+      "etiket": "MAYIS KARARI",
+      "kaynak": "K4, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "İkinci sebep bankaların hareket alanı. Duyuruya göre amaç, likidite yönetimini desteklemek.",
+      "p": {
+        "ikon": "🌬️",
+        "satirlar": [
+          "2. SEBEP:",
+          "*BANKAYA NEFES*"
+        ],
+        "boy": 96
+      },
+      "etiket": "2. SEBEP",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Likidite, bankanın elindeki hazır para demek. Ne kadar fazlaysa o kadar rahattır.",
+      "p": {
+        "ikon": "💰",
+        "satirlar": [
+          "LİKİDİTE =",
+          "*HAZIR PARA*"
+        ],
+        "boy": 104
+      },
+      "etiket": "LİKİDİTE NEDİR?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Merkez Bankası kilitli kalan kısmın oranını da düşürdü. Orta bankada yüzde otuzdan on beşe indi. Büyük bankada kırktan otuz beşe.",
+      "p": {
+        "baslik": "Bloke tesis oranı · TL zorunlu karşılık",
+        "satirlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Aktif 100–500 milyar ₺",
+            "deger": "%30 → %15",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Aktif 500 milyar ₺ üzeri",
+            "deger": "%40 → %35",
+            "renk": "yesil"
+          }
+        ],
+        "not": "Bilanço aktif büyüklüğüne göre"
+      },
+      "etiket": "KİLİTLİ PARA AZALDI",
+      "kaynak": "K1, K2, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Kilitli para azalınca bankanın serbest parası artar. Banka bu parayı daha rahat yönetir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🔓",
+            "metin": "Kilitli para *azalır*"
+          },
+          {
+            "ikon": "💰",
+            "metin": "Serbest para *artar*"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Banka daha *rahat* yönetir"
+          }
+        ]
+      },
+      "etiket": "NEDEN ÖNEMLİ?",
+      "kaynak": "Yorum"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Yani iki hamle aynı yöne bakıyor: bankalara biraz daha hareket alanı.",
+      "p": {
+        "baslik": "Özet · 2 hamle",
+        "satirlar": [
+          {
+            "ikon": "🏪",
+            "metin": "KOBİ kredi sınırı",
+            "deger": "↑ %5",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🔓",
+            "metin": "Kilitli para oranı",
+            "deger": "↓ düştü",
+            "renk": "yesil"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*",
+        "boy": 110
+      },
+      "etiket": "CEBİNE ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Önce şunu bil: bu bir faiz kararı değil. Faiz kararı ayrı bir toplantıda alınıyor.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "BU BİR",
+          "*FAİZ KARARI DEĞİL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "AYRIM",
+      "kaynak": "K1, K6"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Küçük işletmelerin kredi bulması kolaylaşabilir. Stok, maaş ve yatırım için finansman çıkabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏪",
+            "metin": "KOBİ'ye *daha çok kredi*"
+          },
+          {
+            "ikon": "📦",
+            "metin": "Stok, maaş, yatırım *finansmanı*"
+          },
+          {
+            "ikon": "🙂",
+            "metin": "Esnafa *nefes* olabilir"
+          }
+        ]
+      },
+      "etiket": "OLASI ETKİ",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ama banka kredi vermek zorunda değil. Değerlendirme yine bankada yapılıyor.",
+      "p": {
+        "ikon": "📝",
+        "satirlar": [
+          "KARAR YİNE",
+          "*BANKADA*"
+        ],
+        "boy": 104
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "Yorum"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Haberlere göre bu kararda değişen, KOBİ sınırı ve kilitli para oranı. Bireysel kredi sınırları anılmadı.",
+      "p": {
+        "ikon": "👤",
+        "satirlar": [
+          "BİREYSEL KREDİ",
+          "*BU KARARDA YOK*"
+        ],
+        "boy": 76
+      },
+      "etiket": "BİREYSEL KREDİ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Kredi artarsa ekonomi canlanabilir. Ama fiyat baskısı da artabilir. Merkez Bankası bu dengeyi izliyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🚀",
+            "metin": "Kredi *artar*"
+          },
+          {
+            "ikon": "🛍️",
+            "metin": "Talep *canlanır*"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Fiyat baskısı *artabilir*"
+          }
+        ]
+      },
+      "etiket": "DENGE",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu zincirin hiçbir halkası kesin değil. Sonuçları zamanla göreceğiz.",
+      "p": {
+        "ikon": "❓",
+        "satirlar": [
+          "HİÇBİRİ",
+          "*KESİN DEĞİL*"
+        ],
+        "boy": 110,
+        "not": "Olasılıklar — gelecek bilinmez"
+      },
+      "etiket": "DÜRÜST NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "takvim",
+      "say": "Bir sonraki faiz kararı yirmi iki ekimde bekleniyor. Gözler orada.",
+      "p": {
+        "gun": "22",
+        "ay": "EKİM",
+        "gunadi": "PERŞEMBE",
+        "saat": "14.00",
+        "not": "*Faiz kararı* bekleniyor"
+      },
+      "etiket": "SIRADAKİ KARAR",
+      "kaynak": "K6"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: kredi tavanı biraz gevşedi, kilitli para azaldı. Etkisi bize dolaylı gelebilir.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "🏪",
+            "metin": "KOBİ kredi sınırı",
+            "deger": "%4,5 → %5",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🔒",
+            "metin": "Kilitli para",
+            "deger": "azaldı",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "👛",
+            "metin": "Bize etkisi",
+            "deger": "dolaylı",
+            "renk": "mavi"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Öğrenmek istediğin konuyu yorumlara yaz. Sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Merak ettiysen, tıkla bakalım. Abone olmayı unutma.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi sade dille öğrenmek için abone ol"
+      }
+    }
+  ],
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "kaynaklar": {
+    "K1": "TCMB Makroihtiyati Çerçeve Basın Duyurusu 2026-43 (1 Ekim 2026): KOBİ kredisi 8 haftalık büyüme sınırı %4,5 → %5; TL zorunlu karşılıkta bloke tesis oranları düşürüldü; amaç makrofinansal istikrar ve likidite yönetimi — https://www.ahaber.com.tr/ekonomi/2026/10/01/tcmb-kobi-kredileri-icin-yuzde-45-olan-buyume-sinirini-yuzde-5e-yukseltti ; https://www.cnbce.com/haberler/merkez-bankasindan-yeni-hamle-zorunlu-karsilik-oranlarinda-degisiklik-h38536",
+    "K2": "Bloke tesis oranı: aktif 100–500 milyar ₺ bankalarda %30 → %15, 500 milyar ₺ üzeri %40 → %35 — https://www.karar.com/ekonomi-haberleri/merkez-bankasindan-makroihtiyati-adim-kobi-kredi-buyume-siniri-2075654 ; https://bankadunyasi.com/merkez-bankasindan-zorunlu-karsilik-duzenlemesi-3/ ; https://www.nefes.com.tr/merkez-bankasindan-zorunlu-karsilik-adimi-154999",
+    "K3": "Büyüme sınırı aşılırsa ek zorunlu karşılık; zorunlu karşılık = mevduatın bir kısmının TCMB'de tutulması — https://www.bloomberght.com/tcmb-den-zorunlu-karsilik-duzenlemesi-3790044 ; https://www.tv5.com.tr/tcmbden-zorunlu-karsilik-duzenlemesi-kobi-kredilerinde-buyume-siniri-yuzde-5e-cikarildi",
+    "K4": "23 Mayıs 2026 kararı: KOBİ %5→%4,5, KOBİ dışı %3→%2, ihtiyaç %4→%3 (8 haftalık sınırlar) — https://www.ahaber.com.tr/ekonomi/2026/05/23/merkez-bankasi-kredi-sinirlarini-dusurdu ; https://ticaretgazetesi.com.tr/2026/05/23/merkez-bankasindan-kredi-buyumesiyle-ilgili-yeni-adimlar/",
+    "K5": "Mayıs kararının gerekçesi: sıkı parasal duruşu desteklemek — https://sanayigazetesi.com.tr/tcmb-ihtiyac-ve-tasit-kredilerine-fren/",
+    "K6": "Sonraki PPK faiz kararı 22 Ekim 2026, 14.00 — https://bigpara.hurriyet.com.tr/ekonomi-haberleri/galeri-merkez-bankasi-faiz-karari-tarihi-2026-ekim-merkez-bankasi-faiz-karari-ne-zaman-aciklanacak-tcmb-faiz-beklentisi-nedir_ID102251376/ ; https://www.aksam.com.tr/trend/merkez-bankasi-ekim-ayi-faiz-karari-ne-zaman-aciklanacak-2026-tcmb-takvimi/haber-1699168"
+  }
+}
