@@ -22,7 +22,7 @@ modele veriliyor — tam kare CPU'da gereksiz yavaş.
 KURULUM (bir kez, ~5 dk): scripts/setup_propainter.sh
 CPU'da (4 çekirdek) ≈ 1.7 sn/kare → 36 sn'lik klip ~35 dk: arka planda çalıştır. Önce --only t0,t1 ile tek sahnede dene, BAK.
 """
-import argparse, os, shutil, subprocess, sys, tempfile, time
+import argparse, json, os, shutil, subprocess, sys, tempfile, time
 from collections import deque
 import numpy as np, cv2
 
@@ -75,6 +75,8 @@ def main():
     # olarak bulunup tamamen maskeleniyor.
     ap.add_argument("--shadow", help="dx,dy: altyazı maskesini bu kadar kaydırıp ekle (yumuşak "
                     "düşen gölge harf eşiğine takılmıyor, silinince koyu çizgi kalıyor)")
+    ap.add_argument("--boxtrack", help="json: kare başına [y0,y1,x0,x1] yazı kutusu (konumu "
+                    "sahneden sahneye değişen beyaz başlık kutusu)")
     ap.add_argument("--rect", action="append", default=[],
                     help="t0,t1,y0,y1,x0,x1: bu aralıkta dikdörtgenin TAMAMI maskelenir "
                          "(yorum balonu, sahneye yapışık büyük yazı, sabit watermark)")
@@ -153,6 +155,7 @@ def main():
     moving = [[float(v) for v in s.split(",")] for s in a.moving]
     rects = [[float(v) for v in r.split(",")] for r in a.rect]
     shadow = [int(v) for v in a.shadow.split(",")] if a.shadow else None
+    btrack = json.load(open(a.boxtrack)) if a.boxtrack else None
 
     def white_boxes(f, y0, y1):
         """Düz beyaz kutu + koyu yazı: dikdörtgeni bul, tamamını maskele.
@@ -205,6 +208,11 @@ def main():
         for t0, t1, y0, y1, x0, x1 in rects:
             if t0 <= t <= t1:
                 m[int(y0):int(y1), int(x0):int(x1)] = 255
+        if btrack:
+            bx = btrack[min(int(round(t * fps)), len(btrack) - 1)]
+            if bx:
+                y0, y1, x0, x1 = bx
+                m[max(0, y0):y1, max(0, x0):x1] = 255
         for t0, t1, x0, vx, y0, y1, lft, rgt in moving:
             if t0 <= t <= t1:
                 xc = x0 + vx * t
