@@ -75,6 +75,9 @@ def main():
     # olarak bulunup tamamen maskeleniyor.
     ap.add_argument("--shadow", help="dx,dy: altyazı maskesini bu kadar kaydırıp ekle (yumuşak "
                     "düşen gölge harf eşiğine takılmıyor, silinince koyu çizgi kalıyor)")
+    ap.add_argument("--cuts", help="virgülle ek kesim noktaları (sn): birleştirilmiş alt kümede "
+                    "parça sınırları sahne kesimi sayılmayabiliyor; üst ve alt kutu aynı parçaya "
+                    "düşünce ROI tüm kare oldu, bellek yetmedi")
     ap.add_argument("--boxtrack", help="json: kare başına [y0,y1,x0,x1] yazı kutusu (konumu "
                     "sahneden sahneye değişen beyaz başlık kutusu)")
     ap.add_argument("--rect", action="append", default=[],
@@ -263,6 +266,8 @@ def main():
     back, ahead = 6, 10
     plain = [tuple(int(round(float(v) * fps)) for v in p.split(",")) for p in a.plain]
     cuts = [0] + [int(round(c * fps)) for c in scene_cuts(a.src, a.scene_thr, t_end)] + [n]
+    if a.cuts:
+        cuts += [int(round(float(c) * fps)) for c in a.cuts.split(",")]
     cuts += [v for p in plain for v in p]           # karartma aralığı kendi parçası olsun
     cuts = sorted(set(c for c in cuts if 0 <= c <= n))
     masks = np.zeros_like(raw)
