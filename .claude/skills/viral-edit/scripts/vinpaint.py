@@ -311,8 +311,9 @@ def main():
         step = -(-(e - s) // k)
         chunks += [(b, min(e, b + step)) for b in range(s, e, step)]
     if a.only:
-        o0, o1 = (int(round(float(v) * fps)) for v in a.only.split(","))
-        chunks = [(max(s, o0), min(e, o1)) for s, e in chunks if e > o0 and s < o1]
+        # birden çok aralık "a,b;c,d": yalnız kurguda kullanılan kareler işlenir
+        rng_ = [tuple(int(round(float(v) * fps)) for v in r.split(",")) for r in a.only.split(";")]
+        chunks = [(max(s, o0), min(e, o1)) for o0, o1 in rng_ for s, e in chunks if e > o0 and s < o1]
 
     out = fr  # yerinde güncelle
     t_all = time.time()
