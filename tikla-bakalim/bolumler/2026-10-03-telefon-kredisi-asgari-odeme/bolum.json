@@ -1,0 +1,673 @@
+{
+  "baslik": "BDDK'dan telefon kredisi ve kredi kartı kararı: Taksit ve asgari ödeme neden değişti?",
+  "tarih": "2026-10-03",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "vade",
+    "asgari",
+    "taksit",
+    "limit"
+  ],
+  "altyazi": {
+    "Kırk bin liraya kadar": "40 bin liraya kadar",
+    "on iki aya kadar": "12 aya kadar",
+    "on iki ay vade": "12 ay vade",
+    "on iki ayda": "12 ayda",
+    "bir Ekim iki bin yirmi altıda": "1 Ekim 2026'da",
+    "Üç soruda": "3 soruda",
+    "yirmi binden kırk bine": "20 binden 40 bine",
+    "yirmi beş binden elli bine": "25 binden 50 bine",
+    "üç ay": "3 ay",
+    "üç ayda": "3 ayda",
+    "Otuz altı bin liralık": "36 bin liralık",
+    "ayda üç bin lira": "ayda 3 bin lira",
+    "Kırk beş bin liralık": "45 bin liralık",
+    "ayda on beş bin lira": "ayda 15 bin lira",
+    "elli binle yüz bin lira": "50 binle 100 bin lira",
+    "yüzde kırktı": "%40'tı",
+    "yüzde kırk": "%40",
+    "yüzde yirmi": "%20",
+    "elli bin lira": "50 bin lira",
+    "Elli bin liralık": "50 bin liralık",
+    "yirmi binden on bine": "20 binden 10 bine",
+    "yüz binin üstündeyse": "100 binin üstündeyse",
+    "on bin ödersen": "10 bin ödersen",
+    "kırk bin lira": "40 bin lira",
+    "Birinci karar": "1. karar",
+    "İkinci karar": "2. karar",
+    "İki karar": "2 karar",
+    "iki karar": "2 karar"
+  },
+  "kapak": {
+    "ikon": "📱",
+    "ust": "TELEFON TAKSİDİ",
+    "buyuk": "12 AY",
+    "alt": "NE DEĞİŞTİ?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Kırk bin liraya kadar telefonlarda artık on iki aya kadar vade mümkün.",
+      "p": {
+        "ikon": "📱",
+        "etiket": "Telefon kredisi · en uzun vade",
+        "deger": 12,
+        "sonek": " ay",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "fiyatı 40 bin ₺'ye kadar telefonlar · BDDK, 1 Ekim 2026",
+        "sayma": false
+      },
+      "etiket": "TELEFON KREDİSİ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Kredi kartında asgari ödeme kuralı da aynı gün değişti.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "ASGARİ ÖDEME",
+          "*DE DEĞİŞTİ*"
+        ],
+        "boy": 96
+      },
+      "etiket": "İKİNCİ KARAR",
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki ne değişti, neden değişti, cebine nasıl dokunur? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "CEBİNE\n*NE OLUR?*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz, abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ",
+          "*SADE* ANLATIYORUZ"
+        ],
+        "boy": 96
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Kararlar bir Ekim iki bin yirmi altıda, BDDK tarafından açıklandı.",
+      "p": {
+        "gun": "1",
+        "ay": "EKİM",
+        "gunadi": "PERŞEMBE",
+        "not": "2026 · *BDDK* kararı"
+      },
+      "etiket": "KARAR TARİHİ",
+      "kaynak": "K1, K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "BDDK, bankaları denetleyen kurum. Bankaların kurallarını o belirliyor.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "BDDK =",
+          "*BANKALARIN HAKEMİ*"
+        ],
+        "boy": 84,
+        "not": "Bankacılık Düzenleme ve Denetleme Kurumu"
+      },
+      "etiket": "BDDK NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Birinci karar telefon taksidi. Yeni telefonda on iki ay vade sınırı yirmi binden kırk bine çıktı.",
+      "p": {
+        "baslik": "📱 12 ay vade için yeni telefon fiyat sınırı",
+        "sol": {
+          "etiket": "ÖNCE",
+          "deger": 20000,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "ŞİMDİ",
+          "deger": 40000,
+          "renk": "yesil"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "fark": "×2",
+        "not": "Ölçek sıfırdan başlar"
+      },
+      "etiket": "SINIR YÜKSELDİ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Yenilenmiş telefonda bu sınır yirmi beş binden elli bine çıktı.",
+      "p": {
+        "baslik": "12 ay vade için fiyat sınırı",
+        "satirlar": [
+          {
+            "ikon": "📱",
+            "metin": "Yeni telefon",
+            "deger": "20.000 → 40.000 ₺",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "♻️",
+            "metin": "Yenilenmiş telefon",
+            "deger": "25.000 → 50.000 ₺",
+            "renk": "yesil"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "İKİ SINIR",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Sınırı aşan telefonda ise vade en fazla üç ay.",
+      "p": {
+        "ikon": "⏱️",
+        "satirlar": [
+          "SINIRI AŞARSA",
+          "*EN FAZLA 3 AY*"
+        ],
+        "boy": 96
+      },
+      "etiket": "ÇİZGİNİN ÜSTÜ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Otuz altı bin liralık telefon, on iki ayda ayda üç bin lira. Faiz hariç.",
+      "p": {
+        "baslik": "Örnek hesap · faiz hariç",
+        "ikon": "🧮",
+        "ogeler": [
+          "36.000 ₺",
+          "÷",
+          "12 ay",
+          "=",
+          "3.000 ₺/ay"
+        ]
+      },
+      "etiket": "ÇİZGİNİN ALTI",
+      "kaynak": "varsayımsal örnek"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Kırk beş bin liralık telefon, üç ayda ayda on beş bin lira. Fark büyük.",
+      "p": {
+        "baslik": "Örnek hesap · faiz hariç",
+        "ikon": "🧮",
+        "ogeler": [
+          "45.000 ₺",
+          "÷",
+          "3 ay",
+          "=",
+          "15.000 ₺/ay"
+        ]
+      },
+      "etiket": "ÇİZGİNİN ÜSTÜ",
+      "kaynak": "varsayımsal örnek"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "İkinci karar kredi kartı. Asgari ödeme, kart borcunda yatırman gereken en düşük tutar.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "ASGARİ ÖDEME =",
+          "*EN DÜŞÜK TUTAR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ASGARİ ÖDEME NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Limiti elli binle yüz bin lira arasındaki kartlarda oran yüzde kırktı. Şimdi yüzde yirmi.",
+      "p": {
+        "baslik": "💳 Kart limiti 50–100 bin ₺ · asgari ödeme oranı",
+        "sol": {
+          "etiket": "ÖNCE",
+          "deger": 40,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "ŞİMDİ",
+          "deger": 20,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "−20 puan",
+        "not": "Ölçek sıfırdan başlar"
+      },
+      "etiket": "ORAN DÜŞTÜ",
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Dönem borcun elli bin lira diyelim. Asgari ödeme yirmi binden on bine düştü.",
+      "p": {
+        "baslik": "Örnek · limiti 80 bin ₺ olan kart",
+        "ikon": "🧮",
+        "ogeler": [
+          "50.000 ₺",
+          "×",
+          "%20",
+          "=",
+          "10.000 ₺"
+        ]
+      },
+      "etiket": "ÖRNEK HESAP",
+      "kaynak": "varsayımsal örnek"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Limiti yüz binin üstündeyse oran yüzde kırk olarak sürüyor.",
+      "p": {
+        "baslik": "Yeni kural · asgari ödeme / dönem borcu",
+        "satirlar": [
+          {
+            "ikon": "💳",
+            "metin": "Limit 100 bin ₺ ve altı",
+            "deger": "%20",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "💎",
+            "metin": "Limit 100 bin ₺ üstü",
+            "deger": "%40",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "YENİ KURAL",
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki BDDK bunu neden yaptı? Haberlerde ayrıntılı bir gerekçe yok. Ama mantığı okunabiliyor.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*DEĞİŞTİ?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Birinci ipucu fiyatlar. Fiyatlar yükselince sabit bir sınır geride kalır.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "1. İPUCU:",
+          "*FİYAT ARTIŞI*"
+        ],
+        "boy": 104
+      },
+      "etiket": "1. İPUCU",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Telefon pahalandıkça eski sınır geride kalır. Sınırın güncellenmesi bu yüzden beklenebilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏷️",
+            "metin": "Telefon fiyatı *yükselir*"
+          },
+          {
+            "ikon": "📏",
+            "metin": "Eski sınır *geride kalır*"
+          },
+          {
+            "ikon": "🔧",
+            "metin": "Sınır *güncellenir*"
+          }
+        ]
+      },
+      "etiket": "OLASI MANTIK",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "İkinci ipucu fren. Taksit sınırı, harcamayı yavaşlatmak için kullanılan bir araç.",
+      "p": {
+        "ikon": "🚦",
+        "satirlar": [
+          "2. İPUCU:",
+          "*HARCAMA FRENİ*"
+        ],
+        "boy": 104
+      },
+      "etiket": "2. İPUCU",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Vade uzarsa aylık ödeme düşer, alışveriş kolaylaşır. Vade kısalırsa tersi olur.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "⏳",
+            "metin": "Vade *uzar*"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Aylık ödeme *düşer*"
+          },
+          {
+            "ikon": "🛍️",
+            "metin": "Alışveriş *kolaylaşır*"
+          }
+        ]
+      },
+      "etiket": "FRENİN MANTIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Şimdi en ilginç yere geliyoruz. Videoyu beğenirsen daha çok kişiye ulaşıyor.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "KALBE",
+          "*DOKUN*"
+        ],
+        "boy": 120
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kartta da mantık aynı. Asgari ödeme oranı yüksekse borç daha hızlı kapanır.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "KARTTA DA",
+          "*AYNI MANTIK*"
+        ],
+        "boy": 104
+      },
+      "etiket": "KARTTA DA FREN",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Oran yüksekse bu ay çok yatırırsın. Borç hızlı azalır, kartla harcama sınırlanır.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💳",
+            "metin": "Oran *yüksek*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Bu ay *çok* yatırırsın"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Borç *hızlı* azalır"
+          }
+        ]
+      },
+      "etiket": "ORANIN MANTIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kart limitleri zamanla büyüdü. Eski eşik, daha çok kişiyi yüksek orana sokmuş olabilir.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "ESKİ EŞİK",
+          "*GERİDE KALDI?*"
+        ],
+        "boy": 96
+      },
+      "etiket": "EŞİK GÜNCELLENDİ",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Yani iki karar aynı yöne bakıyor: eşikler güncellendi, vade ve ödeme biraz rahatladı.",
+      "p": {
+        "baslik": "Özet · 2 karar",
+        "satirlar": [
+          {
+            "ikon": "📱",
+            "metin": "Telefon vade sınırı",
+            "deger": "↑ iki katı",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Asgari ödeme eşiği",
+            "deger": "↑ 100 bin ₺",
+            "renk": "yesil"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*",
+        "boy": 110
+      },
+      "etiket": "CEBİNE ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Uzun vade aylık yükü azaltır. Ama toplam faiz genelde artar. Faiz bankadan bankaya değişir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "📅",
+            "metin": "Vade *uzar*"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Aylık yük *azalır*"
+          },
+          {
+            "ikon": "🧾",
+            "metin": "Toplam faiz *artabilir*"
+          }
+        ]
+      },
+      "etiket": "OLASI ETKİ",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu sınırlar en uzun vadeyi gösterir. Hangi vadeyi vereceği bankaya bağlı.",
+      "p": {
+        "ikon": "📝",
+        "satirlar": [
+          "12 AY =",
+          "*EN FAZLA*"
+        ],
+        "boy": 120
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kartta asgari ödemeyi yatırmak seni rahatlatır. Ama borcu silmez.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "ASGARİ ÖDEME",
+          "*BORCU SİLMEZ*"
+        ],
+        "boy": 96
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "Yorum"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Elli bin liralık borçta on bin ödersen, kırk bin lira kalır. Faiz bu kalana işler.",
+      "p": {
+        "baslik": "Örnek · asgari ödeme sonrası",
+        "ikon": "🧮",
+        "ogeler": [
+          "50.000 ₺",
+          "−",
+          "10.000 ₺",
+          "=",
+          "40.000 ₺ kalır"
+        ]
+      },
+      "etiket": "KALAN BORÇ",
+      "kaynak": "varsayımsal örnek"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Haberlerde bu kararlarla birlikte faiz oranı değişikliği anılmıyor.",
+      "p": {
+        "ikon": "🔎",
+        "satirlar": [
+          "FAİZ ORANI",
+          "*ANILMADI*"
+        ],
+        "boy": 104
+      },
+      "etiket": "FAİZ",
+      "kaynak": "K1, K2, K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bunlar olasılıklar. Gerçek etkiyi bankanın teklifi ve senin bütçen belirler.",
+      "p": {
+        "ikon": "❓",
+        "satirlar": [
+          "SONUÇ",
+          "*BÜTÇENE BAĞLI*"
+        ],
+        "boy": 104,
+        "not": "Olasılıklar — gelecek bilinmez"
+      },
+      "etiket": "DÜRÜST NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: telefonda vade sınırı iki katına çıktı, kartta asgari ödeme gevşedi.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "📱",
+            "metin": "12 ay vade",
+            "deger": "20 bin → 40 bin ₺",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Asgari ödeme",
+            "deger": "%40 → %20",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "👛",
+            "metin": "Bize etkisi",
+            "deger": "dolaylı",
+            "renk": "mavi"
+          }
+        ],
+        "not": "Telefon: fiyat sınırı · Kart: limiti 50–100 bin ₺ olanlar"
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Öğrenmek istediğin başka bir konu varsa yorumlara yaz; bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi sade öğrenmek için abone ol"
+      }
+    }
+  ],
+  "cta": [
+    {
+      "sahne": 20,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "kaynaklar": {
+    "K1": "BDDK 1 Ekim 2026 kararları: yeni telefonda 12 ay vade için fiyat sınırı 20 bin → 40 bin ₺, yenilenmiş 25 bin → 50 bin ₺; sınır üstünde vade en fazla 3 ay — https://www.teknoblog.com/telefon-kredisi-40-bin-vade/ ; https://www.dunya.com/gundem/bddkdan-onemli-karar-cep-telefonu-kredileri-ve-kredi-karti-odemelerinde-degisiklige-gidildi-haberi-842388 ; https://www.endeks24.com/bddk-telefon-kredisinde-fiyat-sinirini-40-bin-liraya-cikardi",
+    "K2": "Telefon kararının ikinci doğrulaması (40 bin ₺'ye kadar 12 ay, üstü 3 ay; yenilenmiş 50 bin ₺) — https://www.hurriyet.com.tr/gundem/bddkdan-cep-telefonu-kredileri-ve-kredi-karti-asgari-odemelerine-yeni-duzenleme-43327724 ; https://www.cumhuriyet.com.tr/ekonomi/son-dakika-telefon-alacaklar-dikkat-bddk-den-kredi-kartlarina-yeni-duzenleme-100-bin-lira-siniri-geldi-2543201",
+    "K3": "Kredi kartı asgari ödeme: %20 oranının uygulandığı limit sınırı 50 bin → 100 bin ₺; üstünde %40 — https://www.takvim.com.tr/ekonomi/2026/10/02/kredi-karti-borcu-olanlar-dikkat-asgari-odeme-limitinde-yeni-donem-basladi ; https://www.nefes.com.tr/kredi-karti-asgari-odemelerinde-yeni-karar-bddk-acikladi-155223 ; https://www.cgtnturk.com/bddkdan-kredi-karti-asgari-odemeleri-ve-cep-telefonu-kredileriyle-ilgili-yeni-duzenleme"
+  }
+}
