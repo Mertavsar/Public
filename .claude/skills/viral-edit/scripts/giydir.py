@@ -21,6 +21,10 @@ spec:
  "emphasis": ["bitmemişti", "koca"],
  "labels": [{"t0":1.3,"t1":2.5,"text":"İNSAN DİŞİ","x":0.5,"y":0.12,"size":72}]
 }
+counter: {"t0","t1","keys":[[t,değer],...],"suffix":" KG","y":0.075,"size":140}
+  seslendirmenin söylediği sayıyı gösterir; değer söylendiği an tam o sayıdır,
+  arada doğrusal artar (diş klibi: kaynağın LED'i kadraj dışında kalıyordu,
+  kullanıcı "100kg 200kg yazısı neden tam değil" dedi).
 labels: kaynaktaki sabit etiketin (ör. İngilizce "Human Teeth") Türkçesi —
 kaynakta silinip aynı sahnede bu yazılır; büyük yazı değil, altyazıyı da kapatmaz.
 Altyazı tam cümle değil: 2–4 kelimelik parçalar, konuşulan kelime sarı.
@@ -134,6 +138,21 @@ def main():
                     lx += d.textlength(lb["text"], font=f) / 2
                 stroked_text(d, (lx, lb["y"] * H), lb["text"], f,
                              COL.get(lb.get("color", "white"), WHITE), BLACK, max(5, f.size // 11))
+        # ---- sayaç (seslendirmedeki kg) ----
+        for cn in (sp.get("counters", []) if a.layer != "cards" else []):
+            if cn["t0"] <= t < cn["t1"]:
+                ks = cn["keys"]
+                v = ks[0][1] if t <= ks[0][0] else ks[-1][1]
+                for (ta, va), (tb, vb) in zip(ks, ks[1:]):
+                    if ta <= t < tb:
+                        v = va + (vb - va) * (t - ta) / (tb - ta)
+                num, suf = f"{int(round(v))}", cn.get("suffix", " KG")
+                f = load_font(cn.get("size", 140))
+                wn, ws = d.textlength(num, font=f), d.textlength(suf, font=f)
+                x0 = W / 2 - (wn + ws) / 2
+                cy = cn.get("y", 0.075) * H
+                stroked_text(d, (x0 + wn / 2, cy), num, f, RED, BLACK, max(5, f.size // 14))
+                stroked_text(d, (x0 + wn + ws / 2, cy), suf, f, WHITE, BLACK, max(5, f.size // 14))
         # ---- büyük vurgu ----
         for b in (bigs if a.layer != "cards" else []):
             if b["t0"] <= t < b["t1"]:

@@ -851,6 +851,11 @@ Diş klibi ("Crush & Compare", %28 saydam beyaz, 570x295, dişin tam üstünde):
 - Sayım/olay cümleleri gerçek olaya otursun: pres dişe değmeden "Yüz kilo"
   denmez. Temas anını ve gösterge (LED) aralığını ölç, cümleleri o aralıklara
   böl (inmeye başladı → iniş, sayım → temas/LED, "çatladı" → kırıntı karesi).
+- Kaynağın sayı göstergesi (LED) kadraj kenarında yarım kalıyor ve
+  seslendirmenin söylediği sayıyla çelişiyorsa: rakam alanını kutunun kendi
+  siyahıyla doldur (bulanık değil), `giydir.py` `counters` ile seslendirmenin
+  sayısını üst siyah banda yaz — sayı söylendiği an tam o değere oturur ve
+  bekler (sürekli kayan sayaç "Yüz" derken 116 gösterdi).
 - İngilizce sahne etiketi ("Human Teeth"): `--rect` ile sil, `giydir.py`
   `labels` ile Türkçesini yaz.
 
