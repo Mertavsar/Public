@@ -83,6 +83,10 @@ def main():
     ap.add_argument("--rect", action="append", default=[],
                     help="t0,t1,y0,y1,x0,x1: bu aralıkta dikdörtgenin TAMAMI maskelenir "
                          "(yorum balonu, sahneye yapışık büyük yazı, sabit watermark)")
+    ap.add_argument("--mask-img", action="append", default=[],
+                    help="png,x,y,t0,t1: sabit maske resmi (x,y) konumunda o aralıkta eklenir. "
+                         "Yarı saydam watermark harfleri: dikdörtgen maske içindeki dişi/bası "
+                         "tamamen uydurtuyordu, yalnız harf şekli silinince çevre gerçek kalır")
     ap.add_argument("--white-box", help="beyaz altyazı kutusunun durabileceği y0,y1 bandı")
     # Aynı klipte altta soldan sağa kayan bir ikon (kalp + figür) vardı — video
     # boyunca ilerleyen bir süre göstergesi. Konumu x = x0 + vx*t ile gidiyor.
@@ -122,7 +126,7 @@ def main():
     # Uzun iş (35+ dk) konteyner yeniden başlayınca yarıda kaldı: --work ile
     # kalıcı klasör verilirse biten sahneler done.txt'ye yazılır, aynı komut
     # tekrar çalışınca kaldığı yerden devam eder.
-    work = a.work or tempfile.mkdtemp(prefix="vinpaint_")
+    work = os.path.abspath(a.work) if a.work else tempfile.mkdtemp(prefix="vinpaint_")  # ProPainter cwd=PP ile çalışıyor
     os.makedirs(work, exist_ok=True)
     frp, donep = os.path.join(work, "fr.npy"), os.path.join(work, "done.txt")
     resume = os.path.exists(frp) and os.path.exists(donep)
@@ -158,6 +162,11 @@ def main():
     moving = [[float(v) for v in s.split(",")] for s in a.moving]
     rects = [[float(v) for v in r.split(",")] for r in a.rect]
     shadow = [int(v) for v in a.shadow.split(",")] if a.shadow else None
+    mimgs = []
+    for mi in a.mask_img:
+        pth, mx, my, mt0, mt1 = mi.split(",")
+        im = (cv2.imread(pth, cv2.IMREAD_GRAYSCALE) > 127).astype(np.uint8) * 255
+        mimgs.append((im, int(mx), int(my), float(mt0), float(mt1)))
     btrack = json.load(open(a.boxtrack)) if a.boxtrack else None
 
     def white_boxes(f, y0, y1):
@@ -211,6 +220,10 @@ def main():
         for t0, t1, y0, y1, x0, x1 in rects:
             if t0 <= t <= t1:
                 m[int(y0):int(y1), int(x0):int(x1)] = 255
+        for im, mx, my, mt0, mt1 in mimgs:
+            if mt0 <= t <= mt1:
+                hh, ww = im.shape
+                m[my:my + hh, mx:mx + ww] |= im[:H - my, :W - mx]
         if btrack:
             bx = btrack[min(int(round(t * fps)), len(btrack) - 1)]
             if bx:

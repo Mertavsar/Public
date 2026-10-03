@@ -18,8 +18,11 @@ spec:
  "big":   [{"t0":5.2,"t1":6.4,"text":"BİTMEMİŞTİ.","y":0.45}],
  "captions": "captions.json",    // kelime zamanları (sentalign çıktısı)
  "cap_y": 0.70, "cap_size": 84, "chunk_words": 4, "chunk_chars": 22,
- "emphasis": ["bitmemişti", "koca"]
+ "emphasis": ["bitmemişti", "koca"],
+ "labels": [{"t0":1.3,"t1":2.5,"text":"İNSAN DİŞİ","x":0.5,"y":0.12,"size":72}]
 }
+labels: kaynaktaki sabit etiketin (ör. İngilizce "Human Teeth") Türkçesi —
+kaynakta silinip aynı sahnede bu yazılır; büyük yazı değil, altyazıyı da kapatmaz.
 Altyazı tam cümle değil: 2–4 kelimelik parçalar, konuşulan kelime sarı.
 """
 import argparse, json, math, os, re, subprocess, sys
@@ -122,6 +125,12 @@ def main():
                     ln *= 1.0 + ar["pulse"] * math.sin(2 * math.pi * 3.2 * (t - ar["t"] - dr))
                 poly = clip_polygon_progress(arrow_polygon(tipx, tipy, ar["angle"], ln), (tipx, tipy), frac)
                 d.polygon(poly, fill=RED, outline=BLACK, width=max(8, int(ln * 0.045)))
+        # ---- sahne etiketi (çeviri) ----
+        for lb in (sp.get("labels", []) if a.layer != "cards" else []):
+            if lb["t0"] <= t < lb["t1"]:
+                f = fit_font(d, lb["text"], W - 120, lb.get("size", 72))
+                stroked_text(d, (lb.get("x", 0.5) * W, lb["y"] * H), lb["text"], f,
+                             COL.get(lb.get("color", "white"), WHITE), BLACK, max(5, f.size // 11))
         # ---- büyük vurgu ----
         for b in (bigs if a.layer != "cards" else []):
             if b["t0"] <= t < b["t1"]:

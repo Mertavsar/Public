@@ -29,6 +29,8 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
 | `scripts/detext.py` | Kaynağa gömülü, SÜREKLİ DEĞİŞEN altyazıyı (kelime kelime İngilizce yazı + vurgu kutusu) her karede tespit edip siler |
 | `scripts/vinpaint.py` | Logo + değişen altyazı + çizimi ProPainter video onarımıyla siler (yazı hayvanın üstünden geçiyorsa bunu kullan; kurulum `setup_propainter.sh`) |
+| `scripts/unblend.py` | Sabit yarı saydam watermark’ı piksel başına ölçüp ters harmanlar (ardından vinpaint --mask-img) |
+| `scripts/votight.py` | Seslendirmeyi baştan keser, uzun boşlukları kısaltır, atempo ile hızlandırır; altyazı zamanlarını aynı eşlemeyle taşır |
 | `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
@@ -827,6 +829,26 @@ Bu yetmezse (filigran büyük, düz olmayan zemin üzerinde, iz kalıyor):
    kırpmaya izin veriyor mu? Kendi başına kırpma kararı verme.
 3. Kullanıcı "kalsın" derse olduğu gibi bırak — TikTok'tan gelen klipte
    filigran olması izleyici için sıra dışı değil.
+
+### Büyük yarı saydam watermark (sahnenin ortasında, sabit konum)
+
+Diş klibi ("Crush & Compare", %28 saydam beyaz, 570x295, dişin tam üstünde):
+- Yalnız ters harmanlama (`B = (I − k)/s`, piksel başına s,k) izi %90 siler ama
+  harf kenarında hayalet kalır — tek başına teslim edilmez.
+- Yalnız ProPainter (dikdörtgen veya harf boşlukları doldurulmuş maske) dişin
+  üstünde leke uydurur; durağan sahnede zamanda taşıyacak gerçek piksel yok.
+- **Çalışan: ikisi birden.** Önce `unblend.py` ile ~300 karede regresyonla piksel başına s,k
+  ölç (Telea tahmini arka plan; maske YALNIZ harfler — harf içi boşluklar
+  gerçek pikselle kalsın, kapatınca o bölgede fit bozuldu), tüm videoyu ters
+  harmanla, sonra `vinpaint.py --mask-img harf_maskesi.png,x,y,t0,t1` ile
+  yalnız harf şeklini ProPainter'a ver. Bağlam artık temiz, iz kalmıyor.
+- Uzun iş: `--only` ile yalnız kurguda kullanılan aralıklar; ~3.3 sn/kare.
+- 4:5 panel → tam ekran: `cutter.py` planında `"fill":[y0,y1]` — alt köşedeki
+  `@kanal` yazısı satırlarını dışarıda bırakacak y1 seç, silmeye gerek kalmaz.
+  Kaynak kendi içinde yana kaydırıyorsa (LED göstergesine pan) `"xcs"` ile
+  kare başına merkez ver, özne kadrajdan çıkmasın.
+- İngilizce sahne etiketi ("Human Teeth"): `--rect` ile sil, `giydir.py`
+  `labels` ile Türkçesini yaz.
 
 ### Yabancı altyazı kutusu — kırpma, delogo değil: ÜSTÜNE KENDİ KUTUMUZ
 

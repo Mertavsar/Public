@@ -8,8 +8,13 @@ plans.json:
 [
  {"o0":0.0,"o1":0.7,"src":27.0,"slow":1.0},
  {"o0":0.7,"o1":1.2,"rewind":[27.0,0.8]},              // kaynağı geriye sar
- {"o0":4.1,"o1":5.3,"src":4.6,"slow":1.0,"z0":1.0,"z1":1.12,"cx":0.45,"cy":0.55}
+ {"o0":4.1,"o1":5.3,"src":4.6,"slow":1.0,"z0":1.0,"z1":1.12,"cx":0.45,"cy":0.55},
+ {"o0":5.3,"o1":7.0,"src":20.0,"fill":[262,1400],"xc":465}   // 4:5 panel -> tam ekran
 ]
+fill [y0,y1]: kaynağın bu satırları 1920'ye oturur (kenar şerit / alttaki @kanal
+yazısı dışarıda kalır). xc: kaynakta ekran ortasına gelecek x; "xcs": json
+dosyası (kaynak karesi başına xc) — kaynak kendi içinde yana kaydırınca
+(diş videosu: LED göstergesine pan) özne kadrajdan çıkmasın.
 slow>1 ağır çekim (kaynaktan (o1-o0)/slow sn çekilir).
 
     python3 cutter.py ham.mp4 plans.json content.mp4 --boxtrack boxtrack.json --boxmap boxmap.json
@@ -77,12 +82,20 @@ def main():
         fr = frames(p.get("file", a.src), idx + [i + 1 for i in idx])   # plan bazında kaynak
         fr, nxt = fr[:n], fr[n:]
         fr = [f if w < 0.05 else cv2.addWeighted(f, 1 - w, g, w, 0) for f, g, w in zip(fr, nxt, wts)]
+        xcs = json.load(open(p["xcs"])) if p.get("xcs") else None
         z0, z1 = p.get("z0", 1.0), p.get("z1", 1.0)
         cx, cy = p.get("cx", 0.5) * W, p.get("cy", 0.5) * H
         for k, (si, f) in enumerate(zip(idx, fr)):
             u = k / max(1, n - 1)
             z = z0 + (z1 - z0) * (3 * u * u - 2 * u * u * u)     # yumuşak zoom
-            if abs(z - 1) > 1e-3:
+            if "fill" in p:
+                fy0, fy1 = p["fill"]
+                z = H / (fy1 - fy0)
+                xc = xcs[min(si, len(xcs) - 1)] if xcs else p.get("xc", W / 2)
+                xc = min(max(xc, W / 2 / z), W - W / 2 / z)
+                M = np.float32([[z, 0, W / 2 - z * xc], [0, z, -z * fy0]])
+                f = cv2.warpAffine(f, M, (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+            elif abs(z - 1) > 1e-3:
                 M = np.float32([[z, 0, cx * (1 - z)], [0, z, cy * (1 - z)]])
                 f = cv2.warpAffine(f, M, (W, H), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
             else:
@@ -93,8 +106,8 @@ def main():
             if track:
                 y0, y1, x0, x1 = track[min(si, len(track) - 1)]
                 if M is not None:
-                    x0, y0 = z * x0 + cx * (1 - z), z * y0 + cy * (1 - z)
-                    x1, y1 = z * x1 + cx * (1 - z), z * y1 + cy * (1 - z)
+                    x0, y0 = M[0, 0] * x0 + M[0, 2], M[1, 1] * y0 + M[1, 2]
+                    x1, y1 = M[0, 0] * x1 + M[0, 2], M[1, 1] * y1 + M[1, 2]
                 boxmap.append([int(y0) - 2, int(y1) + 2, int(x0) - 2, int(x1) + 2])
         total += n
     enc.stdin.close(); enc.wait()
