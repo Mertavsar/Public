@@ -843,10 +843,14 @@ Diş klibi ("Crush & Compare", %28 saydam beyaz, 570x295, dişin tam üstünde):
   harmanla, sonra `vinpaint.py --mask-img harf_maskesi.png,x,y,t0,t1` ile
   yalnız harf şeklini ProPainter'a ver. Bağlam artık temiz, iz kalmıyor.
 - Uzun iş: `--only` ile yalnız kurguda kullanılan aralıklar; ~3.3 sn/kare.
-- 4:5 panel → tam ekran: `cutter.py` planında `"fill":[y0,y1]` — alt köşedeki
-  `@kanal` yazısı satırlarını dışarıda bırakacak y1 seç, silmeye gerek kalmaz.
-  Kaynak kendi içinde yana kaydırıyorsa (LED göstergesine pan) `"xcs"` ile
-  kare başına merkez ver, özne kadrajdan çıkmasın.
+- ⛔ Kaynak dosya 9:16 ise içindeki 4:5 panel siyah bantlı olsa bile
+  DOLDURMA. Diş klibinde `"fill"` ile 1.69x büyütüldü; kullanıcı "Zoom yapma"
+  dedi (çatlama anında diş kenara kaçtı). Kare olduğu gibi kalır, `@kanal`
+  yazısı `--rect` ile silinir, altyazı alt siyah banda düşer (cap_y 0.82).
+  `cutter.py` `"fill"`/`"xcs"` yalnız kaynak dosyanın kendisi 9:16 DEĞİLSE.
+- Sayım/olay cümleleri gerçek olaya otursun: pres dişe değmeden "Yüz kilo"
+  denmez. Temas anını ve gösterge (LED) aralığını ölç, cümleleri o aralıklara
+  böl (inmeye başladı → iniş, sayım → temas/LED, "çatladı" → kırıntı karesi).
 - İngilizce sahne etiketi ("Human Teeth"): `--rect` ile sil, `giydir.py`
   `labels` ile Türkçesini yaz.
 

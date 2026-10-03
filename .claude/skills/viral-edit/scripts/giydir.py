@@ -129,7 +129,10 @@ def main():
         for lb in (sp.get("labels", []) if a.layer != "cards" else []):
             if lb["t0"] <= t < lb["t1"]:
                 f = fit_font(d, lb["text"], W - 120, lb.get("size", 72))
-                stroked_text(d, (lb.get("x", 0.5) * W, lb["y"] * H), lb["text"], f,
+                lx = lb.get("x", 0.5) * W
+                if lb.get("align") == "left":          # kaynaktaki etiketin sol kenarına otur
+                    lx += d.textlength(lb["text"], font=f) / 2
+                stroked_text(d, (lx, lb["y"] * H), lb["text"], f,
                              COL.get(lb.get("color", "white"), WHITE), BLACK, max(5, f.size // 11))
         # ---- büyük vurgu ----
         for b in (bigs if a.layer != "cards" else []):
