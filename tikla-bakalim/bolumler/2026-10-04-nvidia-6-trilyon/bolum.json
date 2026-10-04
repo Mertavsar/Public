@@ -1,0 +1,610 @@
+{
+  "baslik": "Nvidia'nın değeri 5,7 trilyon dolar: Bir çip şirketi neden bu kadar değerli?",
+  "tarih": "2026-10-04",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "Nvidia",
+    "trilyon",
+    "çip",
+    "yapay zeka"
+  ],
+  "altyazi": {
+    "beş virgül yedi trilyon dolara": "5,7 trilyon dolara",
+    "altı trilyon dolara": "6 trilyon dolara",
+    "Üç soruda": "3 soruda",
+    "iki Ekim'de": "2 Ekim'de",
+    "iki yüz otuz sekiz dolara": "237,88 dolara",
+    "doksan altı virgül iki milyar dolar": "96,2 milyar dolar",
+    "yüzde yüz altı": "%106",
+    "seksen dokuz milyar doları": "89 milyar doları",
+    "iki bin yirmi yediye kadar bir trilyon dolar": "2027'ye kadar 1 trilyon dolar",
+    "yüz elli milyar dolar": "150 milyar dolar",
+    "bir milyar dolardan": "1 milyar dolardan"
+  },
+  "kapak": {
+    "ikon": "🖥️",
+    "ust": "NVIDIA'NIN DEĞERİ",
+    "buyuk": "5,7 TRİLYON $",
+    "alt": "NEDEN?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Nvidia'nın değeri gün içinde beş virgül yedi trilyon dolara çıktı.",
+      "p": {
+        "ikon": "🖥️",
+        "etiket": "Nvidia · piyasa değeri",
+        "deger": 5.7,
+        "ondalik": 1,
+        "sonek": " trilyon $",
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "2 Ekim 2026 · gün içi zirve",
+        "sayma": false
+      },
+      "etiket": "PİYASA DEĞERİ",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Hiçbir şirket altı trilyon dolara ulaşmadı. Nvidia çok yakın.",
+      "p": {
+        "ikon": "🏁",
+        "satirlar": [
+          "6 TRİLYON $ =",
+          "*HENÜZ AŞILMADI*"
+        ],
+        "boy": 96
+      },
+      "etiket": "EŞİK",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bir çip şirketi neden bu kadar değerli? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN BU\n*KADAR DEĞERLİ?*",
+        "boy": 104
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları basitçe anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "KAÇIRMAMAK İÇİN",
+          "*ABONE OL*"
+        ],
+        "boy": 96
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce tanışalım. Nvidia, yapay zeka için gereken güçlü çipleri tasarlıyor.",
+      "p": {
+        "ikon": "⚙️",
+        "satirlar": [
+          "NVIDIA =",
+          "*ÇİP ŞİRKETİ*"
+        ],
+        "boy": 96
+      },
+      "etiket": "NVIDIA NEDİR?",
+      "kaynak": "Genel bilgi"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Hisse, cuma günü iki Ekim'de rekor seviyeye çıktı.",
+      "p": {
+        "gun": "2",
+        "ay": "EKİM",
+        "gunadi": "CUMA",
+        "not": "2026 · *gün içi* rekor"
+      },
+      "etiket": "REKOR GÜNÜ",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Hisse fiyatı gün içinde yaklaşık iki yüz otuz sekiz dolara çıktı.",
+      "p": {
+        "ikon": "📈",
+        "etiket": "Nvidia hisse fiyatı (gün içi)",
+        "deger": 237.88,
+        "ondalik": 2,
+        "sonek": " $",
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "önceki gün içi rekor: 235,54 $",
+        "sayma": true
+      },
+      "etiket": "HİSSE FİYATI",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Piyasa değeri, hisse fiyatı çarpı hisse sayısı demek. Şirketin borsadaki etiketi.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "PİYASA DEĞERİ =",
+          "*FİYAT × HİSSE*"
+        ],
+        "boy": 84
+      },
+      "etiket": "PİYASA DEĞERİ NEDİR?",
+      "kaynak": "Genel bilgi"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu değer, ABD ve Çin hariç her ülkenin yıllık ekonomisinden büyük.",
+      "p": {
+        "ikon": "🌍",
+        "satirlar": [
+          "ABD VE ÇİN HARİÇ",
+          "*HER ÜLKEDEN BÜYÜK*"
+        ],
+        "boy": 72,
+        "not": "Kusurlu karşılaştırma: piyasa değeri ≠ yıllık gelir"
+      },
+      "etiket": "ÖLÇEK",
+      "kaynak": "K5"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Dürüst not: hisse gün içinde zirveye çıktı, ama kapanışta rekor kırılmadı.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "GÜN İÇİ ZİRVE,",
+          "*KAPANIŞ DEĞİL*"
+        ],
+        "boy": 96
+      },
+      "etiket": "DÜRÜST NOT",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Temmuz'da biten çeyrekte geliri doksan altı virgül iki milyar dolar oldu.",
+      "p": {
+        "ikon": "💵",
+        "etiket": "Nvidia · son çeyrek geliri",
+        "deger": 96.2,
+        "ondalik": 1,
+        "sonek": " milyar $",
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "Nisan–Temmuz 2026 çeyreği",
+        "sayma": true
+      },
+      "etiket": "ÇEYREK GELİRİ",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Geçen yıla göre yüzde yüz altı arttı. Yani iki katından fazla.",
+      "p": {
+        "baslik": "📊 Çeyrek geliri · geçen yıl = 100",
+        "sol": {
+          "etiket": "GEÇEN YIL",
+          "deger": 100,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "BU YIL",
+          "deger": 206,
+          "renk": "yesil"
+        },
+        "onek": "",
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "+%106",
+        "not": "Endeks · ölçek sıfırdan başlar"
+      },
+      "etiket": "BÜYÜME",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Yani günde bir milyar dolardan fazla satış. Bu kâr değil, gelir.",
+      "p": {
+        "baslik": "Günlük ortalama gelir",
+        "ikon": "🧮",
+        "ogeler": [
+          "96,2 milyar $",
+          "÷",
+          "91 gün",
+          "=",
+          "1,06 milyar $"
+        ]
+      },
+      "etiket": "GÜNLÜK GELİR",
+      "kaynak": "hesap: 96,2 ÷ 91 · K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Bunun seksen dokuz milyar doları veri merkezlerinden geldi.",
+      "p": {
+        "baslik": "Son çeyrek geliri",
+        "satirlar": [
+          {
+            "ikon": "💵",
+            "metin": "Toplam gelir",
+            "deger": "96,2 milyar $",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "🏢",
+            "metin": "Veri merkezi",
+            "deger": "89,0 milyar $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📊",
+            "metin": "Veri merkezi payı",
+            "deger": "%92,5",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "GELİR NEREDEN?",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki herkes bu çipleri neden alıyor? Cevap yapay zeka.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*ALIYORLAR?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yapay zeka modelleri, çok güçlü bilgisayarlar olmadan çalışmaz.",
+      "p": {
+        "ikon": "🧠",
+        "satirlar": [
+          "YAPAY ZEKA =",
+          "*ÇOK HESAP GÜCÜ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "1. SEBEP",
+      "kaynak": "Genel bilgi"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bir modeli eğitmek, çok sayıda çipin uzun süre çalışması demek.",
+      "p": {
+        "ikon": "⚙️",
+        "satirlar": [
+          "MODEL EĞİTMEK =",
+          "*ÇOK ÇİP*"
+        ],
+        "boy": 90
+      },
+      "etiket": "ÇİP İHTİYACI",
+      "kaynak": "Genel bilgi"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Yapay zeka büyüyor, şirketler dev veri merkezleri kuruyor. Çip siparişleri Nvidia'ya akıyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🤖",
+            "metin": "Yapay zeka *büyüyor*"
+          },
+          {
+            "ikon": "🏢",
+            "metin": "Dev veri merkezleri *kurulur*"
+          },
+          {
+            "ikon": "🔲",
+            "metin": "Çip siparişleri *Nvidia'ya akar*"
+          }
+        ]
+      },
+      "etiket": "SİPARİŞ ZİNCİRİ",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "KALBE",
+          "*DOKUN*"
+        ],
+        "boy": 120
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Yönetim, yeni çiplerden iki bin yirmi yediye kadar bir trilyon dolar bekliyor.",
+      "p": {
+        "ikon": "🔮",
+        "etiket": "Blackwell + Rubin çipleri · en az (şirket beklentisi)",
+        "deger": 1,
+        "ondalik": 0,
+        "sonek": " trilyon $",
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "Tahmin — gerçekleşmiş gelir değil",
+        "sayma": true
+      },
+      "etiket": "BEKLENTİ",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu bir tahmin. Gerçekleşip gerçekleşmeyeceğini zaman gösterecek.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "BU DAHA",
+          "*SADECE TAHMİN*"
+        ],
+        "boy": 104
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Hisse fiyatı geleceği fiyatlar. Beklenti büyüyünce yatırımcı alır, değer yükselir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "📣",
+            "metin": "Gelir beklentisi *büyür*"
+          },
+          {
+            "ikon": "💰",
+            "metin": "Yatırımcı hisseyi *alır*"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Piyasa değeri *yükselir*"
+          }
+        ]
+      },
+      "etiket": "FİYATIN MANTIĞI",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Bir neden daha var. Nvidia hisse geri alımını yüz elli milyar dolar artırdı.",
+      "p": {
+        "ikon": "💵",
+        "etiket": "Hisse geri alım yetkisine eklenen",
+        "deger": 150,
+        "ondalik": 0,
+        "onek": "+",
+        "sonek": " milyar $",
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "28 Eylül 2026 · toplam kalan yetki: 235 milyar $",
+        "sayma": true
+      },
+      "etiket": "GERİ ALIM",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Geri alım, şirketin kendi hissesini borsadan toplaması. Bu artış, tarihin en büyüğü.",
+      "p": {
+        "ikon": "🔄",
+        "satirlar": [
+          "KENDİ HİSSESİNİ",
+          "*GERİ ALIR*"
+        ],
+        "boy": 90
+      },
+      "etiket": "GERİ ALIM NEDİR?",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Herkes rahat değil. Bazı yorumcular yapay zeka balonu olabilir diyor.",
+      "p": {
+        "ikon": "🎈",
+        "satirlar": [
+          "BALON",
+          "*ENDİŞESİ VAR*"
+        ],
+        "boy": 104
+      },
+      "etiket": "ENDİŞE",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur? Şimdi ona bakalım.",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*",
+        "boy": 110
+      },
+      "etiket": "CEBİNE ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Sohbet botları gibi yapay zeka araçları, bu veri merkezlerinde çalışıyor.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SOHBET BOTU",
+          "*VERİ MERKEZİNDE*"
+        ],
+        "boy": 90
+      },
+      "etiket": "BAĞLANTI",
+      "kaynak": "Genel bilgi"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Çip ve elektrik pahalı. Bu maliyet abonelik ücretlerine yansıyabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🔲",
+            "metin": "Çip ve elektrik *pahalı*"
+          },
+          {
+            "ikon": "🏢",
+            "metin": "Şirketin maliyeti *artar*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Abonelik ücreti *artabilir*"
+          }
+        ]
+      },
+      "etiket": "OLASI ETKİ",
+      "kaynak": "Yorum — kesin değil"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "ABD'de veri merkezlerinin elektrik faturasına etkisi tartışılıyor. Kongre'de teklifler konuşuluyor.",
+      "p": {
+        "ikon": "🔌",
+        "satirlar": [
+          "ELEKTRİK",
+          "*FATURASI TARTIŞMASI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ELEKTRİK",
+      "kaynak": "K6"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bunlar olasılıklar. Rekorlar kalıcı olmak zorunda değil. Bu video yatırım tavsiyesi değil.",
+      "p": {
+        "ikon": "❓",
+        "satirlar": [
+          "HEPSİ",
+          "*OLASILIK*"
+        ],
+        "boy": 120,
+        "not": "Yatırım tavsiyesi değildir"
+      },
+      "etiket": "DÜRÜST NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: Nvidia yapay zeka çipleri satıyor, geliri iki katından fazla arttı, değeri zirvede.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "🖥️",
+            "metin": "Piyasa değeri (gün içi)",
+            "deger": "~5,7 trilyon $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Çeyrek geliri",
+            "deger": "96,2 milyar $",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "👛",
+            "metin": "Bize etkisi",
+            "deger": "dolaylı",
+            "renk": "mavi"
+          }
+        ],
+        "not": "Gün içi değer · Nisan–Temmuz çeyreği"
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Öğrenmek istediğin başka bir konu varsa yorumlara yaz; bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi sade öğrenmek için abone ol"
+      }
+    }
+  ],
+  "cta": [
+    {
+      "sahne": 18,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Nvidia 2027 mali yılı 2. çeyrek (26 Temmuz'da biten): gelir 96,2 milyar $ (+%106 yıllık), veri merkezi 89,0 milyar $ (+%117) — https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027 ; https://www.nasdaq.com/press-release/nvidia-announces-financial-results-second-quarter-fiscal-2027-2026-08-26 ; https://www.stocktitan.net/news/NVDA/nvidia-announces-financial-results-for-second-quarter-fiscal-98x41cxh35vk.html",
+    "K2": "2 Ekim 2026 (cuma): gün içi rekor 237,88 $, piyasa değeri ~5,7 trilyon $, kapanışta Mayıs rekoru geçilmedi; 6 trilyon $'ı henüz hiçbir şirket aşmadı — https://finance.yahoo.com/markets/stocks/articles/nvidia-hits-record-high-market-173040132.html ; https://pulse2.com/nvidia-hits-record-high-reaches-5-7-trillion-intraday-market-cap/ ; https://www.kucoin.com/news/flash/nvidia-hits-237-88-record-high-amid-ai-demand-and-analyst-predictions ; https://www.remio.ai/post/nvidia-stock-rally-nears-6-trillion-but-mays-record-still-holds",
+    "K3": "28 Eylül 2026: hisse geri alım yetkisine rekor 150 milyar $ ekleme, toplam kalan yetki 235 milyar $ — https://nvidianews.nvidia.com/news/nvidia-announces-a-150-billion-share-repurchase-authorization-increase ; https://www.cnbc.com/2026/09/28/nvidia-share-buyback-plan-gets-150-billion-boost.html ; https://www.rte.ie/news/business/2026/0928/1593217-nvidia-share-buyback/",
+    "K4": "Blackwell ve Rubin çiplerinden 2027'ye kadar en az 1 trilyon $ gelir BEKLENTİSİ (şirket tahmini) — https://www.aa.com.tr/tr/bilim-teknoloji/nvidia-2027ye-kadar-yapay-zeka-ciplerinden-1-trilyon-dolar-gelir-bekliyor/3867321 ; https://www.bloomberght.com/nvidia-citayi-yukseltti-ai-ciplerinden-en-az-1-trilyon-dolar-gelir-bekliyor-3772032",
+    "K5": "Nvidia piyasa değeri ABD ve Çin dışındaki her ülkenin GSYH'sinden büyük (karşılaştırma kusurlu) — https://www.thestreet.com/markets/nvidia-is-now-worth-more-than-every-economy-except-two ; https://finance.yahoo.com/markets/stocks/articles/nvidia-surpasses-germany-market-caps-050022236.html",
+    "K6": "ABD'de veri merkezi elektrik maliyetleri ve Kongre tartışması — https://www.npr.org/2026/10/01/nx-s1-5984949/data-centers-ai-ratepayers-congress ; https://www.newsbytesapp.com/news/business/congress-weighs-acts-as-ai-data-centers-drive-electricity-costs/tldr ; https://www.aljazeera.com/news/2026/9/30/us-senate-rejects-bill-targeting-ai-data-centre-electricity-costs"
+  }
+}
