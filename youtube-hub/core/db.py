@@ -120,6 +120,77 @@ MIGRATIONS = [
     );
     CREATE INDEX quota_day ON quota_log(day);
     """,
+    # 2 — dönem bazlı analiz: en iyi videolar ve kırılımlar
+    """
+    CREATE TABLE video_window (
+        channel_id   TEXT NOT NULL REFERENCES channels(id) ON DELETE CASCADE,
+        window_days  INTEGER NOT NULL,
+        video_id     TEXT NOT NULL,
+        start_day    TEXT NOT NULL,
+        end_day      TEXT NOT NULL,
+        views        INTEGER,
+        minutes      INTEGER,
+        avg_view_s   INTEGER,
+        avg_view_pct REAL,
+        subs_gained  INTEGER,
+        likes        INTEGER,
+        comments     INTEGER,
+        shares       INTEGER,
+        computed_at  INTEGER NOT NULL,
+        PRIMARY KEY (channel_id, window_days, video_id)
+    );
+
+    -- Trafik kaynağı, içerik türü (Shorts/uzun/canlı), ülke kırılımları.
+    CREATE TABLE channel_breakdown (
+        channel_id  TEXT NOT NULL REFERENCES channels(id) ON DELETE CASCADE,
+        window_days INTEGER NOT NULL,
+        dimension   TEXT NOT NULL,
+        key         TEXT NOT NULL,
+        views       INTEGER,
+        minutes     INTEGER,
+        start_day   TEXT NOT NULL,
+        end_day     TEXT NOT NULL,
+        computed_at INTEGER NOT NULL,
+        PRIMARY KEY (channel_id, window_days, dimension, key)
+    );
+    """,
+    # 3 — Reporting API: video bazında günlük veri
+    """
+    CREATE TABLE reporting_jobs (
+        channel_id  TEXT NOT NULL REFERENCES channels(id) ON DELETE CASCADE,
+        kind        TEXT NOT NULL,
+        report_type TEXT NOT NULL,
+        job_id      TEXT NOT NULL,
+        created_at  INTEGER NOT NULL,
+        PRIMARY KEY (channel_id, kind)
+    );
+
+    CREATE TABLE reporting_files (
+        report_id     TEXT PRIMARY KEY,
+        channel_id    TEXT NOT NULL REFERENCES channels(id) ON DELETE CASCADE,
+        kind          TEXT NOT NULL,
+        day           TEXT,
+        rows          INTEGER,
+        downloaded_at INTEGER NOT NULL
+    );
+
+    CREATE TABLE video_daily (
+        video_id    TEXT NOT NULL,
+        day         TEXT NOT NULL,
+        channel_id  TEXT NOT NULL REFERENCES channels(id) ON DELETE CASCADE,
+        views       INTEGER,
+        minutes     REAL,
+        likes       INTEGER,
+        comments    INTEGER,
+        shares      INTEGER,
+        subs_gained INTEGER,
+        subs_lost   INTEGER,
+        impressions INTEGER,
+        ctr         REAL,
+        PRIMARY KEY (video_id, day)
+    );
+    CREATE INDEX video_daily_channel ON video_daily(channel_id, day);
+    """,
 ]
 
 

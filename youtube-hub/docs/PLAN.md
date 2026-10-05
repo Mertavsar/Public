@@ -1,6 +1,9 @@
 # YouTube Hub — Ürün ve Altyapı Planı
 
-> Tarih: 2026-10-05 · Durum: Faz 0 (yerel temel) kuruldu, gerçek kanallarda doğrulama bekliyor.
+> Tarih: 2026-10-05 · Durum: Faz 0 + Faz 1A (çok kanallı analiz) kuruldu, gerçek kanallarda doğrulama bekliyor.
+>
+> **Öncelik (2026-10-05, kullanıcı kararı):** tüm kanalları tek panelden analiz etmek.
+> Kapak/banner işleri ikinci planda.
 > Bu belge: neyi inşa ettiğimizi, YouTube'un neye izin verip neye vermediğini, kotanın
 > nasıl harcandığını, mimariyi, yol haritasını ve fikir havuzunu tek yerde toplar.
 
@@ -219,8 +222,11 @@ Neden bu seçimler:
 | `actions` | Her yazma işlemi: ne, ne zaman, yeni görsel, yedek, sonuç |
 | `quota_log` | Tahmini kota harcaması (Pasifik günü) |
 
-Faz 1'de eklenecek: `video_daily` (video bazlı analitik + CTR), `assets` (kapak kütüphanesi,
-etiketler, hangi videoda ne zaman kullanıldı), `brand_kits` (kanal başına font/renk/yüz).
+Faz 1A'da eklendi: `video_window` (dönemin en iyi videoları), `channel_breakdown`
+(kaynak/içerik türü/ülke), `reporting_jobs` + `reporting_files` + `video_daily`
+(Reporting API, video × gün).
+
+İleride: `assets` (kapak kütüphanesi), `brand_kits` (kanal başına font/renk/yüz).
 
 ---
 
@@ -231,12 +237,26 @@ etiketler, hangi videoda ne zaman kullanıldı), `brand_kits` (kanal başına fo
 kapak yükleme (tıkla/sürükle), banner, toplu kapak (CLI), yedek + geri al, kota defteri,
 16 otomatik test.
 
+### Faz 1A — Çok kanallı analiz ✅ (kuruldu)
+- 7/28/90 gün dönem seçici, her metrikte önceki döneme göre değişim; dönem Analytics'in
+  son veri gününe sabitlenir.
+- Kanal karşılaştırma tablosu (sıralama, CSV), portföy trendi (toplam / kanallara göre).
+- Kırılımlar: izlenme kaynağı, içerik türü (`creatorContentType` ile kesin Shorts/uzun
+  ayrımı), ülke — tüm kanallar ve kanal bazında.
+- Dönemin en iyi videoları (Analytics `dimensions=video`) — tüm kanallarda.
+- **Reporting API:** kanal başına `channel_basic_a3` + `channel_reach_basic_a1` işleri
+  otomatik oluşturulur; günlük CSV'ler indirilip `video_daily`'ye işlenir (video × gün:
+  izlenme, süre, beğeni, abone ±, kapak gösterimi, CTR). Analytics CTR vermezse kanal
+  günlüğü buradan tamamlanır. İş oluşturulmadan önceki 30 gün geriye doldurulur;
+  raporlar 30-60 gün sonra silindiği için düzenli senkron şart.
+
 ### Faz 1 — Gerçek kanallarda doğrulama (1-2 hafta)
 - Google Cloud kurulumu, 2-3 gerçek kanal bağlama.
 - **Shorts kapak davranışı testi:** `thumbnails.set` bir Shorts'ta nerede görünüyor, nerede
   görünmüyor — ekran görüntüleriyle belgele.
 - Gerçek kota ölçümü (defter vs. Cloud Console).
-- Video bazlı analitik: izlenme, ortalama izlenme süresi, gösterim, CTR (`video_daily`).
+- Tıklama oranı biriminin (oran / yüzde) gerçek veride doğrulanması.
+- Video detay sayfası: yayından sonraki ilk 24/48/72 saat eğrisi, kanal ortalamasıyla kıyas.
 - Zamanlanmış senkron (macOS launchd), kademeli yenileme.
 - Studio "Yönetici" izni ile API onayı çalışıyor mu — test.
 - **Bitti kriteri:** 1 hafta boyunca elle müdahale olmadan günlük veri akıyor; 10 kapak
@@ -322,6 +342,7 @@ Değer: ★ (düşük) – ★★★ (yüksek). Efor: S/M/L.
 1. Google Cloud projesi + iki API'nin açılması + Desktop OAuth istemcisi (adımlar
    `README.md` → "Google Cloud kurulumu").
 2. Kanal listesi: kaç kanal, hangileri marka hesabı, hangileri YPP'de, Shorts mı uzun mu ağırlıklı.
+   (Kimlik bilgileri paylaşılmaz: bağlantı kullanıcının kendi bilgisayarında kurulur.)
 3. Kanallar telefonla doğrulanmış mı? (Değilse özel kapak hiç yüklenemez.)
 4. Karar: SaaS hedefi ne zaman? (Google başvurularının ne zaman başlayacağını belirler.)
 

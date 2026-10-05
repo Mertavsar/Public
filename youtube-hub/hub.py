@@ -28,16 +28,34 @@ def fmt(n):
     return "—" if n is None else f"{n:,}".replace(",", ".")
 
 
-def cmd_status(hub, _):
-    ov = hub.overview()
-    t = ov["totals"]
-    print(f"{t['channels']} kanal · {fmt(t['subscribers'])} abone · {fmt(t['views'])} toplam izlenme")
-    print(f"Son 28 gün: {fmt(t['period_views'])} izlenme, abone net {t['period_subs_net']:+d}\n")
-    for ch in ov["channels"]:
-        err = f"  ⚠ {ch['sync_error']}" if ch["sync_error"] else ""
-        print(f"  {ch['title'][:32]:<32} {fmt(ch['subscribers']):>12} abone  "
-              f"{fmt(ch['period']['views']):>12} izl/28g  {ch['id']}{err}")
-    q = ov["quota"]
+def pct(v):
+    return "  —  " if v is None else f"{v * 100:+.0f}%"
+
+
+def cmd_status(hub, a):
+    p = hub.portfolio(a.days)
+    t = p["totals"]
+    print(f"{len(p['channels'])} kanal · {fmt(t['subscribers'])} abone")
+    if not p["anchor"]:
+        print("Henüz analitik verisi yok. Önce: hub.py sync")
+        return
+    cur, ch_ = t["cur"], t["change"]
+    print(f"Dönem {p['period']['start']} – {p['period']['end']} (önceki {a.days} güne göre)")
+    print(f"  izlenme {fmt(cur['views'])} {pct(ch_['views'])} · izlenme süresi "
+          f"{fmt(cur['minutes'] // 60)} saat {pct(ch_['minutes'])} · abone net {cur['subs_net']:+d}\n")
+    print(f"  {'Kanal':<30} {'Abone':>10} {'İzlenme':>12} {'Değişim':>8} {'Ort.izleme':>10} {'Yükleme':>8}")
+    for ch in sorted(p["channels"], key=lambda c: -c["cur"]["views"]):
+        avg = ch["cur"]["avg_view_s"]
+        avg = f"{avg // 60}:{avg % 60:02d}" if avg is not None else "—"
+        err = "  ⚠ " + ch["sync_error"][:60] if ch["sync_error"] else ""
+        print(f"  {ch['title'][:30]:<30} {fmt(ch['subscribers']):>10} {fmt(ch['cur']['views']):>12} "
+              f"{pct(ch['change']['views']):>8} {avg:>10} {ch['cur']['uploads']:>8}{err}")
+    top = hub.top_videos(a.days, limit=5)
+    if top:
+        print("\n  Dönemin en çok izlenenleri:")
+        for v in top:
+            print(f"    {fmt(v['views']):>10}  {(v['title'] or v['video_id'])[:50]:<50}  {v['channel_title'][:20]}")
+    q = p["quota"]
     print(f"\nKota (tahmini, {q['day']} PT): {q['used']} / {q['limit']}")
 
 
@@ -120,7 +138,7 @@ def main(argv=None):
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("serve")
     sub.add_parser("sync")
-    sub.add_parser("status")
+    s = sub.add_parser("status"); s.add_argument("--days", type=int, default=28, choices=config.WINDOWS)
     s = sub.add_parser("thumb"); s.add_argument("video_id"); s.add_argument("file")
     s = sub.add_parser("bulk-thumbs"); s.add_argument("folder")
     s = sub.add_parser("banner"); s.add_argument("channel_id"); s.add_argument("file")

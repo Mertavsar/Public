@@ -34,6 +34,11 @@ class FakeGoogle:
                                      "keywords": "a b"},
                          "image": {"bannerExternalUrl": "https://yt3.example/old-banner"}}
         self.thumbs_set = {}
+        self.fail_dims = set()
+        self.reporting_enabled = True
+        self.jobs = {}
+        self.reports = {}   # job_id -> [report]
+        self.windows_seen = []
 
     # ------------------------------------------------------------------
     def __call__(self, method, url, headers=None, body=None):
@@ -64,6 +69,10 @@ class FakeGoogle:
                                                      "errors": [{"reason": reason}]}}).encode()
 
         p = u.path
+        if u.netloc.startswith("youtubereporting"):
+            return self._reporting(method, p, body)
+        if u.netloc.startswith("download.example"):
+            return 200, {}, self.report_csv[p]
         if p.endswith("/channels") and method == "GET":
             if q["part"] == "brandingSettings":
                 return self._ok({"items": [{"id": self.channel_id, "brandingSettings": self.branding}]})
@@ -102,14 +111,69 @@ class FakeGoogle:
         if p.endswith("/channelBanners/insert"):
             return self._ok({"url": "https://yt3.example/new-banner"})
         if p.endswith("/reports"):
-            metrics = q["metrics"].split(",")
-            if "videoThumbnailImpressions" in metrics and not self.analytics_reach:
-                return 400, {}, json.dumps({"error": {"code": 400, "message": "Unknown metric",
-                                                      "errors": [{"reason": "badRequest"}]}}).encode()
-            cols = [{"name": "day"}] + [{"name": m} for m in metrics]
-            rows = [[f"2026-09-{d:02d}"] + [d * 10 for _ in metrics] for d in range(1, 29)]
-            return self._ok({"columnHeaders": cols, "rows": rows})
+            return self._report(q)
         return 404, {}, b'{"error": {"code": 404, "message": "no route"}}'
+
+    def _report(self, q):
+        from datetime import date, timedelta
+        metrics = q["metrics"].split(",")
+        dim = q.get("dimensions")
+        if dim in self.fail_dims or ("videoThumbnailImpressions" in metrics and not self.analytics_reach):
+            return 400, {}, json.dumps({"error": {"code": 400, "message": "Unknown",
+                                                  "errors": [{"reason": "badRequest"}]}}).encode()
+        cols = [{"name": dim}] + [{"name": m} for m in metrics]
+        if dim == "day":
+            # Gerçekçi gecikme: son 2 günün verisi yok. Son 28 gün 200, öncesi 100 izlenme.
+            start, end = date.fromisoformat(q["startDate"]), date.fromisoformat(q["endDate"]) - timedelta(days=2)
+            rows, d = [], start
+            while d <= end:
+                recent = (end - d).days < 28
+                vals = {"views": 200 if recent else 100, "estimatedMinutesWatched": 60,
+                        "averageViewDuration": 18, "subscribersGained": 3, "subscribersLost": 1,
+                        "likes": 10, "comments": 2, "shares": 1,
+                        "videoThumbnailImpressions": 1000, "videoThumbnailImpressionsClickRate": 0.05}
+                rows.append([d.isoformat()] + [vals.get(m, 0) for m in metrics])
+                d += timedelta(days=1)
+            self.day_range = (q["startDate"], end.isoformat())
+        elif dim == "video":
+            ids = sorted(self.videos, key=lambda i: -self.videos[i]["views"])[:int(q.get("maxResults", 200))]
+            rows = [[i] + [self.videos[i]["views"] if m == "views" else 5 for m in metrics] for i in ids]
+            self.windows_seen.append((q["startDate"], q["endDate"]))
+        else:
+            data = {"insightTrafficSourceType": [("SHORTS", 600), ("YT_SEARCH", 300), ("RELATED_VIDEO", 100)],
+                    "creatorContentType": [("SHORTS", 700), ("VIDEO_ON_DEMAND", 300)],
+                    "country": [("TR", 800), ("DE", 150), ("AZ", 50)]}[dim]
+            rows = [[k] + [v if m == "views" else v // 10 for m in metrics] for k, v in data]
+        return self._ok({"columnHeaders": cols, "rows": rows})
+
+    def _reporting(self, method, p, body):
+        if not self.reporting_enabled:
+            return 403, {}, json.dumps({"error": {"code": 403, "message": "API not enabled",
+                                                  "errors": [{"reason": "accessNotConfigured"}]}}).encode()
+        if p.endswith("/reportTypes"):
+            return self._ok({"reportTypes": [{"id": t} for t in (
+                "channel_basic_a2", "channel_basic_a3", "channel_reach_basic_a1",
+                "channel_reach_combined_a1", "channel_basic_a3_beta")]})
+        if p.endswith("/jobs") and method == "GET":
+            return self._ok({"jobs": list(self.jobs.values())})
+        if p.endswith("/jobs") and method == "POST":
+            rt = json.loads(body)["reportTypeId"]
+            job = {"id": f"job-{rt}", "reportTypeId": rt}
+            self.jobs[job["id"]] = job
+            return self._ok(job)
+        if p.endswith("/reports"):
+            job_id = p.split("/")[-2]
+            return self._ok({"reports": self.reports.get(job_id, [])})
+        return 404, {}, b"{}"
+
+    def add_report(self, report_type, rid, day, csv_text, created="2026-10-01T00:00:00Z"):
+        """Bir rapor işine indirilebilir CSV ekle."""
+        self.report_csv = getattr(self, "report_csv", {})
+        path = f"/r/{rid}"
+        self.report_csv[path] = csv_text.encode()
+        self.reports.setdefault(f"job-{report_type}", []).append({
+            "id": rid, "startTime": f"{day}T07:00:00Z", "createTime": created,
+            "downloadUrl": f"https://download.example{path}"})
 
     @staticmethod
     def _ok(obj):

@@ -11,6 +11,7 @@ Her çağrı:
   - kota bittiğinde (quotaExceeded) tekrar denemez, QuotaExceeded fırlatır.
 """
 
+import gzip
 import json
 import time
 import urllib.error
@@ -88,7 +89,9 @@ class YouTubeClient:
 
     # ------------------------------------------------------------------ çekirdek
 
-    def _request(self, method, url, params=None, body=None, content_type=None, quota=None):
+    def _request(self, method, url, params=None, body=None, content_type=None, quota=None,
+                 raw=False):
+        raw_out = raw
         if params:
             url = f"{url}?{urllib.parse.urlencode(params)}"
         if isinstance(body, (dict, list)):
@@ -101,15 +104,17 @@ class YouTubeClient:
                        "Accept": "application/json"}
             if content_type:
                 headers["Content-Type"] = content_type
-            status, _, raw = self.transport(method, url, headers, body)
+            status, _, payload = self.transport(method, url, headers, body)
 
             if quota:
                 # Hatalı istekler de kota yer; Google başarısız çağrıyı da sayar.
                 self.on_quota(quota, config.QUOTA_COST.get(quota, 1))
 
             if 200 <= status < 300:
-                return json.loads(raw) if raw else {}
-            err = parse_error(status, raw)
+                if raw_out:
+                    return payload
+                return json.loads(payload) if payload else {}
+            err = parse_error(status, payload)
             if status == 401 and not refreshed:
                 self.creds.access_token(force_refresh=True)
                 refreshed = True
@@ -170,15 +175,51 @@ class YouTubeClient:
             raise ApiError(404, "channelNotFound", channel_id)
         return items[0].get("brandingSettings", {})
 
-    def analytics(self, start, end, metrics, dimensions="day", filters=None):
+    def analytics(self, start, end, metrics, dimensions="day", filters=None, sort=None,
+                  max_results=None):
         params = {"ids": "channel==MINE", "startDate": start, "endDate": end,
-                  "metrics": ",".join(metrics), "dimensions": dimensions, "sort": dimensions}
+                  "metrics": ",".join(metrics), "dimensions": dimensions}
+        if sort or dimensions == "day":
+            params["sort"] = sort or "day"
         if filters:
             params["filters"] = filters
+        if max_results:
+            params["maxResults"] = max_results
         # Analytics API'nin kotası Data API'den ayrıdır; burada sayılmaz.
         data = self._request("GET", f"{config.ANALYTICS_API}/reports", params)
         cols = [h["name"] for h in data.get("columnHeaders", [])]
         return [dict(zip(cols, row)) for row in data.get("rows") or []]
+
+    # ------------------------------------------------------------------ reporting api
+
+    def _paged(self, url, key, params=None):
+        params = dict(params or {})
+        while True:
+            data = self._request("GET", url, params)
+            yield from data.get(key, [])
+            if not data.get("nextPageToken"):
+                return
+            params["pageToken"] = data["nextPageToken"]
+
+    def report_types(self):
+        return list(self._paged(f"{config.REPORTING_API}/reportTypes", "reportTypes"))
+
+    def reporting_jobs(self):
+        return list(self._paged(f"{config.REPORTING_API}/jobs", "jobs"))
+
+    def create_reporting_job(self, report_type):
+        return self._request("POST", f"{config.REPORTING_API}/jobs",
+                             body={"reportTypeId": report_type, "name": f"youtube-hub {report_type}"})
+
+    def job_reports(self, job_id):
+        return list(self._paged(f"{config.REPORTING_API}/jobs/{job_id}/reports", "reports"))
+
+    def download(self, url):
+        """Rapor CSV'si (gzip'li gelirse açılır)."""
+        data = self._request("GET", url, raw=True)
+        if data[:2] == b"\x1f\x8b":
+            data = gzip.decompress(data)
+        return data
 
     # ------------------------------------------------------------------ yazma
 

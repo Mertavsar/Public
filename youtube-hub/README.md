@@ -1,7 +1,9 @@
-# YouTube Hub — çok kanallı yerel panel
+# YouTube Hub — çok kanallı analiz paneli
 
-Tüm YouTube kanalların tek ekranda: abone, izlenme, son 24 saat, 90 günlük grafik,
-her videoya ayrı kapak, kanal banner'ı, toplu kapak, yedek ve geri alma.
+Tüm YouTube kanalların tek ekranda analiz: 7/28/90 günlük dönem ve önceki döneme göre
+değişim, kanal karşılaştırma tablosu, günlük trend, izlenme kaynakları, Shorts/uzun video
+ayrımı, ülkeler, tüm kanallarda en çok izlenen videolar ve video bazında günlük veri.
+(Kapak/banner yönetimi de var ama ikincil.)
 
 Ürün planı, API sınırları ve yol haritası: **[docs/PLAN.md](docs/PLAN.md)**
 
@@ -18,9 +20,11 @@ Sadece Python 3.9+ gerekir. `pip install` yok.
 ## Google Cloud kurulumu (bir kez, ~15 dakika)
 
 1. https://console.cloud.google.com → yeni proje aç (ör. "youtube-hub").
-2. **APIs & Services → Library** → şu ikisini **Enable**:
-   - YouTube Data API v3
-   - YouTube Analytics API
+2. **APIs & Services → Library** → üçünü de **Enable**:
+   - YouTube Data API v3 — kanal/video listesi, sayaçlar
+   - YouTube Analytics API — günlük metrikler, kaynaklar, en iyi videolar
+   - YouTube Reporting API — video bazında günlük toplu raporlar (ilk raporlar
+     kanal bağlandıktan ~24 saat sonra gelir, 30 gün geriye doldurulur)
 3. **APIs & Services → OAuth consent screen** (Google Auth Platform):
    - User type: **External**
    - Uygulama adı, destek e-postası → kaydet.
@@ -43,7 +47,7 @@ Sadece Python 3.9+ gerekir. `pip install` yok.
 
 ```
 python3 youtube-hub/hub.py sync                       # tüm kanalları senkronize et
-python3 youtube-hub/hub.py status                     # özet + kota
+python3 youtube-hub/hub.py status --days 28           # dönem özeti, kanal tablosu, en iyi videolar
 python3 youtube-hub/hub.py thumb VIDEO_ID kapak.jpg   # tek kapak
 python3 youtube-hub/hub.py bulk-thumbs klasor/        # klasördeki VIDEO_ID.jpg|png dosyaları
 python3 youtube-hub/hub.py banner KANAL_ID banner.jpg
@@ -61,8 +65,14 @@ Günlük otomatik senkron (macOS, her gün 08:00 ve 20:00) — `crontab -e`:
 | | |
 |---|---|
 | Çok kanal | Her kanal ayrı OAuth onayı, token kanala bağlı |
-| Genel bakış | Toplam abone, 28 gün izlenme, ~24 saat izlenme, abone net, kota |
-| Kanal detayı | 90 günlük izlenme grafiği, video ızgarası, arama, Shorts filtresi |
+| Dönem | 7 / 28 / 90 gün; her metrik önceki eşit dönemle kıyaslanır. Dönem bugünde değil Analytics verisinin geldiği son günde biter (2-3 gün gecikme yanıltmasın diye) |
+| Özet kutuları | İzlenme, izlenme süresi, abone net, ortalama izleme süresi, yüklenen video, kapak gösterimi/tıklama oranı |
+| Günlük trend | Toplam (önceki dönem kesikli çizgi) veya kanallara göre; izlenme / süre / abone |
+| Kanal karşılaştırma | Sıralanabilir tablo: abone, izlenme ve değişimi, süre, ort. izleme, abone net, yükleme, etkileşim, portföy payı, trend. CSV indirilebilir |
+| Kırılımlar | İzlenme kaynakları, içerik türü (Shorts / uzun / canlı — YouTube'un kendi ayrımı), ülkeler |
+| En iyi videolar | Tüm kanallarda veya tek kanalda dönemin en çok izlenenleri; Shorts/uzun filtresi |
+| Video günlük | Reporting API ile her videonun gün gün izlenme, süre, kapak gösterimi, tıklama oranı |
+| Kanal detayı | Aynı analizler tek kanal için + Studio/YouTube bağlantıları |
 | Kapak | Görsele tıkla veya dosyayı sürükle. Göndermeden önce yerelde doğrulanır (tür, boyut, çözünürlük) — reddedilecek dosyaya kota harcanmaz |
 | Banner | Kanalın diğer marka ayarları korunarak değiştirilir |
 | Yedek + geri al | Her değişiklikten önce mevcut görsel indirilir; "Son işlemler"den geri alınır |
@@ -77,6 +87,8 @@ Günlük otomatik senkron (macOS, her gün 08:00 ve 20:00) — `crontab -e`:
 - `youtube-hub/data/` (token'lar, veritabanı, istemci bilgisi, görseller) git'e girmez.
   Veritabanı dosyası sadece sahibi tarafından okunabilir (0600).
 - Video **yükleme** yetkisi istenmez. Kapsamlar: `youtube`, `yt-analytics.readonly`.
+- Panel sadece **senin bilgisayarında** Google'a bağlanır. `client_secret.json` ve
+  token'ları kimseyle (Claude dahil) paylaşma.
 
 ## Sınırlar (YouTube API'den)
 
@@ -85,6 +97,10 @@ Günlük otomatik senkron (macOS, her gün 08:00 ve 20:00) — `crontab -e`:
   değiştiremez. Panel Shorts'ta bunu uyarır.
 - Analytics verisi 2-3 gün gecikmeli gelir. "~24 saat" kutusu bu yüzden senkronlar
   arasındaki sayaç farkından hesaplanır (en az iki senkron, ~20 saat arayla).
+- Reporting API raporları 30-60 gün sonra silinir; düzenli senkron (günde 1-2) şart,
+  yoksa video bazlı geçmişte boşluk kalır.
+- Tıklama oranının birimi (oran mı yüzde mi) gerçek veride doğrulanacak; panel >1
+  değerleri yüzde kabul ediyor.
 - Kapak = 50 birim kota. Günlük 10.000 birimle ~190 kapak.
 
 Ayrıntı: [docs/PLAN.md §2](docs/PLAN.md#2-youtube-api-gerçekleri)

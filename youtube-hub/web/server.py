@@ -90,8 +90,19 @@ class Handler(BaseHTTPRequestHandler):
                     ready, msg = False, str(e)
                 return self._send(200, {"ready": ready, "message": msg, "redirect_uri": redirect_uri(),
                                         "scopes": config.SCOPES})
-            if path == "/api/overview":
-                return self._send(200, self.hub.overview(int(q.get("days", ["28"])[0])))
+            if path == "/api/portfolio":
+                return self._send(200, self.hub.portfolio(_days(q)))
+            if path == "/api/top-videos":
+                return self._send(200, self.hub.top_videos(
+                    _days(q), channel_id=q.get("channel", [None])[0], kind=q.get("kind", [None])[0],
+                    limit=min(200, int(q.get("limit", ["25"])[0]))))
+            if path == "/api/reporting":
+                return self._send(200, self.hub.reporting_status(q.get("channel", [None])[0]))
+            m = re.fullmatch(r"/api/videos/([\w-]+)/trend", path)
+            if m:
+                return self._send(200, self.hub.video_trend(m.group(1)))
+            if path == "/api/breakdowns":
+                return self._send(200, self.hub.breakdowns(_days(q), channel_id=q.get("channel", [None])[0]))
             if path == "/api/sync":
                 return self._send(200, self.hub.sync_state)
             if path == "/api/actions":
@@ -160,6 +171,14 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:
             traceback.print_exc()
             return self._error(502, str(e))
+
+
+def _days(q):
+    try:
+        d = int(q.get("days", ["28"])[0])
+    except ValueError:
+        d = 28
+    return d if d in config.WINDOWS else 28
 
 
 def _esc(s):

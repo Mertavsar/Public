@@ -6,7 +6,9 @@ veritabanına gitmez; buradaki fonksiyonları çağırır. Yeni bir arayüz ekle
 yüzden ucuzdur.
 """
 
+import csv
 import hashlib
+import io
 import json
 import os
 import re
@@ -39,6 +41,62 @@ def best_thumb(thumbnails):
 
 def _int(v):
     return int(v) if v not in (None, "") else None
+
+
+def _sum(rows, key):
+    vals = [r[key] for r in rows if r[key] is not None]
+    return sum(vals) if vals else None
+
+
+def _agg(rows):
+    """Günlük satırları tek dönem özetine indirger."""
+    views = _sum(rows, "views") or 0
+    minutes = _sum(rows, "minutes") or 0
+    gained, lost = _sum(rows, "subs_gained") or 0, _sum(rows, "subs_lost") or 0
+    likes, comments, shares = (_sum(rows, k) or 0 for k in ("likes", "comments", "shares"))
+    impressions = _sum(rows, "impressions")
+    weighted = [(r["ctr"], r["impressions"]) for r in rows
+                if r["ctr"] is not None and r["impressions"]]
+    return {
+        "views": views, "minutes": minutes, "subs_gained": gained, "subs_lost": lost,
+        "subs_net": gained - lost, "likes": likes, "comments": comments, "shares": shares,
+        # Ortalama izleme süresi = toplam izlenme süresi / izlenme (günlük ortalamaların
+        # ortalaması değil — o yanıltır).
+        "avg_view_s": round(minutes * 60 / views) if views else None,
+        "engagement": (likes + comments + shares) / views if views else None,
+        "impressions": impressions,
+        "ctr": (sum(c * i for c, i in weighted) / sum(i for _, i in weighted)) if weighted else None,
+        "days_with_data": len({r["day"] for r in rows}),
+    }
+
+
+def _pct(cur, prev):
+    if cur is None or not prev:
+        return None
+    return (cur - prev) / prev
+
+
+def _change(cur, prev):
+    return {
+        "views": _pct(cur["views"], prev["views"]),
+        "minutes": _pct(cur["minutes"], prev["minutes"]),
+        "avg_view_s": _pct(cur["avg_view_s"], prev["avg_view_s"]),
+        "uploads": _pct(cur.get("uploads"), prev.get("uploads")),
+        "engagement": _pct(cur["engagement"], prev["engagement"]),
+        "subs_net_diff": cur["subs_net"] - prev["subs_net"],
+    }
+
+
+def _series(rows, days):
+    """Gün gün toplam; verisi olmayan gün 0 değil None (gecikme / eksik veri)."""
+    acc = {}
+    for r in rows:
+        d = acc.setdefault(r["day"], {"views": 0, "minutes": 0, "subs_net": 0})
+        d["views"] += r["views"] or 0
+        d["minutes"] += r["minutes"] or 0
+        d["subs_net"] += (r["subs_gained"] or 0) - (r["subs_lost"] or 0)
+    return [{"day": d, **acc[d]} if d in acc else {"day": d, "views": None, "minutes": None,
+                                                   "subs_net": None} for d in days]
 
 
 class Hub:
@@ -154,6 +212,13 @@ class Hub:
             uploads = ch["contentDetails"]["relatedPlaylists"]["uploads"]
             result["videos"] = self._sync_videos(yt, channel_id, uploads)
             result["days"] = self._sync_analytics(yt, channel_id, result["notes"])
+            try:
+                result["reports"] = self._sync_reporting(yt, channel_id, result["notes"])
+            except QuotaExceeded:
+                raise
+            except ApiError as e:
+                # Reporting API açılmamış olabilir; analizi durdurmaz.
+                result["notes"].append(f"Reporting API: {e.reason} — Google Cloud'da açık mı?")
             error = None
         except (AuthRevoked, QuotaExceeded, ApiError, KeyError) as e:
             result.update(ok=False, error=str(e))
@@ -212,7 +277,59 @@ class Hub:
                     r.get("subscribersLost"), r.get("likes"), r.get("comments"),
                     r.get("shares"), r.get("videoThumbnailImpressions"),
                     r.get("videoThumbnailImpressionsClickRate")))
+        if rows:
+            # Dönemler bugünden değil, verinin geldiği son günden geriye sayılır;
+            # yoksa Analytics gecikmesi son dönemi yapay olarak düşük gösterir.
+            anchor = date.fromisoformat(max(r["day"] for r in rows))
+            for days in config.WINDOWS:
+                try:
+                    self._sync_window(yt, channel_id, anchor, days, notes)
+                except QuotaExceeded:
+                    raise
+                except ApiError as e:
+                    notes.append(f"{days} günlük dönem analizi alınamadı: {e.reason}")
         return len(rows)
+
+    def _sync_window(self, yt, channel_id, anchor, days, notes):
+        """Bir dönem için en iyi videolar + kırılımlar (trafik, içerik türü, ülke)."""
+        start = (anchor - timedelta(days=days - 1)).isoformat()
+        end = anchor.isoformat()
+        try:
+            vids = yt.analytics(start, end, config.TOP_VIDEO_METRICS, dimensions="video",
+                                sort="-views", max_results=config.TOP_VIDEOS_PER_WINDOW)
+        except ApiError as e:
+            if e.status != 400:
+                raise
+            vids = yt.analytics(start, end, config.TOP_VIDEO_METRICS_FALLBACK, dimensions="video",
+                                sort="-views", max_results=config.TOP_VIDEOS_PER_WINDOW)
+        breakdowns = {}
+        for dim, metrics in config.BREAKDOWNS.items():
+            try:
+                breakdowns[dim] = yt.analytics(
+                    start, end, metrics, dimensions=dim, sort="-views",
+                    max_results=config.TOP_COUNTRIES if dim == "country" else None)
+            except QuotaExceeded:
+                raise
+            except ApiError as e:
+                if e.status >= 500:
+                    raise
+                notes.append(f"{dim} kırılımı alınamadı ({days} gün): {e.reason}")
+        now = db.now()
+        with self.conn() as c:
+            c.execute("DELETE FROM video_window WHERE channel_id=? AND window_days=?", (channel_id, days))
+            for r in vids:
+                c.execute("""INSERT INTO video_window VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", (
+                    channel_id, days, r["video"], start, end, r.get("views"),
+                    r.get("estimatedMinutesWatched"), r.get("averageViewDuration"),
+                    r.get("averageViewPercentage"), r.get("subscribersGained"), r.get("likes"),
+                    r.get("comments"), r.get("shares"), now))
+            c.execute("DELETE FROM channel_breakdown WHERE channel_id=? AND window_days=?",
+                      (channel_id, days))
+            for dim, rows in breakdowns.items():
+                for r in rows:
+                    c.execute("INSERT OR REPLACE INTO channel_breakdown VALUES (?,?,?,?,?,?,?,?,?)", (
+                        channel_id, days, dim, str(r[dim]), r.get("views"),
+                        r.get("estimatedMinutesWatched"), start, end, now))
 
     def sync_all(self):
         if not self._sync_lock.acquire(blocking=False):
@@ -234,39 +351,252 @@ class Hub:
         threading.Thread(target=self.sync_all, daemon=True).start()
         return True
 
-    # ------------------------------------------------------------------ okuma (panel)
+    # ------------------------------------------------------------------ reporting api
 
-    def overview(self, days=28):
-        since = (date.today() - timedelta(days=days)).isoformat()
-        out = []
+    def _sync_reporting(self, yt, channel_id, notes):
+        """Rapor işlerini garanti et, yeni günlük CSV'leri indirip video_daily'ye işle."""
         with self.conn() as c:
-            for ch in c.execute("SELECT * FROM channels ORDER BY subscribers DESC NULLS LAST"):
-                ch = dict(ch)
-                daily = c.execute("""SELECT day, views, subs_gained, subs_lost, minutes, impressions, ctr
-                                     FROM channel_daily WHERE channel_id=? AND day>=? ORDER BY day""",
-                                  (ch["id"], since)).fetchall()
-                ch["period"] = {
-                    "days": days,
-                    "views": sum(r["views"] or 0 for r in daily),
-                    "minutes": sum(r["minutes"] or 0 for r in daily),
-                    "subs_net": sum((r["subs_gained"] or 0) - (r["subs_lost"] or 0) for r in daily),
-                    "impressions": sum(r["impressions"] or 0 for r in daily) or None,
-                    "series": [{"day": r["day"], "views": r["views"] or 0} for r in daily],
-                }
+            jobs = {r["kind"]: dict(r) for r in c.execute(
+                "SELECT * FROM reporting_jobs WHERE channel_id=?", (channel_id,))}
+        if len(jobs) < len(config.REPORT_TYPE_PREFIXES):
+            jobs.update(self._ensure_jobs(yt, channel_id, jobs, notes))
+        new_files = 0
+        touched_days = set()
+        for kind in ("basic", "reach"):  # reach, basic'in satırlarının üstüne yazar
+            job = jobs.get(kind)
+            if not job:
+                continue
+            with self.conn() as c:
+                seen = {r[0] for r in c.execute(
+                    "SELECT report_id FROM reporting_files WHERE channel_id=? AND kind=?", (channel_id, kind))}
+            reports = [r for r in yt.job_reports(job["job_id"]) if r["id"] not in seen]
+            # Aynı gün için yeniden üretilen rapor eskisinin yerini alır: eskiden yeniye işle.
+            for rep in sorted(reports, key=lambda r: r.get("createTime", "")):
+                rows = self._parse_report(yt.download(rep["downloadUrl"]), kind)
+                with self.conn() as c:
+                    for (vid, day), v in rows.items():
+                        self._upsert_video_day(c, channel_id, vid, day, kind, v)
+                        touched_days.add(day)
+                    c.execute("INSERT OR REPLACE INTO reporting_files VALUES (?,?,?,?,?,?)",
+                              (rep["id"], channel_id, kind, (rep.get("startTime") or "")[:10],
+                               len(rows), db.now()))
+                new_files += 1
+        if touched_days:
+            self._fill_daily_reach(channel_id, touched_days)
+        return new_files
+
+    def _ensure_jobs(self, yt, channel_id, existing, notes):
+        types = [t["id"] for t in yt.report_types()]
+        remote = {j["reportTypeId"]: j for j in yt.reporting_jobs()}
+        out = {}
+        for kind, prefix in config.REPORT_TYPE_PREFIXES.items():
+            if kind in existing:
+                continue
+            candidates = sorted((t for t in types if t.startswith(prefix)
+                                 and t[len(prefix):].isdigit()), key=lambda t: int(t[len(prefix):]))
+            if not candidates:
+                notes.append(f"Reporting API'de '{prefix}*' rapor türü bulunamadı.")
+                continue
+            rtype = candidates[-1]
+            job = remote.get(rtype) or yt.create_reporting_job(rtype)
+            row = {"channel_id": channel_id, "kind": kind, "report_type": rtype,
+                   "job_id": job["id"], "created_at": db.now()}
+            with self.conn() as c:
+                c.execute("INSERT OR REPLACE INTO reporting_jobs VALUES (:channel_id,:kind,:report_type,:job_id,:created_at)", row)
+            if rtype not in remote:
+                notes.append(f"Reporting API işi oluşturuldu ({rtype}); ilk raporlar ~24 saat içinde gelir.")
+            out[kind] = row
+        return out
+
+    @staticmethod
+    def _parse_report(data, kind):
+        """CSV → {(video_id, gün): toplamlar}. Ülke/abone durumu gibi alt kırılımlar toplanır."""
+        acc = {}
+        for r in csv.DictReader(io.StringIO(data.decode("utf-8-sig"))):
+            d = r.get("date", "")
+            day = f"{d[:4]}-{d[4:6]}-{d[6:8]}" if len(d) == 8 and d.isdigit() else d[:10]
+            key = (r.get("video_id") or "", day)
+            a = acc.setdefault(key, {"views": 0, "minutes": 0.0, "likes": 0, "comments": 0, "shares": 0,
+                                     "subs_gained": 0, "subs_lost": 0, "impressions": 0, "clicks": 0.0})
+            num = lambda k: float(r.get(k) or 0)
+            if kind == "basic":
+                a["views"] += int(num("views"))
+                a["minutes"] += num("watch_time_minutes")
+                a["likes"] += int(num("likes"))
+                a["comments"] += int(num("comments"))
+                a["shares"] += int(num("shares"))
+                a["subs_gained"] += int(num("subscribers_gained"))
+                a["subs_lost"] += int(num("subscribers_lost"))
+            else:
+                imp = int(num("video_thumbnail_impressions"))
+                a["impressions"] += imp
+                a["clicks"] += imp * num("video_thumbnail_impressions_ctr")
+        for a in acc.values():
+            a["ctr"] = a["clicks"] / a["impressions"] if a["impressions"] else None
+        return acc
+
+    @staticmethod
+    def _upsert_video_day(c, channel_id, vid, day, kind, v):
+        if kind == "basic":
+            c.execute("""INSERT INTO video_daily(video_id, day, channel_id, views, minutes, likes, comments,
+                           shares, subs_gained, subs_lost) VALUES (?,?,?,?,?,?,?,?,?,?)
+                         ON CONFLICT(video_id, day) DO UPDATE SET views=excluded.views,
+                           minutes=excluded.minutes, likes=excluded.likes, comments=excluded.comments,
+                           shares=excluded.shares, subs_gained=excluded.subs_gained,
+                           subs_lost=excluded.subs_lost""",
+                      (vid, day, channel_id, v["views"], round(v["minutes"], 2), v["likes"], v["comments"],
+                       v["shares"], v["subs_gained"], v["subs_lost"]))
+        else:
+            c.execute("""INSERT INTO video_daily(video_id, day, channel_id, impressions, ctr) VALUES (?,?,?,?,?)
+                         ON CONFLICT(video_id, day) DO UPDATE SET impressions=excluded.impressions,
+                           ctr=excluded.ctr""", (vid, day, channel_id, v["impressions"], v["ctr"]))
+
+    def _fill_daily_reach(self, channel_id, days):
+        """Analytics API kapak gösterimi vermediyse kanal günlüğünü Reporting verisiyle tamamla."""
+        with self.conn() as c:
+            for day in days:
+                r = c.execute("""SELECT SUM(impressions) imp, SUM(impressions * ctr) clicks FROM video_daily
+                                 WHERE channel_id=? AND day=? AND impressions IS NOT NULL""",
+                              (channel_id, day)).fetchone()
+                if r["imp"]:
+                    c.execute("""UPDATE channel_daily SET impressions=?, ctr=? WHERE channel_id=? AND day=?
+                                 AND impressions IS NULL""",
+                              (r["imp"], (r["clicks"] or 0) / r["imp"], channel_id, day))
+
+    def reporting_status(self, channel_id=None):
+        sql = """SELECT ch.id channel_id, ch.title,
+                   (SELECT GROUP_CONCAT(report_type, ', ') FROM reporting_jobs j WHERE j.channel_id=ch.id) jobs,
+                   (SELECT MIN(day) FROM video_daily v WHERE v.channel_id=ch.id) first_day,
+                   (SELECT MAX(day) FROM video_daily v WHERE v.channel_id=ch.id) last_day,
+                   (SELECT COUNT(DISTINCT day) FROM video_daily v WHERE v.channel_id=ch.id) days,
+                   (SELECT COUNT(*) FROM reporting_files f WHERE f.channel_id=ch.id) files
+                 FROM channels ch {}"""
+        with self.conn() as c:
+            if channel_id:
+                return [dict(r) for r in c.execute(sql.format("WHERE ch.id=?"), (channel_id,))]
+            return [dict(r) for r in c.execute(sql.format(""))]
+
+    def video_trend(self, video_id):
+        with self.conn() as c:
+            return [dict(r) for r in c.execute(
+                "SELECT * FROM video_daily WHERE video_id=? ORDER BY day", (video_id,))]
+
+    # ------------------------------------------------------------------ analiz (panel)
+
+    def portfolio(self, days=28):
+        """Tüm kanallar: seçili dönem ve bir önceki eşit uzunluktaki dönem.
+
+        Dönem, Analytics verisinin geldiği son günde biter (bugünde değil).
+        """
+        with self.conn() as c:
+            last = c.execute("SELECT MAX(day) FROM channel_daily").fetchone()[0]
+            channels = [dict(r) for r in c.execute(
+                "SELECT * FROM channels ORDER BY subscribers DESC NULLS LAST, connected_at")]
+            for ch in channels:
                 ch["views_24h"] = self._delta_24h(c, ch["id"])
-                ch["shorts"] = c.execute("SELECT COUNT(*) FROM videos WHERE channel_id=? AND is_short=1",
-                                         (ch["id"],)).fetchone()[0]
-                out.append(ch)
-        totals = {
-            "channels": len(out),
-            "subscribers": sum(ch["subscribers"] or 0 for ch in out),
-            "views": sum(ch["views"] or 0 for ch in out),
-            "videos": sum(ch["video_count"] or 0 for ch in out),
-            "period_views": sum(ch["period"]["views"] for ch in out),
-            "period_subs_net": sum(ch["period"]["subs_net"] for ch in out),
-            "views_24h": sum(ch["views_24h"] or 0 for ch in out),
+            anchor = date.fromisoformat(last) if last else None
+            daily, uploads = [], []
+            if anchor:
+                prev_start = (anchor - timedelta(days=2 * days - 1)).isoformat()
+                daily = c.execute("SELECT * FROM channel_daily WHERE day>=? AND day<=?",
+                                  (prev_start, anchor.isoformat())).fetchall()
+                uploads = c.execute("""SELECT channel_id, substr(published_at,1,10) d FROM videos
+                                       WHERE substr(published_at,1,10)>=? AND substr(published_at,1,10)<=?""",
+                                    (prev_start, anchor.isoformat())).fetchall()
+
+        common = {"subscribers": sum(ch["subscribers"] or 0 for ch in channels),
+                  "lifetime_views": sum(ch["views"] or 0 for ch in channels),
+                  "views_24h": sum(ch["views_24h"] or 0 for ch in channels)}
+        if not anchor:
+            empty = dict(_agg([]), uploads=0)
+            for ch in channels:
+                ch.update(cur=dict(empty), prev=dict(empty), change=_change(empty, empty),
+                          series=[], prev_series=[], share=None)
+            return {"days": days, "anchor": None, "period": None, "previous": None,
+                    "channels": channels,
+                    "totals": {"cur": empty, "prev": dict(empty), "change": _change(empty, empty), **common},
+                    "series": [], "prev_series": [], "quota": self.quota_today()}
+
+        cur_days = [(anchor - timedelta(days=days - 1 - i)).isoformat() for i in range(days)]
+        prev_days = [(anchor - timedelta(days=2 * days - 1 - i)).isoformat() for i in range(days)]
+        cur_set = set(cur_days)
+        by_ch = {}
+        for r in daily:
+            by_ch.setdefault(r["channel_id"], []).append(r)
+        up_by_ch = {}
+        for u in uploads:
+            key = "cur" if u["d"] in cur_set else "prev"
+            up_by_ch.setdefault(u["channel_id"], {"cur": 0, "prev": 0})[key] += 1
+
+        for ch in channels:
+            rows = by_ch.get(ch["id"], [])
+            cur = [r for r in rows if r["day"] in cur_set]
+            prev = [r for r in rows if r["day"] not in cur_set]
+            ch["cur"], ch["prev"] = _agg(cur), _agg(prev)
+            ups = up_by_ch.get(ch["id"], {"cur": 0, "prev": 0})
+            ch["cur"]["uploads"], ch["prev"]["uploads"] = ups["cur"], ups["prev"]
+            ch["change"] = _change(ch["cur"], ch["prev"])
+            ch["series"] = _series(cur, cur_days)
+            ch["prev_series"] = _series(prev, prev_days)
+
+        cur_all = [r for r in daily if r["day"] in cur_set]
+        prev_all = [r for r in daily if r["day"] not in cur_set]
+        tot_cur, tot_prev = _agg(cur_all), _agg(prev_all)
+        tot_cur["uploads"] = sum(ch["cur"]["uploads"] for ch in channels)
+        tot_prev["uploads"] = sum(ch["prev"]["uploads"] for ch in channels)
+        for ch in channels:
+            ch["share"] = (ch["cur"]["views"] / tot_cur["views"]) if tot_cur["views"] else None
+        return {
+            "days": days, "anchor": anchor.isoformat(),
+            "period": {"start": cur_days[0], "end": cur_days[-1]},
+            "previous": {"start": prev_days[0], "end": prev_days[-1]},
+            "channels": channels,
+            "totals": {"cur": tot_cur, "prev": tot_prev, "change": _change(tot_cur, tot_prev), **common},
+            "series": _series(cur_all, cur_days),
+            "prev_series": _series(prev_all, prev_days),
+            "quota": self.quota_today(),
         }
-        return {"channels": out, "totals": totals, "quota": self.quota_today()}
+
+    def top_videos(self, days=28, channel_id=None, kind=None, limit=25):
+        """Dönemin en çok izlenen videoları — tüm kanallarda veya tek kanalda."""
+        sql = ["""SELECT w.*, v.title, v.thumbnail_url, v.published_at, v.is_short, v.duration_s,
+                         v.views AS lifetime_views, ch.title AS channel_title
+                  FROM video_window w JOIN channels ch ON ch.id = w.channel_id
+                  LEFT JOIN videos v ON v.id = w.video_id
+                  WHERE w.window_days = ?"""]
+        args = [days]
+        if channel_id:
+            sql.append("AND w.channel_id = ?")
+            args.append(channel_id)
+        if kind in ("short", "long"):
+            sql.append("AND v.is_short = ?")
+            args.append(1 if kind == "short" else 0)
+        sql.append("ORDER BY w.views DESC LIMIT ?")
+        args.append(limit)
+        with self.conn() as c:
+            return [dict(r) for r in c.execute(" ".join(sql), args)]
+
+    def breakdowns(self, days=28, channel_id=None):
+        """İzlenme kaynakları, içerik türü, ülkeler. Kanal verilmezse tüm kanalların toplamı."""
+        sql = """SELECT dimension, key, SUM(views) views, SUM(minutes) minutes
+                 FROM channel_breakdown WHERE window_days = ? {} GROUP BY dimension, key
+                 ORDER BY views DESC"""
+        args = [days]
+        if channel_id:
+            sql, args = sql.format("AND channel_id = ?"), args + [channel_id]
+        else:
+            sql = sql.format("")
+        out = {dim: [] for dim in config.BREAKDOWNS}
+        with self.conn() as c:
+            for r in c.execute(sql, args):
+                out.setdefault(r["dimension"], []).append(
+                    {"key": r["key"], "views": r["views"] or 0, "minutes": r["minutes"] or 0})
+        for dim, rows in out.items():
+            total = sum(r["views"] for r in rows)
+            for r in rows:
+                r["share"] = r["views"] / total if total else None
+        out["country"] = out.get("country", [])[:config.TOP_COUNTRIES]
+        return out
 
     def _delta_24h(self, c, channel_id):
         """Anlık sayaçlardan son ~24 saatteki izlenme artışı (Analytics gecikmesini atlar)."""
