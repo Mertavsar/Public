@@ -1,0 +1,3 @@
+id,fikir,format,kova,merak,netlik,kitle,uretim,klip,durum,not
+# Puanlar 1-10. Herhangi biri <=3 ise elenir. durum: (boş)=havuz, cekildi, yayinda, iptal
+# F001,Gergedan neden domuzu görmüyor,A,B,9,9,8,9,8,,

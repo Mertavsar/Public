@@ -6,7 +6,7 @@ Sistem: `.claude/skills/shorts-kanal/SKILL.md` — 10 aşama, sırayla.
 
 | Slug | Kanal | Niş | Aşama | Son güncelleme |
 |---|---|---|---|---|
-| — | henüz kanal eklenmedi | | | |
+| `pulse-files` | Pulse Files (@PulseFiless) | adrenalin / absürt / şaşırtıcı — netleşecek | 1 — veri bekleniyor | 2026-10-05 |
 
 ## Yeni kanal
 
