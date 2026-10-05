@@ -7,13 +7,20 @@ ayrımı, ülkeler, tüm kanallarda en çok izlenen videolar ve video bazında g
 
 Ürün planı, API sınırları ve yol haritası: **[docs/PLAN.md](docs/PLAN.md)**
 
-## Çalıştırma
+## En kısa yol
 
-```
-python3 youtube-hub/hub.py serve
-```
+1. **İlk sefer — kodu indir.** Terminal'e bir kez yapıştır (macOS):
+   ```
+   cd ~/Desktop && git clone -b claude/youtube-channels-management-8r70gz https://github.com/Mertavsar/Public.git YouTubeHub && open YouTubeHub/youtube-hub/baslat.command
+   ```
+2. **Sonraki seferler:** `YouTubeHub/youtube-hub/baslat.command` dosyasına çift tıkla
+   (Windows: `baslat.bat`). Panel tarayıcıda kendiliğinden açılır; açılan siyah pencere
+   açık kaldığı sürece çalışır. Her açılışta son güncellemeleri de çeker.
+3. **Panel ilk açılışta kurulum sihirbazını gösterir:** Google Cloud'daki her adım için
+   doğrudan bağlantı var; sonunda indirdiğin JSON dosyasını panele sürükleyip bırakırsın.
+4. **+ Kanal ekle** → Google'da kanalı seç → izinleri ver. Her kanal için bir kez.
 
-Tarayıcıda: **http://127.0.0.1:7788** · Kapatmak: `Ctrl+C`
+Elle çalıştırmak istersen: `python3 youtube-hub/hub.py serve` → http://127.0.0.1:7788
 
 Sadece Python 3.9+ gerekir. `pip install` yok.
 

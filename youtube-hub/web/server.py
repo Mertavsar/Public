@@ -13,6 +13,7 @@ import secrets
 import sys
 import threading
 import traceback
+import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, quote, urlparse
 
@@ -113,7 +114,11 @@ class Handler(BaseHTTPRequestHandler):
                 data = self.hub.videos(cid) if what == "videos" else self.hub.daily(cid)
                 return self._send(200, data)
             if path == "/oauth/start":
-                return self._send(302, "", headers={"Location": oauth.start_flow(redirect_uri())})
+                try:
+                    target = oauth.start_flow(redirect_uri())
+                except oauth.SetupMissing:
+                    target = "/?oauth_error=setup"
+                return self._send(302, "", headers={"Location": target})
             if path == "/oauth/callback":
                 return self._oauth_callback(q)
             return self._error(404, "Bulunamadı")
@@ -146,6 +151,12 @@ class Handler(BaseHTTPRequestHandler):
             return self._error(403, "Oturum anahtarı geçersiz; sayfayı yenile.")
         path = urlparse(self.path).path
         try:
+            if path == "/api/setup/client-secret":
+                n = int(self.headers.get("Content-Length") or 0)
+                if n > 64 * 1024:
+                    raise ValueError("Dosya çok büyük; bu bir OAuth istemci dosyası değil.")
+                oauth.save_client(self.rfile.read(n))
+                return self._send(200, {"ready": True})
             if path == "/api/sync":
                 started = self.hub.sync_all_async()
                 return self._send(202 if started else 409,
@@ -186,10 +197,21 @@ def _esc(s):
              .replace('"', "&quot;").replace("'", "&#39;"))
 
 
-def serve(hub=None):
+def serve(hub=None, open_browser=True):
+    url = f"http://{config.HOST}:{config.PORT}"
+    try:
+        httpd = ThreadingHTTPServer((config.HOST, config.PORT), Handler)
+    except OSError:
+        # Port dolu: büyük ihtimalle panel zaten açık. Tarayıcıda onu göster.
+        print(f"Panel zaten çalışıyor olabilir → {url}")
+        if open_browser:
+            webbrowser.open(url)
+        return 1
     Handler.hub = hub or Hub()
-    httpd = ThreadingHTTPServer((config.HOST, config.PORT), Handler)
-    print(f"YouTube Hub hazır → http://{config.HOST}:{config.PORT}   (kapatmak için Ctrl+C)")
+    print(f"YouTube Hub hazır → {url}")
+    print("Bu pencere açık kaldığı sürece panel çalışır. Kapatmak için Ctrl+C.")
+    if open_browser:
+        threading.Timer(0.6, webbrowser.open, args=(url,)).start()
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

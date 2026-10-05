@@ -2,7 +2,7 @@
 """
 YouTube Hub — komut satırı.
 
-  python3 youtube-hub/hub.py serve                      panel (http://127.0.0.1:7788)
+  python3 youtube-hub/hub.py serve                      panel (tarayıcı kendiliğinden açılır)
   python3 youtube-hub/hub.py sync                       tüm kanalları senkronize et
   python3 youtube-hub/hub.py status                     kanallar, son 28 gün, kota
   python3 youtube-hub/hub.py thumb VIDEO_ID dosya.jpg   tek videoya kapak
@@ -136,7 +136,7 @@ def cmd_undo(hub, a):
 def main(argv=None):
     p = argparse.ArgumentParser(prog="hub.py", description="YouTube Hub")
     sub = p.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("serve")
+    s = sub.add_parser("serve"); s.add_argument("--no-browser", action="store_true")
     sub.add_parser("sync")
     s = sub.add_parser("status"); s.add_argument("--days", type=int, default=28, choices=config.WINDOWS)
     s = sub.add_parser("thumb"); s.add_argument("video_id"); s.add_argument("file")
@@ -147,7 +147,7 @@ def main(argv=None):
 
     if a.cmd == "serve":
         from web.server import serve
-        return serve()
+        return serve(open_browser=not a.no_browser)
     hub = Hub()
     handlers = {"sync": cmd_sync, "status": cmd_status, "thumb": cmd_thumb,
                 "bulk-thumbs": cmd_bulk, "banner": cmd_banner, "undo": cmd_undo}

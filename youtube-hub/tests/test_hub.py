@@ -254,6 +254,22 @@ class TestUnits(unittest.TestCase):
         self.assertEqual(images.sniff(png(10, 20)), ("image/png", 10, 20))
         self.assertEqual(images.sniff(jpeg(1920, 1080)), ("image/jpeg", 1920, 1080))
 
+    def test_save_client_validates(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "data", "client_secret.json")
+            good = {"installed": {"client_id": "123-abc.apps.googleusercontent.com", "client_secret": "s",
+                                  "redirect_uris": ["http://localhost"]}}
+            import json
+            self.assertTrue(oauth.save_client(json.dumps(good).encode(), path).endswith(".com"))
+            self.assertEqual(oct(os.stat(path).st_mode & 0o777), "0o600")
+            self.assertEqual(oauth.load_client(path)["client_secret"], "s")
+            for bad, msg in [(b"not json", "JSON"),
+                             (json.dumps({"web": good["installed"]}).encode(), "Desktop app"),
+                             (json.dumps({"foo": 1}).encode(), "OAuth istemci")]:
+                with self.assertRaises(ValueError) as cm:
+                    oauth.save_client(bad, path)
+                self.assertIn(msg, str(cm.exception))
+
     def test_oauth_flow_pkce_and_state(self):
         g = FakeGoogle()
         url = oauth.start_flow("http://127.0.0.1:7788/oauth/callback", client=CLIENT)

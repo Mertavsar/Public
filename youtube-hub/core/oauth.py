@@ -46,6 +46,30 @@ def load_client(path=None):
     return {"client_id": block["client_id"], "client_secret": block.get("client_secret", "")}
 
 
+def save_client(raw, path=None):
+    """Panelden yüklenen OAuth istemci JSON'unu doğrulayıp kaydeder."""
+    path = path or config.CLIENT_SECRET_PATH
+    try:
+        data = json.loads(raw)
+    except (ValueError, UnicodeDecodeError):
+        raise ValueError("Dosya JSON değil. Google Cloud'dan indirdiğin client_secret dosyasını seç.")
+    block = data.get("installed") if isinstance(data, dict) else None
+    if not block:
+        if isinstance(data, dict) and data.get("web"):
+            raise ValueError("Bu bir 'Web application' istemcisi. Google Cloud'da Application type "
+                             "olarak 'Desktop app' seçip yeni istemci oluştur.")
+        raise ValueError("Bu dosya bir OAuth istemci dosyası değil (client_id bulunamadı).")
+    if not str(block.get("client_id", "")).endswith(".apps.googleusercontent.com"):
+        raise ValueError("client_id geçersiz görünüyor.")
+    if not block.get("client_secret"):
+        raise ValueError("Dosyada client_secret yok.")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        json.dump({"installed": block}, f)
+    return block["client_id"]
+
+
 def _form_post(url, fields, transport):
     body = urllib.parse.urlencode(fields).encode()
     status, _, raw = transport("POST", url, {"Content-Type": "application/x-www-form-urlencoded"}, body)
