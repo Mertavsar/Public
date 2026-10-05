@@ -63,7 +63,12 @@ class WebTest(unittest.TestCase):
         self.assertTrue(h["Location"].startswith("https://accounts.google.com/"))
         state = parse_qs(urlparse(h["Location"]).query)["state"][0]
         self.assertEqual(ck["kh_oauth"], state)
+        self.last_location = h["Location"]
         return state, ck
+
+    def callback(self, state, ck):
+        st, h, _, ck2 = self.req("GET", f"/oauth/callback?state={state}&code=c", cookies=ck)
+        return h["Location"], ck2.get("kh_session")
 
     def test_flow(self):
         # tanıtım ve yasal sayfalar herkese açık
@@ -82,24 +87,25 @@ class WebTest(unittest.TestCase):
 
         # giriş: çerezdeki state eşleşmezse reddedilir
         state, ck = self.login()
+        self.assertIn("youtube.readonly", self.last_location)          # giriş ve kanal onayı tek ekranda
         st, h, _, _ = self.req("GET", f"/oauth/callback?state={state}&code=c")
         self.assertIn("hata=state", h["Location"])
         st, h, _, ck2 = self.req("GET", f"/oauth/callback?state={state}&code=c", cookies=ck)
-        self.assertEqual((st, h["Location"]), (302, "/kanal-ekle"))  # kanal yok → doğrudan kanal seçimi
+        self.assertEqual((st, h["Location"]), (302, "/panel?connected=UC_test"))  # kanal girişte bağlandı
         session = {"kh_session": ck2["kh_session"]}
-
-        # kanal bağla
-        st, h, _, ck3 = self.req("GET", "/kanal-ekle", cookies=session)
-        loc = h["Location"]
-        self.assertIn("login_hint=ali%40example.com", loc)
-        self.assertIn("youtube.readonly", loc)
-        st2 = parse_qs(urlparse(loc).query)["state"][0]
-        st, h, _, _ = self.req("GET", f"/oauth/callback?state={st2}&code=c", cookies={**session, **ck3})
-        self.assertEqual(h["Location"], "/panel?connected=UC_test")
         for _ in range(100):
             if self.hub.portfolio()["anchor"]:
                 break
             time.sleep(0.05)
+
+        # ek kanal akışı: e-posta ipucuyla, her seferinde onay
+        st, h, _, ck3 = self.req("GET", "/kanal-ekle", cookies=session)
+        loc = h["Location"]
+        self.assertIn("login_hint=ali%40example.com", loc)
+        self.assertIn("prompt=consent", loc)
+        st2 = parse_qs(urlparse(loc).query)["state"][0]
+        st, h, _, _ = self.req("GET", f"/oauth/callback?state={st2}&code=c", cookies={**session, **ck3})
+        self.assertEqual(h["Location"], "/panel?connected=UC_test")
 
         # panel ve veri
         st, _, body, _ = self.req("GET", "/panel", cookies=session)
@@ -140,6 +146,31 @@ class WebTest(unittest.TestCase):
         self.assertEqual(self.req("GET", "/api/portfolio", cookies=session)[0], 401)
         # giriş yapmış kullanıcı /giris'e gelirse panele yönlenir
         self.assertEqual(self.req("GET", "/giris", cookies=s2)[1].get("Location"), "/panel")
+
+    def test_login_variants(self):
+        g = self.g
+        old = (dict(g.login_claims), g.granted_scope)
+        try:
+            # YouTube izin kutusu boş bırakıldı → giriş olur, kanal yok
+            g.login_claims, g.granted_scope = {"sub": "g-izin", "email": "izin@example.com"}, "openid email profile"
+            loc, tok = self.callback(*self.login())
+            self.assertEqual(loc, "/panel?hata=izin")
+            self.assertEqual(self.hub.channel_ids(self.hub.session_user(tok)["id"]), [])
+            # hesapta YouTube kanalı yok
+            g.granted_scope, g.no_channel = old[1], True
+            g.login_claims = {"sub": "g-yok", "email": "yok@example.com"}
+            loc, _ = self.callback(*self.login())
+            self.assertEqual(loc, "/panel?hata=kanal_yok")
+            g.no_channel = False
+            # marka kanalı kimliğiyle giriş → kanalın sahibi olan hesaba girilir
+            owner = self.hub.login({"sub": "g-sahip", "email": "sahip@example.com"})
+            self.hub.link_channel(owner["id"], "UC_test")
+            g.login_claims = {"sub": "marka-1", "email": "kanal@pages.plusgoogle.com"}
+            loc, tok = self.callback(*self.login())
+            self.assertIn(self.hub.session_user(tok)["id"], {owner["id"], 1})
+            self.assertTrue(self.hub.owns(self.hub.session_user(tok)["id"], "UC_test"))
+        finally:
+            g.login_claims, g.granted_scope, g.no_channel = old[0], old[1], False
 
     def test_setup_upload_requires_token(self):
         st, _, _, _ = self.req("POST", "/api/setup/client-secret", body=b"{}")

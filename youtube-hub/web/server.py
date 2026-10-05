@@ -250,12 +250,7 @@ class Handler(BaseHTTPRequestHandler):
             token, purpose, ctx = oauth.finish_flow(state, q.get("code", [""])[0],
                                                     client=self.hub.oauth_client, transport=self.hub.transport)
             if purpose == "login":
-                u = self.hub.login(oauth.id_claims(token))
-                session, _ = self.hub.create_session(u["id"])
-                cookies = [clear, self._cookie(SESSION_COOKIE, session, config.SESSION_DAYS * 86400)]
-                # İlk girişte kanal yoksa doğrudan kanal seçimine geç.
-                nxt = "/panel" if self.hub.channel_ids(u["id"]) else "/kanal-ekle"
-                return self._redirect(nxt, cookies=cookies)
+                return self._finish_login(token, clear)
             if not user or user["id"] != ctx:
                 return self._redirect("/giris?hata=oturum", cookies=[clear])
             cid = self.hub.register(token, user_id=user["id"])
@@ -264,6 +259,31 @@ class Handler(BaseHTTPRequestHandler):
             return self._redirect(f"{back}?hata=baglanti&mesaj={quote(str(e)[:200])}", cookies=[clear])
         threading.Thread(target=self.hub.sync_channel, args=(cid,), daemon=True).start()
         return self._redirect(f"/panel?connected={quote(cid)}", cookies=[clear])
+
+    def _finish_login(self, token, clear):
+        """Tek adımlı giriş: kimlik + Google'da seçilen kanal. Kanal varsa hemen bağlanır."""
+        claims = oauth.id_claims(token)
+        ch, why = self.hub.channel_from_token(token)
+        u = self.hub.login(claims, channel_id=ch["id"] if ch else None)
+        session, _ = self.hub.create_session(u["id"])
+        cookies = [clear, self._cookie(SESSION_COOKIE, session, config.SESSION_DAYS * 86400)]
+        if not ch:
+            # YouTube izni verilmedi ya da hesapta kanal yok: giriş yine tamam.
+            nxt = "/panel" if self.hub.channel_ids(u["id"]) else f"/panel?hata={why}"
+            return self._redirect(nxt, cookies=cookies)
+        cid, new = ch["id"], not self.hub.owns(u["id"], ch["id"])
+        if token.get("refresh_token"):
+            self.hub.register(token, user_id=u["id"])
+        elif self.hub.has_credentials(cid):
+            self.hub.link_channel(u["id"], cid)
+        else:
+            # Google bu kez kalıcı anahtar vermedi (uygulama daha önce onaylanmış);
+            # kanal ekleme akışı onayı yeniden ister.
+            return self._redirect("/kanal-ekle", cookies=cookies)
+        if new:
+            threading.Thread(target=self.hub.sync_channel, args=(cid,), daemon=True).start()
+            return self._redirect(f"/panel?connected={quote(cid)}", cookies=cookies)
+        return self._redirect("/panel", cookies=cookies)
 
     # ------------------------------------------------------------------ POST
 

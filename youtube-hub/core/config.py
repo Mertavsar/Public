@@ -62,6 +62,10 @@ if os.environ.get("YTHUB_MONETARY") == "1":
 # Kapak/banner değiştirmek için ek izin — sadece kullanıcı bu özelliği kullanmak
 # istediğinde ayrıca istenir.
 WRITE_SCOPE = "https://www.googleapis.com/auth/youtube"
+
+# "Google ile devam et": giriş + kanal onayı TEK ekranda. Google aynı akışta hesabı ve
+# YouTube kanalını seçtirir; giriş biter bitmez kanal bağlanmış olur.
+SIGNIN_SCOPES = LOGIN_SCOPES + CHANNEL_SCOPES
 SCOPES = CHANNEL_SCOPES  # geriye uyum
 
 # Data API v3 birim maliyetleri (docs: determine_quota_cost). Günlük varsayılan

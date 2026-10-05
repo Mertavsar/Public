@@ -217,6 +217,14 @@ class TestAccounts(Base):
         again = self.hub.login({"sub": "s1", "email": "a2@x.com", "name": "A"})
         self.assertEqual((again["id"], again["email"]), (u["id"], "a2@x.com"))
 
+    def test_brand_identity_reaches_channel_owner(self):
+        u = self.hub.login({"sub": "s1", "email": "a@x.com"})
+        brand = self.hub.login({"sub": "brand-9", "email": "kanal@pages.plusgoogle.com"}, channel_id=self.cid)
+        self.assertEqual(brand["id"], u["id"])                     # aynı hesaba girildi
+        self.assertEqual(brand["email"], "a@x.com")                # hesap bilgisi ezilmedi
+        stranger = self.hub.login({"sub": "s3", "email": "c@x.com"}, channel_id="UC_baska")
+        self.assertNotEqual(stranger["id"], u["id"])
+
     def test_sessions(self):
         u = self.hub.login({"sub": "s1", "email": "a@x.com"})
         tok, csrf = self.hub.create_session(u["id"])
@@ -337,8 +345,9 @@ class TestUnits(unittest.TestCase):
         self.assertEqual((tok["refresh_token"], purpose, ctx), ("refresh-xyz", "channel", 7))
         self.assertEqual(oauth.id_claims(tok)["email"], "ali@example.com")
         login_url, _ = oauth.start_flow("http://x/cb", purpose="login", client=CLIENT)
-        self.assertIn("scope=openid+email+profile", login_url)
-        self.assertNotIn("access_type", login_url)
+        self.assertIn("scope=openid+email+profile+", login_url)    # giriş + kanal tek ekranda
+        self.assertIn("youtube.readonly", login_url)
+        self.assertIn("prompt=select_account&", login_url + "&")
         with self.assertRaises(ValueError):  # state tek kullanımlık
             oauth.finish_flow(state, "code", client=CLIENT, transport=g)
 

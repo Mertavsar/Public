@@ -12,8 +12,8 @@ ayrımı, ülkeler, tüm kanallarda en çok izlenen videolar ve video bazında g
 | Adres | Ne |
 |---|---|
 | `/` | Tanıtım sayfası: hero + panel önizlemesi, kimler için, sorun→çözüm, özellikler, nasıl çalışır, güvenlik, fiyatlar, SSS, son çağrı |
-| `/giris` | **Google ile devam et** — hesap yoksa ilk girişte açılır |
-| → | İlk girişte kanal yoksa doğrudan **kanal seçimine** geçilir; Google hesaptaki kanalları listeler |
+| `/giris` | **Google ile devam et** — giriş ve YouTube kanal onayı **tek Google ekranında**; hesap yoksa açılır, seçilen kanal anında bağlanır |
+| → | Girişte bir marka kanalı seçilirse ve kanal zaten bir hesaba bağlıysa o hesaba girilir. İzin verilmezse veya hesapta kanal yoksa giriş yine olur, panel ne yapılacağını söyler |
 | `/panel?connected=…` | "✓ Kanal bağlandı — bu hesapta başka kanalın var mı?" → **+ Bir kanal daha ekle** |
 | `/panel` | Analiz paneli; herkes yalnızca kendi kanallarını görür |
 | `/gizlilik`, `/kosullar` | Google doğrulaması için zorunlu sayfalar (taslak) |
@@ -24,7 +24,7 @@ ayrımı, ülkeler, tüm kanallarda en çok izlenen videolar ve video bazında g
 > getirir: girişten hemen sonra kanal seçimi açılır, her bağlantıdan sonra "bir kanal daha"
 > sorulur. Hesabın tek kanalı varsa tek adımda gelir.
 
-**İzinler:** Giriş sadece kimlik (`openid email profile`). Kanallar **salt okunur**
+**İzinler:** Giriş = kimlik (`openid email profile`) + seçilen kanal, tek onayda. Kanallar **salt okunur**
 (`youtube.readonly`, `yt-analytics.readonly`) bağlanır. Kapak/banner değiştirmek isteyene
 `youtube` (yazma) izni o an ayrıca sorulur.
 

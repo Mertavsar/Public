@@ -143,23 +143,60 @@ class Hub:
 
     # ------------------------------------------------------------------ hesaplar
 
-    def login(self, claims):
-        """Google kimliğiyle giriş. Hesap yoksa açılır. Dönen: kullanıcı satırı (dict)."""
+    def login(self, claims, channel_id=None):
+        """Google kimliğiyle giriş. Dönen: kullanıcı satırı (dict).
+
+        Kimlik eşleşmezse ama seçilen kanal zaten bir hesaba bağlıysa o hesaba girilir:
+        Google girişte bir marka kanalı seçilirse kimlik o marka hesabıdır; kanalın sahibi
+        olan hesap yine bulunur. Hiçbiri yoksa yeni hesap açılır."""
         now = db.now()
         with self.conn() as c:
             first = c.execute("SELECT COUNT(*) FROM users").fetchone()[0] == 0
-            c.execute("""INSERT INTO users(google_sub, email, name, picture, created_at, last_login)
-                         VALUES (?,?,?,?,?,?)
-                         ON CONFLICT(google_sub) DO UPDATE SET email=excluded.email, name=excluded.name,
-                           picture=excluded.picture, last_login=excluded.last_login""",
-                      (claims["sub"], claims["email"], claims.get("name"), claims.get("picture"), now, now))
-            user = dict(c.execute("SELECT * FROM users WHERE google_sub=?", (claims["sub"],)).fetchone())
+            row = c.execute("SELECT * FROM users WHERE google_sub=?", (claims["sub"],)).fetchone()
+            if not row and channel_id:
+                row = c.execute("""SELECT u.* FROM users u JOIN user_channels uc ON uc.user_id = u.id
+                                   WHERE uc.channel_id=? ORDER BY uc.added_at LIMIT 1""", (channel_id,)).fetchone()
+            if row and row["google_sub"] == claims["sub"]:
+                c.execute("UPDATE users SET email=?, name=?, picture=?, last_login=? WHERE id=?",
+                          (claims["email"], claims.get("name"), claims.get("picture"), now, row["id"]))
+            elif row:
+                c.execute("UPDATE users SET last_login=? WHERE id=?", (now, row["id"]))
+            else:
+                c.execute("""INSERT INTO users(google_sub, email, name, picture, created_at, last_login)
+                             VALUES (?,?,?,?,?,?)""",
+                          (claims["sub"], claims["email"], claims.get("name"), claims.get("picture"), now, now))
+            uid = row["id"] if row else c.execute("SELECT id FROM users WHERE google_sub=?",
+                                                   (claims["sub"],)).fetchone()[0]
+            user = dict(c.execute("SELECT * FROM users WHERE id=?", (uid,)).fetchone())
             if first:
                 # Hesap sisteminden önce bağlanmış kanallar (yerel kurulum) ilk kullanıcıya geçer.
                 c.execute("""INSERT OR IGNORE INTO user_channels(user_id, channel_id, added_at)
                              SELECT ?, id, ? FROM channels
                              WHERE id NOT IN (SELECT channel_id FROM user_channels)""", (user["id"], now))
         return user
+
+    def channel_from_token(self, token):
+        """Giriş token'ıyla Google'da seçilen kanalı bulur. Dönen: (kanal | None, sebep).
+        sebep: "izin" (YouTube izni verilmedi), "kanal_yok" (hesapta kanal yok), "baglanti"."""
+        granted = (token.get("scope") or "").split()
+        if not any(s in granted for s in (config.CHANNEL_SCOPES[0], config.WRITE_SCOPE)):
+            return None, "izin"
+        creds = Credentials(token.get("refresh_token") or "", token.get("access_token"),
+                            int(time.time()) + int(token.get("expires_in", 3600)),
+                            client=self.oauth_client, transport=self.transport)
+        try:
+            return self._client(creds).my_channel(), None
+        except ApiError as e:
+            return None, "kanal_yok" if e.reason == "noChannel" else "izin" if e.status == 403 else "baglanti"
+
+    def has_credentials(self, channel_id):
+        with self.conn() as c:
+            return c.execute("SELECT 1 FROM credentials WHERE channel_id=?", (channel_id,)).fetchone() is not None
+
+    def link_channel(self, user_id, channel_id):
+        with self.conn() as c:
+            c.execute("INSERT OR IGNORE INTO user_channels(user_id, channel_id, added_at) VALUES (?,?,?)",
+                      (user_id, channel_id, db.now()))
 
     def create_session(self, user_id):
         token, csrf = secrets.token_urlsafe(32), secrets.token_urlsafe(24)

@@ -80,6 +80,8 @@ class FakeGoogle:
         if u.netloc.startswith("download.example"):
             return 200, {}, self.report_csv[p]
         if p.endswith("/channels") and method == "GET":
+            if getattr(self, "no_channel", False):
+                return self._ok({"items": []})
             if q["part"] == "brandingSettings":
                 return self._ok({"items": [{"id": self.channel_id, "brandingSettings": self.branding}]})
             return self._ok({"items": [{

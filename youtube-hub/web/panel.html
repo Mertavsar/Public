@@ -609,6 +609,8 @@ const ERRORS = {
   state: "Güvenlik kontrolü başarısız (oturum süresi dolmuş olabilir). Tekrar dene.",
   oturum: "Oturum değişti; tekrar dene.",
   baglanti: "Kanal bağlanamadı.",
+  izin: "Giriş yapıldı ama YouTube izni verilmedi. Kanalını bağlamak için “+ Kanal ekle”ye bas ve izin kutularını işaretle.",
+  kanal_yok: "Seçtiğin Google hesabında YouTube kanalı yok. “+ Kanal ekle” ile kanalın olduğu hesabı veya marka kanalını seç.",
 };
 (() => { const a = $(".avatar"); a.dataset.initial = (a.dataset.name || "?").trim().charAt(0).toLocaleUpperCase("tr");
   const img = a.querySelector("img"); if (!img.getAttribute("src")) img.remove(); })();

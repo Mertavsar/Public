@@ -1,7 +1,8 @@
 """
 Google OAuth 2.0 (PKCE) — iki ayrı amaç:
 
-  login   → "Google ile giriş": sadece kimlik (e-posta, ad, fotoğraf). Hesap yoksa açılır.
+  login   → "Google ile devam et": kimlik + seçilen YouTube kanalına salt okunur erişim,
+            tek onay ekranında. Hesap yoksa açılır, kanal anında bağlanır.
   channel → "Kanal ekle": seçilen YouTube kanalına salt okunur erişim (refresh token).
             Google'ın hesap seçicisi, hesaptaki kanalları (marka hesapları dahil) listeler;
             seçilen kanal token'a bağlanır. YouTube API tek onayla bir hesaptaki TÜM
@@ -120,17 +121,16 @@ def start_flow(redirect_uri, scopes=None, purpose="channel", ctx=None, login_hin
         "client_id": client["client_id"],
         "redirect_uri": redirect_uri,
         "response_type": "code",
-        "scope": " ".join(scopes or (config.LOGIN_SCOPES if purpose == "login" else config.CHANNEL_SCOPES)),
+        "scope": " ".join(scopes or (config.SIGNIN_SCOPES if purpose == "login" else config.CHANNEL_SCOPES)),
         "state": state,
         "code_challenge": challenge,
         "code_challenge_method": "S256",
         "include_granted_scopes": "true",
     }
-    if purpose == "login":
-        params["prompt"] = "select_account"
-    else:
-        params["access_type"] = "offline"             # refresh_token için şart
-        params["prompt"] = "consent select_account"   # her seferinde kanal seçtir
+    params["access_type"] = "offline"                 # refresh_token için şart
+    # Giriş: hesap/kanal seçtir; onay ekranı sadece ilk seferde (Google hatırlar).
+    # Kanal ekle: her seferinde onay → yeni kanal için mutlaka refresh_token gelir.
+    params["prompt"] = "select_account" if purpose == "login" else "consent select_account"
     if login_hint:
         params["login_hint"] = login_hint
     return f"{config.AUTH_URL}?{urllib.parse.urlencode(params)}", state
