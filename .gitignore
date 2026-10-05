@@ -4,3 +4,10 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# YouTube kanalları — ham medya repoya girmez, sadece metin/karar/veri
+youtube/kanallar/**/*.mp4
+youtube/kanallar/**/*.mov
+youtube/kanallar/**/*.mp3
+youtube/kanallar/**/*.wav
+youtube/kanallar/**/*.m4a

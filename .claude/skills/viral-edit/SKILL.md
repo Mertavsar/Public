@@ -46,6 +46,11 @@ TUR 2   Kullanıcı sesi atar
         -> kurgu, altyazı, grafik, master, teslim (§1'den itibaren)
 ```
 
+Video bir YouTube kanalı için çekiliyorsa (`youtube/kanallar/<slug>/` var) Tur 1'den
+önce o kanalın `kurallar.md` dosyasını oku — kurallar bağlayıcıdır. Metin, başlık
+ve hook kararları `shorts-kanal` skill'inin Aşama 5–8'inde verilir; final metin
+`videolar/<no>/metin.txt` olarak gelir, Tur 2'de `--script` olarak onu kullan.
+
 Kullanıcı video + ses birlikte attıysa doğrudan Tur 2.
 Sadece video attıysa **metni yazmadan kurguya başlama** — ses olmadan kesim ritmi kurulamaz.
 
