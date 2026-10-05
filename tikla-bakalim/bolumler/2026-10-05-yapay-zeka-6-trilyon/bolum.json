@@ -1,0 +1,604 @@
+{
+  "baslik": "Yapay zeka yılda 6 trilyon dolar kazanmak zorunda mı? Bain'in hesabı",
+  "tarih": "2026-10-05",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "trilyon",
+    "açık",
+    "tahmin",
+    "pahalı",
+    "artabilir"
+  ],
+  "altyazi": {
+    "altı trilyon dolar": "6 trilyon dolar",
+    "Üç soruda": "3 soruda",
+    "Yirmi dokuz Eylül'de": "29 Eylül'de",
+    "yedi yüz seksen milyar doları": "780 milyar doları",
+    "bir buçuk trilyon dolara": "1,5 trilyon dolara",
+    "bir virgül sekiz trilyon": "1,8 trilyon",
+    "Altıdan bir virgül sekizi": "6'dan 1,8'i",
+    "dört virgül iki trilyon": "4,2 trilyon",
+    "on altı milyar dolar": "16 milyar dolar",
+    "iki milyar dolar": "2 milyar dolar"
+  },
+  "kapak": {
+    "ikon": "🤖",
+    "ust": "YAPAY ZEKA",
+    "buyuk": "6 TRİLYON $",
+    "alt": "NEREDEN ÇIKACAK?"
+  },
+  "cta": [
+    {
+      "sahne": 15,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Bir danışmanlık şirketine göre, yapay zekanın yılda altı trilyon dolar kazanması gerekiyor.",
+      "p": {
+        "ikon": "🤖",
+        "etiket": "Yapay zekanın gereken yıllık geliri · 2031",
+        "deger": 6,
+        "ondalik": 0,
+        "sonek": " trilyon $",
+        "yon": "up",
+        "renk": "sari",
+        "ok_renk": "sari",
+        "not": "Bain tahmini · 29 Eylül",
+        "sayma": false
+      },
+      "kaynak": "K1",
+      "etiket": "BAIN HESABI"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu rakam nereden çıktı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEREDEN\n*ÇIKTI?*",
+        "boy": 120
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi sade dille anlatıyoruz; kaçırmamak için abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ",
+          "*SADE* ANLATIYORUZ"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Yirmi dokuz Eylül'de Bain adlı şirket, yeni teknoloji raporunu yayımladı.",
+      "p": {
+        "gun": "29",
+        "ay": "EYLÜL",
+        "gunadi": "SALI",
+        "saat": "",
+        "not": "*Bain* teknoloji raporu"
+      },
+      "kaynak": "K1",
+      "etiket": "NE OLDU"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bain, şirketlere strateji öneren dünyaca ünlü bir danışmanlık şirketi.",
+      "p": {
+        "ikon": "📑",
+        "satirlar": [
+          "BAIN =",
+          "*DANIŞMANLIK ŞİRKETİ*"
+        ],
+        "boy": 84,
+        "not": "Şirketlere strateji ve analiz sunar"
+      },
+      "etiket": "BAIN NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce harcamaya bakalım. Beş dev şirket yapay zeka için veri merkezi kuruyor.",
+      "p": {
+        "ikon": "🏢",
+        "satirlar": [
+          "MICROSOFT · GOOGLE",
+          "AMAZON · META",
+          "*ORACLE*"
+        ],
+        "boy": 72
+      },
+      "etiket": "KİM HARCIYOR?",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Bu beş şirketin bu yılki yatırımı, yedi yüz seksen milyar doları bulabilir.",
+      "p": {
+        "ikon": "🏗️",
+        "etiket": "5 dev şirketin 2026 yatırımı (en fazla)",
+        "deger": 780,
+        "ondalik": 0,
+        "sonek": " milyar $",
+        "yon": "up",
+        "renk": "sari",
+        "ok_renk": "kirmizi",
+        "not": "Bain tahmini · kesin değil",
+        "sayma": true
+      },
+      "kaynak": "K2",
+      "etiket": "2026 YATIRIMI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Bu, günde yaklaşık iki milyar dolar demek.",
+      "p": {
+        "baslik": "Günlük ortalama yatırım (tahmini)",
+        "ikon": "🧮",
+        "ogeler": [
+          "780 milyar $",
+          "÷",
+          "365 gün",
+          "=",
+          "~2,1 milyar $"
+        ]
+      },
+      "kaynak": "hesap: 780 ÷ 365 · K2",
+      "etiket": "GÜNLÜK HESAP"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Veri merkezi, yapay zekanın çalıştığı dev bilgisayar binası.",
+      "p": {
+        "ikon": "🏢",
+        "satirlar": [
+          "VERİ MERKEZİ =",
+          "*DEV BİLGİSAYAR BİNASI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "VERİ MERKEZİ NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Bain'e göre yıllık yapay zeka altyapı harcaması, bir buçuk trilyon dolara doğru gidiyor.",
+      "p": {
+        "ikon": "📈",
+        "etiket": "Yıllık altyapı harcaması (yönelim)",
+        "deger": 1.5,
+        "ondalik": 1,
+        "sonek": " trilyon $",
+        "yon": "up",
+        "renk": "sari",
+        "ok_renk": "kirmizi",
+        "not": "Bain tahmini · kesin değil",
+        "sayma": true
+      },
+      "kaynak": "K2",
+      "etiket": "HARCAMA YÖNELİMİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Kısacası şirketler, çok büyük bir bahse girmiş durumda.",
+      "p": {
+        "ikon": "🎲",
+        "satirlar": [
+          "ÇOK BÜYÜK",
+          "*BİR BAHİS*"
+        ],
+        "boy": 104
+      },
+      "etiket": "ÖZET",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bu para neden geri kazanılmak zorunda?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*GERİ DÖNMELİ?*",
+        "boy": 112
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu paranın sahipleri var. Yatırımcılar, harcanan paranın kâr getirmesini bekler.",
+      "p": {
+        "ikon": "💼",
+        "satirlar": [
+          "HARCANAN PARA =",
+          "*GERİ DÖNMELİ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "1. SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bir fırın düşün. Fırını kurmak pahalıysa, çok ekmek satmak gerekir.",
+      "p": {
+        "ikon": "🥖",
+        "satirlar": [
+          "PAHALI FIRIN =",
+          "*ÇOK EKMEK*"
+        ],
+        "boy": 96
+      },
+      "etiket": "FIRIN ÖRNEĞİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Veri merkezi pahalı. Parayı çıkarmak için çok müşteri gerekir. Yani büyük gelir lazım.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏢",
+            "metin": "Veri merkezi *pahalı*"
+          },
+          {
+            "ikon": "👥",
+            "metin": "Çok müşteri *gerekir*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Büyük gelir *lazım*"
+          }
+        ]
+      },
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Hesap şimdi ilginçleşiyor. Videoyu beğenirsen daha çok kişiye ulaşıyor; kalbe dokunmayı unutma.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "KALBE",
+          "*DOKUN*"
+        ],
+        "boy": 120
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Gereken gelir altı trilyon dolar. Mevcut hizmetler, en fazla bir virgül sekiz trilyon getirebilir.",
+      "p": {
+        "baslik": "💵 Yıllık gelir · 2031 · trilyon $",
+        "sol": {
+          "etiket": "GEREKEN",
+          "deger": 6,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "MEVCUT HİZMETLER\n(en fazla)",
+          "deger": 1.8,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " trilyon $",
+        "ondalik": 1,
+        "fark": "açık var",
+        "not": "Bain tahmini · ölçek sıfırdan başlar"
+      },
+      "kaynak": "K1",
+      "etiket": "GELİR AÇIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Altıdan bir virgül sekizi çıkarınca, dört virgül iki trilyon dolar açık kalıyor.",
+      "p": {
+        "baslik": "Henüz var olmayan gelir",
+        "ikon": "🕳️",
+        "ogeler": [
+          "6 trilyon $",
+          "−",
+          "1,8 trilyon $",
+          "=",
+          "4,2 trilyon $"
+        ]
+      },
+      "kaynak": "hesap: 6 − 1,8 · K1",
+      "etiket": "AÇIK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu açığın, bugün olmayan yeni ürünlerden gelmesi gerekiyor.",
+      "p": {
+        "ikon": "🔮",
+        "satirlar": [
+          "HENÜZ OLMAYAN",
+          "*ÜRÜNLER*"
+        ],
+        "boy": 104
+      },
+      "etiket": "YENİ ÜRÜN",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Bain; robotları, otonom makineleri, ilaç geliştirmeyi ve enerji üretimini aday gösteriyor.",
+      "p": {
+        "baslik": "Bain'in aday gösterdiği alanlar",
+        "satirlar": [
+          {
+            "ikon": "🤖",
+            "metin": "Robotlar",
+            "deger": "aday",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🚗",
+            "metin": "Otonom makineler",
+            "deger": "aday",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💊",
+            "metin": "İlaç geliştirme",
+            "deger": "aday",
+            "renk": "sari"
+          },
+          {
+            "ikon": "⚡",
+            "metin": "Enerji üretimi",
+            "deger": "aday",
+            "renk": "sari"
+          }
+        ],
+        "not": "Hiçbiri henüz bu geliri üretmiyor"
+      },
+      "kaynak": "K3",
+      "etiket": "NEREDEN GELECEK?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Dikkat: bu bir danışmanlık şirketinin tahmini. Gerçekleşeceği kesin değil.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "BU BİR",
+          "*TAHMİN*"
+        ],
+        "boy": 120
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Altı trilyon dolar, günde yaklaşık on altı milyar dolar eder.",
+      "p": {
+        "baslik": "Yıllık hedef, günlük hesapla",
+        "ikon": "🧮",
+        "ogeler": [
+          "6 trilyon $",
+          "÷",
+          "365 gün",
+          "=",
+          "~16,4 milyar $"
+        ]
+      },
+      "kaynak": "hesap: 6.000 ÷ 365 · K1",
+      "etiket": "GÜNLÜK HEDEF"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Gelir gecikirse ne olur? Yatırımlar yavaşlayabilir, piyasa dalgalanabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💸",
+            "metin": "Gelir *gecikir*"
+          },
+          {
+            "ikon": "🏢",
+            "metin": "Yatırım *yavaşlayabilir*"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Piyasa *dalgalanabilir*"
+          }
+        ]
+      },
+      "etiket": "OLASI SENARYO"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Herkes aynı fikirde değil. Bazı araştırmalar, yapay zeka gelirlerinin hızla arttığını söylüyor.",
+      "p": {
+        "ikon": "🌱",
+        "satirlar": [
+          "GELİRLER",
+          "*HIZLA ARTIYOR*"
+        ],
+        "boy": 104,
+        "not": "Bazı araştırmalara göre"
+      },
+      "etiket": "KARŞI GÖRÜŞ",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*NE OLUR?*",
+        "boy": 110
+      },
+      "etiket": "CEBİNE ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Telefonundaki yapay zeka araçları da, bu veri merkezlerinde çalışıyor.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SOHBET BOTU",
+          "*VERİ MERKEZİNDE*"
+        ],
+        "boy": 90
+      },
+      "etiket": "BAĞLANTI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Altyapı pahalı. Şirketler maliyeti çıkarmak isteyecek. Abonelik ücretleri artabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏢",
+            "metin": "Altyapı *pahalı*"
+          },
+          {
+            "ikon": "💼",
+            "metin": "Şirket gelir *arar*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Abonelik *artabilir*"
+          }
+        ]
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ücretsiz araçlarda, kullanım sınırı ya da reklam görebiliriz.",
+      "p": {
+        "ikon": "📢",
+        "satirlar": [
+          "ÜCRETSİZ ARAÇ",
+          "*SINIR YA DA REKLAM?*"
+        ],
+        "boy": 72
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Şirketler yeni ürünler de çıkaracak. Bunlar hayatımıza girebilir.",
+      "p": {
+        "ikon": "🤖",
+        "satirlar": [
+          "YENİ ÜRÜNLER",
+          "*HAYATIMIZA GİREBİLİR*"
+        ],
+        "boy": 72
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bunların hepsi olasılık. Kesin bir fiyat artışı değil. Yatırım tavsiyesi de değil.",
+      "p": {
+        "ikon": "❓",
+        "satirlar": [
+          "HEPSİ",
+          "*OLASILIK*"
+        ],
+        "boy": 120,
+        "not": "Yatırım tavsiyesi değildir"
+      },
+      "etiket": "DÜRÜST NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Özetle: yatırım çok büyük, gereken gelir ise daha da büyük.",
+      "p": {
+        "baslik": "Bugün ne öğrendik?",
+        "satirlar": [
+          {
+            "ikon": "🏗️",
+            "metin": "2026 yatırımı",
+            "deger": "≤ 780 milyar $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🎯",
+            "metin": "Gereken gelir",
+            "deger": "~6 trilyon $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🕳️",
+            "metin": "Eksik gelir",
+            "deger": "~4,2 trilyon $",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Hepsi Bain tahmini"
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*YORUMLARDA*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM YAZ"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi sade öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Bain & Company teknoloji raporu (29 Eylül 2026): yapay zeka altyapısını haklı çıkarmak için 2031'e kadar yılda ~6 trilyon $ gelir gerekiyor; mevcut tüketici+kurumsal hizmetler en fazla ~1,8 trilyon $, ~4,2 trilyon $ yeni gelir şart (TAHMİN) — https://www.bloomberg.com/news/articles/2026-09-29/ai-faces-6-trillion-test-to-justify-data-centers-bain-says ; https://www.japantimes.co.jp/business/2026/09/29/tech/ai-6-trillion-data-centers-bain/ ; https://thenextweb.com/news/bain-ai-6-trillion-revenue-2031-data-centres ; https://www.foreks.com/haber/detay/6abb245295016b5817e61a29/PICNEWS/tr/bain-yapay-zeka-yatirimlarini-hakli-cikarmak-icin-yillik-6-trilyon-dolar-gelir-uretilmesi-gerekiyor-29-09-26/",
+    "K2": "Microsoft, Google, Amazon, Meta, Oracle 2026'da en fazla ~780 milyar $ sermaye harcaması yapabilir; yıllık yapay zeka altyapı harcaması ~1,5 trilyon $'a doğru (Bain TAHMİNİ) — https://techblog.comsoc.org/2026/09/29/bain-co-ai-infrastructure-buildout-will-require-6-trillion-revenue-by-2031-to-support-massive-capex/ ; https://invezz.com/news/2026/09/29/ai-must-generate-6t-in-annual-revenue-by-2031-to-justify-infrastructure-boom-bain/ ; https://qz.com/bain-ai-revenue-data-center-buildout-six-trillion-092926",
+    "K3": "Yeni gelir adayı alanlar: otonom makineler, robotik, ilaç geliştirme, ruh sağlığı, enerji üretimi — https://www.japantimes.co.jp/business/2026/09/29/tech/ai-6-trillion-data-centers-bain/ ; https://invezz.com/news/2026/09/29/ai-must-generate-6t-in-annual-revenue-by-2031-to-justify-infrastructure-boom-bain/",
+    "K4": "Yapay zeka şirketlerinin gelirleri son dönemde katlanarak artıyor (araştırma, 30 Eylül 2026; nitel ifade, sayı kullanılmadı) — https://fintechistanbul.org/2026/09/30/yapay-zeka-sirketlerinin-gelirleri-son-donemde-katlanarak-artiyor-arastirma/"
+  }
+}
