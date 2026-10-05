@@ -162,6 +162,7 @@ viral-edit kurgusu**. Bu, niş ve format kararlarını doğrudan sınırlar:
   bilgi ve bakış açısı katması bu yüzden kalite meselesi olduğu kadar gelir
   meselesidir. Görüntünün telifi yine sahibindedir — bunu Aşama 1'de bir kez
   risk satırı olarak yaz, her aşamada tekrarlama.
+- Klip nereden, hangi izinle: `reference/klip-kaynaklari.md`.
 - Stok görüntü veya AI görsel kullanan bir kanalsa kısıt farklıdır; `kanal.md`'deki
   üretim yoluna göre davran.
 

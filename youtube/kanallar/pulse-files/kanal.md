@@ -16,7 +16,7 @@
 | **Ana format** | (Aşama 2 onaylanınca) |
 | Dil / hedef ülke | Türkçe / Türkiye |
 | Üretim yolu | hazır klip + Türkçe seslendirme + viral-edit kurgusu |
-| Klip kaynakları | MISSING |
+| Klip kaynakları | Karar: TikTok/Reddit'te bul → yaratıcıdan izin al; ara plan için Pexels/Pixabay + YouTube CC (`shorts-kanal/reference/klip-kaynaklari.md`) |
 | Kapasite | MISSING |
 | Seslendirme | ElevenLabs — ses: __ · model: __ (viral-edit `reference/voice-settings.md`) |
 | Görsel stil | referans stil / sinematik (viral-edit §8) |
