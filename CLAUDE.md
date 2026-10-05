@@ -8,3 +8,6 @@ sınırları ve kanıt disiplini oradadır. Uzmanlık modülleri `.claude/skills
 
 Video kurgusu ajans akışının dışındadır: kullanıcı klip veya seslendirme attığında
 `.claude/skills/viral-edit/` kullanılır.
+
+YouTube kanal yönetimi (çok kanallı panel, kapak/banner, analitik) `youtube-hub/`
+altındadır; plan ve API sınırları `youtube-hub/docs/PLAN.md`, kurulum `youtube-hub/README.md`.

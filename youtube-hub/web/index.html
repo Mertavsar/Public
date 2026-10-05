@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Hub</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f4f2; --surface: #fcfcfb; --surface-2: #efefec; --line: #e2e1dc;
+  --text: #0b0b0b; --text-2: #52514e; --muted: #85837d;
+  --accent: #2a78d6; --accent-soft: #dbe8f8;
+  --good: #1f8a4c; --warn: #b26b00; --bad: #c43b3a;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #111110; --surface: #1a1a19; --surface-2: #232321; --line: #2e2e2b;
+    --text: #ffffff; --text-2: #c3c2b7; --muted: #8d8c84;
+    --accent: #3987e5; --accent-soft: #1d2f47;
+    --good: #3fb36f; --warn: #e0a030; --bad: #e66767;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+header { display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+  background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+header h1 { font-size: 17px; margin: 0; flex: 1; }
+main { max-width: 1240px; margin: 0 auto; padding: 20px 16px 60px; }
+button, .btn { font: inherit; border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  padding: 7px 12px; border-radius: 8px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+button:hover, .btn:hover { border-color: var(--accent); }
+.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.muted { color: var(--muted); } .t2 { color: var(--text-2); }
+.notice { border-left: 4px solid var(--warn); margin-bottom: 16px; }
+.notice pre { white-space: pre-wrap; background: var(--surface-2); padding: 10px; border-radius: 6px; font-size: 12px; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.tile .label { color: var(--text-2); font-size: 12px; }
+.tile .value { font-size: 24px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.tile.hero .value { font-size: 48px; line-height: 1.05; }
+.meter { height: 8px; background: var(--accent-soft); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.meter > div { height: 100%; background: var(--accent); border-radius: 4px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
+.ch { display: flex; flex-direction: column; gap: 10px; }
+.ch-head { display: flex; gap: 10px; align-items: center; min-width: 0; }
+.ch-head img { width: 44px; height: 44px; border-radius: 50%; flex: none; background: var(--surface-2); }
+.ch-head .name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ch-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; font-variant-numeric: tabular-nums; }
+.ch-stats b { display: block; font-size: 16px; }
+.ch-stats span { font-size: 11px; color: var(--text-2); }
+.ch-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+  background: var(--surface-2); color: var(--text-2); }
+.badge.bad { color: var(--bad); } .badge.good { color: var(--good); }
+svg.spark { width: 100%; height: 40px; display: block; }
+
+section { margin-top: 28px; }
+section > h2 { font-size: 15px; margin: 0 0 10px; display: flex; align-items: center; gap: 10px; }
+.chart-wrap { position: relative; }
+svg.chart { width: 100%; height: 220px; display: block; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 10px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.12); display: none; white-space: nowrap; }
+
+.videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.video { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.thumb { position: relative; aspect-ratio: 16/9; background: var(--surface-2); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb.drop { outline: 3px dashed var(--accent); outline-offset: -3px; }
+.thumb .over { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.55); color: #fff; opacity: 0; transition: opacity .15s; cursor: pointer; font-weight: 600; }
+.thumb:hover .over, .thumb.drop .over { opacity: 1; }
+.video .meta { padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+.video .title { font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.video .nums { font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+td, th { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+th { color: var(--text-2); font-weight: 500; }
+.toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.toolbar input, .toolbar select { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--text); }
+#toast { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 20; max-width: min(420px, calc(100vw - 32px)); }
+#toast div { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  padding: 10px 12px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+#toast div.err { border-left-color: var(--bad); } #toast div.ok { border-left-color: var(--good); }
+.empty { text-align: center; padding: 40px 16px; }
+@media (max-width: 600px) { header { flex-wrap: wrap; } .tile.hero .value { font-size: 36px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>YouTube Hub</h1>
+  <span id="syncInfo" class="muted"></span>
+  <button id="syncBtn">Senkronize et</button>
+  <a class="btn primary" href="/oauth/start">+ Kanal ekle</a>
+</header>
+<main>
+  <div id="setup"></div>
+  <div id="home">
+    <div class="tiles" id="tiles"></div>
+    <div class="grid" id="channels"></div>
+    <section>
+      <h2>Son işlemler <span class="muted" style="font-weight:400">kapak ve banner değişiklikleri</span></h2>
+      <div class="card" id="actions"></div>
+    </section>
+  </div>
+  <div id="detail" hidden></div>
+</main>
+<input type="file" id="filePick" accept="image/jpeg,image/png" hidden>
+<div id="toast"></div>
+
+<script>
+const TOKEN = "__SESSION_TOKEN__";
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf = new Intl.NumberFormat("tr-TR");
+const fmt = n => n == null ? "—" : nf.format(n);
+const compact = n => n == null ? "—" : new Intl.NumberFormat("tr-TR", {notation: "compact", maximumFractionDigits: 1}).format(n);
+const signed = n => n == null ? "—" : (n > 0 ? "+" : "") + nf.format(n);
+let state = { overview: null, channel: null };
+
+function toast(msg, kind = "") {
+  const d = document.createElement("div");
+  d.className = kind; d.textContent = msg;
+  $("#toast").appendChild(d);
+  setTimeout(() => d.remove(), kind === "err" ? 9000 : 5000);
+}
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, { ...opts, headers: { "X-Hub-Token": TOKEN, ...(opts.headers || {}) } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+// ------------------------------------------------------------- grafikler
+function sparkline(series) {
+  if (!series.length) return `<svg class="spark" aria-hidden="true"></svg>`;
+  const w = 280, h = 40, max = Math.max(1, ...series.map(p => p.views));
+  const step = series.length > 1 ? w / (series.length - 1) : 0;
+  const pts = series.map((p, i) => `${(i * step).toFixed(1)},${(h - 3 - (p.views / max) * (h - 6)).toFixed(1)}`);
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Günlük izlenme">
+    <polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+}
+
+function areaChart(el, rows, key, label) {
+  if (!rows.length) { el.innerHTML = `<p class="muted">Analitik verisi yok (senkronize et; veri 2-3 gün gecikmeli gelir).</p>`; return; }
+  const W = 900, H = 220, L = 52, R = 10, T = 10, B = 26;
+  const vals = rows.map(r => r[key] || 0), max = Math.max(1, ...vals);
+  const x = i => L + (rows.length > 1 ? i * (W - L - R) / (rows.length - 1) : 0);
+  const y = v => T + (H - T - B) * (1 - v / max);
+  const line = vals.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const ticks = [0, .5, 1].map(f => Math.round(max * f));
+  const xl = [0, Math.floor(rows.length / 2), rows.length - 1];
+  el.innerHTML = `<div class="chart-wrap">
+    <svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(label)}">
+      ${ticks.map(t => `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="var(--line)" stroke-width="1"/>
+        <text x="${L - 6}" y="${y(t) + 4}" text-anchor="end" font-size="11" fill="var(--muted)">${compact(t)}</text>`).join("")}
+      ${xl.map(i => `<text x="${x(i)}" y="${H - 6}" text-anchor="${i === 0 ? "start" : i === rows.length - 1 ? "end" : "middle"}" font-size="11" fill="var(--muted)">${esc(rows[i].day.slice(5))}</text>`).join("")}
+      <polygon points="${x(0)},${y(0)} ${line} ${x(rows.length - 1)},${y(0)}" fill="var(--accent)" opacity=".12"/>
+      <polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+      <line class="xh" y1="${T}" y2="${H - B}" stroke="var(--text-2)" stroke-width="1" vector-effect="non-scaling-stroke" visibility="hidden"/>
+      <circle class="dot" r="4" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>
+      <rect class="hit" x="${L}" y="0" width="${W - L - R}" height="${H}" fill="transparent"/>
+    </svg><div class="tip"></div></div>`;
+  const svg = $("svg", el), tip = $(".tip", el), xh = $(".xh", el), dot = $(".dot", el);
+  $(".hit", el).addEventListener("mousemove", e => {
+    const box = svg.getBoundingClientRect();
+    const vx = (e.clientX - box.left) / box.width * W;
+    const i = Math.max(0, Math.min(rows.length - 1, Math.round((vx - L) / ((W - L - R) / Math.max(1, rows.length - 1)))));
+    xh.setAttribute("x1", x(i)); xh.setAttribute("x2", x(i)); xh.setAttribute("visibility", "visible");
+    dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(vals[i])); dot.setAttribute("visibility", "visible");
+    tip.style.display = "block";
+    tip.innerHTML = `<b>${esc(rows[i].day)}</b><br>${esc(label)}: ${fmt(vals[i])}`;
+    const px = x(i) / W * box.width;
+    tip.style.left = Math.min(px + 12, box.width - tip.offsetWidth) + "px";
+    tip.style.top = "8px";
+  });
+  $(".hit", el).addEventListener("mouseleave", () => {
+    tip.style.display = "none"; xh.setAttribute("visibility", "hidden"); dot.setAttribute("visibility", "hidden");
+  });
+}
+
+// ------------------------------------------------------------- ana ekran
+async function loadSetup() {
+  const s = await api("/api/setup");
+  $("#setup").innerHTML = s.ready ? "" : `<div class="card notice">
+    <b>Kurulum gerekli — Google OAuth istemcisi yok.</b>
+    <pre>${esc(s.message)}</pre>
+    <p class="t2">Ayrıntılı adımlar: <code>youtube-hub/README.md</code> → "Google Cloud kurulumu".</p></div>`;
+}
+
+async function loadOverview() {
+  const ov = state.overview = await api("/api/overview");
+  const t = ov.totals, q = ov.quota;
+  const pct = Math.min(100, Math.round(q.used / q.limit * 100));
+  $("#tiles").innerHTML = `
+    <div class="card tile hero"><div class="label">Toplam abone · ${t.channels} kanal</div><div class="value">${compact(t.subscribers)}</div></div>
+    <div class="card tile"><div class="label">Son 28 gün izlenme</div><div class="value">${compact(t.period_views)}</div></div>
+    <div class="card tile"><div class="label">Son ~24 saat izlenme</div><div class="value">${compact(t.views_24h)}</div></div>
+    <div class="card tile"><div class="label">Son 28 gün abone (net)</div><div class="value">${signed(t.period_subs_net)}</div></div>
+    <div class="card tile"><div class="label">Kota bugün (tahmini, PT)</div><div class="value">${fmt(q.used)} <span class="muted" style="font-size:13px">/ ${fmt(q.limit)}</span></div>
+      <div class="meter" title="%${pct}"><div style="width:${pct}%"></div></div></div>`;
+  $("#channels").innerHTML = ov.channels.length ? ov.channels.map(ch => `
+    <div class="card ch">
+      <div class="ch-head">
+        <img src="${esc(ch.thumbnail_url)}" alt="" referrerpolicy="no-referrer">
+        <div style="min-width:0;flex:1"><div class="name">${esc(ch.title)}</div>
+          <div class="muted" style="font-size:12px">${esc(ch.handle || ch.id)}</div></div>
+        ${ch.sync_error ? `<span class="badge bad" title="${esc(ch.sync_error)}">⚠ Hata</span>` : ""}
+      </div>
+      <div class="ch-stats">
+        <div><b>${ch.hidden_subs ? "gizli" : compact(ch.subscribers)}</b><span>abone</span></div>
+        <div><b>${compact(ch.period.views)}</b><span>izlenme · 28 gün</span></div>
+        <div><b>${compact(ch.views_24h)}</b><span>~24 saat</span></div>
+      </div>
+      ${sparkline(ch.period.series)}
+      <div class="muted" style="font-size:12px">${fmt(ch.video_count)} video · ${fmt(ch.shorts)} muhtemel Shorts · ${ch.synced_at ? "güncellendi " + new Date(ch.synced_at * 1000).toLocaleString("tr-TR") : "henüz senkronize edilmedi"}</div>
+      <div class="ch-actions">
+        <button data-open="${esc(ch.id)}" class="primary">Videolar · kapaklar</button>
+        <button data-banner="${esc(ch.id)}">Banner değiştir</button>
+      </div>
+    </div>`).join("") : `<div class="card empty" style="grid-column:1/-1"><p><b>Henüz bağlı kanal yok.</b></p>
+      <p class="t2">“+ Kanal ekle”ye bas, Google'da kanalını seç. Her kanal için bir kez tekrarla.</p></div>`;
+}
+
+async function loadActions() {
+  const rows = await api("/api/actions");
+  $("#actions").innerHTML = rows.length ? `<table><thead><tr><th>Zaman</th><th>Kanal</th><th>İşlem</th><th>Durum</th><th></th></tr></thead><tbody>
+    ${rows.map(a => `<tr><td>${new Date(a.created_at * 1000).toLocaleString("tr-TR")}</td>
+      <td>${esc(a.channel_title || a.channel_id)}</td>
+      <td>${a.kind === "thumbnail" ? "Kapak: " + esc(a.video_title || a.video_id) : "Banner"}</td>
+      <td>${a.status === "done" ? `<span class="badge good">✓ tamam</span>` : a.status === "failed" ? `<span class="badge bad" title="${esc(a.detail)}">✗ başarısız</span>` : `<span class="badge">↺ geri alındı</span>`}</td>
+      <td>${a.status === "done" && a.backup_asset ? `<button data-undo="${a.id}">Geri al</button>` : ""}</td></tr>`).join("")}
+    </tbody></table>` : `<p class="muted" style="margin:0">Henüz işlem yok.</p>`;
+}
+
+// ------------------------------------------------------------- kanal detayı
+async function openChannel(id) {
+  const ch = state.overview.channels.find(c => c.id === id);
+  state.channel = { ch, videos: await api(`/api/channels/${id}/videos`), daily: await api(`/api/channels/${id}/daily`) };
+  $("#home").hidden = true; $("#detail").hidden = false;
+  renderDetail();
+  history.replaceState(null, "", "#" + id);
+}
+
+function renderDetail() {
+  const { ch, videos, daily } = state.channel;
+  $("#detail").innerHTML = `
+    <div class="toolbar"><button id="back">← Tüm kanallar</button>
+      <h2 style="margin:0;font-size:18px;flex:1">${esc(ch.title)}</h2>
+      <button data-banner="${esc(ch.id)}">Banner değiştir</button>
+      <button data-disconnect="${esc(ch.id)}">Bağlantıyı kes</button></div>
+    <div class="card"><div class="t2" style="margin-bottom:6px">Günlük izlenme · son 90 gün</div><div id="chart"></div></div>
+    <section><h2>Videolar <span class="muted" style="font-weight:400">kapağı değiştirmek için görselin üstüne tıkla veya dosyayı sürükle</span></h2>
+      <div class="toolbar"><input id="q" placeholder="Başlıkta ara…">
+        <select id="kind"><option value="">Tümü</option><option value="long">Uzun video</option><option value="short">Muhtemel Shorts</option></select>
+        <span class="muted" id="count"></span></div>
+      <div class="videos" id="videos"></div></section>`;
+  areaChart($("#chart"), daily, "views", "İzlenme");
+  $("#back").onclick = () => { $("#detail").hidden = true; $("#home").hidden = false; history.replaceState(null, "", "#"); };
+  $("#q").oninput = $("#kind").onchange = renderVideos;
+  renderVideos();
+}
+
+function renderVideos() {
+  const q = $("#q").value.toLowerCase(), kind = $("#kind").value;
+  const list = state.channel.videos.filter(v => (!q || (v.title || "").toLowerCase().includes(q))
+    && (!kind || (kind === "short") === !!v.is_short));
+  $("#count").textContent = `${list.length} video`;
+  $("#videos").innerHTML = list.map(v => `
+    <div class="card video">
+      <div class="thumb" data-thumb="${esc(v.id)}">
+        <img src="${esc(v.thumbnail_url)}${v._bust ? "?t=" + v._bust : ""}" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <div class="over">Kapak değiştir</div></div>
+      <div class="meta"><div class="title" title="${esc(v.title)}">${esc(v.title)}</div>
+        <div class="nums">${fmt(v.views)} izlenme · ${fmt(v.likes)} beğeni · ${(v.published_at || "").slice(0, 10)}</div>
+        <div>${v.is_short ? `<span class="badge">Shorts?</span> ` : ""}${v.privacy && v.privacy !== "public" ? `<span class="badge">${esc(v.privacy)}</span>` : ""}</div>
+      </div></div>`).join("") || `<p class="muted">Video yok.</p>`;
+}
+
+// ------------------------------------------------------------- yükleme
+let pickTarget = null;
+function pick(target) { pickTarget = target; $("#filePick").value = ""; $("#filePick").click(); }
+$("#filePick").onchange = e => { const f = e.target.files[0]; if (f && pickTarget) upload(pickTarget, f); };
+
+async function upload(target, file) {
+  const url = target.kind === "thumb" ? `/api/videos/${target.id}/thumbnail` : `/api/channels/${target.id}/banner`;
+  toast(`${target.kind === "thumb" ? "Kapak" : "Banner"} yükleniyor…`);
+  try {
+    const res = await api(url, { method: "POST", body: file, headers: { "Content-Type": file.type || "application/octet-stream" } });
+    (res.warnings || []).forEach(w => toast("Uyarı: " + w));
+    toast(`✓ ${target.kind === "thumb" ? "Kapak" : "Banner"} güncellendi. YouTube'da görünmesi birkaç dakika sürebilir.`, "ok");
+    if (target.kind === "thumb" && state.channel) {
+      const v = state.channel.videos.find(v => v.id === target.id);
+      if (v) { if (res.url) v.thumbnail_url = res.url; v._bust = Date.now(); renderVideos(); }
+    }
+    loadActions();
+  } catch (err) { toast("✗ " + err.message, "err"); }
+}
+
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-open],[data-banner],[data-thumb],[data-undo],[data-disconnect]");
+  if (!t) return;
+  if (t.dataset.open) openChannel(t.dataset.open);
+  else if (t.dataset.banner) pick({ kind: "banner", id: t.dataset.banner });
+  else if (t.dataset.thumb) pick({ kind: "thumb", id: t.dataset.thumb });
+  else if (t.dataset.disconnect) {
+    if (!confirm("Kanalın bağlantısı kesilsin mi? Google erişimi iptal edilir ve bu kanalın paneldeki tüm verisi silinir.")) return;
+    try { await api(`/api/channels/${t.dataset.disconnect}/disconnect`, { method: "POST" }); toast("Bağlantı kesildi.", "ok");
+      $("#detail").hidden = true; $("#home").hidden = false; history.replaceState(null, "", "#"); loadOverview(); }
+    catch (err) { toast("✗ " + err.message, "err"); }
+  }
+  else if (t.dataset.undo) {
+    if (!confirm("Bu değişiklik geri alınsın mı? Önceki görsel yeniden yüklenecek (50 birim kota).")) return;
+    try { await api(`/api/actions/${t.dataset.undo}/undo`, { method: "POST" }); toast("✓ Geri alındı.", "ok"); loadActions(); }
+    catch (err) { toast("✗ " + err.message, "err"); }
+  }
+});
+for (const ev of ["dragenter", "dragover"]) document.addEventListener(ev, e => {
+  const t = e.target.closest?.("[data-thumb]"); if (t) { e.preventDefault(); t.classList.add("drop"); }
+});
+document.addEventListener("dragleave", e => e.target.closest?.("[data-thumb]")?.classList.remove("drop"));
+document.addEventListener("drop", e => {
+  const t = e.target.closest?.("[data-thumb]"); if (!t) return;
+  e.preventDefault(); t.classList.remove("drop");
+  const f = e.dataTransfer.files[0]; if (f) upload({ kind: "thumb", id: t.dataset.thumb }, f);
+});
+
+// ------------------------------------------------------------- senkronizasyon
+async function pollSync() {
+  const s = await api("/api/sync");
+  $("#syncBtn").disabled = s.running;
+  $("#syncInfo").textContent = s.running ? `senkronize ediliyor… (${s.results.length} kanal bitti)` : "";
+  if (s.running) setTimeout(pollSync, 2000);
+  else if (pollSync.wasRunning) {
+    const bad = s.results.filter(r => !r.ok);
+    bad.forEach(r => toast(`✗ ${r.channel_id}: ${r.error}`, "err"));
+    toast(`Senkronizasyon bitti: ${s.results.length - bad.length}/${s.results.length} kanal.`, bad.length ? "" : "ok");
+    await loadOverview();
+  }
+  pollSync.wasRunning = s.running;
+}
+$("#syncBtn").onclick = async () => {
+  try { await api("/api/sync", { method: "POST" }); pollSync.wasRunning = true; pollSync(); }
+  catch (err) { toast(err.message, "err"); }
+};
+
+(async function init() {
+  const p = new URLSearchParams(location.search);
+  if (p.has("connected")) toast("✓ Kanal bağlandı, ilk senkronizasyon arka planda başladı.", "ok");
+  if (p.has("oauth_error")) toast("Google onayı tamamlanmadı: " + p.get("oauth_error"), "err");
+  if (p.has("connected") || p.has("oauth_error")) history.replaceState(null, "", "/");
+  try {
+    await Promise.all([loadSetup(), loadOverview(), loadActions()]);
+    pollSync();
+    const hash = location.hash.slice(1);
+    if (hash && state.overview.channels.some(c => c.id === hash)) openChannel(hash);
+  } catch (err) { toast(err.message, "err"); }
+  if (p.has("connected")) setTimeout(loadOverview, 8000);
+})();
+</script>
+</body>
+</html>
