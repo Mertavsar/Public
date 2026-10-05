@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giriş yap · __APP_NAME__</title>
+<link rel="stylesheet" href="/static/site.css">
+<style>
+body { min-height: 100vh; display: flex; flex-direction: column; }
+.shell { flex: 1; display: grid; place-items: center; padding: 32px 16px; }
+.box { width: 100%; max-width: 440px; padding: 34px 30px; box-shadow: var(--shadow); }
+.box h1 { font-size: 26px; letter-spacing: -.02em; margin: 22px 0 6px; }
+.box .btn.google { width: 100%; margin: 24px 0 18px; font-size: 16px; padding: 13px 18px; }
+.box ul { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--text-2); }
+.box li { display: flex; gap: 10px; } .box li svg { flex: none; margin-top: 3px; color: var(--good); }
+#msg:empty { display: none; } #msg { margin-top: 18px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="shell"><div class="card box">
+  <a class="brand" href="/"><span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></span>__APP_NAME__</a>
+  <h1>Hesabına giriş yap</h1>
+  <p class="t2" style="margin:0">Hesabın yoksa ilk girişte otomatik oluşturulur. Ardından YouTube kanallarını seçersin.</p>
+  <div id="msg"></div>
+  <a class="btn google" href="/auth/google" id="gbtn"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile devam et</a>
+  <ul>
+    <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Şifren bize gelmez — giriş Google'ın kendi ekranında.</li>
+    <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kanallarına salt okunur erişim; hiçbir şey değiştirilmez.</li>
+    <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Erişimi istediğin an panelden veya Google hesabından kaldırabilirsin.</li>
+  </ul>
+  <p class="muted" style="font-size:13px;margin:0">Devam ederek <a href="/kosullar">Kullanım Koşulları</a>'nı ve <a href="/gizlilik">Gizlilik Politikası</a>'nı kabul etmiş olursun.</p>
+</div></div>
+<script>
+const ERR = {
+  access_denied: "Google'da giriş iptal edildi. Tekrar deneyebilirsin.",
+  state: "Güvenlik kontrolü başarısız oldu (sayfa çok uzun açık kalmış olabilir). Tekrar dene.",
+  oturum: "Oturumun sona erdi; tekrar giriş yap.",
+  baglanti: "Giriş tamamlanamadı.",
+  kurulum: "Sistem henüz kurulmamış. Yönetici kurulumu tamamlayınca giriş yapabilirsin.",
+};
+const q = new URLSearchParams(location.search), msg = document.getElementById("msg");
+function show(text, html) { msg.className = "notice err"; if (html) msg.innerHTML = html; else msg.textContent = text; }
+if (q.has("hata")) show((ERR[q.get("hata")] || "Giriş tamamlanamadı: " + q.get("hata")) + (q.get("mesaj") ? " — " + q.get("mesaj") : ""));
+fetch("/api/setup").then(r => r.json()).then(s => {
+  if (s.ready) return;
+  document.getElementById("gbtn").setAttribute("href", s.local ? "/kurulum" : "#");
+  if (s.local) show("", 'İlk kurulum gerekli: Google bağlantı bilgisini ekle. <a href="/kurulum">Kurulumu başlat →</a>');
+  else show(ERR.kurulum);
+}).catch(() => {});
+</script>
+</body>
+</html>

@@ -278,9 +278,20 @@ kapak yükleme (tıkla/sürükle), banner, toplu kapak (CLI), yedek + geri al, k
   değiştir" (yazma işlemleri onaylı).
 - `viral-edit` ile tutma eğrisi döngüsü (Fikir #12).
 
+### Faz 4A — SaaS kabuğu ✅ (kuruldu)
+- Tanıtım/pazarlama sayfası (tek sayfa huni), giriş sayfası, gizlilik ve koşullar.
+- Google ile giriş (sadece kimlik) → kullanıcı hesabı; ilk girişte doğrudan kanal seçimi;
+  her bağlantıdan sonra "bir kanal daha ekle".
+- Kullanıcı ↔ kanal ilişkisi (bir kanal birden çok kullanıcıya bağlanabilir), oturumlar,
+  CSRF, her istekte sahiplik denetimi.
+- Kanallar varsayılan salt okunur; yazma izni (kapak/banner) ayrıca, ihtiyaç anında.
+- Sunucu modu (`YTHUB_PUBLIC_URL`), arka planda otomatik senkron.
+- Not: YouTube API, bir hesaptaki tüm kanalları tek onayla vermez; her kanal bir kez seçilir.
+
 ### Faz 4 — Ekip / SaaS hazırlığı (4-6 hafta + Google süreçleri)
-Postgres, worker, çok kullanıcılı yetki, şifreli token, alan adı, gizlilik politikası,
-OAuth doğrulaması, YouTube API denetimi, PubSubHubbub, Reporting API.
+Kalan: Postgres, iş kuyruğu (worker), şifreli token (KMS), alan adı + HTTPS, gizlilik
+politikasının hukuki son hali, OAuth doğrulaması, YouTube API denetimi, ödeme, plan limitleri
+(kanal sayısı), ekip rolleri, e-posta bildirimleri, PubSubHubbub.
 > Google süreçleri haftalar sürdüğü için **başvuru Faz 2'de başlatılmalı.**
 
 ### Faz 5 — Lansman

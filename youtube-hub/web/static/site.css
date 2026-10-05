@@ -1,0 +1,73 @@
+/* Tanıtım, giriş, kurulum ve yasal sayfaların ortak stili. */
+:root {
+  color-scheme: light;
+  --bg: #fafaf8; --surface: #ffffff; --surface-2: #f2f2ef; --line: #e4e3de;
+  --text: #0e0e0d; --text-2: #4f4e4a; --muted: #85837d;
+  --accent: #2a78d6; --accent-2: #1d5fb0; --accent-soft: #e3eefb;
+  --good: #1f8a4c; --bad: #c43b3a; --warn: #b26b00;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4;
+  --radius: 14px; --shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 32px rgba(15,23,42,.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #0f0f0e; --surface: #181817; --surface-2: #222220; --line: #2e2e2b;
+    --text: #ffffff; --text-2: #c3c2b7; --muted: #8d8c84;
+    --accent: #3987e5; --accent-2: #5a9cf0; --accent-soft: #1b2c44;
+    --good: #3fb36f; --bad: #e66767; --warn: #e0a030;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+img { max-width: 100%; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: inherit; font-weight: 600;
+  font-size: 15px; padding: 11px 18px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface);
+  color: var(--text); text-decoration: none; cursor: pointer; white-space: nowrap; transition: transform .08s, border-color .15s, background .15s; }
+.btn:hover { border-color: var(--accent); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.btn.lg { font-size: 17px; padding: 14px 22px; border-radius: 12px; }
+.btn.google { background: #fff; color: #1f1f1f; border-color: #dadce0; }
+.btn.google:hover { background: #f8faff; border-color: #c6d4ea; }
+.btn svg { flex: none; }
+.muted { color: var(--muted); } .t2 { color: var(--text-2); } .small { font-size: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+
+/* üst menü */
+.nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .wrap { display: flex; align-items: center; gap: 22px; height: 66px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 750; font-size: 19px; color: var(--text); text-decoration: none; letter-spacing: -.01em; }
+.brand .mark { width: 30px; height: 30px; border-radius: 9px; background: var(--accent); display: grid; place-items: center; }
+.nav .links { display: flex; gap: 22px; flex: 1; }
+.nav .links a { color: var(--text-2); text-decoration: none; font-size: 15px; }
+.nav .links a:hover { color: var(--text); }
+.nav .cta { display: flex; gap: 10px; }
+@media (max-width: 860px) { .nav .links { display: none; } .nav .wrap { justify-content: space-between; } }
+@media (max-width: 420px) { .nav .cta .ghost { display: none; } }
+
+.notice { border-left: 4px solid var(--warn); padding: 14px 16px; border-radius: 10px; background: var(--surface); border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.notice.err { border-left-color: var(--bad); }
+code { font-size: .92em; background: var(--surface-2); padding: 1px 6px; border-radius: 5px; }
+footer.site { border-top: 1px solid var(--line); padding: 36px 0 44px; margin-top: 40px; color: var(--muted); font-size: 14px; }
+footer.site .wrap { display: flex; flex-wrap: wrap; gap: 18px 40px; justify-content: space-between; }
+footer.site a { color: var(--text-2); text-decoration: none; }
+footer.site a:hover { color: var(--text); }
+footer.site .cols { display: flex; gap: 40px; flex-wrap: wrap; }
+footer.site .cols div { display: flex; flex-direction: column; gap: 6px; }
+footer.site .legal { flex-basis: 100%; font-size: 13px; }
+
+/* yasal sayfalar */
+.doc { max-width: 760px; margin: 0 auto; padding: 40px 20px 20px; }
+.doc h1 { font-size: 34px; letter-spacing: -.02em; margin: 0 0 6px; }
+.doc h2 { font-size: 20px; margin: 32px 0 8px; }
+.doc p, .doc li { color: var(--text-2); }

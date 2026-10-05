@@ -6,7 +6,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from core import images, oauth  # noqa: E402
+from core import config, images, oauth  # noqa: E402
 from core.api import QuotaExceeded  # noqa: E402
 from core.service import Hub, parse_duration  # noqa: E402
 from fake_google import FakeGoogle, jpeg, png  # noqa: E402
@@ -22,7 +22,8 @@ class Base(unittest.TestCase):
                        oauth_client=CLIENT, assets_dir=os.path.join(self.tmp.name, "assets"),
                        sleep=lambda s: None)
         self.cid = self.hub.register({"refresh_token": "refresh-xyz", "access_token": self.g.access,
-                                      "expires_in": 3600})
+                                      "expires_in": 3600,
+                                      "scope": " ".join(config.CHANNEL_SCOPES + [config.WRITE_SCOPE])})
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -77,7 +78,8 @@ class TestSync(Base):
             c.execute("UPDATE credentials SET refresh_token='revoked', expires_at=0")
         r = self.hub.sync_channel(self.cid)
         self.assertFalse(r["ok"])
-        self.assertIn("yeniden bağla", r["error"])
+        self.assertTrue(r["removed"])             # erişim kaldırıldı → veri silinir
+        self.assertEqual(self.hub.portfolio()["channels"], [])
 
     def test_disconnect_deletes_data(self):
         self.hub.sync_channel(self.cid)
@@ -206,6 +208,58 @@ class TestReporting(Base):
         self.assertTrue(self.hub.portfolio(28)["anchor"])
 
 
+class TestAccounts(Base):
+    def test_first_user_claims_existing_channels(self):
+        u = self.hub.login({"sub": "s1", "email": "a@x.com", "name": "A"})
+        self.assertEqual(self.hub.channel_ids(u["id"]), [self.cid])
+        u2 = self.hub.login({"sub": "s2", "email": "b@x.com"})
+        self.assertEqual(self.hub.channel_ids(u2["id"]), [])      # ikinci kullanıcı başkasınınkini almaz
+        again = self.hub.login({"sub": "s1", "email": "a2@x.com", "name": "A"})
+        self.assertEqual((again["id"], again["email"]), (u["id"], "a2@x.com"))
+
+    def test_sessions(self):
+        u = self.hub.login({"sub": "s1", "email": "a@x.com"})
+        tok, csrf = self.hub.create_session(u["id"])
+        su = self.hub.session_user(tok)
+        self.assertEqual((su["id"], su["csrf"]), (u["id"], csrf))
+        self.assertIsNone(self.hub.session_user("yanlis"))
+        with self.hub.conn() as c:
+            row = c.execute("SELECT token_hash FROM sessions").fetchone()
+        self.assertNotEqual(row[0], tok)                            # düz anahtar saklanmaz
+        self.hub.logout(tok)
+        self.assertIsNone(self.hub.session_user(tok))
+
+    def test_scoping(self):
+        self.hub.sync_channel(self.cid)
+        u1 = self.hub.login({"sub": "s1", "email": "a@x.com"})
+        u2 = self.hub.login({"sub": "s2", "email": "b@x.com"})
+        mine, theirs = self.hub.channel_ids(u1["id"]), self.hub.channel_ids(u2["id"])
+        self.assertEqual(len(self.hub.portfolio(28, channel_ids=mine)["channels"]), 1)
+        p2 = self.hub.portfolio(28, channel_ids=theirs)
+        self.assertEqual((p2["channels"], p2["anchor"]), ([], None))
+        self.assertEqual(self.hub.top_videos(28, channel_ids=theirs), [])
+        self.assertEqual(self.hub.breakdowns(28, channel_ids=theirs)["country"], [])
+
+    def test_shared_channel_disconnect(self):
+        u1 = self.hub.login({"sub": "s1", "email": "a@x.com"})
+        u2 = self.hub.login({"sub": "s2", "email": "b@x.com"})
+        self.hub.register({"refresh_token": "r2", "access_token": self.g.access, "expires_in": 3600},
+                          user_id=u2["id"])                          # aynı kanalı ikinci kullanıcı da bağladı
+        self.hub.disconnect(self.cid, user_id=u1["id"])
+        self.assertTrue(self.hub.owns(u2["id"], self.cid))           # kanal u2 için duruyor
+        self.hub.disconnect(self.cid, user_id=u2["id"])
+        self.assertEqual(self.hub.portfolio()["channels"], [])       # son kullanıcı → tamamen silindi
+
+    def test_write_requires_scope(self):
+        from core.service import NeedsWriteScope
+        self.hub.sync_channel(self.cid)
+        with self.hub.conn() as c:
+            c.execute("UPDATE credentials SET scopes=?", (" ".join(config.CHANNEL_SCOPES),))
+        with self.assertRaises(NeedsWriteScope):
+            self.hub.set_thumbnail("vid000", jpeg(1280, 720))
+        self.assertNotIn("vid000", self.g.thumbs_set)
+
+
 class TestImages(Base):
     def setUp(self):
         super().setUp()
@@ -272,14 +326,19 @@ class TestUnits(unittest.TestCase):
 
     def test_oauth_flow_pkce_and_state(self):
         g = FakeGoogle()
-        url = oauth.start_flow("http://127.0.0.1:7788/oauth/callback", client=CLIENT)
+        url, state = oauth.start_flow("http://127.0.0.1:7788/oauth/callback", client=CLIENT, ctx=7)
         self.assertIn("code_challenge_method=S256", url)
         self.assertIn("access_type=offline", url)
-        state = dict(p.split("=", 1) for p in url.split("?", 1)[1].split("&"))["state"]
+        self.assertIn("youtube.readonly", url)          # varsayılan salt okunur
+        self.assertNotIn("auth%2Fyoutube+", url)
         with self.assertRaises(ValueError):
             oauth.finish_flow("wrong-state", "code", client=CLIENT, transport=g)
-        tok = oauth.finish_flow(state, "code", client=CLIENT, transport=g)
-        self.assertEqual(tok["refresh_token"], "refresh-xyz")
+        tok, purpose, ctx = oauth.finish_flow(state, "code", client=CLIENT, transport=g)
+        self.assertEqual((tok["refresh_token"], purpose, ctx), ("refresh-xyz", "channel", 7))
+        self.assertEqual(oauth.id_claims(tok)["email"], "ali@example.com")
+        login_url, _ = oauth.start_flow("http://x/cb", purpose="login", client=CLIENT)
+        self.assertIn("scope=openid+email+profile", login_url)
+        self.assertNotIn("access_type", login_url)
         with self.assertRaises(ValueError):  # state tek kullanımlık
             oauth.finish_flow(state, "code", client=CLIENT, transport=g)
 

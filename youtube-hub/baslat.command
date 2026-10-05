@@ -1,5 +1,5 @@
 #!/bin/bash
-# YouTube Hub — macOS: bu dosyaya çift tıkla. Panel tarayıcıda açılır.
+# macOS: bu dosyaya çift tıkla. Uygulama tarayıcıda açılır.
 # Bu pencere açık kaldığı sürece panel çalışır.
 cd "$(dirname "$0")/.." || exit 1
 if ! command -v python3 >/dev/null 2>&1; then

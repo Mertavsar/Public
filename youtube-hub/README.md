@@ -1,28 +1,63 @@
-# YouTube Hub — çok kanallı analiz paneli
+# Kanalist — çok kanallı YouTube analitiği (SaaS)
 
 Tüm YouTube kanalların tek ekranda analiz: 7/28/90 günlük dönem ve önceki döneme göre
 değişim, kanal karşılaştırma tablosu, günlük trend, izlenme kaynakları, Shorts/uzun video
 ayrımı, ülkeler, tüm kanallarda en çok izlenen videolar ve video bazında günlük veri.
-(Kapak/banner yönetimi de var ama ikincil.)
 
-Ürün planı, API sınırları ve yol haritası: **[docs/PLAN.md](docs/PLAN.md)**
+Ürün adı `YTHUB_APP_NAME` ile değiştirilebilir (YouTube marka kuralları gereği adında
+"YouTube" geçmemeli). Ürün planı, API sınırları ve yol haritası: **[docs/PLAN.md](docs/PLAN.md)**
 
-## En kısa yol
+## Kullanıcı yolculuğu
+
+| Adres | Ne |
+|---|---|
+| `/` | Tanıtım sayfası: hero + panel önizlemesi, kimler için, sorun→çözüm, özellikler, nasıl çalışır, güvenlik, fiyatlar, SSS, son çağrı |
+| `/giris` | **Google ile devam et** — hesap yoksa ilk girişte açılır |
+| → | İlk girişte kanal yoksa doğrudan **kanal seçimine** geçilir; Google hesaptaki kanalları listeler |
+| `/panel?connected=…` | "✓ Kanal bağlandı — bu hesapta başka kanalın var mı?" → **+ Bir kanal daha ekle** |
+| `/panel` | Analiz paneli; herkes yalnızca kendi kanallarını görür |
+| `/gizlilik`, `/kosullar` | Google doğrulaması için zorunlu sayfalar (taslak) |
+| `/kurulum` | İlk kurulum: Google OAuth istemcisi (sadece sunucunun kendisinden) |
+
+> **"Maile bağlı tüm kanallar otomatik gelsin" hakkında:** YouTube API tek onayla bir
+> hesaptaki tüm kanalları vermez; her kanal için ayrı onay ister. Sistem bunu en kısa hale
+> getirir: girişten hemen sonra kanal seçimi açılır, her bağlantıdan sonra "bir kanal daha"
+> sorulur. Hesabın tek kanalı varsa tek adımda gelir.
+
+**İzinler:** Giriş sadece kimlik (`openid email profile`). Kanallar **salt okunur**
+(`youtube.readonly`, `yt-analytics.readonly`) bağlanır. Kapak/banner değiştirmek isteyene
+`youtube` (yazma) izni o an ayrıca sorulur.
+
+## En kısa yol (kendi bilgisayarında)
 
 1. **İlk sefer — kodu indir.** Terminal'e bir kez yapıştır (macOS):
    ```
    cd ~/Desktop && git clone -b claude/youtube-channels-management-8r70gz https://github.com/Mertavsar/Public.git YouTubeHub && open YouTubeHub/youtube-hub/baslat.command
    ```
 2. **Sonraki seferler:** `YouTubeHub/youtube-hub/baslat.command` dosyasına çift tıkla
-   (Windows: `baslat.bat`). Panel tarayıcıda kendiliğinden açılır; açılan siyah pencere
-   açık kaldığı sürece çalışır. Her açılışta son güncellemeleri de çeker.
-3. **Panel ilk açılışta kurulum sihirbazını gösterir:** Google Cloud'daki her adım için
-   doğrudan bağlantı var; sonunda indirdiğin JSON dosyasını panele sürükleyip bırakırsın.
-4. **+ Kanal ekle** → Google'da kanalı seç → izinleri ver. Her kanal için bir kez.
+   (Windows: `baslat.bat`). Tarayıcıda tanıtım sayfası açılır; siyah pencere açık kaldığı
+   sürece çalışır. Her açılışta son güncellemeleri de çeker.
+3. **Giriş yap** → ilk seferde kurulum sayfası açılır: Google Cloud'daki her adım için
+   doğrudan bağlantı var; sonunda indirdiğin JSON dosyasını sayfaya sürükleyip bırakırsın.
+4. **Google ile devam et** → kanalını seç → izin ver. Diğer kanallar için "bir kanal daha ekle".
 
 Elle çalıştırmak istersen: `python3 youtube-hub/hub.py serve` → http://127.0.0.1:7788
 
 Sadece Python 3.9+ gerekir. `pip install` yok.
+
+## Sunucuda yayınlama (gerçek SaaS)
+
+```
+YTHUB_PUBLIC_URL=https://alanadin.com YTHUB_APP_NAME=Kanalist YTHUB_CONTACT_EMAIL=destek@alanadin.com \
+  python3 youtube-hub/hub.py serve
+```
+- Önünde HTTPS sonlandıran bir ters vekil (Caddy/Nginx) olmalı; uygulama `YTHUB_PORT`'ta dinler.
+- Google Cloud'da istemci türü **Web application**, yönlendirme adresi
+  `https://alanadin.com/oauth/callback`. JSON'u sunucuda `youtube-hub/data/client_secret.json`
+  olarak kaydet (güvenlik gereği sunucu modunda web'den yüklenemez).
+- Herkese açmadan önce Google OAuth doğrulaması ve YouTube API denetimi gerekir
+  (doğrulanmamış uygulama en fazla 100 kullanıcı). Ayrıntı: [docs/PLAN.md §4](docs/PLAN.md).
+- Sunucu açıkken kanallar `YTHUB_AUTOSYNC_HOURS` (varsayılan 6) saatte bir kendiliğinden güncellenir.
 
 ## Google Cloud kurulumu (bir kez, ~15 dakika)
 
@@ -96,6 +131,11 @@ Günlük otomatik senkron (macOS, her gün 08:00 ve 20:00) — `crontab -e`:
 - Video **yükleme** yetkisi istenmez. Kapsamlar: `youtube`, `yt-analytics.readonly`.
 - Panel sadece **senin bilgisayarında** Google'a bağlanır. `client_secret.json` ve
   token'ları kimseyle (Claude dahil) paylaşma.
+- Hesaplar: oturum çerezi HttpOnly + SameSite=Lax (HTTPS'te Secure); sunucuda yalnızca
+  özeti saklanır. Her yazma isteği oturuma bağlı CSRF anahtarı ister. Google dönüşünde
+  `state` çerezle eşleşmeli (giriş CSRF'ine karşı). Her API isteğinde kanal sahipliği
+  denetlenir; bir kullanıcı başkasının kanalını göremez.
+- Kullanıcı Google'dan erişimi kaldırırsa bir sonraki senkronda kanalın verisi silinir.
 
 ## Sınırlar (YouTube API'den)
 

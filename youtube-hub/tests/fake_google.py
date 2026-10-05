@@ -35,6 +35,9 @@ class FakeGoogle:
                          "image": {"bannerExternalUrl": "https://yt3.example/old-banner"}}
         self.thumbs_set = {}
         self.fail_dims = set()
+        self.login_claims = {"sub": "g-1", "email": "ali@example.com", "name": "Ali", "picture": ""}
+        self.granted_scope = ("https://www.googleapis.com/auth/youtube.readonly "
+                              "https://www.googleapis.com/auth/yt-analytics.readonly")
         self.reporting_enabled = True
         self.jobs = {}
         self.reports = {}   # job_id -> [report]
@@ -54,7 +57,10 @@ class FakeGoogle:
             self.access = f"tok-{len(self.calls)}"
             out = {"access_token": self.access, "expires_in": 3600}
             if form["grant_type"] == "authorization_code":
-                out.update(refresh_token="refresh-xyz", scope="youtube")
+                import base64
+                b64 = lambda d: base64.urlsafe_b64encode(json.dumps(d).encode()).rstrip(b"=").decode()
+                out.update(refresh_token="refresh-xyz", scope=self.granted_scope,
+                           id_token=f"{b64({'alg': 'RS256'})}.{b64(self.login_claims)}.sig")
             return 200, {}, json.dumps(out).encode()
         if u.path == "/revoke":
             return 200, {}, b""

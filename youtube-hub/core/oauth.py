@@ -1,15 +1,14 @@
 """
-Google OAuth 2.0 — masaüstü uygulaması akışı (loopback + PKCE).
+Google OAuth 2.0 (PKCE) — iki ayrı amaç:
 
-Akış:
-  1. Panel "Kanal ekle" → Google onay ekranı. Hesapta birden çok kanal varsa Google
-     hangisi olduğunu sorar; seçilen kanal token'a bağlanır.
-  2. Google, panelin /oauth/callback adresine `code` ile döner.
-  3. code → refresh_token + access_token. refresh_token kalıcıdır; access_token
-     ~1 saatte bir otomatik yenilenir.
+  login   → "Google ile giriş": sadece kimlik (e-posta, ad, fotoğraf). Hesap yoksa açılır.
+  channel → "Kanal ekle": seçilen YouTube kanalına salt okunur erişim (refresh token).
+            Google'ın hesap seçicisi, hesaptaki kanalları (marka hesapları dahil) listeler;
+            seçilen kanal token'a bağlanır. YouTube API tek onayla bir hesaptaki TÜM
+            kanalları vermez — her kanal bir kez seçilir.
 
-Her kanal için bu akış bir kez yapılır. Aynı Google hesabındaki 5 marka kanalı
-= 5 kez "Kanal ekle".
+Yerel modda istemci türü "Desktop app" (loopback), sunucuda "Web application"
+(kayıtlı yönlendirme adresi) olmalıdır.
 """
 
 import base64
@@ -47,18 +46,21 @@ def load_client(path=None):
 
 
 def save_client(raw, path=None):
-    """Panelden yüklenen OAuth istemci JSON'unu doğrulayıp kaydeder."""
+    """Kurulum sayfasından yüklenen OAuth istemci JSON'unu doğrulayıp kaydeder."""
     path = path or config.CLIENT_SECRET_PATH
     try:
         data = json.loads(raw)
     except (ValueError, UnicodeDecodeError):
         raise ValueError("Dosya JSON değil. Google Cloud'dan indirdiğin client_secret dosyasını seç.")
-    block = data.get("installed") if isinstance(data, dict) else None
-    if not block:
-        if isinstance(data, dict) and data.get("web"):
-            raise ValueError("Bu bir 'Web application' istemcisi. Google Cloud'da Application type "
-                             "olarak 'Desktop app' seçip yeni istemci oluştur.")
+    if not isinstance(data, dict):
         raise ValueError("Bu dosya bir OAuth istemci dosyası değil (client_id bulunamadı).")
+    kind = "installed" if data.get("installed") else "web" if data.get("web") else None
+    if not kind:
+        raise ValueError("Bu dosya bir OAuth istemci dosyası değil (client_id bulunamadı).")
+    if kind == "web" and not config.PUBLIC_URL:
+        raise ValueError("Bu bir 'Web application' istemcisi. Yerel kullanımda Google Cloud'da "
+                         "Application type olarak 'Desktop app' seçip yeni istemci oluştur.")
+    block = data[kind]
     if not str(block.get("client_id", "")).endswith(".apps.googleusercontent.com"):
         raise ValueError("client_id geçersiz görünüyor.")
     if not block.get("client_secret"):
@@ -66,8 +68,22 @@ def save_client(raw, path=None):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
     with os.fdopen(fd, "w", encoding="utf-8") as f:
-        json.dump({"installed": block}, f)
+        json.dump({kind: block}, f)
     return block["client_id"]
+
+
+def id_claims(token):
+    """Token yanıtındaki id_token'ın içeriği (e-posta, ad...). id_token doğrudan Google'ın
+    token uç noktasından HTTPS ile alındığı için imza doğrulaması gerekmez."""
+    raw = token.get("id_token")
+    if not raw or raw.count(".") != 2:
+        raise ValueError("Google kimlik bilgisi (id_token) dönmedi.")
+    payload = raw.split(".")[1]
+    payload += "=" * (-len(payload) % 4)
+    claims = json.loads(base64.urlsafe_b64decode(payload))
+    if not claims.get("sub") or not claims.get("email"):
+        raise ValueError("Google hesabının e-posta bilgisi alınamadı.")
+    return claims
 
 
 def _form_post(url, fields, transport):
@@ -87,50 +103,58 @@ _PENDING_LOCK = threading.Lock()
 _PENDING_TTL = 600
 
 
-def start_flow(redirect_uri, client=None):
+def start_flow(redirect_uri, scopes=None, purpose="channel", ctx=None, login_hint=None,
+               client=None):
+    """Onay adresini ve `state`'i döner. state tarayıcı çerezine de yazılmalı (giriş CSRF'i)."""
     client = client or load_client()
     state = secrets.token_urlsafe(24)
     verifier = secrets.token_urlsafe(64)
     challenge = base64.urlsafe_b64encode(hashlib.sha256(verifier.encode()).digest()).rstrip(b"=").decode()
     with _PENDING_LOCK:
         cutoff = time.time() - _PENDING_TTL
-        for k in [k for k, v in _PENDING.items() if v[2] < cutoff]:
+        for k in [k for k, v in _PENDING.items() if v["created"] < cutoff]:
             del _PENDING[k]
-        _PENDING[state] = (verifier, redirect_uri, time.time())
+        _PENDING[state] = {"verifier": verifier, "redirect_uri": redirect_uri, "created": time.time(),
+                           "purpose": purpose, "ctx": ctx}
     params = {
         "client_id": client["client_id"],
         "redirect_uri": redirect_uri,
         "response_type": "code",
-        "scope": " ".join(config.SCOPES),
-        "access_type": "offline",          # refresh_token için şart
-        "prompt": "consent select_account",  # her seferinde kanal seçtir
-        "include_granted_scopes": "true",
+        "scope": " ".join(scopes or (config.LOGIN_SCOPES if purpose == "login" else config.CHANNEL_SCOPES)),
         "state": state,
         "code_challenge": challenge,
         "code_challenge_method": "S256",
+        "include_granted_scopes": "true",
     }
-    return f"{config.AUTH_URL}?{urllib.parse.urlencode(params)}"
+    if purpose == "login":
+        params["prompt"] = "select_account"
+    else:
+        params["access_type"] = "offline"             # refresh_token için şart
+        params["prompt"] = "consent select_account"   # her seferinde kanal seçtir
+    if login_hint:
+        params["login_hint"] = login_hint
+    return f"{config.AUTH_URL}?{urllib.parse.urlencode(params)}", state
 
 
 def finish_flow(state, code, client=None, transport=None):
+    """Dönen: (token, amaç, bağlam)."""
     with _PENDING_LOCK:
         entry = _PENDING.pop(state, None)
-    if not entry or time.time() - entry[2] > _PENDING_TTL:
-        raise ValueError("Geçersiz veya süresi dolmuş onay isteği. 'Kanal ekle'ye yeniden bas.")
-    verifier, redirect_uri, _ = entry
+    if not entry or time.time() - entry["created"] > _PENDING_TTL:
+        raise ValueError("Geçersiz veya süresi dolmuş onay isteği. Yeniden dene.")
     client = client or load_client()
     tok = _form_post(config.TOKEN_URL, {
         "code": code,
         "client_id": client["client_id"],
         "client_secret": client["client_secret"],
-        "redirect_uri": redirect_uri,
+        "redirect_uri": entry["redirect_uri"],
         "grant_type": "authorization_code",
-        "code_verifier": verifier,
+        "code_verifier": entry["verifier"],
     }, transport or urllib_transport)
-    if "refresh_token" not in tok:
+    if entry["purpose"] == "channel" and "refresh_token" not in tok:
         raise ValueError("Google refresh_token vermedi. myaccount.google.com/permissions "
                          "üzerinden uygulamanın erişimini kaldırıp yeniden dene.")
-    return tok
+    return tok, entry["purpose"], entry["ctx"]
 
 
 # ----------------------------------------------------------------------------

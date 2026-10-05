@@ -12,6 +12,7 @@ import io
 import json
 import os
 import re
+import secrets
 import threading
 import time
 from datetime import date, timedelta
@@ -41,6 +42,24 @@ def best_thumb(thumbnails):
 
 def _int(v):
     return int(v) if v not in (None, "") else None
+
+
+class NeedsWriteScope(PermissionError):
+    """Kanal salt okunur bağlı; yazma işlemi için ek Google izni gerekir."""
+
+
+def _hash(token):
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+def _in(column, ids):
+    """Kanal filtresi. None = filtre yok; boş liste = hiçbir şey."""
+    if ids is None:
+        return "1=1", []
+    ids = list(ids)
+    if not ids:
+        return "0=1", []
+    return f"{column} IN ({','.join('?' * len(ids))})", ids
 
 
 def _sum(rows, key):
@@ -107,9 +126,87 @@ class Hub:
         self.oauth_client = oauth_client
         self.assets_dir = assets_dir or config.ASSETS_DIR
         self.sleep = sleep
-        self._sync_lock = threading.Lock()
-        self.sync_state = {"running": False, "started_at": None, "finished_at": None, "results": []}
+        self._sync_locks = {}
+        self._sync_states = {}
+        self._locks_guard = threading.Lock()
         db.connect(self.db_path).close()  # şemayı hazırla
+
+    @property
+    def sync_state(self):
+        """Tüm kanalların (komut satırı / otomatik) senkron durumu."""
+        return self.sync_state_for("all")
+
+    def sync_state_for(self, key):
+        with self._locks_guard:
+            return self._sync_states.setdefault(
+                key, {"running": False, "started_at": None, "finished_at": None, "results": []})
+
+    # ------------------------------------------------------------------ hesaplar
+
+    def login(self, claims):
+        """Google kimliğiyle giriş. Hesap yoksa açılır. Dönen: kullanıcı satırı (dict)."""
+        now = db.now()
+        with self.conn() as c:
+            first = c.execute("SELECT COUNT(*) FROM users").fetchone()[0] == 0
+            c.execute("""INSERT INTO users(google_sub, email, name, picture, created_at, last_login)
+                         VALUES (?,?,?,?,?,?)
+                         ON CONFLICT(google_sub) DO UPDATE SET email=excluded.email, name=excluded.name,
+                           picture=excluded.picture, last_login=excluded.last_login""",
+                      (claims["sub"], claims["email"], claims.get("name"), claims.get("picture"), now, now))
+            user = dict(c.execute("SELECT * FROM users WHERE google_sub=?", (claims["sub"],)).fetchone())
+            if first:
+                # Hesap sisteminden önce bağlanmış kanallar (yerel kurulum) ilk kullanıcıya geçer.
+                c.execute("""INSERT OR IGNORE INTO user_channels(user_id, channel_id, added_at)
+                             SELECT ?, id, ? FROM channels
+                             WHERE id NOT IN (SELECT channel_id FROM user_channels)""", (user["id"], now))
+        return user
+
+    def create_session(self, user_id):
+        token, csrf = secrets.token_urlsafe(32), secrets.token_urlsafe(24)
+        now = db.now()
+        with self.conn() as c:
+            c.execute("DELETE FROM sessions WHERE expires_at < ?", (now,))
+            c.execute("INSERT INTO sessions VALUES (?,?,?,?,?)",
+                      (_hash(token), user_id, csrf, now, now + config.SESSION_DAYS * 86400))
+        return token, csrf
+
+    def session_user(self, token):
+        if not token:
+            return None
+        with self.conn() as c:
+            row = c.execute("""SELECT u.*, s.csrf FROM sessions s JOIN users u ON u.id = s.user_id
+                               WHERE s.token_hash=? AND s.expires_at>=?""", (_hash(token), db.now())).fetchone()
+        return dict(row) if row else None
+
+    def logout(self, token):
+        with self.conn() as c:
+            c.execute("DELETE FROM sessions WHERE token_hash=?", (_hash(token or ""),))
+
+    def channel_ids(self, user_id):
+        with self.conn() as c:
+            return [r[0] for r in c.execute(
+                "SELECT channel_id FROM user_channels WHERE user_id=? ORDER BY added_at", (user_id,))]
+
+    def owns(self, user_id, channel_id):
+        with self.conn() as c:
+            return c.execute("SELECT 1 FROM user_channels WHERE user_id=? AND channel_id=?",
+                             (user_id, channel_id)).fetchone() is not None
+
+    def video_channel(self, video_id):
+        with self.conn() as c:
+            row = c.execute("""SELECT channel_id FROM videos WHERE id=? UNION ALL
+                               SELECT channel_id FROM video_daily WHERE video_id=? LIMIT 1""",
+                            (video_id, video_id)).fetchone()
+        return row[0] if row else None
+
+    def can_write(self, channel_id):
+        with self.conn() as c:
+            row = c.execute("SELECT scopes FROM credentials WHERE channel_id=?", (channel_id,)).fetchone()
+        return bool(row) and config.WRITE_SCOPE in (row["scopes"] or "").split()
+
+    def _require_write(self, channel_id):
+        if not self.can_write(channel_id):
+            raise NeedsWriteScope("Kapak/banner değiştirmek için bu kanala ek izin vermen gerekiyor.")
 
     def conn(self):
         return db.session(self.db_path)
@@ -142,8 +239,8 @@ class Hub:
 
     # ------------------------------------------------------------------ kanal bağlama
 
-    def register(self, token):
-        """OAuth'tan dönen token ile kanalı kaydeder, kanal ID'sini döner."""
+    def register(self, token, user_id=None):
+        """OAuth'tan dönen token ile kanalı kaydeder (ve kullanıcıya bağlar), kanal ID'sini döner."""
         creds = Credentials(token["refresh_token"], token.get("access_token"),
                             int(time.time()) + int(token.get("expires_in", 3600)),
                             client=self.oauth_client, transport=self.transport)
@@ -157,10 +254,19 @@ class Hub:
                            scopes=excluded.scopes""",
                       (ch["id"], creds.refresh_token, creds._access, creds._expires,
                        token.get("scope", "")))
+            if user_id is not None:
+                c.execute("INSERT OR IGNORE INTO user_channels(user_id, channel_id, added_at) VALUES (?,?,?)",
+                          (user_id, ch["id"], db.now()))
         return ch["id"]
 
-    def disconnect(self, channel_id):
+    def disconnect(self, channel_id, user_id=None):
+        """Kullanıcının kanal bağlantısını kaldırır. Kanala bağlı başka kullanıcı kalmadıysa
+        Google erişimi iptal edilir ve kanalın tüm verisi silinir."""
         with self.conn() as c:
+            if user_id is not None:
+                c.execute("DELETE FROM user_channels WHERE user_id=? AND channel_id=?", (user_id, channel_id))
+                if c.execute("SELECT 1 FROM user_channels WHERE channel_id=?", (channel_id,)).fetchone():
+                    return
             row = c.execute("SELECT refresh_token FROM credentials WHERE channel_id=?",
                             (channel_id,)).fetchone()
             if row:
@@ -220,7 +326,13 @@ class Hub:
                 # Reporting API açılmamış olabilir; analizi durdurmaz.
                 result["notes"].append(f"Reporting API: {e.reason} — Google Cloud'da açık mı?")
             error = None
-        except (AuthRevoked, QuotaExceeded, ApiError, KeyError) as e:
+        except AuthRevoked as e:
+            # Kullanıcı Google'dan erişimi kaldırdı: YouTube API politikası gereği kanalın
+            # verisi silinir. Yeniden bağlanırsa veriler baştan çekilir.
+            self.disconnect(channel_id)
+            result.update(ok=False, error=str(e), removed=True)
+            return result
+        except (QuotaExceeded, ApiError, KeyError) as e:
             result.update(ok=False, error=str(e))
             error = str(e)
         with self.conn() as c:
@@ -331,25 +443,37 @@ class Hub:
                         channel_id, days, dim, str(r[dim]), r.get("views"),
                         r.get("estimatedMinutesWatched"), start, end, now))
 
-    def sync_all(self):
-        if not self._sync_lock.acquire(blocking=False):
+    def sync_all(self, channel_ids=None, key="all"):
+        """Kanalları senkronize eder. channel_ids verilmezse bağlı tüm kanallar."""
+        with self._locks_guard:
+            lock = self._sync_locks.setdefault(key, threading.Lock())
+        if not lock.acquire(blocking=False):
             return None  # zaten çalışıyor
+        state = self.sync_state_for(key)
         try:
-            self.sync_state.update(running=True, started_at=db.now(), finished_at=None, results=[])
-            with self.conn() as c:
-                ids = [r["channel_id"] for r in c.execute("SELECT channel_id FROM credentials")]
-            for cid in ids:
-                self.sync_state["results"].append(self.sync_channel(cid))
-            return self.sync_state["results"]
+            state.update(running=True, started_at=db.now(), finished_at=None, results=[])
+            if channel_ids is None:
+                with self.conn() as c:
+                    channel_ids = [r["channel_id"] for r in c.execute("SELECT channel_id FROM credentials")]
+            for cid in channel_ids:
+                state["results"].append(self.sync_channel(cid))
+            return state["results"]
         finally:
-            self.sync_state.update(running=False, finished_at=db.now())
-            self._sync_lock.release()
+            state.update(running=False, finished_at=db.now())
+            lock.release()
 
-    def sync_all_async(self):
-        if self.sync_state["running"]:
+    def sync_all_async(self, channel_ids=None, key="all"):
+        if self.sync_state_for(key)["running"]:
             return False
-        threading.Thread(target=self.sync_all, daemon=True).start()
+        threading.Thread(target=self.sync_all, args=(channel_ids, key), daemon=True).start()
         return True
+
+    def stale_channels(self, max_age_s):
+        """Son senkronu max_age_s'den eski (veya hiç senkronize edilmemiş) kanallar."""
+        with self.conn() as c:
+            return [r[0] for r in c.execute(
+                """SELECT ch.id FROM channels ch JOIN credentials cr ON cr.channel_id = ch.id
+                   WHERE ch.synced_at IS NULL OR ch.synced_at < ?""", (db.now() - max_age_s,))]
 
     # ------------------------------------------------------------------ reporting api
 
@@ -483,26 +607,28 @@ class Hub:
 
     # ------------------------------------------------------------------ analiz (panel)
 
-    def portfolio(self, days=28):
-        """Tüm kanallar: seçili dönem ve bir önceki eşit uzunluktaki dönem.
+    def portfolio(self, days=28, channel_ids=None):
+        """Kanallar (verilmezse hepsi): seçili dönem ve bir önceki eşit uzunluktaki dönem.
 
         Dönem, Analytics verisinin geldiği son günde biter (bugünde değil).
         """
+        inc, args = _in("channel_id", channel_ids)
+        inch, _ = _in("id", channel_ids)
         with self.conn() as c:
-            last = c.execute("SELECT MAX(day) FROM channel_daily").fetchone()[0]
+            last = c.execute(f"SELECT MAX(day) FROM channel_daily WHERE {inc}", args).fetchone()[0]
             channels = [dict(r) for r in c.execute(
-                "SELECT * FROM channels ORDER BY subscribers DESC NULLS LAST, connected_at")]
+                f"SELECT * FROM channels WHERE {inch} ORDER BY subscribers DESC NULLS LAST, connected_at", args)]
             for ch in channels:
                 ch["views_24h"] = self._delta_24h(c, ch["id"])
             anchor = date.fromisoformat(last) if last else None
             daily, uploads = [], []
             if anchor:
                 prev_start = (anchor - timedelta(days=2 * days - 1)).isoformat()
-                daily = c.execute("SELECT * FROM channel_daily WHERE day>=? AND day<=?",
-                                  (prev_start, anchor.isoformat())).fetchall()
-                uploads = c.execute("""SELECT channel_id, substr(published_at,1,10) d FROM videos
-                                       WHERE substr(published_at,1,10)>=? AND substr(published_at,1,10)<=?""",
-                                    (prev_start, anchor.isoformat())).fetchall()
+                daily = c.execute(f"SELECT * FROM channel_daily WHERE day>=? AND day<=? AND {inc}",
+                                  (prev_start, anchor.isoformat(), *args)).fetchall()
+                uploads = c.execute(f"""SELECT channel_id, substr(published_at,1,10) d FROM videos
+                                       WHERE substr(published_at,1,10)>=? AND substr(published_at,1,10)<=?
+                                       AND {inc}""", (prev_start, anchor.isoformat(), *args)).fetchall()
 
         common = {"subscribers": sum(ch["subscribers"] or 0 for ch in channels),
                   "lifetime_views": sum(ch["views"] or 0 for ch in channels),
@@ -557,7 +683,7 @@ class Hub:
             "quota": self.quota_today(),
         }
 
-    def top_videos(self, days=28, channel_id=None, kind=None, limit=25):
+    def top_videos(self, days=28, channel_id=None, kind=None, limit=25, channel_ids=None):
         """Dönemin en çok izlenen videoları — tüm kanallarda veya tek kanalda."""
         sql = ["""SELECT w.*, v.title, v.thumbnail_url, v.published_at, v.is_short, v.duration_s,
                          v.views AS lifetime_views, ch.title AS channel_title
@@ -568,6 +694,9 @@ class Hub:
         if channel_id:
             sql.append("AND w.channel_id = ?")
             args.append(channel_id)
+        inc, inargs = _in("w.channel_id", channel_ids)
+        sql.append("AND " + inc)
+        args += inargs
         if kind in ("short", "long"):
             sql.append("AND v.is_short = ?")
             args.append(1 if kind == "short" else 0)
@@ -576,16 +705,15 @@ class Hub:
         with self.conn() as c:
             return [dict(r) for r in c.execute(" ".join(sql), args)]
 
-    def breakdowns(self, days=28, channel_id=None):
+    def breakdowns(self, days=28, channel_id=None, channel_ids=None):
         """İzlenme kaynakları, içerik türü, ülkeler. Kanal verilmezse tüm kanalların toplamı."""
         sql = """SELECT dimension, key, SUM(views) views, SUM(minutes) minutes
                  FROM channel_breakdown WHERE window_days = ? {} GROUP BY dimension, key
                  ORDER BY views DESC"""
-        args = [days]
         if channel_id:
-            sql, args = sql.format("AND channel_id = ?"), args + [channel_id]
-        else:
-            sql = sql.format("")
+            channel_ids = [channel_id]
+        inc, inargs = _in("channel_id", channel_ids)
+        sql, args = sql.format("AND " + inc), [days] + inargs
         out = {dim: [] for dim in config.BREAKDOWNS}
         with self.conn() as c:
             for r in c.execute(sql, args):
@@ -632,12 +760,18 @@ class Hub:
         return {"day": quota_day(), "used": used, "limit": config.DAILY_QUOTA,
                 "by_method": {r["method"]: r["u"] for r in rows}}
 
-    def actions(self, limit=100):
+    def actions(self, limit=100, channel_ids=None):
+        inc, args = _in("a.channel_id", channel_ids)
         with self.conn() as c:
             return [dict(r) for r in c.execute(
-                """SELECT a.*, ch.title channel_title, v.title video_title FROM actions a
+                f"""SELECT a.*, ch.title channel_title, v.title video_title FROM actions a
                    LEFT JOIN channels ch ON ch.id=a.channel_id LEFT JOIN videos v ON v.id=a.video_id
-                   ORDER BY a.id DESC LIMIT ?""", (limit,))]
+                   WHERE {inc} ORDER BY a.id DESC LIMIT ?""", (*args, limit))]
+
+    def action_channel(self, action_id):
+        with self.conn() as c:
+            row = c.execute("SELECT channel_id FROM actions WHERE id=?", (action_id,)).fetchone()
+        return row[0] if row else None
 
     # ------------------------------------------------------------------ yazma: görseller
 
@@ -676,6 +810,7 @@ class Hub:
             v = c.execute("SELECT * FROM videos WHERE id=?", (video_id,)).fetchone()
         if not v:
             raise KeyError(f"Video bulunamadı (önce senkronize et): {video_id}")
+        self._require_write(v["channel_id"])
         info = check_thumbnail(data, is_short=bool(v["is_short"]))
         new_path = self._store_asset(v["channel_id"], "thumbnail", data, info["mime"])
         backup = self._backup_remote(v["channel_id"], "thumbnail", v["thumbnail_url"])
@@ -696,6 +831,7 @@ class Hub:
         return info
 
     def set_banner(self, channel_id, data):
+        self._require_write(channel_id)
         info = check_banner(data)
         with self.conn() as c:
             ch = c.execute("SELECT banner_url FROM channels WHERE id=?", (channel_id,)).fetchone()

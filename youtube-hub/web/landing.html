@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__APP_NAME__ — Tüm YouTube kanalların tek ekranda</title>
+<meta name="description" content="Birden çok YouTube kanalını tek panelden analiz et: izlenme, izlenme süresi, abone, en iyi videolar, izlenme kaynakları ve Shorts/uzun video ayrımı — hepsi önceki döneme göre karşılaştırmalı.">
+<link rel="stylesheet" href="/static/site.css">
+<style>
+section { padding: 88px 0; }
+.eyebrow { display: inline-block; font-size: 13px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+h2.title { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 14px; }
+p.lead { font-size: 19px; color: var(--text-2); max-width: 680px; margin: 0; }
+.center { text-align: center; } .center p.lead { margin: 0 auto; }
+
+/* hero */
+.hero { padding: 64px 0 40px; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: -40% -10% auto; height: 760px; z-index: -1;
+  background: radial-gradient(60% 50% at 50% 30%, var(--accent-soft), transparent 70%); }
+.hero h1 { font-size: clamp(38px, 6.4vw, 70px); line-height: 1.03; letter-spacing: -.035em; margin: 0 0 20px; max-width: 900px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { font-size: clamp(18px, 2.2vw, 21px); max-width: 720px; }
+.hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 30px 0 16px; }
+.micro { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--text-2); font-size: 14px; }
+.micro span { display: inline-flex; align-items: center; gap: 7px; }
+.micro svg { color: var(--good); }
+
+/* panel önizlemesi */
+.mock { margin-top: 54px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.mock .bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+.mock .bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: block; }
+.mock .bar span { margin-left: 12px; font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 2px 10px; }
+.mock .body { padding: 18px; display: grid; gap: 14px; }
+.mtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.mtile { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.mtile .l { font-size: 12px; color: var(--text-2); } .mtile .v { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+.mtile .d { font-size: 12px; font-weight: 650; color: var(--good); } .mtile .d.down { color: var(--bad); }
+.mgrid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; }
+.mcard { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.mcard h4 { margin: 0 0 8px; font-size: 13px; }
+.mcard svg { width: 100%; height: auto; display: block; }
+.mrow { display: grid; grid-template-columns: 12px 1fr auto auto; gap: 10px; align-items: center; font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.mrow:last-child { border-bottom: 0; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.up { color: var(--good); font-weight: 650; font-size: 12px; } .dn { color: var(--bad); font-weight: 650; font-size: 12px; }
+.mlegend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--text-2); margin-top: 6px; }
+.mlegend span { display: inline-flex; align-items: center; gap: 5px; }
+.mlegend i { width: 12px; border-top: 2px solid; display: inline-block; }
+@media (max-width: 760px) { .mtiles { grid-template-columns: repeat(2, 1fr); } .mgrid { grid-template-columns: 1fr; } }
+
+/* kimler için */
+.who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.who .card { padding: 22px; }
+.who h3 { margin: 0 0 6px; font-size: 18px; }
+.who p { margin: 0; color: var(--text-2); font-size: 15px; }
+@media (max-width: 860px) { .who { grid-template-columns: 1fr; } }
+
+/* sorun → çözüm */
+.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
+.versus .card { padding: 26px; }
+.versus h3 { margin: 0 0 14px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+.versus ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.versus li { display: flex; gap: 10px; color: var(--text-2); }
+.versus li svg { flex: none; margin-top: 4px; }
+.versus .after { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 0 0 4px var(--accent-soft); }
+@media (max-width: 860px) { .versus { grid-template-columns: 1fr; } }
+
+/* özellikler */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.feature { padding: 26px; }
+.feature .ic { width: 42px; height: 42px; border-radius: 11px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 16px; }
+.feature h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.01em; }
+.feature p { margin: 0; color: var(--text-2); font-size: 15px; }
+@media (max-width: 960px) { .features { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .features { grid-template-columns: 1fr; } }
+
+/* derinlemesine */
+.deep { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; margin-top: 72px; }
+.deep.rev > :first-child { order: 2; }
+.deep h3 { font-size: 28px; letter-spacing: -.02em; line-height: 1.2; margin: 0 0 12px; }
+.deep p { color: var(--text-2); margin: 0 0 16px; }
+.checks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.checks li { display: flex; gap: 10px; }
+.checks svg { flex: none; color: var(--good); margin-top: 5px; }
+.deep .mcard { background: var(--surface); box-shadow: var(--shadow); padding: 18px; }
+.bars .r { display: grid; grid-template-columns: 130px 1fr 54px; gap: 10px; align-items: center; font-size: 13px; padding: 5px 0; }
+.bars .t { height: 9px; background: var(--accent-soft); border-radius: 5px; overflow: hidden; }
+.bars .t i { display: block; height: 100%; background: var(--accent); border-radius: 5px; }
+.bars .v { text-align: right; color: var(--text-2); font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) { .deep { grid-template-columns: 1fr; gap: 28px; } .deep.rev > :first-child { order: 0; } }
+
+/* adımlar */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; counter-reset: s; }
+.step { padding: 26px; position: relative; }
+.step .n { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: grid; place-items: center; margin-bottom: 14px; }
+.step h3 { margin: 0 0 8px; font-size: 18px; }
+.step p { margin: 0; color: var(--text-2); font-size: 15px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+
+/* güven */
+.trust { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 44px; }
+.tgrid h3 { font-size: 16px; margin: 12px 0 6px; }
+.tgrid p { margin: 0; font-size: 14px; color: var(--text-2); }
+.tgrid .ic { color: var(--accent); }
+@media (max-width: 860px) { .tgrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .tgrid { grid-template-columns: 1fr; } }
+
+/* fiyat */
+.beta { display: inline-flex; gap: 8px; align-items: center; background: var(--accent-soft); color: var(--text); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 600; margin-top: 18px; }
+.plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+.plan { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+.plan.pop { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); position: relative; }
+.plan.pop::before { content: "En çok tercih edilecek"; position: absolute; top: -12px; left: 20px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 650; padding: 2px 10px; border-radius: 999px; }
+.plan h3 { margin: 0; font-size: 17px; }
+.plan .price { font-size: 38px; font-weight: 750; letter-spacing: -.03em; line-height: 1; }
+.plan .price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--text-2); flex: 1; }
+.plan li { display: flex; gap: 8px; } .plan li svg { flex: none; color: var(--good); margin-top: 4px; }
+@media (max-width: 960px) { .plans { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+
+/* sss */
+.faq { max-width: 820px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 10px; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
+.faq summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 650; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--muted); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 18px; color: var(--text-2); }
+
+/* son çağrı */
+.final { text-align: center; }
+.final .box { padding: 56px 24px; border-radius: 22px; background: linear-gradient(135deg, var(--accent), #4a3aa7); color: #fff; }
+.final h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.025em; margin: 0 0 12px; line-height: 1.15; }
+.final p { margin: 0 auto 26px; max-width: 560px; opacity: .9; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="wrap">
+  <a class="brand" href="/"><span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></span>__APP_NAME__</a>
+  <div class="links"><a href="#ozellikler">Özellikler</a><a href="#nasil">Nasıl çalışır</a><a href="#guven">Güvenlik</a><a href="#fiyat">Fiyatlar</a><a href="#sss">SSS</a></div>
+  <div class="cta" id="navCta"><a class="btn ghost" href="/giris">Giriş yap</a><a class="btn primary" href="/giris">Ücretsiz başla</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Çok kanallı YouTube analitiği</span>
+  <h1>Tüm YouTube kanalların, <em>tek ekranda.</em></h1>
+  <p class="lead">Kanal kanal Studio'da gezmeyi bırak. İzlenme, izlenme süresi, abone ve en iyi videolarını bütün kanallarında aynı anda gör, önceki dönemle karşılaştır, hızlı karar ver.</p>
+  <div class="actions">
+    <a class="btn google lg" href="/giris" data-cta><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile ücretsiz başla</a>
+    <a class="btn lg" href="#nasil">Nasıl çalışır?</a>
+  </div>
+  <div class="micro">
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>Kredi kartı gerekmez</span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>Salt okunur erişim — kanalına dokunmayız</span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>Dakikalar içinde hazır</span>
+  </div>
+
+  <div class="mock" aria-label="Panel önizlemesi (örnek veri)">
+    <div class="bar"><i></i><i></i><i></i><span>__APP_NAME__ · Panel — son 28 gün</span></div>
+    <div class="body">
+      <div class="mtiles">
+        <div class="mtile"><div class="l">İzlenme</div><div class="v">4,8 Mn</div><div class="d">▲ +18% önceki 28 gün</div></div>
+        <div class="mtile"><div class="l">İzlenme süresi</div><div class="v">61,2 B sa</div><div class="d">▲ +9%</div></div>
+        <div class="mtile"><div class="l">Abone (net)</div><div class="v">+12.480</div><div class="d">▲ +2.115</div></div>
+        <div class="mtile"><div class="l">Ort. izleme süresi</div><div class="v">0:46</div><div class="d down">▼ −4%</div></div>
+      </div>
+      <div class="mgrid">
+        <div class="mcard"><h4>Günlük izlenme — kanallara göre</h4>
+          <svg viewBox="0 0 520 170" role="img" aria-label="Örnek trend grafiği">
+            <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="20" x2="520" y2="20"/><line x1="0" y1="85" x2="520" y2="85"/><line x1="0" y1="150" x2="520" y2="150"/></g>
+            <path d="M0 110 L40 98 L80 104 L120 86 L160 90 L200 70 L240 76 L280 58 L320 64 L360 46 L400 52 L440 38 L480 44 L520 30" fill="none" stroke="var(--s1)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M0 128 L40 122 L80 126 L120 116 L160 120 L200 110 L240 114 L280 104 L320 108 L360 100 L400 103 L440 96 L480 99 L520 92" fill="none" stroke="var(--s2)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M0 140 L40 138 L80 136 L120 137 L160 132 L200 134 L240 128 L280 130 L320 124 L360 126 L400 120 L440 121 L480 115 L520 112" fill="none" stroke="var(--s3)" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          <div class="mlegend"><span><i style="border-color:var(--s1)"></i>Tarih kanalı</span><span><i style="border-color:var(--s2)"></i>Şehir kanalı</span><span><i style="border-color:var(--s3)"></i>Bilim kanalı</span></div>
+        </div>
+        <div class="mcard"><h4>Kanal karşılaştırma</h4>
+          <div class="mrow"><span class="dot" style="background:var(--s1)"></span><span>Tarih kanalı</span><b>2,9 Mn</b><span class="up">▲ 24%</span></div>
+          <div class="mrow"><span class="dot" style="background:var(--s2)"></span><span>Şehir kanalı</span><b>1,2 Mn</b><span class="up">▲ 11%</span></div>
+          <div class="mrow"><span class="dot" style="background:var(--s3)"></span><span>Bilim kanalı</span><b>486 B</b><span class="dn">▼ 6%</span></div>
+          <div class="mrow"><span class="dot" style="background:var(--s4)"></span><span>Mutfak kanalı</span><b>214 B</b><span class="up">▲ 31%</span></div>
+          <div class="muted" style="font-size:11px;margin-top:6px">Örnek veri</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></header>
+
+<section style="padding-top:56px"><div class="wrap center">
+  <span class="eyebrow">Kimler için</span>
+  <h2 class="title">Birden fazla kanalı olan herkes için</h2>
+  <div class="who" style="text-align:left">
+    <div class="card"><h3>Çok kanallı içerik üreticileri</h3><p>Farklı nişlerde kanalların varsa hangisinin büyüdüğünü, hangisinin yavaşladığını tek bakışta gör.</p></div>
+    <div class="card"><h3>Shorts ağları</h3><p>Onlarca kanaldaki Shorts performansını, izlenme kaynaklarını ve viral videoları tek listede yakala.</p></div>
+    <div class="card"><h3>Ajanslar ve ekipler</h3><p>Yönettiğin kanalları karşılaştır, CSV ile rapora aktar, müşteriye dakikalar içinde durum anlat.</p></div>
+  </div>
+</div></section>
+
+<section style="padding-top:20px"><div class="wrap center">
+  <span class="eyebrow">Sorun</span>
+  <h2 class="title">5 kanal = 5 ayrı Studio sekmesi.</h2>
+  <p class="lead">YouTube Studio her seferinde tek kanal gösterir. Karşılaştırma, toplam ve trend için rakamları elle taşımak zorunda kalırsın.</p>
+  <div class="versus" style="text-align:left">
+    <div class="card"><h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>Bugün</h3>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>Her kanal için ayrı giriş, ayrı sekme, ayrı tarih seçimi</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>Toplam izlenmeyi ve büyümeyi Excel'de elle hesaplamak</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>Düşen kanalı ya da patlayan videoyu geç fark etmek</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>"Hangi kanala daha çok emek vermeliyim?" sorusuna sezgiyle cevap</li>
+      </ul></div>
+    <div class="card after"><h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>__APP_NAME__ ile</h3>
+      <ul>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tek giriş, tüm kanallar tek panelde</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Toplamlar ve önceki döneme göre değişim hazır hesaplanmış</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tüm kanallarda dönemin en çok izlenen videoları tek listede</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kanalların portföydeki payı ve trendi yan yana</li>
+      </ul></div>
+  </div>
+</div></section>
+
+<section id="ozellikler"><div class="wrap">
+  <div class="center"><span class="eyebrow">Özellikler</span>
+    <h2 class="title">Karar vermek için gereken her şey</h2>
+    <p class="lead">YouTube'un resmi API'lerinden gelen veriyle, kanallarını tek tek değil bir portföy olarak yönet.</p></div>
+  <div class="features">
+    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+      <h3>Portföy görünümü</h3><p>Tüm kanallarının izlenme, izlenme süresi, abone ve ortalama izleme süresi toplamı — 7, 28 veya 90 gün, önceki döneme göre değişimle.</p></div>
+    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M9 4v16"/></svg></div>
+      <h3>Kanal karşılaştırma</h3><p>Sıralanabilir tablo: büyüme, etkileşim, yükleme sıklığı, portföy payı ve trend çizgisi. Tek tıkla CSV.</p></div>
+    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></div>
+      <h3>En iyi videolar</h3><p>Bütün kanallarında dönemin en çok izlenen videoları tek listede; izlenme oranı, abone kazanımı ve Shorts/uzun filtresiyle.</p></div>
+    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 4"/></svg></div>
+      <h3>İzlenme kaynakları</h3><p>İzleyiciler nereden geliyor: Shorts akışı, arama, önerilenler, harici siteler. Ülke dağılımı da dahil.</p></div>
+    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div>
+      <h3>Shorts ve uzun video ayrımı</h3><p>YouTube'un kendi içerik türü sınıflandırmasıyla: izlenmelerin ne kadarı Shorts'tan, ne kadarı uzun videodan.</p></div>
+    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 20h18"/><path d="M5 16l4-5 4 3 6-8"/></svg></div>
+      <h3>Video bazlı günlük veri</h3><p>Her videonun gün gün izlenmesi, izlenme süresi, kapak gösterimi ve tıklama oranı — bir video ne zaman açıldı, net gör.</p></div>
+  </div>
+
+  <div class="deep">
+    <div><span class="eyebrow">Karşılaştır</span><h3>Hangi kanal büyüyor, hangisi yavaşlıyor — tek bakışta.</h3>
+      <p>Her kanalın bu dönemi bir önceki eşit dönemle kıyaslanır. YouTube Analytics'in 2-3 günlük gecikmesi hesaba katılır; son günler boş kalıp yanıltmaz.</p>
+      <ul class="checks">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Toplam ya da kanal kanal günlük trend</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Portföy payı: emeğin nereye gitmeli?</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Raporlar için CSV dışa aktarma</li>
+      </ul></div>
+    <div class="mcard"><h4>Kanal karşılaştırma · son 28 gün</h4>
+      <div class="mrow" style="font-size:12px;color:var(--muted)"><span></span><span>Kanal</span><span>İzlenme</span><span>Değişim</span></div>
+      <div class="mrow"><span class="dot" style="background:var(--s1)"></span><span>Tarih kanalı</span><b>2,9 Mn</b><span class="up">▲ 24%</span></div>
+      <div class="mrow"><span class="dot" style="background:var(--s2)"></span><span>Şehir kanalı</span><b>1,2 Mn</b><span class="up">▲ 11%</span></div>
+      <div class="mrow"><span class="dot" style="background:var(--s3)"></span><span>Bilim kanalı</span><b>486 B</b><span class="dn">▼ 6%</span></div>
+      <div class="mrow"><span class="dot" style="background:var(--s4)"></span><span>Mutfak kanalı</span><b>214 B</b><span class="up">▲ 31%</span></div>
+      <div class="mrow"><span class="dot" style="background:var(--s5)"></span><span>Gezi kanalı</span><b>98 B</b><span class="dn">▼ 2%</span></div>
+      <div class="muted" style="font-size:11px;margin-top:8px">Örnek veri</div></div>
+  </div>
+
+  <div class="deep rev">
+    <div><span class="eyebrow">Anla</span><h3>İzlenmeler nereden geliyor?</h3>
+      <p>Shorts akışından mı, aramadan mı, önerilenlerden mi? Tüm kanalların toplamında ya da tek kanalda; içerik türü ve ülke kırılımıyla.</p>
+      <ul class="checks">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Trafik kaynakları ve payları</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Shorts / uzun video / canlı ayrımı</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>En çok izleyen ülkeler</li>
+      </ul></div>
+    <div class="mcard bars"><h4>İzlenme kaynakları · tüm kanallar</h4>
+      <div class="r"><span>Shorts akışı</span><span class="t"><i style="width:100%"></i></span><span class="v">%58</span></div>
+      <div class="r"><span>Önerilen videolar</span><span class="t"><i style="width:36%"></i></span><span class="v">%21</span></div>
+      <div class="r"><span>YouTube arama</span><span class="t"><i style="width:22%"></i></span><span class="v">%13</span></div>
+      <div class="r"><span>Göz atma</span><span class="t"><i style="width:9%"></i></span><span class="v">%5</span></div>
+      <div class="r"><span>Harici siteler</span><span class="t"><i style="width:5%"></i></span><span class="v">%3</span></div>
+      <div class="muted" style="font-size:11px;margin-top:8px">Örnek veri</div></div>
+  </div>
+</div></section>
+
+<section id="nasil" style="padding-top:40px"><div class="wrap center">
+  <span class="eyebrow">Nasıl çalışır</span>
+  <h2 class="title">Üç adımda hazır</h2>
+  <div class="steps" style="text-align:left">
+    <div class="card step"><div class="n">1</div><h3>Google ile giriş yap</h3><p>Şifre yok, form yok. Google hesabınla tek tıkla giriş yaparsın; hesabın ilk girişte otomatik açılır.</p></div>
+    <div class="card step"><div class="n">2</div><h3>Kanallarını seç</h3><p>Google, hesabındaki kanalları listeler. Seçtiğin kanal anında bağlanır; birden çok kanalın varsa sistem sırayla sorar.</p></div>
+    <div class="card step"><div class="n">3</div><h3>Analiz hazır</h3><p>Veriler otomatik çekilir ve düzenli olarak güncellenir. Her sabah tek ekrana bakman yeterli.</p></div>
+  </div>
+</div></section>
+
+<section id="guven" class="trust"><div class="wrap">
+  <div class="center"><span class="eyebrow">Güvenlik</span><h2 class="title">Kanalın güvende</h2>
+    <p class="lead">Google'ın resmi giriş sistemi ve YouTube'un resmi API'leri. Sadece görmen gerekeni görürüz.</p></div>
+  <div class="tgrid">
+    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Şifren bize gelmez</h3><p>Giriş Google üzerinden yapılır; şifreni hiçbir zaman görmeyiz ve saklamayız.</p></div>
+    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Salt okunur erişim</h3><p>Kanallar varsayılan olarak yalnızca okuma izniyle bağlanır. Video silemez, yükleyemez, ayarlarını değiştiremeyiz.</p></div>
+    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div><h3>Tek tıkla ayrıl</h3><p>Bir kanalın bağlantısını panelden kesebilir ya da Google hesabından erişimi kaldırabilirsin; verisi silinir.</p></div>
+    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg></div><h3>Veri satılmaz</h3><p>Kanal verilerin sadece sana panel göstermek için kullanılır; üçüncü taraflarla paylaşılmaz, satılmaz.</p></div>
+  </div>
+</div></section>
+
+<section id="fiyat"><div class="wrap center">
+  <span class="eyebrow">Fiyatlar</span>
+  <h2 class="title">Kanal sayına göre basit fiyat</h2>
+  <p class="lead">İhtiyacın büyüdükçe planını büyüt.</p>
+  <div class="beta">🎉 Beta döneminde tüm özellikler ücretsiz — kredi kartı gerekmez</div>
+  <div class="plans" style="text-align:left">
+    <div class="card plan"><h3>Başlangıç</h3><div class="price">$0 <small>/ ay</small></div>
+      <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>2 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Portföy ve kanal analizi</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>7 / 28 / 90 gün</li></ul>
+      <a class="btn" href="/giris" data-cta>Ücretsiz başla</a></div>
+    <div class="card plan"><h3>Creator</h3><div class="price">$12 <small>/ ay</small></div>
+      <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>5 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tüm kanallarda en iyi videolar</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>İzlenme kaynakları ve ülkeler</li></ul>
+      <a class="btn" href="/giris" data-cta>Beta'ya katıl</a></div>
+    <div class="card plan pop"><h3>Pro</h3><div class="price">$29 <small>/ ay</small></div>
+      <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>15 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Video bazlı günlük veri ve tıklama oranı</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>CSV dışa aktarma</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kapak ve banner yönetimi</li></ul>
+      <a class="btn primary" href="/giris" data-cta>Beta'ya katıl</a></div>
+    <div class="card plan"><h3>Ajans</h3><div class="price">$89 <small>/ ay</small></div>
+      <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>50 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Pro'daki her şey</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Ekip erişimi (yakında)</li></ul>
+      <a class="btn" href="/giris" data-cta>Beta'ya katıl</a></div>
+  </div>
+  <p class="muted small" style="margin-top:18px">Fiyatlar beta sonrası için planlanan fiyatlardır; beta kullanıcıları geçişten önce bilgilendirilir.</p>
+</div></section>
+
+<section id="sss" style="padding-top:20px"><div class="wrap">
+  <div class="center"><span class="eyebrow">SSS</span><h2 class="title">Sık sorulan sorular</h2></div>
+  <div class="faq">
+    <details><summary>Kanallarım otomatik olarak gelir mi?</summary>
+      <p>Google ile giriş yaptıktan hemen sonra Google, hesabındaki kanalları listeler; seçtiğin kanal anında bağlanır. YouTube güvenlik gereği her kanal için ayrı onay ister: hesabında birden çok marka kanalı varsa her birini bir kez seçersin, sistem sana sırayla sorar. Sonrasında her şey otomatik güncellenir.</p></details>
+    <details><summary>Şifremi istiyor musunuz?</summary>
+      <p>Hayır. Giriş tamamen Google'ın kendi ekranında yapılır; şifren bize hiç ulaşmaz.</p></details>
+    <details><summary>Kanalımda değişiklik yapabilir misiniz?</summary>
+      <p>Hayır. Kanallar varsayılan olarak salt okunur izinle bağlanır. Kapak veya banner değiştirme özelliğini kullanmak istersen, o an ayrıca ek izin istenir; vermezsen hiçbir şey değişmez.</p></details>
+    <details><summary>Veriler ne kadar güncel?</summary>
+      <p>Abone ve izlenme sayaçları her güncellemede yenilenir. Ayrıntılı analitik (izlenme süresi, kaynaklar, en iyi videolar) YouTube tarafında 2-3 gün gecikmeyle hazırlanır; panel dönemleri buna göre hesaplar. Veriler arka planda düzenli olarak kendiliğinden güncellenir.</p></details>
+    <details><summary>Shorts destekleniyor mu?</summary>
+      <p>Evet. İzlenmelerin ne kadarının Shorts'tan, ne kadarının uzun videolardan geldiğini YouTube'un kendi sınıflandırmasıyla görürsün; en iyi videolar listesini Shorts/uzun diye filtreleyebilirsin.</p></details>
+    <details><summary>Erişimi nasıl kaldırırım?</summary>
+      <p>Panelde kanalın sayfasındaki "Bağlantıyı kes" düğmesiyle ya da Google Hesabı → Güvenlik → Üçüncü taraf erişimi bölümünden. Bağlantı kesildiğinde o kanalın verileri silinir.</p></details>
+    <details><summary>YouTube veya Google ile bağlantınız var mı?</summary>
+      <p>Hayır. __APP_NAME__ bağımsız bir üründür ve YouTube'un herkese açık resmi API Hizmetlerini kullanır.</p></details>
+  </div>
+</div></section>
+
+<section class="final" style="padding-top:20px"><div class="wrap"><div class="box">
+  <h2>Kanallarını bir kez bağla, her sabah tek ekrana bak.</h2>
+  <p>Ücretsiz başla — kurulum yok, kredi kartı yok.</p>
+  <a class="btn google lg" href="/giris" data-cta><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile ücretsiz başla</a>
+</div></div></section>
+
+<footer class="site"><div class="wrap">
+  <div><a class="brand" href="/" style="font-size:17px"><span class="mark" style="width:26px;height:26px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></span>__APP_NAME__</a>
+    <p style="margin:10px 0 0;max-width:300px">Çok kanallı YouTube analitiği.</p></div>
+  <div class="cols">
+    <div><b class="t2">Ürün</b><a href="#ozellikler">Özellikler</a><a href="#fiyat">Fiyatlar</a><a href="#sss">SSS</a><a href="/giris">Giriş yap</a></div>
+    <div><b class="t2">Yasal</b><a href="/gizlilik">Gizlilik Politikası</a><a href="/kosullar">Kullanım Koşulları</a></div>
+  </div>
+  <div class="legal">© __YEAR__ __APP_NAME__. YouTube, Google LLC'nin ticari markasıdır. __APP_NAME__, YouTube veya Google ile bağlantılı değildir ve onlar tarafından desteklenmemektedir. Bu hizmet YouTube API Hizmetlerini kullanır.</div>
+</div></footer>
+
+<script>
+const nav = document.getElementById("nav");
+addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 8), { passive: true });
+fetch("/api/me").then(r => r.json()).then(me => {
+  if (!me.logged_in) return;
+  document.getElementById("navCta").innerHTML = '<a class="btn primary" href="/panel">Panele git</a>';
+  document.querySelectorAll("[data-cta]").forEach(a => a.setAttribute("href", "/panel"));
+}).catch(() => {});
+</script>
+</body>
+</html>

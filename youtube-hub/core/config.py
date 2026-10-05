@@ -13,8 +13,27 @@ DB_PATH = os.path.join(DATA_DIR, "hub.sqlite3")
 CLIENT_SECRET_PATH = os.path.join(DATA_DIR, "client_secret.json")
 ASSETS_DIR = os.path.join(DATA_DIR, "assets")      # yüklenen + yedeklenen görseller
 
-HOST = "127.0.0.1"
+# ----------------------------------------------------------------------------
+# ÜRÜN / SUNUCU
+# ----------------------------------------------------------------------------
+
+# Ürün adı. YouTube marka kuralları gereği adında "YouTube" geçmemeli.
+APP_NAME = os.environ.get("YTHUB_APP_NAME", "Kanalist")
+CONTACT_EMAIL = os.environ.get("YTHUB_CONTACT_EMAIL", "")
+
+# Sunucuda yayınlarken herkese açık adres (ör. https://kanalist.com). Boşsa yerel mod:
+# sadece bu bilgisayar, http://127.0.0.1:PORT
+PUBLIC_URL = os.environ.get("YTHUB_PUBLIC_URL", "").rstrip("/")
+HOST = os.environ.get("YTHUB_HOST", "0.0.0.0" if PUBLIC_URL else "127.0.0.1")
 PORT = int(os.environ.get("YTHUB_PORT", "7788"))
+
+SESSION_DAYS = 30
+# Sunucu açıkken kanallar bu aralıkla kendiliğinden senkronize edilir (0 = kapalı).
+AUTOSYNC_HOURS = float(os.environ.get("YTHUB_AUTOSYNC_HOURS", "6"))
+
+
+def base_url():
+    return PUBLIC_URL or f"http://127.0.0.1:{PORT}"
 
 # ----------------------------------------------------------------------------
 # GOOGLE / YOUTUBE
@@ -28,15 +47,22 @@ UPLOAD_API = "https://www.googleapis.com/upload/youtube/v3"
 ANALYTICS_API = "https://youtubeanalytics.googleapis.com/v2"
 REPORTING_API = "https://youtubereporting.googleapis.com/v1"
 
-# `youtube` kapsamı okuma + kapak + banner için yeterli. Video YÜKLEME bu fazda yok.
-# Gelir verisi istersen YTHUB_MONETARY=1 ile çalıştır (yalnızca para kazanan kanal
-# sahipleri için anlamlı; Google doğrulamasında ek gerekçe ister).
-SCOPES = [
-    "https://www.googleapis.com/auth/youtube",
+# Giriş: sadece kimlik (e-posta, ad, fotoğraf).
+LOGIN_SCOPES = ["openid", "email", "profile"]
+
+# Kanal bağlama: SALT OKUNUR. Analiz için yeterli; kullanıcıya güven verir ve Google
+# doğrulamasını kolaylaştırır.
+CHANNEL_SCOPES = [
+    "https://www.googleapis.com/auth/youtube.readonly",
     "https://www.googleapis.com/auth/yt-analytics.readonly",
 ]
 if os.environ.get("YTHUB_MONETARY") == "1":
-    SCOPES.append("https://www.googleapis.com/auth/yt-analytics-monetary.readonly")
+    CHANNEL_SCOPES.append("https://www.googleapis.com/auth/yt-analytics-monetary.readonly")
+
+# Kapak/banner değiştirmek için ek izin — sadece kullanıcı bu özelliği kullanmak
+# istediğinde ayrıca istenir.
+WRITE_SCOPE = "https://www.googleapis.com/auth/youtube"
+SCOPES = CHANNEL_SCOPES  # geriye uyum
 
 # Data API v3 birim maliyetleri (docs: determine_quota_cost). Günlük varsayılan
 # kota proje başına 10.000 birim, Pasifik saatiyle gece yarısı sıfırlanır.

@@ -191,6 +191,39 @@ MIGRATIONS = [
     );
     CREATE INDEX video_daily_channel ON video_daily(channel_id, day);
     """,
+    # 4 — hesaplar: kullanıcı (Google kimliği), oturum, kullanıcı ↔ kanal
+    """
+    CREATE TABLE users (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        google_sub TEXT UNIQUE NOT NULL,
+        email      TEXT NOT NULL,
+        name       TEXT,
+        picture    TEXT,
+        created_at INTEGER NOT NULL,
+        last_login INTEGER
+    );
+
+    -- Çerezdeki rastgele anahtarın yalnızca özeti saklanır.
+    CREATE TABLE sessions (
+        token_hash TEXT PRIMARY KEY,
+        user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        csrf       TEXT NOT NULL,
+        created_at INTEGER NOT NULL,
+        expires_at INTEGER NOT NULL
+    );
+
+    -- Bir kanal birden çok kullanıcıya bağlı olabilir (ajans/ekip senaryosu).
+    CREATE TABLE user_channels (
+        user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        channel_id TEXT NOT NULL REFERENCES channels(id) ON DELETE CASCADE,
+        role       TEXT NOT NULL DEFAULT 'owner',
+        added_at   INTEGER NOT NULL,
+        PRIMARY KEY (user_id, channel_id)
+    );
+    CREATE INDEX user_channels_channel ON user_channels(channel_id);
+
+    ALTER TABLE actions ADD COLUMN user_id INTEGER;
+    """,
 ]
 
 
