@@ -4,363 +4,663 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>__APP_NAME__ — Tüm YouTube kanalların tek ekranda</title>
-<meta name="description" content="Birden çok YouTube kanalını tek panelden analiz et: izlenme, izlenme süresi, abone, en iyi videolar, izlenme kaynakları ve Shorts/uzun video ayrımı — hepsi önceki döneme göre karşılaştırmalı.">
-<link rel="stylesheet" href="/static/site.css">
+<meta name="description" content="Bütün YouTube kanallarının izlenme, izlenme süresi, abone ve en iyi videolarını tek panelde topla. Önceki döneme göre karşılaştır, büyüyeni ve yavaşlayanı ilk bakışta gör.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
 <style>
-section { padding: 88px 0; }
-.eyebrow { display: inline-block; font-size: 13px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-h2.title { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: -.025em; margin: 0 0 14px; }
-p.lead { font-size: 19px; color: var(--text-2); max-width: 680px; margin: 0; }
-.center { text-align: center; } .center p.lead { margin: 0 auto; }
+/* Düzen: sola yaslı asimetrik iki sütun; açık zemin, aralarda koyu "kontrol odası" bantları.
+   Kanallar bir yatırım portföyü gibi: eş aralıklı rakamlar, değişim etiketleri, kayan şerit. */
+:root {
+  --paper: #f5f7fa; --surface: #ffffff; --sunk: #eef1f6; --line: #dfe4ec;
+  --ink: #0a1020; --ink-2: #47526a; --ink-3: #7a849a;
+  --cobalt: #2453ff; --cobalt-ink: #1a3fd1; --cobalt-soft: #e6ecff;
+  --up: #0d8f63; --down: #d23a2f;
+  --band: #0a1020; --band-2: #121b31; --band-line: #253152; --band-ink: #eaeef7; --band-ink-2: #9ca8c4;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #4a3aa7;
+  --display: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+  --body: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --shadow: 0 1px 1px rgba(10,16,32,.04), 0 18px 48px -12px rgba(10,16,32,.18);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0b101c; --surface: #111827; --sunk: #0e1424; --line: #222c42;
+    --ink: #eef2fa; --ink-2: #a9b3c8; --ink-3: #7d88a0;
+    --cobalt: #6083ff; --cobalt-ink: #86a0ff; --cobalt-soft: #172250;
+    --up: #34c48f; --down: #f06b60;
+    --band: #060a13; --band-2: #0f1728; --band-line: #222d48; --band-ink: #eaeef7; --band-ink-2: #9ca8c4;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #9085e9;
+    --shadow: 0 1px 1px rgba(0,0,0,.3), 0 18px 48px -12px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0b101c; --surface: #111827; --sunk: #0e1424; --line: #222c42;
+  --ink: #eef2fa; --ink-2: #a9b3c8; --ink-3: #7d88a0;
+  --cobalt: #6083ff; --cobalt-ink: #86a0ff; --cobalt-soft: #172250;
+  --up: #34c48f; --down: #f06b60;
+  --band: #060a13; --band-2: #0f1728; --band-line: #222d48; --band-ink: #eaeef7; --band-ink-2: #9ca8c4;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #9085e9;
+  --shadow: 0 1px 1px rgba(0,0,0,.3), 0 18px 48px -12px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+img, svg { max-width: 100%; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 24px; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -.025em; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.label { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.up { color: var(--up); } .down { color: var(--down); }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; border-radius: 6px; }
+
+/* düğmeler */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 600 16px/1 var(--body); padding: 14px 20px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease; }
+.btn:hover { border-color: var(--ink-3); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--cobalt); border-color: var(--cobalt); color: #fff; box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--cobalt) 70%, transparent); }
+.btn.primary:hover { background: var(--cobalt-ink); border-color: var(--cobalt-ink); }
+.btn.google { background: #fff; color: #1f1f1f; border-color: #d3d9e3; }
+.btn.google:hover { border-color: #9fb0cc; box-shadow: 0 6px 18px -8px rgba(10,16,32,.35); }
+.btn.ghost { background: transparent; }
+.btn.sm { padding: 10px 14px; font-size: 15px; }
+.btn .arrow { transition: transform .2s ease; } .btn:hover .arrow { transform: translateX(3px); }
+
+/* üst menü */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--paper) 93%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4); -webkit-backdrop-filter: blur(12px) saturate(1.4); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .wrap { display: flex; align-items: center; gap: 28px; height: 68px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 21px/1 var(--display); letter-spacing: -.03em; }
+.brand .mk { width: 30px; height: 30px; border-radius: 8px; background: var(--ink); display: grid; place-items: center; }
+.brand .mk i { display: block; width: 4px; border-radius: 2px; background: var(--paper); margin: 0 1.5px; align-self: end; }
+.nav .links { display: flex; gap: 24px; flex: 1; font-size: 15px; }
+.nav .links a { text-decoration: none; color: var(--ink-2); }
+.nav .links a:hover { color: var(--ink); }
+.nav .cta { display: flex; gap: 8px; }
+@media (max-width: 900px) { .nav .links { display: none; } .nav .wrap { justify-content: space-between; } }
+@media (max-width: 440px) { .nav .cta .ghost { display: none; } }
 
 /* hero */
-.hero { padding: 64px 0 40px; position: relative; overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: -40% -10% auto; height: 760px; z-index: -1;
-  background: radial-gradient(60% 50% at 50% 30%, var(--accent-soft), transparent 70%); }
-.hero h1 { font-size: clamp(38px, 6.4vw, 70px); line-height: 1.03; letter-spacing: -.035em; margin: 0 0 20px; max-width: 900px; }
-.hero h1 em { font-style: normal; color: var(--accent); }
-.hero p.lead { font-size: clamp(18px, 2.2vw, 21px); max-width: 720px; }
-.hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 30px 0 16px; }
-.micro { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--text-2); font-size: 14px; }
-.micro span { display: inline-flex; align-items: center; gap: 7px; }
-.micro svg { color: var(--good); }
+.hero { padding: 56px 0 0; position: relative; }
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.pill { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line);
+  padding: 6px 12px 6px 8px; border-radius: 999px; margin-bottom: 22px; }
+.pill b { font: 600 11px/1 var(--mono); letter-spacing: .06em; color: var(--paper); background: var(--ink); padding: 4px 7px; border-radius: 999px; }
+.hero h1 { font-size: clamp(40px, 4.7vw, 66px); line-height: 1; font-weight: 800; letter-spacing: -.045em; }
+.hero h1 .u { background: linear-gradient(transparent 68%, var(--cobalt-soft) 68%); }
+.hero .sub { font-size: clamp(18px, 1.6vw, 20px); color: var(--ink-2); max-width: 540px; margin-top: 22px; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 22px; font-size: 14px; color: var(--ink-2); }
+.checks span { display: inline-flex; align-items: center; gap: 7px; }
+.checks svg { color: var(--up); flex: none; }
+@media (max-width: 980px) { .hero .grid { grid-template-columns: minmax(0, 1fr); } }
 
-/* panel önizlemesi */
-.mock { margin-top: 54px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
-.mock .bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
-.mock .bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--line); display: block; }
-.mock .bar span { margin-left: 12px; font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 2px 10px; }
-.mock .body { padding: 18px; display: grid; gap: 14px; }
-.mtiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.mtile { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
-.mtile .l { font-size: 12px; color: var(--text-2); } .mtile .v { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
-.mtile .d { font-size: 12px; font-weight: 650; color: var(--good); } .mtile .d.down { color: var(--bad); }
-.mgrid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; }
-.mcard { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
-.mcard h4 { margin: 0 0 8px; font-size: 13px; }
-.mcard svg { width: 100%; height: auto; display: block; }
-.mrow { display: grid; grid-template-columns: 12px 1fr auto auto; gap: 10px; align-items: center; font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--line); }
-.mrow:last-child { border-bottom: 0; }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.up { color: var(--good); font-weight: 650; font-size: 12px; } .dn { color: var(--bad); font-weight: 650; font-size: 12px; }
-.mlegend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--text-2); margin-top: 6px; }
-.mlegend span { display: inline-flex; align-items: center; gap: 5px; }
-.mlegend i { width: 12px; border-top: 2px solid; display: inline-block; }
-@media (max-width: 760px) { .mtiles { grid-template-columns: repeat(2, 1fr); } .mgrid { grid-template-columns: 1fr; } }
+/* ürün çerçevesi */
+.frame { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; min-width: 0; }
+.frame .top { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--sunk); }
+.frame .top .dots { display: flex; gap: 6px; } .frame .top .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; }
+.frame .top .seg { margin-left: auto; display: flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; font: 600 11px/1 var(--mono); }
+.frame .top .seg span { padding: 5px 8px; color: var(--ink-3); } .frame .top .seg span.on { background: var(--surface); color: var(--ink); }
+.frame .top .t { font: 600 12px/1 var(--mono); color: var(--ink-3); }
+.frame .body { padding: 16px; display: grid; gap: 12px; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.kpi { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.kpi .l { font-size: 12px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi .v { font: 600 clamp(17px, 1.9vw, 24px)/1.2 var(--mono); letter-spacing: -.03em; margin-top: 2px; white-space: nowrap; }
+.kpi .d { font: 600 11px/1 var(--mono); margin-top: 6px; }
+.chartbox { border: 1px solid var(--line); border-radius: 10px; padding: 12px 12px 8px; }
+.chartbox .h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; font-size: 13px; font-weight: 600; }
+.chartbox svg { display: block; width: 100%; height: auto; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--ink-2); margin-top: 4px; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; } .legend i { width: 14px; border-top: 2px solid; display: inline-block; }
+.legend i.dash { border-top-style: dashed; }
+.sample { font: 500 10px/1 var(--mono); color: var(--ink-3); letter-spacing: .04em; text-transform: uppercase; }
+@media (max-width: 560px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-/* kimler için */
-.who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-.who .card { padding: 22px; }
-.who h3 { margin: 0 0 6px; font-size: 18px; }
-.who p { margin: 0; color: var(--text-2); font-size: 15px; }
-@media (max-width: 860px) { .who { grid-template-columns: 1fr; } }
+/* kayan şerit */
+.ticker { margin-top: 56px; border-block: 1px solid var(--line); background: var(--surface); overflow: hidden; position: relative; }
+.ticker .lab { position: absolute; left: 0; top: 0; bottom: 0; z-index: 2; display: flex; align-items: center; padding-inline: 24px 14px; background: var(--surface); }
+.ticker .lab::after { content: ""; position: absolute; top: 0; bottom: 0; right: -48px; width: 48px; background: linear-gradient(90deg, var(--surface), transparent); }
+.ticker .track { display: flex; gap: 36px; width: max-content; padding: 14px 0 14px 230px; animation: tick 48s linear infinite; }
+.ticker .it { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; white-space: nowrap; }
+.ticker .it .dot { width: 8px; height: 8px; border-radius: 50%; }
+.ticker .it .num { font-size: 14px; font-weight: 600; }
+@keyframes tick { to { transform: translateX(-50%); } }
+.ticker:hover .track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .ticker .track { animation: none; } html { scroll-behavior: auto; } }
 
-/* sorun → çözüm */
-.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
-.versus .card { padding: 26px; }
-.versus h3 { margin: 0 0 14px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
-.versus ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.versus li { display: flex; gap: 10px; color: var(--text-2); }
-.versus li svg { flex: none; margin-top: 4px; }
-.versus .after { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 0 0 4px var(--accent-soft); }
-@media (max-width: 860px) { .versus { grid-template-columns: 1fr; } }
+/* bölümler */
+section { padding-block: 104px; }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 64px; align-items: end; margin-bottom: 48px; }
+.head h2 { font-size: clamp(32px, 4.2vw, 54px); line-height: 1.02; font-weight: 800; letter-spacing: -.04em; }
+.head p { color: var(--ink-2); font-size: 18px; max-width: 520px; }
+.head .label { display: block; margin-bottom: 16px; }
+@media (max-width: 860px) { .head { grid-template-columns: minmax(0, 1fr); } }
 
-/* özellikler */
-.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-.feature { padding: 26px; }
-.feature .ic { width: 42px; height: 42px; border-radius: 11px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 16px; }
-.feature h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.01em; }
-.feature p { margin: 0; color: var(--text-2); font-size: 15px; }
-@media (max-width: 960px) { .features { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 620px) { .features { grid-template-columns: 1fr; } }
+/* sorun */
+.problem { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.many { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.mini { aspect-ratio: 4/3; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 8px; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.mini .tb { height: 6px; width: 60%; border-radius: 3px; background: var(--sunk); }
+.mini .ch { flex: 1; border-radius: 4px; background: linear-gradient(180deg, transparent 40%, var(--sunk) 40%); position: relative; overflow: hidden; }
+.mini .ch::after { content: ""; position: absolute; left: 0; right: 0; bottom: 30%; border-top: 2px solid var(--line); transform: skewY(-8deg); }
+.mini .nm { font: 600 10px/1.2 var(--mono); color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arrowdown { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: var(--ink-3); font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.arrowdown::before, .arrowdown::after { content: ""; flex: 1; border-top: 1px dashed var(--line); }
+.one { border: 1.5px solid var(--cobalt); border-radius: 12px; background: var(--surface); padding: 14px; box-shadow: 0 0 0 5px var(--cobalt-soft); }
+.one .r { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.one .r:last-child { border-bottom: 0; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.pains { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 18px; }
+.pains li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
+.pains .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--sunk); display: grid; place-items: center; color: var(--ink-2); }
+.pains b { display: block; font-size: 17px; }
+.pains span { color: var(--ink-2); font-size: 16px; }
+@media (max-width: 900px) { .problem { grid-template-columns: minmax(0, 1fr); } }
 
-/* derinlemesine */
-.deep { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; margin-top: 72px; }
-.deep.rev > :first-child { order: 2; }
-.deep h3 { font-size: 28px; letter-spacing: -.02em; line-height: 1.2; margin: 0 0 12px; }
-.deep p { color: var(--text-2); margin: 0 0 16px; }
-.checks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.checks li { display: flex; gap: 10px; }
-.checks svg { flex: none; color: var(--good); margin-top: 5px; }
-.deep .mcard { background: var(--surface); box-shadow: var(--shadow); padding: 18px; }
-.bars .r { display: grid; grid-template-columns: 130px 1fr 54px; gap: 10px; align-items: center; font-size: 13px; padding: 5px 0; }
-.bars .t { height: 9px; background: var(--accent-soft); border-radius: 5px; overflow: hidden; }
-.bars .t i { display: block; height: 100%; background: var(--accent); border-radius: 5px; }
-.bars .v { text-align: right; color: var(--text-2); font-variant-numeric: tabular-nums; }
-@media (max-width: 860px) { .deep { grid-template-columns: 1fr; gap: 28px; } .deep.rev > :first-child { order: 0; } }
+/* koyu bant: ürün turu */
+.band { background: var(--band); color: var(--band-ink); }
+.band .label { color: var(--band-ink-2); }
+.band .head p { color: var(--band-ink-2); }
+.tour { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 40px; align-items: start; }
+.tabs { display: flex; flex-direction: column; gap: 8px; }
+.tab { text-align: left; background: transparent; border: 1px solid var(--band-line); color: var(--band-ink); border-radius: 12px; padding: 16px 18px; cursor: pointer; font: inherit;
+  transition: background .2s, border-color .2s; }
+.tab:hover { border-color: var(--band-ink-2); }
+.tab[aria-selected="true"] { background: var(--band-2); border-color: var(--cobalt); }
+.tab .k { font: 600 12px/1 var(--mono); color: var(--band-ink-2); letter-spacing: .06em; }
+.tab b { display: block; font: 700 20px/1.25 var(--display); letter-spacing: -.02em; margin: 8px 0 4px; }
+.tab span { display: block; font-size: 15px; color: var(--band-ink-2); }
+.tab:not([aria-selected="true"]) span { display: none; }
+.band .frame { background: var(--band-2); border-color: var(--band-line); box-shadow: 0 30px 80px -30px rgba(0,0,0,.7); }
+.band .frame .top { background: color-mix(in srgb, var(--band-2) 70%, #000); border-color: var(--band-line); }
+.band .frame .top .dots i { background: var(--band-line); }
+.band .frame .top .t { color: var(--band-ink-2); }
+.band .kpi, .band .chartbox, .band .tbl { border-color: var(--band-line); }
+.band .kpi .l, .band .legend { color: var(--band-ink-2); }
+.band .sample { color: var(--band-ink-2); }
+.band .up { color: #34c48f; } .band .down { color: #f06b60; }
+.panelv[hidden] { display: none !important; }
+.tbl { border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; }
+.tbl table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
+.tbl th, .tbl td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--band-line); white-space: nowrap; }
+.tbl th { font: 600 11px/1 var(--mono); letter-spacing: .05em; color: var(--band-ink-2); text-transform: uppercase; }
+.tbl td:first-child, .tbl th:first-child { text-align: left; }
+.tbl tr:last-child td { border-bottom: 0; }
+.tbl .num { font-size: 13px; }
+.share { display: inline-block; height: 6px; border-radius: 3px; background: var(--cobalt); vertical-align: middle; margin-right: 8px; }
+.bars { display: grid; gap: 10px; }
+.bar { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr) 56px; gap: 12px; align-items: center; font-size: 13px; }
+.bar .t { height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--cobalt) 18%, transparent); overflow: hidden; }
+.bar .t i { display: block; height: 100%; border-radius: 5px; background: var(--cobalt); }
+.bar .v { text-align: right; font: 600 12px/1 var(--mono); color: var(--band-ink-2); }
+.split { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px; }
+.split i { display: block; height: 100%; }
+.cols2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.vid { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--band-line); font-size: 13px; }
+.vid:last-child { border-bottom: 0; }
+.thumb { aspect-ratio: 16/9; border-radius: 6px; position: relative; overflow: hidden; }
+.thumb::after { content: ""; position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: translate(-35%, -50%);
+  border-left: 9px solid rgba(255,255,255,.9); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.vid .tt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vid .meta { font: 500 11px/1.3 var(--mono); color: var(--band-ink-2); margin-top: 3px; }
+@media (max-width: 960px) { .tour { grid-template-columns: minmax(0, 1fr); } .tabs { flex-direction: row; overflow-x: auto; padding-bottom: 4px; } .tab { min-width: 210px; } .tab span { display: none !important; } }
+@media (max-width: 640px) { .cols2 { grid-template-columns: minmax(0, 1fr); } }
+
+/* özellik listesi */
+.feat { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.feat > div { padding: 28px 26px 30px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.feat .label { display: block; margin-bottom: 14px; color: var(--cobalt); }
+.feat h3 { font-size: 21px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+.feat p { color: var(--ink-2); font-size: 16px; }
+@media (max-width: 900px) { .feat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 580px) { .feat { grid-template-columns: minmax(0, 1fr); } }
 
 /* adımlar */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; counter-reset: s; }
-.step { padding: 26px; position: relative; }
-.step .n { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: grid; place-items: center; margin-bottom: 14px; }
-.step h3 { margin: 0 0 8px; font-size: 18px; }
-.step p { margin: 0; color: var(--text-2); font-size: 15px; }
-@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; position: relative; counter-reset: s; }
+.steps::before { content: ""; position: absolute; top: 21px; left: 22px; right: 22%; border-top: 2px dashed var(--line); }
+.step { position: relative; padding-right: 32px; }
+.step .n { width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--paper); display: grid; place-items: center; font: 700 16px/1 var(--mono); position: relative; }
+.step h3 { font-size: 23px; font-weight: 700; margin: 22px 0 8px; }
+.step p { color: var(--ink-2); font-size: 16px; max-width: 320px; }
+.step .tm { display: inline-block; margin-top: 14px; font: 600 12px/1 var(--mono); color: var(--ink-3); background: var(--sunk); padding: 6px 9px; border-radius: 6px; }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0, 1fr); gap: 36px; } .steps::before { display: none; } }
 
 /* güven */
-.trust { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 44px; }
-.tgrid h3 { font-size: 16px; margin: 12px 0 6px; }
-.tgrid p { margin: 0; font-size: 14px; color: var(--text-2); }
-.tgrid .ic { color: var(--accent); }
-@media (max-width: 860px) { .tgrid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 520px) { .tgrid { grid-template-columns: 1fr; } }
+.trust { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+.trust h2 { font-size: clamp(32px, 4.2vw, 54px); line-height: 1.02; font-weight: 800; letter-spacing: -.04em; margin-bottom: 20px; }
+.trust > div > p { color: var(--ink-2); font-size: 18px; max-width: 500px; }
+.facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px 28px; margin-top: 34px; }
+.facts b { display: block; font-size: 16px; margin-bottom: 4px; }
+.facts span { color: var(--ink-2); font-size: 15px; }
+.consent { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 26px; font-size: 15px; }
+.consent .g { display: flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 14px; }
+.consent h3 { font: 600 22px/1.3 var(--body); letter-spacing: -.01em; margin: 18px 0 4px; }
+.consent .acct { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px 4px 4px; font-size: 13px; color: var(--ink-2); margin: 10px 0 18px; }
+.consent .acct i { width: 22px; height: 22px; border-radius: 50%; background: var(--s3); display: grid; place-items: center; color: #fff; font: 700 11px/1 var(--body); font-style: normal; }
+.consent ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.consent li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; }
+.consent li svg { margin-top: 2px; }
+.consent .no { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
+.consent .no .label { display: block; margin-bottom: 12px; }
+.consent .no li { color: var(--ink-2); }
+@media (max-width: 900px) { .trust { grid-template-columns: minmax(0, 1fr); } .facts { grid-template-columns: minmax(0, 1fr); } }
+
+/* kimler için */
+.who { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.persona { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.persona h3 { font-size: 22px; font-weight: 700; }
+.persona p { color: var(--ink-2); font-size: 16px; }
+.persona q { display: block; quotes: none; font-size: 15px; color: var(--ink); border-left: 2px solid var(--cobalt); padding-left: 12px; margin-top: auto; }
+@media (max-width: 900px) { .who { grid-template-columns: minmax(0, 1fr); } }
 
 /* fiyat */
-.beta { display: inline-flex; gap: 8px; align-items: center; background: var(--accent-soft); color: var(--text); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 600; margin-top: 18px; }
-.plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
-.plan { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
-.plan.pop { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); position: relative; }
-.plan.pop::before { content: "En çok tercih edilecek"; position: absolute; top: -12px; left: 20px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 650; padding: 2px 10px; border-radius: 999px; }
-.plan h3 { margin: 0; font-size: 17px; }
-.plan .price { font-size: 38px; font-weight: 750; letter-spacing: -.03em; line-height: 1; }
-.plan .price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
-.plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--text-2); flex: 1; }
-.plan li { display: flex; gap: 8px; } .plan li svg { flex: none; color: var(--good); margin-top: 4px; }
-@media (max-width: 960px) { .plans { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+.plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px 22px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.plan.pop { border-color: var(--ink); box-shadow: var(--shadow); position: relative; }
+.plan .tag { position: absolute; top: -11px; left: 22px; font: 600 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 6px 9px; border-radius: 6px; }
+.plan h3 { font-size: 20px; font-weight: 700; }
+.plan .who2 { font-size: 14px; color: var(--ink-2); margin-top: -10px; }
+.plan .price { font: 600 40px/1 var(--mono); letter-spacing: -.04em; }
+.plan .price small { font: 500 14px/1 var(--body); color: var(--ink-3); letter-spacing: 0; }
+.plan ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 15px; color: var(--ink-2); flex: 1; align-content: start; }
+.plan li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 9px; } .plan li svg { margin-top: 5px; color: var(--up); }
+.plan .btn { width: 100%; }
+.betanote { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 22px; padding: 16px 20px; border: 1px dashed var(--line); border-radius: 12px; color: var(--ink-2); font-size: 15px; }
+.betanote b { color: var(--ink); }
+@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .plans { grid-template-columns: minmax(0, 1fr); } }
 
 /* sss */
-.faq { max-width: 820px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 10px; }
-.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
-.faq summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 650; display: flex; justify-content: space-between; gap: 16px; }
+.faqgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 56px; align-items: start; }
+.faqgrid h2 { font-size: clamp(32px, 4.2vw, 54px); line-height: 1.02; font-weight: 800; letter-spacing: -.04em; margin-bottom: 16px; }
+.faqgrid > div:first-child p { color: var(--ink-2); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq details:first-child { border-top: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; padding: 22px 0; display: flex; justify-content: space-between; gap: 20px; font: 600 18px/1.35 var(--body); }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--muted); transition: transform .2s; }
+.faq summary::after { content: "+"; font: 400 24px/1 var(--mono); color: var(--ink-3); transition: transform .2s ease; flex: none; }
 .faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { margin: 0 0 18px; color: var(--text-2); }
+.faq details p { color: var(--ink-2); padding-bottom: 22px; max-width: 640px; font-size: 16px; }
+@media (max-width: 900px) { .faqgrid { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 
-/* son çağrı */
-.final { text-align: center; }
-.final .box { padding: 56px 24px; border-radius: 22px; background: linear-gradient(135deg, var(--accent), #4a3aa7); color: #fff; }
-.final h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.025em; margin: 0 0 12px; line-height: 1.15; }
-.final p { margin: 0 auto 26px; max-width: 560px; opacity: .9; font-size: 18px; }
+/* kapanış */
+.final { padding-block: 0 104px; }
+.final .box { background: var(--band); color: var(--band-ink); border-radius: 24px; padding: clamp(36px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 40px; align-items: end; position: relative; overflow: hidden; }
+.final .box::after { content: ""; position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; border-radius: 50%;
+  border: 1px solid var(--band-line); box-shadow: 0 0 0 60px color-mix(in srgb, var(--band-line) 30%, transparent), 0 0 0 120px color-mix(in srgb, var(--band-line) 15%, transparent); }
+.final h2 { font-size: clamp(34px, 4.6vw, 60px); line-height: 1; font-weight: 800; letter-spacing: -.045em; position: relative; z-index: 1; }
+.final .side { position: relative; z-index: 1; display: grid; gap: 16px; justify-items: start; }
+.final .side p { color: var(--band-ink-2); }
+@media (max-width: 860px) { .final .box { grid-template-columns: minmax(0, 1fr); } }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px 48px; font-size: 14px; color: var(--ink-3); }
+footer .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 32px; }
+footer a { text-decoration: none; color: var(--ink-2); } footer a:hover { color: var(--ink); }
+footer .col { display: grid; gap: 8px; align-content: start; }
+footer .legal { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.6; }
+@media (max-width: 700px) { footer .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } footer .wrap > div:first-child { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
 
 <nav class="nav" id="nav"><div class="wrap">
-  <a class="brand" href="/"><span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></span>__APP_NAME__</a>
-  <div class="links"><a href="#ozellikler">Özellikler</a><a href="#nasil">Nasıl çalışır</a><a href="#guven">Güvenlik</a><a href="#fiyat">Fiyatlar</a><a href="#sss">SSS</a></div>
-  <div class="cta" id="navCta"><a class="btn ghost" href="/giris">Giriş yap</a><a class="btn primary" href="/giris">Ücretsiz başla</a></div>
+  <a class="brand" href="/" aria-label="__APP_NAME__ ana sayfa"><span class="mk" aria-hidden="true"><span style="display:flex;height:16px;align-items:flex-end"><i style="height:8px"></i><i style="height:16px"></i><i style="height:11px"></i></span></span>__APP_NAME__</a>
+  <div class="links"><a href="#urun">Ürün</a><a href="#nasil">Nasıl çalışır</a><a href="#guven">Güvenlik</a><a href="#fiyat">Fiyatlar</a><a href="#sss">SSS</a></div>
+  <div class="cta" id="navCta"><a class="btn sm ghost" href="/giris">Giriş yap</a><a class="btn sm primary" href="/giris" data-cta>Ücretsiz başla</a></div>
 </div></nav>
 
-<header class="hero"><div class="wrap">
-  <span class="eyebrow">Çok kanallı YouTube analitiği</span>
-  <h1>Tüm YouTube kanalların, <em>tek ekranda.</em></h1>
-  <p class="lead">Kanal kanal Studio'da gezmeyi bırak. İzlenme, izlenme süresi, abone ve en iyi videolarını bütün kanallarında aynı anda gör, önceki dönemle karşılaştır, hızlı karar ver.</p>
-  <div class="actions">
-    <a class="btn google lg" href="/giris" data-cta><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile ücretsiz başla</a>
-    <a class="btn lg" href="#nasil">Nasıl çalışır?</a>
-  </div>
-  <div class="micro">
-    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>Kredi kartı gerekmez</span>
-    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>Salt okunur erişim — kanalına dokunmayız</span>
-    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>Dakikalar içinde hazır</span>
-  </div>
-
-  <div class="mock" aria-label="Panel önizlemesi (örnek veri)">
-    <div class="bar"><i></i><i></i><i></i><span>__APP_NAME__ · Panel — son 28 gün</span></div>
-    <div class="body">
-      <div class="mtiles">
-        <div class="mtile"><div class="l">İzlenme</div><div class="v">4,8 Mn</div><div class="d">▲ +18% önceki 28 gün</div></div>
-        <div class="mtile"><div class="l">İzlenme süresi</div><div class="v">61,2 B sa</div><div class="d">▲ +9%</div></div>
-        <div class="mtile"><div class="l">Abone (net)</div><div class="v">+12.480</div><div class="d">▲ +2.115</div></div>
-        <div class="mtile"><div class="l">Ort. izleme süresi</div><div class="v">0:46</div><div class="d down">▼ −4%</div></div>
+<header class="hero">
+  <div class="wrap grid">
+    <div>
+      <span class="pill"><b>BETA</b>Tüm özellikler şimdilik ücretsiz</span>
+      <h1>Kanallarını tek tek değil, <span class="u">portföy olarak</span> yönet.</h1>
+      <p class="sub">__APP_NAME__ bütün YouTube kanallarının izlenme, izlenme süresi, abone ve en iyi videolarını tek panelde toplar. Hangi kanalın büyüdüğünü, hangisinin yavaşladığını ilk bakışta görürsün.</p>
+      <div class="actions">
+        <a class="btn google" href="/giris" data-cta><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile ücretsiz başla</a>
+        <a class="btn ghost" href="#urun">Ürünü gez <span class="arrow">→</span></a>
       </div>
-      <div class="mgrid">
-        <div class="mcard"><h4>Günlük izlenme — kanallara göre</h4>
-          <svg viewBox="0 0 520 170" role="img" aria-label="Örnek trend grafiği">
-            <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="20" x2="520" y2="20"/><line x1="0" y1="85" x2="520" y2="85"/><line x1="0" y1="150" x2="520" y2="150"/></g>
-            <path d="M0 110 L40 98 L80 104 L120 86 L160 90 L200 70 L240 76 L280 58 L320 64 L360 46 L400 52 L440 38 L480 44 L520 30" fill="none" stroke="var(--s1)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M0 128 L40 122 L80 126 L120 116 L160 120 L200 110 L240 114 L280 104 L320 108 L360 100 L400 103 L440 96 L480 99 L520 92" fill="none" stroke="var(--s2)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M0 140 L40 138 L80 136 L120 137 L160 132 L200 134 L240 128 L280 130 L320 124 L360 126 L400 120 L440 121 L480 115 L520 112" fill="none" stroke="var(--s3)" stroke-width="2.5" stroke-linejoin="round"/>
-          </svg>
-          <div class="mlegend"><span><i style="border-color:var(--s1)"></i>Tarih kanalı</span><span><i style="border-color:var(--s2)"></i>Şehir kanalı</span><span><i style="border-color:var(--s3)"></i>Bilim kanalı</span></div>
+      <div class="checks">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kredi kartı yok</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Salt okunur erişim</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>YouTube'un resmi API'leri</span>
+      </div>
+    </div>
+
+    <div class="frame" aria-label="Panel önizlemesi, örnek veri">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="t">Portföy · 8 kanal</span>
+        <span class="seg"><span>7G</span><span class="on">28G</span><span>90G</span></span></div>
+      <div class="body">
+        <div class="kpis">
+          <div class="kpi"><div class="l">İzlenme</div><div class="v">9,42 Mn</div><div class="d up">▲ +18,4%</div></div>
+          <div class="kpi"><div class="l">İzlenme süresi</div><div class="v">206 B sa</div><div class="d up">▲ +9,1%</div></div>
+          <div class="kpi"><div class="l">Abone (net)</div><div class="v">+18.869</div><div class="d up">▲ +421</div></div>
+          <div class="kpi"><div class="l">Ort. izleme</div><div class="v">1:19</div><div class="d down">▼ −3,8%</div></div>
         </div>
-        <div class="mcard"><h4>Kanal karşılaştırma</h4>
-          <div class="mrow"><span class="dot" style="background:var(--s1)"></span><span>Tarih kanalı</span><b>2,9 Mn</b><span class="up">▲ 24%</span></div>
-          <div class="mrow"><span class="dot" style="background:var(--s2)"></span><span>Şehir kanalı</span><b>1,2 Mn</b><span class="up">▲ 11%</span></div>
-          <div class="mrow"><span class="dot" style="background:var(--s3)"></span><span>Bilim kanalı</span><b>486 B</b><span class="dn">▼ 6%</span></div>
-          <div class="mrow"><span class="dot" style="background:var(--s4)"></span><span>Mutfak kanalı</span><b>214 B</b><span class="up">▲ 31%</span></div>
-          <div class="muted" style="font-size:11px;margin-top:6px">Örnek veri</div>
+        <div class="chartbox">
+          <div class="h"><span>Günlük izlenme</span><span class="sample">Örnek veri</span></div>
+          <svg viewBox="0 0 560 170" role="img" aria-label="Bu dönem ve önceki dönem günlük izlenme">
+            <g stroke="var(--line)" stroke-width="1"><line x1="0" y1="14" x2="560" y2="14"/><line x1="0" y1="82" x2="560" y2="82"/><line x1="0" y1="150" x2="560" y2="150"/></g>
+            <path d="M0 108 L40 104 L80 96 L120 100 L160 84 L200 88 L240 70 L280 76 L320 60 L360 66 L400 48 L440 54 L480 38 L520 44 L560 30 L560 150 L0 150 Z" fill="var(--cobalt)" opacity=".1"/>
+            <path d="M0 108 L40 104 L80 96 L120 100 L160 84 L200 88 L240 70 L280 76 L320 60 L360 66 L400 48 L440 54 L480 38 L520 44 L560 30" fill="none" stroke="var(--cobalt)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M0 118 L40 116 L80 112 L120 114 L160 106 L200 108 L240 102 L280 104 L320 98 L360 100 L400 94 L440 96 L480 90 L520 92 L560 88" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="5 5"/>
+            <circle cx="560" cy="30" r="4.5" fill="var(--cobalt)" stroke="var(--surface)" stroke-width="2"/>
+          </svg>
+          <div class="legend"><span><i style="border-color:var(--cobalt)"></i>Bu dönem</span><span><i class="dash" style="border-color:var(--ink-3)"></i>Önceki 28 gün</span></div>
         </div>
       </div>
     </div>
   </div>
-</div></header>
 
-<section style="padding-top:56px"><div class="wrap center">
-  <span class="eyebrow">Kimler için</span>
-  <h2 class="title">Birden fazla kanalı olan herkes için</h2>
-  <div class="who" style="text-align:left">
-    <div class="card"><h3>Çok kanallı içerik üreticileri</h3><p>Farklı nişlerde kanalların varsa hangisinin büyüdüğünü, hangisinin yavaşladığını tek bakışta gör.</p></div>
-    <div class="card"><h3>Shorts ağları</h3><p>Onlarca kanaldaki Shorts performansını, izlenme kaynaklarını ve viral videoları tek listede yakala.</p></div>
-    <div class="card"><h3>Ajanslar ve ekipler</h3><p>Yönettiğin kanalları karşılaştır, CSV ile rapora aktar, müşteriye dakikalar içinde durum anlat.</p></div>
+  <div class="ticker" aria-label="Örnek portföy, son 28 gün değişimi">
+    <div class="lab"><span class="label">Örnek portföy · 28G</span></div>
+    <div class="track">
+      <span class="it"><i class="dot" style="background:var(--s1)"></i>Tarihin Gizemleri<span class="num up">▲ 24,1%</span></span>
+      <span class="it"><i class="dot" style="background:var(--s2)"></i>Spor Anları<span class="num down">▼ 3,2%</span></span>
+      <span class="it"><i class="dot" style="background:var(--s3)"></i>Şehrin Hikayesi<span class="num up">▲ 11,6%</span></span>
+      <span class="it"><i class="dot" style="background:var(--s4)"></i>Mutfak Sırları<span class="num up">▲ 31,0%</span></span>
+      <span class="it"><i class="dot" style="background:var(--s5)"></i>Film Analiz<span class="num up">▲ 2,4%</span></span>
+      <span class="it"><i class="dot" style="background:var(--s6)"></i>Bilim Kısa<span class="num up">▲ 46,8%</span></span>
+      <span class="it"><i class="dot" style="background:var(--ink-3)"></i>Gezi Notları<span class="num down">▼ 1,9%</span></span>
+      <span class="it"><i class="dot" style="background:var(--ink-3)"></i>Oyun Dünyası<span class="num up">▲ 8,7%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--s1)"></i>Tarihin Gizemleri<span class="num up">▲ 24,1%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--s2)"></i>Spor Anları<span class="num down">▼ 3,2%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--s3)"></i>Şehrin Hikayesi<span class="num up">▲ 11,6%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--s4)"></i>Mutfak Sırları<span class="num up">▲ 31,0%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--s5)"></i>Film Analiz<span class="num up">▲ 2,4%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--s6)"></i>Bilim Kısa<span class="num up">▲ 46,8%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--ink-3)"></i>Gezi Notları<span class="num down">▼ 1,9%</span></span>
+      <span class="it" aria-hidden="true"><i class="dot" style="background:var(--ink-3)"></i>Oyun Dünyası<span class="num up">▲ 8,7%</span></span>
+    </div>
+  </div>
+</header>
+
+<section id="sorun"><div class="wrap problem">
+  <div>
+    <span class="label">Sorun</span>
+    <h2 style="font-size:clamp(32px,4.2vw,54px);line-height:1.02;font-weight:800;letter-spacing:-.04em;margin-top:16px">YouTube Studio aynı anda tek kanal gösterir.</h2>
+    <ul class="pains">
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></span>
+        <div><b>Kanal kanal geçiş</b><span>8 kanal, 3 dönem: 24 ayrı ekranda aynı rakamlara bakmak.</span></div></li>
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/></svg></span>
+        <div><b>Elle tutulan tablo</b><span>Toplam izlenmeyi ve büyümeyi her hafta Excel'e taşımak.</span></div></li>
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div><b>Geç fark edilen değişim</b><span>Yavaşlayan kanalı da patlayan videoyu da haftalar sonra görmek.</span></div></li>
+    </ul>
+  </div>
+  <div aria-hidden="true">
+    <div class="many">
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Tarihin Gizemleri</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Spor Anları</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Şehrin Hikayesi</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Mutfak Sırları</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Film Analiz</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Bilim Kısa</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Gezi Notları</div></div>
+      <div class="mini"><div class="tb"></div><div class="ch"></div><div class="nm">Oyun Dünyası</div></div>
+    </div>
+    <div class="arrowdown">__APP_NAME__ ile tek ekran</div>
+    <div class="one">
+      <div class="r"><i class="dot" style="background:var(--s1)"></i><span>Tarihin Gizemleri</span><span class="num">3,62 Mn</span><span class="num up">▲ 24,1%</span></div>
+      <div class="r"><i class="dot" style="background:var(--s3)"></i><span>Şehrin Hikayesi</span><span class="num">1,41 Mn</span><span class="num up">▲ 11,6%</span></div>
+      <div class="r"><i class="dot" style="background:var(--s2)"></i><span>Spor Anları</span><span class="num">1,30 Mn</span><span class="num down">▼ 3,2%</span></div>
+      <div class="r"><i class="dot" style="background:var(--s4)"></i><span>Mutfak Sırları</span><span class="num">979 B</span><span class="num up">▲ 31,0%</span></div>
+    </div>
   </div>
 </div></section>
 
-<section style="padding-top:20px"><div class="wrap center">
-  <span class="eyebrow">Sorun</span>
-  <h2 class="title">5 kanal = 5 ayrı Studio sekmesi.</h2>
-  <p class="lead">YouTube Studio her seferinde tek kanal gösterir. Karşılaştırma, toplam ve trend için rakamları elle taşımak zorunda kalırsın.</p>
-  <div class="versus" style="text-align:left">
-    <div class="card"><h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>Bugün</h3>
-      <ul>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>Her kanal için ayrı giriş, ayrı sekme, ayrı tarih seçimi</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>Toplam izlenmeyi ve büyümeyi Excel'de elle hesaplamak</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>Düşen kanalı ya da patlayan videoyu geç fark etmek</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bad)" stroke-width="3"><path d="M6 6l12 12M18 6L6 18"/></svg>"Hangi kanala daha çok emek vermeliyim?" sorusuna sezgiyle cevap</li>
-      </ul></div>
-    <div class="card after"><h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg>__APP_NAME__ ile</h3>
-      <ul>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tek giriş, tüm kanallar tek panelde</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Toplamlar ve önceki döneme göre değişim hazır hesaplanmış</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tüm kanallarda dönemin en çok izlenen videoları tek listede</li>
-        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kanalların portföydeki payı ve trendi yan yana</li>
-      </ul></div>
+<section class="band" id="urun"><div class="wrap">
+  <div class="head">
+    <div><span class="label">Ürün</span><h2>Sabah kahvesiyle beş dakikalık portföy kontrolü.</h2></div>
+    <p>Her metrik bir önceki eşit dönemle karşılaştırılır. YouTube Analytics'in 2-3 günlük gecikmesi hesaba katılır, böylece son günler boş kalıp düşüş gibi görünmez.</p>
+  </div>
+  <div class="tour">
+    <div class="tabs" role="tablist" aria-label="Ürün turu">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="k">01 · PORTFÖY</span><b>Bütün kanalların toplamı</b><span>İzlenme, izlenme süresi, abone ve ortalama izleme süresi; 7, 28 veya 90 gün, önceki döneme göre.</span></button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="k">02 · KARŞILAŞTIR</span><b>Kanal kanal yan yana</b><span>Büyüme, etkileşim, yükleme sıklığı ve portföy payı tek tabloda. Sırala, CSV olarak indir.</span></button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="k">03 · KAYNAKLAR</span><b>İzlenme nereden geliyor</b><span>Shorts akışı, önerilenler, arama; Shorts ve uzun video ayrımı; ülkeler.</span></button>
+      <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="k">04 · VİDEOLAR</span><b>Dönemin en iyileri</b><span>Tüm kanallarda en çok izlenen videolar ve her videonun gün gün izlenme eğrisi.</span></button>
+    </div>
+    <div>
+      <div class="frame panelv" id="p1" role="tabpanel" aria-labelledby="t1">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="t">Portföy · son 28 gün</span></div>
+        <div class="body">
+          <div class="kpis">
+            <div class="kpi"><div class="l">İzlenme</div><div class="v">9,42 Mn</div><div class="d up">▲ +18,4%</div></div>
+            <div class="kpi"><div class="l">İzlenme süresi</div><div class="v">206 B sa</div><div class="d up">▲ +9,1%</div></div>
+            <div class="kpi"><div class="l">Abone (net)</div><div class="v">+18.869</div><div class="d up">▲ +421</div></div>
+            <div class="kpi"><div class="l">Kapak tıklama oranı</div><div class="v">%5,5</div><div class="d up">▲ +0,3 puan</div></div>
+          </div>
+          <div class="chartbox">
+            <div class="h"><span>Günlük izlenme · kanallara göre</span><span class="sample">Örnek veri</span></div>
+            <svg viewBox="0 0 560 190" role="img" aria-label="Kanallara göre günlük izlenme">
+              <g stroke="var(--band-line)" stroke-width="1"><line x1="0" y1="14" x2="560" y2="14"/><line x1="0" y1="92" x2="560" y2="92"/><line x1="0" y1="170" x2="560" y2="170"/></g>
+              <path d="M0 116 L40 108 L80 112 L120 94 L160 98 L200 80 L240 86 L280 66 L320 72 L360 54 L400 60 L440 44 L480 50 L520 34 L560 28" fill="none" stroke="var(--s1)" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M0 132 L40 128 L80 130 L120 124 L160 126 L200 120 L240 124 L280 118 L320 122 L360 116 L400 120 L440 118 L480 122 L520 120 L560 124" fill="none" stroke="var(--s2)" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M0 146 L40 142 L80 144 L120 136 L160 138 L200 132 L240 134 L280 128 L320 130 L360 124 L400 126 L440 120 L480 122 L520 116 L560 112" fill="none" stroke="var(--s3)" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M0 160 L40 158 L80 156 L120 156 L160 152 L200 152 L240 148 L280 146 L320 142 L360 140 L400 136 L440 134 L480 130 L520 128 L560 124" fill="none" stroke="var(--s4)" stroke-width="2.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="legend"><span><i style="border-color:var(--s1)"></i>Tarihin Gizemleri</span><span><i style="border-color:var(--s2)"></i>Spor Anları</span><span><i style="border-color:var(--s3)"></i>Şehrin Hikayesi</span><span><i style="border-color:var(--s4)"></i>Mutfak Sırları</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frame panelv" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="t">Kanal karşılaştırma · son 28 gün</span></div>
+        <div class="body">
+          <div class="tbl"><table>
+            <thead><tr><th>Kanal</th><th>İzlenme ↓</th><th>Değişim</th><th>Ort. izleme</th><th>Abone net</th><th>Pay</th></tr></thead>
+            <tbody>
+              <tr><td><i class="dot" style="background:var(--s1)"></i>&nbsp; Tarihin Gizemleri</td><td class="num">3,62 Mn</td><td class="num up">▲ 24,1%</td><td class="num">0:38</td><td class="num">+7.258</td><td class="num"><i class="share" style="width:46px"></i>%39</td></tr>
+              <tr><td><i class="dot" style="background:var(--s3)"></i>&nbsp; Şehrin Hikayesi</td><td class="num">1,41 Mn</td><td class="num up">▲ 11,6%</td><td class="num">0:41</td><td class="num">+2.809</td><td class="num"><i class="share" style="width:18px"></i>%15</td></tr>
+              <tr><td><i class="dot" style="background:var(--s2)"></i>&nbsp; Spor Anları</td><td class="num">1,30 Mn</td><td class="num down">▼ 3,2%</td><td class="num">0:36</td><td class="num">+2.786</td><td class="num"><i class="share" style="width:17px"></i>%14</td></tr>
+              <tr><td><i class="dot" style="background:var(--s4)"></i>&nbsp; Mutfak Sırları</td><td class="num">979 B</td><td class="num up">▲ 31,0%</td><td class="num">3:30</td><td class="num">+1.990</td><td class="num"><i class="share" style="width:12px"></i>%10</td></tr>
+              <tr><td><i class="dot" style="background:var(--s6)"></i>&nbsp; Bilim Kısa</td><td class="num">779 B</td><td class="num up">▲ 46,8%</td><td class="num">0:33</td><td class="num">+1.558</td><td class="num"><i class="share" style="width:10px"></i>%8</td></tr>
+              <tr><td><i class="dot" style="background:var(--s5)"></i>&nbsp; Film Analiz</td><td class="num">576 B</td><td class="num up">▲ 2,4%</td><td class="num">4:12</td><td class="num">+1.131</td><td class="num"><i class="share" style="width:7px"></i>%6</td></tr>
+            </tbody></table></div>
+          <span class="sample">Örnek veri · CSV olarak indirilebilir</span>
+        </div>
+      </div>
+
+      <div class="frame panelv" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="t">İzlenme kaynakları · tüm kanallar</span></div>
+        <div class="body">
+          <div class="chartbox"><div class="h"><span>Trafik kaynağı</span><span class="sample">Örnek veri</span></div>
+            <div class="bars">
+              <div class="bar"><span>Shorts akışı</span><span class="t"><i style="width:100%"></i></span><span class="v">%58</span></div>
+              <div class="bar"><span>Önerilen videolar</span><span class="t"><i style="width:34%"></i></span><span class="v">%20</span></div>
+              <div class="bar"><span>YouTube arama</span><span class="t"><i style="width:21%"></i></span><span class="v">%12</span></div>
+              <div class="bar"><span>Göz atma</span><span class="t"><i style="width:10%"></i></span><span class="v">%6</span></div>
+              <div class="bar"><span>Harici siteler</span><span class="t"><i style="width:5%"></i></span><span class="v">%3</span></div>
+            </div></div>
+          <div class="cols2">
+            <div class="chartbox"><div class="h"><span>İçerik türü</span></div>
+              <div class="split" aria-label="Shorts yüzde 75, uzun video yüzde 25"><i style="width:75%;background:var(--cobalt)"></i><i style="width:25%;background:var(--s4)"></i></div>
+              <div class="legend" style="margin-top:10px"><span><i style="border-color:var(--cobalt)"></i>Shorts %75</span><span><i style="border-color:var(--s4)"></i>Uzun video %25</span></div></div>
+            <div class="chartbox"><div class="h"><span>Ülkeler</span></div>
+              <div class="bars">
+                <div class="bar" style="grid-template-columns:minmax(0,90px) minmax(0,1fr) 44px"><span>Türkiye</span><span class="t"><i style="width:100%"></i></span><span class="v">%79</span></div>
+                <div class="bar" style="grid-template-columns:minmax(0,90px) minmax(0,1fr) 44px"><span>Almanya</span><span class="t"><i style="width:13%"></i></span><span class="v">%10</span></div>
+                <div class="bar" style="grid-template-columns:minmax(0,90px) minmax(0,1fr) 44px"><span>Azerbaycan</span><span class="t"><i style="width:7%"></i></span><span class="v">%5</span></div>
+              </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frame panelv" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="t">Dönemin en çok izlenenleri · tüm kanallar</span></div>
+        <div class="body">
+          <div class="chartbox" style="padding-block:4px">
+            <div class="vid"><span class="thumb" style="background:linear-gradient(135deg,var(--s1),#0b1530)"></span><div style="min-width:0"><div class="tt">Gerçek bu mu? #19</div><div class="meta">Tarihin Gizemleri · Shorts · izlenme oranı %61</div></div><span class="num">5,1 Mn</span></div>
+            <div class="vid"><span class="thumb" style="background:linear-gradient(135deg,var(--s2),#2a1206)"></span><div style="min-width:0"><div class="tt">Bir günde ne değişti? #38</div><div class="meta">Spor Anları · Uzun · ort. 2:49</div></div><span class="num">3,6 Mn</span></div>
+            <div class="vid"><span class="thumb" style="background:linear-gradient(135deg,var(--s3),#062418)"></span><div style="min-width:0"><div class="tt">Perde arkası #12</div><div class="meta">Şehrin Hikayesi · Shorts · izlenme oranı %88</div></div><span class="num">2,2 Mn</span></div>
+          </div>
+          <div class="chartbox"><div class="h"><span>“Gerçek bu mu? #19” · günlük izlenme</span><span class="sample">Örnek veri</span></div>
+            <svg viewBox="0 0 560 120" role="img" aria-label="Videonun yayından sonraki günlük izlenme eğrisi">
+              <g stroke="var(--band-line)" stroke-width="1"><line x1="0" y1="10" x2="560" y2="10"/><line x1="0" y1="105" x2="560" y2="105"/></g>
+              <path d="M0 14 L28 20 L56 21 L84 38 L112 60 L140 70 L168 76 L196 74 L224 86 L252 90 L280 89 L308 94 L336 97 L364 98 L392 100 L420 101 L448 102 L476 103 L504 103 L532 104 L560 104 L560 105 L0 105 Z" fill="var(--cobalt)" opacity=".15"/>
+              <path d="M0 14 L28 20 L56 21 L84 38 L112 60 L140 70 L168 76 L196 74 L224 86 L252 90 L280 89 L308 94 L336 97 L364 98 L392 100 L420 101 L448 102 L476 103 L504 103 L532 104 L560 104" fill="none" stroke="var(--cobalt)" stroke-width="2.5" stroke-linejoin="round"/>
+            </svg></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div></section>
 
 <section id="ozellikler"><div class="wrap">
-  <div class="center"><span class="eyebrow">Özellikler</span>
-    <h2 class="title">Karar vermek için gereken her şey</h2>
-    <p class="lead">YouTube'un resmi API'lerinden gelen veriyle, kanallarını tek tek değil bir portföy olarak yönet.</p></div>
-  <div class="features">
-    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-      <h3>Portföy görünümü</h3><p>Tüm kanallarının izlenme, izlenme süresi, abone ve ortalama izleme süresi toplamı — 7, 28 veya 90 gün, önceki döneme göre değişimle.</p></div>
-    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M9 4v16"/></svg></div>
-      <h3>Kanal karşılaştırma</h3><p>Sıralanabilir tablo: büyüme, etkileşim, yükleme sıklığı, portföy payı ve trend çizgisi. Tek tıkla CSV.</p></div>
-    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></div>
-      <h3>En iyi videolar</h3><p>Bütün kanallarında dönemin en çok izlenen videoları tek listede; izlenme oranı, abone kazanımı ve Shorts/uzun filtresiyle.</p></div>
-    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 4"/></svg></div>
-      <h3>İzlenme kaynakları</h3><p>İzleyiciler nereden geliyor: Shorts akışı, arama, önerilenler, harici siteler. Ülke dağılımı da dahil.</p></div>
-    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div>
-      <h3>Shorts ve uzun video ayrımı</h3><p>YouTube'un kendi içerik türü sınıflandırmasıyla: izlenmelerin ne kadarı Shorts'tan, ne kadarı uzun videodan.</p></div>
-    <div class="card feature"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 20h18"/><path d="M5 16l4-5 4 3 6-8"/></svg></div>
-      <h3>Video bazlı günlük veri</h3><p>Her videonun gün gün izlenmesi, izlenme süresi, kapak gösterimi ve tıklama oranı — bir video ne zaman açıldı, net gör.</p></div>
+  <div class="head">
+    <div><span class="label">Özellikler</span><h2>Karar vermek için gereken her şey, tek yerde.</h2></div>
+    <p>Veriler YouTube Data, Analytics ve Reporting API'lerinden gelir. Arka planda düzenli olarak kendiliğinden güncellenir.</p>
   </div>
+  <div class="feat">
+    <div><span class="label">7 · 28 · 90 gün</span><h3>Dönem karşılaştırma</h3><p>Her metrik bir önceki eşit dönemle yan yana. Artış ve düşüş tek bakışta.</p></div>
+    <div><span class="label">~24 saat</span><h3>Son gün sayaçları</h3><p>Analytics gecikmeli olsa da son 24 saatin izlenme artışını anlık sayaçlardan görürsün.</p></div>
+    <div><span class="label">Shorts / uzun</span><h3>İçerik türü ayrımı</h3><p>İzlenmelerin ne kadarı Shorts'tan geliyor? YouTube'un kendi sınıflandırmasıyla.</p></div>
+    <div><span class="label">Video × gün</span><h3>Video bazlı günlük veri</h3><p>Her videonun gün gün izlenmesi, kapak gösterimi ve tıklama oranı.</p></div>
+    <div><span class="label">CSV</span><h3>Rapora aktar</h3><p>Kanal karşılaştırma tablosunu tek tıkla indir, haftalık raporuna ekle.</p></div>
+    <div><span class="label">İsteğe bağlı</span><h3>Kapak ve banner</h3><p>İstersen kapakları panelden değiştir; her değişiklik yedeklenir, tek tıkla geri alınır.</p></div>
+  </div>
+</div></section>
 
-  <div class="deep">
-    <div><span class="eyebrow">Karşılaştır</span><h3>Hangi kanal büyüyor, hangisi yavaşlıyor — tek bakışta.</h3>
-      <p>Her kanalın bu dönemi bir önceki eşit dönemle kıyaslanır. YouTube Analytics'in 2-3 günlük gecikmesi hesaba katılır; son günler boş kalıp yanıltmaz.</p>
-      <ul class="checks">
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Toplam ya da kanal kanal günlük trend</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Portföy payı: emeğin nereye gitmeli?</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Raporlar için CSV dışa aktarma</li>
+<section id="nasil" style="padding-top:0"><div class="wrap">
+  <div class="head">
+    <div><span class="label">Nasıl çalışır</span><h2>Üç adım, birkaç dakika.</h2></div>
+    <p>Kurulum yok, form yok. Google hesabınla giriş yaparsın, kanallarını seçersin, gerisini __APP_NAME__ halleder.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Google ile giriş yap</h3><p>Şifre istemiyoruz. Hesabın ilk girişte otomatik açılır.</p><span class="tm">~10 saniye</span></div>
+    <div class="step"><div class="n">2</div><h3>Kanallarını seç</h3><p>Google hesabındaki kanalları listeler. Birden çok kanalın varsa sistem sırayla sorar.</p><span class="tm">kanal başına ~15 saniye</span></div>
+    <div class="step"><div class="n">3</div><h3>Panelin hazır</h3><p>Geçmiş veriler çekilir ve düzenli olarak güncellenir. Her sabah tek ekrana bakman yeter.</p><span class="tm">ilk veri birkaç dakikada</span></div>
+  </div>
+</div></section>
+
+<section id="guven" style="background:var(--sunk);border-block:1px solid var(--line)"><div class="wrap trust">
+  <div>
+    <span class="label">Güvenlik</span>
+    <h2 style="margin-top:16px">Kanalına dokunmadan.</h2>
+    <p>__APP_NAME__ kanallarına yalnızca okuma izniyle bağlanır. Google'ın onay ekranında tam olarak neye izin verdiğini görürsün.</p>
+    <div class="facts">
+      <div><b>Şifren bize gelmez</b><span>Giriş Google'ın kendi ekranında yapılır.</span></div>
+      <div><b>Tek tıkla ayrıl</b><span>Bağlantıyı kestiğinde o kanalın verileri silinir.</span></div>
+      <div><b>Veri satılmaz</b><span>Verilerin yalnızca senin panelin için kullanılır.</span></div>
+      <div><b>Resmi API</b><span>YouTube API Hizmetleri ile, kazıma yok.</span></div>
+    </div>
+  </div>
+  <div class="consent" aria-label="Google izin ekranı örneği">
+    <div class="g"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile oturum açın</div>
+    <h3>__APP_NAME__ şunlara erişmek istiyor:</h3>
+    <span class="acct"><i>Ş</i>Şehrin Hikayesi</span>
+    <ul>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--up)" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg><span>YouTube hesabınızı görüntüleme</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--up)" stroke-width="2.6"><path d="M5 12l5 5L20 7"/></svg><span>YouTube içeriğiniz için YouTube Analytics raporlarını görüntüleme</span></li>
+    </ul>
+    <div class="no"><span class="label">__APP_NAME__ yapamaz</span>
+      <ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--down)" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Video yüklemek, silmek veya düzenlemek</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--down)" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Yorum yazmak veya kanal ayarlarını değiştirmek</span></li>
       </ul></div>
-    <div class="mcard"><h4>Kanal karşılaştırma · son 28 gün</h4>
-      <div class="mrow" style="font-size:12px;color:var(--muted)"><span></span><span>Kanal</span><span>İzlenme</span><span>Değişim</span></div>
-      <div class="mrow"><span class="dot" style="background:var(--s1)"></span><span>Tarih kanalı</span><b>2,9 Mn</b><span class="up">▲ 24%</span></div>
-      <div class="mrow"><span class="dot" style="background:var(--s2)"></span><span>Şehir kanalı</span><b>1,2 Mn</b><span class="up">▲ 11%</span></div>
-      <div class="mrow"><span class="dot" style="background:var(--s3)"></span><span>Bilim kanalı</span><b>486 B</b><span class="dn">▼ 6%</span></div>
-      <div class="mrow"><span class="dot" style="background:var(--s4)"></span><span>Mutfak kanalı</span><b>214 B</b><span class="up">▲ 31%</span></div>
-      <div class="mrow"><span class="dot" style="background:var(--s5)"></span><span>Gezi kanalı</span><b>98 B</b><span class="dn">▼ 2%</span></div>
-      <div class="muted" style="font-size:11px;margin-top:8px">Örnek veri</div></div>
-  </div>
-
-  <div class="deep rev">
-    <div><span class="eyebrow">Anla</span><h3>İzlenmeler nereden geliyor?</h3>
-      <p>Shorts akışından mı, aramadan mı, önerilenlerden mi? Tüm kanalların toplamında ya da tek kanalda; içerik türü ve ülke kırılımıyla.</p>
-      <ul class="checks">
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Trafik kaynakları ve payları</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>Shorts / uzun video / canlı ayrımı</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M5 12l5 5L20 7"/></svg>En çok izleyen ülkeler</li>
-      </ul></div>
-    <div class="mcard bars"><h4>İzlenme kaynakları · tüm kanallar</h4>
-      <div class="r"><span>Shorts akışı</span><span class="t"><i style="width:100%"></i></span><span class="v">%58</span></div>
-      <div class="r"><span>Önerilen videolar</span><span class="t"><i style="width:36%"></i></span><span class="v">%21</span></div>
-      <div class="r"><span>YouTube arama</span><span class="t"><i style="width:22%"></i></span><span class="v">%13</span></div>
-      <div class="r"><span>Göz atma</span><span class="t"><i style="width:9%"></i></span><span class="v">%5</span></div>
-      <div class="r"><span>Harici siteler</span><span class="t"><i style="width:5%"></i></span><span class="v">%3</span></div>
-      <div class="muted" style="font-size:11px;margin-top:8px">Örnek veri</div></div>
   </div>
 </div></section>
 
-<section id="nasil" style="padding-top:40px"><div class="wrap center">
-  <span class="eyebrow">Nasıl çalışır</span>
-  <h2 class="title">Üç adımda hazır</h2>
-  <div class="steps" style="text-align:left">
-    <div class="card step"><div class="n">1</div><h3>Google ile giriş yap</h3><p>Şifre yok, form yok. Google hesabınla tek tıkla giriş yaparsın; hesabın ilk girişte otomatik açılır.</p></div>
-    <div class="card step"><div class="n">2</div><h3>Kanallarını seç</h3><p>Google, hesabındaki kanalları listeler. Seçtiğin kanal anında bağlanır; birden çok kanalın varsa sistem sırayla sorar.</p></div>
-    <div class="card step"><div class="n">3</div><h3>Analiz hazır</h3><p>Veriler otomatik çekilir ve düzenli olarak güncellenir. Her sabah tek ekrana bakman yeterli.</p></div>
+<section><div class="wrap">
+  <div class="head">
+    <div><span class="label">Kimler için</span><h2>Birden fazla kanalı olan herkes için.</h2></div>
+    <p>İki kanalın da olsa elli kanalın da, soru aynı: emeğim en çok nerede karşılık buluyor?</p>
+  </div>
+  <div class="who">
+    <div class="persona"><span class="label">İçerik üreticisi</span><h3>Farklı nişlerde kanalların varsa</h3><p>Hangi konunun büyüdüğünü görüp üretim zamanını ona göre böl.</p><q>“Bu ay hangi kanala daha çok video çekmeliyim?”</q></div>
+    <div class="persona"><span class="label">Shorts ağı</span><h3>Onlarca kanalda kısa video</h3><p>Shorts akışından gelen payı ve viral olan videoları tek listede yakala.</p><q>“Hangi format bütün kanallarda tutuyor?”</q></div>
+    <div class="persona"><span class="label">Ajans ve ekip</span><h3>Müşteri kanallarını yönetiyorsan</h3><p>Kanalları karşılaştır, CSV ile raporla, durumu dakikalar içinde anlat.</p><q>“Bu hafta hangi müşteride ne değişti?”</q></div>
   </div>
 </div></section>
 
-<section id="guven" class="trust"><div class="wrap">
-  <div class="center"><span class="eyebrow">Güvenlik</span><h2 class="title">Kanalın güvende</h2>
-    <p class="lead">Google'ın resmi giriş sistemi ve YouTube'un resmi API'leri. Sadece görmen gerekeni görürüz.</p></div>
-  <div class="tgrid">
-    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Şifren bize gelmez</h3><p>Giriş Google üzerinden yapılır; şifreni hiçbir zaman görmeyiz ve saklamayız.</p></div>
-    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Salt okunur erişim</h3><p>Kanallar varsayılan olarak yalnızca okuma izniyle bağlanır. Video silemez, yükleyemez, ayarlarını değiştiremeyiz.</p></div>
-    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div><h3>Tek tıkla ayrıl</h3><p>Bir kanalın bağlantısını panelden kesebilir ya da Google hesabından erişimi kaldırabilirsin; verisi silinir.</p></div>
-    <div><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg></div><h3>Veri satılmaz</h3><p>Kanal verilerin sadece sana panel göstermek için kullanılır; üçüncü taraflarla paylaşılmaz, satılmaz.</p></div>
+<section id="fiyat" style="padding-top:0"><div class="wrap">
+  <div class="head">
+    <div><span class="label">Fiyatlar</span><h2>Kanal sayına göre, sade fiyat.</h2></div>
+    <p>Beta döneminde tüm özellikler ücretsiz. Aşağıdaki fiyatlar beta sonrası için planlanıyor; geçişten önce haber verilir.</p>
   </div>
-</div></section>
-
-<section id="fiyat"><div class="wrap center">
-  <span class="eyebrow">Fiyatlar</span>
-  <h2 class="title">Kanal sayına göre basit fiyat</h2>
-  <p class="lead">İhtiyacın büyüdükçe planını büyüt.</p>
-  <div class="beta">🎉 Beta döneminde tüm özellikler ücretsiz — kredi kartı gerekmez</div>
-  <div class="plans" style="text-align:left">
-    <div class="card plan"><h3>Başlangıç</h3><div class="price">$0 <small>/ ay</small></div>
+  <div class="plans">
+    <div class="plan"><h3>Başlangıç</h3><p class="who2">Yeni başlayanlar için</p><div class="price">$0<small> / ay</small></div>
       <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>2 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Portföy ve kanal analizi</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>7 / 28 / 90 gün</li></ul>
       <a class="btn" href="/giris" data-cta>Ücretsiz başla</a></div>
-    <div class="card plan"><h3>Creator</h3><div class="price">$12 <small>/ ay</small></div>
-      <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>5 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tüm kanallarda en iyi videolar</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>İzlenme kaynakları ve ülkeler</li></ul>
+    <div class="plan"><h3>Creator</h3><p class="who2">Birkaç kanalı olanlar</p><div class="price">$12<small> / ay</small></div>
+      <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>5 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Tüm kanallarda en iyi videolar</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kaynaklar ve ülkeler</li></ul>
       <a class="btn" href="/giris" data-cta>Beta'ya katıl</a></div>
-    <div class="card plan pop"><h3>Pro</h3><div class="price">$29 <small>/ ay</small></div>
+    <div class="plan pop"><span class="tag">Önerilen</span><h3>Pro</h3><p class="who2">Ciddi büyüyen kanal ağları</p><div class="price">$29<small> / ay</small></div>
       <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>15 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Video bazlı günlük veri ve tıklama oranı</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>CSV dışa aktarma</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Kapak ve banner yönetimi</li></ul>
       <a class="btn primary" href="/giris" data-cta>Beta'ya katıl</a></div>
-    <div class="card plan"><h3>Ajans</h3><div class="price">$89 <small>/ ay</small></div>
+    <div class="plan"><h3>Ajans</h3><p class="who2">Müşteri kanalları yönetenler</p><div class="price">$89<small> / ay</small></div>
       <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>50 kanal</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Pro'daki her şey</li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Ekip erişimi (yakında)</li></ul>
       <a class="btn" href="/giris" data-cta>Beta'ya katıl</a></div>
   </div>
-  <p class="muted small" style="margin-top:18px">Fiyatlar beta sonrası için planlanan fiyatlardır; beta kullanıcıları geçişten önce bilgilendirilir.</p>
+  <div class="betanote"><b>Beta kullanıcılarına:</b> şimdi katılan herkes ücretli planlara geçişte önceden bilgilendirilir. Kredi kartı istenmez.</div>
 </div></section>
 
-<section id="sss" style="padding-top:20px"><div class="wrap">
-  <div class="center"><span class="eyebrow">SSS</span><h2 class="title">Sık sorulan sorular</h2></div>
+<section id="sss" style="padding-top:0"><div class="wrap faqgrid">
+  <div><span class="label">SSS</span><h2 style="margin-top:16px">Sık sorulanlar</h2><p>Aradığın cevap yoksa bize yaz: __CONTACT_EMAIL__</p></div>
   <div class="faq">
-    <details><summary>Kanallarım otomatik olarak gelir mi?</summary>
-      <p>Google ile giriş yaptıktan hemen sonra Google, hesabındaki kanalları listeler; seçtiğin kanal anında bağlanır. YouTube güvenlik gereği her kanal için ayrı onay ister: hesabında birden çok marka kanalı varsa her birini bir kez seçersin, sistem sana sırayla sorar. Sonrasında her şey otomatik güncellenir.</p></details>
+    <details open><summary>Kanallarım otomatik olarak gelir mi?</summary>
+      <p>Google ile giriş yaptıktan hemen sonra Google, hesabındaki kanalları listeler; seçtiğin kanal anında bağlanır. YouTube güvenlik gereği her kanal için ayrı onay ister. Hesabında birden çok marka kanalı varsa her birini bir kez seçersin, sistem sırayla sorar. Sonrasında her şey kendiliğinden güncellenir.</p></details>
     <details><summary>Şifremi istiyor musunuz?</summary>
-      <p>Hayır. Giriş tamamen Google'ın kendi ekranında yapılır; şifren bize hiç ulaşmaz.</p></details>
+      <p>Hayır. Giriş tamamen Google'ın kendi ekranında yapılır ve şifren bize hiç ulaşmaz.</p></details>
     <details><summary>Kanalımda değişiklik yapabilir misiniz?</summary>
-      <p>Hayır. Kanallar varsayılan olarak salt okunur izinle bağlanır. Kapak veya banner değiştirme özelliğini kullanmak istersen, o an ayrıca ek izin istenir; vermezsen hiçbir şey değişmez.</p></details>
+      <p>Hayır. Kanallar salt okunur izinle bağlanır. Kapak veya banner değiştirme özelliğini kullanmak istersen o an ayrıca izin istenir; vermezsen hiçbir şey değişmez.</p></details>
     <details><summary>Veriler ne kadar güncel?</summary>
-      <p>Abone ve izlenme sayaçları her güncellemede yenilenir. Ayrıntılı analitik (izlenme süresi, kaynaklar, en iyi videolar) YouTube tarafında 2-3 gün gecikmeyle hazırlanır; panel dönemleri buna göre hesaplar. Veriler arka planda düzenli olarak kendiliğinden güncellenir.</p></details>
+      <p>Abone ve izlenme sayaçları her güncellemede yenilenir. Ayrıntılı analitik YouTube tarafında 2-3 gün gecikmeyle hazırlanır; panel dönemleri buna göre hesaplar.</p></details>
     <details><summary>Shorts destekleniyor mu?</summary>
-      <p>Evet. İzlenmelerin ne kadarının Shorts'tan, ne kadarının uzun videolardan geldiğini YouTube'un kendi sınıflandırmasıyla görürsün; en iyi videolar listesini Shorts/uzun diye filtreleyebilirsin.</p></details>
+      <p>Evet. İzlenmelerin Shorts ve uzun video arasındaki dağılımını YouTube'un kendi sınıflandırmasıyla görürsün. En iyi videolar listesi de Shorts ve uzun diye filtrelenebilir.</p></details>
     <details><summary>Erişimi nasıl kaldırırım?</summary>
-      <p>Panelde kanalın sayfasındaki "Bağlantıyı kes" düğmesiyle ya da Google Hesabı → Güvenlik → Üçüncü taraf erişimi bölümünden. Bağlantı kesildiğinde o kanalın verileri silinir.</p></details>
+      <p>Paneldeki “Bağlantıyı kes” düğmesiyle ya da Google Hesabı → Güvenlik → Üçüncü taraf erişimi bölümünden. Bağlantı kesildiğinde o kanalın verileri silinir.</p></details>
     <details><summary>YouTube veya Google ile bağlantınız var mı?</summary>
       <p>Hayır. __APP_NAME__ bağımsız bir üründür ve YouTube'un herkese açık resmi API Hizmetlerini kullanır.</p></details>
   </div>
 </div></section>
 
-<section class="final" style="padding-top:20px"><div class="wrap"><div class="box">
-  <h2>Kanallarını bir kez bağla, her sabah tek ekrana bak.</h2>
-  <p>Ücretsiz başla — kurulum yok, kredi kartı yok.</p>
-  <a class="btn google lg" href="/giris" data-cta><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile ücretsiz başla</a>
+<section class="final"><div class="wrap"><div class="box">
+  <h2>Kanallarını bir kez bağla. Her sabah tek ekrana bak.</h2>
+  <div class="side"><p>Ücretsiz başla. Kredi kartı yok, kurulum yok.</p>
+    <a class="btn google" href="/giris" data-cta><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google ile ücretsiz başla</a></div>
 </div></div></section>
 
-<footer class="site"><div class="wrap">
-  <div><a class="brand" href="/" style="font-size:17px"><span class="mark" style="width:26px;height:26px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></span>__APP_NAME__</a>
-    <p style="margin:10px 0 0;max-width:300px">Çok kanallı YouTube analitiği.</p></div>
-  <div class="cols">
-    <div><b class="t2">Ürün</b><a href="#ozellikler">Özellikler</a><a href="#fiyat">Fiyatlar</a><a href="#sss">SSS</a><a href="/giris">Giriş yap</a></div>
-    <div><b class="t2">Yasal</b><a href="/gizlilik">Gizlilik Politikası</a><a href="/kosullar">Kullanım Koşulları</a></div>
-  </div>
-  <div class="legal">© __YEAR__ __APP_NAME__. YouTube, Google LLC'nin ticari markasıdır. __APP_NAME__, YouTube veya Google ile bağlantılı değildir ve onlar tarafından desteklenmemektedir. Bu hizmet YouTube API Hizmetlerini kullanır.</div>
+<footer><div class="wrap">
+  <div><a class="brand" href="/"><span class="mk" aria-hidden="true"><span style="display:flex;height:16px;align-items:flex-end"><i style="height:8px"></i><i style="height:16px"></i><i style="height:11px"></i></span></span>__APP_NAME__</a>
+    <p style="margin-top:12px;max-width:320px">Çok kanallı YouTube analitiği. Kanallarını portföy olarak yönet.</p></div>
+  <div class="col"><span class="label">Ürün</span><a href="#urun">Ürün turu</a><a href="#fiyat">Fiyatlar</a><a href="#sss">SSS</a><a href="/giris">Giriş yap</a></div>
+  <div class="col"><span class="label">Yasal</span><a href="/gizlilik">Gizlilik Politikası</a><a href="/kosullar">Kullanım Koşulları</a></div>
+  <div class="legal">© __YEAR__ __APP_NAME__. YouTube, Google LLC'nin ticari markasıdır. __APP_NAME__, YouTube veya Google ile bağlantılı değildir ve onlar tarafından desteklenmemektedir. Bu hizmet YouTube API Hizmetlerini kullanır. Bu sayfadaki tüm kanal adları ve rakamlar örnektir.</div>
 </div></footer>
 
 <script>
 const nav = document.getElementById("nav");
 addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 8), { passive: true });
+
+// ürün turu sekmeleri (ok tuşlarıyla da gezilir)
+const tabs = [...document.querySelectorAll(".tab")];
+function select(t, focus) {
+  tabs.forEach(x => { const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1;
+    document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+  if (focus) t.focus();
+}
+tabs.forEach((t, i) => {
+  t.tabIndex = i ? -1 : 0;
+  t.addEventListener("click", () => select(t));
+  t.addEventListener("keydown", e => {
+    const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+  });
+});
+
 fetch("/api/me").then(r => r.json()).then(me => {
   if (!me.logged_in) return;
-  document.getElementById("navCta").innerHTML = '<a class="btn primary" href="/panel">Panele git</a>';
+  document.getElementById("navCta").innerHTML = '<a class="btn sm primary" href="/panel">Panele git</a>';
   document.querySelectorAll("[data-cta]").forEach(a => a.setAttribute("href", "/panel"));
 }).catch(() => {});
 </script>
