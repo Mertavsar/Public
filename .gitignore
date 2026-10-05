@@ -4,3 +4,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# YouTube Hub — token, veritabanı, görseller
+youtube-hub/data/

@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel · __APP_NAME__</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f4f2; --surface: #fcfcfb; --surface-2: #efefec; --line: #e2e1dc;
+  --text: #0b0b0b; --text-2: #52514e; --muted: #85837d;
+  --accent: #2a78d6; --accent-soft: #dbe8f8; --other: #a3a19a;
+  --good: #1f8a4c; --bad: #c43b3a; --warn: #b26b00;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #111110; --surface: #1a1a19; --surface-2: #232321; --line: #2e2e2b;
+    --text: #ffffff; --text-2: #c3c2b7; --muted: #8d8c84;
+    --accent: #3987e5; --accent-soft: #1d2f47; --other: #6d6c66;
+    --good: #3fb36f; --bad: #e66767; --warn: #e0a030;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); }
+header { display: flex; align-items: center; gap: 12px; padding: 12px 20px; flex-wrap: wrap;
+  background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+header h1 { font-size: 17px; margin: 0; flex: 1; white-space: nowrap; }
+main { max-width: 1280px; margin: 0 auto; padding: 16px 16px 60px; }
+button, .btn { font: inherit; border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  padding: 7px 12px; border-radius: 8px; cursor: pointer; text-decoration: none; white-space: nowrap; display: inline-block; }
+button:hover, .btn:hover { border-color: var(--accent); }
+.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; border-radius: 0; padding: 6px 12px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button.on { background: var(--accent-soft); color: var(--text); font-weight: 600; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; min-width: 0; }
+.muted { color: var(--muted); } .t2 { color: var(--text-2); } .small { font-size: 12px; }
+.notice { border-left: 4px solid var(--warn); margin-bottom: 16px; }
+.notice pre { white-space: pre-wrap; background: var(--surface-2); padding: 10px; border-radius: 6px; font-size: 12px; }
+.filters { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.filters .period { color: var(--text-2); font-size: 13px; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.tile .label { color: var(--text-2); font-size: 12px; }
+.tile .value { font-size: 24px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.tile.hero .value { font-size: clamp(30px, 3.2vw, 46px); line-height: 1.05; white-space: nowrap; }
+.tile .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.delta { font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.delta.up { color: var(--good); } .delta.down { color: var(--bad); } .delta.flat { color: var(--muted); font-weight: 400; }
+
+section { margin-top: 22px; }
+.sec-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 10px; }
+.sec-head h2 { font-size: 15px; margin: 0; flex: 1; min-width: 180px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+
+.chart-wrap { position: relative; }
+svg.chart { width: 100%; height: 240px; display: block; overflow: visible; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.14); display: none;
+  white-space: nowrap; z-index: 3; }
+.tip .row { display: flex; align-items: center; gap: 8px; }
+.tip .row b { font-variant-numeric: tabular-nums; min-width: 54px; text-align: right; }
+.key { display: inline-block; width: 14px; height: 0; border-top: 2px solid; vertical-align: middle; }
+.key.dash { border-top-style: dashed; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 12px; color: var(--text-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.tablewrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+td, th { text-align: right; padding: 8px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+td:first-child, th:first-child, td.l, th.l { text-align: left; }
+th { color: var(--text-2); font-weight: 500; font-size: 12px; }
+th button { border: 0; background: none; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+th button.on { color: var(--text); font-weight: 600; }
+tbody tr.click { cursor: pointer; }
+tbody tr.click:hover { background: var(--surface-2); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.chcell { display: flex; align-items: center; gap: 8px; min-width: 180px; }
+.chcell img { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2); flex: none; }
+.chcell .nm { overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+.share { display: inline-block; height: 6px; background: var(--accent); border-radius: 3px; vertical-align: middle; margin-right: 6px; }
+svg.spark { width: 90px; height: 24px; display: block; margin-left: auto; }
+.vcell { display: flex; align-items: center; gap: 10px; min-width: 260px; white-space: normal; text-align: left; }
+.vcell img { width: 80px; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; background: var(--surface-2); flex: none; }
+.vcell .tt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 380px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 1px 7px; border-radius: 999px;
+  background: var(--surface-2); color: var(--text-2); }
+.badge.bad { color: var(--bad); } .badge.good { color: var(--good); }
+
+.bars { display: flex; flex-direction: column; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: minmax(90px, 160px) 1fr auto; gap: 10px; align-items: center; font-size: 13px; }
+.bar-row .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { height: 10px; background: var(--accent-soft); border-radius: 4px; overflow: hidden; }
+.bar-track div { height: 100%; background: var(--accent); border-radius: 4px; }
+.bar-row .val { font-variant-numeric: tabular-nums; color: var(--text-2); white-space: nowrap; }
+
+.chhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.chhead img { width: 52px; height: 52px; border-radius: 50%; background: var(--surface-2); }
+.chhead h2 { margin: 0; font-size: 20px; }
+details > summary { cursor: pointer; font-weight: 600; font-size: 15px; padding: 4px 0; }
+.videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+.video { padding: 0; overflow: hidden; }
+.thumb { position: relative; aspect-ratio: 16/9; background: var(--surface-2); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb.drop { outline: 3px dashed var(--accent); outline-offset: -3px; }
+.thumb .over { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.55); color: #fff; opacity: 0; transition: opacity .15s; cursor: pointer; font-weight: 600; }
+.thumb:hover .over, .thumb.drop .over { opacity: 1; }
+.video .meta { padding: 8px 10px; font-size: 12px; }
+.video .meta .tt { font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.loading { opacity: .55; transition: opacity .2s; }
+#toast { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 20; max-width: min(420px, calc(100vw - 32px)); }
+#toast div { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  padding: 10px 12px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+#toast div.err { border-left-color: var(--bad); } #toast div.ok { border-left-color: var(--good); }
+.empty { text-align: center; padding: 36px 16px; }
+.usermenu { position: relative; }
+.usermenu summary { list-style: none; cursor: pointer; }
+.usermenu summary::-webkit-details-marker { display: none; }
+.usermenu .avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  background: var(--accent-soft); color: var(--accent); font-weight: 700; border: 1px solid var(--line); position: relative; }
+.usermenu .avatar::before { content: attr(data-initial); }
+.usermenu .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.usermenu .card { position: absolute; right: 0; top: 44px; width: 240px; z-index: 10; box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+.connect { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-left: 4px solid var(--good); margin-bottom: 14px; }
+@media (max-width: 600px) { .tile.hero .value { font-size: 36px; } header h1 { flex-basis: 100%; } }
+</style>
+</head>
+<body>
+<header>
+  <h1><a href="/panel" style="color:inherit;text-decoration:none">__APP_NAME__</a></h1>
+  <span id="syncInfo" class="muted small"></span>
+  <button id="syncBtn">Senkronize et</button>
+  <a class="btn primary" href="/kanal-ekle">+ Kanal ekle</a>
+  <details class="usermenu"><summary aria-label="Hesap"><span class="avatar" data-name="__USER_NAME__"><img src="__USER_PICTURE__" alt="" referrerpolicy="no-referrer" onerror="this.remove()"></span></summary>
+    <div class="card"><div style="font-weight:600">__USER_NAME__</div><div class="muted small">__USER_EMAIL__</div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:10px 0">
+      <a href="/" class="small">Ana sayfa</a><br><a href="/gizlilik" class="small">Gizlilik</a><br>
+      <button id="logoutBtn" style="margin-top:10px;width:100%">Çıkış yap</button></div></details>
+</header>
+<main>
+  <div id="banner"></div>
+  <div class="filters">
+    <div class="seg" id="periodSeg" role="group" aria-label="Dönem">
+      <button data-days="7">7 gün</button><button data-days="28">28 gün</button><button data-days="90">90 gün</button>
+    </div>
+    <span class="period" id="periodLabel"></span>
+  </div>
+  <div id="view"></div>
+</main>
+<input type="file" id="filePick" accept="image/jpeg,image/png" hidden>
+<div id="toast"></div>
+
+<script>
+const CSRF = "__CSRF__";
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf = new Intl.NumberFormat("tr-TR");
+const cf = new Intl.NumberFormat("tr-TR", { notation: "compact", maximumFractionDigits: 1 });
+const fmt = n => n == null ? "—" : nf.format(n);
+const compact = n => n == null ? "—" : cf.format(n);
+const signed = n => n == null ? "—" : (n > 0 ? "+" : "") + nf.format(n);
+const hours = m => m == null ? "—" : compact(Math.round(m / 60));
+const dur = s => s == null ? "—" : `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+const pct = (v, d = 1) => v == null ? "—" : "%" + (v * 100).toLocaleString("tr-TR", { maximumFractionDigits: d });
+// Tıklama oranı bazı kaynaklarda oran (0.05), bazılarında yüzde (5) gelir; >1 ise yüzdedir.
+const ctr = v => v == null ? "—" : pct(v > 1 ? v / 100 : v);
+const regionName = (() => { try { const d = new Intl.DisplayNames(["tr"], { type: "region" }); return c => { try { return d.of(c); } catch { return c; } }; } catch { return c => c; } })();
+
+const TRAFFIC = {
+  SHORTS: "Shorts akışı", YT_SEARCH: "YouTube arama", RELATED_VIDEO: "Önerilen videolar",
+  SUBSCRIBER: "Göz atma (ana sayfa, abonelikler)", YT_CHANNEL: "Kanal sayfası", YT_OTHER_PAGE: "Diğer YouTube sayfaları",
+  EXT_URL: "Harici siteler", NO_LINK_OTHER: "Doğrudan / bilinmeyen", NO_LINK_EMBEDDED: "Gömülü oynatıcı",
+  PLAYLIST: "Oynatma listeleri", YT_PLAYLIST_PAGE: "Oynatma listesi sayfası", NOTIFICATION: "Bildirimler",
+  END_SCREEN: "Bitiş ekranı", ANNOTATION: "Kartlar / ek açıklamalar", CAMPAIGN_CARD: "Kampanya kartı",
+  HASHTAGS: "Hashtag sayfaları", SOUND_PAGE: "Ses sayfası", VIDEO_REMIXES: "Remiksler", ADVERTISING: "Reklam",
+  PROMOTED: "Tanıtım", LIVE_REDIRECT: "Canlı yönlendirme", PRODUCT_PAGE: "Ürün sayfası",
+  SHORTS_CONTENT_LINKS: "Shorts içi bağlantılar", IMMERSIVE_LIVE: "Canlı akış",
+};
+const CONTENT = { SHORTS: "Shorts", VIDEO_ON_DEMAND: "Uzun video", LIVE_STREAM: "Canlı yayın", STORY: "Hikaye" };
+const METRICS = {
+  views: { label: "İzlenme", fmt: compact },
+  minutes: { label: "İzlenme süresi (saat)", fmt: m => hours(m) },
+  subs_net: { label: "Abone (net)", fmt: signed },
+};
+const SLOTS = 7;  // fazla kanal grafikte "Diğer"e katlanır
+
+let S = { days: 28, p: null, top: null, bd: null, view: "home", channel: null, videos: null,
+          chartMetric: "views", chartMode: "total", sort: { key: "views", dir: -1 }, topKind: "", topLimit: 10, colors: {} };
+try { const d = +localStorage.getItem("ythub.days"); if ([7, 28, 90].includes(d)) S.days = d; } catch {}
+
+function toast(msg, kind = "") {
+  const d = document.createElement("div"); d.className = kind; d.textContent = msg;
+  $("#toast").appendChild(d); setTimeout(() => d.remove(), kind === "err" ? 9000 : 5000);
+}
+async function api(path, opts = {}) {
+  const res = await fetch(path, { ...opts, headers: { "X-CSRF-Token": CSRF, ...(opts.headers || {}) } });
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401) { location.href = "/giris"; throw new Error("Oturum sona erdi."); }
+  if (!res.ok) { const e = new Error(data.error || res.statusText); e.data = data; throw e; }
+  return data;
+}
+
+function delta(v, { invert = false, abs = false } = {}) {
+  if (v == null || (!abs && !isFinite(v))) return `<span class="delta flat">— önceki dönem yok</span>`;
+  const up = v > 0, flat = abs ? v === 0 : Math.abs(v) < 0.005;
+  if (flat) return `<span class="delta flat">≈ değişim yok</span>`;
+  const good = invert ? !up : up;
+  const txt = abs ? signed(v) : (up ? "+" : "−") + pct(Math.abs(v), 0).slice(1) + "%";
+  return `<span class="delta ${good ? "up" : "down"}">${up ? "▲" : "▼"} ${txt}</span>`;
+}
+const colorOf = id => S.colors[id] || "var(--other)";
+
+// ------------------------------------------------------------- grafik
+function lineChart(el, { days, series, fmt: f, label }) {
+  const W = 960, H = 240, L = 52, R = 12, T = 12, B = 26;
+  const all = series.flatMap(s => s.values).filter(v => v != null);
+  if (!days.length || !all.length) { el.innerHTML = `<p class="muted">Bu dönem için veri yok.</p>`; return; }
+  let min = Math.min(0, ...all), max = Math.max(1, ...all);
+  const x = i => L + (days.length > 1 ? i * (W - L - R) / (days.length - 1) : (W - L - R) / 2);
+  const y = v => T + (H - T - B) * (1 - (v - min) / (max - min || 1));
+  const path = vals => { let d = "", pen = false; vals.forEach((v, i) => {
+    if (v == null) { pen = false; return; } d += `${pen ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)} `; pen = true; }); return d; };
+  const ticks = [min, (min + max) / 2, max].map(v => Math.round(v));
+  const xl = [...new Set([0, Math.floor((days.length - 1) / 2), days.length - 1])];
+  const solo = series.filter(s => !s.dashed).length === 1;
+  const main = series.find(s => !s.dashed);
+  el.innerHTML = `<div class="chart-wrap">
+    <svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(label)}">
+      ${ticks.map(t => `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+        <text x="${L - 6}" y="${y(t) + 4}" text-anchor="end" font-size="11" fill="var(--muted)">${esc(f(t))}</text>`).join("")}
+      ${xl.map(i => `<text x="${x(i)}" y="${H - 6}" text-anchor="${i === 0 ? "start" : i === days.length - 1 ? "end" : "middle"}" font-size="11" fill="var(--muted)">${esc(days[i].slice(5).split("-").reverse().join("."))}</text>`).join("")}
+      ${solo && main ? `<path d="${path(main.values)} L${x(days.length - 1)},${y(Math.max(min, 0))} L${x(0)},${y(Math.max(min, 0))} Z" fill="${main.color}" opacity=".10"/>` : ""}
+      ${series.map(s => `<path d="${path(s.values)}" fill="none" stroke="${s.color}" stroke-width="2" ${s.dashed ? 'stroke-dasharray="5 4" opacity=".75"' : ""} vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>`).join("")}
+      <line class="xh" y1="${T}" y2="${H - B}" stroke="var(--text-2)" stroke-width="1" vector-effect="non-scaling-stroke" visibility="hidden"/>
+      <g class="dots"></g>
+      <rect class="hit" x="${L - 10}" y="0" width="${W - L - R + 20}" height="${H}" fill="transparent"/>
+    </svg><div class="tip"></div></div>
+    ${series.length > 1 ? `<div class="legend">${series.map(s => `<span><i class="key${s.dashed ? " dash" : ""}" style="border-color:${s.color}"></i>${esc(s.name)}</span>`).join("")}</div>` : ""}`;
+  const svg = $("svg", el), tip = $(".tip", el), xh = $(".xh", el), dots = $(".dots", el), hit = $(".hit", el);
+  const show = i => {
+    xh.setAttribute("x1", x(i)); xh.setAttribute("x2", x(i)); xh.setAttribute("visibility", "visible");
+    dots.innerHTML = series.filter(s => s.values[i] != null).map(s => `<circle cx="${x(i)}" cy="${y(s.values[i])}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2" vector-effect="non-scaling-stroke"/>`).join("");
+    const rows = series.map(s => ({ s, v: s.values[i] })).sort((a, b) => (b.v ?? -Infinity) - (a.v ?? -Infinity));
+    tip.innerHTML = `<div class="muted" style="margin-bottom:4px">${esc(days[i])}${series.some(s => s.dashed && s.days) ? "" : ""}</div>` +
+      rows.map(({ s, v }) => `<div class="row"><b>${esc(v == null ? "—" : f(v))}</b><i class="key${s.dashed ? " dash" : ""}" style="border-color:${s.color}"></i><span class="t2">${esc(s.dashed && s.days ? `${s.name} (${s.days[i]})` : s.name)}</span></div>`).join("");
+    tip.style.display = "block";
+    const box = svg.getBoundingClientRect(), px = x(i) / W * box.width;
+    tip.style.left = (px + 14 + tip.offsetWidth > box.width ? px - 14 - tip.offsetWidth : px + 14) + "px";
+    tip.style.top = "6px";
+  };
+  hit.addEventListener("pointermove", e => {
+    const box = svg.getBoundingClientRect(), vx = (e.clientX - box.left) / box.width * W;
+    show(Math.max(0, Math.min(days.length - 1, Math.round((vx - L) / ((W - L - R) / Math.max(1, days.length - 1))))));
+  });
+  hit.addEventListener("pointerleave", () => { tip.style.display = "none"; xh.setAttribute("visibility", "hidden"); dots.innerHTML = ""; });
+}
+
+function spark(series, color) {
+  const v = series.map(d => d.views);
+  const nums = v.filter(n => n != null);
+  if (nums.length < 2) return "";
+  const max = Math.max(1, ...nums), w = 90, h = 24, st = w / (v.length - 1);
+  let d = "", pen = false;
+  v.forEach((n, i) => { if (n == null) { pen = false; return; } d += `${pen ? "L" : "M"}${(i * st).toFixed(1)},${(h - 2 - n / max * (h - 4)).toFixed(1)} `; pen = true; });
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`;
+}
+
+function bars(rows, labelFn, empty) {
+  if (!rows || !rows.length) return `<p class="muted small" style="margin:0">${empty}</p>`;
+  const max = Math.max(...rows.map(r => r.views), 1);
+  return `<div class="bars">${rows.map(r => `<div class="bar-row" title="${esc(labelFn(r.key))}: ${fmt(r.views)} izlenme">
+    <span class="lbl">${esc(labelFn(r.key))}</span>
+    <span class="bar-track"><div style="width:${(r.views / max * 100).toFixed(1)}%"></div></span>
+    <span class="val">${compact(r.views)} · ${pct(r.share, 0)}</span></div>`).join("")}</div>`;
+}
+
+// ------------------------------------------------------------- veri
+async function load() {
+  $("#view").classList.add("loading");
+  const ch = S.view === "channel" ? `&channel=${encodeURIComponent(S.channel)}` : "";
+  try {
+    const [p, top, bd] = await Promise.all([
+      api(`/api/portfolio?days=${S.days}`),
+      api(`/api/top-videos?days=${S.days}&limit=${S.topLimit}${ch}${S.topKind ? "&kind=" + S.topKind : ""}`),
+      api(`/api/breakdowns?days=${S.days}${ch}`),
+    ]);
+    S.p = p; S.top = top; S.bd = bd;
+    S.colors = {}; p.channels.forEach((c, i) => { if (i < SLOTS) S.colors[c.id] = `var(--s${i + 1})`; });
+    if (S.view === "channel" && !p.channels.some(c => c.id === S.channel)) S.view = "home";
+    render();
+  } catch (e) { toast(e.message, "err"); }
+  $("#view").classList.remove("loading");
+}
+
+function render() {
+  document.querySelectorAll("#periodSeg button").forEach(b => b.classList.toggle("on", +b.dataset.days === S.days));
+  const p = S.p;
+  $("#periodLabel").textContent = p.period
+    ? `${p.period.start} – ${p.period.end} · önceki dönem ${p.previous.start} – ${p.previous.end} · YouTube Analytics 2-3 gün gecikmeli`
+    : "";
+  $(".filters").hidden = !p.channels.length;
+  if (S.view === "channel") renderChannel(); else renderHome();
+}
+
+// ------------------------------------------------------------- portföy
+function kpis(cur, change, extra = "") {
+  return `<div class="tiles">
+    <div class="card tile hero"><div class="label">İzlenme</div><div class="value">${compact(cur.views)}</div><div class="sub">${delta(change.views)}</div></div>
+    <div class="card tile"><div class="label">İzlenme süresi</div><div class="value">${hours(cur.minutes)} <span class="muted small">saat</span></div><div class="sub">${delta(change.minutes)}</div></div>
+    <div class="card tile"><div class="label">Abone (net)</div><div class="value">${signed(cur.subs_net)}</div><div class="sub">${delta(change.subs_net_diff, { abs: true })} <span class="muted">önceki döneme göre</span></div></div>
+    <div class="card tile"><div class="label">Ort. izleme süresi</div><div class="value">${dur(cur.avg_view_s)}</div><div class="sub">${delta(change.avg_view_s)}</div></div>
+    <div class="card tile"><div class="label">Yüklenen video</div><div class="value">${fmt(cur.uploads)}</div><div class="sub">${delta(change.uploads)}</div></div>
+    ${cur.impressions ? `<div class="card tile"><div class="label">Kapak gösterimi · tıklama oranı</div><div class="value">${compact(cur.impressions)}</div><div class="sub">tıklama oranı ${ctr(cur.ctr)}</div></div>` : ""}
+    ${extra}</div>`;
+}
+
+function chartBlock(title, seriesFn) {
+  return `<div class="card"><div class="sec-head"><h2>${esc(title)}</h2>
+    <div class="seg" data-seg="metric">${Object.entries(METRICS).map(([k, m]) => `<button data-metric="${k}" class="${S.chartMetric === k ? "on" : ""}">${esc(m.label.replace(" (saat)", ""))}</button>`).join("")}</div>
+    ${seriesFn ? `<div class="seg" data-seg="mode"><button data-mode="total" class="${S.chartMode === "total" ? "on" : ""}">Toplam</button><button data-mode="channels" class="${S.chartMode === "channels" ? "on" : ""}">Kanallara göre</button></div>` : ""}
+    </div><div id="chart"></div></div>`;
+}
+
+function drawChart(cur, prev, perChannel) {
+  const m = S.chartMetric, days = cur.map(d => d.day);
+  let series;
+  if (perChannel && S.chartMode === "channels") {
+    const chs = S.p.channels;
+    series = chs.slice(0, SLOTS).map(c => ({ name: c.title, color: colorOf(c.id), values: c.series.map(d => d[m]) }));
+    if (chs.length > SLOTS) {
+      const rest = chs.slice(SLOTS);
+      series.push({ name: `Diğer (${rest.length} kanal)`, color: "var(--other)",
+        values: days.map((_, i) => rest.some(c => c.series[i][m] != null) ? rest.reduce((a, c) => a + (c.series[i][m] || 0), 0) : null) });
+    }
+  } else {
+    series = [{ name: "Bu dönem", color: "var(--accent)", values: cur.map(d => d[m]) },
+              { name: "Önceki dönem", color: "var(--text-2)", dashed: true, values: prev.map(d => d[m]), days: prev.map(d => d.day) }];
+  }
+  lineChart($("#chart"), { days, series, fmt: METRICS[m].fmt, label: METRICS[m].label });
+}
+
+const COLS = [
+  { key: "title", label: "Kanal", l: true, val: c => c.title.toLocaleLowerCase("tr") },
+  { key: "subscribers", label: "Abone", val: c => c.subscribers ?? -1 },
+  { key: "views", label: "İzlenme", val: c => c.cur.views },
+  { key: "views_ch", label: "Değişim", val: c => c.change.views ?? -Infinity },
+  { key: "minutes", label: "İzl. süresi (sa)", val: c => c.cur.minutes },
+  { key: "avg", label: "Ort. izleme", val: c => c.cur.avg_view_s ?? -1 },
+  { key: "subs", label: "Abone net", val: c => c.cur.subs_net },
+  { key: "uploads", label: "Yükleme", val: c => c.cur.uploads },
+  { key: "eng", label: "Etkileşim", val: c => c.cur.engagement ?? -1 },
+  { key: "h24", label: "~24 saat", val: c => c.views_24h ?? -1 },
+  { key: "share", label: "Pay", val: c => c.share ?? -1 },
+];
+
+function compareTable() {
+  const col = COLS.find(c => c.key === S.sort.key) || COLS[2];
+  const rows = [...S.p.channels].sort((a, b) => { const x = col.val(a), y = col.val(b); return (x > y ? 1 : x < y ? -1 : 0) * S.sort.dir; });
+  return `<div class="tablewrap"><table><thead><tr>
+    ${COLS.map(c => `<th class="${c.l ? "l" : ""}"><button data-sort="${c.key}" class="${S.sort.key === c.key ? "on" : ""}">${esc(c.label)}${S.sort.key === c.key ? (S.sort.dir < 0 ? " ↓" : " ↑") : ""}</button></th>`).join("")}
+    <th>Trend</th></tr></thead><tbody>
+    ${rows.map(c => `<tr class="click" data-open="${esc(c.id)}">
+      <td><div class="chcell"><span class="dot" style="background:${colorOf(c.id)}"></span><img src="${esc(c.thumbnail_url)}" alt="" referrerpolicy="no-referrer" loading="lazy">
+        <span class="nm" title="${esc(c.title)}">${esc(c.title)}</span>${c.sync_error ? `<span class="badge bad" title="${esc(c.sync_error)}">⚠ hata</span>` : ""}</div></td>
+      <td>${c.hidden_subs ? "gizli" : compact(c.subscribers)}</td>
+      <td>${compact(c.cur.views)}</td><td>${delta(c.change.views)}</td>
+      <td>${hours(c.cur.minutes)}</td><td>${dur(c.cur.avg_view_s)}</td>
+      <td>${signed(c.cur.subs_net)}</td><td>${fmt(c.cur.uploads)}</td><td>${pct(c.cur.engagement)}</td>
+      <td>${compact(c.views_24h)}</td>
+      <td><span class="share" style="width:${Math.round((c.share || 0) * 60)}px"></span>${pct(c.share, 0)}</td>
+      <td>${spark(c.series, colorOf(c.id))}</td></tr>`).join("")}
+    </tbody></table></div>`;
+}
+
+function topTable(showChannel) {
+  const rows = S.top || [];
+  const kindSeg = `<div class="seg" data-seg="kind">${[["", "Tümü"], ["short", "Shorts"], ["long", "Uzun"]].map(([k, l]) => `<button data-kind="${k}" class="${S.topKind === k ? "on" : ""}">${l}</button>`).join("")}</div>`;
+  const body = rows.length ? `<div class="tablewrap"><table><thead><tr><th class="l">#</th><th class="l">Video</th>
+    ${showChannel ? `<th class="l">Kanal</th>` : ""}<th>İzlenme</th><th>İzl. süresi (sa)</th><th>Ort. izleme</th><th>İzlenme oranı</th><th>Abone +</th><th>Beğeni</th><th>Yayın</th><th></th></tr></thead><tbody>
+    ${rows.map((v, i) => { const url = `https://www.youtube.com/${v.is_short ? "shorts/" : "watch?v="}${encodeURIComponent(v.video_id)}`;
+      return `<tr><td class="l muted">${i + 1}</td>
+      <td class="l"><a class="vcell" href="${url}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">
+        <img src="${esc(v.thumbnail_url || "")}" alt="" loading="lazy" referrerpolicy="no-referrer"><span><span class="tt">${esc(v.title || v.video_id)}</span>
+        ${v.is_short ? `<span class="badge">Shorts</span>` : ""}</span></a></td>
+      ${showChannel ? `<td class="l"><span class="chcell" style="min-width:0"><span class="dot" style="background:${colorOf(v.channel_id)}"></span><span class="nm" style="max-width:150px">${esc(v.channel_title)}</span></span></td>` : ""}
+      <td>${compact(v.views)}</td><td>${hours(v.minutes)}</td><td>${dur(v.avg_view_s)}</td>
+      <td>${v.avg_view_pct == null ? "—" : "%" + Math.round(v.avg_view_pct)}</td><td>${signed(v.subs_gained)}</td><td>${compact(v.likes)}</td>
+      <td class="muted">${esc((v.published_at || "").slice(0, 10))}</td>
+      <td><button data-trend="${esc(v.video_id)}" title="Günlük grafik (Reporting API)">Günlük</button></td></tr>`; }).join("")}
+    </tbody></table></div>${rows.length >= S.topLimit ? `<div style="text-align:center;margin-top:10px"><button data-more>Daha fazla göster</button></div>` : ""}` : `<p class="muted" style="margin:0">Bu dönem için video verisi yok — senkronize et.</p>`;
+  return `<div class="sec-head"><h2>Dönemin en çok izlenen videoları${showChannel ? " — tüm kanallar" : ""}</h2>${kindSeg}</div>
+    <div class="card" id="vtrend" hidden></div><div class="card">${body}</div>`;
+}
+
+function breakdownBlock(scope) {
+  const b = S.bd || {};
+  return `<div class="cols">
+    <div class="card"><div class="sec-head"><h2>İzlenme kaynakları${scope}</h2></div>${bars(b.insightTrafficSourceType, k => TRAFFIC[k] || k, "Veri yok.")}</div>
+    <div class="card"><div class="sec-head"><h2>İçerik türü${scope}</h2></div>${bars(b.creatorContentType, k => CONTENT[k] || k, "Veri yok.")}</div>
+    <div class="card"><div class="sec-head"><h2>Ülkeler${scope}</h2></div>${bars(b.country, k => regionName(k), "Veri yok.")}</div></div>`;
+}
+
+function renderHome() {
+  const p = S.p, t = p.totals;
+  if (!p.channels.length) {
+    $("#view").innerHTML = `<div class="card empty"><p style="font-size:18px"><b>İlk kanalını bağla</b></p>
+      <ol class="t2" style="text-align:left;max-width:560px;margin:0 auto 18px;display:flex;flex-direction:column;gap:6px">
+        <li>Aşağıdaki düğmeye bas. Google, hesabındaki kanalları listeler; birini seç.</li>
+        <li>İzin ekranında kutuları işaretle → Devam. (Sadece okuma izni; kanalında değişiklik yapılamaz.)</li>
+        <li>Birden çok kanalın varsa her biri için bir kez tekrarla — sistem sana soracak.</li></ol>
+      <a class="btn primary" href="/kanal-ekle" style="font-size:16px;padding:10px 18px">+ Kanal ekle</a></div>`;
+    return;
+  }
+  const errs = p.channels.filter(c => c.sync_error);
+  $("#view").innerHTML = `
+    ${errs.length ? `<div class="card notice"><b>${errs.length} kanalda senkronizasyon hatası</b>
+      ${errs.map(c => `<div class="small t2">${esc(c.title)}: ${esc(c.sync_error)}</div>`).join("")}</div>` : ""}
+    ${!p.anchor ? `<div class="card notice">Analitik verisi henüz yok. <b>Senkronize et</b>'e bas; ilk senkronizasyon birkaç dakika sürebilir.</div>` : ""}
+    ${kpis(t.cur, t.change, `<div class="card tile"><div class="label">Toplam abone · ${p.channels.length} kanal</div><div class="value">${compact(t.subscribers)}</div><div class="sub">${t.views_24h ? `~24 saatte ${compact(t.views_24h)} izlenme` : "&nbsp;"}</div></div>`)}
+    ${chartBlock("Günlük trend — tüm kanallar", true)}
+    <section><div class="sec-head"><h2>Kanal karşılaştırma</h2><button id="csvBtn">CSV indir</button></div>
+      <div class="card">${compareTable()}</div>
+      <p class="muted small">Satıra tıkla → kanal detayı. Etkileşim = (beğeni + yorum + paylaşım) / izlenme. Ort. izleme = toplam izlenme süresi / izlenme. “~24 saat”, senkronlar arasındaki sayaç farkıdır.</p></section>
+    <section>${breakdownBlock(" — tüm kanallar")}</section>
+    <section>${topTable(true)}</section>
+    <section><details id="actionsBox"><summary>Kapak ve banner işlemleri</summary><div class="card" id="actions" style="margin-top:10px"></div></details></section>`;
+  drawChart(p.series, p.prev_series, true);
+  $("#csvBtn").onclick = exportCsv;
+  $("#actionsBox").addEventListener("toggle", e => { if (e.target.open) loadActions(); });
+}
+
+function exportCsv() {
+  const head = ["kanal", "kanal_id", "abone", "izlenme", "izlenme_onceki", "degisim_yuzde", "izlenme_suresi_saat", "ort_izleme_sn", "abone_net", "yukleme", "etkilesim_yuzde", "pay_yuzde"];
+  const r = v => v == null ? "" : String(v);
+  const lines = [head.join(";")].concat(S.p.channels.map(c => [
+    `"${c.title.replace(/"/g, '""')}"`, c.id, r(c.subscribers), c.cur.views, c.prev.views,
+    c.change.views == null ? "" : (c.change.views * 100).toFixed(1), Math.round(c.cur.minutes / 60), r(c.cur.avg_view_s),
+    c.cur.subs_net, c.cur.uploads, c.cur.engagement == null ? "" : (c.cur.engagement * 100).toFixed(2),
+    c.share == null ? "" : (c.share * 100).toFixed(1)].join(";")));
+  const blob = new Blob(["﻿" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `kanallar-${S.p.period?.end || "veri"}-${S.days}g.csv`; a.click(); URL.revokeObjectURL(a.href);
+}
+
+// ------------------------------------------------------------- kanal detayı
+function renderChannel() {
+  const c = S.p.channels.find(x => x.id === S.channel);
+  $("#view").innerHTML = `
+    <div class="chhead"><button data-home>← Tüm kanallar</button>
+      <img src="${esc(c.thumbnail_url)}" alt="" referrerpolicy="no-referrer">
+      <div style="flex:1;min-width:200px"><h2>${esc(c.title)}</h2>
+        <div class="t2 small">${esc(c.handle || c.id)} · ${c.hidden_subs ? "abone sayısı gizli" : fmt(c.subscribers) + " abone"} · ${fmt(c.video_count)} video · ${fmt(c.views)} toplam izlenme</div>
+        <div class="small"><a href="https://www.youtube.com/channel/${encodeURIComponent(c.id)}" target="_blank" rel="noopener">YouTube'da aç</a> ·
+          <a href="https://studio.youtube.com/channel/${encodeURIComponent(c.id)}/analytics" target="_blank" rel="noopener">Studio analitiği</a></div></div>
+      <button data-banner="${esc(c.id)}">Banner değiştir</button><button data-disconnect="${esc(c.id)}">Bağlantıyı kes</button></div>
+    ${c.sync_error ? `<div class="card notice">Son senkronizasyon hatası: ${esc(c.sync_error)}</div>` : ""}
+    ${kpis(c.cur, c.change, `<div class="card tile"><div class="label">Portföydeki payı</div><div class="value">${pct(c.share, 0)}</div><div class="sub">${c.views_24h != null ? `~24 saatte ${compact(c.views_24h)} izlenme` : "&nbsp;"}</div></div>`)}
+    ${chartBlock("Günlük trend", false)}
+    <section>${breakdownBlock("")}</section>
+    <section><div class="card small t2" id="repStatus">Reporting API durumu yükleniyor…</div></section>
+    <section>${topTable(false)}</section>
+    <section><details id="allVideos"><summary>Tüm videolar ve kapaklar</summary>
+      <p class="muted small">Kapağı değiştirmek için görsele tıkla veya dosyayı üstüne sürükle.</p><div class="videos" id="videos"></div></details></section>`;
+  drawChart(c.series, c.prev_series, false);
+  api(`/api/reporting?channel=${encodeURIComponent(c.id)}`).then(([r]) => {
+    $("#repStatus").innerHTML = !r || !r.jobs
+      ? `<b>Video bazlı günlük veri (Reporting API):</b> henüz rapor işi yok. Google Cloud'da <i>YouTube Reporting API</i>'yi aç ve senkronize et.`
+      : r.days
+        ? `<b>Video bazlı günlük veri (Reporting API):</b> ${fmt(r.days)} gün birikti (${esc(r.first_day)} – ${esc(r.last_day)}), ${fmt(r.files)} rapor indirildi. Videolardaki “Günlük” düğmesi bu veriyi gösterir.`
+        : `<b>Video bazlı günlük veri (Reporting API):</b> rapor işleri oluşturuldu (${esc(r.jobs)}). YouTube ilk raporları ~24 saat içinde üretir ve 30 gün geriye doldurur; sonraki senkronizasyonda inecek.`;
+  }).catch(() => {});
+  $("#allVideos").addEventListener("toggle", async e => {
+    if (!e.target.open) return;
+    if (!S.videos || S.videos.cid !== c.id) S.videos = { cid: c.id, list: await api(`/api/channels/${c.id}/videos`) };
+    renderVideos();
+  });
+}
+
+async function showTrend(videoId) {
+  const box = $("#vtrend"), v = (S.top || []).find(x => x.video_id === videoId);
+  box.hidden = false;
+  box.innerHTML = `<p class="muted" style="margin:0">Yükleniyor…</p>`;
+  const rows = await api(`/api/videos/${encodeURIComponent(videoId)}/trend`).catch(() => []);
+  const head = `<div class="sec-head"><h2>${esc(v?.title || videoId)} — günlük</h2><button data-closetrend>Kapat</button></div>`;
+  if (!rows.length) {
+    box.innerHTML = head + `<p class="muted" style="margin:0">Bu video için Reporting API verisi henüz yok. Rapor işleri oluşturulduktan sonra ilk raporlar ~24 saatte gelir.</p>`;
+    return;
+  }
+  const imp = rows.reduce((a, r) => a + (r.impressions || 0), 0), clicks = rows.reduce((a, r) => a + (r.impressions || 0) * (r.ctr || 0), 0);
+  box.innerHTML = head + `<div class="small t2" style="margin-bottom:6px">${rows.length} gün · ${fmt(rows.reduce((a, r) => a + (r.views || 0), 0))} izlenme · ${hours(rows.reduce((a, r) => a + (r.minutes || 0), 0))} saat
+    ${imp ? ` · ${compact(imp)} kapak gösterimi · tıklama oranı ${ctr(clicks / imp)}` : ""}</div><div id="vchart"></div>`;
+  lineChart($("#vchart"), { days: rows.map(r => r.day), series: [{ name: "İzlenme", color: "var(--accent)", values: rows.map(r => r.views) }],
+    fmt: compact, label: "Video günlük izlenme" });
+  box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function renderVideos() {
+  $("#videos").innerHTML = S.videos.list.map(v => `<div class="card video">
+    <div class="thumb" data-thumb="${esc(v.id)}"><img src="${esc(v.thumbnail_url)}${v._bust ? "?t=" + v._bust : ""}" alt="" loading="lazy" referrerpolicy="no-referrer"><div class="over">Kapak değiştir</div></div>
+    <div class="meta"><div class="tt" title="${esc(v.title)}">${esc(v.title)}</div>
+      <div class="t2">${compact(v.views)} izlenme · ${esc((v.published_at || "").slice(0, 10))} ${v.is_short ? `<span class="badge">Shorts?</span>` : ""}</div></div></div>`).join("") || `<p class="muted">Video yok.</p>`;
+}
+
+async function loadActions() {
+  const rows = await api("/api/actions");
+  $("#actions").innerHTML = rows.length ? `<div class="tablewrap"><table><thead><tr><th class="l">Zaman</th><th class="l">Kanal</th><th class="l">İşlem</th><th class="l">Durum</th><th></th></tr></thead><tbody>
+    ${rows.map(a => `<tr><td class="l">${new Date(a.created_at * 1000).toLocaleString("tr-TR")}</td><td class="l">${esc(a.channel_title || a.channel_id)}</td>
+      <td class="l">${a.kind === "thumbnail" ? "Kapak: " + esc(a.video_title || a.video_id) : "Banner"}</td>
+      <td class="l">${a.status === "done" ? `<span class="badge good">✓ tamam</span>` : a.status === "failed" ? `<span class="badge bad" title="${esc(a.detail)}">✗ başarısız</span>` : `<span class="badge">↺ geri alındı</span>`}</td>
+      <td>${a.status === "done" && a.backup_asset ? `<button data-undo="${a.id}">Geri al</button>` : ""}</td></tr>`).join("")}
+    </tbody></table></div>` : `<p class="muted" style="margin:0">Henüz işlem yok.</p>`;
+}
+
+// ------------------------------------------------------------- etkileşim
+let pickTarget = null;
+function pick(target) { pickTarget = target; $("#filePick").value = ""; $("#filePick").click(); }
+$("#filePick").onchange = e => { const f = e.target.files[0]; if (f && pickTarget) upload(pickTarget, f); };
+async function upload(target, file) {
+  const url = target.kind === "thumb" ? `/api/videos/${target.id}/thumbnail` : `/api/channels/${target.id}/banner`;
+  toast(`${target.kind === "thumb" ? "Kapak" : "Banner"} yükleniyor…`);
+  try {
+    const res = await api(url, { method: "POST", body: file, headers: { "Content-Type": file.type || "application/octet-stream" } });
+    (res.warnings || []).forEach(w => toast("Uyarı: " + w));
+    toast(`✓ ${target.kind === "thumb" ? "Kapak" : "Banner"} güncellendi.`, "ok");
+    if (target.kind === "thumb" && S.videos) {
+      const v = S.videos.list.find(v => v.id === target.id);
+      if (v) { if (res.url) v.thumbnail_url = res.url; v._bust = Date.now(); renderVideos(); }
+    }
+  } catch (err) {
+    if (err.data?.need_write) {
+      if (confirm("Kapak veya banner değiştirmek için bu kanala ek izin (yazma) vermen gerekiyor. Google'a yönlendirileceksin; aynı kanalı seç. Devam edilsin mi?"))
+        location.href = "/kanal-ekle?yazma=1";
+    } else toast("✗ " + err.message, "err");
+  }
+}
+
+function go(view, channel) {
+  S.view = view; S.channel = channel || null; S.topKind = ""; S.topLimit = 10;
+  history.replaceState(null, "", channel ? "#" + channel : location.pathname);
+  window.scrollTo(0, 0); load();
+}
+
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-closetrend],[data-trend],[data-more],[data-days],[data-metric],[data-mode],[data-sort],[data-kind],[data-open],[data-home],[data-banner],[data-thumb],[data-undo],[data-disconnect]");
+  if (!t) return;
+  const d = t.dataset;
+  if (d.closetrend !== undefined) { $("#vtrend").hidden = true; }
+  else if (d.trend) showTrend(d.trend);
+  else if (d.more !== undefined) { S.topLimit = Math.min(200, S.topLimit + 40); load(); }
+  else if (d.days) { S.days = +d.days; try { localStorage.setItem("ythub.days", d.days); } catch {} load(); }
+  else if (d.metric) { S.chartMetric = d.metric; render(); }
+  else if (d.mode) { S.chartMode = d.mode; render(); }
+  else if (d.sort) { S.sort = S.sort.key === d.sort ? { key: d.sort, dir: -S.sort.dir } : { key: d.sort, dir: d.sort === "title" ? 1 : -1 }; render(); }
+  else if (d.kind !== undefined) { S.topKind = d.kind; load(); }
+  else if (d.open) go("channel", d.open);
+  else if (d.home !== undefined) go("home");
+  else if (d.banner) pick({ kind: "banner", id: d.banner });
+  else if (d.thumb) pick({ kind: "thumb", id: d.thumb });
+  else if (d.disconnect) {
+    if (!confirm("Kanalın bağlantısı kesilsin mi? Google erişimi iptal edilir ve bu kanalın paneldeki tüm verisi silinir.")) return;
+    try { await api(`/api/channels/${d.disconnect}/disconnect`, { method: "POST" }); toast("Bağlantı kesildi.", "ok"); go("home"); }
+    catch (err) { toast("✗ " + err.message, "err"); }
+  } else if (d.undo) {
+    if (!confirm("Bu değişiklik geri alınsın mı? Önceki görsel yeniden yüklenecek (50 birim kota).")) return;
+    try { await api(`/api/actions/${d.undo}/undo`, { method: "POST" }); toast("✓ Geri alındı.", "ok"); loadActions(); }
+    catch (err) { toast("✗ " + err.message, "err"); }
+  }
+});
+for (const ev of ["dragenter", "dragover"]) document.addEventListener(ev, e => {
+  const t = e.target.closest?.("[data-thumb]"); if (t) { e.preventDefault(); t.classList.add("drop"); } });
+document.addEventListener("dragleave", e => e.target.closest?.("[data-thumb]")?.classList.remove("drop"));
+document.addEventListener("drop", e => {
+  const t = e.target.closest?.("[data-thumb]"); if (!t) return;
+  e.preventDefault(); t.classList.remove("drop");
+  const f = e.dataTransfer.files[0]; if (f) upload({ kind: "thumb", id: t.dataset.thumb }, f);
+});
+
+// ------------------------------------------------------------- senkronizasyon
+async function pollSync() {
+  const s = await api("/api/sync");
+  $("#syncBtn").disabled = s.running;
+  $("#syncInfo").textContent = s.running ? `senkronize ediliyor… (${s.results.length} kanal bitti)` : "";
+  if (s.running) setTimeout(pollSync, 2000);
+  else if (pollSync.wasRunning) {
+    const bad = s.results.filter(r => !r.ok);
+    bad.forEach(r => toast(`✗ ${r.channel_id}: ${r.error}`, "err"));
+    s.results.flatMap(r => r.notes || []).slice(0, 3).forEach(n => toast("Not: " + n));
+    toast(`Senkronizasyon bitti: ${s.results.length - bad.length}/${s.results.length} kanal.`, bad.length ? "" : "ok");
+    load();
+  }
+  pollSync.wasRunning = s.running;
+}
+$("#syncBtn").onclick = async () => {
+  try { await api("/api/sync", { method: "POST" }); pollSync.wasRunning = true; pollSync(); }
+  catch (err) { toast(err.message, "err"); }
+};
+
+const ERRORS = {
+  access_denied: "Google'da izin verilmedi. Tekrar deneyip izin kutularını işaretleyebilirsin.",
+  state: "Güvenlik kontrolü başarısız (oturum süresi dolmuş olabilir). Tekrar dene.",
+  oturum: "Oturum değişti; tekrar dene.",
+  baglanti: "Kanal bağlanamadı.",
+  izin: "Giriş yapıldı ama YouTube izni verilmedi. Kanalını bağlamak için “+ Kanal ekle”ye bas ve izin kutularını işaretle.",
+  kanal_yok: "Seçtiğin Google hesabında YouTube kanalı yok. “+ Kanal ekle” ile kanalın olduğu hesabı veya marka kanalını seç.",
+};
+(() => { const a = $(".avatar"); a.dataset.initial = (a.dataset.name || "?").trim().charAt(0).toLocaleUpperCase("tr");
+  const img = a.querySelector("img"); if (!img.getAttribute("src")) img.remove(); })();
+$("#logoutBtn").onclick = async () => { try { await api("/cikis", { method: "POST" }); } catch {} location.href = "/"; };
+
+(async function init() {
+  const q = new URLSearchParams(location.search);
+  if (q.has("connected")) {
+    // Bir kanal bağlandı: aynı hesapta başka kanal varsa hemen ekletmeyi teklif et.
+    $("#banner").innerHTML = `<div class="card connect"><div style="flex:1;min-width:220px"><b>✓ Kanal bağlandı.</b>
+      <span class="t2">Veriler arka planda çekiliyor (birkaç dakika). Bu hesapta başka kanalın var mı?</span></div>
+      <a class="btn primary" href="/kanal-ekle">+ Bir kanal daha ekle</a><button data-dismiss>Hepsi bu kadar</button></div>`;
+  }
+  if (q.has("hata")) {
+    const m = ERRORS[q.get("hata")] || ("Google onayı tamamlanmadı: " + q.get("hata"));
+    toast(m + (q.get("mesaj") ? " — " + q.get("mesaj") : ""), "err");
+  }
+  if (q.has("connected") || q.has("hata")) history.replaceState(null, "", location.pathname + location.hash);
+  const hash = location.hash.slice(1);
+  if (hash) { S.view = "channel"; S.channel = hash; }
+  await load();
+  pollSync();
+  if (q.has("connected")) { setTimeout(load, 8000); setTimeout(load, 30000); }
+})();
+document.addEventListener("click", e => { if (e.target.closest("[data-dismiss]")) $("#banner").innerHTML = ""; });
+</script>
+</body>
+</html>
