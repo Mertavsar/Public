@@ -34,6 +34,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/unfog.py` | Kaynağa gömülü alt beyaz sis şeridini düzeltir: yarı saydam kısmı geri kazanır, gerisini koyu gradyana çevirir |
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
+| `reference/shorts-format.md` | **Kanal formatı:** hook → vaat/sayaç → yeniden kancalar → bilgi → gecikmeli doruk → soru/döngü; ekran yazısı katmanları |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
 | `reference/script-writing.md` | Metin yapısı, hook kalıpları, döngü kurgusu |
 | `reference/voice-settings.md` | Ses seçimi ve ElevenLabs ayar standardı |
