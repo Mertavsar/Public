@@ -40,7 +40,9 @@ WHITE = (255, 255, 255, 255)
 YELLOW = (255, 214, 0, 255)
 RED = (235, 40, 40, 255)
 BLACK = (0, 0, 0, 255)
-COL = {"white": WHITE, "yellow": YELLOW, "red": RED}
+CYAN = (0, 225, 255, 255)
+COL = {"white": WHITE, "yellow": YELLOW, "red": RED, "cyan": CYAN,
+       "green": (90, 235, 120, 255), "orange": (255, 150, 20, 255), "pink": (255, 90, 170, 255)}
 
 
 def chunks(words, max_w, max_c):
@@ -128,7 +130,7 @@ def main():
                 if ar.get("pulse") and frac >= 1.0:
                     ln *= 1.0 + ar["pulse"] * math.sin(2 * math.pi * 3.2 * (t - ar["t"] - dr))
                 poly = clip_polygon_progress(arrow_polygon(tipx, tipy, ar["angle"], ln), (tipx, tipy), frac)
-                d.polygon(poly, fill=RED, outline=BLACK, width=max(8, int(ln * 0.045)))
+                d.polygon(poly, fill=COL.get(ar.get("color", "red"), RED), outline=BLACK, width=max(8, int(ln * 0.045)))
         # ---- sahne etiketi (çeviri) ----
         for lb in (sp.get("labels", []) if a.layer != "cards" else []):
             if lb["t0"] <= t < lb["t1"]:
@@ -191,7 +193,9 @@ def main():
                         x += wd + sp_w
                         continue
                     key = re.sub(r"[^\wçğıöşüÇĞİÖŞÜ]", "", w["w"]).lower() in emph
-                    col = YELLOW if (on and (key or w["s"] <= t < w["e"] + 0.05)) else WHITE
+                    # aynı klibin ikinci dil sürümü farklı görünsün: vurgu rengi spec'ten
+                    hi = COL.get(sp.get("emph_color", "yellow"), YELLOW)
+                    col = hi if (on and (key or w["s"] <= t < w["e"] + 0.05)) else WHITE
                     fw = fbase
                     if reveal:
                         mw = 1.0 + 0.08 * math.exp(-(t - w["s"]) / 0.05)
