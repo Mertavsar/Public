@@ -110,16 +110,22 @@ def main():
         if bx and a.layer != "text":
             y0, y1, x0, x1 = bx
             x0, x1 = max(0, x0), min(W, x1)
-            d.rounded_rectangle([x0, y0, x1, y1], radius=22, fill=(12, 12, 12, 255),
-                                outline=YELLOW, width=5)
+            fill = tuple(sp.get("card_fill", [12, 12, 12])) + (255,)
+            d.rounded_rectangle([x0, y0, x1, y1], radius=sp.get("card_radius", 22), fill=fill,
+                                outline=COL.get(sp.get("card_outline", "yellow"), YELLOW), width=5)
             act = [c for c in cards if c["t0"] <= t < c["t1"]]
             if act:
                 c = act[-1]
                 age = t - c["t0"]
                 m = 1.0 + 0.10 * math.exp(-age / 0.06)        # beliriş vuruşu
-                f = fit_font(d, c["text"], (x1 - x0) - 60, int(round(min(78, (y1 - y0) * 0.62) * m)))
-                d.text(((x0 + x1) / 2, (y0 + y1) / 2), c["text"], font=f,
-                       fill=COL.get(c.get("color", "white"), WHITE), anchor="mm")
+                lines = c["text"].split("\n")                 # çok satır, satır başına renk
+                cols = c.get("colors", [c.get("color", "white")] * len(lines))
+                lh = (y1 - y0) / len(lines)
+                widest = max(lines, key=lambda q: d.textlength(q, font=load_font(60)))
+                f = fit_font(d, widest, (x1 - x0) - 60, int(round(min(78, lh * 0.66) * m)))
+                for k, (ln_, cl) in enumerate(zip(lines, cols)):
+                    d.text(((x0 + x1) / 2, y0 + lh * (k + 0.5)), ln_, font=f,
+                           fill=COL.get(cl, WHITE), anchor="mm")
         # ---- ok (overlay.py ile aynı biçim) ----
         for ar in (sp.get("arrows", []) if a.layer != "cards" else []):
             if ar["t"] <= t < ar["t"] + ar["dur"]:
