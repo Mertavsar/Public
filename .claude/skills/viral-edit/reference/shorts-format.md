@@ -68,3 +68,15 @@ beklemiyordu" ancak kare bunu gösteriyorsa).
 - [ ] Bilgi cümlesi kaynaklı, sayı yazıyla ("dört aylık")
 - [ ] Son cümle soru veya döngü; "abone ol" yok
 - [ ] Her cümlenin kanıt karesi tabloda
+
+## Viral anlatım dili (kullanıcı: "milyonlarca izlenen kanallardaki metinler gibi")
+
+Format aynı kalır; söyleyiş sertleşir. Kanıt kuralı değişmez — iddia büyümez.
+
+1. **Karşıtlıkla aç**: `Bu oyuncak çocuklar için yapıldı. Şimdi bir kuzgunun önünde.`
+2. **Kesik cümle**: 2–5 kelime, yer yer tek kelime (`Üç.` `Dört.`).
+3. **Ritim tekrarı**: `Bir delik… bir başka delik… ve tam isabet.`
+4. **Orta köprü**: `Asıl çılgın kısım şu:` — ikinci yarıya taşır.
+5. **Bilgi = ters köşe**: `Bilim insanları … test etti. Sonuç: …`
+6. **Döngü final**: son cümle ilk cümleyi tekrar eder
+   (`Ve unutma… bu oyuncak çocuklar için yapıldı.`).
