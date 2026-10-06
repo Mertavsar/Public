@@ -83,3 +83,17 @@ Format aynı kalır; söyleyiş sertleşir. Kanıt kuralı değişmez — iddia 
 5. **Bilgi = ters köşe**: `Bilim insanları … test etti. Sonuç: …`
 6. **Döngü final**: son cümle ilk cümleyi tekrar eder
    (`Ve unutma… bu oyuncak çocuklar için yapıldı.`).
+
+## Teşhis: "milyonluk Shorts gibi değil" (kedi–fare, kullanıcı: "berbat")
+
+Kaynak olduğu gibi + sabit yazı + renk ayarı yetmedi. Eksikler ve çözüm:
+
+1. **Sesi takip eden altyazı yoksa video ölü görünür.** 21 sn sabit iki satır
+   en büyük hataydı. Seslendirme metni yoksa İLK iş metni istemek.
+2. **Soğuk açılış**: en gergin an, ağır çekim, sonuçtan hemen önce DONMA +
+   hook sorusu + `pop` + 0.4 sn müzik sessizliği → `rewind` ile başa dön.
+   (cutter: `slow: 200` donma, `rewind` planı; sounddesign `--pop --mute --rewind`)
+3. **Ölü an hızlanır** (1.5x), olay anı ağır çekime alınır (≈1.6x) + ok + clink.
+4. Kaynağın kendi yazısı: kutu tüm video boyunca → silinir (alttaki zemini
+   kaydırarak kopyala; ProPainter kamerayla birlikte giden kutuda gri yama bıraktı),
+   cümle yalnız ilgili 3–4 sn'de altyazı olarak geçer.
