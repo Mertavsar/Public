@@ -37,7 +37,7 @@ beklemiyordu" ancak kare bunu gösteriyorsa).
 |---|---|
 | Dikkati bir ana çek | `Şimdi şuraya dikkat et.` · `Buraya bak.` |
 | Devamı vaat et | `Ama durmuyor.` · `Asıl ilginç kısım şimdi.` · `Bu daha başlangıç.` |
-| Tekrarı ödüllendir | `Yine deniyor… ve oldu.` · `Bir kez daha.` |
+| Sahte son | `Bitti sandın, değil mi?` (kare gerçekten boşalıyorsa) |
 | Sona çek | `Ve sıra sonuncusunda.` · `Son hamleyi kaçırma.` |
 | Ters köşe | `Ama dikkat et, bu aynı ... değil.` (yalnız kanıtlıysa) |
 | Bilgiye geçiş | `Bilim insanlarına göre…` · `Bunun bir açıklaması var.` |
@@ -58,7 +58,7 @@ beklemiyordu" ancak kare bunu gösteriyorsa).
 | Tür | Örnek |
 |---|---|
 | İkiye bölen soru | `Sence bunu bir çocuk mu daha hızlı yapar, bu kuzgun mu?` |
-| Döngü | son: `Ve hâlâ tek bir soru var:` → ilk: `Bu kuzgun beş parçayı da sokabilecek mi?` |
+| Döngü | son: `Şimdi bir daha izle. Bu sefer gagasına bak.` (tekrar izletir) |
 
 ## Kontrol listesi (metni teslim etmeden önce)
 
@@ -75,7 +75,10 @@ Format aynı kalır; söyleyiş sertleşir. Kanıt kuralı değişmez — iddia 
 
 1. **Karşıtlıkla aç**: `Bu oyuncak çocuklar için yapıldı. Şimdi bir kuzgunun önünde.`
 2. **Kesik cümle**: 2–5 kelime, yer yer tek kelime (`Üç.` `Dört.`).
-3. **Ritim tekrarı**: `Bir delik… bir başka delik… ve tam isabet.`
+3. ⛔ **Hamle hamle anlatma.** `İlki yeşil. Bir delik… bir başkası… ve içeride.`
+   kullanıcıya "berbat" geldi: görüntünün zaten gösterdiğini spiker gibi sayıyor.
+   Hamleyi ekrandaki sayaç/ok gösterir; ses hikâye ve anlam katar (soru, sahte son,
+   ters köşe, bilim cevabı, bekletilen son, "bir daha izle" döngüsü).
 4. **Orta köprü**: `Asıl çılgın kısım şu:` — ikinci yarıya taşır.
 5. **Bilgi = ters köşe**: `Bilim insanları … test etti. Sonuç: …`
 6. **Döngü final**: son cümle ilk cümleyi tekrar eder
