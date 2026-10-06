@@ -1,0 +1,636 @@
+{
+  "baslik": "Enflasyon %30'un altına indi ama fiyatlar neden ucuzlamadı?",
+  "tarih": "2026-10-06",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "enflasyon",
+    "düştü",
+    "hız",
+    "birikir"
+  ],
+  "altyazi": {
+    "elli yedi": "57",
+    "yüzde otuzun": "%30'un",
+    "kasım iki bin yirmi bir'den": "Kasım 2021'den",
+    "Üç soruda": "3 soruda",
+    "yüzde bir virgül seksen dört": "%1,84",
+    "yüzde yirmi dokuz virgül yetmiş üç": "%29,73",
+    "yüz kilometreden seksene": "100 km'den 80'e",
+    "yüz lira": "100 lira",
+    "yüz otuz lira": "130 lira",
+    "on bin liralık": "10.000 liralık",
+    "on üç bin lira": "13.000 lira",
+    "yüzde yirmi sekiz": "%28",
+    "otuz beş": "35",
+    "yüzde otuzdan": "%30'dan",
+    "yüzde kırk bir": "%41"
+  },
+  "kapak": {
+    "ikon": "📉",
+    "ust": "ENFLASYON DÜŞTÜ",
+    "buyuk": "%29,73",
+    "alt": "FİYATLAR NEDEN DÜŞMEDİ?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Enflasyon, elli yedi ay sonra ilk kez yüzde otuzun altına indi.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Eylül · yıllık enflasyon",
+        "deger": 29.73,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "down",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "TÜİK, eylül 2026",
+        "sayma": false
+      },
+      "kaynak": "TÜİK (K1, K2)",
+      "etiket": "EYLÜL ENFLASYONU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki fiyatlar neden ucuzlamadı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "UCUZLAMADI\nMI?\n*NEDEN?*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi sade dille anlatıyoruz; kaçırmamak için abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ *SADE*",
+          "ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 96
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu hafta TÜİK, eylül ayı enflasyonunu açıkladı.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "*TÜİK*",
+          "EYLÜL ENFLASYONU",
+          "AÇIKLANDI"
+        ],
+        "boy": 96
+      },
+      "kaynak": "TÜİK (K1, K2)",
+      "etiket": "NE OLDU?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "TÜİK, markette ve faturada harcadığımız çok sayıda ürünün fiyatına bakıyor.",
+      "p": {
+        "ikon": "🛒",
+        "satirlar": [
+          "ÇOK SAYIDA",
+          "ÜRÜN VE HİZMET",
+          "*FİYATI* İZLENİYOR"
+        ],
+        "boy": 88
+      },
+      "kaynak": "TÜİK yöntemi (K1)",
+      "etiket": "NASIL ÖLÇÜLÜR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Fiyatları geçen yılın aynı ayıyla karşılaştırıyor. Buna yıllık enflasyon deniyor.",
+      "p": {
+        "ikon": "🗓️",
+        "satirlar": [
+          "GEÇEN YIL",
+          "↔",
+          "*BU YIL*"
+        ],
+        "boy": 110
+      },
+      "kaynak": "TÜİK (K1)",
+      "etiket": "YILLIK ENFLASYON"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Resmî adı TÜFE, yani tüketici fiyat endeksi. Haberlerdeki rakam bu.",
+      "p": {
+        "ikon": "📋",
+        "satirlar": [
+          "*TÜFE*",
+          "TÜKETİCİ FİYAT",
+          "ENDEKSİ"
+        ],
+        "boy": 104
+      },
+      "kaynak": "TÜİK (K1)",
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Fiyatlar eylülde, bir önceki aya göre yüzde bir virgül seksen dört arttı.",
+      "p": {
+        "ikon": "🏷️",
+        "etiket": "Eylülde aylık artış",
+        "deger": 1.84,
+        "onek": "+%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "turuncu",
+        "not": "bir önceki aya göre"
+      },
+      "kaynak": "TÜİK (K1, K2)",
+      "etiket": "AYLIK ARTIŞ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Bir yıl öncesine göre artış ise yüzde yirmi dokuz virgül yetmiş üç.",
+      "p": {
+        "ikon": "📈",
+        "etiket": "Yıllık artış",
+        "deger": 29.73,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "geçen yılın eylülüne göre"
+      },
+      "kaynak": "TÜİK (K1, K2)",
+      "etiket": "YILLIK ARTIŞ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Rakam, ekonomistlerin beklentisinin altında kaldı.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "BEKLENTİNİN",
+          "*ALTINDA*",
+          "KALDI"
+        ],
+        "boy": 104
+      },
+      "kaynak": "AA Finans anketi, ekoturk (K3)",
+      "etiket": "BEKLENTİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu oran, kasım iki bin yirmi bir'den beri ilk kez otuzun altında.",
+      "p": {
+        "ikon": "🏁",
+        "satirlar": [
+          "*KASIM 2021*'DEN",
+          "BERİ İLK KEZ",
+          "%30'UN ALTINDA"
+        ],
+        "boy": 92
+      },
+      "kaynak": "Hazine ve Maliye Bakanı açıklaması (K4)",
+      "etiket": "57 AY SONRA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki enflasyon düştüyse, fiyatlar neden eski haline dönmedi?",
+      "p": {
+        "ikon": "🤨",
+        "metin": "DÜŞTÜ\nAMA NEDEN\n*UCUZLAMADI?*",
+        "boy": 104
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Çünkü enflasyon, fiyatın düşmesi değil; fiyatların artış hızıdır.",
+      "p": {
+        "ikon": "⏱️",
+        "satirlar": [
+          "ENFLASYON",
+          "= *HIZ*"
+        ],
+        "boy": 120
+      },
+      "etiket": "ASIL MESELE"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Bir araba düşün. Hızı yüz kilometreden seksene indi. Yavaşladı ama geri gitmiyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🚗",
+            "metin": "Hız düştü"
+          },
+          {
+            "ikon": "🛣️",
+            "metin": "Yine de *ileri* gidiyor"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Fiyatlar geri *dönmüyor*"
+          }
+        ]
+      },
+      "etiket": "ARABA BENZETMESİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Fiyatlar zaten yükselmişti. Enflasyon düşünce yükseliş durmaz; sadece yavaşlar.",
+      "p": {
+        "ikon": "🧗",
+        "satirlar": [
+          "YÜKSELİŞ *DURMAZ*",
+          "SADECE *YAVAŞLAR*"
+        ],
+        "boy": 96
+      },
+      "etiket": "GERİ DÖNÜŞ YOK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "KISIM *ŞİMDİ*",
+          "BİR *BEĞEN* BIRAK"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Geçen yıl yüz lira olan sepet, şimdi yaklaşık yüz otuz lira.",
+      "p": {
+        "baslik": "Geçen yılın 100 liralık sepeti",
+        "ikon": "🛒",
+        "ogeler": [
+          "100 ₺",
+          "+",
+          "%29,73",
+          "=",
+          "129,73 ₺"
+        ]
+      },
+      "kaynak": "hesap: 100 × 1,2973",
+      "etiket": "SEPET HESABI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Küçük aylık artışlar birikir; yıl sonunda büyük bir fark çıkar.",
+      "p": {
+        "ikon": "🧮",
+        "satirlar": [
+          "KÜÇÜK ARTIŞLAR",
+          "*BİRİKİR*"
+        ],
+        "boy": 104
+      },
+      "etiket": "BİRİKME"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani fiyatlar artmaya devam etti; sadece geçen yıldan daha yavaş.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "FİYATLAR *HÂLÂ*",
+          "ARTIYOR",
+          "SADECE DAHA YAVAŞ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YAVAŞLADI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Fiyatların gerçekten düşmesine deflasyon denir. Şu an yaşadığımız bu değil.",
+      "p": {
+        "ikon": "📖",
+        "satirlar": [
+          "*DEFLASYON*",
+          "= FİYATLARIN",
+          "GERÇEKTEN DÜŞMESİ"
+        ],
+        "boy": 92,
+        "not": "Şu an olan bu değil"
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bu yavaşlama her üründe aynı mı?",
+      "p": {
+        "ikon": "🔍",
+        "metin": "HER ÜRÜNDE\n*AYNI MI?*",
+        "boy": 116
+      },
+      "etiket": "AYRINTI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Yıllık artış gıdada yaklaşık yüzde yirmi sekiz, ulaştırmada otuz beş, konutta kırk.",
+      "p": {
+        "baslik": "Yıllık artış · eylül",
+        "satirlar": [
+          {
+            "ikon": "🥖",
+            "metin": "Gıda",
+            "deger": "%27,62",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🚌",
+            "metin": "Ulaştırma",
+            "deger": "%35,10",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "Konut",
+            "deger": "%39,99",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "TÜİK ana harcama grupları"
+      },
+      "kaynak": "TÜİK (K1, K2)",
+      "etiket": "GRUPLARA GÖRE"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kira artışı da yavaşladı ama yıllık oran hâlâ yüzde kırk bir civarında.",
+      "p": {
+        "ikon": "🔑",
+        "satirlar": [
+          "KİRA ARTIŞI",
+          "YAVAŞLADI AMA",
+          "*%41,3*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Hazine ve Maliye Bakanı açıklaması (K4)",
+      "etiket": "KİRA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Gıdada yıllık artış, bir yıl öncesine göre sekiz puandan fazla yavaşladı.",
+      "p": {
+        "ikon": "🥖",
+        "satirlar": [
+          "GIDADA ARTIŞ",
+          "*8 PUANDAN FAZLA*",
+          "YAVAŞLADI"
+        ],
+        "boy": 88
+      },
+      "kaynak": "Hazine ve Maliye Bakanı açıklaması (K4)",
+      "etiket": "GIDA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Eğitimde de artış yavaşladı, ama yıllık oran yüzde kırk sekiz civarında.",
+      "p": {
+        "ikon": "🎓",
+        "satirlar": [
+          "EĞİTİMDE DE",
+          "YAVAŞLADI AMA",
+          "*%48,6*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Hazine ve Maliye Bakanı açıklaması (K4)",
+      "etiket": "EĞİTİM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Dikkat: bunlar ortalama rakamlar. Herkesin harcaması farklı, herkesin enflasyonu da farklı.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "BUNLAR *ORTALAMA*",
+          "SENİN SEPETİN",
+          "FARKLI OLABİLİR"
+        ],
+        "boy": 88
+      },
+      "etiket": "ORTALAMA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunuyor?",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİNE\n*NASIL?*",
+        "boy": 124
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Geçen yıl on bin liralık sepet, şimdi ortalama on üç bin lira.",
+      "p": {
+        "baslik": "Geçen yılın 10.000 liralık sepeti",
+        "ikon": "💸",
+        "ogeler": [
+          "10.000 ₺",
+          "+",
+          "%29,73",
+          "=",
+          "≈ 12.973 ₺"
+        ]
+      },
+      "kaynak": "hesap: 10.000 × 1,2973",
+      "etiket": "CEBİNE ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kira ödüyorsan ya da ev tutacaksan, konut grubundaki artış seni yakından ilgilendirir.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "KONUT GRUBU",
+          "SENİ *YAKINDAN*",
+          "İLGİLENDİRİR"
+        ],
+        "boy": 92
+      },
+      "kaynak": "TÜİK (K2)",
+      "etiket": "KONUT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "say": "Maaşın yüzde otuzdan az arttıysa, aynı parayla biraz daha az şey alırsın.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💰",
+            "metin": "Gelirin artışı"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Fiyatların artışı"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Fark: *alım gücü*"
+          }
+        ]
+      },
+      "etiket": "ALIM GÜCÜ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Market alışverişinde aynı sepete biraz daha fazla ödemeye devam edebilirsin.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "AYNI SEPET",
+          "*BİRAZ DAHA* PAHALI"
+        ],
+        "boy": 104
+      },
+      "etiket": "MARKET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "İyi haber şu: artış yavaşlıyor, yani yeni zamlar daha küçük geliyor.",
+      "p": {
+        "ikon": "🌤️",
+        "satirlar": [
+          "ARTIŞ *YAVAŞLIYOR*",
+          "YENİ ZAMLAR",
+          "DAHA KÜÇÜK"
+        ],
+        "boy": 92
+      },
+      "etiket": "İYİ HABER"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bir sonraki rakam, kasım başında bekleniyor. Yavaşlamanın sürüp sürmediğini o gösterecek.",
+      "p": {
+        "ikon": "🗓️",
+        "satirlar": [
+          "SIRADAKİ RAKAM",
+          "*KASIM BAŞI*",
+          "(bekleniyor)"
+        ],
+        "boy": 96
+      },
+      "kaynak": "TÜİK takvimi (K1)",
+      "etiket": "SIRADAKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası, fiyatlar yavaş artıyor ama ucuzlamıyor. Cebine yansıyan da bu.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "YAVAŞ ARTIYOR",
+          "*UCUZLAMIYOR*"
+        ],
+        "boy": 104
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bunlar bilgi amaçlıdır; yatırım ya da finans tavsiyesi değildir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "BİLGİ AMAÇLIDIR",
+          "TAVSİYE DEĞİL"
+        ],
+        "boy": 96
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "TÜİK Eylül 2026 TÜFE: aylık %1,84, yıllık %29,73 — https://www.bloomberght.com/eylul-enflasyonu-belli-oldu-3790306 ; https://www.forbes.com.tr/ekonomi/tuik-eylul-enflasyonunu-acikladi-eylul-2026-tuketici-fiyat-endeksi-tuik",
+    "K2": "Gıda %27,62, ulaştırma %35,10, konut %39,99 yıllık — https://www.ahaber.com.tr/ekonomi/2026/10/05/eylul-enflasyonu-aciklandi-yillik-oran-yuzde-2973e-geriledi ; https://www.paranfil.com/tuik-2026-eylul-enflasyonunu-acikladi/",
+    "K3": "Eylül enflasyonu beklentilerin altında kaldı (AA Finans anketi ort. %2,18) — https://www.ekoturk.com/ekonomi-verileri/eylul-enflasyonu-beklentilerin-altinda-kaldi/ ; https://www.takvim.com.tr/ekonomi/2026/10/04/tuik-eylul-ayi-enflasyon-rakamlarini-acikladi",
+    "K4": "Yıllık enflasyon Kasım 2021'den beri ilk kez %30'un altında (57 ay); kira %41,3 — https://uzmanpara.milliyet.com.tr/uzmanpara/bakan-simsek-yillik-enflasyon-57-ay-sonra-yuzde-30un-altina-geriledi-7673300 ; https://bankadunyasi.com/mehmet-simsek-enflasyon-aciklamasi-eylul-2026/"
+  },
+  "cta": [
+    {
+      "sahne": 16,
+      "gecikme": 1.8,
+      "sure": 5.0
+    }
+  ]
+}
