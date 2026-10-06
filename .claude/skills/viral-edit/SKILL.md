@@ -462,6 +462,12 @@ yarım saniye önce ya da sonra olur.
 
 İlk kareye flash koyma — görüntüyü yakar. Açılışta darbe sesi ve sarsıntı yeterli.
 
+### ⛔ Whoosh kullanma
+
+`sounddesign.py --whoosh` kesimlerde kullanıcıya "çok kötü" geldi (kuzgun şekil
+oyuncağı, 5 whoosh). Kullanıcı "reels gibi efsane edit" dese bile whoosh koyma;
+müzik yatağı + olay anında clink + girişte tek vuruş yeterli.
+
 ### ⛔ İstenmeyen ekran yazısı EKLEME
 
 Kullanıcının istemediği büyük vurgu yazısı ("PATLAMA!", "TEK BİR HATA…")
