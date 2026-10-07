@@ -13,6 +13,7 @@ spec (json):
  "game": [770, 1630],            // kaynakta oyunun temiz satırları (başlık/HUD dışı)
  "cam":  [0, 560, 0, 1080],      // kaynakta kamera: y0, y1, x0, x1
  "band": 280, "card": [90, 1236, 900, 467], "card_label": "CAM",
+ "layout": "game_top", "game_scale": 1.2,   // oyun en üstte + büyük; bant (200) oyunun altında
  "palette": "red" | "purple" | "navy" | "teal",
  "grade": "warm" | "night" | "neon" | "clean",
  "plan": [ {"src": [33.9, 34.45], "speed": 0.5},
@@ -101,8 +102,15 @@ def main():
     G0, G1 = sp.get("game", [770, 1630]); GH = G1 - G0
     C = sp.get("cam", [0, 560, 0, 1080])
     BAND = sp.get("band", 280)
-    cx, cy, cw, ch = sp.get("card", [90, BAND + GH + 96, 900, 467])
-    STRIP = BAND + GH + 46
+    # "game_top": oyun en üstten başlar (kullanıcı: "üstteki bant oyunu bölüyor, yarım
+    # ekran"), game_scale ile büyür (yanlardan kırpılır), yazı bandı oyunun altına iner.
+    TOP = sp.get("layout") == "game_top"
+    GS = sp.get("game_scale", 1.0)
+    GHO = int(round(GH * GS))                       # çıktıdaki oyun yüksekliği
+    GY = 0 if TOP else BAND
+    HB = (GY + GHO + 4, GY + GHO + 4 + sp.get("band", 200)) if TOP else (0, BAND)   # başlık bandı
+    cx, cy, cw, ch = sp.get("card", [90, (HB[1] + 64) if TOP else BAND + GH + 96, 900, 467])
+    STRIP = (HB[1] + 30) if TOP else BAND + GH + 46
     bgt, bgb, ACC, ACC2, CARD = PAL[sp.get("palette", "red")]
     COL["accent"], COL["accent2"] = ACC, ACC2
     GRADE = sp.get("grade", "warm")
@@ -178,8 +186,14 @@ def main():
 
     def layout(f):
         out = BG.copy()
-        out[BAND:BAND + GH] = grade_game(f[G0:G1], GRADE)
-        out[BAND - 5:BAND] = LINE; out[BAND + GH:BAND + GH + 4] = LINE[:4]
+        g = f[G0:G1]
+        if GS != 1.0:
+            g = cv2.resize(g, (int(round(W * GS)), GHO), interpolation=cv2.INTER_CUBIC)
+            x0 = (g.shape[1] - W) // 2; g = g[:, x0:x0 + W]
+        out[GY:GY + GHO] = grade_game(g, GRADE)
+        if GY >= 5:
+            out[GY - 5:GY] = LINE
+        out[GY + GHO:GY + GHO + 4] = LINE[:4]
         return out
 
     need = {int(round(s * SFPS)) for s, *_ in seq}
@@ -253,7 +267,8 @@ def main():
     CH = [(T(c["at"]), T(c["at"]) + c["dur"], c["parts"]) for c in sp.get("chips", [])]
     FL = [T(v) for v in sp.get("flash", [])]
     SK = [T(v) for v in sp.get("shake", [])]
-    YS = {1: [BAND * 0.6], 2: [BAND * 0.42, BAND * 0.78]}
+    hb0, hb1 = HB; hh = hb1 - hb0
+    YS = {1: [hb0 + hh * 0.55], 2: [hb0 + hh * 0.32, hb0 + hh * 0.76]}
 
     tmpv = OUT + ".v.mp4"
     enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",

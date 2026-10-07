@@ -12,13 +12,7 @@
   0,
   1080
  ],
- "band": 280,
- "card": [
-  90,
-  1236,
-  900,
-  467
- ],
+ "band": 200,
  "card_label": "KERIA",
  "palette": "red",
  "grade": "warm",
@@ -222,12 +216,12 @@
     [
      "KERIA'S LUX",
      "white",
-     104
+     84
     ],
     [
      "WAIT FOR #1…",
      "accent2",
-     116
+     98
     ]
    ]
   },
@@ -238,7 +232,7 @@
     [
      "#4",
      "accent2",
-     190
+     150
     ]
    ]
   },
@@ -249,7 +243,7 @@
     [
      "#3",
      "accent2",
-     190
+     150
     ]
    ]
   },
@@ -260,7 +254,7 @@
     [
      "#2",
      "accent2",
-     190
+     150
     ]
    ]
   },
@@ -271,7 +265,7 @@
     [
      "#1",
      "accent",
-     210
+     165
     ]
    ]
   },
@@ -282,12 +276,12 @@
     [
      "WHICH ONE IS",
      "white",
-     96
+     84
     ],
     [
      "YOUR #1?",
      "accent2",
-     120
+     98
     ]
    ]
   }
@@ -387,5 +381,7 @@
    "text": "Which one is your number one?"
   }
  ],
- "duck_db": -10
+ "duck_db": -10,
+ "layout": "game_top",
+ "game_scale": 1.2
 }

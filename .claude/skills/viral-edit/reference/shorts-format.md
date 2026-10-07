@@ -133,3 +133,7 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   karelere korelasyon), kullanıcıya yüz tablosuyla teyit ettir, yalnız o aralıklar
   canlı (`cam_keep`), kalanında aynı oyuncunun görüntüsü (`cam_fill`).
 - Anons sesi: flite "robotik" bulundu ("daha insansı") → Kokoro `am_michael`.
+- ⛔ Oyunun üstünde bant yok (kullanıcı: "yukarıdaki kırmızı alan oyunu bölüyor,
+  yarım ekran oluyor"). Varsayılan `"layout": "game_top", "game_scale": 1.2`:
+  oyun y=0'dan başlar ve ekranın üst yarısını doldurur, yazı bandı (200 px) oyunla
+  kamera kartı arasında.
