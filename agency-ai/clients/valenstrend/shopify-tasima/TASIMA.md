@@ -4,13 +4,33 @@ Amaç: Valenstrend mağazasının (1t35rr-vh.myshopify.com, valenstrend.myshopif
 içeriği birebir yeni mağazaya kurulsun. Bu dosya bir sonraki oturumun kaldığı yerden devam
 etmesi içindir. `veri/` altındaki her şey 7 Ekim 2026'da Valenstrend'den okunmuştur (FACT).
 
-## Durum (7 Ekim 2026)
+## Durum (7 Ekim 2026, akşam)
 
-- Valenstrend verileri `veri/` altına kaydedildi.
-- Shopify bağlantısı Valenstrend'den koparıldı (`switch-shop`). Yeni mağaza henüz bağlanmadı:
-  bulut oturumu OAuth açamıyor. Kullanıcı Shopify connector'ını claude.ai/customize/connectors
-  üzerinden **yeni mağaza** ile yeniden bağlayıp yeni oturum başlatmalı.
-- Valenstrend'de canlı tema: "Valenstrend – Güncelleme 3 (Sabit menü)" (163013263465).
+Yeni mağaza bağlandı: **"Mağazam" — 9txzze-0r.myshopify.com** (trial plan, TRY, tr).
+Yeni mağazadaki ID'ler: `veri/yeni_magaza_ids.json`.
+
+TAMAM (Claude, API ile, doğrulandı):
+- 6 tema görseli aynı dosya adlarıyla yüklendi (READY).
+- 14 koleksiyon aynı handle/kural/sıralama/SEO ile kuruldu; 13'ü Online Mağaza'da yayında,
+  `kampanya-tum-esarp-ve-sallar` gizli (Valenstrend'deki gibi).
+- 8 sayfa: contact güncellendi; hakkimizda, sss, gizlilik-politikasi,
+  mesafeli-satis-sozlesmesi, cerez-politikasi yayında; kargo-ve-teslimat ve iade-ve-degisim
+  gizli (Valenstrend'deki gibi). Boş `ana-sayfa` sayfası taşınmadı.
+- Menüler: ana-menu-yeni, footer-kategoriler, footer-yardim, footer-kurumsal oluşturuldu;
+  main-menu Valenstrend'deki gibi güncellendi.
+- Kargo: Standart Kargo (1000 TL üzeri ücretsiz) 125 TL [0–999,99], Ücretsiz Kargo [≥1000],
+  "Hızlı" 299 TL silindi; yurt dışı "Standard" 850 TL (aynı 28 ülke).
+- İndirim "5 Eşarp/Şal Alana 1 Koton Eşarp Hediye" aktif.
+- 5 yönlendirme oluşturuldu.
+- Gizlilik politikası: Shopify'ın otomatik politikası zaten var; kopyalanmadı.
+
+BEKLİYOR (kullanıcı):
+- Tema zip yükleme (yeni mağazada şu an sadece varsayılan Atelier + Horizon var).
+- Ürün CSV içe aktarma (0 ürün).
+- Mağaza adı ("Mağazam" → Valenstrend adı), ödeme, plan, alan adı.
+
+SONRA (Claude): tema JSON'larını `veri/tema_json/` ile karşılaştır, ürün sayısı 1038 ve
+koleksiyon ürün sayıları `collections.json` ile eşleşiyor mu kontrol et.
 
 ## Kaynak mağaza özeti
 
