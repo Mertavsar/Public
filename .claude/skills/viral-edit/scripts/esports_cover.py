@@ -16,6 +16,7 @@ ap.add_argument("--l1", required=True); ap.add_argument("--l2", required=True)
 ap.add_argument("--badge", default=""); ap.add_argument("--gx", type=int, default=60)
 ap.add_argument("--ty", type=int, default=935, help="1. satırın y merkezi (2. satır +155)")
 ap.add_argument("--cy", type=float, default=0.5, help="yüz yoksa: odak noktasının y oranı (0-1)")
+ap.add_argument("--ring", help="x,y,r: olayın çevresine kırmızı halka (kapak koordinatı)")
 ap.add_argument("--out", required=True)
 A = ap.parse_args(); W, H = 1080, 1920
 FONT = "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf"
@@ -63,6 +64,10 @@ txt(W / 2, A.ty, A.l1, 150, (255, 255, 255))
 txt(W / 2, A.ty + 155, A.l2, 190, (255, 214, 0), 14)
 # TOP 4 rozeti
 f = ImageFont.truetype(FONT, 78); s = A.badge; tw = d.textlength(s, font=f)
+if A.ring:
+    rx, ry, rr = (int(v) for v in A.ring.split(","))
+    d.ellipse([rx - rr - 4, ry - rr - 4, rx + rr + 4, ry + rr + 4], outline=(0, 0, 0), width=22)
+    d.ellipse([rx - rr, ry - rr, rx + rr, ry + rr], outline=(255, 40, 50), width=14)
 if s:
     d.rounded_rectangle([46, 150, 46 + tw + 56, 260], radius=18, fill=(235, 30, 45), outline=(0, 0, 0), width=6)
     d.text((74, 160), s, font=f, fill=(255, 255, 255), stroke_width=4, stroke_fill=(0, 0, 0))
