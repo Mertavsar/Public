@@ -137,3 +137,6 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   yarım ekran oluyor"). Varsayılan `"layout": "game_top", "game_scale": 1.2`:
   oyun y=0'dan başlar ve ekranın üst yarısını doldurur, yazı bandı (200 px) oyunla
   kamera kartı arasında.
+- LoL formatı sürecek: bazen tek sahne, bazen "en iyi N" geri sayım (kullanıcı).
+  Her videoya kapak `esports_cover.py` ile: en parlak an (lazer/patlama) + oyuncu
+  yüzü + 2-3 kelimelik provokatif satır ("KERIA'S LUX / IS ILLEGAL") + rozet.
