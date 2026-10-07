@@ -24,13 +24,19 @@ TAMAM (Claude, API ile, doğrulandı):
 - 5 yönlendirme oluşturuldu.
 - Gizlilik politikası: Shopify'ın otomatik politikası zaten var; kopyalanmadı.
 
-BEKLİYOR (kullanıcı):
-- Tema zip yükleme (yeni mağazada şu an sadece varsayılan Atelier + Horizon var).
-- Ürün CSV içe aktarma (0 ürün).
-- Mağaza adı ("Mağazam" → Valenstrend adı), ödeme, plan, alan adı.
+TAMAM (kullanıcı yükledi, Claude doğruladı — 7 Ekim gece):
+- Tema zip yüklendi ve yayında; adı "Valenstrend – Güncelleme 3 (Sabit menü)" yapıldı.
+  15 tema JSON dosyasının md5'i Valenstrend ile birebir aynı.
+- Ürünler: 1038/1038, hepsi aktif ve Online Mağaza'da yayında.
+- Koleksiyon ürün sayıları Valenstrend ile birebir aynı (koton-esarp 348, en-cok-satanlar 628,
+  kampanya 1035 vb.).
 
-SONRA (Claude): tema JSON'larını `veri/tema_json/` ile karşılaştır, ürün sayısı 1038 ve
-koleksiyon ürün sayıları `collections.json` ile eşleşiyor mu kontrol et.
+BEKLİYOR (kullanıcı):
+- Mağaza adı ("Mağazam" → "Valenstrend - Sınırsız Renk ve Desenli Eşarp ve Şallar").
+- Mağaza ve konum adresi boş (hangi adres doğru, kullanıcıya soruldu).
+- Plan seçimi (deneme süresi bitiyor) ve şifre kaldırma.
+- Ödeme (iyzico uygulaması, kapıda ödeme, havale), vergi ayarı, uygulamalar, alan adı.
+- Yurt dışı: yeni mağazada sadece "Türkiye" pazarı var; Valenstrend'deki durum bilinmiyor.
 
 ## Kaynak mağaza özeti
 
