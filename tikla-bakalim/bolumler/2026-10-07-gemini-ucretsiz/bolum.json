@@ -1,0 +1,616 @@
+{
+  "baslik": "Ücretsiz Gemini neden kısıtlanıyor? 9 Ekim'de ne değişiyor?",
+  "tarih": "2026-10-07",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "Gemini",
+    "ücretsiz",
+    "model",
+    "hesaplama"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "üç modelden": "3 modelden",
+    "dokuz ekimde": "9 Ekim'de",
+    "dokuz ekimden": "9 Ekim'den",
+    "üç modeli": "3 modeli",
+    "üç modele": "3 modele",
+    "iki yüz lira": "200 ₺",
+    "yedi yüz yirmi lira": "720 ₺",
+    "iki bin dört yüz lira": "2.400 ₺",
+    "sekiz bin altı yüz kırk lira": "8.640 ₺",
+    "Flash Lite": "Flash-Lite"
+  },
+  "kapak": {
+    "ikon": "🤖",
+    "ust": "ÜCRETSİZ GEMINI",
+    "buyuk": "3 → 1",
+    "alt": "NEDEN KISILDI?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Ücretsiz Gemini'de üç modelden yalnızca biri kalıyor.",
+      "p": {
+        "ikon": "🤖",
+        "etiket": "Ücretsiz Gemini'de kalacak model",
+        "deger": 1,
+        "onek": "",
+        "sonek": " model",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "not": "9 Ekim'den itibaren · şimdi 3 model",
+        "sayma": false
+      },
+      "kaynak": "Engadget, Notebookcheck (K1)",
+      "etiket": "9 EKİM"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki Google bunu neden yapıyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*KISITLADI?*",
+        "boy": 120
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları her gün sade dille anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ *SADE*",
+          "ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 96
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Google, Gemini uygulamasında kimin hangi modeli kullanacağını değiştiriyor.",
+      "p": {
+        "ikon": "📱",
+        "satirlar": [
+          "*GEMINI*",
+          "MODEL ERİŞİMİ",
+          "DEĞİŞİYOR"
+        ],
+        "boy": 96
+      },
+      "etiket": "NE OLDU?",
+      "kaynak": "Engadget, Notebookcheck (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Değişiklik dokuz ekimde yürürlüğe giriyor.",
+      "p": {
+        "gun": "9",
+        "ay": "EKİM",
+        "gunadi": "YÜRÜRLÜK",
+        "not": "Ücretsiz hesaplarda *değişiklik* başlıyor"
+      },
+      "kaynak": "Engadget, Notebookcheck (K1)",
+      "etiket": "TARİH"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Model, yapay zekanın beyni gibidir. Büyüğü daha güçlü, küçüğü daha hafiftir.",
+      "p": {
+        "ikon": "🧠",
+        "satirlar": [
+          "MODEL =",
+          "YAPAY ZEKANIN",
+          "*BEYNİ*"
+        ],
+        "boy": 104
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Gemini'nin üç modeli var: Flash Lite küçük, Flash orta, Pro en güçlü.",
+      "p": {
+        "baslik": "Gemini'nin üç modeli",
+        "satirlar": [
+          {
+            "ikon": "🪶",
+            "metin": "Flash-Lite",
+            "deger": "en küçük",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "⚡",
+            "metin": "Flash",
+            "deger": "orta",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🧠",
+            "metin": "Pro",
+            "deger": "en güçlü",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Büyük model genelde daha çok işlemci gücü kullanır"
+      },
+      "kaynak": "Engadget (K1)",
+      "etiket": "3 MODEL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Ücretsiz hesaplarda üç modele erişiliyordu. Dokuz ekimden sonra yalnızca en küçüğüne.",
+      "p": {
+        "baslik": "🤖 Ücretsiz Gemini · erişilen model sayısı",
+        "sol": {
+          "etiket": "ŞİMDİ",
+          "deger": 3,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "9 EKİM'DEN\nSONRA",
+          "deger": 1,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " model",
+        "ondalik": 0,
+        "fark": "−2 model",
+        "not": "Kalan: Flash-Lite"
+      },
+      "kaynak": "Engadget, Notebookcheck, Android Headlines (K1)",
+      "etiket": "ÜCRETSİZ HESAP"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Plus paketinde Flash kalıyor, Pro çıkıyor. Pro paketi ise Deep Think'i de alıyor.",
+      "p": {
+        "baslik": "9 Ekim'den sonra hangi pakette ne var?",
+        "satirlar": [
+          {
+            "ikon": "🆓",
+            "metin": "Ücretsiz",
+            "deger": "Flash-Lite",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "➕",
+            "metin": "AI Plus",
+            "deger": "Lite + Flash",
+            "renk": "sari"
+          },
+          {
+            "ikon": "⭐",
+            "metin": "AI Pro",
+            "deger": "Hepsi + Deep Think",
+            "renk": "yesil"
+          }
+        ],
+        "not": "AI Ultra: değişiklik yok"
+      },
+      "kaynak": "Engadget, Android Headlines (K2)",
+      "etiket": "PAKETLER"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Deep Think, Google'ın zor sorular için sunduğu gelişmiş düşünme modu.",
+      "p": {
+        "ikon": "💭",
+        "satirlar": [
+          "*DEEP THINK*",
+          "= ZOR SORULAR İÇİN",
+          "GELİŞMİŞ MOD"
+        ],
+        "boy": 88
+      },
+      "etiket": "TERİM",
+      "kaynak": "Engadget (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Türkiye'de Plus ayda iki yüz lira, Pro yedi yüz yirmi lira civarında.",
+      "p": {
+        "baslik": "Türkiye · aylık liste fiyatı",
+        "satirlar": [
+          {
+            "ikon": "➕",
+            "metin": "Google AI Plus",
+            "deger": "199,99 ₺",
+            "renk": "sari"
+          },
+          {
+            "ikon": "⭐",
+            "metin": "Google AI Pro",
+            "deger": "719,99 ₺",
+            "renk": "sari"
+          }
+        ],
+        "not": "ABD: Plus 4,99 $ · Pro 19,99 $ · kampanyalar değişebilir"
+      },
+      "kaynak": "Teknoblog, Tamindir (K4); ABD fiyatları K3",
+      "etiket": "FİYAT"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Değişikliği Google, kendi yardım sayfasında duyurdu.",
+      "p": {
+        "ikon": "📢",
+        "satirlar": [
+          "GOOGLE",
+          "YARDIM SAYFASINDA",
+          "*DUYURDU*"
+        ],
+        "boy": 96
+      },
+      "etiket": "DUYURU",
+      "kaynak": "Engadget, LOG (K5)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Ücretsiz hesapta Flash ve Pro'yu kullananlar, bu seçenekleri artık göremeyecek.",
+      "p": {
+        "ikon": "🙈",
+        "satirlar": [
+          "FLASH VE PRO",
+          "ÜCRETSİZ HESAPTA",
+          "*GÖRÜNMEYECEK*"
+        ],
+        "boy": 92
+      },
+      "etiket": "NE KAYBOLUYOR",
+      "kaynak": "Engadget, Notebookcheck (K1)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki Google, ücretsiz kapıyı neden daraltıyor?",
+      "p": {
+        "ikon": "🚪",
+        "metin": "ÜCRETSİZ KAPI\n*NEDEN DAR?*",
+        "boy": 104
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Google'ın açıklaması kısa: kullanım limitleri artık hesaplama gücüne göre ayarlanıyor.",
+      "p": {
+        "ikon": "⚙️",
+        "satirlar": [
+          "LİMİTLER",
+          "*HESAPLAMA GÜCÜNE*",
+          "GÖRE"
+        ],
+        "boy": 96
+      },
+      "etiket": "GOOGLE'IN SÖZÜ",
+      "kaynak": "Google yardım sayfası aktarımı: Engadget, Android Headlines (K5)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Hesaplama gücü, yapay zekanın yakıtı. Yani işlemcilerin çalışma zamanı.",
+      "p": {
+        "ikon": "🖥️",
+        "satirlar": [
+          "HESAPLAMA GÜCÜ",
+          "= YAPAY ZEKANIN",
+          "*YAKITI*"
+        ],
+        "boy": 96
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Sen soru sorarsın, işlemciler çalışır. Model büyüdükçe iş de büyür.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "❓",
+            "metin": "Sen soru sorarsın"
+          },
+          {
+            "ikon": "🖥️",
+            "metin": "İşlemciler *çalışır*"
+          },
+          {
+            "ikon": "🧠",
+            "metin": "Büyük model *daha çok* yük"
+          }
+        ]
+      },
+      "etiket": "NASIL İŞLER?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Videoyu beğenirsen daha çok kişiye ulaşıyor; kalbe dokunmayı unutma.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "VİDEOYU *BEĞENİRSEN*",
+          "DAHA ÇOK KİŞİYE",
+          "ULAŞIYOR"
+        ],
+        "boy": 88
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Büyük modeli herkes ücretsiz kullanınca yük çok büyür. Limitin sebebi bu görünüyor.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "HERKES ÜCRETSİZ",
+          "KULLANINCA",
+          "*YÜK BÜYÜR*"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM: SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Bir pastane düşün. Tadım ikram eder, ama bütün pastaları bedava veremez.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🧁",
+            "metin": "Küçük tadım *ücretsiz*"
+          },
+          {
+            "ikon": "🎂",
+            "metin": "Büyük pasta *ücretli*"
+          }
+        ]
+      },
+      "etiket": "PASTANE BENZETMESİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani ücretsiz yok olmuyor; en güçlü modeller ücretli tarafa kayıyor.",
+      "p": {
+        "ikon": "🔀",
+        "satirlar": [
+          "ÜCRETSİZ *SÜRÜYOR*",
+          "GÜÇLÜ MODELLER",
+          "*ÜCRETLİYE* KAYIYOR"
+        ],
+        "boy": 88
+      },
+      "etiket": "ÖZET",
+      "kaynak": "Engadget, Notebookcheck (K1, K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Küçük model hâlâ ücretsiz. Basit işler için yetebilir.",
+      "p": {
+        "ikon": "🪶",
+        "satirlar": [
+          "KÜÇÜK MODEL",
+          "HÂLÂ *ÜCRETSİZ*",
+          "BASİT İŞE YETEBİLİR"
+        ],
+        "boy": 88
+      },
+      "etiket": "İYİ HABER",
+      "kaynak": "Engadget (K1)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu, senin gününü nasıl etkiler?",
+      "p": {
+        "ikon": "👤",
+        "metin": "SANA\n*NE OLUR?*",
+        "boy": 120
+      },
+      "etiket": "3 · ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ücretsiz kullanıyorsan, zor işlerde cevaplar eskisinden daha basit gelebilir.",
+      "p": {
+        "ikon": "📝",
+        "satirlar": [
+          "ZOR İŞLERDE",
+          "CEVAP *DAHA BASİT*",
+          "GELEBİLİR"
+        ],
+        "boy": 96
+      },
+      "etiket": "ZOR İŞLER"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısa soru ve özet gibi basit işlerde fark az, uzun analizde daha çok hissedilebilir.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "BASİT İŞ: *FARK AZ*",
+          "UZUN ANALİZ:",
+          "*FARK ÇOK*"
+        ],
+        "boy": 88
+      },
+      "etiket": "TAHMİN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Flash'ı korumak için Plus alırsan, ayda iki yüz lira; yılda iki bin dört yüz lira eder.",
+      "p": {
+        "baslik": "Google AI Plus · bir yıl",
+        "ikon": "🧾",
+        "ogeler": [
+          "199,99 ₺",
+          "×",
+          "12 ay",
+          "=",
+          "2.399,88 ₺"
+        ]
+      },
+      "kaynak": "hesap: 199,99 × 12 (K4)",
+      "etiket": "YILLIK MALİYET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Pro'ya geçersen, ayda yedi yüz yirmi lira; yılda sekiz bin altı yüz kırk lira eder.",
+      "p": {
+        "baslik": "Google AI Pro · bir yıl",
+        "ikon": "🧾",
+        "ogeler": [
+          "719,99 ₺",
+          "×",
+          "12 ay",
+          "=",
+          "8.639,88 ₺"
+        ]
+      },
+      "kaynak": "hesap: 719,99 × 12 (K4)",
+      "etiket": "YILLIK MALİYET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "İş için kullanıyorsan fark daha önemli olabilir. Meraktan kullanıyorsan küçük model yetebilir.",
+      "p": {
+        "ikon": "💼",
+        "satirlar": [
+          "İŞ İÇİN: *FARK ÖNEMLİ*",
+          "MERAK İÇİN: *YETEBİLİR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "KİMİN İÇİN?"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Mecbur değilsin. Önce kendi kullanımına bak: gerçekten neye ihtiyacın var?",
+      "p": {
+        "ikon": "🧭",
+        "satirlar": [
+          "MECBUR DEĞİLSİN",
+          "ÖNCE *İHTİYACINA*",
+          "BAK"
+        ],
+        "boy": 96
+      },
+      "etiket": "KARAR SENİN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu kurallar değişebilir. Dokuz ekimden sonra uygulamandaki model listesini kontrol et.",
+      "p": {
+        "ikon": "🔍",
+        "satirlar": [
+          "9 EKİM'DEN SONRA",
+          "MODEL LİSTENİ",
+          "*KONTROL ET*"
+        ],
+        "boy": 92
+      },
+      "etiket": "SIRADAKİ ADIM"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası, ücretsiz kapı daralıyor; güçlü modeller ücretli tarafa taşınıyor.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "KAPI *DARALIYOR*",
+          "GÜÇLÜ MODEL",
+          "*ÜCRETLİDE*"
+        ],
+        "boy": 96
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Fiyatlar ve limitler değişebilir; güncel bilgi için Google'ın resmî sayfasına bak.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "FİYAT VE LİMİT",
+          "DEĞİŞEBİLİR",
+          "RESMÎ SAYFAYA BAK"
+        ],
+        "boy": 92
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Öğrenmek istediğin konuyu yorumlara yaz; bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "cta": [
+    {
+      "sahne": 18,
+      "gecikme": 1.0,
+      "sure": 5.5
+    }
+  ],
+  "kaynaklar": {
+    "K1": "9 Ekim'den itibaren ücretsiz Gemini kullanıcıları yalnızca Flash-Lite'a erişecek; Flash ve Pro kalkıyor — https://www.engadget.com/2278504/google-removes-free-access-gemini-flash-pro-october-9/ ; https://www.notebookcheck.net/Google-Gemini-drops-Flash-and-Pro-for-free-users-on-October-9.1415964.0.html ; https://www.androidheadlines.com/2026/10/google-cuts-gemini-ai-model-access-free-ai-plus-tiers-changes.html",
+    "K2": "AI Plus Flash-Lite + Flash'ta kalır, Pro çıkar; AI Pro'ya Deep Think eklenir; Ultra değişmez — https://www.engadget.com/2278504/google-removes-free-access-gemini-flash-pro-october-9/ ; https://www.androidheadlines.com/2026/10/google-cuts-gemini-ai-model-access-free-ai-plus-tiers-changes.html ; https://nokiamob.net/2026/10/06/google-is-removing-flash-and-pro-from-free-gemini-accounts/",
+    "K3": "ABD fiyatları: AI Plus 4,99 $/ay, AI Pro 19,99 $/ay — https://pasqualepillitteri.it/en/news/20384/gemini-flash-pro-cut-free-ai-plus-oct-9 ; https://www.martincid.com/technology-sv/gemini-free-users-flash-lite-only-october-9/",
+    "K4": "Türkiye liste fiyatları: AI Plus 199,99 ₺/ay, AI Pro 719,99 ₺/ay — https://www.teknoblog.com/google-ai-turkiye-fiyatlari-plus-pro-ve-ultra-farklari/ ; https://www.tamindir.com/haber/google-ai-plus-ozellikleri-fiyati_100500/",
+    "K5": "Google'ın 'Changes to access to and limits on Gemini models' yardım sayfası: değişiklik hesaplamaya dayalı kullanım limitleriyle gerekçelendiriliyor — https://www.engadget.com/2278504/google-removes-free-access-gemini-flash-pro-october-9/ ; https://www.log.com.tr/google-geminidaki-model-erisimlerini-degistiriyor/"
+  }
+}

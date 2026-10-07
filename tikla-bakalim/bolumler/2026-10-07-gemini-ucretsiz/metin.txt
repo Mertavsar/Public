@@ -1,0 +1,67 @@
+Ücretsiz Gemini'de üç modelden yalnızca biri kalıyor.
+
+Peki Google bunu neden yapıyor? Üç soruda anlatayım.
+
+Bu tür konuları her gün sade dille anlatıyoruz; kaçırmamak için abone ol.
+
+Google, Gemini uygulamasında kimin hangi modeli kullanacağını değiştiriyor.
+
+Değişiklik dokuz ekimde yürürlüğe giriyor.
+
+Model, yapay zekanın beyni gibidir. Büyüğü daha güçlü, küçüğü daha hafiftir.
+
+Gemini'nin üç modeli var: Flash Lite küçük, Flash orta, Pro en güçlü.
+
+Ücretsiz hesaplarda üç modele erişiliyordu. Dokuz ekimden sonra yalnızca en küçüğüne.
+
+Plus paketinde Flash kalıyor, Pro çıkıyor. Pro paketi ise Deep Think'i de alıyor.
+
+Deep Think, Google'ın zor sorular için sunduğu gelişmiş düşünme modu.
+
+Türkiye'de Plus ayda iki yüz lira, Pro yedi yüz yirmi lira civarında.
+
+Değişikliği Google, kendi yardım sayfasında duyurdu.
+
+Ücretsiz hesapta Flash ve Pro'yu kullananlar, bu seçenekleri artık göremeyecek.
+
+Peki Google, ücretsiz kapıyı neden daraltıyor?
+
+Google'ın açıklaması kısa: kullanım limitleri artık hesaplama gücüne göre ayarlanıyor.
+
+Hesaplama gücü, yapay zekanın yakıtı. Yani işlemcilerin çalışma zamanı.
+
+Sen soru sorarsın, işlemciler çalışır. Model büyüdükçe iş de büyür.
+
+Videoyu beğenirsen daha çok kişiye ulaşıyor; kalbe dokunmayı unutma.
+
+Büyük modeli herkes ücretsiz kullanınca yük çok büyür. Limitin sebebi bu görünüyor.
+
+Bir pastane düşün. Tadım ikram eder, ama bütün pastaları bedava veremez.
+
+Yani ücretsiz yok olmuyor; en güçlü modeller ücretli tarafa kayıyor.
+
+Küçük model hâlâ ücretsiz. Basit işler için yetebilir.
+
+Peki bu, senin gününü nasıl etkiler?
+
+Ücretsiz kullanıyorsan, zor işlerde cevaplar eskisinden daha basit gelebilir.
+
+Kısa soru ve özet gibi basit işlerde fark az, uzun analizde daha çok hissedilebilir.
+
+Flash'ı korumak için Plus alırsan, ayda iki yüz lira; yılda iki bin dört yüz lira eder.
+
+Pro'ya geçersen, ayda yedi yüz yirmi lira; yılda sekiz bin altı yüz kırk lira eder.
+
+İş için kullanıyorsan fark daha önemli olabilir. Meraktan kullanıyorsan küçük model yetebilir.
+
+Mecbur değilsin. Önce kendi kullanımına bak: gerçekten neye ihtiyacın var?
+
+Bu kurallar değişebilir. Dokuz ekimden sonra uygulamandaki model listesini kontrol et.
+
+Kısacası, ücretsiz kapı daralıyor; güçlü modeller ücretli tarafa taşınıyor.
+
+Fiyatlar ve limitler değişebilir; güncel bilgi için Google'ın resmî sayfasına bak.
+
+Öğrenmek istediğin konuyu yorumlara yaz; bir sonraki videoda biz anlatalım.
+
+Abone olmayı unutma. Merak ettiysen, tıkla bakalım.
