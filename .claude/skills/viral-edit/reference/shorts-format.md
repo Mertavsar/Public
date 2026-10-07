@@ -112,3 +112,11 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
 - Kurgu: son vuruştan hemen önce donan soğuk açılış + soru hook → geri sarma →
   ölü kısım 1.25x → olay (kalkan) anında soru + ok + clink → sahte son → kill
   ağır çekim + boom + sarsıntı → kill feed görünürken donma + sonuç kelimesi.
+- "Tekrarlanan içerik olmasın" (v2): yerleşim tersine (oyun üstte, kamera
+  altta yuvarlak köşeli küçük kart, kaynak boyutunun altında), ayrı renk
+  (gece mavisi oyun, soluk kamera), soğuk açılış başka anda (kalkan), kill sonrası
+  nişangahlı `REPLAY` (0.3x), sonda yorum sorusu. Nişangah: can barı
+  matchTemplate ile izlenir, yalnız doğrulanmış aralıkta çizilir (barın
+  kaybolduğu/kameranın kaydığı yerde kilit kaçtı).
+- Görsel değişiklik tek başına YouTube'un "reused content" kuralını aşmaz;
+  asıl fark özgün seslendirme/yorum. Seslendirme metnini öner, ses gelince senkronla.
