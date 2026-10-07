@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/user/Public/.claude/skills/viral-edit/scripts")
 import sounddesign as sd
 
 S = os.path.dirname(os.path.abspath(__file__))
-SRC, OUT = f"{S}/in/src.mp4", f"{S}/out/blg_gen_wide.mp4"
+SRC, OUT = f"{S}/in/src.mp4", f"{S}/out/blg_gen_loop.mp4"
 W, H, FPS, SFPS = 1080, 1920, 30, 60
 SW, SH = 1920, 1080
 TOPB = 300                                     # üst başlık bandı (her an dolu)
@@ -30,7 +30,8 @@ PLAN = [("play", 3.9, 4.5, 0.5),       # 0 soğuk açılış: J4 ultisi kapanıy
         ("play", 14.4, 17.3, 1.0),      # 9
         ("play", 17.3, 17.8, 0.45),     # 10 Kiin, Bin'i alıyor
         ("play", 17.8, 19.8, 1.0),      # 11
-        ("freeze", 19.8, 3.0)]          # 12 kapanış sorusu
+        ("freeze", 19.8, 2.9),          # 12 kapanış sorusu
+        ("rewind", 19.8, 3.9, 0.5)]     # 13 DÖNGÜ: ilk kareye geri sarar
 seq, segt, t = [], [], 0.0
 for i, p in enumerate(PLAN):
     d = (p[2] - p[1]) / p[3] if p[0] == "play" else (p[2] if p[0] == "freeze" else p[3])
@@ -132,7 +133,7 @@ def get(s):
     return cv2.imdecode(store[i], cv2.IMREAD_COLOR)
 
 
-FB = "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf"
+FB = "/home/user/Public/.claude/skills/viral-edit/fonts/Anton-Regular.ttf"
 _F = {}
 
 
@@ -160,11 +161,12 @@ def pop(tt, t0):
     return 1.0 if u >= 1 else 1.3 - 0.3 * (1 - (1 - max(u, 0)) ** 3)
 
 
-HL = [(0.0, segt[2][1], [("BLG vs GEN", WHITE, 104), ("WHO WALKS OUT ALIVE?", ORANGE, 92)]),
+HL = [(0.0, segt[2][1], [("BLG vs GEN", WHITE, 110), ("WHO WALKS OUT ALIVE?", ORANGE, 100)]),
       (segt[2][1], T_CHOVY, [("BLG vs GEN", WHITE, 104), ("5v5 TEAMFIGHT", ORANGE, 92)]),
       (T_CHOVY, T_BIN, [("BLG vs GEN", WHITE, 104), ("CHOVY DOWN.", ORANGE, 100)]),
       (T_BIN, segt[12][0], [("BLG vs GEN", WHITE, 104), ("KIIN HITS BACK.", ORANGE, 100)]),
-      (segt[12][0], DUR, [("WHO PLAYED IT BETTER?", WHITE, 84), ("BLG or GEN?", ORANGE, 112)])]
+      (segt[12][0], segt[13][0], [("WHO PLAYED IT BETTER?", WHITE, 84), ("BLG or GEN?", ORANGE, 112)]),
+      (segt[13][0], DUR + 1, [("BLG vs GEN", WHITE, 104), ("WHO WALKS OUT ALIVE?", ORANGE, 92)])]
 YS = {2: [TOPB * 0.36, TOPB * 0.72]}
 PUNCH = [T_DIVE, T_CHOVY, T_BIN]
 FLASH = [T_DIVE, T_SHUT, T_CHOVY, T_BIN]
@@ -200,7 +202,7 @@ for n, (s, kind, u, si) in enumerate(seq):
         if t0 <= tt < t1:
             al = min(1, (t1 - tt) / 0.12)
             for j, ((s_, col, sz), y) in enumerate(zip(lines, YS[len(lines)])):
-                same = j == 0 and s_ == "BLG vs GEN" and t0 > 0.01
+                same = (j == 0 and s_ == "BLG vs GEN" and t0 > 0.01) or t0 < 0.01
                 if tt >= t0 + 0.1 * j or same:
                     text(dl, y, s_, sz, col, 1.0 if same else pop(tt, t0 + 0.1 * j), 1.0 if same else al)
     ff = font(34); fw = dl.textlength("TikLOLet", font=ff)
@@ -221,7 +223,7 @@ for i, (t0, t1, p) in enumerate(segt):
         _, s0, s1, spd = p
         fi, fo = f"{work}/i{i}.f32", f"{work}/o{i}.f32"
         src[int(s0 * SR):int(s1 * SR)].tofile(fi)
-        af = f"atempo={spd}" if spd >= 1 else f"rubberband=tempo={spd}:pitch=0.85"
+        af = f"atempo={spd}" if spd >= 1 else f"rubberband=tempo={spd}:pitch=1.0"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", fi, "-af", af, "-f", "f32le", fo], check=True)
         y = np.fromfile(fo, np.float32).reshape(-1, 2); y = np.pad(y, ((0, max(0, n - len(y))), (0, 0)))[:n]
         r = int(0.012 * SR); ramp = np.linspace(0, 1, r)[:, None]; y[:r] *= ramp; y[-r:] *= ramp[::-1]
@@ -283,7 +285,7 @@ place(beatbus, pad, 0.0, 0.35)
 beatbus = sd.lp(beatbus, 9000)
 
 vox = np.zeros(N)
-VO = [("h", segt[1][0] + 0.05), ("a", T_CHOVY + 0.1), ("b", T_BIN + 0.1), ("e", segt[12][0] + 0.05)]
+VO = [("h", segt[1][0] + 0.05), ("a", T_CHOVY + 1.25), ("b", T_BIN + 1.05), ("e", segt[12][0] + 0.05)]
 for k_, t0 in VO:
     x = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", f"{S}/vo/{k_}.wav", "-af",
                                       "highpass=f=70,equalizer=f=3200:t=q:w=1:g=3,acompressor=threshold=-18dB:ratio=3:attack=5:release=80",
@@ -291,6 +293,10 @@ for k_, t0 in VO:
     place(vox, x, t0, 1.0)
 fx = np.zeros(N)
 place(fx, sd.boom(), segt[1][0], 0.9); place(fx, sd.pop(1.0), segt[1][0] + 0.03, 0.35)
+place(fx, sd.boom(), 0.0, 0.8)                                   # ilk karede darbe
+rn = int(1.1 * SR); ris = sd.bp(np.random.default_rng(9).standard_normal(rn), 500, 6000) * np.linspace(0, 1, rn) ** 2
+place(fx, ris, segt[1][0] - 1.1, 0.45)                           # donmaya yükselen gerilim
+place(fx, sd.rewind(0.5), segt[13][0], 0.6)                      # döngü geri sarması
 place(fx, sd.rewind(0.4), segt[2][0], 0.6)
 for x in (T_DIVE, T_CHOVY, T_BIN):
     place(fx, sd.boom(), x, 1.0)
@@ -300,7 +306,12 @@ place(fx, sd.clink(), T_SHUT, 0.5)
 env = np.convolve(np.abs(vox), np.ones(2000) / 2000, mode="same")
 duck = 1 - 0.55 * np.clip(env / (env.max() * 0.15 + 1e-9), 0, 1)
 duck = np.convolve(duck, np.ones(3000) / 3000, mode="same")
-mix = game * 0.25 * duck[:, None] + (beatbus * 0.33 * duck)[:, None] + fx[:, None] * 0.55 + vox[:, None] * 0.95
+gg = np.full(N, 0.22)
+for a0, a1 in [(0.0, segt[1][0]), (T_DIVE - 0.2, T_DIVE + 1.6), (T_SHUT - 0.2, T_SHUT + 1.4),
+               (T_CHOVY - 0.2, T_CHOVY + 1.2), (T_BIN - 0.2, T_BIN + 1.0)]:
+    gg[int(a0 * SR):int(a1 * SR)] = 0.95
+gg = np.convolve(gg, np.ones(int(0.15 * SR)) / int(0.15 * SR), mode="same")
+mix = game * gg[:, None] * duck[:, None] + (beatbus * 0.33 * duck * (1.25 - 0.55 * (gg - 0.22) / 0.73))[:, None] + fx[:, None] * 0.55 + vox[:, None] * 0.95
 mix.astype(np.float32).tofile(f"{work}/mix.f32")
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", f"{work}/mix.f32",
                 "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", f"{S}/w/audio.wav"], check=True)

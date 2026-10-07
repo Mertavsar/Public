@@ -177,3 +177,12 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   varyansıyla netliğin düştüğü anı ölç, donmayı ondan önce al.
 - ⛔ Kapak **sade**: tek odak (ulti/patlama), kenarlar güçlü karartılır (blur yok),
   tek büyük cümle (2-3 kelime) + küçük üst satır. Halka/rozet/çok etiket = "karışık".
+- **Döngü kapanışı:** son plan, kapanış sorusundan sonra 0.5 sn geri sararak
+  videonun İLK karesine döner; son anda üst bant hook'a döner → YouTube başa
+  sardığında kesinti yok. **Spiker:** kill/patlama pencerelerinde tam ses
+  (çığlık en güçlü hook), diğer yerlerde -13 dB; ağır çekimde perde korunur
+  (rubberband pitch=1.0). Açılış: ilk karede darbe + spiker tam + yükselen gerilim → donma.
+- **Kapak (poster):** Anton font (`fonts/`), üstte takım renkli "BLG (VS) GEN",
+  ortada tek odak (ulti/patlama) teal-turuncu renk + güçlü kenar karartma,
+  altta dev 2 satır ("WHO / SURVIVES?") hafif eğik + parıltı. Kullanıcı önceki
+  sade/kalabalık kapakları "berbat" buldu; bu "profesyonel" istendi.
