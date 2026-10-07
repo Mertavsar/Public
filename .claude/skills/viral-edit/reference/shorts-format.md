@@ -186,3 +186,6 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   ortada tek odak (ulti/patlama) teal-turuncu renk + güçlü kenar karartma,
   altta dev 2 satır ("WHO / SURVIVES?") hafif eğik + parıltı. Kullanıcı önceki
   sade/kalabalık kapakları "berbat" buldu; bu "profesyonel" istendi.
+- **LoL'de yapay zekâ seslendirmesi YOK** (kullanıcıyla karar): spiker (kill
+  anlarında tam) + ritim + efekt + bant yazıları. Seslendirme gidince donmalar
+  kısalır (hook 2.0 sn, kapanış 2.5 sn). Pulse Tales'te anlatım kalır.
