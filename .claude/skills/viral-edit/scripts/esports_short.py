@@ -13,6 +13,7 @@ spec (json):
  "game": [770, 1630],            // kaynakta oyunun temiz satırları (başlık/HUD dışı)
  "cam":  [0, 560, 0, 1080],      // kaynakta kamera: y0, y1, x0, x1 (null: kamera yok, kart çizilmez)
  "strip_y": 1640,                 // çeviri etiketinin y'si (isteğe bağlı)
+ "game_x": [0, 972], "game_cx": 0.5,   // oyunun yatay aralığı + büyütmede odak
  "band": 280, "card": [90, 1236, 900, 467], "card_label": "CAM",
  "layout": "game_top", "game_scale": 1.2,   // oyun en üstte + büyük; bant (200) oyunun altında
  "palette": "red" | "purple" | "navy" | "teal",
@@ -101,6 +102,8 @@ def main():
     SRC, OUT = P(sp["src"]), P(sp["out"])
     SFPS = probe(SRC)
     G0, G1 = sp.get("game", [770, 1630]); GH = G1 - G0
+    GX = sp.get("game_x", [0, None])            # yatay kırpma (logo / ekran içi pencere dışarıda)
+    GXC = sp.get("game_cx", 0.5)                # büyütmede yatay odak (0-1)
     NOCAM = "cam" in sp and sp["cam"] is None      # kaynakta oyuncu kamerası yok
     C = sp.get("cam") or [0, 560, 0, 1080]
     BAND = sp.get("band", 280)
@@ -189,10 +192,10 @@ def main():
 
     def layout(f):
         out = BG.copy()
-        g = f[G0:G1]
+        g = f[G0:G1, GX[0]:GX[1]]
         if GS != 1.0 or g.shape[1] != W:
             g = cv2.resize(g, (int(round(g.shape[1] * GS)), GHO), interpolation=cv2.INTER_CUBIC)
-            x0 = (g.shape[1] - W) // 2; g = g[:, x0:x0 + W]
+            x0 = int(round((g.shape[1] - W) * GXC)); g = g[:, x0:x0 + W]
         out[GY:GY + GHO] = grade_game(g, GRADE)
         if GY >= 5:
             out[GY - 5:GY] = LINE
