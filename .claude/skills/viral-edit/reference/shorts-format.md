@@ -153,3 +153,10 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   (hareket + efekt ağırlık merkezine yumuşak otomatik kadraj) ve `keep`
   (kill duyurusu gibi yazılar o sürede kadrajda kalır). Teslimden önce telefon
   gözüyle bak: boşluk / kesik yazı / kadraj dışı aksiyon var mı?
+- Yatay (16:9) yayın + kullanıcı "her açı/sahne görünsün": **bölünmüş ekran**
+  (`reference/esports_split.example.py`): üstte TAM yayın karesi 1080x608 (hiçbir
+  şey kırpılmaz, yakın plan bölgesi beyaz çerçeveyle işaretli), ortada yazı bandı,
+  altta aksiyonu (x+y) takip eden ~1.4x yakın plan. "Gerçek sesi kıs": yayın sesi
+  ≈ -12 dB + anonsta ek kısma; üstüne üretilmiş 140 bpm ritim (kick/clap/hat/808),
+  donmada susar. Bu kaynakta sahne/turnuva adı emin değilse kapakta yazma
+  (MSI mi Worlds mü belli değildi → "2024").
