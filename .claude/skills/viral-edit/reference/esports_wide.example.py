@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/user/Public/.claude/skills/viral-edit/scripts")
 import sounddesign as sd
 
 S = os.path.dirname(os.path.abspath(__file__))
-SRC, OUT = f"{S}/in/src.mp4", f"{S}/out/blg_gen_loop.mp4"
+SRC, OUT = f"{S}/in/src.mp4", f"{S}/out/blg_gen_noVO.mp4"
 W, H, FPS, SFPS = 1080, 1920, 30, 60
 SW, SH = 1920, 1080
 TOPB = 300                                     # üst başlık bandı (her an dolu)
@@ -19,7 +19,7 @@ VY0, VY1 = 0, 1080                             # tam yükseklik: zoom yalnız 1.
 CW = int(round((VY1 - VY0) * W / GH_))         # kaynakta 864 px genişlik
 
 PLAN = [("play", 3.9, 4.5, 0.5),       # 0 soğuk açılış: J4 ultisi kapanıyor
-        ("freeze", 4.5, 3.7),           # 1 hook
+        ("freeze", 4.5, 2.0),           # 1 hook
         ("rewind", 4.5, 0.0, 0.4),      # 2
         ("play", 0.0, 3.0, 1.15),       # 3 kurulum
         ("play", 3.0, 3.6, 0.5),        # 4 dalış
@@ -30,7 +30,7 @@ PLAN = [("play", 3.9, 4.5, 0.5),       # 0 soğuk açılış: J4 ultisi kapanıy
         ("play", 14.4, 17.3, 1.0),      # 9
         ("play", 17.3, 17.8, 0.45),     # 10 Kiin, Bin'i alıyor
         ("play", 17.8, 19.8, 1.0),      # 11
-        ("freeze", 19.8, 2.9),          # 12 kapanış sorusu
+        ("freeze", 19.8, 2.5),          # 12 kapanış sorusu
         ("rewind", 19.8, 3.9, 0.5)]     # 13 DÖNGÜ: ilk kareye geri sarar
 seq, segt, t = [], [], 0.0
 for i, p in enumerate(PLAN):
@@ -263,7 +263,7 @@ def hat():
 
 def b808(m, dur):
     n_ = int(dur * SR); t_ = np.arange(n_) / SR
-    return np.tanh(1.8 * np.sin(2 * np.pi * sd.nf(m) * t_)) * np.exp(-t_ / 0.55)
+    return np.sin(2 * np.pi * sd.nf(m) * t_) * np.exp(-t_ / 0.35) * np.clip(t_ / 0.01, 0, 1)
 
 
 start = segt[3][0]                               # ritim geri sarmadan sonra girer
@@ -271,9 +271,9 @@ t_b, bi = start, 0
 while t_b < DUR:
     bar = bi // 4; pos = bi % 4
     if pos in (0,) or (pos == 2 and bar % 2 == 1):
-        place(beatbus, kick(), t_b, 0.9)
+        place(beatbus, kick(), t_b, 0.6)
     if pos == 0:
-        place(beatbus, b808(roots[bar % 4], beat * 4), t_b, 0.6)
+        place(beatbus, b808(roots[bar % 4], beat * 2), t_b, 0.35)
     if pos in (1, 3):
         place(beatbus, clap(), t_b, 0.55)
     for h in range(2 if bar % 4 != 3 else 4):
@@ -285,7 +285,7 @@ place(beatbus, pad, 0.0, 0.35)
 beatbus = sd.lp(beatbus, 9000)
 
 vox = np.zeros(N)
-VO = [("h", segt[1][0] + 0.05), ("a", T_CHOVY + 1.25), ("b", T_BIN + 1.05), ("e", segt[12][0] + 0.05)]
+VO = []                     # seslendirme yok: spiker + ritim + efekt
 for k_, t0 in VO:
     x = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", f"{S}/vo/{k_}.wav", "-af",
                                       "highpass=f=70,equalizer=f=3200:t=q:w=1:g=3,acompressor=threshold=-18dB:ratio=3:attack=5:release=80",
@@ -304,14 +304,17 @@ place(fx, sd.clink(), T_SHUT, 0.5)
 
 # seviyeler: gerçek ses kısık (-12 dB), anons varken ek kısma
 env = np.convolve(np.abs(vox), np.ones(2000) / 2000, mode="same")
-duck = 1 - 0.55 * np.clip(env / (env.max() * 0.15 + 1e-9), 0, 1)
+duck = np.ones(N)
 duck = np.convolve(duck, np.ones(3000) / 3000, mode="same")
-gg = np.full(N, 0.22)
+gg = np.full(N, 0.95)                          # kullanıcı: yayıncı sesi kısılmasın
 for a0, a1 in [(0.0, segt[1][0]), (T_DIVE - 0.2, T_DIVE + 1.6), (T_SHUT - 0.2, T_SHUT + 1.4),
                (T_CHOVY - 0.2, T_CHOVY + 1.2), (T_BIN - 0.2, T_BIN + 1.0)]:
-    gg[int(a0 * SR):int(a1 * SR)] = 0.95
+    pass
 gg = np.convolve(gg, np.ones(int(0.15 * SR)) / int(0.15 * SR), mode="same")
-mix = game * gg[:, None] * duck[:, None] + (beatbus * 0.33 * duck * (1.25 - 0.55 * (gg - 0.22) / 0.73))[:, None] + fx[:, None] * 0.55 + vox[:, None] * 0.95
+ce = np.convolve(np.abs(game).mean(1), np.ones(int(0.05 * SR)) / int(0.05 * SR), mode="same")
+side = 1 - 0.5 * np.clip(ce / (np.percentile(ce, 90) + 1e-9), 0, 1)       # spiker konuşunca ritim çekilir
+side = np.convolve(side, np.ones(int(0.12 * SR)) / int(0.12 * SR), mode="same")
+mix = game * gg[:, None] + (beatbus * 0.20 * side)[:, None] + fx[:, None] * 0.55 + vox[:, None] * 0.95
 mix.astype(np.float32).tofile(f"{work}/mix.f32")
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", f"{work}/mix.f32",
                 "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", "48000", f"{S}/w/audio.wav"], check=True)

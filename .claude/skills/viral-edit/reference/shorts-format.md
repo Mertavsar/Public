@@ -180,7 +180,7 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
 - **Döngü kapanışı:** son plan, kapanış sorusundan sonra 0.5 sn geri sararak
   videonun İLK karesine döner; son anda üst bant hook'a döner → YouTube başa
   sardığında kesinti yok. **Spiker:** kill/patlama pencerelerinde tam ses
-  (çığlık en güçlü hook), diğer yerlerde -13 dB; ağır çekimde perde korunur
+  (çığlık en güçlü hook); ağır çekimde perde korunur
   (rubberband pitch=1.0). Açılış: ilk karede darbe + spiker tam + yükselen gerilim → donma.
 - **Kapak (poster):** Anton font (`fonts/`), üstte takım renkli "BLG (VS) GEN",
   ortada tek odak (ulti/patlama) teal-turuncu renk + güçlü kenar karartma,
@@ -189,3 +189,7 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
 - **LoL'de yapay zekâ seslendirmesi YOK** (kullanıcıyla karar): spiker (kill
   anlarında tam) + ritim + efekt + bant yazıları. Seslendirme gidince donmalar
   kısalır (hook 2.0 sn, kapanış 2.5 sn). Pulse Tales'te anlatım kalır.
+- ⛔ **Yayıncı (spiker) sesini kısma/kapatma** (kullanıcı: "çok kötü olmuş"): spiker
+  baştan sona tam seviyede; ritim onun ALTINDA, spiker konuştukça kendiliğinden
+  çekilir (sidechain). 808 bas distorsiyonsuz ve kısa — kesik, dolu 808 vuruşu
+  sahnede "garip bir ses" gibi duyuldu (kullanıcı: "24. saniyede bir ses var").
