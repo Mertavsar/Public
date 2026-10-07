@@ -14,6 +14,9 @@ spec (json):
  "cam":  [0, 560, 0, 1080],      // kaynakta kamera: y0, y1, x0, x1 (null: kamera yok, kart çizilmez)
  "strip_y": 1640,                 // çeviri etiketinin y'si (isteğe bağlı)
  "game_x": [0, 972], "game_cx": 0.5,   // oyunun yatay aralığı + büyütmede odak
+ "game_h": 1500, "track": 0.8,         // oyun yüksekliği (boşluk bırakma) + aksiyon takibi (sn)
+ "keep": [[5.75, 8.4, 330, 880]],      // bu sürede bu kaynak x aralığı kadrajda kalsın (duyuru)
+ "footer": "TikLOLet",                 // en alttaki YouTube başlık alanına ince kanal şeridi
  "band": 280, "card": [90, 1236, 900, 467], "card_label": "CAM",
  "layout": "game_top", "game_scale": 1.2,   // oyun en üstte + büyük; bant (200) oyunun altında
  "palette": "red" | "purple" | "navy" | "teal",
@@ -111,6 +114,8 @@ def main():
     # ekran"), game_scale ile büyür (yanlardan kırpılır), yazı bandı oyunun altına iner.
     TOP = sp.get("layout") == "game_top"
     GS = sp.get("game_scale", 1.0)
+    if sp.get("game_h"):                        # oyunun çıktıdaki yüksekliği (ekranı doldur)
+        GS = sp["game_h"] / GH
     GHO = int(round(GH * GS))                       # çıktıdaki oyun yüksekliği
     GY = 0 if TOP else BAND
     HB = (GY + GHO + 4, GY + GHO + 4 + sp.get("band", 200)) if TOP else (0, BAND)   # başlık bandı
@@ -190,12 +195,56 @@ def main():
         ox, oy = (cam.shape[1] - cw) // 2, (cam.shape[0] - ch) // 2
         return grade_cam(cam[oy:oy + ch, ox:ox + cw], GRADE)
 
-    def layout(f):
+    SW_, SH_ = map(int, subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                                        "stream=width,height", "-of", "csv=p=0", SRC], capture_output=True,
+                                       text=True).stdout.strip().split(","))
+    # Aksiyon takibi (otomatik reframe): oyun büyütülüp yanlar kırpılınca kadraj her karede
+    # hareket + efekt yoğunluğunun ağırlık merkezine yumuşakça kayar (kare/yatay kaynak).
+    TRACK = sp.get("track")                     # yumuşatma, sn (ör. 0.8); yoksa sabit game_cx
+    focus = None
+    if TRACK:
+        lw = 192
+        gx1 = GX[1] or SW_
+        lh = int(round(GH * lw / (gx1 - GX[0])))
+        dd = subprocess.run(["ffmpeg", "-v", "error", "-i", SRC, "-vf",
+                             f"crop={gx1 - GX[0]}:{GH}:{GX[0]}:{G0},scale={lw}:{lh},format=gray",
+                             "-f", "rawvideo", "-"], capture_output=True).stdout
+        A = np.frombuffer(dd, np.uint8).reshape(-1, lh, lw).astype(np.float32)
+        xs = (np.arange(lw) + 0.5) / lw
+        cxs, prev = [], 0.5
+        for i_ in range(len(A)):
+            m = np.abs(A[i_] - A[max(0, i_ - 2)]) ** 2 + 400.0 * (A[i_] > 235)
+            m = m.sum(0); tot = m.sum()
+            prev = float((m * xs).sum() / tot) if tot > 2e5 else prev
+            cxs.append(prev)
+        cxs = np.array(cxs)
+        sig = max(1.0, TRACK * SFPS); kx = np.arange(-int(3 * sig), int(3 * sig) + 1)
+        ker = np.exp(-0.5 * (kx / sig) ** 2); ker /= ker.sum()
+        focus = np.convolve(np.pad(cxs, len(kx) // 2, mode="edge"), ker, mode="valid")[:len(cxs)]
+        # kare başına kırpma başlangıcı (px, büyütülmüş oyunda); "keep": duyuru yazısı gibi
+        # kesilmemesi gereken kaynak aralıkları [t0, t1, x0, x1] o sürede kadrajda kalır
+        gw = int(round((gx1 - GX[0]) * GS))
+        x0s = np.clip(focus * gw - W / 2, 0, gw - W)
+        lo = np.zeros(len(x0s)); hi = np.full(len(x0s), gw - W, float)
+        for t0_, t1_, a0_, a1_ in sp.get("keep", []):
+            i0_, i1_ = int(t0_ * SFPS), min(len(x0s), int(t1_ * SFPS) + 1)
+            lo[i0_:i1_] = np.maximum(lo[i0_:i1_], a1_ * GS - W)
+            hi[i0_:i1_] = np.minimum(hi[i0_:i1_], a0_ * GS)
+        x0s = np.clip(x0s, lo, np.maximum(lo, hi))
+        x0s = np.convolve(np.pad(x0s, len(kx) // 2, mode="edge"), ker, mode="valid")[:len(x0s)]
+        focus = np.clip(x0s, lo, np.maximum(lo, hi))          # artık px cinsinden x0
+        print(f"takip: kırpma x0 {focus.min():.0f}–{focus.max():.0f} / {gw - W}")
+
+    def layout(f, k_=None):
         out = BG.copy()
         g = f[G0:G1, GX[0]:GX[1]]
         if GS != 1.0 or g.shape[1] != W:
             g = cv2.resize(g, (int(round(g.shape[1] * GS)), GHO), interpolation=cv2.INTER_CUBIC)
-            x0 = int(round((g.shape[1] - W) * GXC)); g = g[:, x0:x0 + W]
+            if focus is not None and k_ is not None:
+                x0 = int(np.clip(focus[min(k_, len(focus) - 1)], 0, g.shape[1] - W))
+            else:
+                x0 = int(round((g.shape[1] - W) * GXC))
+            g = g[:, x0:x0 + W]
         out[GY:GY + GHO] = grade_game(g, GRADE)
         if GY >= 5:
             out[GY - 5:GY] = LINE
@@ -216,7 +265,7 @@ def main():
         if k in need or k in camneed:
             f = np.frombuffer(b, np.uint8).reshape(SH, SW, 3)
             if k in need:
-                store[k] = cv2.imencode(".jpg", layout(f), [cv2.IMWRITE_JPEG_QUALITY, 96])[1]; last = k
+                store[k] = cv2.imencode(".jpg", layout(f, k), [cv2.IMWRITE_JPEG_QUALITY, 96])[1]; last = k
             if k in camneed:
                 cams[k] = cv2.imencode(".jpg", prep_cam(f), [cv2.IMWRITE_JPEG_QUALITY, 95])[1]
         k += 1
@@ -305,6 +354,12 @@ def main():
             lw = dl.textlength(lab, font=font(30))
             dl.rounded_rectangle([cx + 18, cy + 18, cx + 46 + lw, cy + 60], radius=8, fill=(10, 8, 16, 220))
             dl.text((cx + 32, cy + 22), lab, font=font(30), fill=ACC2 + (255,))
+        foot = sp.get("footer")
+        if foot:
+            fy0 = HB[1] if TOP else H - 120
+            dl.rectangle([0, fy0, W, fy0 + 3], fill=ACC + (255,))
+            ff = font(34); fw = dl.textlength(foot, font=ff)
+            dl.text((W / 2 - fw / 2, fy0 + 40), foot, font=ff, fill=(255, 255, 255, 150))
         img.alpha_composite(lay)
         for t0, t1, parts in CH:
             if t0 <= tt < t1:

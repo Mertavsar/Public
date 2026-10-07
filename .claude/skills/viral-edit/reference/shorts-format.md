@@ -146,3 +146,10 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   müziği/sesi kullanılmadı. İç panel tam 9:16 ise (siyah kenar + üst yazı ekli
   repost) paneli tam ekrana ölçeklemek kırpma DEĞİL: içerik kaybı yok, kaynak
   yazısı da kendiliğinden gider. 4:5 panelde bu yapılmaz (kullanıcı reddetti).
+- ⛔ **Altta büyük boşluk bırakma** (kullanıcı, kare kaynakta: "alt taraftaki büyük
+  siyahlık ne?"). Yerleşimi kaynağın en-boy oranına göre kur: oyun `game_h` (≈1500)
+  ile ekranı yazı bandına kadar doldurur; en alttaki ≈190 px YouTube başlık alanı
+  → yalnız ince kanal şeridi (`footer`). Büyütmede yanlar kırpılır → `track`
+  (hareket + efekt ağırlık merkezine yumuşak otomatik kadraj) ve `keep`
+  (kill duyurusu gibi yazılar o sürede kadrajda kalır). Teslimden önce telefon
+  gözüyle bak: boşluk / kesik yazı / kadraj dışı aksiyon var mı?
