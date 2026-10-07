@@ -1,0 +1,69 @@
+{
+ "files": {
+  "nodes": [
+   {
+    "id": "gid://shopify/MediaImage/26148804001897",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/3-adet-fresh-sal-alana-Web-sitesi-4-1-scaled.webp?v=1763551131",
+     "width": 2560,
+     "height": 1439
+    }
+   },
+   {
+    "id": "gid://shopify/MediaImage/39680014811241",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/Luks-Koton-Esarp-Safir-Mavi_5c8ae0c8-2ab6-4289-ab88-af9604d815f1.webp?v=1783384593",
+     "width": 1536,
+     "height": 2048
+    }
+   },
+   {
+    "id": "gid://shopify/MediaImage/39680117571689",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/Untitled-image-1_1.png?v=1783386473",
+     "width": 1080,
+     "height": 1080
+    }
+   },
+   {
+    "id": "gid://shopify/MediaImage/39896144969833",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/luks-koton-esarp.webp?v=1786271158",
+     "width": 1906,
+     "height": 938
+    }
+   },
+   {
+    "id": "gid://shopify/MediaImage/39896146706537",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/luks-koton-esarp_1.webp?v=1786271399",
+     "width": 1906,
+     "height": 938
+    }
+   },
+   {
+    "id": "gid://shopify/MediaImage/39896147624041",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/luks-koton-esarp_2.webp?v=1786271561",
+     "width": 1906,
+     "height": 938
+    }
+   },
+   {
+    "id": "gid://shopify/MediaImage/39896147787881",
+    "alt": "",
+    "image": {
+     "url": "https://cdn.shopify.com/s/files/1/0659/5215/3705/files/luks-koton-esarp_3.webp?v=1786271632",
+     "width": 1906,
+     "height": 938
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,6 @@
+{"redirects":[{"path":"/collections/one-cikanlar","target":"/collections/en-cok-satanlar"},{"path":"/gizlilik-politikasi","target":"/pages/gizlilik-politikasi"},{"path":"/mesafeli-satis-sozlesmesi","target":"/pages/mesafeli-satis-sozlesmesi"},{"path":"/refund_returns","target":"/pages/cerez-politikasi"},{"path":"/iletisim","target":"/pages/contact"}],
+"discount":{"title":"5 Eşarp/Şal Alana 1 Koton Eşarp Hediye","startsAt":"2026-10-02T00:00:00Z","usesPerOrderLimit":null,"combinesWith":{"orderDiscounts":true,"productDiscounts":false,"shippingDiscounts":true},"buys_quantity":"5","buys_collection":"kampanya-tum-esarp-ve-sallar","gets_quantity":"1","gets_percentage":1,"gets_collection":"koton-esarp"},
+"unpublished_collections":["kampanya-tum-esarp-ve-sallar"],
+"online_store_publication_old":"gid://shopify/Publication/145573216361",
+"shop":{"name":"Valenstrend - Sınırsız Renk ve Desenli Eşarp ve Şallar","email":"valenstrend@gmail.com","currency":"TRY","locale":"tr","plan":"Grow","products":1038},
+"theme":{"main":"Valenstrend – Güncelleme 3 (Sabit menü)","id":"gid://shopify/OnlineStoreTheme/163013263465"}}

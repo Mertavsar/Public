@@ -1,0 +1,375 @@
+{
+ "collections": {
+  "nodes": [
+   {
+    "id": "gid://shopify/Collection/476394193001",
+    "title": "Koton Eşarp",
+    "handle": "koton-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": true,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "desenli koton eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 348
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394586217",
+    "title": "Organik Soft Eşarp",
+    "handle": "organik-soft-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": true,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Organik Soft Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 149
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394684521",
+    "title": "Organik Soft Şal",
+    "handle": "organik-soft-sal",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Organik Soft Şal"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 111
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394750057",
+    "title": "Kampanyalı Eşarp",
+    "handle": "kampanyali-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Kampanyalı Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 30
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394815593",
+    "title": "Lüks Koton Eşarp",
+    "handle": "luks-koton-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Lüks Koton Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 58
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394881129",
+    "title": "Pure Touch Şal",
+    "handle": "pure-touch-sal",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Pure Touch Şal"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 32
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394913897",
+    "title": "Koton Fresh Şal",
+    "handle": "koton-fresh-sal",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Koton Fresh Şal"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 43
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476394979433",
+    "title": "Premium Eşarp",
+    "handle": "premium-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Premium Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 10
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476395077737",
+    "title": "Pırıltı Taşlı Şal",
+    "handle": "pirilti-tasli-sal",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Pırıltı Taşlı Şal"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 17
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476395110505",
+    "title": "Çocuk Eşarp",
+    "handle": "cocuk-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Çocuk Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 62
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476395143273",
+    "title": "Yöresel Eşarp",
+    "handle": "yoresel-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Yöresel Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 10
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/476395176041",
+    "title": "Anne Eşarp",
+    "handle": "anne-esarp",
+    "descriptionHtml": "",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": "",
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Anne Eşarp"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 20
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/486227804265",
+    "title": "En Çok Satanlar",
+    "handle": "en-cok-satanlar",
+    "descriptionHtml": "<p>Müşterilerimizin en çok tercih ettiği eşarp ve şal modelleri.</p>",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": null,
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": false,
+     "rules": [
+      {
+       "column": "VARIANT_INVENTORY",
+       "relation": "GREATER_THAN",
+       "condition": "0"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 628
+    },
+    "seo": {
+     "title": "En Çok Satan Eşarp ve Şallar | Valenstrend",
+     "description": "Valenstrend'in en çok satan eşarp ve şal modelleri. Türkiye geneli ücretsiz kargo, kapıda ödeme imkânı."
+    }
+   },
+   {
+    "id": "gid://shopify/Collection/486239338601",
+    "title": "Kampanya - Tüm Eşarp ve Şallar",
+    "handle": "kampanya-tum-esarp-ve-sallar",
+    "descriptionHtml": "<p>Hediye kampanyası için kullanılan iç koleksiyon (sitede yayınlanmaz).</p>",
+    "sortOrder": "BEST_SELLING",
+    "templateSuffix": null,
+    "image": null,
+    "ruleSet": {
+     "appliedDisjunctively": true,
+     "rules": [
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Eşarp"
+      },
+      {
+       "column": "TITLE",
+       "relation": "CONTAINS",
+       "condition": "Şal"
+      }
+     ]
+    },
+    "productsCount": {
+     "count": 1035
+    },
+    "seo": {
+     "title": null,
+     "description": null
+    }
+   }
+  ]
+ }
+}

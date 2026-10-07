@@ -1,0 +1,392 @@
+{
+ "menus": {
+  "nodes": [
+   {
+    "handle": "main-menu",
+    "title": "Ana menü",
+    "items": [
+     {
+      "title": "Ana Sayfa",
+      "type": "FRONTPAGE",
+      "url": "/",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Koton Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/koton-esarp",
+      "resourceId": "gid://shopify/Collection/476394193001",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Organik Soft Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/organik-soft-esarp",
+      "resourceId": "gid://shopify/Collection/476394586217",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Organik Soft Şal",
+      "type": "COLLECTION",
+      "url": "/collections/organik-soft-sal",
+      "resourceId": "gid://shopify/Collection/476394684521",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Kampanyalı Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/kampanyali-esarp",
+      "resourceId": "gid://shopify/Collection/476394750057",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Premium Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/premium-esarp",
+      "resourceId": "gid://shopify/Collection/476394979433",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Kampanyalı Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/kampanyali-esarp",
+      "resourceId": "gid://shopify/Collection/476394750057",
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "footer",
+    "title": "Altbilgi menüsü",
+    "items": [
+     {
+      "title": "Ara",
+      "type": "SEARCH",
+      "url": "/search",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "customer-account-main-menu",
+    "title": "Müşteri hesabı ana menüsü",
+    "items": [
+     {
+      "title": "Mağaza",
+      "type": "FRONTPAGE",
+      "url": "/",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Siparişler",
+      "type": "CUSTOMER_ACCOUNT_PAGE",
+      "url": "https://shopify.com/65952153705/account/orders",
+      "resourceId": "gid://shopify/CustomerAccountPage/65491992681",
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "ana-men",
+    "title": "Ana menü",
+    "items": [
+     {
+      "title": "Koton Eşarp",
+      "type": "CATALOG",
+      "url": "/collections/all",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Hakkımıızda",
+      "type": "SHOP_POLICY",
+      "url": "/policies/privacy-policy",
+      "resourceId": "gid://shopify/ShopPolicy/33686683753",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Ana Sayfa",
+      "type": "FRONTPAGE",
+      "url": "/",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "ana-menu-yeni",
+    "title": "Ana Menü (Yeni Tasarım)",
+    "items": [
+     {
+      "title": "Tüm Ürünler",
+      "type": "CATALOG",
+      "url": "/collections/all",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Eşarp",
+      "type": "COLLECTIONS",
+      "url": "/collections",
+      "resourceId": null,
+      "tags": [],
+      "items": [
+       {
+        "title": "Koton Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/koton-esarp",
+        "resourceId": "gid://shopify/Collection/476394193001",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Lüks Koton Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/luks-koton-esarp",
+        "resourceId": "gid://shopify/Collection/476394815593",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Organik Soft Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/organik-soft-esarp",
+        "resourceId": "gid://shopify/Collection/476394586217",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Premium Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/premium-esarp",
+        "resourceId": "gid://shopify/Collection/476394979433",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Anne Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/anne-esarp",
+        "resourceId": "gid://shopify/Collection/476395176041",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Çocuk Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/cocuk-esarp",
+        "resourceId": "gid://shopify/Collection/476395110505",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Yöresel Eşarp",
+        "type": "COLLECTION",
+        "url": "/collections/yoresel-esarp",
+        "resourceId": "gid://shopify/Collection/476395143273",
+        "tags": [],
+        "items": []
+       }
+      ]
+     },
+     {
+      "title": "Şal",
+      "type": "COLLECTIONS",
+      "url": "/collections",
+      "resourceId": null,
+      "tags": [],
+      "items": [
+       {
+        "title": "Organik Soft Şal",
+        "type": "COLLECTION",
+        "url": "/collections/organik-soft-sal",
+        "resourceId": "gid://shopify/Collection/476394684521",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Koton Fresh Şal",
+        "type": "COLLECTION",
+        "url": "/collections/koton-fresh-sal",
+        "resourceId": "gid://shopify/Collection/476394913897",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Pure Touch Şal",
+        "type": "COLLECTION",
+        "url": "/collections/pure-touch-sal",
+        "resourceId": "gid://shopify/Collection/476394881129",
+        "tags": [],
+        "items": []
+       },
+       {
+        "title": "Pırıltı Taşlı Şal",
+        "type": "COLLECTION",
+        "url": "/collections/pirilti-tasli-sal",
+        "resourceId": "gid://shopify/Collection/476395077737",
+        "tags": [],
+        "items": []
+       }
+      ]
+     },
+     {
+      "title": "Kampanyalı Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/kampanyali-esarp",
+      "resourceId": "gid://shopify/Collection/476394750057",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "İletişim",
+      "type": "PAGE",
+      "url": "/pages/contact",
+      "resourceId": "gid://shopify/Page/116416184425",
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "footer-kategoriler",
+    "title": "Footer - Kategoriler",
+    "items": [
+     {
+      "title": "Koton Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/koton-esarp",
+      "resourceId": "gid://shopify/Collection/476394193001",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Organik Soft Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/organik-soft-esarp",
+      "resourceId": "gid://shopify/Collection/476394586217",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Organik Soft Şal",
+      "type": "COLLECTION",
+      "url": "/collections/organik-soft-sal",
+      "resourceId": "gid://shopify/Collection/476394684521",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Lüks Koton Eşarp",
+      "type": "COLLECTION",
+      "url": "/collections/luks-koton-esarp",
+      "resourceId": "gid://shopify/Collection/476394815593",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Koton Fresh Şal",
+      "type": "COLLECTION",
+      "url": "/collections/koton-fresh-sal",
+      "resourceId": "gid://shopify/Collection/476394913897",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Tüm Ürünler",
+      "type": "CATALOG",
+      "url": "/collections/all",
+      "resourceId": null,
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "footer-yardim",
+    "title": "Footer - Yardım",
+    "items": [
+     {
+      "title": "Gizlilik Politikası",
+      "type": "PAGE",
+      "url": "/pages/gizlilik-politikasi",
+      "resourceId": "gid://shopify/Page/159034900585",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Mesafeli Satış Sözleşmesi",
+      "type": "PAGE",
+      "url": "/pages/mesafeli-satis-sozlesmesi",
+      "resourceId": "gid://shopify/Page/159034966121",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Çerez Politikası",
+      "type": "PAGE",
+      "url": "/pages/cerez-politikasi",
+      "resourceId": "gid://shopify/Page/159034998889",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "İletişim",
+      "type": "PAGE",
+      "url": "/pages/contact",
+      "resourceId": "gid://shopify/Page/116416184425",
+      "tags": [],
+      "items": []
+     }
+    ]
+   },
+   {
+    "handle": "footer-kurumsal",
+    "title": "Footer - Kurumsal",
+    "items": [
+     {
+      "title": "Hakkımızda",
+      "type": "PAGE",
+      "url": "/pages/hakkimizda",
+      "resourceId": "gid://shopify/Page/159005704297",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "Toptan Sipariş",
+      "type": "PAGE",
+      "url": "/pages/contact",
+      "resourceId": "gid://shopify/Page/116416184425",
+      "tags": [],
+      "items": []
+     },
+     {
+      "title": "İletişim",
+      "type": "PAGE",
+      "url": "/pages/contact",
+      "resourceId": "gid://shopify/Page/116416184425",
+      "tags": [],
+      "items": []
+     }
+    ]
+   }
+  ]
+ }
+}

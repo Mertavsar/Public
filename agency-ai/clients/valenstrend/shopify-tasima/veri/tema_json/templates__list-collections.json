@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection_list_ddHtab": {
+      "type": "main-collection-list",
+      "blocks": {
+        "baslik_grup": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "gap": 84,
+            "width": "fill",
+            "padding-block-start": 36
+          },
+          "blocks": {
+            "baslik": {
+              "type": "text",
+              "settings": {
+                "text": "<h1>Koleksiyonlar</h1>",
+                "width": "100%",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)"
+              }
+            },
+            "ayrac": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-end": 24
+              }
+            }
+          },
+          "block_order": [
+            "baslik",
+            "ayrac"
+          ]
+        },
+        "static-collection-card": {
+          "type": "_collection-card",
+          "static": true,
+          "settings": {
+            "placement": "below_image",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "flex-start",
+            "collection_card_gap": 8
+          },
+          "blocks": {
+            "ct": {
+              "type": "collection-title",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "h6",
+                "font_size": "1rem",
+                "case": "uppercase"
+              }
+            },
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "static": true,
+              "settings": {
+                "image_ratio": "portrait"
+              }
+            }
+          },
+          "block_order": [
+            "ct"
+          ]
+        }
+      },
+      "block_order": [
+        "baslik_grup"
+      ],
+      "settings": {
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 28,
+        "section_width": "page-width",
+        "gap": 12,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 0,
+        "padding-block-end": 48
+      }
+    }
+  },
+  "order": [
+    "collection_list_ddHtab"
+  ]
+}

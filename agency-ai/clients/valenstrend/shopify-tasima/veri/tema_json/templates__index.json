@@ -1,0 +1,760 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner_fresh_sal": {
+      "type": "hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/3-adet-fresh-sal-alana-Web-sitesi-4-1-scaled.webp",
+        "custom_mobile_media": false,
+        "link": "shopify://collections/koton-fresh-sal",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "full-width",
+        "section_height": "auto",
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "kategoriler": {
+      "type": "vt-kategoriler",
+      "settings": {
+        "heading": "",
+        "collections": [
+          "koton-esarp",
+          "luks-koton-esarp",
+          "organik-soft-esarp",
+          "premium-esarp",
+          "organik-soft-sal",
+          "koton-fresh-sal",
+          "pure-touch-sal",
+          "pirilti-tasli-sal",
+          "anne-esarp",
+          "cocuk-esarp",
+          "yoresel-esarp",
+          "kampanyali-esarp"
+        ],
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "liste_one_cikanlar": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "title_one_cikanlar": {
+              "type": "_product-list-text",
+              "settings": {
+                "text": "<h3>En Çok Satanlar</h3>",
+                "width": "fit-content",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-heading--family)"
+              }
+            },
+            "button_one_cikanlar": {
+              "type": "_product-list-button",
+              "settings": {
+                "label": "Tümünü Gör",
+                "style_class": "button-unstyled",
+                "width": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "title_one_cikanlar",
+            "button_one_cikanlar"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 6
+          },
+          "blocks": {
+            "gallery_one_cikanlar": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait"
+              }
+            },
+            "ptitle_one_cikanlar": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "padding-block-start": 4
+              }
+            },
+            "price_one_cikanlar": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "sepet_liste_one_cikanlar": {
+              "type": "vt-sepete-ekle",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "gallery_one_cikanlar",
+            "ptitle_one_cikanlar",
+            "price_one_cikanlar",
+            "sepet_liste_one_cikanlar"
+          ]
+        }
+      },
+      "settings": {
+        "collection": "en-cok-satanlar",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 12,
+        "columns": 6,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "liste_koton": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "title_koton_esarp": {
+              "type": "_product-list-text",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-heading--family)"
+              }
+            },
+            "button_koton_esarp": {
+              "type": "_product-list-button",
+              "settings": {
+                "label": "Tümünü Gör",
+                "style_class": "button-unstyled",
+                "width": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "title_koton_esarp",
+            "button_koton_esarp"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 6
+          },
+          "blocks": {
+            "gallery_koton_esarp": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait"
+              }
+            },
+            "ptitle_koton_esarp": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "padding-block-start": 4
+              }
+            },
+            "price_koton_esarp": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "sepet_liste_koton": {
+              "type": "vt-sepete-ekle",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "gallery_koton_esarp",
+            "ptitle_koton_esarp",
+            "price_koton_esarp",
+            "sepet_liste_koton"
+          ]
+        }
+      },
+      "settings": {
+        "collection": "koton-esarp",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 6,
+        "columns": 6,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "liste_organik_esarp": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "title_organik_soft_esarp": {
+              "type": "_product-list-text",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-heading--family)"
+              }
+            },
+            "button_organik_soft_esarp": {
+              "type": "_product-list-button",
+              "settings": {
+                "label": "Tümünü Gör",
+                "style_class": "button-unstyled",
+                "width": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "title_organik_soft_esarp",
+            "button_organik_soft_esarp"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 6
+          },
+          "blocks": {
+            "gallery_organik_soft_esarp": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait"
+              }
+            },
+            "ptitle_organik_soft_esarp": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "padding-block-start": 4
+              }
+            },
+            "price_organik_soft_esarp": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "sepet_liste_organik_esarp": {
+              "type": "vt-sepete-ekle",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "gallery_organik_soft_esarp",
+            "ptitle_organik_soft_esarp",
+            "price_organik_soft_esarp",
+            "sepet_liste_organik_esarp"
+          ]
+        }
+      },
+      "settings": {
+        "collection": "organik-soft-esarp",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 6,
+        "columns": 6,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "liste_organik_sal": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "title_organik_soft_sal": {
+              "type": "_product-list-text",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-heading--family)"
+              }
+            },
+            "button_organik_soft_sal": {
+              "type": "_product-list-button",
+              "settings": {
+                "label": "Tümünü Gör",
+                "style_class": "button-unstyled",
+                "width": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "title_organik_soft_sal",
+            "button_organik_soft_sal"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 6
+          },
+          "blocks": {
+            "gallery_organik_soft_sal": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait"
+              }
+            },
+            "ptitle_organik_soft_sal": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "padding-block-start": 4
+              }
+            },
+            "price_organik_soft_sal": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "sepet_liste_organik_sal": {
+              "type": "vt-sepete-ekle",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "gallery_organik_soft_sal",
+            "ptitle_organik_soft_sal",
+            "price_organik_soft_sal",
+            "sepet_liste_organik_sal"
+          ]
+        }
+      },
+      "settings": {
+        "collection": "organik-soft-sal",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 6,
+        "columns": 6,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "liste_kampanya": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "title_kampanyali_esarp": {
+              "type": "_product-list-text",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-heading--family)"
+              }
+            },
+            "button_kampanyali_esarp": {
+              "type": "_product-list-button",
+              "settings": {
+                "label": "Tümünü Gör",
+                "style_class": "button-unstyled",
+                "width": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "title_kampanyali_esarp",
+            "button_kampanyali_esarp"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 6
+          },
+          "blocks": {
+            "gallery_kampanyali_esarp": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait"
+              }
+            },
+            "ptitle_kampanyali_esarp": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "padding-block-start": 4
+              }
+            },
+            "price_kampanyali_esarp": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "sepet_liste_kampanya": {
+              "type": "vt-sepete-ekle",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "gallery_kampanyali_esarp",
+            "ptitle_kampanyali_esarp",
+            "price_kampanyali_esarp",
+            "sepet_liste_kampanya"
+          ]
+        }
+      },
+      "settings": {
+        "collection": "kampanyali-esarp",
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_products": 6,
+        "columns": 6,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "padding-block-start": 32,
+        "padding-block-end": 32
+      }
+    },
+    "toptan": {
+      "type": "section",
+      "blocks": {
+        "toptan_grup": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 14,
+            "width": "fill"
+          },
+          "blocks": {
+            "toptan_baslik": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Toptan Sipariş İçin Bize Ulaşın</h2>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "h3"
+              }
+            },
+            "toptan_metin": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Size özel tasarım ve markanıza uygun desen seçenekleri için ekibimizle iletişime geçin.</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "rte",
+                "padding-block-end": 8
+              }
+            },
+            "toptan_buton": {
+              "type": "button",
+              "settings": {
+                "label": "İletişime Geçin",
+                "link": "shopify://pages/contact",
+                "style_class": "button",
+                "width": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "toptan_baslik",
+            "toptan_metin",
+            "toptan_buton"
+          ]
+        }
+      },
+      "block_order": [
+        "toptan_grup"
+      ],
+      "name": "Toptan sipariş",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      }
+    },
+    "banner_izgara": {
+      "type": "vt-banner-grid",
+      "blocks": {
+        "b_koton": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/luks-koton-esarp.webp",
+            "link": "shopify://collections/koton-esarp"
+          }
+        },
+        "b_organik_esarp": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/luks-koton-esarp_1.webp",
+            "link": "shopify://collections/organik-soft-esarp"
+          }
+        },
+        "b_organik_sal": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/luks-koton-esarp_2.webp",
+            "link": "shopify://collections/organik-soft-sal"
+          }
+        },
+        "b_kampanya": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/luks-koton-esarp_3.webp",
+            "link": "shopify://collections/kampanyali-esarp"
+          }
+        }
+      },
+      "block_order": [
+        "b_koton",
+        "b_organik_esarp",
+        "b_organik_sal",
+        "b_kampanya"
+      ],
+      "settings": {
+        "columns": 2,
+        "gap": 16,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "kategoriler",
+    "banner_fresh_sal",
+    "liste_one_cikanlar",
+    "banner_izgara",
+    "liste_koton",
+    "liste_organik_esarp",
+    "liste_organik_sal",
+    "liste_kampanya",
+    "toptan"
+  ]
+}
