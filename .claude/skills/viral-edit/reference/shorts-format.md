@@ -167,3 +167,13 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   aksiyonu takip eden yatay kadraj, kill duyurusu o sürede kadrajda, kill anında
   hafif ani yakınlaşma. Yazı yalnız DONMA anlarında (kare hafif kararır): açılış
   hook'u + kapanış sorusu; oyun akarken üstünde yazı yok, ortada boş bant yok.
+- ⛔ **Fazla zoom yapma** (kullanıcı: "çok zoom yaptığın için oyun izlenmiyor"):
+  16:9 → tam 9:16 (2.2x) savaşın çoğunu dışarıda bırakıyor. Yatay yayında varsayılan
+  `reference/esports_wide.example.py`: kaynağın tam yüksekliği, 864 px genişlik →
+  1080x1350 (yalnız 1.25x, oyun ekranın %70'i), sakin takip (1 sn yumuşatma),
+  ani yakınlaşma yok. Üstte 300 px bant her an dolu ("BLG vs GEN" + değişen
+  satır: hook → 5v5 TEAMFIGHT → CHOVY DOWN. → … → kapanış sorusu).
+- Kaynağın kapanış geçişi (bulanık wipe) donma karesine girmesin: Laplacian
+  varyansıyla netliğin düştüğü anı ölç, donmayı ondan önce al.
+- ⛔ Kapak **sade**: tek odak (ulti/patlama), kenarlar güçlü karartılır (blur yok),
+  tek büyük cümle (2-3 kelime) + küçük üst satır. Halka/rozet/çok etiket = "karışık".
