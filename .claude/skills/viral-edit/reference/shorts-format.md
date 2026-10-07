@@ -160,3 +160,10 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   ≈ -12 dB + anonsta ek kısma; üstüne üretilmiş 140 bpm ritim (kick/clap/hat/808),
   donmada susar. Bu kaynakta sahne/turnuva adı emin değilse kapakta yazma
   (MSI mi Worlds mü belli değildi → "2024").
+- ⛔ Yüz kamerası yoksa ekranı İKİYE BÖLME (kullanıcı: "neden hep 2'ye bölüyorsun,
+  insan yüzü yok ki"; bölünmüş ekranda yazısız anlarda boş kalan bant da kötü).
+  Yatay yayında varsayılan **tam ekran** (`reference/esports_fullscreen.example.py`):
+  skor şeridi ve alt yayın grafikleri dışında kalan satırlardan 9:16 pencere,
+  aksiyonu takip eden yatay kadraj, kill duyurusu o sürede kadrajda, kill anında
+  hafif ani yakınlaşma. Yazı yalnız DONMA anlarında (kare hafif kararır): açılış
+  hook'u + kapanış sorusu; oyun akarken üstünde yazı yok, ortada boş bant yok.
