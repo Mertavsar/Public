@@ -120,3 +120,9 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   kaybolduğu/kameranın kaydığı yerde kilit kaçtı).
 - Görsel değişiklik tek başına YouTube'un "reused content" kuralını aşmaz;
   asıl fark özgün seslendirme/yorum. Seslendirme metnini öner, ses gelince senkronla.
+- ⛔ **Yazı oyunu kapatmaz, az olur** (kullanıcı: "çok yazı olmasın, olan yazılar
+  da oyunu kapatmasın"). Yerleşim: üstte yorum bandı (0–280), oyun paneli
+  (ölçeksiz, alt arayüz şeridi kırpılır), altında çeviri şeridi, en altta kamera
+  kartı. Video başına en çok 3 başlık (hook + 1 espri + kapanış) ve 2 çeviri
+  etiketi (yalnız ana oyuncunun duyuruları). Ok/nişangah/REPLAY etiketi de oyun
+  paneline konmaz.
