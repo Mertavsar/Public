@@ -11,7 +11,8 @@ spec (json):
 {
  "src": "src.mp4", "out": "out.mp4", "target_mb": 29,
  "game": [770, 1630],            // kaynakta oyunun temiz satırları (başlık/HUD dışı)
- "cam":  [0, 560, 0, 1080],      // kaynakta kamera: y0, y1, x0, x1
+ "cam":  [0, 560, 0, 1080],      // kaynakta kamera: y0, y1, x0, x1 (null: kamera yok, kart çizilmez)
+ "strip_y": 1640,                 // çeviri etiketinin y'si (isteğe bağlı)
  "band": 280, "card": [90, 1236, 900, 467], "card_label": "CAM",
  "layout": "game_top", "game_scale": 1.2,   // oyun en üstte + büyük; bant (200) oyunun altında
  "palette": "red" | "purple" | "navy" | "teal",
@@ -100,7 +101,8 @@ def main():
     SRC, OUT = P(sp["src"]), P(sp["out"])
     SFPS = probe(SRC)
     G0, G1 = sp.get("game", [770, 1630]); GH = G1 - G0
-    C = sp.get("cam", [0, 560, 0, 1080])
+    NOCAM = "cam" in sp and sp["cam"] is None      # kaynakta oyuncu kamerası yok
+    C = sp.get("cam") or [0, 560, 0, 1080]
     BAND = sp.get("band", 280)
     # "game_top": oyun en üstten başlar (kullanıcı: "üstteki bant oyunu bölüyor, yarım
     # ekran"), game_scale ile büyür (yanlardan kırpılır), yazı bandı oyunun altına iner.
@@ -111,6 +113,7 @@ def main():
     HB = (GY + GHO + 4, GY + GHO + 4 + sp.get("band", 200)) if TOP else (0, BAND)   # başlık bandı
     cx, cy, cw, ch = sp.get("card", [90, (HB[1] + 64) if TOP else BAND + GH + 96, 900, 467])
     STRIP = (HB[1] + 30) if TOP else BAND + GH + 46
+    STRIP = sp.get("strip_y", STRIP)
     bgt, bgb, ACC, ACC2, CARD = PAL[sp.get("palette", "red")]
     COL["accent"], COL["accent2"] = ACC, ACC2
     GRADE = sp.get("grade", "warm")
@@ -187,8 +190,8 @@ def main():
     def layout(f):
         out = BG.copy()
         g = f[G0:G1]
-        if GS != 1.0:
-            g = cv2.resize(g, (int(round(W * GS)), GHO), interpolation=cv2.INTER_CUBIC)
+        if GS != 1.0 or g.shape[1] != W:
+            g = cv2.resize(g, (int(round(g.shape[1] * GS)), GHO), interpolation=cv2.INTER_CUBIC)
             x0 = (g.shape[1] - W) // 2; g = g[:, x0:x0 + W]
         out[GY:GY + GHO] = grade_game(g, GRADE)
         if GY >= 5:
@@ -197,7 +200,7 @@ def main():
         return out
 
     need = {int(round(s * SFPS)) for s, *_ in seq}
-    camneed = set(cam_src)
+    camneed = set() if NOCAM else set(cam_src)
     store, cams, k, last = {}, {}, 0, 0
     SW, SH = map(int, subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
                                       "stream=width,height", "-of", "csv=p=0", SRC], capture_output=True,
@@ -217,6 +220,8 @@ def main():
     d.wait()
 
     def card(f, i):
+        if NOCAM:
+            return
         ki = cam_src[i]
         while ki not in cams:
             ki -= 1
@@ -290,8 +295,9 @@ def main():
                 f = cv2.warpAffine(f, np.float32([[1, 0, a], [0, 1, -a * 0.6]]), (W, H), borderMode=cv2.BORDER_REFLECT)
         img = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)).convert("RGBA")
         lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); dl = ImageDraw.Draw(lay)
-        dl.rounded_rectangle([cx - 3, cy - 3, cx + cw + 2, cy + ch + 2], radius=32, outline=CARD + (255,), width=5)
-        lab = sp.get("card_label", "")
+        if not NOCAM:
+            dl.rounded_rectangle([cx - 3, cy - 3, cx + cw + 2, cy + ch + 2], radius=32, outline=CARD + (255,), width=5)
+        lab = "" if NOCAM else sp.get("card_label", "")
         if lab:
             lw = dl.textlength(lab, font=font(30))
             dl.rounded_rectangle([cx + 18, cy + 18, cx + 46 + lw, cy + 60], radius=8, fill=(10, 8, 16, 220))
