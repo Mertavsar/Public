@@ -97,3 +97,18 @@ Kaynak olduğu gibi + sabit yazı + renk ayarı yetmedi. Eksikler ve çözüm:
 4. Kaynağın kendi yazısı: kutu tüm video boyunca → silinir (alttaki zemini
    kaydırarak kopyala; ProPainter kamerayla birlikte giden kutuda gri yama bıraktı),
    cümle yalnız ilgili 3–4 sn'de altyazı olarak geçer.
+
+## Başkasının dikey editini yeniden kurgulama (LoL, kamera üstte / oyun altta)
+
+Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şey yazma".
+
+- Ekran yazıları İngilizce (oyun/esports klipleri global kitleye). Oyunun kendi
+  arayüzü (kill feed vb.) kaynak dilinde kalır.
+- Panel sınırındaki başlık yazısı silinmez, yerleşim yeniden kurulur: kamera
+  paneli yazının üstüne kadar kırpılıp kendi alanını doldurur (≤ %3 ölçek),
+  araya kendi ayraç çizgimiz, oyun paneli ölçeksiz. Oyun paneli zoomlanmaz.
+- Zamanlar hızlı arama (`-ss` girişte) ile değil, kare kare ölçülür
+  (parlaklık/sarı alan eşikleri): hızlı aramada ~0.3 sn kayma oldu.
+- Kurgu: son vuruştan hemen önce donan soğuk açılış + soru hook → geri sarma →
+  ölü kısım 1.25x → olay (kalkan) anında soru + ok + clink → sahte son → kill
+  ağır çekim + boom + sarsıntı → kill feed görünürken donma + sonuç kelimesi.
