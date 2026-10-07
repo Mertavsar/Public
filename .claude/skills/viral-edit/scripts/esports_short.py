@@ -23,8 +23,10 @@ spec (json):
  "flash": [T...], "shake": [T...],
  "sfx": {"boom": [T], "clink": [T], "pop": [T], "rewind": [[T, D]]},
  "voice": [{"at": T, "text": "Number six.", "voice": "rms"}],
- "cam_still": [[33.1, 38.1, 32.5, "T1 KERIA"]],   // kaynakta kamera yoksa: aynı maçtan
-                                                  // önceki bir kare + etiket (canlı değil)
+ "cam_keep": [[0, 10.13], [17.63, 21.0]],  // kamerada ana oyuncunun göründüğü aralıklar
+ "cam_fill": [[0.5, 9.9]],                 // dışında karta bu aralıklardan oyuncu görüntüsü
+ "tts": {"engine": "kokoro", "dir": "/yol/tts", "python": "/yol/tts/venv/bin/python",
+         "voice": "am_michael", "speed": 1.05},   // yoksa flite (robotik)
  "duck_db": -9
 }
 T: çıktı saniyesi (sayı) ya da "S:i:t" = plan[i] içindeki kaynak saniyesi t, ya da
@@ -150,34 +152,39 @@ def main():
     a_ = np.linspace(0, 1, W)[None, :, None]
     LINE = (np.array(ACC[::-1]) * (1 - a_) + np.array(ACC2[::-1]) * a_).repeat(5, 0).astype(np.uint8)
 
-    STILLS = sp.get("cam_still", [])
-    still_cam = {}
+    # Kamera kartı: yalnız ana oyuncu. cam_keep: kaynakta kameranın o oyuncu olduğu
+    # aralıklar (canlı). Dışındaki anlarda cam_fill aralıklarından görüntü döngüyle
+    # akar (aynı oyuncu, zamanı kaymış; etiket canlı demez).
+    KEEP = sp.get("cam_keep")
+    FILL = sp.get("cam_fill", KEEP or [])
+    fill_idx = [k_ for a0_, a1_ in FILL for k_ in range(int(a0_ * SFPS), int(a1_ * SFPS), max(1, int(round(SFPS / FPS))))]
 
-    def still_for(s):
-        for a0, a1, st, lab in STILLS:
-            if a0 <= s < a1:
-                return st, lab
-        return None, None
+    def live(s):
+        return KEEP is None or any(a0_ <= s < a1_ for a0_, a1_ in KEEP)
 
-    def layout(f, s):
+    cam_src, fp = [], 0
+    for s, *_ in seq:
+        if live(s):
+            cam_src.append(int(round(s * SFPS)))
+        else:
+            cam_src.append(fill_idx[fp % len(fill_idx)]); fp += 1
+
+    def prep_cam(f):
+        cam = f[C[0]:C[1], C[2]:C[3]]
+        sc = max(cw / cam.shape[1], ch / cam.shape[0])
+        cam = cv2.resize(cam, (int(round(cam.shape[1] * sc)), int(round(cam.shape[0] * sc))), interpolation=cv2.INTER_AREA)
+        ox, oy = (cam.shape[1] - cw) // 2, (cam.shape[0] - ch) // 2
+        return grade_cam(cam[oy:oy + ch, ox:ox + cw], GRADE)
+
+    def layout(f):
         out = BG.copy()
         out[BAND:BAND + GH] = grade_game(f[G0:G1], GRADE)
         out[BAND - 5:BAND] = LINE; out[BAND + GH:BAND + GH + 4] = LINE[:4]
-        st, _ = still_for(s)
-        cam = still_cam[st] if st is not None else f[C[0]:C[1], C[2]:C[3]]
-        sc = min(cw / cam.shape[1], ch / cam.shape[0])
-        cam = cv2.resize(cam, (int(round(cam.shape[1] * sc)), int(round(cam.shape[0] * sc))), interpolation=cv2.INTER_AREA)
-        ox, oy = (cam.shape[1] - cw) // 2, (cam.shape[0] - ch) // 2
-        cam = grade_cam(cam[max(0, oy):max(0, oy) + ch, max(0, ox):max(0, ox) + cw], GRADE)
-        if cam.shape[:2] != (ch, cw):
-            cam = cv2.resize(cam, (cw, ch), interpolation=cv2.INTER_AREA)
-        reg = out[cy:cy + ch, cx:cx + cw].astype(np.float32)
-        out[cy:cy + ch, cx:cx + cw] = (cam * MASK + reg * (1 - MASK)).astype(np.uint8)
         return out
 
     need = {int(round(s * SFPS)) for s, *_ in seq}
-    still_k = {int(round(st * SFPS)): st for _, _, st, _ in STILLS}
-    store, k, last = {}, 0, 0
+    camneed = set(cam_src)
+    store, cams, k, last = {}, {}, 0, 0
     SW, SH = map(int, subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
                                       "stream=width,height", "-of", "csv=p=0", SRC], capture_output=True,
                                      text=True).stdout.strip().split(","))
@@ -186,14 +193,22 @@ def main():
         b = d.stdout.read(SW * SH * 3)
         if len(b) < SW * SH * 3:
             break
-        if k in still_k:
-            still_cam[still_k[k]] = np.frombuffer(b, np.uint8).reshape(SH, SW, 3)[C[0]:C[1], C[2]:C[3]].copy()
-        if k in need:
-            store[k] = cv2.imencode(".jpg", layout(np.frombuffer(b, np.uint8).reshape(SH, SW, 3), k / SFPS),
-                                    [cv2.IMWRITE_JPEG_QUALITY, 96])[1]
-            last = k
+        if k in need or k in camneed:
+            f = np.frombuffer(b, np.uint8).reshape(SH, SW, 3)
+            if k in need:
+                store[k] = cv2.imencode(".jpg", layout(f), [cv2.IMWRITE_JPEG_QUALITY, 96])[1]; last = k
+            if k in camneed:
+                cams[k] = cv2.imencode(".jpg", prep_cam(f), [cv2.IMWRITE_JPEG_QUALITY, 95])[1]
         k += 1
     d.wait()
+
+    def card(f, i):
+        ki = cam_src[i]
+        while ki not in cams:
+            ki -= 1
+        cam = cv2.imdecode(cams[ki], cv2.IMREAD_COLOR).astype(np.float32)
+        reg = f[cy:cy + ch, cx:cx + cw].astype(np.float32)
+        f[cy:cy + ch, cx:cx + cw] = (cam * MASK + reg * (1 - MASK)).astype(np.uint8)
 
     def get(s):
         i = min(int(round(s * SFPS)), last)
@@ -247,6 +262,7 @@ def main():
     for i, (s, kind, u, si) in enumerate(seq):
         tt = i / FPS
         f = get(s).copy()
+        card(f, i)
         if kind == "rewind":
             sh_ = int(10 + 14 * np.sin(np.pi * u))
             g_ = f.copy(); g_[..., 2] = np.roll(f[..., 2], sh_, 1); g_[..., 0] = np.roll(f[..., 0], -sh_, 1)
@@ -260,7 +276,7 @@ def main():
         img = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB)).convert("RGBA")
         lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); dl = ImageDraw.Draw(lay)
         dl.rounded_rectangle([cx - 3, cy - 3, cx + cw + 2, cy + ch + 2], radius=32, outline=CARD + (255,), width=5)
-        lab = still_for(s)[1] or sp.get("card_label", "")
+        lab = sp.get("card_label", "")
         if lab:
             lw = dl.textlength(lab, font=font(30))
             dl.rounded_rectangle([cx + 18, cy + 18, cx + 46 + lw, cy + 60], radius=8, fill=(10, 8, 16, 220))
@@ -315,11 +331,23 @@ def main():
     for v, dd in fx.get("rewind", []): place(bus, sd.rewind(dd), T(v), 0.5)
     for j, vo in enumerate(sp.get("voice", [])):
         wv = f"{work}/vo{j}.wav"
-        txt = vo["text"].replace("'", "")
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", f"flite=text='{txt}':voice={vo.get('voice', 'rms')}",
-                        "-af", "asetrate=16000*0.92,aresample=44100,atempo=1.0869,highpass=f=120,"
-                               "acompressor=threshold=-20dB:ratio=4:attack=5:release=60,aecho=0.8:0.5:40|75:0.25|0.15,"
-                               "volume=2.0", "-ar", str(SR), "-ac", "1", wv], check=True)
+        tts = sp.get("tts", {})
+        if tts.get("engine") == "kokoro":
+            raw_v = f"{work}/vo{j}_raw.wav"
+            subprocess.run([tts["python"], "-I", os.path.join(os.path.dirname(os.path.abspath(__file__)), "tts_kokoro.py"),
+                            tts["dir"], vo.get("voice", tts.get("voice", "am_michael")),
+                            str(vo.get("speed", tts.get("speed", 1.05))), raw_v, vo["text"]],
+                           check=True, capture_output=True)
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", raw_v, "-af",
+                            "highpass=f=70,equalizer=f=3500:t=q:w=1:g=3,"
+                            "acompressor=threshold=-18dB:ratio=3:attack=5:release=80,volume=1.6",
+                            "-ar", str(SR), "-ac", "1", wv], check=True)
+        else:
+            txt = vo["text"].replace("'", "")
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", f"flite=text='{txt}':voice={vo.get('voice', 'rms')}",
+                            "-af", "asetrate=16000*0.92,aresample=44100,atempo=1.0869,highpass=f=120,"
+                                   "acompressor=threshold=-20dB:ratio=4:attack=5:release=60,aecho=0.8:0.5:40|75:0.25|0.15,"
+                                   "volume=2.0", "-ar", str(SR), "-ac", "1", wv], check=True)
         x = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", wv, "-f", "f32le", "-"],
                                          capture_output=True).stdout, np.float32)
         a = int(T(vo["at"]) * SR); place(vox, x, T(vo["at"]), 0.95)

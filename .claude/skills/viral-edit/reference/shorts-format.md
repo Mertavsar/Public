@@ -126,3 +126,10 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   kartı. Video başına en çok 3 başlık (hook + 1 espri + kapanış) ve 2 çeviri
   etiketi (yalnız ana oyuncunun duyuruları). Ok/nişangah/REPLAY etiketi de oyun
   paneline konmaz.
+- Derleme kaynağında (Keria Lux) kullanıcı: "esas sahneler yok, sadece kill anını
+  koymuşsun, berbat" → oyunları **baştan sona** koy (yalnız ölü kısım 1.3x),
+  sıralama (#4→#1) + anons sesi. "Alt kamerada sadece Keria olsun": kaynağın kamerası
+  sahneden sahneye başka oyuncuya geçer — kare kare kimlik sınıflandır (referans
+  karelere korelasyon), kullanıcıya yüz tablosuyla teyit ettir, yalnız o aralıklar
+  canlı (`cam_keep`), kalanında aynı oyuncunun görüntüsü (`cam_fill`).
+- Anons sesi: flite "robotik" bulundu ("daha insansı") → Kokoro `am_michael`.

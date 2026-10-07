@@ -35,7 +35,7 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/variants.py` | Aynı kurgunun farklı açılış yazısıyla sürümleri — hook A/B testi |
 | `scripts/test_align.py` | Hizalama regresyon testi — koda dokunduysan çalıştır |
 | `reference/shorts-format.md` | **Kanal formatı:** hook → vaat/sayaç → yeniden kancalar → bilgi → gecikmeli doruk → soru/döngü; ekran yazısı katmanları |
-| `scripts/esports_short.py` + `reference/esports_top6.example.json` | **Esports (LoL) Shorts, tek spec:** yorum bandı / ölçeksiz oyun / çeviri şeridi / kamera kartı; plan (hız, donma, geri sarma), başlık + çeviri etiketi (oyunu kapatmaz), flaş/sarsıntı, boom/clink, flite yapay zeka anonsu ("Number six…") + ducking, kamerasız aralıkta `cam_still`, hedef MB 2 geçiş |
+| `scripts/esports_short.py` + `reference/esports_topN.example.json` | **Esports (LoL) Shorts, tek spec:** yorum bandı / ölçeksiz oyun / çeviri şeridi / kamera kartı; plan (hız, donma, geri sarma), başlık + çeviri etiketi (oyunu kapatmaz), flaş/sarsıntı, boom/clink, flite yapay zeka anonsu ("Number six…") + ducking, kartta yalnız ana oyuncu (`cam_keep` canlı, dışında `cam_fill`), Kokoro insansı ses (`tts_kokoro.py`, flite yedek), hedef MB 2 geçiş |
 | `reference/example-gergedan.md` | **Eksiksiz örnek.** Yeni videoda buradan kopyala |
 | `reference/script-writing.md` | Metin yapısı, hook kalıpları, döngü kurgusu |
 | `reference/voice-settings.md` | Ses seçimi ve ElevenLabs ayar standardı |
