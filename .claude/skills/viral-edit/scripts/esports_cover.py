@@ -14,6 +14,7 @@ ap.add_argument("--game", required=True, help="oyun karesi (kaynaktan kırpılm�
 ap.add_argument("--face", help="oyuncu kamerası karesi (yoksa oyun tüm kapağı doldurur)")
 ap.add_argument("--l1", required=True); ap.add_argument("--l2", required=True)
 ap.add_argument("--badge", default=""); ap.add_argument("--gx", type=int, default=60)
+ap.add_argument("--ty", type=int, default=935, help="1. satırın y merkezi (2. satır +155)")
 ap.add_argument("--cy", type=float, default=0.5, help="yüz yoksa: odak noktasının y oranı (0-1)")
 ap.add_argument("--out", required=True)
 A = ap.parse_args(); W, H = 1080, 1920
@@ -46,7 +47,7 @@ sh = np.ones((H, 1, 1), np.float32)
 if A.face:
     for y in range(820, 1146): sh[y] = 1 - 0.55 * (y - 820) / 326
 else:                                           # yazı çevresi yumuşak koyulaşır, kenar çizgisi yok
-    yy_ = np.arange(H); sh[:, 0, 0] = 1 - 0.5 * np.exp(-((yy_ - 1010) / 190.0) ** 2)
+    yy_ = np.arange(H); sh[:, 0, 0] = 1 - 0.5 * np.exp(-((yy_ - (A.ty + 75)) / 190.0) ** 2)
 for y in range(0, 330): sh[y] = 0.45 + 0.55 * (y / 330) ** 1.5
 can = (can * sh).astype(np.uint8)
 img = Image.fromarray(cv2.cvtColor(can, cv2.COLOR_BGR2RGB)).convert("RGBA")
@@ -58,8 +59,8 @@ def txt(cx, cy, s, size, col, st=12):
     tw = d.textlength(s, font=f); x, y = cx - tw / 2, cy - size * 0.62
     d.text((x + 8, y + 10), s, font=f, fill=(0, 0, 0, 170), stroke_width=st, stroke_fill=(0, 0, 0, 170))
     d.text((x, y), s, font=f, fill=col, stroke_width=st, stroke_fill=(0, 0, 0))
-txt(W / 2, 935, A.l1, 150, (255, 255, 255))
-txt(W / 2, 1090, A.l2, 190, (255, 214, 0), 14)
+txt(W / 2, A.ty, A.l1, 150, (255, 255, 255))
+txt(W / 2, A.ty + 155, A.l2, 190, (255, 214, 0), 14)
 # TOP 4 rozeti
 f = ImageFont.truetype(FONT, 78); s = A.badge; tw = d.textlength(s, font=f)
 if s:

@@ -140,3 +140,9 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
 - LoL formatı sürecek: bazen tek sahne, bazen "en iyi N" geri sayım (kullanıcı).
   Her videoya kapak `esports_cover.py` ile: en parlak an (lazer/patlama) + oyuncu
   yüzü + 2-3 kelimelik provokatif satır ("KERIA'S LUX / IS ILLEGAL") + rozet.
+- Pulse Tales, seslendirme gelmediyse (örümcek klibi): İngilizce metni ben yazdım,
+  Kokoro `bm_george` (İngiliz belgesel sesi) ile cümle cümle üretip her cümleyi
+  olay anına yerleştirdim (`reference/pulse_spider.example.py`). Kaynağın kendi
+  müziği/sesi kullanılmadı. İç panel tam 9:16 ise (siyah kenar + üst yazı ekli
+  repost) paneli tam ekrana ölçeklemek kırpma DEĞİL: içerik kaybı yok, kaynak
+  yazısı da kendiliğinden gider. 4:5 panelde bu yapılmaz (kullanıcı reddetti).
