@@ -1,0 +1,605 @@
+{
+  "baslik": "Kira zammı neden %31,49? Tavan nasıl hesaplanıyor?",
+  "tarih": "2026-10-08",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "kira",
+    "tavan",
+    "ortalama",
+    "üst sınır"
+  ],
+  "altyazi": {
+    "yüzde otuz bir virgül kırk dokuz": "%31,49",
+    "yüzde otuz bir virgül kırk dokuzla": "%31,49 ile",
+    "Üç soruda": "3 soruda",
+    "yüzde bir virgül seksen dört": "%1,84",
+    "yüzde yirmi dokuz virgül yetmiş üç": "%29,73",
+    "yüzde otuz bir virgül yetmiş dokuzdu": "%31,79 idi",
+    "otuz bir virgül yetmiş dokuz": "31,79",
+    "on iki": "12",
+    "yüzde yirmi beş": "%25",
+    "iki bin yirmi dört": "2024",
+    "Yirmi bin lira": "20.000 lira",
+    "altı bin iki yüz doksan sekiz": "6.298",
+    "yirmi altı bin iki yüz doksan sekiz": "26.298",
+    "on beş bin": "15.000",
+    "on dokuz bin yedi yüz": "19.700",
+    "otuz bin": "30.000",
+    "otuz dokuz bin dört yüz": "39.400"
+  },
+  "kapak": {
+    "ikon": "🏠",
+    "ust": "KİRA TAVANI",
+    "buyuk": "%31,49",
+    "alt": "NASIL ÇIKIYOR?"
+  },
+  "kaynaklar": {
+    "K1": "Ekim 2026 kira artış oranı %31,49 (12 aylık TÜFE ortalaması); geçen ay %31,79 — https://www.fotomac.com.tr/haberler/2026/10/05/ekim-kira-artis-orani-2026-belli-oldu-ekim-ayi-kira-zammi-yuzde-kac ; https://www.cnnturk.com/ekonomi/ekim-ayi-kira-artis-orani-2026-kira-zammi-ne-kadar-yuzde-kac-oldu-tufe-kira-artisi-hesaplama-tablosu-3474937 ; https://www.emlakjet.com/blog/ekim-2026-kira-artis-orani-belli-oldu",
+    "K2": "TÜİK Eylül 2026 TÜFE: aylık %1,84, yıllık %29,73 — https://www.bloomberght.com/eylul-enflasyonu-belli-oldu-3790306 ; https://www.forbes.com.tr/ekonomi/tuik-eylul-enflasyonunu-acikladi-eylul-2026-tuketici-fiyat-endeksi-tuik",
+    "K3": "Kira artışı yıllık enflasyona değil 12 aylık TÜFE ortalamasına bağlı; konut ve işyeri; yılda bir — https://www.bigpara.hurriyet.com.tr/ekonomi-haberleri/galeri-kira-artis-orani-ekim-ayi-hesaplama-2026-ekim-ayi-kira-zammi-ne-zaman-aciklanacak-aciklandi-mi-tuik-kira-artis-zammi-ne_ID102255841/ ; https://www.birgun.net/haber/temmuz-2025-kira-artis-orani-ne-kadar-oldu-kiraya-en-fazla-ne-kadar-zam-yapilabilir-635543",
+    "K4": "%25 konut kirası sınırı 1 Temmuz 2024'te sona erdi — https://medyascope.tv/2024/07/01/yuzde-25-siniri-sona-erdi-kira-artislari-tufeye-gore-belirlenecek/ ; https://www.tgrthaber.com/ekonomi/kiralarda-yuzde-25-siniri-sona-erdi-uzman-isim-kanunlara-isaret-ederek-fahis-kira-artislarini-anlatti-2959246"
+  },
+  "cta": [
+    {
+      "sahne": 17,
+      "gecikme": 1.8,
+      "sure": 5.0
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Ekim ayında kira zammının üst sınırı, yüzde otuz bir virgül kırk dokuz.",
+      "p": {
+        "ikon": "🏠",
+        "etiket": "Ekim · kira artış tavanı",
+        "deger": 31.49,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "renk": "kirmizi",
+        "not": "TÜİK, eylül 2026 verisi",
+        "sayma": false
+      },
+      "kaynak": "TÜİK eylül 2026 TÜFE (K1)",
+      "etiket": "KİRA TAVANI"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu oran nasıl çıkıyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "KİRA ORANI\n*NASIL ÇIKIYOR?*",
+        "boy": 104
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları basitçe anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "BU TÜR KONULARI",
+          "*BASİTÇE* ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Ekim ayında kira sözleşmesi yenilenenler için yeni oran belli oldu.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "EKİM'DE KİRASI",
+          "YENİLENENLER İÇİN",
+          "*YENİ ORAN* BELLİ"
+        ],
+        "boy": 92
+      },
+      "etiket": "NE OLDU?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Oranı, TÜİK'in eylül ayı enflasyon verisi belirledi.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "*TÜİK*",
+          "EYLÜL ENFLASYONU",
+          "ORANI BELİRLEDİ"
+        ],
+        "boy": 96
+      },
+      "etiket": "VERİ KAYNAĞI",
+      "kaynak": "TÜİK (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu oran hem konut hem işyeri kiraları için geçerli.",
+      "p": {
+        "ikon": "🏢",
+        "satirlar": [
+          "*KONUT* VE",
+          "*İŞYERİ* KİRALARI",
+          "İÇİN GEÇERLİ"
+        ],
+        "boy": 92
+      },
+      "etiket": "KİMİ KAPSAR",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Kira artışı yılda yalnızca bir kez, sözleşme yenilenirken yapılabiliyor.",
+      "p": {
+        "ikon": "🗓️",
+        "satirlar": [
+          "YILDA *BİR KEZ*",
+          "SÖZLEŞME",
+          "YENİLENİRKEN"
+        ],
+        "boy": 96
+      },
+      "etiket": "NE ZAMAN",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Eylülde fiyatlar bir önceki aya göre yüzde bir virgül seksen dört arttı.",
+      "p": {
+        "ikon": "🏷️",
+        "etiket": "Eylülde aylık artış",
+        "deger": 1.84,
+        "onek": "+%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "turuncu",
+        "not": "bir önceki aya göre"
+      },
+      "kaynak": "TÜİK (K2)",
+      "etiket": "AYLIK ARTIŞ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Bir yıl öncesine göre artış ise yüzde yirmi dokuz virgül yetmiş üç.",
+      "p": {
+        "ikon": "📈",
+        "etiket": "Yıllık enflasyon",
+        "deger": 29.73,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "geçen yılın eylülüne göre"
+      },
+      "kaynak": "TÜİK (K2)",
+      "etiket": "YILLIK ARTIŞ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Ama kira için bu rakam kullanılmıyor. Kullanılan oran, yüzde otuz bir virgül kırk dokuz.",
+      "p": {
+        "baslik": "🏠 Kira zammında hangi oran?",
+        "sol": {
+          "etiket": "YILLIK\nENFLASYON",
+          "deger": 29.73,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "KİRA\nTAVANI",
+          "deger": 31.49,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "+1,76 puan",
+        "not": ""
+      },
+      "kaynak": "K1, K2",
+      "etiket": "İKİ FARKLI ORAN"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Geçen ay bu oran yüzde otuz bir virgül yetmiş dokuzdu. Yani biraz düştü.",
+      "p": {
+        "baslik": "🏠 Kira artış tavanı",
+        "sol": {
+          "etiket": "GEÇEN AY",
+          "deger": 31.79,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "BU AY",
+          "deger": 31.49,
+          "renk": "sari"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "-0,30 puan",
+        "not": ""
+      },
+      "kaynak": "K1",
+      "etiket": "GEÇEN AYA GÖRE"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki kira zammı neden yıllık enflasyonla hesaplanmıyor?",
+      "p": {
+        "ikon": "🤨",
+        "metin": "YILLIK\nENFLASYON\n*NEDEN YOK?*",
+        "boy": 100
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Çünkü kanun, son on iki ayın ortalamasına bakmayı söylüyor.",
+      "p": {
+        "ikon": "📖",
+        "satirlar": [
+          "KANUN: SON",
+          "*12 AYIN*",
+          "ORTALAMASI"
+        ],
+        "boy": 104
+      },
+      "etiket": "ASIL KURAL",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Son on iki ayın fiyat ortalaması, önceki on iki ayın ortalamasıyla karşılaştırılıyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🗓️",
+            "metin": "Son *12 ayın* ortalaması"
+          },
+          {
+            "ikon": "⚖️",
+            "metin": "Önceki 12 ayla kıyas"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "Fark = *kira tavanı*"
+          }
+        ]
+      },
+      "etiket": "NASIL HESAPLANIR",
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Karne gibi düşün: tek sınav değil, bütün yılın ortalaması sayılıyor.",
+      "p": {
+        "ikon": "🎓",
+        "satirlar": [
+          "TEK SINAV DEĞİL",
+          "*YIL ORTALAMASI*"
+        ],
+        "boy": 100
+      },
+      "etiket": "KARNE BENZETMESİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Enflasyon yavaşlayınca ortalama bunu geç yakalar; içinde yüksek geçen aylar da var.",
+      "p": {
+        "ikon": "🐢",
+        "satirlar": [
+          "ENFLASYON *YAVAŞLAR*",
+          "ORTALAMA *GEÇ* YAKALAR"
+        ],
+        "boy": 92
+      },
+      "etiket": "NEDEN GEÇ?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "KISIM *ŞİMDİ*",
+          "BİR *BEĞEN* BIRAK"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bu kural hep böyle miydi?",
+      "p": {
+        "ikon": "🕰️",
+        "metin": "BU KURAL\n*HEP BÖYLE*\nMİYDİ?",
+        "boy": 104
+      },
+      "etiket": "GEÇMİŞ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bir dönem konut kiralarında yüzde yirmi beş sınırı vardı.",
+      "p": {
+        "ikon": "🔒",
+        "satirlar": [
+          "KONUT KİRASINDA",
+          "*%25* SINIRI",
+          "VARDI"
+        ],
+        "boy": 96
+      },
+      "etiket": "GEÇİCİ SINIR",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu geçici sınır, iki bin yirmi dört temmuzunda sona erdi.",
+      "p": {
+        "ikon": "🔓",
+        "satirlar": [
+          "*1 TEMMUZ 2024*",
+          "%25 SINIRI",
+          "*SONA ERDİ*"
+        ],
+        "boy": 92
+      },
+      "etiket": "SINIR BİTTİ",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "O günden beri artış, on iki aylık ortalamayı geçemiyor.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "O GÜNDEN BERİ",
+          "*12 AYLIK ORTALAMA*",
+          "TAVAN"
+        ],
+        "boy": 92
+      },
+      "etiket": "BUGÜN",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu bir üst sınır. İki taraf daha düşük bir oranda da anlaşabilir.",
+      "p": {
+        "ikon": "🤝",
+        "satirlar": [
+          "BU BİR *ÜST SINIR*",
+          "DAHA DÜŞÜK",
+          "ANLAŞILABİLİR"
+        ],
+        "boy": 92
+      },
+      "etiket": "ZORUNLU DEĞİL",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunuyor?",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİNE\n*NASIL?*",
+        "boy": 124
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Yirmi bin lira kira ödüyorsan, en fazla altı bin iki yüz doksan sekiz lira artış istenebilir.",
+      "p": {
+        "baslik": "20.000 liralık kira",
+        "ikon": "🏠",
+        "ogeler": [
+          "20.000 ₺",
+          "×",
+          "%31,49",
+          "=",
+          "+6.298 ₺"
+        ]
+      },
+      "etiket": "ARTIŞ HESABI",
+      "kaynak": "hesap: 20.000 × 0,3149 = 6.298 (K1)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Yeni kira en fazla yirmi altı bin iki yüz doksan sekiz lira olur.",
+      "p": {
+        "baslik": "Yeni kira (en fazla)",
+        "ikon": "🔑",
+        "ogeler": [
+          "20.000 ₺",
+          "+",
+          "6.298 ₺",
+          "=",
+          "26.298 ₺"
+        ]
+      },
+      "etiket": "YENİ KİRA",
+      "kaynak": "hesap: 20.000 + 6.298 (K1)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Kirası on beş bin olanın tavanı on dokuz bin yedi yüz, otuz bin olanın otuz dokuz bin dört yüz lira.",
+      "p": {
+        "baslik": "Yeni kira · en fazla",
+        "satirlar": [
+          {
+            "ikon": "🏠",
+            "metin": "15.000 ₺ kira",
+            "deger": "19.723 ₺",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "20.000 ₺ kira",
+            "deger": "26.298 ₺",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🏠",
+            "metin": "30.000 ₺ kira",
+            "deger": "39.447 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "%31,49 üst sınırıyla, yuvarlak"
+      },
+      "kaynak": "hesap: kira × 1,3149 (K1)",
+      "etiket": "ÜÇ ÖRNEK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kendi kiranı hesaplamak kolay: eski kirayı yüzde otuz bir virgül kırk dokuzla çarp, kirana ekle.",
+      "p": {
+        "ikon": "🧮",
+        "satirlar": [
+          "ESKİ KİRA *×* %31,49",
+          "= *ARTIŞ*",
+          "KİRANA EKLE"
+        ],
+        "boy": 88
+      },
+      "etiket": "KENDİN HESAPLA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Hangi oran geçerli? Sözleşmenin yenilendiği ayın oranı.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "*YENİLENDİĞİ AYIN*",
+          "ORANI GEÇERLİ"
+        ],
+        "boy": 100
+      },
+      "etiket": "HANGİ ORAN?",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kasımda yenilenenler için oran, kasım başında açıklanacak enflasyonla belli olacak.",
+      "p": {
+        "ikon": "🗓️",
+        "satirlar": [
+          "KASIM ORANI",
+          "*KASIM BAŞINDA*",
+          "(bekleniyor)"
+        ],
+        "boy": 96
+      },
+      "etiket": "SIRADAKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Gelirin kiradan az arttıysa, kira bütçende daha büyük yer tutar.",
+      "p": {
+        "ikon": "👛",
+        "satirlar": [
+          "GELİR *AZ* ARTTIYSA",
+          "KİRA BÜTÇEDE",
+          "*DAHA BÜYÜK* YER TUTAR"
+        ],
+        "boy": 88
+      },
+      "etiket": "BÜTÇE"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası, kira tavanı yıllık enflasyona değil, on iki aylık ortalamaya bağlı.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "KİRA TAVANI =",
+          "*12 AYLIK*",
+          "ORTALAMA"
+        ],
+        "boy": 104
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bunlar genel bilgidir. Kendi sözleşmen için sözleşmene bak ya da uzmana danış.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "GENEL BİLGİDİR",
+          "SÖZLEŞMENE BAK",
+          "YA DA UZMANA DANIŞ"
+        ],
+        "boy": 88
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ]
+}
