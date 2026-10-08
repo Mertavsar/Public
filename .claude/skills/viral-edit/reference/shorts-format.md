@@ -210,3 +210,14 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
 - Kanıt: görüntü metinle çelişiyorsa (yay makinesi videosunda metin "vida" diyordu,
   görüntü çekme yayı sarıyor) editi yine yap ama kullanıcıya açıkça söyle +
   düzeltilmiş metin öner; yorumlarda yakalanır.
+- **Dizi edit'i (Son Yaz – Canan)** `reference/dizi/`: yatay (3:2) kaynaktan çekim
+  başına elle seçilmiş 9:16 kesit, yalnız en vurucu çekimler (~22 sn), yeni hikâye
+  sırası (mezar taşı hook → mutlu an → araba → kayıp → gülümseyen anı). Eski
+  editörün gömülü altyazıları `vinpaint --rect` ile silinir; replikler kendi serif
+  altyazımızla, kelime kelime. Hüzün rengi (soluk, teal gölge, gren, vinyet).
+- **Arkadaki şarkıyı kaldır, dizi sesi kalsın:** `scripts/mdx_separate.py`
+  (UVR Kim_Vocal_2.onnx, GitHub release'ten; onnxruntime venv) vokal/enstrüman
+  ayırır. Şarkının sözleri de vokale düşer → yalnız replik pencereleri (gömülü
+  altyazı zamanlarından) açık, gerisi sessiz. Müziği kullanıcı kendisi ekler.
+- ⛔ `pgrep -f "<desen>"` ile bekleme döngüsü kurma: desen döngünün kendi komut
+  satırında da geçer, sonsuza kadar bekler (iki kez oldu). PID ile bekle.
