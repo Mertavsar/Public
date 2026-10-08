@@ -199,3 +199,7 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   sarı). Yanlış duyulan oyuncu adları (ör. "Chillin") gösterilmez ama zamanı korunur.
   Hook spikerin gerçek, yarım kalan cümlesi olabilir ("FAKER IS NOT—"): donmada
   o cümlenin sesi gerçek hızında çalar. Örnek: `reference/esports_captions.example.py`.
+- ⛔ (LoL, kullanıcı: "berbat, ilk saniyeler donup kalıyor, geri sarmadan önce
+  takılıyor") Soğuk açılış donması + geri sarma + kapanış donması + döngü YOK.
+  Üst bantta yalnız iki takımın adı ("T1 vs BLG"), başka yazı/etiket yok. Video
+  doğrudan oyunla başlar; yalnız kill anlarında kısa ağır çekim + boom kalır.
