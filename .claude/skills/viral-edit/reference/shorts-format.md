@@ -203,3 +203,10 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   takılıyor") Soğuk açılış donması + geri sarma + kapanış donması + döngü YOK.
   Üst bantta yalnız iki takımın adı ("T1 vs BLG"), başka yazı/etiket yok. Video
   doğrudan oyunla başlar; yalnız kill anlarında kısa ağır çekim + boom kalır.
+- **Seslendirme metni Descript'ten**: kullanıcı ses attı ama metin vermediyse sesi
+  Descript'e yükle (`import_media` direct upload) → `export_transcript` srt →
+  kelime zamanları → `votight.py --cap` ile sıkılaştır. Cümle başları sahne
+  sınırıdır; her cümleye kaynağın ilgili bölümü, hız = kaynak süresi / cümle süresi.
+- Kanıt: görüntü metinle çelişiyorsa (yay makinesi videosunda metin "vida" diyordu,
+  görüntü çekme yayı sarıyor) editi yine yap ama kullanıcıya açıkça söyle +
+  düzeltilmiş metin öner; yorumlarda yakalanır.
