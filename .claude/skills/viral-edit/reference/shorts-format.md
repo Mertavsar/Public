@@ -193,3 +193,9 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   baştan sona tam seviyede; ritim onun ALTINDA, spiker konuştukça kendiliğinden
   çekilir (sidechain). 808 bas distorsiyonsuz ve kısa — kesik, dolu 808 vuruşu
   sahnede "garip bir ses" gibi duyuldu (kullanıcı: "24. saniyede bir ses var").
+- **Spiker altyazısı (Descript):** kaynak Descript'e `import_media` (direct upload,
+  language "en") → `export_transcript` srt → segment zamanları. Kelimeler segment
+  içinde harf sayısıyla dağıtılır, üst bantta kelime kelime belirir (aktif kelime
+  sarı). Yanlış duyulan oyuncu adları (ör. "Chillin") gösterilmez ama zamanı korunur.
+  Hook spikerin gerçek, yarım kalan cümlesi olabilir ("FAKER IS NOT—"): donmada
+  o cümlenin sesi gerçek hızında çalar. Örnek: `reference/esports_captions.example.py`.
