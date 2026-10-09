@@ -221,3 +221,9 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   altyazı zamanlarından) açık, gerisi sessiz. Müziği kullanıcı kendisi ekler.
 - ⛔ `pgrep -f "<desen>"` ile bekleme döngüsü kurma: desen döngünün kendi komut
   satırında da geçer, sonsuza kadar bekler (iki kez oldu). PID ile bekle.
+- **Makine + TR seslendirme (kalp kalıbı)** `reference/kalp_kalibi.example.py`:
+  metindeki "az önce dümdüz olan…" gibi bir geri dönüş cümlesinde görüntüyü
+  GERİ SAR (bitmiş üründen düz hale), sonra ileri oynat → sonuç tam "dönüşüyor"
+  kelimesinde biter. Clink'i `clink2()` (inharmonik kısmîli, uzun sönümlü metal
+  "ting"; sonuçta çift ting) — eski kısa clink "kalitesiz" bulunabilir. Ok her
+  cümlenin anlattığı yere (bükme ucu, kalp). "yüzlerce kez" -> "x100+" pop.
