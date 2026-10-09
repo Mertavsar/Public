@@ -232,3 +232,9 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   "again and again" anında geri sarma, görüntüsü olmayan cümleye ("teeth lock
   together… rotate as one") kendi çizdiğimiz kesit animasyonu (dişli mil + iç
   dişli göbek: kayar, kilitlenir, birlikte döner). Özgün katkıdır.
+
+### LoL geniş efektli kurgu (esports_wide_fx.example.py)
+- Soğuk açılış en parlak anda (≈0.45x) → 0.6 sn donma → geri sarma; her kill'de ağır çekim + flaş + sarsıntı + boom; sonda döngü geri sarması.
+- Flaş ve sarsıntı yalnız oyun panelinde; takım bandı sabit kalır.
+- Kadraj sınırları (keep-ranges) ölçülür: kill feed içeride, yayın kamerası / oyuncu isim bandı dışarıda. İkisi aynı anda sığmıyorsa o aralık kesilir.
+- Kapak hook'u doğrulanabilir sayı olsun (skor tablosundan: "8 KILLS IN 35 SECONDS").
