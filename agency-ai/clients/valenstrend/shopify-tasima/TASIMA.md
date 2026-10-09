@@ -32,7 +32,8 @@ TAMAM (kullanıcı yükledi, Claude doğruladı — 7 Ekim gece):
   kampanya 1035 vb.).
 
 BEKLİYOR (kullanıcı):
-- Mağaza adı ("Mağazam" → "Valenstrend - Sınırsız Renk ve Desenli Eşarp ve Şallar").
+- Mağaza adı: kullanıcı "Valenstrend " yaptı (9 Ekim; sonda boşluk var).
+- Kapıda ödeme 45 TL ücreti (1000 TL altı): kargo seçeneği + ödeme kuralı uygulaması önerildi, onay bekleniyor.
 - Mağaza ve konum adresi boş (hangi adres doğru, kullanıcıya soruldu).
 - Plan seçimi (deneme süresi bitiyor) ve şifre kaldırma.
 - Ödeme (iyzico uygulaması, kapıda ödeme, havale), vergi ayarı, uygulamalar, alan adı.
