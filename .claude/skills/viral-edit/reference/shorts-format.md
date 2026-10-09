@@ -227,3 +227,8 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
   kelimesinde biter. Clink'i `clink2()` (inharmonik kısmîli, uzun sönümlü metal
   "ting"; sonuçta çift ting) — eski kısa clink "kalitesiz" bulunabilir. Ok her
   cümlenin anlattığı yere (bükme ucu, kalp). "yüzlerce kez" -> "x100+" pop.
+- **Kısa kaynak + uzun VO (spline, EN)** `reference/spline_en.example.py`: 17 sn
+  görüntüye 34 sn ses -> her cümle ayrı push-in zoom (z0->z1, ease), ağır çekim,
+  "again and again" anında geri sarma, görüntüsü olmayan cümleye ("teeth lock
+  together… rotate as one") kendi çizdiğimiz kesit animasyonu (dişli mil + iç
+  dişli göbek: kayar, kilitlenir, birlikte döner). Özgün katkıdır.
