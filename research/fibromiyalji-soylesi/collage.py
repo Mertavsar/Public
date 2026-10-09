@@ -1,5 +1,5 @@
 """Fibromiyalji söyleşisi için kolaj ve hikâye tasarımları.
-Kullanım: python3 collage.py FONT_DIR OUT_DIR [foto1 foto2 foto3 ...]
+Kullanım: python3 collage.py FONT_DIR OUT_DIR [hande ferda plaket salon]
 Fotoğraf verilmezse yer tutucularla şablon üretir."""
 import sys, os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
@@ -69,32 +69,50 @@ def footer(c, y):
     d.text((W/2, y), "Konuğumuz: Uzm. Dr. Ferda Firdin · Fizik Tedavi ve Rehabilitasyon Uzmanı", font=F("Montserrat-500.ttf", 22), fill=(74, 62, 140), anchor="mt")
 
 def pick(i): return PH[i] if i < len(PH) else None
+HANDE, FERDA, PLAKET, SALON = pick(0), pick(1), pick(2), pick(3)
 
 os.makedirs(OUT, exist_ok=True)
-# 1) Instagram gönderisi 1080x1350: 1 büyük + 2 küçük
+# 1) Instagram gönderisi 1080x1350: büyük Hande + Ferda ve plaket
 c = Image.new("RGBA", (1080, 1350), BG + (255,)); blobs(c)
 y = header(c, 70)
-paste_round(c, cover(pick(0), 960, 560), (60, y))
+paste_round(c, cover(HANDE, 960, 560, 0.30), (60, y))
 y2 = y + 560 + 30
-paste_round(c, cover(pick(1), 465, 300), (60, y2))
-paste_round(c, cover(pick(2), 465, 300), (555, y2))
+paste_round(c, cover(FERDA, 465, 300, 0.30), (60, y2))
+paste_round(c, cover(PLAKET, 465, 300, 0.33), (555, y2))
 footer(c, y2 + 300 + 36)
 c.convert("RGB").save(os.path.join(OUT, "1-gonderi-kolaj-1080x1350.jpg"), quality=93)
 
-# 2) Hikâye 1080x1920: 3 fotoğraf dikey
+# 2) Hikâye 1080x1920: üstte plaket, altta iki konuşmacı
 c = Image.new("RGBA", (1080, 1920), BG + (255,)); blobs(c)
-y = header(c, 150, 1.0)
-paste_round(c, cover(pick(0), 900, 560), (90, y+10))
-paste_round(c, cover(pick(3) or pick(1), 435, 520), (90, y+10+560+34))
-paste_round(c, cover(pick(4) or pick(2), 435, 520), (555, y+10+560+34))
-footer(c, y+10+560+34+520+56)
+y = header(c, 150)
+paste_round(c, cover(PLAKET, 900, 690, 0.30), (90, y+10))
+y2 = y + 10 + 690 + 36
+paste_round(c, cover(HANDE, 435, 640, 0.25), (90, y2))
+paste_round(c, cover(FERDA, 435, 640, 0.25), (555, y2))
+footer(c, y2 + 640 + 46)
 c.convert("RGB").save(os.path.join(OUT, "2-hikaye-1080x1920.jpg"), quality=93)
 
-# 3) Kaydırmalı gönderi kapağı 1080x1350: tek büyük fotoğraf + başlık
+# 3) Kaydırmalı gönderi: kapak (salon) + tek tek kareler
 c = Image.new("RGBA", (1080, 1350), BG + (255,)); blobs(c)
 y = header(c, 70)
-paste_round(c, cover(pick(0), 960, 880), (60, y))
-d = ImageDraw.Draw(c)
-d.text((540, y+880+40), "Söyleşiden kareler  →", font=F("Montserrat-700.ttf", 30), fill=NAVY, anchor="mt")
-c.convert("RGB").save(os.path.join(OUT, "3-kaydirmali-kapak-1080x1350.jpg"), quality=93)
+paste_round(c, cover(SALON, 960, 880, 0.40), (60, y))
+d = ImageDraw.Draw(c); ty = y + 880 + 40
+d.text((520, ty), "Söyleşiden kareler", font=F("Montserrat-700.ttf", 30), fill=NAVY, anchor="rt")
+ax, ay = 545, ty + 18
+d.line((ax, ay, ax + 44, ay), fill=NAVY, width=4)
+d.polygon([(ax + 44, ay - 9), (ax + 58, ay), (ax + 44, ay + 9)], fill=NAVY)
+c.convert("RGB").save(os.path.join(OUT, "3-kaydirmali-1-kapak.jpg"), quality=93)
+
+def slide(path, line1, line2, name, ybias=0.35):
+    c = Image.new("RGBA", (1080, 1350), BG + (255,)); blobs(c)
+    paste_round(c, cover(path, 960, 1040, ybias), (60, 60))
+    d = ImageDraw.Draw(c)
+    d.text((540, 1150), line1, font=F("Montserrat-800.ttf", 36), fill=NAVY, anchor="mt")
+    d.text((540, 1204), line2, font=F("Montserrat-500.ttf", 25), fill=(74, 62, 140), anchor="mt")
+    d.rounded_rectangle((470, 1262, 610, 1267), 3, fill=GREEN)
+    c.convert("RGB").save(os.path.join(OUT, name), quality=93)
+
+slide(HANDE, "Uzm. Dr. Hande Çelik Mehmetoğlu", "Aile Hekimliği Uzmanı · Psikoterapist", "3-kaydirmali-2-hande.jpg")
+slide(FERDA, "Konuğumuz: Uzm. Dr. Ferda Firdin", "Fizik Tedavi ve Rehabilitasyon Uzmanı", "3-kaydirmali-3-ferda.jpg")
+slide(PLAKET, "Değerli konuğumuza teşekkür ederiz", "Birlikte İyileşelim · 9 Ekim 2026", "3-kaydirmali-4-tesekkur.jpg")
 print("ok", len(PH), "foto")
