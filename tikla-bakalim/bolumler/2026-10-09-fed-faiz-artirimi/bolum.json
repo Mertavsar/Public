@@ -1,0 +1,592 @@
+{
+  "baslik": "Fed faizi 3 yıl sonra neden artırdı? Türkiye'ye etkisi ne?",
+  "tarih": "2026-10-09",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "faiz",
+    "Fed",
+    "dolar",
+    "enflasyon"
+  ],
+  "altyazi": {
+    "yüzde dört": "%4",
+    "yüzde dörde": "%4’e",
+    "yüzde üç virgül yetmiş beşten": "%3,75’ten",
+    "yüzde ikilik": "%2’lik",
+    "iki bin yirmi üçten": "2023’ten",
+    "on altı eylül": "16 Eylül",
+    "yirmi sekiz ekimde": "28 Ekim’de",
+    "yirmi iki ekimde": "22 Ekim’de",
+    "yüzde otuz yedide": "%37’de",
+    "yüzde otuz yedi": "%37",
+    "yüz bin dolarlık": "100.000 dolarlık",
+    "iki yüz elli dolar": "250 dolar",
+    "Üç soruda": "3 soruda",
+    "çeyrek puan": "0,25 puan",
+    "yüzde dört civarı": "%4 civarı"
+  },
+  "kapak": {
+    "ikon": "🇺🇸",
+    "ust": "FED FAİZİ",
+    "buyuk": "+0,25",
+    "alt": "NEDEN ARTTI?"
+  },
+  "kaynaklar": {
+    "K1": "Fed 16 Eylül 2026: faiz 25 baz puan artışla %3,75–4,00 aralığına çıktı (önceki %3,50–3,75) — https://www.qnbinvest.com.tr/investodak/qnbarastirma/fed-faiz-artirdi-eylul-2026-karari-piyasalar-icin-ne-anlama-geliyor ; https://pulse2.com/federal-reserve-raises-federal-funds-rate-by-25-basis-points-to-3-75-4-range-as-warsh-says-inflation-remains-too-high/ ; https://uzmanpara.milliyet.com.tr/uzmanpara/son-dakika-fed-faiz-karari-belli-oldu-7607310",
+    "K2": "2023'ten beri ilk artış, oybirliği (12-0); piyasalar bekliyordu — https://www.euronews.com/2026/09/16/fed-raises-rates-for-the-first-time-since-2023-in-unanimous-vote-defying-trump ; https://istanbulticaretgazetesi.com/warsh-baskanligindaki-fed-ilk-faiz-kararini-acikladi-kuresel-piyasalar-bunu-bekliyordu",
+    "K3": "Warsh: enflasyon uzun süredir yüksek; artış 'sorumlu karar' — https://kmph.com/news/nation-world/fed-move-to-raise-rates-was-a-serious-and-responsible-decision-warsh-committee-members-economy-iran ; https://pulse2.com/federal-reserve-raises-federal-funds-rate-by-25-basis-points-to-3-75-4-range-as-warsh-says-inflation-remains-too-high/",
+    "K4": "Artış beklentisi CME FedWatch'ta %90 üstü; Fed'in hedefi %2 — https://www.euronews.com/2026/09/16/fed-raises-rates-for-the-first-time-since-2023-in-unanimous-vote-defying-trump ; https://istanbulticaretgazetesi.com/warsh-baskanligindaki-fed-ilk-faiz-kararini-acikladi-kuresel-piyasalar-bunu-bekliyordu",
+    "K5": "Sonraki FOMC 27–28 Ekim 2026; Fed projeksiyonu yıl sonuna dek bir artış daha (tahmin, kesin değil) — https://www.fotomac.com.tr/haberler/2026/10/01/fed-faiz-karari-ne-zaman-aciklanacak-ekim-2026-fed-faiz-karari-tarihi ; https://investinglive.com/central-banks/fed-dot-plot-backs-hawks-as-warsh-tone-rattles-markets-more-than-the-hike/ ; https://www.24saatgazetesi.com/fed-faiz-artiracak-mi-8-ekim-2026-faiz-beklentilerinde-son-durum-ne",
+    "K6": "TCMB 10 Eylül 2026: politika faizi %37 sabit; sıradaki PPK 22 Ekim 2026 saat 14.00 — https://www.capital.com.tr/haberler/tum-haberler/merkez-bankasinin-eylul-2026-faiz-karari-belli-oldu ; https://www.yenisafak.com/galeri/ozgun/merkez-bankasi-faiz-karari-ne-zaman-2026-ekim-ppk-toplanti-tarihi-4861474"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 1.8,
+      "sure": 5.0
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Amerika'da faizin üst sınırı yüzde dört oldu. Üç yıldan uzun süre sonra ilk artış.",
+      "p": {
+        "ikon": "🇺🇸",
+        "etiket": "Fed faizi · üst sınır",
+        "deger": 4.0,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "16 Eylül 2026 kararı",
+        "sayma": false
+      },
+      "kaynak": "Fed kararı (K1, K2)",
+      "etiket": "FED FAİZİ"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki Fed bunu neden yaptı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "FED FAİZİ\n*NEDEN ARTIRDI?*",
+        "boy": 100
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz; kaçırmamak için abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ *SADE*",
+          "DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Fed, Amerika'nın Merkez Bankası. Faiz de paranın fiyatı gibi düşünülebilir.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "*FED* = AMERİKA'NIN",
+          "MERKEZ BANKASI",
+          "FAİZ = *PARANIN FİYATI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "FED NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Fed, on altı eylül çarşamba günü faizi çeyrek puan yükseltti.",
+      "p": {
+        "gun": "16",
+        "ay": "EYLÜL",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "21:00 (TSİ)",
+        "not": "Fed *faizi artırdı*"
+      },
+      "kaynak": "Fed kararı (K1, K2)",
+      "etiket": "KARAR GÜNÜ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Faizin üst sınırı yüzde üç virgül yetmiş beşten yüzde dörde çıktı.",
+      "p": {
+        "baslik": "🇺🇸 Fed faizi · üst sınır",
+        "sol": {
+          "etiket": "ÖNCE",
+          "deger": 3.75,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "SONRA",
+          "deger": 4.0,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "+0,25 puan",
+        "not": "aralık: %3,50–3,75 → %3,75–4,00"
+      },
+      "kaynak": "Fed kararı (K1, K2)",
+      "etiket": "ÖNCE / SONRA"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Karar oybirliğiyle alındı. Yani komitede itiraz eden olmadı.",
+      "p": {
+        "ikon": "🗳️",
+        "satirlar": [
+          "*OYBİRLİĞİYLE*",
+          "ALINDI",
+          "İTİRAZ EDEN YOK"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Euronews (K2)",
+      "etiket": "OYLAMA"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu, iki bin yirmi üçten beri Fed'in yaptığı ilk faiz artışı.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "*2023'TEN* BERİ",
+          "İLK FAİZ",
+          "*ARTIŞI*"
+        ],
+        "boy": 100
+      },
+      "kaynak": "Euronews (K2)",
+      "etiket": "UZUN ARADAN SONRA"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Fed'in başkanı Kevin Warsh. Kararı sorumlu bir adım olarak tanımladı.",
+      "p": {
+        "ikon": "🎙️",
+        "satirlar": [
+          "FED BAŞKANI",
+          "*KEVIN WARSH*",
+          "\"SORUMLU BİR KARAR\""
+        ],
+        "boy": 88
+      },
+      "kaynak": "K3",
+      "etiket": "AÇIKLAMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki Fed faizi neden artırdı?",
+      "p": {
+        "ikon": "🧐",
+        "metin": "FED\n*NEDEN?*",
+        "boy": 130
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Sebep enflasyon. Fiyatlar, Fed'in yüzde ikilik hedefinin üzerinde seyrediyor.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "SEBEP: *ENFLASYON*",
+          "HEDEF: *%2*",
+          "ÜSTÜNDE SEYREDİYOR"
+        ],
+        "boy": 88
+      },
+      "kaynak": "K1, K3",
+      "etiket": "ASIL SEBEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Faiz, parayı kullanmanın kirası gibi. Kira artarsa, borç almak caydırıcı olur.",
+      "p": {
+        "ikon": "🔑",
+        "satirlar": [
+          "FAİZ = PARANIN *KİRASI*",
+          "KİRA ARTARSA",
+          "BORÇ ALMAK *ZORLAŞIR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "BENZETME"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Borç pahalanınca harcama azalır, fiyat artışı da yavaşlayabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Fed faizi *artırır*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Borç *pahalanır*"
+          },
+          {
+            "ikon": "🛍️",
+            "metin": "Harcama *azalır*"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Fiyat artışı *yavaşlar*"
+          }
+        ]
+      },
+      "etiket": "NASIL İŞLER"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "KISIM *ŞİMDİ*",
+          "BİR *BEĞEN* BIRAK"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki Amerika'nın faizi bizi neden ilgilendiriyor?",
+      "p": {
+        "ikon": "🌍",
+        "metin": "AMERİKA'NIN\nFAİZİ\n*BİZİ NEDEN?*",
+        "boy": 96
+      },
+      "etiket": "TÜRKİYE"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Çünkü dünyadaki para, daha fazla getiri sunan yere akmak ister.",
+      "p": {
+        "ikon": "💰",
+        "satirlar": [
+          "PARA, *GETİRİSİ*",
+          "YÜKSEK YERE",
+          "AKMAK İSTER"
+        ],
+        "boy": 96
+      },
+      "etiket": "PARANIN MANTIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Amerika'da faiz artınca dolar cazip olur; para oraya kayabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🇺🇸",
+            "metin": "ABD faizi *yükselir*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Dolar *cazip* olur"
+          },
+          {
+            "ikon": "🌍",
+            "metin": "Para ABD'ye *kayabilir*"
+          }
+        ]
+      },
+      "etiket": "ZİNCİR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Para çıkarsa, gelişmekte olan ülkelerin parası zayıflayabilir. Türkiye de bunlardan biri.",
+      "p": {
+        "ikon": "📉",
+        "satirlar": [
+          "PARA ÇIKARSA",
+          "ÜLKE PARASI",
+          "*ZAYIFLAYABİLİR*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "genel mekanizma",
+      "etiket": "RİSK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ama bu her zaman olmaz. Piyasalar artışı zaten bekliyordu.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "BU HER ZAMAN",
+          "OLMAZ: PİYASA",
+          "ARTIŞI *BEKLİYORDU*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "K2, K4",
+      "etiket": "BEKLENİYORDU"
+    },
+    {
+      "bolum": "neden",
+      "tip": "takvim",
+      "say": "Fed'in sonraki kararı yirmi sekiz ekimde.",
+      "p": {
+        "gun": "28",
+        "ay": "EKİM",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "",
+        "not": "Fed'in *sonraki* kararı"
+      },
+      "kaynak": "K5",
+      "etiket": "SIRADAKİ KARAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Fed'in yıl sonu tahminine göre, yıl bitmeden bir artış daha gelebilir.",
+      "p": {
+        "ikon": "🔮",
+        "satirlar": [
+          "YIL BİTMEDEN",
+          "BİR ARTIŞ DAHA",
+          "*GELEBİLİR* (tahmin)"
+        ],
+        "boy": 92
+      },
+      "kaynak": "K5",
+      "etiket": "TAHMİN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİNE\n*NASIL?*",
+        "boy": 124
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Dolar güçlenirse, dolara bağlı ürünlerin fiyatı artabilir.",
+      "p": {
+        "baslik": "Dolar güçlenirse · fiyatı artabilenler",
+        "satirlar": [
+          {
+            "ikon": "📱",
+            "metin": "Telefon",
+            "deger": "artabilir",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Akaryakıt",
+            "deger": "artabilir",
+            "renk": "turuncu"
+          },
+          {
+            "ikon": "🚗",
+            "metin": "Araba",
+            "deger": "artabilir",
+            "renk": "turuncu"
+          }
+        ],
+        "not": "kesin değil, ihtimal"
+      },
+      "kaynak": "genel mekanizma",
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "say": "Merkez Bankamız ise eylülde faizi yüzde otuz yedide sabit tuttu.",
+      "p": {
+        "ikon": "🇹🇷",
+        "etiket": "TCMB politika faizi",
+        "deger": 37,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "renk": "sari",
+        "not": "10 Eylül 2026 kararı, sabit"
+      },
+      "kaynak": "TCMB kararı (K6)",
+      "etiket": "TÜRKİYE FAİZİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "Türkiye'de faiz yüzde otuz yedi, Amerika'da yüzde dört civarı.",
+      "p": {
+        "baslik": "Faiz karşılaştırması",
+        "sol": {
+          "etiket": "ABD\n(üst sınır)",
+          "deger": 4.0,
+          "renk": "mavi"
+        },
+        "sag": {
+          "etiket": "TÜRKİYE\n(politika faizi)",
+          "deger": 37,
+          "renk": "sari"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "büyük fark",
+        "not": "yatırımcı yalnız faize bakmaz"
+      },
+      "kaynak": "K1, K6",
+      "etiket": "İKİ FAİZ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "takvim",
+      "say": "Merkez Bankası'nın sıradaki kararı yirmi iki ekimde.",
+      "p": {
+        "gun": "22",
+        "ay": "EKİM",
+        "gunadi": "PERŞEMBE",
+        "saat": "14:00",
+        "not": "TCMB *faiz kararı*"
+      },
+      "kaynak": "K6",
+      "etiket": "TCMB KARARI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Fed'in adımı o toplantıdaki hesabı etkileyebilir. Ama sonucu bilmiyoruz.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "FED ADIMI",
+          "HESABI *ETKİLEYEBİLİR*",
+          "SONUÇ *BİLİNMİYOR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "BELİRSİZLİK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Amerika'da yüz bin dolarlık değişken faizli borcun yıllık yükü, çeyrek puanla iki yüz elli dolar artar.",
+      "p": {
+        "baslik": "100.000 $ değişken faizli borç",
+        "ikon": "🏠",
+        "ogeler": [
+          "100.000 $",
+          "×",
+          "%0,25",
+          "=",
+          "+250 $ / yıl"
+        ]
+      },
+      "kaynak": "hesap: 100.000 × 0,0025 = 250",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Küçük görünen çeyrek puan, büyük borçlarda büyük fark yaratır.",
+      "p": {
+        "ikon": "🔍",
+        "satirlar": [
+          "ÇEYREK PUAN",
+          "KÜÇÜK GÖRÜNÜR",
+          "BÜYÜK BORÇTA *BÜYÜR*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ÖZET 1"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: Fed enflasyon için faizi artırdı; etkisi dolar üzerinden bize uzanabilir.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "FED: *ENFLASYON*",
+          "İÇİN FAİZ ARTTI",
+          "ETKİ: *DOLAR* ÜZERİNDEN"
+        ],
+        "boy": 88
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bunlar genel bilgidir, yatırım tavsiyesi değildir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "GENEL BİLGİDİR",
+          "YATIRIM TAVSİYESİ",
+          "*DEĞİLDİR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ]
+}
