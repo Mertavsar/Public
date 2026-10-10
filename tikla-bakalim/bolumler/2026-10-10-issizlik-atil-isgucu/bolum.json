@@ -1,0 +1,664 @@
+{
+  "baslik": "İşsizlik %7,8'e düştü ama atıl işgücü neden %31? TÜİK Ağustos verisi",
+  "tarih": "2026-10-10",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "işsizlik",
+    "atıl",
+    "işgücü",
+    "düştü",
+    "yükseldi"
+  ],
+  "altyazi": {
+    "yüzde elli iki": "%52",
+    "yüzde kırk sekiz": "%48",
+    "On beş yaş": "15 yaş",
+    "haftada bir saat": "haftada 1 saat",
+    "yüzde otuz bir": "%31",
+    "yüzde sekiz virgül birdi": "%8,1 idi",
+    "yüzde sekiz virgül bir": "%8,1",
+    "yüzde yedi virgül sekize": "%7,8’e",
+    "yüzde yedi virgül sekiz": "%7,8",
+    "yüz altı bin": "106 bin",
+    "iki milyon yedi yüz kırk bine": "2 milyon 740 bine",
+    "yüz otuz altı bin": "136 bin",
+    "otuz iki milyon beş yüz yedi bine": "32 milyon 507 bine",
+    "yüzde yirmi virgül iki": "%20,2",
+    "yüzde on üç": "%13",
+    "on iki milyon altı yüz bin": "12 milyon 600 bin",
+    "otuz eylülde": "30 Eylül’de",
+    "yirmi yedi ekimde": "27 Ekim’de",
+    "Üç soruda": "3 soruda",
+    "Geniş tanımda üç grup": "Geniş tanımda 3 grup"
+  },
+  "kapak": {
+    "ikon": "👷",
+    "ust": "İŞSİZLİK DÜŞTÜ",
+    "buyuk": "%31",
+    "alt": "AMA NEDEN?"
+  },
+  "kaynaklar": {
+    "K1": "TÜİK Ağustos 2026 işgücü (30 Eylül 2026): işsizlik %7,8 (Temmuz %8,1), işsiz 2 milyon 740 bin (−106 bin), istihdam 32 milyon 507 bin (+136 bin), atıl işgücü %31,0 (+0,4 puan), bütünleşik oran %20,2, genç işsizlik %13,0 — https://www.ahaber.com.tr/ekonomi/2026/09/30/isgucu-istatistikleri-agustos-2026-tuik-verileri ; https://www.yeniankara.com.tr/ekonomi/tuik-agustos-2026-issizlik-verileri-issizlik-yuzde-78-atil-isgucu-yuzde-31-oldu-184517 ; https://www.iscihaber.net/ekonomi/tuik-acikladi-issizlik-yuzde-78e-geriledi-atil-isgucu-yuzde-31e-yukseldi/267397",
+    "K2": "Aynı veri, ek doğrulama — https://www.dunya.com/ekonomi/issizlik-rakamlari-belli-oldu-agustosta-iki-farkli-tablo-haberi-842004 ; https://t24.com.tr/ekonomi/tuik-acikladi-agustos-ayi-issizlik-verileri-belli-oldu,1350733 ; https://rayhaber.com/2026/09/issizlik-agustosta-geriledi-genis-tanimli-issizlik-yukseldi/",
+    "K3": "DİSK-AR hesabı: geniş tanımlı işsiz ~12 milyon 608 bin (resmî sayı değil, sendika araştırma kurumunun hesabı) — https://rayhaber.com/2026/09/issizlik-agustosta-geriledi-genis-tanimli-issizlik-yukseldi/ ; https://www.birgun.net/makale/issizlik-yuzde-7-8-e-dustu-peki-12-6-milyon-kisi-nerede-738126",
+    "K4": "Sıradaki işgücü bülteni 27 Ekim 2026'da bekleniyor (TÜİK takvimiyle teyit edilmeli)"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 1.8,
+      "sure": 5.0
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "İşsizlik düştü dendi. Ama aynı raporda bir sayı yükseldi: yüzde otuz bir.",
+      "p": {
+        "ikon": "👷",
+        "etiket": "Atıl işgücü oranı (geniş tanım)",
+        "deger": 31.0,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "Ağustos 2026 · TÜİK",
+        "sayma": false
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "ATIL İŞGÜCÜ"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki iki sayı neden bu kadar farklı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "İŞSİZLİK DÜŞTÜ\n*AMA NEDEN?*",
+        "boy": 100
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi karışıksız anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ *KARIŞIKSIZ*",
+          "ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Türkiye İstatistik Kurumu, kısaca TÜİK, işgücü rakamlarını her ay açıklıyor.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "*TÜİK* = DEVLETİN",
+          "İSTATİSTİK KURUMU",
+          "İŞGÜCÜNÜ HER AY ÖLÇER"
+        ],
+        "boy": 84
+      },
+      "etiket": "TÜİK NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Ağustos ayının rakamları, otuz eylülde açıklandı.",
+      "p": {
+        "gun": "30",
+        "ay": "EYLÜL",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "",
+        "not": "TÜİK *Ağustos* işgücü verisi"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "AÇIKLAMA GÜNÜ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "İşsizlik oranı temmuzda yüzde sekiz virgül birdi; ağustosta yüzde yedi virgül sekize indi.",
+      "p": {
+        "baslik": "👷 İşsizlik oranı (mevsim etkisinden arındırılmış)",
+        "sol": {
+          "etiket": "TEMMUZ",
+          "deger": 8.1,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "AĞUSTOS",
+          "deger": 7.8,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "−0,3 puan",
+        "not": ""
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "RESMÎ İŞSİZLİK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "İşsiz sayısı yüz altı bin azaldı ve iki milyon yedi yüz kırk bine indi.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "İşsiz sayısı",
+        "deger": 2.74,
+        "onek": "",
+        "sonek": " milyon",
+        "ondalik": 2,
+        "yon": "down",
+        "ok_renk": "yesil",
+        "renk": "beyaz",
+        "not": "bir ay önceye göre −106 bin"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "İŞSİZ SAYISI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Çalışan sayısı da yüz otuz altı bin artıp otuz iki milyon beş yüz yedi bine çıktı.",
+      "p": {
+        "ikon": "🧑‍🏭",
+        "etiket": "Çalışan sayısı",
+        "deger": 32.507,
+        "onek": "",
+        "sonek": " milyon",
+        "ondalik": 3,
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "beyaz",
+        "not": "bir ay önceye göre +136 bin"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "ÇALIŞAN SAYISI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "On beş yaş üstü nüfusun yüzde elli ikisi işgücünde; yüzde kırk sekizi çalışıyor.",
+      "p": {
+        "baslik": "15 yaş üstü nüfus · Ağustos 2026",
+        "satirlar": [
+          {
+            "ikon": "🧑‍💼",
+            "metin": "İşgücüne katılım",
+            "deger": "%52,5",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🧑‍🏭",
+            "metin": "İstihdam oranı",
+            "deger": "%48,4",
+            "renk": "yesil"
+          }
+        ],
+        "not": "mevsim etkisinden arındırılmış"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "KATILIM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yani ilk bakışta tablo iyi görünüyor. Peki sorun nerede?",
+      "p": {
+        "ikon": "🧐",
+        "satirlar": [
+          "İLK BAKIŞTA",
+          "TABLO *İYİ*",
+          "PEKİ SORUN *NEREDE?*"
+        ],
+        "boy": 92
+      },
+      "etiket": "SORUN NEREDE?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Sebep, ölçüm yöntemi. TÜİK işsizliği tek değil, birkaç sayıyla ölçüyor.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "İŞSİZLİK TEK",
+          "SAYIYLA DEĞİL",
+          "*BİRKAÇ SAYIYLA* ÖLÇÜLÜR"
+        ],
+        "boy": 84
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Resmî işsiz, iş arayan ve kısa sürede işe başlayabilen kişi demek.",
+      "p": {
+        "ikon": "🔎",
+        "satirlar": [
+          "RESMÎ İŞSİZ =",
+          "İŞ *ARAYAN* VE",
+          "KISA SÜREDE *BAŞLAYABİLEN*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "TÜİK tanımı (basitleştirilmiş)",
+      "etiket": "RESMÎ İŞSİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Çalışmak isteyip iş aramayan biri ise bu sayıya girmiyor.",
+      "p": {
+        "ikon": "🚪",
+        "satirlar": [
+          "İŞ *ARAMAYAN*",
+          "ÇALIŞMAK İSTEYEN",
+          "RESMÎ SAYIYA *GİRMEZ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "SAYIYA GİRMEYEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "KISIM *ŞİMDİ*",
+          "BİR *BEĞEN* BIRAK"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Atıl, boşta duran demek. Yani kullanılmayan işgücü.",
+      "p": {
+        "ikon": "💤",
+        "satirlar": [
+          "*ATIL* = BOŞTA",
+          "DURAN",
+          "KULLANILMAYAN *İŞGÜCÜ*"
+        ],
+        "boy": 88
+      },
+      "etiket": "ATIL NE DEMEK?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Mesela haftada bir saat çalışan biri bile resmî olarak çalışan sayılıyor.",
+      "p": {
+        "ikon": "⏱️",
+        "satirlar": [
+          "HAFTADA *1 SAAT*",
+          "ÇALIŞAN BİLE",
+          "RESMÎ OLARAK *ÇALIŞAN*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "TÜİK tanımı",
+      "etiket": "İLGİNÇ AYRINTI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Geniş tanımda üç grup sayılıyor: işsizler, az çalışanlar, iş aramayanlar.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🔎",
+            "metin": "*İşsizler*"
+          },
+          {
+            "ikon": "⏱️",
+            "metin": "Daha çok çalışmak isteyen *az çalışanlar*"
+          },
+          {
+            "ikon": "🚪",
+            "metin": "Çalışmak isteyip *aramayanlar*"
+          }
+        ]
+      },
+      "kaynak": "TÜİK tanımı (basitleştirilmiş)",
+      "etiket": "ÜÇ GRUP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Üçünün toplamına atıl işgücü deniyor. Ağustosta bu oran yüzde otuz bir oldu.",
+      "p": {
+        "ikon": "🧩",
+        "etiket": "Atıl işgücü oranı",
+        "deger": 31.0,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "bir ay önceye göre +0,4 puan"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "ATIL İŞGÜCÜ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Dar tanımda oran yüzde yedi virgül sekiz, geniş tanımda yüzde otuz bir.",
+      "p": {
+        "baslik": "👷 Aynı ay, iki ölçü",
+        "sol": {
+          "etiket": "DAR TANIM\n(resmî işsiz)",
+          "deger": 7.8,
+          "renk": "yesil"
+        },
+        "sag": {
+          "etiket": "GENİŞ TANIM\n(atıl işgücü)",
+          "deger": 31.0,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "yaklaşık 4 kat",
+        "not": "paydalar farklı; fark yine de büyük"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "İKİ ÖLÇÜ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "İşsizleri ve az çalışanları birlikte sayarsan oran yüzde yirmi virgül iki oluyor.",
+      "p": {
+        "ikon": "⚖️",
+        "etiket": "İşsiz + az çalışan (bütünleşik oran)",
+        "deger": 20.2,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "renk": "turuncu",
+        "not": "Ağustos 2026"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "ARA ÖLÇÜ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani resmî oran düşerken geniş oran yükseldi. İkisi aynı yöne gitmedi.",
+      "p": {
+        "ikon": "↔️",
+        "satirlar": [
+          "RESMÎ ORAN: *↓*",
+          "GENİŞ ORAN: ~↑~",
+          "İKİSİ *AYRI YÖNDE*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "AYRI YÖN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Diyelim biri aylarca iş aradı, bulamadı ve vazgeçti.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🔎",
+            "metin": "Aylarca iş *aradı*"
+          },
+          {
+            "ikon": "😞",
+            "metin": "*Bulamadı*"
+          },
+          {
+            "ikon": "🚪",
+            "metin": "Aramaktan *vazgeçti*"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Resmî işsiz *sayılmaz*"
+          }
+        ]
+      },
+      "kaynak": "genel mekanizma",
+      "etiket": "ÖRNEK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Biri iş aramayı bırakırsa resmî işsiz sayılmaz. Oran böyle de düşebilir.",
+      "p": {
+        "ikon": "🫥",
+        "satirlar": [
+          "İŞ ARAMAYI *BIRAKAN*",
+          "RESMÎ İŞSİZ",
+          "SAYILMAZ"
+        ],
+        "boy": 88
+      },
+      "kaynak": "genel mekanizma",
+      "etiket": "MEKANİZMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ama ağustosta çalışan sayısı da arttı. Yani iyi haber de gerçek.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "ÇALIŞAN SAYISI",
+          "DA *ARTTI*",
+          "İYİ HABER *GERÇEK*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "DENGELİ BAKIŞ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin gününe nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİ\n*NASIL ETKİLER?*",
+        "boy": 116
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "say": "Gençlerde işsizlik oranı yüzde on üç. Yani gençler daha fazla zorlanıyor.",
+      "p": {
+        "ikon": "🎓",
+        "etiket": "Genç işsizlik oranı (15–24 yaş)",
+        "deger": 13.0,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "renk": "kirmizi",
+        "not": "Ağustos 2026"
+      },
+      "kaynak": "TÜİK Ağustos 2026 (K1, K2)",
+      "etiket": "GENÇLER"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "DİSK-AR'ın hesabına göre geniş tanımlı işsiz sayısı yaklaşık on iki milyon altı yüz bin.",
+      "p": {
+        "baslik": "Kaç kişi?",
+        "sol": {
+          "etiket": "RESMÎ İŞSİZ",
+          "deger": 2.74,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "GENİŞ TANIM\n(DİSK-AR hesabı)",
+          "deger": 12.61,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " milyon",
+        "ondalik": 2,
+        "fark": "DİSK-AR'a göre",
+        "not": "geniş tanım sayısı resmî değil, hesaptır"
+      },
+      "kaynak": "DİSK-AR hesabı (K3)",
+      "etiket": "KAÇ KİŞİ?"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Yani işsizlik haberi okurken, hangi tanımın kullanıldığına bakmak lazım.",
+      "p": {
+        "ikon": "🔍",
+        "satirlar": [
+          "HANGİ *TANIM*",
+          "KULLANILDI?",
+          "*BAKMAK* LAZIM"
+        ],
+        "boy": 92
+      },
+      "etiket": "İPUCU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Böylece iki farklı başlık da aynı anda doğru olabiliyor.",
+      "p": {
+        "ikon": "📰",
+        "satirlar": [
+          "İKİ FARKLI BAŞLIK",
+          "AYNI ANDA",
+          "*DOĞRU* OLABİLİR"
+        ],
+        "boy": 92
+      },
+      "etiket": "İKİ BAŞLIK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Bir rakam görünce üç şey sor: hangi tanım, hangi ay, hangi kaynak.",
+      "p": {
+        "baslik": "Her rakama sor",
+        "satirlar": [
+          {
+            "ikon": "📏",
+            "metin": "Hangi tanım?",
+            "deger": "dar mı, geniş mi",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📅",
+            "metin": "Hangi ay?",
+            "deger": "tek ay mı, eğilim mi",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Hangi kaynak?",
+            "deger": "resmî mi, hesap mı",
+            "renk": "sari"
+          }
+        ]
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Tek aylık veri dalgalanabilir. Eğilimi görmek için birkaç aya bakmak gerekir.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "TEK AY *DALGALANIR*",
+          "EĞİLİM İÇİN",
+          "*BİRKAÇ AYA* BAK"
+        ],
+        "boy": 88
+      },
+      "etiket": "DİKKAT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "takvim",
+      "say": "Sıradaki işgücü verisinin yirmi yedi ekimde açıklanması bekleniyor.",
+      "p": {
+        "gun": "27",
+        "ay": "EKİM",
+        "gunadi": "SALI",
+        "saat": "",
+        "not": "Eylül verisi *bekleniyor*"
+      },
+      "kaynak": "TÜİK takvimi (bekleniyor)",
+      "etiket": "SIRADAKİ VERİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: işsizlik düştü ama geniş tanımda tablo daha zor.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "RESMÎ İŞSİZLİK: *↓*",
+          "GENİŞ TANIM: ~%31~",
+          "TABLO *İKİ YÜZLÜ*"
+        ],
+        "boy": 88
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ]
+}
