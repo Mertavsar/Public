@@ -1,0 +1,582 @@
+{
+  "baslik": "Merkez Bankası faizi neden %37'de? 22 Ekim'de ne olabilir",
+  "tarih": "2026-10-11",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "faiz",
+    "enflasyon",
+    "indirim",
+    "sabit",
+    "bekleniyor"
+  ],
+  "altyazi": {
+    "yüzde otuz yedide": "%37'de",
+    "yüzde otuz yediye": "%37'ye",
+    "yüzde otuz yedi": "%37",
+    "yüzde otuz sekizdi": "%38'di",
+    "yüzde otuz sekiz": "%38",
+    "yüzde yirmi dokuz virgül yetmiş üç": "%29,73",
+    "yüzde otuza": "%30'a",
+    "yüzde otuz": "%30",
+    "yüzde birlik": "%1'lik",
+    "bir puanlık": "1 puanlık",
+    "yüz bin lira": "100 bin lira",
+    "bin lira": "1.000 lira",
+    "yirmi iki ekimde": "22 Ekim'de",
+    "yirmi iki": "22",
+    "on beşi": "15'i",
+    "on eylüldeydi": "10 Eylül'deydi",
+    "saat on dörtte": "saat 14.00'te",
+    "Üç soruda": "3 soruda",
+    "üç şeye": "3 şeye",
+    "yedi puan": "7 puan",
+    "Fark yedi puan": "Fark 7 puan",
+    "bir puan": "1 puan"
+  },
+  "kapak": {
+    "ikon": "🏦",
+    "ust": "FAİZ %37",
+    "buyuk": "22 EKİM",
+    "alt": "NE OLACAK?"
+  },
+  "kaynaklar": {
+    "K1": "TCMB PPK, 10 Eylül 2026: politika faizi %37'de sabit — https://www.gzt.com/ekonomi/merkez-bankasi-faiz-karari-aciklandi-tcmb-eylul-2026-faiz-karari-ne-oldu-faiz-indirimi-oldu-mu-4259563 ; https://halilbakirci.av.tr/tcmb-10-eylul-2026-faiz-karari/ ; https://tacirler.com.tr/ppk-toplanti-karari-eylul-2026--4842",
+    "K2": "TCMB PPK, 22 Ocak 2026: 100 baz puan indirimle %38 → %37 (Aralık 2025'te %38) — https://www.cnnturk.com/ekonomi/merkez-bankasi-faiz-karari-son-dakika-merkez-bankasi-faiz-karari-ne-oldu-yilin-ilk-faiz-karari-22-ocak-2026-2387649 ; https://www.sde.org.tr/haber/tcmb-2026-ya-faiz-indirimiyle-basladi-politika-faizi-37-ye-cekildi-haberi-62639",
+    "K3": "TÜİK Eylül 2026 TÜFE (5 Ekim): aylık %1,84, yıllık %29,73 — https://www.evrensel.net/haber/6003473/tuik-eylul-ayi-enflasyon-verilerini-acikladi-aylik-yuzde-184-yillik-2973 ; https://www.forbes.com.tr/ekonomi/tuik-eylul-enflasyonunu-acikladi-eylul-2026-tuketici-fiyat-endeksi-tuik ; https://www.ekonomist.com.tr/ekonomi-haberleri/tuik-acikladi-eylul-2026-enflasyon-rakamlari-belli-oldu-79509",
+    "K4": "Ekim PPK toplantısı 22 Ekim 2026 Perşembe, karar saat 14.00 — https://uzmanpara.milliyet.com.tr/uzmanpara/merkez-bankasi-faiz-karari-ne-zaman-aciklanacak-ekim-2026-tcmb-faiz-karari-icin-tarih-belli-oldu-7675225 ; https://www.politikam.com/merkez-bankasi-ekim-ayi-faiz-karari-ne-zaman-aciklanacak-tcmb-2026-ppk-toplanti-tarihi-ve-detaylari",
+    "K5": "Beklenti (karar değil): ForInvest anketi 9 Ekim, 22 katılımcının 15'i 100 baz puan indirim, 3'ü sabit bekliyor; Goldman Sachs sabit bekliyor — https://www.foreks.com/haber/detay/6ac8ba0024008d7d4373fb35/FRKS/tr/forinvest-haber-anketi-tcmb-nin-ekim-ayi-toplantisina-iliskin-medyan-beklenti-100-baz-puan-faiz-indirimi-oldu-09-10-26/ ; https://www.politikam.com/tcmb-22-ekim-2026-faiz-karari-indirim-beklentisi ; https://finansgundem.com.tr/22-ekim-faiz-karari-oncesi-kurumlarin-tahminleri"
+  },
+  "cta": [
+    {
+      "sahne": 15,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Merkez Bankası'nın faizi yüzde otuz yedi. Yirmi iki ekimde yeni karar geliyor.",
+      "p": {
+        "ikon": "🏦",
+        "etiket": "Merkez Bankası politika faizi",
+        "deger": 37,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "renk": "sari",
+        "not": "10 Eylül 2026 kararı",
+        "sayma": false
+      },
+      "kaynak": "TCMB PPK 10 Eylül 2026 (K1)",
+      "etiket": "POLİTİKA FAİZİ"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu faiz neden bu kadar önemli? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "FAİZ KARARI\n*NEDEN ÖNEMLİ?*",
+        "boy": 100
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları sade anlatıyoruz; kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ *SADE*",
+          "ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce faiz nedir? Faiz, paranın kirası gibi bir şey.",
+      "p": {
+        "ikon": "💰",
+        "satirlar": [
+          "FAİZ =",
+          "*PARANIN KİRASI*"
+        ],
+        "boy": 104
+      },
+      "etiket": "FAİZ NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Merkez Bankası bankalara borç verirken bir faiz uygular. Adı politika faizi.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "MERKEZ BANKASI",
+          "BANKALARA BORÇ VERİR",
+          "*POLİTİKA FAİZİ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "POLİTİKA FAİZİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Aralıkta yüzde otuz sekizdi. Ocakta yüzde otuz yediye indirildi.",
+      "p": {
+        "baslik": "🏦 Politika faizi",
+        "sol": {
+          "etiket": "ARALIK 2025",
+          "deger": 38,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "OCAK 2026",
+          "deger": 37,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "−1 puan",
+        "not": ""
+      },
+      "kaynak": "TCMB PPK 22 Ocak 2026 (K2)",
+      "etiket": "OCAK İNDİRİMİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Son toplantı on eylüldeydi. Kurul faizi yine yüzde otuz yedide sabit bıraktı.",
+      "p": {
+        "gun": "10",
+        "ay": "EYLÜL",
+        "gunadi": "PERŞEMBE",
+        "saat": "",
+        "not": "Faiz *%37'de sabit* kaldı"
+      },
+      "kaynak": "TCMB PPK 10 Eylül 2026 (K1)",
+      "etiket": "SON KARAR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Yeni karar yirmi iki ekimde, saat on dörtte açıklanacak.",
+      "p": {
+        "gun": "22",
+        "ay": "EKİM",
+        "gunadi": "PERŞEMBE",
+        "saat": "14.00",
+        "not": "Yeni *faiz kararı*"
+      },
+      "kaynak": "TCMB toplantı takvimi (K4)",
+      "etiket": "SIRADAKİ KARAR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Bir ankette yirmi iki ekonomistin on beşi, yüzde birlik indirim bekliyor.",
+      "p": {
+        "baslik": "🏦 Faiz · beklenti anketi",
+        "sol": {
+          "etiket": "BUGÜN",
+          "deger": 37,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "BEKLENEN\n(tahmini)",
+          "deger": 36,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "−1 puan (beklenti)",
+        "not": "karar değil, ankette 15 kişinin tahmini"
+      },
+      "kaynak": "ForInvest, 9 Ekim (K5)",
+      "etiket": "BEKLENTİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Peki Merkez Bankası faizi neden yüksek tutuyor? Cevap enflasyon.",
+      "p": {
+        "ikon": "🛒",
+        "satirlar": [
+          "CEVAP:",
+          "*ENFLASYON*"
+        ],
+        "boy": 110
+      },
+      "etiket": "NEDEN?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Enflasyon, fiyatların ne kadar hızlı arttığını gösterir.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "ENFLASYON =",
+          "FİYATLAR NE KADAR",
+          "*HIZLI* ARTIYOR"
+        ],
+        "boy": 88
+      },
+      "etiket": "ENFLASYON NEDİR?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Eylülde yıllık enflasyon yüzde yirmi dokuz virgül yetmiş üç oldu.",
+      "p": {
+        "ikon": "🛒",
+        "etiket": "Yıllık enflasyon (TÜFE)",
+        "deger": 29.73,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "yon": "down",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "not": "Eylül 2026 · TÜİK"
+      },
+      "kaynak": "TÜİK Eylül 2026 (K3)",
+      "etiket": "ENFLASYON"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Merkez Bankası'nın görevi, fiyat artışını yavaşlatmak.",
+      "p": {
+        "ikon": "🎯",
+        "satirlar": [
+          "GÖREVİ:",
+          "FİYAT ARTIŞINI",
+          "*YAVAŞLATMAK*"
+        ],
+        "boy": 92
+      },
+      "etiket": "GÖREV"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Faiz yüksekse kredi pahalanır, harcama azalır, fiyat artışının yavaşlaması hedeflenir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Faiz *yüksek*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Kredi *pahalanır*"
+          },
+          {
+            "ikon": "🛍️",
+            "metin": "Harcama *azalır*"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Fiyat artışı *yavaşlar*"
+          }
+        ]
+      },
+      "kaynak": "genel mekanizma (hedef, garanti değil)",
+      "etiket": "MEKANİZMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Videoyu beğenirsen daha çok kişiye ulaşıyor; kalbe dokunmayı unutma.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "VİDEOYU *BEĞEN*",
+          "DAHA ÇOK KİŞİYE",
+          "ULAŞSIN"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Şimdi asıl ilginç kısım. Faiz yüzde otuz yedi, enflasyon yaklaşık yüzde otuz. Fark yedi puan.",
+      "p": {
+        "baslik": "🏦 Faiz ile enflasyon",
+        "sol": {
+          "etiket": "YILLIK\nENFLASYON",
+          "deger": 29.73,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "POLİTİKA\nFAİZİ",
+          "deger": 37,
+          "renk": "sari"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "yaklaşık +7,3 puan",
+        "not": "kaba karşılaştırma"
+      },
+      "kaynak": "K1, K3 · fark = 37 − 29,73",
+      "etiket": "İLGİNÇ KISIM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ekonomistler bu farka kabaca reel faiz diyor. Yani enflasyonun üstünde kalan kısım.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "FARKA KABACA",
+          "*REEL FAİZ* DENİR",
+          "ENFLASYONUN ÜSTÜ"
+        ],
+        "boy": 88
+      },
+      "etiket": "REEL FAİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Fark büyükken tasarruf etmek cazip olur, borçlanmak ise zorlaşır.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "FARK BÜYÜKSE",
+          "TASARRUF *CAZİP*",
+          "BORÇLANMA *ZOR*"
+        ],
+        "boy": 92
+      },
+      "etiket": "FARKIN ETKİSİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Enflasyon düşüyor ama hâlâ yüzde otuza yakın. Merkez Bankası bu yüzden temkinli olabilir.",
+      "p": {
+        "ikon": "🧭",
+        "satirlar": [
+          "ENFLASYON DÜŞÜYOR",
+          "AMA YÜKSEK",
+          "*TEMKİN* SÜRÜYOR"
+        ],
+        "boy": 88
+      },
+      "etiket": "TEMKİN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Öbür yandan faiz uzun süre yüksek kalırsa borçlanma ve yatırım yavaşlayabilir.",
+      "p": {
+        "ikon": "🐢",
+        "satirlar": [
+          "FAİZ UZUN SÜRE",
+          "YÜKSEK KALIRSA",
+          "YATIRIM *YAVAŞLAYABİLİR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "DİĞER YÜZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "İndirim isteyenler maliyetleri düşürmek istiyor. Beklemek isteyenler, enflasyonun daha çok gerilemesini.",
+      "p": {
+        "baslik": "İki görüş",
+        "satirlar": [
+          {
+            "ikon": "📉",
+            "metin": "İndirim",
+            "deger": "maliyet düşsün",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "⏳",
+            "metin": "Bekleme",
+            "deger": "enflasyon gerilesin",
+            "renk": "sari"
+          }
+        ],
+        "not": "Goldman Sachs: indirim için erken (tahmin)"
+      },
+      "kaynak": "Kurum tahminleri (K5)",
+      "etiket": "İKİ GÖRÜŞ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu karar senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+        "boy": 108
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Banka faizleri genelde politika faizini izler. İndirim gelirse kredi ucuzlayabilir.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "BANKA FAİZLERİ",
+          "GENELDE İZLER",
+          "KREDİ *UCUZLAYABİLİR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "KREDİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ama mevduat faizi de düşebilir. Yani birikimin getirisi azalabilir.",
+      "p": {
+        "ikon": "🏧",
+        "satirlar": [
+          "MEVDUAT FAİZİ",
+          "DE *DÜŞEBİLİR*",
+          "GETİRİ AZALABİLİR"
+        ],
+        "boy": 88
+      },
+      "etiket": "MEVDUAT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Örneğin yüz bin lira bir yıl bankada kalırsa, bir puanlık fark yaklaşık bin lira eder.",
+      "p": {
+        "baslik": "Örnek · 1 yıl · vergi öncesi",
+        "ikon": "🏧",
+        "ogeler": [
+          "100.000 ₺",
+          "×",
+          "%1 puan",
+          "=",
+          "1.000 ₺"
+        ]
+      },
+      "kaynak": "100.000 × 0,01 (basit hesap)",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Karar dolar kurunu da oynatabilir. Yön, piyasanın beklentisine bağlı.",
+      "p": {
+        "ikon": "💵",
+        "satirlar": [
+          "KARAR *KURU*",
+          "DA ETKİLEYEBİLİR",
+          "YÖN: *BEKLENTİYE* BAĞLI"
+        ],
+        "boy": 84
+      },
+      "etiket": "KUR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Piyasa karar metnindeki cümlelere de bakıyor. Yani sinyal de en az sayı kadar önemli.",
+      "p": {
+        "ikon": "📝",
+        "satirlar": [
+          "SADECE SAYI DEĞİL",
+          "*KARAR METNİ*",
+          "DE İZLENİR"
+        ],
+        "boy": 88
+      },
+      "etiket": "SİNYAL"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Kararı izlerken üç şeye bak: faiz kaç oldu, metin ne diyor, enflasyon nereye gidiyor.",
+      "p": {
+        "baslik": "Karar günü üç soru",
+        "satirlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Faiz kaç?",
+            "deger": "sabit mi, indirim mi",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📝",
+            "metin": "Metin ne?",
+            "deger": "sert mi, yumuşak mı",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Enflasyon?",
+            "deger": "düşüş sürüyor mu",
+            "renk": "sari"
+          }
+        ]
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: faiz yüzde otuz yedide, indirim bekleniyor ama karar henüz belli değil.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "FAİZ: *%37*",
+          "İNDİRİM *BEKLENİYOR*",
+          "KARAR: *22 EKİM*"
+        ],
+        "boy": 88
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ]
+}
