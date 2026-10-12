@@ -23,3 +23,11 @@ Referans: VULRAN – "Korsanlar Neden Göz Bandı Takardı?" (30.3 sn, 1080x1920
 - Sonuç sadece sonda görünür. Geri sarma yok. Sonuç anında ağır çekim, flaş, boom ve damga.
 - Orijinal ses: patlama, çarpışma ve tepki anlarında açılır, geri kalanında seslendirmenin altında kalır.
 - Telif: Discovery / Banijay içeriği. Kendi seslendirme, kısa planlar ve kendi grafiklerin olmalı. İlk videolarda Content ID durumu izlenir.
+
+## İlk örnek: asansör (mythbusters_asansor.example.py)
+- Kaynak: resmi MythBusters Shorts (9:16, 41 sn, gömülü İngilizce altyazı y≈1290–1450).
+- **Altyazı silme:** Telea iz bıraktı; ProPainter (vinpaint.py) temiz. Ayar: `--band 1280,1465 --band-x 40,1040 --white-min 175 --shadow 5,6 --grow 13`. Beyaz şeritli sahnede band kapatılıp `--rect` kullanıldı. Kullanılmayan aralık `--plain`. CPU'da ~50 dk.
+- **İngilizce konuşma:** MDX ile ayrıldı, sadece efekt/ortam (inst) kullanıldı. Çarpmada +10 dB.
+- **Kaynaktaki parazit geçişi** (18.88–18.96 TV karıncası) atlandı. Sahne sınırlarını kare kare kontrol et, kesim tespiti 1 kare kaçırabiliyor.
+- **Metin:** Kaynağın İngilizce transkriptinden (Descript) gerçek rakamlar alındı, km/s'ye çevrildi. Kullanıcı istediğinde 6 adımlı yapıyla taslak metin yazılabilir.
+- **Ekrandakiler:** Hız göstergesi (85 / 82 KM/S), BUSTED damgası, ilk cümlede hook başlığı.
