@@ -18,8 +18,13 @@ BY0, BY1 = 298, 918                       # kaynaktaki net bant
 Z = 2.15; CW = int(round(W / Z))          # kırpma genişliği (502)
 BH = int(round((BY1 - BY0) * Z)); OY = (H - BH) // 2   # bant yüksekliği 1333, üstten 293
 ANTON = "/home/user/Public/.claude/skills/viral-edit/fonts/Anton-Regular.ttf"
-caps = json.load(open(f"{S}/w/cap_fast.json", encoding="utf-8"))
-VOD = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f"{S}/w/vo_fast.wav"],
+VO = os.environ.get("VO") or "vo_v"                  # VULRAN hızı: 7 hece/sn, boşluk ≤0.07 sn (votight)
+CAPO = json.load(open(f"{S}/w/cap_fast.json", encoding="utf-8"))   # plan zamanları bu (1.2x) sese göre yazıldı
+caps = json.load(open(f"{S}/w/cap_v.json" if VO == "vo_v" else f"{S}/w/cap_fast.json", encoding="utf-8"))
+_os = [0.0] + [w["s"] for w in CAPO] + [CAPO[-1]["e"] + 5]; _ns = [0.0] + [w["s"] for w in caps] + [caps[-1]["e"] + 5]
+tm = lambda t: float(np.interp(t, _os, _ns))           # eski zaman -> yeni zaman
+wso = lambda i: round(CAPO[i]["s"] - 0.05, 2)
+VOD = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f"{S}/w/{VO}.wav"],
                            capture_output=True, text=True).stdout)
 ws = lambda i: round(caps[i]["s"] - 0.05, 2)
 END = VOD + 1.3
@@ -30,27 +35,28 @@ SEG = [(0.00, 16.80, 17.45, 450),      # SOĞUK AÇILIŞ: Buster kapıdan tekmel
        (2.30, 2.17, 3.00, 330),        # "helikopterden" sunucu yüzü, gülüyor
        (3.25, 25.17, 26.55, 360),      # "300 metre" helikopter + top
        (4.40, 5.10, 6.30, 360),        # "hayatta kalırsın" top gökyüzünde
-       (ws(14), 10.40, 13.77, 330),    # "Mantık basit…" Adam topla yuvarlanıyor
-       (ws(25), 14.60, 15.70, 360),    # "Efsane Avcıları" sensör yapıştırma
+       (wso(14), 10.40, 13.77, 330),    # "Mantık basit…" Adam topla yuvarlanıyor
+       (wso(25), 14.60, 15.70, 360),    # "Efsane Avcıları" sensör yapıştırma
        (10.85, 15.70, 16.70, 400),     # Buster kapıda
        (11.45, 0.00, 0.72, 450),       # "topsuz attı" tekme
-       (ws(31), 0.75, 1.20, 469),      # "Saatte 190" düşüş
+       (wso(31), 0.75, 1.20, 469),      # "Saatte 190" düşüş
        (13.40, 1.25, 2.10, 330),       # tepeden düşüş
        (14.20, 18.90, 20.10, 360),     # "çakıldı" YERE ÇARPMA (kaynak 18.97 → 14.27)
        (15.40, 20.20, 22.10, 360),     # "ölümcül darbe sensörleri"
        (16.80, 22.20, 23.55, 360),     # "kırmızıya döndü" WARNING/FATAL
-       (ws(42), 3.00, 5.10, 360),      # "Sonra Buster'ı dev topun içine koydular."
-       (ws(48), 23.60, 25.10, 360),    # top helikopterin altında
+       (wso(42), 3.00, 5.10, 360),      # "Sonra Buster'ı dev topun içine koydular."
+       (wso(48), 23.60, 25.10, 360),    # top helikopterin altında
        (21.55, 28.00, 30.00, 360),     # "90" düşüyor (26.77 planında top bant dışında, alınmadı)
        (23.80, 30.40, 31.15, 420),     # yere yaklaşıyor
        (24.45, 32.45, 33.40, 251),     # "çarptığı an" TOP YERE ÇARPAR (kaynak 32.95 → 24.95)
        (25.40, 35.83, 37.30, 360),     # "sensörlerin hepsi yine kırmızı"
-       (ws(64), 34.53, 35.83, 360),    # "Topun içini … doldurdular"
-       (ws(69), 22.40, 23.40, 360),    # "Sonuç aynı." FATAL tekrar
-       (ws(71), 32.60, 34.40, 251),    # "Çünkü 90 km = duvar" ağır çekim tekrar
-       (ws(80), 37.30, 39.15, 360)]    # "kurtaramaz" + BUSTED
+       (wso(64), 34.53, 35.83, 360),    # "Topun içini … doldurdular"
+       (wso(69), 22.40, 23.40, 360),    # "Sonuç aynı." FATAL tekrar
+       (wso(71), 32.60, 34.40, 251),    # "Çünkü 90 km = duvar" ağır çekim tekrar
+       (wso(80), 37.30, 39.15, 360)]    # "kurtaramaz" + BUSTED
+SEG = [(tm(t0), a, b, cx) for t0, a, b, cx in SEG]
 B = [s[0] for s in SEG] + [END]
-T_HIT = [14.27, 24.95]
+T_HIT = [tm(14.27), tm(24.95)]
 FREEZE = (B[3], B[4])
 seq = []
 for k, (t0, a, b, cx) in enumerate(SEG):
@@ -227,7 +233,7 @@ enc.stdin.close(); enc.wait()
 SR = sd.SR; N = int(round(DUR * SR))
 rd = lambda p, af="anull": np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", p, "-af", af, "-ar", str(SR), "-ac", "1", "-f", "f32le", "-"],
                                                         capture_output=True).stdout, np.float32).copy()
-vo = rd(f"{S}/w/vo_fast.wav", "highpass=f=70,acompressor=threshold=-18dB:ratio=3:attack=5:release=80")
+vo = rd(f"{S}/w/{VO}.wav", "highpass=f=70,acompressor=threshold=-18dB:ratio=3:attack=5:release=80")
 mus = rd(os.environ.get("MUSIC_FILE") or f"{S}/w/music.wav")
 voc = np.zeros(N); voc[:min(N, len(vo))] = vo[:N]
 m = np.zeros(N); m[:min(N, len(mus))] = mus[:N]

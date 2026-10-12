@@ -52,3 +52,12 @@ Bu ortamdan YouTube'a erişim yok (proxy 403). Klibi kullanıcı indirip atar.
 - **Soğuk açılış (kullanıcı isteği):** Buster helikopterden atılıyor, düşüş YARIDA donuyor (0.25 sn yakınlaşma + kırmızı ton + müzik kesilir), sonra sunucu yüzü. Sonuç saklı kalıyor.
 - Kaynaktaki "ESTIMATED VELOCITY 56 MPH" grafiği: metin kutusu sabit kameradan temiz kareyle yamalandı, topa bağlı kesik çizgi ince çizgi tespiti + Telea ile silindi.
 - Seslendirme 1.2x hızlandı, kelime zamanları Descript'ten alınıp onaylı metne eşlendi. Müzik `audiobed --mood drive --bpm 118`, konuşmanın ~13 dB altında, konuşurken ~7 dB daha iniyor. İki çarpmada `sd.boom`.
+
+## VULRAN ölçümü 2: "James Bond Tuzağı Gerçek Hayatta İşe Yarar Mı?" (~1 milyon izlenme, 33.7 sn)
+`analyze.py` + MDX ayrıştırma, 12 Ekim:
+- **Seslendirme hızı: 7.0 hece/sn.** Seslendirmede 0.12 sn'yi aşan boşluk YOK, cümleler birbirine yapışık. Bizim ilk şişme top 5.3 hece/sn'ydi (%19 sessizlik). Kullanıcı: "sesi daha hızlı yap VULRAN gibi".
+  → Standart: ElevenLabs çıktısı `votight.py --gap 0.06 --min-sil 0.12 --target <7 hece/sn süresi>`. Şişme top: 43.7 → 25.9 sn (toplam 1.69x), sonuç 6.9 hece/sn.
+- **Ses:** −13.3 LUFS. Müzik konuşmanın 15.5 LU altında (VO −13.5, yatak −29.0), baştan sona kesintisiz. Sessizlik %9.
+- **Geçiş:** Düz kesim. 20 kesim / 33.7 sn (0.59/sn), medyan plan 1.17 sn. İlk plan 5.9 sn, ilk 10 sn çizim animasyonu (efsanenin düzeneği izometrik çizimle anlatılıyor), sonra gerçek görüntü.
+- **Ekranda:** Tek kelimelik turuncu küçük harf altyazı, 10–13 sn'de "VULRAN ABONE OL" butonu, sonda damga yok ("Yani efsanevi Bond tuzağı yalandı.").
+- Plan zamanlarını yeni sese taşımak: `tm()` = eski kelime başlangıçlarından yenilere np.interp (örnek dosyada).
