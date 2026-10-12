@@ -31,3 +31,18 @@ Referans: VULRAN – "Korsanlar Neden Göz Bandı Takardı?" (30.3 sn, 1080x1920
 - **Kaynaktaki parazit geçişi** (18.88–18.96 TV karıncası) atlandı. Sahne sınırlarını kare kare kontrol et, kesim tespiti 1 kare kaçırabiliyor.
 - **Metin:** Kaynağın İngilizce transkriptinden (Descript) gerçek rakamlar alındı, km/s'ye çevrildi. Kullanıcı istediğinde 6 adımlı yapıyla taslak metin yazılabilir.
 - **Ekrandakiler:** Hız göstergesi (85 / 82 KM/S), BUSTED damgası, ilk cümlede hook başlığı.
+
+## ⛔ Giriş kuralı (kullanıcı, asansörden sonra): "Shorts potansiyelli içerik editi", VULRAN girişi
+Asansör hook banner + durağan planla açıldı. Kullanıcı: *"istediğim ilk giriş vibe alamadım… diğer videolarla aynı başladı"*.
+VULRAN'ın ilk 4 saniyesi kare kare ölçüldü (korsan göz bandı):
+- **0.0'da sunucunun yüzü, tuhaf/komik bir anda** (Adam kostümle, ağzında bıçak, yakın plan). Düzenek ilk karede değil.
+- **Hook banner YOK.** Sadece küçük tek kelimelik altyazı.
+- **Seslendirme 0.07'de** "Efsaneye göre…" ile başlar. Sessizlik ya da efekt girişi yok.
+- **İlk cümlede kesimler 1.4 ve 2.9'da.** İlk plan hafif itme/kamera hareketli.
+- **2.9'da imza:** Sunucu kesilip beyaz konturlu çıkartma olarak çizim arka planın önüne konur.
+Her MythBusters videosunda: ilk kare sunucu yüzü/tuhaf an → ilk cümle 3 plan → banner yok → ilk 5 sn içinde çıkartma sahnesi.
+Bu, genel SKILL.md'deki "kare sıfırda iki satır hook yazısı" kuralının yerine geçer (yalnız bu format için).
+
+## Kaynak seçimi: Shorts potansiyeli
+Seç: (1) herkesin kendine sorduğu tek soru ("suya dalarsan mermiden kurtulur musun?"), (2) tek, görsel bir doruk anı (patlama, kırılma, çarpma), (3) şaşırtıcı sonuç, (4) sunucunun yüzünü gösteren tepki planı (giriş için şart).
+Bu ortamdan YouTube'a erişim yok (proxy 403). Klibi kullanıcı indirip atar.
