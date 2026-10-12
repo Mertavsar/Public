@@ -228,7 +228,7 @@ SR = sd.SR; N = int(round(DUR * SR))
 rd = lambda p, af="anull": np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", p, "-af", af, "-ar", str(SR), "-ac", "1", "-f", "f32le", "-"],
                                                         capture_output=True).stdout, np.float32).copy()
 vo = rd(f"{S}/w/vo_fast.wav", "highpass=f=70,acompressor=threshold=-18dB:ratio=3:attack=5:release=80")
-mus = rd(f"{S}/w/music.wav")
+mus = rd(os.environ.get("MUSIC_FILE") or f"{S}/w/music.wav")
 voc = np.zeros(N); voc[:min(N, len(vo))] = vo[:N]
 m = np.zeros(N); m[:min(N, len(mus))] = mus[:N]
 rms = lambda x: np.sqrt(np.mean(x[np.abs(x) > 1e-4] ** 2) + 1e-12)
@@ -239,7 +239,8 @@ duck = np.convolve(duck, np.ones(int(0.2 * SR)) / int(0.2 * SR), mode="same")
 fr_ = int(FREEZE[0] * SR), int(FREEZE[1] * SR)            # donmada müzik bir an kesilir (düşüş askıda)
 gate = np.ones(N); gate[fr_[0]:fr_[1]] = 0.15
 gate = np.convolve(gate, np.ones(int(0.03 * SR)) / int(0.03 * SR), mode="same")
-mix = voc + m * duck * gate
+MUS_GAIN = float(os.environ.get("MUSIC", "0"))   # sentetik yatak reddedildi; gerçek parça gelince MUSIC_FILE ile
+mix = voc + m * duck * gate * MUS_GAIN
 fx = np.zeros(N)
 
 

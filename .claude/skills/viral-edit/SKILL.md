@@ -46,6 +46,18 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 
 ---
 
+## 0a. ⛔ MÜZİĞİ SENTEZLEME — kullanıcı açıkça istese bile
+
+> Şişme top (12 Ekim): kullanıcı "arkaya hareketli müzik koy" dedi,
+> `audiobed --mood drive` yatağı verildi → *"arka müzik berbat"*. Bu üçüncü ret
+> (kedi-köpek `drive`, `sad`, şimdi yine `drive`).
+>
+> - Müzik istenirse **gerçek parça iste** (YouTube Ses Kütüphanesi, CapCut, TikTok
+>   sesi). Gelene kadar videoyu **müziksiz** ver ve müziği uygulamada eklemesini öner.
+> - Parça gelince: `MUSIC_FILE=parça.mp3 MUSIC=1 python3 edit.py` (konuşmanın ~13 dB
+>   altında, konuşurken ~7 dB daha iner).
+> - Ağ: ücretsiz müzik siteleri proxy'de kapalı (freepd, incompetech, archive.org 403).
+
 ## 0. ⛔ EFEKT SESİ EKLEME — kullanıcı kendisi ekliyor
 
 > **Kullanıcının kuralı:** *"efekt seslerini sen ekleme ben hallederim, sen
