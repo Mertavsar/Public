@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""CNC torna – küre mafsal: TR seslendirme (sıkı 1.18x), cümle = sahne, 'kesim değil' anında geri sarma,
-'kodladı' anında G-code paneli, 'yanlış değer' alarmı, sonda dümdüz -> hızlı ileri -> parlak küre (clink + ok).
+"""CNC torna – küre mafsal: TR seslendirme (sıkı 1.18x), cümle = sahne, kaynak tek yönde akar (geri sarma yok),
+'kodladı' anında G-code paneli, 'yanlış değer' alarmı, parlak küre yalnız sonda (clink + ok).
 Geçişler: bulanıklıksız zoom-punch + RGB kayması. Makine sesi duyulur ama konuşmanın altında."""
 import json, os, subprocess, sys
 import numpy as np, cv2
@@ -18,19 +18,16 @@ VOD = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=d
                            capture_output=True, text=True).stdout)
 ws = lambda i: caps[i]["s"] - 0.05
 END = VOD + 0.7
-SEG = [(0.0, "play", 0.0, 1.6),        # 0 "Bu metalin … tahmin edebilir misin?" (hook)
-       (ws(10), "play", 1.6, 4.6),     # 1 "Çünkü makine kesmeye başladığında … anlamsız görünüyor."
-       (ws(21), "play", 4.6, 9.6),     # 2 "Ama dikkat et, … milimetre alıyor ve içeride saklı" (ok)
-       (ws(34), "play", 9.6, 12.0),    # 3 "olan şekil yavaş yavaş ortaya çıkıyor." (ok + clink)
-       (ws(40), "rewind", 12.0, 6.0),  # 4 "Fakat asıl şaşırtıcı olan" -> geri sar
-       (ws(43), "play", 6.0, 6.8),     # 5 "kesim değil."
-       (ws(46), "play", 6.8, 8.8),     # 6 "Bu makine nerede duracağını kendi kendine bilmiyor." (panel)
-       (ws(53), "play", 8.8, 12.2),    # 7 "Her hareketi, … önceden kodladı." (G-code yazılıyor)
-       (ws(67), "play", 12.2, 13.4),   # 8 "Tek bir yanlış değer … çöpe çevirebilir." (alarm)
-       (ws(75), "play", 13.4, 15.0),   # 9 "Ama kod doğru olduğunda" (OK)
-       (ws(79), "play", 0.0, 0.9),     # 10 "dümdüz bir metal"
-       (ws(82), "ffwd", 0.9, 17.0),    # 11 "saniyeler içinde" -> hızlı ileri
-       (ws(84), "play", 17.0, 18.9)]   # 12 "bu hale geliyor." (clink + ok)
+SEG = [(0.0, "play", 0.0, 1.4),        # 0 "Bu metalin … tahmin edebilir misin?" (hook)
+       (ws(10), "play", 1.4, 3.3),     # 1 "Çünkü makine kesmeye başladığında … anlamsız görünüyor."
+       (ws(21), "play", 3.3, 5.6),     # 2 "Ama dikkat et, … milimetre alıyor ve içeride saklı" (ok)
+       (ws(34), "play", 5.6, 6.8),     # 3 "olan şekil yavaş yavaş ortaya çıkıyor." (ok + clink)
+       (ws(40), "play", 6.8, 7.7),     # 4 "Fakat asıl şaşırtıcı olan kesim değil."
+       (ws(46), "play", 7.7, 8.8),     # 5 "Bu makine nerede duracağını kendi kendine bilmiyor." (panel)
+       (ws(53), "play", 8.8, 11.0),    # 6 "Her hareketi, … önceden kodladı." (G-code yazılıyor)
+       (ws(67), "play", 11.0, 13.0),   # 7 "Tek bir yanlış değer … çöpe çevirebilir." (alarm; parlatma başlıyor)
+       (ws(75), "play", 13.0, 18.9)]   # 8 "Ama kod doğru olduğunda … bu hale geliyor." (sonuç yalnız burada)
+# kullanıcı: geri sarma yok, sonucu önceden gösterme -> kaynak baştan sona tek yönde akar
 B = [s[0] for s in SEG] + [END]
 seq = []
 for k, (t0, kind, a, b) in enumerate(SEG):
@@ -118,13 +115,13 @@ if cur:
     chunks.append(cur)
 HOOK = [("BU METAL", WHITE, 130), ("NEYE DÖNÜŞECEK?", YELLOW, 140)]
 T_MM, T_SEKIL, T_FINAL = ws(29) + 0.05, ws(35) + 0.05, ws(84) + 0.05
-ARROWS = [(T_MM, ws(31), (640, 705), (330, 1130), YELLOW),          # takımın ucu: "milimetre"
-          (T_SEKIL, B[4], (720, 760), (430, 1150), CYAN),            # basamaklı küre: "şekil"
-          (T_FINAL, END, (700, 790), (400, 1190), YELLOW)]           # parlak küre: "bu hale"
+ARROWS = [(T_MM, ws(31), (470, 610), (230, 1060), YELLOW),          # takımın ucu: "milimetre"
+          (T_SEKIL, B[4], (560, 650), (330, 1090), CYAN),            # basamaklı küre: "şekil"
+          (T_FINAL, END, (700, 755), (400, 1170), YELLOW)]           # parlak küre: "bu hale"
 T_BAD, T_COPE, T_OK = ws(69) + 0.05, ws(73) + 0.05, ws(76) + 0.05
 CUTS = B[1:-1]
 # G-code paneli: (satır, görünme anı)
-GC = [("O1001  (KURE MAFSAL)", B[6] + 0.2),
+GC = [("O1001  (KURE MAFSAL)", B[5] + 0.2),
       ("G00 X52.0 Z2.0", ws(53) + 0.05),
       ("G01 X30.0 Z-15.0 F0.12", ws(55) + 0.05),
       ("G02 X40.0 Z-35.0 R20.0", ws(57) + 0.05),
@@ -150,7 +147,7 @@ for n, (s, kind, u, si) in enumerate(seq):
                 f = rgbsplit(f, int(22 * e))
     if 0 <= tt - T_FINAL < 1.0:                          # final: nabız gibi yakınlaşma
         f = zoom(f, 1 + 0.06 * np.exp(-(tt - T_FINAL) / 0.35), 760, 560)
-    if abs(tt - T_FINAL) < 0.05 or abs(tt - B[4]) < 0.05:
+    if abs(tt - T_FINAL) < 0.05:
         f = cv2.addWeighted(f, 0.65, np.full_like(f, 255), 0.35, 0)
     if 0 <= tt - T_COPE < 0.5:                           # "çöpe": kırmızı alarm + sarsıntı
         e = 1 - (tt - T_COPE) / 0.5; red = f.copy(); red[..., 2] = 255
@@ -175,8 +172,8 @@ for n, (s, kind, u, si) in enumerate(seq):
         for x0_ in (W - 220, W - 170):
             dl.polygon([(x0_, 120), (x0_, 190), (x0_ + 50, 155)], fill=WHITE + (255,), outline=(0, 0, 0, 255), width=5)
         tw = dl.textlength("x15", font=font(64)); stroke(dl, (W - 240 - tw, 115), "x15", font(64), WHITE + (255,), 6)
-    if B[6] <= tt < B[10]:                               # G-code paneli
-        al = min(1, (tt - B[6]) / 0.2) * min(1, (B[10] - tt) / 0.15)
+    if B[5] <= tt < ws(79):                               # G-code paneli
+        al = min(1, (tt - B[5]) / 0.2) * min(1, (ws(79) - tt) / 0.15)
         P = Image.new("RGBA", img.size, (0, 0, 0, 0)); dp = ImageDraw.Draw(P)
         bad = T_BAD <= tt < T_OK; ok = tt >= T_OK
         edge = RED if bad else (GREEN if ok else CYAN)
@@ -271,16 +268,13 @@ def clink2(pitch=1.0):
 
 place(sd.pop(1.0), 0.03, 0.3); place(sd.pop(1.0), 0.15, 0.25)
 for c in CUTS:
-    if c not in (B[4], B[11]):
-        place(sd.pop(0.8), c, 0.22)                  # geçişlerde yumuşak tık (whoosh yok)
+    place(sd.pop(0.8), c, 0.22)                  # geçişlerde yumuşak tık (whoosh yok)
 place(clink2(1.0), T_MM, 0.5)
 place(clink2(1.25), T_SEKIL, 0.55)
-place(sd.rewind(B[5] - B[4]), B[4], 0.5)
 for t0 in [t for _, t in GC[1:]]:
     place(sd.pop(0.6), t0, 0.12)                     # kod satırı tıkı
 place(sd.boom(), T_COPE, 0.75)
 place(clink2(1.5), T_OK, 0.4)
-place(sd.rewind(0.6)[::-1].copy(), B[11], 0.35)      # hızlı ileri
 place(clink2(1.0), T_FINAL, 0.75); place(clink2(1.5), T_FINAL + 0.12, 0.45)
 mix += fx * 0.55
 mix.astype(np.float32).tofile(f"{S}/w/mix.f32")

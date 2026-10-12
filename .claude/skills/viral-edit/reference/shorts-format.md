@@ -238,3 +238,9 @@ Kullanıcı: "profesyonel şekilde değiştir", "globale hitap etsin, TR bir şe
 - Flaş ve sarsıntı yalnız oyun panelinde; takım bandı sabit kalır.
 - Kadraj sınırları (keep-ranges) ölçülür: kill feed içeride, yayın kamerası / oyuncu isim bandı dışarıda. İkisi aynı anda sığmıyorsa o aralık kesilir.
 - Kapak hook'u doğrulanabilir sayı olsun (skor tablosundan: "8 KILLS IN 35 SECONDS").
+
+### Makine / "nasıl yapılır" videoları: sonucu önceden gösterme, geri sarma yok
+- Kullanıcı: "sürekli sonu gösterip geri sarıyorsun, berbat; sonucu gösterme, geri sarma." Kaynak baştan sona TEK YÖNDE akar.
+- Bitmiş parça yalnız son cümlede ("…bu hale geliyor") ortaya çıkar; ortada geri sarma, başa dönüş, hızlı ileri yok.
+- Ses kaynaktan uzunsa ağır çekimle yayılır (≈0.4–0.5x); çeşitlilik ok, panel, zoom-punch geçişleriyle sağlanır.
+- (LoL edit'leri ayrı: orada soğuk açılış + kısa geri sarma isteniyor.)
