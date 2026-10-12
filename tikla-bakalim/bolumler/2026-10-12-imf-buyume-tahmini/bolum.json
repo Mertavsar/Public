@@ -1,0 +1,625 @@
+{
+  "baslik": "IMF dünya ekonomisi için ne diyor? 13 Ekim'de yeni tahmin geliyor",
+  "tarih": "2026-10-12",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "IMF",
+    "büyüme",
+    "tahmin",
+    "enflasyon",
+    "bekleniyor"
+  ],
+  "altyazi": {
+    "yüzde üç virgül birdi": "%3,1'di",
+    "yüzde üç virgül bir": "%3,1",
+    "yüzde üçe": "%3'e",
+    "yüzde üç büyüyeceğini": "%3 büyüyeceğini",
+    "yüzde üç virgül dörtten": "%3,4'ten",
+    "yüzde iki virgül dokuza": "%2,9'a",
+    "yüzde iki virgül dokuz": "%2,9",
+    "yüzde dört virgül yedi": "%4,7",
+    "on üç Ekim'de": "13 Ekim'de",
+    "sekiz Temmuz'daydı": "8 Temmuz'daydı",
+    "Üç soruda": "3 soruda",
+    "üç şeye": "3 şeye",
+    "yüz iki lira doksan kuruş": "102,90 lira",
+    "yüz üç lira kırk kuruş": "103,40 lira",
+    "yüzde üç virgül dört büyüseydi": "%3,4 büyüseydi",
+    "yüzde üç virgül dört": "%3,4",
+    "yılda iki büyük": "yılda 2 büyük",
+    "yüz liralıksa": "100 liralıksa",
+    "yılda dört kez": "yılda 4 kez"
+  },
+  "kapak": {
+    "ikon": "🌍",
+    "ust": "IMF TAHMİNİ",
+    "buyuk": "%3,0",
+    "alt": "13 EKİM'DE NE ÇIKACAK?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "IMF, dünya ekonomisinin bu yıl sadece yüzde üç büyüyeceğini söylüyor. Yeni tahmin on üç Ekim'de geliyor.",
+      "p": {
+        "ikon": "🌍",
+        "etiket": "IMF · 2026 küresel büyüme tahmini",
+        "deger": 3.0,
+        "onek": "%",
+        "ondalik": 1,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Temmuz güncellemesi · Nisan'da %3,1'di"
+      },
+      "kaynak": "IMF Temmuz 2026 (K1, K2)",
+      "etiket": "KÜRESEL BÜYÜME"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki IMF'nin tahmini neden herkesi ilgilendiriyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "IMF TAHMİNİ\n*NEDEN ÖNEMLİ?*",
+        "boy": 100
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ *SADE*",
+          "ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce IMF nedir? Ülkelerin ortak çalıştığı bir para kuruluşu.",
+      "p": {
+        "ikon": "🌐",
+        "satirlar": [
+          "IMF =",
+          "ULUSLARARASI",
+          "*PARA FONU*"
+        ],
+        "boy": 100
+      },
+      "etiket": "IMF NEDİR?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Dünya Bankası'yla birlikte yılda iki büyük toplantı yapıyor. Biri nisanda, biri ekimde.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "YILDA *2* BÜYÜK",
+          "TOPLANTI:",
+          "NİSAN VE *EKİM*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "IMF/Dünya Bankası Bahar ve Yıllık Toplantıları (K4)",
+      "etiket": "TOPLANTI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Dünya ekonomisi için yılda dört kez büyüme tahmini yayımlıyor.",
+      "p": {
+        "ikon": "🔁",
+        "satirlar": [
+          "YILDA *4 KEZ*",
+          "BÜYÜME TAHMİNİ",
+          "YAYIMLAR"
+        ],
+        "boy": 96
+      },
+      "kaynak": "IMF WEO takvimi (K1)",
+      "etiket": "TAHMİN"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Son güncelleme sekiz Temmuz'daydı.",
+      "p": {
+        "gun": "8",
+        "ay": "TEMMUZ",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "",
+        "not": "IMF *son güncelleme*"
+      },
+      "kaynak": "IMF, 8 Temmuz 2026 (K1)",
+      "etiket": "SON RAPOR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Nisan'da dünya için tahmin yüzde üç virgül birdi. Temmuz'da yüzde üçe indi.",
+      "p": {
+        "baslik": "🌍 Küresel büyüme tahmini · 2026",
+        "sol": {
+          "etiket": "NİSAN",
+          "deger": 3.1,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "TEMMUZ",
+          "deger": 3.0,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "-0,1 puan",
+        "not": "Eksen sıfırdan başlar"
+      },
+      "kaynak": "IMF; mdm.com; thenews.pk (K1, K2)",
+      "etiket": "DÜNYA TAHMİNİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Türkiye için bu yılın tahmini yüzde üç virgül dörtten, yüzde iki virgül dokuza çekildi.",
+      "p": {
+        "baslik": "🇹🇷 Türkiye büyüme tahmini · 2026",
+        "sol": {
+          "etiket": "NİSAN",
+          "deger": 3.4,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "TEMMUZ",
+          "deger": 2.9,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "-0,5 puan",
+        "not": "Eksen sıfırdan başlar"
+      },
+      "kaynak": "IMF; Bloomberg HT, T24 (K3)",
+      "etiket": "TÜRKİYE TAHMİNİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Yeni rapor on üç Ekim'de yayımlanıyor.",
+      "p": {
+        "gun": "13",
+        "ay": "EKİM",
+        "gunadi": "SALI",
+        "saat": "",
+        "not": "IMF *Dünya Ekonomik Görünüm*"
+      },
+      "kaynak": "IMF WEO Ekim 2026 sayfası; SUERF (K4)",
+      "etiket": "YENİ RAPOR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yeni rakamlar henüz yok. Bu yüzden eski tahminlere bakıyoruz.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "YENİ RAKAM",
+          "HENÜZ *YOK*",
+          "BEKLENİYOR"
+        ],
+        "boy": 96
+      },
+      "etiket": "BEKLENİYOR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Önce büyüme ne demek? Ülkenin bir yılda ürettiği mal ve hizmetin artması.",
+      "p": {
+        "ikon": "🌱",
+        "satirlar": [
+          "BÜYÜME =",
+          "ÜRETİLEN MAL VE",
+          "HİZMET *ARTIŞI*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BÜYÜME NEDİR?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki tahmin neden sürekli değişiyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "TAHMİN\n*NEDEN DEĞİŞİR?*",
+        "boy": 108
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Tahmin, hava durumu gibidir. Yeni veri geldikçe güncellenir.",
+      "p": {
+        "ikon": "🌦️",
+        "satirlar": [
+          "TAHMİN =",
+          "*HAVA DURUMU*",
+          "GİBİDİR"
+        ],
+        "boy": 100
+      },
+      "etiket": "TAHMİN NEDİR?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "IMF'ye göre savaş, enerji ve gıda maliyetlerini artırdı. Büyüme tahmini de düştü.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💥",
+            "metin": "Orta Doğu'da *savaş*"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Enerji, gıda *pahalandı*"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Büyüme tahmini *düştü*"
+          }
+        ]
+      },
+      "kaynak": "IMF Temmuz 2026; Bloomberg HT (K1, K3)",
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "IMF yine de toparlanma bekliyor. Gelecek yıl için dünya tahmini yüzde üç virgül dört.",
+      "p": {
+        "baslik": "🌍 Küresel büyüme tahmini",
+        "sol": {
+          "etiket": "2026\n(tahmini)",
+          "deger": 3.0,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2027\n(tahmini)",
+          "deger": 3.4,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "+0,4 puan",
+        "not": "Eksen sıfırdan başlar"
+      },
+      "kaynak": "IMF Temmuz 2026; thenews.pk (K1)",
+      "etiket": "TOPARLANMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BURAYA KADAR",
+          "İŞİNE YARADIYSA",
+          "*BEĞEN*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Asıl ilginç kısım şimdi geliyor. Savaş büyümeyi aşağı çekerken, yapay zekâ talebi bir kısmını dengeledi.",
+      "p": {
+        "baslik": "İki zıt güç · IMF'nin okuması",
+        "satirlar": [
+          {
+            "ikon": "💥",
+            "metin": "Savaş",
+            "deger": "büyümeyi düşürdü",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🤖",
+            "metin": "Yapay zekâ talebi",
+            "deger": "kısmen dengeledi",
+            "renk": "yesil"
+          }
+        ],
+        "not": ""
+      },
+      "kaynak": "IMF Temmuz 2026; mdm.com (K1, K2)",
+      "etiket": "İLGİNÇ KISIM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Aynı raporda dünya enflasyonu için tahmin yüzde dört virgül yedi.",
+      "p": {
+        "ikon": "🛒",
+        "etiket": "Küresel enflasyon tahmini · 2026",
+        "deger": 4.7,
+        "onek": "%",
+        "ondalik": 1,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "Nisan'a göre +0,3 puan"
+      },
+      "kaynak": "IMF Temmuz 2026; mdm.com; thenews.pk (K1, K2)",
+      "etiket": "ENFLASYON"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Enflasyon düşmezse merkez bankaları faizi yüksek tutabilir.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "ENFLASYON",
+          "DÜŞMEZSE",
+          "FAİZ *YÜKSEK KALABİLİR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "FAİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Faiz yüksek kalınca kredi pahalanır, yatırım yavaşlar, büyüme zayıflayabilir.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Faiz *yüksek*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Kredi *pahalı*"
+          },
+          {
+            "ikon": "🏗️",
+            "metin": "Yatırım *yavaş*"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Büyüme *zayıf*"
+          }
+        ]
+      },
+      "kaynak": "genel mekanizma (hedef, garanti değil)",
+      "etiket": "MEKANİZMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani büyüme tahmini tek bir sayı değil. Savaşın, fiyatların ve faizin özeti.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "BÜYÜME TAHMİNİ =",
+          "SAVAŞ + FİYAT",
+          "+ *FAİZ* ÖZETİ"
+        ],
+        "boy": 88
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+        "boy": 108
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Büyüme, ekonominin bir yılda ne kadar genişlediği. Ekonomi yüz liralıksa, yüzde iki virgül dokuz büyüme onu yüz iki lira doksan kuruş yapar.",
+      "p": {
+        "baslik": "Örnek · 100 liralık ekonomi · 1 yıl",
+        "ikon": "📊",
+        "ogeler": [
+          "100 ₺",
+          "+",
+          "%2,9",
+          "=",
+          "102,90 ₺"
+        ]
+      },
+      "kaynak": "100 × 1,029 = 102,90 (basit örnek)",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "Yüzde üç virgül dört büyüseydi, aynı ekonomi yüz üç lira kırk kuruş olurdu. Fark küçük görünür ama milyarlarca liralık ekonomide büyüktür.",
+      "p": {
+        "baslik": "",
+        "sol": {
+          "etiket": "%2,9\n(Temmuz tahmini)",
+          "deger": 102.9,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "%3,4\n(Nisan tahmini)",
+          "deger": 103.4,
+          "renk": "sari"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 2,
+        "fark": "+0,50 ₺",
+        "not": "100 liralık ekonomi · 1 yıl · eksen sıfırdan"
+      },
+      "kaynak": "100 × 1,029 ; 100 × 1,034 (basit örnek)",
+      "etiket": "FARK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Büyüme yavaşlarsa yeni iş açmak zorlaşabilir. Yatırım kararları da etkilenebilir.",
+      "p": {
+        "ikon": "💼",
+        "satirlar": [
+          "BÜYÜME YAVAŞSA",
+          "İŞ AÇMAK *ZORLAŞABİLİR*"
+        ],
+        "boy": 92
+      },
+      "etiket": "İŞ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Türkiye dışarıya da mal satıyor. Dünya yavaşlarsa satış zorlaşabilir.",
+      "p": {
+        "ikon": "🚢",
+        "satirlar": [
+          "TÜRKİYE *SATIYOR*",
+          "DÜNYA YAVAŞSA",
+          "SATIŞ *ZORLAŞABİLİR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "DIŞ SATIŞ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Piyasalar rakamın kendisinden çok, beklentiden sapmaya bakar. Sürpriz olursa dolar ve borsa oynayabilir.",
+      "p": {
+        "ikon": "📺",
+        "satirlar": [
+          "PİYASA *SÜRPRİZE*",
+          "BAKAR",
+          "DOLAR, BORSA *OYNAR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "PİYASA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu bir kehanet değil, tahmin. Yeni rapor rakamı yukarı da çekebilir, aşağı da.",
+      "p": {
+        "ikon": "🎲",
+        "satirlar": [
+          "KEHANET *DEĞİL*",
+          "TAHMİN",
+          "YUKARI DA AŞAĞI DA"
+        ],
+        "boy": 92
+      },
+      "etiket": "DİKKAT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Raporu izlerken üç şeye bak: dünya tahmini, Türkiye tahmini ve enflasyon.",
+      "p": {
+        "baslik": "Rapor günü üç şey",
+        "satirlar": [
+          {
+            "ikon": "🌍",
+            "metin": "Dünya tahmini",
+            "deger": "%3,0'dan nereye?",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🇹🇷",
+            "metin": "Türkiye tahmini",
+            "deger": "%2,9'dan nereye?",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Enflasyon",
+            "deger": "%4,7 değişti mi?",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "3 ŞEY"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: IMF yeni tahminini on üç Ekim'de açıklıyor. Yeni rakam bekleniyor.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "IMF: *13 EKİM*",
+          "ESKİ TAHMİN: *%3,0*",
+          "YENİ RAKAM *BEKLENİYOR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "IMF WEO Temmuz 2026 güncellemesi (8 Temmuz): küresel büyüme %3,0 (2026), enflasyon %4,7 — https://www.imf.org/en/publications/weo/issues/2026/07/08/world-economic-outlook-update-july-2026 ; https://www.mdm.com/news/research/economic-trends/imf-lowers-2026-global-growth-outlook-holds-u-s-forecast-steady/ ; https://www.thenews.pk/print/1424775-imf-edges-2026-global-growth-forecast-lower-to-3pc-sees-rebound-in-2027",
+    "K2": "Küresel büyüme tahmini Nisan %3,1 → Temmuz %3,0 — https://www.cnnturk.com/ekonomi/imf-kuresel-buyume-tahminini-asagi-cekti-3440483 ; https://www.thenews.pk/print/1424775-imf-edges-2026-global-growth-forecast-lower-to-3pc-sees-rebound-in-2027",
+    "K3": "Türkiye 2026 büyüme tahmini %3,4 → %2,9; gerekçe jeopolitik risk, enerji-gıda maliyeti — https://www.bloomberght.com/imf-turkiye-icin-2026-buyume-beklentisini-dusurdu-3782348 ; https://t24.com.tr/ekonomi/imf-turkiye-icin-buyume-tahminini-dusurdu,1334761 ; https://istanbulticaretgazetesi.com/imf-turkiye-icin-2026-buyume-beklentisini-yuzde-29a-cekti ; https://infoyatirim.com/blog/kesfet/imf-turkiye-buyume-tahmini-2026-savas-etkisiyle-dusuruldu",
+    "K4": "Ekim 2026 WEO tam raporu 13 Ekim'de yayımlanıyor (Bangkok Yıllık Toplantıları) — https://www.imf.org/en/publications/weo/issues/2026/10/13/world-economic-outlook-october-2026 ; https://www.suerf.org/events/key-insights-from-the-imfs-october-2026-world-economic-outlook-global-financial-stability-report-and-fiscal-monitor/ ; https://sdg.iisd.org/?p=419299"
+  },
+  "cta": [
+    {
+      "sahne": 17,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
