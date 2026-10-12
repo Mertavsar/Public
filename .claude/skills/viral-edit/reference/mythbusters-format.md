@@ -46,3 +46,9 @@ Bu, genel SKILL.md'deki "kare sıfırda iki satır hook yazısı" kuralının ye
 ## Kaynak seçimi: Shorts potansiyeli
 Seç: (1) herkesin kendine sorduğu tek soru ("suya dalarsan mermiden kurtulur musun?"), (2) tek, görsel bir doruk anı (patlama, kırılma, çarpma), (3) şaşırtıcı sonuç, (4) sunucunun yüzünü gösteren tepki planı (giriş için şart).
 Bu ortamdan YouTube'a erişim yok (proxy 403). Klibi kullanıcı indirip atar.
+
+## İkinci örnek: şişme top (mythbusters_sismetop.example.py)
+- **Kaynak başkasının kurgusuydu** (720x1280, bulanık üst/alt, net bant y 298–918, gömülü turkuaz tek kelime altyazı y≈930–985). Altyazı bandın DIŞINDA kaldığı için silme yok, sadece bant kırpıldı: 2.15x büyütme, ortada 1080x1333, üst/alt koyu bar, kenarlar 70 px yumuşak. Bazı planlarda içerik bandın altında kalıyor (top bırakma 26.77), o planı kullanma.
+- **Soğuk açılış (kullanıcı isteği):** Buster helikopterden atılıyor, düşüş YARIDA donuyor (0.25 sn yakınlaşma + kırmızı ton + müzik kesilir), sonra sunucu yüzü. Sonuç saklı kalıyor.
+- Kaynaktaki "ESTIMATED VELOCITY 56 MPH" grafiği: metin kutusu sabit kameradan temiz kareyle yamalandı, topa bağlı kesik çizgi ince çizgi tespiti + Telea ile silindi.
+- Seslendirme 1.2x hızlandı, kelime zamanları Descript'ten alınıp onaylı metne eşlendi. Müzik `audiobed --mood drive --bpm 118`, konuşmanın ~13 dB altında, konuşurken ~7 dB daha iniyor. İki çarpmada `sd.boom`.
