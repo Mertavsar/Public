@@ -39,6 +39,16 @@ BEKLİYOR (kullanıcı):
 - Ödeme (iyzico uygulaması, kapıda ödeme, havale), vergi ayarı, uygulamalar, alan adı.
 - Yurt dışı: yeni mağazada sadece "Türkiye" pazarı var; Valenstrend'deki durum bilinmiyor.
 
+## Ürün açıklaması düzeltmesi (13 Ekim 2026) — YARIM, kullanıcı durdurdu
+
+Yedek: `veri/urun_aciklamalari_yedek_2026-10-13.json` (28 farklı açıklama + 1038 ürün → açıklama no).
+543 üründe yanlış/eski bilgi vardı (fiyat, havale, WhatsApp, "3 adet kargo ücretsiz", 6 taksit,
+Rosebella/Amber'de "Flora İpek", "Pakuksu"). Fiyat/ödeme/kargo satırları silinir (tema ürün
+sayfasında doğrusu yazıyor), isim ve yazım hataları düzeltilir.
+- Uygulandı (364): Koton Eşarp 345 (açıklama no 0 ve 24), Jakarlı Eşarp 19.
+- Bekliyor (179): Jakarlı 58, Çocuk 62, Anne 20, Omuz 7, Triko 7, İncira Amber 6 /
+  Rosebella 13 / Flora İpek 6. Kullanıcı "devam / önce göster / geri al" kararı verecek.
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
