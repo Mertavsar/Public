@@ -49,14 +49,16 @@ Uygulanan: Koton Eşarp 345, Jakarlı 77, Çocuk 62, Anne 20, Omuz 7, Triko 7, �
 Doğrulama: 1038 ürün yeniden okundu; 543'ü yeni metinle birebir, diğer 495 değişmedi; havale,
 WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
 
-## Tema durumu (13 Ekim 2026)
+## Tema durumu (13 Ekim 2026, akşam)
 
-- CANLI: "Güncelleme 3 (Sabit menü)" 166097944662. "Güncelleme 4 (Ödeme yazıları)" 166329253974 hiç
-  yayınlanmadı; ödeme/kapıda ödeme yazıları canlıda henüz eski.
-- YENİ: "Güncelleme 5 (Kategori tasarımı)" 166334824534 = Güncelleme 4 + yeni kategori şeridi
-  (`sections/vt-kategoriler.liquid`: renkli story halkası, başta Çok Satanlar balonu, sonda Tümünü Gör,
-  blok bazlı görsel/yazı/rozet; rozetler: Organik Soft Şal "Çok Satan", Kampanyalı Eşarp "Kampanya").
-  Dosyalar geri okunup doğrulandı. Kullanıcı yayınlayacak.
+- CANLI: "Güncelleme 5 (Kategori tasarımı)" 166334824534 (kullanıcı yayınladı). Ödeme yazıları güncel;
+  kategori şeridi renkli halkalı. Kullanıcı beğenmedi, eski görünüm istedi.
+- YENİ: "Güncelleme 6 (Klasik kategoriler)" 166337773654 = Güncelleme 5 + kategori şeridi eski sade
+  görünümde (ince gri çerçeve, 120/78 px), Çok Satanlar ve Tümünü Gör balonları kapalı, sadece Koton
+  Eşarp'ta "En Çok Satan" rozeti. Çerçeve stili tema düzenleyicide seçilebilir (klasik / renkli).
+  Dosyalar geri okunup doğrulandı. Kullanıcı yayınlayacak. Kopyası: `veri/tema_guncelleme5/`.
+- Kategori görselleri: koleksiyonların kendi görseli yok, dairede ilk ürünün fotoğrafı çıkıyor.
+  Fotoğrafları seçmek için ortamda cdn.shopify.com erişimi gerekir (şu an kapalı).
 
 ## Kaynak mağaza özeti
 

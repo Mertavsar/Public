@@ -2,7 +2,7 @@
   class="section section--page-width"
   style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px;--vt-r1:{{ section.settings.ring_1 }};--vt-r2:{{ section.settings.ring_2 }};--vt-r3:{{ section.settings.ring_3 }};--vt-badge-bg:{{ section.settings.badge_bg }};--vt-badge-fg:{{ section.settings.badge_fg }};"
 >
-  <div class="vt-kat" id="vt-kat-{{ section.id }}">
+  <div class="vt-kat vt-kat--{{ section.settings.ring_style | default: 'classic' }}" id="vt-kat-{{ section.id }}">
     {%- if section.settings.heading != blank -%}
       <h2 class="vt-kat__title">{{ section.settings.heading }}</h2>
     {%- endif -%}
@@ -65,7 +65,7 @@
     </div>
   </div>
   <style>
-    #vt-kat-{{ section.id }} { --vt-size: 116px; --vt-gap: 26px; }
+    #vt-kat-{{ section.id }} { --vt-size: 120px; --vt-gap: 22px; }
     #vt-kat-{{ section.id }} *, #vt-kat-{{ section.id }} *::before, #vt-kat-{{ section.id }} *::after { box-sizing: border-box; }
     .vt-kat__title { font-family: var(--font-heading--family); font-weight: 400; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.2; text-align: center; margin: 0 0 24px; }
     .vt-kat__viewport { position: relative; }
@@ -104,6 +104,13 @@
     .vt-kat__nav:disabled { opacity: 0; pointer-events: none; }
     .vt-kat--fits .vt-kat__nav { display: none; }
 
+    .vt-kat--classic .vt-kat__ring { padding: 1px; }
+    .vt-kat--classic .vt-kat__ring::before { background: rgba(0,0,0,.12); transition: background .25s; }
+    .vt-kat--classic .vt-kat__item:hover .vt-kat__ring { transform: none; }
+    .vt-kat--classic .vt-kat__item:hover .vt-kat__ring::before { transform: none; background: #000; }
+    .vt-kat--classic .vt-kat__item:hover .vt-kat__img img { transform: scale(1.05); }
+    .vt-kat--classic .vt-kat__name { font-weight: 400; letter-spacing: .05em; }
+
     @keyframes vt-kat-spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) {
       .vt-kat__ring, .vt-kat__ring::before, .vt-kat__img img { transition: none; }
@@ -111,15 +118,17 @@
     }
 
     @media (max-width: 749px) {
-      #vt-kat-{{ section.id }} { --vt-size: 74px; --vt-gap: 14px; }
+      #vt-kat-{{ section.id }} { --vt-size: 78px; --vt-gap: 14px; }
       .vt-kat__title { margin-bottom: 16px; }
       .vt-kat__list { padding: 4px 2px 8px; }
-      .vt-kat__item { gap: 9px; }
+      .vt-kat__item { gap: 12px; }
       .vt-kat__ring { padding: 2px; }
       .vt-kat__gap { padding: 2px; }
-      .vt-kat__badge { bottom: -6px; padding: 2px 6px; font-size: 8.5px; letter-spacing: .04em; }
+      .vt-kat__badge { bottom: -6px; padding: 2px 6px; font-size: 8px; letter-spacing: .02em; }
       .vt-kat__name { font-size: 10px; letter-spacing: .03em; }
       .vt-kat__nav { display: none; }
+      .vt-kat--classic .vt-kat__ring { padding: 1px; }
+      .vt-kat--classic .vt-kat__name { letter-spacing: .03em; }
       .vt-kat:not(.vt-kat--fits):not(.vt-kat--end) .vt-kat__list { -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent); mask-image: linear-gradient(90deg, #000 82%, transparent); }
     }
   </style>
@@ -202,7 +211,17 @@
     },
     {
       "type": "header",
-      "content": "Renkler"
+      "content": "Görünüm"
+    },
+    {
+      "type": "select",
+      "id": "ring_style",
+      "label": "Çerçeve stili",
+      "options": [
+        { "value": "classic", "label": "Klasik (ince çerçeve)" },
+        { "value": "color", "label": "Renkli halka" }
+      ],
+      "default": "classic"
     },
     {
       "type": "color",
