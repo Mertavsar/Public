@@ -1,0 +1,577 @@
+{
+  "baslik": "2027 asgari ücret nasıl hesaplanıyor? Neden herkesin rakamı farklı?",
+  "tarih": "2026-10-13",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "asgari",
+    "ücret",
+    "tahmin",
+    "enflasyon",
+    "komisyon"
+  ],
+  "altyazi": {
+    "iki bin yirmi yedide": "2027'de",
+    "yirmi sekiz bin yetmiş beş lira elli kuruş": "28.075,50 lira",
+    "yirmi iki bin yüz dört lira altmış yedi kuruştu": "22.104,67 liraydı",
+    "yüzde yirmi yedi": "%27",
+    "otuz üç bin otuz lira": "33.030 lira",
+    "yüzde yirmi dokuz virgül yetmiş üç": "%29,73",
+    "yüzde yirmi sekiz": "%28",
+    "otuz beş bin dokuz yüz otuz altı lira": "35.936 lira",
+    "otuz altı bin": "36 bin",
+    "yirmi sekiz bin": "28 bin",
+    "kırk bin": "40 bin",
+    "on beş": "15",
+    "Üç soruda": "3 soruda",
+    "üç şeyi": "3 şeyi"
+  },
+  "kapak": {
+    "ikon": "💵",
+    "ust": "2027 ASGARİ ÜCRET",
+    "buyuk": "~36 BİN ₺?",
+    "alt": "RAKAM NEREDEN ÇIKIYOR?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "İki bin yirmi yedide asgari ücret net otuz altı bin liraya yaklaşabilir. Ama bu rakam henüz kesin değil.",
+      "p": {
+        "ikon": "💵",
+        "etiket": "2027 net asgari ücret · tahmini senaryo",
+        "deger": 36,
+        "onek": "~",
+        "sonek": " bin ₺",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "sari",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Resmi rakam yok · karar Aralık'ta bekleniyor"
+      },
+      "kaynak": "Senaryolar 35.936–36.608 ₺ (K3, K4)",
+      "etiket": "2027 TAHMİNİ"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu rakamı kim, nasıl hesaplıyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "ASGARİ ÜCRET\n*NASIL HESAPLANIR?*",
+        "boy": 96
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Karışık konuları sade anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "KARIŞIK KONUYU",
+          "*SADE* ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 88
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce bugünkü durum. Bu yıl net asgari ücret yirmi sekiz bin yetmiş beş lira elli kuruş.",
+      "p": {
+        "ikon": "💵",
+        "satirlar": [
+          "NET ASGARİ ÜCRET",
+          "*28.075,50 ₺*",
+          "2026"
+        ],
+        "boy": 92
+      },
+      "kaynak": "Ocak 2026 asgari ücreti (K1)",
+      "etiket": "BUGÜN"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Geçen yıl net ücret yirmi iki bin yüz dört lira altmış yedi kuruştu. Zam yüzde yirmi yedi oldu.",
+      "p": {
+        "baslik": "💵 Net asgari ücret",
+        "sol": {
+          "etiket": "2025",
+          "deger": 22104.67,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2026",
+          "deger": 28075.5,
+          "renk": "sari"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 2,
+        "fark": "+5.970,83 ₺ (%27)",
+        "not": "Eksen sıfırdan başlar"
+      },
+      "kaynak": "Net 22.104,67 → 28.075,50 ₺; zam %27 (K1)",
+      "etiket": "GEÇEN YIL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Brüt tutar otuz üç bin otuz lira. Sigorta ve işsizlik primi kesilince net tutar kalıyor.",
+      "p": {
+        "baslik": "Brüt → net · 2026",
+        "ikon": "🧾",
+        "ogeler": [
+          "33.030 ₺",
+          "−",
+          "4.954,50 ₺",
+          "=",
+          "28.075,50 ₺"
+        ]
+      },
+      "kaynak": "SGK + işsizlik primi (K1)",
+      "etiket": "BRÜT → NET"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Gelir vergisi ve damga vergisi ise bu ücretten alınmıyor.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "GELİR VERGİSİ: *YOK*",
+          "DAMGA VERGİSİ: *YOK*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Asgari ücret istisnası (K1)",
+      "etiket": "VERGİ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yeni tutar için komisyon aralıkta toplanacak. Resmi bir rakam şimdilik yok.",
+      "p": {
+        "ikon": "📅",
+        "satirlar": [
+          "KOMİSYON",
+          "ARALIKTA TOPLANIR",
+          "RESMİ RAKAM *YOK*"
+        ],
+        "boy": 88
+      },
+      "kaynak": "K3, K5",
+      "etiket": "TAKVİM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Ama haberlerde türlü türlü rakam dolaşıyor. Hepsi tahmin.",
+      "p": {
+        "ikon": "🤷",
+        "satirlar": [
+          "HER YERDE",
+          "FARKLI RAKAM",
+          "HEPSİ *TAHMİN*"
+        ],
+        "boy": 92
+      },
+      "etiket": "KARIŞIKLIK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bu rakamlar nereden çıkıyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "RAKAMLAR\n*NEREDEN ÇIKIYOR?*",
+        "boy": 108
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "En çok bakılan veri enflasyon. TÜİK eylülde yıllık enflasyonu yüzde yirmi dokuz virgül yetmiş üç açıkladı.",
+      "p": {
+        "ikon": "🛒",
+        "etiket": "Yıllık enflasyon · Eylül 2026",
+        "deger": 29.73,
+        "onek": "%",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": ""
+      },
+      "kaynak": "TÜİK Eylül 2026 (K2)",
+      "etiket": "ENFLASYON"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Hesap basit. Bugünkü net ücreti, beklenen enflasyon kadar büyütüyorlar.",
+      "p": {
+        "ikon": "🧮",
+        "satirlar": [
+          "BUGÜNKÜ NET ÜCRET",
+          "×  *(1 + ENFLASYON)*"
+        ],
+        "boy": 76
+      },
+      "kaynak": "Yaygın hesap yöntemi (K3)",
+      "etiket": "FORMÜL"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Merkez Bankası yıl sonu için yüzde yirmi sekiz diyor. Net ücret otuz beş bin dokuz yüz otuz altı lira oluyor.",
+      "p": {
+        "baslik": "Merkez Bankası senaryosu · %28 (tahmini)",
+        "ikon": "🏦",
+        "ogeler": [
+          "28.075,50 ₺",
+          "×",
+          "1,28",
+          "=",
+          "35.936 ₺"
+        ]
+      },
+      "kaynak": "K3",
+      "etiket": "1. SENARYO"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Anketler biraz daha yüksek enflasyon bekliyor. O yüzden her kaynağın rakamı farklı çıkıyor.",
+      "p": {
+        "baslik": "Tahmin → net ücret",
+        "satirlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Merkez Bankası %28",
+            "deger": "35.936 ₺",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "📋",
+            "metin": "Piyasa anketi %29,61",
+            "deger": "36.389 ₺",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📰",
+            "metin": "AA Finans %29,66",
+            "deger": "36.403 ₺",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏢",
+            "metin": "FKB %30,39",
+            "deger": "36.608 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": ""
+      },
+      "kaynak": "K3, K4",
+      "etiket": "SENARYOLAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BURAYA KADAR",
+          "İŞİNE YARADIYSA",
+          "*BEĞEN*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Asıl ilginç kısım şimdi geliyor. Komisyon sadece enflasyona bakmıyor. Ekonomiye, geçim koşullarına ve ödenen ücretlere de bakıyor.",
+      "p": {
+        "baslik": "Komisyon neye bakar?",
+        "satirlar": [
+          {
+            "ikon": "🌍",
+            "metin": "Ülkenin ekonomik durumu",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🛒",
+            "metin": "Geçim koşulları",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💼",
+            "metin": "Fiilen ödenen ücretler",
+            "deger": "",
+            "renk": "sari"
+          }
+        ],
+        "not": "4857 sayılı İş Kanunu ölçütleri"
+      },
+      "kaynak": "Komisyon ölçütleri (K5)",
+      "etiket": "İLGİNÇ KISIM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Komisyonda on beş kişi var. İşçi, işveren ve hükümetten beşer temsilci.",
+      "p": {
+        "baslik": "Asgari Ücret Tespit Komisyonu · 15 kişi",
+        "satirlar": [
+          {
+            "ikon": "👷",
+            "metin": "İşçi tarafı",
+            "deger": "5 kişi",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏢",
+            "metin": "İşveren tarafı",
+            "deger": "5 kişi",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Hükümet tarafı",
+            "deger": "5 kişi",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "kaynak": "Milliyet; Kolay İK (K5)",
+      "etiket": "KOMİSYON"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Karar oy çokluğuyla alınıyor. Sonra Resmi Gazete'de yayımlanıyor.",
+      "p": {
+        "ikon": "🗳️",
+        "satirlar": [
+          "KARAR: *OY ÇOKLUĞU*",
+          "SONRA RESMİ GAZETE"
+        ],
+        "boy": 88
+      },
+      "kaynak": "K5",
+      "etiket": "KARAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Üstelik asgari ücrette emekli maaşı gibi otomatik enflasyon farkı yok. Her seferinde yeni bir karar gerekiyor.",
+      "p": {
+        "ikon": "🔁",
+        "satirlar": [
+          "OTOMATİK",
+          "ENFLASYON FARKI",
+          "*YOK*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "K3",
+      "etiket": "FARK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani rakamlar kesin değil, hesaplar tahmin. Karar aralıkta bekleniyor.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "RAKAMLAR *TAHMİN*",
+          "KARAR *ARALIKTA*",
+          "BEKLENİYOR"
+        ],
+        "boy": 88
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+        "boy": 108
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Merkez Bankası senaryosu gerçekleşirse net ücret yaklaşık sekiz bin lira artar.",
+      "p": {
+        "baslik": "Net ücret farkı · tahmini",
+        "ikon": "📈",
+        "ogeler": [
+          "35.936 ₺",
+          "−",
+          "28.075 ₺",
+          "=",
+          "+7.861 ₺"
+        ]
+      },
+      "kaynak": "K3",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ama zam tek başına yetmez. Fiyatlar da artıyorsa alım gücü o kadar artmaz.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "ZAM TEK BAŞINA",
+          "YETMEZ",
+          "FİYATLAR DA *ARTIYOR*"
+        ],
+        "boy": 88
+      },
+      "etiket": "ALIM GÜCÜ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "İşveren tarafında maliyet daha yüksek. Çalışanın eline yirmi sekiz bin geçerken işverene yaklaşık kırk bin liraya mal oluyor.",
+      "p": {
+        "baslik": "",
+        "sol": {
+          "etiket": "ÇALIŞANIN ELİNE",
+          "deger": 28075.5,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "İŞVERENİN MALİYETİ\n(teşviksiz)",
+          "deger": 40874.63,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 2,
+        "fark": "+12.799,13 ₺",
+        "not": "SGK teşvikiyle biraz düşer · eksen sıfırdan"
+      },
+      "kaynak": "Hesapkurdu; eleman.net (K6)",
+      "etiket": "İŞVEREN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu yüzden küçük işletmeler zamdan sonra işe alımda temkinli olabilir.",
+      "p": {
+        "ikon": "🏪",
+        "satirlar": [
+          "KÜÇÜK İŞLETME",
+          "İŞE ALIMDA",
+          "*TEMKİNLİ* OLABİLİR"
+        ],
+        "boy": 88
+      },
+      "etiket": "İŞLETME"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Aralığa kadar üç şeyi izle: enflasyon verisi, Merkez Bankası tahmini ve komisyon takvimi.",
+      "p": {
+        "baslik": "Aralığa kadar izle",
+        "satirlar": [
+          {
+            "ikon": "🛒",
+            "metin": "Enflasyon verisi",
+            "deger": "ayda bir",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Merkez Bankası tahmini",
+            "deger": "%28",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📅",
+            "metin": "Komisyon takvimi",
+            "deger": "Aralık",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "3 ŞEY"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: rakam kesin değil. Hesaplar otuz altı bin civarını gösteriyor. Karar aralıkta bekleniyor.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "2027 ASGARİ ÜCRET",
+          "TAHMİN: *~36 BİN ₺*",
+          "KARAR *ARALIKTA*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "2026 asgari ücret: brüt 33.030 ₺, net 28.075,50 ₺ (2025: 22.104,67 ₺, zam %27); SGK %14 = 4.624,20 ₺, işsizlik %1 = 330,30 ₺; gelir/damga vergisi istisnası — https://www.qnbinvest.com.tr/investodak/qnbarastirma/2026-asgari-ucret-aciklandi-net-28075-tl ; https://www.ey.com/tr_tr/insights/tax/2026-asgari-ucret ; https://kadimhukuk.com.tr/?p=27597",
+    "K2": "TÜİK Eylül 2026 (5 Ekim): yıllık TÜFE %29,73, aylık %1,84 — https://www.evrensel.net/haber/6003473/tuik-eylul-ayi-enflasyon-verilerini-acikladi-aylik-yuzde-184-yillik-2973 ; https://halktv.com.tr/ekonomi/son-dakika-tuik-acikladi-eylul-enflasyonu-belli-oldu-1059456h ; https://www.ekonomist.com.tr/ekonomi-haberleri/tuik-acikladi-eylul-2026-enflasyon-rakamlari-belli-oldu-79509",
+    "K3": "2027 asgari ücret senaryoları (net × (1+enflasyon tahmini)): TCMB %28 → 35.936 ₺; OVP %28,4 → 36.049 ₺; komisyon Aralık'ta toplanacak, resmi zam oranı yok — https://www.yeniasir.com.tr/ekonomi/2026/10/06/2027-asgari-ucret-ne-kadar-olacak-zam-orani-icin-kritik-veri-geldi-masadaki-5-senaryo-ortaya-cikti ; https://www.nefes.com.tr/2027-asgari-ucret-ne-kadar-olacak-masadaki-5-senaryo-ortaya-cikti-155996 ; https://www.milligazete.com.tr/2027-asgari-ucret-tahmini-35-bin-936-tl-mi-36-bin-608-tl-mi-zam-orani-kac-olacak-kesin-rakam-ne-zaman-belli-olacak",
+    "K4": "Yıl sonu enflasyon beklentileri: TCMB Piyasa Katılımcıları Anketi %29,61 → 36.389 ₺; AA Finans %29,66 → 36.403 ₺; Finansal Kurumlar Birliği %30,39 → 36.608 ₺ — https://finans.cnnturk.com/finans-haberler/galeri/asgari-ucret-2027-asgari-ucret-ne-kadar-olacak-5-farkli-rakam-ortaya-cikti-3476002 ; https://www.gzt.com/ekonomi/2027-asgari-ucret-zammi-ne-kadar-olacak-yeni-asgari-ucret-ne-kadar-olur-masada-5-farkli-rakam-var-4267325 ; https://www.dunya.com/foto-galeri/ekonomi/2027-asgari-ucret-zammi-icin-5-farkli-hesaplama-iste-masadaki-rakamlar-galeri-843119",
+    "K5": "Asgari Ücret Tespit Komisyonu: 15 üye (işçi, işveren, hükümetten 5'er), oy çokluğu, Resmi Gazete; ölçütler: sosyal-ekonomik durum, geçim şartları, ödenen ücretler — https://www.milliyet.com.tr/ekonomi/asgari-ucret-nasil-belirleniyor-iste-tum-ayrintilar-komisyon-15-kisiden-olusuyor-7259903 ; https://kolayik.com/blog/asgari-ucret-nedir-nasil-belirlenir ; https://www.dunya.com/kose-yazisi/asgari-ucret-nasil-belirleniyor/8409",
+    "K6": "İşveren maliyeti 2026 (teşviksiz) 40.874,63 ₺; teşvikle 39.223–40.214 ₺ — https://www.hesapkurdu.com/ticari/rehber/asgari-ucret-isveren-maliyeti ; https://www.eleman.net/asgari-ucret ; https://sanayigazetesi.com.tr/?p=205476"
+  },
+  "cta": [
+    {
+      "sahne": 15,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
