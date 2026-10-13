@@ -49,6 +49,15 @@ Uygulanan: Koton Eşarp 345, Jakarlı 77, Çocuk 62, Anne 20, Omuz 7, Triko 7, �
 Doğrulama: 1038 ürün yeniden okundu; 543'ü yeni metinle birebir, diğer 495 değişmedi; havale,
 WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
 
+## Tema durumu (13 Ekim 2026)
+
+- CANLI: "Güncelleme 3 (Sabit menü)" 166097944662. "Güncelleme 4 (Ödeme yazıları)" 166329253974 hiç
+  yayınlanmadı; ödeme/kapıda ödeme yazıları canlıda henüz eski.
+- YENİ: "Güncelleme 5 (Kategori tasarımı)" 166334824534 = Güncelleme 4 + yeni kategori şeridi
+  (`sections/vt-kategoriler.liquid`: renkli story halkası, başta Çok Satanlar balonu, sonda Tümünü Gör,
+  blok bazlı görsel/yazı/rozet; rozetler: Organik Soft Şal "Çok Satan", Kampanyalı Eşarp "Kampanya").
+  Dosyalar geri okunup doğrulandı. Kullanıcı yayınlayacak.
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
