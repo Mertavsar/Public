@@ -1,0 +1,497 @@
+{
+  "baslik": "Telefonlar neden pahalanıyor? Yapay zekânın bellek çipi krizi",
+  "tarih": "2026-10-14",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "telefon",
+    "bellek",
+    "yapay",
+    "zam",
+    "pahalı"
+  ],
+  "altyazi": {
+    "yüzde yirmi": "%20",
+    "on dört": "14",
+    "iki bin on iki": "2012",
+    "Üç soruda": "3 soruda",
+    "iki kez": "2 kez",
+    "dokuz yüz dolardı": "900 dolardı",
+    "bin dolar": "1.000 dolar",
+    "elli bin liralık": "50 bin liralık",
+    "altmış bin lira": "60 bin lira",
+    "üç kat": "3 kat",
+    "üç şeye": "3 şeye",
+    "yüzde on ila on beş": "%10–15",
+    "yüzde on beşle yirmi": "%15–20",
+    "Galaksi Es yirmi altı": "Galaxy S26"
+  },
+  "kapak": {
+    "ikon": "📱",
+    "ust": "TELEFONLAR NEDEN",
+    "buyuk": "+%20",
+    "alt": "PAHALANDI?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Dünyada telefon satışları bir yılda yüzde yirmi düştü. Sebep, yapay zekânın yuttuğu bellek çipleri.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Küresel telefon sevkiyatı · 2026 3. çeyrek, yıllık",
+        "deger": 20,
+        "onek": "−%",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Counterpoint ön verisi · 2012'den beri en düşük 3. çeyrek"
+      },
+      "kaynak": "Sevkiyat −%20, 2012'den beri en düşük 3. çeyrek (K1)",
+      "etiket": "3. ÇEYREK 2026"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki telefonun yapay zekâyla ne alakası var? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "TELEFON + YAPAY ZEKÂ\n*NE ALAKA?*",
+        "boy": 92
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ SADE",
+          "DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 88
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Samsung, Galaksi Es yirmi altı serisinin fiyatlarını yükseltti.",
+      "p": {
+        "ikon": "📱",
+        "satirlar": [
+          "SAMSUNG",
+          "GALAXY S26'YA",
+          "*ZAM* YAPTI"
+        ],
+        "boy": 92
+      },
+      "kaynak": "Samsung S26 zammı, Ekim 2026 (K2)",
+      "etiket": "NE OLDU"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Amerika'da temel model yaklaşık dokuz yüz dolardı. Şimdi yaklaşık bin dolar.",
+      "p": {
+        "baslik": "📱 Galaxy S26 · ABD başlangıç fiyatı",
+        "sol": {
+          "etiket": "ÖNCE",
+          "deger": 899,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "SONRA",
+          "deger": 999,
+          "renk": "kirmizi"
+        },
+        "onek": "~",
+        "sonek": " $",
+        "ondalik": 0,
+        "fark": "+100 $",
+        "not": "Yaklaşık değer · eksen sıfırdan başlar"
+      },
+      "kaynak": "ABD fiyatı (K2)",
+      "etiket": "ABD FİYATI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Türkiye'de de Samsung, iki hafta içinde iki kez zam yaptı.",
+      "p": {
+        "ikon": "🇹🇷",
+        "satirlar": [
+          "TÜRKİYE'DE DE",
+          "2 HAFTADA",
+          "*2 KEZ ZAM*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "Samsung Türkiye fiyat güncellemeleri (K3)",
+      "etiket": "TÜRKİYE"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Sadece Samsung değil. Counterpoint'e göre telefon fiyatları bu yıl ortalama yüzde yirmi arttı.",
+      "p": {
+        "ikon": "💸",
+        "etiket": "Küresel telefon fiyatı · 2026 başından beri",
+        "deger": 20,
+        "onek": "+%",
+        "ondalik": 0,
+        "yon": "up",
+        "renk": "kirmizi",
+        "not": "Yaklaşık ortalama · Counterpoint"
+      },
+      "kaynak": "Perakende fiyat ≈ +%20, 2026 (K1)",
+      "etiket": "FİYATLAR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Fiyat artınca insanlar telefon almıyor. Satışlar on dört yılın en düşük seviyesinde.",
+      "p": {
+        "ikon": "📉",
+        "satirlar": [
+          "SATIŞLAR",
+          "2012'DEN BERİ",
+          "*EN DÜŞÜK*"
+        ],
+        "boy": 92
+      },
+      "kaynak": "Counterpoint, 3. çeyrek 2026 (K1)",
+      "etiket": "SATIŞLAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki telefonlar neden pahalandı?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "TELEFONLAR\n*NEDEN PAHALANDI?*",
+        "boy": 100
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Telefonda iki bellek var. RAM uygulamaları açık tutar, depolama fotoğrafları saklar.",
+      "p": {
+        "baslik": "Telefondaki iki bellek",
+        "satirlar": [
+          {
+            "ikon": "🧠",
+            "metin": "RAM (DRAM)",
+            "deger": "açık uygulamalar",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💾",
+            "metin": "Depolama (NAND)",
+            "deger": "fotoğraf, dosya",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "BELLEK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu çipleri dünyada sadece birkaç büyük şirket üretiyor. Başlarında Samsung, SK Hynix ve Micron var.",
+      "p": {
+        "ikon": "🏭",
+        "satirlar": [
+          "BELLEĞİ BİRKAÇ",
+          "DEV ŞİRKET ÜRETİYOR",
+          "*SAMSUNG · HYNIX · MICRON*"
+        ],
+        "boy": 72
+      },
+      "kaynak": "Bellek üreticileri (K4)",
+      "etiket": "ÜRETİCİLER"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Yapay zekâ sunucuları HBM denen özel belleği kullanıyor. Fabrikalar üretimi buna kaydırınca telefon belleğine kapasite azalıyor.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "🤖",
+            "metin": "Yapay zekâ sunucuları *HBM* ister"
+          },
+          {
+            "ikon": "🏭",
+            "metin": "Fabrikalar *HBM'e* kayar"
+          },
+          {
+            "ikon": "📱",
+            "metin": "Telefon belleği *azalır*"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Bellek ve telefon *pahalanır*"
+          }
+        ]
+      },
+      "kaynak": "TrendForce; sektör haberleri (K4)",
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BURAYA KADAR",
+          "İŞİNE YARADIYSA",
+          "*BEĞEN*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Bir HBM, sıradan belleğe göre yaklaşık üç kat kapasite yiyor. Bu oran tahmini.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "1 HBM ≈",
+          "3 SIRADAN BELLEK",
+          "*(TAHMİNİ)*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Oran kaynaklara göre 3–4 kat arası değişiyor (K4)",
+      "etiket": "İLGİNÇ KISIM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bulut şirketleri yapay zekâ için alımı artırıyor. Üreticiler önce sunuculara kapasite ayırıyor, telefon üreticisi pahalıya alıyor.",
+      "p": {
+        "ikon": "☁️",
+        "satirlar": [
+          "BULUT ŞİRKETLERİ",
+          "ALIMI ARTIRIYOR",
+          "TELEFON *PAHALIYA ALIYOR*"
+        ],
+        "boy": 76
+      },
+      "kaynak": "TrendForce, 4. çeyrek 2026 (K4)",
+      "etiket": "TALEP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Araştırma şirketi TrendForce, yılın son çeyreğinde RAM fiyatlarında yüzde on ila on beş artış bekliyor. Depolamada beklenti yüzde on beşle yirmi.",
+      "p": {
+        "baslik": "Bellek fiyatı · 4. çeyrek beklentisi",
+        "satirlar": [
+          {
+            "ikon": "🧠",
+            "metin": "RAM (DRAM)",
+            "deger": "+%10–15",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "💾",
+            "metin": "Depolama (NAND)",
+            "deger": "+%15–20",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "TrendForce tahmini · artış hızı yavaşlıyor"
+      },
+      "kaynak": "TrendForce 30 Eylül tahmini (K4)",
+      "etiket": "BEKLENTİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani zam telefondan değil, yapay zekânın yüksek bellek talebinden geliyor.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "ZAMMIN KAYNAĞI",
+          "TELEFON DEĞİL",
+          "*YAPAY ZEKÂ TALEBİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+        "boy": 108
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Ortalama yüzde yirmi artışla, elli bin liralık bir telefon yaklaşık altmış bin lira olur. Bu bir örnek hesap.",
+      "p": {
+        "baslik": "Örnek hesap · ortalama %20 artış",
+        "ikon": "📱",
+        "ogeler": [
+          "50.000 ₺",
+          "×",
+          "1,20",
+          "=",
+          "60.000 ₺"
+        ]
+      },
+      "kaynak": "Örnek hesap (K1)",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bellek bilgisayarda da var. Bu yüzden bilgisayar fiyatlarına da yansıyabilir.",
+      "p": {
+        "ikon": "💻",
+        "satirlar": [
+          "BELLEK BİLGİSAYARDA",
+          "DA VAR",
+          "FİYATA *YANSIYABİLİR*"
+        ],
+        "boy": 80
+      },
+      "kaynak": "TrendForce (K4)",
+      "etiket": "BİLGİSAYAR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Counterpoint'e göre insanlar telefonu daha uzun kullanıyor ve yenilenmiş cihazlara bakıyor.",
+      "p": {
+        "ikon": "🔁",
+        "satirlar": [
+          "TELEFONU DAHA",
+          "UZUN KULLANIYORLAR",
+          "*YENİLENMİŞ* DE BAKIYORLAR"
+        ],
+        "boy": 72
+      },
+      "kaynak": "Counterpoint (K1)",
+      "etiket": "DAVRANIŞ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Almadan önce üç şeye bak: gerçekten gerekli mi, yenilenmiş seçenek var mı, o kadar depolama lazım mı?",
+      "p": {
+        "baslik": "Almadan önce sor",
+        "satirlar": [
+          {
+            "ikon": "❓",
+            "metin": "Gerçekten gerekli mi?",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "♻️",
+            "metin": "Yenilenmiş seçenek?",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💾",
+            "metin": "O depolama lazım mı?",
+            "deger": "",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Üstelik sıkıntı hemen geçmeyebilir. Counterpoint, bellek kıtlığının daha da büyümesini bekliyor.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "BELLEK KITLIĞI",
+          "DAHA DA *BÜYÜYEBİLİR*",
+          "(BEKLENTİ)"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Counterpoint (K1)",
+      "etiket": "GELECEK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: yapay zekâ bellek çiplerini çekiyor, telefonlar pahalanıyor. Rakamlar tahmin, ama yön belli.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "YAPAY ZEKÂ",
+          "BELLEĞİ ÇEKİYOR",
+          "TELEFON *PAHALANIYOR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Counterpoint (13 Ekim 2026): küresel telefon sevkiyatı 3. çeyrekte yıllık ≈ −%20, 2012'den beri en düşük 3. çeyrek; perakende fiyatlar 2026'da ≈ +%20; bellek kıtlığının büyümesi bekleniyor — https://www.fonearena.com/blog/494790/global-smartphone-shipments-q3-2026-counterpoint.html ; https://mexicobusiness.news/tech/news/global-smartphone-shipments-fall-20-amid-memory-chip-shortage ; https://easternherald.com/2026/10/13/global-smartphone-shipments-q3-2026-memory-costs/",
+    "K2": "Samsung Galaxy S26 ABD fiyat artışı (≈1 Ekim 2026): çoğu model +100 $, temel model 999,99 $ — https://thenextweb.com/news/samsung-s26-price-rise-memory ; https://www.sammobile.com/news/buying-galaxy-s26-phones-got-more-expensive/ ; https://tech-ish.com/2026/10/01/samsung-galaxy-s26-s26-and-s26-ultra-now-cost-usd-100-more-as-memory-prices-rise/",
+    "K3": "Samsung Türkiye S26 serisine iki haftada ikinci zam — https://www.karar.com/teknoloji-haberleri/samsung-telefonlara-zam-mi-yapildi-galaxy-s26-ne-kadar-oldu-samsung-2076111 ; https://www.donanimhaber.com/samsung-galaxy-s26-serisine-turkiye-de-dev-zam-iste-yeni-fiyatla--211145 ; https://www.sozcu.com.tr/samsung-telefonlara-zam-geldi-p362114",
+    "K4": "TrendForce 4. çeyrek 2026: geleneksel DRAM sözleşme fiyatı +%10–15, NAND +%15–20 (tahmin); üreticiler kapasiteyi sunucu/HBM'e ayırıyor, bulut şirketleri alımı artırıyor; HBM kabaca 3–4 kat wafer kapasitesi (tahmini) — https://effectstory.com/en/articles/trendforce-4q26-dram-nand-contract-price-forecast-ai-server-demand-consumer-pres ; https://www.guru3d.com/story/dram-and-nand-contract-prices-forecast-to-rise-as-much-as-in-q4-2026/ ; https://news.metal.com/newscontent/104142866-ai-server-growth-demand-supports-q4-memory-contract-price-uptrend-consumer-side-pressure-persists ; https://www.utmel.com/blog/categories/memory%20chip/2026-dram-and-the-3-to-1-hbm-rule-market-supply-analysis-and-b2b-procurement-guide"
+  },
+  "cta": [
+    {
+      "sahne": 13,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
