@@ -43,6 +43,6 @@ Yayına alırken bu kutuyu gizlemek için `index.html` içinde `showLab: false` 
 
 ## Doldurulacaklar
 
-Marka adı, menü ve sahne metinlerindeki rakamlar (80 g beze, 300 °C, 3 dk) şimdilik
+Menü ve sahne metinlerindeki rakamlar (80 g beze, 300 °C, 3 dk) şimdilik
 örnek. Markadan gelen gerçek bilgilerle değiştirilecek. Sipariş bağlantısı ve adres
 bilgisi eklenecek.
