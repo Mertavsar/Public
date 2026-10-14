@@ -355,7 +355,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .visit-text { display: grid; gap: 28px; justify-items: start; min-width: 0; }
 .visit-photo {
   grid-column: 1 / -1; width: 100%; aspect-ratio: 3.2 / 1; border-radius: 999px;
-  background: url("frames/0089.jpg") center / 122% auto no-repeat, rgb(46, 44, 42);
+  background: url("frames/0081.jpg") center / 122% auto no-repeat, rgb(46, 44, 42);
   box-shadow: 0 0 0 8px var(--green-deep), 0 0 0 10px rgba(244, 239, 225, .3), 0 30px 60px -20px rgba(0, 0, 0, .7);
 }
 
@@ -554,8 +554,8 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
           <li><img src="frames/0001.jpg" alt="Unlu tezgâhta hamur bezesi" loading="lazy"><span class="n">1</span><b>Beze</b><span>Hamur dinlenir, bezelere ayrılır.</span></li>
           <li><img src="frames/0023.jpg" alt="Boydan boya açılmış uzun hamur" loading="lazy"><span class="n">2</span><b>Açılış</b><span>Ortadan iki uca, incecik.</span></li>
           <li><img src="frames/0042.jpg" alt="Uzun hamurun üstüne yayılmış kıymalı harç" loading="lazy"><span class="n">3</span><b>Harç</b><span>Kenara kadar, eşit kat.</span></li>
-          <li><img src="frames/0067.jpg" alt="Fırından çıkmış, kenarları benekli lahmacun" loading="lazy"><span class="n">4</span><b>Fırın</b><span>Altı çıtır, kenarı benekli.</span></li>
-          <li><img src="frames/0089.jpg" alt="Maydanoz ve limonla servis edilen lahmacun" loading="lazy"><span class="n">5</span><b>Servis</b><span>Limon, maydanoz, afiyet.</span></li>
+          <li><img src="frames/0059.jpg" alt="Fırından çıkmış, kenarları benekli lahmacun" loading="lazy"><span class="n">4</span><b>Fırın</b><span>Altı çıtır, kenarı benekli.</span></li>
+          <li><img src="frames/0081.jpg" alt="Maydanoz ve limonla servis edilen lahmacun" loading="lazy"><span class="n">5</span><b>Servis</b><span>Limon, maydanoz, afiyet.</span></li>
         </ol>
       </div>
     </div>
@@ -973,6 +973,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const a = ready(frames[i0]) ? frames[i0] : nearestFrame(i0);
     ctx.fillStyle = "#14110e"; ctx.fillRect(0, 0, W, H);
     if (!a) return;
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
     const iw = a.naturalWidth, ih = a.naturalHeight;
     // The footage is shot straight down, so on a tall phone it turns 90° and the long
     // lahmacun runs down the screen instead of losing both ends to the crop.

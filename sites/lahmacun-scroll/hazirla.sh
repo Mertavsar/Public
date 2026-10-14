@@ -8,7 +8,7 @@
 #   0-26:6     beze duruyor (0–1,1 sn)               → seyrek
 #   27-45:1    hamur boydan boya açılıyor (1,1–1,9)  → her kare
 #   46-64:1    harç beliriyor (1,9–2,7 sn)           → her kare
-#   65-161:4   yavaş pişme (2,7–6,7 sn)              → 4'te 1
+#   65-161:6   yavaş pişme (2,7–6,7 sn)              → 6'da 1
 #   162-178:1  maydanoz ve limon (6,75–7,4 sn)       → her kare
 #   179-191:4  son hâl (7,5–8 sn)                    → seyrek
 # Başka bir videoda tüm kareleri almak için: PLAN="0-9999:1" ./hazirla.sh video.mp4
@@ -18,8 +18,9 @@ in="${1:?Video dosyasını ver: ./hazirla.sh flow-videosu.mp4}"
 out="$(cd "$(dirname "$0")" && pwd)/frames"
 fps="${FPS:-24}"
 width="${WIDTH:-1280}"
-quality="${QUALITY:-10}"   # JPEG kalitesi: 2 en iyi, 31 en kötü
-plan="${PLAN:-0-26:6,27-45:1,46-64:1,65-161:4,162-178:1,179-191:4}"
+quality="${QUALITY:-6}"    # JPEG kalitesi: 2 en iyi, 31 en kötü
+sharpen="${SHARPEN:-0.45}" # Flow 720p verdiği için hafif keskinleştirme; 0 kapatır
+plan="${PLAN:-0-26:6,27-45:1,46-64:1,65-161:6,162-178:1,179-191:4}"
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg bulunamadı. Mac: brew install ffmpeg"; exit 1; }
 command -v python3 >/dev/null || { echo "python3 bulunamadı."; exit 1; }
@@ -28,7 +29,7 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 
 ffmpeg -loglevel error -i "$in" -an \
-  -vf "fps=${fps},scale='min(${width},iw)':-2" \
+  -vf "fps=${fps},scale='min(${width},iw)':-2:flags=lanczos,unsharp=5:5:${sharpen}" \
   -q:v "$quality" "$tmp/%05d.jpg"
 
 mkdir -p "$out"
