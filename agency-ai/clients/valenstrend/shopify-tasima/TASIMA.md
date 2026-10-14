@@ -49,10 +49,12 @@ Uygulanan: Koton Eşarp 345, Jakarlı 77, Çocuk 62, Anne 20, Omuz 7, Triko 7, �
 Doğrulama: 1038 ürün yeniden okundu; 543'ü yeni metinle birebir, diğer 495 değişmedi; havale,
 WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
 
-## Tema durumu (13 Ekim 2026, akşam)
+## Tema durumu (14 Ekim 2026)
 
-- CANLI: "Güncelleme 5 (Kategori tasarımı)" 166334824534 (kullanıcı yayınladı). Ödeme yazıları güncel;
-  kategori şeridi renkli halkalı. Kullanıcı beğenmedi, eski görünüm istedi.
+- CANLI: "Güncelleme 6 (Klasik kategoriler)" 166337773654 (kullanıcı yayınladı). Ödeme yazıları güncel,
+  kategori şeridi eski sade görünümde, Koton Eşarp'ta "En Çok Satan" rozeti. Footer "Ödeme ve telif"
+  bölümüne kullanıcı ödeme logoları görselini yükledi (`test.png`, 429×32, yükseklik 26 px).
+- Güncelleme 5 artık yayında değil (renkli halkalı sürüm).
 - YENİ: "Güncelleme 6 (Klasik kategoriler)" 166337773654 = Güncelleme 5 + kategori şeridi eski sade
   görünümde (ince gri çerçeve, 120/78 px), Çok Satanlar ve Tümünü Gör balonları kapalı, sadece Koton
   Eşarp'ta "En Çok Satan" rozeti. Çerçeve stili tema düzenleyicide seçilebilir (klasik / renkli).
