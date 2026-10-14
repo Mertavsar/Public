@@ -107,7 +107,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .script { font-family: var(--f-script); font-weight: 400; margin: 0; }
 
 /* ── Scroll track & pinned stage ── */
-.track { position: relative; height: 520vh; background: var(--stone); }
+.track { position: relative; height: 640vh; background: var(--stone); }
 .stage {
   position: sticky; top: 0; height: 100vh; height: 100dvh;
   overflow: hidden; background: var(--stone); color: var(--cream);
@@ -243,25 +243,108 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .menu-note { margin: 28px 0 0; color: var(--cream-dim); }
 
 /* ── Kilis Tava band ── */
-.spot { background: var(--paper), var(--cream); color: var(--ink); padding-block: clamp(64px, 9vw, 112px); }
+.spot {
+  background: radial-gradient(ellipse 70% 80% at 85% 50%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green);
+  color: var(--cream); padding-block: clamp(64px, 9vw, 112px);
+}
 .spot-grid { display: grid; gap: 28px; align-items: center; }
 @media (min-width: 860px) { .spot-grid { grid-template-columns: 1.4fr 1fr; } }
-.spot .script { font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--tomato); }
+.spot .script { font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--cream); }
 .spot h2 {
   margin: .2rem 0 .8rem; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 115;
   font-size: clamp(3rem, 9vw, 6.6rem); line-height: .86; text-transform: uppercase; letter-spacing: -.02em;
-  color: var(--green);
+  color: var(--cream);
 }
 .spot p { margin: 0; max-width: 42ch; font-size: 1.1rem; }
 .spot-price {
-  justify-self: start; display: grid; place-items: center; text-align: center;
+  justify-self: start; margin-left: 12px; display: grid; place-items: center; text-align: center;
   width: clamp(170px, 26vw, 230px); aspect-ratio: 1; max-width: 100%; border-radius: 50%;
-  background: var(--green); color: var(--cream); transform: rotate(-6deg);
-  box-shadow: 0 0 0 8px var(--cream), 0 0 0 10px var(--green);
+  background: var(--cream); color: var(--green-deep); transform: rotate(-6deg);
+  box-shadow: 0 0 0 8px var(--green), 0 0 0 10px var(--cream);
 }
 @media (min-width: 860px) { .spot-price { justify-self: center; } }
 .spot-price span { font-family: var(--f-display); font-weight: 900; font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1; }
 .spot-price small { display: block; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-size: .72rem; margin-top: 6px; }
+
+/* ── Section heads shared by the new bands ── */
+.sec-head { display: grid; gap: 14px; justify-items: start; margin-bottom: clamp(32px, 5vw, 56px); }
+.sec-head h2 {
+  margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110;
+  font-size: clamp(2.2rem, 6vw, 4.6rem); line-height: .92; text-transform: uppercase; letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.sec-head p { margin: 0; max-width: 46ch; font-size: 1.08rem; }
+
+/* ── Two styles: Sarımsaklı / Soğanlı ── */
+.usul { background: var(--stone); padding-block: clamp(72px, 10vw, 128px); }
+.usul .sec-head p { color: var(--cream-dim); }
+.usul-grid { display: grid; gap: 0; border-top: 2px solid rgba(244, 239, 225, .2); }
+@media (min-width: 760px) { .usul-grid { grid-template-columns: 1fr 1fr; } }
+.usul-item { display: grid; gap: 12px; align-content: start; padding-block: 28px 36px; min-width: 0; }
+@media (min-width: 760px) {
+  .usul-item + .usul-item { border-left: 2px solid rgba(244, 239, 225, .2); padding-left: clamp(24px, 4vw, 56px); }
+  .usul-item:first-child { padding-right: clamp(24px, 4vw, 56px); }
+}
+@media (max-width: 759px) { .usul-item + .usul-item { border-top: 2px solid rgba(244, 239, 225, .2); } }
+.usul-item h3 {
+  margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 115;
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem); line-height: .9; text-transform: uppercase; letter-spacing: -.02em;
+}
+.usul-item p { margin: 0; max-width: 34ch; color: var(--cream-dim); font-size: 1.08rem; }
+.usul-item .price { font-family: var(--f-display); font-weight: 900; font-size: 1.6rem; color: var(--tomato); font-variant-numeric: tabular-nums; }
+
+/* ── Five steps, as stills from the footage ── */
+.adim { background: var(--green-deep); padding-block: clamp(72px, 10vw, 128px); }
+.adim .sec-head p { color: var(--cream-dim); }
+.adim-scroll { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-right: calc(-1 * var(--gutter-r)); }
+.adim-list {
+  list-style: none; margin: 0; padding: 0 var(--gutter-r) 0 0;
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(72vw, 260px); gap: 16px;
+}
+@media (min-width: 1040px) {
+  .adim-scroll { overflow: visible; margin-right: 0; }
+  .adim-list { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); padding: 0; }
+}
+.adim-list li { scroll-snap-align: start; display: grid; gap: 12px; min-width: 0; }
+.adim-list img {
+  display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px;
+  background: var(--stone); box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .7);
+}
+.adim-list .n { font-weight: 800; font-size: .74rem; letter-spacing: .18em; color: var(--tomato); }
+.adim-list b {
+  display: block; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110;
+  text-transform: uppercase; font-size: 1.25rem; line-height: 1.05;
+}
+.adim-list span:last-child { color: var(--cream-dim); font-size: .95rem; }
+
+/* ── How to eat it ── */
+.yenir { background: var(--paper), var(--cream); color: var(--ink); padding-block: clamp(72px, 10vw, 128px); }
+.yenir .sec-head h2 { color: var(--green); }
+.yenir-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; counter-reset: y; }
+@media (min-width: 760px) { .yenir-list { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
+.yenir-list li { counter-increment: y; display: grid; gap: 8px; align-content: start; border-top: 3px solid var(--ink); padding-top: 18px; }
+.yenir-list li::before {
+  content: counter(y); font-family: var(--f-display); font-weight: 900; font-size: 3.4rem; line-height: .9; color: var(--tomato);
+}
+.yenir-list b { font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110; text-transform: uppercase; font-size: 1.35rem; }
+.yenir-list span { color: rgba(20, 20, 20, .74); }
+
+/* ── Desserts ── */
+.tatli { background: var(--paper), var(--cream); color: var(--ink); padding-block: clamp(72px, 10vw, 128px); }
+.tatli .sec-head .script { font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--tomato); }
+.tatli .sec-head h2 { color: var(--green); }
+.tatli-grid { display: grid; gap: 20px; }
+@media (min-width: 760px) { .tatli-grid { grid-template-columns: 1fr 1fr; } }
+.tatli-card {
+  display: grid; grid-template-columns: 1fr auto; gap: 6px 20px; align-items: end;
+  background: var(--green); color: var(--cream); border-radius: 14px; padding: 26px 26px 28px;
+}
+.tatli-card h3 {
+  margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 112;
+  text-transform: uppercase; font-size: clamp(2rem, 4vw, 2.8rem); line-height: .95;
+}
+.tatli-card b { font-family: var(--f-display); font-weight: 900; font-size: 1.8rem; font-variant-numeric: tabular-nums; }
+.tatli-card p { grid-column: 1 / -1; margin: 0; color: var(--cream-dim); }
 
 /* ── Visit ── */
 .visit {
@@ -436,6 +519,61 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     </div>
   </section>
 
+  <section class="usul band" aria-labelledby="usulTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tag">İki usul</p>
+        <h2 id="usulTitle">Sarımsaklı mı, soğanlı mı?</h2>
+        <p>Aynı ince hamur, aynı fırın. Farkı harçta.</p>
+      </div>
+      <div class="usul-grid">
+        <article class="usul-item">
+          <h3>Sarımsaklı</h3>
+          <p>Harca sarımsak girer. Keskin, iddialı, ayranla iyi gider.</p>
+          <span class="price">220 ₺</span>
+        </article>
+        <article class="usul-item">
+          <h3>Soğanlı</h3>
+          <p>Harçta bol soğan. Daha tatlı, daha yumuşak bir lokma.</p>
+          <span class="price">220 ₺</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="adim band" aria-labelledby="adimTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tag">Beş adımda</p>
+        <h2 id="adimTitle">Hamurdan lahmacuna</h2>
+        <p>Yukarıda kaydırarak izlediğin her şey, tek tek.</p>
+      </div>
+      <div class="adim-scroll">
+        <ol class="adim-list">
+          <li><img src="frames/0001.jpg" alt="Unlu tezgâhta hamur bezesi" loading="lazy"><span class="n">1</span><b>Beze</b><span>Hamur dinlenir, bezelere ayrılır.</span></li>
+          <li><img src="frames/0027.jpg" alt="İncecik açılmış hamur" loading="lazy"><span class="n">2</span><b>Açılış</b><span>Ortadan kenara, incecik.</span></li>
+          <li><img src="frames/0042.jpg" alt="Hamurun üstüne yayılan kıymalı harç" loading="lazy"><span class="n">3</span><b>Harç</b><span>Kenara kadar, eşit kat.</span></li>
+          <li><img src="frames/0074.jpg" alt="Fırından çıkmış, kenarları benekli lahmacun" loading="lazy"><span class="n">4</span><b>Fırın</b><span>Altı çıtır, kenarı benekli.</span></li>
+          <li><img src="frames/0098.jpg" alt="Maydanoz ve limonla servis edilen lahmacun" loading="lazy"><span class="n">5</span><b>Servis</b><span>Limon, maydanoz, afiyet.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="yenir band" aria-labelledby="yenirTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="yenirTitle">Nasıl yenir?</h2>
+        <p>Usulü basit, ama sırası var.</p>
+      </div>
+      <ol class="yenir-list">
+        <li><b>Limonu sık</b><span>Fırından gelir gelmez, bütün yüzeye.</span></li>
+        <li><b>Maydanozu ser</b><span>Bir avuç yeşillik, ortaya boydan boya.</span></li>
+        <li><b>Rulo yap</b><span>Sar, iki elle tut, sıcakken ye.</span></li>
+      </ol>
+    </div>
+  </section>
+
   <section class="spot band" aria-labelledby="spotTitle">
     <div class="wrap spot-grid">
       <div>
@@ -444,6 +582,19 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         <p>Kıyma, domates ve biber tepsiye dizilir, fırında pişer. Ekmeğini banmalık.</p>
       </div>
       <div class="spot-price"><div><span>700 ₺</span><small>Kilis Tava</small></div></div>
+    </div>
+  </section>
+
+  <section class="tatli band" aria-labelledby="tatliTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="script">Sona</p>
+        <h2 id="tatliTitle">Tatlıya yer bırak</h2>
+      </div>
+      <div class="tatli-grid">
+        <article class="tatli-card"><h3>Katmer</h3><b>600 ₺</b><p>İncecik hamur, kat kat, sıcak.</p></article>
+        <article class="tatli-card"><h3>Sütlaç</h3><b>200 ₺</b><p>Soğuk ve hafif, yemeğin kapanışı.</p></article>
+      </div>
     </div>
   </section>
 
@@ -805,7 +956,6 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     }
     return 1;
   }
-  const BAND_TOP = "rgb(46,39,32)", BAND_BOTTOM = "rgb(26,23,19)";
   // Position in the frame list for a point in the video (0–1). With a manifest "times" list the
   // frames are unevenly spaced (dense where things move), so search it; otherwise they are even.
   function frameAt(v) {
@@ -820,31 +970,23 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const f = frameAt(mapKeys(p, frameKeys));
     const i0 = Math.floor(f), i1 = Math.min(frames.length - 1, i0 + 1), mixAmt = f - i0;
     const a = ready(frames[i0]) ? frames[i0] : nearestFrame(i0);
-    if (!a) { ctx.fillStyle = BAND_BOTTOM; ctx.fillRect(0, 0, W, H); return; }
+    ctx.fillStyle = "#14110e"; ctx.fillRect(0, 0, W, H);
+    if (!a) return;
     const iw = a.naturalWidth, ih = a.naturalHeight;
-    // Cover the stage, but on a tall phone keep the centre square (where the lahmacun sits)
-    // whole instead of cropping its sides; the leftover bands blend into the stone.
-    const sc = Math.min(Math.max(W / iw, H / ih), W / (ih * 0.84));
-    const dw = iw * sc, dh = ih * sc, x = (W - dw) / 2, y = (H - dh) / 2;
-    if (dh < H) {
-      const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, BAND_TOP); g.addColorStop(1, BAND_BOTTOM);
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-    }
-    ctx.drawImage(a, x, y, dw, dh);
+    // The footage is shot straight down, so on a tall phone it can turn 90° and run the
+    // length of the screen instead of losing both ends of the lahmacun to the crop.
+    const turn = H > W * 1.15 && iw > ih;
+    const cw = turn ? H : W, chh = turn ? W : H;
+    const sc = Math.max(cw / iw, chh / ih), dw = iw * sc, dh = ih * sc;
+    ctx.save();
+    ctx.translate(W / 2, H / 2);
+    if (turn) ctx.rotate(Math.PI / 2);
+    ctx.drawImage(a, -dw / 2, -dh / 2, dw, dh);
     const b = frames[i1];
     if (mixAmt > 0.02 && ready(b) && b !== a) {
-      ctx.globalAlpha = mixAmt; ctx.drawImage(b, x, y, dw, dh); ctx.globalAlpha = 1;
+      ctx.globalAlpha = mixAmt; ctx.drawImage(b, -dw / 2, -dh / 2, dw, dh); ctx.globalAlpha = 1;
     }
-    if (dh < H) {
-      const fade = dh * 0.14;
-      const t = ctx.createLinearGradient(0, y, 0, y + fade);
-      t.addColorStop(0, BAND_TOP); t.addColorStop(1, "rgba(46,39,32,0)");
-      ctx.fillStyle = t; ctx.fillRect(0, y - 1, W, fade + 1);
-      const bt = ctx.createLinearGradient(0, y + dh - fade, 0, y + dh);
-      bt.addColorStop(0, "rgba(26,23,19,0)"); bt.addColorStop(1, BAND_BOTTOM);
-      ctx.fillStyle = bt; ctx.fillRect(0, y + dh - fade, W, fade + 1);
-    }
+    ctx.restore();
   }
   function useFrameUrls(urls, keys = null, times = null) {
     frameKeys = keys;
