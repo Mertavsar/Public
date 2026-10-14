@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taş Fırın Lahmacun</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Bir bezeden bir lahmacuna: hamur açılır, harç yayılır, taş fırında pişer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one tall scroll track with a pinned full-bleed stage (stone counter → oven),
+   then a kraft-paper menu like the paper lahmacun is wrapped in.
+   Single committed look in both themes: dark stone stage, kraft paper below. */
+:root {
+  --stone: #1c1714;
+  --flour: #f3ead9;
+  --flour-dim: rgba(243, 234, 217, .66);
+  --flour-line: rgba(243, 234, 217, .2);
+  --kraft: #d8bf96;
+  --kraft-deep: #c9ad80;
+  --ink: #2a1a10;
+  --ink-line: rgba(42, 26, 16, .22);
+  --isot: #b3311d;
+  --isot-bright: #e0563c;
+  --ember: #ff9a4d;
+  --f-display: "Bricolage Grotesque", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Karla", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+html { background: var(--stone); }
+body {
+  margin: 0;
+  background: var(--kraft);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Scroll track & pinned stage ───────────────────────────── */
+.track { position: relative; height: 520vh; background: var(--stone); }
+.stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100dvh;
+  overflow: hidden;
+  background: var(--stone);
+  color: var(--flour);
+}
+#scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(20, 15, 12, .82) 0%, rgba(20, 15, 12, 0) 38%),
+    linear-gradient(to bottom, rgba(20, 15, 12, .55) 0%, rgba(20, 15, 12, 0) 26%);
+}
+.overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  padding-top: max(28px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(16px, 4vw, 56px), env(safe-area-inset-right, 0px));
+}
+.frame { position: relative; height: 100%; }
+
+.eyebrow {
+  font-family: var(--f-mono); font-size: .74rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; margin: 0;
+}
+.hero { position: absolute; top: 0; left: 0; max-width: 44rem; will-change: opacity, transform; }
+.hero .eyebrow { color: var(--ember); }
+.wordmark {
+  margin: .5rem 0 0;
+  font-family: var(--f-display); font-weight: 800;
+  font-variation-settings: "wdth" 75, "opsz" 96;
+  font-size: clamp(3.1rem, 9.5vw, 8.2rem);
+  line-height: .84; letter-spacing: -.015em;
+  text-transform: uppercase; text-wrap: balance;
+  color: var(--flour);
+}
+.wordmark span { display: block; color: var(--isot-bright); }
+.lede { margin: 1rem 0 0; max-width: 30ch; font-size: 1.05rem; color: var(--flour-dim); }
+.hint {
+  margin: 1.1rem 0 0; font-family: var(--f-mono); font-size: .78rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--flour);
+  animation: bob 1.8s ease-in-out infinite;
+}
+@keyframes bob { 50% { transform: translateY(6px); } }
+
+.steps { position: absolute; left: 0; bottom: 0; width: min(31rem, 100%); display: grid; }
+.step {
+  grid-area: 1 / 1; align-self: end;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.step.is-active { opacity: 1; transform: none; }
+.step .eyebrow { color: var(--ember); font-variant-numeric: tabular-nums; }
+.step h2 {
+  margin: .45rem 0 .55rem;
+  font-family: var(--f-display); font-weight: 750;
+  font-variation-settings: "wdth" 82, "opsz" 72;
+  font-size: clamp(1.9rem, 4.4vw, 3.3rem); line-height: 1; letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.step p { margin: 0; max-width: 36ch; color: var(--flour-dim); }
+
+.rail-wrap { position: absolute; right: 0; top: 50%; transform: translateY(-50%); padding-left: 20px; }
+.rail-wrap::before, .rail-fill {
+  content: ""; position: absolute; left: 0; top: 0; width: 2px; border-radius: 2px;
+}
+.rail-wrap::before { bottom: 0; background: var(--flour-line); }
+.rail-fill { height: 0; background: var(--ember); }
+.rail { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.rail li { display: grid; gap: 1px; opacity: .42; transition: opacity .3s ease; }
+.rail li.is-done, .rail li.is-active { opacity: 1; }
+.rail .r-name {
+  font-family: var(--f-display); font-weight: 700; font-size: 1.05rem;
+  font-variation-settings: "wdth" 85; line-height: 1.1;
+}
+.rail .r-val {
+  font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em;
+  color: var(--flour-dim); font-variant-numeric: tabular-nums;
+}
+.rail li.is-active .r-val { color: var(--ember); }
+
+.bar { display: none; }
+
+@media (max-width: 760px) {
+  .rail-wrap { display: none; }
+  .bar {
+    display: block; position: absolute; left: 0; right: 0; bottom: -14px;
+    height: 2px; background: var(--flour-line); border-radius: 2px; overflow: hidden;
+  }
+  .bar span { display: block; height: 100%; width: 0; background: var(--ember); }
+  .lede { font-size: 1rem; }
+}
+
+/* ── Kraft paper ───────────────────────────────────────────── */
+.paper {
+  position: relative;
+  background-color: var(--kraft);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .13 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  padding-block: clamp(64px, 10vw, 128px) 36px;
+  padding-left: var(--gutter-l);
+  padding-right: var(--gutter-r);
+}
+.wrap { max-width: 70rem; margin: 0 auto; }
+.menu-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.menu-head .eyebrow { color: var(--isot); }
+.menu-head h2 {
+  margin: .5rem 0 0;
+  font-family: var(--f-display); font-weight: 800;
+  font-variation-settings: "wdth" 75, "opsz" 96;
+  font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: .88;
+  text-transform: uppercase; text-wrap: balance;
+}
+.stamp {
+  flex: none; width: 128px; height: 128px; border-radius: 50%;
+  border: 2px solid var(--isot); color: var(--isot);
+  display: grid; place-content: center; text-align: center; gap: 2px;
+  transform: rotate(-9deg);
+  font-family: var(--f-mono); font-weight: 600; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+  box-shadow: inset 0 0 0 5px var(--kraft), inset 0 0 0 6px var(--isot);
+}
+.stamp b { font-family: var(--f-display); font-size: 1.5rem; letter-spacing: 0; font-variation-settings: "wdth" 75; }
+
+.menu-list {
+  list-style: none; margin: 44px 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr;
+  border-top: 2px solid var(--ink);
+}
+.menu-list li {
+  min-width: 0; display: grid; gap: 6px; align-content: start;
+  padding-block: 20px 26px; padding-right: 20px;
+  border-bottom: 1px solid var(--ink-line);
+}
+.menu-list .m-name {
+  font-family: var(--f-display); font-weight: 750; font-size: 1.45rem;
+  font-variation-settings: "wdth" 85; line-height: 1.1;
+}
+.menu-list .m-desc { color: rgba(42, 26, 16, .78); }
+.menu-list .m-tag { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--isot); }
+@media (min-width: 560px) { .menu-list { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 940px) { .menu-list { grid-template-columns: repeat(4, 1fr); } }
+
+.lab {
+  margin-top: 72px; padding: 24px;
+  border: 1.5px dashed rgba(42, 26, 16, .45); border-radius: 4px;
+  display: grid; gap: 14px; max-width: 46rem;
+}
+.lab h3 { margin: 0; font-family: var(--f-display); font-size: 1.3rem; font-variation-settings: "wdth" 85; }
+.lab p { margin: 0; max-width: 60ch; }
+.lab-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  appearance: none; cursor: pointer;
+  font: 600 .95rem/1 var(--f-body);
+  padding: 13px 18px; border-radius: 3px;
+  border: 2px solid var(--ink); background: var(--ink); color: var(--kraft);
+}
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:focus-visible, .file:focus-within { outline: 3px solid var(--isot); outline-offset: 2px; }
+.file { position: relative; }
+.file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+#labStatus { font-family: var(--f-mono); font-size: .82rem; color: var(--ink); min-height: 1.3em; }
+
+.foot {
+  margin-top: 72px; padding-top: 18px; border-top: 2px solid var(--ink);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  font-family: var(--f-mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hint { animation: none; }
+  .step { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="site" lang="tr">
+
+  <section class="track" id="track" aria-label="Hamurdan lahmacuna">
+    <div class="stage">
+      <canvas id="scene" aria-hidden="true"></canvas>
+      <div class="scrim" aria-hidden="true"></div>
+      <div class="overlay">
+        <div class="frame">
+
+          <header class="hero" id="hero">
+            <p class="eyebrow">Odun ateşi · ince hamur</p>
+            <h1 class="wordmark">Taş Fırın<span>Lahmacun</span></h1>
+            <p class="lede">Bir bezeden bir lahmacuna. Aşağı kaydır, hamur açılsın.</p>
+            <p class="hint" aria-hidden="true">Kaydır ↓</p>
+          </header>
+
+          <div class="rail-wrap" aria-hidden="true">
+            <span class="rail-fill" id="railFill"></span>
+            <ol class="rail" id="rail">
+              <li><span class="r-name">Beze</span><span class="r-val">80 g</span></li>
+              <li><span class="r-name">Açılış</span><span class="r-val">2 mm</span></li>
+              <li><span class="r-name">Harç</span><span class="r-val">120 g</span></li>
+              <li><span class="r-name">Fırın</span><span class="r-val">300 °C</span></li>
+              <li><span class="r-name">Servis</span><span class="r-val">sıcak</span></li>
+            </ol>
+          </div>
+
+          <div class="steps" aria-live="polite">
+            <article class="step is-active">
+              <p class="eyebrow">1/5 · 80 g beze</p>
+              <h2>Her lahmacun bir bezeyle başlar.</h2>
+              <p>Hamur sabah yoğrulur, dinlenir ve tek tek 80 gramlık bezelere ayrılır.</p>
+            </article>
+            <article class="step">
+              <p class="eyebrow">2/5 · Ø 30 cm · 2 mm</p>
+              <h2>Oklavayla incecik açılır.</h2>
+              <p>Unlu tezgâhta, ortadan kenara doğru. Kenar biraz kalın kalır ki fırında kabarsın.</p>
+            </article>
+            <article class="step">
+              <p class="eyebrow">3/5 · 120 g harç</p>
+              <h2>Harç elle yayılır.</h2>
+              <p>Zırhta çekilmiş kıyma, soğan, domates, sivri biber ve isot. Kenara bir parmak boşluk kalır.</p>
+            </article>
+            <article class="step">
+              <p class="eyebrow">4/5 · 300 °C · 3 dk</p>
+              <h2>Taş fırında üç dakika.</h2>
+              <p>Odun ateşi altını çıtırlatır, harcı pişirir, kenarları benekler.</p>
+            </article>
+            <article class="step">
+              <p class="eyebrow">5/5 · Sıcak servis</p>
+              <h2>Maydanoz, limon, afiyet olsun.</h2>
+              <p>Fırından çıkar çıkmaz kâğıdına sarılır, masaya gelir.</p>
+            </article>
+          </div>
+
+          <div class="bar" aria-hidden="true"><span id="barFill"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="paper">
+    <div class="wrap">
+      <section id="menu" aria-labelledby="menuTitle">
+        <div class="menu-head">
+          <div>
+            <p class="eyebrow">Menü</p>
+            <h2 id="menuTitle">Fırından çıkanlar</h2>
+          </div>
+          <div class="stamp" aria-hidden="true"><span>Fırından</span><b>Sıcak</b><span>Kapına</span></div>
+        </div>
+        <ul class="menu-list">
+          <li><span class="m-tag">Klasik</span><span class="m-name">Lahmacun</span><span class="m-desc">İnce hamur, kıymalı harç, taş fırın.</span></li>
+          <li><span class="m-tag">Acılı</span><span class="m-name">Acılı Lahmacun</span><span class="m-desc">Harca bolca isot ve acı sivri biber.</span></li>
+          <li><span class="m-tag">Küçük boy</span><span class="m-name">Fındık Lahmacun</span><span class="m-desc">Avuç içi boyunda, porsiyonda beş adet.</span></li>
+          <li><span class="m-tag">Yanına</span><span class="m-name">Yayık Ayranı</span><span class="m-desc">Bakır tasta, köpüğüyle.</span></li>
+        </ul>
+      </section>
+
+      <section class="lab" id="lab" aria-labelledby="labTitle">
+        <h3 id="labTitle">Flow videosunu dene</h3>
+        <p>Google Flow'da ürettiğin hamur → lahmacun videosunu seç. Site videoyu karelere ayırır ve yukarıdaki sahneyi kaydırmaya bağlar. Video bilgisayarından dışarı çıkmaz.</p>
+        <div class="lab-row">
+          <label class="btn file" for="labFile">Video seç<input id="labFile" type="file" accept="video/*"></label>
+          <button class="btn ghost" id="labReset" type="button" hidden>Çizim demosuna dön</button>
+        </div>
+        <p id="labStatus" role="status"></p>
+      </section>
+
+      <footer class="foot">
+        <span>Taş Fırın Lahmacun</span>
+        <span>Odun ateşinde, her gün</span>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  // Ayarlar: yayına alırken kartları frames/ klasörüne koy (bkz. hazirla.sh).
+  // frames/manifest.json bulunursa sahne o kareleri kullanır; yoksa çizim demosu çalışır.
+  const CONFIG = { manifest: "frames/manifest.json", showLab: true };
+
+  const TAU = Math.PI * 2;
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const sm = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  const mix = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
+  const rgb = (c, al = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${al})`;
+
+  const canvas = document.getElementById("scene");
+  const ctx = canvas.getContext("2d");
+  const track = document.getElementById("track");
+  const hero = document.getElementById("hero");
+  const steps = [...document.querySelectorAll(".step")];
+  const railItems = [...document.querySelectorAll("#rail li")];
+  const railFill = document.getElementById("railFill");
+  const barFill = document.getElementById("barFill");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const STOPS = [0, 0.18, 0.45, 0.68, 0.9];
+
+  // ── Deterministic randomness so the drawing is the same on every load ──
+  let seed = 20261014;
+  const rand = () => {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+
+  const MEAT = [[150, 52, 32], [128, 40, 24], [171, 66, 38], [112, 34, 20]];
+  const KIND = [null, [198, 58, 38], [96, 128, 46], [238, 224, 196]];
+  const bits = Array.from({ length: 560 }, () => {
+    const k = rand();
+    return {
+      a: rand() * TAU, d: Math.sqrt(rand()) * 0.9, s: 0.006 + rand() * 0.016,
+      kind: k < 0.66 ? 0 : k < 0.8 ? 1 : k < 0.9 ? 2 : 3,
+      col: MEAT[(rand() * 4) | 0],
+    };
+  });
+  const chars = Array.from({ length: 70 }, (_, i) => ({
+    a: rand() * TAU,
+    d: i < 50 ? 0.86 + rand() * 0.13 : 0.2 + rand() * 0.6,
+    s: i < 50 ? 0.014 + rand() * 0.03 : 0.01 + rand() * 0.018,
+    k: i < 50 ? 0.45 + rand() * 0.55 : 0.25 + rand() * 0.3,
+  }));
+  const leaves = Array.from({ length: 30 }, () => ({
+    a: rand() * TAU, d: Math.sqrt(rand()) * 0.74, rot: rand() * TAU,
+    s: 0.03 + rand() * 0.028, th: rand() * 0.6, c: rand() < 0.5 ? "#4f7d2c" : "#3b6420",
+  }));
+  const sparks = Array.from({ length: 70 }, () => ({
+    x: rand(), sp: 0.06 + rand() * 0.14, ph: rand(), s: 0.6 + rand() * 1.8, wob: rand() * TAU,
+  }));
+  const rimPh = [rand() * TAU, rand() * TAU, rand() * TAU];
+  const pastePh = [rand() * TAU, rand() * TAU, rand() * TAU];
+
+  // ── Canvas sizing and the static stone + flour layers ──
+  let W = 0, H = 0, DPR = 1, stoneLayer = null, flourLayer = null;
+  function resize() {
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    if (!W || !H) return;
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    stoneLayer = buildLayer((g) => {
+      seed = 7;
+      for (let i = 0; i < (W * H) / 260; i++) {
+        const light = rand() < 0.45;
+        g.fillStyle = light ? `rgba(255,240,220,${0.02 + rand() * 0.05})` : `rgba(0,0,0,${0.08 + rand() * 0.14})`;
+        g.beginPath(); g.arc(rand() * W, rand() * H, 0.4 + rand() * 1.4, 0, TAU); g.fill();
+      }
+    });
+    flourLayer = buildLayer((g) => {
+      seed = 11;
+      for (let i = 0; i < 520; i++) {
+        const a = rand() * TAU, d = Math.pow(rand(), 0.65) * 0.62;
+        const x = W / 2 + Math.cos(a) * d * Math.max(W, H) * 0.75;
+        const y = H / 2 + Math.sin(a) * d * Math.max(W, H) * 0.55;
+        g.fillStyle = `rgba(243,234,217,${0.05 + rand() * 0.3})`;
+        g.beginPath(); g.arc(x, y, 0.4 + rand() * 1.8, 0, TAU); g.fill();
+      }
+      for (let i = 0; i < 9; i++) {
+        const x = W / 2 + (rand() - 0.5) * W * 0.7, y = H / 2 + (rand() - 0.5) * H * 0.6;
+        const r = 40 + rand() * Math.min(W, H) * 0.18;
+        const gr = g.createRadialGradient(x, y, 0, x, y, r);
+        gr.addColorStop(0, "rgba(243,234,217,.10)"); gr.addColorStop(1, "rgba(243,234,217,0)");
+        g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
+      }
+    });
+    dirty = true;
+  }
+  function buildLayer(paint) {
+    const c = document.createElement("canvas");
+    c.width = canvas.width; c.height = canvas.height;
+    const g = c.getContext("2d"); g.setTransform(DPR, 0, 0, DPR, 0, 0);
+    paint(g); return c;
+  }
+
+  function blobPath(cx, cy, r, amp, ph) {
+    ctx.beginPath();
+    for (let i = 0; i <= 96; i++) {
+      const a = (i / 96) * TAU;
+      const k = 1 + amp * (0.022 * Math.sin(3 * a + ph[0]) + 0.016 * Math.sin(5 * a + ph[1]) + 0.009 * Math.sin(11 * a + ph[2]));
+      const x = cx + Math.cos(a) * r * k, y = cy + Math.sin(a) * r * k;
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.closePath();
+  }
+  function pill(x, y, w, h) {
+    const r = h / 2;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.arc(x + w - r, y + r, r, -Math.PI / 2, Math.PI / 2);
+    ctx.lineTo(x + r, y + h); ctx.arc(x + r, y + r, r, Math.PI / 2, Math.PI * 1.5); ctx.closePath();
+  }
+
+  // ── The procedural demo: dough ball → rolled sheet → topping → oven → served ──
+  function drawDemo(p, time) {
+    const portrait = W < H;
+    const cx = W / 2, cy = H * (portrait ? 0.47 : 0.5);
+    const R = Math.min(W, H) * (portrait ? 0.4 : 0.35);
+
+    const s = sm(0.14, 0.44, p);              // opening
+    const c = sm(0.46, 0.66, p);              // topping
+    const b = sm(0.68, 0.88, p);              // bake
+    const g = sm(0.9, 0.99, p);               // serve
+    const heat = sm(0.64, 0.76, p) * (1 - sm(0.88, 0.97, p));
+    const roll = sm(0.16, 0.21, p) * (1 - sm(0.41, 0.46, p));
+    const r = lerp(R * 0.26, R, s);
+
+    // stone
+    const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.hypot(W, H) * 0.62);
+    bg.addColorStop(0, rgb(mix([54, 45, 39], [82, 50, 30], heat)));
+    bg.addColorStop(1, rgb(mix([17, 13, 11], [38, 16, 7], heat)));
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    if (stoneLayer) ctx.drawImage(stoneLayer, 0, 0, W, H);
+    if (flourLayer) { ctx.globalAlpha = 1 - 0.8 * b; ctx.drawImage(flourLayer, 0, 0, W, H); ctx.globalAlpha = 1; }
+
+    // oven glow from the edges
+    if (heat > 0.001) {
+      const gl = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, Math.hypot(W, H) * 0.62);
+      gl.addColorStop(0, "rgba(255,110,30,0)");
+      gl.addColorStop(1, `rgba(255,96,24,${0.55 * heat})`);
+      ctx.fillStyle = gl; ctx.fillRect(0, 0, W, H);
+    }
+
+    // flour haze under the dough
+    const hz = ctx.createRadialGradient(cx, cy, r * 0.6, cx, cy, r * 1.6);
+    hz.addColorStop(0, `rgba(243,234,217,${0.13 * (1 - b)})`); hz.addColorStop(1, "rgba(243,234,217,0)");
+    ctx.fillStyle = hz; ctx.fillRect(0, 0, W, H);
+
+    // dough body with its shadow
+    ctx.save();
+    ctx.shadowColor = "rgba(0,0,0,.6)";
+    ctx.shadowBlur = lerp(40, 14, s); ctx.shadowOffsetY = lerp(24, 6, s);
+    blobPath(cx, cy, r, lerp(0.4, 1, s), rimPh);
+    const dg = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    dg.addColorStop(0, rgb(mix([238, 224, 194], [218, 164, 94], b)));
+    dg.addColorStop(0.8, rgb(mix([229, 211, 174], [206, 136, 66], b)));
+    dg.addColorStop(1, rgb(mix([214, 194, 152], [150, 84, 34], b)));
+    ctx.fillStyle = dg; ctx.fill();
+    ctx.restore();
+
+    ctx.save();
+    blobPath(cx, cy, r, lerp(0.4, 1, s), rimPh); ctx.clip();
+
+    // a ball reads as a ball: highlight top-left, shade bottom-right
+    const ball = 1 - s;
+    if (ball > 0.01) {
+      const hl = ctx.createRadialGradient(cx - r * 0.38, cy - r * 0.42, 0, cx - r * 0.2, cy - r * 0.2, r * 1.1);
+      hl.addColorStop(0, `rgba(255,251,240,${0.75 * ball})`); hl.addColorStop(0.55, "rgba(255,251,240,0)");
+      ctx.fillStyle = hl; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      const sh = ctx.createRadialGradient(cx - r * 0.25, cy - r * 0.3, r * 0.25, cx - r * 0.1, cy - r * 0.1, r * 1.35);
+      sh.addColorStop(0, "rgba(80,52,26,0)"); sh.addColorStop(1, `rgba(80,52,26,${0.55 * ball})`);
+      ctx.fillStyle = sh; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+    }
+    // flour specks on the raw sheet
+    ctx.globalAlpha = (1 - c) * 0.9;
+    seed = 31;
+    for (let i = 0; i < 60; i++) {
+      const a = rand() * TAU, d = Math.sqrt(rand()) * 0.9 * r;
+      ctx.fillStyle = `rgba(255,252,244,${0.25 + rand() * 0.4})`;
+      ctx.beginPath(); ctx.arc(cx + Math.cos(a) * d, cy + Math.sin(a) * d, 0.6 + rand() * 1.6, 0, TAU); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // crust ring
+    if (b > 0) {
+      blobPath(cx, cy, r, 1, rimPh);
+      ctx.lineWidth = r * 0.34; ctx.strokeStyle = `rgba(150,78,28,${0.22 * b})`; ctx.stroke();
+      ctx.lineWidth = r * 0.12; ctx.strokeStyle = `rgba(122,60,20,${0.5 * b})`; ctx.stroke();
+    }
+
+    // topping spreads from the centre outwards
+    if (c > 0) {
+      const rp = r * 0.88 * (1 - Math.pow(1 - c, 2));
+      blobPath(cx, cy, rp, 2.2, pastePh);
+      ctx.fillStyle = rgb(mix([160, 56, 34], [116, 38, 19], b), 0.96); ctx.fill();
+      const darken = [66, 22, 10];
+      for (const t of bits) {
+        const d = t.d * r;
+        if (d > rp) continue;
+        const fade = Math.min(1, (rp - d) / (r * 0.05));
+        const base = t.kind === 0 ? t.col : KIND[t.kind];
+        ctx.globalAlpha = fade * (t.kind === 3 ? 0.7 : 0.95);
+        ctx.fillStyle = rgb(mix(base, darken, b * (t.kind === 3 ? 0.25 : 0.45)));
+        ctx.beginPath(); ctx.arc(cx + Math.cos(t.a) * d, cy + Math.sin(t.a) * d, t.s * r, 0, TAU); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // char spots and an oily sheen
+    if (b > 0) {
+      for (const ch of chars) {
+        const x = cx + Math.cos(ch.a) * ch.d * r, y = cy + Math.sin(ch.a) * ch.d * r, rr = ch.s * r;
+        const gr = ctx.createRadialGradient(x, y, 0, x, y, rr);
+        gr.addColorStop(0, `rgba(38,16,6,${0.9 * b * ch.k})`); gr.addColorStop(1, "rgba(38,16,6,0)");
+        ctx.fillStyle = gr; ctx.fillRect(x - rr, y - rr, rr * 2, rr * 2);
+      }
+      const sn = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+      sn.addColorStop(0.3, "rgba(255,214,150,0)");
+      sn.addColorStop(0.46, `rgba(255,214,150,${0.16 * b})`);
+      sn.addColorStop(0.6, "rgba(255,214,150,0)");
+      ctx.fillStyle = sn; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+    }
+    ctx.restore();
+
+    // rolling pin (oklava), tied to scroll so it rolls back when you scroll up
+    if (roll > 0.01) {
+      const q = clamp((p - 0.16) / 0.3);
+      const y = cy + Math.sin(q * Math.PI * 4) * r * 0.5;
+      const ang = -0.22 + Math.sin(q * Math.PI * 2.2) * 0.28;
+      const L = R * 2.9, T = Math.max(9, R * 0.06);
+      ctx.save();
+      ctx.globalAlpha = roll; ctx.translate(cx, y); ctx.rotate(ang);
+      ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 20; ctx.shadowOffsetY = 12;
+      const wg = ctx.createLinearGradient(0, -T / 2, 0, T / 2);
+      wg.addColorStop(0, "#e6bb80"); wg.addColorStop(0.45, "#c38b52"); wg.addColorStop(1, "#7a4a22");
+      ctx.fillStyle = wg; pill(-L / 2, -T / 2, L, T); ctx.fill();
+      ctx.restore();
+    }
+
+    // served: parsley and lemon
+    if (g > 0) {
+      for (const lf of leaves) {
+        const k = clamp((g - lf.th) / 0.35);
+        if (k <= 0) continue;
+        ctx.save();
+        ctx.translate(cx + Math.cos(lf.a) * lf.d * r, cy + Math.sin(lf.a) * lf.d * r);
+        ctx.rotate(lf.rot); ctx.scale(k, k); ctx.fillStyle = lf.c;
+        const L = lf.s * r;
+        for (let j = -1; j <= 1; j++) {
+          ctx.beginPath(); ctx.ellipse(Math.sin(j * 0.9) * L * 0.55, -Math.cos(j * 0.9) * L * 0.55, L * 0.55, L * 0.36, j * 0.9, 0, TAU); ctx.fill();
+        }
+        ctx.restore();
+      }
+      const k = 1 - Math.pow(1 - g, 3);
+      const lx = cx + r * 0.52, ly = cy - r * 0.46, lr = r * 0.17 * k;
+      if (lr > 0.5) {
+        ctx.save();
+        ctx.shadowColor = "rgba(0,0,0,.45)"; ctx.shadowBlur = 12; ctx.shadowOffsetY = 5;
+        ctx.fillStyle = "#f2c53a"; ctx.beginPath(); ctx.arc(lx, ly, lr, 0, TAU); ctx.fill();
+        ctx.restore();
+        ctx.fillStyle = "#fbeaa6"; ctx.beginPath(); ctx.arc(lx, ly, lr * 0.84, 0, TAU); ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,250,.85)"; ctx.lineWidth = Math.max(1, lr * 0.06);
+        for (let i = 0; i < 9; i++) {
+          const a = (i / 9) * TAU;
+          ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + Math.cos(a) * lr * 0.82, ly + Math.sin(a) * lr * 0.82); ctx.stroke();
+        }
+      }
+    }
+
+    // sparks rising from the fire
+    if (heat > 0.01) {
+      ctx.save(); ctx.globalCompositeOperation = "lighter";
+      for (const sp of sparks) {
+        const life = (time * sp.sp + sp.ph) % 1;
+        const x = sp.x * W + Math.sin(time * 1.3 + sp.wob) * 18;
+        const y = H * 1.05 - life * H * 1.1;
+        ctx.fillStyle = `rgba(255,150,60,${heat * (1 - life) * 0.9})`;
+        ctx.beginPath(); ctx.arc(x, y, sp.s, 0, TAU); ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  // ── Frame-sequence source (production: frames/*.jpg, or a video tested in the page) ──
+  let frames = null;   // array of HTMLImageElement, some may still be loading
+  function nearestFrame(i) {
+    for (let k = 0; k < frames.length; k++) {
+      const a = frames[i - k], b = frames[i + k];
+      if (a && a.complete && a.naturalWidth) return a;
+      if (b && b.complete && b.naturalWidth) return b;
+    }
+    return null;
+  }
+  function drawFrames(p) {
+    const img = nearestFrame(Math.round(p * (frames.length - 1)));
+    ctx.fillStyle = "#1c1714"; ctx.fillRect(0, 0, W, H);
+    if (!img) return;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+    const sc = Math.max(W / iw, H / ih), dw = iw * sc, dh = ih * sc;
+    ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+  }
+  function useFrameUrls(urls) {
+    const list = new Array(urls.length);
+    const order = [];
+    const seen = new Set();
+    for (const step of [12, 4, 1]) for (let i = 0; i < urls.length; i += step) if (!seen.has(i)) { seen.add(i); order.push(i); }
+    for (const i of order) {
+      const im = new Image(); im.decoding = "async";
+      im.onload = () => { dirty = true; };
+      im.src = urls[i]; list[i] = im;
+    }
+    frames = list; dirty = true;
+  }
+  async function loadManifest() {
+    try {
+      const res = await fetch(CONFIG.manifest, { cache: "no-cache" });
+      if (!res.ok) return;
+      const m = await res.json();
+      if (!m.count) return;
+      const path = m.path || "frames/", pad = m.pad || 4, ext = m.ext || "jpg";
+      useFrameUrls(Array.from({ length: m.count }, (_, i) => `${path}${String(i + 1).padStart(pad, "0")}.${ext}`));
+    } catch (e) { /* no frames published: keep the drawn demo */ }
+  }
+
+  // ── Scroll → progress, eased so the scene glides instead of stepping ──
+  let target = 0, cur = 0, dirty = true, lastStage = -1;
+  function readScroll() {
+    const span = track.offsetHeight - window.innerHeight;
+    target = span > 0 ? clamp(-track.getBoundingClientRect().top / span) : 0;
+  }
+  function updateUI(p) {
+    let st = 0;
+    for (let i = 0; i < STOPS.length; i++) if (p >= STOPS[i]) st = i;
+    if (st !== lastStage) {
+      steps.forEach((el, i) => el.classList.toggle("is-active", i === st));
+      railItems.forEach((el, i) => { el.classList.toggle("is-active", i === st); el.classList.toggle("is-done", i < st); });
+      lastStage = st;
+    }
+    railFill.style.height = `${p * 100}%`;
+    barFill.style.width = `${p * 100}%`;
+    const h = 1 - sm(0.015, 0.1, p);
+    hero.style.opacity = h;
+    hero.style.transform = `translateY(${(1 - h) * -24}px)`;
+  }
+  function tick(now) {
+    const d = target - cur;
+    if (Math.abs(d) > 0.0004) { cur += reduce ? d : d * 0.14; dirty = true; }
+    else if (cur !== target) { cur = target; dirty = true; }
+    const animated = !frames && !reduce && cur > 0.62 && cur < 0.98;
+    if ((dirty || animated) && W && H) {
+      if (frames) drawFrames(cur); else drawDemo(cur, reduce ? 0 : now / 1000);
+      updateUI(cur);
+      dirty = false;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener("scroll", readScroll, { passive: true });
+  window.addEventListener("resize", () => { resize(); readScroll(); });
+  resize(); readScroll(); cur = target;
+  requestAnimationFrame(tick);
+  loadManifest();
+
+  // ── Lab: turn a local Flow video into frames right in the browser ──
+  const lab = document.getElementById("lab");
+  const labFile = document.getElementById("labFile");
+  const labReset = document.getElementById("labReset");
+  const labStatus = document.getElementById("labStatus");
+  if (!CONFIG.showLab) lab.hidden = true;
+  let labUrls = [];
+
+  function seekTo(v, t) {
+    return new Promise((resolve) => {
+      const done = () => { clearTimeout(timer); v.removeEventListener("seeked", done); resolve(); };
+      const timer = setTimeout(done, 2500);
+      v.addEventListener("seeked", done);
+      v.currentTime = t;
+    });
+  }
+  async function extractFrames(file) {
+    const url = URL.createObjectURL(file);
+    const v = document.createElement("video");
+    v.muted = true; v.playsInline = true; v.preload = "auto"; v.src = url;
+    await new Promise((resolve, reject) => {
+      v.addEventListener("loadeddata", resolve, { once: true });
+      v.addEventListener("error", () => reject(new Error("decode")), { once: true });
+    });
+    const dur = v.duration;
+    const n = Math.round(clamp(dur * 20, 40, 200));
+    const scale = Math.min(1, 1600 / Math.max(v.videoWidth, v.videoHeight));
+    const c = document.createElement("canvas");
+    c.width = Math.round(v.videoWidth * scale); c.height = Math.round(v.videoHeight * scale);
+    const g = c.getContext("2d");
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      await seekTo(v, Math.max(0.001, Math.min(dur - 0.04, (i / (n - 1)) * dur)));
+      g.drawImage(v, 0, 0, c.width, c.height);
+      const blob = await new Promise((res) => c.toBlob(res, "image/jpeg", 0.86));
+      out.push(URL.createObjectURL(blob));
+      labStatus.textContent = `Kareler hazırlanıyor: ${i + 1}/${n}`;
+    }
+    URL.revokeObjectURL(url);
+    return out;
+  }
+  labFile.addEventListener("change", async () => {
+    const file = labFile.files && labFile.files[0];
+    if (!file) return;
+    labStatus.textContent = "Video açılıyor…";
+    try {
+      const urls = await extractFrames(file);
+      labUrls.forEach((u) => URL.revokeObjectURL(u));
+      labUrls = urls;
+      useFrameUrls(urls);
+      labReset.hidden = false;
+      labStatus.textContent = `Hazır: ${urls.length} kare. Yukarı çık ve kaydır.`;
+      track.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    } catch (e) {
+      labStatus.textContent = "Bu video tarayıcıda açılamadı. MP4 (H.264) olarak dışa aktarıp tekrar dene.";
+    }
+    labFile.value = "";
+  });
+  labReset.addEventListener("click", () => {
+    frames = null; dirty = true; labReset.hidden = true;
+    labStatus.textContent = "Çizim demosuna dönüldü.";
+  });
+})();
+</script>
+</body>
+</html>
