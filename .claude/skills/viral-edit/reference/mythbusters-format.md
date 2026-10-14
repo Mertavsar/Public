@@ -73,3 +73,9 @@ Bu ortamdan YouTube'a erişim yok (proxy 403). Klibi kullanıcı indirip atar.
 - Hızlı yedek: `BAR=1` → Türkçe altyazının arkasında opak bant (1366–1478) İngilizceyi örter, 5 dk'da teslim.
 - Seslendirme `votight --gap 0.04 --min-sil 0.08 --target 30` (41 → 30 sn, boşluk yok). Arka ses: kaynağın kendi altyapısı (MDX inst), yeniden sıralanmadan kesintisiz, konuşmanın ~14 dB altında.
 - Ok/etiket/grafik seti: arrow(), ring(), tag(), stamp(), gösterge (7,8 LİTRE), verim çubukları, KIVILCIM üstü çizili → SIKIŞTIRMA, kontakta donma + "?". Her biri kelime zamanına (ws(i)) bağlı.
+
+## ⛔ Cevap ortada verilirse izleyici gider (kullanıcı, kızartma yağı)
+"Motor çalıştı" 15. sn'de dev ÇALIŞTI damgasıyla verildi; kullanıcı: *"insanlar onu görüp gitmez mi"*. Ses kayıtlıyken düzeltme:
+- **3 soruluk kontrol listesi** (2. sn'den sona, üstte): ÇALIŞIR MI? / KAÇ LİTRE YAKAR? / MOTORA ZARARI VAR MI?. Her biri seslendirmede cevaplandığı kelimede tiklenir (yeşil ✓ veya kırmızı !). Baştan "3 cevap var" vaadi.
+- Ara cevaba damga YOK; cevaptan hemen sonra ortada **bir sonraki soru** ("PEKİ KAÇ LİTRE YAKTI?") = yeniden kanca. Büyük damga sadece finalde.
+- Metin yazarken: ana cevap sona, ara cevaplar her zaman yeni bir soruyla bitsin.

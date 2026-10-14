@@ -195,12 +195,12 @@ for n, (s, si) in enumerate(seq):
     if 0.10 <= tt < B[1]:
         arrow(dl, 380, 760, 560, 900, ease(tt, 0.10)); tag(lay, "KIZARTMA YAĞI", 300, 660, 92, RED, sc=pop(tt, 0.10))
     if ws(20) <= tt < B[6]:
-        tag(lay, "KIVILCIM", 540, 400, 110, (70, 70, 70), sc=pop(tt, ws(20)))
+        tag(lay, "KIVILCIM", 540, 480, 110, (70, 70, 70), sc=pop(tt, ws(20)))
         dl = ImageDraw.Draw(lay)
         if tt >= ws(21):
-            e = ease(tt, ws(21), 0.15); dl.line([300, 400, 300 + 480 * e, 400], fill=RED + (255,), width=18)
+            e = ease(tt, ws(21), 0.15); dl.line([300, 480, 300 + 480 * e, 480], fill=RED + (255,), width=18)
         if tt >= ws(22):
-            tag(lay, "SIKIŞTIRMA ✓".replace(" ✓", ""), 540, 570, 120, GREEN, sc=pop(tt, ws(22)))
+            tag(lay, "SIKIŞTIRMA ✓".replace(" ✓", ""), 540, 650, 120, GREEN, sc=pop(tt, ws(22)))
     if B[7] + 0.05 <= tt < B[8]:
         arrow(dl, 400, 830, 760, 880, ease(tt, B[7] + 0.05)); tag(lay, "YAKIT: KIZARTMA YAĞI", 400, 720, 78, RED, sc=pop(tt, B[7] + 0.05))
     dl = ImageDraw.Draw(lay)
@@ -209,37 +209,57 @@ for n, (s, si) in enumerate(seq):
     if FREEZE[0] <= tt < FREEZE[1]:
         fq = font(520 * pop(tt, FREEZE[0], 0.12, 0.4)); qw = dl.textlength("?", font=fq)
         stroke(dl, (540 - qw / 2, 960 - fq.size * 0.62), "?", fq, RED, 16)
-    if ws(39) <= tt < B[12]:
-        stamp(lay, "ÇALIŞTI", GREEN, 540, 760, tt, ws(39))
+    if ws(39) + 0.25 <= tt < ws(45):                      # cevap verildi -> hemen yeni soru (yeniden kanca)
+        sc = pop(tt, ws(39) + 0.25, 0.16, 0.35); fq = font(118 * sc)
+        for j, line in enumerate(["PEKİ KAÇ LİTRE", "YAKTI?"]):
+            lw = dl.textlength(line, font=fq); stroke(dl, (540 - lw / 2, 560 + j * fq.size * 1.08), line, fq, YELLOW, 12)
     dl = ImageDraw.Draw(lay)
     if ws(45) <= tt < B[15]:                              # 100 km = 7,8 L
         sc = pop(tt, ws(45), 0.16, 0.35); fb = font(230 * sc); fu = font(78 * sc); fs = font(70 * sc)
         v = "7,8"; tw = dl.textlength(v, font=fb); uw = dl.textlength("LİTRE", font=fu)
-        x = 540 - (tw + 20 + uw) / 2; y = 300
+        x = 540 - (tw + 20 + uw) / 2; y = 470
         stroke(dl, (540 - dl.textlength("100 KM'DE", font=fs) / 2, y - 95 * sc), "100 KM'DE", fs, WHITE, 8)
         stroke(dl, (x, y), v, fb, YELLOW, 14); stroke(dl, (x + tw + 20, y + fb.size * 0.6), "LİTRE", fu, WHITE, 8)
     if ws(55) <= tt < ws(59):                             # verim çubukları
         e = ease(tt, ws(55), 0.35)
-        dl.rounded_rectangle([90, 250, 990, 640], radius=30, fill=(0, 0, 0, 175))
+        dl.rounded_rectangle([90, 400, 990, 790], radius=30, fill=(0, 0, 0, 175))
         for j, (lab, pct, col) in enumerate([("MAZOT", 1.0, WHITE), ("KIZARTMA YAĞI", 0.9, YELLOW)]):
-            y = 300 + j * 170; fL = font(64)
+            y = 450 + j * 170; fL = font(64)
             stroke(dl, (130, y), lab, fL, col, 6)
             dl.rounded_rectangle([130, y + 85, 130 + 720 * pct * e, y + 140], radius=14, fill=col + (255,))
             stroke(dl, (130 + 720 * pct * e + 18, y + 72), f"%{int(round(pct * 100 * e))}", font(70), col, 7)
     if ws(59) <= tt < B[17]:
-        stamp(lay, "YAKIT: 0 TL", GREEN, 540, 480, tt, ws(59), size=150, angle=-6)
+        stamp(lay, "YAKIT: 0 TL", GREEN, 540, 600, tt, ws(59), size=150, angle=-6)
     if ws(62) <= tt < B[18]:
-        tag(lay, "DİKKAT!", 540, 380, 140, YELLOW, fg=BLACK, sc=pop(tt, ws(62)), angle=-4)
+        tag(lay, "DİKKAT!", 540, 520, 140, YELLOW, fg=BLACK, sc=pop(tt, ws(62)), angle=-4)
     dl = ImageDraw.Draw(lay)
     if B[18] <= tt < B[19]:
         ring(dl, 660, 760, 190, 430, ease(tt, B[18], 0.3))
         if tt >= ws(69):
             tag(lay, "TIKANABİLİR", 540, 1270, 100, RED, sc=pop(tt, ws(69)))
     if tt >= ws(75):
-        stamp(lay, "DOĞRU ÇIKTI", GREEN, 540, 700, tt, ws(75), size=160)
+        stamp(lay, "DOĞRU ÇIKTI", GREEN, 540, 760, tt, ws(75), size=160)
         if tt >= ws(75) + 0.45:
             tag(lay, "UZUN VADEDE MOTORA ZARAR VEREBİLİR", 540, 900, 52, (30, 30, 30), fg=YELLOW, sc=pop(tt, ws(75) + 0.45, 0.15, 0.2))
+        dl = ImageDraw.Draw(lay)
     dl = ImageDraw.Draw(lay)
+    # --- 3 soruluk kontrol listesi (vaat + yeniden kanca) ---
+    if tt >= B[1]:
+        Q = [("ÇALIŞIR MI?", ws(39), "EVET", GREEN), ("KAÇ LİTRE YAKAR?", ws(48), "7,8 L", GREEN),
+             ("MOTORA ZARARI VAR MI?", ws(69), "OLABİLİR", RED)]
+        sc0 = pop(tt, B[1], 0.18, 0.25); x0, y0 = 70, 70
+        dl.rounded_rectangle([x0 - 20, y0 - 18, 1010, y0 + 3 * 92 - 4], radius=24, fill=(0, 0, 0, 185), outline=(255, 255, 255, 90), width=3)
+        for j, (q, tq, ans, col) in enumerate(Q):
+            y = y0 + j * 92; done = tt >= tq; s_ = pop(tt, tq, 0.18, 0.45) if done else 1.0
+            bx = [x0, y + 8, x0 + 58, y + 66]
+            dl.rounded_rectangle(bx, radius=10, fill=(col if done else (40, 40, 40)) + (255,), outline=WHITE + (255,), width=4)
+            if done and col == GREEN:
+                dl.line([x0 + 12, y + 38, x0 + 25, y + 52, x0 + 47, y + 20], fill=WHITE + (255,), width=9, joint="curve")
+            elif done:
+                fx_ = font(52); dl.text((x0 + 29 - dl.textlength("!", font=fx_) / 2, y + 6), "!", font=fx_, fill=WHITE + (255,))
+            fq = font(58 * (s_ if done else 1)); stroke(dl, (x0 + 80, y + 4), q, fq, WHITE if not done else (200, 200, 200), 6)
+            if done:
+                fa = font(58 * s_); aw = dl.textlength(ans, font=fa); stroke(dl, (990 - aw, y + 4), ans, fa, col, 7)
     # --- altyazı ---
     if BAR:
         for (y0, y1, a) in [(1336, 1352, 130), (1352, 1366, 215), (1366, 1478, 255), (1478, 1492, 215), (1492, 1508, 130)]:
