@@ -4,13 +4,13 @@
 #
 # Hareketli anlar her karede, durağan anlar seyrek tutulur; böylece site hafif kalır.
 # PLAN, "kareAralığı:adım" listesidir (24 fps'te kare numarası, 0'dan başlar).
-# Varsayılan plan Kuzu Lahmacun'un 8 sn'lik Flow videosuna göre ayarlıdır:
-#   0-20:5     beze duruyor (0–0,9 sn)             → seyrek
-#   21-44:1    hamur açılıyor (0,9–1,8 sn)         → her kare
-#   45-73:2    harç yayılıyor (1,9–3,0 sn)         → 2'de 1
-#   74-106:4   neredeyse durağan (3,1–4,4 sn)      → 4'te 1
-#   107-130:1  pişiyor (4,5–5,4 sn)                → her kare
-#   131-191:3  buhar, limon, maydanoz (5,5–8 sn)   → 3'te 1
+# Varsayılan plan Kuzu Lahmacun'un uzun lahmacunlu 8 sn'lik Flow videosuna göre ayarlıdır:
+#   0-26:6     beze duruyor (0–1,1 sn)               → seyrek
+#   27-45:1    hamur boydan boya açılıyor (1,1–1,9)  → her kare
+#   46-64:1    harç beliriyor (1,9–2,7 sn)           → her kare
+#   65-161:4   yavaş pişme (2,7–6,7 sn)              → 4'te 1
+#   162-178:1  maydanoz ve limon (6,75–7,4 sn)       → her kare
+#   179-191:4  son hâl (7,5–8 sn)                    → seyrek
 # Başka bir videoda tüm kareleri almak için: PLAN="0-9999:1" ./hazirla.sh video.mp4
 set -euo pipefail
 
@@ -19,7 +19,7 @@ out="$(cd "$(dirname "$0")" && pwd)/frames"
 fps="${FPS:-24}"
 width="${WIDTH:-1280}"
 quality="${QUALITY:-10}"   # JPEG kalitesi: 2 en iyi, 31 en kötü
-plan="${PLAN:-0-20:5,21-44:1,45-73:2,74-106:4,107-130:1,131-191:3}"
+plan="${PLAN:-0-26:6,27-45:1,46-64:1,65-161:4,162-178:1,179-191:4}"
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg bulunamadı. Mac: brew install ffmpeg"; exit 1; }
 command -v python3 >/dev/null || { echo "python3 bulunamadı."; exit 1; }

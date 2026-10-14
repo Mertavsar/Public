@@ -179,19 +179,20 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .step p { margin: 0; max-width: 36ch; color: var(--cream-dim); font-size: 1.05rem; }
 .step .price { color: var(--cream); font-weight: 800; }
 
-.rail-wrap { position: absolute; right: 0; top: 50%; transform: translateY(-50%); padding-left: 20px; opacity: var(--ui-o, 1); }
+.rail-wrap { position: absolute; right: 0; bottom: 4px; padding-top: 14px; opacity: var(--ui-o, 1); }
 .bar { opacity: var(--ui-o, 1); }
-.rail-wrap::before, .rail-fill { content: ""; position: absolute; left: 0; top: 0; width: 3px; border-radius: 3px; }
-.rail-wrap::before { bottom: 0; background: rgba(244, 239, 225, .2); }
-.rail-fill { height: 0; background: var(--tomato); }
-.rail { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.rail-wrap::before, .rail-fill { content: ""; position: absolute; left: 0; top: 0; height: 3px; border-radius: 3px; }
+.rail-wrap::before { right: 0; background: rgba(244, 239, 225, .2); }
+.rail-fill { width: 0; background: var(--tomato); }
+.rail { list-style: none; margin: 0; padding: 0; display: flex; gap: 26px; }
 .rail li {
   font-family: var(--f-display); font-weight: 800; font-variation-settings: "wdth" 110;
-  text-transform: uppercase; letter-spacing: .06em; font-size: .82rem;
-  opacity: .4; transition: opacity .3s ease, transform .3s ease;
+  text-transform: uppercase; letter-spacing: .08em; font-size: .8rem;
+  opacity: .42; transition: opacity .3s ease;
 }
 .rail li.is-done { opacity: .8; }
-.rail li.is-active { opacity: 1; transform: translateX(4px); }
+.rail li.is-active { opacity: 1; color: #fff; }
+@media (max-width: 1099px) { .rail-wrap { display: none; } }
 
 .bar { display: none; }
 
@@ -299,7 +300,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .adim-scroll { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-right: calc(-1 * var(--gutter-r)); }
 .adim-list {
   list-style: none; margin: 0; padding: 0 var(--gutter-r) 0 0;
-  display: grid; grid-auto-flow: column; grid-auto-columns: min(72vw, 260px); gap: 16px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(78vw, 300px); gap: 16px;
 }
 @media (min-width: 1040px) {
   .adim-scroll { overflow: visible; margin-right: 0; }
@@ -307,7 +308,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 }
 .adim-list li { scroll-snap-align: start; display: grid; gap: 12px; min-width: 0; }
 .adim-list img {
-  display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px;
+  display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 12px;
   background: var(--stone); box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .7);
 }
 .adim-list .n { font-weight: 800; font-size: .74rem; letter-spacing: .18em; color: var(--tomato); }
@@ -353,11 +354,11 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .visit-grid { display: grid; gap: 28px; align-items: center; }
 .visit-text { display: grid; gap: 28px; justify-items: start; min-width: 0; }
 .visit-photo {
-  width: min(100%, 420px); aspect-ratio: 1; border-radius: 50%; justify-self: center;
-  background: url("frames/0098.jpg") center / auto 152% no-repeat, var(--stone);
-  box-shadow: 0 0 0 10px var(--green-deep), 0 0 0 12px rgba(244, 239, 225, .35), 0 30px 60px -20px rgba(0, 0, 0, .7);
+  grid-column: 1 / -1; width: 100%; aspect-ratio: 3.2 / 1; border-radius: 999px;
+  background: url("frames/0089.jpg") center / 122% auto no-repeat, rgb(46, 44, 42);
+  box-shadow: 0 0 0 8px var(--green-deep), 0 0 0 10px rgba(244, 239, 225, .3), 0 30px 60px -20px rgba(0, 0, 0, .7);
 }
-@media (min-width: 860px) { .visit-grid { grid-template-columns: 1.3fr 1fr; } }
+
 .visit h2 {
   margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110;
   font-size: clamp(2.4rem, 7vw, 5.4rem); line-height: .9; text-transform: uppercase; letter-spacing: -.015em;
@@ -461,8 +462,8 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
             </article>
             <article class="step">
               <p class="tag">2/5 · Açılış</p>
-              <h2>İncecik açılır.</h2>
-              <p>Unlu tezgâhta, ortadan kenara doğru.</p>
+              <h2>Boydan boya açılır.</h2>
+              <p>Unlu tezgâhta, ortadan iki uca doğru, incecik.</p>
             </article>
             <article class="step">
               <p class="tag">3/5 · Harç</p>
@@ -551,10 +552,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <div class="adim-scroll">
         <ol class="adim-list">
           <li><img src="frames/0001.jpg" alt="Unlu tezgâhta hamur bezesi" loading="lazy"><span class="n">1</span><b>Beze</b><span>Hamur dinlenir, bezelere ayrılır.</span></li>
-          <li><img src="frames/0027.jpg" alt="İncecik açılmış hamur" loading="lazy"><span class="n">2</span><b>Açılış</b><span>Ortadan kenara, incecik.</span></li>
-          <li><img src="frames/0042.jpg" alt="Hamurun üstüne yayılan kıymalı harç" loading="lazy"><span class="n">3</span><b>Harç</b><span>Kenara kadar, eşit kat.</span></li>
-          <li><img src="frames/0074.jpg" alt="Fırından çıkmış, kenarları benekli lahmacun" loading="lazy"><span class="n">4</span><b>Fırın</b><span>Altı çıtır, kenarı benekli.</span></li>
-          <li><img src="frames/0098.jpg" alt="Maydanoz ve limonla servis edilen lahmacun" loading="lazy"><span class="n">5</span><b>Servis</b><span>Limon, maydanoz, afiyet.</span></li>
+          <li><img src="frames/0023.jpg" alt="Boydan boya açılmış uzun hamur" loading="lazy"><span class="n">2</span><b>Açılış</b><span>Ortadan iki uca, incecik.</span></li>
+          <li><img src="frames/0042.jpg" alt="Uzun hamurun üstüne yayılmış kıymalı harç" loading="lazy"><span class="n">3</span><b>Harç</b><span>Kenara kadar, eşit kat.</span></li>
+          <li><img src="frames/0067.jpg" alt="Fırından çıkmış, kenarları benekli lahmacun" loading="lazy"><span class="n">4</span><b>Fırın</b><span>Altı çıtır, kenarı benekli.</span></li>
+          <li><img src="frames/0089.jpg" alt="Maydanoz ve limonla servis edilen lahmacun" loading="lazy"><span class="n">5</span><b>Servis</b><span>Limon, maydanoz, afiyet.</span></li>
         </ol>
       </div>
     </div>
@@ -612,7 +613,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         <a class="btn" href="#menu">Menüye bak</a>
       </div>
       </div>
-      <div class="visit-photo" role="img" aria-label="Fırından yeni çıkmış lahmacun, limon ve maydanozla"></div>
+      <div class="visit-photo" role="img" aria-label="Fırından yeni çıkmış uzun lahmacun, maydanoz ve limonla"></div>
      </div>
 
       <section class="lab" id="lab" aria-labelledby="labTitle" hidden>
@@ -644,13 +645,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 
   // Ayarlar: yayına alırken kartları frames/ klasörüne koy (bkz. hazirla.sh).
   // frames/manifest.json bulunursa sahne o kareleri kullanır; yoksa çizim demosu çalışır.
-  // keys: kaydırma oranı → video oranı. Flow videosunda beze 0–0,9 sn, açılma 0,9–1,8 sn,
-  // harç 1,9–3,0 sn, durağan 3,0–4,4 sn, pişme 4,5–5,4 sn, servis 5,4–8 sn. Bu eşleme her
-  // aşamaya kendi kaydırma payını verir. Başka bir video gelirse yeniden ayarlanır.
+  // keys: kaydırma oranı → video oranı. Uzun lahmacun videosunda beze 0–1,1 sn, açılış
+  // 1,1–1,9 sn, harç 1,9–2,65 sn, pişme 2,65–6,75 sn, servis 6,75–8 sn. Her aşama, ekrandaki
+  // yazısıyla aynı kaydırma aralığına düşer. Başka bir video gelirse yeniden ayarlanır.
   const CONFIG = {
     manifest: "frames/manifest.json",
     showLab: false,   // iç test kutusu; adres sonuna #dene eklenirse de açılır
-    keys: [[0, 0], [0.18, 0.106], [0.45, 0.231], [0.66, 0.381], [0.7, 0.556], [0.9, 0.675], [1, 1]],
+    keys: [[0, 0], [0.18, 0.1375], [0.45, 0.2375], [0.68, 0.331], [0.9, 0.844], [1, 1]],
   };
 
   const TAU = Math.PI * 2;
@@ -973,13 +974,26 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     ctx.fillStyle = "#14110e"; ctx.fillRect(0, 0, W, H);
     if (!a) return;
     const iw = a.naturalWidth, ih = a.naturalHeight;
-    // The footage is shot straight down, so on a tall phone it can turn 90° and run the
-    // length of the screen instead of losing both ends of the lahmacun to the crop.
+    // The footage is shot straight down, so on a tall phone it turns 90° and the long
+    // lahmacun runs down the screen instead of losing both ends to the crop.
     const turn = H > W * 1.15 && iw > ih;
-    const cw = turn ? H : W, chh = turn ? W : H;
-    const sc = Math.max(cw / iw, chh / ih), dw = iw * sc, dh = ih * sc;
+    let sc, cy = H / 2;
+    if (turn) {
+      // Fill the width with the footage's short side; the long lahmacun then runs top to
+      // bottom. If the footage is shorter than the screen, pin it to the top and let the
+      // captions sit on the stone-coloured space below instead of on the food.
+      sc = W / ih;
+      const len = iw * sc;
+      if (len < H) {
+        cy = len / 2;
+        ctx.fillStyle = "rgb(46,44,42)"; ctx.fillRect(0, len - 2, W, H - len + 2);
+      }
+    } else {
+      sc = Math.max(W / iw, H / ih);
+    }
+    const dw = iw * sc, dh = ih * sc;
     ctx.save();
-    ctx.translate(W / 2, H / 2);
+    ctx.translate(W / 2, cy);
     if (turn) ctx.rotate(Math.PI / 2);
     ctx.drawImage(a, -dw / 2, -dh / 2, dw, dh);
     const b = frames[i1];
@@ -987,6 +1001,12 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       ctx.globalAlpha = mixAmt; ctx.drawImage(b, -dw / 2, -dh / 2, dw, dh); ctx.globalAlpha = 1;
     }
     ctx.restore();
+    if (turn && iw * sc < H) {
+      const end = iw * sc, fade = Math.min(90, end * 0.14);
+      const g = ctx.createLinearGradient(0, end - fade, 0, end);
+      g.addColorStop(0, "rgba(46,44,42,0)"); g.addColorStop(1, "rgb(46,44,42)");
+      ctx.fillStyle = g; ctx.fillRect(0, end - fade, W, fade);
+    }
   }
   function useFrameUrls(urls, keys = null, times = null) {
     frameKeys = keys;
@@ -1029,7 +1049,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       railItems.forEach((el, i) => { el.classList.toggle("is-active", i === st); el.classList.toggle("is-done", i < st); });
       lastStage = st;
     }
-    railFill.style.height = `${p * 100}%`;
+    railFill.style.width = `${p * 100}%`;
     barFill.style.width = `${p * 100}%`;
     const h = 1 - sm(0.004, 0.065, p);
     hero.style.opacity = h;
