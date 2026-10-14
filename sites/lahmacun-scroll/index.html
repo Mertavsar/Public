@@ -50,14 +50,15 @@ a { color: inherit; }
 
 /* ── Brand lockup: KUZU LAHMACUN [oven] KİLİS TAVA / ERENKÖY ── */
 .lockup {
-  display: inline-grid; grid-template-columns: auto auto auto; align-items: end;
-  column-gap: .28em; row-gap: .18em;
+  display: inline-grid; grid-template-columns: auto auto auto; align-items: center;
+  column-gap: .3em; row-gap: .24em;
   font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 112;
   text-transform: uppercase; line-height: .86; letter-spacing: -.01em; color: var(--cream);
 }
 .lockup .l-left { text-align: right; }
+.lockup .l-right { text-align: left; }
 .lockup .l-left span, .lockup .l-right span { display: block; }
-.lockup .oven { width: auto; height: 1.12em; aspect-ratio: 120 / 84; align-self: end; margin-bottom: .02em; }
+.lockup .oven { width: auto; height: 1.62em; aspect-ratio: 120 / 63; }
 .lockup .l-loc {
   grid-column: 1 / -1; display: flex; align-items: center; gap: .6em;
   font-size: .28em; font-weight: 700; letter-spacing: .5em; font-variation-settings: "wdth" 125;
@@ -128,18 +129,39 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 }
 .frame { position: relative; height: 100%; text-shadow: 0 2px 16px rgba(8, 7, 5, .75); }
 
-.hero {
-  position: absolute; top: 0; left: 0; right: 0;
-  display: grid; justify-items: center; text-align: center; gap: .9rem;
+.intro {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  display: grid; place-content: center; justify-items: center; text-align: center; gap: 1.2rem;
+  padding-left: var(--gutter-l); padding-right: var(--gutter-r);
+  background: radial-gradient(ellipse 75% 65% at 50% 50%, rgba(10, 9, 7, .64) 0%, rgba(10, 9, 7, .88) 100%);
   will-change: opacity, transform;
 }
-.hero .lockup { font-size: clamp(1.9rem, min(4.6vw, 5.8vh), 4.4rem); text-shadow: 0 4px 30px rgba(0, 0, 0, .55); }
-.hero .script { font-size: clamp(1.2rem, min(2.2vw, 3.2vh), 1.8rem); color: var(--cream); line-height: 1.15; }
-.hint {
-  margin: .8rem 0 0; font-weight: 700; font-size: .76rem; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--cream-dim); animation: bob 1.8s ease-in-out infinite;
+.crest {
+  margin: 0; display: grid; justify-items: center; row-gap: .1em;
+  font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 112;
+  text-transform: uppercase; line-height: .9; letter-spacing: -.01em; color: var(--cream);
+  font-size: clamp(1.8rem, min(7vw, 9vh), 6.2rem); text-shadow: 0 4px 40px rgba(0, 0, 0, .6);
 }
-@keyframes bob { 50% { transform: translateY(6px); } }
+.crest .oven { height: 1.15em; width: auto; aspect-ratio: 120 / 63; margin-bottom: .14em; }
+.crest .c2 { font-size: .6em; letter-spacing: .1em; padding-left: .1em; }
+.crest .l-loc {
+  justify-self: stretch; display: flex; align-items: center; gap: .7em; margin-top: .35em;
+  font-size: .2em; font-weight: 700; letter-spacing: .55em; padding-left: .55em; font-variation-settings: "wdth" 125;
+}
+.crest .l-loc::before, .crest .l-loc::after { content: ""; flex: 1; height: 2px; background: currentColor; opacity: .8; }
+.intro .script { font-size: clamp(1.2rem, min(2.4vw, 4vh), 2rem); color: var(--cream); line-height: 1.2; }
+.cue {
+  position: absolute; left: 50%; bottom: max(30px, env(safe-area-inset-bottom, 0px)); margin: 0;
+  transform: translateX(-50%); display: grid; justify-items: center; gap: 12px;
+  font-weight: 700; font-size: .7rem; letter-spacing: .32em; padding-left: .32em;
+  text-transform: uppercase; color: var(--cream-dim);
+}
+.cue i {
+  display: block; width: 2px; height: 44px; transform-origin: top;
+  background: linear-gradient(var(--cream), rgba(244, 239, 225, 0));
+  animation: cue 2s ease-in-out infinite;
+}
+@keyframes cue { 0% { transform: scaleY(0); opacity: 1; } 55% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
 
 .steps { position: absolute; left: 0; bottom: 0; width: min(34rem, 100%); display: grid; }
 .step {
@@ -157,7 +179,8 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .step p { margin: 0; max-width: 36ch; color: var(--cream-dim); font-size: 1.05rem; }
 .step .price { color: var(--cream); font-weight: 800; }
 
-.rail-wrap { position: absolute; right: 0; top: 50%; transform: translateY(-50%); padding-left: 20px; }
+.rail-wrap { position: absolute; right: 0; top: 50%; transform: translateY(-50%); padding-left: 20px; opacity: var(--ui-o, 1); }
+.bar { opacity: var(--ui-o, 1); }
 .rail-wrap::before, .rail-fill { content: ""; position: absolute; left: 0; top: 0; width: 3px; border-radius: 3px; }
 .rail-wrap::before { bottom: 0; background: rgba(244, 239, 225, .2); }
 .rail-fill { height: 0; background: var(--tomato); }
@@ -177,8 +200,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   .topbar nav a.menu-link { display: none; }
   .rail-wrap { display: none; }
   .overlay { padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
-  .hero .lockup { font-size: clamp(1.3rem, 7vw, 2.4rem); font-variation-settings: "wdth" 100; }
-  .hero .script { font-size: 1.2rem; }
+  .crest { font-size: clamp(1.5rem, min(7.4vw, 9vh), 3rem); font-variation-settings: "wdth" 104; }
   .bar {
     display: block; position: absolute; left: 0; right: 0; bottom: -14px;
     height: 3px; background: rgba(244, 239, 225, .2); border-radius: 3px; overflow: hidden;
@@ -282,7 +304,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hint { animation: none; }
+  .cue i { animation: none; }
   .step { transition: none; }
 }
 </style>
@@ -291,7 +313,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 <div class="site" lang="tr">
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="oven" viewBox="0 0 120 84">
+    <symbol id="oven" viewBox="0 17 120 63">
       <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M8 74a52 52 0 0 1 104 0"/>
         <path d="M27 74a33 33 0 0 1 66 0"/>
@@ -300,14 +322,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         <path d="M44 74a16 16 0 0 1 32 0"/>
       </g>
       <path fill="currentColor" d="M60 50c5 6 9 9.5 9 15a9 9 0 0 1-18 0c0-3.6 2-5.6 3.6-7.4.3 2.6 1.6 4 3 4.4-.8-4.4.5-8.4 2.4-12Z"/>
-      <path fill="currentColor" d="M60 4c2.6 3 4 5 4 7.6a4 4 0 0 1-8 0c0-2.4 1.6-4.4 4-7.6Z" opacity=".9"/>
     </symbol>
   </svg>
 
   <header class="topbar" id="topbar">
     <a class="lockup" href="#track" aria-label="Kuzu Lahmacun, Kilis Tava, Erenköy — başa dön">
       <span class="l-left" aria-hidden="true"><span>Kuzu</span><span>Lahmacun</span></span>
-      <svg class="oven" viewBox="0 0 120 84" aria-hidden="true"><use href="#oven"/></svg>
+      <svg class="oven" viewBox="0 0 120 63" aria-hidden="true"><use href="#oven"/></svg>
       <span class="l-right" aria-hidden="true"><span>Kilis</span><span>Tava</span></span>
       <span class="l-loc" aria-hidden="true">Erenköy</span>
     </a>
@@ -325,17 +346,18 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     <div class="stage">
       <canvas id="scene" aria-hidden="true"></canvas>
       <div class="scrim" aria-hidden="true"></div>
+      <div class="intro" id="hero">
+        <h1 class="crest">
+          <svg class="oven" viewBox="0 0 120 63" aria-hidden="true"><use href="#oven"/></svg>
+          <span class="c1">Kuzu Lahmacun</span>
+          <span class="c2">Kilis Tava</span>
+          <span class="l-loc">Erenköy</span>
+        </h1>
+        <p class="script">Hamurdan lahmacuna, fırından sofraya.</p>
+        <p class="cue" aria-hidden="true">Kaydır<i></i></p>
+      </div>
       <div class="overlay">
         <div class="frame">
-
-          <div class="hero" id="hero">
-            <h1 class="lockup">
-              <span class="l-left"><span>Kuzu</span><span>Lahmacun</span></span>
-              <svg class="oven" viewBox="0 0 120 84" aria-hidden="true"><use href="#oven"/></svg>
-              <span class="l-right"><span>Kilis</span><span>Tava</span></span>
-              <span class="l-loc">Erenköy</span>
-            </h1>
-          </div>
 
           <div class="rail-wrap" aria-hidden="true">
             <span class="rail-fill" id="railFill"></span>
@@ -349,11 +371,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
           </div>
 
           <div class="steps" aria-live="polite">
-            <article class="step is-active">
+            <article class="step">
               <p class="tag">1/5 · Beze</p>
               <h2>Her lahmacun bir bezeyle başlar.</h2>
               <p>Hamur yoğrulur, dinlenir, tek tek bezelere ayrılır.</p>
-              <p class="hint" aria-hidden="true">Aşağı kaydır ↓</p>
             </article>
             <article class="step">
               <p class="tag">2/5 · Açılış</p>
@@ -456,7 +477,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <footer class="foot">
         <span class="lockup" aria-label="Kuzu Lahmacun, Kilis Tava, Erenköy">
           <span class="l-left" aria-hidden="true"><span>Kuzu</span><span>Lahmacun</span></span>
-          <svg class="oven" viewBox="0 0 120 84" aria-hidden="true"><use href="#oven"/></svg>
+          <svg class="oven" viewBox="0 0 120 63" aria-hidden="true"><use href="#oven"/></svg>
           <span class="l-right" aria-hidden="true"><span>Kilis</span><span>Tava</span></span>
           <span class="l-loc" aria-hidden="true">Erenköy</span>
         </span>
@@ -499,7 +520,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   const barFill = document.getElementById("barFill");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const STOPS = [0, 0.18, 0.45, 0.68, 0.9];
+  const STOPS = [0.07, 0.18, 0.45, 0.68, 0.9];   // captions start once the intro has faded
 
   // ── Deterministic randomness so the drawing is the same on every load ──
   let seed = 20261014;
@@ -859,7 +880,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     document.body.classList.toggle("past-stage", box.bottom < 90);
   }
   function updateUI(p) {
-    let st = 0;
+    let st = -1;
     for (let i = 0; i < STOPS.length; i++) if (p >= STOPS[i]) st = i;
     if (st !== lastStage) {
       steps.forEach((el, i) => el.classList.toggle("is-active", i === st));
@@ -868,10 +889,11 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     }
     railFill.style.height = `${p * 100}%`;
     barFill.style.width = `${p * 100}%`;
-    const h = 1 - sm(0.015, 0.1, p);
+    const h = 1 - sm(0.004, 0.065, p);
     hero.style.opacity = h;
     topbar.style.setProperty("--brand-o", (1 - h).toFixed(3));
-    hero.style.transform = `translateY(${(1 - h) * -24}px)`;
+    track.style.setProperty("--ui-o", (1 - h).toFixed(3));
+    hero.style.transform = `scale(${(1 + (1 - h) * 0.12).toFixed(4)})`;
   }
   function tick(now) {
     const d = target - cur;
