@@ -61,3 +61,7 @@ Bu ortamdan YouTube'a erişim yok (proxy 403). Klibi kullanıcı indirip atar.
 - **Geçiş:** Düz kesim. 20 kesim / 33.7 sn (0.59/sn), medyan plan 1.17 sn. İlk plan 5.9 sn, ilk 10 sn çizim animasyonu (efsanenin düzeneği izometrik çizimle anlatılıyor), sonra gerçek görüntü.
 - **Ekranda:** Tek kelimelik turuncu küçük harf altyazı, 10–13 sn'de "VULRAN ABONE OL" butonu, sonda damga yok ("Yani efsanevi Bond tuzağı yalandı.").
 - Plan zamanlarını yeni sese taşımak: `tm()` = eski kelime başlangıçlarından yenilere np.interp (örnek dosyada).
+
+## ⛔ Konu ve kapak güvenliği (kullanıcı, şişme top kapağı: "İNTİHARA TEŞVİK GİBİ BU NE")
+- Kapakta/başlıkta: düşen insan (manken bile olsa) + "yaşar mısın / hangisi kurtuldu / hayatta kalır mı" YOK. Soru NESNEYE sorulur ("Şişme top düşüşü durdurur mu?"), mankende "TEST MANKENİ" etiketi, üstte "BİLİM DENEYİ".
+- Konu seçerken öncelik: nesne/fizik/yemek/ses/araç deneyleri (cam kıran ses, iç içe telefon rehberi, su ısıtıcısı roketi, Mentos-kola, beton mikseri). Yüksekten düşme, silah, çocuk riski içeren efsaneler ikinci planda; seçilirse metin ve kapak bilim çerçevesinde kalır.
