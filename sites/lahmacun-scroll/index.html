@@ -57,8 +57,9 @@ body {
 .scrim {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(to top, rgba(20, 15, 12, .82) 0%, rgba(20, 15, 12, 0) 38%),
-    linear-gradient(to bottom, rgba(20, 15, 12, .55) 0%, rgba(20, 15, 12, 0) 26%);
+    linear-gradient(to top, rgba(20, 15, 12, .85) 0%, rgba(20, 15, 12, 0) 40%),
+    linear-gradient(to bottom, rgba(20, 15, 12, .6) 0%, rgba(20, 15, 12, 0) 28%),
+    linear-gradient(to right, rgba(20, 15, 12, .55) 0%, rgba(20, 15, 12, 0) 42%);
 }
 .overlay {
   position: absolute; inset: 0; pointer-events: none;
@@ -67,7 +68,7 @@ body {
   padding-left: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px));
   padding-right: max(clamp(16px, 4vw, 56px), env(safe-area-inset-right, 0px));
 }
-.frame { position: relative; height: 100%; }
+.frame { position: relative; height: 100%; text-shadow: 0 1px 14px rgba(15, 11, 9, .7); }
 
 .eyebrow {
   font-family: var(--f-mono); font-size: .74rem; font-weight: 600;
@@ -325,7 +326,14 @@ body {
 
   // Ayarlar: yayına alırken kartları frames/ klasörüne koy (bkz. hazirla.sh).
   // frames/manifest.json bulunursa sahne o kareleri kullanır; yoksa çizim demosu çalışır.
-  const CONFIG = { manifest: "frames/manifest.json", showLab: true };
+  // keys: kaydırma oranı → video oranı. Flow videosunda beze 0–0,9 sn, açılma 0,9–1,8 sn,
+  // harç 1,9–3,0 sn, durağan 3,0–4,4 sn, pişme 4,5–5,4 sn, servis 5,4–8 sn. Bu eşleme her
+  // aşamaya kendi kaydırma payını verir. Başka bir video gelirse yeniden ayarlanır.
+  const CONFIG = {
+    manifest: "frames/manifest.json",
+    showLab: true,
+    keys: [[0, 0], [0.18, 0.106], [0.45, 0.231], [0.66, 0.381], [0.7, 0.556], [0.9, 0.675], [1, 1]],
+  };
 
   const TAU = Math.PI * 2;
   const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
@@ -612,23 +620,67 @@ body {
 
   // ── Frame-sequence source (production: frames/*.jpg, or a video tested in the page) ──
   let frames = null;   // array of HTMLImageElement, some may still be loading
+  let frameKeys = null, frameTimes = null;
+  const ready = (im) => im && im.complete && im.naturalWidth;
   function nearestFrame(i) {
     for (let k = 0; k < frames.length; k++) {
-      const a = frames[i - k], b = frames[i + k];
-      if (a && a.complete && a.naturalWidth) return a;
-      if (b && b.complete && b.naturalWidth) return b;
+      if (ready(frames[i - k])) return frames[i - k];
+      if (ready(frames[i + k])) return frames[i + k];
     }
     return null;
   }
-  function drawFrames(p) {
-    const img = nearestFrame(Math.round(p * (frames.length - 1)));
-    ctx.fillStyle = "#1c1714"; ctx.fillRect(0, 0, W, H);
-    if (!img) return;
-    const iw = img.naturalWidth, ih = img.naturalHeight;
-    const sc = Math.max(W / iw, H / ih), dw = iw * sc, dh = ih * sc;
-    ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+  function mapKeys(p, keys) {
+    if (!keys) return p;
+    for (let i = 1; i < keys.length; i++) {
+      const [p0, v0] = keys[i - 1], [p1, v1] = keys[i];
+      if (p <= p1) return lerp(v0, v1, clamp((p - p0) / (p1 - p0)));
+    }
+    return 1;
   }
-  function useFrameUrls(urls) {
+  const BAND_TOP = "rgb(46,39,32)", BAND_BOTTOM = "rgb(26,23,19)";
+  // Position in the frame list for a point in the video (0–1). With a manifest "times" list the
+  // frames are unevenly spaced (dense where things move), so search it; otherwise they are even.
+  function frameAt(v) {
+    const n = frames.length;
+    if (!frameTimes) return v * (n - 1);
+    let lo = 0, hi = n - 1;
+    while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (frameTimes[mid] <= v) lo = mid; else hi = mid; }
+    const span = frameTimes[hi] - frameTimes[lo];
+    return lo + (span > 0 ? clamp((v - frameTimes[lo]) / span) : 0);
+  }
+  function drawFrames(p) {
+    const f = frameAt(mapKeys(p, frameKeys));
+    const i0 = Math.floor(f), i1 = Math.min(frames.length - 1, i0 + 1), mixAmt = f - i0;
+    const a = ready(frames[i0]) ? frames[i0] : nearestFrame(i0);
+    if (!a) { ctx.fillStyle = BAND_BOTTOM; ctx.fillRect(0, 0, W, H); return; }
+    const iw = a.naturalWidth, ih = a.naturalHeight;
+    // Cover the stage, but on a tall phone keep the centre square (where the lahmacun sits)
+    // whole instead of cropping its sides; the leftover bands blend into the stone.
+    const sc = Math.min(Math.max(W / iw, H / ih), W / (ih * 0.84));
+    const dw = iw * sc, dh = ih * sc, x = (W - dw) / 2, y = (H - dh) / 2;
+    if (dh < H) {
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, BAND_TOP); g.addColorStop(1, BAND_BOTTOM);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    ctx.drawImage(a, x, y, dw, dh);
+    const b = frames[i1];
+    if (mixAmt > 0.02 && ready(b) && b !== a) {
+      ctx.globalAlpha = mixAmt; ctx.drawImage(b, x, y, dw, dh); ctx.globalAlpha = 1;
+    }
+    if (dh < H) {
+      const fade = dh * 0.14;
+      const t = ctx.createLinearGradient(0, y, 0, y + fade);
+      t.addColorStop(0, BAND_TOP); t.addColorStop(1, "rgba(46,39,32,0)");
+      ctx.fillStyle = t; ctx.fillRect(0, y - 1, W, fade + 1);
+      const bt = ctx.createLinearGradient(0, y + dh - fade, 0, y + dh);
+      bt.addColorStop(0, "rgba(26,23,19,0)"); bt.addColorStop(1, BAND_BOTTOM);
+      ctx.fillStyle = bt; ctx.fillRect(0, y + dh - fade, W, fade + 1);
+    }
+  }
+  function useFrameUrls(urls, keys = null, times = null) {
+    frameKeys = keys;
+    frameTimes = times && times.length === urls.length ? times : null;
     const list = new Array(urls.length);
     const order = [];
     const seen = new Set();
@@ -647,7 +699,7 @@ body {
       const m = await res.json();
       if (!m.count) return;
       const path = m.path || "frames/", pad = m.pad || 4, ext = m.ext || "jpg";
-      useFrameUrls(Array.from({ length: m.count }, (_, i) => `${path}${String(i + 1).padStart(pad, "0")}.${ext}`));
+      useFrameUrls(Array.from({ length: m.count }, (_, i) => `${path}${String(i + 1).padStart(pad, "0")}.${ext}`), CONFIG.keys, m.times);
     } catch (e) { /* no frames published: keep the drawn demo */ }
   }
 

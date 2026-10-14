@@ -5,6 +5,7 @@ servis edilir. Yukarı kaydırınca sahne geri sarar.
 
 - `index.html`: sitenin tamamı (tek dosya).
 - `hazirla.sh`: Google Flow videosunu `frames/` klasörüne kare dizisi olarak çıkarır.
+- `kaynak/flow-lahmacun.mp4`: Google Flow'dan gelen orijinal video (8 sn, 1280×720).
 - `frames/`: Yayındaki sahne. `frames/manifest.json` varsa site bu kareleri oynatır.
   Yoksa koddan çizilen demo çalışır.
 
@@ -12,7 +13,16 @@ servis edilir. Yukarı kaydırınca sahne geri sarar.
 
 Videoyu kaydırmayla ileri geri sarmak (`video.currentTime`) çoğu tarayıcıda takılır,
 özellikle iPhone'da. Kareleri JPG olarak yükleyip canvas'a çizmek her cihazda akıcıdır.
-8 saniyelik bir video yaklaşık 190 kare ve 8–12 MB eder.
+
+Taş dokusu ve un taneleri sıkıştırmayı zorladığı için 192 karenin hepsi 49 MB tutuyordu.
+`hazirla.sh` hareketli anları (açılma, pişme) her karede, durağan anları seyrek alır:
+98 kare, 14 MB. Kareler önce seyrek sonra sık sırayla yüklenir; sayfa ilk saniyede
+kullanılabilir olur, gerisi arkadan dolar. Kareler arası geçiş harmanlanır.
+
+`index.html` içindeki `keys` ayarı, kaydırma ile video zamanını aşamalara göre eşler.
+Videoda açılma 1 saniye, harç 1 saniye sürüyor; düz oynatılsa bu anlar kaydırmanın küçük
+bir kısmına sıkışırdı. Yeni bir video gelirse `keys` ve `hazirla.sh` içindeki `PLAN`
+yeniden ayarlanır.
 
 ## Adımlar
 
