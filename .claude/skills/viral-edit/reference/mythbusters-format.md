@@ -65,3 +65,11 @@ Bu ortamdan YouTube'a erişim yok (proxy 403). Klibi kullanıcı indirip atar.
 ## ⛔ Konu ve kapak güvenliği (kullanıcı, şişme top kapağı: "İNTİHARA TEŞVİK GİBİ BU NE")
 - Kapakta/başlıkta: düşen insan (manken bile olsa) + "yaşar mısın / hangisi kurtuldu / hayatta kalır mı" YOK. Soru NESNEYE sorulur ("Şişme top düşüşü durdurur mu?"), mankende "TEST MANKENİ" etiketi, üstte "BİLİM DENEYİ".
 - Konu seçerken öncelik: nesne/fizik/yemek/ses/araç deneyleri (cam kıran ses, iç içe telefon rehberi, su ısıtıcısı roketi, Mentos-kola, beton mikseri). Yüksekten düşme, silah, çocuk riski içeren efsaneler ikinci planda; seçilirse metin ve kapak bilim çerçevesinde kalır.
+
+## Üçüncü örnek: kızartma yağı (mythbusters_kizartmayagi.example.py)
+- Resmi Shorts (1080x1920 25fps), gömülü beyaz cümle altyazısı y≈1391–1447.
+- **Disk/süre dersi:** vinpaint tüm kareyi fr.npy'ye yazıyor (68 sn = 10 GB, disk doldu). Çözüm: (1) kullanılacak aralıkları `sel.mp4`'te birleştir, (2) sadece altyazı şeridini kırp (`crop=1080:384:0:1216`), (3) şeridi sil (`--cuts` = birleşim sınırları), (4) kurguda şeridi kareye geri yapıştır. 938 kare.
+- Hız: `--scale 0.38 --raft-iter 6 --neighbor 12` → ~3.6 sn/kare (varsayılan 0.5'te ~6 sn). Silme sürerken başka render çalıştırma, işlemciyi paylaşınca 13 sn/kareye çıktı.
+- Hızlı yedek: `BAR=1` → Türkçe altyazının arkasında opak bant (1366–1478) İngilizceyi örter, 5 dk'da teslim.
+- Seslendirme `votight --gap 0.04 --min-sil 0.08 --target 30` (41 → 30 sn, boşluk yok). Arka ses: kaynağın kendi altyapısı (MDX inst), yeniden sıralanmadan kesintisiz, konuşmanın ~14 dB altında.
+- Ok/etiket/grafik seti: arrow(), ring(), tag(), stamp(), gösterge (7,8 LİTRE), verim çubukları, KIVILCIM üstü çizili → SIKIŞTIRMA, kontakta donma + "?". Her biri kelime zamanına (ws(i)) bağlı.
