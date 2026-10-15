@@ -97,6 +97,21 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
 - Stok takibi kalıcı değil: WordPress'te sonradan değişen stok Shopify'a kendiliğinden geçmez.
 - Yedek ve değişiklik listesi: `veri/stok_esitleme_yedek_2026-10-15.json`.
 
+## Domain geçiş planı (16 Ekim 2026 gecesi, kullanıcı uyguluyor)
+
+Karar: eski WordPress `eski.valenstrend.com` adresinde çalışmaya devam edecek (bekleyen 11 WooCommerce siparişi
+ve eski kayıtlar için), `valenstrend.com` Shopify'a geçecek. Shopify planı: Grow.
+
+1. Hazırlık: Cloudflare DNS listesinin ekran görüntüsü (geri dönüş için), Hostinger tam yedek, bekleyen siparişlerin dökümü,
+   Shopify şifre koruması kapalı.
+2. eski: Cloudflare `A eski → 147.93.73.220` (gri bulut) → Hostinger'da `eski` alt alan adı, klasör public_html → SSL.
+3. Geçiş: WP Ayarlar → Genel iki adres `https://eski.valenstrend.com` → hemen ardından Shopify'da alan adı bağla,
+   Cloudflare `A @ → 23.227.38.65` (gri), `CNAME www → shops.myshopify.com` (gri), AAAA'lar silinir;
+   MX/TXT/CAA ve `eski` kaydına dokunulmaz → Shopify'da doğrula, birincil yap.
+4. Sonra: eski sitede arama motoru engeli + Facebook for WooCommerce eklentisi kapatılır, Meta alan adı doğrulaması ve
+   Search Console site haritası kontrol edilir.
+- Geri dönüş: A kaydı 147.93.73.220'e, AAAA'lar geri, WP adresleri valenstrend.com'a.
+
 ## Test siparişi #1001 (15 Ekim 2026, 23:28 UTC)
 
 - iyzico ile kartla 375 TL (250 ürün + 125 kargo "Standart") — PAID, gerçek çekim (test değil). İade edilecek.
