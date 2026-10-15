@@ -79,6 +79,24 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
   Meta ise eski katalogdaki 5 ürün setinin "aktif reklamları etkileyen" sorunları olduğunu söylüyor; geçiş öncesi reklam/kreatif
   düzeyinde katalog kullanımı ayrıca kontrol edilecek.
 
+## Stok eşitleme — WordPress → Shopify (15 Ekim 2026)
+
+- Kaynak: valenstrend.com bu ortamdan erişilemiyor (proxy 403). WooCommerce'in Meta'ya gönderdiği eski katalog
+  (feed "Ürünler", 15 Ekim 15:25 PDT güncellenmiş) kullanıldı: 1120 öğe = 692 stokta + 428 tükendi.
+- Eşleştirme **ürün adıyla** yapıldı. Shopify handle'ları WordPress linkinden değil ürün adından türetilmiş
+  (ör. WP `organik-soft-esarp-113` = "Organik Soft Eşarp 112", WP `desenli-koton-esarp-474-2` = "...466").
+  11 üründe WP linki ile ad farklı.
+- Uygulanan: 104 ürün tükendi yapıldı (takip açık + DENY; 15'inde adet 1-3 → 0), 84 ürün satışa açıldı
+  (takip kapalı + CONTINUE, mağazadaki diğer stokta ürünlerle aynı ayar). Hatasız.
+- Geri okuma sonrası: 608 satışta, 422 tükendi, uyumsuz 0. WordPress'te hiç olmayan 8 ürün
+  (desenli-koton-esarp 343/442/443/488/575/577/615/616) tükendi olarak bırakıldı.
+- WP'de tükenmiş ama Shopify'da hiç olmayan 6 ürün: Desenli Koton 666/699, Müslin Şal Taş Siyah,
+  Organik Soft Eşarp 225, Organik Soft Şal 286/289.
+- Not: WP'de 692 stokta öğe var, Shopify'da satışta 608 ürün → WP'de satılan ama Shopify'da olmayan ürünler
+  olabilir (ör. Müslin Şal serisi stokta, Shopify'da yok). Liste çıkarılmadı.
+- Stok takibi kalıcı değil: WordPress'te sonradan değişen stok Shopify'a kendiliğinden geçmez.
+- Yedek ve değişiklik listesi: `veri/stok_esitleme_yedek_2026-10-15.json`.
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
