@@ -11,3 +11,14 @@ Video (sessiz, gömülü İngilizce altyazılı, 437.9 sn) + ElevenLabs seslendi
    - Son parça penceresine sığmazsa hızlanır. Pencere uzunsa en fazla %10 yavaşlar (0.90), kalan süre es olarak kalır.
    - Sığmayan cümle, önceki boşluktan en fazla 0.4 sn ödünç alır.
    - Sonuç: 199/199 satırda ses altyazıyla başlıyor, medyan kayma 0.06 sn.
+
+## ⛔ align2 sesi bozdu → align3 kullan
+Kullanıcı: *"bazı yerlerde ses bozulmuş, hızlanmış, kesilmiş"*. align2, cümleleri tahmini kelime sınırından bölüp parçalara farklı tempolar veriyordu (0.85–1.35). Bu kelime ortasından kesiyor, hız sıçratıyor, yumuşak sonları kırpıyordu.
+
+**align3:**
+- Cümle hiç bölünmez, tek parça ve tek tempo (rubberband window=long), aralık 0.92–1.15.
+- Sınırlar Descript blok başı/sonundan alınır, pay −0.10/+0.18, 20 ms yumuşak geçiş.
+- Sığmayan cümle sonrakini ≤0.45 sn iter.
+- Sonuç: cümle başları altyazıyla tam oturuyor (193/199). Satır başı kayması medyan 0.17 sn, %90'ı 0.76 sn içinde. Ani kesik 0.
+- Kalan kayma şuradan geliyor: altyazı satırları seslendirmenden yavaş bir okumaya göre zamanlanmış, ama seslendirmen ikinci satıra nefes almadan geçiyor. Kesin çözüm, ElevenLabs'ta daha yavaş (~0.9) seslendirme almak.
+- Teslim 30 MB altı: video stream copy + AAC 96k.
