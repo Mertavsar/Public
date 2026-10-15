@@ -70,7 +70,14 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
   1038 `/urun/<handle>` → `/products/<handle>`, 6 farklı slug (bone, -2 ekli koza, kibrit-gri, su-yolu-kirmizi),
   12 `/urun-kategori/<handle>` → `/collections/<handle>`, 9 sayfa (/magaza, /sepet, /sss ...). Import id 147161174: 1065 oluşturuldu, 0 hata (toplam 1070 yönlendirme).
 - Katalogdaki 1120 üründen Shopify'da olmayan ~82 link için yönlendirme yok; 404 sayfası En Çok Satanlar gösteriyor.
-- Meta'da hâlâ sadece eski katalog var; Facebook & Instagram uygulamasının yeni kataloğu oluşmamış (bağlantı bitmemiş olabilir).
+- Facebook & Instagram uygulaması bağlandı (15 Ekim, kullanıcı). Yeni katalog: "Shopify Product Catalog (9txzze-0r.myshopify.com)"
+  2558225854645005, aynı işletme (valenstrendonline 631507039023207). 1038 ürün kanalda yayında (otomatik eklenmiş);
+  Meta'ya senkron başladı (ilk okumada 931 → 1000+ öğe, görseller henüz işlenmemiş, tanı hatası yok).
+  Piksel aynı: Valenstrendonline 1305259216806142, aktif.
+- Eski katalog "Katalog_Ürünler" 3598453573752694 silinmeyecek; geçişten birkaç hafta sonra arşivlenebilir.
+  Aktif ad set'lerin hiçbirinde ürün seti (product_set) yok — katalog tabanlı kampanya görünmüyor (15 Ekim, Meta API okuması).
+  Meta ise eski katalogdaki 5 ürün setinin "aktif reklamları etkileyen" sorunları olduğunu söylüyor; geçiş öncesi reklam/kreatif
+  düzeyinde katalog kullanımı ayrıca kontrol edilecek.
 
 ## Kaynak mağaza özeti
 
