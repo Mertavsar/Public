@@ -1,0 +1,537 @@
+{
+  "baslik": "Hürmüz Boğazı neden petrolü pahalı tutuyor? Üç soruda anlatıyoruz",
+  "tarih": "2026-10-15",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "petrol",
+    "boğaz",
+    "pahalı",
+    "savaş",
+    "fatura"
+  ],
+  "altyazi": {
+    "doksan altı lira altmış kuruştu": "96,60 liraydı",
+    "yetmiş dolardı": "70 dolardı",
+    "yüz dolar": "100 dolar",
+    "Üç soruda": "3 soruda",
+    "Yirmi sekiz Şubat'ta": "28 Şubat'ta",
+    "yirmi milyon": "20 milyon",
+    "beşte biri": "1/5",
+    "yetmiş iki dolardan": "72 dolardan",
+    "yüzde yirmi yedi": "%27",
+    "beş kat": "5 kat",
+    "seksen üç lira seksen kuruştu": "83,80 liraydı",
+    "Elli litrelik": "50 litrelik",
+    "dört bin yüz doksan lira": "4.190 lira",
+    "on dört milyar": "14 milyar"
+  },
+  "kapak": {
+    "ikon": "🛢️",
+    "ust": "PETROL NEDEN",
+    "buyuk": "~100 $",
+    "alt": "OLDU?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Petrolün varili savaştan önce yetmiş dolardı. Şimdi yüz dolar civarında.",
+      "p": {
+        "ikon": "🛢️",
+        "etiket": "Brent petrol · varil başına · Ekim 2026",
+        "deger": 100,
+        "onek": "~",
+        "sonek": " $",
+        "ondalik": 0,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Savaş öncesi ≈72 $ · Ekim'de dalgalı, yaklaşık değer"
+      },
+      "kaynak": "Brent ≈72 $ (27 Şubat) → ≈100 $ (Ekim) (K1, K2)",
+      "etiket": "BRENT PETROL"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bir boğaz, neden herkesin faturasını değiştiriyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "BİR BOĞAZ\n*HERKESİN FATURASINI*\nNASIL DEĞİŞTİRİR?",
+        "boy": 84
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ HER GÜN",
+          "SADE DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Önce ne oldu? Yirmi sekiz Şubat'ta Amerika ve İsrail ile İran arasında savaş başladı.",
+      "p": {
+        "gun": "28",
+        "ay": "ŞUBAT",
+        "gunadi": "2026",
+        "saat": "SAVAŞ BAŞLADI",
+        "not": "Amerika ve İsrail ile *İran* arasında"
+      },
+      "kaynak": "Savaşın başlangıcı: 28 Şubat 2026 (K1)",
+      "etiket": "NE OLDU"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Konuşurken hep Brent diyorlar. Brent, dünyada petrol fiyatının ana ölçüsü sayılır.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "BRENT =",
+          "PETROL FİYATININ",
+          "*ANA ÖLÇÜSÜ*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Brent: uluslararası referans petrol fiyatı (K1)",
+      "etiket": "BRENT NEDİR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Savaşın tam ortasında Hürmüz Boğazı var. Körfez petrolünün çıkış kapısı burası.",
+      "p": {
+        "ikon": "🚢",
+        "satirlar": [
+          "HÜRMÜZ BOĞAZI",
+          "KÖRFEZ PETROLÜNÜN",
+          "*ÇIKIŞ KAPISI*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Hürmüz Boğazı (K3)",
+      "etiket": "HÜRMÜZ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Bu dar yoldan her gün yaklaşık yirmi milyon varil petrol geçer. Dünya tüketiminin beşte biri.",
+      "p": {
+        "ikon": "🛢️",
+        "etiket": "Hürmüz'den günlük petrol geçişi · savaş öncesi",
+        "deger": 20,
+        "onek": "~",
+        "sonek": " milyon varil",
+        "ondalik": 0,
+        "yon": "",
+        "renk": "sari",
+        "not": "Dünya sıvı petrol tüketiminin yaklaşık %20'si · EIA"
+      },
+      "kaynak": "≈20 milyon varil/gün ≈ %20 (EIA) (K3)",
+      "etiket": "GÜNLÜK GEÇİŞ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Savaştan beri geçişler aksıyor. Ekimde tanker saldırıları yeniden arttı.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "EKİMDE",
+          "TANKER SALDIRILARI",
+          "*YENİDEN ARTTI*"
+        ],
+        "boy": 88
+      },
+      "kaynak": "Hürmüz'de tanker saldırıları, Ekim 2026 (K4)",
+      "etiket": "RİSK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Sonuç: petrolün varili yetmiş iki dolardan yüz dolar civarına çıktı.",
+      "p": {
+        "baslik": "🛢️ Brent petrol",
+        "sol": {
+          "etiket": "SAVAŞ ÖNCESİ\n(27 Şubat)",
+          "deger": 72,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "EKİM\n(yaklaşık)",
+          "deger": 102,
+          "renk": "kirmizi"
+        },
+        "onek": "~",
+        "sonek": " $",
+        "ondalik": 0,
+        "fark": "≈ +30 $",
+        "not": "Yaklaşık · Ekim'de 95–106 $ arası"
+      },
+      "kaynak": "Brent fiyatı (K1, K2)",
+      "etiket": "FİYAT"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bir yol daralınca fiyat neden bu kadar uçuyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "YOL DARALINCA\n*FİYAT NEDEN UÇAR?*",
+        "boy": 96
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Mantık basit. Geçen petrol azalır, alıcılar aynı varil için yarışır, fiyat yükselir.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "🚢",
+            "metin": "Boğazdan geçen petrol *azalır*"
+          },
+          {
+            "ikon": "🏭",
+            "metin": "Alıcılar aynı varili *ister*"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "Satıcı *fiyatı yükseltir*"
+          }
+        ]
+      },
+      "kaynak": "Arz–talep mantığı",
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Geçişin ne kadar düştüğüne bak. Ham petrol akışı bir haftada yüzde yirmi yedi azaldı.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Hürmüz'den ham petrol geçişi · bir önceki haftaya göre",
+        "deger": 27,
+        "onek": "−%",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "Kpler analizi · 6 Ekim notu · günlük en az 10,1 milyon varil"
+      },
+      "kaynak": "Kpler: −%27, günlük ≥10,1 milyon varil (K5)",
+      "etiket": "GEÇİŞ DÜŞTÜ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kpler'e göre, Umman Körfezi ve Kızıldeniz üzerinden sevkiyat arttı. Ama kayıp tam kapanmadı.",
+      "p": {
+        "ikon": "🗺️",
+        "satirlar": [
+          "ALTERNATİF YOLLAR",
+          "ARTTI AMA",
+          "*KAYIP KAPANMADI*"
+        ],
+        "boy": 80
+      },
+      "kaynak": "Kpler: Umman Körfezi + Kızıldeniz ihracatı ≈6,7 milyon varil/gün (K5)",
+      "etiket": "ALTERNATİF"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Beğenirsen daha çok kişiye ulaşıyoruz; kalbe dokunmayı unutma.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "KISIM ŞİMDİ",
+          "*BEĞEN*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Çünkü bir de taşıma var. Tanker kiralamak, savaştan öncesine göre yaklaşık beş kat pahalandı.",
+      "p": {
+        "ikon": "🚢",
+        "etiket": "Basra Körfezi–Çin tanker navlunu · savaş öncesine göre",
+        "deger": 5,
+        "onek": "~",
+        "sonek": " kat",
+        "ondalik": 0,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": true,
+        "not": "Ton başına ≈45 $ → ≈230 $ (Eylül sonu) · yaklaşık"
+      },
+      "kaynak": "Navlun ≈5 kat, +%406 (AA, Dünya) (K6)",
+      "etiket": "TAŞIMA MALİYETİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani petrol hem az, hem taşıması pahalı. İkisi birlikte fiyatı yukarı çekiyor.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "AZ PETROL",
+          "+ PAHALI TAŞIMA",
+          "= *YÜKSEK FİYAT*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ama fiyat tek yönlü değil. Haber geldikçe bir yukarı, bir aşağı oynuyor.",
+      "p": {
+        "ikon": "↕️",
+        "satirlar": [
+          "FİYAT",
+          "TEK YÖNLÜ DEĞİL",
+          "*HABERLE OYNUYOR*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Ekim'de Brent yaklaşık 95–106 $ arası (K2)",
+      "etiket": "DALGALANMA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+        "boy": 108
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Bu hafta başında İstanbul'da benzinin litresi seksen üç lira seksen kuruştu. Elli litrelik depo dört bin yüz doksan lira eder.",
+      "p": {
+        "baslik": "Bir depo benzin",
+        "ikon": "⛽",
+        "ogeler": [
+          "50 litre",
+          "×",
+          "83,80 ₺",
+          "=",
+          "4.190 ₺"
+        ]
+      },
+      "kaynak": "İstanbul, 12 Ekim (K7)",
+      "etiket": "DEPO HESABI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Petrol pahalı kalırsa bu rakam yükselebilir. Ne kadar yansıyacağı vergilere ve kura da bağlı.",
+      "p": {
+        "ikon": "⛽",
+        "satirlar": [
+          "PETROL PAHALI KALIRSA",
+          "POMPAYA *YANSIYABİLİR*",
+          "(KESİN DEĞİL)"
+        ],
+        "boy": 72
+      },
+      "etiket": "POMPA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Motorin ise daha pahalı. İstanbul'da litresi doksan altı lira altmış kuruştu.",
+      "p": {
+        "baslik": "İstanbul · 12 Ekim · litre",
+        "satirlar": [
+          {
+            "ikon": "⛽",
+            "metin": "Benzin",
+            "deger": "83,80 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🚛",
+            "metin": "Motorin",
+            "deger": "96,60 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Motorin depoyu da, kamyonu da etkiler"
+      },
+      "kaynak": "İstanbul Avrupa, 12 Ekim (K7)",
+      "etiket": "BENZİN · MOTORİN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Motorinle çalışan kamyonlar mal taşıyor. Nakliye pahalanırsa ürün fiyatlarına yansıyabilir.",
+      "p": {
+        "ikon": "🚛",
+        "satirlar": [
+          "MOTORİN PAHALANIRSA",
+          "NAKLİYE PAHALANIR",
+          "FİYATA *YANSIYABİLİR*"
+        ],
+        "boy": 72
+      },
+      "kaynak": "Dolaylı etki, yorum",
+      "etiket": "NAKLİYE"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Türkiye petrolün büyük bölümünü dışarıdan alıyor. Pahalı petrol, ülkenin faturasını da büyütüyor.",
+      "p": {
+        "ikon": "🇹🇷",
+        "satirlar": [
+          "PETROLÜN BÜYÜK",
+          "BÖLÜMÜNÜ *İTHAL*",
+          "EDİYORUZ"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Ham petrolde yüksek dış bağımlılık (K8)",
+      "etiket": "İTHALAT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "say": "Ember'in haziran hesabına göre fiyatlar yüksek kalırsa, enerji faturası yaklaşık on dört milyar dolar artabilir. Bu bir tahmin.",
+      "p": {
+        "ikon": "🧾",
+        "etiket": "Türkiye enerji ithalatı · ek yük (tahmini)",
+        "deger": 14,
+        "onek": "+~",
+        "sonek": " milyar $",
+        "ondalik": 0,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": true,
+        "not": "Ember senaryosu · fiyatlar 1 Mayıs seviyesinde kalırsa · 2025'e göre"
+      },
+      "kaynak": "Ember analizi, Haziran 2026 (K8)",
+      "etiket": "TAHMİN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bazı doğalgaz sözleşmeleri de petrole bağlı. Etkisi aylar sonra görünebilir.",
+      "p": {
+        "ikon": "🔥",
+        "satirlar": [
+          "DOĞALGAZ DA",
+          "PETROLE BAĞLI OLABİLİR",
+          "*ETKİ GECİKEBİLİR*"
+        ],
+        "boy": 72
+      },
+      "kaynak": "Ember analizi (K8)",
+      "etiket": "GECİKME"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Ne yapabilirsin? Tek günlük habere kapılma, haftalık yöne bak ve panikle depo doldurma.",
+      "p": {
+        "baslik": "Haberi okurken",
+        "satirlar": [
+          {
+            "ikon": "📈",
+            "metin": "Haftalık yöne bak",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "😮‍💨",
+            "metin": "Panikle depo doldurma",
+            "deger": "",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "NE YAPMALI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: dar bir yol daralıyor, petrol pahalanıyor. Rakamlar değişebilir, ama yön belli.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "DAR YOL DARALIYOR",
+          "PETROL *PAHALANIYOR*",
+          "YÖN BELLİ"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Brent savaş öncesi (27 Şubat) ≈72,48 $, savaş 28 Şubat'ta başladı — https://rudaw.net/turkish/categories/economic/1279104 ; https://tr.euronews.com/2026/08/26/petrol-fiyatlarinda-son-durum-guncel-varil-fiyati-ve-2026-seyri ; https://bigpara.hurriyet.com.tr/haberleri/brent-petrol-fiyatlari",
+    "K2": "Brent Ekim 2026 ≈100–106 $ (8 Ekim ≈102,5 $; 14 Ekim haberi 106,32 $) — https://www.timeturk.com/8-ekim-akaryakit-fiyatlari-motorine-zam-ya-da-indirim-var-mi ; https://www.cnbce.com/emtia/petrol-fiyatlari-dirence-takildi-hurmuz-bogazinda-gemi-trafigi-durma-noktasinda-h38964 ; https://www.forbes.com.tr/haberler/hurmuz-bogazi-nda-tanker-trafigi-dip-yapti-petrol-fiyatlari-100-dolarin-uzerinde-tutunuyor ; https://www.ekoturk.com/enerji/hurmuz-bogazinda-gemiler-vuruldu-petrol-fiyatlari-yukseldi/",
+    "K3": "Hürmüz'den günlük ≈20 milyon varil, dünya sıvı petrol tüketiminin ≈%20'si (EIA) — https://www.gazetebirlik.com/dunya/hurmuz-bogazi-neden-onemli-deniz-ticareti-icin-onemi/291828 ; https://www.ekoturk.com/enerji/hurmuz-bogazinda-gemiler-vuruldu-petrol-fiyatlari-yukseldi/ ; https://www.hurriyet.com.tr/haberleri/hurmuz-bogazi-nerede",
+    "K4": "Ekim'de Hürmüz'de tanker saldırıları arttı — https://www.paraanaliz.com/haberler/iran-hurmuz-de-tanker-saldirilarini-artirdi-petrol-akisi-toparlanirken-risk-yeni ; https://www.cnbce.com/emtia/petrol-fiyatlari-dirence-takildi-hurmuz-bogazinda-gemi-trafigi-durma-noktasinda-h38964 ; https://www.politikam.com/brent-petrol-neden-yukseliyor-hurmuz-8-ekim-2026",
+    "K5": "Kpler: Hürmüz'den ham petrol geçişi bir önceki haftaya göre −%27, günlük en az 10,1 milyon varil (6 Ekim notu) — https://www.foreks.com/haber/detay/6ac7197b95016b5817e676a8/FRKS/tr/hurmuz-bogazi-ndan-gemi-gecisleri-iki-ayin-en-dusuk-seviyesine-geriledi-08-10-26/ ; https://www.forbes.com.tr/haberler/hurmuz-bogazi-nda-tanker-trafigi-dip-yapti-petrol-fiyatlari-100-dolarin-uzerinde-tutunuyor ; https://www.endeks24.com/hurmuzde-gemi-gecisleri-iki-ayin-en-dusuk-duzeyine-indi",
+    "K6": "Basra Körfezi–Çin tanker navlunu savaş öncesine göre ≈5 kat (+%406; ≈45,42 $ → ≈229,76 $/ton, Eylül sonu) — https://www.dunya.com/ekonomi/hurmuzde-maliyet-5e-katlandi-petrol-devlerinde-indirim-yarisi-haberi-842758 ; https://www.capital.com.tr/haberler/tum-haberler/hurmuzde-5-katina-cikan-navlun-orta-dogu-petrolunde-rekabet-icin-indirim-baskisi-yaratiyor ; https://www.yatirimx.com.tr/dunya/hurmuzde-navlun-5-katina-cikti-orta-dogu-petrolunde-indirim-baskisi/26028",
+    "K7": "12 Ekim İstanbul Avrupa Yakası benzin 83,80 TL — https://www.dunya.com/enerji/akaryakit-fiyatlarinda-son-durum-benzin-motorin-ve-lpgye-zam-indirim-var-mi-12-ekim-2026-haberi-843478 ; https://www.hisse.net/haber/benzin-ve-motorin-kac-tl-oldu-12-ekim-akaryakitta-son-durum-101572. Hesap: 50 × 83,80 = 4.190",
+    "K8": "Ember (Haziran 2026): fiyatlar 1 Mayıs seviyesinde kalırsa enerji ithalat faturası 2025'e göre ≈14 milyar $ artar (tahmin); Türkiye ham petrolde yüksek dışa bağımlı; doğalgaz sözleşmeleri gecikmeli petrole endeksli — https://ember-energy.org/tr/analizler/hurmuz-krizi-turkiyeye-14-milyar-dolara-mal-olacak/ ; https://tr.euronews.com/2026/06/12/hurmuz-kaynakli-enerji-krizi-turkiyeye-14-milyar-dolara-mal-olabilir-kriz-firsata-donebili ; https://www.donanimhaber.com/hurmuz-krizi-turkiye-ye-14-milyar-dolara-mal-olabilir--206743"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
