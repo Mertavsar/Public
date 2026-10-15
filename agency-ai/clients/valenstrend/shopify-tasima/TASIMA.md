@@ -62,6 +62,16 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
 - Kategori görselleri: koleksiyonların kendi görseli yok, dairede ilk ürünün fotoğrafı çıkıyor.
   Fotoğrafları seçmek için ortamda cdn.shopify.com erişimi gerekir (şu an kapalı).
 
+## Domain geçişi hazırlığı (15 Ekim 2026)
+
+- Kullanıcı iyzico'yu bağladığını söyledi (doğrulanmadı, API'den görünmüyor).
+- WordPress ürün linkleri `valenstrend.com/urun/<slug>/` (Meta kataloğu "Katalog_Ürünler" 3598453573752694'ten okundu).
+  Shopify handle'ları çoğunlukla aynı. 1065 yönlendirme CSV ile içe aktarıldı (`veri/yonlendirmeler_wordpress.csv`):
+  1038 `/urun/<handle>` → `/products/<handle>`, 6 farklı slug (bone, -2 ekli koza, kibrit-gri, su-yolu-kirmizi),
+  12 `/urun-kategori/<handle>` → `/collections/<handle>`, 9 sayfa (/magaza, /sepet, /sss ...). Import id 147161174: 1065 oluşturuldu, 0 hata (toplam 1070 yönlendirme).
+- Katalogdaki 1120 üründen Shopify'da olmayan ~82 link için yönlendirme yok; 404 sayfası En Çok Satanlar gösteriyor.
+- Meta'da hâlâ sadece eski katalog var; Facebook & Instagram uygulamasının yeni kataloğu oluşmamış (bağlantı bitmemiş olabilir).
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
