@@ -33,3 +33,10 @@ Kullanıcı: *"bazı yerlerde ses bozulmuş, hızlanmış, kesilmiş"*. align2, 
 - **Hız:** 0.92–1.15 aralığında `atempo` kullan, rubberband değil.
 - **Sonuç:** HF %8.27 (orijinal 8.07), konuşma-taban farkı 44.5 dB.
 - **Bundan sonra:** Seslendirmede dinamik loudnorm kullanma, iki geçişli ölçüm + sabit kazanç.
+
+## Dikey haber klibinde yazı silme (yavru köpek, USA TODAY bodycam)
+- **Hız için:** Kaynağın tamamını değil, sadece kullanılan aralıkları birleştir (`sel.mp4`). Sonra sadece yazının geçtiği şeridi kırp (`crop=1080:272:0:1220`), ProPainter'ı o şeritte çalıştır ve şeridi geri yapıştır. Çerçevenin tamamını işlemeye göre çok daha hızlı, disk de dolmuyor.
+- **Beyaz yazı + beyaz tüylü köpek:** Beyaz-eşik maskesi köpeği de siliyor. Bunun yerine her karede rapidocr ile yazı kutusu bul, kutuyu genişlet, zamanda ±6 kare yay ve `--boxtrack` ile ver.
+- **⛔ Ölçek tuzağı:** 272 px şerit + `--scale 0.38` geçersiz boyut verdi, ProPainter **sessizce** çöktü (log'da hata yok, çıktı da yok). `--scale 0.5` çalıştı. Şerit inpaint'te ölçek × yükseklik 8'in katı olmalı. Çalıştırdıktan sonra çıktı dosyasının oluştuğunu kontrol et.
+- **Süre:** 1060 kare (35 sn), 0.5 ölçek ≈ 55 dk. Bu sırada render başlatma, ProPainter 3–4 kat yavaşlıyor.
+- **Telif temizliği:** Kaynak müzik çıkarıldı (MDX vokal kökü), haber yazıları ve künye silindi. Polisin gerçek sesi sadece iki kısa an olarak kaldı ve TR altyazıyla verildi ("POLİSİN GERÇEK SESİ" etiketi).
