@@ -64,7 +64,7 @@ def rb(x, tempo):
     if abs(tempo - 1) < 0.015: return x
     x.astype(np.float32).tofile('w/_i.f32')
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', '1', '-i', 'w/_i.f32', '-af',
-                    f'rubberband=tempo={tempo:.4f}:pitch=1.0:window=long:smoothing=on', '-f', 'f32le', 'w/_o.f32'], check=True)
+                    f'atempo={tempo:.4f}', '-f', 'f32le', 'w/_o.f32'], check=True)
     return np.fromfile('w/_o.f32', np.float32)
 out = np.zeros(int((VID + 2) * SR), np.float32); prev_end = 0.0; rep = []; caps = []
 for n, k in enumerate(keys):

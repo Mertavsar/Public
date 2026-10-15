@@ -22,3 +22,14 @@ Kullanıcı: *"bazı yerlerde ses bozulmuş, hızlanmış, kesilmiş"*. align2, 
 - Sonuç: cümle başları altyazıyla tam oturuyor (193/199). Satır başı kayması medyan 0.17 sn, %90'ı 0.76 sn içinde. Ani kesik 0.
 - Kalan kayma şuradan geliyor: altyazı satırları seslendirmenden yavaş bir okumaya göre zamanlanmış, ama seslendirmen ikinci satıra nefes almadan geçiyor. Kesin çözüm, ElevenLabs'ta daha yavaş (~0.9) seslendirme almak.
 - Teslim 30 MB altı: video stream copy + AAC 96k.
+
+## ⛔ Hışırtı (kullanıcı: "neden hışırtılar geliyor")
+İki sebep ölçüldü:
+1. **Dinamik loudnorm + kompresör sessiz anları yükseltti:** Konuşma arası taban −68 → −49 dB (+19 dB).
+2. **rubberband konuşmaya hışırtı ekledi:** 6–8 kHz payı %8.1 → %10.3.
+
+Çözüm:
+- **Seviye:** `volume=(−14 − ölçülen I)dB` + `alimiter`, sabit kazanç, sessizliği yükseltmez.
+- **Hız:** 0.92–1.15 aralığında `atempo` kullan, rubberband değil.
+- **Sonuç:** HF %8.27 (orijinal 8.07), konuşma-taban farkı 44.5 dB.
+- **Bundan sonra:** Seslendirmede dinamik loudnorm kullanma, iki geçişli ölçüm + sabit kazanç.
