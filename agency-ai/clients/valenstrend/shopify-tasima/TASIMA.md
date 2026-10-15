@@ -97,6 +97,12 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
 - Stok takibi kalıcı değil: WordPress'te sonradan değişen stok Shopify'a kendiliğinden geçmez.
 - Yedek ve değişiklik listesi: `veri/stok_esitleme_yedek_2026-10-15.json`.
 
+## Test siparişi #1001 (15 Ekim 2026, 23:28 UTC)
+
+- iyzico ile kartla 375 TL (250 ürün + 125 kargo "Standart") — PAID, gerçek çekim (test değil). İade edilecek.
+- Kargo adresi telefonu geldi (05062857853). Adreste şehir alanı "3093", il ve posta kodu boş → kargo için il/ilçe eksik kalabilir; ödeme formu kontrol edilecek.
+- Meta Purchase olayı: istatistikler saatlik geldiği için henüz görünmüyor; 01:01 UTC'de tekrar bakılacak.
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
