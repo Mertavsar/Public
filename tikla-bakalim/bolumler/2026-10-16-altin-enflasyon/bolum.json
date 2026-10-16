@@ -25,7 +25,7 @@
     "altı bin beş yüz yirmi sekiz liradan": "6.528 liradan",
     "altı bin beş yüz seksen liraya": "6.580 liraya",
     "On gram": "10 gram",
-    "altı yüz lira": "600 lira"
+    "beş yüz yetmiş lira": "570 lira"
   },
   "kapak": {
     "ikon": "🪙",
@@ -430,7 +430,7 @@
     {
       "bolum": "etki",
       "tip": "hesap",
-      "say": "On gram altını olan biri için bu fark, yaklaşık altı yüz lira demek.",
+      "say": "On gram altını olan biri için bu fark, yaklaşık beş yüz yetmiş lira demek.",
       "p": {
         "baslik": "On gram altın (yaklaşık)",
         "ikon": "💰",
