@@ -61,6 +61,13 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
   Dosyalar geri okunup doğrulandı. Kullanıcı yayınlayacak. Kopyası: `veri/tema_guncelleme5/`.
 - Kategori görselleri: koleksiyonların kendi görseli yok, dairede ilk ürünün fotoğrafı çıkıyor.
   Fotoğrafları seçmek için ortamda cdn.shopify.com erişimi gerekir (şu an kapalı).
+- 16 Ekim: Mobilde ürün fotoğrafı kesik görünüyordu. Sebep bizim `sections/vt-stil.liquid` içindeki mobil
+  kuralı: `--gallery-aspect-ratio:1 !important` (kare) + `object-position:50% 30%`. Fotoğraflar 4:5
+  (1080×1350; ilk 250 üründe 249'u, 1 tanesi 3:4), kare kutuda alt ve üst ~%20 kırpılıyordu.
+  Düzeltme: iki satır silindi, mobilde şablonun "Dikey 4:5" ayarı geçerli. Uygulandığı tema:
+  "Güncelleme 7 (Mobil görsel kesilmesin)" 166461833302 = Güncelleme 6'nın kopyası + bu düzeltme
+  (MD5 geri okunup doğrulandı). Kullanıcı yayınlayacak (canlı temaya API ile yazmak engelli).
+  Eski dosya: `veri/tema_yedek/vt-stil_2026-10-16_once.liquid`.
 
 ## Domain geçişi hazırlığı (15 Ekim 2026)
 
