@@ -121,6 +121,16 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
 - Shopify: DNS doğrulandı, tüm bölgelerde yayında, birincil alan adı valenstrend.com (API: sslEnabled true; TLS ekranı ~5 dk diyordu).
 - Shopify'da müşteri sayısı 1 (sadece test) → eski WooCommerce müşteri listesi henüz aktarılmadı.
 
+**Geçiş sonrası kontrol (16 Ekim 11:45 TR):**
+- Shopify oturumları 00:00'dan beri 166; piksel geçişten sonra hem tarayıcı hem sunucu (CAPI) olayı alıyor;
+  #1002/#1003 test siparişlerinin Purchase olayları geldi.
+- Sorun: Shopify'da olmayan WP ürünlerinin linkleri 404'e düşüyordu (açılış sayfaları: /urun/organik-soft-esarp-231 19 oturum
+  — reklamı yayında olan ürün —, desenli-koton-esarp 663/667/670/674/675/676/682/686/697/698/702, organik-soft-esarp-229,
+  /urun-kategori/esarp/koton-esarp). Geçici çözüm: 27 yönlendirme eklendi (13 ürün → ilgili koleksiyon, 14 iç içe kategori yolu).
+- Kalıcı çözüm bekliyor: WP'de olup Shopify'da olmayan ürünleri (yaklaşık 80) Shopify'a eklemek. Görseller WP sunucusunda,
+  valenstrend.com artık Shopify'ı gösterdiği için görsellere eski.valenstrend.com gibi bir adresle erişim gerekiyor.
+- #1002 (COD 1290, iptal) ve #1003 (COD 1250, bekliyor) şehir alanı "3093" → büyük ihtimalle test.
+
 ## Test siparişi #1001 (15 Ekim 2026, 23:28 UTC)
 
 - iyzico ile kartla 375 TL (250 ürün + 125 kargo "Standart") — PAID, gerçek çekim (test değil). İade edilecek.
