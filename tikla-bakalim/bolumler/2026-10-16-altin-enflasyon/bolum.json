@@ -1,0 +1,563 @@
+{
+  "baslik": "Altın bir günde neden düştü, ertesi gün neden döndü? Üç soruda anlatıyoruz",
+  "tarih": "2026-10-16",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "altın",
+    "düştü",
+    "faiz",
+    "dolar",
+    "enflasyon"
+  ],
+  "altyazi": {
+    "yüzde üç virgül yedi": "%3,7",
+    "yüzde üç virgül altı": "%3,6",
+    "yüzde iki virgül altı": "%2,6",
+    "dört bin yüz altmış dolar": "4.160 dolar",
+    "dört bin yüz dolar": "4.100 dolar",
+    "Üç soruda": "3 soruda",
+    "On dört Ekim'de": "14 Ekim'de",
+    "on beş Ekim'de": "15 Ekim'de",
+    "otuz bir virgül bir": "31,1",
+    "otuz bir gram": "31 gram",
+    "altı bin beş yüz otuz lira": "6.530 lira",
+    "altı bin beş yüz yirmi sekiz liradan": "6.528 liradan",
+    "altı bin beş yüz seksen liraya": "6.580 liraya",
+    "On gram": "10 gram",
+    "altı yüz lira": "600 lira"
+  },
+  "kapak": {
+    "ikon": "🪙",
+    "ust": "ALTIN",
+    "buyuk": "~4.100 $",
+    "alt": "NEDEN DÜŞTÜ?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Ons altın bir gün içinde dört bin yüz dolar civarına indi. Ertesi gün geri çıktı.",
+      "p": {
+        "ikon": "🪙",
+        "etiket": "Ons altın · 14 Ekim · veri sonrası",
+        "deger": 4100,
+        "onek": "~",
+        "sonek": " $",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Yaklaşık değer · kaynaklara göre 4.095–4.111 $"
+      },
+      "kaynak": "Ons altın ≈4.095–4.111 $ (K3)",
+      "etiket": "ONS ALTIN"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki altın neden düştü, ertesi gün neden toparlandı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "ALTIN NEDEN\n*DÜŞTÜ, DÖNDÜ?*",
+        "boy": 96
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ HER GÜN",
+          "SADE DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Önce ne oldu? On dört Ekim'de Amerika, eylül enflasyonunu açıkladı.",
+      "p": {
+        "gun": "14",
+        "ay": "EKİM",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "ABD ENFLASYON VERİSİ",
+        "not": "Amerika'da *eylül* enflasyonu açıklandı"
+      },
+      "kaynak": "ABD eylül TÜFE, 14 Ekim (K1)",
+      "etiket": "VERİ GÜNÜ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Enflasyon, fiyatların bir yılda ne kadar arttığını gösterir. Amerika'da bu rakam faiz kararını belirler.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "ENFLASYON =",
+          "FİYATLARIN YILLIK",
+          "*ARTIŞ HIZI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ENFLASYON NEDİR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Yıllık enflasyon yüzde üç virgül yedi çıktı. Beklenti yüzde üç virgül altıydı.",
+      "p": {
+        "baslik": "🇺🇸 ABD yıllık enflasyon · eylül",
+        "sol": {
+          "etiket": "BEKLENTİ",
+          "deger": 3.6,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "AÇIKLANAN",
+          "deger": 3.7,
+          "renk": "kirmizi"
+        },
+        "sonek": " %",
+        "ondalik": 1,
+        "fark": "+0,1 puan",
+        "not": "Beklentinin biraz üstünde"
+      },
+      "kaynak": "Foreks, Trading Economics (K1)",
+      "etiket": "BEKLENTİ / GERÇEK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Gıda ve enerji hariç çekirdek enflasyon da beklentiyi aştı: yüzde iki virgül altı.",
+      "p": {
+        "baslik": "🇺🇸 Çekirdek enflasyon · yıllık",
+        "sol": {
+          "etiket": "BEKLENTİ",
+          "deger": 2.5,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "AÇIKLANAN",
+          "deger": 2.6,
+          "renk": "kirmizi"
+        },
+        "sonek": " %",
+        "ondalik": 1,
+        "fark": "+0,1 puan",
+        "not": "Gıda ve enerji hariç"
+      },
+      "kaynak": "Foreks, Trading Economics (K2)",
+      "etiket": "ÇEKİRDEK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Fed, Amerika'nın merkez bankası. Faiz kararı bütün dünyada fiyatları oynatır.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "FED = AMERİKA'NIN",
+          "MERKEZ BANKASI",
+          "*FAİZ KARARI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "FED NEDİR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Ons, altının dünya ölçüsü. Bir ons, yaklaşık otuz bir gram eder.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "ONS = ALTININ",
+          "DÜNYA ÖLÇÜSÜ",
+          "*≈ 31,1 GRAM*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "1 troy ons = 31,1035 g",
+      "etiket": "ONS NEDİR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Sabah yaklaşık dört bin yüz altmış dolar olan ons altın, veriyle dört bin yüz dolar civarına geriledi.",
+      "p": {
+        "baslik": "🪙 Ons altın · 14 Ekim",
+        "sol": {
+          "etiket": "SABAH",
+          "deger": 4159,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "VERİDEN SONRA\n(yaklaşık)",
+          "deger": 4100,
+          "renk": "kirmizi"
+        },
+        "onek": "~",
+        "sonek": " $",
+        "ondalik": 0,
+        "fark": "≈ −60 $",
+        "not": "Kaynaklara göre 4.095–4.111 $ arası"
+      },
+      "kaynak": "Ons: 4.159 → ≈4.095–4.111 $ (K3)",
+      "etiket": "ALTIN DÜŞTÜ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Ertesi gün, on beş Ekim'de altın toparlandı. Ons yeniden yükselişe geçti.",
+      "p": {
+        "ikon": "🪙",
+        "etiket": "Ons altın · 15 Ekim · yükseliş",
+        "deger": 4160,
+        "onek": "~",
+        "sonek": " $",
+        "ondalik": 0,
+        "yon": "up",
+        "renk": "yesil",
+        "ok_renk": "yesil",
+        "not": "Gün içinde yaklaşık %1,3 artışla ≈4.160 $ görüldü"
+      },
+      "kaynak": "Ons ≈4.158,63 $ (15 Ekim) (K4)",
+      "etiket": "ERTESİ GÜN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki yüksek enflasyon, altın için neden kötü haber?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "ENFLASYON YÜKSEK\n*ALTIN NEDEN DÜŞER?*",
+        "boy": 88
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Altının bir özelliği var: faiz getirmez. Sadece fiyatı artarsa kazandırır.",
+      "p": {
+        "ikon": "🪙",
+        "satirlar": [
+          "ALTIN",
+          "FAİZ GETİRMEZ",
+          "*SADECE FİYAT*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ALTININ MANTIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Enflasyon yüksek çıkınca Fed faizi artırabilir. Faiz artınca mevduat ve tahvil cazip olur, altın geride kalır.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "📈",
+            "metin": "Enflasyon *beklentiden yüksek*"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Fed faizi *artırabilir*"
+          },
+          {
+            "ikon": "🪙",
+            "metin": "Faizsiz altın *cazibesini kaybeder*"
+          }
+        ]
+      },
+      "kaynak": "Faiz–altın mantığı; Trading Economics (K1)",
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "KISIM ŞİMDİ",
+          "*BEĞEN*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Veriden sonra piyasada, Fed'in faizi artırabileceği beklentisi güçlendi.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "VERİDEN SONRA",
+          "FAİZ ARTIRIMI",
+          "*BEKLENTİSİ GÜÇLENDİ*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Foreks, Trading Economics (K1)",
+      "etiket": "BEKLENTİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bir de dolar var. Altın dolarla fiyatlanır; dolar güçlenince altın pahalılaşır.",
+      "p": {
+        "ikon": "💵",
+        "satirlar": [
+          "ALTIN",
+          "DOLARLA FİYATLANIR",
+          "*DOLAR ↑ = ALTIN PAHALI*"
+        ],
+        "boy": 76
+      },
+      "etiket": "DOLAR ETKİSİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Haberlere göre ertesi gün dolar, gece ulaştığı zirveden geri çekildi. Altın nefes aldı.",
+      "p": {
+        "ikon": "🔄",
+        "satirlar": [
+          "DOLAR ZİRVEDEN",
+          "GERİ ÇEKİLDİ",
+          "*ALTIN NEFES ALDI*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Mynet, Yatırımx, Cumhuriyet, 15 Ekim (K4)",
+      "etiket": "TOPARLANMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani altın iki şeye bakıyor: faiz beklentisi ve dolar. Biri sertleşince düşer, gevşeyince döner.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "ALTIN =",
+          "FAİZ BEKLENTİSİ",
+          "+ *DOLAR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+        "boy": 108
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Türkiye'de gördüğün gram altın, ons fiyatı ile dolar kurunun birleşimi.",
+      "p": {
+        "ikon": "🇹🇷",
+        "satirlar": [
+          "GRAM ALTIN =",
+          "ONS FİYATI",
+          "× *DOLAR KURU*"
+        ],
+        "boy": 84
+      },
+      "etiket": "GRAM ALTIN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Formül şu: ons çarpı kur, bölü otuz bir virgül bir. Veri sonrası bu, yaklaşık altı bin beş yüz otuz lira eder.",
+      "p": {
+        "baslik": "Gram altın (yaklaşık)",
+        "ikon": "🪙",
+        "ogeler": [
+          "4.110 $ × 49,4 ₺",
+          "÷ 31,1",
+          "=",
+          "~6.530 ₺"
+        ]
+      },
+      "kaynak": "Ons×kur÷31,1035; gram ≈6.528 ₺ (K5). Kur ≈49,4 (K5)",
+      "etiket": "GRAM HESABI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "Ertesi gün gram altın, altı bin beş yüz yirmi sekiz liradan altı bin beş yüz seksen liraya yaklaştı.",
+      "p": {
+        "baslik": "🇹🇷 Gram altın · TL",
+        "sol": {
+          "etiket": "14 EKİM\n(veri sonrası)",
+          "deger": 6528,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "15 EKİM\n(yaklaşık)",
+          "deger": 6585,
+          "renk": "yesil"
+        },
+        "onek": "~",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "fark": "≈ +57 ₺",
+        "not": "Kaynaklarda 6.580–6.600 ₺ arası"
+      },
+      "kaynak": "Bloomberg HT, Politikam, Mynet (K5)",
+      "etiket": "GRAM ALTIN"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "On gram altını olan biri için bu fark, yaklaşık altı yüz lira demek.",
+      "p": {
+        "baslik": "On gram altın (yaklaşık)",
+        "ikon": "💰",
+        "ogeler": [
+          "10 gram",
+          "×",
+          "~57 ₺",
+          "=",
+          "~570 ₺"
+        ]
+      },
+      "kaynak": "Hesap: 10 × 57 ≈ 570 (K5)",
+      "etiket": "FARK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Dolar kuru yükselirse, ons düşse bile gram altın liraya göre yükselebilir. İki hareket birbirini dengeleyebilir.",
+      "p": {
+        "ikon": "💡",
+        "satirlar": [
+          "ONS ↓ AMA KUR ↑",
+          "GRAM ALTIN",
+          "*YÜKSELEBİLİR*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Gram = ons × kur ÷ 31,1",
+      "etiket": "KUR ETKİSİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Altın tek haberle oynayabilir. Bu video yatırım tavsiyesi değildir; yönü kimse kesin bilemez.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "TEK HABERLE",
+          "OYNAYABİLİR",
+          "*YATIRIM TAVSİYESİ DEĞİL*"
+        ],
+        "boy": 76
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Ne yapabilirsin? Tek günlük hareketle karar verme. Faiz beklentisine ve dolara bak.",
+      "p": {
+        "baslik": "Haberi okurken",
+        "satirlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Faiz beklentisine bak",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Dolar kuruna bak",
+            "deger": "",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📅",
+            "metin": "Tek güne bakma",
+            "deger": "",
+            "renk": "sari"
+          }
+        ],
+        "not": ""
+      },
+      "etiket": "NE YAPMALI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: enflasyon yükselince faiz beklentisi artar, altın düşer. Dolar gevşeyince döner.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "ENFLASYON ↑ FAİZ ↑",
+          "ALTIN ↓",
+          "*DOLAR GEVŞER, DÖNER*"
+        ],
+        "boy": 76
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK",
+          "İSTEDİĞİN *KONU*",
+          "YORUMLARA YAZ"
+        ],
+        "boy": 92
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "ABD eylül TÜFE yıllık %3,7 (beklenti %3,6), 14 Ekim; sonrasında Fed faiz artırımı beklentisi güçlendi — https://www.foreks.com/haber/detay/6acf77f5e6a77d53caabc015/FRKS/tr/yenileme-abd-de-tuketici-enflasyonu-eylul-ayinda-piyasa-beklentilerini-asarak-hizlandi-14-10-26/ ; https://tradingeconomics.com/commodity/gold/news/591955 ; https://www.politikam.com/abd-enflasyonu-aciklandi-gram-altin-neden-dustu-14-ekim",
+    "K2": "Çekirdek TÜFE yıllık %2,6 (beklenti %2,5) — https://www.foreks.com/haber/detay/6acf77f5e6a77d53caabc015/FRKS/tr/yenileme-abd-de-tuketici-enflasyonu-eylul-ayinda-piyasa-beklentilerini-asarak-hizlandi-14-10-26/ ; https://tradingeconomics.com/commodity/gold/news/591955",
+    "K3": "Ons altın sabah ≈4.159 $, veri sonrası ≈4.095–4.111 $ (4.100 altı) — https://istanbulticaretgazetesi.com/altin-fiyatlari-14-ekim-2026-abd-verisi-oncesi-gram-ve-ceyrek-altin-ne-kadar-bugun-hizli-hareket-gelebilir ; https://www.politikam.com/abd-enflasyonu-aciklandi-gram-altin-neden-dustu-14-ekim ; https://tradingeconomics.com/commodity/gold/news/591955",
+    "K4": "15 Ekim: dolar zirveden geri çekildi, altın yükseldi (ons ≈4.158 $, ≈%1,3) — https://www.cumhuriyet.com.tr/ekonomi/altin-fiyatlari-yeniden-yukselise-gecti-gram-ceyrek-ve-cumhuriyet-altini-bugun-ne-kadar-oldu-guncel-altin-fiyatlari-15-ekim-2026-persembe-2546923 ; https://www.yatirimx.com.tr/piyasa/dolar-dustu-altin-yukseldi-15-ekim-gram-ve-ceyrek-altin-fiyati/26550 ; https://www.hisse.net/haber/amp/altin-fiyatlari-15-ekim-2026-sert-dusen-sari-metal-yukseliyor-102292 ; https://finans.mynet.com/haber/detay/altin/ceyrek-altin-ne-kadar-oldu-gram-yukseldi-15-ekim-2026-persembe-altin-fiyatlari/580957/",
+    "K5": "Gram altın ≈6.528 ₺ (14 Ekim veri sonrası) → ≈6.580–6.600 ₺ (15 Ekim); dolar/TL ≈49,4. Hesap: 4.110×49,4÷31,1035 ≈ 6.530 — https://www.politikam.com/abd-enflasyonu-aciklandi-gram-altin-neden-dustu-14-ekim ; https://www.bloomberght.com/altin-fiyatlari-14-ekim-2026-carsamba-gram-altin-ne-kadar-oldu-ceyrek-altin-kac-tlden-satiliyor-pkh1-3791313 ; https://finans.mynet.com/haber/detay/altin/ceyrek-altin-ne-kadar-oldu-gram-yukseldi-15-ekim-2026-persembe-altin-fiyatlari/580957/"
+  },
+  "cta": [
+    {
+      "sahne": 15,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ]
+}
