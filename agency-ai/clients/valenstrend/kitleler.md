@@ -52,3 +52,13 @@ sebeple reddedildi, yeni "VT | Site | Satın Alanlar | 180G" kaynağıyla kuruld
 - Yeni katalog (2558225854645005) ürün kitleleri
 - Facebook sayfası etkileşim kitleleri
 - Yeni müşteri listesi (WordPress müşteri dökümü gerekiyor)
+
+## Hariç tutma kitlesi (16 Ekim 2026, kullanıcının isteğiyle)
+| Ad | ID | Kural |
+|---|---|---|
+| VT \| HARİÇ TUT \| Bizi Tanıyan Herkes (Site 180G + IG 365G + FB 365G + Takipçi) | 120249795901600677 | Site tüm ziyaretçi 180G ∪ IG profil etkileşimi 365G (ig_business_profile_all) ∪ IG takipçi ∪ FB sayfa etkileşimi 365G (page_engaged, sayfa 122097826928016240) ∪ FB/IG Mağaza ziyaretçileri 180G (Meta ekledi) |
+
+Soğuk kampanyalarda hariç tutulur. Ek olarak hariç tutulması önerilen mevcut kitleler (bu kitleye eklenemedi, araç
+video kaynağını desteklemiyor): "may-haz-%25 video izlenme" 120246970414880677, "Video İzlenme/Max/%50/(30 ocak)"
+120225172603900677, "14 gün video thr" 120249323600800677, "Müşteri Valens - musteri_listesi_ayrik_sutunlar.csv"
+120221604968110677. Reklamı sadece "gören" (etkileşimsiz) kişiler için Meta'da kitle türü yok.
