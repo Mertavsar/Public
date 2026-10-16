@@ -66,7 +66,8 @@ WhatsApp, ₺, taksit, "Pakuksu", "mavi ve siyah" hiçbir açıklamada kalmadı.
   (1080×1350; ilk 250 üründe 249'u, 1 tanesi 3:4), kare kutuda alt ve üst ~%20 kırpılıyordu.
   Düzeltme: iki satır silindi, mobilde şablonun "Dikey 4:5" ayarı geçerli. Uygulandığı tema:
   "Güncelleme 7 (Mobil görsel kesilmesin)" 166461833302 = Güncelleme 6'nın kopyası + bu düzeltme
-  (MD5 geri okunup doğrulandı). Kullanıcı yayınlayacak (canlı temaya API ile yazmak engelli).
+  (MD5 geri okunup doğrulandı). Kullanıcı 16 Ekim'de yayınladı → CANLI tema artık Güncelleme 7.
+  Yayından sonra 490 tema dosyasının MD5'i Güncelleme 6 ile karşılaştırıldı: tek fark `sections/vt-stil.liquid`.
   Eski dosya: `veri/tema_yedek/vt-stil_2026-10-16_once.liquid`.
 
 ## Domain geçişi hazırlığı (15 Ekim 2026)
