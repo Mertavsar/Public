@@ -112,6 +112,15 @@ ve eski kayıtlar için), `valenstrend.com` Shopify'a geçecek. Shopify planı: 
    Search Console site haritası kontrol edilir.
 - Geri dönüş: A kaydı 147.93.73.220'e, AAAA'lar geri, WP adresleri valenstrend.com'a.
 
+**Uygulanan (16 Ekim ~03:15 TR):** kullanıcı eski.valenstrend.com kurmadan doğrudan taşımayı seçti (bekleyen siparişlerin
+PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
+- `A valenstrend.com`: 147.93.73.220 (Proxied) → 23.227.38.65 (DNS only)
+- `CNAME www`: valenstrend.com (Proxied) → shops.myshopify.com (DNS only)
+- Dokunulmayan: ftp A (Hostinger), CAA'lar (letsencrypt, pki.goog dahil), autoconfig/autodiscover/hostingermail DKIM CNAME'leri,
+  MX mx1/mx2.hostinger.com, NS dns-parking, _dmarc TXT, 2. sayfadaki 1 kayıt.
+- Shopify: DNS doğrulandı, tüm bölgelerde yayında, birincil alan adı valenstrend.com (API: sslEnabled true; TLS ekranı ~5 dk diyordu).
+- Shopify'da müşteri sayısı 1 (sadece test) → eski WooCommerce müşteri listesi henüz aktarılmadı.
+
 ## Test siparişi #1001 (15 Ekim 2026, 23:28 UTC)
 
 - iyzico ile kartla 375 TL (250 ürün + 125 kargo "Standart") — PAID, gerçek çekim (test değil). İade edilecek.
