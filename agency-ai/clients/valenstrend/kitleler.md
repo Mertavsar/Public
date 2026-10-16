@@ -50,7 +50,7 @@ sebeple reddedildi, yeni "VT | Site | Satın Alanlar | 180G" kaynağıyla kuruld
 ## Kurulamayanlar (araçta yok — Reklam Yöneticisi'nden)
 - Video izleyen kitleleri
 - Yeni katalog (2558225854645005) ürün kitleleri
-- Facebook sayfası etkileşim kitleleri
+- Facebook sayfası etkileşim kitleleri (ayrı kitle olarak kurulmadı; page_engaged kuralı hariç tutma kitlesinde çalıştı, istenirse kurulabilir)
 - Yeni müşteri listesi (WordPress müşteri dökümü gerekiyor)
 
 ## Hariç tutma kitlesi (16 Ekim 2026, kullanıcının isteğiyle)
