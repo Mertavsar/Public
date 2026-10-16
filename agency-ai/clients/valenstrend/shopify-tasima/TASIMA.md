@@ -131,6 +131,17 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
   valenstrend.com artık Shopify'ı gösterdiği için görsellere eski.valenstrend.com gibi bir adresle erişim gerekiyor.
 - #1002 (COD 1290, iptal) ve #1003 (COD 1250, bekliyor) şehir alanı "3093" → büyük ihtimalle test.
 
+**Reklamlarda "sayfa bulunamadı" (16 Ekim ~12:00 TR):**
+- Sebep: katalog reklamları hâlâ eski WooCommerce kataloğunu (3598453573752694) kullanıyor — "1 | Katalog | Koton+Organik"
+  (ürün seti 2782131562135032), "2 | Katalog | En Çok Satan Desenli Koton" (843555898610951), LAL kopyaları ve
+  "Remarketing/45 - 05.03 - Kopya" (dinamik, 1103182450724892, bugün en çok harcayan). Bu setlerde Shopify'da olmayan ürünler var.
+- Eski katalogdaki 1120 linkin tamamı tarandı: 114'ü yönlendirmesizdi → hepsi yönlendirildi (import 147193942: 114 oluşturuldu,
+  0 hata; `veri/yonlendirmeler_eksik_urunler_2026-10-16.csv`). Toplam yönlendirme 1211. Sondaki "/" fark etmiyor (Shopify aynı yol sayıyor).
+- Shopify'da hiç olmayan seriler: Müslin Şal (11), Fular (13), Organik Pamuk Şal (16), Organik Soft Şal 271-288, Organik Soft Eşarp
+  223-232, Premium Eşarp 11-15, Desenli Koton Eşarp 658-702 → şimdilik kategoriye / tüm ürünlere gidiyor.
+- Kalıcı çözüm (onay gerekiyor, §0): katalog reklamlarını yeni Shopify kataloğuna (2558225854645005) taşımak; eksik ürünleri Shopify'a eklemek.
+  Eski katalog artık güncellenmiyor ve görsel linkleri (valenstrend.com/wp-content/...) Shopify'da 404.
+
 ## Test siparişi #1001 (15 Ekim 2026, 23:28 UTC)
 
 - iyzico ile kartla 375 TL (250 ürün + 125 kargo "Standart") — PAID, gerçek çekim (test değil). İade edilecek.
