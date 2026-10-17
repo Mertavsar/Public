@@ -1,0 +1,567 @@
+{
+  "baslik": "2027 bütçesi: devlet gelirinden neden fazla harcıyor? Üç soruda anlatıyoruz",
+  "tarih": "2026-10-17",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "bütçe",
+    "açık",
+    "borç",
+    "faiz",
+    "trilyon"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "On yedi Ekim'de": "17 Ekim'de",
+    "iki bin yirmi yedi": "2027",
+    "yirmi bir Ekim'de": "21 Ekim'de",
+    "yüzde on dört": "%14"
+  },
+  "kapak": {
+    "ikon": "🏛️",
+    "ust": "2027 BÜTÇESİ",
+    "buyuk": "3,87 trilyon ₺",
+    "alt": "AÇIK NEREDEN?"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Devlet, gelecek yıl yaklaşık yirmi yedi trilyon lira harcamayı planlıyor.",
+      "p": {
+        "ikon": "🏛️",
+        "etiket": "2027 bütçe teklifi · toplam gider",
+        "deger": 27.276,
+        "sonek": " trilyon ₺",
+        "ondalik": 3,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Teklife göre · merkezi yönetim"
+      },
+      "kaynak": "2027 bütçe teklifi, TBMM (K1, K2)",
+      "etiket": "2027 GİDER"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki kasaya o kadar para girecek mi? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "PARA YETECEK Mİ?\n*3 SORUDA*",
+        "boy": 96
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ HER GÜN",
+          "SADE DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Önce ne oldu? On yedi Ekim'de, iki bin yirmi yedi bütçe teklifi Meclis'e sunuldu.",
+      "p": {
+        "gun": "17",
+        "ay": "EKİM",
+        "gunadi": "CUMARTESİ",
+        "saat": "2027 BÜTÇE TEKLİFİ",
+        "not": "Teklif *Meclis'e* sunuldu"
+      },
+      "kaynak": "2027 bütçe teklifi, TBMM (K1, K2)",
+      "etiket": "TEKLİF"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bütçe, devletin bir yıllık gelir ve gider planıdır. Aile bütçesinin büyük hâli.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "BÜTÇE =",
+          "DEVLETİN YILLIK",
+          "*GELİR-GİDER PLANI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "BÜTÇE NEDİR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Teklife göre giderler yaklaşık yirmi yedi trilyon, gelirler yaklaşık yirmi üç buçuk trilyon lira.",
+      "p": {
+        "baslik": "🏛️ 2027 merkezi yönetim bütçesi",
+        "sol": {
+          "etiket": "GELİR",
+          "deger": 23.408,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "GİDER",
+          "deger": 27.276,
+          "renk": "kirmizi"
+        },
+        "sonek": " trilyon ₺",
+        "ondalik": 3,
+        "fark": "Eksik: 3,868 trilyon ₺",
+        "not": "Planlanan rakamlar"
+      },
+      "kaynak": "2027 bütçe teklifi, TBMM (K1, K2)",
+      "etiket": "GELİR / GİDER"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Aradaki fark, yaklaşık üç trilyon sekiz yüz altmış sekiz milyar lira.",
+      "p": {
+        "baslik": "Gider eksi gelir (trilyon ₺)",
+        "ikon": "🧮",
+        "ogeler": [
+          "27,276",
+          "−",
+          "23,408",
+          "=",
+          "3,868"
+        ]
+      },
+      "kaynak": "27,276 − 23,408 = 3,868 (K1, K2)",
+      "etiket": "FARK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Buna bütçe açığı denir. Harcama gelirden fazlaysa, fark açıktır.",
+      "p": {
+        "ikon": "📉",
+        "satirlar": [
+          "HARCAMA > GELİR",
+          "FARK =",
+          "*BÜTÇE AÇIĞI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "AÇIK NEDİR"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Açık, ülkenin yıllık gelirinin yaklaşık yüzde üç buçuğu olacak. Bu oran bekleniyor.",
+      "p": {
+        "ikon": "📊",
+        "etiket": "Açık / milli gelir (bekleniyor)",
+        "deger": 3.5,
+        "onek": "~",
+        "sonek": " %",
+        "ondalik": 1,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Milli gelir = ülkede bir yılda üretilen her şeyin değeri"
+      },
+      "kaynak": "Açık ≈%3,5 (K2, K3)",
+      "etiket": "AÇIK ORANI"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Gelirin gideri karşılama oranına bakalım: her yüz liralık harcamanın yaklaşık seksen altısı gelirle karşılanıyor.",
+      "p": {
+        "baslik": "Gelir / toplam gider",
+        "ikon": "🧮",
+        "ogeler": [
+          "23,408",
+          "÷",
+          "27,276",
+          "≈",
+          "%85,8"
+        ]
+      },
+      "kaynak": "23,408 ÷ 27,276 ≈ 0,858 (K1)",
+      "etiket": "KARŞILAMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bu açık nasıl kapanacak?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "AÇIK\n*NASIL KAPANIR?*",
+        "boy": 110
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Cevap borçlanma. Devlet, eksik parayı borç alarak tamamlamayı planlıyor.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "EKSİK PARA",
+          "*BORÇLA*",
+          "TAMAMLANIR"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Açığın net borçlanmayla kapatılması planlanıyor (K2)",
+      "etiket": "BORÇLANMA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Borç alınca önce para gelir. Sonra faiz ödemesi başlar.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "📉",
+            "metin": "Gelir giderden *az*"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Devlet *borç* alır"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Borca *faiz* ödenir"
+          }
+        ]
+      },
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Faiz, borcun kirası gibidir. Borç büyüdükçe, ödenen kira da büyür.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "FAİZ =",
+          "BORCUN KİRASI",
+          "*BORÇ ↑ KİRA ↑*"
+        ],
+        "boy": 84
+      },
+      "etiket": "FAİZ NEDİR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kredi kartıyla düşün: gelirinden fazla harcarsan, fark ekstreye borç yazılır.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "KREDİ KARTI",
+          "GİBİ DÜŞÜN:",
+          "*FARK EKSTREYE*"
+        ],
+        "boy": 84
+      },
+      "etiket": "KART ÖRNEĞİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ KISIM",
+          "ŞİMDİ GELİYOR",
+          "*BEĞEN*"
+        ],
+        "boy": 84
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Teklifte yalnızca faize ayrılan para yaklaşık dört trilyon lira.",
+      "p": {
+        "ikon": "💸",
+        "etiket": "2027 faiz giderleri (teklif)",
+        "deger": 3.975,
+        "sonek": " trilyon ₺",
+        "ondalik": 3,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Toplam giderin yaklaşık %14,6'sı"
+      },
+      "kaynak": "Faiz 3,975 trilyon ₺ (K2, K4)",
+      "etiket": "FAİZ GİDERİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Faize ayrılan tutar, açığın biraz üstünde kalıyor.",
+      "p": {
+        "baslik": "💸 Açık ve faiz · 2027 teklifi",
+        "sol": {
+          "etiket": "BÜTÇE AÇIĞI",
+          "deger": 3.868,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "FAİZ GİDERİ",
+          "deger": 3.975,
+          "renk": "kirmizi"
+        },
+        "sonek": " trilyon ₺",
+        "ondalik": 3,
+        "fark": "Faiz biraz fazla",
+        "not": "Planlanan rakamlar"
+      },
+      "kaynak": "K2, K4",
+      "etiket": "AÇIK / FAİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Faiz, toplam harcamanın yüzde on dört virgül altısı. Yani yaklaşık her yedi liranın biri.",
+      "p": {
+        "ikon": "💸",
+        "satirlar": [
+          "HER 7 LİRANIN",
+          "YAKLAŞIK BİRİ",
+          "*FAİZE GİDİYOR*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "3,975 ÷ 27,276 ≈ %14,6 (K4)",
+      "etiket": "FAİZ PAYI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Çünkü yeni borcun yanında, eski borçların faizi de her yıl bütçeden ödenir.",
+      "p": {
+        "ikon": "🔁",
+        "satirlar": [
+          "ESKİ BORÇLARIN",
+          "FAİZİ DE",
+          "*BÜTÇEDEN ÖDENİR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ESKİ BORÇ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "BU SENİN\n*CEBİNE?*",
+        "boy": 120
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Devletin ana geliri vergidir. Gelir yetmeyince borç, borçla birlikte faiz büyür.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "ANA GELİR: VERGİ",
+          "GELİR YETMEZSE:",
+          "*BORÇ → FAİZ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "VERGİ VE BORÇ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Basit hesap: bütçedeki her yüz liranın yaklaşık on dördü borçla karşılanıyor.",
+      "p": {
+        "baslik": "Açık / toplam gider",
+        "ikon": "🧮",
+        "ogeler": [
+          "3,868",
+          "÷",
+          "27,276",
+          "≈",
+          "%14,2"
+        ]
+      },
+      "kaynak": "3,868 ÷ 27,276 ≈ 0,142 (K1, K2)",
+      "etiket": "BORÇ PAYI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Açık büyürse devletin daha çok borçlanması gerekebilir. Bu da faiz ve vergi tartışmalarını gündemde tutabilir.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "AÇIK BÜYÜRSE",
+          "DAHA ÇOK BORÇ",
+          "*GEREKEBİLİR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bir evde olduğu gibi, devlette de faiz artarsa başka harcamalara kalan pay azalabilir.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "FAİZ ARTARSA",
+          "DİĞER HARCAMAYA",
+          "*KALAN PAY AZALABİLİR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "KALAN PAY"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bütçe önce komisyonda görüşülür, sonra Meclis oylar. Rakamlar o süreçte değişebilir.",
+      "p": {
+        "ikon": "🗳️",
+        "satirlar": [
+          "ÖNCE KOMİSYON",
+          "SONRA MECLİS",
+          "*OYLAR*"
+        ],
+        "boy": 96
+      },
+      "etiket": "SÜREÇ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "takvim",
+      "say": "Takvim şöyle: komisyon görüşmeleri yirmi bir Ekim'de başlıyor.",
+      "p": {
+        "gun": "21",
+        "ay": "EKİM",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "PLAN VE BÜTÇE KOMİSYONU",
+        "not": "Bütçenin geneli *27 Ekim'de* görüşülecek"
+      },
+      "kaynak": "K5",
+      "etiket": "TAKVİM"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Takip edeceğin üç şey: açık rakamı, faiz payı ve Meclis'te yapılacak değişiklikler.",
+      "p": {
+        "baslik": "Ne izlemeli?",
+        "satirlar": [
+          {
+            "ikon": "📉",
+            "metin": "Açık rakamı",
+            "deger": "3,868 trilyon ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Faiz payı",
+            "deger": "%14,6",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Meclis'te değişiklik",
+            "deger": "olabilir",
+            "renk": "mavi"
+          }
+        ],
+        "not": "Teklif rakamları"
+      },
+      "etiket": "NE İZLEMELİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Unutma, bunlar teklif rakamları. Meclis görüşmelerinde değişebilir. Bu video yatırım tavsiyesi değildir.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "BUNLAR TEKLİF",
+          "MECLİSTE",
+          "*DEĞİŞEBİLİR*"
+        ],
+        "boy": 96
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: devlet gelirinden fazla harcamayı planlıyor, farkı borçla kapatacak, faiz yükü ağır.",
+      "p": {
+        "ikon": "🧠",
+        "satirlar": [
+          "GELİRDEN FAZLA HARCAMA",
+          "FARK BORÇLA KAPANIR",
+          "*FAİZ YÜKÜ AĞIR*"
+        ],
+        "boy": 76
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "ÖĞRENMEK İSTEDİĞİN",
+          "KONUYU YORUMLARA YAZ",
+          "*SIRADAKİ SENDEN*"
+        ],
+        "boy": 80
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "2027 merkezi yönetim bütçe teklifi TBMM'ye sunuldu; gider 27 trilyon 276 milyar ₺, gelir 23 trilyon 408 milyar ₺, açık 3 trilyon 868 milyar ₺ — https://www.karar.com/ekonomi-haberleri/2027-butcesinin-ayrintilari-belli-oldu-harcamalar-273-trilyon-acik-39-2078760 ; https://www.endeks24.com/2027-butcesinde-3-trilyon-868-milyar-lira-acik ; https://www.ankaranethaber.com/2027-butcesinde-38-trilyon-liralik-acik-faiz-giderleri-4-trilyona-yaklasiyor ; https://www.sivasirade.com/haber/2027-yili-butce-teklifi-tbmmye-sunuldu-27-trilyon-liralik-dev-butcede-takvim-275159.html",
+    "K2": "Açığın GSYH'ye oranı ≈%3,5; açığın borçlanmayla kapatılması planlanıyor — https://www.sivasirade.com/haber/2027-yili-butce-teklifi-tbmmye-sunuldu-27-trilyon-liralik-dev-butcede-takvim-275159.html ; https://www.endeks24.com/2027-butcesinde-3-trilyon-868-milyar-lira-acik",
+    "K3": "Açık/GSYH ≈%3,5, milli gelir ≈111 trilyon ₺ (hesap: 3,868÷111 ≈ %3,5) — https://www.karar.com/ekonomi-haberleri/2027-butcesinin-ayrintilari-belli-oldu-harcamalar-273-trilyon-acik-39-2078760 ; https://www.endeks24.com/2027-butcesinde-3-trilyon-868-milyar-lira-acik",
+    "K4": "Faiz giderleri 3 trilyon 975 milyar ₺ (≈ toplam giderin %14,6'sı; hesap 3,975÷27,276) — https://www.hunattv.com/2027-butcesinde-dikkat-ceken-rakamlar-faize-3-9-trilyon-lira-ayrilacak/31827 ; https://www.ankaranethaber.com/2027-butcesinde-38-trilyon-liralik-acik-faiz-giderleri-4-trilyona-yaklasiyor ; https://www.elipshaber.com/cevdet-yilmaz-2027-butcesini-acikladi-faiz-giderleri-dikkat-cekti",
+    "K5": "Komisyon görüşmeleri 21 Ekim'de başlıyor, bütçenin geneli 27 Ekim'de — https://www.gercekhaberci.com/gundem/2027-butce-teklifi-meclise-sunuldu-gorusmeler-21-ekimde-basliyor/268349 ; https://www.kentgazetesi.com/tbmmde-2027-butce-sureci-basliyor/"
+  }
+}
