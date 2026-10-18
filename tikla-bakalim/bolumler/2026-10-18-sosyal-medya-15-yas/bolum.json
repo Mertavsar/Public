@@ -1,0 +1,609 @@
+{
+  "baslik": "1 Kasım'da sosyal medyada ne değişiyor? 15 yaş kuralını üç soruda anlatıyoruz",
+  "tarih": "2026-10-18",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "yaş",
+    "doğrulama",
+    "e-Devlet",
+    "platform",
+    "ceza"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "on beş": "15",
+    "Bir Kasım'dan": "1 Kasım'dan",
+    "bir Kasım'da": "1 Kasım'da",
+    "On Ekim'de": "10 Ekim'de",
+    "otuz bir Mart": "31 Mart",
+    "on sekiz": "18",
+    "yüzde üçüne": "%3'üne"
+  },
+  "kapak": {
+    "ikon": "📱",
+    "ust": "1 KASIM'DA",
+    "buyuk": "15 YAŞ",
+    "alt": "NE DEĞİŞİYOR?"
+  },
+  "cta": [
+    {
+      "sahne": 16,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Bir Kasım'dan itibaren on beş yaşın altındakiler sosyal medyada hesap açamayacak.",
+      "p": {
+        "ikon": "📱",
+        "etiket": "Sosyal medya için alt yaş sınırı",
+        "deger": 15,
+        "sonek": " yaş",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "sari",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Yönetmelik · yürürlük: 1 Kasım 2026"
+      },
+      "kaynak": "Yaş doğrulama yönetmeliği, Resmî Gazete 10.10.2026 (K1, K2)",
+      "etiket": "YENİ KURAL"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu tam olarak nasıl işleyecek? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NASIL İŞLEYECEK?\n*3 SORUDA*",
+        "boy": 96
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ SADE",
+          "DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Önce ne oldu? On Ekim'de yaş doğrulama yönetmeliği Resmî Gazete'de yayımlandı.",
+      "p": {
+        "gun": "10",
+        "ay": "EKİM",
+        "gunadi": "CUMARTESİ",
+        "saat": "RESMÎ GAZETE",
+        "not": "Yönetmelik *yayımlandı*"
+      },
+      "kaynak": "Resmî Gazete 33396, 10.10.2026 (K1, K2)",
+      "etiket": "YÖNETMELİK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Kural şu: sosyal ağlar, on beş yaşını doldurmamış çocuğa hizmet veremeyecek.",
+      "p": {
+        "ikon": "🚫",
+        "satirlar": [
+          "15 YAŞINI",
+          "DOLDURMAMIŞA",
+          "*HİZMET YOK*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "K1, K2",
+      "etiket": "KURAL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Düzenlemenin dayanağı, bu yılın Mayıs ayında çıkan kanun. Yönetmelik de uygulamayı belirliyor.",
+      "p": {
+        "ikon": "📜",
+        "satirlar": [
+          "KANUN: MAYIS 2026",
+          "YÖNETMELİK:",
+          "*UYGULAMA KURALLARI*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "7578 sayılı Kanun (K5, K6)",
+      "etiket": "DAYANAK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Kanun ve yönetmelik tek tek platform adı saymıyor. Büyük sosyal ağların kapsamda olması bekleniyor.",
+      "p": {
+        "ikon": "📱",
+        "satirlar": [
+          "RESMÎ LİSTE YOK",
+          "BÜYÜK SOSYAL AĞLAR",
+          "*KAPSAMDA BEKLENİYOR*"
+        ],
+        "boy": 80
+      },
+      "kaynak": "Hukuk bürosu yorumları (K6)",
+      "etiket": "KAPSAM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Yeni kurallar bir Kasım'da başlıyor.",
+      "p": {
+        "gun": "1",
+        "ay": "KASIM",
+        "gunadi": "PAZAR",
+        "saat": "2026",
+        "not": "Kurallar *yürürlüğe* giriyor"
+      },
+      "kaynak": "K1, K2",
+      "etiket": "YÜRÜRLÜK"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Yeni hesap açarken e-Devlet üzerinden yaş doğrulaması istenecek.",
+      "p": {
+        "baslik": "Yaş doğrulama kimden istenecek?",
+        "satirlar": [
+          {
+            "ikon": "➕",
+            "metin": "Yeni hesap",
+            "deger": "1 Kasım 2026",
+            "renk": "sari"
+          },
+          {
+            "ikon": "👤",
+            "metin": "Eski hesap",
+            "deger": "en geç 31 Mart 2027",
+            "renk": "mavi"
+          }
+        ],
+        "not": "Yaşı ne olursa olsun herkes"
+      },
+      "kaynak": "K1, K2",
+      "etiket": "KİMDEN"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Mevcut hesaplar için süre daha uzun: en geç otuz bir Mart iki bin yirmi yedi.",
+      "p": {
+        "gun": "31",
+        "ay": "MART",
+        "gunadi": "ÇARŞAMBA",
+        "saat": "2027",
+        "not": "Mevcut hesaplar için *son tarih*"
+      },
+      "kaynak": "K1, K2",
+      "etiket": "SON TARİH"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki neden böyle bir kural geldi?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*GELDİ?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yetkililer gerekçe olarak çocukların korunmasını gösteriyor.",
+      "p": {
+        "ikon": "🛡️",
+        "satirlar": [
+          "GEREKÇE:",
+          "*ÇOCUKLARIN*",
+          "KORUNMASI"
+        ],
+        "boy": 96
+      },
+      "kaynak": "Bakan açıklaması (K3, K4)",
+      "etiket": "GEREKÇE"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Sistem şöyle çalışacak: e-Devlet'te yaşını doğrularsın, sistem bir belirteç üretir.",
+      "p": {
+        "baslik": "Yaş doğrulama nasıl yapılacak?",
+        "adimlar": [
+          {
+            "ikon": "🏛️",
+            "metin": "e-Devlet'te yaşını doğrularsın"
+          },
+          {
+            "ikon": "🔑",
+            "metin": "Sistem *belirteç* üretir"
+          },
+          {
+            "ikon": "📱",
+            "metin": "Platform belirteci görür"
+          }
+        ]
+      },
+      "kaynak": "K1, K2",
+      "etiket": "SİSTEM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Belirteç, sadece yaşı gösteren dijital bir kart gibidir. Ad ve soyad taşımaz.",
+      "p": {
+        "ikon": "🪪",
+        "satirlar": [
+          "BELİRTEÇ =",
+          "SADECE *YAŞ EŞİĞİ*",
+          "AD-SOYAD YOK"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Belirteç yalnızca 15 ve 18 eşiğini gösterir (K1, K2)",
+      "etiket": "BELİRTEÇ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bunu sinema gişesine benzetebilirsin. Görevli kimliğe bakar, sadece uygun olanı içeri alır.",
+      "p": {
+        "ikon": "🎟️",
+        "satirlar": [
+          "SİNEMA GİŞESİ GİBİ:",
+          "KİMLİĞE BAKAR,",
+          "*UYGUNU ALIR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "BENZETME"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE YARADIYSA",
+          "*BİR BEĞEN* BIRAK"
+        ],
+        "boy": 96
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Kurala uymayan platforma, küresel cirosunun yüzde üçüne kadar ceza verilebilir.",
+      "p": {
+        "ikon": "⚖️",
+        "etiket": "Platforma ceza · küresel ciro",
+        "deger": 3,
+        "onek": "%",
+        "sonek": "'e kadar",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Önce bildirim ve süre verilir"
+      },
+      "kaynak": "7578 sayılı Kanun (K5, K6)",
+      "etiket": "CEZA"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kaynaklara göre önce bildirim ve düzeltme süresi veriliyor. Uyulmazsa reklam yasağı ve bant daraltma gelebilir.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "1. BİLDİRİM",
+          "2. DÜZELTME SÜRESİ",
+          "3. *REKLAM YASAĞI*"
+        ],
+        "boy": 64
+      },
+      "kaynak": "K5",
+      "etiket": "AŞAMALAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kaynaklara göre çocuğa ya da ebeveyne ceza yok. Yükümlülük platformda.",
+      "p": {
+        "ikon": "🏢",
+        "satirlar": [
+          "SORUMLU:",
+          "*PLATFORM*",
+          "ÇOCUK / AİLE DEĞİL"
+        ],
+        "boy": 96
+      },
+      "kaynak": "K5, K6",
+      "etiket": "KİM SORUMLU"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "On beş ile on sekiz yaş arası ise tamamen yasak değil. Ama kısıtlı.",
+      "p": {
+        "ikon": "🔒",
+        "satirlar": [
+          "15–18 YAŞ",
+          "YASAK DEĞİL,",
+          "*KISITLI*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "K2, K7",
+      "etiket": "15-18 YAŞ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Haberlere göre bu grupta hesap gizli başlayacak, kişiselleştirilmiş reklam gösterilmeyecek.",
+      "p": {
+        "baslik": "15–18 yaş için (haberlere göre)",
+        "satirlar": [
+          {
+            "ikon": "🔒",
+            "metin": "Hesap varsayılan gizli",
+            "deger": "",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🎯",
+            "metin": "Kişiselleştirilmiş reklam yok",
+            "deger": "",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "💬",
+            "metin": "Kısıtlı mesajlaşma",
+            "deger": "",
+            "renk": "sari"
+          }
+        ],
+        "not": "Ayrıntılar kaynaklara göre değişir"
+      },
+      "kaynak": "K2, K7",
+      "etiket": "KISITLAR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin gününü nasıl etkiler?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "SENİ NASIL\n*ETKİLER?*",
+        "boy": 110
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Yeni hesap açarken bir adım daha olacak: e-Devlet doğrulaması.",
+      "p": {
+        "ikon": "➕",
+        "satirlar": [
+          "YENİ HESAP =",
+          "BİR ADIM DAHA",
+          "*e-DEVLET*"
+        ],
+        "boy": 96
+      },
+      "kaynak": "K1, K2",
+      "etiket": "YENİ HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Uygulamayı açtığında, yaş doğrulaması için seni e-Devlet'e yönlendirebilir.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "UYGULAMA AÇILIR",
+          "*e-DEVLET'E YÖNLENİR*",
+          "YAŞ DOĞRULANIR"
+        ],
+        "boy": 80
+      },
+      "kaynak": "K2, K3",
+      "etiket": "NASIL"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Eski hesabın için de doğrulama istenecek. Süre, otuz bir Mart'a kadar.",
+      "p": {
+        "ikon": "👤",
+        "satirlar": [
+          "ESKİ HESABIN DA",
+          "*DOĞRULANACAK*",
+          "SÜRE: 31 MART 2027"
+        ],
+        "boy": 84
+      },
+      "kaynak": "K1, K2",
+      "etiket": "ESKİ HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Evde on beş yaş altı biri varsa, hesabı bilgi verilerek kapatılabilir.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "15 YAŞ ALTI",
+          "HESAP *KAPATILABİLİR*",
+          "KULLANICIYA BİLGİ VERİLİR"
+        ],
+        "boy": 80
+      },
+      "kaynak": "K1, K2",
+      "etiket": "EVDE"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Haberlere göre şüpheli hesaplar geçici olarak askıya alınıp yeniden doğrulamaya gönderilebilir.",
+      "p": {
+        "ikon": "⏸️",
+        "satirlar": [
+          "ŞÜPHELİ HESAP",
+          "*GEÇİCİ ASKI*",
+          "YENİDEN DOĞRULAMA"
+        ],
+        "boy": 84
+      },
+      "kaynak": "K3, K4",
+      "etiket": "ŞÜPHELİ HESAP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bazı dijital haklar kuruluşları gizlilik endişesi dile getiriyor. Yetkililer ise korumayı öne çıkarıyor.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "İKİ BAKIŞ:",
+          "*GİZLİLİK ENDİŞESİ*",
+          "ÇOCUK KORUMA"
+        ],
+        "boy": 90
+      },
+      "kaynak": "K8, K9",
+      "etiket": "TARTIŞMA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ailelere düşen iş de basit: çocuğun hangi uygulamayı kullandığına birlikte bakmak.",
+      "p": {
+        "ikon": "👨‍👩‍👧",
+        "satirlar": [
+          "AİLELER İÇİN:",
+          "*BİRLİKTE BAK*",
+          "HANGİ UYGULAMA?"
+        ],
+        "boy": 84
+      },
+      "etiket": "AİLELER"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Aklında kalsın: yeni hesaplar bir Kasım'da, eski hesaplar otuz bir Mart'ta.",
+      "p": {
+        "baslik": "Takip edeceğin tarihler",
+        "satirlar": [
+          {
+            "ikon": "📜",
+            "metin": "Yönetmelik yayımlandı",
+            "deger": "10 Ekim",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "➕",
+            "metin": "Yeni hesaplar",
+            "deger": "1 Kasım",
+            "renk": "sari"
+          },
+          {
+            "ikon": "👤",
+            "metin": "Eski hesaplar",
+            "deger": "31 Mart 2027",
+            "renk": "mavi"
+          }
+        ]
+      },
+      "kaynak": "K1, K2",
+      "etiket": "TARİHLER"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Uygulama ayrıntıları platformlara göre değişebilir. Resmî metni Resmî Gazete'den kontrol et.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "AYRINTILAR",
+          "*DEĞİŞEBİLİR*",
+          "RESMÎ METNE BAK"
+        ],
+        "boy": 96
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: platformlar yaşı doğrulayacak, on beş yaş altı giremeyecek, ceza platformda.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "YAŞ DOĞRULANACAK",
+          "15 YAŞ ALTI *YOK*",
+          "CEZA *PLATFORMA*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SEN NE DÜŞÜNÜYORSUN?",
+          "KONUYU *YORUMA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Sosyal medya yaş doğrulama yönetmeliği Resmî Gazete'de (33396, 10 Ekim 2026), yürürlük 1 Kasım 2026, mevcut hesaplar en geç 31 Mart 2027 — https://teyit.org/dosya/sosyal-medyada-yasa-takilanlar-yas-kisitlamasi-resmi-gazetede ; https://www.sozcu.com.tr/sosyal-medyaya-yeni-duzenleme-resm%C3%AE-gazetede-yayimlandi-p367770 ; https://bianet.org/haber/sosyal-medyada-yas-dogrulamasi-yeni-duzenleme-kimleri-nasil-etkileyecek-324350",
+    "K2": "e-Devlet yaş doğrulama belirteci yalnızca 15 ve 18 eşiğini gösterir; 15 yaş altı hesaplar bilgi verilerek kapatılır — https://www.hurriyet.com.tr/bilgi/galeri/15-yas-alti-sosyal-medya-duzenlemesi-resmi-gazete-karari-son-dakika-15-yas-alti-sosyal-medya-yasagi-yururluge-girdi-mi-ne-zaman-43336118 ; https://www.karar.com/guncel-haberler/sosyal-medya-yasagi-hangi-uygulamalara-geliyor-15-yas-alti-sosyal-medya-2078007 ; https://www.artisiirt.com/15-yas-altina-sosyal-medya-yasagi-resmi-gazete-de-1-kasim-da-basliyor/52692",
+    "K3": "Bakan Göktaş: 15 yaş altına sosyal medya yok, hesaplar e-Devlet'ten doğrulanacak — https://www.haberler.com/guncel/bakan-goktas-15-yas-altina-sosyal-medya-erisimi-20332315-haberi/",
+    "K4": "15 yaş altına sosyal medya yasağında yeni ayrıntılar — https://www.ntv.com.tr/turkiye/galeri-15-yas-altina-sosyal-medya-yasaginda-yeni-ayrintilar-tarih-belli-oldu-bu-ozellikler-kaldirilacak-1746132",
+    "K5": "7578 sayılı Kanun: küresel cironun %3'üne kadar idari para cezası; çocuğa/ebeveyne ceza yok — https://fgtastan.com/wiki/5651-dijital-oyunlar-ve-sosyal-ag-saglayicilar/ ; https://www.yilmaztatlihukuk.com/post/turkiyede-cocuklar-icin-sosyal-medya-yasagi-7578-sayili-kanun",
+    "K6": "Aynı hükümlerin hukuk bürosu değerlendirmeleri — https://www.erdemvarol.com.tr/15-yas-alti-sosyal-medya-yasagi/ ; https://handansayanozgul.av.tr/15-yas-alti-sosyal-medya-yasagi/",
+    "K7": "Sosyal medyada 15-18 yaşa kısıtlamalar (haberlere göre) — https://www.hurriyet.com.tr/gundem/sosyal-medyada-15-18-yasa-6-kisitlama-43340588",
+    "K8": "Dijital haklar kuruluşu eleştirisi: kimliksiz sosyal medya kaygısı — https://ifade.org.tr/basin-bultenleri-ve-duyurular/uyardigimiz-gun-geldi-1-kasimdan-itibaren-kimliksiz-sosyal-medya-yok/",
+    "K9": "Yeni düzenleme kimleri nasıl etkileyecek — https://bianet.org/haber/sosyal-medyada-yas-dogrulamasi-yeni-duzenleme-kimleri-nasil-etkileyecek-324350"
+  }
+}
