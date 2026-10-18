@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fransa'da Ne Oluyor</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --ink: #f4f1ea;
+    --mute: #8d8a84;
+    --line: #2a2a2f;
+    --red: #e5322b;
+    --yellow: #f4c430;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  body { display: grid; place-items: center; font-family: var(--sans); color: var(--ink); }
+
+  /* 1080x1920 sahne; pencereye ölçeklenir */
+  #stage {
+    position: absolute; left: 50%; top: 50%;
+    width: 1080px; height: 1920px; background: var(--bg);
+    transform-origin: 0 0; overflow: hidden;
+  }
+  #stage::after { /* hafif vinyet */
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%);
+  }
+  svg.layer { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  .el { position: absolute; opacity: 0; will-change: transform, opacity; }
+
+  /* Üst bilgi */
+  #bar { position: absolute; left: 120px; right: 120px; top: 228px; display: flex; gap: 8px; }
+  #bar i { flex: 1; height: 4px; background: rgba(255,255,255,.14); border-radius: 2px; overflow: hidden; }
+  #bar i b { display: block; height: 100%; width: 100%; background: var(--ink); transform-origin: 0 0; transform: scaleX(0); }
+  .chap { left: 0; right: 0; top: 252px; text-align: center; font: 600 24px var(--sans); letter-spacing: .32em; color: var(--mute); }
+  .chap em { font-style: normal; color: var(--red); }
+
+  .title {
+    left: 110px; right: 110px; top: 300px; text-align: center;
+    font: 600 80px/1.05 var(--serif); letter-spacing: -.005em; color: var(--ink);
+  }
+  .title.big { top: 318px; font-size: 86px; }
+  .title i { font-style: italic; font-weight: 500; color: var(--red); }
+  .title .y { color: var(--yellow); }
+
+  .note { left: 120px; right: 120px; text-align: center; font: 500 34px/1.35 var(--sans); color: var(--ink); }
+  .src { left: 120px; right: 120px; top: 1388px; text-align: center; font: 400 22px var(--sans); color: #6b6964; letter-spacing: .02em; }
+  .dim { color: var(--mute); }
+
+  .tag { font: 600 22px var(--sans); letter-spacing: .24em; color: var(--mute); text-transform: uppercase; }
+
+  /* Haritaya bağlı etiketler */
+  .pin { transform: translate(-50%, -100%); white-space: nowrap; text-align: center; }
+  .pin .t1 { font: 700 30px var(--sans); color: var(--ink); }
+  .pin .t2 { font: 500 24px var(--sans); color: var(--mute); margin-top: 4px; }
+  .card {
+    background: rgba(18,18,22,.92); border: 1px solid #34343a; border-radius: 18px;
+    padding: 18px 26px; text-align: left; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+  .card .k { font: 700 22px var(--sans); letter-spacing: .2em; color: var(--red); text-transform: uppercase; }
+  .card .v { font: 700 40px var(--sans); color: var(--ink); margin-top: 6px; }
+  .card .s { font: 500 26px var(--sans); color: var(--mute); margin-top: 4px; }
+
+  /* Sayaçlar */
+  .num { font: 800 132px/1 var(--sans); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+  .num.md { font-size: 96px; }
+  .num.sm { font-size: 76px; }
+  .red { color: var(--red); } .yel { color: var(--yellow); }
+  .lbl { font: 500 32px/1.3 var(--sans); color: var(--ink); }
+  .lbl.m { color: var(--mute); }
+
+  .track { height: 14px; background: #222227; border-radius: 7px; overflow: hidden; position: relative; }
+  .track b { position: absolute; inset: 0; transform-origin: 0 0; transform: scaleX(0); border-radius: 7px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+  .chip { font: 600 28px var(--sans); padding: 12px 22px; border-radius: 999px; border: 1.5px solid #3a3a40; color: var(--ink); background: rgba(255,255,255,.03); }
+  .chip.r { border-color: rgba(229,50,43,.6); color: #ff8a84; }
+  .chip.y { border-color: rgba(244,196,48,.6); color: var(--yellow); }
+
+  .quote { font: italic 500 50px/1.18 var(--serif); color: var(--ink); text-align: center; }
+  .who { font: 500 24px var(--sans); color: var(--mute); text-align: center; margin-top: 16px; }
+
+  /* Sınıf ızgarası */
+  .grid35 { display: grid; grid-template-columns: repeat(7, 54px); gap: 18px 22px; justify-content: center; }
+  .grid35 span { width: 54px; height: 54px; position: relative; opacity: 0; }
+  .grid35 span::before { content: ''; position: absolute; left: 17px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--ink); }
+  .grid35 span::after { content: ''; position: absolute; left: 7px; top: 24px; width: 40px; height: 30px; border-radius: 20px 20px 6px 6px; background: var(--ink); }
+
+  /* Çubuk grafikler */
+  .vbars { display: flex; gap: 70px; justify-content: center; align-items: flex-end; height: 330px; }
+  .vbar { width: 150px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+  .vbar .col { width: 100%; border-radius: 10px 10px 0 0; transform-origin: 50% 100%; transform: scaleY(0); }
+  .vbar .v { font: 800 46px var(--sans); margin-bottom: 12px; opacity: 0; }
+  .vbar .n { font: 600 24px var(--sans); color: var(--mute); margin-top: 14px; text-align: center; line-height: 1.2; height: 58px; }
+
+  .hrow { display: grid; grid-template-columns: 300px 1fr 96px; align-items: center; gap: 22px; margin-bottom: 34px; }
+  .hrow .nm { font: 700 32px/1.1 var(--sans); }
+  .hrow .nm small { display: block; font: 500 22px var(--sans); color: var(--mute); margin-top: 4px; }
+  .hrow .track { height: 40px; border-radius: 8px; }
+  .hrow .track b { border-radius: 8px; }
+  .hrow .pc { font: 800 40px var(--sans); text-align: right; font-variant-numeric: tabular-nums; }
+
+  .sum { display: grid; grid-template-columns: 70px 1fr; gap: 24px; align-items: start; margin-bottom: 40px; }
+  .sum .i { font: 700 italic 64px/0.9 var(--serif); color: var(--red); }
+  .sum .a { font: 700 38px/1.2 var(--sans); }
+  .sum .b { font: 500 32px/1.3 var(--sans); color: var(--mute); margin-top: 6px; }
+
+  .tl { position: relative; padding-left: 64px; }
+  .tl::before { content: ''; position: absolute; left: 14px; top: 18px; bottom: 30px; width: 2px; background: #33333a; }
+  .tl .row { position: relative; margin-bottom: 38px; }
+  .tl .row::before { content: ''; position: absolute; left: -60px; top: 10px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 3px solid var(--red); }
+  .tl .d { font: 800 36px var(--sans); color: var(--ink); }
+  .tl .x { font: 500 30px/1.3 var(--sans); color: var(--mute); margin-top: 4px; }
+
+  .barrels { display: flex; gap: 14px; justify-content: center; }
+  .barrels svg { width: 56px; height: 74px; opacity: 0; }
+
+  /* Oynatıcı kontrolleri (videoya girmez) */
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 14px; align-items: center; background: linear-gradient(transparent, rgba(0,0,0,.85)); opacity: 0; transition: opacity .25s; z-index: 5; }
+  body:hover #ui, #ui.show { opacity: 1; }
+  #ui button { background: none; border: 0; color: #fff; font: 600 15px var(--sans); cursor: pointer; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+  #ui button:hover { background: rgba(255,255,255,.12); }
+  #ui input { flex: 1; accent-color: var(--red); }
+  #ui span { font: 500 13px var(--sans); color: #bbb; font-variant-numeric: tabular-nums; min-width: 92px; text-align: right; }
+  #start { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 6; cursor: pointer; border: 0; }
+  #start b { font: 600 18px var(--sans); color: #fff; background: var(--red); padding: 16px 28px; border-radius: 999px; letter-spacing: .04em; }
+  body.capture #ui, body.capture #start { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- Bölge haritası: Hürmüz -> Fransa -->
+  <svg class="layer" id="regionSvg" viewBox="0 0 1080 1920">
+    <g id="region" opacity="0">
+      <path id="land" fill="#16161a" stroke="#2b2b31" stroke-width="1.2"/>
+      <path id="frReg" fill="rgba(244,241,234,.06)" stroke="#f4f1ea" stroke-width="2.5"/>
+      <path id="route" fill="none" stroke="#f4c430" stroke-width="4" stroke-linecap="round"/>
+      <g id="hormuzMk"></g>
+    </g>
+  </svg>
+
+  <!-- Fransa haritası (kamera transform'u ile) -->
+  <svg class="layer" id="mapSvg" viewBox="0 0 1080 1920">
+    <g id="mapWrap">
+      <g id="cam">
+        <path id="fr" fill="none" stroke="#f4f1ea" stroke-width="3.2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        <path id="co" fill="none" stroke="#f4f1ea" stroke-width="3.2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      </g>
+      <g id="lines"></g>
+      <g id="ydots"></g>
+      <g id="cdots"></g>
+      <g id="hero"></g>
+    </g>
+  </svg>
+
+  <div id="pins"></div>
+
+  <!-- Üst ilerleme çubuğu -->
+  <div id="bar"></div>
+  <div class="el chap" id="chap"></div>
+
+  <!-- ===== 0 · HOOK  (0–6) ===== -->
+  <div class="el title big" data-in="0.15" data-out="6">Fransa'da basitçe<br>ne oluyor?</div>
+  <div class="el note dim" style="top:520px;font-size:28px;letter-spacing:.2em" data-in="1.0" data-out="6">18 EKİM 2026</div>
+
+  <!-- ===== 1 · LİSE  (6–14.5) ===== -->
+  <div class="el title" data-in="6.1" data-out="14.5">Her şey bir lisede<br><i>başladı.</i></div>
+  <div class="el" id="creteilCard" data-in="8.0" data-out="14.5" data-anchor="creteil">
+    <div class="card"><div class="k">17 Eylül</div><div class="v">Créteil, Paris banliyösü</div><div class="s">Saint-Exupéry Lisesi</div></div>
+  </div>
+  <div class="el" style="left:0;right:0;top:850px" data-in="9.3" data-out="14.5">
+    <div class="tag" style="text-align:center;margin-bottom:26px">Tek bir sınıf</div>
+    <div class="grid35" id="grid35"></div>
+  </div>
+  <div class="el" style="left:110px;right:110px;top:1250px" data-in="11.6" data-out="14.5">
+    <div class="quote" style="font-size:44px">“Sınıfta 35 kişiyiz,<br>yeterli sandalye bile yok.”</div>
+    <div class="who">15 yaşında bir öğrenci · Reuters</div>
+  </div>
+
+  <!-- ===== 2 · YAYILMA  (14.5–23) ===== -->
+  <div class="el title" data-in="14.6" data-out="23">Sonra bütün ülkeye<br><i>yayıldı.</i></div>
+  <div class="el" style="left:110px;right:110px;top:1140px;display:grid;grid-template-columns:1fr 1fr;gap:30px;text-align:center" data-in="18.4" data-out="23">
+    <div><div class="num md" data-count="250000" data-t="18.5" data-d="1.2">0</div><div class="lbl m" style="margin-top:10px">hükümete göre</div></div>
+    <div><div class="num md red" data-count="450000" data-t="19.3" data-d="1.2">0</div><div class="lbl m" style="margin-top:10px">sendikalara göre</div></div>
+  </div>
+  <div class="el note" style="top:1300px" data-in="20.4" data-out="23">tek günde sokaktaki öğrenci</div>
+  <div class="el src" data-in="20.8" data-out="23">Ekim başı en kalabalık gün · İçişleri Bakanlığı / öğrenci sendikaları</div>
+
+  <!-- ===== 3 · BEDEL  (23–31) ===== -->
+  <div class="el title" data-in="23.1" data-out="31">Bedeli <i>ağır</i> oldu.</div>
+  <div class="el" style="left:130px;right:130px;top:560px" data-in="23.5" data-out="31">
+    <div class="num red" data-count="6000" data-t="23.6" data-d="1.1" data-suffix="+">0</div>
+    <div class="lbl" style="margin-top:8px">gözaltı</div>
+    <div style="display:flex;justify-content:space-between;margin-top:26px" class="lbl m"><span>18 yaşından küçük</span><span data-count="87" data-t="25.0" data-d=".8" data-prefix="%">%0</span></div>
+    <div class="track" style="margin-top:12px"><b style="background:var(--red)" data-bar="0.87" data-t="25.0" data-d=".8"></b></div>
+  </div>
+  <div class="el" style="left:130px;right:130px;top:900px" data-in="26.6" data-out="31">
+    <div class="num sm">400–500</div>
+    <div class="lbl" style="margin-top:10px">lisede dersler kısmen ya da<br>tamamen durduruldu</div>
+  </div>
+  <div class="el" style="left:130px;right:130px;top:1130px" data-in="28.2" data-out="31">
+    <div class="num sm red" data-count="24" data-t="28.3" data-d=".7">0</div>
+    <div class="lbl" style="margin-top:10px">okul yakıldı ya da yağmalandı</div>
+  </div>
+  <div class="el src" data-in="28.8" data-out="31">Adalet Bakanlığı · Eğitim Bakanı Édouard Geffray · Time, Al Jazeera</div>
+
+  <!-- ===== 4 · AKARYAKIT  (31–42) ===== -->
+  <div class="el title" data-in="31.1" data-out="42">Sonra akaryakıt<br><i>zamları</i> geldi.</div>
+  <div class="el" data-in="32.5" data-out="35.8" data-anchor="hormuz" data-dx="-30" data-dy="-38" style="transform-origin:100% 100%">
+    <div class="pin" style="transform:translate(-100%,-100%);text-align:right"><div class="t1" style="color:#ff6b64">Hürmüz Boğazı</div><div class="t2">İran savaşı · deniz yolu kapalı</div></div>
+  </div>
+  <div class="el" data-in="34.2" data-out="35.8" data-anchor="parisR" data-dx="0" data-dy="-30">
+    <div class="pin"><div class="t1">Fransa</div></div>
+  </div>
+  <div class="el" style="left:130px;right:130px;top:820px" data-in="35.9" data-out="42">
+    <div class="tag">1 litre motorin</div>
+    <div class="num" style="margin-top:14px" data-count="2.37" data-t="36.0" data-d="1.2" data-dec="2" data-suffix=" €">0,00 €</div>
+    <div class="track" style="margin-top:28px;height:18px"><b style="background:linear-gradient(90deg,#f4c430,#e5322b)" data-bar="0.9958" data-t="36.0" data-d="1.2"></b></div>
+    <div style="display:flex;justify-content:space-between;margin-top:14px" class="lbl m"><span>bugün 2,37 €</span><span style="color:#ff8a84">rekor: 2,38 €</span></div>
+  </div>
+  <div class="el" style="left:110px;right:110px;top:1170px;text-align:center" data-in="38.4" data-out="42">
+    <div class="lbl"><b>7 Ekim:</b> stratejik stoktan <b class="yel">10 milyon varil</b> motorin</div>
+    <div class="barrels" id="barrels" style="margin-top:22px"></div>
+  </div>
+  <div class="el src" data-in="40.2" data-out="42">1 Kasım'dan itibaren litrede ~10 cent indirim sözü · Bloomberg, IBTimes</div>
+
+  <!-- ===== 5 · SOKAK  (42–51) ===== -->
+  <div class="el title" data-in="42.1" data-out="51">17 Ekim: <span class="y">Sarı Yelekler</span><br>geri döndü.</div>
+  <div class="el note" style="top:1360px" data-in="43.2" data-out="46.4"><span class="yel" style="font-weight:800">1.300+</span> eylem noktası planlandı</div>
+  <div class="el" style="left:110px;right:110px;top:1080px;text-align:center" data-in="46.6" data-out="51">
+    <div class="num yel" data-count="550000" data-t="46.7" data-d="1.3">0</div>
+    <div class="lbl" style="margin-top:6px">kişi sokakta · <span class="dim">Paris'te</span> <b data-count="110000" data-t="47.3" data-d="1">0</b></div>
+  </div>
+  <div class="el" style="left:100px;right:100px;top:1290px" data-in="48.6" data-out="51">
+    <div class="chips"><span class="chip">öğrenciler</span><span class="chip">sendikalar</span><span class="chip y">sarı yelekler</span><span class="chip">çiftçiler</span></div>
+  </div>
+  <div class="el src" style="top:1406px;color:#ff8a84" data-in="49.5" data-out="51">biber gazı · yangınlar · yağma · yüzlerce gözaltı — İçişleri Bakanı Laurent Nuñez</div>
+
+  <!-- ===== 6 · BÜTÇE  (51–62) ===== -->
+  <div class="el title" data-in="51.1" data-out="62">Ve devletin kasası<br><i>boş.</i></div>
+  <div class="el" style="left:130px;right:130px;top:560px" data-in="51.5" data-out="62">
+    <div style="display:flex;align-items:baseline;gap:22px"><div class="num red" data-count="119" data-t="51.6" data-d="1.1" data-prefix="%">%0</div><div class="lbl" style="line-height:1.2">kamu borcu<br><span class="dim">/ yıllık millî gelir</span></div></div>
+    <div style="position:relative;margin-top:22px">
+      <div class="track" style="height:22px;border-radius:4px"><b style="background:var(--red);border-radius:4px" data-bar="1" data-t="51.6" data-d="1.1"></b></div>
+      <div style="position:absolute;left:84.03%;top:-12px;bottom:-12px;width:3px;background:var(--ink)"></div>
+      <div class="lbl m" style="position:absolute;left:84.03%;top:36px;transform:translateX(-50%);font-size:24px;white-space:nowrap">%100</div>
+    </div>
+  </div>
+  <div class="el" style="left:110px;right:110px;top:830px" data-in="53.6" data-out="62">
+    <div class="tag" style="text-align:center;margin-bottom:22px">Bütçe açığı · millî gelirin %'si</div>
+    <div class="vbars" style="height:300px">
+      <div class="vbar"><div class="v red" data-t="54.4">5,4</div><div class="col" style="height:92%;background:var(--red)" data-col data-t="53.8"></div><div class="n">2026</div></div>
+      <div class="vbar"><div class="v" data-t="55.0">5,0</div><div class="col" style="height:85%;background:var(--ink)" data-col data-t="54.4"></div><div class="n">2027<br>hedef</div></div>
+      <div class="vbar"><div class="v dim" data-t="55.6">3,0</div><div class="col" style="height:51%;background:#4a4a52" data-col data-t="55.0"></div><div class="n">AB<br>kuralı</div></div>
+    </div>
+  </div>
+  <div class="el" style="left:100px;right:100px;top:1240px;text-align:center" data-in="57.0" data-out="62">
+    <div class="lbl"><b class="red" data-count="54" data-t="57.1" data-d=".8">0</b><b class="red"> milyar €</b> tasarruf gerekiyor</div>
+    <div class="chips" style="margin-top:20px"><span class="chip r">maaşlar donduruluyor</span><span class="chip r">yeni vergiler</span></div>
+  </div>
+  <div class="el src" data-in="59.0" data-out="62">Borçlanma faizi farkı (Almanya'ya göre) 2012'den beri en yüksek · Euronews, Fortune</div>
+
+  <!-- ===== 7 · SİYASET  (62–70) ===== -->
+  <div class="el title" data-in="62.1" data-out="70">Hükümet ayakta<br><i>zor</i> duruyor.</div>
+  <div class="el" style="left:130px;right:130px;top:560px" data-in="62.5" data-out="70">
+    <div class="card" style="padding:26px 32px">
+      <div class="k">Başbakan</div><div class="v">Sébastien Lecornu</div>
+      <div class="s" style="margin-top:10px">Mecliste çoğunluğu yok · bütçeyi geçirmek için muhalefetin desteğine muhtaç</div>
+    </div>
+  </div>
+  <div class="el" style="left:130px;right:130px;top:900px" data-in="64.2" data-out="70">
+    <div class="tag" style="margin-bottom:26px">2027 cumhurbaşkanlığı · anket ortalaması</div>
+    <div class="hrow"><div class="nm">Marine Le Pen<small>aşırı sağ</small></div><div class="track"><b style="background:var(--red)" data-bar="0.9" data-t="64.6" data-d="1"></b></div><div class="pc red" data-count="36" data-t="64.6" data-d="1" data-prefix="%">%0</div></div>
+    <div class="hrow"><div class="nm">J.-L. Mélenchon<small>radikal sol</small></div><div class="track"><b style="background:var(--ink)" data-bar="0.425" data-t="65.0" data-d="1"></b></div><div class="pc" data-count="17" data-t="65.0" data-d="1" data-prefix="%">%0</div></div>
+    <div class="hrow"><div class="nm">R. Glucksmann<small>merkez sol</small></div><div class="track"><b style="background:#77757a" data-bar="0.325" data-t="65.4" data-d="1"></b></div><div class="pc dim" data-count="13" data-t="65.4" data-d="1" data-prefix="%">%0</div></div>
+  </div>
+  <div class="el note" style="top:1290px;font-size:30px" data-in="66.8" data-out="70">Mahkeme Temmuz'da Le Pen'in<br>aday olmasının önünü açtı.</div>
+  <div class="el src" style="top:1404px" data-in="67.4" data-out="70">Vote-Scope anket ortalaması, 15 Ekim · ABC News, CNN</div>
+
+  <!-- ===== 8 · ÖZET  (70–78) ===== -->
+  <div class="el title big" data-in="70.1" data-out="78"><i>Basitçe:</i></div>
+  <div class="el" style="left:120px;right:110px;top:560px" data-in="70.6" data-out="78">
+    <div class="sum" data-row data-t="70.7"><div class="i">1</div><div><div class="a">Okullar dökülüyor</div><div class="b">→ gençler sokakta</div></div></div>
+    <div class="sum" data-row data-t="72.0"><div class="i">2</div><div><div class="a">Yakıt pahalı</div><div class="b">→ herkes sokakta</div></div></div>
+    <div class="sum" data-row data-t="73.3"><div class="i">3</div><div><div class="a">Devlet borç içinde</div><div class="b">→ kemer sıkıyor, öfke büyüyor</div></div></div>
+    <div class="sum" data-row data-t="74.6"><div class="i">4</div><div><div class="a">Hükümet zayıf</div><div class="b">→ 2027 yarışında aşırı sağ önde</div></div></div>
+  </div>
+
+  <!-- ===== 9 · TAKVİM + KAPANIŞ  (78–86) ===== -->
+  <div class="el title" data-in="78.1" data-out="83.4">Sırada ne var?</div>
+  <div class="el" style="left:150px;right:120px;top:520px" data-in="78.4" data-out="83.4">
+    <div class="tl">
+      <div class="row" data-row data-t="78.6"><div class="d">20 Ekim</div><div class="x">Mecliste ilk kritik bütçe oylaması</div></div>
+      <div class="row" data-row data-t="79.4"><div class="d">1 Kasım</div><div class="x">Söz verilen motorin indirimi başlıyor</div></div>
+      <div class="row" data-row data-t="80.2"><div class="d">5 Kasım</div><div class="x">Sendikalardan genel eylem çağrısı</div></div>
+      <div class="row" data-row data-t="81.0"><div class="d">17 Kasım</div><div class="x">Bütçe için planlanan oylama</div></div>
+    </div>
+  </div>
+  <div class="el title" style="top:300px" data-in="83.5" data-out="86.2">Sence kim kazanacak:<br><i>sokak mı, bütçe mi?</i></div>
+
+  <div class="el src" style="top:1406px" data-in="84.4" data-out="86.2">Kaynaklar: Time · CNN · Al Jazeera · Euronews · Bloomberg · Fortune · Connexion</div>
+</div>
+
+<div id="ui">
+  <button id="pp">▶︎ Oynat</button>
+  <input id="seek" type="range" min="0" max="86" step="0.01" value="0">
+  <span id="clock">0:00 / 1:26</span>
+  <button id="mute">Ses: açık</button>
+</div>
+<button id="start"><b>▶︎ Sunumu oynat</b></button>
+<audio id="music" src="assets/soundtrack.m4a" preload="auto"></audio>
+
+<script src="assets/geo.js"></script>
+<script>
+(() => {
+  const DUR = 86;
+  const G = window.GEO;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const E = {
+    out: p => 1 - Math.pow(1 - p, 3),
+    inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    back: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  };
+  const lerp = (a, b, p) => a + (b - a) * p;
+  // [t, değer] dizisinde doğrusal-yumuşak geçiş
+  const track = (keys, t, ease = E.inOut) => {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i], [t0, v0] = keys[i - 1];
+      if (t <= t1) { const p = ease(prog(t, t0, t1)); return Array.isArray(v0) ? v0.map((x, j) => lerp(x, v1[j], p)) : lerp(v0, v1, p); }
+    }
+    return keys[keys.length - 1][1];
+  };
+  const fmt = (v, dec = 0) => v.toLocaleString('tr-TR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+
+  // ---------- Sahneler ----------
+  const SCENES = [
+    [0, 6, ''], [6, 14.5, '<em>01</em> · OKULLAR'], [14.5, 23, '<em>01</em> · OKULLAR'], [23, 31, '<em>01</em> · OKULLAR'],
+    [31, 42, '<em>02</em> · AKARYAKIT'], [42, 51, '<em>03</em> · SOKAK'], [51, 62, '<em>04</em> · BÜTÇE'],
+    [62, 70, '<em>05</em> · SİYASET'], [70, 78, 'ÖZET'], [78, 86, 'TAKVİM'],
+  ];
+  const bar = $('#bar');
+  const segs = SCENES.slice(1).map(() => { const i = document.createElement('i'); const b = document.createElement('b'); i.appendChild(b); bar.appendChild(i); return b; });
+
+  // ---------- Fransa haritası ----------
+  const fr = $('#fr'), co = $('#co');
+  fr.setAttribute('d', G.france); co.setAttribute('d', G.corsica);
+  const frLen = fr.getTotalLength(), coLen = co.getTotalLength();
+  fr.style.strokeDasharray = frLen; co.style.strokeDasharray = coLen;
+  const bb = fr.getBBox();
+  const frC = [bb.x + bb.width / 2, bb.y + bb.height / 2];
+  const C = G.cities;
+  // Kamera: harita noktası p'yi ekranda q'ya, s ölçekle
+  const cam = (s, p, q) => [s, q[0] - s * p[0], q[1] - s * p[1]];
+  const I = [1, 0, 0];
+  const CAM = [
+    [0, I], [6.0, I], [7.6, cam(4.2, C.paris, [540, 600])], [14.5, cam(4.2, C.paris, [540, 600])],
+    [15.8, cam(0.74, frC, [540, 820])], [30.9, cam(0.74, frC, [540, 820])], [31.0, I],
+    [46.2, I], [47.2, cam(0.62, frC, [540, 790])], [51.6, cam(0.62, frC, [540, 790])], [51.7, I],
+  ];
+  const MAPOP = [[0, 1], [9.0, 1], [9.6, .3], [14.5, .3], [15.2, 1], [23, 1], [23.6, .1], [30.4, .1], [31.0, 0], [42, 0], [42.6, 1], [51, 1], [51.6, 0], [83.4, 0], [84.2, 1]];
+  let camNow = I;
+  const scr = p => [camNow[1] + camNow[0] * p[0], camNow[2] + camNow[0] * p[1]];
+
+  // Kahraman nokta (kırmızı) + halkalar
+  const hero = $('#hero');
+  const ring1 = mk('circle', { fill: 'none', stroke: '#e5322b', 'stroke-width': 3 }, hero);
+  const ring2 = mk('circle', { fill: 'none', stroke: '#e5322b', 'stroke-width': 3 }, hero);
+  const heroDot = mk('circle', { fill: '#e5322b' }, hero);
+  const heroGlow = mk('circle', { fill: 'rgba(229,50,43,.25)' }, hero);
+  hero.insertBefore(heroGlow, hero.firstChild);
+  const parisDot = mk('circle', { fill: '#f4f1ea', r: 7 }, hero);
+
+  // Yayılma: Paris'ten şehirlere eğriler
+  const SPREAD = ['lille', 'rouen', 'rennes', 'nantes', 'strasbourg', 'lyon', 'bordeaux', 'dijon', 'toulouse', 'marseille', 'montpellier', 'nice', 'grenoble', 'brest', 'clermont', 'limoges', 'metz', 'tours'];
+  const lines = $('#lines'), cdots = $('#cdots');
+  const spread = SPREAD.map((k, i) => ({
+    k, t: 15.9 + i * 0.19,
+    path: mk('path', { fill: 'none', stroke: 'rgba(229,50,43,.55)', 'stroke-width': 2.2, 'stroke-dasharray': '1 0' }, lines),
+    dot: mk('circle', { fill: '#e5322b' }, cdots),
+    ring: mk('circle', { fill: 'none', stroke: '#e5322b', 'stroke-width': 2 }, cdots),
+  }));
+
+  // Sarı yelek noktaları
+  const ydots = $('#ydots');
+  const yd = G.dots.map(([x, y, r]) => ({ p: [x, y], t: 42.6 + r * 3.0, el: mk('circle', { fill: '#f4c430' }, ydots) }));
+
+  // ---------- Bölge haritası ----------
+  $('#land').setAttribute('d', G.region);
+  $('#frReg').setAttribute('d', G.frRegion);
+  const catmull = pts => {
+    let d = `M${pts[0][0]},${pts[0][1]}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      d += ` C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`;
+    }
+    return d;
+  };
+  const route = $('#route');
+  route.setAttribute('d', catmull(G.route));
+  const routeLen = route.getTotalLength();
+  const hm = $('#hormuzMk');
+  const [hx, hy] = G.hormuz;
+  const hRing = mk('circle', { cx: hx, cy: hy, fill: 'none', stroke: '#e5322b', 'stroke-width': 3 }, hm);
+  const hDot = mk('circle', { cx: hx, cy: hy, r: 11, fill: '#e5322b' }, hm);
+  const hX = mk('path', { d: `M${hx - 22},${hy - 22}L${hx + 22},${hy + 22}M${hx + 22},${hy - 22}L${hx - 22},${hy + 22}`, stroke: '#ff4d45', 'stroke-width': 7, 'stroke-linecap': 'round', fill: 'none' }, hm);
+  const regionG = $('#region');
+  const anchors = { creteil: () => scr(C.creteil), hormuz: () => G.hormuz, parisR: () => G.parisR };
+
+  // ---------- DOM'da üretilen parçalar ----------
+  const grid = $('#grid35');
+  for (let i = 0; i < 35; i++) grid.appendChild(document.createElement('span'));
+  const gridKids = [...grid.children];
+  const barrels = $('#barrels');
+  const barrelSvg = '<svg viewBox="0 0 56 74"><rect x="4" y="2" width="48" height="70" rx="10" fill="#f4c430"/><rect x="4" y="20" width="48" height="5" fill="#0c0c0e" opacity=".55"/><rect x="4" y="49" width="48" height="5" fill="#0c0c0e" opacity=".55"/></svg>';
+  barrels.innerHTML = barrelSvg.repeat(10);
+  const barrelKids = [...barrels.children];
+
+  const els = [...document.querySelectorAll('.el')].map(el => ({
+    el, a: +el.dataset.in, b: +el.dataset.out, anchor: el.dataset.anchor,
+    dx: +(el.dataset.dx || 0), dy: +(el.dataset.dy || 0),
+  }));
+  const counters = [...document.querySelectorAll('[data-count]')].map(el => ({
+    el, v: +el.dataset.count, t: +el.dataset.t, d: +el.dataset.d, dec: +(el.dataset.dec || 0),
+    pre: el.dataset.prefix || '', suf: el.dataset.suffix || '',
+  }));
+  const bars = [...document.querySelectorAll('[data-bar]')].map(el => ({ el, v: +el.dataset.bar, t: +el.dataset.t, d: +el.dataset.d }));
+  const cols = [...document.querySelectorAll('[data-col]')].map(el => ({ el, t: +el.dataset.t }));
+  const vals = [...document.querySelectorAll('.vbar .v')].map(el => ({ el, t: +el.dataset.t }));
+  const rows = [...document.querySelectorAll('[data-row]')].map(el => ({ el, t: +el.dataset.t }));
+
+  // ---------- Kare çizimi: tamamen t'ye bağlı, deterministik ----------
+  function render(t) {
+    // ilerleme çubuğu + bölüm etiketi
+    SCENES.slice(1).forEach(([a, b], i) => { segs[i].style.transform = `scaleX(${prog(t, a, b)})`; });
+    bar.style.opacity = clamp((t - 5.6) / .6);
+    const sc = SCENES.find(([a, b]) => t >= a && t < b) || SCENES[SCENES.length - 1];
+    const chap = $('#chap');
+    if (chap.innerHTML !== sc[2]) chap.innerHTML = sc[2];
+    const cp = Math.min(E.out(prog(t, sc[0] + .05, sc[0] + .5)), 1 - prog(t, sc[1] - .3, sc[1]));
+    chap.style.opacity = sc[2] ? cp : 0;
+
+    // kamera
+    camNow = track(CAM, t);
+    $('#cam').setAttribute('transform', `translate(${camNow[1]},${camNow[2]}) scale(${camNow[0]})`);
+    $('#mapWrap').setAttribute('opacity', track(MAPOP, t, x => x));
+
+    // sınır çizimi: açılışta çiz, sonda tekrar çiz (döngü)
+    let draw = E.inOut(prog(t, .35, 2.6));
+    if (t > 83.4) draw = E.inOut(prog(t, 83.6, 85.4));
+    fr.style.strokeDashoffset = frLen * (1 - draw);
+    co.style.strokeDashoffset = coLen * (1 - E.inOut(prog(t, t > 83.4 ? 85.0 : 2.2, t > 83.4 ? 85.6 : 2.8)));
+
+    // kahraman nokta: Paris -> Créteil -> (kapanışta) Paris
+    let hp = C.paris, hs = 0;
+    if (t < 6) hs = E.back(prog(t, 2.6, 3.0));
+    else if (t < 31) { hp = [lerp(C.paris[0], C.creteil[0], E.inOut(prog(t, 7.0, 7.8))), lerp(C.paris[1], C.creteil[1], E.inOut(prog(t, 7.0, 7.8)))]; hs = 1; }
+    else if (t >= 42 && t < 51.6) hs = 1;
+    else if (t >= 84.6) hs = E.back(prog(t, 85.3, 85.7));
+    const [px, py] = scr(hp);
+    const R = 13 * hs;
+    heroDot.setAttribute('cx', px); heroDot.setAttribute('cy', py); heroDot.setAttribute('r', R);
+    heroGlow.setAttribute('cx', px); heroGlow.setAttribute('cy', py); heroGlow.setAttribute('r', R * 2.1);
+    [ring1, ring2].forEach((r, i) => {
+      const ph = (((t + i * 0.9) % 1.8) + 1.8) % 1.8 / 1.8;
+      r.setAttribute('cx', px); r.setAttribute('cy', py);
+      r.setAttribute('r', R + 46 * E.out(ph) * hs);
+      r.setAttribute('opacity', hs ? (1 - ph) * .8 : 0);
+    });
+    // Créteil'e geçince Paris beyaz noktası
+    const pdo = t >= 6 && t < 14.5 ? Math.min(prog(t, 7.2, 7.7), 1 - prog(t, 14.0, 14.5)) : 0;
+    const [ppx, ppy] = scr(C.paris);
+    parisDot.setAttribute('cx', ppx); parisDot.setAttribute('cy', ppy); parisDot.setAttribute('opacity', pdo);
+
+    // yayılma
+    spread.forEach(s => {
+      const a = scr(C.paris), b = scr(C[s.k]);
+      const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+      const nx = -(b[1] - a[1]) * .22, ny = (b[0] - a[0]) * .22;
+      s.path.setAttribute('d', `M${a[0]},${a[1]} Q${mx + nx},${my + ny} ${b[0]},${b[1]}`);
+      const L = s.path.getTotalLength() || 1;
+      const lp = E.inOut(prog(t, s.t, s.t + .55));
+      s.path.setAttribute('stroke-dasharray', `${L * lp} ${L}`);
+      const vis = t >= 14.5 && t < 31 ? 1 : 0;
+      s.path.setAttribute('opacity', vis * (1 - prog(t, 22.4, 23.2) * .75));
+      const ds = E.back(prog(t, s.t + .5, s.t + .8)) * vis;
+      s.dot.setAttribute('cx', b[0]); s.dot.setAttribute('cy', b[1]); s.dot.setAttribute('r', 8 * ds);
+      const ph = ((t - s.t) % 1.6 + 1.6) % 1.6 / 1.6;
+      s.ring.setAttribute('cx', b[0]); s.ring.setAttribute('cy', b[1]);
+      s.ring.setAttribute('r', 8 + 26 * E.out(ph)); s.ring.setAttribute('opacity', t > s.t + .5 ? (1 - ph) * .7 * vis : 0);
+    });
+
+    // sarı yelek noktaları
+    const yv = t >= 42 && t < 51.6;
+    yd.forEach(d => {
+      const [x, y] = scr(d.p);
+      const s = yv ? E.back(prog(t, d.t, d.t + .3)) : 0;
+      d.el.setAttribute('cx', x); d.el.setAttribute('cy', y); d.el.setAttribute('r', 6.5 * s * Math.max(.75, camNow[0]));
+      d.el.setAttribute('opacity', .85);
+    });
+
+    // bölge haritası
+    regionG.setAttribute('opacity', Math.min(prog(t, 31.2, 32.0), 1 - prog(t, 41.4, 42.0)) * (1 - .78 * prog(t, 35.4, 36.0)));
+    route.style.strokeDasharray = `${routeLen * E.inOut(prog(t, 33.0, 35.0))} ${routeLen}`;
+    route.setAttribute('opacity', 1 - .6 * prog(t, 35.0, 35.5));
+    const hph = ((t % 1.6) + 1.6) % 1.6 / 1.6;
+    const hs2 = E.back(prog(t, 32.2, 32.6));
+    hDot.setAttribute('r', 11 * hs2);
+    hRing.setAttribute('r', 11 + 40 * E.out(hph)); hRing.setAttribute('opacity', hs2 * (1 - hph));
+    hX.setAttribute('opacity', prog(t, 35.0, 35.3));
+
+    // genel giriş/çıkış
+    els.forEach(o => {
+      const pin = E.out(prog(t, o.a, o.a + .6));
+      const pout = prog(t, o.b - .4, o.b);
+      const op = Math.min(pin, 1 - pout);
+      o.el.style.opacity = op;
+      if (op <= 0) { o.el.style.visibility = 'hidden'; return; }
+      o.el.style.visibility = 'visible';
+      if (o.anchor) {
+        const [x, y] = anchors[o.anchor]();
+        o.el.style.left = (x + o.dx) + 'px'; o.el.style.top = (y + o.dy) + 'px';
+        o.el.style.transform = o.anchor === 'creteil' ? `translate(-50%, ${40 + (1 - pin) * 24}px)` : `translateY(${(1 - pin) * 18}px)`;
+      } else {
+        o.el.style.transform = `translateY(${(1 - pin) * 34 - pout * 14}px)`;
+      }
+    });
+    counters.forEach(c => {
+      const v = c.v * E.out(prog(t, c.t, c.t + c.d));
+      c.el.textContent = c.pre + fmt(c.dec ? v : Math.round(v), c.dec) + c.suf;
+    });
+    bars.forEach(b => { b.el.style.transform = `scaleX(${b.v * E.out(prog(t, b.t, b.t + b.d))})`; });
+    cols.forEach(c => { c.el.style.transform = `scaleY(${E.out(prog(t, c.t, c.t + .7))})`; });
+    vals.forEach(v => { const p = prog(t, v.t, v.t + .4); v.el.style.opacity = p; v.el.style.transform = `translateY(${(1 - E.out(p)) * 12}px)`; });
+    rows.forEach(r => { const p = E.out(prog(t, r.t, r.t + .55)); r.el.style.opacity = p; r.el.style.transform = `translateX(${(1 - p) * -40}px)`; });
+    gridKids.forEach((g, i) => { const p = E.back(prog(t, 9.5 + i * .045, 9.5 + i * .045 + .25)); g.style.opacity = clamp(p * 1.4); g.style.transform = `scale(${p})`; });
+    barrelKids.forEach((b, i) => { const p = E.back(prog(t, 38.7 + i * .09, 38.7 + i * .09 + .3)); b.style.opacity = clamp(p * 1.4); b.style.transform = `translateY(${(1 - p) * 20}px) scale(${.6 + .4 * p})`; });
+  }
+
+  // ---------- Ölçekleme ----------
+  const stage = $('#stage');
+  const fit = () => {
+    const s = Math.min(innerWidth / 1080, innerHeight / 1920);
+    stage.style.transform = `scale(${s}) translate(-50%, -50%)`;
+  };
+  addEventListener('resize', fit); fit();
+
+  // ---------- Oynatıcı ----------
+  const params = new URLSearchParams(location.search);
+  const capture = params.has('capture');
+  let t = +(params.get('t') || 0), playing = false, last = 0;
+  const music = $('#music'), seek = $('#seek'), clock = $('#clock'), pp = $('#pp');
+  const mm = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const sync = () => { seek.value = t; clock.textContent = `${mm(t)} / ${mm(DUR)}`; pp.textContent = playing ? '❚❚ Durdur' : '▶︎ Oynat'; };
+  const play = () => {
+    if (t >= DUR - .05) t = 0;
+    playing = true; last = performance.now();
+    try { music.currentTime = t; music.play().catch(() => {}); } catch (e) {}
+    $('#start').style.display = 'none'; sync(); requestAnimationFrame(loop);
+  };
+  const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
+  function loop(now) {
+    if (!playing) return;
+    t += (now - last) / 1000; last = now;
+    if (t >= DUR) { t = DUR; render(t); pause(); return; }
+    render(t); sync(); requestAnimationFrame(loop);
+  }
+  const jump = v => { t = clamp(v, 0, DUR); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  $('#start').onclick = play;
+  pp.onclick = () => playing ? pause() : play();
+  seek.oninput = () => jump(+seek.value);
+  $('#mute').onclick = () => { music.muted = !music.muted; $('#mute').textContent = music.muted ? 'Ses: kapalı' : 'Ses: açık'; };
+  addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') jump(t + 3);
+    if (e.code === 'ArrowLeft') jump(t - 3);
+    if (e.key === 'r') { jump(0); play(); }
+  });
+  stage.addEventListener('click', () => playing ? pause() : play());
+
+  if (capture) { document.body.classList.add('capture'); stage.style.transform = 'none'; stage.style.left = stage.style.top = '0'; }
+  window.__render = render;
+  window.__ready = document.fonts.ready.then(() => { render(t); sync(); return true; });
+})();
+</script>
+</body>
+</html>
