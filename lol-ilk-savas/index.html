@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İlk Savaşı Kazanmak</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --bg: #07080b;
+    --ink: #f3ecdc;
+    --title: #e8dcc0;
+    --blue: #3f8ff0;
+    --blue2: #7fb8ff;
+    --red: #e8443a;
+    --red2: #ff7a70;
+    --gold: #ffd23f;
+    --xp: #b58cff;
+    --cond: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --semi: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  body { font-family: var(--semi); color: var(--ink); }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--bg); transform-origin: 0 0; overflow: hidden; }
+  svg.layer { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  .el { position: absolute; opacity: 0; will-change: transform, opacity; }
+
+  /* Haritanın üst ve altını karartan geçiş */
+  #shade { position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(180deg, var(--bg) 0, var(--bg) 380px, rgba(7,8,11,0) 560px),
+      linear-gradient(0deg, var(--bg) 0, var(--bg) 470px, rgba(7,8,11,.0) 640px),
+      radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%);
+  }
+  #dim { position: absolute; inset: 0; background: rgba(5,6,9,.72); opacity: 0; pointer-events: none; }
+
+  #title { left: 0; right: 0; top: 248px; text-align: center; opacity: 1;
+    font: italic 800 112px/1 var(--cond); letter-spacing: .01em; color: var(--title);
+    text-shadow: 0 6px 0 rgba(0,0,0,.55), 0 0 40px rgba(0,0,0,.6); }
+
+  /* Portre kartları */
+  .champ { width: 170px; text-align: center; }
+  .champ .nm { font: 700 26px var(--semi); color: #cfc6b4; letter-spacing: .02em; }
+  .champ .hp { height: 12px; margin: 6px 18px 10px; background: rgba(0,0,0,.6); border: 1px solid rgba(0,0,0,.8); position: relative; }
+  .champ .hp b { position: absolute; inset: 0; transform-origin: 0 0; }
+  .champ .ph { position: relative; width: 132px; height: 132px; margin: 0 auto; }
+  .champ .ph svg { position: absolute; inset: 0; }
+  .champ .lv { position: absolute; right: -6px; bottom: -4px; width: 46px; height: 46px; border-radius: 50%; background: #0b0d12; border: 3px solid; font: 800 28px/40px var(--semi); text-align: center; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 16px; border-radius: 8px; background: rgba(10,12,18,.92); border: 2px solid; font: italic 800 34px/1 var(--cond); letter-spacing: .04em; }
+  .pill i { width: 12px; height: 12px; border-radius: 50%; }
+  .skills { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+  .skills span { width: 32px; height: 32px; border-radius: 6px; border: 2px solid #3a3f4c; background: #14171f; font: 800 18px/28px var(--semi); color: #4a5060; text-align: center; transition: none; }
+  .skills span.on { color: #0b0d12; }
+
+  /* Altyazı */
+  #cap { left: 60px; right: 140px; top: 1318px; text-align: center; opacity: 1; }
+  #capText { display: inline-block; font: 800 72px/1.04 var(--semi); color: #fff; letter-spacing: -.005em;
+    text-shadow: 0 4px 0 rgba(0,0,0,.7), 0 0 26px rgba(0,0,0,.85); transform-origin: 50% 70%; }
+  #capText .r { color: var(--red2); } #capText .y { color: var(--gold); }
+  #capLine { width: 128px; height: 4px; margin: 18px auto 0; background: var(--red); position: relative; border-radius: 2px; }
+  #capLine::after { content: ''; position: absolute; left: 50%; top: 2px; margin-left: -9px; border: 9px solid transparent; border-top-color: var(--red); }
+  #disc { left: 60px; top: 1500px; font: 700 22px var(--semi); letter-spacing: .22em; color: rgba(243,236,220,.28); opacity: 1; }
+
+  /* Bilgi kartları */
+  .card { background: linear-gradient(180deg, rgba(20,23,32,.96), rgba(12,14,20,.96)); border: 2px solid #2c3242; border-radius: 22px; padding: 34px 38px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+  .card .h { font: italic 800 58px/1 var(--cond); color: var(--gold); letter-spacing: .02em; }
+  .rule { margin-top: 30px; }
+  .rule .k { font: 800 30px var(--semi); letter-spacing: .12em; color: #9aa3b8; }
+  .rule .v { font: 800 46px/1.1 var(--semi); margin-top: 6px; }
+  .mins { display: flex; gap: 8px; margin-top: 14px; align-items: center; }
+  .mins b { width: 34px; height: 34px; border-radius: 50%; background: #c8463c; border: 3px solid #5a1c17; opacity: 0; }
+  .mins b.c { width: 28px; height: 28px; background: #e07a6f; }
+  .mins b.x { background: var(--gold); border-color: #6b5410; }
+  .mins em { font: 800 40px var(--semi); color: #6c7387; font-style: normal; margin: 0 6px; opacity: 0; }
+
+  .opt { display: flex; align-items: center; gap: 22px; padding: 26px 30px; border-radius: 18px; border: 3px solid; margin-top: 22px; font: italic 800 60px/1 var(--cond); letter-spacing: .02em; }
+  .opt .ab { width: 64px; height: 64px; border-radius: 12px; font: 800 40px/64px var(--semi); text-align: center; font-style: normal; color: #0b0d12; }
+
+  .stamp { font: italic 800 112px/1 var(--cond); letter-spacing: .02em; text-align: center; text-shadow: 0 6px 0 rgba(0,0,0,.6), 0 0 40px rgba(0,0,0,.7); }
+
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 14px; align-items: center; background: linear-gradient(transparent, rgba(0,0,0,.85)); opacity: 0; transition: opacity .25s; z-index: 5; }
+  body:hover #ui { opacity: 1; }
+  #ui button { background: none; border: 0; color: #fff; font: 600 15px system-ui, sans-serif; cursor: pointer; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+  #ui button:hover { background: rgba(255,255,255,.12); }
+  #ui input { flex: 1; accent-color: var(--red); }
+  #ui span { font: 500 13px system-ui, sans-serif; color: #bbb; font-variant-numeric: tabular-nums; min-width: 84px; text-align: right; }
+  #start { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 6; cursor: pointer; border: 0; }
+  #start b { font: 700 18px system-ui, sans-serif; color: #fff; background: var(--red); padding: 16px 28px; border-radius: 999px; letter-spacing: .04em; }
+  body.capture #ui, body.capture #start { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg class="layer" id="worldSvg" viewBox="0 0 1080 1920">
+    <defs>
+      <radialGradient id="gLvl"><stop offset="0" stop-color="#fff6c8" stop-opacity=".9"/><stop offset=".5" stop-color="#ffd23f" stop-opacity=".45"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g id="cam">
+      <image id="mapImg" x="0" y="0" width="1600" height="1600"/>
+      <g id="fx0"></g>
+      <g id="units"></g>
+      <g id="fx1"></g>
+    </g>
+  </svg>
+  <div id="shade"></div>
+  <svg class="layer" id="arrowSvg" viewBox="0 0 1080 1920"><g id="arrow" opacity="0"></g></svg>
+  <div id="dim"></div>
+
+  <div class="el" id="title">İLK SAVAŞI KAZANMAK</div>
+
+  <!-- RAKİP portresi (sağ üst) -->
+  <div class="el champ" id="rakipCard" style="left:880px;top:430px;width:180px">
+    <div class="nm">Rakip</div>
+    <div class="hp"><b id="rakipHp" style="background:var(--red)"></b></div>
+    <div class="ph"><svg viewBox="0 0 132 132" id="rakipPh"></svg><div class="lv" id="rakipLv" style="border-color:var(--red);color:var(--red2)">1</div></div>
+    <div class="pill" style="border-color:var(--red);color:var(--red2)"><i style="background:var(--red)"></i>RAKİP</div>
+    <div class="skills" id="rakipSk"><span>Q</span><span>W</span><span>E</span><span>R</span></div>
+  </div>
+
+  <!-- SEN portresi (sol) -->
+  <div class="el champ" id="senCard" style="left:12px;top:960px;width:180px">
+    <div class="nm">Sen</div>
+    <div class="hp"><b id="senHp" style="background:var(--blue)"></b></div>
+    <div class="ph"><svg viewBox="0 0 132 132" id="senPh"></svg><div class="lv" id="senLv" style="border-color:var(--blue);color:var(--blue2)">1</div></div>
+    <div class="pill" style="border-color:var(--blue);color:var(--blue2)"><i style="background:var(--blue)"></i>SEN</div>
+    <div class="skills" id="senSk"><span>Q</span><span>W</span><span>E</span><span>R</span></div>
+  </div>
+
+  <!-- Seviye 2 ve koridor damgaları -->
+  <div class="el stamp" id="lvlStamp" style="left:0;right:0;top:600px;color:var(--gold)" data-in="20.0" data-out="22.4">SEVİYE 2!</div>
+  <div class="el stamp" style="left:0;right:0;top:620px;color:var(--blue2);font-size:96px" data-in="25.7" data-out="27.6">2 YETENEK <span style="color:#8b93a6">vs</span> <span style="color:var(--red2)">1</span></div>
+  <div class="el stamp" style="left:0;right:0;top:610px;color:var(--blue2)" data-in="31.0" data-out="32.6">KORİDOR SENİN</div>
+  <div class="el" style="left:250px;right:250px;top:1180px;text-align:center;font:800 40px var(--semi);color:var(--xp);text-shadow:0 3px 0 #000" data-in="12.3" data-out="15.3" id="xpChip">XP <span id="xpPct">%0</span></div>
+
+  <!-- Kart: seviye 2 kuralı -->
+  <div class="el" style="left:90px;right:150px;top:560px" data-in="32.8" data-out="36.7">
+    <div class="card">
+      <div class="h">SEVİYE 2 İÇİN</div>
+      <div class="rule"><div class="k">ÜST / ORTA</div><div class="v">1. dalga + <span style="color:var(--gold)">1</span> yakın dövüş</div>
+        <div class="mins" id="minsA"></div></div>
+      <div class="rule"><div class="k">ALT KORİDOR</div><div class="v">1. dalga + <span style="color:var(--gold)">3</span> yakın dövüş</div>
+        <div class="mins" id="minsB"></div></div>
+    </div>
+  </div>
+
+  <!-- Kart: soru -->
+  <div class="el" style="left:90px;right:150px;top:600px" data-in="36.9" data-out="40.6">
+    <div class="opt" style="border-color:var(--red);background:rgba(232,68,58,.12)"><span class="ab" style="background:var(--red2)">A</span>KOVALARIM</div>
+    <div class="opt" style="border-color:var(--blue);background:rgba(63,143,240,.12)"><span class="ab" style="background:var(--blue2)">B</span>GÜVENLİ OYNARIM</div>
+  </div>
+
+  <div class="el" id="cap"><span id="capText"></span><div id="capLine"></div></div>
+  <div class="el" id="disc">TEMSİLİ ANLATIM · ÖRNEK SÜRELER</div>
+</div>
+
+<div id="ui">
+  <button id="pp">▶︎ Oynat</button>
+  <input id="seek" type="range" min="0" max="42" step="0.01" value="0">
+  <span id="clock">0:00 / 0:42</span>
+  <button id="mute">Ses: açık</button>
+</div>
+<button id="start"><b>▶︎ Videoyu oynat</b></button>
+<audio id="music" src="assets/soundtrack.m4a" preload="auto"></audio>
+
+<script>
+(async () => {
+  const DUR = 42;
+  window.__DUR = DUR;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const E = {
+    out: p => 1 - Math.pow(1 - p, 3),
+    inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    back: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  };
+  const track = (keys, t, ease = E.inOut) => {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i], [t0, v0] = keys[i - 1];
+      if (t <= t1) { const p = ease(prog(t, t0, t1)); return Array.isArray(v0) ? v0.map((x, j) => lerp(x, v1[j], p)) : lerp(v0, v1, p); }
+    }
+    return keys[keys.length - 1][1];
+  };
+
+  // ---------- Dünya: koridor A(mavi kule) -> B(kırmızı kule) ----------
+  const A = [250, 1350], B = [1350, 250];
+  const N = [Math.SQRT1_2, Math.SQRT1_2];               // koridora dik
+  const lane = (u, off = 0) => [A[0] + (B[0] - A[0]) * u + N[0] * off, A[1] + (B[1] - A[1]) * u + N[1] * off];
+
+  // ---------- Harita resmi (bir kez çizilir) ----------
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const blob = (cx, cy, r, k = 14, j = .32) => {
+    const pts = [];
+    for (let i = 0; i < k; i++) { const a = i / k * Math.PI * 2, rr = r * (1 - j / 2 + rnd() * j); pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr * .82]); }
+    let d = `M${pts[0]}`;
+    for (let i = 0; i < k; i++) { const p = pts[i], q = pts[(i + 1) % k]; d += ` Q${p} ${(p[0] + q[0]) / 2},${(p[1] + q[1]) / 2}`; }
+    return d + 'Z';
+  };
+  const rocks = [], bushes = [];
+  for (const [cx, cy] of [[800, 330], [330, 800], [1270, 800], [800, 1270]]) {
+    rocks.push(blob(cx, cy, 250, 16, .35));
+    rocks.push(blob(cx + (rnd() - .5) * 120, cy + (rnd() - .5) * 120, 150, 12, .4));
+  }
+  for (const [u, off] of [[.3, 150], [.38, -160], [.62, 160], [.7, -150], [.47, 175], [.55, -175]]) {
+    const [x, y] = lane(u, off); bushes.push(blob(x, y, 62, 10, .5));
+  }
+  const mapSvg = `<svg xmlns="${NS}" width="3200" height="3200" viewBox="0 0 1600 1600">
+    <defs>
+      <filter id="n1" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".011" numOctaves="4" seed="3"/><feColorMatrix values="0 0 0 0 .16  0 0 0 0 .22  0 0 0 0 .1  0 0 0 1.1 -.35"/></filter>
+      <filter id="n2" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.12"/></filter>
+      <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="5" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="26"/></filter>
+      <linearGradient id="riv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#173f5a"/><stop offset=".5" stop-color="#21607c"/><stop offset="1" stop-color="#173f5a"/></linearGradient>
+      <linearGradient id="rk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b5470"/><stop offset="1" stop-color="#2c2938"/></linearGradient>
+    </defs>
+    <rect width="1600" height="1600" fill="#24321d"/>
+    <rect width="1600" height="1600" filter="url(#n1)"/>
+    <g filter="url(#rough)">
+      <path d="M100,100 L1500,1500" stroke="#1d2a18" stroke-width="290" fill="none"/>
+      <path d="M100,100 L1500,1500" stroke="url(#riv)" stroke-width="210" fill="none"/>
+      <path d="M100,100 L1500,1500" stroke="#3a86a6" stroke-opacity=".25" stroke-width="60" fill="none"/>
+      <path d="M120,1480 L1480,120" stroke="#3e3424" stroke-width="290" fill="none"/>
+      <path d="M120,1480 L1480,120" stroke="#6f5d40" stroke-width="230" fill="none"/>
+      <path d="M120,1480 L1480,120" stroke="#87724f" stroke-opacity=".45" stroke-width="120" fill="none"/>
+    </g>
+    ${rocks.map(d => `<path d="${d}" fill="url(#rk)" stroke="#181621" stroke-width="10" filter="url(#rough)"/><path d="${d}" fill="none" stroke="#8d6fc0" stroke-opacity=".28" stroke-width="5" filter="url(#rough)"/>`).join('')}
+    ${bushes.map(d => `<path d="${d}" fill="#183a1c" stroke="#0e2410" stroke-width="6"/><path d="${d}" fill="#2f6a2c" fill-opacity=".45" transform="translate(-6,-8)"/>`).join('')}
+    <rect width="1600" height="1600" filter="url(#n2)"/>
+    ${[[A, '#3f8ff0'], [B, '#e8443a']].map(([p, c]) => `
+      <circle cx="${p[0]}" cy="${p[1]}" r="95" fill="${c}" fill-opacity=".08" stroke="${c}" stroke-opacity=".35" stroke-width="4" stroke-dasharray="14 10"/>
+      <circle cx="${p[0]}" cy="${p[1]}" r="46" fill="#2a2e38" stroke="#14161c" stroke-width="8"/>
+      <circle cx="${p[0]}" cy="${p[1]}" r="30" fill="#4a5060" stroke="${c}" stroke-width="7"/>
+      <circle cx="${p[0]}" cy="${p[1]}" r="11" fill="${c}"/>`).join('')}
+  </svg>`;
+  const mapUrl = await new Promise(res => {
+    const img = new Image();
+    img.onload = () => { const c = document.createElement('canvas'); c.width = c.height = 3200; c.getContext('2d').drawImage(img, 0, 0); res(c.toDataURL('image/jpeg', .92)); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(mapSvg);
+  });
+  $('#mapImg').setAttribute('href', mapUrl);
+
+  // ---------- Portreler (özgün, basit ikon) ----------
+  const portrait = (svg, c1, c2, horns) => {
+    svg.innerHTML = `
+      <defs><radialGradient id="pg${horns ? 1 : 0}" cx=".5" cy=".35"><stop offset="0" stop-color="${c2}"/><stop offset="1" stop-color="#0d0f15"/></radialGradient></defs>
+      <circle cx="66" cy="66" r="60" fill="url(#pg${horns ? 1 : 0})"/>
+      ${horns ? '<path d="M38,44 C26,26 28,14 36,8 C38,22 46,30 52,36Z M94,44 C106,26 104,14 96,8 C94,22 86,30 80,36Z" fill="#e9d9b8"/>' : '<path d="M66,10 L74,28 L58,28Z" fill="#cfd8e8"/>'}
+      <path d="M66,26 C44,26 34,44 36,66 C38,84 46,98 66,108 C86,98 94,84 96,66 C98,44 88,26 66,26Z" fill="#c9ced8"/>
+      <path d="M66,26 C44,26 34,44 36,66 C38,84 46,98 66,108 C86,98 94,84 96,66 C98,44 88,26 66,26Z" fill="${c1}" fill-opacity=".35"/>
+      <path d="M44,62 L60,66 L60,72 L42,68Z M88,62 L72,66 L72,72 L90,68Z" fill="#0b0d12"/>
+      <path d="M66,30 L66,104" stroke="#0b0d12" stroke-opacity=".35" stroke-width="3"/>
+      <circle cx="66" cy="66" r="60" fill="none" stroke="#0b0d12" stroke-width="6"/>
+      <circle class="xpr" cx="66" cy="66" r="62" fill="none" stroke="#b58cff" stroke-width="6" stroke-linecap="round" transform="rotate(-90 66 66)" pathLength="100" stroke-dasharray="0 100"/>
+      <circle cx="66" cy="66" r="56" fill="none" stroke="${c1}" stroke-width="5"/>`;
+  };
+  portrait($('#senPh'), '#3f8ff0', '#21406e', false);
+  portrait($('#rakipPh'), '#e8443a', '#6e2420', true);
+
+  // ---------- Birimler ----------
+  const units = $('#units'), fx0 = $('#fx0'), fx1 = $('#fx1');
+  const mkMinion = (team, melee) => {
+    const g = mk('g', {}, units);
+    const col = team === 'b' ? ['#4c8fe6', '#1b3c6c', '#9cc7ff'] : ['#d9483b', '#5f1913', '#ff9c92'];
+    mk('ellipse', { cx: 0, cy: 10, rx: melee ? 17 : 14, ry: 6, fill: 'rgba(0,0,0,.45)' }, g);
+    if (melee) {
+      mk('circle', { r: 16, fill: col[0], stroke: col[1], 'stroke-width': 4 }, g);
+      mk('path', { d: 'M-7,-7 L7,-7 L7,3 L0,9 L-7,3Z', fill: col[2], stroke: col[1], 'stroke-width': 2 }, g);
+    } else {
+      mk('circle', { r: 12, fill: col[0], stroke: col[1], 'stroke-width': 4 }, g);
+      mk('circle', { cx: 9, cy: -12, r: 5, fill: col[2] }, g);
+    }
+    const hb = mk('g', { transform: 'translate(-16,-30)' }, g);
+    mk('rect', { width: 32, height: 6, fill: '#0b0d12' }, hb);
+    const hp = mk('rect', { x: 1, y: 1, width: 30, height: 4, fill: team === 'b' ? '#5aa2ff' : '#ff5a4d' }, hb);
+    return { g, hp, team, melee };
+  };
+  const mkChamp = (team) => {
+    const g = mk('g', {}, units);
+    const c = team === 'b' ? ['#3f8ff0', '#9cc7ff'] : ['#e8443a', '#ff9c92'];
+    mk('ellipse', { cx: 0, cy: 22, rx: 36, ry: 12, fill: 'rgba(0,0,0,.5)' }, g);
+    mk('circle', { r: 46, fill: 'none', stroke: c[0], 'stroke-opacity': .35, 'stroke-width': 3 }, g);
+    mk('circle', { r: 32, fill: '#151821', stroke: c[0], 'stroke-width': 6 }, g);
+    mk('path', { d: 'M0,-22 C-14,-22 -20,-10 -19,2 C-18,12 -12,20 0,26 C12,20 18,12 19,2 C20,-10 14,-22 0,-22Z', fill: '#c9ced8' }, g);
+    mk('path', { d: 'M-12,-1 L-3,1 L-3,5 L-13,3Z M12,-1 L3,1 L3,5 L13,3Z', fill: '#0b0d12' }, g);
+    if (team === 'r') mk('path', { d: 'M-14,-14 C-22,-26 -20,-34 -15,-38 C-15,-29 -10,-24 -6,-20Z M14,-14 C22,-26 20,-34 15,-38 C15,-29 10,-24 6,-20Z', fill: '#e9d9b8' }, g);
+    const hb = mk('g', { transform: 'translate(-44,-66)' }, g);
+    mk('rect', { width: 88, height: 12, fill: '#0b0d12' }, hb);
+    const hp = mk('rect', { x: 2, y: 2, width: 84, height: 8, fill: team === 'b' ? '#5aa2ff' : '#ff5a4d' }, hb);
+    const lv = mk('text', { x: -54, y: -55, 'font-family': 'Barlow Semi Condensed', 'font-weight': 800, 'font-size': 22, fill: '#fff', 'text-anchor': 'middle' }, g);
+    lv.textContent = '1';
+    const name = mk('text', { x: 0, y: -76, 'font-family': 'Barlow Semi Condensed', 'font-weight': 800, 'font-size': 24, fill: c[1], 'text-anchor': 'middle' }, g);
+    name.textContent = team === 'b' ? 'SEN' : 'RAKİP';
+    return { g, hp, lv };
+  };
+
+  // Dalga düzeni: 3 yakın dövüş önde, 3 büyücü arkada
+  const OFF = [-34, 0, 34];
+  const wave = (team, n) => {
+    const s = team === 'b' ? -1 : 1;
+    return [0, 1, 2].map(i => ({ ...mkMinion(team, true), off: OFF[i], du: s * .03, i, n }))
+      .concat([0, 1, 2].map(i => ({ ...mkMinion(team, false), off: OFF[i] * 1.15, du: s * .075, i, n })));
+  };
+  const B1 = wave('b', 1), R1 = wave('r', 1), B2 = wave('b', 2), R2 = wave('r', 2);
+  const sen = mkChamp('b'), rakip = mkChamp('r');
+
+  // Ölüm zamanları (dünya saati) ve XP
+  const XPM = 60.45, XPC = 29.76;                    // tek koridor minyon XP'si
+  const R1die = [9.5, 10.5, 11.5, 10.0, 11.0, 12.0];  // [yakın0..2, büyücü0..2]
+  const B1die = R1die.map(x => x + .35);
+  const R2die = [19.9, 28.2, 29.0, 28.6, 29.8, 30.6];
+  const B2die = [99, 99, 99, 99, 99, 99];
+  R1.forEach((m, k) => m.die = R1die[k]); B1.forEach((m, k) => m.die = B1die[k]);
+  R2.forEach((m, k) => m.die = R2die[k]); B2.forEach((m, k) => m.die = B2die[k]);
+  const xpOf = m => m.melee ? XPM : XPC;
+  const senXP = wt => R1.concat([R2[0]]).reduce((s, m) => s + (wt >= m.die ? xpOf(m) : 0), 0);
+  const rakXP = wt => B1.reduce((s, m) => s + (wt >= m.die ? xpOf(m) : 0), 0);
+  const LV2 = 280, LV3 = 660;
+
+  // Konumlar
+  const waveU = (m, wt) => {
+    const front = m.team === 'b' ? .47 : .53;
+    let base = front;
+    if (m.n === 2) {
+      const from = m.team === 'b' ? -.02 : 1.02;
+      base = lerp(from, front, E.out(prog(wt, 14.6, 18.0)));
+      if (m.team === 'b') base += .14 * E.inOut(prog(wt, 28.0, 32.4));      // itiş
+    }
+    return base + m.du;
+  };
+  const senPos = wt => {
+    let u = .41, off = 70;
+    u = lerp(u, .5, E.inOut(prog(wt, 19.2, 19.7))); off = lerp(off, 40, E.inOut(prog(wt, 19.2, 19.7)));       // son vuruş için öne
+    u = lerp(u, .44, E.inOut(prog(wt, 20.4, 21.2))); off = lerp(off, 60, E.inOut(prog(wt, 20.4, 21.2)));
+    u = lerp(u, .545, E.out(prog(wt, 24.3, 24.65))); off = lerp(off, 26, E.out(prog(wt, 24.3, 24.65)));       // atılma
+    u = lerp(u, .5, E.inOut(prog(wt, 27.6, 28.6))); off = lerp(off, 50, E.inOut(prog(wt, 27.6, 28.6)));
+    u = lerp(u, .58, E.inOut(prog(wt, 29.4, 32.4)));
+    return lane(u + Math.sin(wt * 1.3) * .004, off);
+  };
+  const rakPos = wt => {
+    let u = .59, off = -70;
+    u = lerp(u, .57, E.inOut(prog(wt, 23.0, 24.0)));
+    u = lerp(u, .6, E.out(prog(wt, 26.6, 27.4)));
+    u = lerp(u, .84, E.inOut(prog(wt, 28.8, 31.2))); off = lerp(off, -20, E.inOut(prog(wt, 28.8, 31.2)));
+    return lane(u + Math.sin(wt * 1.1 + 2) * .004, off);
+  };
+  // Takas: [zaman, saldıran, hasar(0-1), renk]
+  const HITS = [[24.75, 's', .22, '#7fd0ff'], [25.2, 'r', .09, '#ff8a70'], [25.45, 's', .24, '#c6a6ff'], [26.05, 's', .06, '#ffe08a'], [26.3, 'r', .07, '#ff8a70'], [26.7, 's', .06, '#ffe08a']];
+  const hpOf = (who, wt) => 1 - HITS.filter(h => h[1] !== who && wt >= h[0] + .18).reduce((s, h) => s + h[2], 0);
+
+  // Efekt havuzu (mermi + yüzen yazı)
+  const shots = [];
+  const addShot = (t0, from, to, color, w = 6) => shots.push({ t0, from, to, color, el: mk('line', { stroke: color, 'stroke-width': w, 'stroke-linecap': 'round' }, fx1), dot: mk('circle', { r: w * 1.3, fill: color }, fx1) });
+  R1.forEach(m => addShot(m.die - .18, 'sen', m, '#ffe08a', 5));
+  addShot(R2[0].die - .18, 'sen', R2[0], '#ffe08a', 6);
+  B1.forEach(m => addShot(m.die - .18, 'rak', m, '#ffb08a', 5));
+  HITS.forEach(h => addShot(h[0], h[1] === 's' ? 'sen' : 'rak', h[1] === 's' ? 'rak' : 'sen', h[3], h[1] === 's' && h[2] > .1 ? 11 : 6));
+  const floats = [];
+  const addFloat = (t0, at, text, color, size = 30) => { const e = mk('text', { 'font-family': 'Barlow Semi Condensed', 'font-weight': 800, 'font-size': size, fill: color, 'text-anchor': 'middle', stroke: '#000', 'stroke-width': 5, 'paint-order': 'stroke' }, fx1); e.textContent = text; floats.push({ t0, at, el: e }); };
+  R1.concat([R2[0]]).forEach(m => addFloat(m.die, m, `+${Math.round(xpOf(m))} XP`, '#c9a6ff'));
+  HITS.forEach(h => addFloat(h[0] + .18, h[1] === 's' ? 'rak' : 'sen', `-${Math.round(h[2] * 600)}`, h[1] === 's' ? '#ffd23f' : '#ff7a70', 38));
+
+  // Seviye atlama halkası
+  const lvlGlow = mk('circle', { fill: 'url(#gLvl)' }, fx0);
+  const lvlRing = mk('circle', { fill: 'none', stroke: '#ffd23f', 'stroke-width': 8 }, fx1);
+  const lvlRing2 = mk('circle', { fill: 'none', stroke: '#fff3b0', 'stroke-width': 4 }, fx1);
+  const hiRing = mk('circle', { fill: 'none', stroke: '#ffd23f', 'stroke-width': 5, 'stroke-dasharray': '10 8' }, fx1);
+  const LVT = R2[0].die + .05;
+
+  // Ok (ekran uzayında)
+  const arrowG = $('#arrow');
+  const arrowPath = mk('path', { fill: '#e8443a', stroke: '#000', 'stroke-width': 9, 'stroke-linejoin': 'round', 'paint-order': 'stroke' }, arrowG);
+
+  // ---------- Kamera ----------
+  const C0 = { s: 1.25, p: lane(.49, 0) };
+  const CAMK = [
+    [0, [1.25, ...lane(.49, 0)]], [3.2, [1.32, ...lane(.495, 0)]],
+    [4.0, [1.6, ...lane(.555, 0)]], [8.6, [1.66, ...lane(.55, 0)]],
+    [9.4, [1.32, ...lane(.48, 15)]], [12.4, [1.4, ...lane(.49, 10)]], [14.6, [1.3, ...lane(.5, 0)]],
+    [15.6, [0.98, ...lane(.62, 0)]], [17.6, [1.05, ...lane(.58, 0)]],
+    [18.6, [1.62, ...lane(.52, 10)]], [20.8, [1.7, ...lane(.5, 25)]],
+    [22.2, [1.3, ...lane(.5, 0)]], [23.8, [1.36, ...lane(.52, 0)]],
+    [24.4, [1.62, ...lane(.555, 0)]], [27.4, [1.7, ...lane(.555, 0)]],
+    [29.0, [1.08, ...lane(.64, 0)]], [32.4, [1.12, ...lane(.66, 0)]],
+    [33.2, [0.92, ...lane(.6, 0)]], [40.4, [0.98, ...lane(.58, 0)]],
+    [41.2, [1.25, ...lane(.49, 0)]], [42, [1.25, ...lane(.49, 0)]],
+  ];
+  const SC = [540, 940];
+  let cam = [1, 0, 0];
+  const toScr = p => [cam[1] + cam[0] * p[0], cam[2] + cam[0] * p[1]];
+
+  // ---------- Altyazı ----------
+  const CAPS = [
+    [0.0, 'LoL\'de ilk savaşı kazanmak,'],
+    [1.6, '<span class="r">tek bir minyona</span> bağlı.'],
+    [3.2, 'İlk dalgada <span class="y">altı</span> minyon var:'],
+    [5.4, '<span class="y">üç</span> yakın dövüş, <span class="y">üç</span> büyücü.'],
+    [7.6, 'Rakip de aynısını kesiyor.'],
+    [9.2, 'Hepsi ölünce'],
+    [10.6, 'seviye <span class="y">ikiye</span> çok az kalır.'],
+    [12.4, 'XP barı <span class="y">yüzde doksan yedi</span>.'],
+    [14.2, 'Rakibinki de öyle.'],
+    [15.4, 'Eksik olan tek şey:'],
+    [16.8, 'ikinci dalganın <span class="r">ilk yakın dövüşü.</span>'],
+    [19.4, 'Onu ilk kim keserse'],
+    [20.4, '<span class="y">ikinci</span> yeteneğini açar.'],
+    [22.2, 'Rakibin hâlâ <span class="y">tek</span> yeteneği var.'],
+    [24.0, 'İşte o an <span class="r">saldır.</span>'],
+    [25.6, 'İki yetenek, bire karşı:'],
+    [27.4, 'takası sen kazanırsın.'],
+    [29.2, 'Rakip geri çekilir,'],
+    [30.8, 'dalga senin olur.'],
+    [32.6, 'Alt koridorda kural farklı:'],
+    [34.6, 'ilk dalga artı <span class="y">üç</span> yakın dövüş.'],
+    [36.8, 'Sen o minyonu <span class="r">kovalar mısın,</span>'],
+    [38.6, 'yoksa güvenli mi oynarsın?'],
+    [40.6, 'Unutma:'],
+  ];
+  const capText = $('#capText'), capLine = $('#capLine');
+
+  // ---------- Kart içi minyon ikonları ----------
+  const fillMins = (el, extra) => { el.innerHTML = '<b></b><b></b><b></b><b class="c"></b><b class="c"></b><b class="c"></b><em>+</em>' + '<b class="x"></b>'.repeat(extra); };
+  fillMins($('#minsA'), 1); fillMins($('#minsB'), 3);
+  const minsA = [...$('#minsA').children], minsB = [...$('#minsB').children];
+
+  const els = [...document.querySelectorAll('.el[data-in]')].map(el => ({ el, a: +el.dataset.in, b: +el.dataset.out }));
+  const senSk = [...$('#senSk').children], rakSk = [...$('#rakipSk').children];
+
+  // ---------- Kare çizimi ----------
+  function render(t) {
+    // Döngü: son 1.4 sn dünya saati 0'a bağlanır, kare 42 = kare 0
+    const wt = t >= 40.6 ? t - 42 : t;
+
+    const k = track(CAMK, t);
+    const drift = 1 + .012 * Math.sin(t * .9);
+    cam = [k[0] * drift, SC[0] - k[0] * drift * k[1], SC[1] - k[0] * drift * k[2]];
+    $('#cam').setAttribute('transform', `translate(${cam[1]},${cam[2]}) scale(${cam[0]})`);
+
+    // minyonlar
+    const drawMinion = m => {
+      const born = m.n === 1 ? -99 : 14.6;
+      const alive = wt >= born && wt < m.die + .35;
+      if (!alive) { m.g.setAttribute('display', 'none'); return; }
+      m.g.setAttribute('display', '');
+      const jig = Math.sin(wt * 7 + m.i * 2 + (m.melee ? 0 : 1)) * .003;
+      const [x, y] = lane(waveU(m, wt) + jig, m.off);
+      const dp = prog(wt, m.die, m.die + .35);
+      m.g.setAttribute('transform', `translate(${x},${y}) scale(${1 - dp * .6})`);
+      m.g.setAttribute('opacity', 1 - dp);
+      // can: savaşırken yavaş düşer
+      let hp = 1;
+      const fightStart = m.n === 1 ? -6 : 18;
+      if (m.die < 90) hp = clamp(1 - prog(wt, fightStart, m.die) * .9);
+      else hp = clamp(1 - prog(wt, fightStart, fightStart + 30) * .5);
+      m.hp.setAttribute('width', 30 * hp);
+      m.pos = [x, y];
+    };
+    B1.concat(R1, B2, R2).forEach(drawMinion);
+
+    // şampiyonlar
+    const sp = senPos(wt), rp = rakPos(wt);
+    sen.g.setAttribute('transform', `translate(${sp})`);
+    rakip.g.setAttribute('transform', `translate(${rp})`);
+    sen.pos = sp; rakip.pos = rp;
+    const sh = hpOf('s', wt), rh = hpOf('r', wt);
+    sen.hp.setAttribute('width', 84 * sh); rakip.hp.setAttribute('width', 84 * rh);
+    const sxp = senXP(wt), rxp = rakXP(wt);
+    const sLv = sxp >= LV2 ? 2 : 1, rLv = rxp >= LV2 ? 2 : 1;
+    sen.lv.textContent = sLv; rakip.lv.textContent = rLv;
+
+    // mermiler
+    const P = o => o === 'sen' ? sen.pos : o === 'rak' ? rakip.pos : o.pos || [0, 0];
+    shots.forEach(s => {
+      const p = prog(wt, s.t0, s.t0 + .18);
+      const on = wt >= s.t0 && wt < s.t0 + .26;
+      if (!on) { s.el.setAttribute('opacity', 0); s.dot.setAttribute('opacity', 0); return; }
+      const a = P(s.from), b = P(s.to);
+      const hx = lerp(a[0], b[0], p), hy = lerp(a[1], b[1], p);
+      const tx = lerp(a[0], b[0], Math.max(0, p - .35)), ty = lerp(a[1], b[1], Math.max(0, p - .35));
+      s.el.setAttribute('x1', tx); s.el.setAttribute('y1', ty); s.el.setAttribute('x2', hx); s.el.setAttribute('y2', hy);
+      s.el.setAttribute('opacity', 1 - prog(wt, s.t0 + .18, s.t0 + .26));
+      s.dot.setAttribute('cx', hx); s.dot.setAttribute('cy', hy); s.dot.setAttribute('opacity', 1 - prog(wt, s.t0 + .18, s.t0 + .26));
+    });
+    floats.forEach(f => {
+      const p = prog(wt, f.t0, f.t0 + 1.0);
+      if (wt < f.t0 || p >= 1) { f.el.setAttribute('opacity', 0); return; }
+      const at = f.at === 'sen' ? sen.pos : f.at === 'rak' ? rakip.pos : (f.at.pos || [0, 0]);
+      f.el.setAttribute('x', at[0] + 4); f.el.setAttribute('y', at[1] - 40 - 60 * E.out(p));
+      f.el.setAttribute('opacity', Math.min(1, (1 - p) * 2.2));
+    });
+
+    // seviye atlama
+    const lp = prog(wt, LVT, LVT + .9);
+    const lon = wt >= LVT && lp < 1;
+    lvlRing.setAttribute('cx', sp[0]); lvlRing.setAttribute('cy', sp[1]); lvlRing.setAttribute('r', 34 + 150 * E.out(lp)); lvlRing.setAttribute('opacity', lon ? 1 - lp : 0);
+    const lp2 = prog(wt, LVT + .12, LVT + 1.0);
+    lvlRing2.setAttribute('cx', sp[0]); lvlRing2.setAttribute('cy', sp[1]); lvlRing2.setAttribute('r', 34 + 110 * E.out(lp2)); lvlRing2.setAttribute('opacity', wt >= LVT + .12 && lp2 < 1 ? 1 - lp2 : 0);
+    const gp = Math.min(prog(wt, LVT, LVT + .25), 1 - prog(wt, LVT + .6, LVT + 2.2));
+    lvlGlow.setAttribute('cx', sp[0]); lvlGlow.setAttribute('cy', sp[1]); lvlGlow.setAttribute('r', 170); lvlGlow.setAttribute('opacity', wt >= LVT ? gp : 0);
+
+    // hedef minyon vurgusu
+    const hon = Math.min(prog(wt, 16.6, 17.0), 1 - prog(wt, R2[0].die - .05, R2[0].die + .1));
+    if (R2[0].pos) { hiRing.setAttribute('cx', R2[0].pos[0]); hiRing.setAttribute('cy', R2[0].pos[1]); }
+    hiRing.setAttribute('r', 30 + 4 * Math.sin(t * 10)); hiRing.setAttribute('opacity', hon > 0 ? hon : 0);
+
+    // ok: ikinci dalganın ilk yakın dövüşü
+    const aon = Math.min(prog(wt, 16.8, 17.1), 1 - prog(wt, 19.6, 19.9));
+    arrowG.setAttribute('opacity', aon > 0 ? aon : 0);
+    if (aon > 0 && R2[0].pos) {
+      const [tx, ty] = toScr(R2[0].pos);
+      const ang = 135 * Math.PI / 180, len = 300 * E.out(prog(wt, 16.8, 17.1));
+      const pulse = 1 + .07 * Math.sin(t * 2 * Math.PI * 3.2);
+      const ux = Math.cos(ang), uy = Math.sin(ang), gap = 42;
+      const hx = tx - ux * gap, hy = ty - uy * gap;               // uç (minyona bakar)
+      const bx = hx - ux * len, by = hy - uy * len;               // kuyruk
+      const px = -uy, py = ux, hw = 46 * pulse, sw = 17 * pulse, hl = 80 * pulse;
+      const nx = hx - ux * hl, ny = hy - uy * hl;
+      arrowPath.setAttribute('d', `M${hx},${hy} L${nx + px * hw},${ny + py * hw} L${nx + px * sw},${ny + py * sw} L${bx + px * sw},${by + py * sw} L${bx - px * sw},${by - py * sw} L${nx - px * sw},${ny - py * sw} L${nx - px * hw},${ny - py * hw}Z`);
+    }
+
+    // HUD: portreler
+    const senXpFrac = sLv === 1 ? sxp / LV2 : (sxp - LV2) / (LV3 - LV2);
+    const rakXpFrac = rLv === 1 ? rxp / LV2 : (rxp - LV2) / (LV3 - LV2);
+    $('#senPh .xpr').setAttribute('stroke-dasharray', `${senXpFrac * 100} 100`);
+    $('#rakipPh .xpr').setAttribute('stroke-dasharray', `${rakXpFrac * 100} 100`);
+    $('#senLv').textContent = sLv; $('#rakipLv').textContent = rLv;
+    $('#senHp').style.transform = `scaleX(${sh})`; $('#rakipHp').style.transform = `scaleX(${rh})`;
+    const lvPop = wt >= LVT ? 1 + .35 * (1 - E.out(prog(wt, LVT, LVT + .5))) : 1;
+    $('#senLv').style.transform = `scale(${lvPop})`;
+    $('#senLv').style.background = wt >= LVT && wt < LVT + 2 ? '#3b2e00' : '#0b0d12';
+    senSk.forEach((s, i) => { const on = i < sLv; s.className = on ? 'on' : ''; s.style.background = on ? (i ? '#c6a6ff' : '#7fd0ff') : ''; s.style.borderColor = on ? '#0b0d12' : ''; });
+    rakSk.forEach((s, i) => { const on = i < rLv; s.className = on ? 'on' : ''; s.style.background = on ? '#ff9c92' : ''; s.style.borderColor = on ? '#0b0d12' : ''; });
+    const hudOp = 1 - Math.min(prog(t, 32.6, 33.0), 1 - prog(t, 40.4, 40.9));
+    $('#senCard').style.opacity = hudOp; $('#rakipCard').style.opacity = hudOp;
+    $('#senCard').style.transform = `translateX(${(1 - hudOp) * -40}px)`;
+    $('#rakipCard').style.transform = `translateX(${(1 - hudOp) * 40}px)`;
+
+    $('#xpPct').textContent = '%' + Math.round(sxp / LV2 * 100);
+    $('#dim').style.opacity = Math.min(prog(t, 32.6, 33.1), 1 - prog(t, 40.3, 40.8)) * 1;
+
+    // data-in/out öğeleri
+    els.forEach(o => {
+      const pin = E.back(prog(t, o.a, o.a + .35)), pout = prog(t, o.b - .3, o.b);
+      const op = Math.min(clamp(prog(t, o.a, o.a + .2)), 1 - pout);
+      o.el.style.opacity = op;
+      o.el.style.visibility = op > 0 ? 'visible' : 'hidden';
+      o.el.style.transform = o.el.classList.contains('stamp') ? `scale(${.7 + .3 * pin}) rotate(-3deg)` : `translateY(${(1 - E.out(prog(t, o.a, o.a + .4))) * 30}px)`;
+    });
+    minsA.concat(minsB).forEach((m, i) => {
+      const j = i % 10, base = i < minsA.length ? 33.3 : 34.8;
+      m.style.opacity = prog(t, base + j * .07, base + j * .07 + .15);
+    });
+
+    // altyazı
+    let ci = 0; for (let i = 0; i < CAPS.length; i++) if (t >= CAPS[i][0]) ci = i;
+    if (capText.dataset.i !== String(ci)) { capText.innerHTML = CAPS[ci][1]; capText.dataset.i = ci; }
+    const cp = ci === 0 ? 1 : prog(t, CAPS[ci][0], CAPS[ci][0] + .16);   // kare 0'da tam boy, okunur
+    capText.style.transform = `scale(${1 + .16 * (1 - E.out(cp))})`;
+    capLine.style.transform = `scaleX(${.5 + .5 * E.out(cp)})`;
+  }
+
+  // ---------- Ölçek + oynatıcı ----------
+  const stage = $('#stage');
+  const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${s}) translate(-50%, -50%)`; };
+  addEventListener('resize', fit); fit();
+  const params = new URLSearchParams(location.search);
+  const capture = params.has('capture');
+  let t = +(params.get('t') || 0), playing = false, last = 0;
+  const music = $('#music'), seek = $('#seek'), clock = $('#clock'), pp = $('#pp');
+  const mm = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const sync = () => { seek.value = t; clock.textContent = `${mm(t)} / ${mm(DUR)}`; pp.textContent = playing ? '❚❚ Durdur' : '▶︎ Oynat'; };
+  const play = () => { playing = true; last = performance.now(); try { music.currentTime = t; music.play().catch(() => {}); } catch (e) {} $('#start').style.display = 'none'; sync(); requestAnimationFrame(loop); };
+  const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
+  function loop(now) {
+    if (!playing) return;
+    t += (now - last) / 1000; last = now;
+    if (t >= DUR) { t -= DUR; try { music.currentTime = t; } catch (e) {} }   // video gibi döngü
+    render(t); sync(); requestAnimationFrame(loop);
+  }
+  const jump = v => { t = clamp(v, 0, DUR - .01); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  $('#start').onclick = play;
+  pp.onclick = () => playing ? pause() : play();
+  seek.oninput = () => jump(+seek.value);
+  $('#mute').onclick = () => { music.muted = !music.muted; $('#mute').textContent = music.muted ? 'Ses: kapalı' : 'Ses: açık'; };
+  addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') jump(t + 3);
+    if (e.code === 'ArrowLeft') jump(t - 3);
+  });
+  stage.addEventListener('click', () => playing ? pause() : play());
+  if (capture) { document.body.classList.add('capture'); stage.style.transform = 'none'; stage.style.left = stage.style.top = '0'; }
+  window.__render = render;
+  await document.fonts.ready;
+  render(t); sync();
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
