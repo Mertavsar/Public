@@ -8,3 +8,6 @@ sınırları ve kanıt disiplini oradadır. Uzmanlık modülleri `.claude/skills
 
 Video kurgusu ajans akışının dışındadır: kullanıcı klip veya seslendirme attığında
 `.claude/skills/viral-edit/` kullanılır.
+
+YouTube kanallarının istatistiklerini tek ekranda izleyen yerel panel `youtube-panel/`
+altındadır (sadece okur). Kurulum ve kullanım: `youtube-panel/README.md`.

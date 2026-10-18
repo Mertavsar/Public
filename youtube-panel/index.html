@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Paneli</title>
+<style>
+  :root{
+    --bg:#f6f6f4; --card:#fff; --ink:#1c1b19; --muted:#6b6a66;
+    --line:#e3e2de; --grid:#eeede9; --accent:#b5561a; --ok:#2f7a4a; --err:#b3261e;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#1a1a18;--card:#232320;--ink:#eceae5;--muted:#9b9992;
+          --line:#35342f;--grid:#2d2c28;--accent:#e2803f;--ok:#5fbb84;--err:#e8695f;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 16px 80px}
+  header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  h1{font-size:21px;margin:0;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:13px}
+  .spacer{flex:1}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .seg button{background:var(--card);color:var(--ink);border:0;padding:7px 12px;
+        font:500 13px/1 inherit;cursor:pointer}
+  .seg button+button{border-left:1px solid var(--line)}
+  .seg button.on{background:var(--ink);color:var(--bg)}
+  .btn{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:8px 14px;
+       font:600 13px/1 inherit;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .note{margin-top:20px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;
+        background:var(--card);font-size:14px}
+  .note.warn{border-color:var(--accent)}
+  code{background:var(--bg);padding:2px 5px;border-radius:4px;font-size:13px}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:20px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .kpi .lbl{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .kpi .val{font-size:26px;font-weight:650;letter-spacing:-.02em;margin-top:2px;
+            font-variant-numeric:tabular-nums}
+  .kpi .cmp{font-size:12px;color:var(--muted);margin-top:2px}
+  .up{color:var(--ok);font-weight:600} .down{color:var(--err);font-weight:600}
+
+  .bar{display:flex;align-items:center;gap:10px;margin:28px 0 10px;flex-wrap:wrap}
+  .bar h2{font-size:16px;margin:0}
+  select{padding:6px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);
+         color:var(--ink);font:inherit;font-size:13px}
+
+  .list{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .ch{display:grid;grid-template-columns:minmax(200px,2.2fr) 1fr 1.3fr 130px 1fr 1fr;
+      gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--line);
+      cursor:pointer;text-decoration:none;color:inherit}
+  .ch:first-child{border-top:0}
+  .ch:hover{background:var(--bg)}
+  .ch.head{cursor:default;font-size:12px;font-weight:600;color:var(--muted);
+           text-transform:uppercase;letter-spacing:.04em;padding:10px 16px}
+  .ch.head:hover{background:none}
+  .ch .num{text-align:right;font-variant-numeric:tabular-nums}
+  .ch .num small{display:block;font-size:12px}
+  .who{display:flex;align-items:center;gap:10px;min-width:0}
+  .who b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .who span{font-size:12px;color:var(--muted)}
+  .av{width:36px;height:36px;border-radius:50%;flex:none;background:var(--line);
+      display:grid;place-items:center;font-weight:700;color:var(--muted);overflow:hidden}
+  .av img{width:100%;height:100%;object-fit:cover}
+  .ch .err{grid-column:2/-1;color:var(--err);font-size:13px}
+  .ch .mlbl{display:none}
+  @media (max-width:760px){
+    .ch.head{display:none}
+    .ch{grid-template-columns:1fr 1fr;row-gap:6px}
+    .ch .who{grid-column:1/-1}
+    .ch .spark{grid-column:1/-1}
+    .ch .num{text-align:left}
+    .ch .mlbl{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    .ch .err{grid-column:1/-1}
+  }
+
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:12px;
+         padding:16px;margin-top:12px;position:relative}
+  .chart h3{font-size:14px;margin:0 0 8px;font-weight:600}
+  .chart svg{display:block;width:100%}
+  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);
+       font-size:12px;padding:6px 9px;border-radius:6px;white-space:nowrap;display:none}
+
+  .tbl{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:10px 14px;border-top:1px solid var(--line);text-align:right;
+        font-variant-numeric:tabular-nums;white-space:nowrap}
+  th{border-top:0;font-size:12px;font-weight:600;color:var(--muted);
+     text-transform:uppercase;letter-spacing:.04em}
+  th:first-child,td:first-child{text-align:left;white-space:normal;min-width:240px}
+  td a{color:inherit;text-decoration:none} td a:hover{text-decoration:underline}
+  .vt{display:flex;gap:10px;align-items:center}
+  .vt img{width:64px;height:36px;object-fit:cover;border-radius:4px;flex:none;background:var(--line)}
+  .vt small{display:block;color:var(--muted);font-size:12px}
+  .pill{display:inline-block;font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;
+        border:1px solid var(--line);color:var(--muted);margin-left:4px}
+  .back{background:none;border:0;color:var(--muted);font:inherit;font-size:14px;cursor:pointer;padding:0}
+  .back:hover{color:var(--ink)}
+  .remove{margin-top:28px;font-size:13px}
+  .remove button{background:none;border:0;color:var(--muted);text-decoration:underline;
+                 cursor:pointer;font:inherit;padding:0}
+  .loading{color:var(--muted);padding:24px 0}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="title">YouTube Paneli</h1>
+    <span class="sub" id="range"></span>
+    <span class="spacer"></span>
+    <div class="seg" id="days">
+      <button data-d="7">7 gün</button><button data-d="28">28 gün</button><button data-d="90">90 gün</button>
+    </div>
+    <button class="btn ghost" id="refresh">Yenile</button>
+    <a class="btn" id="connect" href="/oauth/start">+ Kanal bağla</a>
+  </header>
+  <div id="view"><div class="loading">Yükleniyor…</div></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf = new Intl.NumberFormat("tr-TR");
+const cf = new Intl.NumberFormat("tr-TR", {notation:"compact", maximumFractionDigits:1});
+const n = v => v == null ? "—" : nf.format(v);
+const c = v => v == null ? "gizli" : (Math.abs(v) >= 10000 ? cf.format(v) : nf.format(v));
+const signed = v => (v > 0 ? "+" : "") + nf.format(v);
+const dfmt = s => new Date(s + "T00:00:00").toLocaleDateString("tr-TR", {day:"numeric", month:"short"});
+const dur = s => { s = Math.round(s); const h = Math.floor(s/3600), m = Math.floor(s%3600/60), x = String(s%60).padStart(2,"0");
+                   return h ? `${h}:${String(m).padStart(2,"0")}:${x}` : `${m}:${x}`; };
+
+function delta(pct){
+  if (pct == null) return `<span class="sub">önceki dönem yok</span>`;
+  const cls = pct > 0 ? "up" : pct < 0 ? "down" : "";
+  const arrow = pct > 0 ? "▲" : pct < 0 ? "▼" : "■";
+  return `<span class="${cls}">${arrow} %${nf.format(Math.abs(pct))}</span>`;
+}
+
+const store = {
+  get(k, d){ try { return localStorage.getItem(k) ?? d; } catch { return d; } },
+  set(k, v){ try { localStorage.setItem(k, v); } catch {} },
+};
+let DAYS = +store.get("yt-days", 28);
+let SORT = store.get("yt-sort", "views");
+let DEMO = false;
+
+async function api(path, fresh){
+  const sep = path.includes("?") ? "&" : "?";
+  const r = await fetch(`${path}${sep}days=${DAYS}${fresh ? "&fresh=1" : ""}`);
+  return r.json();
+}
+
+function avatar(ch){
+  return `<div class="av">${ch.thumb ? `<img src="${esc(ch.thumb)}" alt="">` : esc((ch.title||"?")[0])}</div>`;
+}
+
+// --- Grafikler -------------------------------------------------------------
+
+function spark(series){
+  const w = 130, h = 34, vals = series.map(x => x.views), max = Math.max(...vals, 1);
+  const pts = vals.map((v, i) => `${(i/(vals.length-1||1)*(w-4)+2).toFixed(1)},${(h-2-(v/max)*(h-6)).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true">
+    <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+
+function niceMax(v){
+  if (v <= 0) return 1;
+  const p = Math.pow(10, Math.floor(Math.log10(v))), f = v / p;
+  return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * p;
+}
+
+function lineChart(el, series, key, fmt){
+  const W = el.clientWidth - 32, H = 220, L = 52, R = 8, T = 10, B = 26;
+  const vals = series.map(x => x[key]), max = niceMax(Math.max(...vals));
+  const min = Math.min(0, ...vals);
+  const x = i => L + i / (series.length - 1 || 1) * (W - L - R);
+  const y = v => T + (1 - (v - min) / (max - min || 1)) * (H - T - B);
+  const ticks = [min, (max+min)/2, max];
+  const grid = ticks.map(t => `<line x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}" stroke="var(--grid)"/>
+     <text x="${L-8}" y="${y(t)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${cf.format(t)}</text>`).join("");
+  const lbl = [0, Math.floor((series.length-1)/2), series.length-1].map(i =>
+     `<text x="${x(i)}" y="${H-6}" text-anchor="${i===0?"start":i===series.length-1?"end":"middle"}" font-size="11" fill="var(--muted)">${dfmt(series[i].d)}</text>`).join("");
+  const path = series.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(p[key]).toFixed(1)}`).join("");
+  const area = `${path}L${x(series.length-1).toFixed(1)},${y(min)}L${x(0)},${y(min)}Z`;
+  el.querySelector(".plot").innerHTML = `<svg width="${W}" height="${H}" role="img" aria-label="Günlük ${esc(el.dataset.name)}">
+    ${grid}${lbl}
+    <path d="${area}" fill="var(--accent)" opacity=".08"/>
+    <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
+    <line class="xh" y1="${T}" y2="${H-B}" stroke="var(--muted)" stroke-dasharray="3 3" visibility="hidden"/>
+    <circle class="dot" r="4.5" fill="var(--accent)" stroke="var(--card)" stroke-width="2" visibility="hidden"/>
+    <rect x="${L}" y="0" width="${W-L-R}" height="${H}" fill="transparent"/></svg>`;
+  const svg = el.querySelector("svg"), tip = el.querySelector(".tip");
+  const xh = svg.querySelector(".xh"), dot = svg.querySelector(".dot");
+  svg.onmousemove = e => {
+    const r = svg.getBoundingClientRect();
+    const i = Math.max(0, Math.min(series.length-1, Math.round((e.clientX - r.left - L) / (W-L-R) * (series.length-1))));
+    const px = x(i), py = y(series[i][key]);
+    xh.setAttribute("x1", px); xh.setAttribute("x2", px); xh.setAttribute("visibility", "visible");
+    dot.setAttribute("cx", px); dot.setAttribute("cy", py); dot.setAttribute("visibility", "visible");
+    tip.innerHTML = `<b>${fmt(series[i][key])}</b> · ${dfmt(series[i].d)}`;
+    tip.style.display = "block";
+    const tx = Math.min(px + 16 + 12, el.clientWidth - tip.offsetWidth - 8);
+    tip.style.left = tx + "px"; tip.style.top = (py + 30) + "px";
+  };
+  svg.onmouseleave = () => { tip.style.display = "none"; xh.setAttribute("visibility","hidden"); dot.setAttribute("visibility","hidden"); };
+}
+
+// --- Genel bakış -----------------------------------------------------------
+
+async function renderOverview(fresh){
+  $("#title").textContent = "YouTube Paneli";
+  const data = await api("/api/overview", fresh);
+  DEMO = data.demo;
+  $("#range").textContent = `${dfmt(data.start)} – ${dfmt(data.end)}`;
+  const ok = data.channels.filter(ch => !ch.error);
+  const sum = k => ok.reduce((a, ch) => a + (ch[k] || 0), 0);
+  const weighted = k => { // tüm kanalların toplam değişimi
+    const cur = sum(k), prev = sum("prev_" + k);
+    return prev ? Math.round((cur - prev) / prev * 1000) / 10 : null;
+  };
+  let html = "";
+  if (data.demo) html += `<div class="note warn"><b>Örnek veri.</b> Bunlar uydurma kanallar; paneli görmen için. Gerçek kanallarını bağlamak için sunucuyu <code>--demo</code> olmadan başlat.</div>`;
+  if (!data.configured) html += `<div class="note warn"><b>Kurulum eksik.</b> <code>youtube-panel/data/client_secret.json</code> bulunamadı. <code>youtube-panel/README.md</code> içindeki 1. adımı yap (bir kerelik, ~15 dk).</div>`;
+  else if (!data.channels.length) html += `<div class="note">Henüz kanal yok. Sağ üstteki <b>+ Kanal bağla</b> ile başla. Bir Google hesabında birden fazla kanal varsa, girişte hangisini bağlayacağını seçersin; her kanal için bir kez tekrarla.</div>`;
+
+  if (data.channels.length){
+    html += `<div class="kpis">
+      <div class="kpi"><div class="lbl">Toplam abone</div><div class="val">${c(sum("subscribers"))}</div><div class="cmp">${ok.length} kanal</div></div>
+      <div class="kpi"><div class="lbl">İzlenme</div><div class="val">${c(sum("views"))}</div><div class="cmp">${delta(weighted("views"))} önceki ${data.days} güne göre</div></div>
+      <div class="kpi"><div class="lbl">İzlenme süresi</div><div class="val">${c(sum("hours"))} sa</div><div class="cmp">${delta(weighted("hours"))} önceki ${data.days} güne göre</div></div>
+      <div class="kpi"><div class="lbl">Net abone</div><div class="val">${signed(sum("subs"))}</div><div class="cmp">önceki dönem ${signed(ok.reduce((a,ch)=>a+ch.prev_subs,0))}</div></div>
+    </div>`;
+    const sorters = {
+      views: (a, b) => b.views - a.views,
+      growth: (a, b) => (b.views_change ?? -1e9) - (a.views_change ?? -1e9),
+      subs: (a, b) => (b.subscribers ?? -1) - (a.subscribers ?? -1),
+      net: (a, b) => b.subs - a.subs,
+    };
+    const rows = [...ok].sort(sorters[SORT] || sorters.views).concat(data.channels.filter(ch => ch.error));
+    html += `<div class="bar"><h2>Kanallar</h2><span class="spacer"></span>
+      <label class="sub" for="sort">Sırala</label>
+      <select id="sort">
+        <option value="views">En çok izlenen</option><option value="growth">En hızlı büyüyen</option>
+        <option value="subs">En çok abone</option><option value="net">En çok abone kazanan</option>
+      </select></div>
+      <div class="list">
+      <div class="ch head"><div>Kanal</div><div class="num">Abone</div><div class="num">İzlenme</div><div>Gidişat</div><div class="num">İzlenme süresi</div><div class="num">Net abone</div></div>
+      ${rows.map(ch => ch.error ? `
+        <div class="ch" role="group"><div class="who">${avatar(ch)}<div><b>${esc(ch.title)}</b></div></div>
+          <div class="err">${esc(ch.error)} ${ch.reauth ? `· <a href="/oauth/start">Yeniden bağla</a>` : ""}</div></div>` : `
+        <a class="ch" href="#/kanal/${encodeURIComponent(ch.id)}">
+          <div class="who">${avatar(ch)}<div style="min-width:0"><b>${esc(ch.title)}</b><span>${esc(ch.handle)} · ${n(ch.video_count)} video</span></div></div>
+          <div class="num"><span class="mlbl">Abone</span>${c(ch.subscribers)}</div>
+          <div class="num"><span class="mlbl">İzlenme</span>${c(ch.views)}<small>${delta(ch.views_change)}</small></div>
+          <div class="spark">${spark(ch.series)}</div>
+          <div class="num"><span class="mlbl">İzlenme süresi</span>${c(ch.hours)} sa<small>${delta(ch.hours_change)}</small></div>
+          <div class="num"><span class="mlbl">Net abone</span>${signed(ch.subs)}<small class="sub">önceki ${signed(ch.prev_subs)}</small></div>
+        </a>`).join("")}
+      </div>
+      <p class="sub">YouTube istatistikleri ~2 gün gecikmeli gelir; dönem ${dfmt(data.end)} tarihinde biter. Abone ve toplam izlenme anlıktır.</p>`;
+  }
+  $("#view").innerHTML = html;
+  const sort = $("#sort");
+  if (sort){ sort.value = SORT; sort.onchange = () => { SORT = sort.value; store.set("yt-sort", SORT); renderOverview(); }; }
+}
+
+// --- Kanal detayı ----------------------------------------------------------
+
+function videoCell(v){
+  const shorts = v.seconds && v.seconds <= 180 ? `<span class="pill">Kısa</span>` : "";
+  return `<a class="vt" href="https://youtu.be/${esc(v.id)}" target="_blank" rel="noopener">
+    ${v.thumb ? `<img src="${esc(v.thumb)}" alt="">` : `<img alt="">`}
+    <span>${esc(v.title)}<small>${dfmt(v.published)} · ${dur(v.seconds)}${shorts}</small></span></a>`;
+}
+
+async function renderDetail(id, fresh){
+  $("#view").innerHTML = `<div class="loading">Yükleniyor…</div>`;
+  const ch = await api(`/api/channel/${encodeURIComponent(id)}`, fresh);
+  const back = `<p><button class="back" onclick="location.hash=''">← Tüm kanallar</button></p>`;
+  if (ch.error){
+    $("#view").innerHTML = back + `<div class="note warn">${esc(ch.error)} ${ch.reauth ? `· <a href="/oauth/start">Yeniden bağla</a>` : ""}</div>`;
+    return;
+  }
+  $("#title").textContent = ch.title;
+  $("#range").textContent = `${dfmt(ch.start)} – ${dfmt(ch.end)}`;
+  $("#view").innerHTML = back + `
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">Abone</div><div class="val">${c(ch.subscribers)}</div><div class="cmp">${esc(ch.handle)}</div></div>
+      <div class="kpi"><div class="lbl">İzlenme</div><div class="val">${c(ch.views)}</div><div class="cmp">${delta(ch.views_change)} önceki ${ch.days} güne göre</div></div>
+      <div class="kpi"><div class="lbl">İzlenme süresi</div><div class="val">${c(ch.hours)} sa</div><div class="cmp">${delta(ch.hours_change)} önceki ${ch.days} güne göre</div></div>
+      <div class="kpi"><div class="lbl">Net abone</div><div class="val">${signed(ch.subs)}</div><div class="cmp">önceki dönem ${signed(ch.prev_subs)}</div></div>
+      <div class="kpi"><div class="lbl">Toplam</div><div class="val">${c(ch.total_views)}</div><div class="cmp">izlenme · ${n(ch.video_count)} video</div></div>
+    </div>
+    <div class="chart" id="c-views" data-name="izlenme"><h3>Günlük izlenme</h3><div class="plot"></div><div class="tip"></div></div>
+    <div class="chart" id="c-subs" data-name="net abone"><h3>Günlük net abone</h3><div class="plot"></div><div class="tip"></div></div>
+
+    <div class="bar"><h2>Bu dönem en çok izlenenler</h2></div>
+    <div class="tbl"><table>
+      <tr><th>Video</th><th>İzlenme</th><th>Ort. izlenme</th><th>Ort. süre</th><th>İzlenme süresi</th><th>Abone</th></tr>
+      ${ch.top.map(v => `<tr><td>${videoCell(v)}</td><td>${n(v.period_views)}</td>
+        <td>%${nf.format(v.avg_pct)}</td><td>${dur(v.avg_seconds)}</td><td>${nf.format(v.period_hours)} sa</td><td>+${n(v.period_subs)}</td></tr>`).join("")
+        || `<tr><td colspan="6" class="sub">Bu dönemde izlenme yok.</td></tr>`}
+    </table></div>
+
+    <div class="bar"><h2>Son yüklenenler</h2><span class="sub">tüm zamanlar</span></div>
+    <div class="tbl"><table>
+      <tr><th>Video</th><th>İzlenme</th><th>Beğeni</th><th>Yorum</th><th>Beğeni oranı</th></tr>
+      ${ch.recent.map(v => `<tr><td>${videoCell(v)}</td><td>${n(v.views)}</td><td>${n(v.likes)}</td><td>${n(v.comments)}</td>
+        <td>${v.views ? "%" + nf.format(Math.round(v.likes / v.views * 1000) / 10) : "—"}</td></tr>`).join("")
+        || `<tr><td colspan="5" class="sub">Video yok.</td></tr>`}
+    </table></div>
+    ${DEMO ? "" : `<div class="remove"><button id="rm">Bu kanalı panelden kaldır</button> <span class="sub">(kanala dokunmaz, sadece bağlantıyı siler)</span></div>`}`;
+  const draw = () => {
+    lineChart($("#c-views"), ch.series, "views", nf.format);
+    lineChart($("#c-subs"), ch.series, "subs", signed);
+  };
+  draw();
+  window.onresize = draw;
+  const rm = $("#rm");
+  if (rm) rm.onclick = async () => {
+    if (!confirm(`${ch.title} panelden kaldırılsın mı? Kanalın kendisine dokunulmaz.`)) return;
+    await fetch(`/api/channel/${encodeURIComponent(id)}/remove`, {method:"POST"});
+    location.hash = "";
+  };
+}
+
+// --- Yönlendirme -----------------------------------------------------------
+
+function route(fresh){
+  window.onresize = null;
+  document.querySelectorAll("#days button").forEach(b => b.classList.toggle("on", +b.dataset.d === DAYS));
+  const m = location.hash.match(/^#\/kanal\/(.+)$/);
+  return (m ? renderDetail(decodeURIComponent(m[1]), fresh) : renderOverview(fresh)).catch(e => {
+    $("#view").innerHTML = `<div class="note warn">Panel sunucusuna ulaşılamadı: ${esc(e.message)}</div>`;
+  });
+}
+document.querySelectorAll("#days button").forEach(b => b.onclick = () => { DAYS = +b.dataset.d; store.set("yt-days", DAYS); route(); });
+$("#refresh").onclick = async () => { const b = $("#refresh"); b.disabled = true; await route(true); b.disabled = false; };
+window.onhashchange = () => route();
+route();
+</script>
+</body>
+</html>

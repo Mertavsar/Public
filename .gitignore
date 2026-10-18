@@ -4,3 +4,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# YouTube paneli — istemci dosyası ve kanal bağlantı anahtarları
+youtube-panel/data/
