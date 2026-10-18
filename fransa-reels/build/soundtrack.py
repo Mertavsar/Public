@@ -4,8 +4,8 @@
 Müzik burada sentezleniyor (ağ kapalı, hazır kütüphane yok). Telefon hoparlörü
 ~250 Hz altını neredeyse hiç vermiyor; o yüzden enerji orta bölgede tutuluyor:
 akor pad'i, arpej melodisi, tıklı kick, el çırpma ve hi-hat. Bas yalnızca
-destek. Vuruşlar sahne geçişlerine, tıklar sayaç/satır girişlerine oturur
-(geçiş efektleri viral-edit skill'inin motorundan).
+destek. Sahne geçişlerinde efekt yok; sayaç/satır girişlerinde kısa tık var
+(tık sesi viral-edit skill'inin motorundan).
 
     python3 build/soundtrack.py   ->  assets/soundtrack.m4a
 """
@@ -17,7 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SKILL = os.path.join(ROOT, '..', '.claude', 'skills', 'viral-edit', 'scripts')
 sys.path.insert(0, SKILL)
-from audiobed import whoosh, tick, riser  # noqa: E402
+from audiobed import tick  # noqa: E402
 
 SR = 44100
 DUR = 86.0
@@ -25,12 +25,9 @@ BPM = 96.0
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
 
-# Sahne başları (index.html SCENES ile aynı)
-MAJOR = [0.3, 6, 14.5, 23, 31, 42, 51, 62, 70, 78, 83.5]
 MINOR = [2.6, 7.8, 9.5, 11.6, 15.9, 18.5, 19.3, 23.6, 25.0, 26.6, 28.3, 32.2, 35.0, 36.0, 38.7,
          43.2, 46.7, 47.3, 48.6, 51.6, 53.8, 54.4, 55.0, 57.1, 62.5, 64.6, 65.0, 65.4, 66.8,
          70.7, 72.0, 73.3, 74.6, 78.6, 79.4, 80.2, 81.0, 85.3]
-RISER = [42.0, 83.5]
 
 # i–VI–III–VII (La minör): Am F C G
 CHORDS = [
@@ -154,16 +151,6 @@ def bass_note(f, d):
     return lp(saw(f, n, 10), 900) * env(n, 0.005, min(0.08, d / 3))
 
 
-def impact():
-    """Sahne geçişi: orta bölgede duyulan darbe (skill'in boom'u fazla bas)."""
-    n = int(SR * 1.2)
-    t = np.arange(n) / SR
-    f = 60 + 140 * np.exp(-t / 0.06)
-    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.25)
-    crack = bp(rng.standard_normal(n), 600, 6000) * np.exp(-t / 0.05) * 0.7
-    tail = bp(rng.standard_normal(n), 300, 2500) * np.exp(-t / 0.45) * 0.12
-    return body + crack + tail
-
 
 KICK, CLAP = kick(), clap()
 
@@ -220,14 +207,10 @@ def fx_place(sig, t):
     fx[i:j] += sig[:j - i]
 
 
-IMP = impact()
-for t in MAJOR:
-    fx_place(IMP / np.max(np.abs(IMP)) * 0.55, t - 0.01)
-    fx_place(whoosh(rng, amp=0.28), t - 0.36)
+# Sahne geçişlerinde efekt yok (whoosh/darbe/riser kullanıcı isteğiyle kaldırıldı);
+# yalnızca sayaç ve satır girişlerinde kısa tık kalıyor.
 for t in MINOR:
     fx_place(tick(rng, amp=0.16), t - 0.01)
-for t in RISER:
-    fx_place(riser(rng, amp=0.30), t - 1.35)
 
 mus_peak = max(np.max(np.abs(L)), np.max(np.abs(R)))
 L, R = L / mus_peak * 0.62, R / mus_peak * 0.62

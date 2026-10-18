@@ -9,7 +9,7 @@ kendini çizen Fransa sınırı ve Paris'te yanıp sönen kırmızı nokta.
 | `fransa-ne-oluyor.mp4` | Yayına hazır video (H.264 + AAC, 30 fps) |
 | `index.html` | Tarayıcıda oynayan sunum (boşluk: oynat/durdur, ←/→: 3 sn, r: baştan) |
 | `assets/geo.js` | Harita geometrisi (Natural Earth / world-atlas'tan üretildi) |
-| `assets/soundtrack.m4a` | Sentezlenmiş müzik + geçiş efektleri |
+| `assets/soundtrack.m4a` | Sentezlenmiş müzik (sahne geçişlerinde efekt yok) |
 | `build/render.mjs` | Sunumu kare kare yakalayıp MP4'e döker |
 | `build/soundtrack.py` | Ses yatağını üretir (viral-edit skill'inin sentez motoru) |
 
