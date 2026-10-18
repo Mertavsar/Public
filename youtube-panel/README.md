@@ -8,19 +8,23 @@ Studio'da hesap hesap gezmeden hepsini tek ekranda görür.
 
 ## Ne var
 
-- **Genel bakış:** tüm kanalların toplam izlenme, izlenme süresi, net abone ve
-  abonesi; önceki döneme göre değişim. Ana grafik önceki dönemle karşılaştırmalı
-  çizilir; bir günün üstüne gelince o gün hangi kanalın ne kadar izlendiği görünür.
-  Öne çıkanlar (en hızlı büyüyen, en çok düşen, en çok abone kazanan), izlenme
-  payı, sıralanabilir kanal tablosu ve **tüm kanallarda en çok izlenen videolar**.
-- **Kolay geçiş:** kenar çubuğunda her kanal değişim okuyla durur, tek tıkla
-  açılır. `⌘K` / `Ctrl K` ile kanal ara; kanal sayfasında `←` `→` ile önceki ve
-  sonraki kanal.
-- **Kanal sayfası:** izlenme / izlenme süresi / net abone grafiği, dönemin en çok
-  izlenen videoları (ortalama izlenme yüzdesi, süre, kazandırdığı abone), son
-  yüklenenler; YouTube ve Studio'ya tek tıkla geçiş.
-- **Ayarlar:** paket ve kanal kullanımı, kanal kaldırma, hesabı silme (Google'ın
-  doğrulama için istediği "verimi sil" hakkı).
+Panel bir yayın kontrol odası gibi tasarlandı: onlarca kanal işleten biri aslında
+küçük bir televizyon ağı yönetiyor.
+
+- **Monitör duvarı:** her kanal CH numaralı bir monitör. Büyük izlenme rakamı,
+  gidişat çizgisi, toplam izlenmedeki payı gösteren seviye ölçer, yükseliyor /
+  düşüyor ışığı. %10'dan sert düşen kanal **DİKKAT** ile işaretlenir. Tablo
+  isteyene **Liste** görünümü.
+- **Ölçü şeridi:** toplam izlenme, izlenme süresi, net abone, abone. Ölçüye
+  tıklayınca grafik o ölçüye geçer, önceki dönemle karşılaştırmalı çizilir; bir
+  günün üstüne gelince o günün kanal kırılımı görünür.
+- **Hareket bandı:** dönemin en çok yükselen ve düşen kanalları ekranın altında akar.
+- **Yayın akışı:** tüm kanallarda dönemin en çok izlenen videoları.
+- **Kolay geçiş:** kenar çubuğunda her kanal numarası ve ışığıyla durur. `⌘K` /
+  `Ctrl K` ile adını ya da numarasını yaz; kanal sayfasında `←` `→`.
+- **Kanal sayfası:** grafik, dönemin en çok izlenenleri, son yüklenenler; YouTube
+  ve Studio'ya geçiş.
+- **Ayarlar:** paket kullanımı, kanal kaldırma, hesabı silme (onay sayfanın içinde).
 - 7 / 28 / 90 günlük dönem, açık ve koyu tema, mobil uyumlu.
 
 Panel **sadece okur.** Google'dan istenen izinler `youtube.readonly` ve
@@ -136,10 +140,10 @@ uvicorn app:app --app-dir youtube-panel --host 0.0.0.0 --port 8000
 | `youtube.py` | Google/YouTube çağrıları ve hesaplamalar (sadece okuma) |
 | `db.py` | Kullanıcılar, oturumlar, şifreli kanal anahtarları |
 | `demo.py` | `--demo` için örnek veri |
-| `static/landing.html` | Giriş yapmamış ziyaretçinin gördüğü sayfa |
+| `static/landing.html` | Tanıtım ve fiyat sitesi (giriş yapmamış ziyaretçinin gördüğü sayfa) |
 | `static/app.html` | Panel |
 | `static/ekle.html` | Toplu kanal eklemenin ara sayfası |
-| `static/fonts/` | IBM Plex yazı tipleri (SIL Open Font License); Google'a bağlanmadan sunulur |
+| `static/fonts/` | Archivo, Big Shoulders Display, Chivo Mono (SIL Open Font License); Google'a bağlanmadan sunulur |
 | `static/img/` | Açılış sayfasındaki panel görüntüleri (örnek veriyle alındı) |
 
 ## Bilmen gerekenler

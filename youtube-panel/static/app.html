@@ -2,263 +2,355 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{APP_NAME}}</title>
 <link rel="stylesheet" href="/static/fonts/fonts.css">
 <style>
+  /* Kontrol odası: lacivert kumanda masası (kenar çubuğu) + açık çalışma alanı; genel bakış bir monitör duvarı. */
   :root{
     color-scheme:light;
-    --bg:#fafaf9; --panel:#fff; --sunk:#f4f4f2; --hover:#f0f0ed; --sel:#e9e9e5;
-    --ink:#161616; --ink-2:#4a4a47; --muted:#8a8984;
-    --line:#e7e6e2; --line-2:#d5d4cf; --grid:#efeeea;
-    --accent:#1f5fbf;
-    --pos:#1a7f37; --neg:#c4302b;
-    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --paper:#eef0f3; --panel:#ffffff; --sunk:#e5e8ed; --hover:#dfe3ea;
+    --ink:#0d1626; --ink-2:#47506a; --muted:#7f88a0; --line:#d8dce4;
+    --desk:#0b1d3a; --desk-2:#11264a; --desk-3:#183260; --desk-ink:#e8edf7; --desk-muted:#8798bd; --desk-line:rgba(232,237,247,.09);
+    --tally:#ffc81f; --tally-ink:#0b1d3a;
+    --chart:#1f4fd1; --chart-soft:rgba(31,79,209,.12);
+    --pos:#13854a; --neg:#d6343a; --pos-d:#3ddc84; --neg-d:#ff6b6b; --flat-d:#5f6f92;
+    --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+    --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"Chivo Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   @media (prefers-color-scheme:dark){
-    :root{
+    :root:not([data-theme="light"]){
       color-scheme:dark;
-      --bg:#111110; --panel:#171716; --sunk:#1c1c1b; --hover:#212120; --sel:#292927;
-      --ink:#ededea; --ink-2:#b4b3ad; --muted:#7c7b76;
-      --line:#272725; --line-2:#363633; --grid:#222220;
-      --accent:#5b9bf0;
-      --pos:#3fb950; --neg:#f0605a;
+      --paper:#0a0f1a; --panel:#111827; --sunk:#0e1522; --hover:#182234;
+      --ink:#e8edf7; --ink-2:#a9b3c8; --muted:#6f7a92; --line:#1e293c;
+      --desk:#071226; --desk-2:#0e1f3e; --desk-3:#15305c;
+      --chart:#6ea0ff; --chart-soft:rgba(110,160,255,.14);
+      --pos:#3ddc84; --neg:#ff6b6b;
     }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#0a0f1a; --panel:#111827; --sunk:#0e1522; --hover:#182234;
+    --ink:#e8edf7; --ink-2:#a9b3c8; --muted:#6f7a92; --line:#1e293c;
+    --desk:#071226; --desk-2:#0e1f3e; --desk-3:#15305c;
+    --chart:#6ea0ff; --chart-soft:rgba(110,160,255,.14);
+    --pos:#3ddc84; --neg:#ff6b6b;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--sans);
-       -webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+  body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.45 var(--sans);-webkit-font-smoothing:antialiased;
+       font-feature-settings:"tnum" 1}
   a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit}
-  svg.i{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:1.75;
-        stroke-linecap:round;stroke-linejoin:round}
+  svg.i{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .mono{font-family:var(--mono)}
   .muted{color:var(--muted)}
   .hidden{display:none!important}
-  kbd{font:11px/1 var(--mono);color:var(--muted)}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  :focus-visible{outline:2px solid var(--tally);outline-offset:2px}
+  kbd{font:11px/1 var(--mono);color:inherit;opacity:.7}
 
-  /* İskelet ---------------------------------------------------------------- */
-  .shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100%}
-  .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;border-right:1px solid var(--line);padding:0 8px}
-  .brand{display:flex;align-items:center;gap:8px;height:52px;padding:0 8px;font-weight:600;letter-spacing:-.01em;font-size:15px}
-  .mark{width:18px;height:18px;border-radius:4px;background:var(--ink);display:grid;place-items:center}
-  .search{display:flex;align-items:center;gap:8px;width:100%;height:30px;padding:0 8px;border:1px solid var(--line);
-          border-radius:5px;background:var(--panel);color:var(--muted);cursor:pointer;font-size:13px}
+  /* Kumanda masası (kenar çubuğu) ------------------------------------------ */
+  .shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100%}
+  .desk{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;background:var(--desk);color:var(--desk-ink);padding:0 10px}
+  .brand{display:flex;align-items:center;gap:10px;height:60px;padding:0 8px;font:800 24px/1 var(--display);letter-spacing:.05em;text-transform:uppercase}
+  .onair{width:9px;height:9px;border-radius:50%;background:var(--tally);box-shadow:0 0 0 3px rgba(255,200,31,.18)}
+  .search{display:flex;align-items:center;gap:8px;width:100%;height:34px;padding:0 10px;border:1px solid var(--desk-line);border-radius:6px;
+          background:rgba(255,255,255,.04);color:var(--desk-muted);cursor:pointer;font-size:13px}
   .search span{flex:1;text-align:left}
-  .search:hover{border-color:var(--line-2)}
-  .nav{display:flex;flex-direction:column;margin:10px 0 0}
-  .row{display:flex;align-items:center;gap:9px;height:30px;padding:0 8px;border-radius:5px;color:var(--ink-2);min-width:0;font-size:13.5px}
-  .row:hover{background:var(--hover);color:var(--ink)}
-  .row.on{background:var(--sel);color:var(--ink);font-weight:500}
-  .sec{display:flex;align-items:center;justify-content:space-between;margin:18px 0 4px;padding:0 4px 0 8px;font-size:12px;color:var(--muted)}
-  .sec a{display:grid;place-items:center;width:22px;height:22px;border-radius:4px;color:var(--ink-2)}
-  .sec a:hover{background:var(--hover);color:var(--ink)}
-  .chs{flex:1;overflow-y:auto;display:flex;flex-direction:column}
-  .row .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .row .dl{font-size:11.5px}
-  .bang{font:600 11px var(--mono);color:var(--neg)}
-  .me{display:flex;align-items:center;gap:9px;padding:10px 12px 10px 16px;border-top:1px solid var(--line);margin:0 -8px}
+  .search:hover{border-color:rgba(232,237,247,.22);color:var(--desk-ink)}
+  .nav{display:flex;flex-direction:column;gap:1px;margin:12px 0 0}
+  .nav a{display:flex;align-items:center;gap:10px;height:34px;padding:0 10px;border-radius:6px;color:var(--desk-muted);font-weight:500}
+  .nav a:hover{background:rgba(255,255,255,.05);color:var(--desk-ink)}
+  .nav a.on{background:var(--desk-3);color:var(--desk-ink)}
+  .nav a.on svg{color:var(--tally)}
+  .sec{display:flex;align-items:center;justify-content:space-between;margin:20px 0 6px;padding:0 6px 0 10px;
+       font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--desk-muted)}
+  .sec a{display:grid;place-items:center;width:24px;height:24px;border-radius:5px;color:var(--desk-ink);background:rgba(255,255,255,.06)}
+  .sec a:hover{background:var(--tally);color:var(--tally-ink)}
+  .chs{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1px;margin:0 -4px;padding:0 4px 8px}
+  .ch{display:grid;grid-template-columns:20px 8px minmax(0,1fr) auto;gap:9px;align-items:center;height:34px;padding:0 10px 0 8px;
+      border-radius:6px;color:var(--desk-muted);font-size:13.5px}
+  .ch:hover{background:rgba(255,255,255,.05);color:var(--desk-ink)}
+  .ch.on{background:var(--desk-3);color:var(--desk-ink)}
+  .ch.on .no{color:var(--tally)}
+  .ch .no{font:500 10.5px var(--mono);color:var(--desk-muted)}
+  .ch .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ch .dl{font:11px var(--mono)}
+  .tl{width:7px;height:7px;border-radius:50%;background:var(--flat-d)}
+  .tl.pos{background:var(--pos-d);box-shadow:0 0 6px rgba(61,220,132,.55)}
+  .tl.neg{background:var(--neg-d);box-shadow:0 0 6px rgba(255,107,107,.55)}
+  .tl.err{background:var(--tally)}
+  .dl.pos{color:var(--pos)} .dl.neg{color:var(--neg)} .dl.flat{color:var(--muted)}
+  .desk .dl.pos{color:var(--pos-d)} .desk .dl.neg{color:var(--neg-d)} .desk .dl.flat{color:var(--desk-muted)}
+  .me{display:flex;align-items:center;gap:10px;padding:12px 10px;margin:0 -10px;border-top:1px solid var(--desk-line)}
   .me .acct{flex:1;min-width:0;line-height:1.3;font-size:13px}
-  .me .acct b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .me .acct span{font-size:12px;color:var(--muted)}
-  .ib{display:grid;place-items:center;width:28px;height:28px;border:0;border-radius:5px;background:none;cursor:pointer;color:var(--ink-2);flex:none}
-  .ib:hover{background:var(--hover);color:var(--ink)}
-  .ib:disabled{opacity:.35;cursor:default}
+  .me .acct b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .me .acct span{font:11px var(--mono);color:var(--desk-muted)}
+  .ib{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:6px;background:none;cursor:pointer;color:inherit;opacity:.8;flex:none}
+  .ib:hover{opacity:1;background:var(--hover)}
+  .desk .ib:hover{background:rgba(255,255,255,.08)}
+  .ib:disabled{opacity:.3;cursor:default}
   .spin svg{animation:spin .8s linear infinite} @keyframes spin{to{transform:rotate(360deg)}}
 
-  .main{min-width:0}
-  .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;height:52px;padding:0 32px;
-       background:var(--bg);border-bottom:1px solid var(--line)}
-  .crumb{display:flex;align-items:center;gap:10px;min-width:0}
-  .crumb h1{font-size:15px;margin:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .crumb .rng{font:12px var(--mono);color:var(--muted);white-space:nowrap}
-  .spacer{flex:1}
+  /* Üst çubuk ---------------------------------------------------------------- */
+  .main{min-width:0;padding-bottom:44px}
+  .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:68px;padding:10px 32px;
+       background:var(--paper);border-bottom:1px solid var(--line)}
+  .crumb{display:flex;align-items:baseline;gap:14px;min-width:0;flex:1}
+  .crumb h1{margin:0;font:800 30px/1 var(--display);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .crumb .tc{font:12px var(--mono);color:var(--muted);white-space:nowrap}
   .menu{display:none}
-  .pager{display:flex}
-  .seg{display:inline-flex;border:1px solid var(--line-2);border-radius:5px;overflow:hidden;flex:none}
-  .seg button{border:0;background:var(--panel);height:28px;padding:0 10px;font-size:12.5px;color:var(--ink-2);cursor:pointer}
-  .seg button+button{border-left:1px solid var(--line-2)}
+  .pager{display:flex;gap:2px}
+  .seg{display:inline-flex;padding:3px;background:var(--sunk);border-radius:7px;flex:none}
+  .seg button{border:0;background:none;height:28px;padding:0 11px;border-radius:5px;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer}
   .seg button:hover{color:var(--ink)}
-  .seg button.on{background:var(--ink);color:var(--bg)}
-  .content{padding:28px 32px 72px;max-width:1280px}
-  .banner{font-size:13px;color:var(--ink-2);padding:9px 12px;border:1px solid var(--line);border-left:3px solid var(--ink-2);
-          border-radius:4px;background:var(--panel);margin-bottom:20px}
-  .banner.err{border-left-color:var(--neg)}
-  .banner a{color:var(--accent);font-weight:500}
-  code{font:12px var(--mono);background:var(--sunk);padding:1px 4px;border-radius:3px;white-space:nowrap}
+  .seg button.on{background:var(--ink);color:var(--paper)}
+  .content{padding:24px 32px 40px;max-width:1360px}
+  .banner{display:flex;gap:10px;align-items:baseline;font-size:13px;color:var(--ink-2);padding:10px 14px;border-radius:6px;background:var(--panel);
+          border:1px solid var(--line);margin-bottom:18px}
+  .banner .tag{font:600 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--tally);color:var(--tally-ink);flex:none}
+  .banner.err .tag{background:var(--neg);color:#fff}
+  .banner a{color:var(--chart);font-weight:600}
+  code{font:12px var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px;white-space:nowrap}
 
-  /* Panel ------------------------------------------------------------------ */
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;margin-bottom:24px}
-  .ph{display:flex;align-items:baseline;gap:10px;padding:14px 16px 10px}
-  .ph h2{font-size:14px;font-weight:600;margin:0}
-  .ph .sub{font-size:12px;color:var(--muted)}
-  .ph .r{margin-left:auto}
-
-  /* Ölçü şeridi + grafik (şerit aynı zamanda grafiğin sekmesi) ----------- */
-  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
-  .stat{all:unset;box-sizing:border-box;padding:14px 18px;border-right:1px solid var(--line);position:relative;min-width:0}
+  /* Ölçü şeridi + grafik ------------------------------------------------------ */
+  .board{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:22px;overflow:hidden}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stat{all:unset;box-sizing:border-box;position:relative;padding:16px 20px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
   .stat:last-child{border-right:0}
   button.stat{cursor:pointer}
   button.stat:hover{background:var(--sunk)}
-  button.stat:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-  .stat.on::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;background:var(--accent)}
-  .stat:first-child.on::before{border-top-left-radius:6px}
-  .stat .lb{font-size:12.5px;color:var(--ink-2)}
-  .stat.on .lb{color:var(--ink);font-weight:500}
-  .stat .vl{font-size:26px;font-weight:500;letter-spacing:-.02em;line-height:1.2;margin:4px 0 3px;white-space:nowrap}
-  .stat .cm{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .dl{font-family:var(--mono);font-size:12px;white-space:nowrap}
-  .dl.pos{color:var(--pos)} .dl.neg{color:var(--neg)} .dl.flat{color:var(--muted)}
-  .chart{position:relative;padding:12px 16px 10px}
-  .chart .lg{display:flex;gap:16px;justify-content:flex-end;font:11.5px var(--mono);color:var(--muted);margin-bottom:4px}
-  .chart .lg span{display:inline-flex;align-items:center;gap:6px}
-  .sw{display:inline-block;width:14px;border-top:2px solid var(--accent)}
+  button.stat:focus-visible{outline:2px solid var(--tally);outline-offset:-2px}
+  .stat.on{background:var(--panel)}
+  .stat.on::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--tally)}
+  .stat .lb{display:flex;align-items:center;gap:8px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .stat.on .lb{color:var(--ink)}
+  .stat .vl{font:800 46px/1 var(--display);letter-spacing:.01em;margin:10px 0 6px;white-space:nowrap}
+  .stat .cm{display:flex;gap:8px;align-items:baseline;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden}
+  .dl{font:12px var(--mono);white-space:nowrap}
+  .chart{position:relative;padding:14px 18px 10px}
+  .lg{display:flex;gap:18px;justify-content:flex-end;font:11px var(--mono);color:var(--muted);margin-bottom:2px}
+  .lg span{display:inline-flex;align-items:center;gap:6px}
+  .sw{display:inline-block;width:16px;border-top:2.5px solid var(--chart)}
   .sw.p{border-top:1.5px dashed var(--muted)}
-  .plot{height:248px}
+  .plot{height:240px}
   .plot svg{display:block;overflow:visible}
-  .tip{position:absolute;top:30px;pointer-events:none;background:var(--ink);color:var(--bg);border-radius:5px;
-       padding:9px 11px;font-size:12px;min-width:200px;display:none;z-index:3}
-  .tip .d{font:11.5px var(--mono);opacity:.7;margin-bottom:5px}
+  .tip{position:absolute;top:34px;pointer-events:none;background:var(--desk);color:var(--desk-ink);border-radius:8px;padding:10px 12px;
+       font-size:12.5px;min-width:210px;display:none;z-index:3;box-shadow:0 12px 30px rgba(7,18,38,.3)}
+  .tip .d{font:11px var(--mono);color:var(--tally);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase}
   .tip .r{display:flex;align-items:center;gap:8px;padding:1.5px 0}
-  .tip .r b{margin-left:auto;font-weight:500;padding-left:14px}
-  .tip .r .t{max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.85}
-  .tip .sw{border-top-color:var(--bg)} .tip .sw.p{border-top-color:color-mix(in srgb,var(--bg) 55%,transparent)}
-  .tip hr{border:0;border-top:1px solid color-mix(in srgb,var(--bg) 18%,transparent);margin:6px 0}
+  .tip .r b{margin-left:auto;font-weight:600;padding-left:14px}
+  .tip .r .t{max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--desk-muted)}
+  .tip .r .no{font:10.5px var(--mono);color:var(--desk-muted);width:20px}
+  .tip .sw{border-top-color:var(--tally)} .tip .sw.p{border-top-color:var(--desk-muted)}
+  .tip hr{border:0;border-top:1px solid var(--desk-line);margin:7px 0}
 
-  /* Tablolar ---------------------------------------------------------------- */
+  /* Bölüm başlıkları --------------------------------------------------------- */
+  .bh{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 12px}
+  .bh h2{margin:0;font:800 22px/1 var(--display);letter-spacing:.03em;text-transform:uppercase}
+  .bh .sub{font:11.5px var(--mono);color:var(--muted)}
+  .bh .r{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .sort{height:34px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);font:13px var(--sans);padding:0 8px}
+
+  /* Monitör duvarı -------------------------------------------------------------- */
+  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px;margin-bottom:26px;
+        padding:10px;background:var(--desk);border-radius:12px}
+  .mon{position:relative;display:flex;flex-direction:column;gap:2px;padding:12px 14px 12px;background:var(--desk-2);color:var(--desk-ink);
+       border:1px solid var(--desk-line);border-radius:7px;min-width:0;transition:border-color .15s,transform .15s}
+  .mon:hover{border-color:var(--tally)}
+  .mon:focus-visible{outline:2px solid var(--tally);outline-offset:2px}
+  .mon .hd{display:flex;align-items:center;gap:8px;font:500 11px var(--mono);color:var(--desk-muted)}
+  .mon .hd .no{color:var(--tally);letter-spacing:.06em}
+  .mon .hd .dl{margin-left:auto}
+  .mon .nm{font-weight:600;font-size:15px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mon .hn{font-size:12px;color:var(--desk-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mon .big{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+  .mon .big b{font:800 42px/1 var(--display);letter-spacing:.01em}
+  .mon .big span{font:11px var(--mono);color:var(--desk-muted)}
+  .mon svg.sp{display:block;width:100%;height:38px;margin:8px 0 6px}
+  .mon .ft{display:flex;align-items:center;gap:10px;font:11px var(--mono);color:var(--desk-muted)}
+  .meter{display:flex;gap:2px}
+  .meter i{width:6px;height:10px;border-radius:1px;background:rgba(232,237,247,.12)}
+  .meter i.on{background:var(--tally)}
+  .mon .ft .sub{margin-left:auto}
+  .mon.alert{border-color:rgba(255,107,107,.55)}
+  .mon .flag{font:600 9.5px/1 var(--mono);letter-spacing:.08em;padding:3px 5px 2px;background:var(--neg-d);color:#2a0606;border-radius:3px}
+  .mon.err{border-style:dashed}
+  .mon.err .msg{font-size:12.5px;color:var(--desk-muted);margin-top:10px}
+  .mon.err a{color:var(--tally);font-weight:600}
+
+  /* Liste / tablolar ------------------------------------------------------------ */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:26px;overflow:hidden}
   .tw{overflow-x:auto}
   table{border-collapse:collapse;width:100%}
-  th,td{padding:0 14px;height:44px;text-align:right;white-space:nowrap}
-  th{height:34px;font-size:12px;font-weight:400;color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--sunk)}
+  th,td{padding:0 14px;height:48px;text-align:right;white-space:nowrap}
+  th{height:36px;font:500 10.5px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);background:var(--sunk)}
   th button{all:unset;cursor:pointer}
   th button:hover,th.on{color:var(--ink)}
   td{border-bottom:1px solid var(--line)}
   tbody tr:last-child td{border-bottom:0}
-  th:first-child,td:first-child{padding-left:16px}
-  th:last-child,td:last-child{padding-right:16px}
+  th:first-child,td:first-child{padding-left:18px}
+  th:last-child,td:last-child{padding-right:18px}
   .l{text-align:left}
-  .n{font-variant-numeric:tabular-nums}
-  td.b{font-weight:500}
-  .rk{width:28px;padding-right:0;color:var(--muted);font:12px var(--mono);text-align:left}
+  td.b{font-weight:600}
+  .no-c{font:500 11px var(--mono);color:var(--muted);text-align:left;width:44px}
   tr.go{cursor:pointer}
   tr.go:hover td{background:var(--sunk)}
   .who{display:flex;align-items:center;gap:10px;min-width:0}
-  .who b{font-weight:500}
-  .who .h{font-size:12px;color:var(--muted);margin-left:2px}
+  .who b{font-weight:600}
+  .who .h{font-size:12px;color:var(--muted)}
   .share{display:inline-flex;align-items:center;gap:8px}
-  .share i{display:block;width:64px;height:6px;background:var(--sunk);border-radius:1px;overflow:hidden}
-  .share i u{display:block;height:100%;background:var(--accent);opacity:.8}
-  .share span{width:42px;text-align:right}
+  .share .meter i{background:var(--sunk)} .share .meter i.on{background:var(--chart)}
   td.err{color:var(--neg);text-align:left;white-space:normal;font-size:13px}
-  td.err a{color:var(--accent)}
-  .vd{display:flex;align-items:center;gap:12px;min-width:300px;white-space:normal;text-align:left;padding:8px 0}
-  .vd .tt{font-weight:500;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
-  .vd .tt:hover{text-decoration:underline}
-  .vd .mt{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-top:1px}
-  .vd .mt a:hover{color:var(--ink)}
-  .th{position:relative;width:80px;aspect-ratio:16/9;border-radius:3px;overflow:hidden;background:var(--sunk);flex:none}
-  .th img{width:100%;height:100%;object-fit:cover;display:block}
-  .th .du{position:absolute;right:3px;bottom:3px;background:rgba(0,0,0,.8);color:#fff;font:10px/1 var(--mono);padding:2px 3px;border-radius:2px}
-  .more{display:block;width:100%;border:0;border-top:1px solid var(--line);background:none;height:38px;font-size:13px;
-        color:var(--ink-2);cursor:pointer;border-radius:0 0 6px 6px}
-  .more:hover{background:var(--sunk);color:var(--ink)}
+  td.err a{color:var(--chart);font-weight:600}
 
-  .av{border-radius:50%;flex:none;background:var(--sel);color:var(--ink-2);display:grid;place-items:center;font-weight:600;overflow:hidden}
+  .run{list-style:none;margin:0;padding:0}
+  .run li{display:grid;grid-template-columns:44px 128px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .run li:last-child{border-bottom:0}
+  .run .rk{font:800 28px/1 var(--display);color:var(--muted)}
+  .run li:nth-child(-n+3) .rk{color:var(--ink)}
+  .th{position:relative;display:block;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:5px;overflow:hidden;background:var(--desk-2)}
+  .th img{width:100%;height:100%;object-fit:cover;display:block}
+  .th .du{position:absolute;right:4px;bottom:4px;background:rgba(7,18,38,.85);color:#fff;font:10px/1 var(--mono);padding:3px 4px;border-radius:2px}
+  .th .du.s{background:var(--tally);color:var(--tally-ink)}
+  .run .tt{font-weight:600;font-size:14.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .run .tt:hover{text-decoration:underline}
+  .run .mt{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px;font:11.5px var(--mono);color:var(--muted)}
+  .run .mt a:hover{color:var(--ink)}
+  .run .mt .no{color:var(--chart)}
+  .run .nums{text-align:right;line-height:1.25}
+  .run .nums b{display:block;font:800 26px/1 var(--display)}
+  .run .nums span{font:11px var(--mono);color:var(--muted)}
+  .vd{display:flex;align-items:center;gap:12px;min-width:300px;white-space:normal;text-align:left;padding:8px 0}
+  .vd .th{width:96px;flex:none}
+  .vd .tt{font-weight:600;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+  .vd .tt:hover{text-decoration:underline}
+  .vd .mt{font:11.5px var(--mono);color:var(--muted);margin-top:2px}
+  .more{display:block;width:100%;border:0;border-top:1px solid var(--line);background:none;height:42px;font:500 12px var(--mono);
+        letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);cursor:pointer}
+  .more:hover{background:var(--sunk);color:var(--ink)}
+  .av{border-radius:50%;flex:none;background:var(--sunk);color:var(--ink-2);display:grid;place-items:center;font-weight:700;overflow:hidden}
   .av img{width:100%;height:100%;object-fit:cover}
 
-  /* Kanal başlığı --------------------------------------------------------- */
-  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
-  .head h2{font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0}
-  .head .mt{font-size:13px;color:var(--muted);margin-top:1px}
-  .head .lk{margin-left:auto;display:flex;gap:16px;font-size:13px}
-  .head .lk a{color:var(--ink-2);display:inline-flex;align-items:center;gap:4px}
-  .head .lk a:hover{color:var(--ink);text-decoration:underline}
+  /* Kanal başlığı ------------------------------------------------------------ */
+  .hero{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:20px 22px;margin-bottom:18px;background:var(--desk);color:var(--desk-ink);border-radius:12px}
+  .hero .no{font:800 54px/1 var(--display);color:var(--tally);letter-spacing:.02em}
+  .hero .tx{min-width:0;flex:1}
+  .hero h2{margin:0;font:800 34px/1.05 var(--display);letter-spacing:.02em;text-transform:uppercase;overflow-wrap:anywhere}
+  .hero .mt{font:12px var(--mono);color:var(--desk-muted);margin-top:6px}
+  .hero .lk{display:flex;gap:8px}
+  .hero .lk a{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:6px;border:1px solid var(--desk-line);font-size:13px;font-weight:500}
+  .hero .lk a:hover{border-color:var(--tally);color:var(--tally)}
 
-  .foot{color:var(--muted);font-size:12px;margin-top:-8px}
-  .sk{background:var(--sunk);border-radius:4px;animation:pl 1.4s ease-in-out infinite}
-  @keyframes pl{50%{opacity:.5}}
+  .foot{font:11px var(--mono);color:var(--muted);margin-top:-10px}
+  .sk{background:var(--sunk);border-radius:6px;animation:pl 1.4s ease-in-out infinite}
+  .wall .sk{background:var(--desk-2)}
+  @keyframes pl{50%{opacity:.55}}
 
-  /* Boş durum, ayarlar ---------------------------------------------------- */
-  .empty{max-width:480px;padding:40px 0}
-  .empty h2{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0 0 8px}
-  .empty p{color:var(--ink-2);margin:0 0 20px}
-  .empty ol{color:var(--ink-2);font-size:13.5px;padding-left:18px;margin:24px 0 0}
+  /* Alt bant (hareketliler) ------------------------------------------------------ */
+  .ticker{position:fixed;left:252px;right:0;bottom:0;z-index:6;display:flex;height:36px;background:var(--tally);color:var(--tally-ink);
+          padding-bottom:env(safe-area-inset-bottom,0px);overflow:hidden}
+  .ticker .lab{flex:none;display:flex;align-items:center;padding:0 14px;background:var(--desk);color:var(--tally);font:800 15px var(--display);letter-spacing:.08em;text-transform:uppercase}
+  .ticker .rail{flex:1;overflow:hidden;display:flex;align-items:center;mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+  .ticker .run-t{display:flex;gap:28px;white-space:nowrap;padding-left:24px;font:500 12.5px var(--mono);animation:crawl 40s linear infinite}
+  .ticker:hover .run-t{animation-play-state:paused}
+  .ticker .run-t a:hover{text-decoration:underline}
+  .ticker .up::before{content:"▲ "} .ticker .dn::before{content:"▼ "}
+  @keyframes crawl{to{transform:translateX(-50%)}}
+
+  /* Boş durum, ayarlar ---------------------------------------------------------- */
+  .empty{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;padding:28px;background:var(--desk);color:var(--desk-ink);border-radius:14px}
+  .empty h2{font:800 46px/1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:0 0 12px}
+  .empty p{color:var(--desk-muted);margin:0 0 22px;max-width:44ch}
+  .empty ol{margin:22px 0 0;padding-left:18px;color:var(--desk-muted);font-size:13.5px}
   .empty li{margin:6px 0}
-  .btn{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:5px;border:1px solid var(--line-2);
-       background:var(--panel);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+  .ghost-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .ghost-wall i{aspect-ratio:4/3;border:1px dashed var(--desk-line);border-radius:6px;display:grid;place-items:center;font:500 11px var(--mono);color:var(--desk-muted);font-style:normal}
+  .btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:7px;border:1px solid var(--line);background:var(--panel);
+       font-weight:600;font-size:13.5px;cursor:pointer;white-space:nowrap}
   .btn:hover{border-color:var(--ink-2)}
-  .btn.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}
-  .btn.pri:hover{opacity:.88}
+  .btn.pri{background:var(--tally);border-color:var(--tally);color:var(--tally-ink)}
+  .btn.pri:hover{filter:brightness(1.05)}
   .btn.neg{color:var(--neg)}
   .btn:disabled{opacity:.4;cursor:default}
-  .set{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--line)}
-  .set .tx{flex:1;min-width:0;font-size:13.5px}
-  .set .tx b{font-weight:500;display:block}
-  .set .tx span{font-size:12px;color:var(--muted)}
-  .use{height:4px;background:var(--sunk);border-radius:2px;overflow:hidden;margin-top:8px;max-width:320px}
-  .use i{display:block;height:100%;background:var(--ink)}
+  .set{display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:1px solid var(--line)}
+  .set:first-of-type{border-top:0}
+  .set .tx{flex:1;min-width:0}
+  .set .tx b{font-weight:600;display:block}
+  .set .tx span{font-size:12.5px;color:var(--muted)}
+  .use{display:flex;gap:2px;margin-top:10px}
+  .use i{flex:1;max-width:14px;height:12px;border-radius:2px;background:var(--sunk)}
+  .use i.on{background:var(--ink)}
+  .confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-  /* ⌘K --------------------------------------------------------------------- */
-  .pal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.28);display:flex;justify-content:center;align-items:flex-start;padding:14vh 16px 16px}
-  .pbox{width:100%;max-width:540px;background:var(--panel);border:1px solid var(--line-2);border-radius:8px;
-        box-shadow:0 24px 60px rgba(0,0,0,.22);overflow:hidden}
-  .pin{display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;border-bottom:1px solid var(--line);color:var(--muted)}
-  .pin input{flex:1;border:0;outline:0;background:none;font:inherit;font-size:14.5px;color:var(--ink)}
-  .pls{max-height:min(400px,60vh);overflow-y:auto;padding:6px}
-  .pit{display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:5px;cursor:pointer;font-size:13.5px}
-  .pit.on{background:var(--sel)}
-  .pit .h{margin-left:auto;font:12px var(--mono);color:var(--muted)}
-  .pgr{font-size:11.5px;color:var(--muted);padding:8px 10px 4px}
-  .pft{display:flex;gap:16px;padding:8px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+  /* ⌘K -------------------------------------------------------------------------- */
+  .pal{position:fixed;inset:0;z-index:50;background:rgba(7,18,38,.45);display:flex;justify-content:center;align-items:flex-start;padding:14vh 16px 16px}
+  .pbox{width:100%;max-width:560px;background:var(--desk);color:var(--desk-ink);border:1px solid var(--desk-line);border-radius:12px;box-shadow:0 30px 70px rgba(0,0,0,.4);overflow:hidden}
+  .pin{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-bottom:1px solid var(--desk-line);color:var(--desk-muted)}
+  .pin input{flex:1;border:0;outline:0;background:none;font:inherit;font-size:15px;color:var(--desk-ink)}
+  .pls{max-height:min(420px,60vh);overflow-y:auto;padding:6px}
+  .pit{display:grid;grid-template-columns:24px 8px minmax(0,1fr) auto;gap:10px;align-items:center;height:38px;padding:0 10px;border-radius:6px;cursor:pointer;font-size:14px;color:var(--desk-muted)}
+  .pit.on{background:var(--desk-3);color:var(--desk-ink)}
+  .pit .no{font:500 10.5px var(--mono)} .pit.on .no{color:var(--tally)}
+  .pit .h{font:11.5px var(--mono);color:var(--desk-muted)}
+  .pgr{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--desk-muted);padding:10px 10px 4px}
+  .pft{display:flex;gap:16px;padding:9px 16px;border-top:1px solid var(--desk-line);font:11px var(--mono);color:var(--desk-muted)}
 
-  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
-         padding:9px 14px;border-radius:5px;font-size:13px;z-index:60;max-width:calc(100% - 32px);display:none}
+  .toast{position:fixed;left:50%;bottom:calc(52px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--desk);color:var(--desk-ink);
+         border-left:3px solid var(--tally);padding:10px 16px;border-radius:6px;font-size:13px;z-index:60;max-width:calc(100% - 32px);display:none}
   .toast.show{display:block}
 
-  /* Mobil ------------------------------------------------------------------ */
+  /* Dar ekran ---------------------------------------------------------------------- */
   .scrim{display:none}
-  @media (max-width:1100px){ .stats{grid-template-columns:repeat(2,minmax(0,1fr))} .stat:nth-child(2){border-right:0}
-    .stat:nth-child(-n+2){border-bottom:1px solid var(--line)} }
+  @media (max-width:1150px){ .stats{grid-template-columns:repeat(2,minmax(0,1fr))} .stat:nth-child(2n){border-right:0} }
   @media (max-width:900px){
     .shell{grid-template-columns:1fr}
-    .side{position:fixed;left:0;top:0;bottom:0;width:272px;z-index:40;background:var(--bg);transform:translateX(-100%);transition:transform .18s}
-    .side.open{transform:none;box-shadow:0 0 60px rgba(0,0,0,.25)}
-    .scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:30}
+    .desk{position:fixed;left:0;top:0;bottom:0;width:280px;z-index:40;transform:translateX(-100%);transition:transform .2s}
+    .desk.open{transform:none;box-shadow:0 0 80px rgba(0,0,0,.4)}
+    .scrim.open{display:block;position:fixed;inset:0;background:rgba(7,18,38,.4);z-index:30}
     .menu{display:grid}
-    .top{padding:0 12px;gap:8px}
-    .crumb .rng{display:none}
-    .content{padding:16px 12px 48px}
+    .top{padding:10px 14px}
+    .content{padding:16px 12px 32px}
+    .ticker{left:0}
     .sm{display:none}
+    .empty{grid-template-columns:1fr}
+    .run li{grid-template-columns:28px 96px minmax(0,1fr)}
+    .run .nums{grid-column:3;text-align:left;display:flex;gap:8px;align-items:baseline}
+    .run .nums b{display:inline;font-size:22px}
   }
   @media (max-width:560px){
-    .top{height:auto;flex-wrap:wrap;padding:8px 12px}
-    .top .seg{order:9;width:100%} .top .seg button{flex:1}
-    .stat{padding:12px} .stat .vl{font-size:21px}
+    .crumb{flex-basis:100%;order:-1}
+    .crumb h1{font-size:26px}
+    .crumb .tc{display:none}
+    .stat{padding:12px 14px} .stat .vl{font-size:34px}
     .xs{display:none}
     th,td{padding:0 8px}
     .who .h{display:none}
-    .vd{min-width:0;gap:10px} .th{width:64px}
-    .vd .tt{-webkit-line-clamp:2}
-    .vd .mt{white-space:nowrap;overflow:hidden}
-    .vd .mt a{overflow:hidden;text-overflow:ellipsis}
-    .head{flex-wrap:wrap} .head .lk{margin-left:0;width:100%}
+    .wall{grid-template-columns:1fr 1fr;gap:6px;padding:6px}
+    .mon{padding:10px}
+    .mon .big b{font-size:32px}
+    .mon .hn,.mon .ft .sub{display:none}
+    .run li{grid-template-columns:84px minmax(0,1fr);gap:12px}
+    .run .rk{display:none}
+    .run .nums{grid-column:2}
+    .vd{min-width:0} .vd .th{width:72px}
+    .hero{padding:16px} .hero .no{font-size:40px} .hero h2{font-size:26px}
     .plot{height:190px}
   }
+  @media (prefers-reduced-motion:reduce){ .ticker .run-t{animation:none} .mon,.desk{transition:none} .sk{animation:none} }
 </style>
 </head>
 <body>
 <div class="shell">
-  <aside class="side" id="side">
-    <div class="brand"><span class="mark" id="mark"></span>{{APP_NAME}}</div>
+  <aside class="desk" id="desk">
+    <div class="brand"><span class="onair" aria-hidden="true"></span>{{APP_NAME}}</div>
     <button class="search" id="openPal"><i data-i="search"></i><span>Kanal ara</span><kbd id="kbd">⌘K</kbd></button>
     <nav class="nav">
-      <a class="row" href="#/" data-nav="overview"><i data-i="grid"></i>Genel bakış</a>
-      <a class="row" href="#/ayarlar" data-nav="settings"><i data-i="settings"></i>Ayarlar</a>
+      <a href="#/" data-nav="overview"><i data-i="wall"></i>Monitör duvarı</a>
+      <a href="#/ayarlar" data-nav="settings"><i data-i="settings"></i>Ayarlar</a>
     </nav>
-    <div class="sec"><span>Kanallar <span class="mono" id="chCount"></span></span><a href="/giris?toplu=1" title="Kanal ekle" aria-label="Kanal ekle"><i data-i="plus"></i></a></div>
+    <div class="sec"><span>Kanallar <span id="chCount"></span></span><a href="/giris?toplu=1" title="Kanal ekle" aria-label="Kanal ekle"><i data-i="plus"></i></a></div>
     <div class="chs" id="chList"></div>
     <div class="me" id="me"></div>
   </aside>
@@ -267,7 +359,6 @@
     <div class="top">
       <button class="ib menu" id="menuBtn" aria-label="Menü"></button>
       <div class="crumb" id="crumb"></div>
-      <span class="spacer"></span>
       <div class="pager" id="pager"></div>
       <div class="seg" id="days" role="group" aria-label="Dönem">
         <button data-d="7">7 gün</button><button data-d="28">28 gün</button><button data-d="90">90 gün</button>
@@ -277,12 +368,13 @@
     <div class="content" id="view"></div>
   </main>
 </div>
+<div class="ticker hidden" id="ticker" aria-label="Dönemin en hareketli kanalları"><span class="lab">Hareket</span><div class="rail"><div class="run-t" id="tickRun"></div></div></div>
 
 <div class="pal hidden" id="pal">
   <div class="pbox" role="dialog" aria-label="Kanal ara">
-    <div class="pin"><i data-i="search"></i><input id="pIn" placeholder="Kanal ara veya sayfaya git" autocomplete="off"><kbd>esc</kbd></div>
+    <div class="pin"><i data-i="search"></i><input id="pIn" placeholder="Kanal adı ya da numarası (ör. 07)" autocomplete="off"><kbd>esc</kbd></div>
     <div class="pls" id="pList"></div>
-    <div class="pft"><span><kbd>↑↓</kbd> seç</span><span><kbd>↵</kbd> aç</span><span><kbd>←→</kbd> kanal sayfasında önceki / sonraki</span></div>
+    <div class="pft"><span>↑↓ seç</span><span>↵ aç</span><span>← → kanal sayfasında önceki / sonraki</span></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -302,6 +394,7 @@ const signedFull = v => (v > 0 ? "+" : v < 0 ? "−" : "") + full(Math.abs(v));
 const pct1 = v => nf.format(Math.round(v * 10) / 10);
 const dshort = s => new Date(s + "T00:00:00").toLocaleDateString("tr-TR", {day: "numeric", month: "short"});
 const dlong = s => new Date(s + "T00:00:00").toLocaleDateString("tr-TR", {weekday: "short", day: "numeric", month: "long"});
+const tc = s => { const [y, m, d] = s.split("-"); return `${d}.${m}.${y}`; };
 const dur = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, "0");
                    return h ? `${h}:${String(m).padStart(2, "0")}:${x}` : `${m}:${x}`; };
 const low = s => String(s).toLocaleLowerCase("tr");
@@ -309,8 +402,8 @@ const ytUrl = id => `https://youtu.be/${encodeURIComponent(id)}`;
 const chHref = id => `#/kanal/${encodeURIComponent(id)}`;
 
 const I = {
-  grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
-  settings: '<line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/>',
+  wall: '<rect x="3" y="4" width="8" height="7" rx="1"/><rect x="13" y="4" width="8" height="7" rx="1"/><rect x="3" y="13" width="8" height="7" rx="1"/><rect x="13" y="13" width="8" height="7" rx="1"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   refresh: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
   plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
@@ -320,20 +413,24 @@ const I = {
   menu: '<line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/>',
   logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>',
 };
-const ic = (name, size = 15) => `<svg class="i" viewBox="0 0 24 24" style="width:${size}px;height:${size}px" aria-hidden="true">${I[name]}</svg>`;
+const ic = (name, size = 16) => `<svg class="i" viewBox="0 0 24 24" style="width:${size}px;height:${size}px" aria-hidden="true">${I[name]}</svg>`;
 
 function avatar(o, size = 24){
-  return `<span class="av" style="width:${size}px;height:${size}px;font-size:${Math.round(size * .44)}px">${o && o.thumb
+  return `<span class="av" style="width:${size}px;height:${size}px;font-size:${Math.round(size * .42)}px">${o && o.thumb
     ? `<img src="${esc(o.thumb)}" alt="" referrerpolicy="no-referrer" loading="lazy">`
     : esc(((o && (o.title || o.name)) || "?").trim()[0] || "?")}</span>`;
 }
+const state = p => p == null ? "flat" : p >= 2 ? "pos" : p <= -2 ? "neg" : "flat";
 function delta(p){
-  if (p == null) return `<span class="dl flat">—</span>`;
-  const r = Math.round(p * 10) / 10;
-  if (r === 0) return `<span class="dl flat">%0</span>`;
-  return `<span class="dl ${r > 0 ? "pos" : "neg"}">${r > 0 ? "↑" : "↓"} %${pct1(Math.abs(r))}</span>`;
+  if (p == null) return `<span class="dl flat">yeni</span>`;
+  const r = Math.round(p * 10) / 10, s = state(p);
+  return `<span class="dl ${s}">${r > 0 ? "▲" : r < 0 ? "▼" : "■"} %${pct1(Math.abs(r))}</span>`;
 }
 const change = (cur, prev) => prev ? (cur - prev) / Math.abs(prev) * 100 : null;
+function meter(frac, n = 10){
+  const lit = Math.max(frac > 0 ? 1 : 0, Math.round(frac * n));
+  return `<span class="meter" aria-hidden="true">${Array.from({length: n}, (_, i) => `<i class="${i < lit ? "on" : ""}"></i>`).join("")}</span>`;
+}
 
 const store = {
   get(k, d){ try { return localStorage.getItem("kp-" + k) ?? d; } catch { return d; } },
@@ -350,6 +447,7 @@ const S = {
   days: [7, 28, 90].includes(+store.get("days", 28)) ? +store.get("days", 28) : 28,
   ov: {}, top: {},
   sort: {k: store.get("sort", "views"), dir: -1},
+  view: store.get("view", "wall") === "list" ? "list" : "wall",
   metric: ["views", "hours", "subs"].includes(store.get("metric")) ? store.get("metric") : "views",
   redraw: null, seq: 0,
 };
@@ -372,6 +470,8 @@ function topVideos(fresh){
   return S.top[S.days];
 }
 const channelsSorted = () => [...S.me.channels].sort((a, b) => a.title.localeCompare(b.title, "tr"));
+// Kanal numarası: alfabetik sıradaki yeri. Kenar çubuğu, duvar ve aramada aynı numara.
+function chNo(id){ const i = channelsSorted().findIndex(c => c.id === id); return String(i + 1).padStart(2, "0"); }
 
 const METRICS = {
   views: {label: "İzlenme", get: p => p.views, fmt: full},
@@ -380,45 +480,54 @@ const METRICS = {
 };
 
 // ============================================================================
-// Kenar çubuğu
+// Kumanda masası
 // ============================================================================
-const planName = p => ({beta: "Beta", free: "Ücretsiz", pro: "Pro", agency: "Ajans"}[p] || p);
+const planName = p => ({beta: "Beta", free: "Ücretsiz", pro: "Pro", agency: "Ağ"}[p] || p);
 function renderMe(){
   const u = S.me.user;
-  $("#me").innerHTML = `${avatar({thumb: u.picture, title: u.name || u.email}, 28)}
+  $("#me").innerHTML = `${avatar({thumb: u.picture, title: u.name || u.email}, 30)}
     <div class="acct"><b>${esc(u.name || u.email || "Hesabım")}</b><span>${esc(planName(u.plan))} · ${S.me.channels.length}/${S.me.limit} kanal</span></div>
     <form method="post" action="/cikis"><button class="ib" title="Çıkış yap" aria-label="Çıkış yap">${ic("logout")}</button></form>`;
 }
-
 let ovById = {};
-function renderSidebar(){
+function renderDesk(){
   const r = currentRoute();
-  $("#chCount").textContent = S.me.channels.length || "";
-  $("#chList").innerHTML = channelsSorted().map(c => {
+  $("#chCount").textContent = S.me.channels.length ? `· ${S.me.channels.length}` : "";
+  $("#chList").innerHTML = channelsSorted().map((c, i) => {
     const o = ovById[c.id];
-    let tail = "";
-    if (o && o.error) tail = `<span class="bang" title="${esc(o.error)}">!</span>`;
-    else if (o && o.views_change != null){
-      const v = Math.round(o.views_change);
-      tail = `<span class="dl ${v > 0 ? "pos" : v < 0 ? "neg" : "flat"}">${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v)}%</span>`;
-    }
-    return `<a class="row ${r.view === "channel" && r.id === c.id ? "on" : ""}" href="${chHref(c.id)}" title="${esc(c.title)}">
-      ${avatar(c, 20)}<span class="nm">${esc(c.title)}</span>${tail}</a>`;
-  }).join("") || `<a class="row muted" href="/giris?toplu=1">İlk kanalını ekle</a>`;
-  document.querySelectorAll(".nav .row").forEach(a => a.classList.toggle("on", a.dataset.nav === r.view));
+    const st = !o ? "" : o.error ? "err" : state(o.views_change);
+    const dl = o && !o.error && o.views_change != null
+      ? `<span class="dl ${st}">${o.views_change > 0 ? "+" : o.views_change < 0 ? "−" : ""}${Math.abs(Math.round(o.views_change))}%</span>` : "<span></span>";
+    return `<a class="ch ${r.view === "channel" && r.id === c.id ? "on" : ""}" href="${chHref(c.id)}" title="${esc(c.title)}">
+      <span class="no">${String(i + 1).padStart(2, "0")}</span><span class="tl ${st}"></span><span class="nm">${esc(c.title)}</span>${dl}</a>`;
+  }).join("") || `<a class="ch" href="/giris?toplu=1"><span class="no">--</span><span class="tl"></span><span class="nm">İlk kanalını ekle</span><span></span></a>`;
+  document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("on", a.dataset.nav === r.view));
 }
-function openSide(){ $("#side").classList.add("open"); $("#scrim").classList.add("open"); }
-function closeSide(){ $("#side").classList.remove("open"); $("#scrim").classList.remove("open"); }
+function openDesk(){ $("#desk").classList.add("open"); $("#scrim").classList.add("open"); }
+function closeDesk(){ $("#desk").classList.remove("open"); $("#scrim").classList.remove("open"); }
+
+function renderTicker(ov){
+  const ok = ov ? ov.channels.filter(c => !c.error && c.views_change != null) : [];
+  if (!ok.length){ $("#ticker").classList.add("hidden"); return; }
+  const movers = [...ok].sort((a, b) => Math.abs(b.views_change) - Math.abs(a.views_change)).slice(0, 10);
+  const items = movers.map(c => `<a href="${chHref(c.id)}" class="${c.views_change >= 0 ? "up" : "dn"}">CH ${chNo(c.id)} ${esc(c.title)} %${pct1(Math.abs(c.views_change))}</a>`).join("");
+  $("#tickRun").innerHTML = items + items;   // kesintisiz akış için iki kez
+  $("#ticker").classList.remove("hidden");
+}
 
 // ============================================================================
 // Grafik
 // ============================================================================
-function spark(vals, w = 88, h = 22){
+function spark(vals, {w = 200, h = 38, stroke = "#8fb4ff", fill = "rgba(143,180,255,.14)"} = {}){
   if (!vals.length) return "";
   const max = Math.max(...vals), min = Math.min(0, ...vals), rng = max - min || 1;
-  const pts = vals.map((v, i) => `${(i / (vals.length - 1 || 1) * (w - 2) + 1).toFixed(1)},${(h - 2 - (v - min) / rng * (h - 4)).toFixed(1)}`);
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true" style="display:block;margin-left:auto">
-    <polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+  const pts = vals.map((v, i) => [i / (vals.length - 1 || 1) * w, h - 2 - (v - min) / rng * (h - 6)]);
+  const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join("");
+  const last = pts[pts.length - 1];
+  return `<svg class="sp" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    <path d="${line}L${w},${h}L0,${h}Z" fill="${fill}"/>
+    <path d="${line}" fill="none" stroke="${stroke}" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+    <circle cx="${last[0]}" cy="${last[1]}" r="2.6" fill="${stroke}" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
 function niceTicks(lo, hi, n = 4){
@@ -431,7 +540,7 @@ function niceTicks(lo, hi, n = 4){
 
 function drawChart(el, {dates, cur, prev, metric, extra}){
   const plot = $(".plot", el), tip = $(".tip", el), M = METRICS[metric];
-  const W = plot.clientWidth, H = plot.clientHeight, L = 44, R = 4, T = 8, B = 24;
+  const W = plot.clientWidth, H = plot.clientHeight, L = 46, R = 6, T = 8, B = 24;
   const t = niceTicks(Math.min(0, ...cur, ...prev), Math.max(...cur, ...prev, 1));
   const lo = t[0], hi = t[t.length - 1], n = cur.length;
   const x = i => L + (n > 1 ? i / (n - 1) : .5) * (W - L - R);
@@ -439,22 +548,23 @@ function drawChart(el, {dates, cur, prev, metric, extra}){
   const path = arr => arr.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
   const k = W < 520 ? 3 : 7;
   const xl = [...new Set(Array.from({length: k}, (_, j) => Math.round(j * (n - 1) / (k - 1))))];
-  const base = y(Math.max(lo, 0));
+  const base = y(Math.max(lo, 0)), last = n - 1;
   plot.innerHTML = `<svg width="${W}" height="${H}" role="img" aria-label="Günlük ${esc(M.label)}">
-    <defs><linearGradient id="g${el.id}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".12"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
-    ${t.map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${v === 0 ? "var(--line-2)" : "var(--grid)"}"/>
-      <text x="${L - 8}" y="${y(v) + 3.5}" text-anchor="end" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">${num(v)}</text>`).join("")}
-    ${xl.map(i => `<text x="${x(i)}" y="${H - 5}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">${dshort(dates[i])}</text>`).join("")}
-    <path d="${path(cur)}L${x(n - 1)},${base}L${x(0)},${base}Z" fill="url(#g${el.id})"/>
+    <defs><linearGradient id="g${el.id}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--chart)" stop-opacity=".22"/><stop offset="1" stop-color="var(--chart)" stop-opacity="0"/></linearGradient></defs>
+    ${t.map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" ${v === 0 ? "" : 'stroke-dasharray="2 4"'}/>
+      <text x="${L - 10}" y="${y(v) + 3.5}" text-anchor="end" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">${num(v)}</text>`).join("")}
+    ${xl.map(i => `<text x="${x(i)}" y="${H - 5}" text-anchor="${i === 0 ? "start" : i === last ? "end" : "middle"}" font-size="10.5" font-family="var(--mono)" fill="var(--muted)">${dshort(dates[i]).toLocaleUpperCase("tr")}</text>`).join("")}
+    <path d="${path(cur)}L${x(last)},${base}L${x(0)},${base}Z" fill="url(#g${el.id})"/>
     <path d="${path(prev)}" fill="none" stroke="var(--muted)" stroke-width="1.25" stroke-dasharray="3 3"/>
-    <path d="${path(cur)}" fill="none" stroke="var(--accent)" stroke-width="1.75" stroke-linejoin="round"/>
-    <line class="xh" y1="${T}" y2="${H - B}" stroke="var(--line-2)" visibility="hidden"/>
-    <circle class="dt" r="3.5" fill="var(--panel)" stroke="var(--accent)" stroke-width="2" visibility="hidden"/>
+    <path d="${path(cur)}" fill="none" stroke="var(--chart)" stroke-width="2.25" stroke-linejoin="round"/>
+    <circle cx="${x(last)}" cy="${y(cur[last])}" r="4" fill="var(--chart)" stroke="var(--panel)" stroke-width="2"/>
+    <line class="xh" y1="${T}" y2="${H - B}" stroke="var(--tally)" stroke-width="1.5" visibility="hidden"/>
+    <circle class="dt" r="5" fill="var(--tally)" stroke="var(--panel)" stroke-width="2" visibility="hidden"/>
     <rect x="${L - 6}" y="0" width="${W - L - R + 12}" height="${H}" fill="transparent"/></svg>`;
   const svg = $("svg", plot), xh = $(".xh", svg), dt = $(".dt", svg);
   const show = cx => {
     const rc = svg.getBoundingClientRect();
-    const i = Math.max(0, Math.min(n - 1, Math.round((cx - rc.left - L) / (W - L - R) * (n - 1))));
+    const i = Math.max(0, Math.min(last, Math.round((cx - rc.left - L) / (W - L - R) * last)));
     const px = x(i);
     xh.setAttribute("x1", px); xh.setAttribute("x2", px); xh.setAttribute("visibility", "visible");
     dt.setAttribute("cx", px); dt.setAttribute("cy", y(cur[i])); dt.setAttribute("visibility", "visible");
@@ -462,25 +572,25 @@ function drawChart(el, {dates, cur, prev, metric, extra}){
       <div class="r"><i class="sw"></i>Bu dönem<b>${M.fmt(cur[i])}</b></div>
       <div class="r"><i class="sw p"></i>Önceki dönem<b>${M.fmt(prev[i])}</b></div>${extra ? extra(i) : ""}`;
     tip.style.display = "block";
-    const tw = tip.offsetWidth, off = 16 + 14;
-    tip.style.left = (px + off + tw > W + 16 ? px + 16 - tw - 14 : px + off) + "px";
+    const tw = tip.offsetWidth, off = 18 + 16;
+    tip.style.left = (px + off + tw > W + 18 ? px + 18 - tw - 16 : px + off) + "px";
   };
   svg.addEventListener("pointermove", e => show(e.clientX));
   svg.addEventListener("pointerdown", e => show(e.clientX));
   svg.addEventListener("pointerleave", () => { tip.style.display = "none"; xh.setAttribute("visibility", "hidden"); dt.setAttribute("visibility", "hidden"); });
 }
 
-// Ölçü şeridi: ilk üç hücre grafiğin sekmesidir.
-function statsPanel(id, cells){
-  return `<section class="panel" id="${id}">
+// Ölçü şeridi: ilk üç hücre grafiğin kanalını seçer.
+function board(id, cells){
+  return `<section class="board" id="${id}">
     <div class="stats">${cells.map(c => c.metric
       ? `<button class="stat ${S.metric === c.metric ? "on" : ""}" data-m="${c.metric}" aria-pressed="${S.metric === c.metric}">
-           <div class="lb">${c.label}</div><div class="vl">${c.value}</div><div class="cm">${c.delta} <span>${c.sub}</span></div></button>`
-      : `<div class="stat"><div class="lb">${c.label}</div><div class="vl">${c.value}</div><div class="cm">${c.sub}</div></div>`).join("")}</div>
-    <div class="chart"><div class="lg"><span><i class="sw"></i>son ${S.days} gün</span><span><i class="sw p"></i>önceki ${S.days} gün</span></div>
+           <div class="lb">${c.label}</div><div class="vl">${c.value}</div><div class="cm">${c.delta}<span>${c.sub}</span></div></button>`
+      : `<div class="stat"><div class="lb">${c.label}</div><div class="vl">${c.value}</div><div class="cm"><span>${c.sub}</span></div></div>`).join("")}</div>
+    <div class="chart"><div class="lg"><span><i class="sw"></i>SON ${S.days} GÜN</span><span><i class="sw p"></i>ÖNCEKİ ${S.days} GÜN</span></div>
       <div class="plot"></div><div class="tip"></div></div></section>`;
 }
-function bindStats(el, draw){
+function bindBoard(el, draw){
   el.querySelectorAll("button.stat").forEach(b => b.onclick = () => {
     S.metric = b.dataset.m; store.set("metric", S.metric);
     el.querySelectorAll("button.stat").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
@@ -499,128 +609,139 @@ function clip(root, n = 10){
     const b = document.createElement("button");
     b.className = "more"; b.textContent = `Tümünü göster · ${items.length}`;
     b.onclick = () => { items.forEach(x => x.classList.remove("hidden")); b.remove(); };
-    list.closest(".panel").appendChild(b);
+    list.closest(".card").appendChild(b);
   });
 }
 function thumb(v){
+  const s = v.seconds && v.seconds <= 180;
   return `<a class="th" href="${ytUrl(v.id)}" target="_blank" rel="noopener" aria-label="YouTube'da aç">
     ${v.thumb ? `<img src="${esc(v.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}
-    <span class="du">${v.seconds && v.seconds <= 180 ? "Kısa" : dur(v.seconds)}</span></a>`;
+    <span class="du ${s ? "s" : ""}">${s ? "KISA" : dur(v.seconds)}</span></a>`;
 }
 function skeleton(){
-  return `<section class="panel"><div class="stats">${`<div class="stat"><div class="sk" style="height:12px;width:40%"></div><div class="sk" style="height:26px;width:60%;margin:8px 0 6px"></div><div class="sk" style="height:11px;width:70%"></div></div>`.repeat(4)}</div>
-    <div class="chart"><div class="sk" style="height:248px"></div></div></section>
-    <section class="panel"><div style="padding:16px"><div class="sk" style="height:220px"></div></div></section>`;
+  return `<section class="board"><div class="stats">${`<div class="stat"><div class="sk" style="height:11px;width:40%"></div><div class="sk" style="height:40px;width:62%;margin:12px 0 8px"></div><div class="sk" style="height:11px;width:70%"></div></div>`.repeat(4)}</div>
+    <div class="chart"><div class="sk" style="height:240px"></div></div></section>
+    <div class="wall">${`<div class="sk" style="height:200px"></div>`.repeat(4)}</div>`;
 }
-const errBanner = (title, msg, reauth) => `<div class="banner err"><b>${esc(title)}</b> ${esc(msg)} ${reauth ? `<a href="/giris">Yeniden bağla</a>` : ""}</div>`;
+const errBanner = (title, msg, reauth) => `<div class="banner err"><span class="tag">Sinyal yok</span><span><b>${esc(title)}</b> ${esc(msg)} ${reauth ? `<a href="/giris">Yeniden bağla</a>` : ""}</span></div>`;
 
 // ============================================================================
-// Genel bakış
+// Monitör duvarı (genel bakış)
 // ============================================================================
 function emptyState(){
-  return `<div class="empty"><h2>İlk kanalını bağla</h2>
-    <p>Kanalın olduğu Google hesabıyla giriş yap. İstatistikler birkaç saniye içinde burada olur.</p>
-    <a class="btn pri" href="/giris?toplu=1">Kanallarımı ekle</a>
-    <ol><li>Google hesabını seç, ilk kanalı seçip izin ver.</li>
-      <li>Aynı e-postada başka kanalların varsa panel seni sırayla Google'ın kanal seçicisine götürür; her birini bir kez seçersin.</li>
-      <li>Farklı Google hesaplarındaki kanallar da eklenebilir.</li></ol>
-    <p class="muted" style="font-size:12.5px;margin-top:24px">Sadece okuma izni istenir. Kanallarında hiçbir şey değiştirilmez.</p></div>`;
+  return `<div class="empty"><div><h2>Duvar boş.</h2>
+      <p>Kanalının olduğu Google hesabıyla giriş yap, ilk monitör birkaç saniyede yanar.</p>
+      <a class="btn pri" href="/giris?toplu=1">${ic("plus")} Kanallarımı ekle</a>
+      <ol><li>Google hesabını seç, ilk kanalı seçip izin ver.</li>
+        <li>Aynı e-postada başka kanalların varsa panel seni sırayla Google'ın kanal seçicisine götürür.</li>
+        <li>Farklı Google hesaplarındaki kanallar da aynı duvara eklenir.</li></ol></div>
+    <div class="ghost-wall" aria-hidden="true">${Array.from({length: 9}, (_, i) => `<i>CH ${String(i + 1).padStart(2, "0")}</i>`).join("")}</div></div>`;
+}
+
+const SORTS = {
+  views: {label: "İzlenme", get: c => c.views},
+  views_change: {label: "Değişim", get: c => c.views_change ?? -1e9},
+  subscribers: {label: "Abone", get: c => c.subscribers ?? -1},
+  subs: {label: "Net abone", get: c => c.subs},
+  hours: {label: "İzlenme süresi", get: c => c.hours},
+  no: {label: "Kanal numarası", get: c => -parseInt(chNo(c.id), 10)},
+};
+function sortChannels(list){
+  const s = SORTS[S.sort.k] || SORTS.views;
+  return [...list].sort((a, b) => { const x = s.get(a), y = s.get(b); return (x > y ? 1 : x < y ? -1 : 0) * S.sort.dir; });
 }
 
 async function renderOverview(fresh, seq){
-  setTop({title: "Genel bakış"});
-  if (!S.me.channels.length){ $("#view").innerHTML = emptyState(); return; }
+  setTop({title: "Monitör duvarı"});
+  if (!S.me.channels.length){ $("#view").innerHTML = emptyState(); renderTicker(null); return; }
   if (!S.ov[S.days] || fresh) $("#view").innerHTML = skeleton();
   const ov = await overview(fresh);
   if (seq !== S.seq) return;
-  setTop({title: "Genel bakış", range: ov});
+  setTop({title: "Monitör duvarı", range: ov});
+  ovById = {}; ov.channels.forEach(c => ovById[c.id] = c); renderDesk(); renderTicker(ov);
 
   const ok = ov.channels.filter(c => !c.error), bad = ov.channels.filter(c => c.error);
   const sum = k => ok.reduce((a, c) => a + (c[k] || 0), 0);
   const n = ok.length ? ok[0].series.length : 0, dates = ok.length ? ok[0].series.map(p => p.d) : [];
   const total = (key, m) => Array.from({length: n}, (_, i) => ok.reduce((a, c) => a + METRICS[m].get(c[key][i]), 0));
   const subs = ok.some(c => c.subscribers != null) ? sum("subscribers") : null;
+  const alerts = ok.filter(c => c.views_change != null && c.views_change <= -10).length;
 
   let html = "";
-  if (S.me.demo) html += `<div class="banner">Örnek veri gösteriliyor. Gerçek kanallar için sunucuyu <code>--demo</code> olmadan başlat.</div>`;
+  if (S.me.demo) html += `<div class="banner"><span class="tag">Örnek</span><span>Uydurma kanallar gösteriliyor. Gerçek kanallar için sunucuyu <code>--demo</code> olmadan başlat.</span></div>`;
   if (bad.length) html += errBanner(`${bad.length} kanalın verisi alınamadı:`, bad.map(c => c.title).join(", ") + ".", bad.some(c => c.reauth));
-  html += statsPanel("ovChart", [
+  html += board("ovChart", [
     {metric: "views", label: "İzlenme", value: num(sum("views")), delta: delta(change(sum("views"), sum("prev_views"))), sub: `önceki ${num(sum("prev_views"))}`},
-    {metric: "hours", label: "İzlenme süresi", value: num(sum("hours")) + " sa", delta: delta(change(sum("hours"), sum("prev_hours"))), sub: `önceki ${num(sum("prev_hours"))} sa`},
+    {metric: "hours", label: "İzlenme süresi", value: num(sum("hours")) + " sa", delta: delta(change(sum("hours"), sum("prev_hours"))), sub: `önceki ${num(sum("prev_hours"))}`},
     {metric: "subs", label: "Net abone", value: signed(sum("subs")), delta: delta(change(sum("subs"), sum("prev_subs"))), sub: `önceki ${signed(sum("prev_subs"))}`},
-    {label: "Toplam abone", value: num(subs), sub: `${ok.length} kanal · anlık`},
+    {label: "Toplam abone", value: num(subs), sub: `${ok.length} kanal${alerts ? ` · <b style="color:var(--neg)">${alerts} dikkat</b>` : ""}`},
   ]);
-  html += `<section class="panel"><div class="ph"><h2>Kanallar</h2><span class="sub">son ${S.days} gün · satıra tıklayınca kanal açılır</span></div>
-    <div class="tw"><table id="chTable"></table></div></section>`;
-  html += `<section class="panel"><div class="ph"><h2>En çok izlenen videolar</h2><span class="sub">tüm kanallar · son ${S.days} gün</span></div>
-    <div class="tw" id="topVideos"><div style="padding:0 16px 16px"><div class="sk" style="height:180px"></div></div></div></section>`;
-  html += `<p class="foot">YouTube istatistikleri yaklaşık iki gün gecikmeyle gelir; dönem ${dshort(ov.end)} tarihinde biter. Abone sayıları anlıktır.</p>`;
+  html += `<div class="bh"><h2>Kanallar</h2><span class="sub">${ov.channels.length} MONİTÖR · SON ${S.days} GÜN</span>
+    <div class="r"><label class="sub" for="sortSel">SIRALA</label>
+      <select class="sort" id="sortSel">${Object.entries(SORTS).map(([k, s]) => `<option value="${k}">${s.label}</option>`).join("")}</select>
+      <div class="seg" role="group" aria-label="Görünüm"><button data-v="wall">Duvar</button><button data-v="list">Liste</button></div></div></div>
+    <div id="chArea"></div>`;
+  html += `<div class="bh"><h2>Yayın akışı</h2><span class="sub">TÜM KANALLARDA EN ÇOK İZLENENLER · SON ${S.days} GÜN</span></div>
+    <section class="card" id="topVideos"><div style="padding:16px"><div class="sk" style="height:180px"></div></div></section>`;
+  html += `<p class="foot">YOUTUBE ANALYTICS VERİSİ ~48 SAAT GECİKMELİ · DÖNEM ${tc(ov.end)} TARİHİNDE BİTER · ABONE SAYILARI ANLIK</p>`;
   $("#view").innerHTML = html;
 
   const el = $("#ovChart");
   const draw = () => drawChart(el, {dates, metric: S.metric, cur: total("series", S.metric), prev: total("prev_series", S.metric),
     extra: i => {
       const m = METRICS[S.metric], rows = ok.map(c => ({c, v: m.get(c.series[i])})).sort((a, b) => b.v - a.v);
-      return `<hr>${rows.slice(0, 5).map(r => `<div class="r"><span class="t">${esc(r.c.title)}</span><b>${m.fmt(r.v)}</b></div>`).join("")}
-        ${rows.length > 5 ? `<div class="r" style="opacity:.6">+${rows.length - 5} kanal</div>` : ""}`;
+      return `<hr>${rows.slice(0, 5).map(r => `<div class="r"><span class="no">${chNo(r.c.id)}</span><span class="t">${esc(r.c.title)}</span><b>${m.fmt(r.v)}</b></div>`).join("")}
+        ${rows.length > 5 ? `<div class="r" style="color:var(--desk-muted)">+${rows.length - 5} kanal</div>` : ""}`;
     }});
-  bindStats(el, draw); draw(); S.redraw = draw;
-  renderChannelTable(ov.channels);
+  bindBoard(el, draw); draw(); S.redraw = draw;
 
-  topVideos(fresh).then(d => {
-    if (seq !== S.seq) return;
-    $("#topVideos").innerHTML = videoTable(d.videos, true); clip($("#topVideos").closest(".panel"));
-  }).catch(e => { if (seq === S.seq) $("#topVideos").innerHTML = `<p class="muted" style="padding:0 16px 8px">Videolar alınamadı: ${esc(e.message)}</p>`; });
+  const sel = $("#sortSel"); sel.value = SORTS[S.sort.k] ? S.sort.k : "views";
+  sel.onchange = () => { S.sort = {k: sel.value, dir: -1}; store.set("sort", sel.value); renderArea(ov.channels); };
+  document.querySelectorAll(".bh .seg button").forEach(b => b.onclick = () => { S.view = b.dataset.v; store.set("view", S.view); renderArea(ov.channels); });
+  renderArea(ov.channels);
+
+  topVideos(fresh).then(d => { if (seq === S.seq){ $("#topVideos").innerHTML = rundown(d.videos); clip($("#topVideos").parentElement); } })
+    .catch(e => { if (seq === S.seq) $("#topVideos").innerHTML = `<p class="muted" style="padding:16px">Videolar alınamadı: ${esc(e.message)}</p>`; });
 }
 
-const COLS = [
-  {k: "title", label: "Kanal", cls: "l", get: c => low(c.title)},
-  {k: "subscribers", label: "Abone", cls: "xs", get: c => c.subscribers ?? -1},
-  {k: "views", label: "İzlenme", get: c => c.views},
-  {k: "share", label: "Pay", cls: "sm", get: c => c.views},
-  {k: "views_change", label: "Değişim", get: c => c.views_change ?? -1e9},
-  {k: "trend", label: "Gidişat", cls: "sm"},
-  {k: "hours", label: "İzlenme süresi", cls: "sm", get: c => c.hours},
-  {k: "subs", label: "Net abone", cls: "xs", get: c => c.subs},
-];
-function renderChannelTable(channels){
-  const ok = channels.filter(c => !c.error), bad = channels.filter(c => c.error);
-  const total = ok.reduce((a, c) => a + c.views, 0) || 1;
-  const col = COLS.find(c => c.k === S.sort.k && c.get) || COLS[2];
-  ok.sort((a, b) => { const x = col.get(a), y = col.get(b); return (x > y ? 1 : x < y ? -1 : 0) * S.sort.dir; });
-  $("#chTable").innerHTML = `<thead><tr><th class="rk"></th>${COLS.map(c => `<th class="${c.cls || ""} ${c.k === col.k ? "on" : ""}">${c.get
-      ? `<button data-k="${c.k}">${c.label}${c.k === col.k ? (S.sort.dir < 0 ? " ↓" : " ↑") : ""}</button>` : c.label}</th>`).join("")}</tr></thead>
-    <tbody>${ok.map((c, i) => `<tr class="go" data-id="${esc(c.id)}">
-      <td class="rk">${i + 1}</td>
-      <td class="l"><a class="who" href="${chHref(c.id)}">${avatar(c, 26)}<b>${esc(c.title)}</b><span class="h">${esc(c.handle)}</span></a></td>
-      <td class="n xs">${num(c.subscribers)}</td>
-      <td class="n b">${num(c.views)}</td>
-      <td class="sm"><span class="share"><i><u style="width:${c.views / total * 100}%"></u></i><span class="n">%${pct1(c.views / total * 100)}</span></span></td>
+function renderArea(channels){
+  document.querySelectorAll(".bh .seg button").forEach(b => b.classList.toggle("on", b.dataset.v === S.view));
+  const ok = sortChannels(channels.filter(c => !c.error)), bad = channels.filter(c => c.error);
+  const total = ok.reduce((a, c) => a + c.views, 0) || 1, maxShare = Math.max(...ok.map(c => c.views / total), .0001);
+  if (S.view === "wall"){
+    $("#chArea").innerHTML = `<div class="wall">${ok.map(c => {
+      const st = state(c.views_change), alert = c.views_change != null && c.views_change <= -10;
+      return `<a class="mon ${alert ? "alert" : ""}" href="${chHref(c.id)}" aria-label="${esc(c.title)}, ${full(c.views)} izlenme">
+        <div class="hd"><span class="no">CH ${chNo(c.id)}</span><span class="tl ${st}"></span>${alert ? `<span class="flag">DİKKAT</span>` : ""}${delta(c.views_change)}</div>
+        <div class="nm">${esc(c.title)}</div><div class="hn">${esc(c.handle)} · ${num(c.subscribers)} abone</div>
+        <div class="big"><b>${num(c.views)}</b><span>izlenme</span></div>
+        ${spark(c.series.map(p => p.views))}
+        <div class="ft">${meter(c.views / total / maxShare)}<span>%${pct1(c.views / total * 100)}</span><span class="sub">${signed(c.subs)} abone</span></div></a>`;
+    }).join("")}${bad.map(c => `<div class="mon err"><div class="hd"><span class="no">CH ${chNo(c.id)}</span><span class="tl err"></span></div>
+        <div class="nm">${esc(c.title)}</div><div class="msg">Sinyal yok. ${esc(c.error)} ${c.reauth ? `<a href="/giris">Yeniden bağla</a>` : ""}</div></div>`).join("")}</div>`;
+    return;
+  }
+  $("#chArea").innerHTML = `<section class="card"><div class="tw"><table>
+    <thead><tr><th class="no-c">CH</th><th class="l">Kanal</th><th class="xs">Abone</th><th>İzlenme</th><th class="sm">Pay</th><th>Değişim</th><th class="sm">Gidişat</th><th class="sm">İzlenme süresi</th><th class="xs">Net abone</th></tr></thead>
+    <tbody>${ok.map(c => `<tr class="go" data-id="${esc(c.id)}">
+      <td class="no-c">${chNo(c.id)}</td>
+      <td class="l"><a class="who" href="${chHref(c.id)}"><span class="tl ${state(c.views_change)}"></span>${avatar(c, 26)}<b>${esc(c.title)}</b><span class="h">${esc(c.handle)}</span></a></td>
+      <td class="xs">${num(c.subscribers)}</td><td class="b">${num(c.views)}</td>
+      <td class="sm"><span class="share">${meter(c.views / total / maxShare)}<span>%${pct1(c.views / total * 100)}</span></span></td>
       <td>${delta(c.views_change)}</td>
-      <td class="sm">${spark(c.series.map(p => p.views))}</td>
-      <td class="n sm">${num(c.hours)} sa</td>
-      <td class="n xs">${signed(c.subs)}</td></tr>`).join("")}
-    ${bad.map(c => `<tr><td class="rk">—</td><td class="l"><span class="who">${avatar(c, 26)}<b>${esc(c.title)}</b></span></td>
-      <td colspan="7" class="err">${esc(c.error)} ${c.reauth ? `<a href="/giris">Yeniden bağla</a>` : ""}</td></tr>`).join("")}</tbody>`;
-  $("#chTable").querySelectorAll("th button").forEach(b => b.onclick = () => {
-    const k = b.dataset.k;
-    S.sort = {k, dir: S.sort.k === k ? -S.sort.dir : (k === "title" ? 1 : -1)};
-    store.set("sort", k); renderChannelTable(channels);
-  });
-  $("#chTable").querySelectorAll("tr.go").forEach(tr => tr.onclick = e => { if (!e.target.closest("a")) location.hash = chHref(tr.dataset.id); });
+      <td class="sm" style="width:120px">${spark(c.series.map(p => p.views), {w: 110, h: 26, stroke: "var(--chart)", fill: "var(--chart-soft)"})}</td>
+      <td class="sm">${num(c.hours)} sa</td><td class="xs">${signed(c.subs)}</td></tr>`).join("")}
+      ${bad.map(c => `<tr><td class="no-c">${chNo(c.id)}</td><td class="l"><span class="who"><span class="tl err"></span>${avatar(c, 26)}<b>${esc(c.title)}</b></span></td>
+        <td colspan="7" class="err">${esc(c.error)} ${c.reauth ? `<a href="/giris">Yeniden bağla</a>` : ""}</td></tr>`).join("")}</tbody></table></div></section>`;
+  $("#chArea").querySelectorAll("tr.go").forEach(tr => tr.onclick = e => { if (!e.target.closest("a")) location.hash = chHref(tr.dataset.id); });
 }
 
-function videoTable(videos, withChannel){
-  if (!videos.length) return `<p class="muted" style="padding:0 16px 8px">Bu dönemde izlenme yok.</p>`;
-  return `<table><thead><tr><th class="rk"></th><th class="l">Video</th><th>İzlenme</th><th class="xs">Ort. izlenme</th><th class="sm">Ort. süre</th><th class="sm">İzlenme süresi</th><th class="xs">Abone</th></tr></thead>
-    <tbody data-clip>${videos.map((v, i) => `<tr><td class="rk">${i + 1}</td>
-      <td class="l"><div class="vd">${thumb(v)}<div style="min-width:0"><a class="tt" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a>
-        <div class="mt">${withChannel ? `<a href="${chHref(v.channel.id)}">${esc(v.channel.title)}</a><span>·</span>` : ""}<span class="mono">${dshort(v.published)}</span></div></div></div></td>
-      <td class="n b">${num(v.period_views)}</td>
-      <td class="n xs">%${pct1(v.avg_pct)}</td>
-      <td class="n sm mono" style="font-size:12.5px">${dur(v.avg_seconds)}</td>
-      <td class="n sm">${num(v.period_hours)} sa</td>
-      <td class="n xs">+${num(v.period_subs)}</td></tr>`).join("")}</tbody></table>`;
+function rundown(videos){
+  if (!videos.length) return `<p class="muted" style="padding:16px">Bu dönemde izlenme yok.</p>`;
+  return `<ol class="run" data-clip>${videos.map((v, i) => `<li><span class="rk">${String(i + 1).padStart(2, "0")}</span>${thumb(v)}
+    <div style="min-width:0"><a class="tt" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a>
+      <div class="mt"><a href="${chHref(v.channel.id)}"><span class="no">CH ${chNo(v.channel.id)}</span> ${esc(v.channel.title)}</a><span>${tc(v.published)}</span><span>ort. %${pct1(v.avg_pct)} izlendi</span></div></div>
+    <div class="nums"><b>${num(v.period_views)}</b><span>izlenme · +${num(v.period_subs)} abone</span></div></li>`).join("")}</ol>`;
 }
 
 // ============================================================================
@@ -628,40 +749,44 @@ function videoTable(videos, withChannel){
 // ============================================================================
 async function renderChannel(id, fresh, seq){
   const meta = S.me.channels.find(c => c.id === id) || {id, title: "Kanal"};
-  setTop({title: meta.title, channel: meta});
+  setTop({title: `CH ${chNo(id)}`});
   $("#view").innerHTML = skeleton();
   const ch = await api(`/api/channel/${encodeURIComponent(id)}`, {fresh});
   if (seq !== S.seq) return;
-  setTop({title: ch.title || meta.title, channel: {...meta, thumb: ch.thumb || meta.thumb}, range: ch});
+  setTop({title: `CH ${chNo(id)}`, range: ch});
   if (ch.error){ $("#view").innerHTML = errBanner(`${meta.title} verisi alınamadı.`, ch.error, ch.reauth); return; }
 
   const dates = ch.series.map(p => p.d);
   $("#view").innerHTML = `
-    <div class="head">${avatar(ch, 44)}<div><h2>${esc(ch.title)}</h2>
-      <div class="mt">${esc(ch.handle)} · ${full(ch.video_count)} video · toplam ${num(ch.total_views)} izlenme</div></div>
-      <div class="lk"><a href="https://www.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">YouTube ${ic("ext", 13)}</a>
-        <a href="https://studio.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">Studio ${ic("ext", 13)}</a></div></div>
-    ${statsPanel("chChart", [
+    <div class="hero"><span class="no">${chNo(id)}</span>${avatar(ch, 52)}<div class="tx"><h2>${esc(ch.title)}</h2>
+      <div class="mt">${esc(ch.handle)} · ${full(ch.video_count)} VİDEO · TOPLAM ${num(ch.total_views)} İZLENME</div></div>
+      <div class="lk"><a href="https://www.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">YouTube ${ic("ext", 14)}</a>
+        <a href="https://studio.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">Studio ${ic("ext", 14)}</a></div></div>
+    ${board("chChart", [
       {metric: "views", label: "İzlenme", value: num(ch.views), delta: delta(ch.views_change), sub: `önceki ${num(ch.prev_views)}`},
-      {metric: "hours", label: "İzlenme süresi", value: num(ch.hours) + " sa", delta: delta(ch.hours_change), sub: `önceki ${num(ch.prev_hours)} sa`},
+      {metric: "hours", label: "İzlenme süresi", value: num(ch.hours) + " sa", delta: delta(ch.hours_change), sub: `önceki ${num(ch.prev_hours)}`},
       {metric: "subs", label: "Net abone", value: signed(ch.subs), delta: delta(change(ch.subs, ch.prev_subs)), sub: `önceki ${signed(ch.prev_subs)}`},
       {label: "Abone", value: num(ch.subscribers), sub: "anlık"},
     ])}
-    <section class="panel"><div class="ph"><h2>Bu dönem en çok izlenenler</h2><span class="sub">son ${S.days} gün</span></div>
-      <div class="tw">${videoTable(ch.top, false)}</div></section>
-    <section class="panel"><div class="ph"><h2>Son yüklenenler</h2><span class="sub">tüm zamanlar</span></div>
-      <div class="tw"><table><thead><tr><th class="rk"></th><th class="l">Video</th><th>İzlenme</th><th>Beğeni</th><th class="sm">Yorum</th><th class="xs">Beğeni oranı</th></tr></thead>
-      <tbody data-clip>${ch.recent.map((v, i) => `<tr><td class="rk">${i + 1}</td>
-        <td class="l"><div class="vd">${thumb(v)}<div style="min-width:0"><a class="tt" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a>
-          <div class="mt"><span class="mono">${dshort(v.published)}</span></div></div></div></td>
-        <td class="n b">${num(v.views)}</td><td class="n">${num(v.likes)}</td><td class="n sm">${num(v.comments)}</td>
-        <td class="n xs">${v.views ? "%" + pct1(v.likes / v.views * 100) : "—"}</td></tr>`).join("")
+    <div class="bh"><h2>Bu dönem en çok izlenenler</h2><span class="sub">SON ${S.days} GÜN</span></div>
+    <section class="card"><div class="tw"><table><thead><tr><th class="no-c">#</th><th class="l">Video</th><th>İzlenme</th><th class="xs">Ort. izlenme</th><th class="sm">Ort. süre</th><th class="sm">İzlenme süresi</th><th class="xs">Abone</th></tr></thead>
+      <tbody data-clip>${ch.top.map((v, i) => `<tr><td class="no-c">${String(i + 1).padStart(2, "0")}</td>
+        <td class="l"><div class="vd">${thumb(v)}<div style="min-width:0"><a class="tt" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a><div class="mt">${tc(v.published)}</div></div></div></td>
+        <td class="b">${num(v.period_views)}</td><td class="xs">%${pct1(v.avg_pct)}</td><td class="sm mono">${dur(v.avg_seconds)}</td>
+        <td class="sm">${num(v.period_hours)} sa</td><td class="xs">+${num(v.period_subs)}</td></tr>`).join("")
+        || `<tr><td></td><td class="l muted" colspan="6">Bu dönemde izlenme yok.</td></tr>`}</tbody></table></div></section>
+    <div class="bh"><h2>Son yüklenenler</h2><span class="sub">TÜM ZAMANLAR</span></div>
+    <section class="card"><div class="tw"><table><thead><tr><th class="no-c">#</th><th class="l">Video</th><th>İzlenme</th><th>Beğeni</th><th class="sm">Yorum</th><th class="xs">Beğeni oranı</th></tr></thead>
+      <tbody data-clip>${ch.recent.map((v, i) => `<tr><td class="no-c">${String(i + 1).padStart(2, "0")}</td>
+        <td class="l"><div class="vd">${thumb(v)}<div style="min-width:0"><a class="tt" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a><div class="mt">${tc(v.published)}</div></div></div></td>
+        <td class="b">${num(v.views)}</td><td>${num(v.likes)}</td><td class="sm">${num(v.comments)}</td>
+        <td class="xs">${v.views ? "%" + pct1(v.likes / v.views * 100) : "—"}</td></tr>`).join("")
         || `<tr><td></td><td class="l muted" colspan="5">Video yok.</td></tr>`}</tbody></table></div></section>
-    <p class="foot">YouTube istatistikleri yaklaşık iki gün gecikmeyle gelir; dönem ${dshort(ch.end)} tarihinde biter.</p>`;
+    <p class="foot">YOUTUBE ANALYTICS VERİSİ ~48 SAAT GECİKMELİ · DÖNEM ${tc(ch.end)} TARİHİNDE BİTER</p>`;
   const el = $("#chChart");
   const draw = () => drawChart(el, {dates, metric: S.metric,
     cur: ch.series.map(METRICS[S.metric].get), prev: ch.prev_series.map(METRICS[S.metric].get)});
-  bindStats(el, draw); draw(); S.redraw = draw;
+  bindBoard(el, draw); draw(); S.redraw = draw;
   clip($("#view"));
 }
 
@@ -676,47 +801,49 @@ function neighbors(id){
 function renderSettings(){
   setTop({title: "Ayarlar"});
   const u = S.me.user, used = S.me.channels.length, lim = S.me.limit;
+  const cells = Math.min(lim, 50);
   $("#view").innerHTML = `
-    <section class="panel"><div class="ph"><h2>Hesap</h2></div>
-      <div class="set">${avatar({thumb: u.picture, title: u.name || u.email}, 36)}
-        <div class="tx"><b>${esc(u.name || "—")}</b><span>${esc(u.email || "")}</span></div>
-        <form method="post" action="/cikis"><button class="btn">Çıkış yap</button></form></div></section>
-    <section class="panel"><div class="ph"><h2>Paket</h2></div>
-      <div class="set"><div class="tx"><b>${esc(planName(u.plan))}</b><span class="mono">${used} / ${lim} kanal</span>
-        <div class="use"><i style="width:${Math.min(100, used / (lim || 1) * 100)}%"></i></div></div></div></section>
-    <section class="panel"><div class="ph"><h2>Bağlı kanallar</h2><a class="btn r" href="/giris?toplu=1">Kanal ekle</a></div>
-      ${channelsSorted().map(c => `<div class="set">${avatar(c, 28)}<div class="tx"><b>${esc(c.title)}</b><span>${esc(c.handle)}</span></div>
-        ${S.me.demo ? "" : `<button class="btn neg" data-rm="${esc(c.id)}" data-t="${esc(c.title)}">Kaldır</button>`}</div>`).join("")
-        || `<div class="set"><div class="tx muted">Henüz kanal yok.</div></div>`}</section>
-    <section class="panel"><div class="ph"><h2>Hesabı sil</h2></div>
-      <div class="set"><div class="tx"><b>Hesabı ve tüm kanal bağlantılarını kalıcı olarak sil</b>
-        <span>Kanallarına dokunulmaz; bu paneldeki bağlantılar ve Google izinleri kaldırılır.</span></div>
-        <button class="btn neg" id="delAcc" ${S.me.demo ? "disabled" : ""}>Hesabı sil</button></div></section>`;
-  $("#view").querySelectorAll("[data-rm]").forEach(b => b.onclick = async () => {
-    if (!confirm(`${b.dataset.t} panelden kaldırılsın mı? Kanalın kendisine dokunulmaz.`)) return;
-    try { await api(`/api/channel/${encodeURIComponent(b.dataset.rm)}`, {method: "DELETE", days: false}); }
-    catch (e) { toast(e.message); return; }
-    await refreshMe(); toast("Kanal kaldırıldı."); renderSettings();
-  });
-  const del = $("#delAcc");
-  if (del) del.onclick = async () => {
-    if (!confirm("Hesabın ve tüm kanal bağlantıların kalıcı olarak silinecek. Emin misin?")) return;
-    try { await api("/api/account", {method: "DELETE", days: false}); location.href = "/"; } catch (e) { toast(e.message); }
-  };
+    <div class="bh"><h2>Hesap</h2></div>
+    <section class="card"><div class="set">${avatar({thumb: u.picture, title: u.name || u.email}, 40)}
+      <div class="tx"><b>${esc(u.name || "—")}</b><span>${esc(u.email || "")}</span></div>
+      <form method="post" action="/cikis"><button class="btn">Çıkış yap</button></form></div></section>
+    <div class="bh"><h2>Paket</h2><span class="sub">${used} / ${lim} KANAL</span></div>
+    <section class="card"><div class="set"><div class="tx"><b>${esc(planName(u.plan))}</b><span>Her kare bir kanal yuvası.</span>
+      <div class="use">${Array.from({length: cells}, (_, i) => `<i class="${i < Math.round(used / lim * cells) ? "on" : ""}"></i>`).join("")}</div></div></div></section>
+    <div class="bh"><h2>Bağlı kanallar</h2><div class="r"><a class="btn pri" href="/giris?toplu=1">${ic("plus", 14)} Kanal ekle</a></div></div>
+    <section class="card">${channelsSorted().map(c => `<div class="set"><span class="mono muted" style="width:28px">${chNo(c.id)}</span>${avatar(c, 30)}
+      <div class="tx"><b>${esc(c.title)}</b><span>${esc(c.handle)}</span></div>
+      ${S.me.demo ? "" : `<span class="confirm" data-id="${esc(c.id)}"><button class="btn neg" data-act="ask">Kaldır</button></span>`}</div>`).join("")
+      || `<div class="set"><div class="tx muted">Henüz kanal yok.</div></div>`}</section>
+    <div class="bh"><h2>Hesabı sil</h2></div>
+    <section class="card"><div class="set"><div class="tx"><b>Hesabı ve tüm kanal bağlantılarını kalıcı olarak sil</b>
+      <span>Kanallarına dokunulmaz; bu paneldeki bağlantılar ve Google izinleri kaldırılır.</span></div>
+      <span class="confirm" data-id="__account">${S.me.demo ? `<button class="btn neg" disabled>Hesabı sil</button>` : `<button class="btn neg" data-act="ask">Hesabı sil</button>`}</span></div></section>`;
+  // Onay sayfanın içinde: "Kaldır" -> "Emin misin? Evet / Vazgeç"
+  $("#view").querySelectorAll(".confirm").forEach(box => box.addEventListener("click", async e => {
+    const act = e.target.dataset.act; if (!act) return;
+    const id = box.dataset.id, acc = id === "__account";
+    if (act === "ask"){ box.innerHTML = `<span class="muted" style="font-size:13px">Emin misin?</span><button class="btn neg" data-act="yes">${acc ? "Evet, sil" : "Evet, kaldır"}</button><button class="btn" data-act="no">Vazgeç</button>`; return; }
+    if (act === "no"){ box.innerHTML = `<button class="btn neg" data-act="ask">${acc ? "Hesabı sil" : "Kaldır"}</button>`; return; }
+    try {
+      if (acc){ await api("/api/account", {method: "DELETE", days: false}); location.href = "/"; return; }
+      await api(`/api/channel/${encodeURIComponent(id)}`, {method: "DELETE", days: false});
+      await refreshMe(); toast("Kanal kaldırıldı."); renderSettings();
+    } catch (err) { toast(err.message); }
+  }));
 }
 
 async function refreshMe(){
   S.me = await api("/api/me", {days: false});
   S.ov = {}; S.top = {}; ovById = {};
-  renderMe(); renderSidebar();
+  renderMe(); renderDesk();
 }
 
 // ============================================================================
 // Üst çubuk ve yönlendirme
 // ============================================================================
-function setTop({title, channel, range}){
-  $("#crumb").innerHTML = `${channel ? avatar(channel, 22) : ""}<h1>${esc(title)}</h1>
-    ${range ? `<span class="rng">${dshort(range.start)} – ${dshort(range.end)}</span>` : ""}`;
+function setTop({title, range}){
+  $("#crumb").innerHTML = `<h1>${esc(title)}</h1>${range ? `<span class="tc">${tc(range.start)} — ${tc(range.end)}</span>` : ""}`;
   document.title = `${title} · {{APP_NAME}}`;
 }
 function currentRoute(){
@@ -727,13 +854,13 @@ function currentRoute(){
 }
 async function route(fresh = false){
   const seq = ++S.seq, r = currentRoute();
-  S.redraw = null; closeSide(); closePal();
+  S.redraw = null; closeDesk(); closePal();
   document.querySelectorAll("#days button").forEach(b => b.classList.toggle("on", +b.dataset.d === S.days));
   $("#days").classList.toggle("hidden", r.view === "settings");
   const [prev, next] = r.view === "channel" ? neighbors(r.id) : [null, null];
   $("#pager").innerHTML = prev && S.me.channels.length > 1
-    ? `<a class="ib" href="${chHref(prev.id)}" title="Önceki: ${esc(prev.title)} (←)">${ic("left")}</a><a class="ib" href="${chHref(next.id)}" title="Sonraki: ${esc(next.title)} (→)">${ic("right")}</a>` : "";
-  renderSidebar();
+    ? `<a class="ib" href="${chHref(prev.id)}" title="Önceki: CH ${chNo(prev.id)} ${esc(prev.title)} (←)">${ic("left")}</a><a class="ib" href="${chHref(next.id)}" title="Sonraki: CH ${chNo(next.id)} ${esc(next.title)} (→)">${ic("right")}</a>` : "";
+  renderDesk();
   window.scrollTo(0, 0);
   try {
     if (r.view === "channel") await renderChannel(r.id, fresh, seq);
@@ -741,9 +868,9 @@ async function route(fresh = false){
     else await renderOverview(fresh, seq);
   } catch (e) { if (seq === S.seq) $("#view").innerHTML = errBanner("Veri alınamadı.", e.message); }
 }
-function loadSidebarDeltas(){
+function loadDesk(){
   if (!S.me.channels.length) return;
-  overview().then(ov => { ovById = {}; ov.channels.forEach(c => ovById[c.id] = c); renderSidebar(); }).catch(() => {});
+  overview().then(ov => { ovById = {}; ov.channels.forEach(c => ovById[c.id] = c); renderDesk(); renderTicker(ov); }).catch(() => {});
 }
 
 // ============================================================================
@@ -752,18 +879,20 @@ function loadSidebarDeltas(){
 const P = {items: [], idx: 0};
 function palItems(q){
   q = low(q.trim());
-  const chans = channelsSorted().map(c => ({label: c.title, sub: c.handle, href: chHref(c.id), ch: c, group: "Kanallar"}));
-  const pages = [{label: "Genel bakış", href: "#/", icon: "grid", group: "Sayfalar"},
+  const chans = channelsSorted().map(c => ({label: c.title, sub: c.handle, href: chHref(c.id), no: chNo(c.id), id: c.id, group: "Kanallar"}));
+  const pages = [{label: "Monitör duvarı", href: "#/", icon: "wall", group: "Sayfalar"},
                  {label: "Ayarlar", href: "#/ayarlar", icon: "settings", group: "Sayfalar"},
                  {label: "Kanal ekle", href: "/giris?toplu=1", icon: "plus", group: "Sayfalar"}];
-  return [...chans, ...pages].filter(it => !q || low(it.label).includes(q) || low(it.sub || "").includes(q));
+  return [...chans, ...pages].filter(it => !q || low(it.label).includes(q) || low(it.sub || "").includes(q) || (it.no && (it.no === q.padStart(2, "0") || it.no.startsWith(q))));
 }
 function renderPal(){
   let g = "";
-  $("#pList").innerHTML = P.items.map((it, i) => `${it.group !== g ? `<div class="pgr">${(g = it.group)}</div>` : ""}
-    <div class="pit ${i === P.idx ? "on" : ""}" data-i="${i}">${it.ch ? avatar(it.ch, 20) : `<span style="width:20px;display:grid;place-items:center;color:var(--muted)">${ic(it.icon, 14)}</span>`}
-    <span>${esc(it.label)}</span>${it.sub ? `<span class="h">${esc(it.sub)}</span>` : ""}</div>`).join("")
-    || `<div class="muted" style="padding:12px">Sonuç yok</div>`;
+  $("#pList").innerHTML = P.items.map((it, i) => {
+    const o = it.id && ovById[it.id], st = o ? (o.error ? "err" : state(o.views_change)) : "";
+    return `${it.group !== g ? `<div class="pgr">${(g = it.group)}</div>` : ""}
+    <div class="pit ${i === P.idx ? "on" : ""}" data-i="${i}">${it.no ? `<span class="no">${it.no}</span><span class="tl ${st}"></span>` : `<span>${ic(it.icon, 15)}</span><span></span>`}
+    <span>${esc(it.label)}</span><span class="h">${esc(it.sub || "")}</span></div>`;
+  }).join("") || `<div style="padding:14px;color:var(--desk-muted)">Sonuç yok</div>`;
   const on = $("#pList .pit.on"); if (on) on.scrollIntoView({block: "nearest"});
 }
 function openPal(){ $("#pal").classList.remove("hidden"); const i = $("#pIn"); i.value = ""; P.items = palItems(""); P.idx = 0; renderPal(); i.focus(); }
@@ -794,18 +923,17 @@ document.addEventListener("keydown", e => {
 // Başlat
 // ============================================================================
 document.querySelectorAll("i[data-i]").forEach(el => el.outerHTML = ic(el.dataset.i));
-$("#mark").innerHTML = `<svg viewBox="0 0 18 18" width="12" height="12" aria-hidden="true"><rect x="2" y="9" width="3" height="7" fill="var(--bg)"/><rect x="7.5" y="4" width="3" height="12" fill="var(--bg)"/><rect x="13" y="7" width="3" height="9" fill="var(--bg)"/></svg>`;
-$("#menuBtn").innerHTML = ic("menu", 17);
+$("#menuBtn").innerHTML = ic("menu", 18);
 $("#refresh").innerHTML = ic("refresh");
 if (!/Mac|iPhone|iPad/.test(navigator.platform)) $("#kbd").textContent = "Ctrl K";
 $("#openPal").onclick = openPal;
-$("#menuBtn").onclick = openSide;
-$("#scrim").onclick = closeSide;
-document.querySelectorAll("#days button").forEach(b => b.onclick = () => { S.days = +b.dataset.d; store.set("days", S.days); route(); loadSidebarDeltas(); });
+$("#menuBtn").onclick = openDesk;
+$("#scrim").onclick = closeDesk;
+document.querySelectorAll("#days button").forEach(b => b.onclick = () => { S.days = +b.dataset.d; store.set("days", S.days); route(); loadDesk(); });
 $("#refresh").onclick = async () => {
   const b = $("#refresh"); b.disabled = true; b.classList.add("spin");
   S.ov = {}; S.top = {};
-  await route(true); loadSidebarDeltas();
+  await route(true); loadDesk();
   b.disabled = false; b.classList.remove("spin");
 };
 window.addEventListener("hashchange", () => route());
@@ -818,7 +946,7 @@ let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTime
   catch (e) { $("#view").innerHTML = errBanner("Sunucuya ulaşılamadı.", e.message); return; }
   renderMe();
   route();
-  loadSidebarDeltas();
+  loadDesk();
 })();
 </script>
 </body>

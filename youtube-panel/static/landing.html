@@ -2,144 +2,508 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{APP_NAME}} — Bütün YouTube kanalların tek ekranda</title>
-<meta name="description" content="Studio'da hesaptan hesaba geçmeden tüm YouTube kanallarının izlenme, izlenme süresi, abone ve video verisini tek ekranda gör.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{APP_NAME}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Onlarca YouTube kanalını tek monitör duvarında izle. Hangi kanal yükseliyor, hangisi düşüyor, bir bakışta gör.">
 <link rel="stylesheet" href="/static/fonts/fonts.css">
 <style>
+  /* Kontrol odası: lacivert yayın bantları ile açık kağıt bölümler sırayla akar; sarı, canlı yayın ışığı. */
   :root{
-    color-scheme:light;
-    --bg:#fafaf9; --panel:#fff; --sunk:#f4f4f2; --ink:#161616; --ink-2:#4a4a47; --muted:#8a8984;
-    --line:#e7e6e2; --line-2:#d5d4cf;
-    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --paper:#eef0f3; --panel:#ffffff; --ink:#0d1626; --ink-2:#47506a; --muted:#7f88a0; --line:#d8dce4;
+    --desk:#0b1d3a; --desk-2:#11264a; --desk-3:#183260; --desk-ink:#e8edf7; --desk-muted:#8798bd; --desk-line:rgba(232,237,247,.1);
+    --tally:#ffc81f; --tally-ink:#0b1d3a;
+    --pos:#13854a; --neg:#d6343a; --pos-d:#3ddc84; --neg-d:#ff6b6b; --flat-d:#5f6f92;
+    --spark:#8fb4ff; --spark-fill:rgba(143,180,255,.14);
+    --shot-light:block; --shot-dark:none;
+    --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+    --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"Chivo Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   @media (prefers-color-scheme:dark){
-    :root{ color-scheme:dark; --bg:#111110; --panel:#171716; --sunk:#1c1c1b; --ink:#ededea; --ink-2:#b4b3ad; --muted:#7c7b76;
-           --line:#272725; --line-2:#363633; }
+    :root:not([data-theme="light"]){
+      --paper:#0a0f1a; --panel:#111827; --ink:#e8edf7; --ink-2:#a9b3c8; --muted:#6f7a92; --line:#1e293c;
+      --desk:#071226; --desk-2:#0e1f3e; --desk-3:#15305c; --pos:#3ddc84; --neg:#ff6b6b;
+      --shot-light:none; --shot-dark:block; color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0a0f1a; --panel:#111827; --ink:#e8edf7; --ink-2:#a9b3c8; --muted:#6f7a92; --line:#1e293c;
+    --desk:#071226; --desk-2:#0e1f3e; --desk-3:#15305c; --pos:#3ddc84; --neg:#ff6b6b;
+    --shot-light:none; --shot-dark:block; color-scheme:dark;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--desk)}
   a{color:inherit}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  :focus-visible{outline:2px solid var(--tally);outline-offset:2px}
+  .wrap{max-width:1240px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  h1,h2,h3{margin:0;font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+  .lab{font:500 11.5px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 22px;border-radius:8px;font:700 15.5px var(--sans);text-decoration:none;
+       white-space:nowrap;cursor:pointer;border:2px solid var(--tally);background:var(--tally);color:var(--tally-ink)}
+  .btn:hover{filter:brightness(1.06)}
+  .btn.line{background:transparent;color:inherit;border-color:currentColor;opacity:.9}
+  .btn.line:hover{opacity:1;filter:none}
+  .btn .g{width:20px;height:20px;border-radius:50%;background:#fff;display:grid;place-items:center}
 
-  nav{display:flex;align-items:center;height:64px;border-bottom:1px solid var(--line)}
-  .brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:16px;letter-spacing:-.01em;text-decoration:none}
-  .mark{width:20px;height:20px;border-radius:4px;background:var(--ink);display:grid;place-items:center}
-  nav .sp{flex:1}
-  nav a.in{font-size:14px;color:var(--ink-2);text-decoration:none}
-  nav a.in:hover{color:var(--ink)}
+  /* Lacivert yayın bandı ----------------------------------------------------------- */
+  .band{background:var(--desk);color:var(--desk-ink)}
+  header{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--desk);color:var(--desk-ink);border-bottom:1px solid var(--desk-line)}
+  header .wrap{display:flex;align-items:center;gap:28px;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;font:800 26px/1 var(--display);letter-spacing:.05em;text-transform:uppercase;text-decoration:none}
+  .onair{width:10px;height:10px;border-radius:50%;background:var(--tally);box-shadow:0 0 0 4px rgba(255,200,31,.18);animation:blink 2.4s ease-in-out infinite}
+  @keyframes blink{50%{box-shadow:0 0 0 7px rgba(255,200,31,.05)}}
+  nav.links{display:flex;gap:26px;font-size:14.5px;color:var(--desk-muted)}
+  nav.links a{text-decoration:none} nav.links a:hover{color:var(--desk-ink)}
+  header .sp{flex:1}
+  header .in{font-size:14.5px;color:var(--desk-muted);text-decoration:none} header .in:hover{color:var(--desk-ink)}
+  header .btn{height:40px;padding:0 16px;font-size:14px}
 
-  .hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end;padding:88px 0 48px}
-  h1{font-size:clamp(40px,5.6vw,68px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:0}
-  .lead{font-size:18px;color:var(--ink-2);margin:0 0 28px;max-width:44ch}
-  .cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:6px;background:var(--ink);color:var(--bg);
-       font-weight:500;font-size:15px;text-decoration:none;white-space:nowrap}
-  .btn:hover{opacity:.88}
-  .btn .g{width:18px;height:18px;border-radius:50%;background:#fff;display:grid;place-items:center}
-  .note{font:13px var(--mono);color:var(--muted)}
+  .hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center;padding-block:64px 72px}
+  .hero .kicker{display:flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tally);margin-bottom:22px}
+  .hero h1{font-size:clamp(54px,7.2vw,104px);line-height:.9}
+  .hero h1 span{color:var(--tally)}
+  .hero .lead{font-size:18.5px;color:var(--desk-muted);margin:24px 0 30px;max-width:42ch}
+  .hero .lead b{color:var(--desk-ink);font-weight:600}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero .fine{margin-top:16px;font:12.5px var(--mono);color:var(--desk-muted)}
 
-  .shot{margin:0 0 96px;border:1px solid var(--line-2);border-radius:8px;overflow:hidden;background:var(--panel);
-        box-shadow:0 30px 60px -30px rgba(0,0,0,.25)}
-  .shot img{display:block;width:100%;height:auto}
+  /* Canlı monitör duvarı ---------------------------------------------------------- */
+  .wall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:8px;background:#050d1c;border-radius:14px;
+        border:1px solid var(--desk-line);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+  .mon{display:flex;flex-direction:column;gap:2px;padding:12px 13px;background:var(--desk-2);border:1px solid var(--desk-line);border-radius:8px;min-width:0}
+  .mon .hd{display:flex;align-items:center;gap:7px;font:500 10.5px var(--mono);color:var(--desk-muted)}
+  .mon .hd .no{color:var(--tally);letter-spacing:.06em}
+  .mon .hd .dl{margin-left:auto}
+  .mon .nm{font-weight:600;font-size:14px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mon .big{font:800 34px/1 var(--display);margin-top:8px;transition:color .6s}
+  .mon .big.tick{color:var(--tally);transition:none}
+  .mon svg{display:block;width:100%;height:30px;margin:6px 0 4px}
+  .meter{display:flex;gap:2px}
+  .meter i{width:5px;height:8px;border-radius:1px;background:rgba(232,237,247,.12)}
+  .meter i.on{background:var(--tally)}
+  .tl{width:7px;height:7px;border-radius:50%;background:var(--flat-d);display:inline-block}
+  .tl.pos{background:var(--pos-d);box-shadow:0 0 6px rgba(61,220,132,.6)}
+  .tl.neg{background:var(--neg-d);box-shadow:0 0 6px rgba(255,107,107,.6)}
+  .dl{font:11px var(--mono);white-space:nowrap}
+  .band .dl.pos,.wall .dl.pos{color:var(--pos-d)} .band .dl.neg,.wall .dl.neg{color:var(--neg-d)}
+  .mon.alert{border-color:rgba(255,107,107,.5)}
+  .flag{font:600 9px/1 var(--mono);letter-spacing:.08em;padding:3px 4px 2px;background:var(--neg-d);color:#2a0606;border-radius:3px}
 
-  .sec-h{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--ink);padding-top:14px;margin-bottom:28px}
-  .sec-h h2{font-size:15px;font-weight:600;margin:0}
-  .sec-h span{font:13px var(--mono);color:var(--muted)}
-  .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-bottom:104px}
-  .col .n{font:13px var(--mono);color:var(--muted);display:block;margin-bottom:10px}
-  .col h3{font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0 0 8px;line-height:1.25}
-  .col p{margin:0;color:var(--ink-2);font-size:15px}
+  /* Hareket bandı -------------------------------------------------------------------- */
+  .ticker{display:flex;height:46px;background:var(--tally);color:var(--tally-ink);overflow:hidden}
+  .ticker .l{flex:none;display:flex;align-items:center;padding:0 18px;background:var(--desk);color:var(--tally);font:800 18px var(--display);letter-spacing:.1em;text-transform:uppercase}
+  .ticker .rail{flex:1;display:flex;align-items:center;overflow:hidden}
+  .ticker .run{display:flex;gap:36px;white-space:nowrap;padding-left:28px;font:500 14px var(--mono);animation:crawl 36s linear infinite}
+  .ticker .run span::before{margin-right:6px}
+  .ticker .up::before{content:"▲"} .ticker .dn::before{content:"▼"}
+  @keyframes crawl{to{transform:translateX(-50%)}}
 
-  .faq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;margin-bottom:104px}
-  .faq h2{font-size:32px;letter-spacing:-.025em;font-weight:600;margin:0;line-height:1.1}
-  details{border-top:1px solid var(--line)}
+  section{padding-block:104px 0}
+  .sh{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:end;margin-bottom:44px}
+  .sh h2{font-size:clamp(40px,5.2vw,68px);line-height:.92}
+  .sh p{margin:0;color:var(--ink-2);font-size:17px;max-width:56ch}
+
+  /* Bir sabah, iki yol ---------------------------------------------------------------- */
+  .morning{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+  .lane{border-radius:14px;padding:24px 26px 26px;min-width:0}
+  .lane.old{background:var(--panel);border:1px solid var(--line)}
+  .lane.new{background:var(--desk);color:var(--desk-ink)}
+  .lane h3{font-size:30px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .lane h3 small{font:500 12px var(--mono);letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  .lane.new h3 small{color:var(--tally)}
+  .lane ol{list-style:none;margin:20px 0 0;padding:0}
+  .lane li{display:grid;grid-template-columns:62px minmax(0,1fr);gap:14px;padding:10px 0;border-top:1px dashed var(--line);font-size:15px}
+  .lane.new li{border-top-color:var(--desk-line)}
+  .lane li time{font:500 13px var(--mono);color:var(--muted);padding-top:2px}
+  .lane.new li time{color:var(--tally)}
+  .lane.old li.repeat{color:var(--muted)}
+  .lane .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:14px;border-top:2px solid var(--ink)}
+  .lane.new .total{border-top-color:var(--tally)}
+  .lane .total b{font:800 46px/1 var(--display)}
+  .lane .total span{font:12px var(--mono);color:var(--muted)}
+  .lane.new .total span{color:var(--desk-muted)}
+  .morning-note{margin-top:14px;font:12.5px var(--mono);color:var(--muted)}
+
+  /* Ürün ------------------------------------------------------------------------- */
+  .shot{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--desk);box-shadow:0 50px 90px -50px rgba(7,18,38,.55)}
+  .shot img{display:block;width:100%;height:auto;max-width:100%}
+  .shot .l{display:var(--shot-light)} .shot .d{display:var(--shot-dark)}
+  .keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:36px}
+  .key{border-top:3px solid var(--ink);padding-top:16px;min-width:0}
+  .key h3{font-size:24px;line-height:1;margin-bottom:8px}
+  .key p{margin:0;color:var(--ink-2);font-size:15px}
+  .key .demo{display:flex;gap:6px;align-items:center;margin-bottom:12px;min-height:22px;font:12px var(--mono);color:var(--ink-2)}
+  kbd{font:12px var(--mono);border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:1px 7px;background:var(--panel);color:var(--ink)}
+  .key .meter i{background:var(--line)} .key .meter i.on{background:var(--tally)}
+
+  /* Kurulum --------------------------------------------------------------------- */
+  .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px 26px;min-width:0}
+  .step .n{display:flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+  .step .n b{font:800 44px/1 var(--display);color:var(--ink)}
+  .step h3{font-size:26px;line-height:1;margin:18px 0 10px}
+  .step p{margin:0;color:var(--ink-2);font-size:15px}
+  .why{margin-top:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start;padding:18px 22px;border-radius:12px;background:var(--desk);color:var(--desk-muted);font-size:15px}
+  .why b{color:var(--desk-ink)}
+  .why .tag{font:600 11px var(--mono);letter-spacing:.08em;padding:4px 8px;border-radius:4px;background:var(--tally);color:var(--tally-ink);white-space:nowrap}
+
+  /* Kanal paketleri -------------------------------------------------------------- */
+  .tuner{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;padding:22px 24px;border-radius:14px 14px 0 0;background:var(--desk);color:var(--desk-ink)}
+  .tuner label{font:800 22px var(--display);letter-spacing:.04em;text-transform:uppercase}
+  .tuner input[type=range]{flex:1;min-width:180px;max-width:420px;accent-color:var(--tally);height:28px}
+  .tuner output{font:800 52px/1 var(--display);color:var(--tally);min-width:3ch;text-align:right}
+  .tuner .hint{flex-basis:100%;font:13px var(--mono);color:var(--desk-muted)}
+  .tuner .hint b{color:var(--desk-ink);font-weight:500}
+  .cycle{display:inline-flex;margin-left:auto;padding:3px;border-radius:8px;background:rgba(255,255,255,.07)}
+  .cycle button{border:0;background:none;height:34px;padding:0 14px;border-radius:6px;font:600 14px var(--sans);color:var(--desk-muted);cursor:pointer}
+  .cycle button[aria-pressed="true"]{background:var(--desk-ink);color:var(--desk)}
+  .cycle small{font:500 11px var(--mono);margin-left:6px;color:var(--tally)}
+  .cycle button[aria-pressed="true"] small{color:var(--neg)}
+  .pkgs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;overflow:hidden}
+  .pkg{display:flex;flex-direction:column;gap:16px;padding:26px 24px 28px;background:var(--panel);min-width:0;transition:background .25s,color .25s}
+  .pkg .cap{display:flex;align-items:baseline;gap:10px}
+  .pkg .cap b{font:800 76px/.85 var(--display);letter-spacing:-.01em}
+  .pkg .cap span{font:600 13px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+  .pkg h3{font-size:24px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .pkg .badge{font:600 10.5px var(--mono);letter-spacing:.08em;padding:4px 7px;border-radius:4px;background:var(--desk);color:var(--tally);visibility:hidden}
+  .pkg .price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+  .pkg .price b{font:800 40px/1 var(--display)}
+  .pkg .price span{font-size:14px;color:var(--muted)}
+  .pkg .billed{font:12px var(--mono);color:var(--muted);margin-top:-10px;min-height:18px}
+  .pkg ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px;color:var(--ink-2)}
+  .pkg li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:8px}
+  .pkg li::before{content:"";width:8px;height:8px;margin-top:7px;border-radius:2px;background:currentColor;opacity:.45}
+  .pkg li small{font:11px var(--mono);margin-left:6px;opacity:.75}
+  .pkg .per{font:12.5px var(--mono);min-height:18px;color:var(--muted)}
+  .pkg .btn{margin-top:auto;justify-content:center;height:46px;background:transparent;border-color:var(--line);color:var(--ink)}
+  .pkg .btn:hover{border-color:var(--ink)}
+  .pkg.pick{background:var(--tally);color:var(--tally-ink)}
+  .pkg.pick .badge{visibility:visible}
+  .pkg.pick ul,.pkg.pick .price span,.pkg.pick .billed,.pkg.pick .per{color:var(--tally-ink)}
+  .pkg.pick .btn{background:var(--desk);border-color:var(--desk);color:var(--tally)}
+  .incl{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:22px;font-size:14.5px;color:var(--ink-2)}
+  .incl span{display:inline-flex;gap:8px;align-items:center}
+  .incl span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pos)}
+  .tax{margin-top:8px;font:12px var(--mono);color:var(--muted)}
+
+  /* İzinler ---------------------------------------------------------------------- */
+  .perm{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:start}
+  .perm h2{font-size:clamp(38px,4.6vw,60px);line-height:.92}
+  .perm p{color:var(--ink-2);max-width:46ch}
+  .scopes{border-radius:14px;overflow:hidden;background:var(--desk);color:var(--desk-ink)}
+  .scope{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 22px;border-bottom:1px solid var(--desk-line)}
+  .scope:last-child{border-bottom:0}
+  .scope code{font:500 13.5px var(--mono);overflow-wrap:anywhere}
+  .scope p{margin:3px 0 0;font-size:13.5px;color:var(--desk-muted)}
+  .scope .st{display:inline-flex;align-items:center;gap:8px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .scope .st.on{color:var(--pos-d)} .scope .st.off{color:var(--neg-d)}
+
+  /* SSS -------------------------------------------------------------------------- */
+  .faq{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px}
+  .faq h2{font-size:clamp(38px,4.6vw,60px);line-height:.92}
+  details{border-top:2px solid var(--ink)}
+  details+details{border-top-width:1px;border-top-color:var(--line)}
   details:last-child{border-bottom:1px solid var(--line)}
-  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:18px 0;font-weight:500}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font-weight:600;font-size:17px}
   summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";font:18px/1 var(--mono);color:var(--muted)}
-  details[open] summary::after{content:"−"}
-  details p{margin:0 0 20px;color:var(--ink-2);font-size:15px;max-width:62ch}
+  summary::after{content:"+";font:800 26px/1 var(--display);color:var(--muted);flex:none}
+  details[open] summary::after{content:"−";color:var(--ink)}
+  details p{margin:0 0 22px;color:var(--ink-2);max-width:62ch}
 
-  .end{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid var(--ink);
-       padding:40px 0 96px}
-  .end h2{font-size:clamp(26px,3vw,36px);letter-spacing:-.025em;font-weight:600;margin:0}
-  footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:13px;color:var(--muted)}
-  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  /* Son çağrı -------------------------------------------------------------------- */
+  .final{margin-top:112px}
+  .final .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center;padding-block:88px}
+  .final h2{font-size:clamp(48px,6.6vw,92px);line-height:.88}
+  .final h2 span{color:var(--tally)}
+  .final p{color:var(--desk-muted);margin:20px 0 28px;max-width:44ch}
+  .ghost{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .ghost i{aspect-ratio:4/3;border-radius:6px;border:1px dashed var(--desk-line);display:grid;place-items:center;font:500 11px var(--mono);font-style:normal;color:var(--desk-muted)}
+  .ghost i.lit{border:1px solid var(--desk-line);background:var(--desk-2);color:var(--tally)}
+  footer{background:var(--desk);color:var(--desk-muted);border-top:1px solid var(--desk-line)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;padding-block:24px calc(28px + env(safe-area-inset-bottom,0px));font:12px var(--mono)}
 
-  .toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 14px;
-         border-radius:5px;font-size:14px;max-width:calc(100% - 32px);display:none;z-index:9}
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--desk);color:var(--desk-ink);
+         border-left:3px solid var(--tally);padding:11px 16px;border-radius:6px;font-size:14px;z-index:30;max-width:calc(100% - 32px)}
 
-  @media (max-width:860px){
-    .hero{grid-template-columns:1fr;gap:20px;padding:48px 0 32px}
-    .cols{grid-template-columns:1fr;gap:28px}
-    .faq{grid-template-columns:1fr;gap:16px}
-    .shot{margin-bottom:64px}
+  @media (max-width:1080px){
+    .hero{grid-template-columns:1fr;gap:40px}
+    .pkgs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .keys{grid-template-columns:repeat(2,minmax(0,1fr))}
+    nav.links{display:none}
   }
+  @media (max-width:820px){
+    .sh,.morning,.perm,.faq,.final .wrap{grid-template-columns:1fr;gap:20px}
+    .steps{grid-template-columns:1fr}
+    section{padding-block:72px 0}
+    .final{margin-top:80px}
+    .final .wrap{padding-block:64px}
+  }
+  @media (max-width:560px){
+    .wall{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px}
+    .mon:nth-child(n+5){display:none}
+    .pkgs,.keys{grid-template-columns:1fr}
+    header .in{display:none}
+    .hero{padding-block:40px 48px}
+    .tuner output{font-size:42px}
+    .cycle{margin-left:0}
+    .lane{padding:20px}
+    .lane li{grid-template-columns:52px minmax(0,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){ .ticker .run,.onair{animation:none} .pkg,.mon .big{transition:none} }
 </style>
 </head>
 <body>
-<div class="toast" id="toast"></div>
-<nav class="wrap">
-  <a class="brand" href="/"><span class="mark"><svg viewBox="0 0 18 18" width="13" height="13" aria-hidden="true"><rect x="2" y="9" width="3" height="7" fill="var(--bg)"/><rect x="7.5" y="4" width="3" height="12" fill="var(--bg)"/><rect x="13" y="7" width="3" height="9" fill="var(--bg)"/></svg></span>{{APP_NAME}}</a>
-  <span class="sp"></span>
-  <a class="in" href="/giris?toplu=1">Giriş yap</a>
-</nav>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#ust"><span class="onair" aria-hidden="true"></span>{{APP_NAME}}</a>
+    <nav class="links" aria-label="Bölümler"><a href="#sabah">Neden</a><a href="#panel">Panel</a><a href="#kurulum">Kurulum</a><a href="#paketler">Paketler</a><a href="#sss">SSS</a></nav>
+    <span class="sp"></span>
+    <a class="in" href="/giris?toplu=1" data-cta>Giriş yap</a>
+    <a class="btn" href="/giris?toplu=1" data-cta>Ücretsiz başla</a>
+  </div>
+</header>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>Bütün kanalların, tek ekranda.</h1>
-    <div>
-      <p class="lead">Studio'da hesaptan hesaba geçmeden izlenme, izlenme süresi, abone ve video verilerini
-        birlikte gör. Birden fazla kanal işletenler için.</p>
-      <div class="cta">
-        <a class="btn" href="/giris?toplu=1"><span class="g"><svg viewBox="0 0 48 48" width="12" height="12" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span>Google ile giriş yap</a>
-        <span class="note">Beta süresince ücretsiz</span>
+<main id="ust">
+  <div class="band">
+    <div class="wrap hero">
+      <div>
+        <div class="kicker"><span class="tl pos"></span>Kanal ağları için kontrol odası</div>
+        <h1>Bütün kanalların <span>tek duvarda.</span></h1>
+        <p class="lead">Studio'da hesaptan hesaba geçmeyi bırak. <b>Her kanal bir monitör:</b> izlenmesi, gidişatı, payı. Yükselen yeşil, düşen kırmızı yanar.</p>
+        <div class="cta">
+          <a class="btn" href="/giris?toplu=1" data-cta><span class="g"><svg viewBox="0 0 48 48" width="12" height="12" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg></span>Google ile ücretsiz başla</a>
+          <a class="btn line" href="#paketler">Kanal paketleri</a>
+        </div>
+        <div class="fine">2 kanal ücretsiz · kart istenmez · sadece okuma izni</div>
       </div>
+      <div class="wall" id="wall" aria-label="Örnek monitör duvarı"></div>
     </div>
-  </section>
+  </div>
+  <div class="ticker" aria-hidden="true"><span class="l">Hareket</span><div class="rail"><div class="run" id="tick"></div></div></div>
 
-  <figure class="shot" style="margin-left:0;margin-right:0">
-    <picture>
-      <source srcset="/static/img/panel-dark.webp" media="(prefers-color-scheme: dark)">
-      <img src="/static/img/panel-light.webp" width="2560" height="1600" alt="Sekiz kanalın toplam izlenmesini, kanal tablosunu ve günlük grafiği gösteren genel bakış ekranı">
-    </picture>
-  </figure>
+  <div class="wrap">
+    <section id="sabah">
+      <div class="sh">
+        <h2>Bir sabah, iki yol.</h2>
+        <p>12 kanalın var ve dün ne olduğunu bilmek istiyorsun. Studio her kanalı ayrı bir hesap gibi açtırıyor. Kontrol odasında hepsi aynı anda yanıyor.</p>
+      </div>
+      <div class="morning">
+        <div class="lane old">
+          <h3>Studio ile <small>12 kez tekrar</small></h3>
+          <ol>
+            <li><time>09:00</time><span>Kanal 1'i aç, Analiz sekmesine gir</span></li>
+            <li><time>09:02</time><span>Rakamları bir kenara yaz</span></li>
+            <li><time>09:03</time><span>Profil menüsü → Hesap değiştir → Kanal 2</span></li>
+            <li class="repeat"><time>09:06</time><span>Aynısını kanal 3, 4, 5… için yap</span></li>
+            <li><time>09:38</time><span>Rakamları tabloya geçir, topla</span></li>
+            <li><time>09:45</time><span>Hangi kanal düştü? Dünkü tabloyla karşılaştır</span></li>
+          </ol>
+          <div class="total"><b>~45 dk</b><span>her sabah</span></div>
+        </div>
+        <div class="lane new">
+          <h3>Kanalist ile <small>tek ekran</small></h3>
+          <ol>
+            <li><time>09:00</time><span>Monitör duvarını aç</span></li>
+            <li><time>09:00</time><span>Düşen kanal kırmızı yanıyor, üstünde DİKKAT yazıyor</span></li>
+            <li><time>09:01</time><span>Toplam izlenme, önceki haftayla aynı grafikte</span></li>
+            <li><time>09:01</time><span>Ayın en iyi videosu yayın akışının başında</span></li>
+            <li><time>09:02</time><span><kbd>→</kbd> ile düşen kanala geç, videolarına bak</span></li>
+          </ol>
+          <div class="total"><b>~2 dk</b><span>aynı bilgi</span></div>
+        </div>
+      </div>
+      <p class="morning-note">Örnek akış; süreler 12 kanallı bir hesap için kabaca hesaplandı.</p>
+    </section>
 
-  <div class="sec-h"><h2>Neler var</h2><span>sadece okuma izniyle</span></div>
-  <section class="cols">
-    <div class="col"><span class="n">01</span><h3>Toplam ve kırılım bir arada</h3>
-      <p>Bütün kanalların toplam izlenmesi, izlenme süresi ve net abonesi; önceki dönemle karşılaştırmalı. Grafikte bir güne gel, o gün hangi kanalın ne getirdiğini gör.</p></div>
-    <div class="col"><span class="n">02</span><h3>Kanaldan kanala bir tuşla</h3>
-      <p>Kenar çubuğunda her kanal, değişim oranıyla duruyor. <span class="note">⌘K</span> ile ara, kanal sayfasında <span class="note">← →</span> ile sıradakine geç.</p></div>
-    <div class="col"><span class="n">03</span><h3>Hangi video çalışıyor</h3>
-      <p>Tüm kanallarda dönemin en çok izlenen videoları tek listede: izlenme, ortalama izlenme oranı, süre ve kazandırdığı abone.</p></div>
-  </section>
+    <section id="panel">
+      <div class="sh">
+        <h2>Kanal ağı işletenler için.</h2>
+        <p>Otomasyon kanalları, içerik ajansları, birden fazla nişte yayın yapanlar. Panelin her parçası tek soruya cevap veriyor: hangi kanal ne durumda?</p>
+      </div>
+      <figure class="shot" style="margin:0">
+        <img class="l" src="/static/img/panel-light.webp" width="2560" height="1600" alt="Kanalist monitör duvarı: toplam izlenme grafiği ve kanal monitörleri">
+        <img class="d" src="/static/img/panel-dark.webp" width="2560" height="1600" alt="Kanalist monitör duvarı, koyu tema">
+      </figure>
+      <div class="keys">
+        <div class="key"><div class="demo"><span class="tl pos"></span><span class="tl neg"></span><span class="tl"></span></div>
+          <h3>Durum ışıkları</h3><p>Önceki döneme göre yükselen yeşil, düşen kırmızı yanar. %10'dan sert düşüşte kanal DİKKAT ile işaretlenir.</p></div>
+        <div class="key"><div class="demo"><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span> %36,6</div>
+          <h3>Pay ölçeri</h3><p>Her kanalın toplam izlenmedeki payı ses seviyesi gibi okunur. Ağın yükünü kimin çektiği bir bakışta belli.</p></div>
+        <div class="key"><div class="demo"><span class="tl pos"></span>CH 03 Gezgin Çift ▲ %29,1</div>
+          <h3>Hareket bandı</h3><p>Dönemin en çok yükselen ve düşen kanalları ekranın altında akar. Tıkla, kanala geç.</p></div>
+        <div class="key"><div class="demo"><kbd>⌘K</kbd><kbd>←</kbd><kbd>→</kbd></div>
+          <h3>Kanal numaraları</h3><p>Her kanalın CH numarası var. Adını ya da numarasını yaz, aç; kanal sayfasında oklarla sıradakine geç.</p></div>
+      </div>
+    </section>
 
-  <section class="faq">
-    <h2>Sık sorulanlar</h2>
-    <div>
-      <details open><summary>Kanallarıma erişim güvenli mi?</summary>
-        <p>{{APP_NAME}} Google'dan yalnızca okuma izni ister. Video yükleyemez, silemez, ayarlarını değiştiremez. Bağlantı anahtarları şifreli saklanır; bir kanalı panelden kaldırdığında Google'daki izin de geri alınır.</p></details>
-      <details><summary>Tek e-postada onlarca kanalım var. Hepsi gelir mi?</summary>
-        <p>Evet. Google her girişte tek bir kanala izin verdiği için, giriş yaptıktan sonra panel seni sırayla Google'ın kanal seçicisine götürür; aynı e-postadaki her kanalı bir kez seçersin. Farklı Google hesaplarındaki kanallar da aynı panele eklenir. Bu sadece bir kez yapılır; sonraki girişlerde bütün kanalların hazırdır.</p></details>
-      <details><summary>Veriler ne kadar güncel?</summary>
-        <p>İzlenme ve izlenme süresi YouTube Analytics'ten gelir ve YouTube'un kendi gecikmesiyle, yaklaşık iki gün geriden takip edilir. Abone sayıları anlıktır.</p></details>
-      <details><summary>Ücretli mi?</summary>
-        <p>Beta süresince ücretsiz. Sonrasında bağlanan kanal sayısına göre aylık paketler olacak; beta kullanıcılarına önceden haber verilecek.</p></details>
+    <section id="kurulum">
+      <div class="sh">
+        <h2>Duvar üç adımda kurulur.</h2>
+        <p>Kurulacak bir şey yok. Kanalların zaten Google hesabına bağlı; panele de oradan giriyorsun.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n"><b>1</b>Giriş</div><h3>Google ile gir</h3><p>Kanalının olduğu hesabı seç. İlk monitör birkaç saniyede yanar.</p></div>
+        <div class="step"><div class="n"><b>2</b>Kanallar</div><h3>Diğerlerini sırayla seç</h3><p>Panel seni Google'ın kanal seçicisine geri götürür. Her kanalı bir kez seçersin; eklenmiş olanlar atlanır.</p></div>
+        <div class="step"><div class="n"><b>3</b>Her gün</div><h3>Tek duvardan izle</h3><p>Sonraki girişlerde bütün kanalların hazır. Farklı Google hesaplarındaki kanallar da aynı duvarda.</p></div>
+      </div>
+      <div class="why"><span class="tag">NEDEN TEK TEK?</span><span><b>Bir e-postadaki her kanal ayrı bir Brand Account'tur</b> ve Google her girişte yalnızca seçilen kanala izin verir. Bu yüzden kanalları ilk seferde birer kez seçiyorsun; sonra bir daha sorulmuyor.</span></div>
+    </section>
+
+    <section id="paketler">
+      <div class="sh">
+        <h2>Kanal paketleri.</h2>
+        <p>Bütün paketlerde panelin tamamı açık. Paketler yalnızca duvara bağlayabileceğin kanal sayısında ayrılıyor. İstediğin an yükselt ya da iptal et.</p>
+      </div>
+      <div class="tuner">
+        <label for="count">Kaç kanalın var?</label>
+        <input type="range" id="count" min="1" max="150" value="12" aria-describedby="hint">
+        <output id="countOut" for="count">12</output>
+        <div class="cycle" role="group" aria-label="Faturalama dönemi">
+          <button id="cycMonth" aria-pressed="true">Aylık</button>
+          <button id="cycYear" aria-pressed="false">Yıllık<small>2 ay bedava</small></button>
+        </div>
+        <div class="hint" id="hint"></div>
+      </div>
+      <div class="pkgs" id="pkgs"></div>
+      <div class="incl"><span>Sadece okuma izni</span><span>7 / 28 / 90 günlük dönem</span><span>Mobil ve koyu tema</span><span>İstediğin an iptal</span></div>
+      <p class="tax">Fiyatlar Türk lirası, KDV dahil. Yıllık pakette tutar yılda bir kez faturalanır.</p>
+    </section>
+
+    <section>
+      <div class="perm">
+        <div>
+          <span class="lab">Güvenlik</span>
+          <h2 style="margin-top:14px">Kanallarına dokunamayız.</h2>
+          <p>{{APP_NAME}} Google'dan yalnızca okuma izni ister. Bağlantı anahtarları şifreli saklanır. Bir kanalı panelden kaldırdığında Google'daki izni de geri alırız; hesabını silersen bütün verin silinir.</p>
+        </div>
+        <div class="scopes" role="list" aria-label="Google izinleri">
+          <div class="scope" role="listitem"><div><code>youtube.readonly</code><p>Kanal adı, abone sayısı, video listesi</p></div><span class="st on"><span class="tl pos"></span>istenir</span></div>
+          <div class="scope" role="listitem"><div><code>yt-analytics.readonly</code><p>İzlenme, izlenme süresi, abone kazanımı</p></div><span class="st on"><span class="tl pos"></span>istenir</span></div>
+          <div class="scope" role="listitem"><div><code>youtube.upload</code><p>Video yükleme</p></div><span class="st off"><span class="tl neg"></span>istenmez</span></div>
+          <div class="scope" role="listitem"><div><code>youtube</code><p>Kanal ayarlarını değiştirme, video silme</p></div><span class="st off"><span class="tl neg"></span>istenmez</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sss">
+      <div class="faq">
+        <h2>Sık sorulanlar</h2>
+        <div>
+          <details open><summary>Tek e-postada onlarca kanalım var. Hepsi gelir mi?</summary>
+            <p>Evet. Giriş yaptıktan sonra panel seni sırayla Google'ın kanal seçicisine götürür; aynı e-postadaki her kanalı bir kez seçersin. Bu yalnızca ilk seferde yapılır.</p></details>
+          <details><summary>Farklı Google hesaplarındaki kanallar aynı duvarda durabilir mi?</summary>
+            <p>Durabilir. Kanal eklerken o kanalın bağlı olduğu hesabı seçmen yeterli. Duvara bağlı kanallardan herhangi birinin hesabıyla girmen aynı paneli açar.</p></details>
+          <details><summary>Veriler ne kadar güncel?</summary>
+            <p>İzlenme ve izlenme süresi YouTube Analytics'ten gelir. YouTube bu veriyi yaklaşık 48 saat gecikmeyle açtığı için panel de iki gün geriden takip eder. Abone sayıları anlıktır.</p></details>
+          <details><summary>Paketimdeki kanal sayısını aşarsam ne olur?</summary>
+            <p>Yeni kanal eklenmez, mevcut monitörlerin çalışmaya devam eder. Paketini yükselttiğin anda yeni kanalları ekleyebilirsin.</p></details>
+          <details><summary>İptal etmek kolay mı?</summary>
+            <p>Ayarlar sayfasından. Dönem sonuna kadar panel açık kalır, sonra ücretsiz pakete geçersin.</p></details>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="band final">
+    <div class="wrap">
+      <div>
+        <h2>Duvarı aç, <span>kanalları yak.</span></h2>
+        <p>İki kanala kadar ücretsiz. Kart bilgisi istenmez, kurulum yok.</p>
+        <a class="btn" href="/giris?toplu=1" data-cta>Google ile ücretsiz başla</a>
+      </div>
+      <div class="ghost" aria-hidden="true" id="ghost"></div>
     </div>
-  </section>
-
-  <section class="end">
-    <h2>Kanallarını bağla, gerisini panel toplasın.</h2>
-    <a class="btn" href="/giris?toplu=1">Google ile giriş yap</a>
-  </section>
+  </div>
 </main>
-<footer><div class="wrap"><span>© {{APP_NAME}}</span><span>YouTube, Google LLC'nin ticari markasıdır. {{APP_NAME}}, YouTube veya Google ile bağlantılı değildir.</span></div></footer>
+<footer><div class="wrap"><span>© 2026 {{APP_NAME}}</span><span>YouTube, Google LLC'nin ticari markasıdır. {{APP_NAME}}, YouTube veya Google ile bağlantılı değildir.</span></div></footer>
+<div class="toast" id="toast" hidden></div>
+
 <script>
-  const q = new URLSearchParams(location.search), t = document.getElementById("toast");
-  if (q.get("hata")) { t.textContent = q.get("hata"); t.style.display = "block"; history.replaceState(null, "", "/"); setTimeout(() => t.style.display = "none", 7000); }
+  const $ = s => document.querySelector(s);
+  const nf = new Intl.NumberFormat("tr-TR"), cf = new Intl.NumberFormat("tr-TR", {notation: "compact", maximumFractionDigits: 1});
+  const num = v => v >= 10000 ? cf.format(v) : nf.format(Math.round(v));
+  const pct = v => nf.format(Math.round(v * 10) / 10);
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // --- Örnek monitör duvarı (uydurma kanallar) ---------------------------------
+  const CH = [
+    {no: "01", name: "Cebimdeki Para", views: 7128,   ch: 24.9},
+    {no: "03", name: "Gezgin Çift",    views: 33040,  ch: 29.1},
+    {no: "04", name: "Kısa Bilgi",     views: 159600, ch: -4.1},
+    {no: "05", name: "Mutfak Sırları", views: 120700, ch: 1.9},
+    {no: "07", name: "Tarih Dedektifi",views: 45500,  ch: 14.9},
+    {no: "08", name: "Teknoloji Kutusu",views: 47600, ch: -15.5},
+  ];
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  CH.forEach(c => { let v = 50; c.s = Array.from({length: 28}, (_, i) => (v = Math.max(8, v + (rnd() - .48 + c.ch / 400) * 14 + (rnd() < .05 ? 30 : 0)))); });
+  const total = CH.reduce((a, c) => a + c.views, 0), maxShare = Math.max(...CH.map(c => c.views)) / total;
+  const st = p => p >= 2 ? "pos" : p <= -2 ? "neg" : "";
+  function spark(vals){
+    const max = Math.max(...vals), min = Math.min(...vals), w = 200, h = 30, r = max - min || 1;
+    const pts = vals.map((v, i) => `${(i / (vals.length - 1) * w).toFixed(1)},${(h - 2 - (v - min) / r * (h - 5)).toFixed(1)}`);
+    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="M${pts.join("L")}L${w},${h}L0,${h}Z" fill="var(--spark-fill)"/><path d="M${pts.join("L")}" fill="none" stroke="var(--spark)" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`;
+  }
+  const meter = f => `<span class="meter">${Array.from({length: 10}, (_, i) => `<i class="${i < Math.max(1, Math.round(f * 10)) ? "on" : ""}"></i>`).join("")}</span>`;
+  function drawWall(){
+    $("#wall").innerHTML = CH.map((c, i) => `<div class="mon ${c.ch <= -10 ? "alert" : ""}">
+      <div class="hd"><span class="no">CH ${c.no}</span><span class="tl ${st(c.ch)}"></span>${c.ch <= -10 ? `<span class="flag">DİKKAT</span>` : ""}
+        <span class="dl ${st(c.ch)}">${c.ch > 0 ? "▲" : "▼"} %${pct(Math.abs(c.ch))}</span></div>
+      <div class="nm">${c.name}</div><div class="big" id="b${i}">${num(c.views)}</div>${spark(c.s)}
+      ${meter(c.views / total / maxShare)}</div>`).join("");
+  }
+  drawWall();
+  if (!calm) setInterval(() => {
+    const i = Math.floor(Math.random() * CH.length), c = CH[i];
+    c.views += Math.round(c.views * (0.0004 + Math.random() * 0.0012)) + 1;
+    const el = document.getElementById("b" + i); if (!el) return;
+    el.textContent = num(c.views); el.classList.add("tick"); requestAnimationFrame(() => setTimeout(() => el.classList.remove("tick"), 60));
+  }, 1400);
+  const movers = [...CH].sort((a, b) => Math.abs(b.ch) - Math.abs(a.ch));
+  const items = movers.map(c => `<span class="${c.ch >= 0 ? "up" : "dn"}">CH ${c.no} ${c.name} %${pct(Math.abs(c.ch))}</span>`).join("");
+  $("#tick").innerHTML = items + items;
+  $("#ghost").innerHTML = Array.from({length: 12}, (_, i) => `<i class="${i < 5 ? "lit" : ""}">CH ${String(i + 1).padStart(2, "0")}</i>`).join("");
+
+  // --- Kanal paketleri -----------------------------------------------------------
+  const PLANS = [
+    {name: "Ücretsiz", cap: 2,   capLabel: "02",   month: 0,   year: 0,    items: ["Monitör duvarı ve liste", "7 ve 28 günlük dönem", "Yayın akışı: en iyi videolar"], cta: "Ücretsiz başla"},
+    {name: "Pro",      cap: 15,  capLabel: "15",   month: 299, year: 2990, items: ["Ücretsizdeki her şey", "90 günlük dönem", "Kanal detay sayfaları", "E-posta desteği"], cta: "Pro ile başla"},
+    {name: "Ağ",       cap: 100, capLabel: "100",  month: 899, year: 8990, items: ["Pro'daki her şey", "Öncelikli destek", "Fatura ile ödeme", {t: "Haftalık e-posta raporu", soon: 1}, {t: "Ekip üyeleri", soon: 1}], cta: "Ağ paketiyle başla"},
+    {name: "Kurumsal", cap: Infinity, capLabel: "100+", month: null, year: null, items: ["Ağ paketindeki her şey", "Kanal ağına özel sınır", "Sözleşme ve SLA", "Kurulumda birebir destek"], cta: "Bize yazın"},
+  ];
+  const tl = n => nf.format(Math.round(n)) + " TL";
+  const tl1 = n => new Intl.NumberFormat("tr-TR", {maximumFractionDigits: 1}).format(n) + " TL";
+  const store = { get(k){ try { return localStorage.getItem("kl-" + k); } catch { return null; } }, set(k, v){ try { localStorage.setItem("kl-" + k, v); } catch {} } };
+  let yearly = store.get("yearly") === "1", count = +(store.get("count") || 12);
+  if (!(count >= 1 && count <= 150)) count = 12;
+  function renderPkgs(){
+    const pick = PLANS.find(p => count <= p.cap), m = p => p.month == null ? null : (yearly ? p.year / 12 : p.month);
+    $("#count").value = count; $("#countOut").textContent = count;
+    $("#cycMonth").setAttribute("aria-pressed", !yearly); $("#cycYear").setAttribute("aria-pressed", yearly);
+    $("#hint").innerHTML = pick.month == null ? `<b>${count} kanal</b> için Kurumsal pakete göz at.`
+      : pick.month === 0 ? `<b>${count} kanal</b> ücretsiz pakete sığıyor.`
+      : `<b>${count} kanal</b> → <b>${pick.name}</b> paketi · kanal başına aylık <b>${tl1(m(pick) / count)}</b>`;
+    $("#pkgs").innerHTML = PLANS.map(p => {
+      const mp = m(p), on = p === pick;
+      return `<article class="pkg ${on ? "pick" : ""}" aria-label="${p.name} paketi${on ? ", senin için önerilen" : ""}">
+        <div class="cap"><b>${p.capLabel}</b><span>kanal</span></div>
+        <h3>${p.name}<span class="badge">SENİN İÇİN</span></h3>
+        <div class="price">${mp == null ? "<b>Özel fiyat</b>" : `<b>${nf.format(Math.round(mp))}</b><span>TL / ay</span>`}</div>
+        <div class="billed">${mp == null ? "kanal sayına göre teklif" : p.month === 0 ? "her zaman ücretsiz" : yearly ? `yılda ${tl(p.year)} faturalanır` : "aylık faturalanır"}</div>
+        <ul>${p.items.map(i => typeof i === "string" ? `<li><span>${i}</span></li>` : `<li><span>${i.t}<small>yakında</small></span></li>`).join("")}</ul>
+        <div class="per">${on && mp ? `${count} kanal · kanal başına ${tl1(mp / count)}` : ""}</div>
+        <a class="btn" href="/giris?toplu=1" data-cta>${p.cta}</a></article>`;
+    }).join("");
+  }
+  $("#count").addEventListener("input", e => { count = +e.target.value; store.set("count", count); renderPkgs(); });
+  $("#cycMonth").addEventListener("click", () => { yearly = false; store.set("yearly", "0"); renderPkgs(); });
+  $("#cycYear").addEventListener("click", () => { yearly = true; store.set("yearly", "1"); renderPkgs(); });
+  renderPkgs();
+
+  const q = new URLSearchParams(location.search);
+  if (q.get("hata")){ const t = $("#toast"); t.textContent = q.get("hata"); t.hidden = false; history.replaceState(null, "", "/"); setTimeout(() => t.hidden = true, 7000); }
 </script>
 </body>
 </html>
