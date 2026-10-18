@@ -213,23 +213,36 @@ def index(request: Request):
 
 @app.get("/giris")
 def login(request: Request):
-    """Google ile giriş. Oturum açıksa, seçilen kanalı mevcut panele ekler."""
+    """
+    Google ile giriş. Oturum açıksa seçilen kanalı mevcut panele ekler.
+
+    Google her girişte tek bir kanala izin verir; bir e-postada onlarca kanal
+    (Brand Account) olabilir. Bu yüzden toplu ekleme bir döngüdür:
+      ?toplu=1    her kanaldan sonra /ekle ara sayfasına döner
+      ?toplu=oto  ara sayfa birkaç saniye sonra sıradaki kanalı kendiliğinden ister
+    """
     if DEMO:
         return back_with_error("Örnek veri modundasın; gerçek giriş için --demo olmadan başlat.")
     if not configured():
         return back_with_error("Sunucu ayarları eksik: GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET.")
+    mode = {"1": "toplu", "oto": "oto"}.get(request.query_params.get("toplu", ""), "")
     user = current_user(request)
     if user and db.count_channels(user["id"]) >= PLAN_LIMITS.get(user["plan"], 0):
+        if mode:
+            return RedirectResponse("/ekle?durum=sinir", status_code=303)
         return back_with_error("Paketindeki kanal sınırına ulaştın.")
-    state = db.save_state(user["id"] if user else None)
-    return RedirectResponse(yt.auth_url(REDIRECT_URI, state), status_code=303)
+    state = db.save_state(user["id"] if user else None, mode)
+    hint = user.get("email") if user and mode else None
+    return RedirectResponse(yt.auth_url(REDIRECT_URI, state, hint), status_code=303)
 
 
 @app.get("/oauth/callback")
 def oauth_callback(request: Request):
     q = request.query_params
-    valid, state_user = db.pop_state(q.get("state"))
+    valid, state_user, mode = db.pop_state(q.get("state"))
     if q.get("error"):
+        if mode and state_user:
+            return RedirectResponse("/", status_code=303)  # toplu eklemede "İptal" = bitti
         return back_with_error("Google girişi iptal edildi.")
     if not valid or not q.get("code"):
         return back_with_error("Giriş isteğinin süresi doldu. Tekrar dene.")
@@ -251,26 +264,45 @@ def oauth_callback(request: Request):
         user_id = db.create_user(sub, who.get("email"),
                                  who.get("name") or (info and info["title"]), who.get("picture"))
 
-    target, error = "/", None
-    if info:
+    if not info:
+        status = "kanalyok"
+    else:
         existing = db.get_channel(user_id, info["id"])
-        limit = PLAN_LIMITS.get(db.user_plan(user_id), 0)
-        if not existing and db.count_channels(user_id) >= limit:
-            error = "Paketindeki kanal sınırına ulaştın; kanal eklenmedi."
+        if not existing and db.count_channels(user_id) >= PLAN_LIMITS.get(db.user_plan(user_id), 0):
+            status = "sinir"
         else:
             db.upsert_channel(user_id, info, FERNET.encrypt(tok["refresh_token"].encode()).decode(), sub)
             if existing:
                 forget(existing["id"])
-            target = "/#/kanal/" + urllib.parse.quote(info["id"])
-    else:
-        error = ("Bu Google hesabında YouTube kanalı yok. Girişte kanalın bağlı olduğu "
-                 "hesabı veya kanalı seç.")
+            status = "var" if existing else "yeni"
 
-    resp = back_with_error(error) if error else RedirectResponse(target, status_code=303)
+    if mode:
+        params = {"durum": status}
+        if info:
+            params.update(kanal=info["id"], ad=info["title"])
+        if mode == "oto":
+            params["oto"] = "1"
+        resp = RedirectResponse("/ekle?" + urllib.parse.urlencode(params), status_code=303)
+    elif status == "kanalyok":
+        resp = back_with_error("Bu Google hesabında YouTube kanalı yok. Girişte kanalın bağlı "
+                               "olduğu hesabı veya kanalı seç.")
+    elif status == "sinir":
+        resp = back_with_error("Paketindeki kanal sınırına ulaştın; kanal eklenmedi.")
+    else:
+        resp = RedirectResponse("/#/kanal/" + urllib.parse.quote(info["id"]), status_code=303)
+
     if state_user is None:
         resp.set_cookie(COOKIE, db.create_session(user_id), max_age=db.SESSION_DAYS * 86400,
                         httponly=True, samesite="lax", secure=SECURE_COOKIE)
     return resp
+
+
+@app.get("/ekle")
+def add_progress(request: Request):
+    """Toplu kanal eklemenin ara sayfası."""
+    if not current_user(request):
+        return RedirectResponse("/", status_code=303)
+    return page("ekle.html")
 
 
 @app.post("/cikis")

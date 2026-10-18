@@ -83,8 +83,8 @@ def report(token, **params):
 # GİRİŞ
 # ----------------------------------------------------------------------------
 
-def auth_url(redirect_uri, state):
-    return AUTH_URL + "?" + urllib.parse.urlencode({
+def auth_url(redirect_uri, state, login_hint=None):
+    params = {
         "client_id": CLIENT["id"],
         "redirect_uri": redirect_uri,
         "response_type": "code",
@@ -92,7 +92,10 @@ def auth_url(redirect_uri, state):
         "state": state,
         "access_type": "offline",            # kalıcı yenileme anahtarı için
         "prompt": "consent select_account",  # her seferinde hesap/kanal seçtir
-    })
+    }
+    if login_hint:
+        params["login_hint"] = login_hint    # toplu eklemede Google hesabı önceden seçili gelir
+    return AUTH_URL + "?" + urllib.parse.urlencode(params)
 
 
 def exchange_code(code, redirect_uri):

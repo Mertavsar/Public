@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanal ekleniyor · {{APP_NAME}}</title>
+<link rel="stylesheet" href="/static/fonts/fonts.css">
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#fafaf9; --panel:#fff; --sunk:#f4f4f2; --sel:#e9e9e5; --ink:#161616; --ink-2:#4a4a47; --muted:#8a8984;
+    --line:#e7e6e2; --line-2:#d5d4cf; --accent:#1f5fbf; --pos:#1a7f37; --neg:#c4302b;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ color-scheme:dark; --bg:#111110; --panel:#171716; --sunk:#1c1c1b; --sel:#292927; --ink:#ededea; --ink-2:#b4b3ad;
+           --muted:#7c7b76; --line:#272725; --line-2:#363633; --accent:#5b9bf0; --pos:#3fb950; --neg:#f0605a; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  header{display:flex;align-items:center;height:52px;padding:0 24px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
+  .mark{width:18px;height:18px;border-radius:4px;background:var(--ink);display:grid;place-items:center}
+  main{max-width:600px;margin:0 auto;padding:56px 24px 80px}
+  .st{font:12.5px var(--mono);color:var(--muted);margin-bottom:10px}
+  .st.pos{color:var(--pos)} .st.neg{color:var(--neg)}
+  h1{font-size:28px;line-height:1.15;letter-spacing:-.025em;font-weight:600;margin:0 0 8px}
+  .lead{color:var(--ink-2);margin:0 0 28px}
+  .acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:6px;border:1px solid var(--line-2);
+       background:var(--panel);font-weight:500;font-size:14px;cursor:pointer;font-family:inherit;color:inherit}
+  .btn:hover{border-color:var(--ink-2)}
+  .btn.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+  .btn.pri:hover{opacity:.88}
+  .count{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:13.5px;color:var(--ink-2)}
+  .bar{flex:1;max-width:220px;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--ink);transition:width 1s linear}
+  .link{background:none;border:0;padding:0;font:inherit;color:var(--accent);cursor:pointer}
+  .how{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:14px;color:var(--ink-2)}
+  .how h2{font-size:13px;font-weight:600;color:var(--ink);margin:0 0 10px}
+  .how ol{margin:0;padding-left:18px}
+  .how li{margin:5px 0}
+  .list{margin-top:32px}
+  .list h2{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin:0 0 8px}
+  .list h2 span{font:12.5px var(--mono);color:var(--muted);font-weight:400}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+  .ch{display:flex;align-items:center;gap:9px;height:40px;border-bottom:1px solid var(--line);font-size:13.5px;min-width:0;padding-right:10px}
+  .ch span.nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ch.new span.nm{font-weight:600}
+  .ch em{font:normal 11.5px var(--mono);color:var(--pos)}
+  .av{width:22px;height:22px;border-radius:50%;flex:none;background:var(--sel);color:var(--ink-2);display:grid;place-items:center;
+      font-size:10px;font-weight:600;overflow:hidden}
+  .av img{width:100%;height:100%;object-fit:cover}
+  kbd{font:12px var(--mono);border:1px solid var(--line-2);border-radius:3px;padding:0 4px}
+  @media (max-width:520px){ main{padding-top:36px} .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header><a class="brand" href="/"><span class="mark"><svg viewBox="0 0 18 18" width="12" height="12" aria-hidden="true"><rect x="2" y="9" width="3" height="7" fill="var(--bg)"/><rect x="7.5" y="4" width="3" height="12" fill="var(--bg)"/><rect x="13" y="7" width="3" height="9" fill="var(--bg)"/></svg></span>{{APP_NAME}}</a></header>
+<main>
+  <div class="st" id="st"></div>
+  <h1 id="title"></h1>
+  <p class="lead" id="lead"></p>
+  <div class="acts" id="acts"></div>
+  <div class="count hidden" id="auto"></div>
+
+  <section class="how">
+    <h2>Neden tek tek?</h2>
+    <ol>
+      <li>Google her girişte yalnızca <b>tek bir kanala</b> izin veriyor; bir e-postadaki kanalların hepsini birden vermiyor.</li>
+      <li>Açılan Google ekranında sıradaki kanalı seç ve izin ver. Zaten ekli bir kanalı seçersen atlanır.</li>
+      <li>Bunu her kanal için bir kez yaparsın. Sonraki girişlerde bütün kanalların panelde hazır olur.</li>
+      <li>Bitirmek için <b>Bitti</b>'ye bas ya da Google ekranında <b>İptal</b> de.</li>
+    </ol>
+  </section>
+
+  <section class="list">
+    <h2>Paneldeki kanallar <span id="cnt"></span></h2>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+<script>
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const q = new URLSearchParams(location.search);
+  const durum = q.get("durum") || "", ad = q.get("ad") || "Kanal", kanal = q.get("kanal"), oto = q.get("oto") === "1";
+  const NEXT = "/giris?toplu=oto", WAIT = 3;
+  const store = { get(k, d){ try { return localStorage.getItem("kp-" + k) ?? d; } catch { return d; } },
+                  set(k, v){ try { localStorage.setItem("kp-" + k, v); } catch {} } };
+
+  const msg = {
+    yeni:     ["Eklendi", "pos", `${ad} panele eklendi.`],
+    var:      ["Zaten ekliydi", "", `${ad} zaten panelde.`],
+    sinir:    ["Sınır", "neg", "Paketindeki kanal sınırına ulaştın."],
+    kanalyok: ["Kanal yok", "neg", "Seçilen hesapta YouTube kanalı yok."],
+  }[durum] || ["", "", "Kanal ekle"];
+  $("#st").textContent = msg[0]; if (msg[1]) $("#st").classList.add(msg[1]);
+  $("#title").textContent = msg[2];
+
+  const done = `<a class="btn" href="/">Bitti, panele git</a>`;
+  const box = $("#auto");
+  let timer = null, left = WAIT;
+
+  function paintOn(){
+    box.innerHTML = `<span>Sıradaki kanal <b>${left}</b> sn içinde isteniyor</span>
+      <span class="bar"><i style="width:${(WAIT - left) / WAIT * 100}%"></i></span><button class="link" id="stop">Durdur</button>`;
+  }
+  function paintOff(){ box.innerHTML = `<span>Otomatik geçiş kapalı.</span><button class="link" id="resume">Aç</button>`; }
+  function startAuto(){
+    clearInterval(timer); left = WAIT; box.classList.remove("hidden"); paintOn();
+    timer = setInterval(() => { left--; if (left <= 0){ clearInterval(timer); location.href = NEXT; } else paintOn(); }, 1000);
+  }
+  box.addEventListener("click", e => {
+    if (e.target.id === "stop"){ clearInterval(timer); store.set("auto-off", "1"); paintOff(); }
+    else if (e.target.id === "resume"){ store.set("auto-off", ""); startAuto(); }
+  });
+
+  if (durum === "sinir"){
+    $("#lead").textContent = "Daha fazla kanal eklemek için paketini yükseltmen gerekiyor.";
+    $("#acts").innerHTML = `<a class="btn pri" href="/">Panele git</a>`;
+  } else if (oto){
+    $("#lead").textContent = "Google ekranında sıradaki kanalı seç. Eklenmiş olanları seçersen atlanır.";
+    $("#acts").innerHTML = `<a class="btn pri" href="${NEXT}">Sıradakini şimdi seç</a>${done}`;
+    if (store.get("auto-off", "") === "1"){ box.classList.remove("hidden"); paintOff(); } else startAuto();
+  } else {
+    $("#lead").textContent = "Bu e-postada başka kanalların da varsa hepsini sırayla ekleyelim. Her kanal için Google'da birkaç tıklama yeter.";
+    $("#acts").innerHTML = `<a class="btn pri" id="yes" href="${NEXT}">Evet, diğer kanallarımı da ekle</a><a class="btn" href="/">Hayır, panele git</a>`;
+    $("#yes").addEventListener("click", () => store.set("auto-off", ""));
+  }
+
+  fetch("/api/me").then(r => r.ok ? r.json() : null).then(me => {
+    if (!me) return;
+    const list = [...me.channels].sort((a, b) => (b.id === kanal) - (a.id === kanal) || a.title.localeCompare(b.title, "tr"));
+    $("#cnt").textContent = `${me.channels.length} / ${me.limit}`;
+    $("#grid").innerHTML = list.map(c => `<div class="ch ${c.id === kanal && durum === "yeni" ? "new" : ""}">
+      <span class="av">${c.thumb ? `<img src="${esc(c.thumb)}" alt="" referrerpolicy="no-referrer">` : esc((c.title || "?")[0])}</span>
+      <span class="nm">${esc(c.title)}</span>${c.id === kanal && durum === "yeni" ? "<em>yeni</em>" : ""}</div>`).join("")
+      || `<p style="color:var(--muted);font-size:13.5px">Henüz kanal yok.</p>`;
+  });
+</script>
+<style>.hidden{display:none!important}</style>
+</body>
+</html>

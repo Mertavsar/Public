@@ -47,7 +47,8 @@ CREATE INDEX IF NOT EXISTS channels_by_sub ON channels(google_sub);
 CREATE TABLE IF NOT EXISTS oauth_states (
     state       TEXT PRIMARY KEY,
     user_id     INTEGER,
-    created_at  INTEGER NOT NULL
+    created_at  INTEGER NOT NULL,
+    mode        TEXT NOT NULL DEFAULT ''   -- '' tek kanal, 'toplu' ara sayfa, 'oto' otomatik döngü
 );
 """
 
@@ -76,6 +77,9 @@ def init(path):
     with conn() as c:
         c.execute("PRAGMA journal_mode = WAL")
         c.executescript(SCHEMA)
+        cols = [r["name"] for r in c.execute("PRAGMA table_info(oauth_states)")]
+        if "mode" not in cols:  # eski veritabanı
+            c.execute("ALTER TABLE oauth_states ADD COLUMN mode TEXT NOT NULL DEFAULT ''")
 
 
 def _hash(token):
@@ -110,22 +114,23 @@ def delete_session(token):
         c.execute("DELETE FROM sessions WHERE token_hash = ?", (_hash(token or ""),))
 
 
-def save_state(user_id):
+def save_state(user_id, mode=""):
     state = secrets.token_urlsafe(24)
     with conn() as c:
         c.execute("DELETE FROM oauth_states WHERE created_at < ?",
                   (int(time.time()) - STATE_SECONDS,))
-        c.execute("INSERT INTO oauth_states VALUES (?, ?, ?)", (state, user_id, int(time.time())))
+        c.execute("INSERT INTO oauth_states (state, user_id, created_at, mode) VALUES (?, ?, ?, ?)",
+                  (state, user_id, int(time.time()), mode))
     return state
 
 
 def pop_state(state):
-    """Geçerliyse (bulundu, user_id) döner; her state tek kullanımlıktır."""
+    """Geçerliyse (True, user_id, mode) döner; her state tek kullanımlıktır."""
     with conn() as c:
         row = c.execute("SELECT * FROM oauth_states WHERE state = ? AND created_at > ?",
                         (state or "", int(time.time()) - STATE_SECONDS)).fetchone()
         c.execute("DELETE FROM oauth_states WHERE state = ?", (state or "",))
-    return (True, row["user_id"]) if row else (False, None)
+    return (True, row["user_id"], row["mode"]) if row else (False, None, "")
 
 
 # ----------------------------------------------------------------------------
@@ -166,6 +171,12 @@ def user_plan(user_id):
     with conn() as c:
         row = c.execute("SELECT plan FROM users WHERE id = ?", (user_id,)).fetchone()
     return row["plan"] if row else None
+
+
+def user_email(user_id):
+    with conn() as c:
+        row = c.execute("SELECT email FROM users WHERE id = ?", (user_id,)).fetchone()
+    return row["email"] if row else None
 
 
 def delete_user(user_id):

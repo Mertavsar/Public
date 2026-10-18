@@ -258,7 +258,7 @@
       <a class="row" href="#/" data-nav="overview"><i data-i="grid"></i>Genel bakış</a>
       <a class="row" href="#/ayarlar" data-nav="settings"><i data-i="settings"></i>Ayarlar</a>
     </nav>
-    <div class="sec"><span>Kanallar <span class="mono" id="chCount"></span></span><a href="/giris" title="Kanal ekle" aria-label="Kanal ekle"><i data-i="plus"></i></a></div>
+    <div class="sec"><span>Kanallar <span class="mono" id="chCount"></span></span><a href="/giris?toplu=1" title="Kanal ekle" aria-label="Kanal ekle"><i data-i="plus"></i></a></div>
     <div class="chs" id="chList"></div>
     <div class="me" id="me"></div>
   </aside>
@@ -404,7 +404,7 @@ function renderSidebar(){
     }
     return `<a class="row ${r.view === "channel" && r.id === c.id ? "on" : ""}" href="${chHref(c.id)}" title="${esc(c.title)}">
       ${avatar(c, 20)}<span class="nm">${esc(c.title)}</span>${tail}</a>`;
-  }).join("") || `<a class="row muted" href="/giris">İlk kanalını ekle</a>`;
+  }).join("") || `<a class="row muted" href="/giris?toplu=1">İlk kanalını ekle</a>`;
   document.querySelectorAll(".nav .row").forEach(a => a.classList.toggle("on", a.dataset.nav === r.view));
 }
 function openSide(){ $("#side").classList.add("open"); $("#scrim").classList.add("open"); }
@@ -520,10 +520,10 @@ const errBanner = (title, msg, reauth) => `<div class="banner err"><b>${esc(titl
 function emptyState(){
   return `<div class="empty"><h2>İlk kanalını bağla</h2>
     <p>Kanalın olduğu Google hesabıyla giriş yap. İstatistikler birkaç saniye içinde burada olur.</p>
-    <a class="btn pri" href="/giris">Kanal ekle</a>
-    <ol><li>Google hesabını seç.</li>
-      <li>Hesabında birden fazla kanal varsa Google hangisini istediğini sorar; birini seç.</li>
-      <li>Diğer kanallar için tekrarla. Farklı Google hesaplarındaki kanallar da eklenebilir.</li></ol>
+    <a class="btn pri" href="/giris?toplu=1">Kanallarımı ekle</a>
+    <ol><li>Google hesabını seç, ilk kanalı seçip izin ver.</li>
+      <li>Aynı e-postada başka kanalların varsa panel seni sırayla Google'ın kanal seçicisine götürür; her birini bir kez seçersin.</li>
+      <li>Farklı Google hesaplarındaki kanallar da eklenebilir.</li></ol>
     <p class="muted" style="font-size:12.5px;margin-top:24px">Sadece okuma izni istenir. Kanallarında hiçbir şey değiştirilmez.</p></div>`;
 }
 
@@ -684,7 +684,7 @@ function renderSettings(){
     <section class="panel"><div class="ph"><h2>Paket</h2></div>
       <div class="set"><div class="tx"><b>${esc(planName(u.plan))}</b><span class="mono">${used} / ${lim} kanal</span>
         <div class="use"><i style="width:${Math.min(100, used / (lim || 1) * 100)}%"></i></div></div></div></section>
-    <section class="panel"><div class="ph"><h2>Bağlı kanallar</h2><a class="btn r" href="/giris">Kanal ekle</a></div>
+    <section class="panel"><div class="ph"><h2>Bağlı kanallar</h2><a class="btn r" href="/giris?toplu=1">Kanal ekle</a></div>
       ${channelsSorted().map(c => `<div class="set">${avatar(c, 28)}<div class="tx"><b>${esc(c.title)}</b><span>${esc(c.handle)}</span></div>
         ${S.me.demo ? "" : `<button class="btn neg" data-rm="${esc(c.id)}" data-t="${esc(c.title)}">Kaldır</button>`}</div>`).join("")
         || `<div class="set"><div class="tx muted">Henüz kanal yok.</div></div>`}</section>
@@ -755,7 +755,7 @@ function palItems(q){
   const chans = channelsSorted().map(c => ({label: c.title, sub: c.handle, href: chHref(c.id), ch: c, group: "Kanallar"}));
   const pages = [{label: "Genel bakış", href: "#/", icon: "grid", group: "Sayfalar"},
                  {label: "Ayarlar", href: "#/ayarlar", icon: "settings", group: "Sayfalar"},
-                 {label: "Kanal ekle", href: "/giris", icon: "plus", group: "Sayfalar"}];
+                 {label: "Kanal ekle", href: "/giris?toplu=1", icon: "plus", group: "Sayfalar"}];
   return [...chans, ...pages].filter(it => !q || low(it.label).includes(q) || low(it.sub || "").includes(q));
 }
 function renderPal(){

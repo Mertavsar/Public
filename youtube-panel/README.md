@@ -77,12 +77,24 @@ Google uygulamayı doğrulayana kadar:
 - Uyarısız ve sınırsız kullanım için Google **uygulama doğrulaması** gerekir: alan
   adı, açılış sayfası, gizlilik politikası ve uygulamanın tanıtım videosu istenir.
 
-## Bir hesapta birden fazla kanal
+## Tek e-postada onlarca kanal
 
-Google her girişte **tek bir kanala** erişim verir. Bir Google hesabında birden
-fazla kanal (Brand Account) varsa, giriş ekranında Google hangi kanalı istediğini
-sorar; her kanal için **Kanal ekle**'yi bir kez tekrarlamak gerekir. Panele bağlı
-kanallardan herhangi birinin hesabıyla giriş yapmak aynı paneli açar.
+Bir Gmail adresinin altındaki kanalların her biri ayrı bir Brand Account'tur ve
+Google her girişte **yalnızca seçilen tek kanala** erişim verir. "Bu e-postadaki
+bütün kanalları ver" diyen bir YouTube API'si yok; tek istisna, YouTube İş Ortağı
+(CMS / içerik sahibi) hesaplarıdır.
+
+Panel bunu bir döngüyle çözer:
+
+1. **Google ile giriş yap** → ilk kanal eklenir, ara sayfa açılır (`/ekle`).
+2. **Evet, diğer kanallarımı da ekle** → panel seni Google'ın kanal seçicisine
+   götürür; Google hesabın önceden seçili gelir (`login_hint`).
+3. Kanalı seç, izin ver → eklenir, 3 saniye sonra sıradaki için Google yeniden
+   açılır. Zaten ekli kanalı seçersen atlanır.
+4. Bitince **Bitti**'ye bas ya da Google ekranında **İptal** de.
+
+Bu her kanal için bir kez yapılır. Sonraki girişlerde, bağlı kanallardan
+herhangi birinin hesabıyla girmek bütün kanalları getirir.
 
 Kanalın **sahibi** veya Brand Account **yöneticisi** olan hesapla giriş yapılmalı;
 Studio'daki "İzinler" bölümünden davet edilen kullanıcılar genellikle kanalı API'de
@@ -112,6 +124,7 @@ uvicorn app:app --app-dir youtube-panel --host 0.0.0.0 --port 8000
 | `demo.py` | `--demo` için örnek veri |
 | `static/landing.html` | Giriş yapmamış ziyaretçinin gördüğü sayfa |
 | `static/app.html` | Panel |
+| `static/ekle.html` | Toplu kanal eklemenin ara sayfası |
 | `static/fonts/` | IBM Plex yazı tipleri (SIL Open Font License); Google'a bağlanmadan sunulur |
 | `static/img/` | Açılış sayfasındaki panel görüntüleri (örnek veriyle alındı) |
 
