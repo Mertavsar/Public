@@ -50,7 +50,18 @@ load_env()
 
 APP_NAME = os.environ.get("APP_NAME", "Kanalist")
 PORT = int(os.environ.get("PORT", "8000"))
-BASE_URL = os.environ.get("BASE_URL", f"http://localhost:{PORT}").rstrip("/")
+
+
+def default_base_url():
+    """GitHub Codespaces'te panelin herkese açık adresi; yerelde localhost."""
+    name = os.environ.get("CODESPACE_NAME")
+    domain = os.environ.get("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")
+    if name and domain:
+        return f"https://{name}-{PORT}.{domain}"
+    return f"http://localhost:{PORT}"
+
+
+BASE_URL = os.environ.get("BASE_URL", default_base_url()).rstrip("/")
 DATA_DIR = os.environ.get("DATA_DIR", os.path.join(APP_DIR, "data"))
 DEMO = "--demo" in sys.argv or os.environ.get("DEMO") == "1"
 
@@ -428,4 +439,6 @@ if __name__ == "__main__":
         print("UYARI: GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET yok. Giriş çalışmaz.")
         print("Kurulum: youtube-panel/README.md\n")
     print(f"{APP_NAME}:  {BASE_URL}")
+    if not DEMO:
+        print(f"Giriş adresi (Google Cloud'a ekle):  {REDIRECT_URI}")
     uvicorn.run(app, host="127.0.0.1", port=PORT, log_level="warning")

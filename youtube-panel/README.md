@@ -37,6 +37,20 @@ python3 youtube-panel/app.py --demo
 Tarayıcıda **http://localhost:8000**. 8 uydurma kanalla tüm paneli gezersin;
 Google'a bağlanmaz.
 
+## GitHub'dan, kurulum yapmadan aç (Codespaces)
+
+1. GitHub'da repoyu aç → yeşil **Code** düğmesi → **Codespaces** → **Create codespace**.
+2. Açılan tarayıcı içi editörde, alttaki terminale yaz:
+   ```
+   python3 youtube-panel/app.py --demo
+   ```
+3. Sağ altta çıkan **Open in Browser**'a bas (ya da **Ports** sekmesinde 8000'i aç).
+
+Gerçek girişi Codespaces'te denemek için aşağıdaki kurulumu yap. Google Cloud'daki
+yönlendirme adresine codespace'in adresini ekle:
+`https://<codespace-adı>-8000.app.github.dev/oauth/callback`. Panel bu adresi
+kendisi algılar. Başlatırken terminalde `Giriş adresi` olarak yazar.
+
 ## Gerçek girişi açmak (bir kerelik)
 
 ### 1. Google Cloud
