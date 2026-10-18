@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{APP_NAME}}</title>
 <link rel="stylesheet" href="/static/fonts/fonts.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%230b1d3a%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%227%22 fill=%22%23ffc81f%22/%3E%3C/svg%3E">
 <style>
   /* Kontrol odası: lacivert kumanda masası (kenar çubuğu) + açık çalışma alanı; genel bakış bir monitör duvarı. */
   :root{
@@ -158,12 +159,16 @@
         padding:10px;background:var(--desk);border-radius:12px}
   .mon{position:relative;display:flex;flex-direction:column;gap:2px;padding:12px 14px 12px;background:var(--desk-2);color:var(--desk-ink);
        border:1px solid var(--desk-line);border-radius:7px;min-width:0;transition:border-color .15s,transform .15s}
-  .mon:hover{border-color:var(--tally)}
+  .mon:hover{border-color:var(--tally);transform:translateY(-2px)}
+  .wall.boot .mon{animation:poweron .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 45ms)}
+  @keyframes poweron{0%{opacity:0;filter:brightness(2.2) saturate(0);transform:scaleY(.04)}45%{opacity:1;transform:scaleY(1)}100%{filter:none}}
   .mon:focus-visible{outline:2px solid var(--tally);outline-offset:2px}
   .mon .hd{display:flex;align-items:center;gap:8px;font:500 11px var(--mono);color:var(--desk-muted)}
   .mon .hd .no{color:var(--tally);letter-spacing:.06em}
   .mon .hd .dl{margin-left:auto}
-  .mon .nm{font-weight:600;font-size:15px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mon .nm{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-top:10px;min-width:0}
+  .mon .nm span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mon .nm .av{background:var(--desk-3);color:var(--desk-ink)}
   .mon .hn{font-size:12px;color:var(--desk-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mon .big{display:flex;align-items:baseline;gap:8px;margin-top:10px}
   .mon .big b{font:800 42px/1 var(--display);letter-spacing:.01em}
@@ -212,6 +217,9 @@
   .run li:nth-child(-n+3) .rk{color:var(--ink)}
   .th{position:relative;display:block;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:5px;overflow:hidden;background:var(--desk-2)}
   .th img{width:100%;height:100%;object-fit:cover;display:block}
+  .th.nosig{background:linear-gradient(90deg,#bfbfbf 0 14.3%,#bfbf3a 0 28.6%,#3abfbf 0 42.9%,#3abf3a 0 57.1%,#bf3abf 0 71.4%,#bf3a3a 0 85.7%,#3a3abf 0) top/100% 68% no-repeat,
+    linear-gradient(90deg,#3a3abf 0 14.3%,#14141c 0 28.6%,#bf3abf 0 42.9%,#14141c 0 57.1%,#3abfbf 0 71.4%,#14141c 0 85.7%,#bfbfbf 0) 0 68%/100% 10% no-repeat,
+    linear-gradient(90deg,#0b1d3a 0 60%,#2a3550 0) bottom/100% 22% no-repeat;filter:saturate(.55) brightness(.92)}
   .th .du{position:absolute;right:4px;bottom:4px;background:rgba(7,18,38,.85);color:#fff;font:10px/1 var(--mono);padding:3px 4px;border-radius:2px}
   .th .du.s{background:var(--tally);color:var(--tally-ink)}
   .run .tt{font-weight:600;font-size:14.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -258,6 +266,7 @@
   .ticker .run-t a:hover{text-decoration:underline}
   .ticker .up::before{content:"▲ "} .ticker .dn::before{content:"▼ "}
   @keyframes crawl{to{transform:translateX(-50%)}}
+  body.no-ticker .ticker{display:none}
 
   /* Boş durum, ayarlar ---------------------------------------------------------- */
   .empty{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;padding:28px;background:var(--desk);color:var(--desk-ink);border-radius:14px}
@@ -338,7 +347,7 @@
     .hero{padding:16px} .hero .no{font-size:40px} .hero h2{font-size:26px}
     .plot{height:190px}
   }
-  @media (prefers-reduced-motion:reduce){ .ticker .run-t{animation:none} .mon,.desk{transition:none} .sk{animation:none} }
+  @media (prefers-reduced-motion:reduce){ .ticker .run-t{animation:none} .mon,.desk{transition:none} .sk{animation:none} .wall.boot .mon{animation:none} }
 </style>
 </head>
 <body>
@@ -614,7 +623,7 @@ function clip(root, n = 10){
 }
 function thumb(v){
   const s = v.seconds && v.seconds <= 180;
-  return `<a class="th" href="${ytUrl(v.id)}" target="_blank" rel="noopener" aria-label="YouTube'da aç">
+  return `<a class="th ${v.thumb ? "" : "nosig"}" href="${ytUrl(v.id)}" target="_blank" rel="noopener" aria-label="YouTube'da aç">
     ${v.thumb ? `<img src="${esc(v.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}
     <span class="du ${s ? "s" : ""}">${s ? "KISA" : dur(v.seconds)}</span></a>`;
 }
@@ -698,22 +707,22 @@ async function renderOverview(fresh, seq){
   const sel = $("#sortSel"); sel.value = SORTS[S.sort.k] ? S.sort.k : "views";
   sel.onchange = () => { S.sort = {k: sel.value, dir: -1}; store.set("sort", sel.value); renderArea(ov.channels); };
   document.querySelectorAll(".bh .seg button").forEach(b => b.onclick = () => { S.view = b.dataset.v; store.set("view", S.view); renderArea(ov.channels); });
-  renderArea(ov.channels);
+  renderArea(ov.channels, !S.booted); S.booted = true;
 
   topVideos(fresh).then(d => { if (seq === S.seq){ $("#topVideos").innerHTML = rundown(d.videos); clip($("#topVideos").parentElement); } })
     .catch(e => { if (seq === S.seq) $("#topVideos").innerHTML = `<p class="muted" style="padding:16px">Videolar alınamadı: ${esc(e.message)}</p>`; });
 }
 
-function renderArea(channels){
+function renderArea(channels, boot = false){
   document.querySelectorAll(".bh .seg button").forEach(b => b.classList.toggle("on", b.dataset.v === S.view));
   const ok = sortChannels(channels.filter(c => !c.error)), bad = channels.filter(c => c.error);
   const total = ok.reduce((a, c) => a + c.views, 0) || 1, maxShare = Math.max(...ok.map(c => c.views / total), .0001);
   if (S.view === "wall"){
-    $("#chArea").innerHTML = `<div class="wall">${ok.map(c => {
+    $("#chArea").innerHTML = `<div class="wall ${boot ? "boot" : ""}">${ok.map((c, i) => {
       const st = state(c.views_change), alert = c.views_change != null && c.views_change <= -10;
-      return `<a class="mon ${alert ? "alert" : ""}" href="${chHref(c.id)}" aria-label="${esc(c.title)}, ${full(c.views)} izlenme">
+      return `<a class="mon ${alert ? "alert" : ""}" style="--i:${i}" href="${chHref(c.id)}" aria-label="${esc(c.title)}, ${full(c.views)} izlenme">
         <div class="hd"><span class="no">CH ${chNo(c.id)}</span><span class="tl ${st}"></span>${alert ? `<span class="flag">DİKKAT</span>` : ""}${delta(c.views_change)}</div>
-        <div class="nm">${esc(c.title)}</div><div class="hn">${esc(c.handle)} · ${num(c.subscribers)} abone</div>
+        <div class="nm">${avatar(c, 22)}<span>${esc(c.title)}</span></div><div class="hn">${esc(c.handle)} · ${num(c.subscribers)} abone</div>
         <div class="big"><b>${num(c.views)}</b><span>izlenme</span></div>
         ${spark(c.series.map(p => p.views))}
         <div class="ft">${meter(c.views / total / maxShare)}<span>%${pct1(c.views / total * 100)}</span><span class="sub">${signed(c.subs)} abone</span></div></a>`;
@@ -857,6 +866,7 @@ async function route(fresh = false){
   S.redraw = null; closeDesk(); closePal();
   document.querySelectorAll("#days button").forEach(b => b.classList.toggle("on", +b.dataset.d === S.days));
   $("#days").classList.toggle("hidden", r.view === "settings");
+  document.body.classList.toggle("no-ticker", r.view === "settings");
   const [prev, next] = r.view === "channel" ? neighbors(r.id) : [null, null];
   $("#pager").innerHTML = prev && S.me.channels.length > 1
     ? `<a class="ib" href="${chHref(prev.id)}" title="Önceki: CH ${chNo(prev.id)} ${esc(prev.title)} (←)">${ic("left")}</a><a class="ib" href="${chHref(next.id)}" title="Sonraki: CH ${chNo(next.id)} ${esc(next.title)} (→)">${ic("right")}</a>` : "";
