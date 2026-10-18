@@ -1,97 +1,127 @@
-# YouTube Paneli — tüm kanallar tek ekranda
+# Kanalist — tüm YouTube kanalları tek panelde
 
-Studio'da kanal kanal geçiş yapmak yerine bütün kanallarının gidişatını tek ekranda
-görürsün:
+Kanalı olan herkes **Google ile giriş yapar**; giriş yaptığı hesabın YouTube kanalı
+panele kendiliğinden gelir. Diğer kanallarını **Kanal ekle** ile bağlar. Sonra
+Studio'da hesap hesap gezmeden hepsini tek ekranda görür.
 
-- **Genel bakış:** toplam abone, izlenme, izlenme süresi, net abone; her kanal için
-  önceki döneme göre değişim (▲ / ▼) ve günlük izlenme gidişat çizgisi.
-  Sıralama: en çok izlenen, en hızlı büyüyen, en çok abone, en çok abone kazanan.
-- **Kanal detayı:** günlük izlenme ve net abone grafikleri, dönemin en çok izlenen
-  videoları (ortalama izlenme yüzdesi, ortalama süre, kazandırdığı abone), son
-  yüklenen 20 videonun izlenme / beğeni / yorum sayıları.
-- Dönem: 7, 28 veya 90 gün.
+Ürün adı geçici; `.env` içindeki `APP_NAME` ile tek yerden değişir.
 
-Panel **sadece okur.** Kanallarında hiçbir şeyi değiştiremez, video yükleyemez,
-silemez; Google'dan istenen izinler yalnızca `youtube.readonly` ve
-`yt-analytics.readonly`'dir.
+## Ne var
+
+- **Genel bakış:** tüm kanalların toplam izlenme, izlenme süresi, net abone ve
+  abonesi; önceki döneme göre değişim. Ana grafik önceki dönemle karşılaştırmalı
+  çizilir; bir günün üstüne gelince o gün hangi kanalın ne kadar izlendiği görünür.
+  Öne çıkanlar (en hızlı büyüyen, en çok düşen, en çok abone kazanan), izlenme
+  payı, sıralanabilir kanal tablosu ve **tüm kanallarda en çok izlenen videolar**.
+- **Kolay geçiş:** kenar çubuğunda her kanal değişim okuyla durur, tek tıkla
+  açılır. `⌘K` / `Ctrl K` ile kanal ara; kanal sayfasında `←` `→` ile önceki ve
+  sonraki kanal.
+- **Kanal sayfası:** izlenme / izlenme süresi / net abone grafiği, dönemin en çok
+  izlenen videoları (ortalama izlenme yüzdesi, süre, kazandırdığı abone), son
+  yüklenenler; YouTube ve Studio'ya tek tıkla geçiş.
+- **Ayarlar:** paket ve kanal kullanımı, kanal kaldırma, hesabı silme (Google'ın
+  doğrulama için istediği "verimi sil" hakkı).
+- 7 / 28 / 90 günlük dönem, açık ve koyu tema, mobil uyumlu.
+
+Panel **sadece okur.** Google'dan istenen izinler `youtube.readonly` ve
+`yt-analytics.readonly`'dir; kanallarda hiçbir şey değiştirilemez, yüklenemez,
+silinemez.
 
 ## Hemen bak (örnek veriyle)
 
 ```
-python3 youtube-panel/server.py --demo
+pip install -r youtube-panel/requirements.txt
+python3 youtube-panel/app.py --demo
 ```
 
-Tarayıcıda **http://127.0.0.1:7788**. Uydurma kanallarla panelin nasıl göründüğünü
-gösterir; Google'a bağlanmaz.
+Tarayıcıda **http://localhost:8000**. 8 uydurma kanalla tüm paneli gezersin;
+Google'a bağlanmaz.
 
-## Gerçek kanallar — bir kerelik kurulum (~15 dk)
+## Gerçek girişi açmak (bir kerelik)
 
-Google, YouTube verisini sadece kendi kayıtlı "uygulamanla" verir. Bu uygulama senin
-Google Cloud hesabında durur, ücretsizdir, kimseyle paylaşılmaz.
+### 1. Google Cloud
 
-### 1. Google Cloud projesi
+1. https://console.cloud.google.com → yeni proje.
+2. **API'ler ve Hizmetler → Kitaplık**: **YouTube Data API v3** ve
+   **YouTube Analytics API**'yi etkinleştir.
+3. **Google Auth Platform** → **Başlayın**: uygulama adı (`APP_NAME` ile aynı),
+   destek e-postası, kitle **Harici**.
+4. **Veri erişimi** → kapsam ekle: `openid`, `email`, `profile`,
+   `youtube.readonly`, `yt-analytics.readonly`.
+5. **İstemciler → İstemci oluştur → Web uygulaması**.
+   **Yetkili yönlendirme URI'leri**: `http://localhost:8000/oauth/callback`
+   (sunucuya taşıyınca `https://alanadin.com/oauth/callback` da ekle).
+   İstemci kimliğini ve gizli anahtarı kopyala.
 
-1. https://console.cloud.google.com adresine gir, üstten **Yeni proje** oluştur
-   (ad: `YouTube Paneli`).
-2. **API'ler ve Hizmetler → Kitaplık**'tan şu ikisini bul ve **Etkinleştir**:
-   - **YouTube Data API v3**
-   - **YouTube Analytics API**
-
-### 2. Giriş ekranı (OAuth)
-
-1. **Google Auth Platform** (eski adı "OAuth izin ekranı") sayfasına gir,
-   **Başlayın**'a bas.
-2. Uygulama adı: `YouTube Paneli`, destek e-postası: kendi adresin.
-   Kitle: **Harici (External)**.
-3. **Kitle (Audience)** sayfasında **Uygulamayı yayınla (Publish app)**'a bas.
-   > Bunu atlarsan uygulama "Test" modunda kalır ve Google bağlantıları **7 günde
-   > bir siler**; her hafta kanalları yeniden bağlaman gerekir.
-4. Google onayı gerekmez. Girişte "Google bu uygulamayı doğrulamadı" uyarısı çıkar:
-   **Gelişmiş → YouTube Paneli'ne git (güvenli değil)** de. Uygulama senin olduğu
-   için bu normal.
-
-### 3. İstemci dosyası
-
-1. **İstemciler (Clients) → İstemci oluştur**.
-2. Uygulama türü: **Masaüstü uygulaması (Desktop app)**. Ad önemli değil.
-3. Oluşan istemcinin **JSON'unu indir** ve şu adla kaydet:
+### 2. Ayar dosyası
 
 ```
-youtube-panel/data/client_secret.json
+cp youtube-panel/.env.example youtube-panel/.env
 ```
 
-### 4. Kanalları bağla
+`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` ve `SECRET_KEY`'i doldur (anahtarı
+üretme komutu dosyanın içinde). Sonra:
 
 ```
-python3 youtube-panel/server.py
+python3 youtube-panel/app.py
 ```
 
-http://127.0.0.1:7788 → sağ üstte **+ Kanal bağla**.
+### 3. Test kullanıcıları ve yayın
 
-- Google hesabını seç. Hesabında birden fazla kanal varsa Google **hangi kanalı**
-  istediğini sorar, birini seç → izin ver. Panele dönersin, kanal listededir.
-- Her kanal için **+ Kanal bağla**'yı tekrarla. Farklı Google hesaplarındaki kanallar
-  da olur: girişte o hesabı seçmen yeterli.
-- Kanalın **sahibi** ya da Brand Account **yöneticisi** olan hesapla giriş yapılmalı.
-  Studio'daki "İzinler" bölümünden davet edilen kullanıcılar genellikle kanalı
-  API'de göremez.
+Google uygulamayı doğrulayana kadar:
+
+- **Kitle** sayfasında uygulama "Test" modundaysa sadece eklediğin **test
+  kullanıcıları** girebilir ve bağlantılar **7 günde bir** düşer.
+- **Uygulamayı yayınla** dersen herkes girebilir, ama girişte "Google bu uygulamayı
+  doğrulamadı" uyarısı çıkar ve en fazla 100 kullanıcı olur.
+- Uyarısız ve sınırsız kullanım için Google **uygulama doğrulaması** gerekir: alan
+  adı, açılış sayfası, gizlilik politikası ve uygulamanın tanıtım videosu istenir.
+
+## Bir hesapta birden fazla kanal
+
+Google her girişte **tek bir kanala** erişim verir. Bir Google hesabında birden
+fazla kanal (Brand Account) varsa, giriş ekranında Google hangi kanalı istediğini
+sorar; her kanal için **Kanal ekle**'yi bir kez tekrarlamak gerekir. Panele bağlı
+kanallardan herhangi birinin hesabıyla giriş yapmak aynı paneli açar.
+
+Kanalın **sahibi** veya Brand Account **yöneticisi** olan hesapla giriş yapılmalı;
+Studio'daki "İzinler" bölümünden davet edilen kullanıcılar genellikle kanalı API'de
+göremez.
+
+## Sunucuya kurmak
+
+```
+pip install -r requirements.txt
+uvicorn app:app --app-dir youtube-panel --host 0.0.0.0 --port 8000
+```
+
+- Önüne HTTPS veren bir ters vekil (Caddy, Nginx) veya HTTPS'li bir barındırma
+  koy. `BASE_URL`'i `https://...` yap; oturum çerezi o zaman otomatik olarak
+  yalnızca HTTPS üzerinden gönderilir.
+- `SECRET_KEY`'i ortam değişkeni olarak ver ve yedekle. Kaybolursa kayıtlı kanal
+  anahtarları açılamaz, herkes kanallarını yeniden bağlamak zorunda kalır.
+- Veritabanı `DATA_DIR/app.db` (SQLite). Kalıcı bir diske koy ve yedekle.
+
+## Yapı
+
+| Dosya | Görevi |
+|---|---|
+| `app.py` | Sunucu: giriş, oturum, API, paket sınırları (`PLAN_LIMITS`) |
+| `youtube.py` | Google/YouTube çağrıları ve hesaplamalar (sadece okuma) |
+| `db.py` | Kullanıcılar, oturumlar, şifreli kanal anahtarları |
+| `demo.py` | `--demo` için örnek veri |
+| `static/landing.html` | Giriş yapmamış ziyaretçinin gördüğü sayfa |
+| `static/app.html` | Panel |
 
 ## Bilmen gerekenler
 
-- **Veri gecikmesi:** YouTube istatistikleri yaklaşık 2 gün gecikmeli gelir. Panel bu
-  yüzden dönemi 2 gün önce bitirir; böylece son günler grafikte sahte bir düşüş gibi
-  görünmez. Abone sayısı ve toplam izlenme anlıktır.
-- **Hız:** Veriler 10 dakika saklanır; **Yenile** hemen yeniden çeker.
-- **Kota:** Google'ın günlük ücretsiz kotası bu panelin kullanımının çok üstündedir;
-  onlarca kanalla gün boyu yenilesen de dolmaz.
-- **"Yeniden bağla" uyarısı:** Kanal sahibi erişimi kaldırdıysa veya şifre
-  değiştiyse çıkar. Linke tıkla, aynı kanalı tekrar seç.
-- **Kanalı kaldırmak:** Kanal detayının en altında. Kanala dokunmaz, sadece panelin
-  bağlantısını siler.
-
-## Güvenlik
-
-`youtube-panel/data/` klasöründe istemci dosyan ve kanalların kalıcı bağlantı
-anahtarları durur. Bu klasör `.gitignore`'dadır; **kimseyle paylaşma, repoya
-ekleme.** Panel sadece senin bilgisayarında (`127.0.0.1`) çalışır, dışarıdan
-erişilemez.
+- **Veri gecikmesi:** YouTube istatistikleri yaklaşık 2 gün gecikmeli gelir; dönem
+  bu yüzden 2 gün önce biter. Abone sayıları anlıktır.
+- **Kota:** Her kanalın verisi 10 dakika saklanır, **Yenile** hemen yeniden çeker.
+  Varsayılan günlük YouTube kotası ilk yüzlerce kullanıcıya yeter. Daha fazlası
+  için YouTube'un ücretsiz uygunluk denetimiyle kota artırılır.
+- **Güvenlik:**
+  - Kanal anahtarları veritabanında şifreli durur.
+  - Oturum çerezleri `HttpOnly`'dir.
+  - Her kullanıcı yalnızca kendi kanallarını görür.
+  - Kanal kaldırılınca veya hesap silinince Google'daki izin de geri alınır.

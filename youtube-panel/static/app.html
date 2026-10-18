@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{APP_NAME}}</title>
+<style>
+  :root{
+    color-scheme:light;
+    --page:#f7f7f5; --side:#fbfbfa; --surface:#fff; --surface-2:#f3f3f0; --surface-3:#ebeae6;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --line:rgba(11,11,11,.08); --line-2:rgba(11,11,11,.14); --grid:#ecebe6; --base:#c3c2b7;
+    --accent:#2a78d6; --accent-ink:#1c5cab; --accent-soft:rgba(42,120,214,.10);
+    --up:#006300; --down:#d03b3b; --warn:#b26b00;
+    --shadow:0 1px 2px rgba(11,11,11,.04),0 1px 1px rgba(11,11,11,.02);
+    --pop:0 12px 40px rgba(11,11,11,.16),0 2px 6px rgba(11,11,11,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      color-scheme:dark;
+      --page:#0d0d0d; --side:#121211; --surface:#1a1a19; --surface-2:#232322; --surface-3:#2c2c2a;
+      --ink:#f0efec; --ink-2:#c3c2b7; --muted:#898781;
+      --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.14); --grid:#2c2c2a; --base:#383835;
+      --accent:#3987e5; --accent-ink:#86b6ef; --accent-soft:rgba(57,135,229,.16);
+      --up:#0ca30c; --down:#e66767; --warn:#e0a030;
+      --shadow:none; --pop:0 16px 48px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--page);color:var(--ink);
+       font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+  svg.i{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:2;
+        stroke-linecap:round;stroke-linejoin:round}
+  .muted{color:var(--muted)}
+  .hidden{display:none!important}
+  kbd{font:500 11px/1 system-ui;padding:3px 5px;border-radius:4px;border:1px solid var(--line-2);
+      color:var(--muted);background:var(--surface)}
+
+  /* --- İskelet -------------------------------------------------------- */
+  .shell{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100%}
+  .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;
+        background:var(--side);border-right:1px solid var(--line);padding:14px 10px 10px}
+  .brand{display:flex;align-items:center;gap:9px;padding:4px 8px 14px;font-weight:700;
+         font-size:15px;letter-spacing:-.01em}
+  .brand .logo{width:26px;height:26px;border-radius:7px;background:var(--accent);display:grid;place-items:center}
+  .search{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:1px solid var(--line);
+          border-radius:8px;background:var(--surface);color:var(--muted);cursor:pointer;text-align:left}
+  .search span{flex:1}
+  .search:hover{border-color:var(--line-2)}
+  .nav{display:flex;flex-direction:column;gap:1px;margin:12px 0 4px}
+  .nav a,.ch-item{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:7px;
+        color:var(--ink-2);font-weight:500;min-width:0}
+  .nav a:hover,.ch-item:hover{background:var(--surface-2);color:var(--ink)}
+  .nav a.on,.ch-item.on{background:var(--surface-3);color:var(--ink)}
+  .side-label{display:flex;justify-content:space-between;padding:14px 10px 6px;font-size:11px;
+        font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .ch-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1px;margin:0 -4px;padding:0 4px}
+  .ch-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ch-item .md{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums}
+  .warn-dot{width:16px;height:16px;border-radius:50%;background:var(--down);color:#fff;font-size:11px;
+        font-weight:700;display:grid;place-items:center;flex:none}
+  .add{display:flex;align-items:center;justify-content:center;gap:7px;margin:8px 0;padding:8px;
+       border:1px dashed var(--line-2);border-radius:8px;color:var(--ink-2);font-weight:500}
+  .add:hover{border-color:var(--accent);color:var(--accent)}
+  .me{display:flex;align-items:center;gap:10px;padding:10px 8px 2px;border-top:1px solid var(--line)}
+  .me .who{flex:1;min-width:0;line-height:1.3}
+  .me .who b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .me .who span{font-size:12px;color:var(--muted)}
+  .icon-btn{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);
+        border-radius:8px;background:var(--surface);cursor:pointer;color:var(--ink-2);flex:none}
+  .icon-btn:hover{color:var(--ink);border-color:var(--line-2)}
+  .icon-btn.bare{border-color:transparent;background:none}
+  .icon-btn:disabled{opacity:.4;cursor:default}
+  .spin svg{animation:spin .8s linear infinite} @keyframes spin{to{transform:rotate(360deg)}}
+
+  .main{min-width:0;display:flex;flex-direction:column}
+  .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 28px;
+       background:color-mix(in srgb,var(--page) 88%,transparent);backdrop-filter:blur(10px);
+       border-bottom:1px solid var(--line);min-height:57px}
+  .crumb{display:flex;align-items:center;gap:10px;min-width:0}
+  .crumb h1{font-size:16px;margin:0;font-weight:650;letter-spacing:-.01em;white-space:nowrap;
+            overflow:hidden;text-overflow:ellipsis}
+  .crumb .range{font-size:12px;color:var(--muted);white-space:nowrap}
+  .spacer{flex:1}
+  .menu{display:none}
+  .pager{display:flex;gap:4px}
+  .seg{display:inline-flex;padding:2px;border-radius:8px;background:var(--surface-3);flex:none}
+  .seg button{border:0;background:none;padding:5px 10px;border-radius:6px;font-size:13px;
+        font-weight:500;color:var(--ink-2);cursor:pointer}
+  .seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+  .content{padding:24px 28px 64px;max-width:1240px;width:100%;margin:0 auto}
+
+  /* --- Kartlar --------------------------------------------------------- */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+        margin-top:16px}
+  .card-h{display:flex;align-items:center;gap:10px;padding:14px 18px 0;flex-wrap:wrap}
+  .card-h h2{font-size:14px;font-weight:650;margin:0}
+  .card-b{padding:12px 18px 16px}
+  .note{display:flex;gap:10px;align-items:flex-start;padding:12px 16px;border-radius:10px;
+        border:1px solid var(--line);background:var(--surface);margin-bottom:16px;font-size:13px;color:var(--ink-2)}
+  .note b{color:var(--ink)}
+  .note.err{border-color:color-mix(in srgb,var(--down) 40%,transparent)}
+  .note a{color:var(--accent);font-weight:600}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 12px;
+       box-shadow:var(--shadow);position:relative;overflow:hidden;min-width:0}
+  .kpi-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;
+         font-weight:500;color:var(--ink-2)}
+  .kpi-v{font-size:28px;font-weight:650;letter-spacing:-.025em;margin:4px 0 2px;line-height:1.15;white-space:nowrap}
+  .kpi-s{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .kpi svg.sp{display:block;margin-top:8px;width:100%;height:30px}
+
+  .d{display:inline-flex;align-items:center;gap:2px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .d.up{color:var(--up)} .d.down{color:var(--down)} .d.flat{color:var(--muted)}
+  .d .ar{font-size:.8em}
+
+  /* --- Grafik ----------------------------------------------------------- */
+  .tabs{display:flex;gap:4px}
+  .tab{border:0;background:none;padding:6px 10px;border-radius:7px;font-weight:500;color:var(--ink-2);cursor:pointer}
+  .tab:hover{background:var(--surface-2)}
+  .tab.on{background:var(--accent-soft);color:var(--accent-ink)}
+  .legend{display:flex;gap:14px;font-size:12px;color:var(--ink-2);margin-left:auto}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{display:inline-block;width:14px;height:0;border-top:2px solid var(--accent)}
+  .sw.prev{border-top:2px dashed var(--muted)}
+  .plot-wrap{position:relative;padding:8px 18px 12px}
+  .plot{height:260px}
+  .plot svg{display:block;overflow:visible}
+  .tip{position:absolute;top:8px;pointer-events:none;background:var(--surface);color:var(--ink);
+       border:1px solid var(--line-2);border-radius:10px;box-shadow:var(--pop);padding:10px 12px;
+       font-size:12px;min-width:190px;display:none;z-index:2}
+  .tip-d{font-weight:600;margin-bottom:6px}
+  .tip-row{display:flex;align-items:center;gap:8px;padding:2px 0;color:var(--ink-2)}
+  .tip-row b{margin-left:auto;color:var(--ink);font-variant-numeric:tabular-nums;padding-left:12px}
+  .tip-row .t{max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tip-sep{border-top:1px solid var(--line);margin:6px 0}
+
+  .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+  .grid2>.card{margin-top:16px}
+
+  .ins{list-style:none;margin:0;padding:4px 0 8px}
+  .ins li a,.ins li>div{display:flex;align-items:center;gap:12px;padding:10px 18px}
+  .ins li a:hover{background:var(--surface-2)}
+  .ins .ic{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--surface-2);
+           color:var(--ink-2);flex:none}
+  .ins .ic.up{color:var(--up)} .ins .ic.down{color:var(--down)}
+  .ins .tx{flex:1;min-width:0;line-height:1.35}
+  .ins .tx span{display:block;font-size:12px;color:var(--muted)}
+  .ins .tx b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ins .val{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  .share{list-style:none;margin:0;padding:6px 0 10px}
+  .share li a,.share li>div{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) 64px;gap:12px;
+        align-items:center;padding:6px 18px}
+  .share li a:hover{background:var(--surface-2)}
+  .share .nm{display:flex;align-items:center;gap:8px;min-width:0}
+  .share .nm span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .share .bar{height:10px;border-radius:0 4px 4px 0;background:var(--accent);min-width:2px}
+  .share .bar.other{background:var(--base)}
+  .share .pc{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+
+  /* --- Tablolar --------------------------------------------------------- */
+  .tbl-wrap{overflow-x:auto;margin-top:8px}
+  table{border-collapse:collapse;width:100%}
+  th,td{padding:10px 14px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  th{font-size:12px;font-weight:500;color:var(--muted);border-bottom:1px solid var(--line)}
+  th button{border:0;background:none;padding:0;color:inherit;font:inherit;cursor:pointer;display:inline-flex;gap:4px;align-items:center}
+  th button:hover,th.on button{color:var(--ink)}
+  td{border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:0}
+  th:first-child,td:first-child{text-align:left;padding-left:18px}
+  th:last-child,td:last-child{padding-right:18px}
+  tbody tr.link{cursor:pointer}
+  tbody tr.link:hover td{background:var(--surface-2)}
+  .cell-ch{display:flex;align-items:center;gap:10px;min-width:180px}
+  .cell-ch b{font-weight:600;display:block}
+  .cell-ch span{font-size:12px;color:var(--muted)}
+  td .sub{display:block;font-size:12px}
+  td.err{color:var(--down);text-align:left;white-space:normal}
+  td.err a{color:var(--accent);font-weight:600}
+
+  .vcell{display:flex;align-items:center;gap:12px;min-width:280px;white-space:normal}
+  .vcell .t{font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .vcell .m{font-size:12px;color:var(--muted)}
+  .thumb{position:relative;width:96px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--surface-3);flex:none;
+         display:grid;place-items:center;color:var(--muted)}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb .dur{position:absolute;right:4px;bottom:4px;background:rgba(0,0,0,.78);color:#fff;font-size:10px;
+         font-weight:600;padding:1px 4px;border-radius:3px}
+  .pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 5px;border-radius:4px;
+        background:var(--surface-3);color:var(--ink-2);margin-left:4px;vertical-align:1px}
+
+  .vlist{list-style:none;margin:0;padding:4px 0 8px}
+  .vlist li{display:flex;align-items:center;gap:14px;padding:10px 18px}
+  .vlist li+li{border-top:1px solid var(--line)}
+  .vlist .rank{width:20px;text-align:right;color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums;flex:none}
+  .vlist .thumb{width:120px}
+  .vlist .vm{flex:1;min-width:0}
+  .vlist .vt{font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .vlist .vt:hover{text-decoration:underline}
+  .vlist .vc{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);margin-top:3px}
+  .vlist .vc:hover{color:var(--ink)}
+  .vlist .vn{text-align:right;white-space:nowrap;line-height:1.35}
+  .vlist .vn b{display:block;font-size:15px;font-variant-numeric:tabular-nums}
+  .vlist .vn span{font-size:12px;color:var(--muted)}
+
+  /* --- Avatar ----------------------------------------------------------- */
+  .av{border-radius:50%;flex:none;background:var(--surface-3);color:var(--ink-2);display:grid;place-items:center;
+      font-weight:650;overflow:hidden}
+  .av img{width:100%;height:100%;object-fit:cover}
+
+  /* --- Kanal başlığı ---------------------------------------------------- */
+  .hero{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+  .hero h2{font-size:22px;margin:0;letter-spacing:-.02em;font-weight:700}
+  .hero .meta{color:var(--muted);font-size:13px;margin-top:2px}
+  .hero .acts{margin-left:auto;display:flex;gap:8px}
+  .btn{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;border:1px solid var(--line-2);
+       background:var(--surface);font-weight:500;cursor:pointer;white-space:nowrap}
+  .btn:hover{border-color:var(--ink-2)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{filter:brightness(1.08)}
+  .btn.danger{color:var(--down);border-color:color-mix(in srgb,var(--down) 40%,transparent)}
+
+  /* --- Boş durum / iskelet ---------------------------------------------- */
+  .empty{max-width:520px;margin:48px auto;text-align:center}
+  .empty .big{width:56px;height:56px;border-radius:14px;background:var(--accent-soft);color:var(--accent);
+        display:grid;place-items:center;margin:0 auto 18px}
+  .empty .big svg{width:26px;height:26px}
+  .empty h2{font-size:22px;letter-spacing:-.02em;margin:0 0 8px}
+  .empty p{color:var(--ink-2);margin:0 0 20px}
+  .empty ol{text-align:left;color:var(--ink-2);font-size:13px;margin:24px auto 0;max-width:420px;padding-left:20px}
+  .empty li{margin:6px 0}
+  .sk{background:linear-gradient(90deg,var(--surface-2),var(--surface-3),var(--surface-2));background-size:200% 100%;
+      animation:sk 1.2s ease-in-out infinite;border-radius:8px}
+  @keyframes sk{to{background-position:-200% 0}}
+  .foot{color:var(--muted);font-size:12px;margin-top:16px}
+  .more{display:block;width:100%;border:0;border-top:1px solid var(--line);background:none;padding:11px;
+        color:var(--ink-2);font-weight:500;cursor:pointer;border-radius:0 0 12px 12px}
+  .more:hover{background:var(--surface-2);color:var(--ink)}
+
+  /* --- Ayarlar ---------------------------------------------------------- */
+  .set-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-top:1px solid var(--line)}
+  .set-row:first-child{border-top:0}
+  .set-row .tx{flex:1;min-width:0}
+  .set-row .tx b{display:block;font-weight:600}
+  .set-row .tx span{font-size:12px;color:var(--muted)}
+  .usage{height:8px;border-radius:4px;background:var(--surface-3);overflow:hidden;margin-top:8px}
+  .usage i{display:block;height:100%;background:var(--accent);border-radius:4px}
+
+  /* --- Hızlı geçiş (⌘K) ------------------------------------------------- */
+  .palette{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.32);display:flex;justify-content:center;
+           align-items:flex-start;padding:12vh 16px 16px}
+  .pbox{width:100%;max-width:560px;background:var(--surface);border:1px solid var(--line-2);border-radius:14px;
+        box-shadow:var(--pop);overflow:hidden}
+  .pin{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);color:var(--muted)}
+  .pin input{flex:1;border:0;outline:0;background:none;font:inherit;font-size:15px;color:var(--ink)}
+  .plist{max-height:min(420px,60vh);overflow-y:auto;padding:6px}
+  .pitem{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer}
+  .pitem.on{background:var(--surface-3)}
+  .pitem .sub{margin-left:auto;font-size:12px;color:var(--muted)}
+  .pgroup{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 10px 4px}
+  .pfoot{display:flex;gap:14px;padding:8px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;
+         background:var(--ink);color:var(--page);padding:10px 16px;border-radius:10px;font-size:13px;
+         box-shadow:var(--pop);transition:.2s;z-index:60;max-width:calc(100% - 32px);pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%)}
+
+  /* --- Mobil ------------------------------------------------------------ */
+  .scrim{display:none}
+  @media (max-width:1100px){ .kpis{grid-template-columns:repeat(2,minmax(0,1fr))} .grid2{grid-template-columns:1fr} .grid2>.card+.card{margin-top:0} }
+  @media (max-width:900px){
+    .shell{grid-template-columns:1fr}
+    .side{position:fixed;left:0;top:0;bottom:0;width:280px;z-index:40;transform:translateX(-100%);transition:transform .2s}
+    .side.open{transform:none;box-shadow:var(--pop)}
+    .scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:30}
+    .menu{display:grid}
+    .top{padding:10px 16px;flex-wrap:wrap}
+    .crumb .range{display:none}
+    .content{padding:16px 16px 48px}
+    .hide-sm{display:none}
+  }
+  @media (max-width:560px){
+    .top .seg{order:10;width:100%;justify-content:stretch}
+    .top .seg button{flex:1}
+    .kpi-v{font-size:22px}
+    .hide-xs{display:none}
+    th,td{padding:10px 8px}
+    .cell-ch{min-width:0}
+    .cell-ch>span>span{display:none}
+    .vlist li{flex-wrap:wrap;row-gap:4px}
+    .vlist .thumb{width:84px}
+    .vlist .rank{display:none}
+    .vlist .vm{flex-basis:calc(100% - 98px)}
+    .vlist .vn{width:100%;padding-left:98px;text-align:left;display:flex;gap:8px;align-items:baseline}
+    .vlist .vn b{display:inline;font-size:14px}
+    .vcell{min-width:220px}.vcell .thumb{width:72px}
+    .share li a,.share li>div{grid-template-columns:minmax(0,110px) minmax(0,1fr) 48px}
+    .hero .acts{margin-left:0;width:100%}
+    .plot{height:200px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="brand"><span class="logo" id="logo"></span><span>{{APP_NAME}}</span></div>
+    <button class="search" id="openPalette"><span class="si"></span><span>Kanal ara</span><kbd id="kbd">⌘K</kbd></button>
+    <nav class="nav">
+      <a href="#/" data-nav="overview"><span class="ni" data-i="grid"></span>Genel bakış</a>
+      <a href="#/ayarlar" data-nav="settings"><span class="ni" data-i="settings"></span>Ayarlar</a>
+    </nav>
+    <div class="side-label"><span>Kanallar</span><span id="chCount"></span></div>
+    <div class="ch-list" id="chList"></div>
+    <a class="add" href="/giris"><span class="ni" data-i="plus"></span>Kanal ekle</a>
+    <div class="me" id="me"></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <main class="main">
+    <div class="top">
+      <button class="icon-btn menu" id="menuBtn" aria-label="Menü"></button>
+      <div class="crumb" id="crumb"></div>
+      <span class="spacer"></span>
+      <div class="pager" id="pager"></div>
+      <div class="seg" id="days" role="group" aria-label="Dönem">
+        <button data-d="7">7 gün</button><button data-d="28">28 gün</button><button data-d="90">90 gün</button>
+      </div>
+      <button class="icon-btn" id="refresh" title="Verileri yenile" aria-label="Yenile"></button>
+    </div>
+    <div class="content" id="view"></div>
+  </main>
+</div>
+
+<div class="palette hidden" id="palette">
+  <div class="pbox" role="dialog" aria-label="Kanal ara">
+    <div class="pin"><span class="si"></span><input id="pInput" placeholder="Kanal ara veya sayfaya git…" autocomplete="off"><kbd>esc</kbd></div>
+    <div class="plist" id="pList"></div>
+    <div class="pfoot"><span><kbd>↑</kbd> <kbd>↓</kbd> seç</span><span><kbd>↵</kbd> aç</span><span><kbd>←</kbd> <kbd>→</kbd> kanal sayfasında önceki/sonraki</span></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================================
+// Yardımcılar
+// ============================================================================
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf = new Intl.NumberFormat("tr-TR");
+const cf = new Intl.NumberFormat("tr-TR", {notation: "compact", maximumFractionDigits: 1});
+const num = v => v == null ? "—" : (Math.abs(v) >= 10000 ? cf.format(v) : nf.format(Math.round(v)));
+const full = v => v == null ? "—" : nf.format(Math.round(v));
+const signed = v => (v > 0 ? "+" : v < 0 ? "−" : "") + num(Math.abs(v));
+const signedFull = v => (v > 0 ? "+" : v < 0 ? "−" : "") + full(Math.abs(v));
+const dshort = s => new Date(s + "T00:00:00").toLocaleDateString("tr-TR", {day: "numeric", month: "short"});
+const dlong = s => new Date(s + "T00:00:00").toLocaleDateString("tr-TR", {day: "numeric", month: "long", weekday: "short"});
+const dur = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, "0");
+                   return h ? `${h}:${String(m).padStart(2, "0")}:${x}` : `${m}:${x}`; };
+const low = s => String(s).toLocaleLowerCase("tr");
+const ytUrl = id => `https://youtu.be/${encodeURIComponent(id)}`;
+const chHref = id => `#/kanal/${encodeURIComponent(id)}`;
+
+const I = {
+  grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  settings: '<line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  refresh: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
+  plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
+  ext: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+  left: '<path d="m15 18-6-6 6-6"/>',
+  right: '<path d="m9 18 6-6-6-6"/>',
+  menu: '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
+  logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>',
+  up: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  down: '<polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/>',
+  userPlus: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>',
+  award: '<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+  play: '<polygon points="6 3 20 12 6 21 6 3"/>',
+  alert: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  sort: '<path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/>',
+};
+const ic = (name, size = 16) => `<svg class="i" viewBox="0 0 24 24" style="width:${size}px;height:${size}px" aria-hidden="true">${I[name]}</svg>`;
+
+function avatar(o, size = 28){
+  const fs = Math.round(size * .42);
+  return `<span class="av" style="width:${size}px;height:${size}px;font-size:${fs}px">${o && o.thumb
+    ? `<img src="${esc(o.thumb)}" alt="" referrerpolicy="no-referrer" loading="lazy">` : esc(((o && (o.title || o.name)) || "?").trim()[0] || "?")}</span>`;
+}
+
+function delta(p, opts = {}){
+  if (p == null) return opts.quiet ? "" : `<span class="d flat">yeni</span>`;
+  const cls = p > 0.05 ? "up" : p < -0.05 ? "down" : "flat";
+  const ar = cls === "up" ? "▲" : cls === "down" ? "▼" : "■";
+  return `<span class="d ${cls}"><span class="ar">${ar}</span>%${nf.format(Math.abs(Math.round(p * 10) / 10))}</span>`;
+}
+
+const store = {
+  get(k, d){ try { return localStorage.getItem("kp-" + k) ?? d; } catch { return d; } },
+  set(k, v){ try { localStorage.setItem("kp-" + k, v); } catch {} },
+};
+
+let toastTimer;
+function toast(msg){
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 6000);
+}
+
+// ============================================================================
+// Durum ve veri
+// ============================================================================
+const S = {
+  me: null,
+  days: [7, 28, 90].includes(+store.get("days", 28)) ? +store.get("days", 28) : 28,
+  ov: {}, top: {},           // gün -> Promise
+  sort: {k: store.get("sort", "views"), dir: -1},
+  metric: store.get("metric", "views"),
+  redraw: null, seq: 0,
+};
+
+async function api(path, {fresh = false, method = "GET", days = true} = {}){
+  let url = path;
+  if (days) url += (path.includes("?") ? "&" : "?") + "days=" + S.days + (fresh ? "&fresh=1" : "");
+  const r = await fetch(url, {method, headers: {"Accept": "application/json"}});
+  if (r.status === 401){ location.reload(); throw new Error("Oturum kapandı"); }
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.detail || `Hata ${r.status}`);
+  return data;
+}
+function overview(fresh){
+  if (fresh || !S.ov[S.days]) S.ov[S.days] = api("/api/overview", {fresh}).catch(e => { delete S.ov[S.days]; throw e; });
+  return S.ov[S.days];
+}
+function topVideos(fresh){
+  if (fresh || !S.top[S.days]) S.top[S.days] = api("/api/top-videos", {fresh}).catch(e => { delete S.top[S.days]; throw e; });
+  return S.top[S.days];
+}
+const channelsSorted = () => [...S.me.channels].sort((a, b) => a.title.localeCompare(b.title, "tr"));
+
+const METRICS = {
+  views: {label: "İzlenme", get: p => p.views, fmt: v => full(v), tick: v => num(v)},
+  hours: {label: "İzlenme süresi", get: p => p.minutes / 60, fmt: v => full(v) + " sa", tick: v => num(v)},
+  subs:  {label: "Net abone", get: p => p.subs, fmt: v => signedFull(v), tick: v => num(v)},
+};
+
+// ============================================================================
+// Kenar çubuğu
+// ============================================================================
+function renderMe(){
+  const u = S.me.user;
+  $("#me").innerHTML = `${avatar({thumb: u.picture, title: u.name || u.email}, 30)}
+    <div class="who"><b>${esc(u.name || u.email || "Hesabım")}</b>
+      <span>${esc(planName(u.plan))} · ${S.me.channels.length}/${S.me.limit} kanal</span></div>
+    <form method="post" action="/cikis"><button class="icon-btn bare" title="Çıkış yap" aria-label="Çıkış yap">${ic("logout")}</button></form>`;
+}
+const planName = p => ({beta: "Beta", free: "Ücretsiz", pro: "Pro", agency: "Ajans"}[p] || p);
+
+async function renderSidebar(){
+  const r = currentRoute();
+  let byId = {};
+  try { const ov = S.ov[S.days] && await Promise.race([S.ov[S.days], Promise.resolve(null)]);
+        if (ov) ov.channels.forEach(c => byId[c.id] = c); } catch {}
+  $("#chCount").textContent = S.me.channels.length;
+  $("#chList").innerHTML = channelsSorted().map(c => {
+    const o = byId[c.id];
+    const tail = !o ? "" : o.error ? `<span class="warn-dot" title="${esc(o.error)}">!</span>`
+               : `<span class="md">${delta(o.views_change, {quiet: true})}</span>`;
+    return `<a class="ch-item ${r.view === "channel" && r.id === c.id ? "on" : ""}" href="${chHref(c.id)}" title="${esc(c.title)}">
+      ${avatar(c, 22)}<span class="ch-name">${esc(c.title)}</span>${tail}</a>`;
+  }).join("") || `<div class="muted" style="padding:6px 10px;font-size:13px">Henüz kanal yok</div>`;
+  document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("on", a.dataset.nav === r.view));
+}
+
+function openSide(){ $("#side").classList.add("open"); $("#scrim").classList.add("open"); }
+function closeSide(){ $("#side").classList.remove("open"); $("#scrim").classList.remove("open"); }
+
+// ============================================================================
+// Grafikler
+// ============================================================================
+function spark(vals, w = 120, h = 30){
+  if (!vals.length) return "";
+  const max = Math.max(...vals), min = Math.min(0, ...vals), rng = max - min || 1;
+  const pts = vals.map((v, i) => `${(i / (vals.length - 1 || 1) * (w - 4) + 2).toFixed(1)},${(h - 3 - (v - min) / rng * (h - 6)).toFixed(1)}`);
+  return `<svg class="sp" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+
+function niceTicks(lo, hi, n = 4){
+  if (hi <= lo) hi = lo + 1;
+  const raw = (hi - lo) / n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+  const step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p;
+  const out = [];
+  for (let v = Math.floor(lo / step) * step; v <= Math.ceil(hi / step) * step + step / 2; v += step) out.push(Math.round(v / step) * step);
+  return out;
+}
+
+function drawChart(el, {dates, cur, prev, metric, extra}){
+  const plot = $(".plot", el), tip = $(".tip", el), M = METRICS[metric];
+  const W = plot.clientWidth, H = plot.clientHeight, L = 46, R = 8, T = 10, B = 26;
+  const all = cur.concat(prev || []);
+  const t = niceTicks(Math.min(0, ...all), Math.max(...all, 1));
+  const lo = t[0], hi = t[t.length - 1], n = cur.length;
+  const x = i => L + (n > 1 ? i / (n - 1) : .5) * (W - L - R);
+  const y = v => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  const line = arr => arr.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
+  const nl = W < 520 ? 3 : 6;
+  const lbls = [...new Set(Array.from({length: nl}, (_, k) => Math.round(k * (n - 1) / (nl - 1))))];
+  const zero = lo < 0 ? `<line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--base)"/>` : "";
+  plot.innerHTML = `<svg width="${W}" height="${H}" role="img" aria-label="Günlük ${esc(M.label)}">
+    <defs><linearGradient id="g-${el.id}" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="var(--accent)" stop-opacity=".18"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+    ${t.map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/>
+      <text x="${L - 10}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="var(--muted)">${M.tick(v)}</text>`).join("")}
+    ${zero}
+    ${lbls.map(i => `<text x="${x(i)}" y="${H - 6}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}" font-size="11" fill="var(--muted)">${dshort(dates[i])}</text>`).join("")}
+    <path d="${line(cur)}L${x(n - 1)},${y(Math.max(lo, 0))}L${x(0)},${y(Math.max(lo, 0))}Z" fill="url(#g-${el.id})"/>
+    ${prev && prev.length === n ? `<path d="${line(prev)}" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>` : ""}
+    <path d="${line(cur)}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <line class="xh" y1="${T}" y2="${H - B}" stroke="var(--line-2)" visibility="hidden"/>
+    <circle class="dot" r="4.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>
+    <rect class="hit" x="${L - 6}" y="0" width="${W - L - R + 12}" height="${H}" fill="transparent"/></svg>`;
+  const svg = $("svg", plot), xh = $(".xh", svg), dot = $(".dot", svg);
+  const show = clientX => {
+    const r = svg.getBoundingClientRect();
+    const i = Math.max(0, Math.min(n - 1, Math.round((clientX - r.left - L) / (W - L - R) * (n - 1))));
+    const px = x(i), py = y(cur[i]);
+    xh.setAttribute("x1", px); xh.setAttribute("x2", px); xh.setAttribute("visibility", "visible");
+    dot.setAttribute("cx", px); dot.setAttribute("cy", py); dot.setAttribute("visibility", "visible");
+    tip.innerHTML = `<div class="tip-d">${dlong(dates[i])}</div>
+      <div class="tip-row"><i class="sw"></i>Bu dönem<b>${M.fmt(cur[i])}</b></div>
+      ${prev && prev.length === n ? `<div class="tip-row"><i class="sw prev"></i>Önceki dönem<b>${M.fmt(prev[i])}</b></div>` : ""}
+      ${extra ? extra(i) : ""}`;
+    tip.style.display = "block";
+    const tw = tip.offsetWidth, left = px + 18 + 16 + tw > W + 18 ? px + 18 - tw - 16 : px + 18 + 16;
+    tip.style.left = Math.max(4, left) + "px";
+  };
+  svg.addEventListener("pointermove", e => show(e.clientX));
+  svg.addEventListener("pointerdown", e => show(e.clientX));
+  svg.addEventListener("pointerleave", () => { tip.style.display = "none"; xh.setAttribute("visibility", "hidden"); dot.setAttribute("visibility", "hidden"); });
+}
+
+function chartCard(id, title){
+  return `<section class="card" id="${id}">
+    <div class="card-h"><div class="tabs" role="tablist">${Object.entries(METRICS).map(([k, m]) =>
+      `<button class="tab ${S.metric === k ? "on" : ""}" data-m="${k}" role="tab">${m.label}</button>`).join("")}</div>
+      <div class="legend"><span><i class="sw"></i>Son ${S.days} gün</span><span><i class="sw prev"></i>Önceki ${S.days} gün</span></div></div>
+    <div class="plot-wrap"><div class="plot" aria-label="${esc(title)}"></div><div class="tip"></div></div></section>`;
+}
+function bindTabs(el, draw){
+  el.querySelectorAll(".tab").forEach(b => b.onclick = () => {
+    S.metric = b.dataset.m; store.set("metric", S.metric);
+    el.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === b)); draw();
+  });
+}
+
+// ============================================================================
+// Genel bakış
+// ============================================================================
+function kpi(label, value, deltaHtml, sub, vals){
+  return `<div class="kpi"><div class="kpi-h"><span>${label}</span>${deltaHtml || ""}</div>
+    <div class="kpi-v">${value}</div><div class="kpi-s">${sub}</div>${vals ? spark(vals) : ""}</div>`;
+}
+function change(cur, prev){ return prev ? (cur - prev) / Math.abs(prev) * 100 : null; }
+
+function skeleton(){
+  const tile = `<div class="kpi"><div class="sk" style="height:14px;width:50%"></div><div class="sk" style="height:30px;width:70%;margin:10px 0 8px"></div><div class="sk" style="height:30px"></div></div>`;
+  return `<div class="kpis">${tile.repeat(4)}</div><div class="card" style="padding:18px"><div class="sk" style="height:260px"></div></div>
+    <div class="card" style="padding:18px"><div class="sk" style="height:180px"></div></div>`;
+}
+
+function emptyState(){
+  return `<div class="empty"><div class="big">${ic("play", 26)}</div>
+    <h2>İlk kanalını bağla</h2>
+    <p>Kanalın olan Google hesabıyla giriş yap; kanal istatistiklerin birkaç saniyede burada.</p>
+    <a class="btn primary" href="/giris">${ic("plus")} Kanal ekle</a>
+    <ol><li>Google hesabını seç.</li>
+      <li>Hesabında birden fazla kanal varsa Google hangisini istediğini sorar; birini seç.</li>
+      <li>Diğer kanallar için <b>Kanal ekle</b>'yi tekrarla. Farklı Google hesaplarındaki kanallar da olur.</li></ol>
+    <p class="muted" style="margin-top:20px;font-size:12px">${ic("shield", 13)} Sadece okuma izni istenir; kanallarında hiçbir şey değiştirilemez.</p></div>`;
+}
+
+async function renderOverview(fresh, seq){
+  setTop({title: "Genel bakış"});
+  if (!S.me.channels.length){ $("#view").innerHTML = emptyState(); return; }
+  if (!S.ov[S.days] || fresh) $("#view").innerHTML = skeleton();
+  const ov = await overview(fresh);
+  if (seq !== S.seq) return;
+  setTop({title: "Genel bakış", range: ov});
+  renderSidebar();
+
+  const ok = ov.channels.filter(c => !c.error), bad = ov.channels.filter(c => c.error);
+  const sum = k => ok.reduce((a, c) => a + (c[k] || 0), 0);
+  const n = ok.length ? ok[0].series.length : 0;
+  const dates = ok.length ? ok[0].series.map(p => p.d) : [];
+  const total = (key, metric) => Array.from({length: n}, (_, i) => ok.reduce((a, c) => a + METRICS[metric].get(c[key][i]), 0));
+  const subsTotal = ok.some(c => c.subscribers != null) ? sum("subscribers") : null;
+
+  let html = "";
+  if (S.me.demo) html += `<div class="note">${ic("play")}<div><b>Örnek veri.</b> Uydurma kanallar; paneli görmen için. Gerçek kanallar için sunucuyu <code>--demo</code> olmadan başlat.</div></div>`;
+  if (bad.length) html += `<div class="note err">${ic("alert")}<div><b>${bad.length} kanalın verisi alınamadı.</b> ${bad.map(c => esc(c.title)).join(", ")}. ${bad.some(c => c.reauth) ? `<a href="/giris">Yeniden bağla</a>` : ""}</div></div>`;
+
+  html += `<div class="kpis">
+    ${kpi("İzlenme", num(sum("views")), delta(change(sum("views"), sum("prev_views"))), `önceki ${S.days} gün: ${num(sum("prev_views"))}`, total("series", "views"))}
+    ${kpi("İzlenme süresi", num(sum("hours")) + " sa", delta(change(sum("hours"), sum("prev_hours"))), `önceki ${S.days} gün: ${num(sum("prev_hours"))} sa`, total("series", "hours"))}
+    ${kpi("Net abone", signed(sum("subs")), delta(change(sum("subs"), sum("prev_subs"))), `önceki ${S.days} gün: ${signed(sum("prev_subs"))}`, total("series", "subs"))}
+    ${kpi("Toplam abone", num(subsTotal), "", `${ok.length} kanal · anlık`, null)}
+  </div>`;
+
+  html += chartCard("mainChart", "Tüm kanallar");
+  html += `<div class="grid2">
+    <section class="card"><div class="card-h"><h2>Öne çıkanlar</h2><span class="muted" style="font-size:12px">önceki ${S.days} güne göre</span></div>${insights(ok)}</section>
+    <section class="card"><div class="card-h"><h2>İzlenme payı</h2><span class="muted" style="font-size:12px">son ${S.days} gün</span></div>${shareBars(ok)}</section>
+  </div>`;
+  html += `<section class="card"><div class="card-h"><h2>Kanallar</h2><span class="muted" style="font-size:12px">${ov.channels.length} kanal · satıra tıkla, kanala geç</span></div>
+    <div class="tbl-wrap"><table id="chTable"></table></div></section>`;
+  html += `<section class="card"><div class="card-h"><h2>Tüm kanallarda en çok izlenen videolar</h2><span class="muted" style="font-size:12px">son ${S.days} gün</span></div>
+    <div id="topVideos"><div style="padding:18px"><div class="sk" style="height:200px"></div></div></div></section>`;
+  html += `<p class="foot">YouTube istatistikleri yaklaşık 2 gün gecikmeli gelir; dönem ${dshort(ov.end)} tarihinde biter. Abone sayıları anlıktır.</p>`;
+  $("#view").innerHTML = html;
+
+  const el = $("#mainChart");
+  const draw = () => drawChart(el, {
+    dates, metric: S.metric, cur: total("series", S.metric), prev: total("prev_series", S.metric),
+    extra: i => {
+      const m = METRICS[S.metric];
+      const rows = ok.map(c => ({c, v: m.get(c.series[i])})).sort((a, b) => b.v - a.v);
+      const top = rows.slice(0, 5);
+      return `<div class="tip-sep"></div>${top.map(r => `<div class="tip-row">${avatar(r.c, 16)}<span class="t">${esc(r.c.title)}</span><b>${m.fmt(r.v)}</b></div>`).join("")}
+        ${rows.length > 5 ? `<div class="tip-row muted">+${rows.length - 5} kanal daha</div>` : ""}`;
+    },
+  });
+  bindTabs(el, draw); draw(); S.redraw = draw;
+  renderChannelTable(ov.channels);
+
+  topVideos(fresh).then(d => { if (seq === S.seq){ $("#topVideos").innerHTML = videoList(d.videos); clip($("#topVideos")); } })
+    .catch(e => { if (seq === S.seq) $("#topVideos").innerHTML = `<div class="card-b muted">Videolar alınamadı: ${esc(e.message)}</div>`; });
+}
+
+function insights(ok){
+  if (!ok.length) return `<div class="card-b muted">Veri yok.</div>`;
+  const by = (arr, f) => arr.reduce((best, c) => best == null || f(c) > f(best) ? c : best, null);
+  const comparable = ok.filter(c => c.views_change != null && c.prev_views >= 100);
+  const grow = by(comparable, c => c.views_change), drop = by(comparable, c => -c.views_change);
+  const subs = by(ok, c => c.subs), views = by(ok, c => c.views);
+  const total = ok.reduce((a, c) => a + c.views, 0) || 1;
+  const row = (icon, cls, label, c, val) => c ? `<li><a href="${chHref(c.id)}"><span class="ic ${cls}">${ic(icon)}</span>
+      <span class="tx"><span>${label}</span><b>${esc(c.title)}</b></span><span class="val">${val}</span></a></li>` : "";
+  return `<ul class="ins">
+    ${row("up", "up", "En hızlı büyüyen", grow && grow.views_change > 0 ? grow : null, grow ? delta(grow.views_change) : "")}
+    ${drop && drop.views_change < 0 ? row("down", "down", "En çok düşen", drop, delta(drop.views_change))
+      : `<li><div><span class="ic">${ic("down")}</span><span class="tx"><span>En çok düşen</span><b>İzlenmesi düşen kanal yok</b></span></div></li>`}
+    ${row("userPlus", "", "En çok abone kazanan", subs, signed(subs.subs))}
+    ${row("award", "", "En çok izlenen", views, `%${nf.format(Math.round(views.views / total * 1000) / 10)} pay`)}
+  </ul>`;
+}
+
+function shareBars(ok){
+  if (!ok.length) return `<div class="card-b muted">Veri yok.</div>`;
+  const sorted = [...ok].sort((a, b) => b.views - a.views), total = sorted.reduce((a, c) => a + c.views, 0) || 1;
+  const head = sorted.slice(0, 7), rest = sorted.slice(7);
+  const max = head[0].views || 1;
+  const row = (c, v, other) => {
+    const inner = `<span class="nm">${other ? "" : avatar(c, 18)}<span>${esc(other ? `Diğer ${rest.length} kanal` : c.title)}</span></span>
+      <span><span class="bar ${other ? "other" : ""}" style="display:block;width:${Math.max(.5, v / max * 100)}%"></span></span>
+      <span class="pc">%${nf.format(Math.round(v / total * 1000) / 10)}</span>`;
+    return other ? `<li><div>${inner}</div></li>` : `<li><a href="${chHref(c.id)}" title="${esc(c.title)}: ${full(v)} izlenme">${inner}</a></li>`;
+  };
+  return `<ul class="share">${head.map(c => row(c, c.views)).join("")}${rest.length ? row(null, rest.reduce((a, c) => a + c.views, 0), true) : ""}</ul>`;
+}
+
+const COLS = [
+  {k: "title", label: "Kanal", get: c => low(c.title)},
+  {k: "subscribers", label: "Abone", get: c => c.subscribers ?? -1, cls: "hide-xs"},
+  {k: "views", label: "İzlenme", get: c => c.views},
+  {k: "views_change", label: "Değişim", get: c => c.views_change ?? -1e9},
+  {k: "trend", label: "Gidişat", cls: "hide-sm"},
+  {k: "hours", label: "İzlenme süresi", get: c => c.hours, cls: "hide-sm"},
+  {k: "subs", label: "Net abone", get: c => c.subs, cls: "hide-xs"},
+];
+function renderChannelTable(channels){
+  const ok = channels.filter(c => !c.error), bad = channels.filter(c => c.error);
+  const col = COLS.find(c => c.k === S.sort.k && c.get) || COLS[2];
+  ok.sort((a, b) => { const x = col.get(a), y = col.get(b); return (x > y ? 1 : x < y ? -1 : 0) * S.sort.dir; });
+  $("#chTable").innerHTML = `<thead><tr>${COLS.map(c => `<th class="${c.cls || ""} ${c.k === col.k ? "on" : ""}">${c.get
+      ? `<button data-k="${c.k}">${c.label}${c.k === col.k ? (S.sort.dir < 0 ? " ↓" : " ↑") : ""}</button>` : c.label}</th>`).join("")}</tr></thead>
+    <tbody>${ok.map(c => `<tr class="link" data-id="${esc(c.id)}">
+      <td><a class="cell-ch" href="${chHref(c.id)}">${avatar(c, 32)}<span><b>${esc(c.title)}</b><span>${esc(c.handle)} · ${full(c.video_count)} video</span></span></a></td>
+      <td class="hide-xs">${num(c.subscribers)}</td>
+      <td><b>${num(c.views)}</b></td>
+      <td>${delta(c.views_change)}</td>
+      <td class="hide-sm" style="width:130px">${spark(c.series.map(p => p.views))}</td>
+      <td class="hide-sm">${num(c.hours)} sa</td>
+      <td class="hide-xs">${signed(c.subs)}<span class="sub muted">önceki ${signed(c.prev_subs)}</span></td></tr>`).join("")}
+    ${bad.map(c => `<tr><td><span class="cell-ch">${avatar(c, 32)}<b>${esc(c.title)}</b></span></td>
+      <td colspan="6" class="err">${esc(c.error)} ${c.reauth ? `· <a href="/giris">Yeniden bağla</a>` : ""}</td></tr>`).join("")}</tbody>`;
+  $("#chTable").querySelectorAll("th button").forEach(b => b.onclick = () => {
+    S.sort = {k: b.dataset.k, dir: S.sort.k === b.dataset.k ? -S.sort.dir : (b.dataset.k === "title" ? 1 : -1)};
+    store.set("sort", S.sort.k); renderChannelTable(channels);
+  });
+  $("#chTable").querySelectorAll("tr.link").forEach(tr => tr.onclick = e => { if (!e.target.closest("a")) location.hash = chHref(tr.dataset.id); });
+}
+
+function thumb(v){
+  const shorts = v.seconds && v.seconds <= 180;
+  return `<a class="thumb" href="${ytUrl(v.id)}" target="_blank" rel="noopener" aria-label="YouTube'da aç">
+    ${v.thumb ? `<img src="${esc(v.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ic("play", 18)}
+    <span class="dur">${shorts ? "Kısa" : dur(v.seconds)}</span></a>`;
+}
+function videoList(videos){
+  if (!videos.length) return `<div class="card-b muted">Bu dönemde izlenme yok.</div>`;
+  return `<ol class="vlist" data-clip>${videos.map((v, i) => `<li><span class="rank">${i + 1}</span>${thumb(v)}
+    <div class="vm"><a class="vt" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a>
+      <a class="vc" href="${chHref(v.channel.id)}">${avatar(v.channel, 16)}${esc(v.channel.title)}<span class="muted">· ${dshort(v.published)}</span></a></div>
+    <div class="vn"><b>${num(v.period_views)}</b><span>izlenme · ort. %${nf.format(v.avg_pct)}</span></div></li>`).join("")}</ol>`;
+}
+
+// ============================================================================
+// Kanal sayfası
+// ============================================================================
+function clip(root, n = 10){
+  root.querySelectorAll("[data-clip]").forEach(list => {
+    const items = [...list.children];
+    if (items.length <= n) return;
+    items.slice(n).forEach(x => x.classList.add("hidden"));
+    const b = document.createElement("button");
+    b.className = "more"; b.textContent = `Tümünü göster (${items.length})`;
+    b.onclick = () => { items.forEach(x => x.classList.remove("hidden")); b.remove(); };
+    list.closest(".card").appendChild(b);
+  });
+}
+
+function vcell(v){
+  return `<div class="vcell">${thumb(v)}<div><a class="t" href="${ytUrl(v.id)}" target="_blank" rel="noopener">${esc(v.title)}</a>
+    <div class="m">${dshort(v.published)}</div></div></div>`;
+}
+
+async function renderChannel(id, fresh, seq){
+  const meta = S.me.channels.find(c => c.id === id) || {id, title: "Kanal"};
+  setTop({title: meta.title, channel: meta});
+  $("#view").innerHTML = skeleton();
+  const ch = await api(`/api/channel/${encodeURIComponent(id)}`, {fresh});
+  if (seq !== S.seq) return;
+  setTop({title: ch.title || meta.title, channel: {...meta, thumb: ch.thumb || meta.thumb}, range: ch});
+  if (ch.error){
+    $("#view").innerHTML = `<div class="note err">${ic("alert")}<div><b>${esc(meta.title)} verisi alınamadı.</b> ${esc(ch.error)} ${ch.reauth ? `<a href="/giris">Yeniden bağla</a>` : ""}</div></div>`;
+    return;
+  }
+  const dates = ch.series.map(p => p.d);
+  $("#view").innerHTML = `
+    <div class="hero">${avatar(ch, 56)}<div><h2>${esc(ch.title)}</h2>
+      <div class="meta">${esc(ch.handle)} · ${full(ch.video_count)} video · toplam ${num(ch.total_views)} izlenme</div></div>
+      <div class="acts"><a class="btn" href="https://www.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">${ic("ext", 14)} Kanal</a>
+        <a class="btn" href="https://studio.youtube.com/channel/${encodeURIComponent(ch.id)}" target="_blank" rel="noopener">${ic("ext", 14)} Studio</a></div></div>
+    <div class="kpis">
+      ${kpi("İzlenme", num(ch.views), delta(ch.views_change), `önceki ${S.days} gün: ${num(ch.prev_views)}`, ch.series.map(p => p.views))}
+      ${kpi("İzlenme süresi", num(ch.hours) + " sa", delta(ch.hours_change), `önceki ${S.days} gün: ${num(ch.prev_hours)} sa`, ch.series.map(p => p.minutes))}
+      ${kpi("Net abone", signed(ch.subs), delta(change(ch.subs, ch.prev_subs)), `önceki ${S.days} gün: ${signed(ch.prev_subs)}`, ch.series.map(p => p.subs))}
+      ${kpi("Abone", num(ch.subscribers), "", "anlık", null)}
+    </div>
+    ${chartCard("chChart", ch.title)}
+    <section class="card"><div class="card-h"><h2>Bu dönem en çok izlenenler</h2><span class="muted" style="font-size:12px">son ${S.days} gün</span></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Video</th><th>İzlenme</th><th>Ort. izlenme</th><th class="hide-sm">Ort. süre</th><th class="hide-sm">İzlenme süresi</th><th>Abone</th></tr></thead>
+      <tbody data-clip>${ch.top.map(v => `<tr><td>${vcell(v)}</td><td><b>${full(v.period_views)}</b></td><td>%${nf.format(v.avg_pct)}</td>
+        <td class="hide-sm">${dur(v.avg_seconds)}</td><td class="hide-sm">${nf.format(v.period_hours)} sa</td><td>+${full(v.period_subs)}</td></tr>`).join("")
+        || `<tr><td colspan="6" class="muted">Bu dönemde izlenme yok.</td></tr>`}</tbody></table></div></section>
+    <section class="card"><div class="card-h"><h2>Son yüklenenler</h2><span class="muted" style="font-size:12px">tüm zamanlar</span></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Video</th><th>İzlenme</th><th>Beğeni</th><th class="hide-sm">Yorum</th><th class="hide-sm">Beğeni oranı</th></tr></thead>
+      <tbody data-clip>${ch.recent.map(v => `<tr><td>${vcell(v)}</td><td><b>${full(v.views)}</b></td><td>${full(v.likes)}</td><td class="hide-sm">${full(v.comments)}</td>
+        <td class="hide-sm">${v.views ? "%" + nf.format(Math.round(v.likes / v.views * 1000) / 10) : "—"}</td></tr>`).join("")
+        || `<tr><td colspan="5" class="muted">Video yok.</td></tr>`}</tbody></table></div></section>
+    <p class="foot">YouTube istatistikleri yaklaşık 2 gün gecikmeli gelir; dönem ${dshort(ch.end)} tarihinde biter.</p>`;
+  const el = $("#chChart");
+  const draw = () => drawChart(el, {dates, metric: S.metric,
+    cur: ch.series.map(METRICS[S.metric].get), prev: ch.prev_series.map(METRICS[S.metric].get)});
+  bindTabs(el, draw); draw(); S.redraw = draw;
+  clip($("#view"));
+}
+
+function neighbors(id){
+  const list = channelsSorted(), i = list.findIndex(c => c.id === id);
+  return i < 0 ? [null, null] : [list[(i - 1 + list.length) % list.length], list[(i + 1) % list.length]];
+}
+
+// ============================================================================
+// Ayarlar
+// ============================================================================
+function renderSettings(){
+  setTop({title: "Ayarlar"});
+  const u = S.me.user, used = S.me.channels.length, lim = S.me.limit;
+  $("#view").innerHTML = `
+    <section class="card" style="margin-top:0"><div class="card-h"><h2>Hesap</h2></div>
+      <div class="set-row">${avatar({thumb: u.picture, title: u.name || u.email}, 40)}
+        <div class="tx"><b>${esc(u.name || "—")}</b><span>${esc(u.email || "")}</span></div>
+        <form method="post" action="/cikis"><button class="btn">${ic("logout", 14)} Çıkış yap</button></form></div></section>
+    <section class="card"><div class="card-h"><h2>Paket</h2></div>
+      <div class="card-b"><b>${esc(planName(u.plan))}</b> · ${used} / ${lim} kanal kullanılıyor
+        <div class="usage"><i style="width:${Math.min(100, used / (lim || 1) * 100)}%"></i></div></div></section>
+    <section class="card"><div class="card-h"><h2>Bağlı kanallar</h2><a class="btn" href="/giris" style="margin-left:auto">${ic("plus", 14)} Kanal ekle</a></div>
+      <div style="margin-top:8px">${channelsSorted().map(c => `<div class="set-row">${avatar(c, 32)}
+        <div class="tx"><b>${esc(c.title)}</b><span>${esc(c.handle)}</span></div>
+        ${S.me.demo ? "" : `<button class="btn danger" data-rm="${esc(c.id)}" data-t="${esc(c.title)}">Kaldır</button>`}</div>`).join("")
+        || `<div class="card-b muted">Henüz kanal yok.</div>`}</div></section>
+    <section class="card"><div class="card-h"><h2>Hesabı sil</h2></div>
+      <div class="set-row"><div class="tx"><b>Hesabını ve tüm kanal bağlantılarını kalıcı olarak sil</b>
+        <span>Kanallarına dokunulmaz; sadece bu paneldeki bağlantılar ve Google izinleri kaldırılır.</span></div>
+        <button class="btn danger" id="delAcc" ${S.me.demo ? "disabled" : ""}>Hesabı sil</button></div></section>`;
+  $("#view").querySelectorAll("[data-rm]").forEach(b => b.onclick = async () => {
+    if (!confirm(`${b.dataset.t} panelden kaldırılsın mı? Kanalın kendisine dokunulmaz.`)) return;
+    try { await api(`/api/channel/${encodeURIComponent(b.dataset.rm)}`, {method: "DELETE", days: false}); }
+    catch (e) { toast(e.message); return; }
+    await refreshMe(); toast("Kanal kaldırıldı."); renderSettings();
+  });
+  const del = $("#delAcc");
+  if (del) del.onclick = async () => {
+    if (!confirm("Hesabın ve tüm kanal bağlantıların kalıcı olarak silinecek. Emin misin?")) return;
+    try { await api("/api/account", {method: "DELETE", days: false}); location.href = "/"; } catch (e) { toast(e.message); }
+  };
+}
+
+async function refreshMe(){
+  S.me = await api("/api/me", {days: false});
+  S.ov = {}; S.top = {};
+  renderMe(); renderSidebar();
+}
+
+// ============================================================================
+// Üst çubuk ve yönlendirme
+// ============================================================================
+function setTop({title, channel, range}){
+  $("#crumb").innerHTML = `${channel ? avatar(channel, 24) : ""}<h1>${esc(title)}</h1>
+    ${range ? `<span class="range">${dshort(range.start)} – ${dshort(range.end)}</span>` : ""}`;
+  document.title = `${title} · {{APP_NAME}}`;
+}
+
+function currentRoute(){
+  const h = location.hash, m = h.match(/^#\/kanal\/(.+)$/);
+  if (m) return {view: "channel", id: decodeURIComponent(m[1])};
+  if (h === "#/ayarlar") return {view: "settings"};
+  return {view: "overview"};
+}
+
+async function route(fresh = false){
+  const seq = ++S.seq, r = currentRoute();
+  S.redraw = null; closeSide(); closePalette();
+  document.querySelectorAll("#days button").forEach(b => b.classList.toggle("on", +b.dataset.d === S.days));
+  $("#days").classList.toggle("hidden", r.view === "settings");
+  const [prev, next] = r.view === "channel" ? neighbors(r.id) : [null, null];
+  $("#pager").innerHTML = prev && S.me.channels.length > 1
+    ? `<a class="icon-btn" href="${chHref(prev.id)}" title="Önceki kanal: ${esc(prev.title)} (←)">${ic("left")}</a>
+       <a class="icon-btn" href="${chHref(next.id)}" title="Sonraki kanal: ${esc(next.title)} (→)">${ic("right")}</a>` : "";
+  renderSidebar();
+  window.scrollTo(0, 0);
+  try {
+    if (r.view === "channel") await renderChannel(r.id, fresh, seq);
+    else if (r.view === "settings") renderSettings();
+    else await renderOverview(fresh, seq);
+  } catch (e) {
+    if (seq === S.seq) $("#view").innerHTML = `<div class="note err">${ic("alert")}<div><b>Veri alınamadı.</b> ${esc(e.message)}</div></div>`;
+  }
+}
+
+// ============================================================================
+// Hızlı geçiş (⌘K)
+// ============================================================================
+const P = {items: [], idx: 0};
+function paletteItems(q){
+  q = low(q.trim());
+  const pages = [{label: "Genel bakış", href: "#/", icon: "grid", group: "Sayfalar"},
+                 {label: "Ayarlar", href: "#/ayarlar", icon: "settings", group: "Sayfalar"},
+                 {label: "Kanal ekle", href: "/giris", icon: "plus", group: "Sayfalar"}];
+  const chans = channelsSorted().map(c => ({label: c.title, sub: c.handle, href: chHref(c.id), ch: c, group: "Kanallar"}));
+  return [...chans, ...pages].filter(it => !q || low(it.label).includes(q) || low(it.sub || "").includes(q));
+}
+function renderPalette(){
+  let group = "";
+  $("#pList").innerHTML = P.items.map((it, i) => {
+    const g = it.group !== group ? `<div class="pgroup">${(group = it.group)}</div>` : "";
+    return `${g}<div class="pitem ${i === P.idx ? "on" : ""}" data-i="${i}">${it.ch ? avatar(it.ch, 22) : `<span class="av" style="width:22px;height:22px">${ic(it.icon, 13)}</span>`}
+      <span>${esc(it.label)}</span>${it.sub ? `<span class="sub">${esc(it.sub)}</span>` : ""}</div>`;
+  }).join("") || `<div class="muted" style="padding:14px">Sonuç yok</div>`;
+  const on = $("#pList .pitem.on"); if (on) on.scrollIntoView({block: "nearest"});
+}
+function openPalette(){
+  $("#palette").classList.remove("hidden");
+  const inp = $("#pInput"); inp.value = ""; P.items = paletteItems(""); P.idx = 0; renderPalette(); inp.focus();
+}
+function closePalette(){ $("#palette").classList.add("hidden"); }
+function go(it){ closePalette(); if (it.href.startsWith("#")) location.hash = it.href; else location.href = it.href; }
+
+$("#pInput").addEventListener("input", e => { P.items = paletteItems(e.target.value); P.idx = 0; renderPalette(); });
+$("#pInput").addEventListener("keydown", e => {
+  if (e.key === "ArrowDown"){ P.idx = Math.min(P.items.length - 1, P.idx + 1); renderPalette(); e.preventDefault(); }
+  else if (e.key === "ArrowUp"){ P.idx = Math.max(0, P.idx - 1); renderPalette(); e.preventDefault(); }
+  else if (e.key === "Enter" && P.items[P.idx]) go(P.items[P.idx]);
+  else if (e.key === "Escape") closePalette();
+});
+$("#pList").addEventListener("click", e => { const it = e.target.closest(".pitem"); if (it) go(P.items[+it.dataset.i]); });
+$("#palette").addEventListener("click", e => { if (e.target.id === "palette") closePalette(); });
+
+document.addEventListener("keydown", e => {
+  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){ e.preventDefault(); $("#palette").classList.contains("hidden") ? openPalette() : closePalette(); return; }
+  if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === "/"){ e.preventDefault(); openPalette(); }
+  const r = currentRoute();
+  if (r.view === "channel" && (e.key === "ArrowLeft" || e.key === "ArrowRight") && $("#palette").classList.contains("hidden")){
+    const [prev, next] = neighbors(r.id), target = e.key === "ArrowLeft" ? prev : next;
+    if (target) location.hash = chHref(target.id);
+  }
+});
+
+// ============================================================================
+// Başlat
+// ============================================================================
+document.querySelectorAll("[data-i]").forEach(el => el.outerHTML = ic(el.dataset.i));
+document.querySelectorAll(".si").forEach(el => el.outerHTML = ic("search"));
+$("#logo").innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M5 18V12"/><path d="M12 18V6"/><path d="M19 18v-9"/></svg>`;
+$("#menuBtn").innerHTML = ic("menu");
+$("#refresh").innerHTML = ic("refresh");
+if (!/Mac|iPhone|iPad/.test(navigator.platform)) $("#kbd").textContent = "Ctrl K";
+$("#openPalette").onclick = openPalette;
+$("#menuBtn").onclick = openSide;
+$("#scrim").onclick = closeSide;
+document.querySelectorAll("#days button").forEach(b => b.onclick = () => { S.days = +b.dataset.d; store.set("days", S.days); route(); });
+$("#refresh").onclick = async () => {
+  const b = $("#refresh"); b.disabled = true; b.classList.add("spin");
+  S.ov = {}; S.top = {};
+  await route(true);
+  b.disabled = false; b.classList.remove("spin");
+};
+window.addEventListener("hashchange", () => route());
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => S.redraw && S.redraw(), 120); });
+
+(async () => {
+  const q = new URLSearchParams(location.search);
+  if (q.get("hata")){ toast(q.get("hata")); history.replaceState(null, "", "/" + location.hash); }
+  try { S.me = await api("/api/me", {days: false}); }
+  catch (e) { $("#view").innerHTML = `<div class="note err">${ic("alert")}<div><b>Sunucuya ulaşılamadı.</b> ${esc(e.message)}</div></div>`; return; }
+  renderMe();
+  route();
+  if (S.me.channels.length) overview().then(renderSidebar).catch(() => {});
+})();
+</script>
+</body>
+</html>

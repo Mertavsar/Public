@@ -7,3 +7,4 @@ __pycache__/
 
 # YouTube paneli — istemci dosyası ve kanal bağlantı anahtarları
 youtube-panel/data/
+youtube-panel/.env
