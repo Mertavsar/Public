@@ -23,6 +23,25 @@ girmiş") üzerine düzen değiştirildi:
 | 50–60 | Karşılaştırma tablosu | Ne zaman? Ne kazanırsın? Risk |
 | 60–66 | Sen hangisini daha çok yapıyorsun? | A: Dondurmak · B: İtmek |
 
+## İngilizce sürüm
+
+`freeze-or-push.mp4` (sayfa: `index.en.html`). Animasyon, süreler ve ses aynı; bütün
+metinler İngilizce. Yeniden üretmek için:
+
+```bash
+node build/render.mjs --page index.en.html    # out/index.en-silent.mp4
+ffmpeg -i out/index.en-silent.mp4 -i assets/soundtrack.m4a -map 0:v -map 1:a -c copy -shortest -movflags +faststart freeze-or-push.mp4
+```
+
+English caption:
+
+```
+Freeze or push? Learn wave management in 1 minute ❄️➜
+Which one do you do more? A or B? 👇
+
+#leagueoflegends #lol #wavemanagement #lolguide #gaming
+```
+
 ## Açıklama önerisi
 
 ```

@@ -15,6 +15,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const OUT = path.join(ROOT, 'out');
 const FPS = 30;
 const args = process.argv.slice(2);
+const PAGE = args.includes('--page') ? args[args.indexOf('--page') + 1] : 'index.html';
 const stills = args.includes('--stills') ? args[args.indexOf('--stills') + 1].split(',').map(Number) : null;
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -29,7 +30,7 @@ const port = server.address().port;
 
 const browser = await pw.chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
-await page.goto(`http://127.0.0.1:${port}/index.html?capture=1`);
+await page.goto(`http://127.0.0.1:${port}/${PAGE}?capture=1`);
 await page.waitForFunction(() => window.__ready === true || (window.__ready && window.__ready.then), null, { timeout: 60000 });
 await page.evaluate(() => window.__ready);
 const DUR = await page.evaluate(() => window.__DUR || 86);
@@ -37,10 +38,10 @@ const DUR = await page.evaluate(() => window.__DUR || 86);
 if (stills) {
   for (const t of stills) {
     await page.evaluate(t => window.__render(t), t);
-    await page.screenshot({ path: path.join(OUT, `still-${t}.png`) });
+    await page.screenshot({ path: path.join(OUT, `${PAGE === 'index.html' ? '' : PAGE.replace(/\.html$/, '') + '-'}still-${t}.png`) });
   }
 } else {
-  const silent = path.join(OUT, 'video-silent.mp4');
+  const silent = path.join(OUT, PAGE === 'index.html' ? 'video-silent.mp4' : PAGE.replace(/\.html$/, '') + '-silent.mp4');
   const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', silent], { stdio: ['pipe', 'inherit', 'inherit'] });
   const N = Math.round(DUR * FPS);

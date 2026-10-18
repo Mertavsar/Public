@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freeze or Push</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --bg: #07080b; --ink: #f3ecdc; --mute: #9aa3b8; --title: #e8dcc0;
+    --blue: #3f8ff0; --blue2: #7fb8ff; --red: #e8443a; --red2: #ff7a70;
+    --gold: #ffd23f; --ice: #8fe3ff; --orange: #ff9a3d; --green: #5fe08e;
+    --cond: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --semi: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  body { font-family: var(--semi); color: var(--ink); }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--bg); transform-origin: 0 0; overflow: hidden; }
+  svg.layer { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+
+  #title { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font: italic 800 100px/1 var(--cond); color: var(--title); letter-spacing: .01em; text-shadow: 0 5px 0 rgba(0,0,0,.6); }
+  #title .i { color: var(--ice); } #title .o { color: var(--orange); }
+
+  /* Harita penceresi: 70..950 x 400..1080 */
+  #frame { position: absolute; left: 70px; top: 400px; width: 880px; height: 680px; border-radius: 26px; border: 3px solid #2c3242; box-shadow: inset 0 0 60px rgba(0,0,0,.65); pointer-events: none; }
+
+  /* Bilgi paneli */
+  #panel { position: absolute; left: 70px; width: 880px; top: 1110px; height: 330px; }
+  .step { position: absolute; inset: 0; opacity: 0; }
+  .chipK { display: inline-block; font: 800 28px var(--semi); letter-spacing: .16em; padding: 8px 16px; border-radius: 10px; border: 2px solid; }
+  .head { font: italic 800 64px/1.05 var(--cond); margin-top: 16px; letter-spacing: .01em; }
+  .body { font: 600 38px/1.28 var(--semi); color: #d9d2c2; margin-top: 12px; }
+  .body b { color: #fff; } .body .y { color: var(--gold); } .body .r { color: var(--red2); } .body .i { color: var(--ice); } .body .o { color: var(--orange); } .body .g { color: var(--green); }
+  .icons { display: flex; gap: 18px; margin-top: 22px; }
+  .icons span { font: 800 34px var(--semi); padding: 14px 20px; border-radius: 14px; background: rgba(255,154,61,.12); border: 2px solid rgba(255,154,61,.6); color: var(--orange); opacity: 0; }
+
+  #disc { position: absolute; left: 70px; top: 1086px; font: 700 18px var(--semi); letter-spacing: .22em; color: rgba(243,236,220,.3); display: none; }
+
+  /* Tam ekran kartlar */
+  .full { position: absolute; left: 70px; width: 880px; top: 400px; opacity: 0; }
+  .tbl { width: 100%; border-collapse: separate; border-spacing: 0; background: #10131b; border: 3px solid #2c3242; border-radius: 26px; overflow: hidden; }
+  .tbl th { font: italic 800 60px/1 var(--cond); padding: 30px 18px 22px; }
+  .tbl td { font: 600 34px/1.22 var(--semi); color: #ddd6c6; padding: 22px 22px; border-top: 2px solid #232836; vertical-align: top; width: 50%; }
+  .tbl td.k { width: auto; }
+  .tbl .rowk { font: 800 26px var(--semi); letter-spacing: .18em; color: var(--mute); padding: 20px 22px 0; border-top: 2px solid #232836; }
+  .opt { display: flex; align-items: center; gap: 24px; padding: 30px 32px; border-radius: 20px; border: 3px solid; margin-top: 26px; font: italic 800 72px/1 var(--cond); }
+  .opt .ab { width: 76px; height: 76px; border-radius: 14px; font: 800 46px/76px var(--semi); text-align: center; font-style: normal; color: #0b0d12; }
+  .q { font: italic 800 76px/1.05 var(--cond); text-align: center; margin-bottom: 20px; }
+
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 14px; align-items: center; background: linear-gradient(transparent, rgba(0,0,0,.85)); opacity: 0; transition: opacity .25s; z-index: 5; }
+  body:hover #ui { opacity: 1; }
+  #ui button { background: none; border: 0; color: #fff; font: 600 15px system-ui, sans-serif; cursor: pointer; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+  #ui button:hover { background: rgba(255,255,255,.12); }
+  #ui input { flex: 1; accent-color: var(--red); }
+  #ui span { font: 500 13px system-ui, sans-serif; color: #bbb; font-variant-numeric: tabular-nums; min-width: 84px; text-align: right; }
+  #start { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 6; cursor: pointer; border: 0; }
+  #start b { font: 700 18px system-ui, sans-serif; color: #fff; background: var(--red); padding: 16px 28px; border-radius: 999px; }
+  body.capture #ui, body.capture #start { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg class="layer" viewBox="0 0 1080 1920">
+    <defs>
+      <clipPath id="win"><rect x="70" y="400" width="880" height="680" rx="26"/></clipPath>
+      <radialGradient id="gBlast"><stop offset="0" stop-color="#fff2c0" stop-opacity=".95"/><stop offset=".45" stop-color="#ff9a3d" stop-opacity=".6"/><stop offset="1" stop-color="#ff5a1f" stop-opacity="0"/></radialGradient>
+      <radialGradient id="gRecall"><stop offset="0" stop-color="#bfe6ff" stop-opacity="0"/><stop offset=".7" stop-color="#7fc8ff" stop-opacity=".4"/><stop offset="1" stop-color="#7fc8ff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g clip-path="url(#win)" id="mapWin">
+      <rect x="70" y="400" width="880" height="680" fill="#0d1010"/>
+      <g id="cam">
+        <image id="mapImg" x="0" y="0" width="1600" height="1600"/>
+        <g id="fx0"></g><g id="units"></g><g id="fx1"></g>
+      </g>
+      <g id="lbl"></g>
+    </g>
+  </svg>
+  <div id="frame"></div>
+  <div id="title">FREEZE OR PUSH?</div>
+  <div id="disc">ILLUSTRATIVE</div>
+
+  <div id="panel">
+    <div class="step" data-a="0" data-b="6">
+      <span class="chipK" style="border-color:#6c7387;color:var(--mute)">WAVE MANAGEMENT</span>
+      <div class="head">You control a minion wave in two ways</div>
+      <div class="body">You <span class="i">freeze</span> it or you <span class="o">push</span> it. Your choice decides who wins the lane.</div>
+    </div>
+    <div class="step" data-a="6" data-b="13">
+      <span class="chipK" style="border-color:var(--ice);color:var(--ice)">❄ FREEZE · 1/3</span>
+      <div class="head" style="color:var(--ice)">The wave waits outside your tower</div>
+      <div class="body">Keep the wave <b>just in front of your own tower</b>, but never let it cross the <span class="r">red line</span>: your tower's range.</div>
+    </div>
+    <div class="step" data-a="13" data-b="20.5">
+      <span class="chipK" style="border-color:var(--ice);color:var(--ice)">❄ FREEZE · 2/3 · HOW?</span>
+      <div class="head" style="color:var(--ice)">Only last-hit</div>
+      <div class="body">Don't auto-attack minions for free. Let the enemy wave keep <span class="y">about 4 extra casters</span>: it leans toward you but never reaches your tower.</div>
+    </div>
+    <div class="step" data-a="20.5" data-b="29">
+      <span class="chipK" style="border-color:var(--ice);color:var(--ice)">❄ FREEZE · 3/3 · WHY?</span>
+      <div class="head" style="color:var(--ice)">The enemy has to come to you</div>
+      <div class="body">To farm, they must walk <span class="r">deep into your side</span>. Far from their tower, <span class="g">your jungler catches them.</span></div>
+    </div>
+    <div class="step" data-a="29" data-b="35.5">
+      <span class="chipK" style="border-color:var(--orange);color:var(--orange)">PUSH ➜ · 1/3</span>
+      <div class="head" style="color:var(--orange)">Clear the wave fast</div>
+      <div class="body">Spend your abilities on minions. The enemy wave dies <b>in a few seconds</b> and your wave starts marching.</div>
+    </div>
+    <div class="step" data-a="35.5" data-b="43">
+      <span class="chipK" style="border-color:var(--orange);color:var(--orange)">PUSH ➜ · 2/3</span>
+      <div class="head" style="color:var(--orange)">The wave crashes into their tower</div>
+      <div class="body">Their tower kills your minions. The enemy <span class="r">has to farm under tower</span> and can't leave the lane.</div>
+    </div>
+    <div class="step" data-a="43" data-b="50.5">
+      <span class="chipK" style="border-color:var(--orange);color:var(--orange)">PUSH ➜ · 3/3 · WHY?</span>
+      <div class="head" style="color:var(--orange)">You buy time</div>
+      <div class="body">While they're stuck at their tower, you're free:</div>
+      <div class="icons"><span data-pop="44.6">⌂ Recall</span><span data-pop="45.6">↯ Roam</span><span data-pop="46.6">◆ Dragon</span></div>
+    </div>
+  </div>
+
+  <!-- Karşılaştırma tablosu -->
+  <div class="full" id="tblCard" data-a="50.5" data-b="60.5">
+    <table class="tbl">
+      <tr><th style="color:var(--ice)">❄ FREEZE</th><th style="color:var(--orange)">PUSH ➜</th></tr>
+      <tr><td colspan="2" class="rowk">WHEN?</td></tr>
+      <tr class="r" data-pop="51.4"><td>You're ahead and your jungler is near</td><td>You want to recall or roam</td></tr>
+      <tr><td colspan="2" class="rowk">WHAT YOU GAIN</td></tr>
+      <tr class="r" data-pop="53.8"><td>Enemy loses CS, gank is set up</td><td>Time: shop, roam, dragon</td></tr>
+      <tr><td colspan="2" class="rowk">RISK</td></tr>
+      <tr class="r" data-pop="56.2"><td>You're tied to your lane</td><td>You're pushed up and gankable</td></tr>
+    </table>
+  </div>
+
+  <!-- Soru -->
+  <div class="full" id="qCard" data-a="60.5" data-b="66">
+    <div class="q">Which one do you do more?</div>
+    <div class="opt" style="border-color:var(--ice);background:rgba(143,227,255,.10)"><span class="ab" style="background:var(--ice)">A</span>FREEZE</div>
+    <div class="opt" style="border-color:var(--orange);background:rgba(255,154,61,.12)"><span class="ab" style="background:var(--orange)">B</span>PUSH</div>
+    <div class="body" style="text-align:center;margin-top:30px;color:var(--mute)">Tell me in the comments 👇</div>
+  </div>
+</div>
+
+<div id="ui">
+  <button id="pp">▶︎ Play</button>
+  <input id="seek" type="range" min="0" max="66" step="0.01" value="0">
+  <span id="clock">0:00 / 1:06</span>
+  <button id="mute">Sound: on</button>
+</div>
+<button id="start"><b>▶︎ Play video</b></button>
+<audio id="music" src="assets/soundtrack.m4a" preload="auto"></audio>
+
+<script>
+(async () => {
+  const DUR = 66;
+  window.__DUR = DUR;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const E = {
+    out: p => 1 - Math.pow(1 - p, 3),
+    inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    sine: p => .5 - .5 * Math.cos(Math.PI * p),
+  };
+  const track = (keys, t, ease = E.sine) => {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i], [t0, v0] = keys[i - 1];
+      if (t <= t1) { const p = ease(prog(t, t0, t1)); return Array.isArray(v0) ? v0.map((x, j) => lerp(x, v1[j], p)) : lerp(v0, v1, p); }
+    }
+    return keys[keys.length - 1][1];
+  };
+
+  // ---------- Dünya ----------
+  const A = [250, 1350], B = [1350, 250];
+  const N = [Math.SQRT1_2, Math.SQRT1_2];
+  const LEN = Math.hypot(B[0] - A[0], B[1] - A[1]);
+  const lane = (u, off = 0) => [A[0] + (B[0] - A[0]) * u + N[0] * off, A[1] + (B[1] - A[1]) * u + N[1] * off];
+  const RANGE = 245;
+  const FZ = (RANGE + 40) / LEN;                    // dondurma noktası: menzilin hemen dışı
+
+  // ---------- Harita ----------
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const blob = (cx, cy, r, k = 14, j = .32) => {
+    const pts = [];
+    for (let i = 0; i < k; i++) { const a = i / k * Math.PI * 2, rr = r * (1 - j / 2 + rnd() * j); pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr * .82]); }
+    let d = `M${pts[0]}`;
+    for (let i = 0; i < k; i++) { const p = pts[i], q = pts[(i + 1) % k]; d += ` Q${p} ${(p[0] + q[0]) / 2},${(p[1] + q[1]) / 2}`; }
+    return d + 'Z';
+  };
+  const rocks = [], bushes = [];
+  for (const [cx, cy] of [[800, 330], [330, 800], [1270, 800], [800, 1270]]) {
+    rocks.push(blob(cx, cy, 250, 16, .35));
+    rocks.push(blob(cx + (rnd() - .5) * 120, cy + (rnd() - .5) * 120, 150, 12, .4));
+  }
+  for (const [u, off] of [[.3, 160], [.38, -160], [.62, 160], [.7, -150], [.47, 175], [.55, -175]]) { const [x, y] = lane(u, off); bushes.push(blob(x, y, 62, 10, .5)); }
+  const mapSvg = `<svg xmlns="${NS}" width="3200" height="3200" viewBox="0 0 1600 1600">
+    <defs>
+      <filter id="n1" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".011" numOctaves="4" seed="3"/><feColorMatrix values="0 0 0 0 .16  0 0 0 0 .22  0 0 0 0 .1  0 0 0 1.1 -.35"/></filter>
+      <filter id="n2" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".09" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 -.12"/></filter>
+      <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="5" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="26"/></filter>
+      <linearGradient id="riv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#173f5a"/><stop offset=".5" stop-color="#21607c"/><stop offset="1" stop-color="#173f5a"/></linearGradient>
+      <linearGradient id="rk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b5470"/><stop offset="1" stop-color="#2c2938"/></linearGradient>
+    </defs>
+    <rect width="1600" height="1600" fill="#24321d"/><rect width="1600" height="1600" filter="url(#n1)"/>
+    <g filter="url(#rough)">
+      <path d="M100,100 L1500,1500" stroke="#1d2a18" stroke-width="290" fill="none"/>
+      <path d="M100,100 L1500,1500" stroke="url(#riv)" stroke-width="210" fill="none"/>
+      <path d="M120,1480 L1480,120" stroke="#3e3424" stroke-width="290" fill="none"/>
+      <path d="M120,1480 L1480,120" stroke="#6f5d40" stroke-width="230" fill="none"/>
+      <path d="M120,1480 L1480,120" stroke="#87724f" stroke-opacity=".45" stroke-width="120" fill="none"/>
+    </g>
+    ${rocks.map(d => `<path d="${d}" fill="url(#rk)" stroke="#181621" stroke-width="10" filter="url(#rough)"/>`).join('')}
+    ${bushes.map(d => `<path d="${d}" fill="#183a1c" stroke="#0e2410" stroke-width="6"/><path d="${d}" fill="#2f6a2c" fill-opacity=".45" transform="translate(-6,-8)"/>`).join('')}
+    <rect width="1600" height="1600" filter="url(#n2)"/>
+    ${[[A, '#3f8ff0'], [B, '#e8443a']].map(([p, c]) => `
+      <circle cx="${p[0]}" cy="${p[1]}" r="52" fill="#2a2e38" stroke="#14161c" stroke-width="8"/>
+      <circle cx="${p[0]}" cy="${p[1]}" r="34" fill="#4a5060" stroke="${c}" stroke-width="8"/>
+      <circle cx="${p[0]}" cy="${p[1]}" r="12" fill="${c}"/>`).join('')}
+  </svg>`;
+  const mapUrl = await new Promise(res => {
+    const img = new Image();
+    img.onload = () => { const c = document.createElement('canvas'); c.width = c.height = 3200; c.getContext('2d').drawImage(img, 0, 0); res(c.toDataURL('image/jpeg', .92)); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(mapSvg);
+  });
+  $('#mapImg').setAttribute('href', mapUrl);
+
+  // ---------- Birimler ----------
+  const fx0 = $('#fx0'), unitsG = $('#units'), fx1 = $('#fx1');
+  const minion = (team, melee) => {
+    const g = mk('g', {}, unitsG);
+    const col = team === 'b' ? ['#4c8fe6', '#1b3c6c', '#9cc7ff'] : ['#d9483b', '#5f1913', '#ff9c92'];
+    mk('ellipse', { cx: 0, cy: 10, rx: melee ? 17 : 14, ry: 6, fill: 'rgba(0,0,0,.45)' }, g);
+    if (melee) { mk('circle', { r: 16, fill: col[0], stroke: col[1], 'stroke-width': 4 }, g); mk('path', { d: 'M-7,-7 L7,-7 L7,3 L0,9 L-7,3Z', fill: col[2], stroke: col[1], 'stroke-width': 2 }, g); }
+    else { mk('circle', { r: 12, fill: col[0], stroke: col[1], 'stroke-width': 4 }, g); mk('circle', { cx: 9, cy: -12, r: 5, fill: col[2] }, g); }
+    return g;
+  };
+  const champ = (kind) => {
+    const c = { sen: ['#3f8ff0', '#9cc7ff', 'YOU'], rak: ['#e8443a', '#ff9c92', 'ENEMY'], jg: ['#3bd16f', '#9cf5b8', 'JUNGLER'] }[kind];
+    const g = mk('g', {}, unitsG);
+    mk('ellipse', { cx: 0, cy: 22, rx: 36, ry: 12, fill: 'rgba(0,0,0,.5)' }, g);
+    mk('circle', { r: 32, fill: '#151821', stroke: c[0], 'stroke-width': 6 }, g);
+    if (kind === 'jg') mk('path', { d: 'M0,-22 L16,6 L6,6 L6,22 L-6,22 L-6,6 L-16,6Z', fill: '#cfe9c8' }, g);
+    else {
+      mk('path', { d: 'M0,-22 C-14,-22 -20,-10 -19,2 C-18,12 -12,20 0,26 C12,20 18,12 19,2 C20,-10 14,-22 0,-22Z', fill: '#c9ced8' }, g);
+      mk('path', { d: 'M-12,-1 L-3,1 L-3,5 L-13,3Z M12,-1 L3,1 L3,5 L13,3Z', fill: '#0b0d12' }, g);
+      if (kind === 'rak') mk('path', { d: 'M-14,-14 C-22,-26 -20,-34 -15,-38 C-15,-29 -10,-24 -6,-20Z M14,-14 C22,-26 20,-34 15,-38 C15,-29 10,-24 6,-20Z', fill: '#e9d9b8' }, g);
+    }
+    const hb = mk('g', { transform: 'translate(-40,-60)' }, g);
+    mk('rect', { width: 80, height: 11, fill: '#0b0d12' }, hb);
+    const hp = mk('rect', { x: 2, y: 2, width: 76, height: 7, fill: kind === 'rak' ? '#ff5a4d' : kind === 'jg' ? '#5fe08e' : '#5aa2ff' }, hb);
+    const nm = mk('text', { x: 0, y: -68, 'font-family': 'Barlow Semi Condensed', 'font-weight': 800, 'font-size': 26, fill: c[1], 'text-anchor': 'middle', stroke: '#000', 'stroke-width': 5, 'paint-order': 'stroke' }, g);
+    nm.textContent = c[2];
+    return { g, hp };
+  };
+
+  // Sahneler: 'mid' (0–6), 'freeze' (6–29), 'push' (29–50.5), 'card' (50.5–66)
+  const sceneAt = t => t < 6 ? 'mid' : t < 29 ? 'freeze' : t < 50.5 ? 'push' : 'card';
+  const MIN = [];  // {scene, team, melee, path:[[t,u,off]], die}
+  const add = (scene, team, melee, path, die = 999) => MIN.push({ scene, team, melee, path, die, g: minion(team, melee) });
+  const O3 = [-36, 0, 36];
+
+  // Açılış: dalgalar ortada
+  O3.forEach(o => { add('mid', 'b', true, [[0, .45, o]]); add('mid', 'r', true, [[0, .55, o]]); add('mid', 'b', false, [[0, .405, o * 1.15]]); add('mid', 'r', false, [[0, .595, o * 1.15]]); });
+
+  // Dondurma: büyük kırmızı dalga menzil dışında; 3 son vuruş, 2 sn arayla
+  const LH = [14.6, 16.6, 18.6];
+  O3.forEach((o, i) => add('freeze', 'r', true, [[6, FZ, o]], i < 2 ? LH[i] : 999));
+  O3.forEach((o, i) => add('freeze', 'r', false, [[6, FZ + .04, o * 1.2]], i === 1 ? LH[2] : 999));
+  const EXTRA = [];
+  [-66, -22, 22, 66].forEach(o => { add('freeze', 'r', false, [[6, FZ + .078, o]]); EXTRA.push(MIN[MIN.length - 1]); });
+  [-22, 22].forEach(o => add('freeze', 'b', true, [[6, FZ - .03, o]]));
+
+  // İtme
+  const PK = [31.0, 31.15, 31.3, 32.0, 32.15, 32.3];
+  O3.forEach((o, i) => add('push', 'r', true, [[29, .55, o]], PK[i]));
+  O3.forEach((o, i) => add('push', 'r', false, [[29, .595, o * 1.15]], PK[i + 3]));
+  const TK = [37.6, 38.3, 39.0, 39.7, 40.4, 41.1];
+  const BP = [];
+  O3.forEach((o, i) => { add('push', 'b', true, [[29, .45, o], [33.0, .45, o], [36.6, .8, o * .8]], TK[i]); BP.push(MIN[MIN.length - 1]); });
+  O3.forEach((o, i) => { add('push', 'b', false, [[29, .405, o * 1.15], [33.2, .405, o * 1.15], [36.9, .765, o]], TK[i + 3]); BP.push(MIN[MIN.length - 1]); });
+
+  const CH = {
+    mid: { sen: [[0, .37, 70]], rak: [[0, .64, 55]] },
+    freeze: {
+      sen: [[6, .09, 60], [24.4, .09, 60], [25.6, .2, 50], [29, .2, 50]],
+      rak: [[6, .45, -70], [21.6, .45, -70], [24.2, .27, -30], [25.6, .27, -30], [27.4, .45, -70], [29, .5, -70]],
+      jg: [[6, .3, 175], [24.4, .3, 175], [25.4, .265, 40], [27.4, .33, -40], [29, .36, -50]],
+    },
+    push: {
+      sen: [[29, .4, 60], [30.2, .45, 50], [33, .5, 40], [43.2, .5, 40], [50.5, .5, 40]],
+      rak: [[29, .64, -70], [31.2, .7, -70], [34.6, .86, -50], [50.5, .86, -50]],
+    },
+  };
+  const champs = { sen: champ('sen'), rak: champ('rak'), jg: champ('jg') };
+  const RAK_HP = [[25.6, 1], [26.7, .32]];
+
+  const posOf = (path, t) => { const k = track(path.map(p => [p[0], [p[1], p[2]]]), t); return lane(k[0], k[1]); };
+
+  // ---------- Efektler ----------
+  const shots = [];
+  const shot = (scene, t0, from, to, color, w = 6, dur = .25) => shots.push({ scene, t0, from, to, color, dur, el: mk('line', { stroke: color, 'stroke-width': w, 'stroke-linecap': 'round' }, fx1), dot: mk('circle', { r: w * 1.3, fill: color }, fx1) });
+  const freezeLH = MIN.filter(m => m.scene === 'freeze' && m.die < 99);
+  freezeLH.forEach(m => shot('freeze', m.die - .25, 'sen', m, '#ffe08a', 6));
+  [[25.6, 'jg', '#7dffa8', 9], [25.95, 'sen', '#7fd0ff', 9], [26.3, 'jg', '#7dffa8', 9]].forEach(([t0, f, c, w]) => shot('freeze', t0, f, 'rak', c, w));
+  const waveC = { pos: lane(.57, 0) };
+  shot('push', 30.6, 'sen', waveC, '#ffb36b', 13, .3);
+  shot('push', 31.6, 'sen', waveC, '#ffb36b', 13, .3);
+  const blasts = [[30.9, 150], [31.9, 170]].map(([t0, r]) => ({ t0, r, el: mk('circle', { fill: 'url(#gBlast)' }, fx1), ring: mk('circle', { fill: 'none', stroke: '#ffd08a', 'stroke-width': 6 }, fx1) }));
+  BP.forEach(m => shot('push', m.die - .3, { pos: B }, m, '#ff4d45', 8, .3));
+
+  const rangeRing = mk('circle', { cx: A[0], cy: A[1], r: RANGE, fill: 'rgba(232,68,58,.08)', stroke: '#ff6a5f', 'stroke-width': 5, 'stroke-dasharray': '18 12' }, fx0);
+  const extraRings = EXTRA.map(() => mk('circle', { r: 21, fill: 'none', stroke: '#ffd23f', 'stroke-width': 4 }, fx1));
+  const danger = mk('path', { fill: 'none', stroke: '#ff6a5f', 'stroke-width': 6, 'stroke-dasharray': '2 14', 'stroke-linecap': 'round' }, fx0);
+  const recallG = mk('g', {}, fx0);
+  const recallC = mk('circle', { fill: 'url(#gRecall)' }, recallG);
+  const recallArc = mk('circle', { fill: 'none', stroke: '#e6f6ff', 'stroke-width': 7, 'stroke-linecap': 'round', pathLength: 100 }, recallG);
+  const hookF = mk('path', { fill: 'rgba(143,227,255,.9)', stroke: '#000', 'stroke-width': 6, 'paint-order': 'stroke' }, fx1);
+  const hookP = mk('path', { fill: 'rgba(255,154,61,.9)', stroke: '#000', 'stroke-width': 6, 'paint-order': 'stroke' }, fx1);
+  const hookTF = mk('text', { 'font-family': 'Barlow Condensed', 'font-style': 'italic', 'font-weight': 800, 'font-size': 58, fill: '#8fe3ff', stroke: '#000', 'stroke-width': 8, 'paint-order': 'stroke', 'text-anchor': 'middle' }, $('#mapWin'));
+  const hookTP = mk('text', { 'font-family': 'Barlow Condensed', 'font-style': 'italic', 'font-weight': 800, 'font-size': 58, fill: '#ff9a3d', stroke: '#000', 'stroke-width': 8, 'paint-order': 'stroke', 'text-anchor': 'middle' }, $('#mapWin'));
+  hookTF.textContent = '❄ FREEZE'; hookTP.textContent = 'PUSH ➜';
+  const pushArrow = mk('path', { fill: 'rgba(255,154,61,.85)', stroke: '#000', 'stroke-width': 6, 'paint-order': 'stroke' }, fx0);
+
+  const arrowD = (a, b, w, hw, hl) => {
+    const d = [b[0] - a[0], b[1] - a[1]], L = Math.hypot(...d), u = [d[0] / L, d[1] / L], n = [-u[1], u[0]], nb = [b[0] - u[0] * hl, b[1] - u[1] * hl];
+    const pt = (p, s) => `${p[0] + n[0] * s},${p[1] + n[1] * s}`;
+    return `M${b} L${pt(nb, hw)} L${pt(nb, w)} L${pt(a, w)} L${pt(a, -w)} L${pt(nb, -w)} L${pt(nb, -hw)}Z`;
+  };
+  // Pencere içi tek etiket (ekran uzayı, pencerenin üst kenarında sabit)
+  const lblG = $('#lbl');
+  const lblBox = mk('rect', { rx: 12, fill: 'rgba(8,10,14,.88)', stroke: '#3a4152', 'stroke-width': 2 }, lblG);
+  const lblTxt = mk('text', { 'font-family': 'Barlow Semi Condensed', 'font-weight': 800, 'font-size': 32, 'text-anchor': 'middle', fill: '#fff' }, lblG);
+  const LBL = [
+    [8.0, 12.6, 'RED DASHED LINE = TOWER RANGE', '#ff9c92'],
+    [16.8, 20.2, 'YELLOW RINGS = 4 EXTRA CASTERS', '#ffd23f'],
+    [22.0, 25.2, 'ENEMY IS FAR FROM THEIR TOWER', '#ff9c92'],
+    [25.6, 28.6, 'JUNGLER CATCHES THEM · ENEMY RUNS', '#7dffa8'],
+    [37.4, 42.6, 'TOWER KILLS YOUR MINIONS', '#ff9c92'],
+    [43.6, 50.2, 'YOU RECALL', '#9fd8ff'],
+  ];
+
+  // ---------- Kamera (pencere merkezi 510,740) ----------
+  const CAMK = [
+    [0, [1.0, ...lane(.5, 0)]], [5.99, [1.08, ...lane(.5, 0)]],
+    [6.0, [0.95, ...lane(.22, 0)]], [9.0, [1.15, ...lane(.17, 0)]], [13.0, [1.2, ...lane(.17, 0)]],
+    [15.0, [1.5, ...lane(.165, 0)]], [20.5, [1.55, ...lane(.17, 0)]],
+    [22.4, [1.05, ...lane(.28, 0)]], [25.0, [1.2, ...lane(.25, 10)]], [28.99, [1.3, ...lane(.27, 0)]],
+    [29.0, [1.2, ...lane(.52, 0)]], [32.5, [1.35, ...lane(.56, 0)]],
+    [35.5, [1.05, ...lane(.68, 0)]], [37.4, [1.2, ...lane(.8, 0)]], [42.8, [1.25, ...lane(.8, 0)]],
+    [44.0, [1.55, ...lane(.5, 40)]], [50.5, [1.6, ...lane(.5, 40)]],
+    [50.6, [0.9, ...lane(.5, 0)]], [66, [0.95, ...lane(.5, 0)]],
+  ];
+  const SC = [510, 740];
+  let cam = [1, 0, 0];
+
+  const steps = [...document.querySelectorAll('.step')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b }));
+  const fulls = [...document.querySelectorAll('.full')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b }));
+  const pops = [...document.querySelectorAll('[data-pop]')].map(el => ({ el, t: +el.dataset.pop }));
+  const fade = (t, a, b, fi = .45, fo = .45) => Math.min(prog(t, a, a + fi), 1 - prog(t, b - fo, b));
+
+  function render(t) {
+    const sc = sceneAt(t);
+    const k = track(CAMK, t);
+    cam = [k[0], SC[0] - k[0] * k[1], SC[1] - k[0] * k[2]];
+    $('#cam').setAttribute('transform', `translate(${cam[1]},${cam[2]}) scale(${cam[0]})`);
+    $('#mapWin').setAttribute('opacity', sc === 'card' ? 1 - .75 * prog(t, 50.5, 51.0) : 1);
+
+    MIN.forEach(m => {
+      const on = m.scene === sc && t < m.die + .5;
+      if (!on) { m.g.setAttribute('display', 'none'); return; }
+      m.g.setAttribute('display', '');
+      const p = posOf(m.path, t);
+      const j = Math.sin(t * 5 + p[0] * .05) * 2.5;
+      m.pos = [p[0] + j * .7, p[1] - j * .7];
+      const dp = prog(t, m.die, m.die + .5);
+      m.g.setAttribute('transform', `translate(${m.pos}) scale(${1 - dp * .6})`);
+      m.g.setAttribute('opacity', 1 - dp);
+    });
+    const cs = sc === 'card' ? 'push' : sc;
+    for (const key of ['sen', 'rak', 'jg']) {
+      const c = champs[key], path = CH[cs] && CH[cs][key];
+      if (!path || sc === 'card' || (key === 'jg' && t < 24.2)) { c.g.setAttribute('display', 'none'); continue; }
+      c.g.setAttribute('display', '');
+      const p = posOf(path, t);
+      c.pos = [p[0] + Math.sin(t * 1.3) * 2, p[1] + Math.cos(t * 1.1) * 2];
+      c.g.setAttribute('transform', `translate(${c.pos})`);
+      c.g.setAttribute('opacity', key === 'jg' ? prog(t, 24.2, 24.6) : 1);
+      c.hp.setAttribute('width', 76 * (key === 'rak' && sc === 'freeze' ? track(RAK_HP, t, x => x) : 1));
+    }
+
+    const P = o => typeof o === 'string' ? champs[o].pos : o.pos;
+    shots.forEach(s => {
+      const on = s.scene === sc && t >= s.t0 && t < s.t0 + s.dur + .1;
+      if (!on) { s.el.setAttribute('opacity', 0); s.dot.setAttribute('opacity', 0); return; }
+      const p = prog(t, s.t0, s.t0 + s.dur), a = P(s.from), b = P(s.to);
+      const hx = lerp(a[0], b[0], p), hy = lerp(a[1], b[1], p), tx = lerp(a[0], b[0], Math.max(0, p - .35)), ty = lerp(a[1], b[1], Math.max(0, p - .35));
+      const op = 1 - prog(t, s.t0 + s.dur, s.t0 + s.dur + .1);
+      s.el.setAttribute('x1', tx); s.el.setAttribute('y1', ty); s.el.setAttribute('x2', hx); s.el.setAttribute('y2', hy); s.el.setAttribute('opacity', op);
+      s.dot.setAttribute('cx', hx); s.dot.setAttribute('cy', hy); s.dot.setAttribute('opacity', op);
+    });
+    blasts.forEach(b => {
+      const p = prog(t, b.t0, b.t0 + .7), on = sc === 'push' && t >= b.t0 && p < 1;
+      [b.el, b.ring].forEach(e => { e.setAttribute('cx', waveC.pos[0]); e.setAttribute('cy', waveC.pos[1]); e.setAttribute('opacity', on ? 1 - p : 0); });
+      b.el.setAttribute('r', b.r * (.4 + .6 * E.out(p))); b.ring.setAttribute('r', b.r * (.3 + .9 * E.out(p)));
+    });
+
+    rangeRing.setAttribute('opacity', sc === 'freeze' ? prog(t, 7.0, 8.0) * (t > 13 && t < 25 ? .55 : 1) : 0);
+    rangeRing.setAttribute('stroke-dashoffset', -t * 20);
+    const eOn = sc === 'freeze' ? fade(t, 16.6, 20.4) : 0;
+    EXTRA.forEach((m, i) => { if (m.pos) { extraRings[i].setAttribute('cx', m.pos[0]); extraRings[i].setAttribute('cy', m.pos[1]); } extraRings[i].setAttribute('opacity', eOn); });
+    const dOn = sc === 'freeze' ? fade(t, 21.8, 25.4) : 0;
+    danger.setAttribute('opacity', dOn);
+    if (dOn > 0) danger.setAttribute('d', `M${lane(.45, -70)} L${champs.rak.pos}`);
+
+    const ho = sc === 'mid' ? fade(t, .6, 6.0, .5, .4) : 0;
+    [hookF, hookP, hookTF, hookTP].forEach(e => e.setAttribute('opacity', ho));
+    if (ho > 0) {
+      hookF.setAttribute('d', arrowD(lane(.42, 140), lane(.3, 140), 13, 32, 50));
+      hookP.setAttribute('d', arrowD(lane(.58, -140), lane(.7, -140), 13, 32, 50));
+      hookTF.setAttribute('x', 220); hookTF.setAttribute('y', 1052); hookTP.setAttribute('x', 800); hookTP.setAttribute('y', 470);
+    }
+    const pa = sc === 'push' ? fade(t, 33.0, 37.0, .4, .5) : 0;
+    pushArrow.setAttribute('opacity', pa);
+    if (pa > 0) {
+      const a = lane(.5, 0), b = lane(.76, 0), d = [b[0] - a[0], b[1] - a[1]], L = Math.hypot(...d), u = [d[0] / L, d[1] / L], n = [-u[1], u[0]];
+      const w = 14, hw = 34, hl = 54, nb = [b[0] - u[0] * hl, b[1] - u[1] * hl];
+      const pt = (p, s) => `${p[0] + n[0] * s},${p[1] + n[1] * s}`;
+      pushArrow.setAttribute('d', `M${b} L${pt(nb, hw)} L${pt(nb, w)} L${pt(a, w)} L${pt(a, -w)} L${pt(nb, -w)} L${pt(nb, -hw)}Z`);
+      pushArrow.setAttribute('transform', `translate(${n[0] * 110},${n[1] * 110})`);
+    }
+
+    const rcOn = sc === 'push' && t >= 43.6;
+    recallG.setAttribute('opacity', rcOn ? prog(t, 43.6, 44.0) : 0);
+    if (rcOn) {
+      const p = champs.sen.pos;
+      recallC.setAttribute('cx', p[0]); recallC.setAttribute('cy', p[1]); recallC.setAttribute('r', 74 + 6 * Math.sin(t * 5));
+      recallArc.setAttribute('cx', p[0]); recallArc.setAttribute('cy', p[1]); recallArc.setAttribute('r', 58);
+      recallArc.setAttribute('transform', `rotate(-90 ${p[0]} ${p[1]})`);
+      recallArc.setAttribute('stroke-dasharray', `${prog(t, 43.8, 49.8) * 100} 100`);
+    }
+
+    // pencere etiketi (her an en fazla bir tane)
+    const L = LBL.find(l => t >= l[0] && t < l[1]);
+    if (L) {
+      const op = fade(t, L[0], L[1], .35, .35);
+      if (lblTxt.textContent !== L[2]) { lblTxt.textContent = L[2]; lblTxt.setAttribute('fill', L[3]); }
+      const w = lblTxt.getComputedTextLength() + 44;
+      lblBox.setAttribute('x', 510 - w / 2); lblBox.setAttribute('y', 424); lblBox.setAttribute('width', w); lblBox.setAttribute('height', 54);
+      lblTxt.setAttribute('x', 510); lblTxt.setAttribute('y', 462);
+      lblG.setAttribute('opacity', op);
+    } else lblG.setAttribute('opacity', 0);
+
+    steps.forEach(s => {
+      const op = s.a === 0 ? 1 - prog(t, s.b - .4, s.b) : fade(t, s.a, s.b, .5, .4);
+      s.el.style.opacity = op; s.el.style.visibility = op > 0 ? 'visible' : 'hidden';
+      s.el.style.transform = `translateY(${(1 - E.out(prog(t, s.a, s.a + .5))) * (s.a === 0 ? 0 : 18)}px)`;
+    });
+    fulls.forEach(f => { const op = fade(t, f.a, f.b, .5, .4); f.el.style.opacity = op; f.el.style.visibility = op > 0 ? 'visible' : 'hidden'; });
+    pops.forEach(p => { const q = prog(t, p.t, p.t + .45); p.el.style.opacity = q; p.el.style.transform = `translateY(${(1 - E.out(q)) * 16}px)`; });
+    $('#frame').style.opacity = sc === 'card' ? 1 - prog(t, 50.5, 51.0) : 1;
+  }
+
+  // ---------- Ölçek + oynatıcı ----------
+  const stage = $('#stage');
+  const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${s}) translate(-50%, -50%)`; };
+  addEventListener('resize', fit); fit();
+  const params = new URLSearchParams(location.search);
+  const capture = params.has('capture');
+  let t = +(params.get('t') || 0), playing = false, last = 0;
+  const music = $('#music'), seek = $('#seek'), clock = $('#clock'), pp = $('#pp');
+  const mm = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const sync = () => { seek.value = t; clock.textContent = `${mm(t)} / ${mm(DUR)}`; pp.textContent = playing ? '❚❚ Pause' : '▶︎ Play'; };
+  const play = () => { if (t >= DUR - .05) t = 0; playing = true; last = performance.now(); try { music.currentTime = t; music.play().catch(() => {}); } catch (e) {} $('#start').style.display = 'none'; sync(); requestAnimationFrame(loop); };
+  const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
+  function loop(now) {
+    if (!playing) return;
+    t += (now - last) / 1000; last = now;
+    if (t >= DUR) { t = DUR - .01; render(t); pause(); return; }
+    render(t); sync(); requestAnimationFrame(loop);
+  }
+  const jump = v => { t = clamp(v, 0, DUR - .01); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  $('#start').onclick = play;
+  pp.onclick = () => playing ? pause() : play();
+  seek.oninput = () => jump(+seek.value);
+  $('#mute').onclick = () => { music.muted = !music.muted; $('#mute').textContent = music.muted ? 'Sound: off' : 'Sound: on'; };
+  addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') jump(t + 3);
+    if (e.code === 'ArrowLeft') jump(t - 3);
+  });
+  stage.addEventListener('click', () => playing ? pause() : play());
+  if (capture) { document.body.classList.add('capture'); stage.style.transform = 'none'; stage.style.left = stage.style.top = '0'; }
+  window.__render = render;
+  await document.fonts.ready;
+  render(t); sync();
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
