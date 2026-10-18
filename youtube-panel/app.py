@@ -21,6 +21,7 @@ from concurrent.futures import ThreadPoolExecutor
 from cryptography.fernet import Fernet, InvalidToken
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 import db
 import demo
@@ -99,6 +100,7 @@ def setup():
 
 setup()
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+app.mount("/static", StaticFiles(directory=os.path.join(APP_DIR, "static")), name="static")
 
 
 @app.middleware("http")

@@ -112,6 +112,8 @@ uvicorn app:app --app-dir youtube-panel --host 0.0.0.0 --port 8000
 | `demo.py` | `--demo` için örnek veri |
 | `static/landing.html` | Giriş yapmamış ziyaretçinin gördüğü sayfa |
 | `static/app.html` | Panel |
+| `static/fonts/` | IBM Plex yazı tipleri (SIL Open Font License); Google'a bağlanmadan sunulur |
+| `static/img/` | Açılış sayfasındaki panel görüntüleri (örnek veriyle alındı) |
 
 ## Bilmen gerekenler
 
