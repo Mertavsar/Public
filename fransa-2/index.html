@@ -49,6 +49,10 @@
   .tl .d { font: 800 52px var(--sans); }
   .tl .x { font: 500 34px/1.3 var(--sans); color: #b8b3a9; margin-top: 4px; }
 
+  /* Altyazı: 1290–1420 bandı, kelime kelime yanar */
+  #sub { position: absolute; left: 90px; right: 130px; top: 1296px; text-align: center; font: 800 58px/1.12 var(--sans); letter-spacing: -.01em; text-shadow: 0 3px 0 rgba(0,0,0,.8), 0 0 22px rgba(0,0,0,.9); }
+  #sub span { display: inline-block; margin: 0 .2em; color: rgba(244,241,234,.32); transform-origin: 50% 80%; }
+  #sub span.on { color: #fff; } #sub span.on.yellow { color: var(--yellow); } #sub span.on.red { color: var(--red2); }
   .opt { position: absolute; left: 140px; right: 160px; display: flex; align-items: center; gap: 26px; padding: 26px 32px; border-radius: 20px; border: 3px solid; font: 700 48px var(--sans); }
   .opt b { width: 70px; height: 70px; border-radius: 14px; display: grid; place-items: center; font: 800 40px var(--sans); color: var(--bg); }
 
@@ -90,39 +94,34 @@
   <div class="sc" data-a="0" data-b="5.2">
     <div class="tag a" data-t=".2"><em>BÖLÜM 2</em> · 19 EKİM 2026</div>
     <div class="ttl a" data-t="0">Fransa'da işler<br><i>büyüdü.</i></div>
-    <div class="txt a" data-t="1.4">Hafta sonu ne oldu, şimdi ne olacak?<br><b>Bir dakikada.</b></div>
   </div>
 
   <!-- 1 · SOKAK -->
   <div class="sc" data-a="5.2" data-b="12.6">
     <div class="tag a" data-t="5.3">17 EKİM · CUMARTESİ</div>
     <div class="ttl a" data-t="5.3">Ülke aynı gün<br><i>sokağa döküldü</i></div>
-    <div class="duo a" data-t="8.0">
+    <div class="duo a" data-t="8.0" style="top:1112px">
       <div><div class="num" data-count="550000" data-ct="8.1" data-cd="1.3">0</div><div class="lbl">yetkililere göre</div></div>
       <div><div class="num" style="color:var(--red)" data-count="800000" data-ct="8.9" data-cd="1.3">0</div><div class="lbl">düzenleyicilere göre</div></div>
     </div>
-    <div class="src a" data-t="10.2">Öfkenin adı: pahalılık, okullar ve kamu kesintileri · CBS, The National</div>
   </div>
 
   <!-- 2 · BİLANÇO -->
   <div class="sc" data-a="12.6" data-b="20.8">
     <div class="tag a" data-t="12.7">BİLANÇO</div>
     <div class="ttl a" data-t="12.7">Hafta sonunun<br><i>bedeli</i></div>
-    <div class="a" data-t="13.4" style="position:absolute;left:0;right:0;top:1112px;text-align:center;font:500 24px var(--sans);color:var(--mute)">Her kare = 20 gözaltı</div>
-    <div class="stats a" data-t="16.4">
+    <div class="a" data-t="13.4" style="position:absolute;left:0;right:0;top:978px;text-align:center;font:500 24px var(--sans);color:var(--mute)">Her kare = 20 gözaltı</div>
+    <div class="stats a" data-t="16.4" style="top:1036px">
       <div><div class="num" style="color:var(--red)" data-count="2400" data-ct="16.5" data-cd="1" data-pre="~">0</div><div class="lbl">gözaltı</div></div>
       <div><div class="num" data-count="1000" data-ct="17.3" data-cd="1" data-pre="~">0</div><div class="lbl">yaralı polis<br>ve jandarma</div></div>
       <div><div class="num" data-count="1" data-ct="18.1" data-cd=".3">0</div><div class="lbl">ölü<br>(Paris)</div></div>
     </div>
-    <div class="src a" data-t="18.6">Ölen eylemci kalp krizi geçirdi · France 24, Al Jazeera, CBS</div>
   </div>
 
   <!-- 3 · LIMOGES -->
   <div class="sc" data-a="20.8" data-b="29.6">
     <div class="tag a" data-t="20.9">LIMOGES</div>
     <div class="ttl a" data-t="20.9">143 yıllık belediye<br>binası <i>yandı</i></div>
-    <div class="txt a" data-t="24.6">Cumartesi gecesi <b>kundaklandı</b>.<br>Tarihi bina büyük ölçüde yok oldu.</div>
-    <div class="src a" data-t="25.6">CBS News, The National</div>
   </div>
 
   <!-- 4 · DEVLETİN CEVABI -->
@@ -141,14 +140,13 @@
       <svg class="ic" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="#1f1f26"/><path d="M30 64c0-10 8-16 18-16s18 6 18 16" fill="none" stroke="#f4f1ea" stroke-width="6" stroke-linecap="round"/><circle cx="48" cy="34" r="11" fill="none" stroke="#f4f1ea" stroke-width="6"/><path d="M66 24 L80 38 M80 24 L66 38" stroke="#ff6b64" stroke-width="6" stroke-linecap="round"/></svg>
       <div><div class="h">"Kontrolü kaybettik"</div><div class="s">İçişleri Bakanı Nuñez istifasını sundu. Macron kabul etmedi.</div></div>
     </div>
-    <div class="src a" data-t="35.6" style="top:1290px">France 24, Al Jazeera · 19 Ekim</div>
   </div>
 
   <!-- 5 · MECLİS -->
   <div class="sc" data-a="38.4" data-b="45.6">
     <div class="tag a" data-t="38.5"><em>YARIN</em> · 20 EKİM</div>
     <div class="ttl a" data-t="38.5">Mecliste kritik<br><i>bütçe oylaması</i></div>
-    <div class="txt a" data-t="41.2">2027 bütçesinin ilk bölümü oylanıyor. Hükümetin <b>çoğunluğu yok</b>.<br><span class="r">Tahviller ve Paris borsası düştü.</span></div>
+    <div class="a" data-t="41.6" style="position:absolute;left:0;right:0;top:1150px;text-align:center;font:600 30px var(--sans);color:var(--red2)">▼ Tahviller ve Paris borsası düştü</div>
   </div>
 
   <!-- 6 · TAKVİM -->
@@ -170,31 +168,33 @@
     </div>
     <div id="follow" class="a" data-t="56.5" style="position:absolute;left:250px;right:270px;top:880px;height:120px;border-radius:60px;display:grid;place-items:center;font:800 52px var(--sans);letter-spacing:.02em"></div>
     <svg id="hand" class="a" data-t="56.4" style="position:absolute;left:0;top:0" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="handG"><path d="M0 0 C-6 -40 -6 -70 6 -72 C18 -74 20 -50 22 -26 L26 -40 C30 -52 46 -50 46 -36 L48 -30 C52 -42 68 -40 68 -26 L70 -20 C74 -30 90 -28 90 -14 C92 20 86 46 70 66 L18 70 C8 50 -4 30 -14 18 C-22 8 -14 -4 0 0 Z" fill="#f4f1ea" stroke="#0c0c0e" stroke-width="5" stroke-linejoin="round"/></g></svg>
-    <div class="txt a" data-t="57.4" style="top:1080px">Takip et, <b>abone ol</b>.<br>Yeni bölüm gelince ilk sen öğren.</div>
   </div>
+
+  <div id="sub"></div>
 
   <!-- 7 · SORU -->
   <div class="sc" data-a="52.6" data-b="56.0">
     <div class="ttl a" data-t="52.7" style="top:270px">Sence hükümet<br><i>bu kışı çıkarır mı?</i></div>
-    <div class="opt a" data-t="53.6" style="top:1150px;border-color:#5a5a62;background:rgba(255,255,255,.04)"><b style="background:var(--ink)">A</b>Ayakta kalır</div>
-    <div class="opt a" data-t="54.2" style="top:1290px;border-color:var(--red);background:rgba(229,50,43,.10)"><b style="background:var(--red2)">B</b>Düşer</div>
-    <div class="src a" data-t="54.4" style="top:1440px">Kaynaklar: CBS · France 24 · Al Jazeera · The National · Fortune</div>
+    <div class="opt a" data-t="53.6" style="top:1040px;border-color:#5a5a62;background:rgba(255,255,255,.04)"><b style="background:var(--ink)">A</b>Ayakta kalır</div>
+    <div class="opt a" data-t="54.2" style="top:1160px;border-color:var(--red);background:rgba(229,50,43,.10)"><b style="background:var(--red2)">B</b>Düşer</div>
   </div>
 </div>
 
 <div id="ui">
   <button id="pp">▶︎ Oynat</button>
-  <input id="seek" type="range" min="0" max="59.6" step="0.01" value="0">
-  <span id="clock">0:00 / 0:59</span>
+  <input id="seek" type="range" min="0" max="60" step="0.01" value="0">
+  <span id="clock">0:00 / 0:58</span>
   <button id="mute">Ses: açık</button>
 </div>
 <button id="start"><b>▶︎ Videoyu oynat</b></button>
-<audio id="music" src="assets/soundtrack.m4a" preload="auto"></audio>
+<audio id="music" src="assets/mix.m4a" preload="auto"></audio>
 
 <script src="assets/geo.js"></script>
+<script src="assets/timing.js"></script>
 <script>
 (async () => {
-  const DUR = 59.6;
+  const TM = window.TIMING;
+  const DUR = TM.DUR;
   window.__DUR = DUR;
   const G = window.GEO;
   const $ = s => document.querySelector(s);
@@ -227,11 +227,11 @@
   const C = G.cities, PAR = C.paris, LIM = C.limoges;
   const bb = fr.getBBox(), FC = [bb.x + bb.width / 2, bb.y + bb.height / 2];
   const cam = (s, p, q) => [s, q[0] - s * p[0], q[1] - s * p[1]];
-  const VIS = [540, 840];                                   // görsel bölgenin merkezi
+  const VIS = [540, 820];                                   // görsel bölgenin merkezi
   const CAMK = [
-    [0, cam(.8, FC, VIS)], [12.6, cam(.8, FC, VIS)],
-    [20.8, cam(.8, FC, VIS)], [22.4, cam(3.2, LIM, [540, 840])], [29.6, cam(3.2, LIM, [540, 840])],
-    [29.61, cam(.8, FC, VIS)], [52.6, cam(.6, FC, [540, 790])], [59.6, cam(.6, FC, [540, 790])],
+    [0, cam(.72, FC, VIS)], [12.6, cam(.72, FC, VIS)],
+    [20.8, cam(.72, FC, VIS)], [22.4, cam(3.2, LIM, [540, 840])], [29.6, cam(3.2, LIM, [540, 840])],
+    [29.61, cam(.72, FC, VIS)], [52.6, cam(.56, FC, [540, 760])], [59.6, cam(.56, FC, [540, 760])],
   ];
   const MAPOP = [[0, 1], [12.3, 1], [12.8, .0], [20.6, 0], [20.9, 1], [22.9, 1], [23.5, .12], [29.3, .12], [29.6, 0], [52.6, 0], [53.2, .55], [55.7, .55], [56.1, .18], [59.6, .18]];
   let K = [1, 0, 0];
@@ -327,7 +327,7 @@
   const fmt = v => Math.round(v).toLocaleString('tr-TR');
 
   const follow = $('#follow'), handG = $('#handG'), bellG = $('#bellG');
-  function render(t) {
+  function scene(t) {
     // sahne kapları
     scs.forEach(s => { const o = fade(t, s.a, s.b, .35, .35); s.el.style.opacity = s.a === 0 ? 1 - prog(t, s.b - .35, s.b) : o; s.el.style.visibility = (s.a === 0 ? t < s.b : o > 0) ? 'visible' : 'hidden'; });
     ani.forEach(a => { const p = prog(t, a.t, a.t + .6); a.el.style.opacity = a.t === 0 ? 1 : E.out(p); a.el.style.transform = a.t === 0 ? '' : `translateY(${(1 - E.out(p)) * 26}px)`; });
@@ -406,6 +406,32 @@
     }
   }
 
+  // Seslendirme zamanı (T) -> animasyon zamanı (t): sahne başları cümle başlarına oturur
+  const warp = T => {
+    const W = TM.WARP;
+    for (let i = 1; i < W.length; i++) if (T <= W[i][0]) { const [n0, o0] = W[i - 1], [n1, o1] = W[i]; return o0 + (T - n0) / (n1 - n0) * (o1 - o0); }
+    return W[W.length - 1][1];
+  };
+  const sub = $('#sub');
+  let capI = -1, capSpans = [];
+  function captions(T) {
+    let ci = -1;
+    TM.CAPS.forEach((c, i) => { if (T >= c.t0 - .05 && T < c.t1) ci = i; });
+    if (ci !== capI) {
+      capI = ci; sub.innerHTML = '';
+      capSpans = ci < 0 ? [] : TM.CAPS[ci].words.map(w => { const e = document.createElement('span'); e.textContent = w.w; e.className = w.c; sub.appendChild(e); return { e, w }; });
+    }
+    capSpans.forEach(({ e, w }) => {
+      const on = T >= w.s; e.classList.toggle('on', on);
+      const p = prog(T, w.s, w.s + .18);
+      e.style.transform = on ? `scale(${1 + .07 * (1 - E.out(p))})` : '';
+    });
+    const c = ci < 0 ? null : TM.CAPS[ci];
+    sub.style.opacity = c ? Math.min(prog(T, c.t0 - .05, c.t0 + .08), 1 - prog(T, c.t1 - .06, c.t1)) : 0;
+    sub.style.transform = c ? `translateY(${(1 - E.out(prog(T, c.t0 - .05, c.t0 + .15))) * 14}px)` : '';
+  }
+  function render(T) { scene(warp(T)); captions(T); }
+
   // ---------- Ölçek + oynatıcı ----------
   const stage = $('#stage');
   const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${s}) translate(-50%, -50%)`; };
@@ -420,6 +446,7 @@
   const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
   function loop(now) { if (!playing) return; t += (now - last) / 1000; last = now; if (t >= DUR) { t = DUR - .01; render(t); pause(); return; } render(t); sync(); requestAnimationFrame(loop); }
   const jump = v => { t = clamp(v, 0, DUR - .01); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  seek.max = DUR;
   $('#start').onclick = play;
   pp.onclick = () => playing ? pause() : play();
   seek.oninput = () => jump(+seek.value);

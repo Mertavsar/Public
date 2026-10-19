@@ -16,7 +16,28 @@ kısa metin. Her sahne 7–9 saniye ekranda kalıyor ve yazılar görsellerin ü
 | 53–56 | Sence hükümet bu kışı çıkarır mı? | A/B seçenekleri, haritada Paris'e dönüş |
 | 56–60 | 3. bölümü kaçırma | Parmak "Takip Et"e basıyor, zil çalıyor; takip et / abone ol |
 
-## Seslendirme
+## Seslendirme ve ses kurgusu
+
+Kayıt `vo/ham.mp3` (61,2 sn). İşlem sırası, her adım tek komut:
+
+```bash
+python3 build/vo_clean.py vo/ham.wav     # boşluk kısaltma, nefes/hırıltı atma, EQ, de-esser, kompresör -> vo/temiz.wav
+python3 ../.claude/skills/viral-edit/scripts/align.py --audio vo/temiz.wav --text seslendirme.txt \
+        --out vo/captions.json --check --emphasis kaybetti kundaklandı kontrolü çoğunluğu
+python3 build/timing.py                  # sahne eşlemesi + altyazı parçaları -> assets/timing.js, vo/son.wav
+python3 build/soundtrack.py              # sakin müzik yatağı, yeni süreye göre
+python3 build/mix.py                     # ses -16 / müzik -30 LUFS, sidechain, master -14 LUFS -> assets/mix.m4a
+node build/render.mjs
+ffmpeg -i out/video-silent.mp4 -i assets/mix.m4a -filter_complex "[1:a]apad[a]" -map 0:v -map "[a]" \
+       -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart fransa-bolum-2.mp4
+```
+
+- Kelimelerin içinden kesilmez; yalnızca konuşma bölgeleri arasındaki sessizlik
+  kısaltılır (uzun ara → 0,4 sn). Sonuç 57,3 sn.
+- Altyazı kelime kelime yanar; sayılar sarı, vurgu kelimeleri kırmızı. Ekranda
+  "Limoges" yazar, seslendirmede "Limoj" okunur.
+- Sahneler cümle başlarına oturur (`timing.js` içindeki WARP).
+
 
 `seslendirme.txt` okunacak metindir. Yabancı kelimeler okunduğu gibi yazıldı:
 **Limoges → "Limoj"**. Altyazıda doğru yazım (Limoges) kullanılacak.

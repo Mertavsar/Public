@@ -9,7 +9,7 @@ destek. Sahne geçişlerinde efekt yok; sayaç/satır girişlerinde kısa tık v
 
     python3 build/soundtrack.py   ->  assets/soundtrack.m4a
 """
-import os, subprocess, sys, tempfile, wave
+import json, os, subprocess, sys, tempfile, wave
 import numpy as np
 from scipy.signal import butter, sosfilt
 
@@ -20,12 +20,14 @@ sys.path.insert(0, SKILL)
 from audiobed import tick  # noqa: E402
 
 SR = 44100
-DUR = 59.6
+TM = json.load(open(os.path.join(ROOT, 'vo', 'timing.json'))) if os.path.exists(os.path.join(ROOT, 'vo', 'timing.json')) else None
+DUR = TM['DUR'] if TM else 59.6
 BPM = 72.0   # sakin: davul/bas yok, yalnızca pad ve seyrek notalar
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
 
-MINOR = [2.2, 8.1, 8.9, 13.5, 16.5, 17.3, 18.1, 22.0, 30.5, 32.6, 34.7, 38.8, 41.2, 46.4, 47.9, 49.4, 53.6, 54.2, 57.0]
+MINOR = TM['ticks'] if TM else [2.2, 8.1, 8.9, 13.5, 16.5, 17.3, 18.1, 22.0, 30.5, 32.6, 34.7, 38.8, 41.2, 46.4, 47.9, 49.4, 53.6, 54.2, 57.0]
+SC = TM['scenes'] if TM else [0, 5.2, 12.6, 20.8, 29.6, 38.4, 45.6, 52.6, 56.0]
 
 # i–VI–III–VII (La minör): Am F C G
 CHORDS = [
@@ -37,12 +39,12 @@ CHORDS = [
 
 # Bölümlere göre yoğunluk: (başlangıç, pad, arp, arp16, kick, clap, hat, bass)
 SECTIONS = [
-    # (başlangıç, pad, arp, arp16, kick, clap, hat, bass) — kullanıcı geri bildirimi: müzik
-    # dikkat dağıtmasın, seslendirmenin altında fark edilmeden dursun
-    (0.0,  .8, .30, 0, 0, 0, 0, 0),
-    (20.8, .8, .22, 0, 0, 0, 0, 0),
-    (29.6, .8, .30, 0, 0, 0, 0, 0),
-    (52.6, .8, .18, 0, 0, 0, 0, 0),
+    # (başlangıç, pad, arp, arp16, kick, clap, hat, bass) — müzik dikkat dağıtmasın,
+    # seslendirmenin altında fark edilmeden dursun
+    (0.0,   .8, .30, 0, 0, 0, 0, 0),
+    (SC[3], .8, .22, 0, 0, 0, 0, 0),
+    (SC[4], .8, .30, 0, 0, 0, 0, 0),
+    (SC[7], .8, .18, 0, 0, 0, 0, 0),
 ]
 
 
@@ -184,7 +186,7 @@ while t0 < DUR - 0.3:
     t0 += BAR
 
 # Kapanış: son akor çalarak sönsün
-place(pad_chord(CHORDS[0][1] + [440.0], 7.0), 52.6, 0, 0.6)
+place(pad_chord(CHORDS[0][1] + [440.0], DUR - SC[7]), SC[7], 0, 0.6)
 
 tt = np.arange(N) / SR
 fade = np.clip(tt / 0.6, 0, 1) * np.clip((DUR - tt) / 1.5, 0, 1)
