@@ -20,12 +20,12 @@ sys.path.insert(0, SKILL)
 from audiobed import tick  # noqa: E402
 
 SR = 44100
-DUR = 58.0
+DUR = 59.6
 BPM = 96.0
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
 
-MINOR = [2.2, 8.1, 8.9, 13.5, 16.5, 17.3, 18.1, 22.0, 30.5, 32.6, 34.7, 38.8, 41.2, 46.4, 47.9, 49.4, 53.6, 54.2, 55.4]
+MINOR = [2.2, 8.1, 8.9, 13.5, 16.5, 17.3, 18.1, 22.0, 30.5, 32.6, 34.7, 38.8, 41.2, 46.4, 47.9, 49.4, 53.6, 54.2, 57.0]
 
 # i–VI–III–VII (La minör): Am F C G
 CHORDS = [
@@ -186,7 +186,7 @@ while t0 < DUR - 0.3:
     t0 += BAR
 
 # Kapanış: son akor çalarak sönsün
-place(pad_chord(CHORDS[0][1] + [440.0], 5.4), 52.6, 0, 0.6)
+place(pad_chord(CHORDS[0][1] + [440.0], 7.0), 52.6, 0, 0.6)
 
 tt = np.arange(N) / SR
 fade = np.clip(tt / 0.6, 0, 1) * np.clip((DUR - tt) / 1.5, 0, 1)

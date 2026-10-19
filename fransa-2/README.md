@@ -1,6 +1,6 @@
 # Fransa'da işler büyüdü — 2. bölüm
 
-Dikey (1080×1920), 58 saniye. "Fransa'da basitçe ne oluyor?" videosunun devamı.
+Dikey (1080×1920), 59,6 saniye. "Fransa'da basitçe ne oluyor?" videosunun devamı.
 Durum 19 Ekim 2026 itibarıyla anlatılıyor. Düzen: üstte başlık, ortada görsel, altta
 kısa metin. Her sahne 7–9 saniye ekranda kalıyor ve yazılar görsellerin üstüne binmiyor.
 
@@ -13,7 +13,13 @@ kısa metin. Her sahne 7–9 saniye ekranda kalıyor ve yazılar görsellerin ü
 | 30–38 | Hükümet sertleşiyor | Sokağa çıkma yasağı, olağanüstü hal, "kontrolü kaybettik" kartları |
 | 38–46 | Yarın mecliste kritik bütçe oylaması | 577 sandalyelik meclis dolup ortadan ikiye bölünüyor |
 | 46–53 | Sırada ne var? | 20 Ekim, 24 Ekim, 5 Kasım |
-| 53–58 | Sence hükümet bu kışı çıkarır mı? | A/B seçenekleri, haritada Paris'e dönüş |
+| 53–56 | Sence hükümet bu kışı çıkarır mı? | A/B seçenekleri, haritada Paris'e dönüş |
+| 56–60 | 3. bölümü kaçırma | Parmak "Takip Et"e basıyor, zil çalıyor; takip et / abone ol |
+
+## Seslendirme
+
+`seslendirme.txt` okunacak metindir. Yabancı kelimeler okunduğu gibi yazıldı:
+**Limoges → "Limoj"**. Altyazıda doğru yazım (Limoges) kullanılacak.
 
 ## Açıklama önerisi
 

@@ -162,19 +162,30 @@
     </div>
   </div>
 
+  <!-- 8 · TAKİP -->
+  <div class="sc" data-a="56.0" data-b="59.61" id="cta">
+    <div class="ttl a" data-t="56.05" style="top:300px">3. bölümü<br><i>kaçırma</i></div>
+    <div class="a" data-t="56.3" style="position:absolute;left:0;right:0;top:640px;display:grid;place-items:center">
+      <svg id="bell" width="170" height="170" viewBox="0 0 170 170"><g transform="translate(85 85)"><g id="bellG"><path d="M-46 30 C-38 20 -38 4 -38 -10 C-38 -34 -22 -50 0 -52 C22 -50 38 -34 38 -10 C38 4 38 20 46 30 Z" fill="#f4f1ea"/><circle cx="0" cy="40" r="11" fill="#f4f1ea"/><rect x="-6" y="-64" width="12" height="14" rx="6" fill="#f4f1ea"/></g></g></svg>
+    </div>
+    <div id="follow" class="a" data-t="56.5" style="position:absolute;left:250px;right:270px;top:880px;height:120px;border-radius:60px;display:grid;place-items:center;font:800 52px var(--sans);letter-spacing:.02em"></div>
+    <svg id="hand" class="a" data-t="56.4" style="position:absolute;left:0;top:0" width="1080" height="1920" viewBox="0 0 1080 1920"><g id="handG"><path d="M0 0 C-6 -40 -6 -70 6 -72 C18 -74 20 -50 22 -26 L26 -40 C30 -52 46 -50 46 -36 L48 -30 C52 -42 68 -40 68 -26 L70 -20 C74 -30 90 -28 90 -14 C92 20 86 46 70 66 L18 70 C8 50 -4 30 -14 18 C-22 8 -14 -4 0 0 Z" fill="#f4f1ea" stroke="#0c0c0e" stroke-width="5" stroke-linejoin="round"/></g></svg>
+    <div class="txt a" data-t="57.4" style="top:1080px">Takip et, <b>abone ol</b>.<br>Yeni bölüm gelince ilk sen öğren.</div>
+  </div>
+
   <!-- 7 · SORU -->
-  <div class="sc" data-a="52.6" data-b="58.01">
+  <div class="sc" data-a="52.6" data-b="56.0">
     <div class="ttl a" data-t="52.7" style="top:270px">Sence hükümet<br><i>bu kışı çıkarır mı?</i></div>
     <div class="opt a" data-t="53.6" style="top:1150px;border-color:#5a5a62;background:rgba(255,255,255,.04)"><b style="background:var(--ink)">A</b>Ayakta kalır</div>
     <div class="opt a" data-t="54.2" style="top:1290px;border-color:var(--red);background:rgba(229,50,43,.10)"><b style="background:var(--red2)">B</b>Düşer</div>
-    <div class="src a" data-t="55.0" style="top:1440px">Kaynaklar: CBS · France 24 · Al Jazeera · The National · Fortune</div>
+    <div class="src a" data-t="54.4" style="top:1440px">Kaynaklar: CBS · France 24 · Al Jazeera · The National · Fortune</div>
   </div>
 </div>
 
 <div id="ui">
   <button id="pp">▶︎ Oynat</button>
-  <input id="seek" type="range" min="0" max="58" step="0.01" value="0">
-  <span id="clock">0:00 / 0:58</span>
+  <input id="seek" type="range" min="0" max="59.6" step="0.01" value="0">
+  <span id="clock">0:00 / 0:59</span>
   <button id="mute">Ses: açık</button>
 </div>
 <button id="start"><b>▶︎ Videoyu oynat</b></button>
@@ -183,7 +194,7 @@
 <script src="assets/geo.js"></script>
 <script>
 (async () => {
-  const DUR = 58;
+  const DUR = 59.6;
   window.__DUR = DUR;
   const G = window.GEO;
   const $ = s => document.querySelector(s);
@@ -220,9 +231,9 @@
   const CAMK = [
     [0, cam(.8, FC, VIS)], [12.6, cam(.8, FC, VIS)],
     [20.8, cam(.8, FC, VIS)], [22.4, cam(3.2, LIM, [540, 840])], [29.6, cam(3.2, LIM, [540, 840])],
-    [29.61, cam(.8, FC, VIS)], [52.6, cam(.6, FC, [540, 790])], [58, cam(.6, FC, [540, 790])],
+    [29.61, cam(.8, FC, VIS)], [52.6, cam(.6, FC, [540, 790])], [59.6, cam(.6, FC, [540, 790])],
   ];
-  const MAPOP = [[0, 1], [12.3, 1], [12.8, .0], [20.6, 0], [20.9, 1], [22.9, 1], [23.5, .12], [29.3, .12], [29.6, 0], [52.6, 0], [53.2, .55], [58, .55]];
+  const MAPOP = [[0, 1], [12.3, 1], [12.8, .0], [20.6, 0], [20.9, 1], [22.9, 1], [23.5, .12], [29.3, .12], [29.6, 0], [52.6, 0], [53.2, .55], [55.7, .55], [56.1, .18], [59.6, .18]];
   let K = [1, 0, 0];
   const scr = p => [K[1] + K[0] * p[0], K[2] + K[0] * p[1]];
 
@@ -315,25 +326,42 @@
   const cnt = [...document.querySelectorAll('[data-count]')].map(el => ({ el, v: +el.dataset.count, t: +el.dataset.ct, d: +el.dataset.cd, pre: el.dataset.pre || '' }));
   const fmt = v => Math.round(v).toLocaleString('tr-TR');
 
+  const follow = $('#follow'), handG = $('#handG'), bellG = $('#bellG');
   function render(t) {
     // sahne kapları
     scs.forEach(s => { const o = fade(t, s.a, s.b, .35, .35); s.el.style.opacity = s.a === 0 ? 1 - prog(t, s.b - .35, s.b) : o; s.el.style.visibility = (s.a === 0 ? t < s.b : o > 0) ? 'visible' : 'hidden'; });
     ani.forEach(a => { const p = prog(t, a.t, a.t + .6); a.el.style.opacity = a.t === 0 ? 1 : E.out(p); a.el.style.transform = a.t === 0 ? '' : `translateY(${(1 - E.out(p)) * 26}px)`; });
     cnt.forEach(c => { c.el.textContent = c.pre + fmt(c.v * E.out(prog(t, c.t, c.t + c.d))); });
 
+    // takip butonu: parmak gelir, basar, buton döner
+    if (t >= 56.0) {
+      const tap = 57.0, done = t >= tap + .12;
+      follow.textContent = done ? '✓ Takip ediliyor' : '＋ Takip Et';
+      follow.style.background = done ? '#26262c' : '#e5322b';
+      follow.style.color = done ? '#c9c5bc' : '#fff';
+      const press = 1 - .08 * Math.sin(Math.PI * prog(t, tap - .08, tap + .16));
+      follow.style.transform = `scale(${press})`;
+      const hp = E.inOut(prog(t, 56.4, 56.95)), back = E.inOut(prog(t, 57.35, 57.9));
+      const hx = lerp(860, 600, hp) + back * 140, hy = lerp(1300, 980, hp) + back * 160 + 10 * Math.sin(Math.PI * prog(t, tap - .1, tap + .2));
+      handG.setAttribute('transform', `translate(${hx} ${hy}) rotate(-18)`);
+      $('#hand').style.opacity = Math.min(prog(t, 56.4, 56.7), 1 - prog(t, 57.35, 57.75));
+      const ring = prog(t, 57.15, 58.6);
+      bellG.setAttribute('transform', `rotate(${ring > 0 && ring < 1 ? 18 * Math.sin(ring * Math.PI * 7) * (1 - ring) : 0})`);
+    }
+
     // harita
     K = track(CAMK, t);
     $('#cam').setAttribute('transform', `translate(${K[1]},${K[2]}) scale(${K[0]})`);
     $('#mapG').setAttribute('opacity', track(MAPOP, t, x => x));
-    const draw = t < 52 ? E.inOut(prog(t, 0, 2.2)) : E.inOut(prog(t, 52.8, 55.0));
+    const draw = t < 52 ? E.inOut(prog(t, 0, 2.2)) : E.inOut(prog(t, 52.7, 54.0));
     fr.style.strokeDashoffset = frLen * (1 - draw);
-    co.style.strokeDashoffset = coLen * (1 - (t < 52 ? E.inOut(prog(t, 1.8, 2.4)) : E.inOut(prog(t, 54.6, 55.2))));
+    co.style.strokeDashoffset = coLen * (1 - (t < 52 ? E.inOut(prog(t, 1.8, 2.4)) : E.inOut(prog(t, 53.7, 54.1))));
 
     // kahraman nokta: Paris (açılış/kapanış), Limoges (sahne 3)
     let hp = PAR, hs = 0;
     if (t < 12.6) hs = E.back(prog(t, 2.2, 2.6));
     else if (t >= 20.8 && t < 29.6) { hp = LIM; hs = E.back(prog(t, 21.6, 22.0)); }
-    else if (t >= 52.6) hs = E.back(prog(t, 55.0, 55.4));
+    else if (t >= 52.6) hs = E.back(prog(t, 53.6, 54.0));
     const [px, py] = scr(hp), R = 12 * hs;
     heroDot.setAttribute('cx', px); heroDot.setAttribute('cy', py); heroDot.setAttribute('r', R);
     rings.forEach((r, i) => { const ph = ((t + i * .9) % 1.8) / 1.8; r.setAttribute('cx', px); r.setAttribute('cy', py); r.setAttribute('r', R + 44 * E.out(ph) * hs); r.setAttribute('opacity', hs ? (1 - ph) * .8 : 0); });
