@@ -35,6 +35,7 @@ PRE, PRE_MAX, POST, POST_MAX = .06, .22, .10, .26
 SIB_HZ, SIB_DB = 3200, -42
 MERGE, MIN_CLUSTER = .25, .06
 RAMP = .012
+TAIL_HOLD, TAIL_MIN = .18, .45
 
 
 def load(path):
@@ -63,39 +64,53 @@ def features(x, sr):
 
 
 def keep_regions(db, cent, voiced):
+    """Korunacak bölgeler.
+
+    Temel birim enerji bölgesidir (-45 dB üstü, 0.15 s'den kısa sessizlikler
+    birleşik): cümle ya da cümle parçası, kısık son hecesiyle birlikte.
+    - İçinde sesli harf (perdeli küme) olmayan bölge: nefes/burun çekme -> atılır.
+    - Bölgenin SONU asla kırpılmaz: cümle sonu kısılıp fısıltıya döner,
+      orayı kesmek cümleyi yarım bırakır. Sona 60 ms pay eklenir.
+    - Bölgenin BAŞINDA ilk sesli harften önce 0.25 s'den uzun, alçak tınılı
+      perdesiz ses varsa bu nefes almadır: ilk sesli harften PRE önceye kadar
+      kırpılır (s/ş gibi yüksek tınılı ünsüz sürdükçe PRE_MAX'a kadar korunur).
+    """
     n = len(db)
-    # sesli kümeler
-    cl, i = [], 0
+    on = db > -45
+    regs, i = [], 0
     while i < n:
-        if not voiced[i]:
+        if not on[i]:
             i += 1; continue
         j = i
-        while True:
-            while j < n and voiced[j]:
-                j += 1
+        while j < n:
+            if on[j]:
+                j += 1; continue
             k = j
-            while k < n and not voiced[k] and (k - j) * HOP < MERGE:
+            while k < n and not on[k]:
                 k += 1
-            if k < n and voiced[k] and (k - j) * HOP < MERGE:
-                j = k; continue
-            break
-        if (j - i) * HOP >= MIN_CLUSTER:
-            cl.append([i, j])
-        i = j
+            if (k - j) * HOP >= .15 or k >= n:
+                break
+            j = k
+        regs.append([i, j]); i = j
     sib = (cent > SIB_HZ) & (db > SIB_DB)
-    out = []
-    for a, b in cl:
-        s = a - int(PRE / HOP)
-        while s > 0 and a - s < PRE_MAX / HOP and sib[s - 1]:
-            s -= 1
-        e = b + int(POST / HOP)
-        while e < n and e - b < POST_MAX / HOP and sib[e]:
-            e += 1
-        s, e = max(s, 0), min(e, n)
+    out, inhales = [], []
+    for a, b in regs:
+        vi = np.flatnonzero(voiced[a:b])
+        if len(vi) * HOP < MIN_CLUSTER:
+            continue                                         # sesli harf yok: nefes / burun
+        first = a + vi[0]
+        s = a
+        if (first - a) * HOP > .25 and np.median(cent[a:first]) < SIB_HZ:
+            s = first - int(PRE / HOP)
+            while s > a and first - s < PRE_MAX / HOP and sib[s - 1]:
+                s -= 1
+            inhales.append(((a) * HOP, s * HOP))
+        e = min(n, b + int(.06 / HOP))
         if out and s <= out[-1][1]:
             out[-1][1] = max(out[-1][1], e)
         else:
             out.append([s, e])
+    keep_regions.inhales = inhales
     return [(a * HOP, b * HOP) for a, b in out]
 
 
@@ -104,22 +119,6 @@ def main(src):
     db, cent, voiced = features(x, sr)
     keep = keep_regions(db, cent, voiced)
 
-    # Aradaki perdesiz parça gerçekten nefes/hırıltı mı? Değilse (kısa ve güçlü bir
-    # patlamalı ünsüz ya da yüksek tınılı bir "s/ş") kelimenin parçasıdır: geri ekle.
-    def is_noise(a, b):
-        seg = db[int(a / HOP):int(b / HOP)]
-        if not len(seg) or seg.max() < -50:
-            return True
-        loud = seg > seg.max() - 12
-        hz = float(np.median(cent[int(a / HOP):int(b / HOP)][loud]))
-        return seg.max() < -32 or (b - a >= .18 and hz < 4500)
-    merged = [list(keep[0])]
-    for a, b in keep[1:]:
-        if not is_noise(merged[-1][1], a):
-            merged[-1][1] = b
-        else:
-            merged.append([a, b])
-    keep = [tuple(k) for k in merged]
 
     # atılan (perdesiz, sesli) parçaların raporu
     dropped, prev = [], 0.0
@@ -136,6 +135,15 @@ def main(src):
     out, mapping, t_new = [np.zeros(int(LEAD_SIL * sr))], [], LEAD_SIL
     for i, (a, b) in enumerate(keep):
         seg = x[int(a * sr):int(b * sr)].copy()
+        # cümle sonu: son sesli harften TAIL_HOLD sonra kesmeden yavaşça kıs (hece
+        # duyulur, arkasındaki nefes vermesi öne çıkmaz)
+        vi = np.flatnonzero(voiced[int(a / HOP):int(b / HOP)])
+        if len(vi):
+            t_hold = (vi[-1] * HOP) + TAIL_HOLD
+            k0 = int(t_hold * sr)
+            if k0 < len(seg):
+                g = np.linspace(1, TAIL_MIN, len(seg) - k0)
+                seg[k0:] *= g
         if len(seg) > 2 * rl:
             seg[:rl] *= ramp; seg[-rl:] *= ramp[::-1]
         mapping.append(dict(old=[round(a, 3), round(b, 3)], new=[round(t_new, 3), round(t_new + b - a, 3)]))
@@ -165,6 +173,8 @@ def main(src):
     json.dump(dict(duration=round(t_new, 3), pieces=mapping), open(P('vo', 'kurgu.json'), 'w'), indent=1)
     json.dump(dropped, open(P('vo', 'atilan.json'), 'w'), indent=1)
     print(f'{len(x) / sr:.2f} s -> {t_new:.2f} s · {len(keep)} parça korundu · {len(dropped)} gürültü parçası atıldı')
+    for a, b in keep_regions.inhales:
+        print(f'  cümle başı nefes alma kırpıldı {a:6.2f}-{b:6.2f}')
     for d in dropped:
         print(f"  atıldı {d['t'][0]:6.2f}-{d['t'][1]:6.2f}  tepe {d['peak_db']:6.1f} dB  ~{d['hz']} Hz")
 
