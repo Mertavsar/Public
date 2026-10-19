@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Fransa Kapak</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #000; }
+  /* 1080x1920; profil ızgarası 3:4 (y 240–1680) ve kare (y 420–1500) ortadan kırpar */
+  #c { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+       background: radial-gradient(ellipse 80% 55% at 50% 52%, #2a0d06 0%, #120706 45%, #0b0b0d 75%); }
+  svg { position: absolute; inset: 0; }
+  .tag { position: absolute; left: 0; right: 0; top: 452px; text-align: center; font: 700 30px 'Inter', sans-serif; letter-spacing: .34em; color: #f4f1ea; opacity: .85; }
+  .tag b { color: #ff5a4f; }
+  .t1 { position: absolute; left: 0; right: 0; top: 500px; text-align: center; font: 700 190px/0.9 'Cormorant Garamond', serif; color: #f4f1ea; letter-spacing: -.01em; text-shadow: 0 8px 40px rgba(0,0,0,.9); }
+  .t2 { position: absolute; left: 0; right: 0; top: 664px; text-align: center; font: italic 600 200px/0.9 'Cormorant Garamond', serif; color: #ff4136; -webkit-text-stroke: 3px #1a0503; paint-order: stroke fill; text-shadow: 0 0 50px rgba(0,0,0,.95), 0 0 60px rgba(255,80,30,.45); }
+  .chips { position: absolute; left: 0; right: 0; top: 1392px; display: flex; justify-content: center; gap: 22px; }
+  .chip { font: 800 58px/1 'Inter', sans-serif; padding: 22px 34px; border-radius: 18px; letter-spacing: -.01em; }
+  .chip.r { background: #e5322b; color: #fff; box-shadow: 0 10px 40px rgba(229,50,43,.45); }
+  .chip.y { background: #f4c430; color: #0b0b0d; box-shadow: 0 10px 40px rgba(244,196,48,.35); }
+</style>
+</head>
+<body>
+<div id="c">
+  <svg viewBox="0 0 1080 1920" id="s">
+    <defs>
+      <radialGradient id="gFire" cx=".5" cy=".7"><stop offset="0" stop-color="#ffb347" stop-opacity=".85"/><stop offset=".5" stop-color="#ff5a1f" stop-opacity=".35"/><stop offset="1" stop-color="#ff3d00" stop-opacity="0"/></radialGradient>
+      <linearGradient id="gFlame" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff3d00"/><stop offset=".55" stop-color="#ff9a2a"/><stop offset="1" stop-color="#ffe08a"/></linearGradient>
+      <linearGradient id="fadeTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b0b0d"/><stop offset="1" stop-color="#0b0b0d" stop-opacity="0"/></linearGradient>
+      <filter id="blur"><feGaussianBlur stdDeviation="10"/></filter>
+    </defs>
+    <g id="map" opacity=".22"></g>
+    <g id="bld"></g>
+  </svg>
+  <div class="tag"><b>2. BÖLÜM</b> · 19 EKİM</div>
+  <div class="t1">FRANSA</div>
+  <div class="t2">yanıyor</div>
+  <div class="chips"><span class="chip r">1 ÖLÜ</span><span class="chip y">2.400 GÖZALTI</span></div>
+</div>
+<script src="assets/geo.js"></script>
+<script>
+(async () => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  const G = window.GEO;
+  // Fransa silüeti: büyük, arka planda
+  const map = document.getElementById('map');
+  const g = mk('g', { transform: 'translate(540 1060) scale(1.55) translate(-520 -940)' }, map);
+  mk('path', { d: G.france, fill: 'none', stroke: '#f4f1ea', 'stroke-width': 2.2, 'vector-effect': 'non-scaling-stroke' }, g);
+
+  // Yanan bina (videodaki çizimle aynı)
+  const bld = document.getElementById('bld');
+  const BX = 540, BY = 1330, t = 1.7;
+  mk('ellipse', { cx: BX, cy: BY - 230, rx: 520, ry: 420, fill: 'url(#gFire)' }, bld);
+  let sr = 5; const rnd = () => (sr = (sr * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 9; i++) mk('circle', { cx: BX + (rnd() - .5) * 560, cy: BY - 380 - rnd() * 300, r: 60 + rnd() * 90, fill: '#1c1614', opacity: .75, filter: 'url(#blur)' }, bld);
+  const L = (d, w = 5) => mk('path', { d, fill: 'none', stroke: '#ffd2a0', 'stroke-width': w, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, bld);
+  for (const row of [0, 1]) for (const k of [-5, -4, -3, -2, 2, 3, 4, 5]) {
+    const x = BX + k * 52 - (k > 0 ? 26 : -26), y = BY - 225 + row * 110;
+    mk('path', { d: `M${x - 16},${y + 60} V${y + 12} Q${x},${y - 6} ${x + 16},${y + 12} V${y + 60} Z`, fill: '#ff8a2a', opacity: .85 }, bld);
+    L(`M${x - 16},${y + 60} V${y + 12} Q${x},${y - 6} ${x + 16},${y + 12} V${y + 60} Z`, 3);
+  }
+  L(`M${BX - 330},${BY} H${BX + 330}`, 6);
+  L(`M${BX - 300},${BY} V${BY - 250} H${BX + 300} V${BY}`);
+  L(`M${BX - 310},${BY - 250} H${BX + 310}`, 6);
+  L(`M${BX - 300},${BY - 250} L${BX - 260},${BY - 300} H${BX + 260} L${BX + 300},${BY - 250}`);
+  L(`M${BX - 70},${BY - 300} V${BY - 420} H${BX + 70} V${BY - 300}`);
+  L(`M${BX - 80},${BY - 420} H${BX + 80}`, 6);
+  L(`M${BX - 60},${BY - 420} Q${BX},${BY - 520} ${BX + 60},${BY - 420}`);
+  L(`M${BX - 40},${BY} V${BY - 90} Q${BX},${BY - 130} ${BX + 40},${BY - 90} V${BY}`);
+  const flame = (cx, base, w, h, ph) => {
+    const s1 = Math.sin(t * 7 + ph) * w * .25, s2 = Math.sin(t * 11 + ph * 2) * w * .15;
+    return `M${cx - w},${base} C${cx - w},${base - h * .5} ${cx - w * .3 + s2},${base - h * .55} ${cx + s1},${base - h} C${cx + w * .4 + s2},${base - h * .6} ${cx + w},${base - h * .45} ${cx + w},${base} Z`;
+  };
+  [[-230, 1.0], [-120, 1.3], [0, 1.75], [120, 1.25], [230, 1.05], [-300, .7], [300, .75], [-60, .95], [60, 1.0]].forEach(([dx, h], i) => {
+    const hh = 150 * h, w = 50;
+    mk('path', { d: flame(BX + dx, BY - 250, w, hh, i * 1.7), fill: 'url(#gFlame)', opacity: .95 }, bld);
+    mk('path', { d: flame(BX + dx, BY - 250, w * .45, hh * .55, i * 1.7 + 1), fill: '#ffe9a8', opacity: .85 }, bld);
+  });
+  for (let i = 0; i < 60; i++) { const ph = rnd(); mk('circle', { cx: BX + (rnd() - .5) * 700, cy: BY - 270 - ph * 560, r: (2 + rnd() * 4) * (1 - ph * .7), fill: '#ffb347', opacity: 1 - ph * .8 }, bld); }
+  // üst kenar başlık için koyulaşsın
+  mk('rect', { x: 0, y: 380, width: 1080, height: 520, fill: 'url(#fadeTop)', opacity: .0 }, bld);
+  await document.fonts.ready;
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
