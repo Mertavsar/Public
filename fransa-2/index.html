@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fransa Bölüm 2</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --bg: #0c0c0e; --ink: #f4f1ea; --mute: #8d8a84; --red: #e5322b; --red2: #ff6b64;
+    --yellow: #f4c430; --fire: #ff8a2a;
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  body { font-family: var(--sans); color: var(--ink); }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--bg); transform-origin: 0 0; overflow: hidden; }
+  #stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%); }
+  svg.layer { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  .sc { position: absolute; inset: 0; opacity: 0; }
+
+  /* Bölgeler: başlık 240–470 · görsel 520–1160 · metin 1190–1440 */
+  .tag { position: absolute; left: 0; right: 0; top: 246px; text-align: center; font: 600 24px var(--sans); letter-spacing: .3em; color: var(--mute); }
+  .tag em { font-style: normal; color: var(--red); }
+  .ttl { position: absolute; left: 100px; right: 100px; top: 292px; text-align: center; font: 600 82px/1.04 var(--serif); }
+  .ttl i { font-style: italic; font-weight: 500; color: var(--red); }
+  .txt { position: absolute; left: 110px; right: 130px; top: 1200px; text-align: center; font: 500 38px/1.32 var(--sans); color: #e7e2d8; }
+  .txt b { color: #fff; font-weight: 700; } .txt .r { color: var(--red2); } .txt .y { color: var(--yellow); }
+  .src { position: absolute; left: 110px; right: 130px; top: 1404px; text-align: center; font: 400 21px var(--sans); color: #66635e; }
+  .a { opacity: 0; }
+
+  .num { font: 800 104px/1 var(--sans); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+  .lbl { font: 500 28px/1.25 var(--sans); color: var(--mute); margin-top: 8px; }
+  .duo { position: absolute; left: 110px; right: 130px; top: 1190px; display: grid; grid-template-columns: 1fr 1fr; text-align: center; gap: 20px; }
+  .vs { position: absolute; left: 50%; top: 1218px; margin-left: -30px; width: 40px; text-align: center; font: italic 500 40px var(--serif); color: var(--mute); }
+
+  .stats { position: absolute; left: 110px; right: 130px; top: 1190px; display: grid; grid-template-columns: 1.15fr 1fr .7fr; gap: 18px; text-align: center; }
+  .stats .num { font-size: 76px; }
+  .stats .lbl { font-size: 24px; }
+
+  .card { position: absolute; left: 110px; right: 130px; display: grid; grid-template-columns: 96px 1fr; gap: 26px; align-items: center; padding: 26px 30px; border-radius: 22px; background: #141418; border: 2px solid #2a2a30; }
+  .card .ic { width: 96px; height: 96px; }
+  .card .h { font: 700 40px/1.15 var(--sans); }
+  .card .s { font: 500 28px/1.3 var(--sans); color: #a9a59c; margin-top: 6px; }
+
+  .tl { position: absolute; left: 170px; right: 130px; top: 560px; }
+  .tl .row { position: relative; padding-left: 70px; margin-bottom: 64px; }
+  .tl .dot { position: absolute; left: 0; top: 6px; width: 34px; height: 34px; border-radius: 50%; border: 4px solid var(--red); background: var(--bg); }
+  .tl .d { font: 800 52px var(--sans); }
+  .tl .x { font: 500 34px/1.3 var(--sans); color: #b8b3a9; margin-top: 4px; }
+
+  .opt { position: absolute; left: 140px; right: 160px; display: flex; align-items: center; gap: 26px; padding: 26px 32px; border-radius: 20px; border: 3px solid; font: 700 48px var(--sans); }
+  .opt b { width: 70px; height: 70px; border-radius: 14px; display: grid; place-items: center; font: 800 40px var(--sans); color: var(--bg); }
+
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 14px; align-items: center; background: linear-gradient(transparent, rgba(0,0,0,.85)); opacity: 0; transition: opacity .25s; z-index: 5; }
+  body:hover #ui { opacity: 1; }
+  #ui button { background: none; border: 0; color: #fff; font: 600 15px var(--sans); cursor: pointer; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+  #ui input { flex: 1; accent-color: var(--red); }
+  #ui span { font: 500 13px var(--sans); color: #bbb; min-width: 84px; text-align: right; font-variant-numeric: tabular-nums; }
+  #start { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 6; cursor: pointer; border: 0; }
+  #start b { font: 600 18px var(--sans); color: #fff; background: var(--red); padding: 16px 28px; border-radius: 999px; }
+  body.capture #ui, body.capture #start { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- Görsel katman (harita, birim grafiği, bina, meclis) -->
+  <svg class="layer" id="vis" viewBox="0 0 1080 1920">
+    <defs>
+      <radialGradient id="gFire" cx=".5" cy=".7"><stop offset="0" stop-color="#ffb347" stop-opacity=".75"/><stop offset=".5" stop-color="#ff6a1f" stop-opacity=".3"/><stop offset="1" stop-color="#ff3d00" stop-opacity="0"/></radialGradient>
+      <linearGradient id="gFlame" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff3d00"/><stop offset=".55" stop-color="#ff9a2a"/><stop offset="1" stop-color="#ffe08a"/></linearGradient>
+      <filter id="blur6"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g id="mapG">
+      <g id="cam">
+        <path id="fr" fill="rgba(244,241,234,.03)" stroke="#f4f1ea" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        <path id="co" fill="none" stroke="#f4f1ea" stroke-width="3" vector-effect="non-scaling-stroke"/>
+      </g>
+      <g id="dots"></g>
+      <g id="hero"></g>
+    </g>
+    <g id="unitG"></g>
+    <clipPath id="bClip"><rect x="0" y="490" width="1080" height="700"/></clipPath>
+    <g id="bldG" clip-path="url(#bClip)"></g>
+    <g id="hemiG"></g>
+  </svg>
+
+  <!-- 0 · HOOK -->
+  <div class="sc" data-a="0" data-b="5.2">
+    <div class="tag a" data-t=".2"><em>BÖLÜM 2</em> · 19 EKİM 2026</div>
+    <div class="ttl a" data-t="0">Fransa'da işler<br><i>büyüdü.</i></div>
+    <div class="txt a" data-t="1.4">Hafta sonu ne oldu, şimdi ne olacak?<br><b>Bir dakikada.</b></div>
+  </div>
+
+  <!-- 1 · SOKAK -->
+  <div class="sc" data-a="5.2" data-b="12.6">
+    <div class="tag a" data-t="5.3">17 EKİM · CUMARTESİ</div>
+    <div class="ttl a" data-t="5.3">Ülke aynı gün<br><i>sokağa döküldü</i></div>
+    <div class="duo a" data-t="8.0">
+      <div><div class="num" data-count="550000" data-ct="8.1" data-cd="1.3">0</div><div class="lbl">yetkililere göre</div></div>
+      <div><div class="num" style="color:var(--red)" data-count="800000" data-ct="8.9" data-cd="1.3">0</div><div class="lbl">düzenleyicilere göre</div></div>
+    </div>
+    <div class="src a" data-t="10.2">Öfkenin adı: pahalılık, okullar ve kamu kesintileri · CBS, The National</div>
+  </div>
+
+  <!-- 2 · BİLANÇO -->
+  <div class="sc" data-a="12.6" data-b="20.8">
+    <div class="tag a" data-t="12.7">BİLANÇO</div>
+    <div class="ttl a" data-t="12.7">Hafta sonunun<br><i>bedeli</i></div>
+    <div class="a" data-t="13.4" style="position:absolute;left:0;right:0;top:1112px;text-align:center;font:500 24px var(--sans);color:var(--mute)">Her kare = 20 gözaltı</div>
+    <div class="stats a" data-t="16.4">
+      <div><div class="num" style="color:var(--red)" data-count="2400" data-ct="16.5" data-cd="1" data-pre="~">0</div><div class="lbl">gözaltı</div></div>
+      <div><div class="num" data-count="1000" data-ct="17.3" data-cd="1" data-pre="~">0</div><div class="lbl">yaralı polis<br>ve jandarma</div></div>
+      <div><div class="num" data-count="1" data-ct="18.1" data-cd=".3">0</div><div class="lbl">ölü<br>(Paris)</div></div>
+    </div>
+    <div class="src a" data-t="18.6">Ölen eylemci kalp krizi geçirdi · France 24, Al Jazeera, CBS</div>
+  </div>
+
+  <!-- 3 · LIMOGES -->
+  <div class="sc" data-a="20.8" data-b="29.6">
+    <div class="tag a" data-t="20.9">LIMOGES</div>
+    <div class="ttl a" data-t="20.9">143 yıllık belediye<br>binası <i>yandı</i></div>
+    <div class="txt a" data-t="24.6">Cumartesi gecesi <b>kundaklandı</b>.<br>Tarihi bina büyük ölçüde yok oldu.</div>
+    <div class="src a" data-t="25.6">CBS News, The National</div>
+  </div>
+
+  <!-- 4 · DEVLETİN CEVABI -->
+  <div class="sc" data-a="29.6" data-b="38.4">
+    <div class="tag a" data-t="29.7">DEVLETİN CEVABI</div>
+    <div class="ttl a" data-t="29.7">Hükümet<br><i>sertleşiyor</i></div>
+    <div class="card a" data-t="30.5" style="top:560px">
+      <svg class="ic" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="#1f1f26"/><path d="M58 22a28 28 0 1 0 16 44A24 24 0 0 1 58 22z" fill="#f4c430"/><circle cx="62" cy="40" r="3" fill="#f4c430"/><circle cx="70" cy="30" r="2" fill="#f4c430"/></svg>
+      <div><div class="h">Kısmi sokağa çıkma yasağı</div><div class="s">Başbakan Lecornu, olayların yaşandığı bazı şehirlerde yerel yasak istedi.</div></div>
+    </div>
+    <div class="card a" data-t="32.6" style="top:790px">
+      <svg class="ic" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="#1f1f26"/><path d="M48 18 L80 74 H16Z" fill="none" stroke="#ff6b64" stroke-width="6" stroke-linejoin="round"/><rect x="45" y="38" width="6" height="20" rx="3" fill="#ff6b64"/><circle cx="48" cy="65" r="3.5" fill="#ff6b64"/></svg>
+      <div><div class="h">Olağanüstü hal masada</div><div class="s">Lecornu: "Mümkün, ama şimdilik sokağa çıkma yasağı daha uygun."</div></div>
+    </div>
+    <div class="card a" data-t="34.7" style="top:1020px">
+      <svg class="ic" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="#1f1f26"/><path d="M30 64c0-10 8-16 18-16s18 6 18 16" fill="none" stroke="#f4f1ea" stroke-width="6" stroke-linecap="round"/><circle cx="48" cy="34" r="11" fill="none" stroke="#f4f1ea" stroke-width="6"/><path d="M66 24 L80 38 M80 24 L66 38" stroke="#ff6b64" stroke-width="6" stroke-linecap="round"/></svg>
+      <div><div class="h">"Kontrolü kaybettik"</div><div class="s">İçişleri Bakanı Nuñez istifasını sundu. Macron kabul etmedi.</div></div>
+    </div>
+    <div class="src a" data-t="35.6" style="top:1290px">France 24, Al Jazeera · 19 Ekim</div>
+  </div>
+
+  <!-- 5 · MECLİS -->
+  <div class="sc" data-a="38.4" data-b="45.6">
+    <div class="tag a" data-t="38.5"><em>YARIN</em> · 20 EKİM</div>
+    <div class="ttl a" data-t="38.5">Mecliste kritik<br><i>bütçe oylaması</i></div>
+    <div class="txt a" data-t="41.2">2027 bütçesinin ilk bölümü oylanıyor. Hükümetin <b>çoğunluğu yok</b>.<br><span class="r">Tahviller ve Paris borsası düştü.</span></div>
+  </div>
+
+  <!-- 6 · TAKVİM -->
+  <div class="sc" data-a="45.6" data-b="52.6">
+    <div class="tag a" data-t="45.7">TAKVİM</div>
+    <div class="ttl a" data-t="45.7">Sırada <i>ne var?</i></div>
+    <div class="tl">
+      <div class="row a" data-t="46.4"><div class="dot"></div><div class="d">20 Ekim</div><div class="x">Bütçe oylaması</div></div>
+      <div class="row a" data-t="47.9"><div class="dot"></div><div class="d">24 Ekim</div><div class="x">Sarı Yelekler yeniden sokağa çağırıyor</div></div>
+      <div class="row a" data-t="49.4"><div class="dot"></div><div class="d">5 Kasım</div><div class="x">Sendikalardan genel eylem</div></div>
+    </div>
+  </div>
+
+  <!-- 7 · SORU -->
+  <div class="sc" data-a="52.6" data-b="58.01">
+    <div class="ttl a" data-t="52.7" style="top:270px">Sence hükümet<br><i>bu kışı çıkarır mı?</i></div>
+    <div class="opt a" data-t="53.6" style="top:1150px;border-color:#5a5a62;background:rgba(255,255,255,.04)"><b style="background:var(--ink)">A</b>Ayakta kalır</div>
+    <div class="opt a" data-t="54.2" style="top:1290px;border-color:var(--red);background:rgba(229,50,43,.10)"><b style="background:var(--red2)">B</b>Düşer</div>
+    <div class="src a" data-t="55.0" style="top:1440px">Kaynaklar: CBS · France 24 · Al Jazeera · The National · Fortune</div>
+  </div>
+</div>
+
+<div id="ui">
+  <button id="pp">▶︎ Oynat</button>
+  <input id="seek" type="range" min="0" max="58" step="0.01" value="0">
+  <span id="clock">0:00 / 0:58</span>
+  <button id="mute">Ses: açık</button>
+</div>
+<button id="start"><b>▶︎ Videoyu oynat</b></button>
+<audio id="music" src="assets/soundtrack.m4a" preload="auto"></audio>
+
+<script src="assets/geo.js"></script>
+<script>
+(async () => {
+  const DUR = 58;
+  window.__DUR = DUR;
+  const G = window.GEO;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const E = {
+    out: p => 1 - Math.pow(1 - p, 3),
+    inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    back: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  };
+  const track = (keys, t, ease = E.inOut) => {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i], [t0, v0] = keys[i - 1];
+      if (t <= t1) { const p = ease(prog(t, t0, t1)); return Array.isArray(v0) ? v0.map((x, j) => lerp(x, v1[j], p)) : lerp(v0, v1, p); }
+    }
+    return keys[keys.length - 1][1];
+  };
+  const fade = (t, a, b, fi = .5, fo = .45) => Math.min(prog(t, a, a + fi), 1 - prog(t, b - fo, b));
+  let sr = 9; const rnd = () => (sr = (sr * 16807) % 2147483647) / 2147483647;
+
+  // ---------- Harita ----------
+  const fr = $('#fr'), co = $('#co');
+  fr.setAttribute('d', G.france); co.setAttribute('d', G.corsica);
+  const frLen = fr.getTotalLength(), coLen = co.getTotalLength();
+  fr.style.strokeDasharray = frLen; co.style.strokeDasharray = coLen;
+  const C = G.cities, PAR = C.paris, LIM = C.limoges;
+  const bb = fr.getBBox(), FC = [bb.x + bb.width / 2, bb.y + bb.height / 2];
+  const cam = (s, p, q) => [s, q[0] - s * p[0], q[1] - s * p[1]];
+  const VIS = [540, 840];                                   // görsel bölgenin merkezi
+  const CAMK = [
+    [0, cam(.8, FC, VIS)], [12.6, cam(.8, FC, VIS)],
+    [20.8, cam(.8, FC, VIS)], [22.4, cam(3.2, LIM, [540, 840])], [29.6, cam(3.2, LIM, [540, 840])],
+    [29.61, cam(.8, FC, VIS)], [52.6, cam(.6, FC, [540, 790])], [58, cam(.6, FC, [540, 790])],
+  ];
+  const MAPOP = [[0, 1], [12.3, 1], [12.8, .0], [20.6, 0], [20.9, 1], [22.9, 1], [23.5, .12], [29.3, .12], [29.6, 0], [52.6, 0], [53.2, .55], [58, .55]];
+  let K = [1, 0, 0];
+  const scr = p => [K[1] + K[0] * p[0], K[2] + K[0] * p[1]];
+
+  const hero = $('#hero');
+  const rings = [0, 1].map(() => mk('circle', { fill: 'none', stroke: '#e5322b', 'stroke-width': 3 }, hero));
+  const heroDot = mk('circle', { fill: '#e5322b' }, hero);
+
+  // Sokak noktaları: Paris'ten uzaklığa göre dalga gibi yayılır
+  const dotsG = $('#dots');
+  const D = G.dots.map(([x, y]) => {
+    const d = Math.hypot(x - PAR[0], y - PAR[1]);
+    return { p: [x, y], t: 6.0 + d / 430 * 2.4 + rnd() * .35, red: rnd() < .55, el: mk('circle', {}, dotsG) };
+  });
+  D.forEach(d => d.el.setAttribute('fill', d.red ? '#e5322b' : '#f4c430'));
+
+  // ---------- Birim grafiği: 120 kare = 2.400 gözaltı ----------
+  const unitG = $('#unitG');
+  const UN = [];
+  const COLS = 15, SZ = 40, GAP = 10, gx0 = 540 - (COLS * (SZ + GAP) - GAP) / 2, gy0 = 560;
+  for (let i = 0; i < 120; i++) {
+    const c = i % COLS, r = Math.floor(i / COLS);
+    UN.push({ el: mk('rect', { x: gx0 + c * (SZ + GAP), y: gy0 + r * (SZ + GAP), width: SZ, height: SZ, rx: 6, fill: '#e5322b' }, unitG), t: 13.5 + i * .022 + (r % 2) * .05, c, r });
+  }
+
+  // ---------- Bina: çizgi çizim + yangın ----------
+  const bldG = $('#bldG');
+  const BX = 540, BY = 1080;                                 // zemin orta noktası
+  const bp = [];
+  const L = (d, w = 4) => { const e = mk('path', { d, fill: 'none', stroke: '#f4f1ea', 'stroke-width': w, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, bldG); bp.push(e); return e; };
+  // gövde
+  L(`M${BX - 330},${BY} H${BX + 330}`, 5);
+  L(`M${BX - 300},${BY} V${BY - 250} H${BX + 300} V${BY}`);
+  L(`M${BX - 310},${BY - 250} H${BX + 310}`, 5);
+  L(`M${BX - 300},${BY - 250} L${BX - 260},${BY - 300} H${BX + 260} L${BX + 300},${BY - 250}`);
+  // kule + saat + kubbe
+  L(`M${BX - 70},${BY - 300} V${BY - 420} H${BX + 70} V${BY - 300}`);
+  L(`M${BX - 80},${BY - 420} H${BX + 80}`, 5);
+  L(`M${BX - 60},${BY - 420} Q${BX},${BY - 520} ${BX + 60},${BY - 420}`);
+  L(`M${BX},${BY - 490} V${BY - 540}`, 3);
+  bp.push(mk('circle', { cx: BX, cy: BY - 362, r: 30, fill: 'none', stroke: '#f4f1ea', 'stroke-width': 4 }, bldG));
+  L(`M${BX},${BY - 362} V${BY - 382} M${BX},${BY - 362} L${BX + 14},${BY - 356}`, 3);
+  // kapı + pencereler
+  L(`M${BX - 40},${BY} V${BY - 90} Q${BX},${BY - 130} ${BX + 40},${BY - 90} V${BY}`);
+  const WIN = [];
+  for (const row of [0, 1]) for (const k of [-5, -4, -3, -2, 2, 3, 4, 5]) {
+    const x = BX + k * 52 - (k > 0 ? 26 : -26), y = BY - 225 + row * 110;
+    L(`M${x - 16},${y + 60} V${y + 12} Q${x},${y - 6} ${x + 16},${y + 12} V${y + 60} Z`, 3);
+    WIN.push([x, y + 30]);
+  }
+  bp.forEach(e => { const l = e.getTotalLength ? e.getTotalLength() : 200; e.dataset.len = l; e.style.strokeDasharray = l; e.style.strokeDashoffset = l; });
+  const glow = mk('ellipse', { cx: BX, cy: BY - 220, rx: 460, ry: 360, fill: 'url(#gFire)' }, bldG);
+  bldG.insertBefore(glow, bldG.firstChild);
+  const winFill = WIN.map(([x, y]) => { const e = mk('rect', { x: x - 14, y: y - 18, width: 28, height: 46, fill: '#ff8a2a' }, bldG); bldG.insertBefore(e, bldG.children[1]); return e; });
+  // alevler
+  const FL = [[-230, 1.0], [-120, 1.25], [0, 1.6], [120, 1.2], [230, 1.05], [-300, .7], [300, .75], [-60, .9], [60, .95]].map(([dx, h], i) => ({ dx, h, ph: i * 1.7, el: mk('path', { fill: 'url(#gFlame)', opacity: .92 }, bldG), core: mk('path', { fill: '#ffe9a8', opacity: .8 }, bldG) }));
+  const EMB = Array.from({ length: 46 }, () => ({ x: BX + (rnd() - .5) * 620, ph: rnd(), sp: .5 + rnd() * .6, r: 2 + rnd() * 3.5, el: mk('circle', { fill: '#ffb347' }, bldG) }));
+  const SMK = Array.from({ length: 10 }, (_, i) => ({ x: BX + (rnd() - .5) * 500, ph: rnd(), el: mk('circle', { fill: '#2a2624', filter: 'url(#blur6)' }, bldG) }));
+  SMK.forEach(s => bldG.insertBefore(s.el, bldG.firstChild));
+  const flame = (cx, base, w, h, t, ph) => {
+    const s1 = Math.sin(t * 7 + ph) * w * .25, s2 = Math.sin(t * 11 + ph * 2) * w * .15;
+    return `M${cx - w},${base} C${cx - w},${base - h * .5} ${cx - w * .3 + s2},${base - h * .55} ${cx + s1},${base - h} C${cx + w * .4 + s2},${base - h * .6} ${cx + w},${base - h * .45} ${cx + w},${base} Z`;
+  };
+  // "143 YIL" rozet
+  const badge = mk('g', {}, bldG);
+  mk('rect', { x: BX - 120, y: 1100, width: 240, height: 60, rx: 30, fill: '#141418', stroke: '#ff6b64', 'stroke-width': 3 }, badge);
+  const bTxt = mk('text', { x: BX, y: 1141, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 800, 'font-size': 32, fill: '#ff6b64' }, badge);
+  bTxt.textContent = '1883 → 2026';
+
+  // ---------- Meclis yarım dairesi: 577 sandalye ----------
+  const hemiG = $('#hemiG');
+  const HX = 540, HY = 1060, R0 = 150, R1 = 420, ROWS = 11;
+  const seats = [];
+  const radii = Array.from({ length: ROWS }, (_, i) => R0 + (R1 - R0) * i / (ROWS - 1));
+  const tot = radii.reduce((s, r) => s + r, 0);
+  let left = 577;
+  radii.forEach((r, i) => {
+    const n = i === ROWS - 1 ? left : Math.round(577 * r / tot); left -= n;
+    for (let k = 0; k < n; k++) { const a = Math.PI * (1 - k / (n - 1)); seats.push({ a, x: HX + Math.cos(a) * r, y: HY - Math.sin(a) * r }); }
+  });
+  seats.sort((p, q) => q.a - p.a);
+  seats.forEach((s, i) => { s.t = 38.8 + i / seats.length * 1.6; s.el = mk('circle', { cx: s.x, cy: s.y, r: 0, fill: '#5d5b66' }, hemiG); });
+  const hTxt = mk('text', { x: HX, y: HY - 46, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 800, 'font-size': 84, fill: '#f4f1ea' }, hemiG);
+  const hSub = mk('text', { x: HX, y: HY + 52, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 500, 'font-size': 28, fill: '#8d8a84' }, hemiG);
+  hSub.textContent = 'sandalye · çoğunluk için 289 gerekiyor';
+  const hLine = mk('line', { x1: HX, y1: HY - R1 - 26, x2: HX, y2: HY - R0 + 4, stroke: '#e5322b', 'stroke-width': 4, 'stroke-dasharray': '10 8' }, hemiG);
+
+  // ---------- Genel öğeler ----------
+  const scs = [...document.querySelectorAll('.sc')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b }));
+  const ani = [...document.querySelectorAll('.a')].map(el => ({ el, t: +el.dataset.t }));
+  const cnt = [...document.querySelectorAll('[data-count]')].map(el => ({ el, v: +el.dataset.count, t: +el.dataset.ct, d: +el.dataset.cd, pre: el.dataset.pre || '' }));
+  const fmt = v => Math.round(v).toLocaleString('tr-TR');
+
+  function render(t) {
+    // sahne kapları
+    scs.forEach(s => { const o = fade(t, s.a, s.b, .35, .35); s.el.style.opacity = s.a === 0 ? 1 - prog(t, s.b - .35, s.b) : o; s.el.style.visibility = (s.a === 0 ? t < s.b : o > 0) ? 'visible' : 'hidden'; });
+    ani.forEach(a => { const p = prog(t, a.t, a.t + .6); a.el.style.opacity = a.t === 0 ? 1 : E.out(p); a.el.style.transform = a.t === 0 ? '' : `translateY(${(1 - E.out(p)) * 26}px)`; });
+    cnt.forEach(c => { c.el.textContent = c.pre + fmt(c.v * E.out(prog(t, c.t, c.t + c.d))); });
+
+    // harita
+    K = track(CAMK, t);
+    $('#cam').setAttribute('transform', `translate(${K[1]},${K[2]}) scale(${K[0]})`);
+    $('#mapG').setAttribute('opacity', track(MAPOP, t, x => x));
+    const draw = t < 52 ? E.inOut(prog(t, 0, 2.2)) : E.inOut(prog(t, 52.8, 55.0));
+    fr.style.strokeDashoffset = frLen * (1 - draw);
+    co.style.strokeDashoffset = coLen * (1 - (t < 52 ? E.inOut(prog(t, 1.8, 2.4)) : E.inOut(prog(t, 54.6, 55.2))));
+
+    // kahraman nokta: Paris (açılış/kapanış), Limoges (sahne 3)
+    let hp = PAR, hs = 0;
+    if (t < 12.6) hs = E.back(prog(t, 2.2, 2.6));
+    else if (t >= 20.8 && t < 29.6) { hp = LIM; hs = E.back(prog(t, 21.6, 22.0)); }
+    else if (t >= 52.6) hs = E.back(prog(t, 55.0, 55.4));
+    const [px, py] = scr(hp), R = 12 * hs;
+    heroDot.setAttribute('cx', px); heroDot.setAttribute('cy', py); heroDot.setAttribute('r', R);
+    rings.forEach((r, i) => { const ph = ((t + i * .9) % 1.8) / 1.8; r.setAttribute('cx', px); r.setAttribute('cy', py); r.setAttribute('r', R + 44 * E.out(ph) * hs); r.setAttribute('opacity', hs ? (1 - ph) * .8 : 0); });
+
+    const dv = t >= 5.2 && t < 12.6;
+    D.forEach(d => { const [x, y] = scr(d.p); const s = dv ? E.back(prog(t, d.t, d.t + .35)) : 0; d.el.setAttribute('cx', x); d.el.setAttribute('cy', y); d.el.setAttribute('r', 5.4 * s); d.el.setAttribute('opacity', .9 * (1 - prog(t, 12.2, 12.6))); });
+
+    // birim grafiği
+    const uOn = t >= 12.6 && t < 20.8;
+    unitG.setAttribute('opacity', uOn ? fade(t, 12.6, 20.8, .3, .4) : 0);
+    if (uOn) UN.forEach(u => { const p = E.back(prog(t, u.t, u.t + .3)); const s = SZ * p; u.el.setAttribute('width', Math.max(0, s)); u.el.setAttribute('height', Math.max(0, s)); u.el.setAttribute('x', gx0 + u.c * (SZ + GAP) + (SZ - s) / 2); u.el.setAttribute('y', gy0 + u.r * (SZ + GAP) + (SZ - s) / 2); });
+
+    // bina
+    const bOn = t >= 22.6 && t < 29.6;
+    bldG.setAttribute('opacity', bOn ? fade(t, 22.6, 29.6, .4, .4) : 0);
+    if (bOn) {
+      bp.forEach((e, i) => { const l = +e.dataset.len; const p = E.inOut(prog(t, 22.7 + i * .035, 23.9 + i * .035)); e.style.strokeDashoffset = l * (1 - p); e.setAttribute('stroke', `rgb(${lerp(244, 255, prog(t, 24.4, 26))},${lerp(241, 196, prog(t, 24.4, 26))},${lerp(234, 160, prog(t, 24.4, 26))})`); });
+      const f = E.out(prog(t, 24.2, 26.2));
+      glow.setAttribute('opacity', f * (.85 + .15 * Math.sin(t * 9)));
+      winFill.forEach((w, i) => w.setAttribute('opacity', prog(t, 24.3 + i * .06, 24.7 + i * .06) * (.65 + .35 * Math.sin(t * 13 + i))));
+      FL.forEach(fl => {
+        const h = 130 * fl.h * f * (.85 + .15 * Math.sin(t * 5 + fl.ph)), w = 46 * (.6 + .4 * f);
+        fl.el.setAttribute('d', f > .01 ? flame(BX + fl.dx, BY - 250, w, h + 20, t, fl.ph) : '');
+        fl.core.setAttribute('d', f > .01 ? flame(BX + fl.dx, BY - 250, w * .45, (h + 20) * .55, t * 1.3, fl.ph + 1) : '');
+      });
+      EMB.forEach(e => { const ph = (t * e.sp * .5 + e.ph) % 1; e.el.setAttribute('cx', e.x + Math.sin(t * 2 + e.ph * 6) * 18); e.el.setAttribute('cy', BY - 260 - ph * 520); e.el.setAttribute('r', e.r * (1 - ph)); e.el.setAttribute('opacity', f * (1 - ph)); });
+      SMK.forEach(s => { const ph = (t * .12 + s.ph) % 1; s.el.setAttribute('cx', s.x + ph * 60); s.el.setAttribute('cy', BY - 330 - ph * 420); s.el.setAttribute('r', 50 + ph * 110); s.el.setAttribute('opacity', f * .85 * (1 - ph)); });
+      badge.setAttribute('opacity', E.out(prog(t, 25.0, 25.6)));
+    }
+
+    // meclis
+    const hOn = t >= 38.4 && t < 45.6;
+    hemiG.setAttribute('opacity', hOn ? fade(t, 38.4, 45.6, .3, .4) : 0);
+    if (hOn) {
+      seats.forEach(s => { const p = E.back(prog(t, s.t, s.t + .3)); s.el.setAttribute('r', 7.2 * p); });
+      hTxt.textContent = fmt(577 * E.out(prog(t, 38.8, 40.4)));
+      hLine.setAttribute('opacity', prog(t, 40.6, 41.0));
+      hSub.setAttribute('opacity', prog(t, 40.4, 40.9));
+      // "çoğunluk yok": sandalyeler belirsizce titreşir
+      const q = prog(t, 41.2, 41.8);
+      seats.forEach((s, i) => { if (q > 0) s.el.setAttribute('fill', `rgba(${lerp(93, 160, q * (.5 + .5 * Math.sin(t * 3 + i * .7)))},${lerp(91, 90, q)},${lerp(102, 95, q)},1)`); });
+    }
+  }
+
+  // ---------- Ölçek + oynatıcı ----------
+  const stage = $('#stage');
+  const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${s}) translate(-50%, -50%)`; };
+  addEventListener('resize', fit); fit();
+  const params = new URLSearchParams(location.search);
+  const capture = params.has('capture');
+  let t = +(params.get('t') || 0), playing = false, last = 0;
+  const music = $('#music'), seek = $('#seek'), clock = $('#clock'), pp = $('#pp');
+  const mm = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const sync = () => { seek.value = t; clock.textContent = `${mm(t)} / ${mm(DUR)}`; pp.textContent = playing ? '❚❚ Durdur' : '▶︎ Oynat'; };
+  const play = () => { if (t >= DUR - .05) t = 0; playing = true; last = performance.now(); try { music.currentTime = t; music.play().catch(() => {}); } catch (e) {} $('#start').style.display = 'none'; sync(); requestAnimationFrame(loop); };
+  const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
+  function loop(now) { if (!playing) return; t += (now - last) / 1000; last = now; if (t >= DUR) { t = DUR - .01; render(t); pause(); return; } render(t); sync(); requestAnimationFrame(loop); }
+  const jump = v => { t = clamp(v, 0, DUR - .01); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  $('#start').onclick = play;
+  pp.onclick = () => playing ? pause() : play();
+  seek.oninput = () => jump(+seek.value);
+  $('#mute').onclick = () => { music.muted = !music.muted; $('#mute').textContent = music.muted ? 'Ses: kapalı' : 'Ses: açık'; };
+  addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); } if (e.code === 'ArrowRight') jump(t + 3); if (e.code === 'ArrowLeft') jump(t - 3); });
+  stage.addEventListener('click', () => playing ? pause() : play());
+  if (capture) { document.body.classList.add('capture'); stage.style.transform = 'none'; stage.style.left = stage.style.top = '0'; }
+  window.__render = render;
+  await document.fonts.ready;
+  render(t); sync();
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
