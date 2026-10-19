@@ -32,8 +32,12 @@ ffmpeg -i out/video-silent.mp4 -i assets/mix.m4a -filter_complex "[1:a]apad[a]" 
        -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart fransa-bolum-2.mp4
 ```
 
-- Kelimelerin içinden kesilmez; yalnızca konuşma bölgeleri arasındaki sessizlik
-  kısaltılır (uzun ara → 0,4 sn). Sonuç 57,3 sn.
+- Nefes, burun çekme ve hırıltı perdesiz ve alçak tınılı oldukları için ayrılır ve
+  tamamen susturulur (17 parça, liste: `vo/atilan.json`). "s/ş" gibi yüksek tınılı ve
+  kısa patlamalı ünsüzler korunur; kelimelerin içinden kesilmez.
+- Bölgeler arası uzun sessizlik 0,38 sn'ye iner. Sonuç 56,4 sn.
+- Ses zinciri: sıcaklık, telefon kutusu kesimi, netlik, hava, de-esser, iki kademeli
+  yumuşak kompresör.
 - Altyazı kelime kelime yanar; sayılar sarı, vurgu kelimeleri kırmızı. Ekranda
   "Limoges" yazar, seslendirmede "Limoj" okunur.
 - Sahneler cümle başlarına oturur (`timing.js` içindeki WARP).

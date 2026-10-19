@@ -106,7 +106,7 @@ muted = []
 for r in regions(db, v, h):
     core = [m for m in mids if r['a'] - .05 <= m <= r['b'] + .05]
     overlap = sum(max(0, min(r['b'], e) - max(r['a'], s)) for s, e in ons)
-    if not core and overlap < .5 * (r['b'] - r['a']):
+    if not core and (overlap < .5 * (r['b'] - r['a']) or r['b'] - r['a'] < .14):   # kelimesiz kısa tık/burun sesi
         a, b = int(max(0, r['a'] - .03) * sr), int(min(len(x) / sr, r['b'] + .05) * sr)
         f = min(int(.01 * sr), (b - a) // 2)
         env = np.zeros(b - a); env[:f] = np.linspace(1, 0, f); env[-f:] = np.linspace(0, 1, f)
