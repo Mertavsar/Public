@@ -1,0 +1,628 @@
+{
+  "baslik": "Elektrik ve doğalgaza zam yok ama destek sınırı düşüyor: Bu ne demek?",
+  "tarih": "2026-10-19",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "zam",
+    "destek",
+    "limit",
+    "sınır",
+    "fatura"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "dört bin": "4.000",
+    "Dört bin": "4.000",
+    "beş bin": "5.000",
+    "dört bine": "4.000'e",
+    "iki bin yirmi beşte": "2025'te",
+    "iki bin yirmi altıda": "2026'da",
+    "iki bin yirmi yedi": "2027",
+    "İki bin yirmi yedi": "2027",
+    "bin metreküp": "1.000 m³",
+    "iki yüz yirmi": "220",
+    "bin dolar": "1.000 dolar",
+    "Bin watt'lık": "1.000 watt'lık",
+    "bir kilovatsaat": "1 kWh",
+    "üç yüz otuz üç": "333",
+    "üç yüz otuz üçü": "333'ü",
+    "yüzde yetmiş beş": "%75",
+    "yüz metreküpse,": "100 m³'se,",
+    "yüz yetmiş beşin": "175'in",
+    "on ikiye": "12'ye",
+    "üç ay": "3 ay"
+  },
+  "kapak": {
+    "ikon": "⚡",
+    "ust": "ZAM YOK AMA",
+    "buyuk": "4.000 kWh",
+    "alt": "SINIRI AŞARSAN?"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Yılda dört bin kilovatsaati aşan hane, elektrikte devlet desteğini kaybediyor.",
+      "p": {
+        "ikon": "⚡",
+        "etiket": "Elektrikte yıllık destek sınırı (konut)",
+        "deger": 4000,
+        "sonek": " kWh",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "2026 · aşan hane destekli tarifeden çıkıyor"
+      },
+      "kaynak": "EPDK düzenlemesi, 1 Ocak 2026 (K1, K2)",
+      "etiket": "YENİ SINIR"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu kural tam olarak nasıl işliyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NASIL İŞLİYOR?\n*3 SORUDA*",
+        "boy": 96
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ HER GÜN",
+          "SADE DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Enerji Bakanı Bayraktar, bu kış elektrik ve doğalgaza zam olmadığını söyledi.",
+      "p": {
+        "ikon": "🎙️",
+        "satirlar": [
+          "ENERJİ BAKANI:",
+          "BU KIŞ ELEKTRİK VE",
+          "GAZA *ZAM YOK*"
+        ],
+        "boy": 84
+      },
+      "etiket": "AÇIKLAMA",
+      "kaynak": "Bakan Bayraktar, 19 Ekim 2026 (K3, K4)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yani ekim ve kasımda planlanan bir fiyat değişikliği yok. Ama bütçe durumu izleniyor.",
+      "p": {
+        "ikon": "🚫",
+        "satirlar": [
+          "EKİM-KASIM:",
+          "FİYAT DEĞİŞİKLİĞİ YOK",
+          "BÜTÇE *İZLENİYOR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "PLAN",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Ama bir ayrıntı var: fiyat sabit kalsa da destek limitleri güncellenecek.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "FİYAT SABİT",
+          "AMA *DESTEK LİMİTLERİ*",
+          "GÜNCELLENECEK"
+        ],
+        "boy": 84
+      },
+      "etiket": "AYRINTI",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Destek, devletin faturanın bir kısmını senin yerine karşılaması demek.",
+      "p": {
+        "ikon": "🤝",
+        "satirlar": [
+          "DESTEK =",
+          "DEVLET FATURANIN",
+          "BİR KISMINI *ÜSTLENİR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "DESTEK NE?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Elektrikte yıllık sınır, iki bin yirmi beşte beş bin kilovatsaatti. İki bin yirmi altıda dört bine indi.",
+      "p": {
+        "baslik": "⚡ Konut elektriği · yıllık destek sınırı",
+        "sol": {
+          "etiket": "2025",
+          "deger": 5000,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2026",
+          "deger": 4000,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " kWh",
+        "ondalik": 0,
+        "fark": "−1.000 kWh",
+        "not": "Yıllık toplam tüketim"
+      },
+      "kaynak": "EPDK; K1, K2",
+      "etiket": "SINIR DÜŞTÜ"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "İki bin yirmi yedi için sınır bir kademe daha düşebilir. Kesin rakam henüz açıklanmadı.",
+      "p": {
+        "ikon": "🔮",
+        "satirlar": [
+          "2027: SINIR",
+          "*DAHA DA DÜŞEBİLİR*",
+          "(RAKAM BELLİ DEĞİL)"
+        ],
+        "boy": 84
+      },
+      "kaynak": "Bakan Bayraktar, 19 Ekim 2026 (K3, K4)",
+      "etiket": "2027 (BEKLENTİ)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Doğalgazda da nisandan beri benzer bir sistem var.",
+      "p": {
+        "ikon": "🔥",
+        "satirlar": [
+          "DOĞALGAZ:",
+          "NİSAN 2026'DAN BERİ",
+          "*BENZER SİSTEM*"
+        ],
+        "boy": 84
+      },
+      "kaynak": "K5, K6",
+      "etiket": "DOĞALGAZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki devlet bunu neden yapıyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*YAPIYOR?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Bakana göre evlere doğalgaz, bin metreküp başına iki yüz yirmi dolardan veriliyor. Avrupa'da bu yaklaşık bin dolar.",
+      "p": {
+        "baslik": "🔥 1.000 m³ doğalgaz · konut",
+        "sol": {
+          "etiket": "TÜRKİYE\n(Bakan)",
+          "deger": 220,
+          "renk": "yesil"
+        },
+        "sag": {
+          "etiket": "AVRUPA\n(yaklaşık)",
+          "deger": 1000,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " $",
+        "ondalik": 0,
+        "fark": "~4,5 kat",
+        "not": "Bakan açıklaması"
+      },
+      "kaynak": "Bakan Bayraktar (K4, K5)",
+      "etiket": "FİYAT FARKI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani evler, Avrupa'dakinden çok daha ucuz gaz kullanıyor. Aradaki farkı destek kapatıyor.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "EVLER ÇOK DAHA",
+          "UCUZ GAZ KULLANIYOR",
+          "FARKI *DESTEK* KAPATIYOR"
+        ],
+        "boy": 72
+      },
+      "kaynak": "K4, K5",
+      "etiket": "FARK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE YARADIYSA",
+          "*BİR BEĞEN* BIRAK"
+        ],
+        "boy": 96
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Desteğin yükü büyüyünce devlet bir ayar yapıyor. Az kullananı korumak, çok kullananı destek dışında bırakmak.",
+      "p": {
+        "ikon": "🎚️",
+        "satirlar": [
+          "AYAR:",
+          "AZ KULLANANI *KORU*",
+          "ÇOK KULLANANI ÇIKAR"
+        ],
+        "boy": 84
+      },
+      "etiket": "AYAR",
+      "kaynak": "K1, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Elektrikte bu ayar yıllık sınırla yapılıyor. Kilovatsaat, elektriğin ölçü birimi.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "ELEKTRİKTE AYAR:",
+          "*YILLIK SINIR*",
+          "BİRİM: KİLOVATSAAT"
+        ],
+        "boy": 84
+      },
+      "etiket": "ELEKTRİK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bin watt'lık bir ütü bir saat çalışırsa, bir kilovatsaat harcar.",
+      "p": {
+        "ikon": "♨️",
+        "satirlar": [
+          "1.000 WATT'LIK ÜTÜ",
+          "1 SAAT ÇALIŞIRSA",
+          "= *1 KİLOVATSAAT*"
+        ],
+        "boy": 84
+      },
+      "etiket": "KİLOVATSAAT"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Dört bin kilovatsaati on ikiye bölersen, ayda yaklaşık üç yüz otuz üç kilovatsaat eder.",
+      "p": {
+        "baslik": "Yıllık sınır, aylığa çevrilince",
+        "ikon": "🧮",
+        "ogeler": [
+          "4.000 kWh",
+          "÷",
+          "12 ay",
+          "=",
+          "~333 kWh/ay"
+        ]
+      },
+      "kaynak": "Hesap: 4.000 ÷ 12 = 333,3 (K1, K2)",
+      "etiket": "AYLIK KARŞILIĞI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kaynaklara göre sınırı aşan hane, tükettiği elektriğin tamamını desteksiz tarifeden ödüyor.",
+      "p": {
+        "ikon": "💡",
+        "satirlar": [
+          "SINIRI AŞAN HANE:",
+          "TÜM ELEKTRİĞİ",
+          "*DESTEKSİZ TARİFEDEN*"
+        ],
+        "boy": 80
+      },
+      "etiket": "SINIR AŞILIRSA",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Sınır aşıldıktan sonra yeni tarife, genelde üç ay sonra başlıyor.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "SINIR AŞILIR",
+          "→ *ÜÇ AY SONRA*",
+          "YENİ TARİFE"
+        ],
+        "boy": 90
+      },
+      "etiket": "GEÇİŞ",
+      "kaynak": "EPDK örneği (K1, K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Doğalgazda sınır ise ilin ortalamasına göre belirleniyor.",
+      "p": {
+        "ikon": "🗺️",
+        "satirlar": [
+          "DOĞALGAZDA SINIR:",
+          "*İLİN ORTALAMASINA*",
+          "GÖRE"
+        ],
+        "boy": 90
+      },
+      "etiket": "DOĞALGAZ SINIRI",
+      "kaynak": "K5, K6"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ortalamanın yüzde yetmiş beş üzerinde gaz kullanan, devlet desteğinin dışında kalıyor.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "ORTALAMANIN",
+          "*%75 ÜSTÜ*",
+          "= DESTEK DIŞI"
+        ],
+        "boy": 96
+      },
+      "etiket": "%75 KURALI",
+      "kaynak": "K5, K6"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Örneğin ilinde ortalama yüz metreküpse, yüz yetmiş beşin üstü sınırı aşıyor.",
+      "p": {
+        "baslik": "Örnek: ortalama 100 m³ olsun",
+        "ikon": "🔥",
+        "ogeler": [
+          "100 m³",
+          "×",
+          "1,75",
+          "=",
+          "175 m³"
+        ]
+      },
+      "kaynak": "Örnek hesap (K5, K6)",
+      "etiket": "ÖRNEK HESAP"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Özetle zincir şöyle: fiyat sabit, limit düşer, destek dışında kalan hane sayısı artabilir.",
+      "p": {
+        "baslik": "Zam yok, ama…",
+        "adimlar": [
+          {
+            "ikon": "🏷️",
+            "metin": "Fiyat *sabit*"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Limit düşer"
+          },
+          {
+            "ikon": "🧾",
+            "metin": "Destek dışı artabilir"
+          }
+        ]
+      },
+      "etiket": "ZİNCİR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebini nasıl etkiler?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "SENİ NASIL\n*ETKİLER?*",
+        "boy": 110
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısa vadede iyi haber var: Bakana göre bu kış elektrik ve doğalgaza zam yok.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "BU KIŞ ZAM YOK",
+          "(BAKAN AÇIKLAMASI)",
+          "*İYİ HABER*"
+        ],
+        "boy": 84
+      },
+      "etiket": "İYİ HABER",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ama bu bir garanti değil. Bakan, bütçe durumunu da izlediklerini söyledi.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "GARANTİ DEĞİL",
+          "BÜTÇE DURUMU",
+          "*İZLENİYOR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Sınırın altında kalan hane için şu an bir şey değişmiyor.",
+      "p": {
+        "ikon": "🟢",
+        "satirlar": [
+          "SINIRIN ALTINDA",
+          "KALANA: *DEĞİŞİKLİK YOK*",
+          "(ŞİMDİLİK)"
+        ],
+        "boy": 84
+      },
+      "etiket": "SINIR ALTI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Sınırı geçen için ise fatura belirgin biçimde artabilir.",
+      "p": {
+        "ikon": "🔴",
+        "satirlar": [
+          "SINIRI GEÇENE:",
+          "FATURA *ARTABİLİR*"
+        ],
+        "boy": 96
+      },
+      "etiket": "SINIR ÜSTÜ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu yüzden faturandaki yıllık tüketime bak. Elektrikte ayda üç yüz otuz üçü geçiyorsan, dikkat.",
+      "p": {
+        "ikon": "🔎",
+        "satirlar": [
+          "YILLIK TÜKETİME BAK",
+          "AYDA ~333 kWh'İ",
+          "GEÇİYORSAN *DİKKAT*"
+        ],
+        "boy": 80
+      },
+      "etiket": "KONTROL"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Takip edeceğin üç şey: yıllık elektrik tüketimin, doğalgazda ilinin ortalaması, bir de iki bin yirmi yedi limiti.",
+      "p": {
+        "baslik": "Takip listesi",
+        "satirlar": [
+          {
+            "ikon": "⚡",
+            "metin": "Yıllık elektrik tüketimin",
+            "deger": "≤ 4.000 kWh",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🔥",
+            "metin": "Gazda il ortalaması",
+            "deger": "%75 üstü = dışı",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🔮",
+            "metin": "2027 limiti",
+            "deger": "belli değil",
+            "renk": "beyaz"
+          }
+        ]
+      },
+      "etiket": "TAKİP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Rakamlar ve limitler değişebilir. Güncel durum için resmi duyurulara bak.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "LİMİTLER",
+          "*DEĞİŞEBİLİR*",
+          "RESMÎ DUYURUYA BAK"
+        ],
+        "boy": 90
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: zam yok, ama destek limiti düşüyor. Sınırı aşan, desteği kaybediyor.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "ZAM YOK",
+          "LİMİT *DÜŞÜYOR*",
+          "AŞAN DESTEĞİ KAYBEDER"
+        ],
+        "boy": 80
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SEN NE DÜŞÜNÜYORSUN?",
+          "KONUYU *YORUMA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "EPDK: konut elektriği yıllık destek sınırı 2026'da 4.000 kWh (2025: 5.000); sınırı aşan abone destekli tarifeden çıkar — https://gensed.org/mesken-elektriginde-yeni-kademe-4-000-kwhe-dusuruldu/ ; https://www.takvim.com.tr/ekonomi/2025/11/25/elektrikte-yeni-tarife-basliyor-2026da-4-bin-kwhyi-asan-aboneler-destekten-cikacak",
+    "K2": "Sınırı aşan abone tüketimin tamamını desteksiz tarifeden öder; geçiş sınırın aşıldığı aydan sonraki üçüncü ayın başında (EPDK örneği) — https://www.nefes.com.tr/elektrik-faturasinda-4000-kwh-siniri-nedir-kimleri-ilgilendiriyor-151615 ; https://www.teknotalk.com/2026-elektrik-faturalarinda-yeni-limit-belli-oldu-yillik-4-000-kwhye-dustu-195210/",
+    "K3": "Bakan Bayraktar, 19 Ekim 2026: bu kış elektrik ve doğalgaza zam yok, destekler sürecek, destek tüketim limitleri güncellenecek; 2027'de elektrik limiti 4.000 kWh'in altına inebilir (kesin rakam yok) — https://www.trtv.net/2026/10/19/bayraktar-elektrik-destek-limiti-2027/ ; https://www.gzt.com/gundem/elektrik-ve-dogal-gaza-zam-gelecek-mi-bakan-bayraktardan-kritik-aciklama-4270641",
+    "K4": "Aynı açıklama; 1.000 m³ doğalgaz evlere 220 dolar, Avrupa'da ~1.000 dolar — https://www.karar.com/ekonomi-haberleri/dogalgaz-ve-elektrik-fiyatlarina-ekim-kasim-ayinda-zam-var-mi-yeni-2079259 ; https://gazeteoksijen.com/turkiye/bakan-bayraktardan-dogalgazda-zam-ve-elektrikte-limit-acilamasi-293079",
+    "K5": "Doğalgazda Nisan 2026'dan itibaren il ortalamasının %75 üzerinde tüketen haneler destek dışı — https://t24.com.tr/ekonomi/dogal-gazi-cok-tuketene-devlet-destegi-verilmeyecek,1310705 ; https://www.ntv.com.tr/ntvpara/dogalgazda-yeni-fiyat-hesabi-nasil-yapilacak-il-ortalamalari-belli-oldu-fatura-hesaplama-rehberi-1718729",
+    "K6": "Kademeli doğalgaz sistemi Nisan'da başladı — https://www.donanimhaber.com/dogal-gazda-kademeli-fatura-nisan-da-baslayacak-iste-detaylar--203714 ; https://www.cumhuriyet.com.tr/ekonomi/dogalgazda-yeni-donem-basladi-zam-oranlari-aciklandi-iste-nisan-ayi-guncel-tarifeleri-2492276"
+  }
+}
