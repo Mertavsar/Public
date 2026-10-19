@@ -115,7 +115,10 @@ for r in regions(db, v, h):
 w = wave.open(P('vo', 'son.wav'), 'w'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr)
 w.writeframes((np.clip(x, -1, 1) * 32767).astype('<i2').tobytes()); w.close()
 
-json.dump(dict(DUR=dur, ticks=[round(to_new(t), 3) for t in OLD_TICKS], scenes=NEW,
+# bas vurguları: her sahne açılışı + kırmızı (vurgu) kelimelerin başı
+hits = sorted(set([0.05] + [round(starts[k], 3) for k in range(1, len(starts))] +
+                  [round(w['s'] + .03, 3) for w in words if w['c'] == 'red']))
+json.dump(dict(DUR=dur, ticks=[round(to_new(t), 3) for t in OLD_TICKS], scenes=NEW, hits=hits,
                speech=[[w['s'], w['e']] for w in words]), open(P('vo', 'timing.json'), 'w'), indent=1)
 print(f'süre {dur}s · {len(CAPS)} altyazı parçası · susturulan: {muted}')
 print('sahne başları:', NEW)

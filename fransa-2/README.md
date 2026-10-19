@@ -18,7 +18,7 @@ kısa metin. Her sahne 7–9 saniye ekranda kalıyor ve yazılar görsellerin ü
 
 ## Seslendirme ve ses kurgusu
 
-Kayıt `vo/ham.mp3` (61,2 sn). İşlem sırası, her adım tek komut:
+Kayıt `vo/ham.mp3` (2. kayıt, 67,1 sn; ilk kayıt `vo/ham-1.mp3`). İşlem sırası, her adım tek komut:
 
 ```bash
 python3 build/vo_clean.py vo/ham.wav     # boşluk kısaltma, nefes/hırıltı atma, EQ, de-esser, kompresör -> vo/temiz.wav
@@ -32,11 +32,16 @@ ffmpeg -i out/video-silent.mp4 -i assets/mix.m4a -filter_complex "[1:a]apad[a]" 
        -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart fransa-bolum-2.mp4
 ```
 
-- Cümleden ayrı duran nefes, burun çekme ve hırıltılar susturulur (11 parça,
-  liste: `vo/atilan.json`). Cümle başındaki uzun nefes alma kırpılır.
+- Cümleden ayrı duran nefes ve hırıltılar susturulur (11 parça, liste: `vo/atilan.json`).
+- Burun çekme ayrıca spektral imzasıyla bulunur: enerjinin > %50'si 300–3000 Hz'de ve
+  spektrum düz (> 0.17). s/ş sesleri bu imzayı taşımaz; "hal" gibi kısa kelimeler
+  harmonik olduğu için düzlükleri düşüktür. 2. kayıtta 4 burun çekme bulundu ve çıkarıldı.
+- Cümle başındaki uzun nefes alma kırpılır.
 - Cümle sonları **asla kırpılmaz** (kısık son hece cümlenin parçasıdır); son sesli
   harften 0,18 sn sonrası kesilmeden yavaşça kısılır, nefes vermesi öne çıkmaz.
-- Bölgeler arası uzun sessizlik 0,38 sn'ye iner. Sonuç 57,3 sn.
+- Bölgeler arası uzun sessizlik 0,38 sn'ye iner. Sonuç 58,9 sn.
+- Bas vurguları: her sahne açılışında ve dört vurgu kelimesinde (kaybetti, kundaklandı,
+  kontrolü, çoğunluğu) derin bir vuruş; ayrı stem (`assets/hits.wav`), whoosh yok.
 - Ses zinciri: sıcaklık, telefon kutusu kesimi, netlik, hava, de-esser, iki kademeli
   yumuşak kompresör.
 - Altyazı kelime kelime yanar; sayılar sarı, vurgu kelimeleri kırmızı. Ekranda

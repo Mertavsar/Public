@@ -174,7 +174,7 @@ def split_sentences(text):
     return [p.strip() for p in parts if p.strip()]
 
 
-def match_blocks(syl, counts, durs, empty_cost=0.5, dur_weight=0.6):
+def match_blocks(syl, counts, durs, empty_cost=0.5, dur_weight=0.6, words=None, punct_cost=0.8):
     """
     Kelimeleri bloklara böler: her bloğun hece yükü o bloğun tepe sayısına
     olabildiğince yakın olsun.
@@ -186,12 +186,22 @@ def match_blocks(syl, counts, durs, empty_cost=0.5, dur_weight=0.6):
 
     Dönen: her blok için (ilk kelime, son kelime+1). Boş blok (nefes, tıklama)
     mümkün ama küçük bir ceza ile caydırılır.
+
+    Üçüncü kanıt noktalama: konuşmacı cümle sonunda duraksar. Blok sınırı
+    noktalamasız bir kelimeden sonra düşerse `punct_cost`, virgülden sonra
+    düşerse yarısı eklenir. Hece eşitliğinde (ölçüldü: "olacak? | Cumartesi"
+    ile "olacak? Cumartesi |" aynı maliyetteydi) doğru sınırı bu seçer.
     """
     cum = np.concatenate([[0], np.cumsum(syl)])
     NW, NB = len(syl), len(counts)
     rate = sum(durs) / max(1.0, float(sum(syl)))      # saniye / hece
     exp = [d / rate for d in durs]                    # süreden beklenen hece
     INF = float("inf")
+    def bcost(j):
+        if words is None or j == 0 or j >= NW:
+            return 0.0
+        w = words[j - 1]
+        return 0.0 if re.search(r'[.?!:;]["”»]?$', w) else (punct_cost / 2 if w.endswith(',') else punct_cost)
     dp = np.full((NB + 1, NW + 1), INF)
     dp[0, 0] = 0.0
     back = {}
@@ -202,7 +212,7 @@ def match_blocks(syl, counts, durs, empty_cost=0.5, dur_weight=0.6):
             for j in range(i, NW + 1):
                 s = cum[j] - cum[i]
                 c = (dp[b, i] + abs(s - counts[b]) + dur_weight * abs(s - exp[b])
-                     + (empty_cost if j == i else 0.0))
+                     + (empty_cost if j == i else bcost(j)))
                 if c < dp[b + 1, j]:
                     dp[b + 1, j] = c
                     back[(b + 1, j)] = i
@@ -287,7 +297,7 @@ def align(audio, text, min_dur=0.18, floor_off=18.0, min_gap=0.12, min_block=0.0
             counts[i] = counts[i] + counts[i + 1]
             del blocks[i + 1], per_block[i + 1], counts[i + 1]
 
-    seg, cost = match_blocks(syl, counts, [b - a for a, b in blocks])
+    seg, cost = match_blocks(syl, counts, [b - a for a, b in blocks], words=words)
 
     items = []
     for (i, j), span, pk in zip(seg, blocks, per_block):

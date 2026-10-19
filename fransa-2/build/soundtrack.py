@@ -208,6 +208,30 @@ def fx_place(sig, t):
 for t in MINOR:
     fx_place(tick(rng, amp=0.16), t - 0.01)
 
+# ---- bas vurguları (ayrı stem: assets/hits.wav, mix.py konuşmaya göre seviyeler) ----
+def boom(amp=1.0):
+    """Derin vuruş: 45 Hz'e inen sinüs gövde + telefonda duyulan 150 Hz 'tok'
+    + çok kısa üst tık. Whoosh yok."""
+    n = int(SR * 1.3); t = np.arange(n) / SR
+    f = 45 + 75 * np.exp(-t / .05)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .38)
+    knock = np.sin(2 * np.pi * 150 * t) * np.exp(-t / .06) * .55
+    click = bp(rng.standard_normal(n), 1200, 4200) * np.exp(-t / .008) * .18
+    return (body + knock + click) * amp
+
+
+HITS = TM.get('hits', []) if TM else []
+hits_bus = np.zeros(N)
+for k, t in enumerate(HITS):
+    b = boom(1.0 if k == 0 or t in SC else .8)
+    i = int(max(0, t - .01) * SR); j = min(N, i + len(b))
+    hits_bus[i:j] += b[:j - i]
+if HITS:
+    hits_bus /= np.max(np.abs(hits_bus)) + 1e-9
+    w = wave.open(os.path.join(ROOT, 'assets', 'hits.wav'), 'w')
+    w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
+    w.writeframes((hits_bus * .9 * 32767).astype('<i2').tobytes()); w.close()
+
 mus_peak = max(np.max(np.abs(L)), np.max(np.abs(R)))
 L, R = L / mus_peak * 0.62, R / mus_peak * 0.62
 fx = sosfilt(butter(2, 70, btype='high', fs=SR, output='sos'), fx)

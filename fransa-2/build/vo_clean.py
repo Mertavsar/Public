@@ -63,6 +63,57 @@ def features(x, sr):
     return db, cent, voiced
 
 
+def sniff_score(x, sr, a, b):
+    """(alçak bant oranı, spektral düzlük). Burun çekme: alçak > 0.5 ve düzlük > 0.17.
+    Ölçüm: 31.8 s'deki burun çekme 0.70 / 0.22; metindeki s/ş sesleri < 0.45 ve
+    çoğunlukla < 0.16; "hal" gibi kısa gerçek kelimeler harmoniktir, düzlüğü düşüktür."""
+    y = x[int(a * sr):int(b * sr)]
+    S = np.abs(np.fft.rfft(y * np.hanning(len(y)))) ** 2
+    f = np.fft.rfftfreq(len(y), 1 / sr)
+    tot = S[f > 300].sum() + 1e-12
+    low = S[(f > 300) & (f < 3000)].sum() / tot
+    band = S[(f > 500) & (f < 10000)] + 1e-12
+    return float(low), float(np.exp(np.mean(np.log(band))) / np.mean(band))
+
+
+def sniffs(x, sr, db, voiced):
+    """Burun çekme adayları: (1) perdesiz koşular ≥ 0.12 s, (2) iki yanı sessiz
+    (−50 dB altı, ≥ 0.08 s) 0.08–0.45 s'lik ses adaları — perde ölçümü burun
+    sesinde yanılabildiği için adalarda perdeye bakılmaz."""
+    n, cands = len(db), []
+    i = 0
+    while i < n:
+        if voiced[i] or db[i] < -50:
+            i += 1; continue
+        j = i
+        while j < n and not voiced[j] and db[j] >= -50:
+            j += 1
+        if (j - i) * HOP >= .12:
+            cands.append((i, j))
+        i = j
+    on = db >= -50
+    i = 0
+    while i < n:
+        if not on[i]:
+            i += 1; continue
+        j = i
+        while j < n and (on[j] or (j + 8 < n and on[j:j + 8].any())):
+            j += 1
+        while j > i and not on[j - 1]:
+            j -= 1
+        pre_quiet = i == 0 or not on[max(0, i - 8):i].any()
+        post_quiet = j >= n or not on[j:j + 8].any()
+        if pre_quiet and post_quiet and .08 <= (j - i) * HOP <= .45:
+            cands.append((i, j))
+        i = max(j, i + 1)
+    out = []
+    for i, j in sorted(set(cands)):
+        lo, fl = sniff_score(x, sr, i * HOP, j * HOP)
+        if lo > .5 and fl > .17:
+            out.append((i * HOP, j * HOP, round(lo, 2), round(fl, 3)))
+    return out
+
+
 def keep_regions(db, cent, voiced):
     """Korunacak bölgeler.
 
@@ -129,6 +180,18 @@ def main(src):
                                 hz=int(np.median(cent[int(prev / HOP):int(a / HOP)][seg > -55])) if (seg > -55).any() else 0))
         prev = b
 
+    # burun çekmeleri sustur (korunan bölgelerin içinde de olsa)
+    sn = sniffs(x, sr, db, voiced)
+    x = x.copy()
+    for a, b, lo, fl in sn:
+        i0, i1 = int(max(0, a - .02) * sr), int((b + .03) * sr)
+        r = min(int(.015 * sr), (i1 - i0) // 2)
+        env = np.zeros(i1 - i0); env[:r] = np.linspace(1, 0, r); env[-r:] = np.linspace(0, 1, r)
+        x[i0:i1] *= env
+        dropped.append(dict(t=[round(a, 2), round(b, 2)], peak_db=None, hz=None, burun=[lo, fl]))
+    # yalnızca burun çekmeden oluşan parçayı kurgudan tamamen çıkar (ara sıkışsın)
+    keep = [(a, b) for a, b in keep if not any(sa - .06 <= a and b <= sb + .08 for sa, sb, _, _ in sn)]
+
     # kurgu: korunan bölgeler + sıkıştırılmış aralar
     rl = int(RAMP * sr)
     ramp = np.linspace(0, 1, rl)
@@ -173,10 +236,13 @@ def main(src):
     json.dump(dict(duration=round(t_new, 3), pieces=mapping), open(P('vo', 'kurgu.json'), 'w'), indent=1)
     json.dump(dropped, open(P('vo', 'atilan.json'), 'w'), indent=1)
     print(f'{len(x) / sr:.2f} s -> {t_new:.2f} s · {len(keep)} parça korundu · {len(dropped)} gürültü parçası atıldı')
+    for a, b, lo, fl in sn:
+        print(f'  burun çekme susturuldu {a:6.2f}-{b:6.2f}  alçak bant {lo:.2f}  düzlük {fl:.3f}')
     for a, b in keep_regions.inhales:
         print(f'  cümle başı nefes alma kırpıldı {a:6.2f}-{b:6.2f}')
     for d in dropped:
-        print(f"  atıldı {d['t'][0]:6.2f}-{d['t'][1]:6.2f}  tepe {d['peak_db']:6.1f} dB  ~{d['hz']} Hz")
+        if d.get('peak_db') is not None:
+            print(f"  atıldı {d['t'][0]:6.2f}-{d['t'][1]:6.2f}  tepe {d['peak_db']:6.1f} dB  ~{d['hz']} Hz")
 
 
 if __name__ == '__main__':
