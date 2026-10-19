@@ -21,7 +21,7 @@ from audiobed import tick  # noqa: E402
 
 SR = 44100
 DUR = 59.6
-BPM = 96.0
+BPM = 72.0   # sakin: davul/bas yok, yalnızca pad ve seyrek notalar
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
 
@@ -37,14 +37,12 @@ CHORDS = [
 
 # Bölümlere göre yoğunluk: (başlangıç, pad, arp, arp16, kick, clap, hat, bass)
 SECTIONS = [
-    (0.0,  .8, .6, 0, 0,  0,  0,  0),
-    (5.2,  .8, .8, 0, .7, 0,  .6, .5),
-    (12.6, .8, .9, 0, .8, .6, .7, .7),
-    (20.8, .9, .6, 0, .5, 0,  .4, .6),
-    (29.6, .8, .9, 1, .9, .8, .9, .8),
-    (38.4, .9, 1., 1, 1., .9, 1., 1.),
-    (45.6, .8, .9, 0, .8, .6, .8, .7),
-    (52.6, .9, .5, 0, 0,  0,  0,  0),
+    # (başlangıç, pad, arp, arp16, kick, clap, hat, bass) — kullanıcı geri bildirimi: müzik
+    # dikkat dağıtmasın, seslendirmenin altında fark edilmeden dursun
+    (0.0,  .8, .30, 0, 0, 0, 0, 0),
+    (20.8, .8, .22, 0, 0, 0, 0, 0),
+    (29.6, .8, .30, 0, 0, 0, 0, 0),
+    (52.6, .8, .18, 0, 0, 0, 0, 0),
 ]
 
 
@@ -158,7 +156,7 @@ while t0 < DUR - 0.3:
     pad_g, arp_g, arp16, kick_g, clap_g, hat_g, bass_g = section(t0 + 0.01)
     place(pad_chord(chord, BAR + 0.3), t0, -0.25, 0.55 * pad_g)
     place(pad_chord([c * 2 for c in chord[:2]], BAR + 0.3), t0, 0.3, 0.22 * pad_g)
-    steps = 16 if arp16 else 8
+    steps = 16 if arp16 else 4
     order = [0, 1, 2, 3, 2, 1, 2, 3, 0, 2, 1, 3, 2, 1, 3, 2]
     for s in range(steps):
         ts = t0 + s * BAR / steps
@@ -222,7 +220,7 @@ with tempfile.TemporaryDirectory() as tmp:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((st * 32767).astype('<i2').tobytes())
     w.close()
-    subprocess.run([sys.executable, os.path.join(SKILL, 'master.py'), raw, mst, '-14.0', '-3.5'], check=True)
+    subprocess.run([sys.executable, os.path.join(SKILL, 'master.py'), raw, mst, '-20.0', '-3.5'], check=True)   # tek başına çalan yatak: sakin seviye
     out = os.path.join(ROOT, 'assets', 'soundtrack.m4a')
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', mst, '-c:a', 'aac', '-b:a', '192k', out], check=True)
     print('yazıldı:', out)
