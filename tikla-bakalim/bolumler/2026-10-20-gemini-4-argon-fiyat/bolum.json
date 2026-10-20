@@ -1,0 +1,513 @@
+{
+  "baslik": "Google'ın yeni yapay zekâsı Gemini 4 Argon'un fiyatı neden iki katına çıkıyor?",
+  "tarih": "2026-10-20",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "fiyat",
+    "iki kat",
+    "indirim",
+    "token",
+    "ücretli"
+  ],
+  "altyazi": {
+    "Gemini dört Argon": "Gemini 4 Argon",
+    "Gemini dört": "Gemini 4",
+    "Üç soruda": "3 soruda",
+    "on üç Ekim": "13 Ekim",
+    "otuz Kasım": "30 Kasım",
+    "otuz Kasım'da": "30 Kasım'da",
+    "otuz Kasım'a": "30 Kasım'a",
+    "bir milyon": "1 milyon",
+    "yüz milyon": "100 milyon",
+    "iki dolar": "2 dolar",
+    "on dolar": "10 dolar",
+    "on iki dolar": "12 dolar",
+    "yirmi dört dolar": "24 dolar",
+    "dört dolar": "4 dolar",
+    "yirmi dolar": "20 dolar",
+    "bin dolar": "1.000 dolar",
+    "sekiz yüz yetmiş lira": "870 lira",
+    "Üç şey": "3 şey",
+    "üç şey": "3 şey"
+  },
+  "kapak": {
+    "ikon": "🤖",
+    "ust": "YAPAY ZEKÂ FİYATI",
+    "buyuk": "2 KAT",
+    "alt": "1 ARALIK'TA?"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Google'ın yeni yapay zekâsı Gemini dört Argon'un fiyatı, aralığın ilk gününde iki katına çıkıyor.",
+      "p": {
+        "ikon": "🤖",
+        "etiket": "Argon API fiyatı · 1 Aralık'tan sonra",
+        "deger": 2,
+        "onek": "",
+        "sonek": " KAT",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Yazılımcıların ödediği token ücreti"
+      },
+      "etiket": "FİYAT ARTIYOR",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu ne demek? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NE DEMEK?\n*3 SORUDA*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Yapay zekâyı ve gündemi sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ SADE",
+          "DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Google, Gemini dört Argon modelini on üç Ekim'de ücretli kullanıcılara açtı.",
+      "p": {
+        "ikon": "🚀",
+        "satirlar": [
+          "13 EKİM:",
+          "GEMINI 4 ARGON",
+          "*ÜCRETLİ KULLANICIYA AÇILDI*"
+        ],
+        "boy": 72
+      },
+      "etiket": "AÇILIŞ",
+      "kaynak": "Webrazzi, VentureBeat (K1, K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Model ilk kez eylülün son günü duyurulmuştu. İlk iki hafta yalnızca güvenlik uzmanlarına açıktı.",
+      "p": {
+        "ikon": "🛡️",
+        "satirlar": [
+          "30 EYLÜL: DUYURU",
+          "İLK 2 HAFTA:",
+          "*SADECE GÜVENLİK UZMANLARI*"
+        ],
+        "boy": 72
+      },
+      "etiket": "ÖNCESİ",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yapay zekâ modeli, sorunu anlayıp cevap yazan bir yazılım. Argon da Google'ın en yenisi.",
+      "p": {
+        "ikon": "🧠",
+        "satirlar": [
+          "YAPAY ZEKÂ MODELİ =",
+          "SORUYU ANLAYIP",
+          "*CEVAP YAZAN YAZILIM*"
+        ],
+        "boy": 80
+      },
+      "etiket": "MODEL NE?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Gemini uygulamasında Argon yalnızca ücretli planlarda var: AI Pro ve AI Ultra. Ücretsiz hesapta yok.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "UYGULAMADA ARGON:",
+          "AI PRO VE AI ULTRA",
+          "ÜCRETSİZDE *YOK*"
+        ],
+        "boy": 80
+      },
+      "etiket": "KİMLER KULLANIR",
+      "kaynak": "K4, K5"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yazılımcılar ise token başına ödüyor. Token, yapay zekânın okuduğu ve yazdığı küçük metin parçası.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "TOKEN =",
+          "OKUNAN VE YAZILAN",
+          "*KÜÇÜK METİN PARÇASI*"
+        ],
+        "boy": 80
+      },
+      "etiket": "TOKEN NE?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Bir milyon token için şimdilik okumak iki dolar, yazmak on dolar.",
+      "p": {
+        "baslik": "Argon API · 1 milyon token (tanıtım fiyatı)",
+        "satirlar": [
+          {
+            "ikon": "📖",
+            "metin": "Girdi (okuma)",
+            "deger": "2 $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "✍️",
+            "metin": "Çıktı (yazma)",
+            "deger": "10 $",
+            "renk": "sari"
+          }
+        ],
+        "not": "30 Kasım'a kadar"
+      },
+      "etiket": "ŞİMDİKİ FİYAT",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Bu indirimli fiyat otuz Kasım'da bitiyor. Bunu Google'ın kendi belgeleri söylüyor.",
+      "p": {
+        "gun": "30",
+        "ay": "KASIM",
+        "gunadi": "PAZARTESİ",
+        "saat": "SON GÜN",
+        "not": "*Tanıtım fiyatı* bitiyor"
+      },
+      "etiket": "SON TARİH",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Bir milyon token okutup bir milyon token yazdırırsan, şimdi on iki dolar. Aralıktan sonra yirmi dört dolar.",
+      "p": {
+        "baslik": "🤖 1 milyon girdi + 1 milyon çıktı",
+        "sol": {
+          "etiket": "ŞİMDİ\n(30 Kasım'a kadar)",
+          "deger": 12,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "1 ARALIK'TAN\nSONRA",
+          "deger": 24,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " $",
+        "ondalik": 0,
+        "fark": "2 kat",
+        "not": "girdi ve çıktı fiyatlarının toplamı"
+      },
+      "etiket": "FİYAT FARKI",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki fiyat neden ikiye katlanıyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*İKİ KAT?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Çünkü bugünkü fiyat, zaten süreli bir tanıtım fiyatı. Asıl fiyat dört dolar ve yirmi dolar.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "BUGÜNKÜ FİYAT:",
+          "*TANITIM İNDİRİMİ*",
+          "ASIL: 4 $ / 20 $"
+        ],
+        "boy": 84
+      },
+      "etiket": "ASIL FİYAT",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE YARADIYSA",
+          "*BİR BEĞEN* BIRAK"
+        ],
+        "boy": 96
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Google bu indirimin nedenini açıklamadı. Biz de kesin konuşmayalım, sadece olasılıklara bakalım.",
+      "p": {
+        "ikon": "🔍",
+        "satirlar": [
+          "GOOGLE NEDENİ",
+          "AÇIKLAMADI",
+          "BU BÖLÜM *YORUM*"
+        ],
+        "boy": 84
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Olası zincir şöyle: indirimli fiyat, deneyen yazılımcılar, sonra yeni fiyat. Bu bir tahmin.",
+      "p": {
+        "baslik": "Olası senaryo (tahmin)",
+        "adimlar": [
+          {
+            "ikon": "🏷️",
+            "metin": "İndirimli fiyat"
+          },
+          {
+            "ikon": "🧑‍💻",
+            "metin": "Yazılımcılar *dener*"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Fiyat iki katı"
+          }
+        ]
+      },
+      "etiket": "OLASI ZİNCİR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Modelin gücü de tartışmalı. Bir bağımsız testte birinci, bazı testlerde rakipler önde.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "BİR TESTTE ZİRVE",
+          "BAZI TESTLERDE",
+          "*RAKİPLER ÖNDE*"
+        ],
+        "boy": 84
+      },
+      "etiket": "GÜÇ",
+      "kaynak": "K3, K6"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebini nasıl etkiler?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "SENİ NASIL\n*ETKİLER?*",
+        "boy": 110
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Gemini'yi sadece uygulamadan kullanıyorsan, bu zam seni doğrudan etkilemiyor. Abonelikte değişiklik duyurulmadı.",
+      "p": {
+        "ikon": "📱",
+        "satirlar": [
+          "SADECE UYGULAMA:",
+          "TOKEN ZAMMI *SENİ*",
+          "DOĞRUDAN ETKİLEMEZ"
+        ],
+        "boy": 80
+      },
+      "etiket": "UYGULAMA",
+      "kaynak": "K4, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Google Türkiye sayfasında AI Pro, ayda yaklaşık sekiz yüz yetmiş lira görünüyor. Fiyat değişebilir.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "AI PRO (TR SAYFASI):",
+          "*AYDA ~870 ₺*",
+          "DEĞİŞEBİLİR"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONELİK",
+      "kaynak": "K4, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ücretsiz hesapta ise Argon yok. Yani bu modeli bedava deneyemezsin.",
+      "p": {
+        "ikon": "🚫",
+        "satirlar": [
+          "ÜCRETSİZ HESAP:",
+          "ARGON *YOK*"
+        ],
+        "boy": 100
+      },
+      "etiket": "ÜCRETSİZ",
+      "kaynak": "K3, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Örneğin ayda yüz milyon token yazdıran bir uygulama, zamdan sonra ayda bin dolar fazla ödeyebilir.",
+      "p": {
+        "baslik": "Örnek: ayda 100 milyon çıktı tokenı (milyon başına zam: 10 $)",
+        "ikon": "🧮",
+        "ogeler": [
+          "100",
+          "×",
+          "+10 $",
+          "=",
+          "+1.000 $/ay"
+        ]
+      },
+      "etiket": "ÖRNEK HESAP",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Böyle uygulamalar bu maliyeti sana yansıtabilir. Kesin değil, ama ihtimal var.",
+      "p": {
+        "ikon": "🔁",
+        "satirlar": [
+          "MALİYET",
+          "KULLANICIYA",
+          "*YANSIYABİLİR*"
+        ],
+        "boy": 90
+      },
+      "etiket": "OLASI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Takip edeceğin üç şey: otuz Kasım tarihi, abonelik fiyatı ve rakip modellerin fiyatları.",
+      "p": {
+        "baslik": "Takip listesi",
+        "satirlar": [
+          {
+            "ikon": "⏳",
+            "metin": "30 Kasım",
+            "deger": "son indirim günü",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Abonelik fiyatı",
+            "deger": "değişti mi?",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "⚖️",
+            "metin": "Rakip modeller",
+            "deger": "fiyat karşılaştır",
+            "renk": "beyaz"
+          }
+        ]
+      },
+      "etiket": "TAKİP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: Argon yeni ve güçlü ama ücretli. Tanıtım fiyatı otuz Kasım'da bitiyor.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "ARGON YENİ, ÜCRETLİ",
+          "İNDİRİM *30 KASIM'DA*",
+          "BİTİYOR"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Fiyatlar ve koşullar değişebilir. Güncel durum için Google'ın resmî sayfasına bak.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "FİYATLAR",
+          "*DEĞİŞEBİLİR*",
+          "GOOGLE'IN SAYFASINA BAK"
+        ],
+        "boy": 84
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SEN NE DÜŞÜNÜYORSUN?",
+          "KONUYU *YORUMA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Gemini 4 Argon 13 Ekim'de ücretli kullanıcılara açıldı (Webrazzi, 14 Ekim 2026) — https://webrazzi.com/2026/10/14/google-yeni-yapay-zeka-modeli-gemini-4-argonu-kullanima-sundu/ ; https://shiftdelete.net/gemini-4-argon-ozellikleri-ve-fiyatlandirmasi",
+    "K2": "Tanıtım API fiyatı 1M token başına 2 $ girdi / 10 $ çıktı, 30 Kasım 2026'ya kadar; 1 Aralık'tan itibaren 4 $ / 20 $ — https://venturebeat.com/technology/google-makes-gemini-4-argon-broadly-available-with-limited-time-low-api-pricing-of-2-10-per-1m-token ; https://www.technology.org/2026/10/14/gemini-4-argon-generally-available-pricing-december/",
+    "K3": "Google resmî API belgesi ve duyuru blogu: tanıtım fiyatı ve Aralık fiyatı; ilk duyuru 30 Eylül (Fairwind, güvenlik uzmanları), genel açılış 13 Ekim; ücretsiz katman yok — https://ai.google.dev/gemini-api/docs/latest-model ; https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+    "K4": "Gemini uygulamasında Argon yalnızca AI Pro / AI Ultra; Türkiye AI Pro fiyatı ₺869,99/ay (sayfada görünen, değişebilir) — https://www.milligazete.com.tr/gemini-4-argon-fiyati-kac-tl-google-ai-pro-ve-ultra-abonelikleri ; https://gemini.google/tr/subscriptions/?hl=tr",
+    "K5": "Argon ücretsiz hesaplarda yok — https://www.tgrthaber.com/teknoloji/google-gemini-4-argon-ucretsiz-mi-yeni-yapay-zeka-modelinin-ozellikleri-ve-fiyati-3365242 ; https://webmasto.com/googlein-yeni-modeli-gemini-4-argon-ai-pro-ve-ai-ultra-abonelerine-acildi",
+    "K6": "Vals.ai endeksinde 1., Terminal-bench 4.0'da Claude Opus 5.5, bazı testlerde GPT-6 Astra önde — https://www.vals.ai/models/google_gemini-4-argon ; https://www.datacamp.com/blog/gemini-4-argon"
+  }
+}

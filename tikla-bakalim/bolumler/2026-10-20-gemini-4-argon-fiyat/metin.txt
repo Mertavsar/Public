@@ -1,0 +1,55 @@
+Google'ın yeni yapay zekâsı Gemini dört Argon'un fiyatı, aralığın ilk gününde iki katına çıkıyor.
+
+Peki bu ne demek? Üç soruda anlatayım.
+
+Yapay zekâyı ve gündemi sade dille anlatıyoruz. Kaçırmamak için abone ol.
+
+Önce ne oldu? Google, Gemini dört Argon modelini on üç Ekim'de ücretli kullanıcılara açtı.
+
+Model ilk kez eylülün son günü duyurulmuştu. İlk iki hafta yalnızca güvenlik uzmanlarına açıktı.
+
+Yapay zekâ modeli, sorunu anlayıp cevap yazan bir yazılım. Argon da Google'ın en yenisi.
+
+Gemini uygulamasında Argon yalnızca ücretli planlarda var: AI Pro ve AI Ultra. Ücretsiz hesapta yok.
+
+Yazılımcılar ise token başına ödüyor. Token, yapay zekânın okuduğu ve yazdığı küçük metin parçası.
+
+Bir milyon token için şimdilik okumak iki dolar, yazmak on dolar.
+
+Bu indirimli fiyat otuz Kasım'da bitiyor. Bunu Google'ın kendi belgeleri söylüyor.
+
+Bir milyon token okutup bir milyon token yazdırırsan, şimdi on iki dolar. Aralıktan sonra yirmi dört dolar.
+
+Peki fiyat neden ikiye katlanıyor?
+
+Çünkü bugünkü fiyat, zaten süreli bir tanıtım fiyatı. Asıl fiyat dört dolar ve yirmi dolar.
+
+Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.
+
+Google bu indirimin nedenini açıklamadı. Biz de kesin konuşmayalım, sadece olasılıklara bakalım.
+
+Olası zincir şöyle: indirimli fiyat, deneyen yazılımcılar, sonra yeni fiyat. Bu bir tahmin.
+
+Modelin gücü de tartışmalı. Bir bağımsız testte birinci, bazı testlerde rakipler önde.
+
+Peki bu senin cebini nasıl etkiler?
+
+Gemini'yi sadece uygulamadan kullanıyorsan, bu zam seni doğrudan etkilemiyor. Abonelikte değişiklik duyurulmadı.
+
+Google Türkiye sayfasında AI Pro, ayda yaklaşık sekiz yüz yetmiş lira görünüyor. Fiyat değişebilir.
+
+Ücretsiz hesapta ise Argon yok. Yani bu modeli bedava deneyemezsin.
+
+Örneğin ayda yüz milyon token yazdıran bir uygulama, zamdan sonra ayda bin dolar fazla ödeyebilir.
+
+Böyle uygulamalar bu maliyeti sana yansıtabilir. Kesin değil, ama ihtimal var.
+
+Takip edeceğin üç şey: otuz Kasım tarihi, abonelik fiyatı ve rakip modellerin fiyatları.
+
+Kısacası: Argon yeni ve güçlü ama ücretli. Tanıtım fiyatı otuz Kasım'da bitiyor.
+
+Fiyatlar ve koşullar değişebilir. Güncel durum için Google'ın resmî sayfasına bak.
+
+Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sonraki videoda biz anlatalım.
+
+Abone olmayı unutma. Merak ettiysen, tıkla bakalım.
