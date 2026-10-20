@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hürmüz Boğazı</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --bg: #0b0b0d; --ink: #f4f1ea; --mute: #8d8a84; --red: #e5322b; --red2: #ff6b64;
+    --yellow: #f4c430; --sea: #0c1622;
+    --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  body { font-family: var(--sans); color: var(--ink); }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--bg); transform-origin: 0 0; overflow: hidden; }
+  svg.layer { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  #fade { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, var(--bg) 0, var(--bg) 470px, rgba(11,11,13,0) 600px, rgba(11,11,13,0) 1060px, var(--bg) 1180px); }
+  .sc { position: absolute; inset: 0; opacity: 0; }
+  .a { opacity: 0; }
+  .tag { position: absolute; left: 0; right: 0; top: 246px; text-align: center; font: 600 24px var(--sans); letter-spacing: .3em; color: var(--mute); }
+  .tag em { font-style: normal; color: var(--red); }
+  .ttl { position: absolute; left: 90px; right: 90px; top: 292px; text-align: center; font: 600 80px/1.04 var(--serif); }
+  .ttl i { font-style: italic; font-weight: 500; color: var(--red); }
+  .txt { position: absolute; left: 110px; right: 130px; top: 1200px; text-align: center; font: 500 37px/1.34 var(--sans); color: #e7e2d8; }
+  .txt b { color: #fff; font-weight: 700; } .txt .y { color: var(--yellow); } .txt .r { color: var(--red2); }
+  .src { position: absolute; left: 110px; right: 130px; top: 1400px; text-align: center; font: 400 21px var(--sans); color: #66635e; }
+  .num { font: 800 150px/1 var(--sans); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+
+  .tl { position: absolute; left: 150px; right: 130px; top: 540px; }
+  .tl .row { position: relative; padding-left: 70px; margin-bottom: 44px; }
+  .tl .dot { position: absolute; left: 0; top: 8px; width: 32px; height: 32px; border-radius: 50%; border: 4px solid var(--red); background: var(--bg); }
+  .tl .d { font: 800 44px var(--sans); }
+  .tl .x { font: 500 32px/1.3 var(--sans); color: #b8b3a9; margin-top: 2px; }
+  .tl .line { position: absolute; left: 15px; top: 30px; width: 2px; background: #3a3a40; transform-origin: 0 0; }
+
+  .bars { position: absolute; left: 110px; right: 130px; top: 1190px; }
+  .bar { margin-bottom: 26px; }
+  .bar .k { display: flex; justify-content: space-between; font: 600 30px var(--sans); color: #d9d4ca; margin-bottom: 10px; }
+  .bar .k b { font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; }
+  .bar .tr { height: 30px; background: #1d1d22; border-radius: 6px; overflow: hidden; }
+  .bar .tr i { display: block; height: 100%; transform-origin: 0 0; transform: scaleX(0); border-radius: 6px; }
+
+  .chips { position: absolute; left: 100px; right: 120px; top: 1220px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .chip { font: 700 32px var(--sans); padding: 14px 24px; border-radius: 14px; background: #17171c; border: 2px solid #2c2c33; }
+  .chip span { color: var(--mute); font-weight: 600; margin-right: 10px; }
+
+  .pumps { position: absolute; left: 110px; right: 130px; top: 560px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .pump { background: linear-gradient(180deg, #1b1b20, #121216); border: 2px solid #2c2c33; border-radius: 26px; padding: 30px 26px 34px; text-align: center; }
+  .pump .k { font: 800 32px var(--sans); letter-spacing: .18em; }
+  .pump .lcd { margin-top: 22px; background: #0a120c; border: 2px solid #1d2a20; border-radius: 14px; padding: 22px 6px; font: 800 82px/1 var(--sans); color: #7dff9a; letter-spacing: -.02em; font-variant-numeric: tabular-nums; text-shadow: 0 0 18px rgba(125,255,154,.35); }
+  .pump .u { font: 600 26px var(--sans); color: var(--mute); margin-top: 14px; }
+  .pump .d { font: 700 26px var(--sans); color: #7dff9a; margin-top: 8px; }
+  .nozzle { width: 60px; height: 160px; margin: 26px auto 0; border-radius: 12px; border: 3px solid #3a3a42; position: relative; }
+  .nozzle::after { content: ''; position: absolute; left: 18px; bottom: -40px; width: 18px; height: 40px; border-left: 3px solid #3a3a42; border-bottom: 3px solid #3a3a42; border-bottom-left-radius: 16px; }
+
+  .cards { position: absolute; left: 110px; right: 130px; top: 560px; }
+  .card { display: grid; grid-template-columns: 70px 1fr; gap: 22px; align-items: center; padding: 22px 26px; border-radius: 20px; background: #141418; border: 2px solid #2a2a30; margin-bottom: 20px; font: 700 36px/1.2 var(--sans); }
+  .card b { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; font: 800 34px var(--sans); background: #26262c; color: var(--yellow); }
+  .opt { position: absolute; left: 140px; right: 160px; display: flex; align-items: center; gap: 26px; padding: 24px 32px; border-radius: 20px; border: 3px solid; font: 700 48px var(--sans); }
+  .opt b { width: 68px; height: 68px; border-radius: 14px; display: grid; place-items: center; font: 800 38px var(--sans); color: var(--bg); }
+
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 14px; align-items: center; background: linear-gradient(transparent, rgba(0,0,0,.85)); opacity: 0; transition: opacity .25s; z-index: 5; }
+  body:hover #ui { opacity: 1; }
+  #ui button { background: none; border: 0; color: #fff; font: 600 15px var(--sans); cursor: pointer; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+  #ui input { flex: 1; accent-color: var(--red); }
+  #ui span { font: 500 13px var(--sans); color: #bbb; min-width: 84px; text-align: right; font-variant-numeric: tabular-nums; }
+  #start { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 6; cursor: pointer; border: 0; }
+  #start b { font: 600 18px var(--sans); color: #fff; background: var(--red); padding: 16px 28px; border-radius: 999px; }
+  body.capture #ui, body.capture #start { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg class="layer" viewBox="0 0 1080 1920">
+    <defs>
+      <radialGradient id="gRed"><stop offset="0" stop-color="#e5322b" stop-opacity=".45"/><stop offset="1" stop-color="#e5322b" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g id="mapG">
+      <rect x="0" y="380" width="1080" height="900" fill="#0a1a2c"/>
+      <g id="cam">
+        <path id="land" fill="#26262c" stroke="#5a5a66" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+        <path id="borders" fill="none" stroke="#3c3c46" stroke-width="1" vector-effect="non-scaling-stroke"/>
+        <path id="lane" fill="none" stroke="#5b7a99" stroke-width="2" stroke-dasharray="6 8" vector-effect="non-scaling-stroke"/>
+        <path id="pipeSA" fill="none" stroke="#f4c430" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <path id="pipeUAE" fill="none" stroke="#f4c430" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+      </g>
+      <g id="ships"></g>
+      <g id="mk"></g>
+      <g id="lbls"></g>
+    </g>
+  </svg>
+  <div id="fade"></div>
+
+  <!-- 0 · HOOK -->
+  <div class="sc" data-a="0" data-b="5.5">
+    <div class="tag a" data-t="0">HÜRMÜZ BOĞAZI · 20 EKİM 2026</div>
+    <div class="ttl a" data-t="0">Dünyanın petrol<br>musluğu <i>kapandı.</i></div>
+    <div class="txt a" data-t="1.2">Benzin neden bu kadar pahalı?<br>Cevap bu <b>dar su yolunda</b>.</div>
+  </div>
+
+  <!-- 1 · NORMALDE -->
+  <div class="sc" data-a="5.5" data-b="13">
+    <div class="tag a" data-t="5.6"><em>SAVAŞTAN ÖNCE</em> · HER GÜN</div>
+    <div class="ttl a" data-t="5.6"><i>20 milyon</i> varil<br>petrol buradan geçerdi</div>
+    <div class="txt a" data-t="8.2">Denizden taşınan petrolün <b class="y">dörtte biri</b>,<br>sıvılaştırılmış gazın <b class="y">beşte biri</b>.</div>
+    <div class="src a" data-t="9.4">Uluslararası Enerji Ajansı (IEA)</div>
+  </div>
+
+  <!-- 2 · BUGÜN -->
+  <div class="sc" data-a="13" data-b="21">
+    <div class="tag a" data-t="13.1">GÜNLÜK GEMİ GEÇİŞİ</div>
+    <div class="ttl a" data-t="13.1">Günde 85 gemi geçerdi.<br><i>18 Ekim'de: 4</i></div>
+    <div class="a" data-t="13.6" style="position:absolute;left:0;right:0;top:1190px;text-align:center">
+      <div class="num" data-count="85" data-to="4" data-ct="14.4" data-cd="4.2">85</div>
+      <div style="font:500 28px var(--sans);color:var(--mute);margin-top:6px">gemi / gün</div>
+    </div>
+    <div class="src a" data-t="17">IMF PortWatch · boğaz Mart başından beri fiilen kapalı</div>
+  </div>
+
+  <!-- 3 · NE OLDU -->
+  <div class="sc" data-a="21" data-b="30">
+    <div class="tag a" data-t="21.1">NE OLDU?</div>
+    <div class="ttl a" data-t="21.1">Savaş, abluka,<br><i>saldırılar</i></div>
+    <div class="tl">
+      <div class="line" id="tlLine"></div>
+      <div class="row a" data-t="21.9"><div class="dot"></div><div class="d">28 Şubat</div><div class="x">ABD ve İsrail İran'ı vurdu</div></div>
+      <div class="row a" data-t="23.5"><div class="dot"></div><div class="d">Mart</div><div class="x">İran boğazı kapattı</div></div>
+      <div class="row a" data-t="25.1"><div class="dot"></div><div class="d">Temmuz</div><div class="x">ABD, İran limanlarını abluka altına aldı</div></div>
+      <div class="row a" data-t="26.7"><div class="dot"></div><div class="d">Eylül sonu</div><div class="x">Bir haftada <b style="color:var(--red2)">10 tanker</b> vuruldu</div></div>
+    </div>
+    <div class="src a" data-t="27.4" style="top:1240px">Britannica, Al Jazeera (Kpler verisi)</div>
+  </div>
+
+  <!-- 4 · BORU HATLARI -->
+  <div class="sc" data-a="30" data-b="38">
+    <div class="tag a" data-t="30.1">ALTERNATİF VAR MI?</div>
+    <div class="ttl a" data-t="30.1">Boru hatları<br><i>yetmiyor</i></div>
+    <div class="bars a" data-t="32.6">
+      <div class="bar"><div class="k"><span>Normalde boğazdan</span><b>20</b></div><div class="tr"><i style="background:var(--red)" data-bar="1" data-bt="32.8"></i></div></div>
+      <div class="bar"><div class="k"><span>Boru hatlarıyla, en fazla</span><b>5,5</b></div><div class="tr"><i style="background:var(--yellow)" data-bar=".275" data-bt="33.6"></i></div></div>
+    </div>
+    <div class="src a" data-t="34.4" style="top:1404px">milyon varil / gün · Suudi Arabistan ve BAE hatları · IEA</div>
+  </div>
+
+  <!-- 5 · PETROL -->
+  <div class="sc" data-a="38" data-b="45">
+    <div class="tag a" data-t="38.1">SONUÇ</div>
+    <div class="ttl a" data-t="38.1">Bir varil petrol</div>
+    <div class="a" data-t="38.5" style="position:absolute;left:0;right:0;top:560px;text-align:center">
+      <div class="num" style="font-size:230px;color:var(--red)"><span data-count="110" data-ct="38.7" data-cd="1.6">0</span>$</div>
+      <div style="font:500 30px var(--sans);color:var(--mute);margin-top:12px">Brent · 17 Ekim kapanışı 109,86 $</div>
+    </div>
+    <div class="chips a" data-t="41.2" style="top:1000px">
+      <div class="chip"><span>FRANSA</span>motorin 2,37 € / litre</div>
+      <div class="chip"><span>ABD</span>benzin 4,29 $ / galon</div>
+    </div>
+    <div class="txt a" data-t="42.2" style="top:1220px">Pahalılık dünyayı dolaşıyor.<br>Fransa'daki eylemlerin bir sebebi de bu.</div>
+  </div>
+
+  <!-- 6 · TÜRKİYE -->
+  <div class="sc" data-a="45" data-b="52">
+    <div class="tag a" data-t="45.1"><em>TÜRKİYE</em> · BUGÜN</div>
+    <div class="ttl a" data-t="45.1">Pompada <i>tablo</i></div>
+    <div class="pumps">
+      <div class="pump a" data-t="45.6"><div class="k">BENZİN</div><div class="lcd"><span data-count="79.60" data-dec="2" data-ct="45.9" data-cd="1.8">0,00</span></div><div class="u">TL / litre</div><div class="d a" data-t="48.2">bugün −4,30 TL</div><div class="nozzle"></div></div>
+      <div class="pump a" data-t="46.1"><div class="k" style="color:var(--yellow)">MOTORİN</div><div class="lcd" style="color:#ffd76a;text-shadow:0 0 18px rgba(255,215,106,.35)"><span data-count="96.70" data-dec="2" data-ct="46.4" data-cd="1.8">0,00</span></div><div class="u">TL / litre</div><div class="d a" data-t="48.6" style="color:#ffd76a">değişmedi</div><div class="nozzle"></div></div>
+    </div>
+    <div class="txt a" data-t="48.9">Motorin, benzinden <b class="y">17 lira</b> pahalı.</div>
+    <div class="src a" data-t="49.4">İstanbul Avrupa Yakası · 20 Ekim 2026 · BirGün</div>
+  </div>
+
+  <!-- 7 · İRAN'IN ŞARTI -->
+  <div class="sc" data-a="52" data-b="56.6">
+    <div class="tag a" data-t="52.1">İRAN'IN ŞARTI</div>
+    <div class="ttl a" data-t="52.1">"Birkaç gün içinde<br><i>açarız, eğer…"</i></div>
+    <div class="cards">
+      <div class="card a" data-t="52.6"><b>1</b>ABD ablukası kalkarsa</div>
+      <div class="card a" data-t="53.3"><b>2</b>Petrol yaptırımları biterse</div>
+      <div class="card a" data-t="54.0"><b>3</b>Bütün cephelerde savaş durursa</div>
+    </div>
+    <div class="src a" data-t="54.4" style="top:1000px">İran Dışişleri Bakanı · Reuters, CBS · anlaşma yok</div>
+  </div>
+
+  <!-- 8 · SORU -->
+  <div class="sc" data-a="56.6" data-b="60.01">
+    <div class="ttl a" data-t="56.65" style="top:290px">Sence boğaz<br><i>bu yıl açılır mı?</i></div>
+    <div class="opt a" data-t="57.1" style="top:1110px;border-color:#5a5a62;background:rgba(255,255,255,.04)"><b style="background:var(--ink)">A</b>Açılır</div>
+    <div class="opt a" data-t="57.5" style="top:1240px;border-color:var(--red);background:rgba(229,50,43,.10)"><b style="background:var(--red2)">B</b>Kapalı kalır</div>
+    <div class="src a" data-t="58" style="top:1390px;color:#9a968f;font-size:24px">Takip et · yeni bölüm gelince ilk sen öğren</div>
+  </div>
+</div>
+
+<div id="ui">
+  <button id="pp">▶︎ Oynat</button>
+  <input id="seek" type="range" min="0" max="60" step="0.01" value="0">
+  <span id="clock">0:00 / 1:00</span>
+  <button id="mute">Ses: açık</button>
+</div>
+<button id="start"><b>▶︎ Videoyu oynat</b></button>
+<audio id="music" src="assets/mix.m4a" preload="auto"></audio>
+
+<script src="assets/gulf.js"></script>
+<script>
+(async () => {
+  const DUR = 60;
+  window.__DUR = DUR;
+  const G = window.GULF;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const E = {
+    out: p => 1 - Math.pow(1 - p, 3),
+    inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    back: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  };
+  const track = (keys, t, ease = E.inOut) => {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      const [t1, v1] = keys[i], [t0, v0] = keys[i - 1];
+      if (t <= t1) { const p = ease(prog(t, t0, t1)); return Array.isArray(v0) ? v0.map((x, j) => lerp(x, v1[j], p)) : lerp(v0, v1, p); }
+    }
+    return keys[keys.length - 1][1];
+  };
+  const fade = (t, a, b, fi = .5, fo = .45) => Math.min(prog(t, a, a + fi), 1 - prog(t, b - fo, b));
+  let sr = 3; const rnd = () => (sr = (sr * 16807) % 2147483647) / 2147483647;
+
+  // ---------- Harita ----------
+  $('#land').setAttribute('d', G.land);
+  $('#borders').setAttribute('d', G.borders);
+  const curve = pts => { let d = `M${pts[0]}`; for (let i = 0; i < pts.length - 1; i++) { const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2; d += ` C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`; } return d; };
+  const lane = $('#lane'); lane.setAttribute('d', curve(G.lane));
+  const laneLen = lane.getTotalLength();
+  const pSA = $('#pipeSA'), pUAE = $('#pipeUAE');
+  pSA.setAttribute('d', curve(G.pipeSA)); pUAE.setAttribute('d', curve(G.pipeUAE));
+  const lSA = pSA.getTotalLength(), lUAE = pUAE.getTotalLength();
+  pSA.style.strokeDasharray = lSA; pUAE.style.strokeDasharray = lUAE;
+  const H = G.hormuz;
+  // boğaz noktasının hat üzerindeki yeri
+  let sH = 0, best = 1e9;
+  for (let s = 0; s <= 1; s += .002) { const p = lane.getPointAtLength(s * laneLen), d = Math.hypot(p.x - H[0], p.y - H[1]); if (d < best) { best = d; sH = s; } }
+
+  const cam = (s, p, q) => [s, q[0] - s * p[0], q[1] - s * p[1]];
+  const VIS = [540, 820];
+  const WIDE = cam(1.0, [540, 830], VIS), ZOOM = cam(4.2, H, VIS), MID = cam(2.2, H, [560, 820]);
+  const CAMK = [
+    [0, cam(1.75, H, [620, 840])], [5.4, cam(1.95, H, [630, 840])],
+    [5.5, cam(2.4, H, VIS)], [8.5, ZOOM], [13, ZOOM], [21, cam(3.2, H, VIS)],
+    [21.01, cam(1.6, H, [640, 820])], [30, cam(1.6, H, [640, 820])],
+    [30.01, cam(1.35, H, [800, 790])], [32.4, WIDE], [38, WIDE],
+    [38.01, cam(1.75, H, [620, 840])], [60, cam(1.75, H, [620, 840])],
+  ];
+  const MAPOP = [[0, 1], [21, 1], [21.4, .16], [29.6, .16], [30, 1], [38, 1], [38.4, .16], [56.6, .16], [57, .35], [60, .35]];
+  let K = [1, 0, 0];
+  const scr = p => [K[1] + K[0] * p[0], K[2] + K[0] * p[1]];
+
+  // Gemiler: hat üzerinde akan tankerler
+  const shipsG = $('#ships');
+  const SHIPS = Array.from({ length: 40 }, (_, i) => ({ ph: i / 40 + rnd() * .012, off: (rnd() - .5) * 10, el: mk('path', { d: 'M-11,-4 L8,-4 L12,0 L8,4 L-11,4 Z', fill: '#cfd6de' }, shipsG), rank: rnd() }));
+  SHIPS.sort((a, b) => a.rank - b.rank);
+  // Bekleyen tankerler (kapalı boğazın iki yanı)
+  const QUEUE = Array.from({ length: 22 }, (_, i) => { const west = i < 13; const s = west ? sH - .04 - rnd() * .16 : sH + .05 + rnd() * .12; return { s, off: (rnd() - .5) * 26, el: mk('path', { d: 'M-11,-4 L8,-4 L12,0 L8,4 L-11,4 Z', fill: '#9aa3ad' }, shipsG), ph: rnd() * 6 }; });
+  const at = (s, off) => { const L = clamp(s, 0, 1) * laneLen, p = lane.getPointAtLength(L), q = lane.getPointAtLength(Math.min(laneLen, L + 2)); const a = Math.atan2(q.y - p.y, q.x - p.x); return [p.x - Math.sin(a) * off, p.y + Math.cos(a) * off, a * 180 / Math.PI]; };
+
+  // Boğaz işaretleri
+  const mkG = $('#mk');
+  const glow = mk('circle', { fill: 'url(#gRed)', r: 120 }, mkG);
+  const ring = mk('circle', { fill: 'none', stroke: '#e5322b', 'stroke-width': 3 }, mkG);
+  const xMark = mk('path', { fill: 'none', stroke: '#ff4d45', 'stroke-width': 9, 'stroke-linecap': 'round' }, mkG);
+  const nar = mk('g', {}, mkG);
+  const narLine = mk('line', { stroke: '#f4c430', 'stroke-width': 4 }, nar);
+  const narTxt = mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 34, fill: '#f4c430', stroke: '#0b0b0d', 'stroke-width': 7, 'paint-order': 'stroke' }, nar);
+  narTxt.textContent = 'en dar yeri ≈ 33 km';
+  const lblG = $('#lbls');
+  // yakın plan etiketleri (boğazın iki kıyısı): derece başına ~34 px, Mercator'da enlem ~38 px
+  const LL = (lon, lat) => [H[0] + (lon - 56.45) * 34.0, H[1] - (lat - 26.55) * 38.0];
+  const ZL = [['İRAN', LL(56.75, 27.15)], ['UMMAN', LL(56.05, 26.05)], ['BAE', LL(55.6, 25.45)]].map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 700, 'font-size': 30, fill: '#9a99a2', 'letter-spacing': '4', 'text-anchor': 'middle' }, document.querySelector('#lbls')), { textContent: k }) }));
+  const LB = Object.entries(G.labels).map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 600, 'font-size': 24, fill: '#77767c', 'letter-spacing': '3', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
+  const SL = Object.entries(G.seaLabels).map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Cormorant Garamond', 'font-style': 'italic', 'font-weight': 500, 'font-size': 32, fill: '#5b7a99', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
+  const HL = Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 30, fill: '#ff6b64', stroke: '#0b0b0d', 'stroke-width': 7, 'paint-order': 'stroke', 'text-anchor': 'start' }, lblG), { textContent: 'HÜRMÜZ BOĞAZI' });
+  const PL = Object.entries(G.ports).map(([k, p]) => ({ p, dot: mk('circle', { r: 7, fill: '#f4c430' }, lblG), el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 700, 'font-size': 26, fill: '#f4c430', stroke: '#0b0b0d', 'stroke-width': 6, 'paint-order': 'stroke', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
+
+  // ---------- Genel öğeler ----------
+  const scs = [...document.querySelectorAll('.sc')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b }));
+  const ani = [...document.querySelectorAll('.a')].map(el => ({ el, t: +el.dataset.t }));
+  const cnt = [...document.querySelectorAll('[data-count]')].map(el => ({ el, v: +el.dataset.count, to: el.dataset.to !== undefined ? +el.dataset.to : null, t: +el.dataset.ct, d: +el.dataset.cd, dec: +(el.dataset.dec || 0) }));
+  const bars = [...document.querySelectorAll('[data-bar]')].map(el => ({ el, v: +el.dataset.bar, t: +el.dataset.bt }));
+  const fmt = (v, dec) => v.toLocaleString('tr-TR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  const tlLine = $('#tlLine');
+
+  function render(t) {
+    scs.forEach(s => { const o = s.a === 0 ? 1 - prog(t, s.b - .35, s.b) : fade(t, s.a, s.b, .35, .35); s.el.style.opacity = o; s.el.style.visibility = o > 0 ? 'visible' : 'hidden'; });
+    ani.forEach(a => { const p = prog(t, a.t, a.t + .6); a.el.style.opacity = a.t === 0 ? 1 : E.out(p); a.el.style.transform = a.t === 0 ? '' : `translateY(${(1 - E.out(p)) * 24}px)`; });
+    cnt.forEach(c => { const p = E.out(prog(t, c.t, c.t + c.d)); const v = c.to === null ? c.v * p : lerp(c.v, c.to, p); c.el.textContent = fmt(c.dec ? v : Math.round(v), c.dec); });
+    bars.forEach(b => b.el.style.transform = `scaleX(${b.v * E.out(prog(t, b.t, b.t + 1.1))})`);
+    tlLine.style.height = `${E.inOut(prog(t, 21.9, 27.2)) * 420}px`;
+
+    K = track(CAMK, t);
+    $('#cam').setAttribute('transform', `translate(${K[1]},${K[2]}) scale(${K[0]})`);
+    $('#mapG').setAttribute('opacity', track(MAPOP, t, x => x));
+
+    // gemi akışı: sahne 1'de dolu, sahne 2'de 40 -> 2 (85 -> 4 oranı)
+    const flowOn = t >= 5.5 && t < 21;
+    const keepN = t < 14.4 ? 40 : Math.round(lerp(40, 2, E.out(prog(t, 14.4, 18.6))));
+    SHIPS.forEach((sh, i) => {
+      if (!flowOn) { sh.el.setAttribute('opacity', 0); return; }
+      const s = (sh.ph + t * .028) % 1;
+      const [x, y, a] = at(s, sh.off);
+      const [X, Y] = scr([x, y]);
+      sh.el.setAttribute('transform', `translate(${X},${Y}) rotate(${a}) scale(${Math.min(1.6, .55 + K[0] * .22)})`);
+      const alive = i < keepN ? 1 : 0;
+      const fin = prog(t, 5.6, 6.4);
+      sh.el.setAttribute('opacity', fin * (alive ? 1 : 0));
+      sh.el.setAttribute('fill', i < 2 && t > 16 ? '#ffffff' : '#cfd6de');
+    });
+    const qOn = t < 5.5 || t >= 56.6;
+    QUEUE.forEach(q => {
+      if (!qOn) { q.el.setAttribute('opacity', 0); return; }
+      const [x, y, a] = at(q.s, q.off);
+      const [X, Y] = scr([x, y]);
+      q.el.setAttribute('transform', `translate(${X},${Y + Math.sin(t * 1.5 + q.ph) * 1.2}) rotate(${a + 25 * Math.sin(q.ph)}) scale(${.55 + K[0] * .22})`);
+      q.el.setAttribute('opacity', t < 5.5 ? E.out(prog(t, .2 + q.ph * .05, .7 + q.ph * .05)) : prog(t, 56.8, 57.4) * .7);
+    });
+    lane.style.opacity = t >= 30 && t < 38 ? .25 : .7;
+
+    // boğaz: kapalı X + nabız (açılış, kapanış), dar geçit ölçüsü (sahne 1)
+    const [hx, hy] = scr(H);
+    const closed = t < 5.5 || t >= 56.6 ? 1 : (t >= 13 && t < 21 ? prog(t, 18.6, 19.2) : 0);
+    glow.setAttribute('cx', hx); glow.setAttribute('cy', hy); glow.setAttribute('opacity', closed * (.7 + .3 * Math.sin(t * 4)));
+    const ph = (t % 1.6) / 1.6;
+    ring.setAttribute('cx', hx); ring.setAttribute('cy', hy); ring.setAttribute('r', 18 + 60 * E.out(ph)); ring.setAttribute('opacity', closed * (1 - ph));
+    const xs = 26 * E.back(prog(t, t < 5.5 ? .5 : t >= 56.6 ? 56.9 : 18.8, (t < 5.5 ? .5 : t >= 56.6 ? 56.9 : 18.8) + .35));
+    xMark.setAttribute('d', `M${hx - xs},${hy - xs}L${hx + xs},${hy + xs}M${hx + xs},${hy - xs}L${hx - xs},${hy + xs}`);
+    xMark.setAttribute('opacity', closed);
+    const nOn = t >= 5.5 && t < 13 ? prog(t, 9.0, 9.5) * (1 - prog(t, 12.6, 13)) : 0;
+    nar.setAttribute('opacity', nOn);
+    const [ax, ay] = scr(G.narrow[0]), [bx, by] = scr(G.narrow[1]);
+    narLine.setAttribute('x1', ax); narLine.setAttribute('y1', ay); narLine.setAttribute('x2', bx); narLine.setAttribute('y2', by);
+    narTxt.setAttribute('x', Math.max(ax, bx) + 26); narTxt.setAttribute('y', (ay + by) / 2 + 12);
+
+    // boru hatları
+    const pp = t >= 30 && t < 38 ? 1 : 0;
+    pSA.style.strokeDashoffset = lSA * (1 - E.inOut(prog(t, 30.6, 32.4)));
+    pUAE.style.strokeDashoffset = lUAE * (1 - E.inOut(prog(t, 31.2, 32.4)));
+    pSA.style.opacity = pUAE.style.opacity = pp;
+
+    // etiketler
+    const lop = track(MAPOP, t, x => x) < .5 ? 0 : 1;
+    LB.forEach(l => { const [x, y] = scr(l.p); l.el.setAttribute('x', x); l.el.setAttribute('y', y); l.el.setAttribute('opacity', lop * (K[0] > 3 ? 0 : 1)); });
+    SL.forEach(l => { const [x, y] = scr(l.p); l.el.setAttribute('x', x); l.el.setAttribute('y', y); l.el.setAttribute('opacity', lop * (K[0] > 3 || K[0] > 1.5 && (t < 5.5) ? 0 : .9)); });
+    ZL.forEach(l => { const [x, y] = scr(l.p); l.el.setAttribute('x', x); l.el.setAttribute('y', y); l.el.setAttribute('opacity', K[0] > 3 && lop ? prog(K[0], 3, 3.6) : 0); });
+    HL.setAttribute('x', hx + 40); HL.setAttribute('y', hy - 34); HL.setAttribute('opacity', (t < 5.5 ? prog(t, .8, 1.3) : t >= 5.5 && t < 13 ? 1 - prog(t, 8.6, 9.0) : 0));
+    PL.forEach(l => { const [x, y] = scr(l.p); l.dot.setAttribute('cx', x); l.dot.setAttribute('cy', y); l.el.setAttribute('x', x); l.el.setAttribute('y', y - 18); const o = pp * prog(t, 32.2, 32.6); l.dot.setAttribute('opacity', o); l.el.setAttribute('opacity', o); });
+  }
+
+  // ---------- Ölçek + oynatıcı ----------
+  const stage = $('#stage');
+  const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${s}) translate(-50%, -50%)`; };
+  addEventListener('resize', fit); fit();
+  const params = new URLSearchParams(location.search);
+  const capture = params.has('capture');
+  let t = +(params.get('t') || 0), playing = false, last = 0;
+  const music = $('#music'), seek = $('#seek'), clock = $('#clock'), pp = $('#pp');
+  const mm = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const sync = () => { seek.value = t; clock.textContent = `${mm(t)} / ${mm(DUR)}`; pp.textContent = playing ? '❚❚ Durdur' : '▶︎ Oynat'; };
+  const play = () => { if (t >= DUR - .05) t = 0; playing = true; last = performance.now(); try { music.currentTime = t; music.play().catch(() => {}); } catch (e) {} $('#start').style.display = 'none'; sync(); requestAnimationFrame(loop); };
+  const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
+  function loop(now) { if (!playing) return; t += (now - last) / 1000; last = now; if (t >= DUR) { t = DUR - .01; render(t); pause(); return; } render(t); sync(); requestAnimationFrame(loop); }
+  const jump = v => { t = clamp(v, 0, DUR - .01); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  $('#start').onclick = play;
+  pp.onclick = () => playing ? pause() : play();
+  seek.oninput = () => jump(+seek.value);
+  $('#mute').onclick = () => { music.muted = !music.muted; $('#mute').textContent = music.muted ? 'Ses: kapalı' : 'Ses: açık'; };
+  addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); } if (e.code === 'ArrowRight') jump(t + 3); if (e.code === 'ArrowLeft') jump(t - 3); });
+  stage.addEventListener('click', () => playing ? pause() : play());
+  if (capture) { document.body.classList.add('capture'); stage.style.transform = 'none'; stage.style.left = stage.style.top = '0'; }
+  window.__render = render;
+  await document.fonts.ready;
+  render(t); sync();
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
