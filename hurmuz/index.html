@@ -16,11 +16,21 @@
   body { font-family: var(--sans); color: var(--ink); }
   #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; background: var(--bg); transform-origin: 0 0; overflow: hidden; }
   svg.layer { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  /* Tam ekran harita; yazılar için üstte ve altta yumuşak koyu geçiş (bant değil) */
   #fade { position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, var(--bg) 0, var(--bg) 470px, rgba(11,11,13,0) 600px, rgba(11,11,13,0) 1060px, var(--bg) 1180px); }
+    background:
+      linear-gradient(180deg, rgba(6,22,40,.55) 0, rgba(6,22,40,.25) 260px, rgba(6,22,40,0) 420px),
+      linear-gradient(0deg, rgba(6,22,40,.55) 0, rgba(6,22,40,.2) 420px, rgba(6,22,40,0) 600px); }
+  /* yazı panelleri: renkli haritanın üstünde okunurluk */
+  .ttl { left: 70px; right: 70px; padding: 22px 24px 26px; border-radius: 30px; background: rgba(7,22,38,.8); box-shadow: 0 16px 50px rgba(0,0,0,.35); backdrop-filter: blur(2px); }
+  .tag span { display: inline-block; padding: 8px 18px; border-radius: 999px; background: rgba(7,22,38,.8); }
+  .txt { padding: 20px 26px; border-radius: 24px; background: rgba(7,22,38,.8); }
+  .src span { display: inline-block; padding: 6px 14px; border-radius: 10px; background: rgba(7,22,38,.72); color: #aab4bf; }
+  .bars, .tl { padding: 26px 30px 6px; border-radius: 26px; background: rgba(7,22,38,.82); }
+  .txt, .src, .ttl, .tag { text-shadow: 0 2px 4px rgba(0,0,0,.9), 0 0 24px rgba(0,0,0,.85); }
   .sc { position: absolute; inset: 0; opacity: 0; }
   .a { opacity: 0; }
-  .tag { position: absolute; left: 0; right: 0; top: 246px; text-align: center; font: 600 24px var(--sans); letter-spacing: .3em; color: var(--mute); }
+  .tag { position: absolute; left: 0; right: 0; top: 214px; text-align: center; font: 600 24px var(--sans); letter-spacing: .3em; color: var(--mute); }
   .tag em { font-style: normal; color: var(--red); }
   .ttl { position: absolute; left: 90px; right: 90px; top: 292px; text-align: center; font: 600 80px/1.04 var(--serif); }
   .ttl i { font-style: italic; font-weight: 500; color: var(--red); }
@@ -76,16 +86,18 @@
 <div id="stage">
   <svg class="layer" viewBox="0 0 1080 1920">
     <defs>
+      <radialGradient id="gSea" cx=".5" cy=".45" r=".75"><stop offset="0" stop-color="#2a9bcf"/><stop offset=".6" stop-color="#1c74a8"/><stop offset="1" stop-color="#134e7a"/></radialGradient>
+      <linearGradient id="gLand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2c084"/><stop offset="1" stop-color="#c99a58"/></linearGradient>
       <radialGradient id="gRed"><stop offset="0" stop-color="#e5322b" stop-opacity=".45"/><stop offset="1" stop-color="#e5322b" stop-opacity="0"/></radialGradient>
     </defs>
     <g id="mapG">
-      <rect x="0" y="380" width="1080" height="900" fill="#0a1a2c"/>
+      <rect x="0" y="0" width="1080" height="1920" fill="url(#gSea)"/>
       <g id="cam">
-        <path id="land" fill="#26262c" stroke="#5a5a66" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
-        <path id="borders" fill="none" stroke="#3c3c46" stroke-width="1" vector-effect="non-scaling-stroke"/>
-        <path id="lane" fill="none" stroke="#5b7a99" stroke-width="2" stroke-dasharray="6 8" vector-effect="non-scaling-stroke"/>
-        <path id="pipeSA" fill="none" stroke="#f4c430" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-        <path id="pipeUAE" fill="none" stroke="#f4c430" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <path id="land" fill="url(#gLand)" stroke="#7a5a2e" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+        <path id="borders" fill="none" stroke="#9c7a45" stroke-dasharray="4 4" stroke-width="1" vector-effect="non-scaling-stroke"/>
+        <path id="lane" fill="none" stroke="#e8f6ff" stroke-width="2" stroke-dasharray="6 8" vector-effect="non-scaling-stroke"/>
+        <path id="pipeSA" fill="none" stroke="#e5322b" stroke-width="7" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <path id="pipeUAE" fill="none" stroke="#e5322b" stroke-width="7" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
       </g>
       <g id="ships"></g>
       <g id="mk"></g>
@@ -96,33 +108,33 @@
 
   <!-- 0 · HOOK -->
   <div class="sc" data-a="0" data-b="5.5">
-    <div class="tag a" data-t="0">HÜRMÜZ BOĞAZI · 20 EKİM 2026</div>
+    <div class="tag a" data-t="0"><span>HÜRMÜZ BOĞAZI · 20 EKİM 2026</span></div>
     <div class="ttl a" data-t="0">Dünyanın petrol<br>musluğu <i>kapandı.</i></div>
     <div class="txt a" data-t="1.2">Benzin neden bu kadar pahalı?<br>Cevap bu <b>dar su yolunda</b>.</div>
   </div>
 
   <!-- 1 · NORMALDE -->
   <div class="sc" data-a="5.5" data-b="13">
-    <div class="tag a" data-t="5.6"><em>SAVAŞTAN ÖNCE</em> · HER GÜN</div>
+    <div class="tag a" data-t="5.6"><span><em>SAVAŞTAN ÖNCE</em> · HER GÜN</span></div>
     <div class="ttl a" data-t="5.6"><i>20 milyon</i> varil<br>petrol buradan geçerdi</div>
     <div class="txt a" data-t="8.2">Denizden taşınan petrolün <b class="y">dörtte biri</b>,<br>sıvılaştırılmış gazın <b class="y">beşte biri</b>.</div>
-    <div class="src a" data-t="9.4">Uluslararası Enerji Ajansı (IEA)</div>
+    <div class="src a" data-t="9.4"><span>Uluslararası Enerji Ajansı (IEA)</span></div>
   </div>
 
   <!-- 2 · BUGÜN -->
   <div class="sc" data-a="13" data-b="21">
-    <div class="tag a" data-t="13.1">GÜNLÜK GEMİ GEÇİŞİ</div>
+    <div class="tag a" data-t="13.1"><span>GÜNLÜK GEMİ GEÇİŞİ</span></div>
     <div class="ttl a" data-t="13.1">Günde 85 gemi geçerdi.<br><i>18 Ekim'de: 4</i></div>
-    <div class="a" data-t="13.6" style="position:absolute;left:0;right:0;top:1190px;text-align:center">
+    <div class="a" data-t="13.6" style="position:absolute;left:330px;right:330px;top:1170px;text-align:center;padding:22px 0 20px;border-radius:28px;background:rgba(7,22,38,.82)">
       <div class="num" data-count="85" data-to="4" data-ct="14.4" data-cd="4.2">85</div>
-      <div style="font:500 28px var(--sans);color:var(--mute);margin-top:6px">gemi / gün</div>
+      <div style="font:600 28px var(--sans);color:#c9d3dd;margin-top:6px">gemi / gün</div>
     </div>
-    <div class="src a" data-t="17">IMF PortWatch · boğaz Mart başından beri fiilen kapalı</div>
+    <div class="src a" data-t="17"><span>IMF PortWatch · boğaz Mart başından beri fiilen kapalı</span></div>
   </div>
 
   <!-- 3 · NE OLDU -->
   <div class="sc" data-a="21" data-b="30">
-    <div class="tag a" data-t="21.1">NE OLDU?</div>
+    <div class="tag a" data-t="21.1"><span>NE OLDU?</span></div>
     <div class="ttl a" data-t="21.1">Savaş, abluka,<br><i>saldırılar</i></div>
     <div class="tl">
       <div class="line" id="tlLine"></div>
@@ -131,27 +143,27 @@
       <div class="row a" data-t="25.1"><div class="dot"></div><div class="d">Temmuz</div><div class="x">ABD, İran limanlarını abluka altına aldı</div></div>
       <div class="row a" data-t="26.7"><div class="dot"></div><div class="d">Eylül sonu</div><div class="x">Bir haftada <b style="color:var(--red2)">10 tanker</b> vuruldu</div></div>
     </div>
-    <div class="src a" data-t="27.4" style="top:1240px">Britannica, Al Jazeera (Kpler verisi)</div>
+    <div class="src a" data-t="27.4" style="top:1240px"><span>Britannica, Al Jazeera (Kpler verisi)</span></div>
   </div>
 
   <!-- 4 · BORU HATLARI -->
   <div class="sc" data-a="30" data-b="38">
-    <div class="tag a" data-t="30.1">ALTERNATİF VAR MI?</div>
+    <div class="tag a" data-t="30.1"><span>ALTERNATİF VAR MI?</span></div>
     <div class="ttl a" data-t="30.1">Boru hatları<br><i>yetmiyor</i></div>
     <div class="bars a" data-t="32.6">
       <div class="bar"><div class="k"><span>Normalde boğazdan</span><b>20</b></div><div class="tr"><i style="background:var(--red)" data-bar="1" data-bt="32.8"></i></div></div>
       <div class="bar"><div class="k"><span>Boru hatlarıyla, en fazla</span><b>5,5</b></div><div class="tr"><i style="background:var(--yellow)" data-bar=".275" data-bt="33.6"></i></div></div>
     </div>
-    <div class="src a" data-t="34.4" style="top:1404px">milyon varil / gün · Suudi Arabistan ve BAE hatları · IEA</div>
+    <div class="src a" data-t="34.4" style="top:1404px"><span>milyon varil / gün · Suudi Arabistan ve BAE hatları · IEA</span></div>
   </div>
 
   <!-- 5 · PETROL -->
   <div class="sc" data-a="38" data-b="45">
-    <div class="tag a" data-t="38.1">SONUÇ</div>
+    <div class="tag a" data-t="38.1"><span>SONUÇ</span></div>
     <div class="ttl a" data-t="38.1">Bir varil petrol</div>
-    <div class="a" data-t="38.5" style="position:absolute;left:0;right:0;top:560px;text-align:center">
+    <div class="a" data-t="38.5" style="position:absolute;left:150px;right:150px;top:540px;text-align:center;padding:30px 0 30px;border-radius:30px;background:rgba(7,22,38,.82)">
       <div class="num" style="font-size:230px;color:var(--red)"><span data-count="110" data-ct="38.7" data-cd="1.6">0</span>$</div>
-      <div style="font:500 30px var(--sans);color:var(--mute);margin-top:12px">Brent · 17 Ekim kapanışı 109,86 $</div>
+      <div style="font:600 30px var(--sans);color:#c9d3dd;margin-top:12px">Brent · 17 Ekim kapanışı 109,86 $</div>
     </div>
     <div class="chips a" data-t="41.2" style="top:1000px">
       <div class="chip"><span>FRANSA</span>motorin 2,37 € / litre</div>
@@ -162,26 +174,26 @@
 
   <!-- 6 · TÜRKİYE -->
   <div class="sc" data-a="45" data-b="52">
-    <div class="tag a" data-t="45.1"><em>TÜRKİYE</em> · BUGÜN</div>
+    <div class="tag a" data-t="45.1"><span><em>TÜRKİYE</em> · BUGÜN</span></div>
     <div class="ttl a" data-t="45.1">Pompada <i>tablo</i></div>
     <div class="pumps">
       <div class="pump a" data-t="45.6"><div class="k">BENZİN</div><div class="lcd"><span data-count="79.60" data-dec="2" data-ct="45.9" data-cd="1.8">0,00</span></div><div class="u">TL / litre</div><div class="d a" data-t="48.2">bugün −4,30 TL</div><div class="nozzle"></div></div>
       <div class="pump a" data-t="46.1"><div class="k" style="color:var(--yellow)">MOTORİN</div><div class="lcd" style="color:#ffd76a;text-shadow:0 0 18px rgba(255,215,106,.35)"><span data-count="96.70" data-dec="2" data-ct="46.4" data-cd="1.8">0,00</span></div><div class="u">TL / litre</div><div class="d a" data-t="48.6" style="color:#ffd76a">değişmedi</div><div class="nozzle"></div></div>
     </div>
     <div class="txt a" data-t="48.9">Motorin, benzinden <b class="y">17 lira</b> pahalı.</div>
-    <div class="src a" data-t="49.4">İstanbul Avrupa Yakası · 20 Ekim 2026 · BirGün</div>
+    <div class="src a" data-t="49.4"><span>İstanbul Avrupa Yakası · 20 Ekim 2026 · BirGün</span></div>
   </div>
 
   <!-- 7 · İRAN'IN ŞARTI -->
   <div class="sc" data-a="52" data-b="56.6">
-    <div class="tag a" data-t="52.1">İRAN'IN ŞARTI</div>
+    <div class="tag a" data-t="52.1"><span>İRAN'IN ŞARTI</span></div>
     <div class="ttl a" data-t="52.1">"Birkaç gün içinde<br><i>açarız, eğer…"</i></div>
     <div class="cards">
       <div class="card a" data-t="52.6"><b>1</b>ABD ablukası kalkarsa</div>
       <div class="card a" data-t="53.3"><b>2</b>Petrol yaptırımları biterse</div>
       <div class="card a" data-t="54.0"><b>3</b>Bütün cephelerde savaş durursa</div>
     </div>
-    <div class="src a" data-t="54.4" style="top:1000px">İran Dışişleri Bakanı · Reuters, CBS · anlaşma yok</div>
+    <div class="src a" data-t="54.4" style="top:1000px"><span>İran Dışişleri Bakanı · Reuters, CBS · anlaşma yok</span></div>
   </div>
 
   <!-- 8 · SORU -->
@@ -189,7 +201,7 @@
     <div class="ttl a" data-t="56.65" style="top:290px">Sence boğaz<br><i>bu yıl açılır mı?</i></div>
     <div class="opt a" data-t="57.1" style="top:1110px;border-color:#5a5a62;background:rgba(255,255,255,.04)"><b style="background:var(--ink)">A</b>Açılır</div>
     <div class="opt a" data-t="57.5" style="top:1240px;border-color:var(--red);background:rgba(229,50,43,.10)"><b style="background:var(--red2)">B</b>Kapalı kalır</div>
-    <div class="src a" data-t="58" style="top:1390px;color:#9a968f;font-size:24px">Takip et · yeni bölüm gelince ilk sen öğren</div>
+    <div class="src a" data-t="58" style="top:1390px;color:#9a968f;font-size:24px"><span>Takip et · yeni bölüm gelince ilk sen öğren</span></div>
   </div>
 </div>
 
@@ -246,25 +258,25 @@
   for (let s = 0; s <= 1; s += .002) { const p = lane.getPointAtLength(s * laneLen), d = Math.hypot(p.x - H[0], p.y - H[1]); if (d < best) { best = d; sH = s; } }
 
   const cam = (s, p, q) => [s, q[0] - s * p[0], q[1] - s * p[1]];
-  const VIS = [540, 820];
-  const WIDE = cam(1.0, [540, 830], VIS), ZOOM = cam(4.2, H, VIS), MID = cam(2.2, H, [560, 820]);
+  const VIS = [540, 940];
+  const WIDE = cam(1.15, [520, 790], [540, 900]), ZOOM = cam(4.2, H, VIS), MID = cam(2.2, H, [560, 820]);
   const CAMK = [
-    [0, cam(1.75, H, [620, 840])], [5.4, cam(1.95, H, [630, 840])],
+    [0, cam(1.9, H, [600, 900])], [5.4, cam(2.1, H, [610, 900])],
     [5.5, cam(2.4, H, VIS)], [8.5, ZOOM], [13, ZOOM], [21, cam(3.2, H, VIS)],
-    [21.01, cam(1.6, H, [640, 820])], [30, cam(1.6, H, [640, 820])],
-    [30.01, cam(1.35, H, [800, 790])], [32.4, WIDE], [38, WIDE],
-    [38.01, cam(1.75, H, [620, 840])], [60, cam(1.75, H, [620, 840])],
+    [21.01, cam(1.6, H, [640, 940])], [30, cam(1.6, H, [640, 940])],
+    [30.01, cam(1.35, H, [800, 900])], [32.4, WIDE], [38, WIDE],
+    [38.01, cam(1.9, H, [600, 900])], [60, cam(1.9, H, [600, 900])],
   ];
-  const MAPOP = [[0, 1], [21, 1], [21.4, .16], [29.6, .16], [30, 1], [38, 1], [38.4, .16], [56.6, .16], [57, .35], [60, .35]];
+  const MAPOP = [[0, 1], [21, 1], [21.4, .55], [29.6, .55], [30, 1], [38, 1], [38.4, .55], [56.6, .55], [57, .85], [60, .85]];
   let K = [1, 0, 0];
   const scr = p => [K[1] + K[0] * p[0], K[2] + K[0] * p[1]];
 
   // Gemiler: hat üzerinde akan tankerler
   const shipsG = $('#ships');
-  const SHIPS = Array.from({ length: 40 }, (_, i) => ({ ph: i / 40 + rnd() * .012, off: (rnd() - .5) * 10, el: mk('path', { d: 'M-11,-4 L8,-4 L12,0 L8,4 L-11,4 Z', fill: '#cfd6de' }, shipsG), rank: rnd() }));
+  const SHIPS = Array.from({ length: 40 }, (_, i) => ({ ph: i / 40 + rnd() * .012, off: (rnd() - .5) * 10, el: mk('path', { d: 'M-11,-4 L8,-4 L12,0 L8,4 L-11,4 Z', fill: '#ffffff', stroke: '#0b2a44', 'stroke-width': 1.5 }, shipsG), rank: rnd() }));
   SHIPS.sort((a, b) => a.rank - b.rank);
   // Bekleyen tankerler (kapalı boğazın iki yanı)
-  const QUEUE = Array.from({ length: 22 }, (_, i) => { const west = i < 13; const s = west ? sH - .04 - rnd() * .16 : sH + .05 + rnd() * .12; return { s, off: (rnd() - .5) * 26, el: mk('path', { d: 'M-11,-4 L8,-4 L12,0 L8,4 L-11,4 Z', fill: '#9aa3ad' }, shipsG), ph: rnd() * 6 }; });
+  const QUEUE = Array.from({ length: 22 }, (_, i) => { const west = i < 13; const s = west ? sH - .04 - rnd() * .16 : sH + .05 + rnd() * .12; return { s, off: (rnd() - .5) * 26, el: mk('path', { d: 'M-11,-4 L8,-4 L12,0 L8,4 L-11,4 Z', fill: '#ffb547', stroke: '#5a2e00', 'stroke-width': 1.5 }, shipsG), ph: rnd() * 6 }; });
   const at = (s, off) => { const L = clamp(s, 0, 1) * laneLen, p = lane.getPointAtLength(L), q = lane.getPointAtLength(Math.min(laneLen, L + 2)); const a = Math.atan2(q.y - p.y, q.x - p.x); return [p.x - Math.sin(a) * off, p.y + Math.cos(a) * off, a * 180 / Math.PI]; };
 
   // Boğaz işaretleri
@@ -273,17 +285,17 @@
   const ring = mk('circle', { fill: 'none', stroke: '#e5322b', 'stroke-width': 3 }, mkG);
   const xMark = mk('path', { fill: 'none', stroke: '#ff4d45', 'stroke-width': 9, 'stroke-linecap': 'round' }, mkG);
   const nar = mk('g', {}, mkG);
-  const narLine = mk('line', { stroke: '#f4c430', 'stroke-width': 4 }, nar);
-  const narTxt = mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 34, fill: '#f4c430', stroke: '#0b0b0d', 'stroke-width': 7, 'paint-order': 'stroke' }, nar);
+  const narLine = mk('line', { stroke: '#ffe14d', 'stroke-width': 5 }, nar);
+  const narTxt = mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 34, fill: '#ffe14d', stroke: '#0b2a44', 'stroke-width': 8, 'paint-order': 'stroke' }, nar);
   narTxt.textContent = 'en dar yeri ≈ 33 km';
   const lblG = $('#lbls');
   // yakın plan etiketleri (boğazın iki kıyısı): derece başına ~34 px, Mercator'da enlem ~38 px
   const LL = (lon, lat) => [H[0] + (lon - 56.45) * 34.0, H[1] - (lat - 26.55) * 38.0];
-  const ZL = [['İRAN', LL(56.75, 27.15)], ['UMMAN', LL(56.05, 26.05)], ['BAE', LL(55.6, 25.45)]].map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 700, 'font-size': 30, fill: '#9a99a2', 'letter-spacing': '4', 'text-anchor': 'middle' }, document.querySelector('#lbls')), { textContent: k }) }));
-  const LB = Object.entries(G.labels).map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 600, 'font-size': 24, fill: '#77767c', 'letter-spacing': '3', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
-  const SL = Object.entries(G.seaLabels).map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Cormorant Garamond', 'font-style': 'italic', 'font-weight': 500, 'font-size': 32, fill: '#5b7a99', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
-  const HL = Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 30, fill: '#ff6b64', stroke: '#0b0b0d', 'stroke-width': 7, 'paint-order': 'stroke', 'text-anchor': 'start' }, lblG), { textContent: 'HÜRMÜZ BOĞAZI' });
-  const PL = Object.entries(G.ports).map(([k, p]) => ({ p, dot: mk('circle', { r: 7, fill: '#f4c430' }, lblG), el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 700, 'font-size': 26, fill: '#f4c430', stroke: '#0b0b0d', 'stroke-width': 6, 'paint-order': 'stroke', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
+  const ZL = [['İRAN', LL(56.75, 27.15)], ['UMMAN', LL(56.05, 26.05)], ['BAE', LL(55.6, 25.45)]].map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 700, 'font-size': 30, fill: '#5a3e14', 'letter-spacing': '4', 'text-anchor': 'middle' }, document.querySelector('#lbls')), { textContent: k }) }));
+  const LB = Object.entries(G.labels).map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 600, 'font-size': 24, fill: '#5a3e14', 'letter-spacing': '3', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
+  const SL = Object.entries(G.seaLabels).map(([k, p]) => ({ p, el: Object.assign(mk('text', { 'font-family': 'Cormorant Garamond', 'font-style': 'italic', 'font-weight': 500, 'font-size': 34, fill: '#e8f6ff', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
+  const HL = Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 30, fill: '#ffffff', stroke: '#9e1a14', 'stroke-width': 8, 'paint-order': 'stroke', 'text-anchor': 'start' }, lblG), { textContent: 'HÜRMÜZ BOĞAZI' });
+  const PL = Object.entries(G.ports).map(([k, p]) => ({ p, dot: mk('circle', { r: 8, fill: '#e5322b', stroke: '#fff', 'stroke-width': 2 }, lblG), el: Object.assign(mk('text', { 'font-family': 'Inter', 'font-weight': 800, 'font-size': 28, fill: '#ffffff', stroke: '#5a1410', 'stroke-width': 6, 'paint-order': 'stroke', 'text-anchor': 'middle' }, lblG), { textContent: k }) }));
 
   // ---------- Genel öğeler ----------
   const scs = [...document.querySelectorAll('.sc')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b }));
@@ -316,7 +328,7 @@
       const alive = i < keepN ? 1 : 0;
       const fin = prog(t, 5.6, 6.4);
       sh.el.setAttribute('opacity', fin * (alive ? 1 : 0));
-      sh.el.setAttribute('fill', i < 2 && t > 16 ? '#ffffff' : '#cfd6de');
+      sh.el.setAttribute('fill', i < 2 && t > 16 ? '#ffe14d' : '#ffffff');
     });
     const qOn = t < 5.5 || t >= 56.6;
     QUEUE.forEach(q => {
@@ -326,7 +338,7 @@
       q.el.setAttribute('transform', `translate(${X},${Y + Math.sin(t * 1.5 + q.ph) * 1.2}) rotate(${a + 25 * Math.sin(q.ph)}) scale(${.55 + K[0] * .22})`);
       q.el.setAttribute('opacity', t < 5.5 ? E.out(prog(t, .2 + q.ph * .05, .7 + q.ph * .05)) : prog(t, 56.8, 57.4) * .7);
     });
-    lane.style.opacity = t >= 30 && t < 38 ? .25 : .7;
+    lane.style.opacity = t >= 30 && t < 38 ? .35 : .85;
 
     // boğaz: kapalı X + nabız (açılış, kapanış), dar geçit ölçüsü (sahne 1)
     const [hx, hy] = scr(H);

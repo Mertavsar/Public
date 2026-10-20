@@ -3,16 +3,21 @@ import fs from 'fs';
 import * as topo from 'topojson-client';
 import { geoMercator, geoPath, geoBounds } from 'd3-geo';
 const w = JSON.parse(fs.readFileSync('node_modules/world-atlas/countries-10m.json'));
-const all = topo.feature(w, w.objects.countries).features;
-const box = [[33, 9], [66, 38]];
-const feats = all.filter(f => { const [[a, b], [c, d]] = geoBounds(f); return c > box[0][0] && a < box[1][0] && d > box[0][1] && b < box[1][1] && c - a < 180; });
+const w50 = JSON.parse(fs.readFileSync('node_modules/world-atlas/countries-50m.json'));
+// Körfez ülkeleri 10m (yakın planda kıyı detayı), geri kalanı 50m (render hızı)
+const NEAR = new Set(['Iran', 'Oman', 'United Arab Emirates', 'Qatar', 'Bahrain', 'Kuwait', 'Saudi Arabia', 'Iraq']);
+const all = topo.feature(w, w.objects.countries).features.filter(f => NEAR.has(f.properties.name))
+  .concat(topo.feature(w50, w50.objects.countries).features.filter(f => !NEAR.has(f.properties.name)));
+const box = [[33, 9], [66, 38]];                 // projeksiyon çerçevesi (ölçek bununla sabit)
+const wide = [[18, -12], [80, 52]];               // tam ekranı dolduracak kadar geniş çizim alanı
+const feats = all.filter(f => { const [[a, b], [c, d]] = geoBounds(f); return c > wide[0][0] && a < wide[1][0] && d > wide[0][1] && b < wide[1][1] && c - a < 180; });
 const frame = { type: 'Feature', geometry: { type: 'MultiPoint', coordinates: [[box[0][0], box[0][1]], [box[1][0], box[1][1]], [box[0][0], box[1][1]], [box[1][0], box[0][1]]] } };
 const proj = geoMercator().fitExtent([[-20, 480], [1100, 1180]], frame);
-proj.clipExtent([[-200, 300], [1280, 1400]]);
+proj.clipExtent([[-900, -900], [1980, 2820]]);
 const path = geoPath(proj).digits(1);
 const P = ll => proj(ll).map(v => Math.round(v * 10) / 10);
 const land = path({ type: 'FeatureCollection', features: feats });
-const borders = path(topo.mesh(w, w.objects.countries, (a, b) => a !== b));
+const borders = path(topo.mesh(w50, w50.objects.countries, (a, b) => a !== b));
 const out = {
   land, borders,
   hormuz: P([56.45, 26.55]),
