@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hürmüz Kinetik</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --ink: #0d0d0f; --oil: #ffc93c; --red: #ff3b30; --sea: #1e6fd9; --cream: #f6efe3;
+    --k: 'Barlow Condensed', 'Arial Narrow', sans-serif; --s: 'Inter', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; overflow: hidden; }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; transform-origin: 0 0; overflow: hidden; background: var(--oil); }
+  .beat { position: absolute; inset: 0; }
+  .beat > .bg { position: absolute; inset: 0; }
+  .beat > .in { position: absolute; inset: 0; transform-origin: 50% 45%; }
+  .k { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; will-change: transform, opacity; }
+  .w { font: italic 800 250px/.86 var(--k); letter-spacing: -.01em; text-transform: uppercase; }
+  .w.m { font-size: 200px; } .w.s { font-size: 150px; } .w.xl { font-size: 330px; }
+  .lab { font: 800 40px var(--s); letter-spacing: .22em; text-transform: uppercase; }
+  .sub { font: 600 44px/1.25 var(--s); }
+  .note { font: 600 28px var(--s); opacity: .75; letter-spacing: .04em; }
+  .num { font: 800 340px/1 var(--s); letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
+  .ink { color: var(--ink); } .oil { color: var(--oil); } .red { color: var(--red); } .cream { color: var(--cream); } .wh { color: #fff; }
+  .pill { display: inline-block; padding: 10px 26px; border-radius: 999px; }
+  .rowx { display: flex; gap: 22px; align-items: baseline; justify-content: center; }
+  .bar { height: 120px; border-radius: 18px; transform-origin: 0 50%; }
+  .opt { display: inline-flex; align-items: center; gap: 24px; padding: 24px 40px; border-radius: 26px; font: italic 800 96px/1 var(--k); }
+  .opt b { width: 84px; height: 84px; border-radius: 18px; display: grid; place-items: center; font: 800 50px var(--s); font-style: normal; }
+
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); display: flex; gap: 14px; align-items: center; background: linear-gradient(transparent, rgba(0,0,0,.85)); opacity: 0; transition: opacity .25s; z-index: 5; }
+  body:hover #ui { opacity: 1; }
+  #ui button { background: none; border: 0; color: #fff; font: 600 15px var(--s); cursor: pointer; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+  #ui input { flex: 1; accent-color: var(--red); }
+  #ui span { font: 500 13px var(--s); color: #bbb; min-width: 84px; text-align: right; font-variant-numeric: tabular-nums; }
+  #start { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 6; cursor: pointer; border: 0; }
+  #start b { font: 600 18px var(--s); color: #fff; background: var(--red); padding: 16px 28px; border-radius: 999px; }
+  body.capture #ui, body.capture #start { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1 · HOOK (sarı) -->
+  <div class="beat" data-a="0" data-b="3.6" data-bg="var(--oil)" data-o="50% 50%">
+    <div class="bg"></div><div class="in">
+      <div class="k w xl ink" style="top:470px" data-t="-1" data-fx="slam">BENZİN</div>
+      <div class="k w ink" style="top:770px" data-t=".45" data-fx="slam">NEDEN</div>
+      <div class="k w ink" style="top:990px" data-t=".9" data-fx="slam">BU KADAR</div>
+      <div class="k w red" style="top:1210px" data-t="1.35" data-fx="slam">PAHALI?</div>
+    </div>
+  </div>
+
+  <!-- 2 · 33 KM (siyah) -->
+  <div class="beat" data-a="3.6" data-b="8" data-bg="var(--ink)" data-o="100% 100%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab oil" style="top:420px" data-t="3.8" data-fx="up">Cevap bu</div>
+      <div class="k num oil" style="top:500px" data-t="4.0" data-fx="slam"><span data-count="33" data-ct="4.0" data-cd=".9">0</span><span style="font-size:.5em"> km</span></div>
+      <div class="k sub cream" style="top:870px" data-t="4.7" data-fx="up">genişliğinde bir su yolu</div>
+      <svg class="k" data-t="5.0" data-fx="up" style="top:990px;left:140px;right:auto;width:800px;height:380px" viewBox="0 0 800 380">
+        <rect x="0" y="0" width="800" height="380" rx="30" fill="#1e6fd9"/>
+        <path id="landL" d="M0,0 H380 C330,120 400,200 300,380 H0Z" fill="#f6efe3"/>
+        <path id="landR" d="M800,0 H470 C520,140 430,240 520,380 H800Z" fill="#f6efe3"/>
+        <g id="gap"><line x1="352" y1="190" x2="448" y2="190" stroke="#ffc93c" stroke-width="8" stroke-linecap="round"/><path d="M352,170 V210 M448,170 V210" stroke="#ffc93c" stroke-width="8" stroke-linecap="round"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 3 · HÜRMÜZ (mavi) -->
+  <div class="beat" data-a="8" data-b="12.4" data-bg="var(--sea)" data-o="0% 0%">
+    <div class="bg"></div><div class="in">
+      <div class="k w cream" style="top:300px" data-t="8.2" data-fx="slam">HÜRMÜZ</div>
+      <div class="k w oil" style="top:510px" data-t="8.5" data-fx="slam">BOĞAZI</div>
+      <svg class="k" id="coast" data-t="9.0" data-fx="up" style="top:780px;left:90px;right:auto;width:900px;height:620px" viewBox="0 0 900 620">
+        <defs><clipPath id="cc"><rect width="900" height="620" rx="36"/></clipPath></defs>
+        <g clip-path="url(#cc)"><rect width="900" height="620" fill="#1658b5"/><g id="coastG"></g></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 4 · 20 MİLYON (krem) -->
+  <div class="beat" data-a="12.4" data-b="17.4" data-bg="var(--cream)" data-o="100% 0%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab ink" style="top:330px" data-t="12.6" data-fx="up">Savaştan önce · her gün</div>
+      <div class="k w ink" style="top:420px" data-t="12.8" data-fx="slam">20 MİLYON</div>
+      <div class="k w red" style="top:640px" data-t="13.2" data-fx="slam">VARİL</div>
+      <svg class="k" data-t="13.6" data-fx="up" style="top:880px;width:1080px;height:200px" viewBox="0 0 1080 200"><g id="convoy"></g></svg>
+      <div class="k sub ink" style="top:1130px" data-t="14.6" data-fx="up">dünyada denizden taşınan<br>petrolün <span class="pill" style="background:var(--ink);color:var(--oil)">DÖRTTE BİRİ</span></div>
+      <div class="k note ink" style="top:1360px" data-t="15.3" data-fx="up">IEA</div>
+    </div>
+  </div>
+
+  <!-- 5 · 85 → 4 (kırmızı) -->
+  <div class="beat" data-a="17.4" data-b="22.6" data-bg="var(--red)" data-o="0% 100%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab cream" style="top:300px" data-t="17.6" data-fx="up">Günde geçen gemi</div>
+      <div class="k num cream" style="top:370px;font-size:420px" data-t="17.7" data-fx="slam"><span data-count="85" data-to="4" data-ct="19.0" data-cd="1.8">85</span></div>
+      <svg class="k" data-t="18.1" data-fx="up" style="top:860px;left:150px;right:auto;width:780px;height:470px" viewBox="0 0 780 470"><g id="grid"></g></svg>
+      <div class="k sub cream" style="top:1370px" data-t="20.6" data-fx="up"><span class="pill" style="background:var(--ink);color:var(--oil)">18 EKİM: SADECE 4</span></div>
+    </div>
+  </div>
+
+  <!-- 6 · NEDEN (siyah) -->
+  <div class="beat" data-a="22.6" data-b="28" data-bg="var(--ink)" data-o="50% 0%">
+    <div class="bg"></div><div class="in">
+      <div class="k w m wh" style="top:330px" data-t="22.8" data-fx="slam">NEDEN?</div>
+      <div class="k w red" style="top:560px" data-t="23.5" data-fx="slam">SAVAŞ.</div>
+      <div class="k sub cream" style="top:780px;font-size:36px" data-t="23.8" data-fx="up">28 Şubat · ABD ve İsrail İran'ı vurdu</div>
+      <div class="k w red" style="top:860px" data-t="24.9" data-fx="slam">ABLUKA.</div>
+      <div class="k sub cream" style="top:1080px;font-size:36px" data-t="25.2" data-fx="up">Temmuz · ABD İran limanlarını kapattı</div>
+      <div class="k w red" style="top:1160px" data-t="26.3" data-fx="slam">SALDIRI.</div>
+      <div class="k sub cream" style="top:1380px;font-size:36px" data-t="26.6" data-fx="up">Eylül sonu · bir haftada 10 tanker vuruldu</div>
+    </div>
+  </div>
+
+  <!-- 7 · BORU HATLARI (sarı) -->
+  <div class="beat" data-a="28" data-b="33" data-bg="var(--oil)" data-o="100% 50%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab ink" style="top:320px" data-t="28.2" data-fx="up">B planı</div>
+      <div class="k w s ink" style="top:410px" data-t="28.4" data-fx="slam">BORU HATLARI?</div>
+      <div class="k" style="top:640px;left:110px;right:150px;text-align:left" data-t="29.0" data-fx="up">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font:700 40px var(--s);color:var(--ink)"><span>boğazdan geçen</span><b style="font:800 96px var(--s)">20</b></div>
+        <div class="bar" style="background:var(--ink);margin:8px 0 46px" data-bar="1" data-bt="29.2"></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font:700 40px var(--s);color:var(--ink)"><span>boru hatlarının taşıyabildiği</span><b style="font:800 96px var(--s);color:var(--red)">5,5</b></div>
+        <div class="bar" style="background:var(--red);margin-top:8px" data-bar=".275" data-bt="29.9"></div>
+      </div>
+      <div class="k w red" style="top:1210px" data-t="31.0" data-fx="slam">YETMİYOR.</div>
+      <div class="k note ink" style="top:1440px" data-t="31.5" data-fx="up">milyon varil / gün · Suudi Arabistan ve BAE hatları · IEA</div>
+    </div>
+  </div>
+
+  <!-- 8 · 110 $ (siyah) -->
+  <div class="beat" data-a="33" data-b="38" data-bg="#141414" data-o="0% 50%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab oil" style="top:330px" data-t="33.2" data-fx="up">1 varil petrol</div>
+      <svg class="k" data-t="33.3" data-fx="up" style="top:420px;left:390px;right:auto;width:300px;height:400px" viewBox="0 0 300 400">
+        <defs><clipPath id="bc"><rect x="30" y="20" width="240" height="360" rx="40"/></clipPath></defs>
+        <rect x="30" y="20" width="240" height="360" rx="40" fill="#2a2a2a"/>
+        <rect id="oilFill" x="30" y="380" width="240" height="0" fill="#ffc93c" clip-path="url(#bc)"/>
+        <rect x="30" y="20" width="240" height="360" rx="40" fill="none" stroke="#f6efe3" stroke-width="10"/>
+        <path d="M30,140 H270 M30,260 H270" stroke="#f6efe3" stroke-width="10"/>
+      </svg>
+      <div class="k num red" style="top:860px;font-size:380px" data-t="33.8" data-fx="slam"><span data-count="110" data-ct="33.9" data-cd="1.4">0</span>$</div>
+      <div class="k sub cream" style="top:1260px" data-t="35.6" data-fx="up">Brent · 17 Ekim kapanışı 109,86 $</div>
+    </div>
+  </div>
+
+  <!-- 9 · POMPA (krem) -->
+  <div class="beat" data-a="38" data-b="43.5" data-bg="var(--cream)" data-o="50% 100%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab ink" style="top:300px" data-t="38.2" data-fx="up">Türkiye · bugün</div>
+      <svg class="k" data-t="38.3" data-fx="up" style="top:370px;left:400px;right:auto;width:280px;height:300px" viewBox="0 0 280 300">
+        <rect x="30" y="30" width="150" height="250" rx="22" fill="#0d0d0f"/>
+        <rect x="52" y="56" width="106" height="66" rx="10" fill="#ffc93c"/>
+        <rect x="64" y="72" width="60" height="10" rx="4" fill="#0d0d0f"/><rect x="64" y="94" width="82" height="10" rx="4" fill="#0d0d0f"/>
+        <rect x="20" y="270" width="170" height="22" rx="8" fill="#0d0d0f"/>
+        <path d="M180,90 C240,90 250,130 250,170 V220" fill="none" stroke="#0d0d0f" stroke-width="14" stroke-linecap="round"/>
+        <path d="M232,214 H262 V250 L250,262 H238 Z" fill="#0d0d0f"/>
+        <path id="drop" d="M250,262 C250,262 238,280 238,290 A12,12 0 0 0 262,290 C262,280 250,262 250,262 Z" fill="#ff3b30"/>
+      </svg>
+      <div class="k w m ink" style="top:720px" data-t="38.7" data-fx="slam">BENZİN</div>
+      <div class="k num ink" style="top:890px;font-size:190px" data-t="38.9" data-fx="slam"><span data-count="79.60" data-dec="2" data-ct="38.9" data-cd="1.2">0,00</span><span style="font-size:.45em"> TL</span></div>
+      <div class="k w m red" style="top:1100px" data-t="39.8" data-fx="slam">MOTORİN</div>
+      <div class="k num red" style="top:1270px;font-size:190px" data-t="40.0" data-fx="slam"><span data-count="96.70" data-dec="2" data-ct="40.0" data-cd="1.2">0,00</span><span style="font-size:.45em"> TL</span></div>
+      <div class="k note ink" style="top:1480px" data-t="41.2" data-fx="up">İstanbul Avrupa Yakası · 20 Ekim 2026 · litre</div>
+    </div>
+  </div>
+
+  <!-- 10 · İRAN'IN ŞARTI (mavi) -->
+  <div class="beat" data-a="43.5" data-b="48.2" data-bg="var(--sea)" data-o="0% 0%">
+    <div class="bg"></div><div class="in">
+      <div class="k lab cream" style="top:330px" data-t="43.7" data-fx="up">İran diyor ki</div>
+      <div class="k w xl oil" style="top:400px;font-size:280px" data-t="43.9" data-fx="slam">"AÇARIZ</div>
+      <div class="k w cream" style="top:640px" data-t="44.4" data-fx="slam">EĞER…"</div>
+      <div class="k sub cream" style="top:930px;font-size:52px" data-t="45.0" data-fx="up">① ABD ablukası kalkarsa</div>
+      <div class="k sub cream" style="top:1030px;font-size:52px" data-t="45.5" data-fx="up">② petrol yaptırımları biterse</div>
+      <div class="k sub cream" style="top:1130px;font-size:52px" data-t="46.0" data-fx="up">③ savaş her yerde durursa</div>
+      <div class="k sub" style="top:1290px" data-t="46.7" data-fx="up"><span class="pill" style="background:var(--ink);color:var(--oil);font-size:36px">ŞU AN ANLAŞMA YOK</span></div>
+    </div>
+  </div>
+
+  <!-- 11 · SORU (siyah) -->
+  <div class="beat" data-a="48.2" data-b="52.01" data-bg="var(--ink)" data-o="100% 0%">
+    <div class="bg"></div><div class="in">
+      <div class="k w m wh" style="top:360px" data-t="48.4" data-fx="slam">SENCE</div>
+      <div class="k w oil" style="top:560px" data-t="48.7" data-fx="slam">AÇILIR MI?</div>
+      <div class="k" style="top:880px" data-t="49.2" data-fx="pop"><span class="opt" style="background:var(--cream);color:var(--ink)"><b style="background:var(--ink);color:var(--cream)">A</b>AÇILIR</span></div>
+      <div class="k" style="top:1060px" data-t="49.5" data-fx="pop"><span class="opt" style="background:var(--red);color:var(--cream)"><b style="background:var(--cream);color:var(--red)">B</b>KAPALI KALIR</span></div>
+      <div class="k lab oil" style="top:1300px;font-size:34px" data-t="50.2" data-fx="up">Takip et · yorumlara yaz</div>
+    </div>
+  </div>
+</div>
+
+<div id="ui">
+  <button id="pp">▶︎ Oynat</button>
+  <input id="seek" type="range" min="0" max="52" step="0.01" value="0">
+  <span id="clock">0:00 / 0:52</span>
+  <button id="mute">Ses: açık</button>
+</div>
+<button id="start"><b>▶︎ Videoyu oynat</b></button>
+<audio id="music" src="assets/mix.m4a" preload="auto"></audio>
+
+<script src="assets/gulf.js"></script>
+<script>
+(async () => {
+  const DUR = 52;
+  window.__DUR = DUR;
+  const $ = s => document.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const E = {
+    out: p => 1 - Math.pow(1 - p, 3),
+    out5: p => 1 - Math.pow(1 - p, 5),
+    inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+    back: p => { const c1 = 2.2, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  };
+
+  // Gerçek kıyı çizgisi: Hürmüz çevresi (krem kara, mavi deniz)
+  const G = window.GULF, H = G.hormuz;
+  const cg = $('#coastG');
+  const vb = { x: H[0] - 120, y: H[1] - 70, w: 240, h: 165 };          // 900x620 kutuya
+  const sc = 900 / vb.w;
+  const cgg = mk('g', { transform: `scale(${sc}) translate(${-vb.x},${-vb.y})` }, cg);
+  mk('path', { d: G.land, fill: '#f6efe3', stroke: '#c9bfae', 'stroke-width': .3 }, cgg);
+  const lanePts = G.lane.map(p => [(p[0] - vb.x) * sc, (p[1] - vb.y) * sc]);
+  let ld = `M${lanePts[0]}`; lanePts.slice(1).forEach(p => ld += ` L${p}`);
+  const laneEl = mk('path', { d: ld, fill: 'none', stroke: '#ffc93c', 'stroke-width': 7, 'stroke-dasharray': '18 14', 'stroke-linecap': 'round' }, cg);
+  const pinX = (H[0] - vb.x) * sc, pinY = (H[1] - vb.y) * sc;
+  const pinR = mk('circle', { cx: pinX, cy: pinY, fill: 'none', stroke: '#ff3b30', 'stroke-width': 6 }, cg);
+  mk('circle', { cx: pinX, cy: pinY, r: 16, fill: '#ff3b30', stroke: '#fff', 'stroke-width': 5 }, cg);
+  const lab = (x, y, s) => { const e = mk('text', { x, y, 'font-family': 'Inter', 'font-weight': 800, 'font-size': 40, fill: '#0d0d0f', 'letter-spacing': 6, 'text-anchor': 'middle' }, cg); e.textContent = s; return e; };
+  lab(pinX + 150, pinY - 190, 'İRAN'); lab(pinX - 80, pinY + 150, 'UMMAN');
+
+  // Tanker ikonu (yandan)
+  const tanker = (parent, x, y, s, hull = '#0d0d0f', stripe = '#ff3b30') => {
+    const g = mk('g', { transform: `translate(${x},${y}) scale(${s})` }, parent);
+    mk('path', { d: 'M0,30 H150 L138,52 H14 Z', fill: hull }, g);
+    mk('rect', { x: 4, y: 30, width: 144, height: 6, fill: stripe }, g);
+    mk('rect', { x: 14, y: 18, width: 26, height: 12, fill: hull }, g);
+    mk('rect', { x: 18, y: 8, width: 14, height: 10, fill: hull }, g);
+    mk('path', { d: 'M48,30 V22 H136 V30', fill: 'none', stroke: hull, 'stroke-width': 4 }, g);
+    return g;
+  };
+  const convoy = $('#convoy');
+  const CV = Array.from({ length: 9 }, (_, i) => ({ g: tanker(convoy, 0, 60, 1.1), i }));
+
+  // 85 gemi ızgarası (17 x 5)
+  const grid = $('#grid');
+  const GR = [];
+  for (let i = 0; i < 85; i++) { const c = i % 10, r = Math.floor(i / 10); GR.push({ i, g: tanker(grid, c * 78 + 2, r * 52 + 2, .46, '#f6efe3', '#0d0d0f'), keep: [12, 37, 54, 81].includes(i) }); }
+
+  // ---------- Genel öğeler ----------
+  const beats = [...document.querySelectorAll('.beat')].map((el, i) => ({ el, a: +el.dataset.a, b: +el.dataset.b, bg: el.querySelector('.bg'), inn: el.querySelector('.in'), o: el.dataset.o, z: i + 1 }));
+  beats.forEach(b => { b.bg.style.background = b.el.dataset.bg; b.el.style.zIndex = b.z; });
+  const ks = [...document.querySelectorAll('[data-fx]')].map(el => ({ el, t: +el.dataset.t, fx: el.dataset.fx }));
+  const cnt = [...document.querySelectorAll('[data-count]')].map(el => ({ el, v: +el.dataset.count, to: el.dataset.to !== undefined ? +el.dataset.to : null, t: +el.dataset.ct, d: +el.dataset.cd, dec: +(el.dataset.dec || 0) }));
+  const bars = [...document.querySelectorAll('[data-bar]')].map(el => ({ el, v: +el.dataset.bar, t: +el.dataset.bt }));
+  const fmt = (v, dec) => v.toLocaleString('tr-TR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+
+  function render(t) {
+    // vuruşlar: yeni zemin bir köşeden daire olarak açılır, eskiyi örter
+    beats.forEach((b, i) => {
+      const on = t >= b.a - .001 && t < b.b + .5;
+      b.el.style.display = on ? '' : 'none';
+      if (!on) return;
+      const p = i === 0 ? 1 : E.out5(prog(t, b.a, b.a + .42));
+      b.el.style.clipPath = p >= 1 ? 'none' : `circle(${p * 150}% at ${b.o})`;
+      b.inn.style.transform = `scale(${1 + .035 * prog(t, b.a, b.b)})`;
+    });
+    ks.forEach(k => {
+      if (k.t < 0) { k.el.style.opacity = 1; k.el.style.transform = ''; return; }
+      const p = prog(t, k.t, k.t + (k.fx === 'slam' ? .32 : .5));
+      if (k.fx === 'slam') { const q = E.back(p); k.el.style.opacity = clamp(p * 3); k.el.style.transform = `scale(${lerp(1.5, 1, q)}) rotate(${lerp(-5, 0, E.out(p))}deg)`; }
+      else if (k.fx === 'pop') { k.el.style.opacity = clamp(p * 2); k.el.style.transform = `scale(${E.back(p)})`; }
+      else { k.el.style.opacity = E.out(p); k.el.style.transform = `translateY(${(1 - E.out(p)) * 50}px)`; }
+    });
+    cnt.forEach(c => { const p = E.out(prog(t, c.t, c.t + c.d)); const v = c.to === null ? c.v * p : lerp(c.v, c.to, p); c.el.textContent = fmt(c.dec ? v : Math.round(v), c.dec); });
+    bars.forEach(b => b.el.style.transform = `scaleX(${b.v * E.out(prog(t, b.t, b.t + 1))})`);
+
+    // 33 km: iki kara parçası birbirine yaklaşır, dar geçit kalır
+    const sq = E.inOut(prog(t, 5.1, 6.1));
+    $('#landL').setAttribute('transform', `translate(${lerp(-200, 0, sq)},0)`);
+    $('#landR').setAttribute('transform', `translate(${lerp(200, 0, sq)},0)`);
+    $('#gap').setAttribute('opacity', prog(t, 6.0, 6.3));
+    // kıyı: hat akar, pin nabız atar
+    laneEl.setAttribute('stroke-dashoffset', -t * 60);
+    const ph = (t % 1.4) / 1.4; pinR.setAttribute('r', 16 + 60 * E.out(ph)); pinR.setAttribute('opacity', 1 - ph);
+    // konvoy soldan sağa akar
+    CV.forEach(c => { const x = ((c.i * 190 + (t - 12.4) * 170) % 1710) - 200; c.g.setAttribute('transform', `translate(${x},60) scale(1.1)`); });
+    // 85 -> 4: gemiler sırayla kaybolur, 4'ü kalır (sarı)
+    const kill = prog(t, 19.0, 20.8);
+    let order = 0;
+    GR.forEach(g => {
+      if (g.keep) { g.g.setAttribute('opacity', 1); g.g.querySelectorAll('path,rect').forEach(e => { if (e.getAttribute('fill') === '#f6efe3' || e.getAttribute('fill') === '#ffc93c') e.setAttribute('fill', t > 20.6 ? '#ffc93c' : '#f6efe3'); if (e.getAttribute('stroke') === '#f6efe3' || e.getAttribute('stroke') === '#ffc93c') e.setAttribute('stroke', t > 20.6 ? '#ffc93c' : '#f6efe3'); }); return; }
+      const my = (order++) / 81;
+      g.g.setAttribute('opacity', 1 - clamp((kill * 1.08 - my) / .06));
+    });
+    // varil dolar
+    const f = E.out(prog(t, 33.4, 35.2));
+    $('#oilFill').setAttribute('y', 380 - 360 * f); $('#oilFill').setAttribute('height', 360 * f);
+    // pompa damlası
+    const dp = ((t - 38) % 1.2) / 1.2;
+    $('#drop').setAttribute('transform', `translate(0,${dp * 40})`); $('#drop').setAttribute('opacity', t > 38.6 ? 1 - dp : 0);
+  }
+
+  // ---------- Ölçek + oynatıcı ----------
+  const stage = $('#stage');
+  const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${s}) translate(-50%, -50%)`; };
+  addEventListener('resize', fit); fit();
+  const params = new URLSearchParams(location.search);
+  const capture = params.has('capture');
+  let t = +(params.get('t') || 0), playing = false, last = 0;
+  const music = $('#music'), seek = $('#seek'), clock = $('#clock'), pp = $('#pp');
+  const mm = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const sync = () => { seek.value = t; clock.textContent = `${mm(t)} / ${mm(DUR)}`; pp.textContent = playing ? '❚❚ Durdur' : '▶︎ Oynat'; };
+  const play = () => { if (t >= DUR - .05) t = 0; playing = true; last = performance.now(); try { music.currentTime = t; music.play().catch(() => {}); } catch (e) {} $('#start').style.display = 'none'; sync(); requestAnimationFrame(loop); };
+  const pause = () => { playing = false; try { music.pause(); } catch (e) {} sync(); };
+  function loop(now) { if (!playing) return; t += (now - last) / 1000; last = now; if (t >= DUR) { t = DUR - .01; render(t); pause(); return; } render(t); sync(); requestAnimationFrame(loop); }
+  const jump = v => { t = clamp(v, 0, DUR - .01); render(t); try { music.currentTime = t; } catch (e) {} sync(); };
+  $('#start').onclick = play;
+  pp.onclick = () => playing ? pause() : play();
+  seek.oninput = () => jump(+seek.value);
+  $('#mute').onclick = () => { music.muted = !music.muted; $('#mute').textContent = music.muted ? 'Ses: kapalı' : 'Ses: açık'; };
+  addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); playing ? pause() : play(); } if (e.code === 'ArrowRight') jump(t + 3); if (e.code === 'ArrowLeft') jump(t - 3); });
+  stage.addEventListener('click', () => playing ? pause() : play());
+  if (capture) { document.body.classList.add('capture'); stage.style.transform = 'none'; stage.style.left = stage.style.top = '0'; }
+  window.__render = render;
+  await document.fonts.ready;
+  render(t); sync();
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
