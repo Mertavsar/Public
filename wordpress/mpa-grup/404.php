@@ -11,13 +11,13 @@ get_template_part(
 	null,
 	array(
 		'eyebrow' => '404',
-		'title'   => __( 'Bu kat henüz inşa edilmedi.', 'mpa-grup' ),
+		'title'   => __( 'Sayfa bulunamadı', 'mpa-grup' ),
 	)
 );
 ?>
 <section class="section section--paper">
 	<div class="container container--narrow">
-		<p><?php esc_html_e( 'Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir.', 'mpa-grup' ); ?></p>
+		<p><?php esc_html_e( 'Aradığınız sayfa kaldırılmış ya da adresi değişmiş olabilir.', 'mpa-grup' ); ?></p>
 		<p><a class="btn btn--accent" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Ana sayfaya dön', 'mpa-grup' ); ?></a></p>
 	</div>
 </section>

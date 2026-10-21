@@ -56,7 +56,7 @@ function mpa_handle_contact() {
 		array(
 			'post_type'   => 'mpa_mesaj',
 			'post_status' => 'private',
-			'post_title'  => $name . ( $subject ? ' — ' . $subject : '' ),
+			'post_title'  => $name . ( $subject ? ' / ' . $subject : '' ),
 		)
 	);
 	if ( $post_id && ! is_wp_error( $post_id ) ) {
@@ -72,7 +72,7 @@ function mpa_handle_contact() {
 		$to = get_option( 'admin_email' );
 	}
 	$body = sprintf(
-		"Ad Soyad: %s\nTelefon: %s\nE-posta: %s\nKonu: %s\n\n%s\n\n— %s",
+		"Ad Soyad: %s\nTelefon: %s\nE-posta: %s\nKonu: %s\n\n%s\n\n%s",
 		$name,
 		$phone,
 		$email ? $email : '-',

@@ -16,7 +16,7 @@ if ( ! $principles ) {
 ?>
 <section class="section section--grid" id="ilkelerimiz">
 	<div class="container">
-		<?php mpa_section_head( __( 'Değerlerimiz', 'mpa-grup' ), __( 'İlkelerimiz', 'mpa-grup' ), '02' ); ?>
+		<?php mpa_section_head( '', __( 'İlkelerimiz', 'mpa-grup' ) ); ?>
 		<div class="principles">
 			<?php foreach ( $principles as $i => $item ) : ?>
 				<div class="principle reveal">

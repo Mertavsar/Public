@@ -150,3 +150,38 @@ function mpa_activation_notice() {
 	);
 }
 add_action( 'admin_notices', 'mpa_activation_notice' );
+
+/**
+ * Önceki sürümle eklenmiş proje içeriklerindeki " — " ayraçlarını virgüle çevirir (bir kez).
+ */
+function mpa_fix_seed_captions() {
+	if ( get_option( 'mpa_captions_v2' ) ) {
+		return;
+	}
+	update_option( 'mpa_captions_v2', 1 );
+	$posts = get_posts(
+		array(
+			'post_type'   => array( 'mpa_proje', 'attachment' ),
+			'post_status' => 'any',
+			'numberposts' => -1,
+		)
+	);
+	foreach ( $posts as $post ) {
+		$changes = array();
+		foreach ( array( 'post_content', 'post_title', 'post_excerpt' ) as $field ) {
+			if ( false !== strpos( $post->$field, ' — ' ) ) {
+				$changes[ $field ] = str_replace( ' — ', ', ', $post->$field );
+			}
+		}
+		if ( $changes ) {
+			$changes['ID'] = $post->ID;
+			wp_update_post( $changes );
+		}
+		$alt = get_post_meta( $post->ID, '_wp_attachment_image_alt', true );
+		if ( $alt && false !== strpos( $alt, ' — ' ) ) {
+			update_post_meta( $post->ID, '_wp_attachment_image_alt', str_replace( ' — ', ', ', $alt ) );
+		}
+	}
+}
+add_action( 'admin_init', 'mpa_fix_seed_captions' );
+add_action( 'after_switch_theme', 'mpa_fix_seed_captions', 20 );

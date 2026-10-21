@@ -18,10 +18,7 @@ $stats      = $full ? mpa_stats() : array();
 ?>
 <section class="section section--paper about-section" id="hakkimizda">
 	<div class="container">
-		<div class="section-head__top">
-			<p class="eyebrow"><?php esc_html_e( 'Kurumsal', 'mpa-grup' ); ?></p>
-			<span class="section-num" aria-hidden="true">(01)</span>
-		</div>
+		<p class="eyebrow"><?php esc_html_e( 'Hakkımızda', 'mpa-grup' ); ?></p>
 		<p class="statement" data-words><?php echo mpa_kses_title( mpa_opt( 'about_title' ) ); // phpcs:ignore ?></p>
 
 		<div class="about">
@@ -32,11 +29,11 @@ $stats      = $full ? mpa_stats() : array();
 					$caption = wp_get_attachment_caption( $image_id );
 				} else {
 					printf(
-						'<img class="about__img" src="%s" alt="%s" loading="lazy" width="1600" height="900">',
+						'<img class="about__img" src="%s" alt="%s" width="1600" height="900">',
 						esc_url( mpa_img( 'projeler/anittepe-olimpik-yuzme-havuzu-02.jpg' ) ),
 						esc_attr__( 'Anıttepe Olimpik Yüzme Havuzu', 'mpa-grup' )
 					);
-					$caption = __( 'Anıttepe Olimpik Yüzme Havuzu — Ankara', 'mpa-grup' );
+					$caption = __( 'Anıttepe Olimpik Yüzme Havuzu, Ankara', 'mpa-grup' );
 				}
 				if ( $caption ) {
 					echo '<figcaption class="about__caption">' . esc_html( $caption ) . '</figcaption>';

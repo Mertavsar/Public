@@ -1,5 +1,5 @@
 /**
- * MPA Grup — kaydırmaya bağlı inşaat animasyonu, menü ve görünür olma efektleri.
+ * MPA Grup: kaydırmaya bağlı inşaat animasyonu, menü ve görünür olma efektleri.
  */
 (function () {
 	'use strict';
@@ -209,7 +209,7 @@
 			}
 			big.src = largest(img);
 			big.alt = img.alt || '';
-			cap.textContent = (fc ? fc.textContent + ' — ' : '') + (current + 1) + ' / ' + imgs.length;
+			cap.textContent = (fc ? fc.textContent + ' · ' : '') + (current + 1) + ' / ' + imgs.length;
 		}
 		function open(i) {
 			opener = document.activeElement;
@@ -422,7 +422,7 @@
 				el.classList.toggle('is-active', n === phase);
 				el.classList.toggle('is-done', n < phase);
 			});
-			setText(hud.phase, (phase < 9 ? '0' : '') + (phase + 1));
+			setText(hud.phase, String(phase + 1));
 			lastPhase = phase;
 		}
 

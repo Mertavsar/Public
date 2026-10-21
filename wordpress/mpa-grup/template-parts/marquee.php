@@ -15,7 +15,7 @@ if ( ! $words ) {
 }
 $line = '';
 foreach ( $words as $i => $word ) {
-	$line .= '<span class="marquee__word' . ( $i % 2 ? ' is-outline' : '' ) . '">' . esc_html( $word ) . '</span><span class="marquee__star" aria-hidden="true">✦</span>';
+	$line .= '<span class="marquee__word' . ( $i % 2 ? ' is-outline' : '' ) . '">' . esc_html( $word ) . '</span><span class="marquee__mark" aria-hidden="true"></span>';
 }
 ?>
 <div class="marquee" aria-label="<?php echo esc_attr( implode( ', ', $words ) ); ?>">

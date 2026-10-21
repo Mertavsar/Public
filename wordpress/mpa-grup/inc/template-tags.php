@@ -73,9 +73,9 @@ function mpa_service_images() {
 	return apply_filters(
 		'mpa_service_images',
 		array(
-			array( 'projeler/ivedik-otel-03.jpg', 'İvedik Otel — temel ve bodrum imalatı' ),
-			array( 'projeler/anittepe-olimpik-yuzme-havuzu-01.jpg', 'Anıttepe Olimpik Yüzme Havuzu — cephe' ),
-			array( 'projeler/lalahan-arastirma-merkezi-02.jpg', 'Ankara Lalahan Araştırma Merkezi — tamamlanan yapı' ),
+			array( 'projeler/ivedik-otel-03.jpg', 'İvedik Otel, temel ve bodrum imalatı' ),
+			array( 'projeler/anittepe-olimpik-yuzme-havuzu-01.jpg', 'Anıttepe Olimpik Yüzme Havuzu, cephe' ),
+			array( 'projeler/lalahan-arastirma-merkezi-02.jpg', 'Ankara Lalahan Araştırma Merkezi' ),
 		)
 	);
 }
@@ -329,22 +329,19 @@ function mpa_menu_fallback() {
 }
 
 /**
- * Bölüm başlığı: üstte turuncu etiket ve sıra numarası, altında büyük başlık.
+ * Bölüm başlığı: isteğe bağlı kısa etiket ve başlık.
  *
- * @param string $eyebrow Üst etiket.
+ * @param string $eyebrow Etiket (boşsa gösterilmez).
  * @param string $title   Başlık (<em> ince vurgu).
- * @param string $num     Sıra numarası (ör. 01).
+ * @param string $unused  Eski sürümlerle uyum için.
  * @param string $tag     Başlık etiketi.
  * @param string $extra   Ek sınıf (ör. section-head--light).
  */
-function mpa_section_head( $eyebrow, $title, $num = '', $tag = 'h2', $extra = '' ) {
+function mpa_section_head( $eyebrow, $title, $unused = '', $tag = 'h2', $extra = '' ) {
 	echo '<header class="section-head ' . esc_attr( $extra ) . '">';
-	echo '<div class="section-head__top">';
-	printf( '<p class="eyebrow">%s</p>', esc_html( $eyebrow ) );
-	if ( $num ) {
-		printf( '<span class="section-num" aria-hidden="true">(%s)</span>', esc_html( $num ) );
+	if ( $eyebrow ) {
+		printf( '<p class="eyebrow">%s</p>', esc_html( $eyebrow ) );
 	}
-	echo '</div>';
 	printf( '<%1$s class="section-title">%2$s</%1$s>', tag_escape( $tag ), mpa_kses_title( $title ) );
 	echo '</header>';
 }

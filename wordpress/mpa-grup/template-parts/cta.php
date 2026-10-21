@@ -15,8 +15,7 @@ $email = mpa_opt( 'email' );
 ?>
 <section class="cta"<?php echo $id ? ' id="' . esc_attr( $id ) . '"' : ''; ?>>
 	<div class="container">
-		<p class="eyebrow"><?php esc_html_e( 'Teklif & keşif', 'mpa-grup' ); ?></p>
-		<h2 class="cta__title"><?php esc_html_e( 'Bir sonraki yapıyı', 'mpa-grup' ); ?><br><em><?php esc_html_e( 'birlikte inşa edelim.', 'mpa-grup' ); ?></em></h2>
+		<h2 class="cta__title"><?php esc_html_e( 'Projeniz için', 'mpa-grup' ); ?><br><em><?php esc_html_e( 'teklif alın.', 'mpa-grup' ); ?></em></h2>
 		<div class="cta__row">
 			<p class="cta__text"><?php echo esc_html( mpa_opt( 'contact_text' ) ); ?></p>
 			<div class="btn-row">

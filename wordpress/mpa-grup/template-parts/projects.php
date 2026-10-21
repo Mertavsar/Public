@@ -14,7 +14,7 @@ $has_posts = wp_count_posts( 'mpa_proje' )->publish > 0;
 ?>
 <section class="section section--paper" id="projeler">
 	<div class="container">
-		<?php mpa_section_head( __( 'Referanslarımız', 'mpa-grup' ), __( 'Seçili <em>projeler</em>', 'mpa-grup' ), '03' ); ?>
+		<?php mpa_section_head( __( 'Referanslarımız', 'mpa-grup' ), __( 'Projelerimiz', 'mpa-grup' ) ); ?>
 
 		<div class="project-grid">
 			<?php

@@ -20,13 +20,9 @@ $tag     = $project['url'] ? 'a' : 'div';
 		<?php endif; ?>
 	</div>
 	<div class="project-card__body">
-		<span class="project-card__num"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
 		<div class="project-card__info">
 			<p class="project-card__meta"><?php echo esc_html( implode( ' · ', array_filter( array( $project['category'], $project['location'] ) ) ) ); ?></p>
 			<h3 class="project-card__title"><?php echo esc_html( $project['title'] ); ?></h3>
 		</div>
-		<?php if ( $project['url'] ) : ?>
-			<span class="project-card__go" aria-hidden="true"><?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></span>
-		<?php endif; ?>
 	</div>
 </<?php echo $tag; // phpcs:ignore ?>>

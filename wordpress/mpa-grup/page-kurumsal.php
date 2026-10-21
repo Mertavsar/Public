@@ -13,7 +13,6 @@ while ( have_posts() ) :
 		'template-parts/page-hero',
 		null,
 		array(
-			'eyebrow' => mpa_opt( 'company_name' ),
 			'title'   => get_the_title(),
 			'lead'    => mpa_opt( 'company_short' ),
 			'image'   => mpa_img( 'projeler/anittepe-olimpik-yuzme-havuzu-01.jpg' ),

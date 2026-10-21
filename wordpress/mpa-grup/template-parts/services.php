@@ -15,7 +15,7 @@ $images   = mpa_service_images();
 ?>
 <section class="section section--ink" id="hizmetler">
 	<div class="container">
-		<?php mpa_section_head( __( 'Uzmanlık alanlarımız', 'mpa-grup' ), __( 'Temelden çatıya,<br><em>tek elden.</em>', 'mpa-grup' ), $full ? '01' : '02', 'h2', 'section-head--light' ); ?>
+		<?php mpa_section_head( '', __( 'Hizmetlerimiz', 'mpa-grup' ), '', 'h2', 'section-head--light' ); ?>
 
 		<div class="services">
 			<?php foreach ( $services as $i => $service ) : ?>
@@ -24,7 +24,6 @@ $images   = mpa_service_images();
 						<?php if ( isset( $images[ $i ] ) ) : ?>
 							<img src="<?php echo esc_url( mpa_img( $images[ $i ][0] ) ); ?>" alt="<?php echo esc_attr( $images[ $i ][1] ); ?>" loading="lazy" width="800" height="1000">
 						<?php endif; ?>
-						<span class="service__num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
 					</div>
 					<h3 class="service__title"><?php echo esc_html( $service['title'] ); ?></h3>
 					<p><?php echo esc_html( $service['text'] ); ?></p>
@@ -41,7 +40,7 @@ $images   = mpa_service_images();
 <?php if ( $full ) : ?>
 	<section class="section section--paper" id="surec">
 		<div class="container">
-			<?php mpa_section_head( __( 'Planlamadan teslime', 'mpa-grup' ), __( 'Çalışma <em>sürecimiz</em>', 'mpa-grup' ), '02' ); ?>
+			<?php mpa_section_head( __( 'Planlamadan teslime', 'mpa-grup' ), __( 'Çalışma sürecimiz', 'mpa-grup' ) ); ?>
 			<ol class="process">
 				<?php foreach ( mpa_phases() as $i => $phase ) : ?>
 					<li class="process__step reveal">

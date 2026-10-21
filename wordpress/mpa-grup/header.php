@@ -21,7 +21,7 @@
 		<div class="preloader__inner">
 			<?php mpa_logo( 'light' ); ?>
 			<div class="preloader__bar"><span></span></div>
-			<div class="preloader__meta"><span><?php esc_html_e( 'İnşa ediliyor', 'mpa-grup' ); ?></span><span class="preloader__pct">0</span></div>
+			<div class="preloader__meta"><span class="preloader__pct">0</span></div>
 		</div>
 	</div>
 <?php endif; ?>

@@ -19,7 +19,7 @@ $topics  = array( 'Kamu yapısı', 'Özel sektör yapısı', 'Betonarme imalat',
 ?>
 <section class="section section--white" id="iletisim">
 	<div class="container">
-		<?php mpa_section_head( __( 'İletişim', 'mpa-grup' ), mpa_opt( 'contact_title' ), '01' ); ?>
+		<?php mpa_section_head( '', mpa_opt( 'contact_title' ) ); ?>
 
 		<div class="contact">
 			<div class="contact__info reveal">

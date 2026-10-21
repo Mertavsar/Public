@@ -11,10 +11,9 @@ get_template_part(
 	'template-parts/page-hero',
 	null,
 	array(
-		'eyebrow' => __( 'Referanslarımız', 'mpa-grup' ),
 		'title'   => __( 'Projelerimiz', 'mpa-grup' ),
 		'lead'    => __( 'Kamu ve özel sektör yapılarında, kaba inşaattan mimari uygulamaya referans projelerimiz.', 'mpa-grup' ),
-		'image'   => mpa_img( 'insaat-son.jpg' ),
+		'image'   => mpa_img( 'projeler/anittepe-olimpik-yuzme-havuzu-02.jpg' ),
 	)
 );
 ?>

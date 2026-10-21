@@ -45,15 +45,14 @@ $starts = implode( ',', wp_list_pluck( $phases, 'at' ) );
 				<p class="kicker"><?php echo esc_html( mpa_opt( 'hero_eyebrow' ) ); ?></p>
 				<h1 class="mpa-build__title"><?php echo mpa_kses_title( mpa_opt( 'hero_title' ) ); // phpcs:ignore ?></h1>
 				<p class="mpa-build__lead"><?php echo esc_html( mpa_opt( 'hero_text' ) ); ?></p>
-				<p class="mpa-build__cue"><span class="mpa-build__mouse" aria-hidden="true"></span><?php esc_html_e( 'Yapıyı inşa etmek için kaydırın', 'mpa-grup' ); ?></p>
+				<p class="mpa-build__cue"><span class="mpa-build__mouse" aria-hidden="true"></span><?php esc_html_e( 'Aşağı kaydırın', 'mpa-grup' ); ?></p>
 			</div>
 
 			<div class="mpa-build__phases" aria-live="polite">
-				<p class="kicker"><?php esc_html_e( 'İnşaat süreci', 'mpa-grup' ); ?> <span class="kicker__count"><b data-hud="phase">01</b> / <?php echo esc_html( sprintf( '%02d', count( $phases ) ) ); ?></span></p>
+				<p class="kicker"><?php esc_html_e( 'İnşaat süreci', 'mpa-grup' ); ?> <span class="kicker__count"><b data-hud="phase">1</b> / <?php echo (int) count( $phases ); ?></span></p>
 				<ol class="phase-list">
 					<?php foreach ( $phases as $i => $phase ) : ?>
 						<li class="phase-item<?php echo 0 === $i ? ' is-active' : ''; ?>">
-							<span class="phase-item__num" aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
 							<h2 class="phase-item__title"><span><?php echo esc_html( $phase['title'] ); ?></span></h2>
 							<p class="phase-item__text"><?php echo esc_html( $phase['text'] ); ?></p>
 						</li>
@@ -84,6 +83,6 @@ $starts = implode( ',', wp_list_pluck( $phases, 'at' ) );
 			<span class="timeline__pct">%<b data-hud="pct">0</b></span>
 		</div>
 
-		<a class="mpa-build__skip" href="#hakkimizda"><?php esc_html_e( 'Animasyonu geç', 'mpa-grup' ); ?> <?php echo mpa_icon( 'down' ); // phpcs:ignore ?></a>
+		<a class="mpa-build__skip" href="#hakkimizda"><?php esc_html_e( 'Geç', 'mpa-grup' ); ?> <?php echo mpa_icon( 'down' ); // phpcs:ignore ?></a>
 	</div>
 </section>
