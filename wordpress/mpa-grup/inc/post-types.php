@@ -181,3 +181,35 @@ function mpa_project_archive_order( $query ) {
 	}
 }
 add_action( 'pre_get_posts', 'mpa_project_archive_order' );
+
+/**
+ * Proje içeriğindeki görsellerin adresini her gösterimde ekin güncel adresinden üretir.
+ * Kurulumdan sonra alan adı ya da http/https değişse de (ör. Hostinger geçici adresinden
+ * mpagrup.com'a geçiş) galeri fotoğrafları kırılmaz.
+ *
+ * @param string $content İçerik.
+ * @return string
+ */
+function mpa_refresh_image_urls( $content ) {
+	if ( ! is_singular( 'mpa_proje' ) && ! is_page() ) {
+		return $content;
+	}
+	return preg_replace_callback(
+		'/<img\b[^>]*>/i',
+		static function ( $m ) {
+			$tag = $m[0];
+			if ( ! preg_match( '/wp-image-(\d+)/', $tag, $id ) ) {
+				return $tag;
+			}
+			$url = wp_get_attachment_image_url( (int) $id[1], 'large' );
+			if ( ! $url ) {
+				return $tag;
+			}
+			$tag = preg_replace( '/\ssrcset="[^"]*"/i', '', $tag );
+			$tag = preg_replace( '/\ssizes="[^"]*"/i', '', $tag );
+			return preg_replace( '/\ssrc="[^"]*"/i', ' src="' . esc_url( $url ) . '"', $tag, 1 );
+		},
+		$content
+	);
+}
+add_filter( 'the_content', 'mpa_refresh_image_urls', 8 );
