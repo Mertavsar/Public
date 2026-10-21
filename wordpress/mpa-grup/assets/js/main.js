@@ -65,14 +65,13 @@
 	var toggle = document.querySelector('.nav-toggle');
 	var heroEl = document.querySelector('.mpa-build') || document.querySelector('.page-hero--image');
 	var hasHero = document.body.classList.contains('has-hero') && heroEl;
-	var portrait = window.matchMedia('(max-width: 900px) and (orientation: portrait)');
 
 	function updateHeader() {
 		if (!header) {
 			return;
 		}
 		var solid = true;
-		if (hasHero && !(portrait.matches && heroEl.classList.contains('mpa-build'))) {
+		if (hasHero) {
 			solid = heroEl.getBoundingClientRect().bottom <= header.offsetHeight + 1;
 		}
 		header.classList.toggle('is-solid', solid || document.body.classList.contains('nav-open'));

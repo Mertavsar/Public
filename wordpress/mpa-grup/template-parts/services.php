@@ -13,9 +13,9 @@ $full     = isset( $args['mode'] ) && 'full' === $args['mode'];
 $services = mpa_items( 'service', 3 );
 $images   = mpa_service_images();
 ?>
-<section class="section section--ink" id="hizmetler">
+<section class="section section--white" id="hizmetler">
 	<div class="container">
-		<?php mpa_section_head( '', __( 'Hizmetlerimiz', 'mpa-grup' ), '', 'h2', 'section-head--light' ); ?>
+		<?php mpa_section_head( '', __( 'Hizmetlerimiz', 'mpa-grup' ) ); ?>
 
 		<div class="services">
 			<?php foreach ( $services as $i => $service ) : ?>
@@ -32,7 +32,7 @@ $images   = mpa_service_images();
 		</div>
 
 		<?php if ( ! $full ) : ?>
-			<p class="section-more"><a class="btn btn--light" href="<?php echo esc_url( mpa_url( 'hizmetler' ) ); ?>"><?php esc_html_e( 'Hizmetlerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
+			<p class="section-more"><a class="btn btn--dark" href="<?php echo esc_url( mpa_url( 'hizmetler' ) ); ?>"><?php esc_html_e( 'Hizmetlerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
 		<?php endif; ?>
 	</div>
 </section>
