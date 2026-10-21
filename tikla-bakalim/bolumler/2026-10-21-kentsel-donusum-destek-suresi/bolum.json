@@ -1,0 +1,603 @@
+{
+  "baslik": "İstanbul'da kentsel dönüşüm desteği neden uzatıldı? Konut başına 1.875.000 ₺'nin gerçeği",
+  "tarih": "2026-10-21",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "destek",
+    "uzatıldı",
+    "hibe",
+    "kredi",
+    "son gün"
+  ],
+  "altyazi": {
+    "bir milyon sekiz yüz yetmiş beş bin liraya kadar": "1.875.000 liraya kadar",
+    "bir milyon sekiz yüz yetmiş beş bin lira": "1.875.000 lira",
+    "bir milyon sekiz yüz yetmiş beş bin": "1.875.000",
+    "sekiz yüz yetmiş beş bin lira": "875 bin lira",
+    "sekiz yüz yetmiş beş bin lirayı": "875 bin lirayı",
+    "sekiz yüz yetmiş beş bini": "875 binini",
+    "sekiz yüz yetmiş beş bin": "875 bin",
+    "yüz yirmi beş bin lira": "125 bin lira",
+    "dört yüz otuz yedi bin beş yüz lira": "437.500 lira",
+    "yüz yirmi aya": "120 aya",
+    "yedi bin üç yüz lira": "7.300 lira",
+    "otuz bir Aralık iki bin yirmi yedi": "31 Aralık 2027",
+    "otuz bir Aralık iki bin yirmi altı": "31 Aralık 2026",
+    "Yirmi Ekim": "20 Ekim",
+    "Üç soruda": "3 soruda",
+    "üç soruda": "3 soruda",
+    "otuz dokuz": "39",
+    "on yıl": "10 yıl",
+    "iki yıl": "2 yıl",
+    "bir yıl": "1 yıl"
+  },
+  "kapak": {
+    "ikon": "🏗️",
+    "ust": "KENTSEL DÖNÜŞÜM",
+    "buyuk": "1.875.000 ₺",
+    "alt": "AMA YARISI KREDİ"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "İstanbul'da konut başına destek: bir milyon sekiz yüz yetmiş beş bin liraya kadar.",
+      "p": {
+        "ikon": "🏗️",
+        "etiket": "Konut başına destek paketi · İstanbul",
+        "deger": 1875000,
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "sayma": false,
+        "not": "hibe, kredi ve taşınma · yarısı kredi"
+      },
+      "etiket": "DESTEK",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Süresi de uzatıldı. Peki ne değişti? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NE DEĞİŞTİ?\n*3 SORUDA*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ SADE",
+          "DİLLE ANLATIYORUZ",
+          "*ABONE OL*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Yirmi Ekim tarihli Resmî Gazete'de bir karar yayımlandı.",
+      "p": {
+        "ikon": "📰",
+        "satirlar": [
+          "20 EKİM:",
+          "RESMÎ GAZETE'DE",
+          "*YENİ KARAR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "KARAR",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Karar, İstanbul'daki kentsel dönüşüm desteğinin süresini uzatıyor.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "İSTANBUL'DA",
+          "KENTSEL DÖNÜŞÜM",
+          "*DESTEĞİ UZADI*"
+        ],
+        "boy": 84
+      },
+      "etiket": "SÜRE UZADI",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Eski son tarih, bu yılın sonuydu. Yeni son gün otuz bir Aralık iki bin yirmi yedi.",
+      "p": {
+        "baslik": "Destek için son tarih",
+        "satirlar": [
+          {
+            "ikon": "⌛",
+            "metin": "Eski son gün",
+            "deger": "31 Aralık 2026",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "✅",
+            "metin": "Yeni son gün",
+            "deger": "31 Aralık 2027",
+            "renk": "yesil"
+          }
+        ],
+        "not": "süre 1 yıl uzadı"
+      },
+      "etiket": "SON GÜN",
+      "kaynak": "K1, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Yani ortada yeni bir kampanya yok. Var olan destek aynen devam ediyor.",
+      "p": {
+        "ikon": "🔁",
+        "satirlar": [
+          "YENİ KAMPANYA YOK",
+          "VAR OLAN DESTEK",
+          "*AYNEN DEVAM*"
+        ],
+        "boy": 84
+      },
+      "etiket": "NE OLDU",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Kentsel dönüşüm, depreme dayanıksız riskli binanın yıkılıp yenisinin yapılması.",
+      "p": {
+        "ikon": "🧱",
+        "satirlar": [
+          "KENTSEL DÖNÜŞÜM =",
+          "RİSKLİ BİNAYI YIKIP",
+          "*YENİSİNİ YAPMAK*"
+        ],
+        "boy": 80
+      },
+      "etiket": "TERİM",
+      "kaynak": "K5"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Devletin bu destek kampanyasının adı: Yarısı Bizden.",
+      "p": {
+        "ikon": "🤝",
+        "satirlar": [
+          "KAMPANYANIN ADI:",
+          "*YARISI BİZDEN*"
+        ],
+        "boy": 100
+      },
+      "etiket": "KAMPANYA",
+      "kaynak": "K2, K5"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Konut için sekiz yüz yetmiş beş bin lira hibe, o kadar da kredi var. Bir de yüz yirmi beş bin lira taşınma desteği.",
+      "p": {
+        "baslik": "Konut başına destek · İstanbul",
+        "satirlar": [
+          {
+            "ikon": "🎁",
+            "metin": "Hibe (geri ödenmez)",
+            "deger": "875.000 ₺",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Kredi (geri ödenir)",
+            "deger": "875.000 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🚚",
+            "metin": "Taşınma desteği",
+            "deger": "125.000 ₺",
+            "renk": "mavi"
+          }
+        ],
+        "not": "toplam 1.875.000 ₺ · kampanya şartlarına göre"
+      },
+      "etiket": "NE KADAR",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Dikkat: toplamın sekiz yüz yetmiş beş bini kredi. Onu geri ödüyorsun.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "TOPLAMIN 875 BİN ₺'Sİ",
+          "*KREDİ*",
+          "GERİ ÖDENİR"
+        ],
+        "boy": 84
+      },
+      "etiket": "DİKKAT",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "İş yeri için dört yüz otuz yedi bin beş yüz lira hibe ve o kadar kredi var.",
+      "p": {
+        "baslik": "İş yeri başına destek · İstanbul",
+        "satirlar": [
+          {
+            "ikon": "🎁",
+            "metin": "Hibe",
+            "deger": "437.500 ₺",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Kredi",
+            "deger": "437.500 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🚚",
+            "metin": "Taşınma desteği",
+            "deger": "125.000 ₺",
+            "renk": "mavi"
+          }
+        ],
+        "not": "kampanya şartlarına göre"
+      },
+      "etiket": "İŞ YERİ",
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki süre neden uzatıldı?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*UZATILDI?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE YARADIYSA",
+          "*BİR BEĞEN* BIRAK"
+        ],
+        "boy": 96
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Resmî bir gerekçe açıklanmadı. Bu yüzden şimdi anlatacağım kısım yorum.",
+      "p": {
+        "ikon": "🔍",
+        "satirlar": [
+          "RESMÎ GEREKÇE",
+          "AÇIKLANMADI",
+          "BU BÖLÜM *YORUM*"
+        ],
+        "boy": 84
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Dönüşüm tek kişinin kararıyla olmuyor. Binadaki herkesin aynı yönde ilerlemesi gerekiyor.",
+      "p": {
+        "ikon": "👥",
+        "satirlar": [
+          "TEK KİŞİYLE OLMAZ",
+          "BİNADAKİ HERKES",
+          "*AYNI YÖNDE* İLERLEMELİ"
+        ],
+        "boy": 80
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Bir binayı dönüştürmek için sakinlerin anlaşması, proje ve ruhsat gerekiyor. Bu süreç uzun sürebilir.",
+      "p": {
+        "baslik": "Kabaca bir bina dönüşümü (yorum)",
+        "adimlar": [
+          {
+            "ikon": "📋",
+            "metin": "Riskli yapı kararı"
+          },
+          {
+            "ikon": "🤝",
+            "metin": "Sakinler *anlaşır*"
+          },
+          {
+            "ikon": "📐",
+            "metin": "Proje ve ruhsat"
+          }
+        ]
+      },
+      "etiket": "SÜREÇ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Desteğe girmek için son tarihe kadar işlem yapmak gerekiyor. Tarih uzayınca zaman kazanıldı.",
+      "p": {
+        "ikon": "✍️",
+        "satirlar": [
+          "SON TARİHE KADAR",
+          "İŞLEM GEREKİR",
+          "*ZAMAN KAZANILDI*"
+        ],
+        "boy": 80
+      },
+      "etiket": "SON TARİH",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Kararda yeni para yok. Tutarlar aynı, değişen sadece süre.",
+      "p": {
+        "ikon": "🟰",
+        "satirlar": [
+          "TUTARLAR AYNI",
+          "DEĞİŞEN: *SADECE SÜRE*"
+        ],
+        "boy": 96
+      },
+      "etiket": "NE DEĞİŞMEDİ",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebini nasıl etkiler?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "SENİ NASIL\n*ETKİLER?*",
+        "boy": 110
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "İstanbul'da riskli bina sahibiysen, kampanyadan yararlanabilirsin. Kaynaklara göre gelir şartı aranmıyor.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "İSTANBUL'DA",
+          "RİSKLİ BİNA SAHİBİ:",
+          "*GELİR ŞARTI YOK*"
+        ],
+        "boy": 80
+      },
+      "etiket": "KİM",
+      "kaynak": "K2, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Sekiz yüz yetmiş beş bin lirayı yüz yirmi aya bölersen, ayda yaklaşık yedi bin üç yüz lira eder.",
+      "p": {
+        "baslik": "Örnek: 10 yıllık kredi taksiti (güncelleme hariç)",
+        "ikon": "🧮",
+        "ogeler": [
+          "875.000 ₺",
+          "÷",
+          "120 ay",
+          "=",
+          "≈ 7.300 ₺/ay"
+        ]
+      },
+      "etiket": "ÖRNEK HESAP",
+      "kaynak": "K2, K3: 875.000 / 120 = 7.291,67"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Gerçekte taksit biraz artar. İlk yıl faiz yok, sonra tutar enflasyonun yarısı kadar güncellenir.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "İLK YIL FAİZ YOK",
+          "SONRA: ENFLASYONUN",
+          "*YARISI KADAR* ARTAR"
+        ],
+        "boy": 80
+      },
+      "etiket": "GÜNCELLEME",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Taşınma desteğini seçersen, geri ödemeyeceğin kısım hibe ve taşınma ile toplam bir milyon lira.",
+      "p": {
+        "baslik": "Geri ödenmeyen kısım (taşınma desteği seçilirse)",
+        "ikon": "🧮",
+        "ogeler": [
+          "875.000 ₺",
+          "+",
+          "125.000 ₺",
+          "=",
+          "1.000.000 ₺"
+        ]
+      },
+      "etiket": "GERİ ÖDENMEZ",
+      "kaynak": "K2, K3: 875.000 + 125.000 = 1.000.000"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Taksitler, yapı ruhsatından iki yıl sonra başlıyor. Vade on yıl.",
+      "p": {
+        "ikon": "🗓️",
+        "satirlar": [
+          "RUHSATTAN 2 YIL SONRA",
+          "TAKSİT BAŞLAR",
+          "VADE: *10 YIL*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ÖDEME",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kredi almak zorunda değilsin. Kaynaklara göre hibeyi tek başına kullanmak mümkün.",
+      "p": {
+        "ikon": "🙋",
+        "satirlar": [
+          "KREDİ ZORUNLU DEĞİL",
+          "HİBE *TEK BAŞINA*",
+          "KULLANILABİLİR"
+        ],
+        "boy": 84
+      },
+      "etiket": "SEÇENEK",
+      "kaynak": "K2, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Aylık kira yardımı ile taşınma desteği birlikte alınmıyor. İkisinden birini seçiyorsun.",
+      "p": {
+        "ikon": "🔀",
+        "satirlar": [
+          "KİRA YARDIMI YA DA",
+          "TAŞINMA DESTEĞİ",
+          "*İKİSİNDEN BİRİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "SEÇİM",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Takip edeceğin üç şey: binanın durumu, sakinlerin kararı ve Bakanlığın güncel şartları.",
+      "p": {
+        "baslik": "Takip listesi",
+        "satirlar": [
+          {
+            "ikon": "🏢",
+            "metin": "Binan riskli mi?",
+            "deger": "rapora bak",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🤝",
+            "metin": "Sakinler",
+            "deger": "anlaşıyor mu?",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "📑",
+            "metin": "Güncel şartlar",
+            "deger": "Bakanlık sayfası",
+            "renk": "beyaz"
+          }
+        ]
+      },
+      "etiket": "TAKİP"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: destek aynı, süre bir yıl uzadı. Ama toplamın yarısı kredi.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "DESTEK AYNI",
+          "SÜRE *1 YIL UZADI*",
+          "YARISI KREDİ"
+        ],
+        "boy": 84
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Şartlar değişebilir. Güncel bilgi için Çevre, Şehircilik Bakanlığı'nın sayfasına bak.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "ŞARTLAR",
+          "*DEĞİŞEBİLİR*",
+          "BAKANLIK SAYFASINA BAK"
+        ],
+        "boy": 84
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SEN NE DÜŞÜNÜYORSUN?",
+          "KONUYU *YORUMA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "20 Ekim 2026 Resmî Gazete: İstanbul kentsel dönüşüm yapım yardımı süresi 31 Aralık 2027'ye uzatıldı (11902 sayılı Cumhurbaşkanı Kararı; yalnızca süre, tutar değişikliği yok) — https://www.hurriyet.com.tr/bilgi/galeri/resmi-gazete-atama-kararlari-20-ekim-2026-bazi-bakanlik-ve-kamu-kurumlarina-iliskin-atama-ve-gorevden-alma-kararlari-yayinlandi-bugun-43347897 ; https://www.gazetevatan.com/galeri/kentsel-donusumde-beklenen-karar-cikti-yarisi-bizden-destegi-2027ye-uzatildi-2418988 ; https://www.tv5.com.tr/resmi-gazetede-yayimlandi-istanbulda-kentsel-donusum-yardim-suresi-uzatildi",
+    "K2": "Konut: 875 bin ₺ hibe + 875 bin ₺ kredi + 125 bin ₺ taşınma = 1.875.000 ₺; kredi ruhsattan 2 yıl sonra başlar, 10 yıl vade, ilk yıl faizsiz, sonra TÜFE'nin yarısı kadar güncelleme; kira yardımı ya da taşınma desteğinden biri — https://csb.gov.tr/yarisi-bizden-kampanyasinda-destek-tutarlari-artirildi-bakanlik-faaliyetleri-41622 ; https://www.ntv.com.tr/ntvpara/galeri-istanbullulara-1-milyon-875-bin-lira-veriliyor-sure-uzatildi-1747089 ; https://www.milligazete.com.tr/yarisi-bizden-destegi-ne-kadar-875-bin-tl-hibe-kimlere-veriliyor-kredi-geri-odemesi-ne-zaman-tasinma-yardimi-kac-tl-1",
+    "K3": "İş yeri: 437.500 ₺ hibe + 437.500 ₺ kredi + 125.000 ₺ taşınma — https://www.habergazetesi.com.tr/1-milyon-875-bin-tlye-kadar-destek-yarisi-bizden-kampanyasina-basvurular-suruyor ; https://www.memurlar.net/haber/1134738/yarisi-bizden-kampanyasi-hakkinda-merak-edilen-16-soru.html",
+    "K4": "Önceki son tarih 31 Aralık 2026 (hibe taahhütnamesi ve kredi sözleşmesi) — https://www.karar.com/sehir-haberleri/istanbulda-ev-ve-is-yerleri-icin-kentsel-donusum-destegi-uzatildi-2032423 ; https://www.hukukihaber.net/istanbul-kentsel-donusumune-yon-veren-yeni-cumhurbaskanligi-karari-resmi-gazetede-yayimlandi",
+    "K5": "Kampanya: İstanbul'daki riskli yapı sahipleri, 6306 sayılı Kanun kapsamı; gelir/kredi notu şartı yok — https://csb.gov.tr/haberler/istanbul-icin-yarisi-bizden-kampanyasi-302278 ; https://medyascope.tv/2025/04/30/yarisi-bizden-kampanyasi-nedir-nasil-basvurulur/"
+  }
+}
