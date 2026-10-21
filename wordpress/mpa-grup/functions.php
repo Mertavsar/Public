@@ -150,6 +150,10 @@ function mpa_excerpt_length() {
 }
 add_filter( 'excerpt_length', 'mpa_excerpt_length' );
 
+// WordPress 6.7'nin "sizes=auto" eklentisi tarayıcıda görselin oranını yok sayar;
+// sabit oranlı çerçevelerde (galeri, proje kartları) alttaki görseller sıfır yükseklikte kalır.
+add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
+
 /**
  * Tema içeriği Türkçe olduğundan sayfa dili Türkçe işaretlenir; böylece büyük harfe
  * çevrilen başlıklarda "i" doğru şekilde "İ" olur (MİMARİ İMALAT).

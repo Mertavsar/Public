@@ -213,3 +213,22 @@ function mpa_refresh_image_urls( $content ) {
 	);
 }
 add_filter( 'the_content', 'mpa_refresh_image_urls', 8 );
+
+/**
+ * Kapak fotoğrafı proje sayfasının girişinde zaten büyük gösterilir; galeride tekrar edilmez.
+ *
+ * @param string $content Yazı içeriği.
+ * @return string
+ */
+function mpa_skip_cover_in_gallery( $content ) {
+	if ( ! is_singular( 'mpa_proje' ) || ! has_post_thumbnail() ) {
+		return $content;
+	}
+	$id = (int) get_post_thumbnail_id();
+	return preg_replace(
+		'#(?:<!-- wp:image \{[^}]*\} -->\s*)?<figure class="wp-block-image[^"]*">(?:(?!</figure>).)*?\bwp-image-' . $id . '\b(?:(?!</figure>).)*</figure>(?:\s*<!-- /wp:image -->)?#s',
+		'',
+		$content
+	);
+}
+add_filter( 'the_content', 'mpa_skip_cover_in_gallery', 7 );

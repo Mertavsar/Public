@@ -632,11 +632,10 @@ html.js .reveal-img.is-in img { transform: none; }
 .entry__content a { color: var(--accent); }
 .entry__content figure { margin-left: 0; margin-right: 0; }
 .entry__content figcaption { font-size: 14px; color: var(--muted); }
-.entry__content .wp-block-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 48px 0 0; }
+/* Galeri: eşit küçük kareler; fotoğrafın tamamı tıklayınca tam ekranda açılır */
+.entry__content .wp-block-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 48px 0 0; }
 .entry__content .wp-block-gallery .wp-block-image { position: relative; margin: 0; width: 100% !important; overflow: hidden; }
-.entry__content .wp-block-gallery .wp-block-image:first-child { grid-column: 1 / -1; }
-.entry__content .wp-block-gallery img { width: 100%; height: 100% !important; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1s var(--ease); }
-.entry__content .wp-block-gallery .wp-block-image:first-child img { aspect-ratio: 16 / 9; }
+.entry__content .wp-block-gallery img { width: 100%; height: auto !important; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1s var(--ease); }
 .entry__content .wp-block-gallery figcaption {
 	position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 30px 16px 12px;
 	background: linear-gradient(0deg, rgba(8, 12, 16, .7), transparent) !important;
@@ -745,7 +744,7 @@ html.js .reveal-img.is-in img { transform: none; }
 	.field-row { grid-template-columns: 1fr; gap: 0; }
 	.site-footer__grid { grid-template-columns: 1fr; }
 	.process { grid-template-columns: 1fr; }
-	.entry__content .wp-block-gallery { grid-template-columns: 1fr; }
+	.entry__content .wp-block-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 		.btn--lg { width: 100%; }
 	.cta .btn-row { width: 100%; }
 	.wa-float { right: 14px; bottom: 76px; }
@@ -780,6 +779,10 @@ html.js .reveal-img.is-in img { transform: none; }
 	color: var(--muted) !important; font-family: var(--ff-body); font-size: 13px; font-weight: 400; letter-spacing: 0; text-align: left;
 }
 .entry__content .wp-block-gallery .wp-block-image:hover img { transform: none; }
+@media (max-width: 600px) {
+	.entry__content .wp-block-gallery .wp-block-image { padding: 6px; }
+	.entry__content .wp-block-gallery figcaption { padding-top: 7px !important; font-size: 12px; line-height: 1.35; }
+}
 .page-hero--split .page-hero__media { padding: 12px; background: var(--ink-2); border: 1px solid var(--line-dark); box-shadow: none; }
 .page-hero--split .page-hero__media img { height: 100%; }
 

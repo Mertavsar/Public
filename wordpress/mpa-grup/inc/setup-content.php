@@ -185,3 +185,44 @@ function mpa_fix_seed_captions() {
 }
 add_action( 'admin_init', 'mpa_fix_seed_captions' );
 add_action( 'after_switch_theme', 'mpa_fix_seed_captions', 20 );
+
+/**
+ * Önceki sürümle eklenmiş kapak fotoğraflarını kenarındaki siyah katalog çizgisi
+ * kırpılmış hâlleriyle değiştirir (bir kez).
+ */
+function mpa_fix_seed_borders() {
+	if ( get_option( 'mpa_borders_v1' ) ) {
+		return;
+	}
+	update_option( 'mpa_borders_v1', 1 );
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	foreach ( mpa_seed_projects() as $seed ) {
+		$file = $seed['images'][0][0];
+		$src  = MPA_DIR . '/assets/img/projeler/' . $file;
+		$ids  = get_posts(
+			array(
+				'post_type'   => 'attachment',
+				'post_status' => 'inherit',
+				'numberposts' => -1,
+				'fields'      => 'ids',
+				'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+					array(
+						'key'     => '_wp_attached_file',
+						'value'   => pathinfo( $file, PATHINFO_FILENAME ),
+						'compare' => 'LIKE',
+					),
+				),
+			)
+		);
+		foreach ( $ids as $id ) {
+			$path = get_attached_file( $id );
+			if ( ! $path || ! is_writable( $path ) || ! is_readable( $src ) ) {
+				continue;
+			}
+			copy( $src, $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $path ) );
+		}
+	}
+}
+add_action( 'admin_init', 'mpa_fix_seed_borders' );
+add_action( 'after_switch_theme', 'mpa_fix_seed_borders', 20 );
