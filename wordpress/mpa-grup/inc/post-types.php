@@ -163,3 +163,21 @@ function mpa_message_column_content( $column, $post_id ) {
 	}
 }
 add_action( 'manage_mpa_mesaj_posts_custom_column', 'mpa_message_column_content', 10, 2 );
+
+/**
+ * Projeler sayfasında sıralama ana sayfayla aynı: önce "Sıra" alanı, sonra tarih.
+ *
+ * @param WP_Query $query Sorgu.
+ */
+function mpa_project_archive_order( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && $query->is_post_type_archive( 'mpa_proje' ) ) {
+		$query->set(
+			'orderby',
+			array(
+				'menu_order' => 'ASC',
+				'date'       => 'DESC',
+			)
+		);
+	}
+}
+add_action( 'pre_get_posts', 'mpa_project_archive_order' );

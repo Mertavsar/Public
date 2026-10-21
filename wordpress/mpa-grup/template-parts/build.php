@@ -66,8 +66,8 @@ $starts = implode( ',', wp_list_pluck( $phases, 'at' ) );
 				<h2 class="mpa-build__title"><?php echo mpa_kses_title( mpa_opt( 'final_title' ) ); // phpcs:ignore ?></h2>
 				<p class="mpa-build__lead"><?php echo esc_html( mpa_opt( 'final_text' ) ); ?></p>
 				<div class="btn-row">
-					<a class="btn btn--accent" href="#projeler"><?php esc_html_e( 'Projelerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
-					<a class="btn btn--ghost-light" href="#iletisim"><?php esc_html_e( 'Teklif Alın', 'mpa-grup' ); ?></a>
+					<a class="btn btn--accent" href="<?php echo esc_url( mpa_url( 'projeler' ) ); ?>"><?php esc_html_e( 'Projelerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
+					<a class="btn btn--ghost-light" href="<?php echo esc_url( mpa_url( 'iletisim' ) ); ?>"><?php esc_html_e( 'Teklif Alın', 'mpa-grup' ); ?></a>
 				</div>
 			</div>
 		</div>

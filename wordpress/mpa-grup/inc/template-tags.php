@@ -266,19 +266,24 @@ function mpa_project_data( $post ) {
 }
 
 /**
- * Menü atanmadığında tek sayfa bağlantıları.
+ * Menü atanmadığında kullanılan bağlantılar: Kurumsal, Hizmetler, Projeler, İletişim.
  */
 function mpa_menu_fallback() {
-	$home  = home_url( '/' );
 	$links = array(
-		'#hakkimizda' => __( 'Kurumsal', 'mpa-grup' ),
-		'#hizmetler'  => __( 'Hizmetler', 'mpa-grup' ),
-		'#projeler'   => __( 'Projeler', 'mpa-grup' ),
-		'#iletisim'   => __( 'İletişim', 'mpa-grup' ),
+		'kurumsal'  => __( 'Kurumsal', 'mpa-grup' ),
+		'hizmetler' => __( 'Hizmetler', 'mpa-grup' ),
+		'projeler'  => __( 'Projeler', 'mpa-grup' ),
+		'iletisim'  => __( 'İletişim', 'mpa-grup' ),
 	);
 	echo '<ul class="menu">';
-	foreach ( $links as $anchor => $label ) {
-		printf( '<li><a href="%1$s">%2$s</a></li>', esc_url( $home . $anchor ), esc_html( $label ) );
+	foreach ( $links as $key => $label ) {
+		printf(
+			'<li class="%1$s"><a href="%2$s"%3$s>%4$s</a></li>',
+			mpa_is_current( $key ) ? 'current-menu-item' : '',
+			esc_url( mpa_url( $key ) ),
+			mpa_is_current( $key ) ? ' aria-current="page"' : '',
+			esc_html( $label )
+		);
 	}
 	echo '</ul>';
 }

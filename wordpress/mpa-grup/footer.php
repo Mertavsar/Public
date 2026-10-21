@@ -40,7 +40,7 @@ $whatsapp = mpa_opt( 'whatsapp' );
 			<h2 class="site-footer__title"><?php esc_html_e( 'Hizmetler', 'mpa-grup' ); ?></h2>
 			<ul class="menu">
 				<?php foreach ( mpa_items( 'service', 3 ) as $service ) : ?>
-					<li><a href="<?php echo esc_url( home_url( '/#hizmetler' ) ); ?>"><?php echo esc_html( $service['title'] ); ?></a></li>
+					<li><a href="<?php echo esc_url( mpa_url( 'hizmetler' ) ); ?>"><?php echo esc_html( $service['title'] ); ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
@@ -57,7 +57,7 @@ $whatsapp = mpa_opt( 'whatsapp' );
 				<?php if ( $address ) : ?>
 					<li><?php echo mpa_icon( 'pin' ); // phpcs:ignore ?><span><?php echo nl2br( esc_html( $address ) ); ?></span></li>
 				<?php endif; ?>
-				<li><?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?><a href="<?php echo esc_url( home_url( '/#iletisim' ) ); ?>"><?php esc_html_e( 'İletişim formu', 'mpa-grup' ); ?></a></li>
+				<li><?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?><a href="<?php echo esc_url( mpa_url( 'iletisim' ) ); ?>"><?php esc_html_e( 'İletişim formu', 'mpa-grup' ); ?></a></li>
 			</ul>
 		</div>
 	</div>

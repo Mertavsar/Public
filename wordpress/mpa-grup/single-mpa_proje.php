@@ -37,10 +37,15 @@ while ( have_posts() ) :
 	<nav class="container container--narrow post-nav" aria-label="<?php esc_attr_e( 'Diğer projeler', 'mpa-grup' ); ?>">
 		<?php
 		previous_post_link( '<span class="post-nav__prev">%link</span>', '&larr; %title' );
+		?>
+		<a class="post-nav__all" href="<?php echo esc_url( mpa_url( 'projeler' ) ); ?>"><?php esc_html_e( 'Tüm projeler', 'mpa-grup' ); ?></a>
+		<?php
 		next_post_link( '<span class="post-nav__next">%link</span>', '%title &rarr;' );
 		?>
 	</nav>
 	<?php
 endwhile;
+
+get_template_part( 'template-parts/cta' );
 
 get_footer();

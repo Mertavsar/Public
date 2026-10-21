@@ -19,6 +19,7 @@ require MPA_DIR . '/inc/post-types.php';
 require MPA_DIR . '/inc/customizer.php';
 require MPA_DIR . '/inc/contact.php';
 require MPA_DIR . '/inc/setup-content.php';
+require MPA_DIR . '/inc/pages.php';
 
 /**
  * Tema destekleri ve menü konumları.

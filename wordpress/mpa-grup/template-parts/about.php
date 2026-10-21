@@ -1,6 +1,6 @@
 <?php
 /**
- * Kurumsal / Hakkımızda.
+ * Kurumsal / Hakkımızda. Ana sayfada kısa tanıtım (teaser), Kurumsal sayfasında tam metin.
  *
  * @package MPA_Grup
  */
@@ -10,8 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $image_id   = (int) mpa_opt( 'about_image' );
-$paragraphs = array_filter( array_map( 'trim', preg_split( '/\n\s*\n/', (string) mpa_opt( 'about_text' ) ) ) );
-$stats      = mpa_stats();
+$full       = isset( $args['mode'] ) && 'full' === $args['mode'];
+$paragraphs = array_values( array_filter( array_map( 'trim', preg_split( '/\n\s*\n/', (string) mpa_opt( 'about_text' ) ) ) ) );
+$paragraphs = $full ? $paragraphs : array_slice( $paragraphs, 0, 2 );
+$stats      = $full ? mpa_stats() : array();
 ?>
 <section class="section section--paper" id="hakkimizda">
 	<div class="container">
@@ -43,7 +45,12 @@ $stats      = mpa_stats();
 				<?php foreach ( $paragraphs as $i => $paragraph ) : ?>
 					<p<?php echo 0 === $i ? ' class="about__first"' : ''; ?>><?php echo esc_html( $paragraph ); ?></p>
 				<?php endforeach; ?>
-				<a class="link-arrow" href="#projeler"><?php esc_html_e( 'Referans projelerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
+				<div class="about__actions">
+					<?php if ( ! $full ) : ?>
+						<a class="btn btn--dark" href="<?php echo esc_url( mpa_url( 'kurumsal' ) ); ?>"><?php esc_html_e( 'Kurumsal', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
+					<?php endif; ?>
+					<a class="link-arrow" href="<?php echo esc_url( mpa_url( 'projeler' ) ); ?>"><?php esc_html_e( 'Referans projelerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
+				</div>
 			</div>
 		</div>
 

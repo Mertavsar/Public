@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function mpa_after_switch_theme() {
 	mpa_register_post_types();
 	mpa_import_seed_projects();
+	mpa_create_core_pages();
 	flush_rewrite_rules();
 	set_transient( 'mpa_activated', 1, HOUR_IN_SECONDS );
 }

@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $eyebrow = isset( $args['eyebrow'] ) ? $args['eyebrow'] : '';
 $title   = isset( $args['title'] ) ? $args['title'] : '';
 $meta    = isset( $args['meta'] ) ? array_filter( (array) $args['meta'] ) : array();
+$lead    = isset( $args['lead'] ) ? $args['lead'] : '';
 ?>
 <section class="page-hero">
 	<div class="container">
@@ -19,6 +20,9 @@ $meta    = isset( $args['meta'] ) ? array_filter( (array) $args['meta'] ) : arra
 			<p class="eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
 		<?php endif; ?>
 		<h1 class="page-hero__title"><?php echo esc_html( $title ); ?></h1>
+		<?php if ( $lead ) : ?>
+			<p class="page-hero__lead"><?php echo esc_html( $lead ); ?></p>
+		<?php endif; ?>
 		<?php if ( $meta ) : ?>
 			<dl class="page-hero__meta">
 				<?php foreach ( $meta as $label => $value ) : ?>

@@ -13,6 +13,7 @@ get_template_part(
 	array(
 		'eyebrow' => __( 'Referanslarımız', 'mpa-grup' ),
 		'title'   => __( 'Projelerimiz', 'mpa-grup' ),
+		'lead'    => __( 'Kamu ve özel sektör yapılarında, kaba inşaattan mimari uygulamaya referans projelerimiz.', 'mpa-grup' ),
 	)
 );
 ?>
@@ -38,4 +39,5 @@ get_template_part(
 	</div>
 </section>
 <?php
+get_template_part( 'template-parts/cta' );
 get_footer();

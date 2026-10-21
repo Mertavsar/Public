@@ -1,6 +1,6 @@
 <?php
 /**
- * Referans projeler: katalogdaki "Projelerimiz" sayfasının satır düzeni.
+ * Ana sayfada öne çıkan referans projeler; tamamı /projeler/ sayfasında.
  *
  * @package MPA_Grup
  */
@@ -9,9 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$projects    = mpa_get_projects( 6 );
-$archive_url = get_post_type_archive_link( 'mpa_proje' );
-$has_posts   = wp_count_posts( 'mpa_proje' )->publish > 0;
+$projects  = mpa_get_projects( 3 );
+$has_posts = wp_count_posts( 'mpa_proje' )->publish > 0;
 ?>
 <section class="section section--paper" id="projeler">
 	<div class="container">
@@ -32,15 +31,8 @@ $has_posts   = wp_count_posts( 'mpa_proje' )->publish > 0;
 			?>
 		</div>
 
-		<?php if ( $has_posts && $archive_url ) : ?>
-			<p class="project-list__more"><a class="btn btn--dark" href="<?php echo esc_url( $archive_url ); ?>"><?php esc_html_e( 'Tüm projeler', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
+		<?php if ( $has_posts ) : ?>
+			<p class="section-more"><a class="btn btn--dark" href="<?php echo esc_url( mpa_url( 'projeler' ) ); ?>"><?php esc_html_e( 'Tüm projeler', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
 		<?php endif; ?>
-	</div>
-</section>
-
-<section class="cta-band">
-	<div class="container cta-band__inner">
-		<p class="cta-band__text"><?php esc_html_e( 'Kamu ve özel sektör yapılarınızda kaba inşaattan mimari uygulamaya güvenilir çözüm ortağınız.', 'mpa-grup' ); ?></p>
-		<a class="btn btn--accent" href="#iletisim"><?php esc_html_e( 'Teklif Alın', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
 	</div>
 </section>

@@ -33,7 +33,7 @@
 				)
 			);
 			?>
-			<a class="btn btn--accent btn--sm main-nav__cta" href="<?php echo esc_url( home_url( '/#iletisim' ) ); ?>"><?php esc_html_e( 'Teklif Alın', 'mpa-grup' ); ?></a>
+			<a class="btn btn--accent btn--sm main-nav__cta" href="<?php echo esc_url( mpa_url( 'iletisim' ) ); ?>"><?php esc_html_e( 'Teklif Alın', 'mpa-grup' ); ?></a>
 		</nav>
 
 		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="ana-menu">
