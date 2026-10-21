@@ -16,10 +16,21 @@
 <?php wp_body_open(); ?>
 <a class="skip-link" href="#icerik"><?php esc_html_e( 'İçeriğe geç', 'mpa-grup' ); ?></a>
 
+<?php if ( is_front_page() ) : ?>
+	<div class="preloader" aria-hidden="true">
+		<div class="preloader__inner">
+			<?php mpa_logo( 'light' ); ?>
+			<div class="preloader__bar"><span></span></div>
+			<div class="preloader__meta"><span><?php esc_html_e( 'İnşa ediliyor', 'mpa-grup' ); ?></span><span class="preloader__pct">0</span></div>
+		</div>
+	</div>
+<?php endif; ?>
+
 <header class="site-header">
 	<div class="container site-header__inner">
 		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 			<?php mpa_logo( 'dark' ); ?>
+			<?php mpa_logo( 'light' ); ?>
 		</a>
 
 		<nav class="main-nav" id="ana-menu" aria-label="<?php esc_attr_e( 'Ana menü', 'mpa-grup' ); ?>">

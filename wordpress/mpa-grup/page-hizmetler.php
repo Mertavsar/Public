@@ -16,6 +16,7 @@ while ( have_posts() ) :
 			'eyebrow' => mpa_opt( 'company_name' ),
 			'title'   => get_the_title(),
 			'lead'    => mpa_opt( 'hero_text' ),
+			'image'   => mpa_img( 'hero-hizmetler.jpg' ),
 		)
 	);
 	get_template_part( 'template-parts/services', null, array( 'mode' => 'full' ) );

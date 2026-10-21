@@ -15,34 +15,91 @@
 		return t * t * (3 - 2 * t);
 	}
 
+	/* ---------- Giriş ekranı ---------- */
+	var pre = document.querySelector('.preloader');
+	var prePct = pre ? pre.querySelector('.preloader__pct') : null;
+	var preShown = 0;
+	var preDone = !pre || root.classList.contains('seen');
+
+	function preloaderSet(f) {
+		if (preDone || f < preShown) {
+			return;
+		}
+		preShown = f;
+		pre.style.setProperty('--load', f.toFixed(3));
+		prePct.textContent = String(Math.round(f * 100));
+	}
+
+	function preloaderDone() {
+		if (preDone) {
+			return;
+		}
+		preloaderSet(1);
+		preDone = true;
+		setTimeout(function () {
+			pre.classList.add('is-done');
+		}, 300);
+		try {
+			sessionStorage.setItem('mpaSeen', '1');
+		} catch (e) {}
+	}
+
+	if (!preDone) {
+		// Gerçek ilerleme gelmezse bile çubuk yavaşça dolar; en geç 6 sn'de açılır.
+		var fake = 0;
+		var fakeTimer = setInterval(function () {
+			fake = Math.min(0.85, fake + 0.04);
+			preloaderSet(fake);
+			if (preDone) {
+				clearInterval(fakeTimer);
+			}
+		}, 120);
+		setTimeout(preloaderDone, 6000);
+		if (!document.querySelector('.mpa-build__video')) {
+			window.addEventListener('load', preloaderDone);
+		}
+	}
+
 	/* ---------- Menü ---------- */
 	var header = document.querySelector('.site-header');
 	var toggle = document.querySelector('.nav-toggle');
+	var heroEl = document.querySelector('.mpa-build') || document.querySelector('.page-hero--image');
+	var hasHero = document.body.classList.contains('has-hero') && heroEl;
+	var portrait = window.matchMedia('(max-width: 900px) and (orientation: portrait)');
+
+	function updateHeader() {
+		if (!header) {
+			return;
+		}
+		var solid = true;
+		if (hasHero && !(portrait.matches && heroEl.classList.contains('mpa-build'))) {
+			solid = heroEl.getBoundingClientRect().bottom <= header.offsetHeight + 1;
+		}
+		header.classList.toggle('is-solid', solid || document.body.classList.contains('nav-open'));
+		header.classList.toggle('is-scrolled', window.scrollY > 8);
+	}
 
 	if (toggle) {
 		toggle.addEventListener('click', function () {
 			var open = toggle.getAttribute('aria-expanded') !== 'true';
 			toggle.setAttribute('aria-expanded', String(open));
 			document.body.classList.toggle('nav-open', open);
+			updateHeader();
 		});
 		document.querySelectorAll('.main-nav a').forEach(function (link) {
 			link.addEventListener('click', function () {
 				toggle.setAttribute('aria-expanded', 'false');
 				document.body.classList.remove('nav-open');
+				updateHeader();
 			});
 		});
 	}
-
-	function onScrollHeader() {
-		if (header) {
-			header.classList.toggle('is-scrolled', window.scrollY > 8);
-		}
-	}
-	window.addEventListener('scroll', onScrollHeader, { passive: true });
-	onScrollHeader();
+	window.addEventListener('scroll', updateHeader, { passive: true });
+	window.addEventListener('resize', updateHeader);
+	updateHeader();
 
 	/* ---------- Görünür olunca belirme ---------- */
-	var reveals = document.querySelectorAll('.reveal');
+	var reveals = document.querySelectorAll('.reveal, .reveal-img');
 	if ('IntersectionObserver' in window && !reduceMotion) {
 		var io = new IntersectionObserver(function (entries) {
 			entries.forEach(function (entry) {
@@ -56,6 +113,162 @@
 	} else {
 		reveals.forEach(function (el) { el.classList.add('is-in'); });
 	}
+
+	/* ---------- Kaydırdıkça kelime kelime aydınlanan cümle ---------- */
+	document.querySelectorAll('[data-words]').forEach(function (el) {
+		var words = [];
+		(function split(node) {
+			[].slice.call(node.childNodes).forEach(function (child) {
+				if (child.nodeType === 3) {
+					var frag = document.createDocumentFragment();
+					child.textContent.split(/(\s+)/).forEach(function (part) {
+						if (!part) {
+							return;
+						}
+						if (/^\s+$/.test(part)) {
+							frag.appendChild(document.createTextNode(part));
+						} else {
+							var span = document.createElement('span');
+							span.className = 'w';
+							span.textContent = part;
+							frag.appendChild(span);
+							words.push(span);
+						}
+					});
+					node.replaceChild(frag, child);
+				} else if (child.nodeType === 1) {
+					split(child);
+				}
+			});
+		})(el);
+
+		if (reduceMotion) {
+			words.forEach(function (w) { w.classList.add('is-lit'); });
+			return;
+		}
+		var lit = -1;
+		function light() {
+			var r = el.getBoundingClientRect();
+			var vh = window.innerHeight;
+			var f = clamp((vh * 0.85 - r.top) / (r.height + vh * 0.35), 0, 1);
+			var n = Math.round(f * words.length);
+			if (n !== lit) {
+				words.forEach(function (w, i) { w.classList.toggle('is-lit', i < n); });
+				lit = n;
+			}
+		}
+		window.addEventListener('scroll', light, { passive: true });
+		window.addEventListener('resize', light);
+		light();
+	});
+
+	/* ---------- Tam ekran galeri ---------- */
+	document.querySelectorAll('[data-lightbox]').forEach(function (box) {
+		var imgs = [].slice.call(box.querySelectorAll('img'));
+		if (!imgs.length) {
+			return;
+		}
+		var lb = document.createElement('div');
+		lb.className = 'lightbox';
+		lb.setAttribute('role', 'dialog');
+		lb.setAttribute('aria-modal', 'true');
+		lb.setAttribute('aria-label', 'Galeri');
+		var arrow = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+		lb.innerHTML = '<p class="lightbox__cap"></p>' +
+			'<button type="button" class="lightbox__btn lightbox__close" aria-label="Kapat">&times;</button>' +
+			'<button type="button" class="lightbox__btn lightbox__prev" aria-label="Önceki">' + arrow + '</button>' +
+			'<button type="button" class="lightbox__btn lightbox__next" aria-label="Sonraki">' + arrow + '</button>';
+		document.body.appendChild(lb);
+		var big = null;
+		var cap = lb.querySelector('.lightbox__cap');
+		var current = 0;
+		var opener = null;
+
+		function largest(img) {
+			var best = img.currentSrc || img.src;
+			var max = 0;
+			(img.getAttribute('srcset') || '').split(',').forEach(function (c) {
+				var parts = c.trim().split(/\s+/);
+				var w = parseInt(parts[1], 10) || 0;
+				if (w > max) {
+					max = w;
+					best = parts[0];
+				}
+			});
+			return best;
+		}
+		function show(i) {
+			current = (i + imgs.length) % imgs.length;
+			var img = imgs[current];
+			var fig = img.closest('figure');
+			var fc = fig ? fig.querySelector('figcaption') : null;
+			if (!big) {
+				big = document.createElement('img');
+				big.className = 'lightbox__img';
+				lb.insertBefore(big, lb.firstChild);
+			}
+			big.src = largest(img);
+			big.alt = img.alt || '';
+			cap.textContent = (fc ? fc.textContent + ' — ' : '') + (current + 1) + ' / ' + imgs.length;
+		}
+		function open(i) {
+			opener = document.activeElement;
+			show(i);
+			lb.classList.add('is-open');
+			document.documentElement.style.overflow = 'hidden';
+			lb.querySelector('.lightbox__close').focus();
+		}
+		function close() {
+			lb.classList.remove('is-open');
+			document.documentElement.style.overflow = '';
+			if (opener && opener.focus) {
+				opener.focus();
+			}
+		}
+		imgs.forEach(function (img, i) {
+			img.setAttribute('tabindex', '0');
+			img.setAttribute('role', 'button');
+			img.addEventListener('click', function () { open(i); });
+			img.addEventListener('keydown', function (e) {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					open(i);
+				}
+			});
+		});
+		lb.querySelector('.lightbox__close').addEventListener('click', close);
+		lb.querySelector('.lightbox__prev').addEventListener('click', function () { show(current - 1); });
+		lb.querySelector('.lightbox__next').addEventListener('click', function () { show(current + 1); });
+		lb.addEventListener('click', function (e) {
+			if (e.target === lb) {
+				close();
+			}
+		});
+		document.addEventListener('keydown', function (e) {
+			if (!lb.classList.contains('is-open')) {
+				return;
+			}
+			if (e.key === 'Escape') {
+				close();
+			} else if (e.key === 'ArrowLeft') {
+				show(current - 1);
+			} else if (e.key === 'ArrowRight') {
+				show(current + 1);
+			}
+		});
+		var startX = null;
+		lb.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+		lb.addEventListener('touchend', function (e) {
+			if (startX === null) {
+				return;
+			}
+			var dx = e.changedTouches[0].clientX - startX;
+			if (Math.abs(dx) > 50) {
+				show(current + (dx < 0 ? 1 : -1));
+			}
+			startX = null;
+		});
+	});
 
 	/* ---------- İnşaat sahnesi ---------- */
 	var build = document.querySelector('.mpa-build');
@@ -107,14 +320,41 @@
 		var source = [].filter.call(video.querySelectorAll('source'), function (el) {
 			return video.canPlayType(el.type) !== '';
 		})[0];
+		video.addEventListener('loadeddata', preloaderDone);
+		video.addEventListener('error', preloaderDone);
 		if (source && window.fetch && window.URL) {
 			fetch(source.src).then(function (res) {
-				return res.ok ? res.blob() : null;
+				if (!res.ok) {
+					return null;
+				}
+				var total = parseInt(res.headers.get('Content-Length'), 10) || 0;
+				if (!total || !res.body || !res.body.getReader) {
+					return res.blob();
+				}
+				// Giriş ekranındaki çubuk videonun gerçek indirme ilerlemesini gösterir.
+				var reader = res.body.getReader();
+				var chunks = [];
+				var got = 0;
+				return (function pump() {
+					return reader.read().then(function (step) {
+						if (step.done) {
+							return new Blob(chunks, { type: source.type || 'video/mp4' });
+						}
+						chunks.push(step.value);
+						got += step.value.length;
+						preloaderSet(Math.min(0.98, got / total));
+						return pump();
+					});
+				})();
 			}).then(function (blob) {
 				if (blob) {
 					video.src = URL.createObjectURL(blob);
+				} else {
+					preloaderDone();
 				}
-			}).catch(function () {});
+			}).catch(preloaderDone);
+		} else {
+			preloaderDone();
 		}
 
 		// iOS Safari karelerin çizilmesi için bir kez oynatılmasını ister.

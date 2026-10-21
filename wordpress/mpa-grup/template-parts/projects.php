@@ -1,6 +1,6 @@
 <?php
 /**
- * Ana sayfada öne çıkan referans projeler; tamamı /projeler/ sayfasında.
+ * Ana sayfada seçili projeler; tamamı /projeler/ sayfasında.
  *
  * @package MPA_Grup
  */
@@ -14,13 +14,13 @@ $has_posts = wp_count_posts( 'mpa_proje' )->publish > 0;
 ?>
 <section class="section section--paper" id="projeler">
 	<div class="container">
-		<?php mpa_section_head( __( 'Referanslarımız', 'mpa-grup' ), __( 'Projelerimiz', 'mpa-grup' ), '03' ); ?>
+		<?php mpa_section_head( __( 'Referanslarımız', 'mpa-grup' ), __( 'Seçili <em>projeler</em>', 'mpa-grup' ), '03' ); ?>
 
-		<div class="project-list">
+		<div class="project-grid">
 			<?php
 			foreach ( $projects as $i => $project ) {
 				get_template_part(
-					'template-parts/project-row',
+					'template-parts/project-card',
 					null,
 					array(
 						'project' => $project,

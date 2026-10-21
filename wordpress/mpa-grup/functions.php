@@ -106,7 +106,8 @@ add_filter( 'wp_resource_hints', 'mpa_resource_hints', 10, 2 );
  * JS çalışıyorsa animasyonlar başlangıç durumundan açılır; çalışmıyorsa bitmiş bina görünür.
  */
 function mpa_js_class() {
-	echo "<script>document.documentElement.classList.add('js');</script>\n";
+	// Giriş ekranı oturum başına bir kez gösterilir.
+	echo "<script>(function(d){d.classList.add('js');try{if(sessionStorage.getItem('mpaSeen'))d.classList.add('seen');}catch(e){}})(document.documentElement);</script>\n";
 }
 add_action( 'wp_head', 'mpa_js_class', 1 );
 
@@ -129,7 +130,10 @@ add_action( 'wp_head', 'mpa_fallback_favicon', 5 );
  */
 function mpa_body_class( $classes ) {
 	if ( is_front_page() ) {
-		$classes[] = 'mpa-onepage';
+		$classes[] = 'mpa-home';
+	}
+	if ( mpa_has_image_hero() ) {
+		$classes[] = 'has-hero';
 	}
 	return $classes;
 }
@@ -159,3 +163,87 @@ function mpa_language_attributes( $output ) {
 	return preg_replace( '/lang="[^"]*"/', 'lang="tr"', $output );
 }
 add_filter( 'language_attributes', 'mpa_language_attributes' );
+
+/**
+ * Görselli giriş alanı olan sayfalar: üst menü bu sayfalarda görselin üzerinde şeffaf başlar.
+ *
+ * @return bool
+ */
+function mpa_has_image_hero() {
+	return is_front_page()
+		|| is_page( array( 'kurumsal', 'hizmetler', 'iletisim' ) )
+		|| is_post_type_archive( 'mpa_proje' )
+		|| is_singular( 'mpa_proje' );
+}
+
+/**
+ * Paylaşım önizlemesi (WhatsApp, LinkedIn, Facebook) ve arama motoru bilgileri.
+ * Yoast / Rank Math / SEOPress gibi bir SEO eklentisi varsa onlara bırakılır.
+ */
+function mpa_meta_tags() {
+	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'AIOSEO_VERSION' ) ) {
+		return;
+	}
+	$site  = mpa_opt( 'company_name' );
+	$title = wp_get_document_title();
+	$desc  = mpa_opt( 'hero_text' );
+	$image = MPA_URI . '/assets/img/insaat-son.jpg';
+	$url   = home_url( add_query_arg( array() ) );
+
+	if ( is_singular() ) {
+		$post = get_queried_object();
+		$url  = get_permalink( $post );
+		if ( has_excerpt( $post ) ) {
+			$desc = get_the_excerpt( $post );
+		}
+		if ( has_post_thumbnail( $post ) ) {
+			$image = get_the_post_thumbnail_url( $post, 'large' );
+		}
+	}
+	if ( is_page( 'kurumsal' ) ) {
+		$desc = wp_strip_all_tags( mpa_opt( 'about_title' ) );
+	}
+
+	$tags = array(
+		'description'    => $desc,
+		'og:type'        => is_singular( 'mpa_proje' ) ? 'article' : 'website',
+		'og:site_name'   => $site,
+		'og:locale'      => 'tr_TR',
+		'og:title'       => $title,
+		'og:description' => $desc,
+		'og:url'         => $url,
+		'og:image'       => $image,
+		'twitter:card'   => 'summary_large_image',
+	);
+	foreach ( $tags as $key => $value ) {
+		$attr = 0 === strpos( $key, 'og:' ) ? 'property' : 'name';
+		printf( '<meta %1$s="%2$s" content="%3$s">' . "\n", esc_attr( $attr ), esc_attr( $key ), esc_attr( wp_strip_all_tags( $value ) ) );
+	}
+
+	$org = array(
+		'@context'    => 'https://schema.org',
+		'@type'       => 'GeneralContractor',
+		'name'        => $site,
+		'url'         => home_url( '/' ),
+		'logo'        => MPA_URI . '/assets/img/logo.png',
+		'image'       => MPA_URI . '/assets/img/insaat-son.jpg',
+		'description' => mpa_opt( 'hero_text' ),
+	);
+	if ( mpa_opt( 'phone' ) ) {
+		$org['telephone'] = mpa_opt( 'phone' );
+	}
+	if ( mpa_opt( 'email' ) ) {
+		$org['email'] = mpa_opt( 'email' );
+	}
+	if ( mpa_opt( 'address' ) ) {
+		$org['address'] = mpa_opt( 'address' );
+	}
+	$same = array_values( array_filter( array( mpa_opt( 'instagram' ), mpa_opt( 'linkedin' ), mpa_opt( 'facebook' ), mpa_opt( 'youtube' ) ) ) );
+	if ( $same ) {
+		$org['sameAs'] = $same;
+	}
+	if ( is_front_page() ) {
+		echo '<script type="application/ld+json">' . wp_json_encode( $org, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+	}
+}
+add_action( 'wp_head', 'mpa_meta_tags', 2 );

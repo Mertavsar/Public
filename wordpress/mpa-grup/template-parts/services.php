@@ -1,7 +1,6 @@
 <?php
 /**
- * Hizmet alanları. Ana sayfada kartlar ve Hizmetler sayfasına bağlantı; Hizmetler
- * sayfasında kartlar ve çalışma süreci adımları.
+ * Hizmet alanları: fotoğraflı kartlar. Hizmetler sayfasında ayrıca çalışma süreci.
  *
  * @package MPA_Grup
  */
@@ -11,19 +10,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $full     = isset( $args['mode'] ) && 'full' === $args['mode'];
-$icons    = array( 'concrete', 'facade', 'blueprint' );
 $services = mpa_items( 'service', 3 );
+$images   = mpa_service_images();
 ?>
-<section class="section section--grid" id="hizmetler">
+<section class="section section--ink" id="hizmetler">
 	<div class="container">
-		<?php mpa_section_head( __( 'Uzmanlık Alanlarımız', 'mpa-grup' ), __( 'Hizmetlerimiz', 'mpa-grup' ), $full ? '01' : '02' ); ?>
+		<?php mpa_section_head( __( 'Uzmanlık alanlarımız', 'mpa-grup' ), __( 'Temelden çatıya,<br><em>tek elden.</em>', 'mpa-grup' ), $full ? '01' : '02', 'h2', 'section-head--light' ); ?>
 
 		<div class="services">
 			<?php foreach ( $services as $i => $service ) : ?>
 				<article class="service reveal">
-					<div class="service__head">
-						<span class="service__num">/ <?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
-						<?php echo mpa_icon( isset( $icons[ $i ] ) ? $icons[ $i ] : 'concrete' ); // phpcs:ignore ?>
+					<div class="service__media reveal-img">
+						<?php if ( isset( $images[ $i ] ) ) : ?>
+							<img src="<?php echo esc_url( mpa_img( $images[ $i ][0] ) ); ?>" alt="<?php echo esc_attr( $images[ $i ][1] ); ?>" loading="lazy" width="800" height="1000">
+						<?php endif; ?>
+						<span class="service__num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
 					</div>
 					<h3 class="service__title"><?php echo esc_html( $service['title'] ); ?></h3>
 					<p><?php echo esc_html( $service['text'] ); ?></p>
@@ -32,7 +33,7 @@ $services = mpa_items( 'service', 3 );
 		</div>
 
 		<?php if ( ! $full ) : ?>
-			<p class="section-more"><a class="btn btn--dark" href="<?php echo esc_url( mpa_url( 'hizmetler' ) ); ?>"><?php esc_html_e( 'Hizmetlerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
+			<p class="section-more"><a class="btn btn--light" href="<?php echo esc_url( mpa_url( 'hizmetler' ) ); ?>"><?php esc_html_e( 'Hizmetlerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
 		<?php endif; ?>
 	</div>
 </section>
@@ -40,7 +41,7 @@ $services = mpa_items( 'service', 3 );
 <?php if ( $full ) : ?>
 	<section class="section section--paper" id="surec">
 		<div class="container">
-			<?php mpa_section_head( __( 'Planlamadan teslime', 'mpa-grup' ), __( 'Çalışma sürecimiz', 'mpa-grup' ), '02' ); ?>
+			<?php mpa_section_head( __( 'Planlamadan teslime', 'mpa-grup' ), __( 'Çalışma <em>sürecimiz</em>', 'mpa-grup' ), '02' ); ?>
 			<ol class="process">
 				<?php foreach ( mpa_phases() as $i => $phase ) : ?>
 					<li class="process__step reveal">

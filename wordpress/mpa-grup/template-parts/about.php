@@ -1,6 +1,7 @@
 <?php
 /**
- * Kurumsal / Hakkımızda. Ana sayfada kısa tanıtım (teaser), Kurumsal sayfasında tam metin.
+ * Kurumsal. Ana sayfada: kaydırdıkça kelime kelime aydınlanan kurumsal cümle, görsel
+ * ve kısa metin. Kurumsal sayfasında: metnin tamamı ve rakamlar.
  *
  * @package MPA_Grup
  */
@@ -15,32 +16,33 @@ $paragraphs = array_values( array_filter( array_map( 'trim', preg_split( '/\n\s*
 $paragraphs = $full ? $paragraphs : array_slice( $paragraphs, 0, 2 );
 $stats      = $full ? mpa_stats() : array();
 ?>
-<section class="section section--paper" id="hakkimizda">
+<section class="section section--paper about-section" id="hakkimizda">
 	<div class="container">
-		<?php mpa_section_head( __( 'Kurumsal', 'mpa-grup' ), __( 'Hakkımızda', 'mpa-grup' ), '01' ); ?>
+		<div class="section-head__top">
+			<p class="eyebrow"><?php esc_html_e( 'Kurumsal', 'mpa-grup' ); ?></p>
+			<span class="section-num" aria-hidden="true">(01)</span>
+		</div>
+		<p class="statement" data-words><?php echo mpa_kses_title( mpa_opt( 'about_title' ) ); // phpcs:ignore ?></p>
 
 		<div class="about">
-			<div class="about__lead reveal">
-				<p class="about__statement"><?php echo mpa_kses_title( mpa_opt( 'about_title' ) ); // phpcs:ignore ?></p>
-				<figure class="frame">
-					<?php
-					if ( $image_id ) {
-						echo wp_get_attachment_image( $image_id, 'large', false, array( 'class' => 'frame__img' ) );
-						$caption = wp_get_attachment_caption( $image_id );
-					} else {
-						printf(
-							'<img class="frame__img" src="%s" alt="%s" loading="lazy" width="1600" height="1200">',
-							esc_url( MPA_URI . '/assets/img/projeler/lalahan-arastirma-merkezi-01.jpg' ),
-							esc_attr__( 'Ankara Lalahan Araştırma Merkezi — tamamlanan yapı', 'mpa-grup' )
-						);
-						$caption = __( 'Ankara Lalahan Araştırma Merkezi', 'mpa-grup' );
-					}
-					if ( $caption ) {
-						echo '<figcaption class="frame__tag">' . esc_html( $caption ) . '</figcaption>';
-					}
-					?>
-				</figure>
-			</div>
+			<figure class="about__media reveal-img">
+				<?php
+				if ( $image_id ) {
+					echo wp_get_attachment_image( $image_id, 'large', false, array( 'class' => 'about__img' ) );
+					$caption = wp_get_attachment_caption( $image_id );
+				} else {
+					printf(
+						'<img class="about__img" src="%s" alt="%s" loading="lazy" width="1600" height="900">',
+						esc_url( mpa_img( 'projeler/anittepe-olimpik-yuzme-havuzu-02.jpg' ) ),
+						esc_attr__( 'Anıttepe Olimpik Yüzme Havuzu', 'mpa-grup' )
+					);
+					$caption = __( 'Anıttepe Olimpik Yüzme Havuzu — Ankara', 'mpa-grup' );
+				}
+				if ( $caption ) {
+					echo '<figcaption class="about__caption">' . esc_html( $caption ) . '</figcaption>';
+				}
+				?>
+			</figure>
 			<div class="about__text reveal">
 				<?php foreach ( $paragraphs as $i => $paragraph ) : ?>
 					<p<?php echo 0 === $i ? ' class="about__first"' : ''; ?>><?php echo esc_html( $paragraph ); ?></p>

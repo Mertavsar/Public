@@ -1,6 +1,7 @@
 <?php
 /**
- * Proje detayı.
+ * Proje detayı: solda başlık ve bilgiler, sağda kapak; ardından açıklama, büyütülebilir
+ * galeri ve sıradaki proje.
  *
  * @package MPA_Grup
  */
@@ -13,8 +14,11 @@ while ( have_posts() ) :
 		'template-parts/page-hero',
 		null,
 		array(
-			'eyebrow' => __( 'Referans Proje', 'mpa-grup' ),
+			'eyebrow' => get_post_meta( get_the_ID(), '_mpa_category', true ),
 			'title'   => get_the_title(),
+			'image'   => get_the_post_thumbnail_url( null, 'large' ),
+			'layout'  => 'split',
+			'trail'   => array( __( 'Projeler', 'mpa-grup' ) => mpa_url( 'projeler' ) ),
 			'meta'    => array(
 				__( 'İşveren', 'mpa-grup' )  => get_post_meta( get_the_ID(), '_mpa_client', true ),
 				__( 'Konum', 'mpa-grup' )    => get_post_meta( get_the_ID(), '_mpa_location', true ),
@@ -25,25 +29,40 @@ while ( have_posts() ) :
 	?>
 	<article class="section section--paper">
 		<div class="container container--narrow entry">
-			<?php if ( has_post_thumbnail() ) : ?>
-				<figure class="frame entry__cover"><?php the_post_thumbnail( 'large', array( 'class' => 'frame__img' ) ); ?></figure>
-			<?php endif; ?>
-			<div class="entry__content">
+			<div class="entry__content" data-lightbox>
 				<?php the_content(); ?>
 			</div>
+			<p class="section-more"><a class="link-arrow" href="<?php echo esc_url( mpa_url( 'projeler' ) ); ?>"><?php esc_html_e( 'Tüm projeler', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a></p>
 		</div>
 	</article>
 
-	<nav class="container container--narrow post-nav" aria-label="<?php esc_attr_e( 'Diğer projeler', 'mpa-grup' ); ?>">
-		<?php
-		previous_post_link( '<span class="post-nav__prev">%link</span>', '&larr; %title' );
-		?>
-		<a class="post-nav__all" href="<?php echo esc_url( mpa_url( 'projeler' ) ); ?>"><?php esc_html_e( 'Tüm projeler', 'mpa-grup' ); ?></a>
-		<?php
-		next_post_link( '<span class="post-nav__next">%link</span>', '%title &rarr;' );
-		?>
-	</nav>
 	<?php
+	$next = get_adjacent_post( false, '', false );
+	if ( ! $next ) {
+		$first = get_posts(
+			array(
+				'post_type'      => 'mpa_proje',
+				'posts_per_page' => 1,
+				'order'          => 'ASC',
+				'orderby'        => 'date',
+				'exclude'        => array( get_the_ID() ),
+			)
+		);
+		$next  = $first ? $first[0] : null;
+	}
+	if ( $next ) :
+		?>
+		<a class="next-project" href="<?php echo esc_url( get_permalink( $next ) ); ?>">
+			<?php if ( has_post_thumbnail( $next ) ) : ?>
+				<span class="next-project__media"><?php echo get_the_post_thumbnail( $next, 'large', array( 'alt' => '' ) ); ?></span>
+			<?php endif; ?>
+			<span class="container next-project__inner">
+				<span class="eyebrow"><?php esc_html_e( 'Sıradaki proje', 'mpa-grup' ); ?></span>
+				<span class="next-project__title"><?php echo esc_html( get_the_title( $next ) ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></span>
+			</span>
+		</a>
+		<?php
+	endif;
 endwhile;
 
 get_template_part( 'template-parts/cta' );

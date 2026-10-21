@@ -32,26 +32,66 @@ function mpa_kses_title( $text ) {
  * @param string $variant 'dark' (açık zemin) veya 'light' (koyu zemin).
  */
 function mpa_logo( $variant = 'dark' ) {
-	$name = mpa_opt( 'company_name' );
-	if ( 'dark' === $variant && has_custom_logo() ) {
-		$logo_id = get_theme_mod( 'custom_logo' );
+	$name  = mpa_opt( 'company_name' );
+	$class = 'brand__img brand__img--' . $variant;
+	if ( has_custom_logo() ) {
 		echo wp_get_attachment_image(
-			$logo_id,
+			get_theme_mod( 'custom_logo' ),
 			'full',
 			false,
 			array(
-				'class' => 'brand__img',
+				'class' => $class . ' is-custom',
 				'alt'   => $name,
 			)
 		);
 		return;
 	}
-	$file = 'light' === $variant ? 'logo-light.png' : 'logo.png';
 	printf(
-		'<img class="brand__img" src="%1$s" alt="%2$s" width="900" height="150">',
-		esc_url( MPA_URI . '/assets/img/' . $file ),
+		'<img class="%1$s" src="%2$s" alt="%3$s" width="900" height="150">',
+		esc_attr( $class ),
+		esc_url( MPA_URI . '/assets/img/' . ( 'light' === $variant ? 'logo-light.png' : 'logo.png' ) ),
 		esc_attr( $name )
 	);
+}
+
+/**
+ * Tema içindeki görselin adresi.
+ *
+ * @param string $file assets/img altındaki yol.
+ * @return string
+ */
+function mpa_img( $file ) {
+	return MPA_URI . '/assets/img/' . $file;
+}
+
+/**
+ * Hizmet kartlarının görselleri (katalogdaki proje fotoğrafları).
+ *
+ * @return array
+ */
+function mpa_service_images() {
+	return apply_filters(
+		'mpa_service_images',
+		array(
+			array( 'projeler/ivedik-otel-03.jpg', 'İvedik Otel — temel ve bodrum imalatı' ),
+			array( 'projeler/anittepe-olimpik-yuzme-havuzu-01.jpg', 'Anıttepe Olimpik Yüzme Havuzu — cephe' ),
+			array( 'projeler/lalahan-arastirma-merkezi-02.jpg', 'Ankara Lalahan Araştırma Merkezi — tamamlanan yapı' ),
+		)
+	);
+}
+
+/**
+ * Sayfa yolu: Ana Sayfa / … / Sayfa.
+ *
+ * @param array $trail Ara adımlar: etiket => adres.
+ * @param string $current Bulunulan sayfa.
+ */
+function mpa_breadcrumb( $trail, $current ) {
+	echo '<nav class="crumbs" aria-label="' . esc_attr__( 'Sayfa yolu', 'mpa-grup' ) . '"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Ana Sayfa', 'mpa-grup' ) . '</a>';
+	foreach ( $trail as $label => $url ) {
+		echo '<span aria-hidden="true">/</span><a href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a>';
+	}
+	echo '<span aria-hidden="true">/</span><span aria-current="page">' . esc_html( $current ) . '</span></nav>';
 }
 
 /**
@@ -289,20 +329,23 @@ function mpa_menu_fallback() {
 }
 
 /**
- * Katalogdaki pafta üslubunda bölüm başlığı: turuncu küçük etiket, büyük başlık, kontur numara.
+ * Bölüm başlığı: üstte turuncu etiket ve sıra numarası, altında büyük başlık.
  *
  * @param string $eyebrow Üst etiket.
- * @param string $title   Başlık.
- * @param string $num     Kontur numara (ör. 01, P02).
+ * @param string $title   Başlık (<em> ince vurgu).
+ * @param string $num     Sıra numarası (ör. 01).
  * @param string $tag     Başlık etiketi.
+ * @param string $extra   Ek sınıf (ör. section-head--light).
  */
-function mpa_section_head( $eyebrow, $title, $num = '', $tag = 'h2' ) {
-	echo '<header class="section-head">';
+function mpa_section_head( $eyebrow, $title, $num = '', $tag = 'h2', $extra = '' ) {
+	echo '<header class="section-head ' . esc_attr( $extra ) . '">';
+	echo '<div class="section-head__top">';
 	printf( '<p class="eyebrow">%s</p>', esc_html( $eyebrow ) );
-	printf( '<%1$s class="section-title">%2$s</%1$s>', tag_escape( $tag ), mpa_kses_title( $title ) );
 	if ( $num ) {
-		printf( '<span class="section-num" aria-hidden="true">%s</span>', esc_html( $num ) );
+		printf( '<span class="section-num" aria-hidden="true">(%s)</span>', esc_html( $num ) );
 	}
+	echo '</div>';
+	printf( '<%1$s class="section-title">%2$s</%1$s>', tag_escape( $tag ), mpa_kses_title( $title ) );
 	echo '</header>';
 }
 
