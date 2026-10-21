@@ -36,7 +36,7 @@
     "ikon": "🏗️",
     "ust": "KENTSEL DÖNÜŞÜM",
     "buyuk": "1.875.000 ₺",
-    "alt": "AMA YARISI KREDİ"
+    "alt": "YARISINA YAKINI KREDİ"
   },
   "cta": [
     {
@@ -61,7 +61,7 @@
         "ok_renk": "yesil",
         "renk": "sari",
         "sayma": false,
-        "not": "hibe, kredi ve taşınma · yarısı kredi"
+        "not": "hibe, kredi ve taşınma · yarısına yakını kredi"
       },
       "etiket": "DESTEK",
       "kaynak": "K2, K3"
@@ -542,13 +542,13 @@
     {
       "bolum": "etki",
       "tip": "baslik",
-      "say": "Kısacası: destek aynı, süre bir yıl uzadı. Ama toplamın yarısı kredi.",
+      "say": "Kısacası: destek aynı, süre bir yıl uzadı. Ama toplamın yarısına yakını kredi.",
       "p": {
         "ikon": "✅",
         "satirlar": [
           "DESTEK AYNI",
           "SÜRE *1 YIL UZADI*",
-          "YARISI KREDİ"
+          "YARISINA YAKINI KREDİ"
         ],
         "boy": 84
       },
