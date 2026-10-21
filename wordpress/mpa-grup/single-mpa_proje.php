@@ -14,7 +14,6 @@ while ( have_posts() ) :
 		'template-parts/page-hero',
 		null,
 		array(
-			'eyebrow' => get_post_meta( get_the_ID(), '_mpa_category', true ),
 			'title'   => get_the_title(),
 			'image'   => get_the_post_thumbnail_url( null, 'large' ),
 			'layout'  => 'split',
