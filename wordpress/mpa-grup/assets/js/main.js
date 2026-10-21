@@ -72,9 +72,7 @@
 		hud[el.getAttribute('data-hud')] = el;
 	});
 	var phaseItems = stage.querySelectorAll('.phase-item');
-	var phaseNames = [].map.call(stage.querySelectorAll('.phase-item__title'), function (el) {
-		return el.textContent;
-	});
+	var steps = stage.querySelectorAll('.timeline__step');
 	var lastPhase = -1;
 	var lastMode = '';
 
@@ -160,12 +158,7 @@
 			stage.style.setProperty('--laser-o', building ? '1' : '0');
 		}
 		media.style.setProperty('--zoom', (1.1 - 0.1 * smooth(p)).toFixed(4));
-		stage.style.setProperty('--shade', clamp((p - 0.02) / 0.06, 0, 1).toFixed(3));
-
 		setText(hud.pct, String(Math.round(p * 100)));
-		if (hud.bar) {
-			hud.bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-		}
 
 		var phase = 0;
 		for (var i = 0; i < phases.length; i++) {
@@ -173,12 +166,23 @@
 				phase = i;
 			}
 		}
+
+		// Zaman çizgisi: noktalar eşit aralıklı; dolgu her aşamanın kendi süresi içinde ilerler.
+		if (hud.bar) {
+			var last = phases.length - 1;
+			var within = phase < last ? clamp((p - phases[phase]) / (phases[phase + 1] - phases[phase]), 0, 1) : 0;
+			hud.bar.style.transform = 'scaleX(' + ((phase + within) / last).toFixed(4) + ')';
+		}
+
 		if (phase !== lastPhase) {
 			phaseItems.forEach(function (el, n) {
 				el.classList.toggle('is-active', n === phase);
 			});
+			steps.forEach(function (el, n) {
+				el.classList.toggle('is-active', n === phase);
+				el.classList.toggle('is-done', n < phase);
+			});
 			setText(hud.phase, (phase < 9 ? '0' : '') + (phase + 1));
-			setText(hud.name, phaseNames[phase] || '');
 			lastPhase = phase;
 		}
 

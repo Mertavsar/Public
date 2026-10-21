@@ -58,7 +58,7 @@ add_action( 'after_setup_theme', 'mpa_setup' );
 function mpa_assets() {
 	wp_enqueue_style(
 		'mpa-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;500;600;700;800&display=swap',
 		array(),
 		null
 	);

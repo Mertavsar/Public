@@ -39,10 +39,10 @@ function mpa_defaults() {
 
 		// Giriş / inşaat animasyonu.
 		'hero_eyebrow'   => 'Mühendislik ve Taahhüt Hizmetleri',
-		'hero_title'     => 'Betonarme ve<br>mimari imalat.',
+		'hero_title'     => 'Betonarme ve<br><em>mimari imalat.</em>',
 		'hero_text'      => 'Kamu ve özel sektör yapılarında, kaba inşaattan mimari uygulamaya uzanan süreçte planlı, denetimli ve standartlara uygun imalat.',
 		'final_eyebrow'  => 'Anahtar Teslim',
-		'final_title'    => 'Temelden çatıya,<br>kalıcı yapılar.',
+		'final_title'    => 'Temelden çatıya,<br><em>kalıcı yapılar.</em>',
 		'final_text'     => 'Mühendislik disiplinini ticari başarıyla aynı değerde gören, planlamadan teslime kadar sürecin tamamını üstlenen güvenilir çözüm ortağı.',
 		'hero_video'     => 0,
 		'hero_image'     => 0,

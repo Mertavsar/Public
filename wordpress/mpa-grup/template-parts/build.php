@@ -42,50 +42,46 @@ $starts = implode( ',', wp_list_pluck( $phases, 'at' ) );
 
 		<div class="mpa-build__copy">
 			<div class="mpa-build__intro">
-				<p class="eyebrow"><?php echo esc_html( mpa_opt( 'hero_eyebrow' ) ); ?></p>
+				<p class="kicker"><?php echo esc_html( mpa_opt( 'hero_eyebrow' ) ); ?></p>
 				<h1 class="mpa-build__title"><?php echo mpa_kses_title( mpa_opt( 'hero_title' ) ); // phpcs:ignore ?></h1>
 				<p class="mpa-build__lead"><?php echo esc_html( mpa_opt( 'hero_text' ) ); ?></p>
-				<p class="mpa-build__cue"><span class="mpa-build__mouse" aria-hidden="true"></span><?php esc_html_e( 'Yapıyı inşa etmek için aşağı kaydırın', 'mpa-grup' ); ?></p>
+				<p class="mpa-build__cue"><span class="mpa-build__mouse" aria-hidden="true"></span><?php esc_html_e( 'Yapıyı inşa etmek için kaydırın', 'mpa-grup' ); ?></p>
 			</div>
 
 			<div class="mpa-build__phases" aria-live="polite">
-				<div class="phase-card">
-					<div class="phase-card__top">
-						<span><?php esc_html_e( 'İnşaat Aşaması', 'mpa-grup' ); ?></span>
-						<span class="phase-card__count"><b data-hud="phase">01</b> / <?php echo esc_html( sprintf( '%02d', count( $phases ) ) ); ?></span>
-					</div>
-					<ol class="phase-list">
-						<?php foreach ( $phases as $i => $phase ) : ?>
-							<li class="phase-item<?php echo 0 === $i ? ' is-active' : ''; ?>">
-								<span class="phase-item__num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
-								<h2 class="phase-item__title"><?php echo esc_html( $phase['title'] ); ?></h2>
-								<p class="phase-item__text"><?php echo esc_html( $phase['text'] ); ?></p>
-							</li>
-						<?php endforeach; ?>
-					</ol>
-					<div class="phase-card__bar" aria-hidden="true">
-						<span class="phase-card__fill" data-hud="bar"></span>
-						<?php foreach ( $phases as $phase ) : ?>
-							<i style="left:<?php echo esc_attr( $phase['at'] * 100 ); ?>%"></i>
-						<?php endforeach; ?>
-					</div>
-				</div>
+				<p class="kicker"><?php esc_html_e( 'İnşaat süreci', 'mpa-grup' ); ?> <span class="kicker__count"><b data-hud="phase">01</b> / <?php echo esc_html( sprintf( '%02d', count( $phases ) ) ); ?></span></p>
+				<ol class="phase-list">
+					<?php foreach ( $phases as $i => $phase ) : ?>
+						<li class="phase-item<?php echo 0 === $i ? ' is-active' : ''; ?>">
+							<span class="phase-item__num" aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
+							<h2 class="phase-item__title"><span><?php echo esc_html( $phase['title'] ); ?></span></h2>
+							<p class="phase-item__text"><?php echo esc_html( $phase['text'] ); ?></p>
+						</li>
+					<?php endforeach; ?>
+				</ol>
 			</div>
 
 			<div class="mpa-build__final">
-				<p class="eyebrow"><?php echo esc_html( mpa_opt( 'final_eyebrow' ) ); ?></p>
-				<h2 class="mpa-build__title mpa-build__title--final"><?php echo mpa_kses_title( mpa_opt( 'final_title' ) ); // phpcs:ignore ?></h2>
+				<p class="kicker"><?php echo esc_html( mpa_opt( 'final_eyebrow' ) ); ?></p>
+				<h2 class="mpa-build__title"><?php echo mpa_kses_title( mpa_opt( 'final_title' ) ); // phpcs:ignore ?></h2>
 				<p class="mpa-build__lead"><?php echo esc_html( mpa_opt( 'final_text' ) ); ?></p>
 				<div class="btn-row">
-					<a class="btn btn--accent" href="#projeler"><?php esc_html_e( 'Projelerimiz', 'mpa-grup' ); ?></a>
+					<a class="btn btn--accent" href="#projeler"><?php esc_html_e( 'Projelerimiz', 'mpa-grup' ); ?> <?php echo mpa_icon( 'arrow' ); // phpcs:ignore ?></a>
 					<a class="btn btn--ghost-light" href="#iletisim"><?php esc_html_e( 'Teklif Alın', 'mpa-grup' ); ?></a>
 				</div>
 			</div>
 		</div>
 
-		<div class="mpa-build__hud" aria-hidden="true">
-			<div class="hud-cell"><span class="hud-key"><?php esc_html_e( 'Tamamlanma', 'mpa-grup' ); ?></span><span class="hud-val">%<b data-hud="pct">0</b></span></div>
-			<div class="hud-cell"><span class="hud-key"><?php esc_html_e( 'Aşama', 'mpa-grup' ); ?></span><span class="hud-val hud-val--text" data-hud="name"><?php echo esc_html( $phases[0]['title'] ); ?></span></div>
+		<div class="mpa-build__timeline" aria-hidden="true">
+			<div class="timeline">
+				<span class="timeline__track"><span class="timeline__fill" data-hud="bar"></span></span>
+				<ol class="timeline__steps">
+					<?php foreach ( $phases as $i => $phase ) : ?>
+						<li class="timeline__step<?php echo 0 === $i ? ' is-active' : ''; ?>" style="left:<?php echo esc_attr( round( 100 * $i / ( count( $phases ) - 1 ), 3 ) ); ?>%"><i></i><span><?php echo esc_html( $phase['title'] ); ?></span></li>
+					<?php endforeach; ?>
+				</ol>
+			</div>
+			<span class="timeline__pct">%<b data-hud="pct">0</b></span>
 		</div>
 
 		<a class="mpa-build__skip" href="#hakkimizda"><?php esc_html_e( 'Animasyonu geç', 'mpa-grup' ); ?> <?php echo mpa_icon( 'down' ); // phpcs:ignore ?></a>
