@@ -386,10 +386,24 @@ html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: no
 }
 
 /* Dikey telefonda üst yarı kâğıt zemin üzerinde metin, alt yarı video */
-/* Dikey telefonda video tam ekran; yazılar altta, koyu geçişin üzerinde */
+/* Dikey telefonda: arka planı videonun bulanık kopyası doldurur, binanın tamamı
+   ortadaki çerçevede görünür; yazılar altta */
+.mpa-build__blur { display: none; }
 @media (max-width: 900px) and (orientation: portrait) {
-	.mpa-build__media { transform: none; }
-	.mpa-build__layer, .mpa-build__video { object-position: 62% 50%; }
+	.mpa-build__media { transform: none; background: var(--ink); }
+	.mpa-build__layer { object-position: 62% 50%; }
+	.mpa-build__blur {
+		display: block; position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px);
+		filter: blur(22px) brightness(.5) saturate(1.1);
+	}
+	.mpa-build__video {
+		--box: min(calc((100vw - 2 * var(--gutter)) * .8), clamp(200px, calc(100svh - 460px), 56vh));
+		top: calc(var(--header-h) + max(14px, (100svh - var(--header-h) - 340px - var(--box)) / 2));
+		left: var(--gutter); right: var(--gutter); bottom: auto;
+		width: calc(100% - 2 * var(--gutter)); height: var(--box);
+		object-fit: cover; object-position: 64% 50%;
+		border: 1px solid rgba(255, 255, 255, .28); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
+	}
 	.mpa-build__shade {
 		background:
 			linear-gradient(0deg, rgba(8, 12, 16, .9) 0%, rgba(8, 12, 16, .72) 30%, rgba(8, 12, 16, .2) 55%, rgba(8, 12, 16, 0) 68%),
