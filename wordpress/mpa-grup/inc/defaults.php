@@ -44,7 +44,8 @@ function mpa_defaults() {
 		'final_eyebrow'  => 'Anahtar Teslim',
 		'final_title'    => 'Temelden çatıya,<br>kalıcı yapılar.',
 		'final_text'     => 'Mühendislik disiplinini ticari başarıyla aynı değerde gören, planlamadan teslime kadar sürecin tamamını üstlenen güvenilir çözüm ortağı.',
-		'sign_text'      => 'MPA GRUP',
+		'hero_video'     => 0,
+		'hero_image'     => 0,
 
 		// Hakkımızda.
 		'about_title'    => 'Mühendislik disiplinini <em>ticari başarıyla</em> aynı değerde gören, kalıcı yapılar üreten bir inşaat kuruluşu.',

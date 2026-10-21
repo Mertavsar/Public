@@ -15,10 +15,6 @@
 		return t * t * (3 - 2 * t);
 	}
 
-	function lerp(a, b, t) {
-		return a + (b - a) * t;
-	}
-
 	/* ---------- Menü ---------- */
 	var header = document.querySelector('.site-header');
 	var toggle = document.querySelector('.nav-toggle');
@@ -68,74 +64,28 @@
 	}
 
 	var stage = build.querySelector('.mpa-build__stage');
-	var svg = build.querySelector('.mpa-build__svg');
-	var GROUND = 620;
-	var FLOOR_H = 32;
+	var media = build.querySelector('.mpa-build__media');
+	var video = build.querySelector('.mpa-build__video');
 	var phases = stage.getAttribute('data-phases').split(',').map(Number);
-	var frame = stage.getAttribute('data-frame').split(',').map(Number);
-	var floors = Number(stage.getAttribute('data-floors'));
-
-	function range(attr) {
-		if (!attr) {
-			return null;
-		}
-		var parts = attr.split(',');
-		return [Number(parts[0]), Number(parts[1])];
-	}
-
-	var items = [];
-	svg.querySelectorAll('[data-a],[data-o]').forEach(function (el) {
-		items.push({
-			el: el,
-			a: range(el.getAttribute('data-a')),
-			o: range(el.getAttribute('data-o')),
-			ta: '',
-			to: ''
-		});
-	});
-
-	function local(p, r) {
-		return smooth(clamp((p - r[0]) / (r[1] - r[0]), 0, 1));
-	}
-
-	// Gökyüzü: kâğıt (çizim) → sabah → gün → gün batımı → akşam.
-	var SKY = [
-		[0.00, [243, 242, 238], [236, 234, 228]],
-		[0.10, [236, 238, 238], [234, 232, 226]],
-		[0.25, [136, 178, 212], [222, 232, 238]],
-		[0.55, [92, 150, 204], [208, 226, 238]],
-		[0.80, [86, 110, 160], [242, 196, 150]],
-		[0.92, [42, 48, 86], [220, 136, 98]],
-		[1.00, [17, 21, 40], [104, 66, 82]]
-	];
-
-	function skyAt(p) {
-		for (var i = 1; i < SKY.length; i++) {
-			if (p <= SKY[i][0]) {
-				var t = (p - SKY[i - 1][0]) / (SKY[i][0] - SKY[i - 1][0]);
-				return [mix(SKY[i - 1][1], SKY[i][1], t), mix(SKY[i - 1][2], SKY[i][2], t)];
-			}
-		}
-		return [SKY[SKY.length - 1][1], SKY[SKY.length - 1][2]];
-	}
-
-	function mix(a, b, t) {
-		return 'rgb(' + Math.round(lerp(a[0], b[0], t)) + ',' + Math.round(lerp(a[1], b[1], t)) + ',' + Math.round(lerp(a[2], b[2], t)) + ')';
-	}
-
-	var sun = svg.querySelector('#mpa-sun');
-	var sunDisc = sun.querySelector('.sun-disc');
-	var hook = svg.querySelector('#mpa-hook');
-	var rope = hook.querySelector('.hook-rope');
-	var hookBody = hook.querySelector('.hook-body');
-	var hookLoad = hook.querySelector('.hook-load');
 	var hud = {};
 	stage.querySelectorAll('[data-hud]').forEach(function (el) {
 		hud[el.getAttribute('data-hud')] = el;
 	});
 	var phaseItems = stage.querySelectorAll('.phase-item');
+	var phaseNames = [].map.call(stage.querySelectorAll('.phase-item__title'), function (el) {
+		return el.textContent;
+	});
 	var lastPhase = -1;
 	var lastMode = '';
+
+	// Zaman çizelgesi (kaydırma ilerlemesi 0–1).
+	var ROUGH = [0.1, 0.6];  // kaba inşaat zeminden çatıya
+	var DONE = [0.6, 0.88];  // cephe ve renkler
+	var VIDEO = [0.03, 0.92]; // video baştan sona
+
+	function span(p, r) {
+		return clamp((p - r[0]) / (r[1] - r[0]), 0, 1);
+	}
 
 	function setText(el, value) {
 		if (el && el.textContent !== value) {
@@ -143,73 +93,82 @@
 		}
 	}
 
-	function hookY(p) {
-		var top = GROUND - floors * FLOOR_H - 46;
-		if (p < 0.26) {
-			return 300;
+	/* Video: kaydırmaya göre kare kare ileri/geri. Dosya belleğe alınır; böylece
+	   sunucu kısmi indirmeyi desteklemese de her kareye anında gidilebilir. */
+	var videoTarget = 0;
+	var seeking = false;
+	var seekStarted = 0;
+	if (video) {
+		video.pause();
+		video.addEventListener('seeked', function () {
+			seeking = false;
+			seekVideo();
+		});
+		video.addEventListener('loadedmetadata', seekVideo);
+
+		var source = [].filter.call(video.querySelectorAll('source'), function (el) {
+			return video.canPlayType(el.type) !== '';
+		})[0];
+		if (source && window.fetch && window.URL) {
+			fetch(source.src).then(function (res) {
+				return res.ok ? res.blob() : null;
+			}).then(function (blob) {
+				if (blob) {
+					video.src = URL.createObjectURL(blob);
+				}
+			}).catch(function () {});
 		}
-		if (p < frame[0]) {
-			return lerp(300, GROUND - 46, smooth((p - 0.26) / (frame[0] - 0.26)));
+
+		// iOS Safari karelerin çizilmesi için bir kez oynatılmasını ister.
+		var unlock = function () {
+			var play = video.play();
+			if (play && play.then) {
+				play.then(function () { video.pause(); seekVideo(); }).catch(function () {});
+			}
+			window.removeEventListener('touchstart', unlock);
+		};
+		window.addEventListener('touchstart', unlock, { passive: true });
+	}
+
+	function seekVideo() {
+		if (!video || !video.duration) {
+			return;
 		}
-		if (p < frame[1]) {
-			return GROUND - 46 - (p - frame[0]) / (frame[1] - frame[0]) * floors * FLOOR_H;
+		if (seeking && Date.now() - seekStarted < 400) {
+			return;
 		}
-		if (p < 0.8) {
-			return top;
+		var time = videoTarget * (video.duration - 0.05);
+		if (Math.abs(video.currentTime - time) > 0.02) {
+			seeking = true;
+			seekStarted = Date.now();
+			video.currentTime = time;
 		}
-		return lerp(top, 128, smooth(clamp((p - 0.8) / 0.05, 0, 1)));
 	}
 
 	function render(p) {
-		var i, item, v;
-		for (i = 0; i < items.length; i++) {
-			item = items[i];
-			if (item.a) {
-				v = local(p, item.a).toFixed(3);
-				if (v !== item.ta) {
-					item.el.style.setProperty('--t', v);
-					item.ta = v;
-				}
-			}
-			if (item.o) {
-				v = local(p, item.o).toFixed(3);
-				if (v !== item.to) {
-					item.el.style.setProperty('--o', v);
-					item.to = v;
-				}
-			}
+		if (video) {
+			videoTarget = span(p, VIDEO);
+			seekVideo();
+		} else {
+			var rough = smooth(span(p, ROUGH));
+			var done = smooth(span(p, DONE));
+			stage.style.setProperty('--rough-top', ((1 - rough) * 100).toFixed(2) + '%');
+			stage.style.setProperty('--done-top', ((1 - done) * 100).toFixed(2) + '%');
+			var active = p < DONE[0] ? rough : done;
+			var building = (p > ROUGH[0] && p < ROUGH[1]) || (p > DONE[0] && p < DONE[1]);
+			stage.style.setProperty('--laser', ((1 - active) * 100).toFixed(2) + '%');
+			stage.style.setProperty('--laser-o', building ? '1' : '0');
 		}
+		media.style.setProperty('--zoom', (1.1 - 0.1 * smooth(p)).toFixed(4));
+		stage.style.setProperty('--shade', clamp((p - 0.02) / 0.06, 0, 1).toFixed(3));
 
-		var sky = skyAt(p);
-		stage.style.setProperty('--sky-top', sky[0]);
-		stage.style.setProperty('--sky-bottom', sky[1]);
-
-		// Güneş sol üstten ufka iner.
-		var s = clamp((p - 0.14) / 0.84, 0, 1);
-		var sunOpacity = clamp((p - 0.14) / 0.08, 0, 1) * (1 - clamp((p - 0.95) / 0.05, 0, 1));
-		sun.setAttribute('transform', 'translate(' + (430 - s * 300).toFixed(1) + ' ' + (130 + s * s * 500).toFixed(1) + ')');
-		sun.setAttribute('opacity', sunOpacity.toFixed(3));
-		sunDisc.setAttribute('fill', mix([255, 244, 220], [255, 128, 64], s * s));
-
-		// Vinç kancası katla birlikte yükselir, araba bom üzerinde gezinir.
-		var hy = hookY(p);
-		var hx = p < 0.8 ? 760 + Math.sin(p * 38) * 90 : 760;
-		hook.setAttribute('transform', 'translate(' + hx.toFixed(1) + ' 0)');
-		rope.setAttribute('y2', hy.toFixed(1));
-		hookBody.setAttribute('transform', 'translate(0 ' + hy.toFixed(1) + ')');
-		hookLoad.style.opacity = p > 0.27 && p < frame[1] ? 1 : 0;
-
-		// Gösterge.
-		var built = Math.floor(clamp((p - frame[0]) / (frame[1] - frame[0]), 0, 1) * floors + 0.0001);
 		setText(hud.pct, String(Math.round(p * 100)));
-		setText(hud.floor, (built < 10 ? '0' : '') + built);
-		setText(hud.level, (built * 3.2).toFixed(2));
 		if (hud.bar) {
 			hud.bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
 		}
 
 		var phase = 0;
-		for (i = 0; i < phases.length; i++) {
+		for (var i = 0; i < phases.length; i++) {
 			if (p >= phases[i]) {
 				phase = i;
 			}
@@ -219,6 +178,7 @@
 				el.classList.toggle('is-active', n === phase);
 			});
 			setText(hud.phase, (phase < 9 ? '0' : '') + (phase + 1));
+			setText(hud.name, phaseNames[phase] || '');
 			lastPhase = phase;
 		}
 
@@ -228,23 +188,11 @@
 			stage.classList.add('is-' + mode);
 			lastMode = mode;
 		}
-		stage.classList.toggle('is-dark', p > 0.86);
-	}
-
-	// Dar ekranda sahne binaya yakınlaşır.
-	function fit() {
-		var ratio = stage.clientWidth / stage.clientHeight;
-		var box = ratio < 0.8 ? '485 40 680 770' : ratio < 1.25 ? '330 10 860 790' : '20 30 1170 770';
-		if (svg.getAttribute('viewBox') !== box) {
-			svg.setAttribute('viewBox', box);
-		}
 	}
 
 	if (reduceMotion) {
-		fit();
 		render(1);
 		stage.classList.add('is-static');
-		window.addEventListener('resize', fit);
 		return;
 	}
 
@@ -258,7 +206,7 @@
 	}
 
 	function tick() {
-		current = current < 0 ? target : current + (target - current) * 0.16;
+		current = current < 0 ? target : current + (target - current) * 0.14;
 		if (Math.abs(target - current) < 0.0004) {
 			current = target;
 		}
@@ -273,11 +221,7 @@
 		}
 	}
 
-	fit();
 	onScroll();
 	window.addEventListener('scroll', onScroll, { passive: true });
-	window.addEventListener('resize', function () {
-		fit();
-		onScroll();
-	});
+	window.addEventListener('resize', onScroll);
 })();

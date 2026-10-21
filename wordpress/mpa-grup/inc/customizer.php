@@ -130,7 +130,44 @@ function mpa_customize_register( $wp_customize ) {
 	$add( 'hero_eyebrow', 'mpa_hero', __( 'Üst etiket', 'mpa-grup' ) );
 	$add( 'hero_title', 'mpa_hero', __( 'Ana başlık', 'mpa-grup' ), 'html', __( 'Satır atlamak için <br> kullanın.', 'mpa-grup' ) );
 	$add( 'hero_text', 'mpa_hero', __( 'Giriş metni', 'mpa-grup' ), 'textarea' );
-	$add( 'sign_text', 'mpa_hero', __( 'Bina tepesindeki tabela', 'mpa-grup' ) );
+	$wp_customize->add_setting(
+		'hero_video',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'hero_video',
+			array(
+				'label'       => __( 'İnşaat videosu (MP4)', 'mpa-grup' ),
+				'description' => __( 'Temelden bitmiş hale giden, sabit kameralı video. Ziyaretçi aşağı kaydırdıkça kare kare ilerler. Boşsa aşağıdaki görselle çizim → kaba inşaat → bitmiş yapı efekti kullanılır.', 'mpa-grup' ),
+				'section'     => 'mpa_hero',
+				'mime_type'   => 'video',
+			)
+		)
+	);
+	$wp_customize->add_setting(
+		'hero_image',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'hero_image',
+			array(
+				'label'       => __( 'Bitmiş yapı görseli', 'mpa-grup' ),
+				'description' => __( 'Videonun kapak karesi ve video yokken kullanılan görsel. Boşsa Anıttepe Olimpik Yüzme Havuzu fotoğrafı kullanılır.', 'mpa-grup' ),
+				'section'     => 'mpa_hero',
+				'mime_type'   => 'image',
+			)
+		)
+	);
 	foreach ( mpa_default_phases() as $i => $phase ) {
 		$n = $i + 1;
 		/* translators: %d: aşama numarası */

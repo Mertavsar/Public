@@ -97,6 +97,52 @@ function mpa_phases() {
 }
 
 /**
+ * Giriş videosu kaynakları: Özelleştir'den seçilen video, yoksa tema içindeki
+ * assets/video/insaat.webm ve/veya insaat.mp4.
+ *
+ * @return array MIME türü => adres. Boşsa fotoğraf modu kullanılır.
+ */
+function mpa_hero_video_sources() {
+	$id = (int) mpa_opt( 'hero_video' );
+	if ( $id && wp_get_attachment_url( $id ) ) {
+		return array( get_post_mime_type( $id ) => wp_get_attachment_url( $id ) );
+	}
+	$sources = array();
+	foreach ( array( 'webm' => 'video/webm', 'mp4' => 'video/mp4' ) as $ext => $mime ) {
+		if ( file_exists( MPA_DIR . '/assets/video/insaat.' . $ext ) ) {
+			$sources[ $mime ] = MPA_URI . '/assets/video/insaat.' . $ext;
+		}
+	}
+	return $sources;
+}
+
+/**
+ * Bitmiş yapı görseli (giriş animasyonunun son karesi).
+ *
+ * @return string
+ */
+function mpa_hero_image_url() {
+	$id = (int) mpa_opt( 'hero_image' );
+	if ( $id ) {
+		$url = wp_get_attachment_image_url( $id, 'full' );
+		if ( $url ) {
+			return $url;
+		}
+	}
+	return MPA_URI . '/assets/img/insaat-son.jpg';
+}
+
+/**
+ * Teknik çizim katmanı: tema görseli için hazır çizim; özel görselde boş döner ve
+ * çizim görünümü CSS filtresiyle üretilir.
+ *
+ * @return string
+ */
+function mpa_hero_sketch_url() {
+	return (int) mpa_opt( 'hero_image' ) ? '' : MPA_URI . '/assets/img/insaat-cizim.jpg';
+}
+
+/**
  * Numaralı başlık/metin grupları (hizmetler, ilkeler).
  *
  * @param string $prefix Ayar öneki.

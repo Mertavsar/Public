@@ -2,7 +2,7 @@
 Theme Name: MPA Grup İnşaat
 Theme URI: https://mpagrup.com
 Author: MPA Grup İnşaat
-Description: MPA Grup İnşaat kurumsal teması. Girişte, aşağı kaydırdıkça teknik çizimden başlayıp hafriyat, temel, betonarme karkas, cephe ve peyzajla anahtar teslim binaya dönüşen inşaat animasyonu; kurumsal katalogdaki referans projeler, hizmetler, iletişim formu ve Özelleştir panelinden yönetilen içerik. Etkinleştirildiği anda hazır gelir.
+Description: MPA Grup İnşaat kurumsal teması. Girişte, aşağı kaydırdıkça temelden bitmiş hale gelen yapı (kaydırmayla oynayan inşaat videosu ya da çizim → kaba inşaat → bitmiş yapı fotoğraf efekti); kurumsal katalogdaki referans projeler, hizmetler, iletişim formu ve Özelleştir panelinden yönetilen içerik. Etkinleştirildiği anda hazır gelir.
 Version: 1.0.0
 Requires at least: 6.3
 Tested up to: 6.8
@@ -177,64 +177,25 @@ h1, h2, h3, h4 { font-family: var(--ff-head); line-height: 1.12; margin: 0 0 .5e
 /* ==========================================================================
    İnşaat sahnesi
    ========================================================================== */
-.mpa-build { position: relative; height: 560vh; margin-top: calc(-1 * var(--header-h)); }
-.mpa-build__stage {
-	--sky-top: rgb(243, 242, 238);
-	--sky-bottom: rgb(236, 234, 228);
-	position: sticky; top: 0;
-	height: 100vh; height: 100svh;
-	overflow: hidden;
-	background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 78%);
+.mpa-build { position: relative; height: 460vh; margin-top: calc(-1 * var(--header-h)); background: var(--ink); }
+.mpa-build__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--paper); }
+
+/* Görsel katmanları: çizim → kaba inşaat (gri) → bitmiş yapı; ya da video */
+.mpa-build__media { position: absolute; inset: var(--header-h) 0 0; transform: scale(var(--zoom, 1)); transform-origin: 62% 60%; will-change: transform; }
+.mpa-build__layer, .mpa-build__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
+.mpa-build__sketch.is-filtered { filter: grayscale(1) contrast(1.7) brightness(1.3); }
+.mpa-build__rough { filter: grayscale(1) contrast(1.08) brightness(1.05); clip-path: inset(var(--rough-top, 100%) 0 0 0); }
+.mpa-build__done { clip-path: inset(var(--done-top, 100%) 0 0 0); }
+html:not(.js) .mpa-build__rough, html:not(.js) .mpa-build__done { clip-path: none; }
+.mpa-build__laser {
+	position: absolute; left: 0; right: 0; top: var(--laser, 100%); height: 2px; margin-top: -1px;
+	background: var(--accent); opacity: var(--laser-o, 0);
+	box-shadow: 0 0 10px 2px rgba(235, 83, 30, .75), 0 0 46px 8px rgba(235, 83, 30, .28);
 }
-.mpa-build__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-
-/* SVG öğeleri — --t: görünme (0→1), --o: kaybolma (0→1) */
-.mpa-build__svg [data-a], .mpa-build__svg [data-o] { transform-box: fill-box; }
-html.js .mpa-build__svg [data-a] { --t: 0; }
-.a-grow { transform-origin: 50% 100%; transform: scaleY(var(--t, 1)); }
-.a-dig { transform-origin: 50% 0; transform: scaleY(var(--t, 1)); }
-.a-growx { transform-origin: 0 50%; transform: scaleX(var(--t, 1)); }
-.a-pop { transform-origin: 50% 100%; transform: scale(var(--t, 1)); }
-.a-fade { opacity: calc(var(--t, 1) * (1 - var(--o, 0))); }
-.a-draw { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--t, 1)); }
-.a-crane { transform: translateY(calc((1 - var(--t, 1) + var(--o, 0)) * 580px)); }
-[data-o]:not(.a-fade):not(.a-crane) { opacity: calc(1 - var(--o, 0)); }
-.a-pop[data-a]:not(g) { transform-box: fill-box; }
-g.a-pop { transform-box: fill-box; }
-
-.concrete, .column, .slab { fill: #c2bdb3; }
-.column { fill: #b3aea4; }
-.slab { fill: #cdc8be; }
-.cladding, .cladding rect { fill: #20272d; }
-.stone, .stone rect { fill: #d8cfbe; }
-.lit { fill: #ffd27e; }
-.accent-fill { fill: var(--accent); }
-.paper-fill { fill: var(--sky-bottom, #ecebe4); }
-.skyline rect { fill: #0f161b; fill-opacity: .1; }
-.cloud ellipse { fill: #fff; fill-opacity: .6; }
-.cloud { animation: mpa-drift 80s linear infinite alternate; }
-.cloud--2 { animation-duration: 110s; }
-.cloud--3 { animation-duration: 95s; animation-direction: alternate-reverse; }
-@keyframes mpa-drift { to { transform: translateX(120px); } }
-.crane-steel { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
-.hook-load { transition: opacity .3s; }
-.blink { animation: mpa-blink 1.6s steps(2, jump-none) infinite; }
-@keyframes mpa-blink { 50% { opacity: .15; } }
-.sign { font-family: var(--ff-head); font-size: 10px; font-weight: 700; letter-spacing: .32em; fill: #fff; }
-.sign--glow { fill: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); }
-.hoarding-text { font-family: var(--ff-head); font-size: 7px; font-weight: 700; letter-spacing: .2em; fill: #fff; }
-
-/* Teknik çizim katmanı */
-.bp-lines rect, .bp-lines circle, .bp-lines path { fill: none; stroke: var(--ink); stroke-width: 1.3; }
-.bp-lines .bp-thin { stroke-width: .7; stroke-opacity: .55; }
-.bp-lines .bp-axis { stroke-width: .7; stroke-dasharray: 14 4 2 4; stroke-opacity: .5; }
-.bp-lines circle { fill: var(--paper); }
-.bp-label { font-family: var(--ff-head); font-size: 10px; font-weight: 600; fill: var(--ink); }
-.bp-level path:first-child { fill: var(--accent); stroke: none; }
-.bp-level text { font-family: var(--ff-head); font-size: 10px; font-weight: 600; fill: var(--ink); }
-.bp-titleblock rect, .bp-titleblock path { fill: none; stroke: var(--ink); stroke-width: 1; }
-.bp-key { font-family: var(--ff-head); font-size: 7px; font-weight: 700; letter-spacing: .18em; fill: var(--accent); }
-.bp-val { font-family: var(--ff-head); font-size: 8.5px; font-weight: 700; letter-spacing: .06em; fill: var(--ink); }
+.mpa-build__shade {
+	position: absolute; inset: var(--header-h) 0 0; pointer-events: none; opacity: var(--shade, 0);
+	background: linear-gradient(90deg, rgba(15, 22, 27, .6) 0%, rgba(15, 22, 27, .2) 42%, rgba(15, 22, 27, 0) 68%);
+}
 
 /* Metin katmanı */
 .mpa-build__copy {
@@ -242,7 +203,7 @@ g.a-pop { transform-box: fill-box; }
 	left: max(var(--gutter), calc((100vw - var(--container)) / 2));
 	top: calc(50% + var(--header-h) / 2);
 	transform: translateY(-50%);
-	width: min(460px, 40vw);
+	width: min(500px, 42vw);
 	display: grid;
 }
 .mpa-build__copy > * { grid-area: 1 / 1; align-self: center; transition: opacity .5s var(--ease), transform .6s var(--ease), visibility .5s; }
@@ -252,6 +213,11 @@ g.a-pop { transform-box: fill-box; }
 .is-final .mpa-build__final { opacity: 1; visibility: visible; transform: none; }
 html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: none; }
 
+.mpa-build__intro {
+	background: rgba(244, 243, 239, .9); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+	padding: 30px 32px 26px; border-top: 3px solid var(--accent); box-shadow: 0 30px 60px rgba(15, 22, 27, .12);
+}
+.hud-val--text { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
 .mpa-build__title {
 	font-size: clamp(2.2rem, 3.9vw, 3.7rem); font-weight: 800; line-height: 1.04;
 	text-transform: uppercase; letter-spacing: -.015em; margin-bottom: 22px;
@@ -320,7 +286,10 @@ html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: no
 .is-final .mpa-build__skip, .is-static .mpa-build__skip { opacity: 0; pointer-events: none; }
 
 @media (max-width: 900px) {
-	.mpa-build { height: 480vh; }
+	.mpa-build { height: 400vh; }
+	.mpa-build__intro { padding: 20px 20px 18px; }
+	.mpa-build__stage:not(.is-intro) .mpa-build__skip { opacity: 0; pointer-events: none; }
+	.mpa-build__layer, .mpa-build__video { object-position: 58% 50%; }
 	.mpa-build__copy {
 		left: var(--gutter); right: var(--gutter); width: auto;
 		top: calc(var(--header-h) + 18px); transform: none;
@@ -337,8 +306,6 @@ html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: no
 	.mpa-build__hud { left: var(--gutter); right: auto; bottom: 16px; }
 	.hud-cell { padding: 8px 12px; }
 	.hud-val { font-size: 16px; }
-	.hud-cell:nth-child(3) { display: none; }
-	.bp-titleblock { display: none; }
 	.mpa-build__skip { left: auto; right: var(--gutter); bottom: 16px; transform: none; padding: 8px 10px; font-size: 10px; }
 }
 
@@ -346,7 +313,7 @@ html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: no
 	html { scroll-behavior: auto; }
 	.mpa-build { height: auto; }
 	.mpa-build__stage { position: relative; }
-	.cloud, .blink, .mpa-build__mouse::after { animation: none; }
+	.mpa-build__mouse::after { animation: none; }
 }
 
 /* ==========================================================================
