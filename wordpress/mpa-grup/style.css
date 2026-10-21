@@ -311,6 +311,7 @@ html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: no
 }
 .mpa-build__skip:hover { color: #fff; }
 .mpa-build__skip .icon { width: 14px; height: 14px; }
+.mpa-build__skip { padding: 12px 0; }
 .mpa-build__stage:not(.is-intro) .mpa-build__skip, .is-static .mpa-build__skip { opacity: 0; pointer-events: none; }
 
 @media (max-width: 1100px) {
@@ -487,6 +488,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 .contact__list .icon { width: 22px; height: 22px; color: var(--accent); margin-top: 2px; }
 .contact__list span { display: block; font-family: var(--ff-head); font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 .contact__list a, .contact__list p { margin: 0; font-weight: 600; color: var(--ink); text-decoration: none; font-size: 1.05rem; }
+.contact__list a { display: inline-block; padding: 10px 0; margin: -6px 0; }
 .contact__map { margin-top: 28px; border: 1px solid var(--line); }
 .contact__map iframe { display: block; width: 100%; height: 260px; border: 0; filter: grayscale(.4); }
 .contact__scope { margin-top: 32px; padding: 24px 26px; background: var(--ink); color: #fff; border-top: 3px solid var(--accent); }
@@ -572,11 +574,13 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 .site-footer__brand p { max-width: 38ch; }
 .site-footer__title { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 18px; }
 .site-footer .menu { list-style: none; margin: 0; padding: 0; }
-.site-footer .menu li { margin-bottom: 10px; }
+.site-footer .menu li { margin-bottom: 0; }
+.site-footer .menu a { display: inline-block; padding: 8px 0; min-height: 40px; }
 .site-footer a { text-decoration: none; transition: color .2s; }
 .site-footer a:hover { color: var(--accent); }
 .site-footer__contact { list-style: none; margin: 0; padding: 0; }
-.site-footer__contact li { display: flex; gap: 12px; margin-bottom: 14px; }
+.site-footer__contact li { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.site-footer__contact a { padding: 8px 0; }
 .site-footer__contact .icon { color: var(--accent); margin-top: 3px; }
 .site-footer__bottom {
 	display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
