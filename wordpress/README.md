@@ -12,8 +12,12 @@ Etkinleştirildiği anda site hazır gelir. Ek eklenti veya ayar gerekmez:
 
 - Ana sayfa: kaydırdıkça temelden bitmiş hale gelen yapı. Anıttepe Olimpik Yüzme Havuzu
   inşaat videosu (Flow) ziyaretçi kaydırdıkça kare kare ileri/geri oynar; hafriyat, temel,
-  karkas, cephe ve teslim aşamalarının yazıları videodaki anlarla eşleşir.
-  Ardından Kurumsal, Hizmetler, Projeler, İletişim.
+  karkas, cephe ve teslim aşamalarının yazıları videodaki anlarla eşleşir. Ardından
+  Kurumsal, Hizmetler ve öne çıkan projelerden kısa tanıtımlar.
+- Sayfalar (otomatik oluşturulur): **/kurumsal/** (hakkımızda, ilkeler), **/hizmetler/**
+  (hizmet alanları, 7 adımlı çalışma süreci), **/projeler/** (tüm projeler, her birinin
+  galerili kendi sayfası), **/iletisim/** (bilgiler, form, harita). Sayfa düzenleyicisine
+  yazılan içerik de bu sayfalarda gösterilir.
 - Katalogdaki 3 referans proje (İvedik Otel, Ankara Lalahan Araştırma Merkezi,
   Anıttepe Olimpik Yüzme Havuzu) fotoğraflarıyla **Projeler** menüsüne otomatik eklenir.
 - İletişim formu eklentisiz çalışır; mesajlar panelde **Gelen Mesajlar** altında saklanır
@@ -53,7 +57,7 @@ akıcı sarma için yeniden kodlanmış) ve ilk karesi `insaat-poster.jpg`.
 | Vurgu rengi (logo turuncusu `#eb531e`) | Özelleştir › MPA Grup › Firma & İletişim Bilgileri |
 | Logo (varsayılan: katalogdaki logo) | Özelleştir › Site Kimliği |
 | Yeni proje | Projeler › Yeni Proje (öne çıkan görsel + Proje Bilgileri kutusu) |
-| Menü (boşsa tek sayfa bağlantıları kullanılır) | Görünüm › Menüler › "Ana Menü" |
+| Menü (boşsa Kurumsal · Hizmetler · Projeler · İletişim kullanılır) | Görünüm › Menüler › "Ana Menü" |
 
 ## Dosya yapısı
 
