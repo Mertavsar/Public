@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MPA_VERSION', '1.0.0' );
+define( 'MPA_VERSION', '1.1.0' );
 define( 'MPA_DIR', get_template_directory() );
 define( 'MPA_URI', get_template_directory_uri() );
 
@@ -63,7 +63,8 @@ function mpa_assets() {
 		array(),
 		null
 	);
-	wp_enqueue_style( 'mpa-style', get_stylesheet_uri(), array(), MPA_VERSION );
+	// Sürüm olarak dosyanın değişme zamanı: her güncellemede tarayıcı ve sunucu önbelleği yenilenir.
+	wp_enqueue_style( 'mpa-style', get_stylesheet_uri(), array(), (string) filemtime( MPA_DIR . '/style.css' ) );
 
 	$accent = sanitize_hex_color( mpa_opt( 'accent_color' ) );
 	if ( $accent ) {
@@ -74,7 +75,7 @@ function mpa_assets() {
 		'mpa-main',
 		MPA_URI . '/assets/js/main.js',
 		array(),
-		MPA_VERSION,
+		(string) filemtime( MPA_DIR . '/assets/js/main.js' ),
 		array(
 			'in_footer' => true,
 			'strategy'  => 'defer',
