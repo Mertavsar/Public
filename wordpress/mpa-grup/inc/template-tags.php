@@ -81,10 +81,17 @@ function mpa_whatsapp_url( $number ) {
 /**
  * İnşaat animasyonu aşamaları ve kaydırma ilerlemesindeki başlangıç noktaları.
  *
+ * Video modunda başlangıçlar temadaki inşaat videosunun içeriğine göre ayarlıdır
+ * (hafriyat 0 sn, temel ~1,1 sn, karkas ~1,8 sn, cephe ~4,8 sn, ince işler ~5,9 sn;
+ * video kaydırmanın 0,06–0,92 aralığına yayılır).
+ *
+ * @param bool $video Video modu.
  * @return array
  */
-function mpa_phases() {
-	$starts = array( 0, 0.12, 0.2, 0.3, 0.6, 0.8, 0.93 );
+function mpa_phases( $video = false ) {
+	$starts = $video
+		? array( 0, 0.06, 0.18, 0.255, 0.575, 0.695, 0.93 )
+		: array( 0, 0.12, 0.2, 0.3, 0.6, 0.8, 0.93 );
 	$phases = array();
 	foreach ( $starts as $i => $start ) {
 		$phases[] = array(
@@ -114,6 +121,19 @@ function mpa_hero_video_sources() {
 		}
 	}
 	return $sources;
+}
+
+/**
+ * Video yüklenene kadar görünen kare: temadaki videonun ilk karesi, özel videoda
+ * bitmiş yapı görseli.
+ *
+ * @return string
+ */
+function mpa_hero_video_poster() {
+	if ( ! (int) mpa_opt( 'hero_video' ) && file_exists( MPA_DIR . '/assets/video/insaat-poster.jpg' ) ) {
+		return MPA_URI . '/assets/video/insaat-poster.jpg';
+	}
+	return mpa_hero_image_url();
 }
 
 /**

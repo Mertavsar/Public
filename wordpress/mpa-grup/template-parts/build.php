@@ -3,8 +3,8 @@
  * Giriş: aşağı kaydırdıkça temelden bitmiş hale gelen yapı.
  *
  * İki mod:
- * - Video: Özelleştir'den yüklenen (ya da assets/video/insaat.webm|mp4) inşaat videosu
- *   kaydırmayla kare kare ilerler.
+ * - Video: temadaki assets/video/insaat.mp4 (Anıttepe inşaat videosu) ya da
+ *   Özelleştir'den yüklenen video kaydırmayla kare kare ilerler.
  * - Fotoğraf: video yoksa bitmiş yapı fotoğrafı; önce teknik çizim, sonra zeminden
  *   yükselen kaba inşaat (gri), en sonda cephe ve renkler.
  *
@@ -18,15 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 $video  = mpa_hero_video_sources();
 $final  = mpa_hero_image_url();
 $sketch = mpa_hero_sketch_url();
-$phases = mpa_phases();
+$phases = mpa_phases( (bool) $video );
 $starts = implode( ',', wp_list_pluck( $phases, 'at' ) );
 ?>
 <section class="mpa-build" id="insaat" aria-label="<?php esc_attr_e( 'İnşaat süreci', 'mpa-grup' ); ?>">
-	<div class="mpa-build__stage is-intro" data-phases="<?php echo esc_attr( $starts ); ?>" data-mode="<?php echo $video ? 'video' : 'photo'; ?>">
+	<div class="mpa-build__stage is-intro" data-phases="<?php echo esc_attr( $starts ); ?>" data-mode="<?php echo $video ? 'video' : 'photo'; ?>" data-video="0.06,0.92">
 
 		<div class="mpa-build__media" aria-hidden="true">
 			<?php if ( $video ) : ?>
-				<video class="mpa-build__video" poster="<?php echo esc_url( $final ); ?>" muted playsinline preload="auto">
+				<video class="mpa-build__video" poster="<?php echo esc_url( mpa_hero_video_poster() ); ?>" muted playsinline preload="auto">
 					<?php foreach ( $video as $mime => $src ) : ?>
 						<source src="<?php echo esc_url( $src ); ?>" type="<?php echo esc_attr( $mime ); ?>">
 					<?php endforeach; ?>

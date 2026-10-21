@@ -143,7 +143,7 @@ function mpa_customize_register( $wp_customize ) {
 			'hero_video',
 			array(
 				'label'       => __( 'İnşaat videosu (MP4)', 'mpa-grup' ),
-				'description' => __( 'Temelden bitmiş hale giden, sabit kameralı video. Ziyaretçi aşağı kaydırdıkça kare kare ilerler. Boşsa aşağıdaki görselle çizim → kaba inşaat → bitmiş yapı efekti kullanılır.', 'mpa-grup' ),
+				'description' => __( 'Temelden bitmiş hale giden, sabit kameralı video; ziyaretçi aşağı kaydırdıkça kare kare ilerler. Boşsa temadaki Anıttepe inşaat videosu kullanılır. Aşama yazılarının zamanlaması temadaki videoya göre ayarlıdır.', 'mpa-grup' ),
 				'section'     => 'mpa_hero',
 				'mime_type'   => 'video',
 			)

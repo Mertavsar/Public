@@ -1,7 +1,9 @@
-İnşaat videosu bu klasöre konursa giriş animasyonu otomatik olarak video moduna geçer:
-  insaat.webm (VP9) ve/veya insaat.mp4 (H.264)
-Alternatif: Görünüm > Özelleştir > MPA Grup > Giriş: İnşaat Animasyonu > İnşaat videosu.
+insaat.mp4        Anıttepe Olimpik Yüzme Havuzu inşaat videosu (Flow, 8 sn, 1280x720).
+                  Kaydırmada akıcı ileri/geri sarma için 8 karede bir anahtar kare ve sessiz olarak kodlandı.
+insaat-poster.jpg Video yüklenene kadar görünen ilk kare.
 
-Kaydırmada akıcı ileri/geri sarma için her kare anahtar kare olmalı:
-  ffmpeg -i flow.mp4 -vf scale=1600:-2 -an -c:v libx264 -preset slow -crf 26 -g 1 -pix_fmt yuv420p -movflags +faststart insaat.mp4
-  ffmpeg -i flow.mp4 -vf scale=1600:-2 -an -c:v libvpx-vp9 -b:v 0 -crf 38 -g 1 -row-mt 1 insaat.webm
+Başka bir video kullanmak için: Görünüm > Özelleştir > MPA Grup > Giriş: İnşaat Animasyonu > İnşaat videosu.
+Bu klasördeki dosyaları değiştirirseniz aynı adlarla değiştirin ve videoyu şu ayarla kodlayın:
+  ffmpeg -i yeni.mp4 -an -c:v libx264 -preset slow -crf 28 -g 8 -keyint_min 8 -sc_threshold 0 -pix_fmt yuv420p -movflags +faststart insaat.mp4
+  ffmpeg -i insaat.mp4 -frames:v 1 -q:v 3 insaat-poster.jpg
+Aşama yazılarının videodaki zamanlaması: inc/template-tags.php > mpa_phases().

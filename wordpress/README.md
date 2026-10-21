@@ -10,9 +10,10 @@
 
 Etkinleştirildiği anda site hazır gelir. Ek eklenti veya ayar gerekmez:
 
-- Ana sayfa: kaydırdıkça temelden bitmiş hale gelen yapı (Anıttepe Olimpik Yüzme Havuzu
-  fotoğrafı: önce teknik çizim, sonra zeminden yükselen kaba inşaat, en sonda cephe ve renkler),
-  Kurumsal, Hizmetler, Projeler, İletişim.
+- Ana sayfa: kaydırdıkça temelden bitmiş hale gelen yapı. Anıttepe Olimpik Yüzme Havuzu
+  inşaat videosu (Flow) ziyaretçi kaydırdıkça kare kare ileri/geri oynar; hafriyat, temel,
+  karkas, cephe ve teslim aşamalarının yazıları videodaki anlarla eşleşir.
+  Ardından Kurumsal, Hizmetler, Projeler, İletişim.
 - Katalogdaki 3 referans proje (İvedik Otel, Ankara Lalahan Araştırma Merkezi,
   Anıttepe Olimpik Yüzme Havuzu) fotoğraflarıyla **Projeler** menüsüne otomatik eklenir.
 - İletişim formu eklentisiz çalışır; mesajlar panelde **Gelen Mesajlar** altında saklanır
@@ -30,16 +31,17 @@ Etkinleştirildiği anda site hazır gelir. Ek eklenti veya ayar gerekmez:
 Ayrıca: **Ayarlar › Genel** altında site başlığını ve dilini (Türkçe) kontrol edin;
 **Ayarlar › Kalıcı Bağlantılar** "Yazı adı" olmalı (`/projeler/ivedik-otel/` gibi adresler için).
 
-## Giriş videosu (Flow)
+Not: zip yaklaşık 8 MB. Sunucunuz "dosya çok büyük" derse temayı FTP / cPanel Dosya
+Yöneticisi ile `wp-content/themes/` altına klasör olarak yükleyip Görünüm › Temalar'dan etkinleştirin.
 
-Flow'da üretilen inşaat videosu yüklendiğinde giriş otomatik olarak video moduna geçer ve
-video, ziyaretçi kaydırdıkça kare kare ileri/geri oynar.
+## Giriş videosu
 
-- **Özelleştir › MPA Grup › Giriş: İnşaat Animasyonu › İnşaat videosu** alanından MP4 seçin, ya da
-- videoyu `mpa-grup/assets/video/insaat.mp4` (ve isteğe bağlı `insaat.webm`) olarak koyun.
+Temada hazır gelir: `mpa-grup/assets/video/insaat.mp4` (8 sn, 1280×720, sessiz, kaydırmada
+akıcı sarma için yeniden kodlanmış) ve ilk karesi `insaat-poster.jpg`.
 
-Akıcı geri sarma için videonun her karesi anahtar kare olmalı; komutlar
-`mpa-grup/assets/video/BENIOKU.txt` içinde. Video yokken fotoğraf efekti kullanılır.
+- Başka bir video için: **Özelleştir › MPA Grup › Giriş: İnşaat Animasyonu › İnşaat videosu**.
+- Video dosyası kaldırılırsa giriş fotoğraf efektine döner (çizim → kaba inşaat → bitmiş yapı).
+- Kodlama komutları ve aşama zamanlaması: `mpa-grup/assets/video/BENIOKU.txt`.
 
 ## Düzenleme
 

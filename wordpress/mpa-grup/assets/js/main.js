@@ -81,7 +81,7 @@
 	// Zaman çizelgesi (kaydırma ilerlemesi 0–1).
 	var ROUGH = [0.1, 0.6];  // kaba inşaat zeminden çatıya
 	var DONE = [0.6, 0.88];  // cephe ve renkler
-	var VIDEO = [0.03, 0.92]; // video baştan sona
+	var VIDEO = (stage.getAttribute('data-video') || '0.06,0.92').split(',').map(Number); // video baştan sona
 
 	function span(p, r) {
 		return clamp((p - r[0]) / (r[1] - r[0]), 0, 1);

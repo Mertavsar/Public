@@ -309,6 +309,15 @@ html:not(.js) .mpa-build__final { opacity: 1; visibility: visible; transform: no
 	.mpa-build__skip { left: auto; right: var(--gutter); bottom: 16px; transform: none; padding: 8px 10px; font-size: 10px; }
 }
 
+@media (max-width: 900px) and (orientation: portrait) {
+	.mpa-build__media { top: 40%; transform: none; }
+	.mpa-build__media::before {
+		content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 3px; background: var(--accent);
+	}
+	.mpa-build__shade { display: none; }
+	.mpa-build__layer, .mpa-build__video { object-position: 64% 60%; }
+}
+
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
 	.mpa-build { height: auto; }
