@@ -1,7 +1,8 @@
 <?php
 /**
  * İç sayfa giriş alanı. Görsel verilirse tam genişlik fotoğraf üzerinde büyük başlık;
- * 'split' düzeninde solda başlık, sağda görsel (proje sayfaları).
+ * 'split' düzeninde solda başlık, sağda görsel; 'compact' düzeninde görselsiz, küçük başlık
+ * ve sayfa yolu (proje sayfaları).
  *
  * @package MPA_Grup
  */
@@ -17,7 +18,7 @@ $lead    = isset( $args['lead'] ) ? $args['lead'] : '';
 $image   = isset( $args['image'] ) ? $args['image'] : '';
 $layout  = isset( $args['layout'] ) ? $args['layout'] : 'cover';
 $trail   = isset( $args['trail'] ) ? (array) $args['trail'] : array();
-$classes = 'page-hero' . ( $image ? ' page-hero--image page-hero--' . $layout : '' );
+$classes = 'page-hero' . ( $image ? ' page-hero--image page-hero--' . $layout : ( 'compact' === $layout ? ' page-hero--compact' : '' ) );
 ?>
 <section class="<?php echo esc_attr( $classes ); ?>">
 	<?php if ( $image ) : ?>
@@ -25,7 +26,7 @@ $classes = 'page-hero' . ( $image ? ' page-hero--image page-hero--' . $layout : 
 	<?php endif; ?>
 	<div class="container page-hero__inner">
 		<?php
-		if ( $image ) {
+		if ( $image || $trail ) {
 			mpa_breadcrumb( $trail, wp_strip_all_tags( $title ) );
 		}
 		?>

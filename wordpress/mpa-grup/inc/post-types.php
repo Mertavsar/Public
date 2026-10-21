@@ -215,7 +215,8 @@ function mpa_refresh_image_urls( $content ) {
 add_filter( 'the_content', 'mpa_refresh_image_urls', 8 );
 
 /**
- * Kapak fotoğrafı proje sayfasının girişinde zaten büyük gösterilir; galeride tekrar edilmez.
+ * Kapak fotoğrafı proje kartlarında ve "Sıradaki proje" alanında kullanılır; katalogdan
+ * alındığı için galerideki ilk fotoğrafla neredeyse aynıdır, galeride tekrar edilmez.
  *
  * @param string $content Yazı içeriği.
  * @return string

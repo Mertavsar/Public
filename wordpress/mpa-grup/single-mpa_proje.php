@@ -1,7 +1,7 @@
 <?php
 /**
- * Proje detayı: solda başlık ve bilgiler, sağda kapak; ardından açıklama, büyütülebilir
- * galeri ve sıradaki proje.
+ * Proje detayı: sade başlık ve bilgiler; ardından açıklama, büyütülebilir galeri ve
+ * sıradaki proje.
  *
  * @package MPA_Grup
  */
@@ -15,8 +15,7 @@ while ( have_posts() ) :
 		null,
 		array(
 			'title'   => get_the_title(),
-			'image'   => get_the_post_thumbnail_url( null, 'large' ),
-			'layout'  => 'split',
+			'layout'  => 'compact',
 			'trail'   => array( __( 'Projeler', 'mpa-grup' ) => mpa_url( 'projeler' ) ),
 			'meta'    => array(
 				__( 'İşveren', 'mpa-grup' )  => get_post_meta( get_the_ID(), '_mpa_client', true ),
@@ -26,7 +25,7 @@ while ( have_posts() ) :
 		)
 	);
 	?>
-	<article class="section section--paper">
+	<article class="section section--paper section--entry">
 		<div class="container container--narrow entry">
 			<div class="entry__content" data-lightbox>
 				<?php the_content(); ?>

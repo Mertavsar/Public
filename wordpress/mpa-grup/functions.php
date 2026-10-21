@@ -177,8 +177,7 @@ add_filter( 'language_attributes', 'mpa_language_attributes' );
 function mpa_has_image_hero() {
 	return is_front_page()
 		|| is_page( array( 'kurumsal', 'hizmetler' ) )
-		|| is_post_type_archive( 'mpa_proje' )
-		|| is_singular( 'mpa_proje' );
+		|| is_post_type_archive( 'mpa_proje' );
 }
 
 /**

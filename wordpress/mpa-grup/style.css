@@ -629,6 +629,15 @@ html.js .reveal-img.is-in img { transform: none; }
 .page-hero--split .page-hero__media { position: relative; inset: auto; grid-column: 2; grid-row: 1; margin: 0; }
 .page-hero--split .page-hero__title { font-size: clamp(2.4rem, 4.6vw, 4.4rem); }
 
+/* Proje sayfası: görselsiz, sade giriş */
+.page-hero--compact { padding: clamp(36px, 5vw, 64px) 0 clamp(28px, 3.5vw, 40px); background: var(--paper); border-bottom: 1px solid var(--line); }
+.page-hero--compact .crumbs { margin-bottom: 14px; }
+.page-hero--compact .page-hero__title { max-width: none; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.05; }
+.page-hero--compact .page-hero__meta { gap: 10px 48px; margin-top: 22px; padding-top: 0; border-top: 0; }
+.page-hero--compact .page-hero__meta dt { font-family: var(--ff-body); font-size: 13px; font-weight: 400; color: var(--muted); }
+.page-hero--compact .page-hero__meta dd { margin-top: 2px; font-size: 1rem; }
+.section--entry { padding-top: clamp(40px, 5vw, 64px); }
+
 .entry__cover { margin-bottom: 48px; }
 .entry__content { font-size: 1.1rem; line-height: 1.75; }
 .entry__content > * { margin-bottom: 1.2em; }
