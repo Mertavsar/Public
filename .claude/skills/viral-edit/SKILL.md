@@ -25,6 +25,9 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 | `scripts/overlay.py` | Altyazı, banner, ok — saydam katman |
 | `scripts/audiobed.py` | Efekt + müzik yatağı, EDL kesimlerinden türer |
 | `scripts/master.py` | Look-ahead limiter (`volume+alimiter` yerine) |
+| `scripts/denoise.py` | Telefon kaydında oda uğultusu: konuşma öncesi boşluktan profil, Wiener (afftdn yetmediğinde) |
+| `scripts/dethump.py` | Mikrofona el/sürtünme darbeleri: yalnızca konuşmasız anlarda 250 Hz altı bastırılır |
+| `scripts/matcheq.py` | Kaydın bir kısmı boğuklaştıysa (el mikrofonu kapattı): temiz kısmın tınısına eşleştirme EQ |
 | `scripts/cover.py` | Dikey kapak görseli |
 | `scripts/dewatermark.py` | TikTok filigranını kırpmadan/bulanıklaştırmadan siler (inpainting) |
 | `scripts/detext.py` | Kaynağa gömülü, SÜREKLİ DEĞİŞEN altyazıyı (kelime kelime İngilizce yazı + vurgu kutusu) her karede tespit edip siler |
