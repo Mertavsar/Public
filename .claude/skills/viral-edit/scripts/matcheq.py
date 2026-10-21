@@ -1,7 +1,7 @@
 # Boğuklaşan bölümü temiz bölümün tını dengesine geri getirir (zamana göre değişen eşleştirme EQ'su).
 # Referans: temiz kısmın konuşma karelerinin uzun süreli ortalama spektrumu (LTAS).
 # Her 0.5 s'lik pencerede yerel LTAS ölçülür; fark (yumuşatılmış, sınırlı) o pencerenin karelerine uygulanır.
-# kullanım: matcheq.py giriş.f32 çıkış.f32 ref0 ref1
+# kullanım: matcheq.py giriş.f32 çıkış.f32 ref0 ref1 [sınır0 sınır1]  (sınır: tiz yükseltmesi en fazla +3 dB)
 import sys, numpy as np
 SR, N, HOP = 48000, 2048, 512
 x = np.fromfile(sys.argv[1], np.float32).astype(np.float64); r0, r1 = float(sys.argv[3]), float(sys.argv[4])
@@ -32,6 +32,10 @@ for t0 in tw:
     hf = d[fc > 3000].mean()
     corr_t.append(d * np.clip((hf - 3) / 6, 0, 1) if hf > 0 else d * 0)
 corr_t = np.array(corr_t)
+# isteğe bağlı: bir zaman aralığında tiz yükseltmesini sınırla (orada sürtünme var, yükseltme onu da büyütür)
+if len(sys.argv) > 6:
+    c0, c1 = float(sys.argv[5]), float(sys.argv[6]); m = (tw >= c0 - 0.5) & (tw <= c1)
+    corr_t[m] = np.minimum(corr_t[m], 3.0)
 # zamanda yumuşat (ani tını sıçraması olmasın)
 k = np.array([1, 2, 3, 2, 1], float); k /= k.sum()
 corr_t = np.array([np.convolve(np.pad(c, 2, mode="edge"), k, "valid") for c in corr_t.T]).T
