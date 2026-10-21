@@ -367,25 +367,6 @@
 		window.addEventListener('touchstart', unlock, { passive: true });
 	}
 
-	// Telefonda arka plandaki bulanık kopya: o anki kare küçük bir tuvale çizilir.
-	var blur = build.querySelector('.mpa-build__blur');
-	var blurCtx = blur && blur.getContext ? blur.getContext('2d') : null;
-	function paintBlur(src) {
-		if (!blurCtx || blur.offsetParent === null) {
-			return;
-		}
-		try {
-			blurCtx.drawImage(src, 0, 0, blur.width, blur.height);
-		} catch (e) {}
-	}
-	if (blurCtx && video) {
-		var poster = new Image();
-		poster.onload = function () { paintBlur(poster); };
-		poster.src = video.getAttribute('poster');
-		video.addEventListener('seeked', function () { paintBlur(video); });
-		video.addEventListener('loadeddata', function () { paintBlur(video); });
-	}
-
 	function seekVideo() {
 		if (!video || !video.duration) {
 			return;

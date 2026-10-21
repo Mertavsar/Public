@@ -26,7 +26,6 @@ $starts = implode( ',', wp_list_pluck( $phases, 'at' ) );
 
 		<div class="mpa-build__media" aria-hidden="true">
 			<?php if ( $video ) : ?>
-				<canvas class="mpa-build__blur" width="160" height="90"></canvas>
 				<video class="mpa-build__video" poster="<?php echo esc_url( mpa_hero_video_poster() ); ?>" muted playsinline preload="auto">
 					<?php foreach ( $video as $mime => $src ) : ?>
 						<source src="<?php echo esc_url( $src ); ?>" type="<?php echo esc_attr( $mime ); ?>">
