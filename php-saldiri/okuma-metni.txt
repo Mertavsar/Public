@@ -1,0 +1,18 @@
+PHP2Shell — Seslendirme metni (~50 sn)
+Parantez içi: okunuşu. Her paragraf ayrı bir sahne; paragraflar arasında kısa bir nefes payı bırak.
+
+1. Web siten şu an hackerlara (hekırlara) açık olabilir. Üstelik şifren bile seni korumuyor.
+
+2. Neden? Sitelerin çoğu PHP (pi eyç pi) denen bir dille çalışıyor. Bunu sitenin motoru gibi düşün.
+
+3. 21 Ekim'de (yirmi bir Ekim'de) bu motorda iki ciddi açık bulundu. Adı: PHP2Shell (pi eyç pi tu şel).
+
+4. Basitçe: saldırgan şifre bilmeden sunucunda komut çalıştırabiliyor. Yani siten ele geçirilebilir.
+
+5. Ve saldırılar, güncelleme çıkmadan saatler önce başladı.
+
+6. Aynı hafta popüler WordPress (vördpres) eklentisi Rank Math PRO'ya (renk mat pro'ya) da gizli bir arka kapı konuldu.
+
+7. Ne yapmalısın? Hosting firmana ya da yazılımcına sor: PHP (pi eyç pi) güncel mi? Güncellemeden sonra sunucu yeniden başlatılmalı.
+
+8. Bu videoyu sitesi olan birine gönder. Daha fazlası için takip et.
