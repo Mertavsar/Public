@@ -10,7 +10,7 @@ görünür (altyazi.txt: "PHP"). İki dosya satır satır eşleşir; her satır 
   böylece önizleme altyazılı çıkar.
 Satır içindeki altyazı kelimeleri satır süresine hece ağırlığıyla dağıtılır.
 
-    python3 build/captions.py   ->  assets/timing.js, vo/timing.json
+    python3 build/captions.py   ->  assets/timing.js, vo/timing.json (+ gerçek seste vo/son.wav)
 """
 import json, os, re
 
@@ -20,7 +20,19 @@ P = lambda *a: os.path.join(ROOT, *a)
 WIN = [[70, 75], [0, 5], [5, 14], [14, 23], [31, 39], [39, 48], [48, 56], [56, 60.5]]
 LEAD, TAIL, GAP, RATE = .25, 1.0, .45, 5.2
 MAX_CHARS = 26
-OLD_TICKS = [71.2, 72.6, 6.0, 7.2, 9.4, 15.4, 17.6, 19.6, 32.0, 34.6, 40.0, 41.6, 49.0, 51.8, 57.2]
+NOBREAK = {('rank', 'math'), ('math', "pro'ya"), ('ele', 'geçirilebilir'), ('takip', 'et')}   # birlikte kalsın
+# animasyon anı <-> kelime: (satır, ekrandaki kelime, kelimeye göre kayma sn, animasyon zamanı)
+ANCHORS = [
+    (0, 'açık', 0, 71.2), (0, 'şifren', -.1, 72.2), (0, 'korumuyor.', 0, 73.0),
+    (1, 'Sitelerin', 0, .3), (1, 'motoru', 0, 1.5),
+    (2, "Ekim'de", 0, 6.4), (2, 'iki', 0, 7.2), (2, 'Adı:', 0, 9.3), (2, 'PHP2Shell.', 0, 9.4),
+    (3, 'şifre', 0, 15.4), (3, 'sunucunda', 0, 16.4), (3, 'çalıştırabiliyor.', 0, 18.6), (3, 'ele', -.15, 20.3),
+    (4, 'saldırılar,', 0, 32.0), (4, 'güncelleme', 0, 34.6), (4, 'saatler', 0, 35.6),
+    (5, 'WordPress', 0, 39.6), (5, 'Rank', 0, 40.6), (5, 'gizli', 0, 41.6),
+    (6, 'Hosting', 0, 48.8), (6, 'Güncellemeden', 0, 51.8),
+    (7, 'videoyu', 0, 56.4), (7, 'takip', 0, 57.6),
+]
+OLD_TICKS = [71.2, 72.6, 6.4, 7.2, 9.4, 15.4, 16.4, 18.6, 32.0, 34.6, 40.6, 41.6, 48.8, 51.8, 57.6]
 RED = {'açık', 'korumuyor', 'php2shell', 'geçirilebilir', 'saatler', 'kapı', 'güncel'}
 # okunuşu hecesiz/farklı olan yazımlar için hece ağırlığı
 WEIGHT = {'hackerlara': 4, 'php': 3, "php'de": 4, "php'yi": 4, 'php2shell': 5, '21': 4, "21": 4, "ekim'de": 3, "5'ten": 2, "8'e": 2,
@@ -57,21 +69,43 @@ else:
         spans.append((t, t + d)); t += d + GAP
     real = False
 
+def groups(l):
+    """Okunuş kelimelerini ekrandaki tek kelimeye denk gelen öbeklere ayır:
+    "pi eyç pi tu şel." -> PHP2Shell., "pi eyç pi" -> PHP, "Yirmi bir" -> 21."""
+    g, i = [], 0
+    while i < len(l):
+        k = [key(w) for w in l[i:i + 5]]
+        n = 5 if k[:2] == ['pi', 'eyç'] and k[3:5] == ['tu', 'şel'] else \
+            3 if k[:2] == ['pi', 'eyç'] else 2 if k[:2] == ['yirmi', 'bir'] else 1
+        g.append(n); i += n
+    return g
+
+def color(w):
+    return 'red' if key(w) in RED else ('yellow' if re.search(r'\d', w) else 'white')
+
 words = []
-for (a, b), l in zip(spans, shown):
-    tot = sum(syl(w) for w in l); t = a
-    for w in l:
-        d = (b - a) * syl(w) / tot
-        k = key(w)
-        c = 'red' if k in RED else ('yellow' if re.search(r'\d', w) else 'white')
-        words.append(dict(w=w, s=round(t, 3), e=round(t + d, 3), c=c, line_end=False)); t += d
-    words[-1]['line_end'] = True
+if real:   # kelime zamanları gerçek sesten
+    i = 0
+    for li, (sp, l) in enumerate(zip(spoken, shown)):
+        g = groups(sp)
+        assert len(g) == len(l), f'okunuş/yazım eşleşmedi: {sp} | {l}'
+        for n, w in zip(g, l):
+            words.append(dict(w=w, s=round(W[i]['s'], 3), e=round(W[i + n - 1]['e'], 3), c=color(w), line_end=False, line=li)); i += n
+        words[-1]['line_end'] = True
+else:      # tahmini: satır süresi hece ağırlığıyla dağıtılır
+    for li, ((a, b), l) in enumerate(zip(spans, shown)):
+        tot = sum(syl(w) for w in l); t = a
+        for w in l:
+            d = (b - a) * syl(w) / tot
+            words.append(dict(w=w, s=round(t, 3), e=round(t + d, 3), c=color(w), line_end=False, line=li)); t += d
+        words[-1]['line_end'] = True
 
 def L(ws): return len(' '.join(x['w'] for x in ws))
 def split(ws):
     if L(ws) <= MAX_CHARS or len(ws) == 1:
         return [ws]
-    best = min(range(1, len(ws)), key=lambda k: abs(L(ws[:k]) - L(ws[k:])) + (6 if len(ws[k - 1]['w']) <= 3 else 0))
+    best = min(range(1, len(ws)), key=lambda k: abs(L(ws[:k]) - L(ws[k:])) + (6 if len(ws[k - 1]['w']) <= 3 else 0)
+               + (60 if (key(ws[k - 1]['w']), key(ws[k]['w'])) in NOBREAK else 0))
     return split(ws[:best]) + split(ws[best:])
 phr, cur = [], []
 for w in words:
@@ -98,14 +132,53 @@ for k, c in enumerate(caps):
     CAPS.append(dict(t0=c[0]['s'], t1=round(min(t1, c[-1]['e'] + .9), 3), words=[{x: w[x] for x in 'wsec'} for w in c]))
 NEW = [0.0] + [round(max(s - LEAD, 0), 3) for s, _ in spans[1:]]
 EDGE = NEW + [dur]
-# satır i: seslendirme [EDGE[i], EDGE[i+1]] -> animasyon WIN[i]
-WARP = [[EDGE[i], EDGE[i + 1], o0, o1] for i, (o0, o1) in enumerate(WIN)]
+# satır i: seslendirme [EDGE[i], EDGE[i+1]] -> animasyon WIN[i]; aradaki çapalar
+# animasyonun önemli anını kelimenin başladığı ana kilitler
+WARP = []
+for i, (o0, o1) in enumerate(WIN):
+    knots = [[EDGE[i], o0]]
+    for li, wd, off, old in ANCHORS:
+        if li != i: continue
+        w = next(x for x in words if x['line'] == li and x['w'] == wd)
+        n = round(w['s'] + off, 3)
+        if knots[-1][0] < n < EDGE[i + 1] and knots[-1][1] < old < o1:
+            knots.append([n, old])
+    knots.append([EDGE[i + 1], o1])
+    WARP.append(knots)
 def to_new(t):
-    for n0, n1, o0, o1 in WARP:
-        if o0 <= t <= o1: return n0 + (t - o0) / (o1 - o0) * (n1 - n0)
+    for knots in WARP:
+        if knots[0][1] <= t <= knots[-1][1]:
+            for (n0, a), (n1, b) in zip(knots, knots[1:]):
+                if a <= t <= b: return n0 + (t - a) / (b - a) * (n1 - n0)
     return dur
 open(P('assets', 'timing.js'), 'w').write('window.TIMING = ' + json.dumps(dict(DUR=dur, WARP=WARP, CAPS=CAPS, REAL=real), ensure_ascii=False) + ';\n')
 hits = sorted(set([0.05] + [round(s, 3) for s, _ in spans[1:]] + [round(w['s'] + .03, 3) for w in words if w['c'] == 'red']))
 json.dump(dict(DUR=dur, ticks=[round(to_new(t), 3) for t in OLD_TICKS], scenes=NEW, hits=hits,
                speech=[[w['s'], w['e']] for w in words]), open(P('vo', 'timing.json'), 'w'), indent=1)
 print(f"{'gerçek ses' if real else 'TAHMİNİ'} · süre {dur}s · {len(CAPS)} altyazı · sahneler {NEW}")
+
+# gerçek seste kelimeye denk gelmeyen kısa sesleri (tık, yutkunma) sustur -> vo/son.wav
+if real:
+    import sys, wave
+    import numpy as np
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from vo_analyze import load, frames, regions
+    x, sr = load(P('vo', 'temiz.wav'))
+    db, v, h = frames(x, sr)
+    mids = [(w['s'] + w['e']) / 2 for w in W]
+    ons = [(w['s'], w['e']) for w in W]
+    muted = []
+    for r in regions(db, v, h):
+        core = [m for m in mids if r['a'] - .05 <= m <= r['b'] + .05]
+        overlap = sum(max(0, min(r['b'], e) - max(r['a'], s)) for s, e in ons)
+        if not core and (overlap < .5 * (r['b'] - r['a']) or r['b'] - r['a'] < .14):
+            a, b = int(max(0, r['a'] - .03) * sr), int(min(len(x) / sr, r['b'] + .05) * sr)
+            f = min(int(.01 * sr), (b - a) // 2)
+            env = np.zeros(b - a); env[:f] = np.linspace(1, 0, f); env[-f:] = np.linspace(0, 1, f)
+            x[a:b] *= env
+            muted.append((round(r['a'], 2), round(r['b'], 2)))
+    w = wave.open(P('vo', 'son.wav'), 'w'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr)
+    w.writeframes((np.clip(x, -1, 1) * 32767).astype('<i2').tobytes()); w.close()
+    print('susturulan:', muted)
+    for c in CAPS[:40]:
+        print(f"  {c['t0']:6.2f}-{c['t1']:6.2f}  {' '.join(w['w'] for w in c['words'])}")

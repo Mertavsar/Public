@@ -20,7 +20,7 @@ alçaktır (spektral merkez ~1–2 kHz). "s/ş" de perdesizdir ama tınısı yü
    uzun ara 0.38 s. Kelimelerin içinden asla kesilmez.
 6. Ses zinciri: 75 Hz altı kesim, sıcaklık (+2 dB @120 Hz), telefon kutusu
    kesimi (−3 dB @350 Hz), netlik (+2.5 dB @3 kHz), hava (+2 dB @10 kHz),
-   de-esser, iki kademeli yumuşak kompresör.
+   de-esser, iki kademeli yumuşak kompresör, TEMPO kadar hızlandırma (atempo).
 
     python3 build/vo_clean.py vo/ham.wav   ->  vo/temiz.wav, vo/kurgu.json, vo/atilan.json
 """
@@ -36,6 +36,7 @@ SIB_HZ, SIB_DB = 3200, -42
 MERGE, MIN_CLUSTER = .25, .06
 RAMP = .012
 TAIL_HOLD, TAIL_MIN = .18, .45
+TEMPO = 1.05          # perdeyi bozmadan hafif hızlandırma (Reels temposu)
 
 
 def load(path):
@@ -230,9 +231,13 @@ def main(src):
         'deesser=i=0.3:m=0.5:f=0.5:s=o',
         'acompressor=threshold=-26dB:ratio=2.5:attack=12:release=140:makeup=2dB:knee=6',
         'acompressor=threshold=-14dB:ratio=4:attack=3:release=60:makeup=1dB:knee=3',
+        f'atempo={TEMPO}',
     ])
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tmp, '-af', chain, '-ar', '48000', '-ac', '1', P('vo', 'temiz.wav')], check=True)
     os.remove(tmp)
+    for m in mapping:
+        m['new'] = [round(v / TEMPO, 3) for v in m['new']]
+    t_new /= TEMPO
     json.dump(dict(duration=round(t_new, 3), pieces=mapping), open(P('vo', 'kurgu.json'), 'w'), indent=1)
     json.dump(dropped, open(P('vo', 'atilan.json'), 'w'), indent=1)
     print(f'{len(x) / sr:.2f} s -> {t_new:.2f} s · {len(keep)} parça korundu · {len(dropped)} gürültü parçası atıldı')
