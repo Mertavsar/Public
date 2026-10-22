@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>PHP2Shell Kapak</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #000; }
+  /* 1080x1920; profil ızgarası 3:4 (y 240–1680) ve kare (y 420–1500) ortadan kırpar: ana öğeler 440–1480 arasında */
+  #c { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+       background: linear-gradient(180deg, #241860 0%, #4a2696 40%, #8a2b95 72%, #c43a7c 100%); }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); }
+  svg { position: absolute; inset: 0; }
+  .chip { position: absolute; left: 0; right: 0; top: 452px; text-align: center; }
+  .chip span { display: inline-block; font: 800 40px 'Inter', sans-serif; letter-spacing: .16em; color: #fff; padding: 14px 34px; border-radius: 999px;
+               background: #ff3b5c; box-shadow: 0 0 50px rgba(255,59,92,.75); }
+  .t1 { position: absolute; left: 0; right: 0; top: 548px; text-align: center; font: italic 800 250px/.86 'Barlow Condensed', sans-serif; color: #fff;
+        text-shadow: 12px 0 0 rgba(62,240,255,.75), -12px 0 0 rgba(255,75,242,.75), 0 14px 0 rgba(20,6,50,.6); }
+  .t2 { position: absolute; left: 0; right: 0; top: 766px; text-align: center; font: italic 800 196px/.86 'Barlow Condensed', sans-serif; color: #ff3b5c;
+        -webkit-text-stroke: 6px #fff; paint-order: stroke fill; text-shadow: 0 0 60px rgba(255,59,92,.9), 0 14px 0 rgba(20,6,50,.6); }
+  .bot { position: absolute; left: 0; right: 0; top: 1392px; display: flex; justify-content: center; gap: 22px; }
+  .bot span { font: 800 50px/1 'Inter', sans-serif; padding: 22px 32px; border-radius: 20px; }
+  .bot .m { background: #ff4bf2; color: #fff; box-shadow: 0 0 46px rgba(255,75,242,.7); }
+  .bot .y { background: #ffe14d; color: #2a0f4a; box-shadow: 0 0 46px rgba(255,225,77,.55); }
+</style>
+</head>
+<body>
+<div id="c">
+  <div class="blob" style="left:-220px;top:280px;width:760px;height:760px;background:#3ef0ff;opacity:.3"></div>
+  <div class="blob" style="right:-260px;top:880px;width:820px;height:820px;background:#ff3b5c;opacity:.45"></div>
+  <svg viewBox="0 0 1080 1920" id="s">
+    <defs>
+      <radialGradient id="glow" cx=".5" cy=".5"><stop offset="0" stop-color="#ff3b5c" stop-opacity=".8"/><stop offset="1" stop-color="#ff3b5c" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g id="grid"></g>
+    <!-- açılmış kilit -->
+    <circle cx="540" cy="1170" r="330" fill="url(#glow)"/>
+    <g transform="translate(540 1200)">
+      <circle r="250" fill="none" stroke="#ff3b5c" stroke-width="6" opacity=".55"/>
+      <circle r="300" fill="none" stroke="#ff3b5c" stroke-width="4" opacity=".3"/>
+      <path d="M-78,-30 V-110 A78,78 0 0 1 78,-110 V-70" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="round" transform="translate(78 -10) rotate(-34) translate(-78 -40)"/>
+      <rect x="-140" y="-40" width="280" height="220" rx="38" fill="#ff3b5c" stroke="#fff" stroke-width="8"/>
+      <circle cx="0" cy="48" r="28" fill="#2a0f4a"/><rect x="-11" y="56" width="22" height="64" rx="11" fill="#2a0f4a"/>
+    </g>
+    <!-- çizilmiş şifre alanı -->
+    <g transform="translate(540 1006)" opacity=".0"></g>
+  </svg>
+  <div class="chip"><span>⚠ SİTEN AÇIK OLABİLİR</span></div>
+  <div class="t1">ŞİFRE</div>
+  <div class="t2">KORUMUYOR</div>
+  <div class="bot"><span class="m">PHP AÇIĞI</span><span class="y">HEMEN KONTROL ET</span></div>
+</div>
+<script>
+(async () => {
+  const NS = 'http://www.w3.org/2000/svg', g = document.getElementById('grid');
+  const mk = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); g.appendChild(e); return e; };
+  const HZ = 1560;
+  for (let k = -9; k <= 9; k++) mk('line', { x1: 540 + k * 30, y1: HZ, x2: 540 + k * 260, y2: 1920, stroke: '#3ef0ff', 'stroke-width': 2, opacity: .3 });
+  for (let k = 1; k < 9; k++) { const y = HZ + Math.pow(k / 9, 2.2) * (1920 - HZ); mk('line', { x1: 0, x2: 1080, y1: y, y2: y, stroke: '#3ef0ff', 'stroke-width': 2, opacity: .1 + k * .03 }); }
+  mk('line', { x1: 0, x2: 1080, y1: HZ, y2: HZ, stroke: '#ff4bf2', 'stroke-width': 3, opacity: .6 });
+  let sr = 7; const rnd = () => (sr = (sr * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 40; i++) { const e = mk('text', { x: rnd() * 1060, y: rnd() * 1920, 'font-family': 'DejaVu Sans Mono', 'font-weight': 700, 'font-size': 22 + rnd() * 18, fill: '#fff', opacity: .1 + rnd() * .12 }); e.textContent = rnd() > .5 ? '1' : '0'; }
+  window.__render = () => {};
+  window.__DUR = 1;
+  await document.fonts.ready;
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>
