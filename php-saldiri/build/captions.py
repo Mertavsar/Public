@@ -24,7 +24,7 @@ OLD_TICKS = [1.2, 6.0, 7.2, 9.4, 15.4, 17.6, 19.6, 24.0, 25.4, 32.0, 34.6, 40.0,
 RED = {'yangın', 'php2shell', 'geçirilebilir', 'hepsi', 'arka', 'kapı', 'yetmez'}
 # okunuşu hecesiz/farklı olan yazımlar için hece ağırlığı
 WEIGHT = {'php': 3, "php'de": 4, "php'yi": 4, 'php2shell': 5, '21': 4, "21": 4, "ekim'de": 3, "5'ten": 2, "8'e": 2,
-          '4': 1, "wordpress'in": 4, 'wordpress': 3, 'rank': 1, 'math': 1, "pro'ya": 2}
+          '6': 2, 'cloudflare': 2, "wordpress'in": 4, 'wordpress': 3, 'rank': 1, 'math': 1, "pro'ya": 2}
 VOW = set('aeıioöuüAEIİOÖUÜ')
 
 def key(w):
@@ -85,6 +85,12 @@ for ph in phr:
     else:
         caps.append(ph)
 caps = [c for ph in caps for c in split(ph)]
+# geriye eklenemeyen tek kısa öbek ("Adı:") bir sonrakiyle birlikte görünsün
+k = 0
+while k < len(caps) - 1:
+    if L(caps[k]) <= 6 and L(caps[k]) + L(caps[k + 1]) + 1 <= MAX_CHARS + 4:
+        caps[k:k + 2] = [caps[k] + caps[k + 1]]
+    k += 1
 dur = round(spans[-1][1] + TAIL + 2.2, 2)          # sondaki soru/takip ekranı biraz kalsın
 CAPS = []
 for k, c in enumerate(caps):

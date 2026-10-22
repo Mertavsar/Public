@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fransa 2. bölüm: müzik + efekt yatağı.
+"""PHP saldırısı videosu: müzik + efekt yatağı.
 
 Müzik burada sentezleniyor (ağ kapalı, hazır kütüphane yok). Telefon hoparlörü
 ~250 Hz altını neredeyse hiç vermiyor; o yüzden enerji orta bölgede tutuluyor:

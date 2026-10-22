@@ -2,7 +2,7 @@
 21 Ekim'de PHP ekibi iki kritik açık için acil güncelleme yayınladı. Adı: PHP2Shell.
 Bu açıklar saldırgana şifre bile sormadan sunucunda kod çalıştırma imkânı veriyor. Yani siten tamamen ele geçirilebilir.
 Etkilenen sürümler? PHP 5'ten 8'e, neredeyse hepsi.
-Saldırılar çoktan başladı. Amazon ilk denemeyi, açık duyurulmadan 4 gün önce gördü.
+Saldırılar çoktan başladı. Cloudflare ilk saldırıları, güncelleme çıkmadan 6 saat önce gördü.
 Aynı hafta WordPress'in popüler eklentisi Rank Math PRO'ya da arka kapı yerleştirildi.
-Ne yapmalısın? PHP'yi hemen güncelle, sunucuyu yeniden başlat. WordPress güncellemesi tek başına yetmez.
+Ne yapmalısın? PHP'yi hemen güncelle, sunucuyu yeniden başlat. Eklentiyi güncellemek tek başına yetmez, siteni tara.
 Senin sitende PHP kaç sürüm? Yorumlara yaz, takipte kal.

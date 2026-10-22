@@ -9,7 +9,7 @@
   ~6 dB altında; enerjisi çoğunlukla 45–150 Hz'de olduğu için kelimeyi örtmez.
 - Master: viral-edit/master.py ile -14 LUFS, tavan -3.5 dBFS (AAC aşması için pay).
 
-    python3 build/mix.py   ->  assets/mix.m4a
+    python3 build/mix.py   ->  assets/mix.m4a  (vo/son.wav yoksa yalnızca müzik + vurgular)
 """
 import os, re, subprocess, sys, tempfile
 
@@ -33,8 +33,12 @@ def to_level(src, dst, target):
 
 with tempfile.TemporaryDirectory() as tmp:
     vo, mus, mix, mst = (os.path.join(tmp, n) for n in ('vo.wav', 'mus.wav', 'mix.wav', 'master.wav'))
-    to_level(P('vo', 'son.wav'), vo, -16.0)
-    to_level(P('assets', 'soundtrack.m4a'), mus, -30.0)
+    has_vo = os.path.exists(P('vo', 'son.wav'))
+    if has_vo:
+        to_level(P('vo', 'son.wav'), vo, -16.0)
+    else:   # seslendirme henüz yok: önizleme için sessiz konuşma kanalı, müzik biraz daha önde
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', '1', vo], check=True)
+    to_level(P('assets', 'soundtrack.m4a'), mus, -30.0 if has_vo else -20.0)
     hits = P('assets', 'hits.wav')
     ins = ['-i', mus, '-i', vo] + (['-i', hits] if os.path.exists(hits) else [])
     fc = ('[1]asplit=2[v][sc];'
