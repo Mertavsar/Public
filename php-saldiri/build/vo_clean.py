@@ -21,6 +21,8 @@ alçaktır (spektral merkez ~1–2 kHz). "s/ş" de perdesizdir ama tınısı yü
 6. Ses zinciri: 75 Hz altı kesim, sıcaklık (+2 dB @120 Hz), telefon kutusu
    kesimi (−3 dB @350 Hz), netlik (+2.5 dB @3 kHz), hava (+2 dB @10 kHz),
    de-esser, iki kademeli yumuşak kompresör, TEMPO kadar hızlandırma (atempo).
+7. Son geçiş: kelimeler arasında kalan her sessizlik MAX_SIL'e iner (tighten).
+   kurgu.json'daki parça zamanları bu adımdan önceki hâli gösterir.
 
     python3 build/vo_clean.py vo/ham.wav   ->  vo/temiz.wav, vo/kurgu.json, vo/atilan.json
 """
@@ -30,13 +32,14 @@ import numpy as np
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = lambda *a: os.path.join(ROOT, *a)
 HOP = .01
-LEAD_SIL, SHORT_GAP, LONG_GAP, TAIL = .12, .42, .38, .6
+LEAD_SIL, SHORT_GAP, LONG_GAP, TAIL = .08, .15, .18, .6
 PRE, PRE_MAX, POST, POST_MAX = .06, .22, .10, .26
 SIB_HZ, SIB_DB = 3200, -42
 MERGE, MIN_CLUSTER = .25, .06
 RAMP = .012
 TAIL_HOLD, TAIL_MIN = .18, .45
-TEMPO = 1.05          # perdeyi bozmadan hafif hızlandırma (Reels temposu)
+TEMPO = 1.12          # perdeyi bozmadan hızlandırma (Reels temposu)
+MAX_SIL, SIL_DB = .15, -40   # parça içindeki sessizlikler de en fazla bu kadar kalır
 
 
 def load(path):
@@ -166,6 +169,39 @@ def keep_regions(db, cent, voiced):
     return [(a * HOP, b * HOP) for a, b in out]
 
 
+def tighten(y, sr):
+    """Kelimeler arasında kalan her sessizliği MAX_SIL'e indir (kenarlardan 60 ms
+    korunur, ortası çıkarılır). Patlamalı ünsüzlerin kapanışı (< 0.12 s) etkilenmez."""
+    hop, win = int(sr * HOP), int(sr * .03)
+    n = (len(y) - win) // hop
+    db = np.array([20 * np.log10(np.sqrt(np.mean(y[i * hop:i * hop + win] ** 2)) + 1e-9) for i in range(n)])
+    quiet = db < SIL_DB
+    cuts, i = [], 0
+    while i < n:
+        if quiet[i]:
+            j = i
+            while j < n and quiet[j]: j += 1
+            if (j - i) * HOP > MAX_SIL:
+                a = i * hop + int(.06 * sr); b = j * hop - int((MAX_SIL - .06) * sr)
+                if b > a: cuts.append((a, b))
+            i = j
+        else:
+            i += 1
+    if not cuts:
+        return y
+    parts, prev, rl = [], 0, int(.006 * sr)
+    for a, b in cuts + [(len(y), len(y))]:
+        seg = y[prev:a].copy()
+        if len(seg) > 2 * rl:          # kesik kenarlarında tık olmasın
+            if prev: seg[:rl] *= np.linspace(0, 1, rl)
+            if a < len(y): seg[-rl:] *= np.linspace(1, 0, rl)
+        parts.append(seg)
+        prev = b
+    out = np.concatenate(parts)
+    print(f'  sessizlik sıkıştırma: {len(cuts)} ara, {(len(y) - len(out)) / sr:.2f} s kısaldı')
+    return out
+
+
 def main(src):
     x, sr = load(src)
     db, cent, voiced = features(x, sr)
@@ -217,7 +253,7 @@ def main(src):
             g = g if g < SHORT_GAP else LONG_GAP
             out.append(np.zeros(int(g * sr))); t_new += g
     out.append(np.zeros(int(TAIL * sr))); t_new += TAIL
-    y = np.concatenate(out)
+    y = tighten(np.concatenate(out), sr)
 
     tmp = P('vo', '_kurgu.wav')
     w = wave.open(tmp, 'w'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr)

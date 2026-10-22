@@ -28,7 +28,7 @@ ANCHORS = [
     (2, "Ekim'de", 0, 6.4), (2, 'iki', 0, 7.2), (2, 'Adı:', 0, 9.3), (2, 'PHP2Shell.', 0, 9.4),
     (3, 'şifre', 0, 15.4), (3, 'sunucunda', 0, 16.4), (3, 'çalıştırabiliyor.', 0, 18.6), (3, 'ele', -.15, 20.3),
     (4, 'saldırılar,', 0, 32.0), (4, 'güncelleme', 0, 34.6), (4, 'saatler', 0, 35.6),
-    (5, 'WordPress', 0, 39.6), (5, 'Rank', 0, 40.6), (5, 'gizli', 0, 41.6),
+    (5, 'Aynı', 0, 39.6), (5, 'WordPress', 0, 40.6), (5, 'gizli', 0, 41.6),
     (6, 'Hosting', 0, 48.8), (6, 'Güncellemeden', 0, 51.8),
     (7, 'videoyu', 0, 56.4), (7, 'takip', 0, 57.6),
 ]
@@ -152,8 +152,24 @@ def to_new(t):
                 if a <= t <= b: return n0 + (t - a) / (b - a) * (n1 - n0)
     return dur
 open(P('assets', 'timing.js'), 'w').write('window.TIMING = ' + json.dumps(dict(DUR=dur, WARP=WARP, CAPS=CAPS, REAL=real), ensure_ascii=False) + ';\n')
+# efekt sesleri (animasyon zamanı -> ses zamanı); soundtrack.py sentezler
+SFX_OLD = [(70.15, 'glitch'), (71.2, 'clunk'), (71.3, 'alarm'), (72.9, 'zip'), (73.0, 'stamp'),
+           (.25, 'glitch'), (1.5, 'sweep'),
+           (5.25, 'glitch'), (7.6, 'sweep'), (9.4, 'stamp'),
+           (14.25, 'glitch'), (15.5, 'zip'), (18.6, 'alarm'), (20.3, 'stamp'),
+           (31.25, 'glitch'), (32.0, 'pop'), (34.6, 'pop'), (35.6, 'stamp'),
+           (39.25, 'glitch'), (39.6, 'pop'), (40.9, 'pop'), (41.6, 'clunk'),
+           (48.25, 'glitch'), (48.8, 'pop'), (51.8, 'pop'),
+           (56.2, 'glitch'), (56.4, 'pop'), (57.6, 'pop'), (58.0, 'ding')]
+SFX_OLD += [(.3 + i * .08, 'blip') for i in range(0, 12, 2)]                      # siteler belirir
+SFX_OLD += [(16.4 + k * .55 + 1.4, 'blip') for k in range(5)]                      # paketler sunucuya varır
+SFX_OLD += [(72.3 + k * .0625, 'key') for k in range(8)]                           # şifre noktaları
+for a0, b0, n in [(5.5, 6.3, 22), (6.4, 6.9, 21), (7.2, 7.6, 21), (7.8, 8.2, 19), (8.3, 8.7, 19)]:
+    SFX_OLD += [(a0 + (b0 - a0) * k / n, 'key') for k in range(0, n, 2)]            # terminal yazımı
+sfx = sorted([round(to_new(t), 3), k] for t, k in SFX_OLD if to_new(t) < dur)
+
 hits = sorted(set([0.05] + [round(s, 3) for s, _ in spans[1:]] + [round(w['s'] + .03, 3) for w in words if w['c'] == 'red']))
-json.dump(dict(DUR=dur, ticks=[round(to_new(t), 3) for t in OLD_TICKS], scenes=NEW, hits=hits,
+json.dump(dict(DUR=dur, ticks=[round(to_new(t), 3) for t in OLD_TICKS], scenes=NEW, hits=hits, sfx=sfx,
                speech=[[w['s'], w['e']] for w in words]), open(P('vo', 'timing.json'), 'w'), indent=1)
 print(f"{'gerçek ses' if real else 'TAHMİNİ'} · süre {dur}s · {len(CAPS)} altyazı · sahneler {NEW}")
 

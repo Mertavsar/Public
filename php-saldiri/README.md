@@ -5,14 +5,14 @@
 (Cloudflare, 07:43 UTC) ve aynı hafta Rank Math PRO 3.0.123'e konan arka kapı.
 
 - `seslendirme.txt`: okunacak metin (yabancı kelimeler okunuşla); `altyazi.txt`: ekrandaki yazım.
-- `php2shell.mp4`: son video (47 sn) — temizlenmiş seslendirme, kelime senkronlu altyazı, müzik ve bas vurguları.
+- `php2shell.mp4`: son video (39 sn) — sıkılaştırılmış hızlı seslendirme, kelime senkronlu altyazı, siber müzik ve efekt sesleri.
 - Animasyonun önemli anları kelimelere kilitli (`build/captions.py` → `ANCHORS`): kilit "açık"ta açılır, damga "PHP2Shell"de vurur, kapı "gizli"de açılır, takip butonu "takip"te çıkar.
 
 ## Ses gelince
 
 ```
 ffmpeg -i vo/ham.mp3 -ac 1 -ar 48000 vo/ham.wav
-python3 build/vo_clean.py vo/ham.wav          # boşluk/nefes/burun sesi temizliği, %5 tempo -> vo/temiz.wav
+python3 build/vo_clean.py vo/ham.wav          # boşluk/nefes/burun sesi temizliği, %12 tempo, sessizlik ≤0.15 sn -> vo/temiz.wav
 python3 ../.claude/skills/viral-edit/scripts/align.py --audio vo/temiz.wav --text seslendirme.txt --out vo/captions.json --check
 python3 build/captions.py                      # sahne + altyazı zamanları gerçek sese oturur, vo/son.wav
 python3 build/soundtrack.py && python3 build/mix.py

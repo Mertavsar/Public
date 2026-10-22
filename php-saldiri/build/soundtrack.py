@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-"""PHP saldırısı videosu: müzik + efekt yatağı.
+"""PHP saldırısı videosu: müzik + efekt sesleri.
 
-Müzik burada sentezleniyor (ağ kapalı, hazır kütüphane yok). Telefon hoparlörü
-~250 Hz altını neredeyse hiç vermiyor; o yüzden enerji orta bölgede tutuluyor:
-akor pad'i, arpej melodisi, tıklı kick, el çırpma ve hi-hat. Bas yalnızca
-destek. Sahne geçişlerinde efekt yok; sayaç/satır girişlerinde kısa tık var
-(tık sesi viral-edit skill'inin motorundan).
+Müzik (assets/soundtrack.m4a): 112 BPM, La minör siber nabız. Telefon hoparlörü
+~250 Hz altını vermediği için enerji orta bölgede: 8'lik nabız bas (üst
+harmonikli), 16'lık arpej, akor pad'i, yumuşak "tok" kick ve çok hafif hi-hat.
+Alkış/snare yok. Pad ve bas her vuruşta hafifçe "pompalanır" (sidechain hissi).
+Bölümler sahnelere oturur: hook gerilimli (kick yok), anlatım boyunca tam,
+"ne yapmalısın" sahnesinde nefes alır, kapanışta geri gelir.
 
-    python3 build/soundtrack.py   ->  assets/soundtrack.m4a
+Efektler (assets/hits.wav, mix.py sidechain'siz ekler): sahne başı bas vuruşu,
+vurgulu kelimelerde bas, glitch, klavye tıkı, kilit sesi, alarm, damga vuruşu,
+veri blipi, kart "pop"u, zil. Geçişlerde whoosh yok.
+
+    python3 build/soundtrack.py   ->  assets/soundtrack.m4a, assets/hits.wav
 """
 import json, os, subprocess, sys, tempfile, wave
 import numpy as np
@@ -16,237 +21,226 @@ from scipy.signal import butter, sosfilt
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SKILL = os.path.join(ROOT, '..', '.claude', 'skills', 'viral-edit', 'scripts')
-sys.path.insert(0, SKILL)
-from audiobed import tick  # noqa: E402
-
 SR = 44100
-TM = json.load(open(os.path.join(ROOT, 'vo', 'timing.json'))) if os.path.exists(os.path.join(ROOT, 'vo', 'timing.json')) else None
-DUR = TM['DUR'] if TM else 59.6
-BPM = 72.0   # sakin: davul/bas yok, yalnızca pad ve seyrek notalar
+TM = json.load(open(os.path.join(ROOT, 'vo', 'timing.json')))
+DUR, SC = TM['DUR'], TM['scenes']
+BPM = 112.0
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
+N = int(SR * DUR)
+rng = np.random.default_rng(2026)
 
-MINOR = TM['ticks'] if TM else [2.2, 8.1, 8.9, 13.5, 16.5, 17.3, 18.1, 22.0, 30.5, 32.6, 34.7, 38.8, 41.2, 46.4, 47.9, 49.4, 53.6, 54.2, 57.0]
-SC = TM['scenes'] if TM else [0, 5.2, 12.6, 20.8, 29.6, 38.4, 45.6, 52.6, 56.0]
-
-# i–VI–III–VII (La minör): Am F C G
+# Am – F – G – Em: (bas kökü, pad akoru, arpej notaları)
 CHORDS = [
     (110.00, [220.00, 261.63, 329.63], [440.00, 523.25, 659.25, 880.00]),
-    (87.31,  [220.00, 261.63, 349.23], [440.00, 523.25, 698.46, 880.00]),
-    (130.81, [261.63, 329.63, 392.00], [523.25, 659.25, 783.99, 1046.50]),
-    (98.00,  [246.94, 293.66, 392.00], [493.88, 587.33, 783.99, 987.77]),
-]
-
-# Bölümlere göre yoğunluk: (başlangıç, pad, arp, arp16, kick, clap, hat, bass)
-SECTIONS = [
-    # (başlangıç, pad, arp, arp16, kick, clap, hat, bass) — müzik dikkat dağıtmasın,
-    # seslendirmenin altında fark edilmeden dursun
-    (0.0,   .8, .30, 0, 0, 0, 0, 0),
-    (SC[3], .8, .22, 0, 0, 0, 0, 0),
-    (SC[4], .8, .30, 0, 0, 0, 0, 0),
-    (SC[7], .8, .18, 0, 0, 0, 0, 0),
+    (87.31,  [174.61, 220.00, 261.63], [349.23, 440.00, 523.25, 698.46]),
+    (98.00,  [196.00, 246.94, 293.66], [392.00, 493.88, 587.33, 783.99]),
+    (82.41,  [164.81, 196.00, 246.94], [329.63, 392.00, 493.88, 659.25]),
 ]
 
 
-def section(t):
-    s = SECTIONS[0]
-    for row in SECTIONS:
-        if t >= row[0]:
-            s = row
-    return s[1:]
-
-
-rng = np.random.default_rng(2026)
-N = int(SR * DUR)
-L = np.zeros(N)
-R = np.zeros(N)
-
-
-def place(sig, t, pan=0.0, gain=1.0):
-    i = int(t * SR)
-    if i >= N:
-        return
-    j = min(N, i + len(sig))
-    gl, gr = gain * np.sqrt((1 - pan) / 2), gain * np.sqrt((1 + pan) / 2)
-    L[i:j] += sig[:j - i] * gl
-    R[i:j] += sig[:j - i] * gr
+def lp(x, fc): return sosfilt(butter(2, fc, btype='low', fs=SR, output='sos'), x)
+def hp(x, fc): return sosfilt(butter(2, fc, btype='high', fs=SR, output='sos'), x)
+def bp(x, lo, hi): return sosfilt(butter(2, [lo, hi], btype='band', fs=SR, output='sos'), x)
+def T(d): return np.arange(int(SR * d)) / SR
 
 
 def saw(f, n, harm=12):
     t = np.arange(n) / SR
     out = np.zeros(n)
     for k in range(1, harm + 1):
-        if f * k > 9000:
-            break
+        if f * k > 9000: break
         out += np.sin(2 * np.pi * f * k * t + k) / k
     return out
 
 
-def lp(x, fc):
-    return sosfilt(butter(2, fc, btype='low', fs=SR, output='sos'), x)
-
-
-def bp(x, lo, hi):
-    return sosfilt(butter(2, [lo, hi], btype='band', fs=SR, output='sos'), x)
-
-
 def env(n, a, r):
-    e = np.ones(n)
-    na, nr = int(a * SR), int(r * SR)
-    if na:
-        e[:na] = np.linspace(0, 1, na)
-    if nr:
-        e[-nr:] *= np.linspace(1, 0, nr)
+    e = np.ones(n); na, nr = int(a * SR), int(r * SR)
+    if na: e[:na] = np.linspace(0, 1, na)
+    if nr: e[-nr:] *= np.linspace(1, 0, nr)
     return e
 
 
+def place(bus, sig, t, gain=1.0):
+    i = int(max(0, t) * SR)
+    if i >= len(bus): return
+    j = min(len(bus), i + len(sig))
+    bus[i:j] += sig[:j - i] * gain
+
+
+# ---------------------------------------------------------------- müzik
+def section(t):
+    """(pad, bas, arp, arp16, kick, hat) yoğunlukları."""
+    if t < SC[1]: return (.9, .7, .45, 0, 0, 0)          # hook: gerilim, vuruş yok
+    if t < SC[3]: return (.8, .9, .5, 1, .9, .5)         # anlatım
+    if t < SC[6]: return (.8, 1, .55, 1, 1, .6)          # saldırı / arka kapı: tam
+    if t < SC[7]: return (.9, .6, .4, 0, 0, .3)          # ne yapmalısın: nefes
+    return (.9, .9, .5, 1, .9, .5)                        # kapanış
+
+
 def pad_chord(notes, d):
-    n = int(SR * d)
-    s = np.zeros(n)
-    for f in notes:
-        s += saw(f * 1.0012, n, 8) + saw(f * 0.9988, n, 8)
-    return lp(s, 1900) * env(n, 0.35, 0.5) / (len(notes) * 2.5)
+    n = int(SR * d); s = np.zeros(n)
+    for f in notes: s += saw(f * 1.003, n, 8) + saw(f * .997, n, 8)
+    return lp(s, 1700) * env(n, .25, .4) / (len(notes) * 2.5)
 
 
-def pluck(f, d=0.42):
+def pluck(f, d=.22):
+    t = T(d)
+    s = np.sin(2 * np.pi * f * t) + .5 * np.sign(np.sin(2 * np.pi * f * t)) * .35 + .2 * np.sin(6 * np.pi * f * t)
+    return lp(s, 4200) * np.exp(-t / .07) * np.minimum(1, t / .002)
+
+
+def bass8(f, d):
     n = int(SR * d)
-    t = np.arange(n) / SR
-    s = np.sin(2 * np.pi * f * t) + 0.45 * np.sin(4 * np.pi * f * t) + 0.18 * np.sin(6 * np.pi * f * t)
-    return s * np.exp(-t / 0.13) * np.minimum(1, t / 0.003)
+    body = lp(saw(f * 2, n, 14), 1100) + .6 * np.sin(2 * np.pi * f * np.arange(n) / SR)   # 220 Hz bölgesi telefonda duyulur
+    return body * env(n, .004, d * .55)
 
 
 def kick():
-    n = int(SR * 0.42)
-    t = np.arange(n) / SR
-    f = 48 + 110 * np.exp(-t / 0.04)
-    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.13)
-    click = bp(rng.standard_normal(n), 1800, 5200) * np.exp(-t / 0.004) * 0.6
-    knock = np.sin(2 * np.pi * 180 * t) * np.exp(-t / 0.03) * 0.5   # telefonda "tok" duyulan kısım
-    return body + click + knock
+    t = T(.35)
+    f = 52 + 90 * np.exp(-t / .035)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .12)
+    knock = np.sin(2 * np.pi * 160 * t) * np.exp(-t / .025) * .45
+    return body + knock
 
 
-def clap():
-    n = int(SR * 0.26)
-    t = np.arange(n) / SR
-    x = bp(rng.standard_normal(n), 900, 5200)
-    e = np.exp(-t / 0.09)
-    for d in (0.0, 0.011, 0.022):                       # el çırpmanın çoklu vuruşu
-        e += (t >= d) * np.exp(-np.maximum(t - d, 0) / 0.006) * 0.8
-    return x * e * 0.55 + np.sin(2 * np.pi * 230 * t) * np.exp(-t / 0.04) * 0.25
+def hat():
+    t = T(.04)
+    return hp(rng.standard_normal(len(t)), 8000) * np.exp(-t / .008)
 
 
-def hat(d=0.05):
-    n = int(SR * d)
-    t = np.arange(n) / SR
-    x = sosfilt(butter(2, 7000, btype='high', fs=SR, output='sos'), rng.standard_normal(n))
-    return x * np.exp(-t / (d / 3.5))
-
-
-def bass_note(f, d):
-    n = int(SR * d)
-    return lp(saw(f, n, 10), 900) * env(n, 0.005, min(0.08, d / 3))
-
-
-
-KICK, CLAP = kick(), clap()
-
-# ---- müzik ----
-bar_i = 0
-t0 = 0.0
-while t0 < DUR - 0.3:
+L, R = np.zeros(N), np.zeros(N)
+pump = np.ones(N)
+KICK = kick()
+bar_i, t0 = 0, 0.0
+while t0 < DUR:
     root, chord, arp = CHORDS[bar_i % 4]
-    pad_g, arp_g, arp16, kick_g, clap_g, hat_g, bass_g = section(t0 + 0.01)
-    place(pad_chord(chord, BAR + 0.3), t0, -0.25, 0.55 * pad_g)
-    place(pad_chord([c * 2 for c in chord[:2]], BAR + 0.3), t0, 0.3, 0.22 * pad_g)
-    steps = 16 if arp16 else 4
-    order = [0, 1, 2, 3, 2, 1, 2, 3, 0, 2, 1, 3, 2, 1, 3, 2]
-    for s in range(steps):
-        ts = t0 + s * BAR / steps
-        f = arp[order[s % 16]]
-        g = arp_g * (0.95 if s % (steps // 4) == 0 else 0.7)
-        pan = -0.35 if s % 2 else 0.35
-        place(pluck(f), ts, pan, 0.30 * g)
-        place(pluck(f), ts + BEAT * 0.75, -pan, 0.11 * g)       # ping-pong yankı
-    for b in range(4):
-        tb = t0 + b * BEAT
-        tsec = section(tb + 0.01)
-        if tsec[3]:
-            place(KICK, tb, 0, 0.75 * tsec[3])
-        if tsec[4] and b in (1, 3):
-            place(CLAP, tb, 0.05, 0.55 * tsec[4])
-        if tsec[5]:
-            place(hat(), tb + BEAT / 2, 0.25, 0.20 * tsec[5])
-            if tsec[2]:
-                place(hat(0.03), tb + BEAT / 4, -0.25, 0.10 * tsec[5])
-                place(hat(0.03), tb + 3 * BEAT / 4, -0.25, 0.10 * tsec[5])
-        if tsec[6]:
-            place(bass_note(root, BEAT * 0.45), tb, 0, 0.42 * tsec[6])
-            place(bass_note(root * 2, BEAT * 0.3), tb + BEAT / 2, 0, 0.22 * tsec[6])
-    bar_i += 1
-    t0 += BAR
+    pad_g, bass_g, arp_g, a16, kick_g, hat_g = section(t0 + .01)
+    pc = pad_chord(chord, BAR + .2)
+    place(L, pc, t0, .5 * pad_g); place(R, pc, t0, .5 * pad_g)
+    for s8 in range(8):
+        ts = t0 + s8 * BEAT / 2
+        g = section(ts + .01)
+        b = bass8(root, BEAT / 2 * .9)
+        place(L, b, ts, .42 * g[1]); place(R, b, ts, .42 * g[1])
+        if g[5] and s8 % 2:
+            h = hat(); place(L, h, ts, .10 * g[5]); place(R, h, ts, .14 * g[5])
+    steps = 16 if a16 else 8
+    order = [0, 2, 1, 3, 2, 0, 3, 1, 0, 2, 1, 3, 2, 3, 1, 2]
+    for k in range(steps):
+        ts = t0 + k * BAR / steps
+        g = section(ts + .01)
+        p = pluck(arp[order[k % 16]])
+        acc = 1 if k % (steps // 4) == 0 else .7
+        place(L if k % 2 else R, p, ts, .28 * g[2] * acc)
+        place(R if k % 2 else L, p, ts + BEAT * .75, .09 * g[2])               # yankı
+    for bt in range(4):
+        tb = t0 + bt * BEAT
+        g = section(tb + .01)
+        if g[4]:
+            place(L, KICK, tb, .8 * g[4]); place(R, KICK, tb, .8 * g[4])
+            i = int(tb * SR); j = min(N, i + int(.22 * SR))                    # pompalama
+            pump[i:j] = np.minimum(pump[i:j], 1 - .45 * np.exp(-np.arange(j - i) / (.07 * SR)))
+    bar_i += 1; t0 += BAR
 
-# Kapanış: son akor çalarak sönsün
-place(pad_chord(CHORDS[0][1] + [440.0], DUR - SC[7]), SC[7], 0, 0.6)
-
+L *= pump; R *= pump
 tt = np.arange(N) / SR
-fade = np.clip(tt / 0.6, 0, 1) * np.clip((DUR - tt) / 1.5, 0, 1)
-L *= fade
-R *= fade
+fade = np.clip(tt / .4, 0, 1) * np.clip((DUR - tt) / 1.4, 0, 1)
+L *= fade; R *= fade
 
-# ---- efektler ----
-fx = np.zeros(N)
-
-
-def fx_place(sig, t):
-    i = max(0, int(t * SR))
-    j = min(N, i + len(sig))
-    fx[i:j] += sig[:j - i]
-
-
-# Sahne geçişlerinde efekt yok (whoosh/darbe/riser kullanıcı isteğiyle kaldırıldı);
-# yalnızca sayaç ve satır girişlerinde kısa tık kalıyor.
-for t in MINOR:
-    fx_place(tick(rng, amp=0.16), t - 0.01)
-
-# ---- bas vurguları (ayrı stem: assets/hits.wav, mix.py konuşmaya göre seviyeler) ----
+# ---------------------------------------------------------------- efektler
 def boom(amp=1.0):
-    """Derin vuruş: 45 Hz'e inen sinüs gövde + telefonda duyulan 150 Hz 'tok'
-    + çok kısa üst tık. Whoosh yok."""
-    n = int(SR * 1.3); t = np.arange(n) / SR
+    t = T(1.1)
     f = 45 + 75 * np.exp(-t / .05)
-    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .38)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .32)
     knock = np.sin(2 * np.pi * 150 * t) * np.exp(-t / .06) * .55
-    click = bp(rng.standard_normal(n), 1200, 4200) * np.exp(-t / .008) * .18
-    return (body + knock + click) * amp
+    return (body + knock) * amp
 
 
-HITS = TM.get('hits', []) if TM else []
-hits_bus = np.zeros(N)
-for k, t in enumerate(HITS):
-    b = boom(1.0 if k == 0 or t in SC else .8)
-    i = int(max(0, t - .01) * SR); j = min(N, i + len(b))
-    hits_bus[i:j] += b[:j - i]
-if HITS:
-    hits_bus /= np.max(np.abs(hits_bus)) + 1e-9
-    w = wave.open(os.path.join(ROOT, 'assets', 'hits.wav'), 'w')
-    w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
-    w.writeframes((hits_bus * .9 * 32767).astype('<i2').tobytes()); w.close()
+def glitch():
+    out = np.zeros(int(SR * .26)); k = 0
+    while k * .028 < .24:
+        f = 300 + rng.random() * 2200; t = T(.024)
+        sq = np.sign(np.sin(2 * np.pi * f * t)) * .5
+        crush = np.round(rng.standard_normal(len(t)) * 3) / 3 * .35
+        place(out, (sq + crush) * np.exp(-t / .02), k * .028, .8 if rng.random() > .3 else .4)
+        k += 1
+    return bp(out, 250, 6000) * .6
 
-mus_peak = max(np.max(np.abs(L)), np.max(np.abs(R)))
-L, R = L / mus_peak * 0.62, R / mus_peak * 0.62
-fx = sosfilt(butter(2, 70, btype='high', fs=SR, output='sos'), fx)
-L += fx * 0.85
-R += fx * 0.85
+
+def key():
+    t = T(.03)
+    return (bp(rng.standard_normal(len(t)), 2000, 6500) * np.exp(-t / .004) + .4 * np.sin(2 * np.pi * 1500 * t) * np.exp(-t / .006)) * .5
+
+
+def clunk():
+    t = T(.5)
+    metal = sum(a * np.sin(2 * np.pi * f * t) for f, a in [(523, 1), (1187, .7), (2093, .5), (3170, .3)]) * np.exp(-t / .09)
+    click = bp(rng.standard_normal(len(t)), 1500, 6000) * np.exp(-t / .006)
+    thud = np.sin(2 * np.pi * 90 * t) * np.exp(-t / .07)
+    return (metal * .35 + click * .6 + thud * .8) * .8
+
+
+def alarm(d=1.0):
+    out = np.zeros(int(SR * d))
+    for k in range(int(d / .25)):
+        f = 880 if k % 2 == 0 else 660; t = T(.22)
+        s = (np.sin(2 * np.pi * f * t) + .3 * np.sin(6 * np.pi * f * t)) * env(len(t), .01, .03)
+        place(out, s, k * .25, 1 - k / (d / .25) * .6)
+    return lp(out, 3500) * .35
+
+
+def stamp():
+    t = T(.6)
+    crack = bp(rng.standard_normal(len(t)), 900, 4500) * np.exp(-t / .03)
+    return boom(.9)[:len(t)] + crack * .7
+
+
+def blip():
+    t = T(.07); f = 700 + 900 * t / .07
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(t), .003, .03) * .35
+
+
+def pop():
+    t = T(.1); f = 480 + 520 * np.minimum(1, t / .04)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / .035) * .55
+
+
+def zip_():
+    t = T(.16); f = 3200 - 2400 * t / .16
+    s = np.sin(2 * np.pi * np.cumsum(f) / SR) * .3 + bp(rng.standard_normal(len(t)), 900, 5000) * .5
+    return s * env(len(t), .005, .05) * .55
+
+
+def sweep():
+    t = T(.9); f = 260 + 700 * (t / .9) ** 1.5
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * (.6 + .4 * np.sin(2 * np.pi * 14 * t)) * env(len(t), .05, .15) * .22
+
+
+def ding():
+    t = T(1.4)
+    return sum(a * np.sin(2 * np.pi * f * t) for f, a in [(1318.5, 1), (2637, .45), (3955, .2)]) * np.exp(-t / .35) * .4
+
+
+SFX = dict(glitch=glitch, key=key, clunk=clunk, alarm=alarm, stamp=stamp, blip=blip, pop=pop, zip=zip_, sweep=sweep, ding=ding)
+fx = np.zeros(N)
+for t, k in TM.get('sfx', []):
+    place(fx, SFX[k](), t - .005)
+# bas vuruşları: sahne başları güçlü, vurgulu kelimeler biraz daha hafif
+for k, t in enumerate(TM.get('hits', [])):
+    place(fx, boom(1.0 if k == 0 or t in SC else .75), t - .01, .9)
+fx /= np.max(np.abs(fx)) + 1e-9
+w = wave.open(os.path.join(ROOT, 'assets', 'hits.wav'), 'w')
+w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
+w.writeframes((fx * .9 * 32767).astype('<i2').tobytes()); w.close()
+
 st = np.stack([L, R], 1)
-st /= np.max(np.abs(st)) / 0.9
-
+st /= np.max(np.abs(st)) / .9
 with tempfile.TemporaryDirectory() as tmp:
     raw, mst = os.path.join(tmp, 'mix.wav'), os.path.join(tmp, 'master.wav')
-    w = wave.open(raw, 'w')
-    w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
-    w.writeframes((st * 32767).astype('<i2').tobytes())
-    w.close()
-    subprocess.run([sys.executable, os.path.join(SKILL, 'master.py'), raw, mst, '-20.0', '-3.5'], check=True)   # tek başına çalan yatak: sakin seviye
+    w = wave.open(raw, 'w'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+    w.writeframes((st * 32767).astype('<i2').tobytes()); w.close()
+    subprocess.run([sys.executable, os.path.join(SKILL, 'master.py'), raw, mst, '-18.0', '-3.5'], check=True)
     out = os.path.join(ROOT, 'assets', 'soundtrack.m4a')
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', mst, '-c:a', 'aac', '-b:a', '192k', out], check=True)
-    print('yazıldı:', out)
+    print('yazıldı:', out, '+ assets/hits.wav')
