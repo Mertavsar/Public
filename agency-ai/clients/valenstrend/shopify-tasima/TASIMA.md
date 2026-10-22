@@ -174,6 +174,17 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
 - Açık: 45 eski WordPress linki (`/urun/desenli-koton-esarp-658…702`) hâlâ /collections/koton-esarp'a yönleniyor,
   artık ürün sayfasına yönlendirilebilir.
 - Liste (kod, ürün ID, dosya ID): `veri/yeni_koton_urunler_2026-10-22.json`.
+- Meta kataloğu (2558225854645005): 73'ü de kendiliğinden geldi; valenstrend.com linki, 330/250 TL, uygun (eligible),
+  "All Products" setinde. 13:45 UTC'de 43'ünün görseli çekilmişti, 30'u sıradaydı.
+
+### Organik Soft Eşarp (aynı gün, aynı yöntem)
+- 9 yeni ürün: 223, 224, 225, 226, 228, 229, 230, 231, 252 (aynı kodlu Organik Soft **Şal** ürünleri ayrı, dokunulmadı).
+- Ayarlar diğer Organik Soft Eşarplarla aynı: tip "Organik Soft Eşarp", standart organik açıklama, 350 TL / üstü çizili
+  410 TL, takip kapalı + CONTINUE, 3 kanalda yayında. organik-soft-esarp 149 → 158.
+- Koleksiyon zaten MANUAL; sadece 9 yeni ürün en üste alındı (252 → 223), eskilerin sırası değişmedi.
+- Ürün ID'leri: 223 10367240077398, 224 10367240175702, 225 10367240437846, 226 10367240601686, 228 10367240699990,
+  229 10367240831062, 230 10367241027670, 231 10367241125974, 252 10367241453654.
+- Açık: `/urun/organik-soft-esarp-223/224/226/229/230/231` eski linkleri hâlâ koleksiyona yönleniyor (231 reklamdaydı).
 
 ## Kaynak mağaza özeti
 
