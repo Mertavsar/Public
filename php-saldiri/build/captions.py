@@ -16,14 +16,14 @@ import json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = lambda *a: os.path.join(ROOT, *a)
-OLD = [0, 5, 14, 23, 31, 39, 48, 56]
-OLD_END = 60.0
+# her satırın animasyon penceresi (index.html'deki iç zaman); sıra serbest: hook sahnesi 70–75'te durur
+WIN = [[70, 75], [0, 5], [5, 14], [14, 23], [31, 39], [39, 48], [48, 56], [56, 60.5]]
 LEAD, TAIL, GAP, RATE = .25, 1.0, .45, 5.2
 MAX_CHARS = 26
-OLD_TICKS = [1.2, 6.0, 7.2, 9.4, 15.4, 17.6, 19.6, 24.0, 25.4, 32.0, 34.6, 40.0, 41.6, 49.0, 50.4, 51.8, 56.6, 57.2]
-RED = {'yangın', 'php2shell', 'geçirilebilir', 'hepsi', 'arka', 'kapı', 'yetmez'}
+OLD_TICKS = [71.2, 72.6, 6.0, 7.2, 9.4, 15.4, 17.6, 19.6, 32.0, 34.6, 40.0, 41.6, 49.0, 51.8, 57.2]
+RED = {'açık', 'korumuyor', 'php2shell', 'geçirilebilir', 'saatler', 'kapı', 'güncel'}
 # okunuşu hecesiz/farklı olan yazımlar için hece ağırlığı
-WEIGHT = {'php': 3, "php'de": 4, "php'yi": 4, 'php2shell': 5, '21': 4, "21": 4, "ekim'de": 3, "5'ten": 2, "8'e": 2,
+WEIGHT = {'hackerlara': 4, 'php': 3, "php'de": 4, "php'yi": 4, 'php2shell': 5, '21': 4, "21": 4, "ekim'de": 3, "5'ten": 2, "8'e": 2,
           '6': 2, 'cloudflare': 2, "wordpress'in": 4, 'wordpress': 3, 'rank': 1, 'math': 1, "pro'ya": 2}
 VOW = set('aeıioöuüAEIİOÖUÜ')
 
@@ -40,7 +40,7 @@ def syl(w):
 
 spoken = [l.split() for l in open(P('seslendirme.txt'), encoding='utf-8').read().strip().split('\n')]
 shown = [l.split() for l in open(P('altyazi.txt'), encoding='utf-8').read().strip().split('\n')]
-assert len(spoken) == len(shown) == len(OLD)
+assert len(spoken) == len(shown) == len(WIN)
 
 cap = P('vo', 'captions.json')
 if os.path.exists(cap):
@@ -97,9 +97,11 @@ for k, c in enumerate(caps):
     t1 = caps[k + 1][0]['s'] if k + 1 < len(caps) else dur - .3
     CAPS.append(dict(t0=c[0]['s'], t1=round(min(t1, c[-1]['e'] + .9), 3), words=[{x: w[x] for x in 'wsec'} for w in c]))
 NEW = [0.0] + [round(max(s - LEAD, 0), 3) for s, _ in spans[1:]]
-WARP = [[n, o] for n, o in zip(NEW, OLD)] + [[dur, OLD_END]]
+EDGE = NEW + [dur]
+# satır i: seslendirme [EDGE[i], EDGE[i+1]] -> animasyon WIN[i]
+WARP = [[EDGE[i], EDGE[i + 1], o0, o1] for i, (o0, o1) in enumerate(WIN)]
 def to_new(t):
-    for (n0, o0), (n1, o1) in zip(WARP, WARP[1:]):
+    for n0, n1, o0, o1 in WARP:
         if o0 <= t <= o1: return n0 + (t - o0) / (o1 - o0) * (n1 - n0)
     return dur
 open(P('assets', 'timing.js'), 'w').write('window.TIMING = ' + json.dumps(dict(DUR=dur, WARP=WARP, CAPS=CAPS, REAL=real), ensure_ascii=False) + ';\n')

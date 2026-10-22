@@ -27,39 +27,39 @@
   #chip { position: absolute; left: 0; right: 0; top: 150px; text-align: center; }
   #chip span { display: inline-block; font: 700 26px var(--sans); letter-spacing: .22em; padding: 12px 26px; border-radius: 999px; background: rgba(255, 59, 92, .9); box-shadow: 0 0 30px rgba(255, 59, 92, .6); }
   #chip i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #fff; margin-right: 12px; vertical-align: 1px; }
-  .kick { left: 60px; right: 60px; top: 236px; text-align: center; font: 700 30px var(--sans); letter-spacing: .2em; color: var(--cyan); text-shadow: 0 0 18px rgba(62, 240, 255, .6); }
-  .ttl { left: 40px; right: 40px; top: 284px; text-align: center; font: italic 800 112px/.98 var(--cond); text-transform: uppercase; letter-spacing: .005em;
+  .kick { left: 60px; right: 60px; top: 228px; text-align: center; font: 700 34px var(--sans); letter-spacing: .2em; color: var(--cyan); text-shadow: 0 0 18px rgba(62, 240, 255, .6); }
+  .ttl { left: 30px; right: 30px; top: 282px; text-align: center; font: italic 800 128px/.98 var(--cond); text-transform: uppercase; letter-spacing: .005em;
     text-shadow: 0 6px 0 rgba(20, 6, 50, .55), 0 0 40px rgba(255, 75, 242, .35); }
   .ttl r { color: var(--red); } .ttl y { color: var(--yel); } .ttl c { color: var(--cyan); } .ttl l { color: var(--lime); }
 
   .card { background: var(--card); border: 4px solid var(--cyan); border-radius: 30px; box-shadow: 0 0 36px rgba(62, 240, 255, .35), inset 0 0 30px rgba(62, 240, 255, .08); }
-  .stamp { font: italic 800 96px/1 var(--cond); text-transform: uppercase; padding: 14px 40px 18px; border-radius: 22px; white-space: nowrap; }
-  .lbl { font: 700 34px var(--sans); letter-spacing: .1em; text-align: center; }
+  .stamp { font: italic 800 104px/1 var(--cond); text-transform: uppercase; padding: 14px 40px 18px; border-radius: 22px; white-space: nowrap; }
+  .lbl { font: 700 40px var(--sans); letter-spacing: .1em; text-align: center; }
   .pill { font: 800 44px var(--sans); padding: 18px 34px; border-radius: 999px; white-space: nowrap; }
 
   /* terminal */
-  #term { left: 70px; top: 520px; width: 940px; height: 404px; overflow: hidden; border-color: var(--lime); box-shadow: 0 0 36px rgba(184, 255, 60, .3); }
-  #term .bar { height: 58px; background: rgba(184, 255, 60, .16); display: flex; align-items: center; gap: 14px; padding: 0 26px; font: 600 26px var(--mono); color: rgba(255,255,255,.7); }
+  #term { left: 50px; top: 580px; width: 980px; height: 460px; overflow: hidden; border-color: var(--lime); box-shadow: 0 0 36px rgba(184, 255, 60, .3); }
+  #term .bar { height: 64px; background: rgba(184, 255, 60, .16); display: flex; align-items: center; gap: 14px; padding: 0 26px; font: 600 26px var(--mono); color: rgba(255,255,255,.7); }
   #term .bar b { width: 20px; height: 20px; border-radius: 50%; display: inline-block; }
-  #term pre { padding: 22px 34px; font: 600 40px/58px var(--mono); white-space: pre; color: #e9f6ff; }
+  #term pre { padding: 28px 36px; font: 600 44px/66px var(--mono); white-space: pre; color: #e9f6ff; }
   #term .k { color: var(--lime); } #term .v { color: var(--yel); } #term .rr { color: var(--red); } #term .cur { background: var(--lime); color: transparent; }
 
   /* sürüm çubukları */
-  .row { left: 80px; width: 920px; height: 56px; }
-  .row .n { position: absolute; left: 0; top: 0; width: 220px; font: 800 46px/56px var(--cond); letter-spacing: .02em; }
-  .row .tr { position: absolute; left: 230px; right: 0; top: 6px; height: 44px; border-radius: 22px; background: rgba(255, 255, 255, .14); overflow: hidden; }
-  .row .fl { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 22px; }
-  .row .ic { position: absolute; right: 14px; top: 6px; font: 800 30px/32px var(--sans); color: #fff; opacity: 0; }
+  .row { left: 60px; width: 960px; height: 70px; }
+  .row .n { position: absolute; left: 0; top: 0; width: 250px; font: 800 58px/70px var(--cond); letter-spacing: .02em; }
+  .row .tr { position: absolute; left: 260px; right: 0; top: 8px; height: 54px; border-radius: 27px; background: rgba(255, 255, 255, .14); overflow: hidden; }
+  .row .fl { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 27px; }
+  .row .ic { position: absolute; right: 18px; top: 7px; font: 800 36px/40px var(--sans); color: #fff; opacity: 0; }
 
   /* kontrol listesi */
-  .chk { left: 80px; width: 920px; padding: 26px 30px; display: flex; gap: 28px; align-items: flex-start; }
-  .chk .o { flex: none; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; font: 800 50px var(--sans); color: #1a0a3e; }
-  .chk h3 { font: 800 52px/1.1 var(--sans); }
-  .chk p { font: 600 34px/1.3 var(--sans); color: rgba(255, 255, 255, .85); margin-top: 10px; }
+  .chk { left: 50px; width: 980px; padding: 32px 34px; display: flex; gap: 28px; align-items: flex-start; }
+  .chk .o { flex: none; width: 100px; height: 100px; border-radius: 50%; display: grid; place-items: center; font: 800 58px var(--sans); color: #1a0a3e; }
+  .chk h3 { font: 800 60px/1.1 var(--sans); }
+  .chk p { font: 600 40px/1.3 var(--sans); color: rgba(255, 255, 255, .85); margin-top: 10px; }
   .chk .vs { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
-  .chk .vs span { font: 700 32px var(--mono); padding: 8px 16px; border-radius: 12px; background: rgba(184, 255, 60, .18); color: var(--lime); border: 2px solid rgba(184, 255, 60, .6); }
+  .chk .vs span { font: 700 38px var(--mono); padding: 10px 18px; border-radius: 12px; background: rgba(184, 255, 60, .18); color: var(--lime); border: 2px solid rgba(184, 255, 60, .6); }
 
-  #sub { position: absolute; left: 70px; right: 70px; top: 1256px; text-align: center; font: 800 58px/1.14 var(--sans); letter-spacing: -.01em;
+  #sub { position: absolute; left: 60px; right: 60px; top: 1500px; text-align: center; font: 800 66px/1.14 var(--sans); letter-spacing: -.01em;
     text-shadow: 0 4px 0 rgba(30, 6, 50, .85), 0 0 24px rgba(30, 6, 60, .95); }
   #sub span { display: inline-block; margin: 0 .2em; color: rgba(255, 255, 255, .58); transform-origin: 50% 80%; }
   #sub span.on { color: #fff; } #sub span.on.yellow { color: var(--yel); } #sub span.on.red { color: #ff8a9e; }
@@ -82,107 +82,102 @@
   <svg class="layer" id="grid" viewBox="0 0 1080 1920"></svg>
   <div id="alarm"></div>
 
-  <!-- S0: internetin büyük kısmı PHP · yangın -->
+  <!-- S0: PHP = sitelerin motoru -->
   <section class="sc" data-s="0" data-e="5">
-    <div class="a kick" data-t=".15">İNTERNETİN OMURGASI</div>
-    <div class="a ttl gl" data-t=".25" data-out="2.45">İNTERNETİN BÜYÜK<br>KISMI <c>PHP</c> İLE</div>
-    <div class="a ttl gl" data-t="2.6" data-fx="stamp">ŞU AN PHP'DE<br><r>YANGIN VAR</r></div>
+    <div class="a kick" data-t=".15">NEDEN?</div>
+    <div class="a ttl gl" data-t=".25">SİTELERİN MOTORU:<br><c>PHP</c></div>
     <svg class="layer" id="s0"></svg>
   </section>
 
   <!-- S1: 21 Ekim, iki kritik açık, PHP2Shell -->
   <section class="sc" data-s="5" data-e="14">
-    <div class="a kick" data-t="5.15">PHP GÜVENLİK EKİBİ</div>
-    <div class="a ttl gl" data-t="5.25">ACİL<br><y>GÜNCELLEME</y></div>
-    <div class="a card" id="term" data-t="5.3"><div class="bar"><b style="background:#ff5f57"></b><b style="background:#febc2e"></b><b style="background:#28c840"></b>&nbsp; güvenlik-bülteni</div><pre id="termTxt"></pre></div>
+    <div class="a kick" data-t="5.15">21 EKİM 2026</div>
+    <div class="a ttl gl" data-t="5.25">MOTORDA<br><r>2 CİDDİ AÇIK</r></div>
+    <div class="a card" id="term" data-t="5.3"><div class="bar"><b style="background:#ff5f57"></b><b style="background:#febc2e"></b><b style="background:#28c840"></b>&nbsp; güvenlik-uyarısı</div><pre id="termTxt"></pre></div>
     <svg class="layer" id="s1"></svg>
-    <div class="a lbl" data-t="11.0" style="left:70px;width:440px;top:1172px;color:var(--yel)">CVSS 9.2 · KRİTİK</div>
-    <div class="a lbl" data-t="9.3" style="left:570px;width:440px;top:968px;color:var(--cyan)">ADI</div>
-    <div class="a stamp gl" data-t="9.4" data-fx="stamp" style="left:560px;width:460px;top:1020px;text-align:center;background:var(--mag);box-shadow:0 0 50px rgba(255,75,242,.7);font-size:90px">PHP2Shell</div>
-    <div class="a lbl" data-t="10.2" style="left:570px;width:440px;top:1168px;font-size:30px;color:rgba(255,255,255,.85)">2 AÇIK · TEK İSİM</div>
+    <div class="a lbl" data-t="11.0" style="left:50px;width:480px;top:1420px;color:var(--yel)">TEHLİKE: 9.2 / 10</div>
+    <div class="a lbl" data-t="9.3" style="left:560px;width:470px;top:1110px;color:var(--cyan)">ADI</div>
+    <div class="a stamp gl" data-t="9.4" data-fx="stamp" style="left:560px;width:470px;top:1180px;text-align:center;background:var(--mag);box-shadow:0 0 50px rgba(255,75,242,.7);font-size:100px">PHP2Shell</div>
+    <div class="a lbl" data-t="10.2" style="left:560px;width:470px;top:1340px;font-size:36px;color:rgba(255,255,255,.9)">2 AÇIK · TEK İSİM</div>
   </section>
 
   <!-- S2: şifresiz kod çalıştırma -->
   <section class="sc" data-s="14" data-e="23">
-    <div class="a kick" data-t="14.15">ŞİFRE BİLE SORMADAN</div>
-    <div class="a ttl gl" data-t="14.25">SUNUCUNDA<br><r>KOD ÇALIŞTIRIR</r></div>
+    <div class="a kick" data-t="14.15">BASİTÇE</div>
+    <div class="a ttl gl" data-t="14.25">ŞİFRESİZ<br><r>İÇERİ GİRİYOR</r></div>
     <svg class="layer" id="s2"></svg>
-    <div class="a lbl" data-t="14.6" style="left:40px;width:280px;top:915px;color:#ffc2cc">SALDIRGAN</div>
-    <div class="a lbl" data-t="14.9" style="left:760px;width:280px;top:915px">SUNUCUN</div>
-    <div class="a lbl" data-t="15.4" data-fx="pop" style="left:340px;width:400px;top:915px;color:var(--yel)">ŞİFRE YOK</div>
-    <div class="a stamp gl" data-t="20.3" data-fx="stamp" style="left:90px;width:900px;top:1060px;text-align:center;background:var(--red);box-shadow:0 0 60px rgba(255,59,92,.8);font-size:84px">SİTEN ELE GEÇİRİLEBİLİR</div>
-  </section>
-
-  <!-- S3: etkilenen sürümler -->
-  <section class="sc" data-s="23" data-e="31">
-    <div class="a kick" data-t="23.15">ETKİLENEN SÜRÜMLER</div>
-    <div class="a ttl gl" data-t="23.25">PHP <y>5</y>'TEN <y>8</y>'E</div>
-    <div id="rows"></div>
-    <div class="a stamp gl" data-t="27.4" data-fx="stamp" style="left:190px;width:700px;top:1090px;text-align:center;background:var(--red);box-shadow:0 0 60px rgba(255,59,92,.8)">NEREDEYSE HEPSİ</div>
+    <div class="a lbl" data-t="14.6" style="left:20px;width:320px;top:1100px;color:#ffc2cc">SALDIRGAN</div>
+    <div class="a lbl" data-t="14.9" style="left:740px;width:320px;top:1100px">SUNUCUN</div>
+    <div class="a lbl" data-t="15.4" data-fx="pop" style="left:340px;width:400px;top:1100px;color:var(--yel)">ŞİFRE YOK</div>
+    <div class="a stamp gl" data-t="20.3" data-fx="stamp" style="left:60px;width:960px;top:1250px;text-align:center;background:var(--red);box-shadow:0 0 60px rgba(255,59,92,.8);font-size:92px">SİTEN ELE GEÇİRİLEBİLİR</div>
   </section>
 
   <!-- S4: saldırılar güncellemeden önce başladı -->
   <section class="sc" data-s="31" data-e="39">
     <div class="a kick" data-t="31.15">21 EKİM 2026 · UTC</div>
-    <div class="a ttl gl" data-t="31.25">SALDIRILAR<br><r>ÇOKTAN BAŞLADI</r></div>
+    <div class="a ttl gl" data-t="31.25">SALDIRILAR<br><r>ÖNCE BAŞLADI</r></div>
     <svg class="layer" id="s4"></svg>
-    <div class="a card" data-t="32.0" data-fx="pop" style="left:183px;top:552px;width:400px;height:170px;border-color:var(--red);box-shadow:0 0 40px rgba(255,59,92,.55);text-align:center;padding-top:18px">
-      <div style="font:800 64px/1 var(--cond);color:var(--red)">07:43</div>
-      <div style="font:700 30px var(--sans);margin-top:10px">İLK SALDIRILAR</div>
-      <div style="font:600 24px var(--sans);margin-top:6px;color:rgba(255,255,255,.75)">Cloudflare gördü</div>
+    <div class="a card" data-t="32.0" data-fx="pop" style="left:160px;top:640px;width:460px;height:200px;border-color:var(--red);box-shadow:0 0 40px rgba(255,59,92,.55);text-align:center;padding-top:18px">
+      <div style="font:800 80px/1 var(--cond);color:var(--red)">07:43</div>
+      <div style="font:700 36px var(--sans);margin-top:10px">İLK SALDIRILAR</div>
+      <div style="font:600 28px var(--sans);margin-top:6px;color:rgba(255,255,255,.8)">Cloudflare gördü</div>
     </div>
-    <div class="a card" data-t="34.6" data-fx="pop" style="left:453px;top:920px;width:400px;height:150px;border-color:var(--lime);box-shadow:0 0 40px rgba(184,255,60,.45);text-align:center;padding-top:18px">
-      <div style="font:800 64px/1 var(--cond);color:var(--lime)">14:00</div>
-      <div style="font:700 30px var(--sans);margin-top:10px">GÜNCELLEME ÇIKTI</div>
+    <div class="a card" data-t="34.6" data-fx="pop" style="left:440px;top:1090px;width:460px;height:170px;border-color:var(--lime);box-shadow:0 0 40px rgba(184,255,60,.45);text-align:center;padding-top:18px">
+      <div style="font:800 80px/1 var(--cond);color:var(--lime)">14:00</div>
+      <div style="font:700 36px var(--sans);margin-top:10px">GÜNCELLEME ÇIKTI</div>
     </div>
-    <div class="a stamp gl" data-t="35.6" data-fx="stamp" style="left:240px;width:600px;top:1100px;text-align:center;background:var(--yel);color:#2a0f4a;box-shadow:0 0 50px rgba(255,225,77,.6);font-size:84px">≈ 6 SAAT ÖNCE</div>
+    <div class="a stamp gl" data-t="35.6" data-fx="stamp" style="left:200px;width:680px;top:1310px;text-align:center;background:var(--yel);color:#2a0f4a;box-shadow:0 0 50px rgba(255,225,77,.6);font-size:96px">≈ 6 SAAT ÖNCE</div>
   </section>
 
   <!-- S5: Rank Math PRO arka kapı -->
   <section class="sc" data-s="39" data-e="48">
     <div class="a kick" data-t="39.15">AYNI HAFTA · WORDPRESS</div>
     <div class="a ttl gl" data-t="39.25">EKLENTİYE<br><r>ARKA KAPI</r></div>
-    <div class="a card" data-t="39.6" data-fx="up" style="left:90px;top:540px;width:900px;height:240px;border-color:var(--mag);box-shadow:0 0 40px rgba(255,75,242,.45)">
-      <svg width="150" height="150" viewBox="0 0 100 100" style="position:absolute;left:36px;top:42px">
+    <div class="a card" data-t="39.6" data-fx="up" style="left:50px;top:600px;width:980px;height:300px;border-color:var(--mag);box-shadow:0 0 40px rgba(255,75,242,.45)">
+      <svg width="190" height="190" viewBox="0 0 100 100" style="position:absolute;left:30px;top:50px">
         <path d="M18 30h18a10 10 0 1 1 20 0h18v18a10 10 0 1 1 0 20v18H56a10 10 0 1 0-20 0H18V68a10 10 0 1 0 0-20z" fill="#ff4bf2" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
       </svg>
-      <div style="position:absolute;left:216px;top:46px;font:italic 800 76px/1 var(--cond)">Rank Math PRO</div>
-      <div style="position:absolute;left:216px;top:140px;font:700 32px var(--mono);padding:8px 18px;border-radius:12px;background:rgba(255,59,92,.25);border:2px solid var(--red);color:#ffd0d8">sürüm 3.0.123</div>
+      <div style="position:absolute;left:236px;top:62px;font:italic 800 92px/1 var(--cond)">Rank Math PRO</div>
+      <div style="position:absolute;left:236px;top:176px;font:700 38px var(--mono);padding:8px 18px;border-radius:12px;background:rgba(255,59,92,.25);border:2px solid var(--red);color:#ffd0d8">sürüm 3.0.123</div>
     </div>
     <svg class="layer" id="s5"></svg>
-    <div class="a lbl" data-t="41.9" data-fx="pop" style="left:90px;width:900px;top:820px;color:#ffc2cc;font-size:40px">İÇİNE GİZLİ ARKA KAPI KONDU</div>
-    <div class="a pill" data-t="44.0" data-fx="up" style="left:90px;top:960px;background:rgba(255,225,77,.18);border:3px solid var(--yel);color:var(--yel);font-size:38px">15–16 Ekim · ~11 saat</div>
-    <div class="a pill" data-t="45.4" data-fx="up" style="left:570px;top:960px;background:rgba(184,255,60,.18);border:3px solid var(--lime);color:var(--lime);font-size:38px">Temiz: 3.0.124</div>
+    <div class="a lbl" data-t="41.9" data-fx="pop" style="left:50px;width:980px;top:960px;color:#ffc2cc;font-size:46px">İÇİNE GİZLİ ARKA KAPI KONDU</div>
+    <div class="a pill" data-t="44.0" data-fx="up" style="left:140px;width:800px;text-align:center;top:1100px;background:rgba(255,225,77,.18);border:3px solid var(--yel);color:var(--yel);font-size:50px">15–16 Ekim · ~11 saat</div>
+    <div class="a pill" data-t="45.4" data-fx="up" style="left:140px;width:800px;text-align:center;top:1250px;background:rgba(184,255,60,.18);border:3px solid var(--lime);color:var(--lime);font-size:50px">Temiz: 3.0.124</div>
   </section>
 
   <!-- S6: ne yapmalısın -->
   <section class="sc" data-s="48" data-e="56">
     <div class="a kick" data-t="48.15">NE YAPMALISIN?</div>
-    <div class="a ttl gl" data-t="48.25"><l>HEMEN</l> YAP</div>
-    <div class="a card chk" data-t="49.0" data-fx="left" style="top:450px;border-color:var(--lime);box-shadow:0 0 36px rgba(184,255,60,.35)">
-      <div class="o" style="background:var(--lime)">✓</div>
-      <div><h3>PHP'yi güncelle</h3><div class="vs"><span>8.5.12</span><span>8.4.27</span><span>8.3.36</span><span>8.2.35</span></div></div>
+    <div class="a ttl gl" data-t="48.25">TEK BİR<br><l>SORU SOR</l></div>
+    <div class="a card chk" data-t="48.8" data-fx="left" style="top:600px;border-color:var(--cyan);box-shadow:0 0 36px rgba(62,240,255,.35)">
+      <div class="o" style="background:var(--cyan)">?</div>
+      <div><p style="margin:0">Hostingine ya da yazılımcına:</p><h3 style="font-size:76px;margin-top:8px">“PHP güncel mi?”</h3>
+        <p>Güvenli sürümler:</p><div class="vs"><span>8.5.12</span><span>8.4.27</span><span>8.3.36</span><span>8.2.35</span></div></div>
     </div>
-    <div class="a card chk" data-t="50.4" data-fx="left" style="top:720px;border-color:var(--lime);box-shadow:0 0 36px rgba(184,255,60,.35)">
+    <div class="a card chk" data-t="51.8" data-fx="left" style="top:1110px;border-color:var(--lime);box-shadow:0 0 36px rgba(184,255,60,.35)">
       <div class="o" style="background:var(--lime)">✓</div>
-      <div><h3>Sunucuyu yeniden başlat</h3></div>
-    </div>
-    <div class="a card chk" data-t="51.8" data-fx="left" style="top:900px;border-color:var(--org);box-shadow:0 0 36px rgba(255,176,46,.4)">
-      <div class="o" style="background:var(--org)">!</div>
-      <div><h3>Eklentiyi güncellemek yetmez</h3><p>Siteni tara, şifreleri yenile.</p></div>
+      <div><h3>Sonra sunucu yeniden başlatılsın</h3></div>
     </div>
   </section>
 
-  <!-- S7: soru + takip -->
+  <!-- S7: paylaş + takip -->
   <section class="sc" data-s="56" data-e="60.5">
-    <div class="a kick" data-t="56.1">SIRA SENDE</div>
-    <div class="a ttl gl" data-t="56.2">SENİN<br><y>SİTEN?</y></div>
+    <div class="a kick" data-t="56.1">BİR İYİLİK YAP</div>
+    <div class="a ttl gl" data-t="56.2">BUNU<br><y>PAYLAŞ</y></div>
     <svg class="layer" id="s7"></svg>
-    <div class="a" data-t="56.4" data-fx="pop" style="left:150px;width:780px;top:600px;text-align:center">
-      <div style="font:italic 800 104px/1 var(--cond)">PHP <y style="color:var(--yel)">kaç</y> sürüm?</div>
-      <div style="font:700 38px var(--sans);margin-top:22px;color:var(--cyan)">Yorumlara yaz</div>
+    <div class="a" data-t="56.6" data-fx="pop" style="left:60px;width:960px;top:900px;text-align:center">
+      <div style="font:italic 800 96px/1.02 var(--cond)">Sitesi olan<br>birine gönder</div>
     </div>
-    <div class="a pill" id="follow" data-t="57.2" data-fx="pop" style="left:290px;top:1000px;width:500px;text-align:center;background:var(--mag);font-size:56px;box-shadow:0 0 50px rgba(255,75,242,.7)">+ TAKİP ET</div>
+    <div class="a pill" id="follow" data-t="57.6" data-fx="pop" style="left:240px;top:1180px;width:600px;text-align:center;background:var(--mag);font-size:66px;box-shadow:0 0 50px rgba(255,75,242,.7)">+ TAKİP ET</div>
+  </section>
+
+  <!-- H: hook — siten açık olabilir -->
+  <section class="sc" data-s="70" data-e="75">
+    <div class="a kick" data-t="70.1">DİKKAT</div>
+    <div class="a ttl gl" data-t="70.15" data-fx="stamp">SİTEN ŞU AN<br><r>AÇIK OLABİLİR</r></div>
+    <svg class="layer" id="sH"></svg>
+    <div class="a stamp gl" data-t="73.0" data-fx="stamp" style="left:140px;width:800px;top:1270px;text-align:center;background:var(--red);box-shadow:0 0 60px rgba(255,59,92,.8);font-size:92px">ŞİFRE KORUMUYOR</div>
   </section>
 
   <div id="chip" class="a" data-t="0" style="opacity:1"><span><i></i>SİBER ALARM · 22 EKİM 2026</span></div>
@@ -220,7 +215,7 @@
 
   // ---------- arka plan: perspektif ızgara ----------
   const grid = $('#grid');
-  const HZ = 1240, gl = [];
+  const HZ = 1470, gl = [];
   for (let k = -9; k <= 9; k++) mk('line', { x1: 540 + k * 30, y1: HZ, x2: 540 + k * 260, y2: 1920, stroke: '#3ef0ff', 'stroke-width': 2, opacity: .22 }, grid);
   for (let k = 0; k < 12; k++) gl.push(mk('line', { x1: 0, x2: 1080, stroke: '#3ef0ff', 'stroke-width': 2 }, grid));
   mk('line', { x1: 0, x2: 1080, y1: HZ, y2: HZ, stroke: '#ff4bf2', 'stroke-width': 3, opacity: .5 }, grid);
@@ -233,16 +228,20 @@
   }
 
   // ---------- S0: siteler ve PHP çekirdeği ----------
-  const s0 = $('#s0'), CX = 540, CY = 860;
-  const sitePos = [[150, 600], [400, 580], [680, 580], [930, 600], [120, 790], [960, 790], [120, 960], [960, 960], [150, 1140], [400, 1160], [680, 1160], [930, 1140]];
+  const s0 = $('#s0'), CX = 540, CY = 1010;
+  const sitePos = [[140, 660], [400, 640], [680, 640], [940, 660], [120, 880], [960, 880], [120, 1140], [960, 1140], [140, 1370], [400, 1390], [680, 1390], [940, 1370]];
   const links = sitePos.map(([x, y]) => mk('line', { x1: CX, y1: CY, x2: x, y2: y, stroke: '#3ef0ff', 'stroke-width': 3, 'stroke-dasharray': '10 10' }, s0));
+  const gear = mk('path', { fill: 'none', stroke: '#3ef0ff', 'stroke-width': 10, 'stroke-linejoin': 'round', opacity: .55 }, s0);
+  { let d = ''; const N = 14;
+    for (let k = 0; k < N * 4; k++) { const a = k / (N * 4) * Math.PI * 2, r = (k % 4 < 2) ? 310 : 270; d += (k ? 'L' : 'M') + (r * Math.cos(a)).toFixed(1) + ',' + (r * Math.sin(a)).toFixed(1); }
+    gear.setAttribute('d', d + 'Z'); }
   const coreG = mk('g', {}, s0);
-  const rings = [0, 1, 2].map(() => mk('circle', { cx: CX, cy: CY, r: 200, fill: 'none', stroke: '#ff3b5c', 'stroke-width': 6 }, coreG));
-  const coreE = mk('ellipse', { cx: CX, cy: CY, rx: 200, ry: 112, fill: '#7f87ff', stroke: '#fff', 'stroke-width': 6 }, coreG);
-  const coreT = mk('text', { x: CX, y: CY + 40, 'text-anchor': 'middle', 'font-family': 'Barlow Condensed', 'font-style': 'italic', 'font-weight': 800, 'font-size': 140, fill: '#fff' }, coreG);
+  const rings = [0, 1, 2].map(() => mk('circle', { cx: CX, cy: CY, r: 230, fill: 'none', stroke: '#ff3b5c', 'stroke-width': 6 }, coreG));
+  const coreE = mk('ellipse', { cx: CX, cy: CY, rx: 230, ry: 130, fill: '#7f87ff', stroke: '#fff', 'stroke-width': 6 }, coreG);
+  const coreT = mk('text', { x: CX, y: CY + 48, 'text-anchor': 'middle', 'font-family': 'Barlow Condensed', 'font-style': 'italic', 'font-weight': 800, 'font-size': 168, fill: '#fff' }, coreG);
   coreT.textContent = 'php';
   const sites = sitePos.map(([x, y], i) => {
-    const g = mk('g', {}, s0), w = 170, h = 112;
+    const g = mk('g', {}, s0), w = 200, h = 130;
     const box = mk('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: 16, fill: '#24104f', stroke: '#3ef0ff', 'stroke-width': 4 }, g);
     const bar = mk('rect', { x: -w / 2, y: -h / 2, width: w, height: 26, rx: 14, fill: '#3ef0ff', opacity: .35 }, g);
     [0, 1, 2].forEach(k => mk('circle', { cx: -w / 2 + 18 + k * 16, cy: -h / 2 + 13, r: 5, fill: '#fff' }, g));
@@ -254,14 +253,15 @@
   });
   function scene0(t) {
     const pc = E.back(prog(t, 0, .6));
+    gear.setAttribute('transform', `translate(${CX} ${CY}) rotate(${t * 40}) scale(${E.out(prog(t, 1.4, 2.2))})`);
     coreG.setAttribute('transform', `translate(${CX} ${CY}) scale(${pc}) translate(${-CX} ${-CY})`);
-    const fire = prog(t, 2.6, 3.2);
+    const fire = 0;
     coreE.setAttribute('fill', fire > 0 ? `rgb(${lerp(127, 255, fire)},${lerp(135, 59, fire)},${lerp(255, 92, fire)})` : '#7f87ff');
-    rings.forEach((r, k) => { const ph = ((t - 2.6) * .8 + k / 3) % 1; r.setAttribute('r', 200 + ph * 260); r.setAttribute('opacity', t > 2.6 ? (1 - ph) * .8 : 0); });
+    rings.forEach((r, k) => { const ph = ((t - 2.6) * .8 + k / 3) % 1; r.setAttribute('r', 230 + ph * 300); r.setAttribute('opacity', 0); });
     sites.forEach(s => {
       const p = E.back(prog(t, .3 + s.i * .08, .8 + s.i * .08));
       s.g.setAttribute('transform', `translate(${s.x} ${s.y}) scale(${p})`);
-      const red = prog(t, 2.7 + s.d / 900, 3.0 + s.d / 900);
+      const red = 0;
       s.box.setAttribute('stroke', red > .5 ? '#ff3b5c' : '#3ef0ff');
       s.box.setAttribute('fill', red > .5 ? '#5a1033' : '#24104f');
       s.bar.setAttribute('fill', red > .5 ? '#ff3b5c' : '#3ef0ff');
@@ -270,17 +270,17 @@
     links.forEach((l, i) => {
       l.setAttribute('opacity', prog(t, .4 + i * .08, .9 + i * .08) * .8);
       l.setAttribute('stroke-dashoffset', -t * 40);
-      l.setAttribute('stroke', t > 2.7 + sites[i].d / 900 ? '#ff3b5c' : '#3ef0ff');
+      
     });
   }
 
   // ---------- S1: terminal + CVSS göstergesi ----------
   const LINES = [
-    [5.5, 6.3, '<span class="k">$</span> php güvenlik-bülteni'],
+    [5.5, 6.3, '<span class="k">$</span> php güvenlik-uyarısı'],
     [6.4, 6.9, 'tarih    <span class="v">21 EKİM 2026</span>'],
-    [7.2, 7.6, 'durum    <span class="rr">2 KRİTİK AÇIK</span>'],
-    [7.8, 8.2, '         CVE-2026-109618'],
-    [8.3, 8.7, '         CVE-2026-109619'],
+    [7.2, 7.6, 'bulunan  <span class="rr">2 CİDDİ AÇIK</span>'],
+    [7.8, 8.2, 'tehlike  <span class="rr">ÇOK YÜKSEK</span>'],
+    [8.3, 8.7, 'çözüm    <span class="k">GÜNCELLEME</span>'],
   ];
   const termTxt = $('#termTxt');
   const plain = h => h.replace(/<[^>]+>/g, '');
@@ -291,11 +291,11 @@
     const open = (out.match(/<span/g) || []).length - (out.match(/<\/span>/g) || []).length;
     return out + '</span>'.repeat(Math.max(0, open));
   }
-  const s1 = $('#s1'), GX = 290, GY = 1150, GR = 150;
+  const s1 = $('#s1'), GX = 290, GY = 1390, GR = 185;
   const arc = (p) => { const a = Math.PI * (1 - p); return [GX + GR * Math.cos(a), GY - GR * Math.sin(a)]; };
   mk('path', { d: `M${GX - GR},${GY} A${GR},${GR} 0 0 1 ${GX + GR},${GY}`, fill: 'none', stroke: 'rgba(255,255,255,.18)', 'stroke-width': 34, 'stroke-linecap': 'round' }, s1);
   const gArc = mk('path', { fill: 'none', stroke: '#ff3b5c', 'stroke-width': 34, 'stroke-linecap': 'round' }, s1);
-  const gTxt = mk('text', { x: GX, y: GY - 20, 'text-anchor': 'middle', 'font-family': 'Barlow Condensed', 'font-weight': 800, 'font-style': 'italic', 'font-size': 120, fill: '#fff' }, s1);
+  const gTxt = mk('text', { x: GX, y: GY - 24, 'text-anchor': 'middle', 'font-family': 'Barlow Condensed', 'font-weight': 800, 'font-style': 'italic', 'font-size': 140, fill: '#fff' }, s1);
   const gBox = mk('g', {}, s1);
   function scene1(t) {
     let html = '';
@@ -316,7 +316,7 @@
   }
 
   // ---------- S2: saldırgan → (şifre yok) → sunucu ----------
-  const s2 = $('#s2'), AX = 180, AY = 760, SX = 900, SY = 760;
+  const s2 = $('#s2'), AX = 180, AY = 900, SX = 900, SY = 900;
   const atk = mk('g', {}, s2);
   mk('circle', { cx: 0, cy: 0, r: 120, fill: '#5a1033', stroke: '#ff3b5c', 'stroke-width': 6 }, atk);
   mk('path', { d: 'M-70,70 C-70,-10 -50,-80 0,-85 C50,-80 70,-10 70,70 Z', fill: '#1a0a2e' }, atk);
@@ -336,13 +336,13 @@
   const lt = mk('text', { x: 0, y: -66, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 800, 'font-size': 30, fill: '#ffe14d' }, login); lt.textContent = 'GİRİŞ';
   [[-34, 'kullanıcı'], [40, 'şifre']].forEach(([y, s]) => { mk('rect', { x: -100, y: y - 24, width: 200, height: 48, rx: 10, fill: 'rgba(255,255,255,.12)' }, login); const e = mk('text', { x: -84, y: y + 9, 'font-family': 'Inter', 'font-weight': 600, 'font-size': 24, fill: 'rgba(255,255,255,.6)' }, login); e.textContent = s; });
   const cross = mk('path', { d: 'M-120,-100 L120,100 M120,-100 L-120,100', stroke: '#ff3b5c', 'stroke-width': 18, 'stroke-linecap': 'round', fill: 'none', 'stroke-dasharray': 700 }, login);
-  const route = mk('path', { d: `M${AX + 120},${AY - 20} C ${AX + 260},${AY - 240} ${SX - 260},${AY - 240} ${SX - 110},${AY - 60}`, fill: 'none', stroke: '#ff3b5c', 'stroke-width': 5, 'stroke-dasharray': '14 14' }, s2);
+  const route = mk('path', { d: `M${AX + 140},${AY - 60} C ${AX + 260},${AY - 330} ${SX - 260},${AY - 330} ${SX - 130},${AY - 200}`, fill: 'none', stroke: '#ff3b5c', 'stroke-width': 5, 'stroke-dasharray': '14 14' }, s2);
   const RL = route.getTotalLength();
-  const packets = [0, 1, 2, 3, 4].map(() => mk('circle', { r: 16, fill: '#ff3b5c', stroke: '#fff', 'stroke-width': 4 }, s2));
+  const packets = [0, 1, 2, 3, 4].map(() => mk('circle', { r: 20, fill: '#ff3b5c', stroke: '#fff', 'stroke-width': 4 }, s2));
   function scene2(t) {
-    atk.setAttribute('transform', `translate(${AX} ${AY}) scale(${E.back(prog(t, 14.3, 14.9))})`);
-    srv.setAttribute('transform', `translate(${SX} ${SY}) scale(${E.back(prog(t, 14.6, 15.2))})`);
-    login.setAttribute('transform', `translate(540 ${AY}) scale(${E.back(prog(t, 14.9, 15.4))})`);
+    atk.setAttribute('transform', `translate(${AX} ${AY}) scale(${1.25 * E.back(prog(t, 14.3, 14.9))})`);
+    srv.setAttribute('transform', `translate(${SX} ${SY - 20}) scale(${1.25 * E.back(prog(t, 14.6, 15.2))})`);
+    login.setAttribute('transform', `translate(540 ${AY}) scale(${1.2 * E.back(prog(t, 14.9, 15.4))})`);
     cross.setAttribute('stroke-dashoffset', 700 * (1 - E.out(prog(t, 15.5, 16.0))));
     route.setAttribute('opacity', prog(t, 16.0, 16.4));
     route.setAttribute('stroke-dashoffset', -t * 50);
@@ -358,41 +358,20 @@
     code.setAttribute('opacity', hit > .9 ? .6 + .4 * pulse(t, 2) : 0);
   }
 
-  // ---------- S3: sürüm çubukları ----------
-  const VERS = ['5.x', '7.x', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5'];
-  const rowsEl = $('#rows');
-  const rows = VERS.map((v, i) => {
-    const r = document.createElement('div'); r.className = 'a row'; r.dataset.t = (23.5 + i * .14).toFixed(2); r.dataset.fx = 'left';
-    r.style.top = (530 + i * 68) + 'px';
-    r.innerHTML = `<div class="n">PHP ${v}</div><div class="tr"><div class="fl"></div><div class="ic">!</div></div>`;
-    rowsEl.appendChild(r);
-    return { fl: r.querySelector('.fl'), ic: r.querySelector('.ic'), i };
-  });
-  function scene3(t) {
-    rows.forEach(({ fl, ic, i }) => {
-      const p = E.inOut(prog(t, 24.0 + i * .22, 24.9 + i * .22));
-      fl.style.width = (p * 100) + '%';
-      const red = prog(t, 25.4 + i * .18, 25.7 + i * .18);
-      fl.style.background = red > .5 ? 'linear-gradient(90deg,#ff3b5c,#ff7a45)' : 'linear-gradient(90deg,#3ef0ff,#7f87ff)';
-      fl.style.boxShadow = red > .5 ? '0 0 22px rgba(255,59,92,.8)' : 'none';
-      ic.style.opacity = red > .5 ? 1 : 0;
-    });
-  }
-
   // ---------- S4: zaman çizelgesi ----------
-  const s4 = $('#s4'), X0 = 100, X1 = 980, AYL = 820, hx = h => X0 + h / 24 * (X1 - X0);
+  const s4 = $('#s4'), X0 = 80, X1 = 1000, AYL = 960, hx = h => X0 + h / 24 * (X1 - X0);
   const axis = mk('line', { x1: X0, y1: AYL, x2: X0, y2: AYL, stroke: '#fff', 'stroke-width': 10, 'stroke-linecap': 'round' }, s4);
   const span = mk('line', { x1: hx(7.717), y1: AYL, x2: hx(7.717), y2: AYL, stroke: '#ff3b5c', 'stroke-width': 22, 'stroke-linecap': 'round' }, s4);
   const tickEls = [0, 6, 12, 18, 24].map(h => {
     const g = mk('g', {}, s4);
     mk('line', { x1: hx(h), y1: AYL - 14, x2: hx(h), y2: AYL + 14, stroke: '#fff', 'stroke-width': 4 }, g);
-    const e = mk('text', { x: hx(h), y: AYL + 56, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 600, 'font-size': 28, fill: 'rgba(255,255,255,.75)' }, g);
+    const e = mk('text', { x: hx(h), y: AYL + 56, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 600, 'font-size': 32, fill: 'rgba(255,255,255,.8)' }, g);
     e.textContent = String(h).padStart(2, '0') + ':00'; return g;
   });
   const pinA = mk('g', {}, s4), pinB = mk('g', {}, s4);
-  mk('line', { x1: hx(7.717), y1: 726, x2: hx(7.717), y2: AYL, stroke: '#ff3b5c', 'stroke-width': 6 }, pinA);
+  mk('line', { x1: hx(7.717), y1: 840, x2: hx(7.717), y2: AYL, stroke: '#ff3b5c', 'stroke-width': 6 }, pinA);
   mk('circle', { cx: hx(7.717), cy: AYL, r: 22, fill: '#ff3b5c', stroke: '#fff', 'stroke-width': 5 }, pinA);
-  mk('line', { x1: hx(14), y1: AYL, x2: hx(14), y2: 916, stroke: '#b8ff3c', 'stroke-width': 6 }, pinB);
+  mk('line', { x1: hx(14), y1: AYL, x2: hx(14), y2: 1090, stroke: '#b8ff3c', 'stroke-width': 6 }, pinB);
   mk('circle', { cx: hx(14), cy: AYL, r: 22, fill: '#b8ff3c', stroke: '#fff', 'stroke-width': 5 }, pinB);
   function scene4(t) {
     axis.setAttribute('x2', lerp(X0, X1, E.inOut(prog(t, 31.3, 32.0))));
@@ -404,7 +383,7 @@
   }
 
   // ---------- S5: kapı ----------
-  const s5 = $('#s5'), DX = 820, DY = 570, DW = 120, DH = 180;
+  const s5 = $('#s5'), DX = 850, DY = 640, DW = 130, DH = 220;
   const doorG = mk('g', {}, s5);
   const glow = mk('rect', { x: DX, y: DY, width: DW, height: DH, rx: 8, fill: '#ff3b5c' }, doorG);
   mk('rect', { x: DX - 8, y: DY - 8, width: DW + 16, height: DH + 8, rx: 10, fill: 'none', stroke: '#fff', 'stroke-width': 6 }, doorG);
@@ -423,20 +402,55 @@
   const bell = mk('g', {}, s7);
   mk('path', { d: 'M-40,30 C-40,-10 -32,-50 0,-52 C32,-50 40,-10 40,30 L52,44 L-52,44 Z', fill: '#ffe14d', stroke: '#fff', 'stroke-width': 4 }, bell);
   mk('circle', { cx: 0, cy: 56, r: 12, fill: '#ffe14d' }, bell);
-  const fRing = mk('rect', { x: 290, y: 1000, width: 500, height: 102, rx: 51, fill: 'none', stroke: '#ff4bf2', 'stroke-width': 6 }, s7);
+  const plane = mk('g', {}, s7);
+  mk('circle', { cx: 0, cy: 0, r: 120, fill: 'rgba(62,240,255,.18)', stroke: '#3ef0ff', 'stroke-width': 6 }, plane);
+  mk('path', { d: 'M-62,6 L66,-56 L30,64 L4,22 Z', fill: '#fff' }, plane);
+  mk('path', { d: 'M4,22 L66,-56 L-14,30 Z', fill: '#3ef0ff' }, plane);
+  const fRing = mk('rect', { x: 240, y: 1180, width: 600, height: 116, rx: 58, fill: 'none', stroke: '#ff4bf2', 'stroke-width': 6 }, s7);
   function scene7(t) {
-    const p = E.back(prog(t, 57.8, 58.3));
-    bell.setAttribute('transform', `translate(880 1050) rotate(${Math.sin(t * 14) * 18 * prog(t, 57.8, 58.2)}) scale(${p})`);
-    const ph = ((t - 57.4) * .9) % 1;
-    fRing.setAttribute('opacity', t > 57.5 ? (1 - ph) * .9 : 0);
+    const p = E.back(prog(t, 58.0, 58.5));
+    bell.setAttribute('transform', `translate(930 1232) rotate(${Math.sin(t * 14) * 18 * prog(t, 57.8, 58.2)}) scale(${p})`);
+    const ph = ((t - 57.9) * .9) % 1;
+    fRing.setAttribute('opacity', t > 58 ? (1 - ph) * .9 : 0);
+    plane.setAttribute('transform', `translate(${540 + Math.sin(t * 2) * 12} ${740 + Math.cos(t * 2.4) * 8}) scale(${E.back(prog(t, 56.4, 56.9))})`);
     const s = 1 + ph * .25;
-    fRing.setAttribute('transform', `translate(540 1051) scale(${s} ${1 + ph * .6}) translate(-540 -1051)`);
+    fRing.setAttribute('transform', `translate(540 1238) scale(${s} ${1 + ph * .6}) translate(-540 -1238)`);
+  }
+
+  // ---------- H: hook — kilit açılıyor ----------
+  const sH = $('#sH');
+  const win = mk('g', {}, sH);
+  const wBox = mk('rect', { x: 120, y: 600, width: 840, height: 600, rx: 34, fill: '#24104f', stroke: '#3ef0ff', 'stroke-width': 6 }, win);
+  const wBar = mk('rect', { x: 120, y: 600, width: 840, height: 74, rx: 32, fill: '#3ef0ff', opacity: .3 }, win);
+  [0, 1, 2].forEach(k => mk('circle', { cx: 166 + k * 34, cy: 637, r: 11, fill: '#fff' }, win));
+  mk('rect', { x: 290, y: 618, width: 520, height: 40, rx: 20, fill: 'rgba(255,255,255,.15)' }, win);
+  const url = mk('text', { x: 550, y: 648, 'text-anchor': 'middle', 'font-family': 'Inter', 'font-weight': 600, 'font-size': 28, fill: '#fff' }, win); url.textContent = 'siten.com';
+  const lock = mk('g', {}, win);
+  const shackle = mk('path', { d: 'M-60,0 V-60 A60,60 0 0 1 60,-60 V0', fill: 'none', stroke: '#fff', 'stroke-width': 24, 'stroke-linecap': 'round' }, lock);
+  const body = mk('rect', { x: -100, y: -10, width: 200, height: 160, rx: 28, fill: '#b8ff3c' }, lock);
+  mk('circle', { cx: 0, cy: 55, r: 20, fill: '#24104f' }, lock); mk('rect', { x: -8, y: 60, width: 16, height: 46, rx: 8, fill: '#24104f' }, lock);
+  const pw = mk('g', {}, win);
+  mk('rect', { x: 260, y: 1070, width: 560, height: 84, rx: 18, fill: 'rgba(255,255,255,.14)', stroke: 'rgba(255,255,255,.4)', 'stroke-width': 3 }, pw);
+  const pwT = mk('text', { x: 290, y: 1126, 'font-family': 'DejaVu Sans Mono', 'font-weight': 700, 'font-size': 44, fill: '#fff' }, pw);
+  const pwX = mk('line', { x1: 250, y1: 1112, x2: 250, y2: 1112, stroke: '#ff3b5c', 'stroke-width': 14, 'stroke-linecap': 'round' }, pw);
+  function sceneH(t) {
+    win.setAttribute('transform', `translate(540 900) scale(${E.back(prog(t, 70.0, 70.5))}) translate(-540 -900)`);
+    const open = E.back(prog(t, 71.2, 71.7));
+    shackle.setAttribute('transform', `translate(60 0) rotate(${-38 * open}) translate(-60 ${-46 * open})`);
+    const red = prog(t, 71.25, 71.45);
+    body.setAttribute('fill', red > .5 ? '#ff3b5c' : '#b8ff3c');
+    wBox.setAttribute('stroke', red > .5 ? '#ff3b5c' : '#3ef0ff'); wBar.setAttribute('fill', red > .5 ? '#ff3b5c' : '#3ef0ff');
+    const shake = red > 0 && t < 72 ? Math.sin(t * 60) * 8 * (1 - prog(t, 71.3, 72)) : 0;
+    lock.setAttribute('transform', `translate(${540 + shake} 850) scale(${1.35 * (1 + .08 * pulse(t, 1.2) * red)})`);
+    pw.setAttribute('opacity', prog(t, 72.2, 72.5));
+    pwT.textContent = 'şifre: ' + '•'.repeat(Math.round(8 * prog(t, 72.3, 72.8)));
+    pwX.setAttribute('x2', lerp(250, 830, E.out(prog(t, 72.9, 73.2))));
   }
 
   // ---------- genel giriş/çıkış ----------
   const scenes = $$('section.sc').map(e => ({ e, s: +e.dataset.s, end: +e.dataset.e, items: $$('.a', e) }));
   const glitchEls = $$('.gl');
-  const SCN = [scene0, scene1, scene2, scene3, scene4, scene5, () => {}, scene7];
+  const SCN = [scene0, scene1, scene2, scene4, scene5, () => {}, scene7, sceneH];
   function animItem(el, t) {
     const a = +el.dataset.t, fx = el.dataset.fx || 'up', out = el.dataset.out ? +el.dataset.out : null;
     let p = prog(t, a, a + .5), o = Math.min(1, p * 1.6), tr = '';
@@ -465,15 +479,14 @@
       if (o > 0) { sc.items.forEach(el => animItem(el, t)); SCN[i](t); }
     });
     glitch(t);
-    const al = t < 5 ? prog(t, 2.6, 3.0) * (1 - prog(t, 4.6, 5)) : t < 23 ? prog(t, 18.8, 19.4) * (1 - prog(t, 22.4, 22.9)) : 0;
+    const al = t > 70 ? prog(t, 71.2, 71.6) * (1 - prog(t, 74.6, 75)) : t > 14 && t < 23 ? prog(t, 18.8, 19.4) * (1 - prog(t, 22.4, 22.9)) : 0;
     $('#alarm').style.opacity = al * (.45 + .55 * pulse(t, 1.2));
   }
 
   // Seslendirme zamanı (T) -> animasyon zamanı (t): sahne başları cümle başlarına oturur
   const warp = T => {
-    const W = TM.WARP;
-    for (let i = 1; i < W.length; i++) if (T <= W[i][0]) { const [n0, o0] = W[i - 1], [n1, o1] = W[i]; return o0 + (T - n0) / (n1 - n0) * (o1 - o0); }
-    return W[W.length - 1][1];
+    for (const [n0, n1, o0, o1] of TM.WARP) if (T < n1) return o0 + (Math.max(T, n0) - n0) / (n1 - n0) * (o1 - o0);
+    return TM.WARP[TM.WARP.length - 1][3];
   };
   const sub = $('#sub');
   let capI = -1, capSpans = [];

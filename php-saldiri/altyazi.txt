@@ -1,8 +1,8 @@
-İnternetin büyük kısmı PHP ile çalışıyor. Ve şu an PHP'de büyük bir yangın var.
-21 Ekim'de PHP ekibi iki kritik açık için acil güncelleme yayınladı. Adı: PHP2Shell.
-Bu açıklar saldırgana şifre bile sormadan sunucunda kod çalıştırma imkânı veriyor. Yani siten tamamen ele geçirilebilir.
-Etkilenen sürümler? PHP 5'ten 8'e, neredeyse hepsi.
-Saldırılar çoktan başladı. Cloudflare ilk saldırıları, güncelleme çıkmadan 6 saat önce gördü.
-Aynı hafta WordPress'in popüler eklentisi Rank Math PRO'ya da arka kapı yerleştirildi.
-Ne yapmalısın? PHP'yi hemen güncelle, sunucuyu yeniden başlat. Eklentiyi güncellemek tek başına yetmez, siteni tara.
-Senin sitende PHP kaç sürüm? Yorumlara yaz, takipte kal.
+Web siten şu an hackerlara açık olabilir. Üstelik şifren bile seni korumuyor.
+Neden? Sitelerin çoğu PHP denen bir dille çalışıyor. Bunu sitenin motoru gibi düşün.
+21 Ekim'de bu motorda iki ciddi açık bulundu. Adı: PHP2Shell.
+Basitçe: saldırgan şifre bilmeden sunucunda komut çalıştırabiliyor. Yani siten ele geçirilebilir.
+Ve saldırılar, güncelleme çıkmadan saatler önce başladı.
+Aynı hafta popüler WordPress eklentisi Rank Math PRO'ya da gizli bir arka kapı konuldu.
+Ne yapmalısın? Hosting firmana ya da yazılımcına sor: PHP güncel mi? Güncellemeden sonra sunucu yeniden başlatılmalı.
+Bu videoyu sitesi olan birine gönder. Daha fazlası için takip et.

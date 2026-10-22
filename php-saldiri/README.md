@@ -1,6 +1,6 @@
 # PHP2Shell alarmı (22 Ekim 2026)
 
-~56 sn dikey (1080×1920) animasyon: 21 Ekim 2026 PHP güvenlik güncellemesi
+~52 sn dikey (1080×1920) animasyon. Hook girişli, teknik terimsiz anlatım: 21 Ekim 2026 PHP güvenlik güncellemesi
 (CVE-2026-109618 / 109619, "PHP2Shell"), güncellemeden önce görülen saldırılar
 (Cloudflare, 07:43 UTC) ve aynı hafta Rank Math PRO 3.0.123'e konan arka kapı.
 
