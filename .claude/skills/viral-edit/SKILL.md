@@ -59,7 +59,19 @@ milyonlarca izlenen bir videodan kare kare ölçülmüş sayılar içerir. Önce
 >   sesi). Gelene kadar videoyu **müziksiz** ver ve müziği uygulamada eklemesini öner.
 > - Parça gelince: `MUSIC_FILE=parça.mp3 MUSIC=1 python3 edit.py` (konuşmanın ~13 dB
 >   altında, konuşurken ~7 dB daha iner).
-> - Ağ: ücretsiz müzik siteleri proxy'de kapalı (freepd, incompetech, archive.org 403).
+> - Ağ: freepd ve archive.org kapalı (403). **incompetech açık** (kullanıcı izin
+>   listesine ekledi): katalog `incompetech.com/music/royalty-free/pieces.json`
+>   (feel/bpm/instruments ile filtrele), parça
+>   `.../mp3-royaltyfree/<Başlık>.mp3`. Kevin MacLeod, CC BY 4.0 — açıklamaya
+>   atıf satırı şart. Beğenilen düzey: konuşmanın 9–12 dB altı (duck öncesi).
+> - **Gerçek efekt sesi (CC0):** kenney.nl / freesound / opengameart kapalı, ama
+>   GitHub'daki `kapishdima/soundcn` deposu Kenney paketlerinin orijinal OGG'lerini
+>   tutuyor (`assets/kenney_impact-sounds`, `kenney_rpg-audio`, …). Seyrek çek:
+>   `git clone --filter=blob:none --no-checkout --depth 1` + `git checkout HEAD -- <dosyalar>`.
+>   Metal/demir konusu: `impactBell_heavy_*` (örs çınlaması), `impactMetal_heavy_*`
+>   (metal darbe), `impactPlate_heavy_*` (kopma), `drawKnife*` (bıçak çekme).
+>   ⚠ Aynı depoda **Blizzard — All Rights Reserved** öğeler de var; yalnız
+>   `registry.json`'da yazarı Kenney ve lisansı CC0 olanları kullan.
 
 ## 0. ⛔ EFEKT SESİ EKLEME — kullanıcı kendisi ekliyor
 
