@@ -184,7 +184,8 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
 - Koleksiyon zaten MANUAL; sadece 9 yeni ürün en üste alındı (252 → 223), eskilerin sırası değişmedi.
 - Ürün ID'leri: 223 10367240077398, 224 10367240175702, 225 10367240437846, 226 10367240601686, 228 10367240699990,
   229 10367240831062, 230 10367241027670, 231 10367241125974, 252 10367241453654.
-- Açık: `/urun/organik-soft-esarp-223/224/226/229/230/231` eski linkleri hâlâ koleksiyona yönleniyor (231 reklamdaydı).
+- `/urun/organik-soft-esarp-231` → `/products/organik-soft-esarp-231` yapıldı (kullanıcı istedi; eski katalogda bu link
+  "Organik Soft Eşarp 231" ürününe ait, doğrulandı). Açık: 223/224/226/229/230 eski linkleri hâlâ koleksiyona yönleniyor.
 
 ## Kaynak mağaza özeti
 
