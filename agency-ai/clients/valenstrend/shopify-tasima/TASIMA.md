@@ -187,6 +187,16 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
 - `/urun/organik-soft-esarp-231` → `/products/organik-soft-esarp-231` yapıldı (kullanıcı istedi; eski katalogda bu link
   "Organik Soft Eşarp 231" ürününe ait, doğrulandı). 223/224/226/229/230 de eski katalogla doğrulanıp kendi ürünlerine bağlandı (kullanıcı "bağla" dedi).
 
+### Premium Eşarp (aynı gün, aynı yöntem)
+- 5 yeni ürün: Premium Eşarp 11, 12, 13, 14, 15 (dosyalar `Premium_Esarp_011…015.jpg`; ad, eski sitedeki gibi 2 haneli).
+  Eski katalogda (3598453573752694) aynı adlarla 360 / 520 TL satılıyordu.
+- Ayarlar 01–10 ile aynı: tip "Premium Eşarp", standart premium açıklaması, 360 TL / üstü çizili 520 TL, takip kapalı +
+  CONTINUE, 3 kanalda yayında.
+- ID'ler: 11 10367277727830, 12 10367277760598, 13 10367277793366, 14 10367277858902, 15 10367277924438.
+- `/urun/premium-esarp-11…15` eski linkleri koleksiyondan kendi ürünlerine çevrildi (eski katalogla doğrulandı).
+- premium-esarp 10 → 15. Sıralama BEST_SELLING → MANUAL: 15→11, satıştaki eskiler (01,02,03,04,06,08,10), en sonda
+  tükenenler (05,07,09). Geri almak için koleksiyonda "En çok satanlar".
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
