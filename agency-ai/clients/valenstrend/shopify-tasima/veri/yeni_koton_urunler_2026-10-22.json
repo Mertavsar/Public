@@ -1,0 +1,594 @@
+{
+ "tarih": "2026-10-22",
+ "koleksiyon_sira_onceki": "BEST_SELLING",
+ "koleksiyon_sira_yeni": "MANUAL",
+ "urunler": [
+  {
+   "kod": 156,
+   "handle": "desenli-koton-esarp-156",
+   "urun_id": "gid://shopify/Product/10367180865622",
+   "dosya_id": "gid://shopify/MediaImage/46550405087318",
+   "dosya": "Desenli_Koton_Esarp_156.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 192,
+   "handle": "desenli-koton-esarp-192",
+   "urun_id": "gid://shopify/Product/10367184535638",
+   "dosya_id": "gid://shopify/MediaImage/46550414852182",
+   "dosya": "Desenli_Koton_Esarp_192.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 223,
+   "handle": "desenli-koton-esarp-223",
+   "urun_id": "gid://shopify/Product/10367184568406",
+   "dosya_id": "gid://shopify/MediaImage/46550414164054",
+   "dosya": "Desenli_Koton_Esarp_223.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 231,
+   "handle": "desenli-koton-esarp-231",
+   "urun_id": "gid://shopify/Product/10367184633942",
+   "dosya_id": "gid://shopify/MediaImage/46550414950486",
+   "dosya": "Desenli_Koton_Esarp_231.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 658,
+   "handle": "desenli-koton-esarp-658",
+   "urun_id": "gid://shopify/Product/10367184699478",
+   "dosya_id": "gid://shopify/MediaImage/46550403285078",
+   "dosya": "Desenli_Koton_Esarp_658.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 659,
+   "handle": "desenli-koton-esarp-659",
+   "urun_id": "gid://shopify/Product/10367184732246",
+   "dosya_id": "gid://shopify/MediaImage/46550404366422",
+   "dosya": "Desenli_Koton_Esarp_659.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 660,
+   "handle": "desenli-koton-esarp-660",
+   "urun_id": "gid://shopify/Product/10367184765014",
+   "dosya_id": "gid://shopify/MediaImage/46550404464726",
+   "dosya": "Desenli_Koton_Esarp_660.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 661,
+   "handle": "desenli-koton-esarp-661",
+   "urun_id": "gid://shopify/Product/10367184830550",
+   "dosya_id": "gid://shopify/MediaImage/46550403776598",
+   "dosya": "Desenli_Koton_Esarp_661.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 662,
+   "handle": "desenli-koton-esarp-662",
+   "urun_id": "gid://shopify/Product/10367184896086",
+   "dosya_id": "gid://shopify/MediaImage/46550404169814",
+   "dosya": "Desenli_Koton_Esarp_662.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 663,
+   "handle": "desenli-koton-esarp-663",
+   "urun_id": "gid://shopify/Product/10367184961622",
+   "dosya_id": "gid://shopify/MediaImage/46550404104278",
+   "dosya": "Desenli_Koton_Esarp_663.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 664,
+   "handle": "desenli-koton-esarp-664",
+   "urun_id": "gid://shopify/Product/10367185027158",
+   "dosya_id": "gid://shopify/MediaImage/46550405939286",
+   "dosya": "Desenli_Koton_Esarp_664.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 665,
+   "handle": "desenli-koton-esarp-665",
+   "urun_id": "gid://shopify/Product/10367185059926",
+   "dosya_id": "gid://shopify/MediaImage/46550405349462",
+   "dosya": "Desenli_Koton_Esarp_665.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 666,
+   "handle": "desenli-koton-esarp-666",
+   "urun_id": "gid://shopify/Product/10367185092694",
+   "dosya_id": "gid://shopify/MediaImage/46550403121238",
+   "dosya": "Desenli_Koton_Esarp_666.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 667,
+   "handle": "desenli-koton-esarp-667",
+   "urun_id": "gid://shopify/Product/10367185158230",
+   "dosya_id": "gid://shopify/MediaImage/46550404333654",
+   "dosya": "Desenli_Koton_Esarp_667.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 668,
+   "handle": "desenli-koton-esarp-668",
+   "urun_id": "gid://shopify/Product/10367185223766",
+   "dosya_id": "gid://shopify/MediaImage/46550403252310",
+   "dosya": "Desenli_Koton_Esarp_668.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 669,
+   "handle": "desenli-koton-esarp-669",
+   "urun_id": "gid://shopify/Product/10367185256534",
+   "dosya_id": "gid://shopify/MediaImage/46550404268118",
+   "dosya": "Desenli_Koton_Esarp_669.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 670,
+   "handle": "desenli-koton-esarp-670",
+   "urun_id": "gid://shopify/Product/10367185322070",
+   "dosya_id": "gid://shopify/MediaImage/46550403547222",
+   "dosya": "Desenli_Koton_Esarp_670.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 671,
+   "handle": "desenli-koton-esarp-671",
+   "urun_id": "gid://shopify/Product/10367185387606",
+   "dosya_id": "gid://shopify/MediaImage/46550403317846",
+   "dosya": "Desenli_Koton_Esarp_671.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 672,
+   "handle": "desenli-koton-esarp-672",
+   "urun_id": "gid://shopify/Product/10367185420374",
+   "dosya_id": "gid://shopify/MediaImage/46550403711062",
+   "dosya": "Desenli_Koton_Esarp_672.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 673,
+   "handle": "desenli-koton-esarp-673",
+   "urun_id": "gid://shopify/Product/10367189352534",
+   "dosya_id": "gid://shopify/MediaImage/46550404137046",
+   "dosya": "Desenli_Koton_Esarp_673.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 674,
+   "handle": "desenli-koton-esarp-674",
+   "urun_id": "gid://shopify/Product/10367189385302",
+   "dosya_id": "gid://shopify/MediaImage/46550403874902",
+   "dosya": "Desenli_Koton_Esarp_674.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 675,
+   "handle": "desenli-koton-esarp-675",
+   "urun_id": "gid://shopify/Product/10367189418070",
+   "dosya_id": "gid://shopify/MediaImage/46550404431958",
+   "dosya": "Desenli_Koton_Esarp_675.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 676,
+   "handle": "desenli-koton-esarp-676",
+   "urun_id": "gid://shopify/Product/10367189483606",
+   "dosya_id": "gid://shopify/MediaImage/46550403645526",
+   "dosya": "Desenli_Koton_Esarp_676.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 677,
+   "handle": "desenli-koton-esarp-677",
+   "urun_id": "gid://shopify/Product/10367189516374",
+   "dosya_id": "gid://shopify/MediaImage/46550403186774",
+   "dosya": "Desenli_Koton_Esarp_677.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 678,
+   "handle": "desenli-koton-esarp-678",
+   "urun_id": "gid://shopify/Product/10367189581910",
+   "dosya_id": "gid://shopify/MediaImage/46550404497494",
+   "dosya": "Desenli_Koton_Esarp_678.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 679,
+   "handle": "desenli-koton-esarp-679",
+   "urun_id": "gid://shopify/Product/10367189614678",
+   "dosya_id": "gid://shopify/MediaImage/46550414032982",
+   "dosya": "Desenli_Koton_Esarp_679.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 680,
+   "handle": "desenli-koton-esarp-680",
+   "urun_id": "gid://shopify/Product/10367189680214",
+   "dosya_id": "gid://shopify/MediaImage/46550405021782",
+   "dosya": "Desenli_Koton_Esarp_680.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 681,
+   "handle": "desenli-koton-esarp-681",
+   "urun_id": "gid://shopify/Product/10367189712982",
+   "dosya_id": "gid://shopify/MediaImage/46550404923478",
+   "dosya": "Desenli_Koton_Esarp_681.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 682,
+   "handle": "desenli-koton-esarp-682",
+   "urun_id": "gid://shopify/Product/10367189745750",
+   "dosya_id": "gid://shopify/MediaImage/46550404202582",
+   "dosya": "Desenli_Koton_Esarp_682.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 683,
+   "handle": "desenli-koton-esarp-683",
+   "urun_id": "gid://shopify/Product/10367189811286",
+   "dosya_id": "gid://shopify/MediaImage/46550403809366",
+   "dosya": "Desenli_Koton_Esarp_683.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 684,
+   "handle": "desenli-koton-esarp-684",
+   "urun_id": "gid://shopify/Product/10367189844054",
+   "dosya_id": "gid://shopify/MediaImage/46550404956246",
+   "dosya": "Desenli_Koton_Esarp_684.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 685,
+   "handle": "desenli-koton-esarp-685",
+   "urun_id": "gid://shopify/Product/10367189876822",
+   "dosya_id": "gid://shopify/MediaImage/46550414098518",
+   "dosya": "Desenli_Koton_Esarp_685.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 686,
+   "handle": "desenli-koton-esarp-686",
+   "urun_id": "gid://shopify/Product/10367189942358",
+   "dosya_id": "gid://shopify/MediaImage/46550403612758",
+   "dosya": "Desenli_Koton_Esarp_686.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 687,
+   "handle": "desenli-koton-esarp-687",
+   "urun_id": "gid://shopify/Product/10367189975126",
+   "dosya_id": "gid://shopify/MediaImage/46550404989014",
+   "dosya": "Desenli_Koton_Esarp_687.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 688,
+   "handle": "desenli-koton-esarp-688",
+   "urun_id": "gid://shopify/Product/10367190073430",
+   "dosya_id": "gid://shopify/MediaImage/46550403678294",
+   "dosya": "Desenli_Koton_Esarp_688.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 689,
+   "handle": "desenli-koton-esarp-689",
+   "urun_id": "gid://shopify/Product/10367190106198",
+   "dosya_id": "gid://shopify/MediaImage/46550403743830",
+   "dosya": "Desenli_Koton_Esarp_689.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 690,
+   "handle": "desenli-koton-esarp-690",
+   "urun_id": "gid://shopify/Product/10367190171734",
+   "dosya_id": "gid://shopify/MediaImage/46550403219542",
+   "dosya": "Desenli_Koton_Esarp_690.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 691,
+   "handle": "desenli-koton-esarp-691",
+   "urun_id": "gid://shopify/Product/10367192662102",
+   "dosya_id": "gid://shopify/MediaImage/46550405316694",
+   "dosya": "Desenli_Koton_Esarp_691.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 692,
+   "handle": "desenli-koton-esarp-692",
+   "urun_id": "gid://shopify/Product/10367192727638",
+   "dosya_id": "gid://shopify/MediaImage/46550404825174",
+   "dosya": "Desenli_Koton_Esarp_692.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 693,
+   "handle": "desenli-koton-esarp-693",
+   "urun_id": "gid://shopify/Product/10367192760406",
+   "dosya_id": "gid://shopify/MediaImage/46550405447766",
+   "dosya": "Desenli_Koton_Esarp_693.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 694,
+   "handle": "desenli-koton-esarp-694",
+   "urun_id": "gid://shopify/Product/10367192793174",
+   "dosya_id": "gid://shopify/MediaImage/46550406037590",
+   "dosya": "Desenli_Koton_Esarp_694.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 695,
+   "handle": "desenli-koton-esarp-695",
+   "urun_id": "gid://shopify/Product/10367192891478",
+   "dosya_id": "gid://shopify/MediaImage/46550405513302",
+   "dosya": "Desenli_Koton_Esarp_695.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 696,
+   "handle": "desenli-koton-esarp-696",
+   "urun_id": "gid://shopify/Product/10367192924246",
+   "dosya_id": "gid://shopify/MediaImage/46550404530262",
+   "dosya": "Desenli_Koton_Esarp_696.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 697,
+   "handle": "desenli-koton-esarp-697",
+   "urun_id": "gid://shopify/Product/10367192957014",
+   "dosya_id": "gid://shopify/MediaImage/46550404890710",
+   "dosya": "Desenli_Koton_Esarp_697.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 698,
+   "handle": "desenli-koton-esarp-698",
+   "urun_id": "gid://shopify/Product/10367192989782",
+   "dosya_id": "gid://shopify/MediaImage/46550404235350",
+   "dosya": "Desenli_Koton_Esarp_698.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 699,
+   "handle": "desenli-koton-esarp-699",
+   "urun_id": "gid://shopify/Product/10367193055318",
+   "dosya_id": "gid://shopify/MediaImage/46550405775446",
+   "dosya": "Desenli_Koton_Esarp_699.jpg",
+   "olcu": "1080x1350"
+  },
+  {
+   "kod": 700,
+   "handle": "desenli-koton-esarp-700",
+   "urun_id": "gid://shopify/Product/10367193088086",
+   "dosya_id": "gid://shopify/MediaImage/46550413738070",
+   "dosya": "Desenli_Koton_Esarp_700.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 701,
+   "handle": "desenli-koton-esarp-701",
+   "urun_id": "gid://shopify/Product/10367193153622",
+   "dosya_id": "gid://shopify/MediaImage/46550405840982",
+   "dosya": "Desenli_Koton_Esarp_701.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 702,
+   "handle": "desenli-koton-esarp-702",
+   "urun_id": "gid://shopify/Product/10367193186390",
+   "dosya_id": "gid://shopify/MediaImage/46550405808214",
+   "dosya": "Desenli_Koton_Esarp_702.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 703,
+   "handle": "desenli-koton-esarp-703",
+   "urun_id": "gid://shopify/Product/10367193251926",
+   "dosya_id": "gid://shopify/MediaImage/46550414688342",
+   "dosya": "Desenli_Koton_Esarp_703.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 704,
+   "handle": "desenli-koton-esarp-704",
+   "urun_id": "gid://shopify/Product/10367193284694",
+   "dosya_id": "gid://shopify/MediaImage/46550414000214",
+   "dosya": "Desenli_Koton_Esarp_704.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 705,
+   "handle": "desenli-koton-esarp-705",
+   "urun_id": "gid://shopify/Product/10367193317462",
+   "dosya_id": "gid://shopify/MediaImage/46550414196822",
+   "dosya": "Desenli_Koton_Esarp_705.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 706,
+   "handle": "desenli-koton-esarp-706",
+   "urun_id": "gid://shopify/Product/10367193382998",
+   "dosya_id": "gid://shopify/MediaImage/46550414884950",
+   "dosya": "Desenli_Koton_Esarp_706.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 707,
+   "handle": "desenli-koton-esarp-707",
+   "urun_id": "gid://shopify/Product/10367193448534",
+   "dosya_id": "gid://shopify/MediaImage/46550414819414",
+   "dosya": "Desenli_Koton_Esarp_707.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 709,
+   "handle": "desenli-koton-esarp-709",
+   "urun_id": "gid://shopify/Product/10367193514070",
+   "dosya_id": "gid://shopify/MediaImage/46550414786646",
+   "dosya": "Desenli_Koton_Esarp_709.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 710,
+   "handle": "desenli-koton-esarp-710",
+   "urun_id": "gid://shopify/Product/10367198330966",
+   "dosya_id": "gid://shopify/MediaImage/46550414262358",
+   "dosya": "Desenli_Koton_Esarp_710.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 711,
+   "handle": "desenli-koton-esarp-711",
+   "urun_id": "gid://shopify/Product/10367198363734",
+   "dosya_id": "gid://shopify/MediaImage/46550414590038",
+   "dosya": "Desenli_Koton_Esarp_711.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 712,
+   "handle": "desenli-koton-esarp-712",
+   "urun_id": "gid://shopify/Product/10367198429270",
+   "dosya_id": "gid://shopify/MediaImage/46550414524502",
+   "dosya": "Desenli_Koton_Esarp_712.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 713,
+   "handle": "desenli-koton-esarp-713",
+   "urun_id": "gid://shopify/Product/10367198527574",
+   "dosya_id": "gid://shopify/MediaImage/46550414491734",
+   "dosya": "Desenli_Koton_Esarp_713.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 715,
+   "handle": "desenli-koton-esarp-715",
+   "urun_id": "gid://shopify/Product/10367198593110",
+   "dosya_id": "gid://shopify/MediaImage/46550406004822",
+   "dosya": "Desenli_Koton_Esarp_715.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 717,
+   "handle": "desenli-koton-esarp-717",
+   "urun_id": "gid://shopify/Product/10367198625878",
+   "dosya_id": "gid://shopify/MediaImage/46550414131286",
+   "dosya": "Desenli_Koton_Esarp_717.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 718,
+   "handle": "desenli-koton-esarp-718",
+   "urun_id": "gid://shopify/Product/10367198658646",
+   "dosya_id": "gid://shopify/MediaImage/46550404399190",
+   "dosya": "Desenli_Koton_Esarp_718.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 719,
+   "handle": "desenli-koton-esarp-719",
+   "urun_id": "gid://shopify/Product/10367198756950",
+   "dosya_id": "gid://shopify/MediaImage/46550405972054",
+   "dosya": "Desenli_Koton_Esarp_719.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 720,
+   "handle": "desenli-koton-esarp-720",
+   "urun_id": "gid://shopify/Product/10367198789718",
+   "dosya_id": "gid://shopify/MediaImage/46550404759638",
+   "dosya": "Desenli_Koton_Esarp_720.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 721,
+   "handle": "desenli-koton-esarp-721",
+   "urun_id": "gid://shopify/Product/10367198888022",
+   "dosya_id": "gid://shopify/MediaImage/46550405906518",
+   "dosya": "Desenli_Koton_Esarp_721.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 722,
+   "handle": "desenli-koton-esarp-722",
+   "urun_id": "gid://shopify/Product/10367198920790",
+   "dosya_id": "gid://shopify/MediaImage/46550405382230",
+   "dosya": "Desenli_Koton_Esarp_722.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 724,
+   "handle": "desenli-koton-esarp-724",
+   "urun_id": "gid://shopify/Product/10367198953558",
+   "dosya_id": "gid://shopify/MediaImage/46550404857942",
+   "dosya": "Desenli_Koton_Esarp_724.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 725,
+   "handle": "desenli-koton-esarp-725",
+   "urun_id": "gid://shopify/Product/10367199019094",
+   "dosya_id": "gid://shopify/MediaImage/46550414622806",
+   "dosya": "Desenli_Koton_Esarp_725.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 726,
+   "handle": "desenli-koton-esarp-726",
+   "urun_id": "gid://shopify/Product/10367199051862",
+   "dosya_id": "gid://shopify/MediaImage/46550414557270",
+   "dosya": "Desenli_Koton_Esarp_726.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 727,
+   "handle": "desenli-koton-esarp-727",
+   "urun_id": "gid://shopify/Product/10367199150166",
+   "dosya_id": "gid://shopify/MediaImage/46550414655574",
+   "dosya": "Desenli_Koton_Esarp_727.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 728,
+   "handle": "desenli-koton-esarp-728",
+   "urun_id": "gid://shopify/Product/10367199182934",
+   "dosya_id": "gid://shopify/MediaImage/46550414721110",
+   "dosya": "Desenli_Koton_Esarp_728.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 729,
+   "handle": "desenli-koton-esarp-729",
+   "urun_id": "gid://shopify/Product/10367199215702",
+   "dosya_id": "gid://shopify/MediaImage/46550414753878",
+   "dosya": "Desenli_Koton_Esarp_729.jpg",
+   "olcu": "1536x2048"
+  },
+  {
+   "kod": 745,
+   "handle": "desenli-koton-esarp-745",
+   "urun_id": "gid://shopify/Product/10367199281238",
+   "dosya_id": "gid://shopify/MediaImage/46550405480534",
+   "dosya": "Desenli_Koton_Esarp_745.jpg",
+   "olcu": "1536x2048"
+  }
+ ],
+ "acilmayan": {
+  "382": "gid://shopify/MediaImage/46550405414998"
+ }
+}

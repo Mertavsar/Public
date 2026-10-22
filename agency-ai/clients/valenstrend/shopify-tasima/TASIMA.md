@@ -156,6 +156,25 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
 - Kargo adresi telefonu geldi (05062857853). Adreste şehir alanı "3093", il ve posta kodu boş → kargo için il/ilçe eksik kalabilir; ödeme formu kontrol edilecek.
 - Meta Purchase olayı: istatistikler saatlik geldiği için henüz görünmüyor; 01:01 UTC'de tekrar bakılacak.
 
+## Yeni Desenli Koton Eşarp ürünleri (22 Ekim 2026)
+
+- Kullanıcı 74 fotoğrafı Shopify → İçerik → Dosyalar'a yükledi (`Desenli_Koton_Esarp_<kod>.jpg`; 42 adet 1080×1350,
+  32 adet 1536×2048). Dosya adındaki koddan ürün açıldı, fotoğraf yeniden yüklenmeden mevcut dosya ürüne bağlandı.
+- 73 yeni ürün: 156, 192, 223, 231, 658–707 (708 yok), 709–713, 715, 717–722, 724–729, 745. Hepsi ACTIVE;
+  Online Mağaza, Point of Sale, Facebook & Instagram kanallarında yayında.
+- Ayarlar diğer koton eşarplarla birebir: başlık "Desenli Koton Eşarp <kod>", tip "Koton Eşarp", Valenstrend,
+  standart koton açıklaması, 250 TL / üstü çizili 330 TL, stok takibi kapalı + CONTINUE, vergili, kargo gerekli.
+- Kategoriler kurala göre doldu: koton-esarp 348 → 421, kampanya-tum-esarp-ve-sallar 1035 → 1108,
+  en-cok-satanlar 608 → 681.
+- 382 açılmadı: "Desenli Koton Eşarp 382" zaten var (aktif, 2 fotoğraflı). Yüklenen `Desenli_Koton_Esarp_382_v1.jpg`
+  Dosyalar'da kullanılmadan duruyor.
+- Koton Eşarp sıralaması kullanıcının isteğiyle BEST_SELLING → MANUAL: önce 73 yeni ürün (koda göre büyükten küçüğe),
+  sonra satıştaki eskiler (657 → 60), en sonda tükenen 58 ürün. Geri almak için: koleksiyonda "En çok satanlar".
+  Manuel sırada yeni eklenen ürün en alta düşer; sonraki yüklemede yenileri en üste taşımak gerekir.
+- Açık: 45 eski WordPress linki (`/urun/desenli-koton-esarp-658…702`) hâlâ /collections/koton-esarp'a yönleniyor,
+  artık ürün sayfasına yönlendirilebilir.
+- Liste (kod, ürün ID, dosya ID): `veri/yeni_koton_urunler_2026-10-22.json`.
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
