@@ -1,0 +1,598 @@
+{
+  "baslik": "Avrupa saati geri aldı, Türkiye neden almadı? Kış saati olmayan tek büyük komşu mu?",
+  "tarih": "2026-10-26",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "almadık",
+    "iki saat",
+    "sabit",
+    "askıda"
+  ],
+  "altyazi": {
+    "UTC artı üç": "UTC+3",
+    "Yirmi beş Ekim": "25 Ekim",
+    "yirmi beş Ekim": "25 Ekim",
+    "iki bin on altıda": "2016'da",
+    "iki bin on yedide": "2017'de",
+    "iki bin on sekizde": "2018'de",
+    "iki bin on dokuzda": "2019'da",
+    "Üç soruda": "3 soruda",
+    "dört yüz on": "410",
+    "yüz doksan iki": "192",
+    "sekizi yirmi beş geçe": "08.25'te",
+    "yirmi altı Ekim iki bin yirmi altı": "26 Ekim 2026",
+    "bir saat": "1 saat",
+    "iki saate": "2 saate",
+    "iki saat": "2 saat"
+  },
+  "kapak": {
+    "ikon": "🕒",
+    "ust": "AVRUPA SAATİ GERİ ALDI",
+    "buyuk": "TÜRKİYE?",
+    "alt": "NEDEN ALMADI?"
+  },
+  "cta": [
+    {
+      "sahne": 13,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Avrupa saatini geri aldı, Türkiye almadı. Aradaki fark iki saate çıktı.",
+      "p": {
+        "ikon": "🕒",
+        "etiket": "Almanya ile saat farkı · kışın",
+        "deger": 2,
+        "onek": "",
+        "sonek": " saat",
+        "ondalik": 0,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "not": "yazın fark: 1 saat",
+        "sayma": false
+      },
+      "etiket": "SAAT FARKI",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki Türkiye saati neden değiştirmiyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "SAATİ\n*NEDEN DEĞİŞTİRMİYOR?*",
+        "boy": 100
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "SADE DİLLE",
+          "HER GÜN",
+          "*ABONE OL*"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Avrupa kış saatine geçti.",
+      "p": {
+        "ikon": "🇪🇺",
+        "satirlar": [
+          "AVRUPA",
+          "KIŞ SAATİNE",
+          "*GEÇTİ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "NE OLDU",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Yirmi beş Ekim Pazar gecesi saatler bir saat geri alındı.",
+      "p": {
+        "gun": "25",
+        "ay": "EKİM",
+        "gunadi": "PAZAR",
+        "saat": "GECE",
+        "not": "Avrupa'da *saatler 1 saat geri*"
+      },
+      "etiket": "SAAT GERİ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Almanya'da saat üç oldu ikiye döndü. İngiltere'de iki yerine bir. Türkiye'de ise hiçbir şey değişmedi.",
+      "p": {
+        "baslik": "25 Ekim 2026 · saat ne oldu?",
+        "satirlar": [
+          {
+            "ikon": "🇩🇪",
+            "metin": "Almanya",
+            "deger": "03.00 → 02.00",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🇬🇧",
+            "metin": "İngiltere",
+            "deger": "02.00 → 01.00",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🇹🇷",
+            "metin": "Türkiye",
+            "deger": "DEĞİŞMEDİ",
+            "renk": "sari"
+          }
+        ],
+        "not": "İngiltere saati kaynaklarda planlı olarak veriliyor"
+      },
+      "etiket": "3 ÜLKE",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Çünkü biz yıl boyu aynı saati kullanıyoruz. Adı UTC artı üç.",
+      "p": {
+        "ikon": "🌍",
+        "satirlar": [
+          "YIL BOYU",
+          "AYNI SAAT",
+          "*UTC+3*"
+        ],
+        "boy": 96
+      },
+      "etiket": "TERİM",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "UTC dünya saatinin ölçüsü. Artı üç, bizim ondan üç saat ileride olduğumuz anlamına geliyor.",
+      "p": {
+        "ikon": "📏",
+        "satirlar": [
+          "UTC = DÜNYA",
+          "SAAT ÖLÇÜSÜ",
+          "*+3 = ÜÇ SAAT İLERİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Yazın Avrupa'yla farkımız bir saatti. Kışın bu fark iki saate çıkıyor.",
+      "p": {
+        "baslik": "Almanya ile saat farkı",
+        "satirlar": [
+          {
+            "ikon": "☀️",
+            "metin": "Yaz",
+            "deger": "1 saat",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "❄️",
+            "metin": "Kış",
+            "deger": "2 saat",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Türkiye saati sabit, Almanya değişiyor"
+      },
+      "etiket": "FARK",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "hesap",
+      "say": "Yani bizde saat on ikiyken Almanya'da saat on.",
+      "p": {
+        "baslik": "Kışın Türkiye 12.00 iken Almanya'da saat",
+        "ikon": "🧮",
+        "ogeler": [
+          "12.00",
+          "−",
+          "2 saat",
+          "=",
+          "10.00"
+        ]
+      },
+      "etiket": "ÖRNEK",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu yeni bir düzen değil. Türkiye bu uygulamaya iki bin on altıda geçti.",
+      "p": {
+        "ikon": "🕰️",
+        "satirlar": [
+          "KARAR",
+          "*2016*",
+          "YIL BOYU AYNI SAAT"
+        ],
+        "boy": 96
+      },
+      "etiket": "NE ZAMAN",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki devlet saati neden sabitledi?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*SABİTLEDİ?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE",
+          "YARADIYSA",
+          "*BİR BEĞEN BIRAK*"
+        ],
+        "boy": 90
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Resmî gerekçe iki şey: gün ışığından daha çok yararlanmak ve elektrik tüketimini azaltmak.",
+      "p": {
+        "ikon": "💡",
+        "satirlar": [
+          "GÜN IŞIĞINDAN",
+          "*DAHA ÇOK YARAR*",
+          "+ ELEKTRİK TASARRUFU"
+        ],
+        "boy": 76
+      },
+      "etiket": "GEREKÇE",
+      "kaynak": "K3, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Fikir şu: saat ileride olursa akşam daha geç kararır, lambalar daha geç yanar.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "⏩",
+            "metin": "Saat *ileride*"
+          },
+          {
+            "ikon": "🌇",
+            "metin": "Akşam *geç kararır*"
+          },
+          {
+            "ikon": "💡",
+            "metin": "Lambalar *geç yanar*"
+          }
+        ]
+      },
+      "etiket": "MANTIK",
+      "kaynak": "K3, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu hedefin gerçekte ne kadar tuttuğuna dair net bir rakam bulamadık. O yüzden bir sayı söylemiyoruz.",
+      "p": {
+        "ikon": "❓",
+        "satirlar": [
+          "TASARRUF",
+          "NE KADAR TUTTU?",
+          "*NET RAKAM YOK*"
+        ],
+        "boy": 80
+      },
+      "etiket": "BELİRSİZ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Karar ilk başta mahkemeye takıldı. Danıştay iki bin on yedide uygulamayı durdurdu.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "DANIŞTAY",
+          "*2017*",
+          "UYGULAMAYI DURDURDU"
+        ],
+        "boy": 90
+      },
+      "etiket": "MAHKEME",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Sonra yeni bir düzenlemeyle uygulama sürdü. İki bin on sekizde kalıcı hale geldi.",
+      "p": {
+        "ikon": "📜",
+        "satirlar": [
+          "YENİ KARAR",
+          "*2018*",
+          "KALICI OLDU"
+        ],
+        "boy": 96
+      },
+      "etiket": "KALICI",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Avrupa tarafında da hikâye ilginç. Orada da saat değişimini kaldırmak istediler.",
+      "p": {
+        "ikon": "🇪🇺",
+        "satirlar": [
+          "AVRUPA DA",
+          "SAAT DEĞİŞİMİNİ",
+          "*KALDIRMAK İSTEDİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "AVRUPA",
+      "kaynak": "K6, K7"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Avrupa Parlamentosu iki bin on dokuzda kaldırmaya evet dedi. Oy sayısı dört yüz on kabul, yüz doksan iki ret.",
+      "p": {
+        "baslik": "AB Parlamentosu · Mart 2019",
+        "satirlar": [
+          {
+            "ikon": "✅",
+            "metin": "Kabul",
+            "deger": "410",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "❌",
+            "metin": "Ret",
+            "deger": "192",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "51 çekimser"
+      },
+      "etiket": "OYLAMA",
+      "kaynak": "K6, K7"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ama ülkeler hangi saatte kalacaklarında anlaşamadı. Yani karar yedi yıldır askıda.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "HANGİ SAATTE",
+          "KALINACAK?",
+          "*ANLAŞMA YOK*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ASKIDA",
+      "kaynak": "K6, K7"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin gününe nasıl dokunur?",
+      "p": {
+        "ikon": "💡",
+        "metin": "SANA\n*NE OLUR?*",
+        "boy": 120
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kışın sabahlar geç aydınlanıyor. Aralıkta İstanbul'da güneş yaklaşık sekizi yirmi beş geçe doğuyor.",
+      "p": {
+        "ikon": "🌅",
+        "satirlar": [
+          "ARALIKTA İSTANBUL",
+          "GÜNEŞ YAKLAŞIK",
+          "*08.25'TE DOĞUYOR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "SABAH",
+      "kaynak": "K8, K9"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Güneş doğmadan önce hava biraz aydınlanır. Ama erken çıkanlar yine de karanlığa denk gelebilir.",
+      "p": {
+        "ikon": "🌄",
+        "satirlar": [
+          "DOĞMADAN ÖNCE",
+          "BİRAZ AYDINLIK",
+          "*ERKEN ÇIKAN KARANLIKTA*"
+        ],
+        "boy": 72
+      },
+      "etiket": "ALACAKARANLIK",
+      "kaynak": "K8"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Tartışmanın merkezinde sabah erken okula giden çocuklar var.",
+      "p": {
+        "ikon": "🎒",
+        "satirlar": [
+          "TARTIŞMANIN",
+          "MERKEZİNDE",
+          "*OKULA GİDEN ÇOCUKLAR*"
+        ],
+        "boy": 76
+      },
+      "etiket": "OKUL",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Avrupa'yla toplantın varsa saatleri kış için yeniden hesapla. Fark artık iki saat.",
+      "p": {
+        "ikon": "💻",
+        "satirlar": [
+          "AVRUPA'YLA",
+          "TOPLANTI VARSA",
+          "*FARK ARTIK 2 SAAT*"
+        ],
+        "boy": 76
+      },
+      "etiket": "İŞ",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Canlı yayın ve uçuş saatlerine de iki kere bak. Avrupa saatine göre olanlar bir saat kayabilir.",
+      "p": {
+        "ikon": "✈️",
+        "satirlar": [
+          "CANLI YAYIN",
+          "UÇUŞ SAATİ",
+          "*İKİ KERE KONTROL ET*"
+        ],
+        "boy": 76
+      },
+      "etiket": "KONTROL"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Saat değişecek mi? Bakanlık şu an böyle bir karar ya da hazırlık olmadığını söylüyor.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "ENERJİ BAKANLIĞI",
+          "DEĞİŞİKLİK",
+          "*YOK, DİYOR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ŞİMDİLİK",
+      "kaynak": "K3, K10"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Meclis'te konuyla ilgili bir kanun teklifi var. Ama sonucu belli değil.",
+      "p": {
+        "ikon": "📄",
+        "satirlar": [
+          "KANUN TEKLİFİ",
+          "KOMİSYONDA",
+          "*SONUÇ BELLİ DEĞİL*"
+        ],
+        "boy": 80
+      },
+      "etiket": "MECLİS",
+      "kaynak": "K10"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: Avrupa saati değiştiriyor, biz yıl boyu aynı kalıyoruz, tartışma sürüyor.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "AVRUPA DEĞİŞTİRİR",
+          "BİZ SABİT",
+          "*TARTIŞMA SÜRÜYOR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bilgiler yirmi altı Ekim iki bin yirmi altı itibarıyla. Güneş saati yaklaşık.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "VERİLER",
+          "26 EKİM 2026",
+          "*GÜNEŞ SAATİ YAKLAŞIK*"
+        ],
+        "boy": 80
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Avrupa'da kış saati 25 Ekim 2026'da başladı; Türkiye değişmedi, fark kışın 2 saat — https://reflexhaber.com/avrupada-saatler-geri-alindi-turkiye-ile-fark-iki-saate-cikti ; https://www.teknotalk.com/avrupa-kis-saati-turkiye-saat-farki-2026-212080/",
+    "K2": "Almanya'da saatler 03.00'ten 02.00'ye alındı; sonraki ileri alma 28 Mart 2027 — https://www.guneydoguekspres.com/saatler-geri-alinacak-mi-turkiyede-kis-saati-uygulanacak-mi-kis-saati-uygulamasi-nedir ; https://www.milligazete.com.tr/kis-saati-uygulamasi-2026da-turkiyede-saatler-geri-alinacak-mi-avrupada-kis-saati-ne-zaman-baslayacak-saatler-hangi-gun-degisecek",
+    "K3": "Türkiye'de kalıcı yaz saati: 2016 kararı, Danıştay 14 Eylül 2017 yürütmeyi durdurma, 2018 kalıcı karar (tarih/sayı ayrıntıları kaynaklarda farklı) — https://tr.wikipedia.org/wiki/T%C3%BCrkiye'de_yaz_saati_uygulamas%C4%B1 ; https://medyascope.tv/2024/11/18/yaz-saati-uygulamasi-ne-zaman-kalkti/",
+    "K4": "Kalıcı yaz saatinin kışın sabah karanlığı ve okul tartışması — https://www.cumhuriyet.com.tr/turkiye/damat-bakan-gitti-eseri-kaldi-iktidarin-inat-ettigi-yaz-saati-uygulamasi-ogrencileri-vurdu-1997128 ; https://www.webtekno.com/kalici-yaz-saati-uygulamasi-ve-olumsuz-etkileri-h116988.html",
+    "K5": "Resmî gerekçe (Enerji Bakanlığı): gün ışığından yararlanma, elektrik tüketimini azaltma — https://www.milliyet.com.tr/bilgi-rehberi/turkiyede-kis-saati-uygulamasina-gecilecek-mi-turkiyede-saatler-geri-alinacak-mi-ne-zaman-alinacak-kis-saati-uygulamasi-7470134 ; https://www.haberler.com/haber/turkiyede-saatler-neden-geri-alinmiyor-kis-saati-20347518-haberi/",
+    "K6": "AB Parlamentosu 26 Mart 2019: 410 kabul, 192 ret, 51 çekimser; üye ülkeler anlaşamadı — https://www.europarl.europa.eu/legislative-train/theme-union-of-democratic-change/file-discontinuing-seasonal-changes-of-time ; https://oeil.europarl.europa.eu/oeil/en/document-summary?id=1579670",
+    "K7": "AB saat değişimi hâlâ sürüyor, plan yedi yıldır takılı — https://www.euronews.com/2026/10/22/eu-planned-to-scrap-clock-changes-why-are-they-still-happening ; https://www.ibtimes.com.au/europe-daylight-saving-time-eu-clock-change-debate-1877361",
+    "K8": "İstanbul'da Aralık gün doğumu yaklaşık 08.20–08.30 — https://kalkoro.com/gun-dogumu-hesaplama ; https://meteocast.net/sunrise-sunset/tr/aralik/",
+    "K9": "21 Aralık'ta İstanbul'da güneş yaklaşık 08.25 — https://www.kocaelibarisgazetesi.com/kesfet/turkiyede-milyonlarca-kisi-karanlikta-uyanacak-sizin-sehriniz-de-listede-h161372",
+    "K10": "Bakanlık şu an değişiklik kararı/hazırlığı olmadığını belirtiyor; kanun teklifi komisyonda — https://www.tele3haber.com/avrupa-saatleri-geri-aldi-turkiye-karanlik-sabahlara-devam-ediyor-degisiklik-teklifi-mecliste-bekliyor ; https://www.politikam.com/turkiyede-saatler-geri-alinmayacak-25-ekimde-kis-saati-uygulamasi-baslayacak-mi-iste-2026-takvimi-ve-yaniti"
+  }
+}
