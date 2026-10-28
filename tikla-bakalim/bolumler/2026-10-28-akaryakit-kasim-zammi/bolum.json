@@ -1,0 +1,604 @@
+{
+  "baslik": "Benzine ve motorine 1 Kasım zammı: Eşel mobil bitti, vergi neden geri geliyor?",
+  "tarih": "2026-10-28",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "zam",
+    "vergi",
+    "eşel mobil",
+    "kademeli"
+  ],
+  "altyazi": {
+    "Bir Kasım'da": "1 Kasım'da",
+    "bir Kasım'da": "1 Kasım'da",
+    "dört lira on beş kuruş": "4,15 ₺",
+    "üç lira altmış kuruş": "3,60 ₺",
+    "Üç soruda": "3 soruda",
+    "Bir Ekim'de": "1 Ekim'de",
+    "üç aya": "3 aya",
+    "yedi lira doksan kuruştu": "7,90 ₺ idi",
+    "on bir lira otuz altı kuruş": "11,36 ₺",
+    "yüz seksen lira": "180 ₺",
+    "iki yüz yedi lira elli kuruş": "207,50 ₺",
+    "Elli litrelik": "50 litrelik",
+    "yüzde yetmiş beşine": "%75'ine",
+    "yetmiş altı liradan": "76 liradan",
+    "seksen liraya": "80 liraya",
+    "yüz liraya": "100 liraya",
+    "yirmi sekiz Ekim": "28 Ekim",
+    "dokuz liraya": "9 liraya",
+    "altı lira": "6 lira",
+    "eylülde üç": "eylülde 3"
+  },
+  "kapak": {
+    "ikon": "⛽",
+    "ust": "1 KASIM'DA BENZİNE",
+    "buyuk": "+4,15 ₺",
+    "alt": "NEDEN ZAM GELİYOR?"
+  },
+  "cta": [
+    {
+      "sahne": 12,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Bir Kasım'da benzine litre başına yaklaşık dört lira on beş kuruş zam bekleniyor.",
+      "p": {
+        "ikon": "⛽",
+        "etiket": "Benzine beklenen zam (litre, tahmini)",
+        "deger": 4.15,
+        "onek": "+",
+        "sonek": " ₺",
+        "ondalik": 2,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "not": "1 Kasım · vergi kaynaklı · KDV dahil",
+        "sayma": false
+      },
+      "etiket": "BEKLENEN ZAM",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu zam nereden çıktı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "ZAM\n*NEREDEN ÇIKTI?*",
+        "boy": 110
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "SADE DİLLE",
+          "HER GÜN",
+          "*ABONE OL*"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Akaryakıttaki vergi desteği adım adım geri alınıyor.",
+      "p": {
+        "ikon": "⛽",
+        "satirlar": [
+          "VERGİ DESTEĞİ",
+          "ADIM ADIM",
+          "*GERİ ALINIYOR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "NE OLDU",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu desteğin adı eşel mobil. Bir Ekim'de resmen sona erdi.",
+      "p": {
+        "ikon": "🪜",
+        "satirlar": [
+          "EŞEL MOBİL",
+          "1 EKİM'DE",
+          "*SONA ERDİ*"
+        ],
+        "boy": 92
+      },
+      "etiket": "BİTTİ",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Ama vergi bir anda eski haline dönmedi. Artış üç aya bölündü.",
+      "p": {
+        "ikon": "✂️",
+        "satirlar": [
+          "ARTIŞ",
+          "3 AYA",
+          "*BÖLÜNDÜ*"
+        ],
+        "boy": 100
+      },
+      "etiket": "3 ADIM",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Benzinde litre başına vergi ekimde yedi lira doksan kuruştu. Kasımda on bir lira otuz altı kuruş olacak.",
+      "p": {
+        "baslik": "Benzin · litre başına ÖTV",
+        "satirlar": [
+          {
+            "ikon": "🍂",
+            "metin": "Ekim",
+            "deger": "7,90 ₺",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "🍁",
+            "metin": "Kasım",
+            "deger": "11,36 ₺",
+            "renk": "sari"
+          },
+          {
+            "ikon": "❄️",
+            "metin": "Aralık",
+            "deger": "14,83 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "ÖTV: özel tüketim vergisi · Aralık değeri eşel mobil öncesi seviye"
+      },
+      "etiket": "VERGİ ADIMLARI",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Aralıkta ise eşel mobil öncesindeki seviyeye dönülecek.",
+      "p": {
+        "ikon": "🔙",
+        "satirlar": [
+          "ARALIKTA",
+          "ESKİ SEVİYE",
+          "*GERİ GELİYOR*"
+        ],
+        "boy": 92
+      },
+      "etiket": "ARALIK",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Pompaya yansıması benzinde yaklaşık dört lira on beş kuruş. Motorinde üç lira altmış kuruş.",
+      "p": {
+        "baslik": "1 Kasım · beklenen zam (litre)",
+        "satirlar": [
+          {
+            "ikon": "⛽",
+            "metin": "Benzin",
+            "deger": "+4,15 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🛢️",
+            "metin": "Motorin",
+            "deger": "+3,60 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Tahmini · vergi + KDV dahil"
+      },
+      "etiket": "POMPAYA YANSIMA",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Zam pazar günü, bir Kasım'da bekleniyor. Pompaya hangi saatte yansıyacağı şirketlere göre değişebilir.",
+      "p": {
+        "gun": "1",
+        "ay": "KASIM",
+        "gunadi": "PAZAR",
+        "saat": "TAHMİNİ",
+        "not": "Pazar mı, *pazartesi mi?* Net değil"
+      },
+      "etiket": "TARİH",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki devlet vergiyi neden geri alıyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "VERGİ\n*NEDEN GERİ GELİYOR?*",
+        "boy": 100
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE",
+          "YARADIYSA",
+          "*BİR BEĞEN BIRAK*"
+        ],
+        "boy": 90
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Eşel mobil kayan merdiven gibi çalışır. Petrol pahalanınca vergi düşer.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "🛢️",
+            "metin": "Petrol *pahalanır*"
+          },
+          {
+            "ikon": "⬇️",
+            "metin": "Vergi *düşer*"
+          },
+          {
+            "ikon": "⛽",
+            "metin": "Pompa zammı *yavaşlar*"
+          }
+        ]
+      },
+      "etiket": "MANTIK",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu sistem bu yıl mart ayında devreye girdi.",
+      "p": {
+        "ikon": "🛡️",
+        "satirlar": [
+          "MART 2026",
+          "EŞEL MOBİL",
+          "*DEVREYE GİRDİ*"
+        ],
+        "boy": 92
+      },
+      "etiket": "MART",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Bakan Şimşek'e göre artışın yüzde yetmiş beşine kadarı vergiden karşılandı.",
+      "p": {
+        "ikon": "🧾",
+        "etiket": "Artışın vergiden karşılanan payı (en çok)",
+        "deger": 75,
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "renk": "yesil",
+        "not": "Hazine ve Maliye Bakanı'nın açıklaması"
+      },
+      "etiket": "VERGİ ÜSTLENDİ",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani devlet, pompada daha az ödeyesin diye vergi gelirinden vazgeçti.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "DEVLET",
+          "VERGİ GELİRİNDEN",
+          "*VAZGEÇTİ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "BEDEL",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ama bu geçici bir destekti. Vergi gelirinden vazgeçmenin bütçeye maliyeti var.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "GEÇİCİ DESTEK",
+          "BÜTÇEYE",
+          "*MALİYETİ VAR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "GEÇİCİ",
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu yüzden destek ağustostan itibaren azaltıldı, ekimde tamamen kalktı.",
+      "p": {
+        "ikon": "📉",
+        "satirlar": [
+          "AĞUSTOSTAN",
+          "İTİBAREN AZALDI",
+          "*EKİMDE KALKTI*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ÇEKİLİŞ",
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Motorinde süreç ağustosta başladı. Vergi eylülde üç, ekimde altı lira oldu. Kasımda dokuz liraya çıkması bekleniyor.",
+      "p": {
+        "baslik": "Motorin · litre başına ÖTV",
+        "satirlar": [
+          {
+            "ikon": "☀️",
+            "metin": "Ağustos sonu",
+            "deger": "0 ₺",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🍂",
+            "metin": "Eylül",
+            "deger": "3 ₺",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "🍁",
+            "metin": "Ekim",
+            "deger": "6 ₺",
+            "renk": "sari"
+          },
+          {
+            "ikon": "❄️",
+            "metin": "Kasım (bekleniyor)",
+            "deger": "9 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "ÖTV: özel tüketim vergisi"
+      },
+      "etiket": "MOTORİN",
+      "kaynak": "K2, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Özetle: önce vergi düşürüldü, şimdi adım adım geri alınıyor.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "🛢️",
+            "metin": "Petrol *pahalandı*"
+          },
+          {
+            "ikon": "⬇️",
+            "metin": "Vergi *düşürüldü*"
+          },
+          {
+            "ikon": "🔚",
+            "metin": "Destek *bitti*"
+          },
+          {
+            "ikon": "⬆️",
+            "metin": "Vergi *geri geliyor*"
+          }
+        ]
+      },
+      "etiket": "ÖZET",
+      "kaynak": "K1, K4"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİNE\n*NE OLUR?*",
+        "boy": 110
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Elli litrelik bir depo benzin, yaklaşık iki yüz yedi lira elli kuruş daha pahalı olabilir.",
+      "p": {
+        "baslik": "Bir depo benzin (tahmini)",
+        "ikon": "🚗",
+        "ogeler": [
+          "50 litre",
+          "×",
+          "4,15 ₺",
+          "=",
+          "+207,50 ₺"
+        ]
+      },
+      "etiket": "BENZİN DEPOSU",
+      "kaynak": "K2 · 50 × 4,15 = 207,50"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Motorinde aynı depo yüz seksen lira daha pahalı olabilir.",
+      "p": {
+        "baslik": "Bir depo motorin (tahmini)",
+        "ikon": "🚚",
+        "ogeler": [
+          "50 litre",
+          "×",
+          "3,60 ₺",
+          "=",
+          "+180 ₺"
+        ]
+      },
+      "etiket": "MOTORİN DEPOSU",
+      "kaynak": "K2 · 50 × 3,60 = 180"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "Benzinin litresi yaklaşık yetmiş altı liradan seksen liraya çıkabilir.",
+      "p": {
+        "baslik": "⛽ Benzin · İstanbul · 1 litre (yaklaşık)",
+        "sol": {
+          "etiket": "BUGÜN",
+          "deger": 76.3,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "KASIM\n(tahmini)",
+          "deger": 80.45,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 2,
+        "fark": "+4,15 ₺",
+        "not": "Fiyat ilçeye ve şirkete göre değişir"
+      },
+      "etiket": "LİTRE FİYATI",
+      "kaynak": "K2, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Motorinin litresi de yaklaşık yüz liraya dayanabilir.",
+      "p": {
+        "ikon": "🛢️",
+        "satirlar": [
+          "MOTORİN",
+          "YAKLAŞIK",
+          "*100 ₺'YE DAYANABİLİR*"
+        ],
+        "boy": 76
+      },
+      "etiket": "MOTORİN",
+      "kaynak": "K2, K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Motorin çok kullanan nakliyede maliyet artabilir. Bu da bazı ürünlere yansıyabilir.",
+      "p": {
+        "ikon": "🚚",
+        "satirlar": [
+          "NAKLİYE",
+          "MALİYETİ ARTARSA",
+          "*ÜRÜNE YANSIYABİLİR*"
+        ],
+        "boy": 72
+      },
+      "etiket": "DOLAYLI ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Benzinde aralıkta son bir adım daha var.",
+      "p": {
+        "ikon": "❄️",
+        "satirlar": [
+          "BENZİNDE",
+          "ARALIKTA",
+          "*SON ADIM*"
+        ],
+        "boy": 92
+      },
+      "etiket": "SIRADAKİ",
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: destek bitti, vergi adım adım geri geliyor, zam pompaya yansıyor.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "DESTEK BİTTİ",
+          "VERGİ GERİ GELİYOR",
+          "*ZAM POMPAYA YANSIYOR*"
+        ],
+        "boy": 72
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Rakamlar beklenti. Resmî pompa fiyatı kesinleşince değişebilir. Bilgiler yirmi sekiz Ekim itibarıyla.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "VERİLER",
+          "28 EKİM 2026",
+          "*RAKAMLAR TAHMİNİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Eşel mobil 1 Ekim 2026'da sona erdi; benzindeki ÖTV artışı üç aya bölündü (ekim 7,90 · kasım 11,36 · aralık eşel mobil öncesi 14,8277 TL) — https://bianet.org/haber/esel-mobil-sona-erdi-benzine-12-48-liralik-zam-uc-aya-bolundu-323966 ; https://sanayigazetesi.com.tr/esel-mobil-sistemi-sona-erdi-benzinde-otv-artisi-kademeli-uygulanacak/ ; https://www.haberturk.com/bilgi/foto/resmi-gazete-yayimlandi-akaryakitta-esel-mobil-sistemi-sona-erdi-iste-1-ekim-2026-resmi-gazete-de-alinan-atama-kararlari-3916316",
+    "K2": "1 Kasım'da beklenen zam: benzin +4,15 TL, motorin +3,60 TL (ÖTV farkı + KDV); 50 litre benzin ~207,50 TL, motorin 180 TL; pazar/pazartesi belirsiz — https://www.gazetekritik.com/ekonomi/benzin-ve-motorine-otv-zammi-gundemde-1-kasimda-fiyatlar-ne-kadar-artacak/416115 ; https://www.haberler.com/ekonomi/1-kasim-da-benzine-4-lira-15-kurus-motorine-3-lira-20365926-haberi/ ; https://www.cumhuriyet.com.tr/ekonomi/akaryakita-yeni-zam-yolda-benzin-ve-motorinde-beklenen-artis-belli-oldu-2550303",
+    "K3": "Motorinde ÖTV: ağustos sonuna kadar 0, eylül 3, ekim 6, kasım (beklenen) 9 TL — https://www.cumhuriyet.com.tr/ekonomi/akaryakita-yeni-zam-yolda-benzin-ve-motorinde-beklenen-artis-belli-oldu-2550303 ; https://www.autobond.tr/haberler/benzin-motorin-otv-ekim-2026/ ; https://ana-bellek.com.tr/2026/09/motorine-otv-zammi-pompaya-yansidi-iste-guncel-akaryakit-fiyatlari/",
+    "K4": "Eşel mobil mekanizması, 5 Mart 2026'da devreye giriş, Bakan Şimşek: artışın %75'ine kadarı vergiyle karşılandı — https://www.pwc.com.tr/tr/hizmetlerimiz/vergi/dolayli-vergi/bultenler/kdv-otv-bultenleri/2026/akaryakitlarda-esel-mobil-sistemi-uygulamasi.html ; https://www.takvim.com.tr/ekonomi/2026/03/06/petrol-fiyatlarina-esel-mobil-kalkani-6-mart-2026-il-il-guncel-akaryakit-fiyatlari ; https://www.politikam.com/son-dakika-akaryakitta-esel-mobil-devri-basladi-iste-yeni-fiyat-formulu",
+    "K5": "İstanbul (Avrupa Yakası) 28 Ekim civarı benzin ~76,30 TL, motorin ~96,80 TL; fiyatlar kaynaklara göre küçük farklı — https://www.ulusal.com.tr/ekonomi/pompa-fiyatlari-yenilendi-iste-sehir-sehir-guncel-benzin-motorin-ve-lpg-tarifesi-15104218 ; https://www.sonmuhur.com/benzin-ve-motorine-ne-kadar-zam-gelecek-27-ekim-2026-guncel-akaryakit-fiyatlari-kac-lira-olacak"
+  }
+}
