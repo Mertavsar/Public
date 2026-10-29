@@ -1,0 +1,563 @@
+{
+  "baslik": "Ocak 2027 emekli zammı nasıl hesaplanıyor? Yarısı belli, gerisi ne olacak?",
+  "tarih": "2026-10-29",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "yarısı",
+    "formül",
+    "tahmin",
+    "kanun"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "altı ayın": "6 ayın",
+    "altı aylık": "6 aylık",
+    "yüzde bir virgül yetmiş sekiz": "%1,78",
+    "yüzde bir virgül seksen dört": "%1,84",
+    "yüzde beş virgül elli yedi": "%5,57",
+    "üç ayın": "3 ayın",
+    "üç Kasım'da": "3 Kasım'da",
+    "yüzde iki": "%2",
+    "yüzde beşlik": "%5'lik",
+    "yüzde yediyi": "%7'yi",
+    "yüzde dokuz ile on bir": "%9 ile %11",
+    "yüzde sekiz ile sekiz buçuk": "%8 ile %8,5",
+    "yirmi üç bin beş yüz elli iki lira": "23.552 ₺",
+    "otuz bin lira": "30.000 ₺",
+    "Yüzde on": "%10",
+    "otuz üç bin liraya": "33.000 ₺'ye",
+    "yirmi altı bin liraya": "26.000 ₺'ye",
+    "kalan üç ay": "kalan 3 ay",
+    "yirmi dokuz Ekim": "29 Ekim"
+  },
+  "kapak": {
+    "ikon": "👵",
+    "ust": "EMEKLİ ZAMMININ",
+    "buyuk": "YARISI BELLİ",
+    "alt": "GERİSİ NE OLACAK?"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "etiket": "OCAK ZAMMI",
+      "say": "Ocak'ta emekli maaşına gelecek zammın yarısı şimdiden belli.",
+      "p": {
+        "ikon": "👵",
+        "etiket": "6 ayın 3'ü geride · birikmiş enflasyon",
+        "deger": 5.57,
+        "onek": "%",
+        "ondalik": 2,
+        "yon": "up",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "sayma": false
+      },
+      "kaynak": "TÜİK verisi, basın (K2)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "etiket": "3 SORU",
+      "say": "Peki gerisi nasıl hesaplanıyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🧮",
+        "metin": "GERİSİ\n*NASIL HESAPLANIR?*",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "etiket": "ABONE OL",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEM",
+          "*SADE DİLLE*"
+        ],
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "etiket": "KURAL",
+      "say": "Önce kural. SSK ve Bağ-Kur emeklisinin zammı, son altı ayın enflasyonu kadar.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "⏳",
+            "metin": "Temmuz → Aralık enflasyonu"
+          },
+          {
+            "ikon": "➕",
+            "metin": "6 ay *birikir*"
+          },
+          {
+            "ikon": "💰",
+            "metin": "Ocak'ta maaşa *zam* olur"
+          }
+        ]
+      },
+      "kaynak": "5510 sayılı Kanun, basın (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "yigin",
+      "etiket": "AY AY ENFLASYON",
+      "say": "Temmuzda enflasyon yüzde bir virgül yetmiş sekiz oldu. Ağustos ve eylülde yüzde bir virgül seksen dört.",
+      "p": {
+        "baslik": "Ocak zammı için biriken enflasyon",
+        "toplam_etiket": "Birikmiş:",
+        "temsili": false,
+        "durumlar": [
+          {
+            "etiket": "Temmuz",
+            "toplam_metin": "%1,78",
+            "renk": "sari",
+            "parcalar": [
+              {
+                "ad": "Temmuz",
+                "deger": 1.78,
+                "renk": "mavi"
+              },
+              {
+                "ad": "Ağustos",
+                "deger": 0,
+                "renk": "mor"
+              },
+              {
+                "ad": "Eylül",
+                "deger": 0,
+                "renk": "turuncu"
+              }
+            ]
+          },
+          {
+            "etiket": "+ Ağustos",
+            "toplam_metin": "%3,65",
+            "renk": "sari",
+            "parcalar": [
+              {
+                "ad": "Temmuz",
+                "deger": 1.78
+              },
+              {
+                "ad": "Ağustos",
+                "deger": 1.84
+              },
+              {
+                "ad": "Eylül",
+                "deger": 0
+              }
+            ]
+          },
+          {
+            "etiket": "+ Eylül",
+            "toplam_metin": "%5,57",
+            "renk": "sari",
+            "parcalar": [
+              {
+                "ad": "Temmuz",
+                "deger": 1.78
+              },
+              {
+                "ad": "Ağustos",
+                "deger": 1.84
+              },
+              {
+                "ad": "Eylül",
+                "deger": 1.84
+              }
+            ]
+          }
+        ]
+      },
+      "kaynak": "TÜİK aylık TÜFE, basın (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "3 AY TOPLAMI",
+      "say": "Üç ayın toplamı yüzde beş virgül elli yedi. Yani zammın yarısı birikti.",
+      "p": {
+        "ikon": "📊",
+        "etiket": "Temmuz · Ağustos · Eylül toplamı",
+        "deger": 5.57,
+        "onek": "%",
+        "ondalik": 2,
+        "renk": "sari",
+        "not": "6 aylık yolun *yarısı* tamam"
+      },
+      "kaynak": "TÜİK verisi, basın (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "etiket": "SIRADAKİ VERİ",
+      "say": "Sırada ekim var. Ekim enflasyonu üç Kasım'da açıklanacak.",
+      "p": {
+        "gun": "3",
+        "ay": "KASIM",
+        "gunadi": "SALI",
+        "saat": "10.00",
+        "not": "*Ekim* enflasyonu açıklanıyor"
+      },
+      "kaynak": "TÜİK takvimi, basın (K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "BEKLENTİ",
+      "say": "Ekonomistler ekimde yüzde iki civarında bir artış bekliyor.",
+      "p": {
+        "ikon": "🔮",
+        "etiket": "Ekim enflasyonu beklentisi",
+        "deger": 2.2,
+        "onek": "~%",
+        "ondalik": 1,
+        "renk": "turuncu",
+        "not": "AA Finans anketi · kesin rakam *3 Kasım'da*"
+      },
+      "kaynak": "AA Finans ve TCMB anketleri (K3)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "etiket": "NEDEN FARKLI",
+      "say": "Peki zam oranı neden her emekliye aynı değil?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*HERKESE AYNI DEĞİL?*",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "İKİ FORMÜL",
+      "say": "Çünkü iki ayrı formül var. SSK ve Bağ-Kur emeklisi, doğrudan altı aylık enflasyonu alıyor.",
+      "p": {
+        "baslik": "Ocak zammı · iki ayrı formül",
+        "satirlar": [
+          {
+            "ikon": "👷",
+            "metin": "SSK / Bağ-Kur",
+            "deger": "Enflasyon kadar",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Memur emeklisi",
+            "deger": "%5 + fark",
+            "renk": "mavi"
+          }
+        ]
+      },
+      "kaynak": "5510 sayılı Kanun, toplu sözleşme (K1, K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "MEMUR EMEKLİSİ",
+      "say": "Memur emeklisinde toplu sözleşmeden gelen yüzde beşlik bir zam var. Altı aylık enflasyon yüzde yediyi geçerse, aradaki fark da ekleniyor.",
+      "p": {
+        "baslik": "Memur emeklisi nasıl hesaplanır?",
+        "adimlar": [
+          {
+            "ikon": "📝",
+            "metin": "Toplu sözleşme: *%5*"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Enflasyon *%7'yi* geçerse"
+          },
+          {
+            "ikon": "➕",
+            "metin": "Aradaki *fark* eklenir"
+          }
+        ]
+      },
+      "kaynak": "Toplu sözleşme, basın (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "etiket": "NEDEN FARK VAR",
+      "say": "Bu yüzden aynı enflasyonda bile iki grubun zammı farklı çıkıyor.",
+      "p": {
+        "baslik": "Ocak 2027 · tahmini zam",
+        "sol": {
+          "etiket": "SSK\nBağ-Kur",
+          "deger": 10.67,
+          "renk": "sari"
+        },
+        "sag": {
+          "etiket": "Memur\nemeklisi",
+          "deger": 8.6,
+          "renk": "mavi"
+        },
+        "onek": "%",
+        "ondalik": 1,
+        "not": "Aynı enflasyon senaryosu (%10,67) · memur: 1,05 × 1,1067 ÷ 1,07"
+      },
+      "kaynak": "basın tahminleri (K5, K7)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "TABAN AYLIK",
+      "say": "Bir de en düşük emekli aylığı var. Bu tutar zamla kendiliğinden artmıyor.",
+      "p": {
+        "ikon": "🏠",
+        "satirlar": [
+          "EN DÜŞÜK AYLIK",
+          "*KENDİLİĞİNDEN*",
+          "ARTMIYOR"
+        ],
+        "boy": 96
+      },
+      "kaynak": "7590 sayılı Kanun (K6, K8)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEĞEN",
+      "say": "Asıl merak edilen kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "SIRADA",
+          "*RAKAMLAR*"
+        ],
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "KANUN ŞART",
+      "say": "Taban aylığın artması için Meclis'ten ayrı bir kanun çıkması gerekiyor. Temmuzda da böyle bir kanunla artırıldı.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "📊",
+            "metin": "Zam oranı belli olur"
+          },
+          {
+            "ikon": "🏛️",
+            "metin": "Meclis'ten *kanun* çıkar"
+          },
+          {
+            "ikon": "💳",
+            "metin": "Taban aylık artar"
+          }
+        ]
+      },
+      "kaynak": "7590 sayılı Kanun, basın (K6, K8)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "etiket": "SENİN MAAŞIN",
+      "say": "Peki bu senin maaşına nasıl yansır?",
+      "p": {
+        "ikon": "💳",
+        "metin": "SENİN MAAŞINA\n*NASIL YANSIR?*",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "etiket": "TAHMİN ARALIĞI",
+      "say": "Tahminlere göre SSK ve Bağ-Kur emeklisinin zammı yüzde dokuz ile on bir arasında.",
+      "p": {
+        "baslik": "SSK ve Bağ-Kur · Ocak 2027 tahmini",
+        "sol": {
+          "etiket": "DÜŞÜK\nSENARYO",
+          "deger": 8.7,
+          "renk": "sari"
+        },
+        "sag": {
+          "etiket": "YÜKSEK\nSENARYO",
+          "deger": 10.67,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "ondalik": 2,
+        "not": "Basındaki 4 senaryo · kesin oran ocak başında"
+      },
+      "kaynak": "basın tahminleri (K5)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "MEMUR EMEKLİSİ",
+      "say": "Memur emeklisi için tahminler yüzde sekiz ile sekiz buçuk arasında.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "MEMUR EMEKLİSİ",
+          "*%8 – %8,5*"
+        ],
+        "boy": 110,
+        "not": "tahmin · kesin değil"
+      },
+      "kaynak": "AA Finans, FKB anketleri (K7)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "ÖRNEK HESAP",
+      "say": "Diyelim maaşın otuz bin lira. Yüzde on zamla otuz üç bin liraya çıkar.",
+      "p": {
+        "baslik": "Örnek hesap · oran temsili",
+        "ikon": "🧾",
+        "ogeler": [
+          "30.000 ₺",
+          "×",
+          "%10",
+          "=",
+          "33.000 ₺"
+        ]
+      },
+      "kaynak": "örnek hesap: 30.000 × 1,10"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "etiket": "BUGÜNKÜ TABAN",
+      "say": "En düşük emekli aylığı şu an yirmi üç bin beş yüz elli iki lira.",
+      "p": {
+        "ikon": "🏠",
+        "etiket": "En düşük emekli aylığı",
+        "baslangic": 20000,
+        "deger": 23552,
+        "sonek": " ₺",
+        "renk": "sari",
+        "not": "Temmuzda *20.000 ₺'den* kanunla yükseltildi"
+      },
+      "kaynak": "7590 sayılı Kanun, 31 Temmuz 2026 (K6)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "TABAN SENARYOSU",
+      "say": "Benzer bir oranla taban yaklaşık yirmi altı bin liraya çıkabilir. Ama bunun için kanun şart.",
+      "p": {
+        "baslik": "Taban aylık · senaryo",
+        "ogeler": [
+          "23.552 ₺",
+          "+ ~%10,5",
+          "≈ 26.000 ₺"
+        ],
+        "not": "Kanun çıkarsa · kesin değil"
+      },
+      "kaynak": "basın senaryosu %10,45 → ~26.013 ₺ (K5)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "etiket": "TAKVİM",
+      "say": "Takvim şöyle. Ekim verisi üç Kasım'da, kasım verisi aralık başında geliyor. Kesin oran ocak başında belli olacak.",
+      "p": {
+        "baslik": "Zam ne zaman kesinleşir?",
+        "satirlar": [
+          {
+            "ikon": "📊",
+            "metin": "Ekim enflasyonu",
+            "deger": "3 Kasım",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📊",
+            "metin": "Kasım enflasyonu",
+            "deger": "Aralık başı",
+            "renk": "sari"
+          },
+          {
+            "ikon": "✅",
+            "metin": "Kesin zam oranı",
+            "deger": "Ocak başı",
+            "renk": "yesil"
+          }
+        ]
+      },
+      "kaynak": "TÜİK takvimi, basın (K3, K5)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "ÖZET",
+      "say": "Kısacası: zammın yarısı birikti, kalan üç ay belirleyecek.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "YARISI *BİRİKTİ*",
+          "KALAN 3 AY",
+          "*BELİRLEYECEK*"
+        ],
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "NOT",
+      "say": "Rakamlar tahmin, kesin oran değişebilir. Bilgiler yirmi dokuz Ekim itibarıyla.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "RAKAMLAR",
+          "*TAHMİN*"
+        ],
+        "boy": 110,
+        "not": "29 Ekim 2026 itibarıyla"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "etiket": "YORUM",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "MERAK ETTİĞİN KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "SSK ve Bağ-Kur emeklisi ocak zammı Temmuz–Aralık TÜFE değişimi kadar (5510 sayılı Kanun) — https://www.milligazete.com.tr/emekliye-ocak-2027-zammi-nasil-hesaplanacak-alti-aylik-enflasyon-kac-olursa-maas-ne-kadar-artacak ; https://www.sabah.com.tr/yasam/emekli-zammi-ne-kadar-olacak-ne-zaman-belli-olacak-iste-2027-ocak-emekli-maas-zammi-hesaplama-7667711",
+    "K2": "Aylık TÜFE: temmuz %1,78, ağustos %1,84, eylül %1,84; üç aylık birikimli %5,57 — https://www.gazetevatan.com/galeri/eylul-2026-enflasyonu-belli-oldu-tuik-aylik-ve-yillik-enflasyon-oranini-acikladi-2414017 ; https://www.imzagazetesi.com/enflasyon-orani-emekli-zammi-kac-tl-3-aylik-enflasyon-farki-2026-ekim",
+    "K3": "Ekim enflasyonu 3 Kasım 2026 Salı 10.00'da; beklenti AA Finans %2,20, TCMB anketi %2,11 — https://www.cnnturk.com/ekonomi/ekim-2026-enflasyon-beklentisi-ekim-ayi-enflasyonu-ne-zaman-aciklanacak-3480526 ; https://istanbulticaretgazetesi.com/enflasyon-beklenti-anketi-sonuclandi-21-ekonomist-ile-yapildi-ekim-2026-enflasyon-beklentisi-ne-oldu",
+    "K4": "Memur emeklisi: 2027 ilk yarı toplu sözleşme %5 + Temmuz–Aralık enflasyonu %7'yi aşarsa fark — https://www.haberturk.com/bilgi/foto/memur-maasi-ne-kadar-olacak-ocak-2027-enflasyon-farki-ve-toplu-sozlesme-zammi-ile-memur-maasina-ne-kadar-zam-gelecek-3918561 ; https://www.memurlar.net/haber/1182217/memura-ek-zam-2027-yillik-programinda-yok.html",
+    "K5": "SSK/Bağ-Kur ocak zammı için basında 4 senaryo: %8,70–%10,67; %10,45 senaryosunda taban ~26.013 TL; kesin oran aralık enflasyonuyla ocak başında — https://www.cumhuriyet.com.tr/ekonomi/2027-ocak-emekli-zammi-icin-4-formul-masada-seyyanen-zam-ve-refah-payi-ayrintisi-2550955 ; https://www.memurlar.net/haber/1182379/emekli-zammi-2027-en-dusuk-aylik-ne-olacak-kim-ne-kadar-alacak.html",
+    "K6": "En düşük emekli aylığı 23.552 TL (7590 sayılı Kanun, Resmî Gazete 31 Temmuz 2026; 20.000 TL'den) — https://t24.com.tr/ekonomi/resmi-gazetede-yayimlandi-en-dusuk-emekli-ayligi-23-bin-552-liraya-yukseldi,1339353 ; https://www.sozcu.com.tr/en-dusuk-emekli-maasi-ne-kadar-oldu-2026-p341158",
+    "K7": "Memur emeklisi ocak tahmini: AA Finans anketiyle ~%8,05, FKB anketiyle ~%8,3, yüksek senaryo ~%8,6 — https://egitimsitesi.net/haber/milyonlarca-memur-ve-memur-emeklisini-ilgilendiriyor-2027de-ocak-ve-temmuz-ayi-zam-oranlari-ne-olacak-11799 ; https://www.milligazete.com.tr/memur-maasi-ocak-2027-hesaplamasi-nasil-yapilir-toplu-sozlesme-zammi-kac",
+    "K8": "Taban aylık, refah payı gibi otomatik zam dışı düzenlemeler kanun gerektiriyor; teklifin yıl sonuna kadar Meclis'ten geçirilmesi hedefleniyor — https://www.cumhuriyet.com.tr/ekonomi/2027-ocak-emekli-zammi-icin-4-formul-masada-seyyanen-zam-ve-refah-payi-ayrintisi-2550955"
+  }
+}
