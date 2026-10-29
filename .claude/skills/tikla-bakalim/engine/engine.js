@@ -207,7 +207,8 @@ SCENES.liste = (p, r) => {
     Object.assign(row.style, { display: "flex", alignItems: "center", width: "100%", padding: "30px 40px", margin: "14px 0", gap: "30px", textAlign: "left" });
     const ic = el("div", "emoji", s.ikon || "•", row); ic.style.fontSize = "96px";
     const tx = el("div", "h", md(s.metin), row); Object.assign(tx.style, { fontSize: "60px", flex: "1" });
-    if (s.deger != null) { const v = el("div", "h", md(s.deger), row); v.style.fontSize = "68px"; v.style.color = cvar(s.renk || "sari"); }
+    if (SCW > 1000) tx.style.whiteSpace = "nowrap";   // yatayda yer bol: "SSK / Bağ-Kur" tireden bölünmesin
+    if (s.deger != null) { const v = el("div", "h", md(s.deger), row); v.style.fontSize = "68px"; if (SCW > 1000) v.style.whiteSpace = "nowrap"; v.style.color = cvar(s.renk || "sari"); }
     return row;
   });
   const note = p.not ? el("div", "note", md(p.not), r) : null;
