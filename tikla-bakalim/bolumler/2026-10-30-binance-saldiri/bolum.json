@@ -1,0 +1,431 @@
+{
+  "baslik": "Binance'e rekor saldırı: ~6 milyar dolar nasıl çıktı? Üç soruda anlatıyoruz",
+  "tarih": "2026-10-30",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "saldırı",
+    "milyar",
+    "tahmini",
+    "dondurdu"
+  ],
+  "altyazi": {
+    "altı milyar": "6 milyar",
+    "Üç soruda": "3 soruda",
+    "şubat iki bin yirmi beşteki": "Şubat 2025'teki",
+    "dört katı": "4 katı",
+    "iki buçuk milyar": "2,5 milyar",
+    "bir milyar dolar": "1 milyar dolar",
+    "seksen bin": "80 bin",
+    "iki bin on dokuzda kırk milyon": "2019'da 40 milyon",
+    "bir hafta": "1 hafta",
+    "iki adımlı": "2 adımlı",
+    "üç şey": "3 şey",
+    "yirmi dakikada": "20 dakikada"
+  },
+  "kapak": {
+    "ikon": "🏦",
+    "ust": "BİNANCE'TEN",
+    "buyuk": "~6 MİLYAR $",
+    "alt": "NASIL ÇIKTI?"
+  },
+  "cta": [
+    {
+      "sahne": 10,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "etiket": "REKOR SALDIRI",
+      "say": "Dünyanın en büyük kripto borsasından yaklaşık altı milyar dolar çıkmış olabilir.",
+      "p": {
+        "ikon": "🏦",
+        "etiket": "Binance · tahmini kayıp",
+        "deger": 6.3,
+        "onek": "~",
+        "sonek": " milyar $",
+        "ondalik": 1,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Kaynaklara göre 5,7–6,36 milyar $"
+      },
+      "kaynak": "Axios, NBC, CNBC (K1)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "etiket": "3 SORU",
+      "say": "Peki ne oldu? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NE OLDU?\n*3 SORUDA*",
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "etiket": "ABONE OL",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEM",
+          "*SADE DİLLE*"
+        ],
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "etiket": "29 EKİM",
+      "say": "Perşembe günü Binance, para yatırma ve çekme işlemlerini durdurdu. Şirket buna güvenlik kontrolü diyor. Yani kullanıcılar paralarını çekemiyor.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "⚠️",
+            "metin": "Şüpheli *saldırı*"
+          },
+          {
+            "ikon": "⏸️",
+            "metin": "Yatırma ve çekme *durdu*"
+          },
+          {
+            "ikon": "🔍",
+            "metin": "Şirket: güvenlik *kontrolü*"
+          }
+        ]
+      },
+      "kaynak": "Binance açıklaması, CNBC, Fox Business (K1, K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "etiket": "REKOR",
+      "say": "Kayıp tahminleri altı milyar doların üzerinde. Bu doğruysa, şubat iki bin yirmi beşteki Bybit saldırısının yaklaşık dört katı.",
+      "p": {
+        "baslik": "Kripto saldırıları (milyar $)",
+        "sol": {
+          "etiket": "BYBİT\nŞubat 2025",
+          "deger": 1.5,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "BİNANCE\n(tahmini)",
+          "deger": 6.3,
+          "renk": "kirmizi"
+        },
+        "onek": "~",
+        "sonek": " mlr $",
+        "ondalik": 1,
+        "fark": "~4 KAT",
+        "not": "Binance rakamı ilk tahmin, değişebilir"
+      },
+      "kaynak": "TRM Labs, CNBC, NBC (K1, K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "etiket": "BİNANCE NEDİR?",
+      "say": "Binance, insanların kripto paralarını alıp sattığı ve sakladığı dev bir borsa.",
+      "p": {
+        "ikon": "🏦",
+        "satirlar": [
+          "BİNANCE",
+          "= *KRİPTO BORSASI*"
+        ],
+        "boy": 100,
+        "not": "Parayı alıp satmak ve saklamak için"
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "etiket": "NASIL OLDU?",
+      "say": "Peki bu nasıl oldu?",
+      "p": {
+        "ikon": "🕵️",
+        "metin": "NASIL\n*OLDU?*",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "GİRİŞ YOLU",
+      "say": "İlk incelemeye göre bir mühendisin bilgisayarı ele geçirildi. Saldırgan oradan sisteme girdi ve izinsiz çekim işlemleri gönderdi.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💻",
+            "metin": "Mühendisin bilgisayarı *ele geçti*"
+          },
+          {
+            "ikon": "🚪",
+            "metin": "Sisteme *giriş*"
+          },
+          {
+            "ikon": "📤",
+            "metin": "İzinsiz *çekim* talimatları"
+          }
+        ]
+      },
+      "kaynak": "Binance ilk incelemesi, CoinDesk (K2, K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "KASA MI?",
+      "say": "Binance, cüzdan anahtarlarının sızdığına dair kanıt bulmadığını söylüyor. Yani kasa kırılmadı; kasayı kullananın bilgisayarı ele geçirildi.",
+      "p": {
+        "ikon": "🔐",
+        "satirlar": [
+          "ANAHTAR SIZMADI",
+          "*BİLGİSAYAR* ELE GEÇTİ"
+        ],
+        "boy": 84,
+        "not": "Benzetme · ilk inceleme, kesin sonuç değil"
+      },
+      "kaynak": "Binance açıklaması (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "SICAK CÜZDAN",
+      "say": "Borsalar paranın bir kısmını internete bağlı cüzdanlarda tutar, çünkü çekimler hızlı olmalı. Buna sıcak cüzdan denir; cebindeki harçlık gibi düşün.",
+      "p": {
+        "baslik": "Borsanın iki cebi",
+        "satirlar": [
+          {
+            "ikon": "🔥",
+            "metin": "Sıcak cüzdan",
+            "deger": "hızlı · riskli",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🧊",
+            "metin": "Soğuk kasa",
+            "deger": "yavaş · güvenli",
+            "renk": "yesil"
+          }
+        ],
+        "not": "Sıcak: internete bağlı · Soğuk: internetten kopuk. Bir kaynağa göre para büyük ölçüde sıcak cüzdanlardan çıktı."
+      },
+      "kaynak": "Genel bilgi; olay için Crypto Economy (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEĞEN",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "ASIL İLGİNÇ",
+          "*KISIM GELİYOR*"
+        ],
+        "boy": 100
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "KİM YAPTI?",
+      "say": "TRM Labs adlı analiz şirketi, saldırının Kuzey Kore bağlantılı bir grubun işi olduğunu söylüyor. Binance bunu henüz doğrulamadı. Aynı şirkete göre paranın çoğu yaklaşık yirmi dakikada çıktı.",
+      "p": {
+        "ikon": "🕵️",
+        "satirlar": [
+          "ANALİZ ŞİRKETİ:",
+          "*KUZEY KORE BAĞLANTILI*"
+        ],
+        "boy": 84,
+        "not": "Binance doğrulamadı · resmi sonuç değil · çıkış ~20 dk (TRM)"
+      },
+      "kaynak": "TRM Labs, Chainalysis, akt. basın (K3)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "DONDURMA",
+      "say": "Dolara bağlı dijital paralar çıkaran Tether ve Circle, çalınan paranın bir kısmını dondurdu. Dondurulan tutar iki buçuk milyar dolar civarında, ama rakam değişiyor.",
+      "p": {
+        "baslik": "Dondurulan para (tahmini)",
+        "satirlar": [
+          {
+            "ikon": "🧊",
+            "metin": "Tether (USDT)",
+            "deger": "~1,57 mlr $",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🧊",
+            "metin": "Circle (USDC)",
+            "deger": "tutar belirsiz",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "📊",
+            "metin": "Toplam bildirilen",
+            "deger": "~2,4–3 mlr $",
+            "renk": "sari"
+          }
+        ],
+        "not": "Kaynaklar arasında 2,38–3 milyar $ farkı var"
+      },
+      "kaynak": "Fox Business, IBTimes, CNBC (K2)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "etiket": "SANA ETKİSİ",
+      "say": "Peki bu senin cebine dokunur mu?",
+      "p": {
+        "ikon": "👛",
+        "metin": "CEBİME\n*DOKUNUR MU?*",
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "akis",
+      "etiket": "KİM ÖDER?",
+      "say": "Binance, kullanıcı paralarının güvende olduğunu ve kaybı kendisinin karşılayacağını söylüyor. Bunun için bir koruma fonu var; büyüklüğü yaklaşık bir milyar dolar. Kayıp bundan büyük, bu yüzden şirket kendi kaynaklarını da kullanacak.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "🛡️",
+            "metin": "Binance: kullanıcı fonu *güvende*"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "Koruma fonu ~*1 milyar $*"
+          },
+          {
+            "ikon": "➕",
+            "metin": "Fark: şirket *kaynakları*"
+          }
+        ]
+      },
+      "kaynak": "Binance (X), Richard Teng, Fox Business (K2, K5)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "sayi",
+      "etiket": "BİTCOİN",
+      "say": "Bitcoin ise seksen bin dolar çevresine indi. Teknoloji hisselerindeki düşüş de bunda etkili.",
+      "p": {
+        "ikon": "₿",
+        "etiket": "Bitcoin · 29–30 Ekim civarı",
+        "deger": 80,
+        "onek": "~",
+        "sonek": " bin $",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Saldırı + teknoloji hisselerinde satış"
+      },
+      "kaynak": "Bloomberg, Nexo, CoinDesk (K6)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "GEÇMİŞ",
+      "say": "Binance, iki bin on dokuzda kırk milyon dolarlık bir saldırı yaşadığında çekimleri yaklaşık bir hafta durdurmuştu. Bu kez ne zaman açılacağı belli değil.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "2019: ~40 MİLYON $",
+          "ÇEKİM *~1 HAFTA DURDU*"
+        ],
+        "boy": 80,
+        "not": "Şimdi: açılış tarihi açıklanmadı"
+      },
+      "kaynak": "TechCrunch (2019), CoinDesk (K7)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "etiket": "NE YAPMALI?",
+      "say": "Hangi borsada olursan ol üç şey işe yarar. İki adımlı doğrulamayı aç. Paranın hepsini tek yerde tutma. Şirketin resmi duyurularını takip et.",
+      "p": {
+        "baslik": "Genel güvenlik · yatırım tavsiyesi değil",
+        "satirlar": [
+          {
+            "ikon": "🔑",
+            "metin": "İki adımlı doğrulama",
+            "deger": "AÇ",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🧺",
+            "metin": "Hepsi tek yerde olmasın",
+            "deger": "DAĞIT",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "📢",
+            "metin": "Resmi duyurular",
+            "deger": "TAKİP ET",
+            "renk": "yesil"
+          }
+        ]
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "DİKKAT",
+      "say": "Rakamlar ilk haberlere dayanıyor ve değişebilir. Kesin tutarı şirketin raporu gösterecek.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "RAKAMLAR",
+          "*İLK TAHMİN*"
+        ],
+        "boy": 110,
+        "not": "Şirketin raporu bekleniyor"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "etiket": "YORUM YAZ",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konu varsa yorumlara yaz; bir sonraki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONU",
+          "*SENDEN GELSİN*"
+        ],
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Kayıp ~5,7–6,36 milyar $, rekor; Bybit Şubat 2025 ~1,5 milyar $ — https://www.axios.com/2026/10/29/binance-cyberattack-crypto-heist ; https://www.nbcnews.com/business/markets/binance-hack-tether-circle-stablecoins-rcna606445 ; https://www.cnbc.com/2026/10/29/circle-tether-freeze-funds-impacted-by-potential-binance-security-issue.html",
+    "K2": "Yatırma/çekme durduruldu, Binance kaybı karşılayacak; Tether ~1,57 mlr $, toplam dondurulan ~2,4–3 mlr $ — https://www.foxbusiness.com/technology/binance-says-security-incident-had-estimated-6-3b-impact-3b-assets-frozen ; https://www.ibtimes.co.uk/binance-suspends-withdrawals-after-security-incident-1828947 ; https://investinglive.com/cryptocurrency/binance-halts-deposits-and-withdrawals-pledges-to-cover-all-losses-from-suspected-hack/",
+    "K3": "TRM Labs: Kuzey Kore bağlantılı TraderTraitor (Binance doğrulamadı) — https://www.newsbytesapp.com/news/science/north-korea-behind-binance-s-6b-hack-report/story ; https://cryptonewsbytes.com/binance-hack-6-billion-north-korea-lazarus-eip7702-october-2026/",
+    "K4": "İlk inceleme: ele geçirilen mühendis bilgisayarı, özel anahtar sızıntısı kanıtı yok — https://coindesk.com/business/2026/10/29/potential-multi-billion-binance-hack-hitting-crypto-markets ; https://crypto-economy.com/binance-halts-withdrawals-after-what-could-be-the-largest-hack-in-crypto-history/ ; https://www.financemagnates.com/cryptocurrency/binance-hacked-estimated-63-billion-in-crypto-drained/",
+    "K5": "Koruma fonu (SAFU) ~1–1,16 milyar $ — https://www.chaincatcher.com/en/article/2300297 ; https://meyka.com/blog/binance-hack-6-3-billion-crypto-heist-north-korea-3010/",
+    "K6": "Bitcoin ~80 bin $, teknoloji satışı + Binance — https://www.bloomberg.com/news/articles/2026-10-29/us-stock-futures-fall-as-alphabet-sales-miss-revives-ai-fears ; https://nexo.com/blog/markets-today-october-29",
+    "K7": "2019: ~40 milyon $ saldırı, çekimler ~1 hafta durdu; şimdi tarih yok — https://techcrunch.com/2019/05/15/binance-resumes-trading-following-40m-bitcoin-hack ; https://coindesk.com/business/2026/10/29/potential-multi-billion-binance-hack-hitting-crypto-markets"
+  }
+}
