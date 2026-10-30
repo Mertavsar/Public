@@ -140,3 +140,9 @@ html.dikey .ctahint { left: 0; right: 0; text-align: center; top: 1740px; }
 
 /* Kapak kipi */
 #stage.cover #cta, #stage.cover #top, #stage.cover #cap, #stage.cover #capline, #stage.cover #src, #stage.cover #tag, #stage.cover #bar { display: none; }
+
+/* Arayüz katmanları her zaman sahnenin üstünde — tam ekran foto sahnesi (z-index 2) onları örtmesin */
+#top, #cap, #capline, #tag, #src, #bar { z-index: 30; }
+/* açık renkli fotoğrafta da okunsun */
+html.yatay #tag { background: rgba(5, 10, 20, .72); }
+html.yatay #src { text-shadow: 0 1px 4px #000; }

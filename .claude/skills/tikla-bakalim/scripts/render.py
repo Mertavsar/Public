@@ -216,6 +216,22 @@ def timeline(b, fmt, vo=None, work=None):
         else:
             t0, t1 = end, end + float(s["sure"])
             end = t1
+        p = dict(s.get("p", {}))
+        if p.get("src") and not p["src"].startswith("file://"):
+            # foto sahnesi: yol bölüm klasörüne göre; lisans .json yan dosyasından kredi satırı
+            path = os.path.join(b["_dir"], p["src"])
+            if not os.path.exists(path):
+                sys.exit(f"HATA: foto yok: {path}")
+            meta = path + ".json"
+            if os.path.exists(meta) and "kredi" not in p:
+                m = json.load(open(meta, encoding="utf-8"))
+                lic = (m.get("lisans") or [""])[0].upper().replace("CC-", "CC ").replace("-", " ")
+                if lic.startswith("PD"):
+                    lic = "Kamu malı"
+                yaz = re.sub(r"https?://\S+", "", m.get("yazar", "")).strip()
+                p["kredi"] = "Foto: " + (f"{yaz} · " if yaz else "") + f"{lic} · Wikimedia Commons"
+            p["src"] = "file://" + os.path.abspath(path)
+        s = dict(s, p=p)
         scenes.append({"t0": t0, "t1": t1, "tip": s["tip"], "bolum": s["bolum"],
                        "p": s.get("p", {}), "kaynak": s.get("kaynak"), "etiket": s.get("etiket")})
     # Abone ol / beğen çağrısı: {"sahne": N (1'den), "gecikme": sn, "sure": sn}
@@ -225,7 +241,7 @@ def timeline(b, fmt, vo=None, work=None):
         d = float(c.get("sure", 5.0))
         cta.append({"t0": round(s0, 3), "t1": round(min(s0 + d, end), 3),
                     "abone": round(s0 + 1.3, 3), "begen": round(s0 + 2.4, 3)})
-    return {"format": fmt, "gecis": b.get("gecis", True), "dur": round(end, 3), "scenes": scenes,
+    return {"format": fmt, "gecis": b.get("gecis", True), "bolum_adlari": b.get("bolum_adlari"), "dur": round(end, 3), "scenes": scenes,
             "cta": cta, "words": display_words(tl_words, b.get("altyazi"))}, text
 
 
@@ -466,6 +482,7 @@ def main():
     a = ap.parse_args()
 
     b = json.load(open(a.bolum, encoding="utf-8"))
+    b["_dir"] = os.path.dirname(os.path.abspath(a.bolum))
     fmt = a.format or b.get("format", "yatay")
     base = os.path.dirname(os.path.abspath(a.bolum))
     out = a.out or os.path.join(base, "cikti", "video.mp4" if a.vo else "taslak.mp4")

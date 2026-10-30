@@ -452,6 +452,81 @@ SCENES.kapanis = (p, r) => {
   };
 };
 
+// Gerçek fotoğraf. İki kip:
+//  tam   — fotoğraf tüm ekranı kaplar, yavaş yaklaşma + kayma (Ken Burns), eski
+//          fotoğrafa hafif nostalji tonu, solda yıl etiketi + başlık, köşede kredi.
+//  nesne — fotoğraf (banknot, ürün) zeminin üstünde süzülür: gölge, hafif dönme, parlama.
+// p.src mutlak file:// yolu (render.py çevirir), p.kredi lisans satırı (render.py ekler).
+SCENES.foto = (p, r) => {
+  const tam = (p.kip || "tam") === "tam";
+  if (tam) Object.assign(r.style, { left: "0", right: "auto", top: "0", width: W + "px", height: H + "px", transformOrigin: "50% 50%",
+    justifyContent: "flex-end", alignItems: "flex-start", textAlign: "left" });
+  const wrap = el("div", null, null, r);
+  Object.assign(wrap.style, tam ? { position: "absolute", inset: "0", overflow: "hidden", background: "#000" }
+                                : { position: "relative", display: "flex", alignItems: "center", justifyContent: "center" });
+  const img = el("img", null, null, wrap);
+  img.src = p.src;
+  if (tam) Object.assign(img.style, { position: "absolute", inset: "0", width: "100%", height: "100%", objectFit: "cover",
+    objectPosition: p.odak || "50% 50%", transformOrigin: p.odak || "50% 50%" });
+  else Object.assign(img.style, { maxWidth: (p.genislik || (FORMAT === "yatay" ? 1100 : 860)) + "px", maxHeight: "560px",
+    borderRadius: "10px", boxShadow: "0 40px 90px rgba(0,0,0,.65), 0 0 0 2px rgba(255,255,255,.15)" });
+  if (p.ton === "eski") img.style.filter = "sepia(.32) saturate(.85) contrast(1.06) brightness(.96)";
+  let shine = null;
+  if (!tam) {
+    shine = el("div", null, null, wrap);
+    Object.assign(shine.style, { position: "absolute", inset: "0", pointerEvents: "none", borderRadius: "10px",
+      background: "linear-gradient(105deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%)", backgroundSize: "300% 100%" });
+  }
+  let shade = null, box = null, yil = null, lines = [], note = null;
+  if (tam) {
+    shade = el("div", null, null, wrap);
+    Object.assign(shade.style, { position: "absolute", inset: "0",
+      background: FORMAT === "yatay"
+        ? "linear-gradient(90deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.55) 38%, rgba(5,10,20,0) 65%), linear-gradient(0deg, rgba(5,10,20,.7) 0%, rgba(5,10,20,0) 30%)"
+        : "linear-gradient(0deg, rgba(5,10,20,.92) 0%, rgba(5,10,20,.5) 40%, rgba(5,10,20,0) 65%)" });
+    box = el("div", null, null, r);
+    Object.assign(box.style, FORMAT === "yatay"
+      ? { position: "absolute", left: "90px", top: "0", bottom: "130px", width: "900px", display: "flex", flexDirection: "column", justifyContent: "center" }
+      : { position: "absolute", left: "70px", right: "70px", bottom: "520px", display: "flex", flexDirection: "column" });
+  } else box = r;
+  if (p.yil) {
+    yil = el("div", "h", p.yil, box);
+    Object.assign(yil.style, { alignSelf: tam ? "flex-start" : "center", fontSize: tam ? "64px" : "54px", padding: "6px 26px", borderRadius: "14px",
+      background: "var(--sari)", color: "#111", marginBottom: "22px", marginTop: tam ? "0" : "56px" });
+  }
+  (p.satirlar || []).forEach(t => {
+    const e = el("div", "h", md(t), box);
+    Object.assign(e.style, { fontSize: (p.boy || (tam ? 96 : 80)) + "px", textShadow: "0 6px 24px rgba(0,0,0,.6)", margin: "4px 0" });
+    lines.push(e);
+  });
+  if (p.not) { note = el("div", "note", md(p.not), box); note.style.marginTop = "18px"; note.style.color = "rgba(255,255,255,.85)"; }
+  if (p.kredi) {
+    const k = el("div", null, p.kredi, tam ? r : wrap);
+    Object.assign(k.style, { position: "absolute", right: tam ? "40px" : "0", bottom: tam ? (FORMAT === "yatay" ? "150px" : "500px") : "-44px",
+      fontWeight: "600", fontSize: "20px", color: "rgba(255,255,255,.6)", textShadow: "0 1px 3px #000", whiteSpace: "nowrap" });
+  }
+  const dir = p.kayma || "sol";      // sol | sag | yukari | asagi
+  return (lt, d) => {
+    const u = clamp(lt / Math.max(1, d));
+    if (tam) {
+      const s = 1.06 + .12 * u, m = 40 * (u - .5);
+      const dx = dir === "sol" ? -m : dir === "sag" ? m : 0, dy = dir === "yukari" ? -m : dir === "asagi" ? m : 0;
+      img.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
+      img.style.opacity = clamp(prog(lt, 0, .5));
+      if (yil) slide(yil, lt, .25, -60, 0, .4);
+      lines.forEach((e, i) => slide(e, lt, .4 + i * .14, -80, 0, .45));
+      if (note) slide(note, lt, .5 + lines.length * .14 + .1, 0, 30, .4);
+    } else {
+      const x = pop(wrap, lt, 0, .55, .6);
+      wrap.style.transform += ` rotate(${-4 + 3 * Math.sin(lt * .9)}deg) translateY(${bob(lt, 10, 3)}px)`;
+      if (shine) shine.style.backgroundPosition = `${100 - ((lt * 35) % 300)}% 0`;
+      if (yil) pop(yil, lt, .2);
+      lines.forEach((e, i) => slide(e, lt, .35 + i * .12, 0, 40, .4));
+      if (note) slide(note, lt, .6 + lines.length * .12, 0, 30, .4);
+    }
+  };
+};
+
 // Kapak — sadece kapak.png için. Büyük, tek fikir.
 // Dikey: tek sütun. Yatay (YouTube küçük resmi): solda yazı, sağda dev ikon.
 SCENES.kapak = (p, r) => {
@@ -683,6 +758,8 @@ window.load = async function (tl, opts = {}) {
   // Fontlar yüklenmeden ölçüm yapılırsa sığdırma yedek fonta göre hesaplanır
   await Promise.all([600, 800, 900].map(w => document.fonts.load(`${w} 60px M`, "AaŞşĞğİıÇçÖöÜü₺0123")));
   TL = tl;
+  // bölüm şeridi yazıları bölüme özel olabilir ("1 · NE ALINIRDI?")
+  if (tl.bolum_adlari) for (const k in tl.bolum_adlari) if (SECTIONS[k]) SECTIONS[k].t = tl.bolum_adlari[k];
   FORMAT = tl.format === "yatay" ? "yatay" : "dikey";
   [W, H] = FORMAT === "yatay" ? [1920, 1080] : [1080, 1920];
   SCW = FORMAT === "yatay" ? 1300 : 940;
@@ -735,7 +812,9 @@ window.seek = function (t) {
     b.r.style.zIndex = fo > 0 ? 1 : 2;
     b.r.style.opacity = fin * (1 - fo);
     b.r.style.filter = fo > 0 ? `blur(${fo * 10}px)` : fin < 1 ? `blur(${(1 - fin) * 6}px)` : "none";
-    b.r.style.transform = `translateY(${(1 - fin) * 26 - fo * 30}px) scale(${SCALE * z * (1 - .03 * fo)})`;
+    // tam ekran fotoğraf sahne kutusunun ölçeğini almaz; kendi Ken Burns hareketi var
+    const sc = b.s.tip === "foto" && (b.s.p.kip || "tam") === "tam" ? (1 - .03 * fo) : SCALE * z * (1 - .03 * fo);
+    b.r.style.transform = `translateY(${(1 - fin) * 26 - fo * 30}px) scale(${sc})`;
   });
   // Bölüm şeridi
   const sec = cur && SECTIONS[cur.s.bolum];
