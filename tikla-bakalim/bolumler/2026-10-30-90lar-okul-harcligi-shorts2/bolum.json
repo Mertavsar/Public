@@ -1,0 +1,180 @@
+{
+  "baslik": "Nostalji: her şey ucuz muydu? (Shorts 2)",
+  "tarih": "2026-10-31",
+  "durum": "yayına hazır",
+  "format": "dikey",
+  "gecis": false,
+  "vurgu": [
+    "ucuz",
+    "karışık",
+    "zengin"
+  ],
+  "altyazi": {
+    "bir milyon liralık": "1 milyon liralık",
+    "bir milyon lira": "1 milyon lira",
+    "bir milyon liranın": "1 milyon liranın",
+    "Bir milyonla": "1 milyonla",
+    "bir milyonla": "1 milyonla",
+    "Üç soruda": "3 soruda",
+    "Doksan dokuzda": "1999'da",
+    "iki yüz gramlık": "200 gramlık",
+    "yetmiş beş bin liraydı": "75.000 liraydı",
+    "on üç ekmek": "13 ekmek",
+    "İki binde": "2000'de",
+    "iki binde": "2000'de",
+    "beş yüz doksan bin liraydı": "590.000 liraydı",
+    "iki litre": "2 litre",
+    "on milyon liralık": "10 milyon liralık",
+    "İki bin beşte": "2005'te",
+    "altı sıfır": "6 sıfır",
+    "bir yeni Türk lirası": "1 Yeni Türk Lirası",
+    "otuz lira": "30 lira",
+    "otuz milyon lira": "30 milyon lira",
+    "seksen milyon lira": "80 milyon lira",
+    "bin ekmek": "1.000 ekmek",
+    "bin altı yüz ekmek": "1.600 ekmek",
+    "yüz otuz litre": "130 litre",
+    "üç yüz elli litre": "350 litre"
+  },
+  "kapak": {
+    "ikon": "🤔",
+    "ust": "ESKİDEN",
+    "buyuk": "UCUZ MUYDU?",
+    "alt": "RAKAMLAR BAŞKA"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Nostalji her şeyin ucuz olduğunu söyler.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/anadolu1990_sokak.jpg",
+        "ton": "eski",
+        "yil": "1990'LAR",
+        "satirlar": [
+          "Eskiden her şey",
+          "*UCUZ MUYDU?*"
+        ],
+        "boy": 110,
+        "kayma": "sag",
+        "odak": "62% 40%"
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Rakamlar ise hikâyenin daha karışık olduğunu gösteriyor.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "RAKAMLAR",
+          "*BAŞKA*",
+          "*SÖYLÜYOR*"
+        ],
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Doksanlarda cebinde bir milyon lira varsa, kendini zengin hissederdin.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/banknot_1milyon_1995.jpg",
+        "kip": "nesne",
+        "yil": "1995",
+        "satirlar": [
+          "1 milyon lira",
+          "*= zengin?*"
+        ],
+        "boy": 90
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "karsilastir",
+      "say": "İki binde net asgari ücret yaklaşık seksen milyon liraydı, bin ekmek ediyordu. Bugün asgari ücretle bin altı yüz ekmek alınıyor.",
+      "p": {
+        "baslik": "Asgari ücretle kaç ekmek?",
+        "sol": {
+          "etiket": "2000",
+          "deger": 1074,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2026",
+          "deger": 1604,
+          "renk": "yesil"
+        },
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "+%49 🍞",
+        "not": "200 g ekmek · net asgari ücret"
+      },
+      "kaynak": "K1, K3, K6, K7"
+    },
+    {
+      "bolum": "hook",
+      "tip": "karsilastir",
+      "say": "Benzinde de benzer. O zaman asgari ücret yüz otuz litre ediyordu, bugün üç yüz elli litre civarında.",
+      "p": {
+        "baslik": "Asgari ücretle kaç litre benzin?",
+        "sol": {
+          "etiket": "2000",
+          "deger": 136,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2026",
+          "deger": 351,
+          "renk": "yesil"
+        },
+        "sonek": " L",
+        "ondalik": 0,
+        "not": "2026: litre ~80 TL ile"
+      },
+      "kaynak": "K2, K3, K7, K8"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "foto",
+      "say": "Sen okula kaç lirayla giderdin, harçlığınla ne alırdın? Yorumlara yaz.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/koy_ilkokulu.jpg",
+        "satirlar": [
+          "Sen okula",
+          "*kaç lirayla*",
+          "giderdin?"
+        ],
+        "boy": 110,
+        "kayma": "yukari",
+        "odak": "50% 40%",
+        "not": "💬 Yorumlara yaz"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "sure": 1.6,
+      "p": {
+        "ikon": "👆",
+        "satirlar": [
+          "TAMAMI",
+          "*KANALDA*"
+        ],
+        "boy": 130,
+        "not": "Tıkla Bakalım"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Yıllara göre ekmek fiyatları: 1999–2000 döneminde 200 g ekmek 75.000 TL — https://www.akademikpersonel.org/yillara-gore-ekmek-fiyatlari/ ; https://www.blogarti.com/yillara-gore-ekmek-fiyatlari.html",
+    "K2": "2000 yılı benzin litre fiyatı ~0,59 TL (590.000 eski TL) — https://www.muhasebedersleri.com/blog/2000-2016-yili-asgari-ucretleri-ve-benzin-fiyatlari/ ; https://www.blogarti.com/yillara-gore-benzin-fiyatlari.html",
+    "K3": "2000 net asgari ücret ~80,5 milyon TL (kaynaklar 80,5–86,9 milyon arası veriyor) ve asgari ücretle ~136–146 L benzin — https://www.muhasebedersleri.com/blog/2000-2016-yili-asgari-ucretleri-ve-benzin-fiyatlari/ ; https://teknoseyir.com/blog/yillara-gore-asgari-ucretle-alinabilen-benzin-miktari",
+    "K4": "2005'te Yeni Türk Lirası: 1.000.000 TL = 1 YTL; yüksek enflasyon dönemi — https://en.wikipedia.org/wiki/Turkish_lira",
+    "K5": "İstanbul'da simit 26 Eylül 2026'dan itibaren 30 TL — https://boldmedya.com/2026/09/26/istanbulda-simit-de-zamlandi-fiyati-30-liraya-cikti/ ; https://www.nefes.com.tr/istanbulda-simite-zam-153844",
+    "K6": "200 g ekmek 1 Nisan 2026'dan itibaren 17,50 TL — https://medyascope.tv/2026/04/01/ekmege-zam-geldi/",
+    "K7": "2026 net asgari ücret 28.075,50 TL — https://www.csgb.gov.tr/haberler/2026-yilinda-gecerli-olacak-yeni-asgari-ucret-28-bin-75-lira-olarak-belirlendi/",
+    "K8": "İstanbul benzin litre fiyatı Ekim sonu 2026 ~76 TL, 1 Kasım'da ~4 TL zam bekleniyor (bkz. 2026-10-28 akaryakıt bölümü kaynakları)",
+    "K9": "Fotoğraflar: Wikimedia Commons, her birinin lisansı foto/*.json dosyalarında; banknotlar PD-TR-currency"
+  }
+}
