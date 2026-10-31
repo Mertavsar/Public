@@ -483,11 +483,12 @@ SCENES.foto = (p, r) => {
     Object.assign(shade.style, { position: "absolute", inset: "0",
       background: FORMAT === "yatay"
         ? "linear-gradient(90deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.55) 38%, rgba(5,10,20,0) 65%), linear-gradient(0deg, rgba(5,10,20,.7) 0%, rgba(5,10,20,0) 30%)"
+        : p.ust ? "linear-gradient(180deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.45) 24%, rgba(5,10,20,0) 38%), linear-gradient(0deg, rgba(5,10,20,.85) 0%, rgba(5,10,20,0) 30%)"
         : "linear-gradient(0deg, rgba(5,10,20,.92) 0%, rgba(5,10,20,.5) 40%, rgba(5,10,20,0) 65%)" });
     box = el("div", null, null, r);
     Object.assign(box.style, FORMAT === "yatay"
       ? { position: "absolute", left: "90px", top: "0", bottom: "130px", width: "900px", display: "flex", flexDirection: "column", justifyContent: "center" }
-      : { position: "absolute", left: "70px", right: "70px", bottom: "720px", display: "flex", flexDirection: "column" });   // dikey: altyazı 1270–1430
+      : { position: "absolute", left: "70px", right: "70px", display: "flex", flexDirection: "column", ...(p.ust ? { top: "170px" } : { bottom: "720px" }) });   // dikey: altyazı 1270–1430
   } else box = r;
   if (p.yil) {
     yil = el("div", "h", p.yil, box);
@@ -502,7 +503,7 @@ SCENES.foto = (p, r) => {
   if (p.not) { note = el("div", "note", md(p.not), box); note.style.marginTop = "18px"; note.style.color = "rgba(255,255,255,.85)"; }
   if (p.kredi) {
     const k = el("div", null, p.kredi, tam ? r : wrap);
-    Object.assign(k.style, { position: "absolute", right: tam ? "40px" : "0", bottom: tam ? (FORMAT === "yatay" ? "150px" : "690px") : "-44px",
+    Object.assign(k.style, { position: "absolute", right: tam ? "40px" : "0", bottom: tam ? (FORMAT === "yatay" ? "150px" : p.ust ? "455px" : "690px") : "-44px",
       fontWeight: "600", fontSize: "20px", color: "rgba(255,255,255,.6)", textShadow: "0 1px 3px #000", whiteSpace: "nowrap" });
   }
   const dir = p.kayma || "sol";      // sol | sag | yukari | asagi
@@ -524,6 +525,152 @@ SCENES.foto = (p, r) => {
       lines.forEach((e, i) => slide(e, lt, .35 + i * .12, 0, 40, .4));
       if (note) slide(note, lt, .6 + lines.length * .12, 0, 30, .4);
     }
+  };
+};
+
+// Sokak: 90'lar mahallesinde top oynayan çocuklar — tamamen çizim (temsili).
+// Gerçek foto bulunamayan nostalji açılışları için. Yazı kutusu/yıl çipi foto ile aynı.
+SCENES.sokak = (p, r) => {
+  const upd = SCENES.foto({ ust: true, ...p, src: "data:image/gif;base64,R0lGODlhAQABAAAAACw=", ton: null,
+    kredi: p.kredi === undefined ? "Temsili çizim" : p.kredi }, r);
+  const wrap = r.firstChild;
+  wrap.firstChild.style.display = "none";
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 1080 1920");
+  svg.setAttribute("preserveAspectRatio", "xMidYMin slice");
+  Object.assign(svg.style, { position: "absolute", inset: "0", width: "100%", height: "100%", transformOrigin: "50% 45%" });
+  wrap.insertBefore(svg, wrap.children[1]);
+  let PAR = svg;
+  const S = (tag, a, par = PAR) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); par.appendChild(e); return e; };
+  // rastgele ama deterministik
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const defs = S("defs", {});
+  defs.innerHTML = `
+    <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4f7a"/><stop offset=".45" stop-color="#e08a5a"/><stop offset=".75" stop-color="#f6c27a"/></linearGradient>
+    <linearGradient id="as" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d625a"/><stop offset="1" stop-color="#2a2522"/></linearGradient>
+    <radialGradient id="gun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3c4"/><stop offset=".35" stop-color="#ffd27a" stop-opacity=".9"/><stop offset="1" stop-color="#ffb060" stop-opacity="0"/></radialGradient>
+    <radialGradient id="vin" cx=".5" cy=".4" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+    <filter id="gr"><feTurbulence id="grt" type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="1"/><feColorMatrix type="saturate" values="0"/></filter>`;
+  const bg = S("g", { transform: "translate(0 280)" }); PAR = bg;
+  S("rect", { x: 0, y: -400, width: 1080, height: 1220, fill: "url(#sk)" });
+  const sun = S("circle", { cx: 560, cy: 560, r: 260, fill: "url(#gun)" });
+  // arka sıra binalar (puslu)
+  const bina = (x, y, w, h, renk, pus) => {
+    const g = S("g", {});
+    S("rect", { x, y, width: w, height: h, fill: renk }, g);
+    S("rect", { x: x - 6, y: y - 10, width: w + 12, height: 14, fill: pus ? "#9b7f78" : "#7a6158" }, g);   // çatı saçağı
+    const kat = Math.floor((h - 40) / 78), col = Math.max(2, Math.floor(w / 70));
+    for (let k = 0; k < kat; k++) {
+      const yy = y + 30 + k * 78;
+      for (let c = 0; c < col; c++) {
+        const xx = x + 18 + c * ((w - 36) / col);
+        const lit = rnd() < .28;
+        S("rect", { x: xx, y: yy, width: (w - 36) / col - 18, height: 44, rx: 2, fill: lit ? "#ffd98a" : (pus ? "#8e7a80" : "#4a3f44"), opacity: lit ? .95 : 1 }, g);
+      }
+      if (!pus && k % 1 === 0) {   // balkon korkuluğu
+        S("rect", { x: x + 10, y: yy + 46, width: w - 20, height: 6, fill: "#5a4a44" }, g);
+        for (let q = x + 14; q < x + w - 14; q += 16) S("rect", { x: q, y: yy + 30, width: 3, height: 18, fill: "#5a4a44", opacity: .8 }, g);
+      }
+    }
+    if (!pus) {   // çanak anten
+      S("ellipse", { cx: x + w - 40, cy: y - 26, rx: 20, ry: 13, fill: "#d8d2c8", transform: `rotate(-25 ${x + w - 40} ${y - 26})` }, g);
+      S("rect", { x: x + w - 42, y: y - 24, width: 4, height: 16, fill: "#9a948a" }, g);
+    }
+    return g;
+  };
+  bina(-20, 300, 260, 480, "#b79a92", true); bina(420, 250, 300, 530, "#c2a49a", true); bina(860, 330, 260, 450, "#b39690", true);
+  bina(-40, 380, 330, 420, "#d7b48e"); bina(700, 360, 400, 440, "#c99a7c");
+  // çamaşır ipi + sallanan çamaşırlar
+  S("path", { d: "M290 470 Q495 520 700 480", stroke: "#3a302c", "stroke-width": 3, fill: "none" });
+  const camas = [["#e74c3c", 330], ["#f1f1f1", 380], ["#3498db", 440], ["#f4d03f", 520], ["#ecf0f1", 590], ["#8e44ad", 640]].map(([c, x]) => {
+    const y = 470 + (x - 290) * (480 - 470) / 410 + 50 * Math.sin(Math.PI * (x - 290) / 410) - 4;
+    return { e: S("rect", { x: -18, y: 0, width: 36, height: 48, rx: 4, fill: c }), x, y };
+  });
+  // kaldırım + asfalt
+  S("rect", { x: 0, y: 780, width: 1080, height: 40, fill: "#a29486" });
+  S("rect", { x: 0, y: 812, width: 1080, height: 8, fill: "#7d7064" });
+  S("rect", { x: 0, y: 820, width: 1080, height: 900, fill: "url(#as)" });
+  S("path", { d: "M0 1180 H1080", stroke: "#e8e0c8", "stroke-width": 8, "stroke-dasharray": "70 60", opacity: .35 });
+  for (let i = 0; i < 14; i++) S("ellipse", { cx: rnd() * 1080, cy: 860 + rnd() * 700, rx: 20 + rnd() * 50, ry: 4 + rnd() * 8, fill: "#000", opacity: .12 });
+  // park etmiş eski sedan
+  const car = S("g", { transform: "translate(780 742)" });
+  S("rect", { x: 0, y: 30, width: 280, height: 56, rx: 10, fill: "#c0a060" }, car);
+  S("path", { d: "M50 32 L80 0 H200 L232 32 Z", fill: "#b09050" }, car);
+  S("path", { d: "M62 30 L86 6 H136 V30 Z M144 30 V6 H196 L220 30 Z", fill: "#7fa3b8" }, car);
+  S("rect", { x: 0, y: 58, width: 280, height: 6, fill: "#e8e2d4" }, car);
+  [60, 220].forEach(cx => { S("circle", { cx, cy: 88, r: 22, fill: "#1d1a18" }, car); S("circle", { cx, cy: 88, r: 9, fill: "#9a948a" }, car); });
+  // okul çantası kaleler
+  const canta = (x, c) => { S("rect", { x, y: 868, width: 54, height: 46, rx: 9, fill: c }); S("rect", { x: x + 8, y: 880, width: 38, height: 16, rx: 4, fill: "#000", opacity: .18 }); S("path", { d: `M${x + 14} 868 q13 -18 26 0`, stroke: c, "stroke-width": 6, fill: "none" }); };
+  canta(345, "#2e6fb5"); canta(578, "#c0392b");
+  PAR = svg;
+  // çocuklar
+  const KIDS = [
+    { x: 470, y: 1150, s: 1.3, shirt: "#ecf0f1", sort: "#16a085", hair: "#3a2416", skin: "#dba67c", ph: 4.4 },
+    { x: 700, y: 1170, s: 1.38, shirt: "#f4d03f", sort: "#2c3e50", hair: "#4a2e1c", skin: "#d39c72", ph: 1.7 },
+    { x: 250, y: 1235, s: 1.65, shirt: "#e74c3c", sort: "#1f3a5f", hair: "#2b1d14", skin: "#e2ae84", ph: 0 },
+    { x: 880, y: 1250, s: 1.7, shirt: "#27ae60", sort: "#34495e", hair: "#1b1410", skin: "#e8b890", ph: 3.1 },
+  ].map(k => {
+    const g = S("g", {});
+    const shadow = S("ellipse", { cx: 0, cy: 0, rx: 46, ry: 10, fill: "#000", opacity: .3 }, g);
+    const limb = (c, w) => S("path", { stroke: c, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round", fill: "none" }, g);
+    const legB = limb(k.skin, 19), armB = limb(k.skin, 15);
+    S("rect", { x: -27, y: -88, width: 54, height: 30, rx: 8, fill: k.sort }, g);
+    const legF = limb(k.skin, 19);
+    S("rect", { x: -30, y: -150, width: 60, height: 80, rx: 20, fill: k.shirt }, g);
+    const armF = limb(k.skin, 15);
+    S("circle", { cx: 0, cy: -184, r: 31, fill: k.skin }, g);
+    S("path", { d: "M-31 -186 a31 31 0 0 1 62 0 q-10 -12 -31 -11 q-21 -1 -31 11z", fill: k.hair }, g);
+    S("circle", { cx: 14, cy: -186, r: 3.5, fill: "#2a1a10" }, g);
+    S("path", { d: "M8 -170 q8 5 15 0", stroke: "#8a4a30", "stroke-width": 3, fill: "none", "stroke-linecap": "round" }, g);
+    return { ...k, g, legB, legF, armB, armF };
+  });
+  const ball = S("g", {}), ballSh = S("ellipse", { rx: 16, ry: 5, fill: "#000", opacity: .35 });
+  svg.appendChild(ball);
+  S("circle", { r: 17, fill: "#fafafa", stroke: "#222", "stroke-width": 2 }, ball);
+  ballSh.setAttribute("rx", 24); ballSh.setAttribute("ry", 7);
+  S("path", { d: "M0 -7 L6.7 -2.2 L4.1 5.7 H-4.1 L-6.7 -2.2Z M0 -7 V-17 M6.7 -2.2 L16 -5 M4.1 5.7 L10 14 M-4.1 5.7 L-10 14 M-6.7 -2.2 L-16 -5", fill: "#222", stroke: "#222", "stroke-width": 2 }, ball);
+  // tozlu film dokusu + vinyet
+  const grain = S("rect", { x: 0, y: 0, width: 1080, height: 1920, filter: "url(#gr)", opacity: .1 });
+  S("rect", { x: 0, y: 0, width: 1080, height: 1920, fill: "url(#vin)" });
+  svg.style.filter = "sepia(.28) saturate(.9) contrast(1.04)";
+  const grt = defs.querySelector("#grt");
+  const ORDER = [2, 0, 1, 3, 0, 2, 1, 0], PASS = .85;
+  const kidX = (k, lt) => k.x + 26 * Math.sin(lt * 1.3 + k.ph);
+  const foot = (i, lt) => ({ x: kidX(KIDS[i], lt) + 30 * KIDS[i].s * (i % 2 ? -1 : 1), y: KIDS[i].y });
+  return (lt, d) => {
+    upd(lt, d);
+    const u = clamp(lt / Math.max(1, d));
+    svg.style.transform = `scale(${1.04 + .08 * u}) translateY(${-14 * u}px)`;
+    svg.style.opacity = clamp(prog(lt, 0, .4));
+    sun.setAttribute("cy", 560 + 30 * u);
+    camas.forEach((c, i) => c.e.setAttribute("transform", `translate(${c.x} ${c.y}) rotate(${6 * Math.sin(lt * 2.2 + i)})`));
+    grt.setAttribute("seed", 1 + Math.floor(lt * 12) % 50);
+    // top
+    const n = Math.floor(lt / PASS), f = (lt % PASS) / PASS;
+    const a = ORDER[n % ORDER.length], b = ORDER[(n + 1) % ORDER.length];
+    const A = foot(a, lt), B = foot(b, lt);
+    const e = f * f * (3 - 2 * f);
+    const bx = A.x + (B.x - A.x) * e, gy = A.y + (B.y - A.y) * e, by = gy - 190 * Math.sin(Math.PI * f) - 24;
+    ball.setAttribute("transform", `translate(${bx} ${by}) rotate(${lt * 520}) scale(1.5)`);
+    ballSh.setAttribute("cx", bx); ballSh.setAttribute("cy", gy); ballSh.setAttribute("opacity", .35 - .2 * Math.sin(Math.PI * f));
+    KIDS.forEach((k, i) => {
+      const x = kidX(k, lt), face = bx >= x ? 1 : -1;
+      const kick = i === a ? Math.max(0, 1 - f * 5) : 0;           // vuruş anı
+      const ph = lt * 10 + k.ph, sw = 32 * Math.sin(ph);
+      k.g.setAttribute("transform", `translate(${x} ${k.y}) scale(${k.s * face} ${k.s})`);
+      const leg = (ang, knee) => {
+        const r1 = ang * Math.PI / 180, kx = 32 * Math.sin(r1), ky = -66 + 32 * Math.cos(r1);
+        const r2 = (ang - knee) * Math.PI / 180;
+        return `M0 -66 L${kx} ${ky} L${kx + 34 * Math.sin(r2)} ${ky + 34 * Math.cos(r2)}`;
+      };
+      k.legF.setAttribute("d", leg(sw + 55 * kick, Math.max(0, 40 * Math.sin(ph + 1))));
+      k.legB.setAttribute("d", leg(-sw, Math.max(0, 40 * Math.sin(ph + 1 + Math.PI))));
+      const arm = ang => { const rr = ang * Math.PI / 180; return `M0 -138 L${26 * Math.sin(rr)} ${-138 + 26 * Math.cos(rr)} L${48 * Math.sin(rr + .6)} ${-138 + 46 * Math.cos(rr + .6)}`; };
+      k.armF.setAttribute("d", arm(-sw * 1.1)); k.armB.setAttribute("d", arm(sw * 1.1));
+    });
+    // derinlik: top, arka çocukların önünde
+    void grain;
   };
 };
 

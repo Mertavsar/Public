@@ -45,19 +45,15 @@
   "sahneler": [
     {
       "bolum": "hook",
-      "tip": "foto",
+      "tip": "sokak",
       "say": "Nostalji her şeyin ucuz olduğunu söyler.",
       "p": {
-        "src": "../2026-10-30-90lar-okul-harcligi/foto/ist1995_temmuz.jpg",
-        "ton": "eski",
-        "yil": "1995",
+        "yil": "90'LAR",
         "satirlar": [
           "Eskiden her şey",
           "*UCUZ MUYDU?*"
         ],
-        "boy": 112,
-        "kayma": "yukari",
-        "odak": "62% 78%"
+        "boy": 100
       }
     },
     {
