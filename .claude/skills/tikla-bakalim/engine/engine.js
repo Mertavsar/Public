@@ -781,6 +781,8 @@ window.load = async function (tl, opts = {}) {
   WORDS = tl.words || [];
   if (FORMAT === "yatay") buildLines();
   if (opts.cover) stage.classList.add("cover");
+  // foto sahneleri: tüm görseller çözülmeden ilk kare çekilmesin (yoksa boş kare)
+  await Promise.all([...document.images].map(i => i.decode().catch(() => console.error("GÖRSEL YÜKLENEMEDİ: " + i.src))));
   return document.fonts.ready.then(() => true);
 };
 

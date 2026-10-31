@@ -48,30 +48,31 @@
       "tip": "foto",
       "say": "Nostalji her şeyin ucuz olduğunu söyler.",
       "p": {
-        "src": "../2026-10-30-90lar-okul-harcligi/foto/anadolu1990_sokak.jpg",
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/ist1995_temmuz.jpg",
         "ton": "eski",
-        "yil": "1990'LAR",
+        "yil": "1995",
         "satirlar": [
           "Eskiden her şey",
           "*UCUZ MUYDU?*"
         ],
-        "boy": 110,
-        "kayma": "sag",
-        "odak": "62% 40%"
+        "boy": 112,
+        "kayma": "yukari",
+        "odak": "62% 78%"
       }
     },
     {
       "bolum": "hook",
-      "tip": "baslik",
+      "tip": "foto",
       "say": "Rakamlar ise hikâyenin daha karışık olduğunu gösteriyor.",
       "p": {
-        "ikon": "🧩",
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/banknot_10milyon_1999.jpg",
+        "kip": "nesne",
+        "yil": "1999",
         "satirlar": [
           "RAKAMLAR",
-          "*BAŞKA*",
-          "*SÖYLÜYOR*"
+          "*BAŞKA SÖYLÜYOR*"
         ],
-        "boy": 120
+        "boy": 96
       }
     },
     {
@@ -79,14 +80,16 @@
       "tip": "foto",
       "say": "Doksanlarda cebinde bir milyon lira varsa, kendini zengin hissederdin.",
       "p": {
-        "src": "../2026-10-30-90lar-okul-harcligi/foto/banknot_1milyon_1995.jpg",
-        "kip": "nesne",
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/ist1995_eminonu.jpg",
+        "ton": "eski",
         "yil": "1995",
         "satirlar": [
           "1 milyon lira",
           "*= zengin?*"
         ],
-        "boy": 90
+        "boy": 112,
+        "kayma": "sol",
+        "odak": "50% 45%"
       }
     },
     {
@@ -139,15 +142,17 @@
       "tip": "foto",
       "say": "Sen okula kaç lirayla giderdin, harçlığınla ne alırdın? Yorumlara yaz.",
       "p": {
-        "src": "../2026-10-30-90lar-okul-harcligi/foto/koy_ilkokulu.jpg",
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/ist1995_sultanahmet.jpg",
+        "ton": "eski",
+        "yil": "90'LAR",
         "satirlar": [
           "Sen okula",
           "*kaç lirayla*",
           "giderdin?"
         ],
         "boy": 110,
-        "kayma": "yukari",
-        "odak": "50% 40%",
+        "kayma": "sag",
+        "odak": "40% 50%",
         "not": "💬 Yorumlara yaz"
       }
     },
