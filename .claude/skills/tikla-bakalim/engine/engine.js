@@ -606,10 +606,10 @@ SCENES.sokak = (p, r) => {
   PAR = svg;
   // çocuklar
   const KIDS = [
-    { x: 470, y: 1150, s: 1.3, shirt: "#ecf0f1", sort: "#16a085", hair: "#3a2416", skin: "#dba67c", ph: 4.4 },
-    { x: 700, y: 1170, s: 1.38, shirt: "#f4d03f", sort: "#2c3e50", hair: "#4a2e1c", skin: "#d39c72", ph: 1.7 },
-    { x: 250, y: 1235, s: 1.65, shirt: "#e74c3c", sort: "#1f3a5f", hair: "#2b1d14", skin: "#e2ae84", ph: 0 },
-    { x: 880, y: 1250, s: 1.7, shirt: "#27ae60", sort: "#34495e", hair: "#1b1410", skin: "#e8b890", ph: 3.1 },
+    { x: 470, y: 1150, s: 1.3, shirt: "#ecf0f1", sort: "#16a085", hair: "#3a2416", skin: "#f0c9a2", ph: 4.4 },
+    { x: 700, y: 1170, s: 1.38, shirt: "#f4d03f", sort: "#2c3e50", hair: "#4a2e1c", skin: "#eec39a", ph: 1.7 },
+    { x: 250, y: 1235, s: 1.65, shirt: "#e74c3c", sort: "#1f3a5f", hair: "#2b1d14", skin: "#f3cfa9", ph: 0 },
+    { x: 880, y: 1250, s: 1.7, shirt: "#27ae60", sort: "#34495e", hair: "#1b1410", skin: "#ecc198", ph: 3.1 },
   ].map(k => {
     const g = S("g", {});
     const shadow = S("ellipse", { cx: 0, cy: 0, rx: 46, ry: 10, fill: "#000", opacity: .3 }, g);
