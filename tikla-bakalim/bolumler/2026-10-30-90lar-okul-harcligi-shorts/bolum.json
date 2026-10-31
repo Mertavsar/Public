@@ -1,0 +1,175 @@
+{
+  "baslik": "90'larda 1 milyon lira (Shorts)",
+  "tarih": "2026-10-31",
+  "durum": "yayına hazır",
+  "format": "dikey",
+  "gecis": false,
+  "vurgu": [
+    "zengin",
+    "asıl"
+  ],
+  "altyazi": {
+    "bir milyon liralık": "1 milyon liralık",
+    "bir milyon lira": "1 milyon lira",
+    "bir milyon liranın": "1 milyon liranın",
+    "Bir milyonla": "1 milyonla",
+    "bir milyonla": "1 milyonla",
+    "Üç soruda": "3 soruda",
+    "Doksan dokuzda": "1999'da",
+    "iki yüz gramlık": "200 gramlık",
+    "yetmiş beş bin liraydı": "75.000 liraydı",
+    "on üç ekmek": "13 ekmek",
+    "İki binde": "2000'de",
+    "iki binde": "2000'de",
+    "beş yüz doksan bin liraydı": "590.000 liraydı",
+    "iki litre": "2 litre",
+    "on milyon liralık": "10 milyon liralık",
+    "İki bin beşte": "2005'te",
+    "altı sıfır": "6 sıfır",
+    "bir yeni Türk lirası": "1 Yeni Türk Lirası",
+    "otuz lira": "30 lira",
+    "otuz milyon lira": "30 milyon lira",
+    "seksen milyon lira": "80 milyon lira",
+    "bin ekmek": "1.000 ekmek",
+    "bin altı yüz ekmek": "1.600 ekmek",
+    "yüz otuz litre": "130 litre",
+    "üç yüz elli litre": "350 litre"
+  },
+  "kapak": {
+    "ikon": "💵",
+    "ust": "90'LARDA",
+    "buyuk": "1 MİLYON",
+    "alt": "NE EDERDİ?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Doksanlarda cebinde bir milyon lira varsa, kendini zengin hissederdin.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/anadolu1990_sokak.jpg",
+        "ton": "eski",
+        "yil": "1990'LAR",
+        "satirlar": [
+          "Cebinde",
+          "*1 MİLYON*",
+          "= ZENGİN?"
+        ],
+        "boy": 110,
+        "kayma": "sag",
+        "odak": "62% 40%"
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Doksan dokuzda, iki yüz gramlık bir ekmek yetmiş beş bin liraydı.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/ist1995_eminonu.jpg",
+        "ton": "eski",
+        "yil": "1999",
+        "satirlar": [
+          "1 ekmek",
+          "*75.000 TL*"
+        ],
+        "boy": 110,
+        "kayma": "sol",
+        "odak": "55% 50%"
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "hesap",
+      "say": "Yani bir milyon lirayla on üç ekmek alabilirdin.",
+      "p": {
+        "ikon": "🍞",
+        "ogeler": [
+          "1.000.000 TL",
+          "÷",
+          "75.000 TL",
+          "=",
+          "13 ekmek"
+        ]
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Bir milyonla iki litre bile benzin alamazdın.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/banknot_1milyon_1995.jpg",
+        "kip": "nesne",
+        "yil": "2000",
+        "satirlar": [
+          "1 milyon =",
+          "*1,7 litre benzin*"
+        ],
+        "boy": 80
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Bugün İstanbul'da bir simit otuz lira.",
+      "p": {
+        "src": "../2026-10-30-90lar-okul-harcligi/foto/simit_cay.jpg",
+        "yil": "2026",
+        "satirlar": [
+          "1 simit",
+          "*30 TL*"
+        ],
+        "boy": 120,
+        "kayma": "yukari",
+        "odak": "40% 50%"
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Eski parayla söylersek, otuz milyon lira.",
+      "p": {
+        "ikon": "🥯",
+        "etiket": "Bugünkü simit · eski parayla",
+        "baslangic": 0,
+        "deger": 30000000,
+        "sonek": " TL",
+        "renk": "kirmizi"
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Ama asıl soru şu: maaşla ne alınıyordu, şimdi ne alınıyor?",
+      "p": {
+        "ikon": "⚖️",
+        "metin": "MAAŞLA\n*NE ALINIYOR?*",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "sure": 1.8,
+      "p": {
+        "ikon": "👆",
+        "satirlar": [
+          "CEVAP",
+          "*UZUN VİDEODA*"
+        ],
+        "boy": 120,
+        "not": "Sonu şaşırtıcı · Tıkla Bakalım"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Yıllara göre ekmek fiyatları: 1999–2000 döneminde 200 g ekmek 75.000 TL — https://www.akademikpersonel.org/yillara-gore-ekmek-fiyatlari/ ; https://www.blogarti.com/yillara-gore-ekmek-fiyatlari.html",
+    "K2": "2000 yılı benzin litre fiyatı ~0,59 TL (590.000 eski TL) — https://www.muhasebedersleri.com/blog/2000-2016-yili-asgari-ucretleri-ve-benzin-fiyatlari/ ; https://www.blogarti.com/yillara-gore-benzin-fiyatlari.html",
+    "K3": "2000 net asgari ücret ~80,5 milyon TL (kaynaklar 80,5–86,9 milyon arası veriyor) ve asgari ücretle ~136–146 L benzin — https://www.muhasebedersleri.com/blog/2000-2016-yili-asgari-ucretleri-ve-benzin-fiyatlari/ ; https://teknoseyir.com/blog/yillara-gore-asgari-ucretle-alinabilen-benzin-miktari",
+    "K4": "2005'te Yeni Türk Lirası: 1.000.000 TL = 1 YTL; yüksek enflasyon dönemi — https://en.wikipedia.org/wiki/Turkish_lira",
+    "K5": "İstanbul'da simit 26 Eylül 2026'dan itibaren 30 TL — https://boldmedya.com/2026/09/26/istanbulda-simit-de-zamlandi-fiyati-30-liraya-cikti/ ; https://www.nefes.com.tr/istanbulda-simite-zam-153844",
+    "K6": "200 g ekmek 1 Nisan 2026'dan itibaren 17,50 TL — https://medyascope.tv/2026/04/01/ekmege-zam-geldi/",
+    "K7": "2026 net asgari ücret 28.075,50 TL — https://www.csgb.gov.tr/haberler/2026-yilinda-gecerli-olacak-yeni-asgari-ucret-28-bin-75-lira-olarak-belirlendi/",
+    "K8": "İstanbul benzin litre fiyatı Ekim sonu 2026 ~76 TL, 1 Kasım'da ~4 TL zam bekleniyor (bkz. 2026-10-28 akaryakıt bölümü kaynakları)",
+    "K9": "Fotoğraflar: Wikimedia Commons, her birinin lisansı foto/*.json dosyalarında; banknotlar PD-TR-currency"
+  }
+}

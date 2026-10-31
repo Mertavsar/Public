@@ -487,7 +487,7 @@ SCENES.foto = (p, r) => {
     box = el("div", null, null, r);
     Object.assign(box.style, FORMAT === "yatay"
       ? { position: "absolute", left: "90px", top: "0", bottom: "130px", width: "900px", display: "flex", flexDirection: "column", justifyContent: "center" }
-      : { position: "absolute", left: "70px", right: "70px", bottom: "520px", display: "flex", flexDirection: "column" });
+      : { position: "absolute", left: "70px", right: "70px", bottom: "720px", display: "flex", flexDirection: "column" });   // dikey: altyazı 1270–1430
   } else box = r;
   if (p.yil) {
     yil = el("div", "h", p.yil, box);
@@ -502,7 +502,7 @@ SCENES.foto = (p, r) => {
   if (p.not) { note = el("div", "note", md(p.not), box); note.style.marginTop = "18px"; note.style.color = "rgba(255,255,255,.85)"; }
   if (p.kredi) {
     const k = el("div", null, p.kredi, tam ? r : wrap);
-    Object.assign(k.style, { position: "absolute", right: tam ? "40px" : "0", bottom: tam ? (FORMAT === "yatay" ? "150px" : "500px") : "-44px",
+    Object.assign(k.style, { position: "absolute", right: tam ? "40px" : "0", bottom: tam ? (FORMAT === "yatay" ? "150px" : "690px") : "-44px",
       fontWeight: "600", fontSize: "20px", color: "rgba(255,255,255,.6)", textShadow: "0 1px 3px #000", whiteSpace: "nowrap" });
   }
   const dir = p.kayma || "sol";      // sol | sag | yukari | asagi
