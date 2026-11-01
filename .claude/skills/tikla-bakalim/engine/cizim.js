@@ -287,5 +287,23 @@ SCENES.cizim = (p, r) => {
     if (p.buyuk) { const e = el("div", "h sari", md(p.buyuk), box); Object.assign(e.style, { fontSize: (p.boy || 150) + "px", textShadow: "0 0 30px rgba(255,200,61,.35)" }); items.push(e); }
     if (p.alt) { const e = el("div", null, md(p.alt), box); Object.assign(e.style, { color: CZ.panelTxt || "rgba(219,231,255,.8)", fontWeight: 700, fontSize: "30px", marginTop: "6px", letterSpacing: "1px" }); items.push(e); }
   }
+  // Kapak düzeni: solda dev yazı, sağda çizim (yalnız kapak görseli için)
+  if (p.kapak) {
+    const k = p.kapak;
+    const pan = el("div", null, null, r);
+    Object.assign(pan.style, { position: "absolute", left: "0", top: "0", bottom: "0", width: "1150px",
+      background: "linear-gradient(90deg, rgba(247,241,227,1) 0%, rgba(247,241,227,.97) 62%, rgba(247,241,227,0) 100%)" });
+    const col = el("div", null, null, r);
+    Object.assign(col.style, { position: "absolute", left: "80px", top: "0", bottom: "0", width: "1000px", display: "flex",
+      flexDirection: "column", justifyContent: "center", alignItems: "flex-start", textAlign: "left" });
+    if (k.rozet) { const e = el("div", null, k.rozet, col); Object.assign(e.style, { background: CZ.tur, color: "#fff", fontWeight: 900, fontSize: "46px",
+      padding: "10px 26px", borderRadius: "12px", letterSpacing: "2px", marginBottom: "26px", transform: "rotate(-2deg)" }); }
+    (k.satirlar || []).forEach(t => { const e = el("div", "h", md(t), col);
+      Object.assign(e.style, { fontSize: (k.boy || 160) + "px", lineHeight: ".98", color: CZ.panelTxt || "#fff", letterSpacing: "-2px" }); });
+    if (k.ikon) { const e = el("div", "emoji", k.ikon, r); Object.assign(e.style, { position: "absolute", left: (k.ikonX || 1010) + "px", top: (k.ikonY || 330) + "px",
+      fontSize: (k.ikonBoy || 230) + "px", filter: "drop-shadow(0 10px 18px rgba(0,0,0,.25))", transform: "rotate(10deg)" }); }
+    const fr = el("div", null, null, r);
+    Object.assign(fr.style, { position: "absolute", inset: "0", boxShadow: "inset 0 0 0 14px " + CZ.panelTxt + ", inset 0 0 120px rgba(60,40,20,.25)" });
+  }
   return (lt) => items.forEach((e, i) => slide(e, lt, .25 + i * .12, 0, 24, .45));
 };
