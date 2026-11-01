@@ -813,7 +813,7 @@ function wordCaption(t) {
   const w = WORDS.find(w => t >= w.s && t < w.e);
   if (!w) { cap.style.opacity = 0; return; }
   cap.textContent = w.w.replace(/[.,!?;:…"]+$/, "").replace(/^["(]+/, "");
-  cap.style.color = { yellow: "var(--sari)", red: "var(--kirmizi)", green: "var(--yesil)" }[w.c] || "#fff";
+  cap.style.color = { yellow: "var(--sari)", red: "var(--kirmizi)", green: "var(--yesil)" }[w.c] || "var(--capink, #fff)";
   cap.style.transform = `scale(${lerp(.75, 1, eOut(prog(t, w.s, .09)))})`;
   cap.style.opacity = 1;
   cap.style.fontSize = "96px";

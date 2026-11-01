@@ -1,0 +1,227 @@
+{
+  "baslik": "Su nasıl elektrik olur? (Shorts)",
+  "tarih": "2026-11-01",
+  "durum": "ses: uzun videodan bütün cümle blokları",
+  "format": "dikey",
+  "stil": "cizim",
+  "dunya": "baraj",
+  "tema": "kagit",
+  "gecis": false,
+  "adim_atla": [
+    3,
+    4,
+    5,
+    16
+  ],
+  "vurgu": [
+    "türbin",
+    "jeneratör",
+    "trafo",
+    "elektrik"
+  ],
+  "altyazi": {
+    "iki bin dört yüz megavattır": "2.400 megavattır",
+    "altıda biri": "1/6'sı"
+  },
+  "kapak": {
+    "ikon": "⚡",
+    "ust": "SU NASIL",
+    "buyuk": "ELEKTRİK",
+    "alt": "OLUR?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          700,
+          780,
+          0.95
+        ],
+        "adim": 1
+      },
+      "say": "Barajın arkasında milyonlarca ton su bekliyor."
+    },
+    {
+      "bolum": "hook",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          3280,
+          900,
+          2.0
+        ],
+        "adim": 2,
+        "baslik": "SU NASIL *ELEKTRİK* OLUR?",
+        "boy": 72
+      },
+      "say": "Peki bu su, evindeki lambayı nasıl yakıyor?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1300,
+          900,
+          1.25
+        ],
+        "adim": 6
+      },
+      "say": "Barajın gövdesinde, aşağı inen kalın borular vardır."
+    },
+    {
+      "bolum": "ne",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1250,
+          880,
+          1.35
+        ],
+        "adim": 7,
+        "kamera2": [
+          1480,
+          1040,
+          1.35
+        ]
+      },
+      "say": "Kapaklar açılınca su bu borulardan büyük bir hızla aşağı akar."
+    },
+    {
+      "bolum": "neden",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1580,
+          1080,
+          1.7
+        ],
+        "adim": 8
+      },
+      "say": "Borunun ucunda bir türbin bekler: kanatlı dev bir çark."
+    },
+    {
+      "bolum": "neden",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1560,
+          1100,
+          2.3
+        ],
+        "adim": 9
+      },
+      "say": "Su kanatlara çarpar ve türbini döndürür."
+    },
+    {
+      "bolum": "neden",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1580,
+          1010,
+          1.8
+        ],
+        "adim": 10
+      },
+      "say": "Türbin, üstündeki jeneratörü çevirir."
+    },
+    {
+      "bolum": "neden",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1590,
+          720,
+          1.0
+        ],
+        "adim": 11
+      },
+      "say": "Jeneratörün içinde mıknatıslar bobinlerin yanında döner. Bu dönüş, tellerde elektrik akımı oluşturur."
+    },
+    {
+      "bolum": "etki",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1820,
+          940,
+          1.75
+        ],
+        "adim": 13
+      },
+      "say": "Elektrik önce trafoya gider, gerilimi yükseltilir."
+    },
+    {
+      "bolum": "etki",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          2160,
+          820,
+          1.0
+        ],
+        "adim": 14,
+        "kamera2": [
+          2960,
+          820,
+          1.0
+        ]
+      },
+      "say": "Böylece uzun hatlarda daha az kayıpla taşınır."
+    },
+    {
+      "bolum": "etki",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          3200,
+          910,
+          1.7
+        ],
+        "adim": 15
+      },
+      "say": "Şehre yaklaşınca gerilim yeniden düşürülür ve evine ulaşır."
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1700,
+          860,
+          0.32
+        ],
+        "adim": 15,
+        "baslik": "SIRADAKİ MAKİNE\n*HANGİSİ?*",
+        "alt": "💬 Yorumlara yaz",
+        "boy": 72
+      },
+      "say": "Bir sonraki videoda hangi makineyi anlatalım? Yorumlara yaz."
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "cizim",
+      "p": {
+        "kamera": [
+          1700,
+          860,
+          0.32
+        ],
+        "adim": 15,
+        "baslik": "TAMAMI\n*KANALDA*",
+        "alt": "Tıkla Bakalım",
+        "boy": 110
+      },
+      "sure": 1.8
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Atatürk Barajı HES: kurulu güç 2.400 MW, 8 türbin, son türbin 1994 — https://en.wikipedia.org/wiki/Atat%C3%BCrk_Dam ; https://kureansiklopedi.com/tr/detay/ataturk-baraji-ve-hidroelektrik-santrali-748891 ; urfanatik.com",
+    "K2": "2025'te hidroelektriğin Türkiye elektrik üretimindeki payı %16 — Ember, Türkiye Elektrik Görünümü 2026: https://ember-energy.org/tr/chapter/hidroelektrik/",
+    "K3": "Yağışlı aylarda pay çok daha yüksek (ör. bir mayıs ayında %43,1) — forbes.com.tr/ekonomi/mayista-elektrik-uretiminde-hidroelektrik-liderligi-surdurdu",
+    "K4": "Çalışma ilkesi (potansiyel enerji → türbin → jeneratör, elektromanyetik indüksiyon, yüksek gerilimle iletim) — genel fizik / https://en.wikipedia.org/wiki/Hydroelectricity"
+  }
+}

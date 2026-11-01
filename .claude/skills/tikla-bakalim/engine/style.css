@@ -176,3 +176,5 @@ html.cizim.t-tahta #stage { background: radial-gradient(130% 100% at 50% 40%, #2
 html.cizim.t-tahta #grid { opacity: .5; }
 html.cizim.t-neon #stage { background: radial-gradient(130% 100% at 50% 40%, #121225 0%, #05050b 100%); }
 html.cizim.t-neon #grid { opacity: .6; }
+html.cizim.t-kagit { --capink: #2a2b33; --kirmizi: #d0482f; }
+html.cizim.t-kagit #cap span { -webkit-text-stroke: 0 !important; paint-order: normal; text-shadow: 0 0 18px rgba(247,241,227,.95), 0 0 6px rgba(247,241,227,.95) !important; text-transform: uppercase; }

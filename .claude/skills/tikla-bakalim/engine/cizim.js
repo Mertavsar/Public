@@ -45,7 +45,8 @@ window.buildWorld = function (stage, tl) {
   };
   // adım → başlangıç zamanı (o adımı ilk gösteren sahnenin başı)
   const cz = tl.scenes.filter(s => s.tip === "cizim");
-  const stepT = k => { const s = cz.find(s => (s.p.adim || 0) >= k); return s ? s.t0 : 1e9; };
+  const skip = new Set(tl.adim_atla || []);          // kısa sürümde atlanan adımlar hiç görünmez
+  const stepT = k => { if (skip.has(k)) return 1e9; const s = cz.find(s => (s.p.adim || 0) >= k); return s ? s.t0 : 1e9; };
   const stepEnd = k => { const s = cz.find(s => (s.p.adim || 0) >= k); return s ? s.t1 : 1e9; };
   const W0 = (window.WORLDS[tl.dunya || "baraj"])(mk, S, stepT);
   REG.forEach(r => {
@@ -71,7 +72,7 @@ window.buildWorld = function (stage, tl) {
     c[0] += 6 * Math.sin(t * .5); c[1] += 4 * Math.sin(t * .37);
     return c;
   };
-  const CY = FORMAT === "yatay" ? 470 : 820;
+  const CY = FORMAT === "yatay" ? 470 : 900;
   return t => {
     const [cx, cy, z] = camAt(t);
     cam.setAttribute("transform", `translate(${W / 2 - cx * z} ${CY - cy * z}) scale(${z})`);
