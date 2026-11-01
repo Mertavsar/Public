@@ -1,0 +1,198 @@
+{
+  "baslik": "90'larda 1 çeyrek = 1 milyon lira. Bugün? (Shorts)",
+  "tarih": "2026-11-01",
+  "durum": "ses: uzun videodan bütün cümle blokları",
+  "format": "dikey",
+  "gecis": false,
+  "vurgu": [
+    "çeyrek",
+    "yakıyor",
+    "bile"
+  ],
+  "altyazi": {
+    "Doksanlarda": "90'larda",
+    "doksan beşte": "1995'te",
+    "Doksan beşte": "1995'te",
+    "bir milyon liraydı": "1 milyon liraydı",
+    "bir milyon lira": "1 milyon lira",
+    "İki binde": "2000'de",
+    "on milyon liraya": "10 milyon liraya",
+    "sekiz çeyrek": "8 çeyrek",
+    "üç çeyrek": "3 çeyrek",
+    "yirmi kişinin": "20 kişinin",
+    "iki buçuk": "2,5",
+    "yedi asgari": "7 asgari",
+    "iki milyon liraya": "2 milyon liraya",
+    "yetmiş bir": "71",
+    "Doksanların": "90'ların",
+    "bir çeyrek": "1 çeyrek"
+  },
+  "kapak": {
+    "ikon": "💍",
+    "ust": "90'LARDA 1 ÇEYREK",
+    "buyuk": "1 MİLYON",
+    "alt": "BUGÜN?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Doksanlarda bir düğüne gittin, geline bir çeyrek altın taktın.",
+      "p": {
+        "src": "../2026-10-31-90lar-dugun-takisi/foto/impala_gelin_arabasi.jpg",
+        "ton": "eski",
+        "yil": "90'LAR",
+        "satirlar": [
+          "Düğüne gittin,",
+          "*1 çeyrek* taktın"
+        ],
+        "kayma": "sag",
+        "odak": "50% 55%",
+        "boy": 112
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "O çeyrek, doksan beşte yaklaşık bir milyon liraydı.",
+      "p": {
+        "src": "../2026-10-31-90lar-dugun-takisi/foto/ceyrek_cizim.svg",
+        "kip": "nesne",
+        "genislik": 620,
+        "yil": "1995",
+        "satirlar": [
+          "≈ *1.000.000 TL*"
+        ],
+        "boy": 96,
+        "kredi": "Temsili çizim"
+      },
+      "kaynak": "çeyrek altın 1995 (K1)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Peki bugün aynı çeyreği takmak cebini ne kadar yakıyor?",
+      "p": {
+        "src": "../2026-10-31-90lar-dugun-takisi/foto/cerez_atma.jpg",
+        "satirlar": [
+          "Bugün aynı çeyrek",
+          "*ne kadar yakıyor?*"
+        ],
+        "kayma": "sol",
+        "odak": "50% 35%",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "karsilastir",
+      "say": "İki binde bir asgari ücretle yaklaşık sekiz çeyrek alınıyordu. Bugün üç çeyrek bile alınmıyor.",
+      "p": {
+        "baslik": "Net asgari ücretle kaç çeyrek?",
+        "sol": {
+          "etiket": "2000",
+          "deger": 8,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2026",
+          "deger": 2.7,
+          "renk": "kirmizi"
+        },
+        "sonek": " çeyrek",
+        "ondalik": 1,
+        "not": "2000: ~80,5 milyon ÷ ~10 milyon · 2026: 28.075,50 ÷ ~10.400 TL"
+      },
+      "kaynak": "asgari ücret ve çeyrek fiyatları (K2, K3, K5, K6)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "foto",
+      "say": "Şimdi yirmi kişinin çeyrek taktığı bir düğün düşün.",
+      "p": {
+        "src": "../2026-10-31-90lar-dugun-takisi/foto/dugun_yemegi.jpg",
+        "satirlar": [
+          "*20 davetli*",
+          "× 1 çeyrek"
+        ],
+        "kayma": "sag",
+        "boy": 112
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "hesap",
+      "say": "İki binde bu takı, iki buçuk asgari ücret ediyordu.",
+      "p": {
+        "baslik": "2000'de 20 çeyrek",
+        "ikon": "🪙",
+        "ogeler": [
+          "20 × ~10 milyon",
+          "=",
+          "~200 milyon TL",
+          "≈",
+          "2,5 maaş"
+        ]
+      },
+      "kaynak": "hesap: 200 milyon ÷ ~80,5 milyon (K2, K3)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "hesap",
+      "say": "Bugün aynı takı, yedi asgari ücreti geçiyor.",
+      "p": {
+        "baslik": "2026'da 20 çeyrek",
+        "ikon": "🪙",
+        "ogeler": [
+          "20 × ~10.400 TL",
+          "=",
+          "~208.000 TL",
+          "≈",
+          "7,4 maaş"
+        ]
+      },
+      "kaynak": "hesap: 208.000 ÷ 28.075,50 (K5, K6)"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "foto",
+      "say": "Senin düğününde kaç çeyrek takılmıştı? Yorumlara yaz.",
+      "p": {
+        "src": "../2026-10-31-90lar-dugun-takisi/foto/dugun_konvoyu.jpg",
+        "satirlar": [
+          "Senin düğününde",
+          "*kaç çeyrek* takıldı?"
+        ],
+        "kayma": "sol",
+        "not": "💬 Yorumlara yaz",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "sure": 1.6,
+      "p": {
+        "ikon": "👆",
+        "satirlar": [
+          "TAMAMI",
+          "*KANALDA*"
+        ],
+        "boy": 130,
+        "not": "Tıkla Bakalım"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "1995 çeyrek altın ~786 bin → ~1,23 milyon eski TL (yıl başı/sonu) — anlikaltinfiyati.com/ceyrek-altin-1995-yili-fiyatlari.html ; 1995 gram altın ort. 566.230 eski TL (Ocak 490.000, Aralık 718.600) — milliyet.com.tr/gundem/yillara-gore-altin-fiyatlari-son-40-yilin-altin-fiyatlari-2597607 ; karekod.org/blog/yillara-gore-altin-fiyatlari/",
+    "K2": "2000 çeyrek altın ~10,50 (milyon eski TL) — blogarti.com/yillara-gore-ceyrek-altin-fiyatlari.html ; 2000 gram altın ort. ~5,55 milyon eski TL (× ~1,6 ≈ 9 milyon çeyrek) — karekod.org/blog/yillara-gore-altin-fiyatlari/",
+    "K3": "2000 net asgari ücret 80,55–82,4 milyon eski TL — bianet.org/yazi/uc-asgari-ucret-bir-yoksulluk-bir-iktidar-271496 ; yeniakit.com.tr (2019 asgari ücret tablosu) ; muhasebedersleri.com 2000–2016 asgari ücretler",
+    "K4": "Türk lirasının değer kaybı, 2005'te 6 sıfır — https://en.wikipedia.org/wiki/Turkish_lira",
+    "K5": "Çeyrek altın 2026: Haziran ~10 bin TL bandı (gzt.com), 15 Ağustos Kapalıçarşı 10.756–11.002 TL (gzt.com), 25 Ekim gram ~6.384 TL (uzmanpara.milliyet.com.tr) → Ekim sonu çeyrek ≈ 10.400 TL (tahmini)",
+    "K6": "2026 net asgari ücret 28.075,50 TL — https://www.csgb.gov.tr/haberler/2026-yilinda-gecerli-olacak-yeni-asgari-ucret-28-bin-75-lira-olarak-belirlendi/",
+    "K7": "Düğünlerde çeyrek yerine yarım gram altın, nakit, ortak altın — gzt.com/ekonomi/dugun-sezonu-2026-taki-trendleri-ceyrek-altinin-10-bin-lirayi-asmasiyla-gram-altina-talep-firladi-ekonomi-haberleri-4235249 ; timeturk.com (düğünlerde çeyrek altının yerini yarım gram altın aldı) ; gazetevatan.com (düğünlerde çeyreğin yerini gram altın ve nakit para aldı)",
+    "K8": "Evlenmenin toplam maliyeti 2026'da ~2 milyon TL — gzt.com/ekonomi/bir-dugun-yapmanin-bedeli-2-milyon-tl-oldu-4026770 ; turkiyegazetesi.com.tr/ekonomi/evet-demek-artik-servet-istiyor-dugun-maliyeti-2-milyona-dayandi-1786670",
+    "K9": "Ons altın 2026'da rekor (Ocak 2026 ~5.600 $'a yaklaştı) — politikam.com 29 Ocak 2026 ; birgun.net/haber/altin-rekor-ustune-rekor-kiriyor-688121 ; gzt.com 14 Ağustos 2026",
+    "K10": "Fotoğraflar: Wikimedia Commons, lisanslar foto/*.json; çeyrek ve kurdele temsili çizim"
+  }
+}
