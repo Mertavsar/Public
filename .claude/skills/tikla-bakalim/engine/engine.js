@@ -900,7 +900,7 @@ function ctaLayer(stage) {
   };
 }
 
-let BG = null, CARDFX = null, CTA = null;
+let BG = null, CARDFX = null, CTA = null, WORLD = null;
 window.load = async function (tl, opts = {}) {
   // Fontlar yüklenmeden ölçüm yapılırsa sığdırma yedek fonta göre hesaplanır
   await Promise.all([600, 800, 900].map(w => document.fonts.load(`${w} 60px M`, "AaŞşĞğİıÇçÖöÜü₺0123")));
@@ -915,6 +915,7 @@ window.load = async function (tl, opts = {}) {
   if (!tl.ust_bant) document.documentElement.classList.add("temiz");   // üst bant (bölüm şeridi, etiket, kaynak) varsayılan kapalı
   const stage = document.getElementById("stage");
   BG = background(stage);
+  if (tl.stil === "cizim") { document.documentElement.classList.add("cizim"); WORLD = window.buildWorld(stage, tl); }   // teknik çizim modu (cizim.js)
   stage.appendChild(document.getElementById("top"));
   const root = el("div", null, null, stage);
   BUILT = tl.scenes.map(s => {
@@ -936,6 +937,7 @@ window.load = async function (tl, opts = {}) {
 
 window.seek = function (t) {
   BG(t);
+  if (WORLD) WORLD(t);
   let cur = null;
   const last = TL.scenes[TL.scenes.length - 1];
   const starts = (TL._ss ||= sectionStarts()).map(c => c.t);
@@ -963,8 +965,9 @@ window.seek = function (t) {
     b.r.style.opacity = fin * (1 - fo);
     b.r.style.filter = fo > 0 ? `blur(${fo * 10}px)` : fin < 1 ? `blur(${(1 - fin) * 6}px)` : "none";
     // tam ekran fotoğraf sahne kutusunun ölçeğini almaz; kendi Ken Burns hareketi var
-    const sc = b.s.tip === "foto" && (b.s.p.kip || "tam") === "tam" ? (1 - .03 * fo) : SCALE * z * (1 - .03 * fo);
+    const sc = (b.s.tip === "foto" && (b.s.p.kip || "tam") === "tam") || b.s.tip === "cizim" ? (1 - .03 * fo) : SCALE * z * (1 - .03 * fo);
     b.r.style.transform = `translateY(${(1 - fin) * 26 - fo * 30}px) scale(${sc})`;
+    if (b.s.tip === "cizim") b.r.style.filter = "none";
   });
   // Bölüm şeridi
   const sec = cur && SECTIONS[cur.s.bolum];

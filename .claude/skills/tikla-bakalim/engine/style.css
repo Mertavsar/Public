@@ -149,3 +149,16 @@ html.yatay #src { text-shadow: 0 1px 4px #000; }
 
 /* temiz: üstte yazı yok — bölüm şeridi, sahne etiketi, kaynak satırı gizli (kullanıcı isteği). bolum.json "ust_bant": true açar. */
 html.temiz #top, html.temiz #tag, html.temiz #src { display: none !important; }
+
+/* Teknik çizim (blueprint) modu: lacivert zemin, ince çift ızgara, ışık lekeleri yok.
+   Altyazı: kutusuz, büyük harf, konuşulmamış kelimeler görünmez (kelime kelime belirir). */
+html.cizim #stage { background: radial-gradient(120% 90% at 50% 40%, #13284a 0%, #0b1730 75%); }
+html.cizim .blob { display: none; }
+html.cizim #grid { opacity: 1; inset: 0; transform: none !important;
+  background-image: linear-gradient(rgba(140,180,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(140,180,255,.07) 1px, transparent 1px),
+    linear-gradient(rgba(140,180,255,.13) 2px, transparent 2px), linear-gradient(90deg, rgba(140,180,255,.13) 2px, transparent 2px);
+  background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px; }
+html.cizim.yatay #capline { background: none; text-transform: uppercase; letter-spacing: 1.5px; font-size: 44px; top: 975px;
+  text-shadow: 0 3px 14px rgba(0,0,0,.8); }
+html.cizim.yatay #capline span { opacity: 0; }
+html.cizim.yatay #capline span.done, html.cizim.yatay #capline span.on { opacity: 1; }
