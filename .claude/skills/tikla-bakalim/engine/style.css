@@ -162,3 +162,17 @@ html.cizim.yatay #capline { background: none; text-transform: uppercase; letter-
   text-shadow: 0 3px 14px rgba(0,0,0,.8); }
 html.cizim.yatay #capline span { opacity: 0; }
 html.cizim.yatay #capline span.done, html.cizim.yatay #capline span.on { opacity: 1; }
+
+/* Çizim temaları */
+html.cizim.t-kagit { --ink: #2a2b33; --sari: #e08a12; --dim: rgba(42,43,51,.6); }
+html.cizim.t-kagit #stage { background: radial-gradient(130% 100% at 50% 40%, #f7f1e3 0%, #e9dfc8 100%); }
+html.cizim.t-kagit #grid { background-image: linear-gradient(rgba(70,60,40,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(70,60,40,.07) 1px, transparent 1px),
+    linear-gradient(rgba(70,60,40,.12) 2px, transparent 2px), linear-gradient(90deg, rgba(70,60,40,.12) 2px, transparent 2px); }
+html.cizim.t-kagit.yatay #capline { color: rgba(42,43,51,.4); text-shadow: 0 2px 10px rgba(247,241,227,.9); }
+html.cizim.t-kagit.yatay #capline span.done { color: #2a2b33; }
+html.cizim.t-kagit.yatay #capline span.on { color: #d0482f; text-shadow: none; }
+html.cizim.t-kagit #bar b { background: #d0482f; }
+html.cizim.t-tahta #stage { background: radial-gradient(130% 100% at 50% 40%, #2a4a3c 0%, #17302a 100%); }
+html.cizim.t-tahta #grid { opacity: .5; }
+html.cizim.t-neon #stage { background: radial-gradient(130% 100% at 50% 40%, #121225 0%, #05050b 100%); }
+html.cizim.t-neon #grid { opacity: .6; }

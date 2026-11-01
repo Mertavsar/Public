@@ -241,7 +241,7 @@ def timeline(b, fmt, vo=None, work=None):
         d = float(c.get("sure", 5.0))
         cta.append({"t0": round(s0, 3), "t1": round(min(s0 + d, end), 3),
                     "abone": round(s0 + 1.3, 3), "begen": round(s0 + 2.4, 3)})
-    return {"format": fmt, "gecis": b.get("gecis", True), "bolum_adlari": b.get("bolum_adlari"), "ust_bant": b.get("ust_bant", False), "stil": b.get("stil"), "dunya": b.get("dunya"), "dur": round(end, 3), "scenes": scenes,
+    return {"format": fmt, "gecis": b.get("gecis", True), "bolum_adlari": b.get("bolum_adlari"), "ust_bant": b.get("ust_bant", False), "stil": b.get("stil"), "dunya": b.get("dunya"), "tema": b.get("tema"), "dur": round(end, 3), "scenes": scenes,
             "cta": cta, "words": display_words(tl_words, b.get("altyazi"))}, text
 
 

@@ -11,9 +11,22 @@ const CZ = {
   ink: "#dbe7ff", dim: "rgba(219,231,255,.35)", su: "#5fb4ff", suF: "rgba(95,180,255,.16)",
   tur: "#4fe0d2", sari: "#ffc83d", kir: "#ff5a6e", mav: "#5b8cff", glow: "rgba(255,200,61,.85)",
 };
+// Renk temaları — bolum.json "tema": mavi (blueprint) | kagit (mühendis defteri) | tahta (kara tahta) | neon (gece)
+const CZ_TEMA = {
+  mavi:  {},
+  kagit: { ink: "#2a2b33", dim: "rgba(42,43,51,.32)", su: "#2f7fd8", suF: "rgba(47,127,216,.13)", tur: "#d0482f", sari: "#e08a12",
+           kir: "#d63a4a", mav: "#3a6fd8", panel: "rgba(243,236,220,.94)", panelTxt: "#2a2b33", detay: "rgba(250,246,236,.97)", bakir: "#c07a3a" },
+  tahta: { ink: "#f1f3ea", dim: "rgba(241,243,234,.33)", su: "#8fd0ff", suF: "rgba(143,208,255,.14)", tur: "#ffd36b", sari: "#ffe066",
+           kir: "#ff8a80", mav: "#82b1ff", panel: "rgba(28,54,44,.93)", detay: "rgba(24,46,38,.95)" },
+  neon:  { ink: "#e8f7ff", dim: "rgba(160,220,255,.28)", su: "#33d6ff", suF: "rgba(51,214,255,.12)", tur: "#ff4fd8", sari: "#fff36b",
+           kir: "#ff3d6e", mav: "#3d8bff", panel: "rgba(6,6,14,.9)", detay: "rgba(8,8,18,.95)" },
+};
 const CZ_DRAW = 1.1;   // bir öğenin kendini çizme süresi (sn)
 
 window.buildWorld = function (stage, tl) {
+  const tema = CZ_TEMA[tl.tema] ? tl.tema : "mavi";
+  Object.assign(CZ, { panel: "rgba(10,22,44,.92)", panelTxt: null, detay: "rgba(10,22,44,.92)", bakir: "#e0975a" }, CZ_TEMA[tema]);
+  document.documentElement.classList.add("t-" + tema);
   const NS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(NS, "svg");
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
@@ -88,7 +101,7 @@ WORLDS.baraj = (mk, S, stepT) => {
     S("path", { d: `M${x} ${y} L${tx} ${ty} H${tx + (o.sol ? -1 : 1) * (o.w || 150)}`, fill: "none", stroke: o.renk || CZ.tur, "stroke-width": 2 }, g);
     S("circle", { cx: x, cy: y, r: 5, fill: o.renk || CZ.tur }, g);
     const tx2 = tx + (o.sol ? -1 : 1) * 6;
-    const te = S("text", { x: tx2, y: ty - 12, fill: o.renk || CZ.tur, "font-family": "Montserrat, sans-serif", "font-weight": 800,
+    const te = S("text", { x: tx2, y: ty - 12, fill: o.renk || CZ.tur, "font-family": "M, sans-serif", "font-weight": 800,
       "font-size": o.boy || 26, "letter-spacing": 2, "text-anchor": o.sol ? "end" : "start" }, g);
     te.textContent = text;
     return g;
@@ -123,7 +136,7 @@ WORLDS.baraj = (mk, S, stepT) => {
   const dimG = mk("g", {}, 5, "label", { dur: .6 });
   S("path", { d: `M1050 560 V${G} M1030 560 H1070 M1030 ${G} H1070`, stroke: CZ.sari, "stroke-width": 2.5, fill: "none" }, dimG);
   S("path", { d: `M1040 580 L1050 560 L1060 580 M1040 ${G - 20} L1050 ${G} L1060 ${G - 20}`, stroke: CZ.sari, "stroke-width": 2.5, fill: "none" }, dimG);
-  const dt = S("text", { x: 1030, y: 790, fill: CZ.sari, "font-family": "Montserrat, sans-serif", "font-weight": 800, "font-size": 30, "text-anchor": "end" }, dimG);
+  const dt = S("text", { x: 1030, y: 790, fill: CZ.sari, "font-family": "M, sans-serif", "font-weight": 800, "font-size": 30, "text-anchor": "end" }, dimG);
   dt.textContent = "YÜKSEKLİK = ENERJİ";
   // --- 6: cebri boru + giriş kapağı
   const pc = "M1150 830 L1300 905 L1520 1090";
@@ -157,10 +170,10 @@ WORLDS.baraj = (mk, S, stepT) => {
   // --- 11: jeneratörün içi (büyüteç dairesi)
   const det = mk("g", {}, 11, "label", { dur: .6 });
   S("path", { d: "M1560 900 V712", stroke: CZ.tur, "stroke-width": 2, "stroke-dasharray": "6 6", fill: "none" }, det);
-  S("circle", { cx: 1560, cy: 560, r: 152, fill: "rgba(10,22,44,.92)", stroke: CZ.tur, "stroke-width": 3 }, det);
+  S("circle", { cx: 1560, cy: 560, r: 152, fill: CZ.detay, stroke: CZ.tur, "stroke-width": 3 }, det);
   // stator bobinleri (sol/sağ)
   for (const sx of [-1, 1]) {
-    S("path", { d: `M${1560 + sx * 118} 470 A 120 120 0 0 ${sx > 0 ? 1 : 0} ${1560 + sx * 118} 650`, fill: "none", stroke: "#e0975a", "stroke-width": 16, opacity: .9 }, det);
+    S("path", { d: `M${1560 + sx * 118} 470 A 120 120 0 0 ${sx > 0 ? 1 : 0} ${1560 + sx * 118} 650`, fill: "none", stroke: CZ.bakir, "stroke-width": 16, opacity: .9 }, det);
     for (let k = 0; k < 7; k++) {
       const a = (-.62 + k * .2) * (sx > 0 ? 1 : -1) + (sx > 0 ? 0 : Math.PI);
       S("path", { d: `M${1560 + 104 * Math.cos(a)} ${560 + 104 * Math.sin(a)} L${1560 + 132 * Math.cos(a)} ${560 + 132 * Math.sin(a)}`, stroke: "#8a4a20", "stroke-width": 3 }, det);
@@ -169,11 +182,11 @@ WORLDS.baraj = (mk, S, stepT) => {
   const mag = S("g", {}, det);
   S("rect", { x: -70, y: -24, width: 70, height: 48, fill: CZ.kir }, mag);
   S("rect", { x: 0, y: -24, width: 70, height: 48, fill: CZ.mav }, mag);
-  const tN = S("text", { x: -35, y: 11, fill: "#fff", "font-family": "Montserrat", "font-weight": 900, "font-size": 30, "text-anchor": "middle" }, mag); tN.textContent = "N";
-  const tS = S("text", { x: 35, y: 11, fill: "#fff", "font-family": "Montserrat", "font-weight": 900, "font-size": 30, "text-anchor": "middle" }, mag); tS.textContent = "S";
-  const wire = S("path", { d: "M1680 488 C 1760 470 1780 560 1860 560", fill: "none", stroke: "#e0975a", "stroke-width": 5 }, det);
+  const tN = S("text", { x: -35, y: 11, fill: "#fff", "font-family": "M, sans-serif", "font-weight": 900, "font-size": 30, "text-anchor": "middle" }, mag); tN.textContent = "N";
+  const tS = S("text", { x: 35, y: 11, fill: "#fff", "font-family": "M, sans-serif", "font-weight": 900, "font-size": 30, "text-anchor": "middle" }, mag); tS.textContent = "S";
+  const wire = S("path", { d: "M1680 488 C 1760 470 1780 560 1860 560", fill: "none", stroke: CZ.bakir, "stroke-width": 5 }, det);
   const elec = [0, 1, 2, 3, 4].map(() => S("circle", { r: 7, fill: CZ.sari, opacity: 0 }, det));
-  const tm = S("text", { x: 1560, y: 380, fill: CZ.tur, "font-family": "Montserrat", "font-weight": 800, "font-size": 24, "text-anchor": "middle", "letter-spacing": 2 }, det);
+  const tm = S("text", { x: 1560, y: 380, fill: CZ.tur, "font-family": "M, sans-serif", "font-weight": 800, "font-size": 24, "text-anchor": "middle", "letter-spacing": 2 }, det);
   tm.textContent = "MIKNATIS + BOBİN = AKIM";
   // --- 13: yükseltici trafo
   mk("rect", { x: 1870, y: 900, width: 100, height: 100, rx: 6 }, 13);
@@ -271,11 +284,11 @@ SCENES.cizim = (p, r) => {
   if (p.baslik || p.buyuk) {
     const box = el("div", null, null, r);
     Object.assign(box.style, { display: "flex", flexDirection: "column", alignItems: "center", padding: "22px 54px 26px",
-      background: "radial-gradient(closest-side, rgba(10,22,44,.92), rgba(10,22,44,.6) 70%, rgba(10,22,44,0))" });
+      background: `radial-gradient(closest-side, ${CZ.panel}, ${CZ.panel.replace(/[\d.]+\)$/, ".55)")} 70%, transparent)` });
     if (p.ust) { const e = el("div", null, md(p.ust), box); Object.assign(e.style, { color: CZ.tur, fontWeight: 800, fontSize: "30px", letterSpacing: "4px" }); items.push(e); }
     if (p.baslik) { const e = el("div", "h", md(p.baslik), box); Object.assign(e.style, { fontSize: (p.boy || 84) + "px", letterSpacing: "2px" }); items.push(e); }
     if (p.buyuk) { const e = el("div", "h sari", md(p.buyuk), box); Object.assign(e.style, { fontSize: (p.boy || 150) + "px", textShadow: "0 0 30px rgba(255,200,61,.35)" }); items.push(e); }
-    if (p.alt) { const e = el("div", null, md(p.alt), box); Object.assign(e.style, { color: "rgba(219,231,255,.8)", fontWeight: 700, fontSize: "30px", marginTop: "6px", letterSpacing: "1px" }); items.push(e); }
+    if (p.alt) { const e = el("div", null, md(p.alt), box); Object.assign(e.style, { color: CZ.panelTxt || "rgba(219,231,255,.8)", fontWeight: 700, fontSize: "30px", marginTop: "6px", letterSpacing: "1px" }); items.push(e); }
   }
   return (lt) => items.forEach((e, i) => slide(e, lt, .25 + i * .12, 0, 24, .45));
 };

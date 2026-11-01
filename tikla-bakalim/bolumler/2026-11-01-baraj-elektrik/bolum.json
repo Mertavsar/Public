@@ -188,8 +188,8 @@
       "p": {
         "kamera": [
           1620,
-          690,
-          1.45
+          660,
+          1.4
         ],
         "adim": 11
       }
@@ -336,5 +336,6 @@
     "K2": "2025'te hidroelektriğin Türkiye elektrik üretimindeki payı %16 — Ember, Türkiye Elektrik Görünümü 2026: https://ember-energy.org/tr/chapter/hidroelektrik/",
     "K3": "Yağışlı aylarda pay çok daha yüksek (ör. bir mayıs ayında %43,1) — forbes.com.tr/ekonomi/mayista-elektrik-uretiminde-hidroelektrik-liderligi-surdurdu",
     "K4": "Çalışma ilkesi (potansiyel enerji → türbin → jeneratör, elektromanyetik indüksiyon, yüksek gerilimle iletim) — genel fizik / https://en.wikipedia.org/wiki/Hydroelectricity"
-  }
+  },
+  "tema": "kagit"
 }
