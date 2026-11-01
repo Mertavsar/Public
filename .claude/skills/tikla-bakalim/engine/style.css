@@ -146,3 +146,6 @@ html.dikey .ctahint { left: 0; right: 0; text-align: center; top: 1740px; }
 /* açık renkli fotoğrafta da okunsun */
 html.yatay #tag { background: rgba(5, 10, 20, .72); }
 html.yatay #src { text-shadow: 0 1px 4px #000; }
+
+/* temiz: üstte yazı yok — bölüm şeridi, sahne etiketi, kaynak satırı gizli (kullanıcı isteği). bolum.json "ust_bant": true açar. */
+html.temiz #top, html.temiz #tag, html.temiz #src { display: none !important; }

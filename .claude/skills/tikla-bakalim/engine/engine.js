@@ -912,6 +912,7 @@ window.load = async function (tl, opts = {}) {
   SCW = FORMAT === "yatay" ? 1300 : 940;
   SCALE = FORMAT === "yatay" ? .84 : 1;
   document.documentElement.classList.add(FORMAT);
+  if (!tl.ust_bant) document.documentElement.classList.add("temiz");   // üst bant (bölüm şeridi, etiket, kaynak) varsayılan kapalı
   const stage = document.getElementById("stage");
   BG = background(stage);
   stage.appendChild(document.getElementById("top"));
