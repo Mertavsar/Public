@@ -1,0 +1,55 @@
+{
+ "logo": "../logo.jpg",
+ "cikti": "kapaklar",
+ "kapaklar": [
+  {
+   "ad": "01-90lar-1-milyon",
+   "gorsel": "foto/anadolu1990_sokak.jpg",
+   "odak": "55% 40%",
+   "etiket": "NOSTALJİ",
+   "satirlar": [
+    "90'LARDA CEBİNDE",
+    "1 MİLYON",
+    "[ZENGİN MİYDİN?]"
+   ],
+   "boy": 120,
+   "kredi": "Foto: Karl Oppolzer · CC-BY-SA-3.0 · Wikimedia Commons"
+  },
+  {
+   "ad": "02-baraj-elektrik",
+   "gorsel": "foto/baraj_cizim.png",
+   "odak": "50% 50%",
+   "etiket": "NASIL ÇALIŞIR?",
+   "satirlar": [
+    "SU NASIL",
+    "[ELEKTRİĞE]",
+    "DÖNÜŞÜR?"
+   ],
+   "boy": 140
+  },
+  {
+   "ad": "03-benzin-pahali",
+   "gorsel": null,
+   "ikon": "⛽",
+   "etiket": "GÜNDEM",
+   "satirlar": [
+    "BENZİN NEDEN",
+    "[BU KADAR]",
+    "PAHALI?"
+   ],
+   "boy": 136
+  },
+  {
+   "ad": "04-fransa",
+   "gorsel": "foto/paris.jpg",
+   "odak": "50% 30%",
+   "etiket": "DÜNYA",
+   "satirlar": [
+    "FRANSA'DA",
+    "[NE OLUYOR?]"
+   ],
+   "boy": 140,
+   "kredi": "Foto: Jorge Royan · CC-BY-SA-3.0 · Wikimedia Commons"
+  }
+ ]
+}
