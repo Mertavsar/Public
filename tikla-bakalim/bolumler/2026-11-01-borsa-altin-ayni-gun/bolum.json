@@ -1,0 +1,550 @@
+{
+  "baslik": "Borsa ve altın aynı gün neden düştü? Güvenli liman neden çalışmadı?",
+  "tarih": "2026-11-01",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "düştü",
+    "nakit",
+    "faiz",
+    "güvenli liman"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "yüzde üç virgül altmış dört": "%3,64",
+    "yüzde üç buçuk": "%3,5",
+    "üç bin sekiz yüz seksen dolar": "3.880 $",
+    "yüzde on iki buçuk": "%12,6",
+    "yüzde beşten": "%5'ten",
+    "yüzde on ": "%10 ",
+    "yüzde üç virgül yetmiş beş ile dört": "%3,75 ile %4",
+    "yüz bin liralık": "100.000 ₺'lik",
+    "üç bin altı yüz kırk lira": "3.640 ₺",
+    "dokuz bin dokuz yüz kırk lira": "9.940 ₺",
+    "otuz Ekim": "30 Ekim",
+    "üç Kasım'da": "3 Kasım'da",
+    "yedi haftadır": "7 haftadır",
+    "üç bin beş yüz lira": "3.500 ₺",
+    "altı bin iki yüz yirmi iki liraya": "6.222 ₺'ye"
+  },
+  "kapak": {
+    "ikon": "🪙",
+    "ust": "BORSA VE ALTIN",
+    "buyuk": "AYNI GÜN DÜŞTÜ",
+    "alt": "NEDEN?"
+  },
+  "cta": [
+    {
+      "sahne": 11,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "etiket": "BORSA 30 EKİM",
+      "say": "Geçen cuma borsa tek günde yüzde üç virgül altmış dört düştü. Altın da aynı gün düştü.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "BIST 100 · 30 Ekim · tek günde",
+        "deger": 3.64,
+        "onek": "−%",
+        "ondalik": 2,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Altın da aynı gün *düştü*"
+      },
+      "kaynak": "AA, Dünya (K1)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "etiket": "3 SORU",
+      "say": "Peki altın güvenli liman değil miydi? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🪙",
+        "metin": "ALTIN\n*GÜVENLİ LİMAN* DEĞİL MİYDİ?",
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "etiket": "ABONE OL",
+      "say": "Bu tür konuları her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEM",
+          "*SADE DİLLE*"
+        ],
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "ÜÇ DÜŞÜŞ",
+      "say": "Cuma günü üç şey birden düştü. Borsa İstanbul, altın ve Amerikan teknoloji hisseleri.",
+      "p": {
+        "baslik": "30 Ekim · günlük değişim",
+        "satirlar": [
+          {
+            "ikon": "🇹🇷",
+            "metin": "BIST 100",
+            "deger": "−%3,64",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🪙",
+            "metin": "Ons altın",
+            "deger": "−%3,5",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "💻",
+            "metin": "Nasdaq 100",
+            "deger": "−%1,38",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Kapanış / gün içi veriler"
+      },
+      "kaynak": "AA, Dünya (K1); Reuters atıflı haberler (K3, K4)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "ALTIN",
+      "say": "Ons altın yüzde üç buçuk düşüp üç bin sekiz yüz seksen dolar civarına indi. Bu, bir yılın en düşük seviyelerinden biri.",
+      "p": {
+        "ikon": "🪙",
+        "etiket": "Ons altın · 30 Ekim",
+        "deger": 3880,
+        "sonek": " $",
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "~%3,5 düşüş · bir yılın *en düşük* seviyelerinden"
+      },
+      "kaynak": "Reuters atıflı haberler, Sputnik (K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "GRAM ALTIN",
+      "say": "Türkiye'de gram altın da yaklaşık altı bin iki yüz yirmi iki liraya geriledi.",
+      "p": {
+        "ikon": "🪙",
+        "etiket": "Gram altın · 30 Ekim",
+        "deger": 6222,
+        "sonek": " ₺",
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "~%3,5 düşüş · yaklaşık değer"
+      },
+      "kaynak": "Gazete Kritik, Mynet/Bigpara (K9)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "EKİM TABLOSU",
+      "say": "Türkiye borsasının asıl hikâyesi ise bir aylık. Ekimde yaklaşık yüzde on değer kaybetti.",
+      "p": {
+        "ikon": "📊",
+        "etiket": "BIST 100 · Ekim ayı",
+        "deger": 9.94,
+        "onek": "−%",
+        "ondalik": 2,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "Üst üste *7. haftalık* kayıp"
+      },
+      "kaynak": "TRT Haber, Para Ajansı (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "etiket": "NEDEN",
+      "say": "Peki bu varlıklar neden birlikte düştü?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*BİRLİKTE DÜŞTÜ?*",
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "1. SEBEP",
+      "say": "İlk sebep teknoloji. Perşembe günü Alphabet hisseleri yüzde on iki buçuk civarı düştü. Yapay zekâ harcamalarının karşılığı gelecek mi, endişesi büyüdü.",
+      "p": {
+        "baslik": "1. sebep · teknoloji satışı",
+        "adimlar": [
+          {
+            "ikon": "💸",
+            "metin": "Yapay zekâ *harcaması* arttı"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Alphabet *~%12,6* düştü"
+          },
+          {
+            "ikon": "😟",
+            "metin": "Endişe *yayıldı*"
+          }
+        ]
+      },
+      "kaynak": "Alphabet bölümü K5, K6"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "YAYILDI",
+      "say": "Satış Asya'ya da yayıldı. Güney Kore borsası yüzde beşten fazla düştü.",
+      "p": {
+        "baslik": "Küresel satış · 30 Ekim",
+        "satirlar": [
+          {
+            "ikon": "🇰🇷",
+            "metin": "Kospi (G. Kore)",
+            "deger": "−%5'ten fazla",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🇺🇸",
+            "metin": "Nasdaq 100",
+            "deger": "−%1,38",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🇺🇸",
+            "metin": "S&P 500",
+            "deger": "−%0,30",
+            "renk": "kirmizi"
+          }
+        ]
+      },
+      "kaynak": "Habertürk, Hibya, Sputnik (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEĞEN",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "SIRADA",
+          "*ALTIN VAR*"
+        ],
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEKLENTİ",
+      "say": "Normalde korku büyüyünce insanlar altına kaçar. Buna güvenli liman denir.",
+      "p": {
+        "ikon": "⚓",
+        "satirlar": [
+          "GÜVENLİ LİMAN",
+          "= *KORKUDA SIĞINAK*"
+        ],
+        "boy": 88,
+        "not": "Normal beklenti: korku ↑ altın ↑"
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "2. SEBEP",
+      "say": "Bu sefer tersi oldu. Hisselerde zarar eden yatırımcıya nakit lazım olur. Kârdaki altını satar.",
+      "p": {
+        "baslik": "2. sebep · nakit ihtiyacı",
+        "adimlar": [
+          {
+            "ikon": "📉",
+            "metin": "Hisselerde *zarar*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "*Nakit* lazım olur"
+          },
+          {
+            "ikon": "🪙",
+            "metin": "Altın *satılır*"
+          }
+        ]
+      },
+      "kaynak": "Analist yorumu, Sputnik (K5)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "YORUM",
+      "say": "Analistler altının bu yüzden düşmüş olabileceğini söylüyor. Bu bir yorum, kesin bilgi değil.",
+      "p": {
+        "ikon": "🗣️",
+        "satirlar": [
+          "ANALİST",
+          "*YORUMU*"
+        ],
+        "boy": 120,
+        "not": "kesin değil · olabilir"
+      },
+      "kaynak": "Sputnik (K5)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "3. SEBEP",
+      "say": "Bir de faiz var. Amerikan Merkez Bankası faizi yüzde üç virgül yetmiş beş ile dört arasında sabit tuttu. Faiz yüksek kalınca, faiz getirmeyen altın daha az cazip olabilir.",
+      "p": {
+        "baslik": "3. sebep · faiz (Fed, 28 Ekim)",
+        "satirlar": [
+          {
+            "ikon": "🏦",
+            "metin": "Fed faizi",
+            "deger": "%3,75–4 sabit",
+            "renk": "mavi"
+          },
+          {
+            "ikon": "🪙",
+            "metin": "Altın faiz",
+            "deger": "getirmez",
+            "renk": "sari"
+          },
+          {
+            "ikon": "⚖️",
+            "metin": "Faiz yüksekse",
+            "deger": "altın ↓",
+            "renk": "kirmizi"
+          }
+        ]
+      },
+      "kaynak": "hisse.net, Politikam (K7)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "TÜRKİYE",
+      "say": "Türkiye borsası ise zaten yedi haftadır geriliyordu. Cuma günkü küresel satış üstüne geldi.",
+      "p": {
+        "baslik": "BIST 100 · Ekim",
+        "satirlar": [
+          {
+            "ikon": "🔻",
+            "metin": "Üst üste kayıp hafta",
+            "deger": "7",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "📊",
+            "metin": "Ekim ayı",
+            "deger": "−%9,94",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "💵",
+            "metin": "Dolar bazında",
+            "deger": "−%11,62",
+            "renk": "kirmizi"
+          }
+        ]
+      },
+      "kaynak": "TRT Haber, Dünya, Para Ajansı (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "ÖZET SEBEP",
+      "say": "Kısacası üç etki üst üste bindi. Teknoloji satışı, nakit ihtiyacı ve yüksek faiz.",
+      "p": {
+        "adimlar": [
+          {
+            "ikon": "💻",
+            "metin": "Teknoloji *satışı*"
+          },
+          {
+            "ikon": "💵",
+            "metin": "*Nakit* ihtiyacı"
+          },
+          {
+            "ikon": "🏦",
+            "metin": "*Yüksek* faiz"
+          }
+        ]
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "etiket": "CEBİNE",
+      "say": "Peki bu senin cebine nasıl yansır?",
+      "p": {
+        "ikon": "💳",
+        "metin": "SENİN CEBİNE\n*NASIL YANSIR?*",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "CUMA",
+      "say": "Diyelim yüz bin liralık hisse portföyün var. Cuma günü yaklaşık üç bin altı yüz kırk lira eksilirdi.",
+      "p": {
+        "baslik": "Örnek hesap · portföy temsili",
+        "ikon": "🧾",
+        "ogeler": [
+          "100.000 ₺",
+          "×",
+          "%3,64",
+          "=",
+          "−3.640 ₺"
+        ]
+      },
+      "kaynak": "hesap: 100.000 × 0,0364"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "EKİM",
+      "say": "Ekim boyunca aynı portföy dokuz bin dokuz yüz kırk lira eksilirdi. Endeksi birebir izlediğini varsayarsak.",
+      "p": {
+        "baslik": "Örnek hesap · Ekim ayı",
+        "ikon": "🧾",
+        "ogeler": [
+          "100.000 ₺",
+          "×",
+          "%9,94",
+          "=",
+          "−9.940 ₺"
+        ],
+        "not": "Endeksi izleyen portföy varsayımı"
+      },
+      "kaynak": "hesap: 100.000 × 0,0994"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "ALTIN HESABI",
+      "say": "Aynı yüz bin liralık altın ise cuma günü yaklaşık üç bin beş yüz lira eksilirdi.",
+      "p": {
+        "baslik": "Örnek hesap · altın temsili",
+        "ikon": "🧾",
+        "ogeler": [
+          "100.000 ₺",
+          "×",
+          "%3,5",
+          "=",
+          "−3.500 ₺"
+        ],
+        "not": "Ons altın düşüşüne göre yaklaşık"
+      },
+      "kaynak": "hesap: 100.000 × 0,035"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "DERS",
+      "say": "Panik anlarında birbirinden bağımsız sanılan varlıklar bile aynı yöne gidebilir. Bu bir mekanizma açıklaması, yatırım tavsiyesi değil.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "PANİKTE",
+          "*HER ŞEY* BİRLİKTE",
+          "DÜŞEBİLİR"
+        ],
+        "boy": 88,
+        "not": "yatırım tavsiyesi değildir"
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "takvim",
+      "etiket": "SIRADAKİ",
+      "say": "Takvimde sıradaki durak salı. Ekim enflasyonu üç Kasım'da açıklanacak.",
+      "p": {
+        "gun": "3",
+        "ay": "KASIM",
+        "gunadi": "SALI",
+        "saat": "10.00",
+        "not": "*Ekim* enflasyonu açıklanıyor"
+      },
+      "kaynak": "TÜİK takvimi, basın (K8)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "ÖZET",
+      "say": "Kısacası: borsa da altın da aynı gün düştü, çünkü sebepler üst üste bindi.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "SEBEPLER",
+          "*ÜST ÜSTE* BİNDİ"
+        ],
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "NOT",
+      "say": "Rakamlar otuz Ekim kapanışına göre. Nedenler analist yorumudur, kesin değildir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "RAKAMLAR",
+          "*30 EKİM*"
+        ],
+        "boy": 110,
+        "not": "30 Ekim 2026 kapanışı · yatırım tavsiyesi değildir"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "etiket": "YORUM",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "MERAK ETTİĞİN KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "BIST 100 30 Ekim 2026: günü %3,64 düşüşle 10.759,56 puandan kapattı — https://aa.com.tr/tr/ekonomi/borsa-gunu-dususle-tamamladi/4106741 ; https://www.dunya.com/finans/haberler/borsa-istanbulda-sert-satis-bist-100-gunu-yuzde-364-kayipla-kapatti-haberi-845878",
+    "K2": "BIST 100 Ekim'i %9,94 kayıpla kapattı, üst üste 7. haftalık düşüş; dolar bazında %11,62 — https://www.trtv.net/2026/11/01/bist-100-ekimde-yuzde-10-deger-kaybetti/ ; https://paraajansi.com.tr/piyasalar/son-1-ayda-bist-100-endeksinde-994luk-kayip-yasandi-22231256h",
+    "K3": "Spot altın 30 Ekim'de ~%3,4–3,5 düşüşle ~3.880 $, Ekim 2025'ten beri en düşük seviyelerden biri (Reuters atıflı) — https://anlatilaninotesi.com.tr/20261030/kuresel-borsalarda-kayiplar-buyudu-satislarin-merkezinde-ne-var-1109979179.html ; https://www.haberler.com/haber/altin-neden-dusuyor-altin-dusmeye-devam-edecek-mi-20383810-haberi/",
+    "K4": "Nasdaq 100 −%1,38, S&P 500 −%0,30, Kospi −%5+ (30 Ekim) — https://www.haberturk.com/ekonomi/teknoloji-hisseleri-kuresel-piyasalari-baskiliyor-3923653 ; https://hibya.com/teknoloji-hisselerindeki-satislar-kuresel-piyasalari-baskiladi-1076579",
+    "K5": "Alphabet 29 Ekim'de ~%12,6 düştü; yatırım harcaması endişesi (bkz. 2026-10-31-google-500-milyar K1–K7); altının düşüşü için analist yorumu: diğer varlıklardaki zararı karşılamak için pozisyon kapatma 'olabilir' — https://www.cnbc.com/2026/10/29/alphabet-google-microsoft-msft-shares-today-earnings.html ; https://anlatilaninotesi.com.tr/20261030/kuresel-borsalarda-kayiplar-buyudu-satislarin-merkezinde-ne-var-1109979179.html",
+    "K6": "Alphabet düşüşü Türkçe kaynaklarda — https://www.haberturk.com/ekonomi/google-in-cati-sirketi-alphabet-te-tarihi-dusus-450-mslyar-dolar-silindi-3923587 ; https://n24.com.tr/sirket/alphabette-yapay-zeka-faturasi-500-milyar-dolar-kayip",
+    "K7": "Fed 28 Ekim'de faizi %3,75–4,00 aralığında sabit tuttu (Eylül'de 25 baz puan artırmıştı) — https://www.hisse.net/haber/fed-ekim-ayi-faiz-kararini-acikladi-piyasalarin-bekledigi-haber-geldi-104416 ; https://www.politikam.com/fed-ekim-2026-faiz-karari-aciklandi-faiz-yuzde-kac",
+    "K9": "Gram altın 30 Ekim 2026 ~6.222–6.223 ₺ (günlük ~%3,56 düşüş) — https://www.gazetekritik.com/ekonomi/31-ekim-altin-fiyatlari-gram-altin-6223-tl-ceyrek-altin-ne-kadar/416353 ; https://finans.mynet.com/haber/detay/altin/bugun-ceyrek-altin-kac-tl-31-ekim-cumartesi-2026-gram-tam-cumhuriyet-kapalicarsi-anlik-fiyatlar/582596/",
+    "K8": "TÜİK Ekim enflasyonu 3 Kasım 2026 Salı 10.00 — https://www.gzt.com/ekonomi/ekim-ayi-enflasyon-beklentisi-ne-kadar-tuik-2026-ekim-ayi-enflasyon-ne-zaman-aciklanacak-4274154 ; https://www.cnnturk.com/ekonomi/ekim-2026-enflasyon-beklentisi-ekim-ayi-enflasyonu-ne-zaman-aciklanacak-3480526"
+  }
+}
