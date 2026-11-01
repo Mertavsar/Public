@@ -38,7 +38,7 @@ window.buildWorld = function (stage, tl) {
   const S = (tag, a, par) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); (par || cam).appendChild(e); return e; };
   // mk: dünyaya öğe ekle. kind: stroke (kendini çizer) | fill (belirir) | label | flow | pulse | custom
   const mk = (tag, a, step, kind = "stroke", o = {}) => {
-    const base = kind === "stroke" ? { fill: "none", stroke: CZ.ink, "stroke-width": 2.6, "stroke-linecap": "round", "stroke-linejoin": "round" } : {};
+    const base = kind === "stroke" ? { fill: "none", stroke: CZ.ink, "stroke-width": 3.4, "stroke-linecap": "round", "stroke-linejoin": "round" } : {};
     const e = S(tag, { ...base, ...a }, o.par);
     REG.push({ e, step, kind, delay: o.delay || 0, dur: o.dur || CZ_DRAW });
     return e;
@@ -46,9 +46,11 @@ window.buildWorld = function (stage, tl) {
   // adım → başlangıç zamanı (o adımı ilk gösteren sahnenin başı)
   const cz = tl.scenes.filter(s => s.tip === "cizim");
   const stepT = k => { const s = cz.find(s => (s.p.adim || 0) >= k); return s ? s.t0 : 1e9; };
+  const stepEnd = k => { const s = cz.find(s => (s.p.adim || 0) >= k); return s ? s.t1 : 1e9; };
   const W0 = (window.WORLDS[tl.dunya || "baraj"])(mk, S, stepT);
   REG.forEach(r => {
     r.t = stepT(r.step) + r.delay;
+    r.tEnd = stepEnd(r.step);
     if (r.kind === "stroke" && r.e.getTotalLength) {
       r.len = r.e.getTotalLength() + 2;
       r.e.style.strokeDasharray = r.len;
@@ -80,7 +82,7 @@ window.buildWorld = function (stage, tl) {
         if (r.len) r.e.style.strokeDashoffset = r.len * (1 - eInOut(u));
       } else if (r.kind === "fill") r.e.style.opacity = eOut(u) * (+r.e.dataset.op || 1);
       else if (r.kind === "label") {
-        r.e.style.opacity = eOut(u);
+        r.e.style.opacity = eOut(u) * (1 - clamp((t - r.tEnd) / .4));
         r.e.style.transform = `translateY(${(1 - eOut(u)) * 12}px)`;
       }
     });
@@ -109,17 +111,11 @@ WORLDS.baraj = (mk, S, stepT) => {
   // --- 1: dağlar, zemin, rezervuar, baraj
   mk("polyline", { points: "0,1000 0,560 170,430 320,520 470,370 640,490 800,420 960,540 1120,470 1140,480", stroke: CZ.dim }, 1);
   mk("path", { d: `M1140 ${G} H3400` }, 1, "stroke", { delay: .2 });
-  for (let x = 1480; x < 3400; x += 60) mk("path", { d: `M${x} ${G} l-22 22`, stroke: CZ.dim, "stroke-width": 1.6 }, 1, "stroke", { delay: .5 });
   const water = mk("polygon", { points: "", fill: CZ.suF, stroke: "none" }, 1, "fill", { delay: .6 });
   const surf = mk("path", { d: "", stroke: CZ.su, "stroke-width": 3, fill: "none" }, 1, "fill", { delay: .6 });
   const waves = [0, 1, 2].map(i => mk("path", { d: "", stroke: CZ.su, "stroke-width": 2, fill: "none", opacity: .6 }, 1, "fill", { delay: .8 }));
   // baraj gövdesi (ağırlık barajı kesiti)
   mk("polygon", { points: `1140,460 1232,460 1470,${G} 1140,${G}`, "stroke-width": 3.2 }, 1, "stroke", { delay: .1 });
-  for (let k = 0; k < 9; k++) {
-    const y = 520 + k * 55;
-    mk("path", { d: `M1146 ${y} l${Math.min(40 + k * 26, 300)} 0`, stroke: CZ.dim, "stroke-width": 1.4 }, 1, "stroke", { delay: .7 + k * .04 });
-  }
-  mk("path", { d: `M1100 ${G + 30} H1520`, stroke: CZ.dim, "stroke-dasharray": "10 8" }, 1, "fill", { delay: .9 });
   // --- 2: ev (sağda, ışıklar 15'te yanar)
   mk("polygon", { points: `3200,${G} 3200,860 3360,860 3360,${G}` }, 2);
   mk("polyline", { points: "3182,862 3280,782 3378,862" }, 2, "stroke", { delay: .2 });
