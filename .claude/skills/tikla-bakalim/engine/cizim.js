@@ -290,12 +290,18 @@ SCENES.cizim = (p, r) => {
   // Kapak düzeni: solda dev yazı, sağda çizim (yalnız kapak görseli için)
   if (p.kapak) {
     const k = p.kapak;
+    const dik = FORMAT !== "yatay";
     const pan = el("div", null, null, r);
-    Object.assign(pan.style, { position: "absolute", left: "0", top: "0", bottom: "0", width: "1150px",
-      background: "linear-gradient(90deg, rgba(247,241,227,1) 0%, rgba(247,241,227,.97) 62%, rgba(247,241,227,0) 100%)" });
+    Object.assign(pan.style, dik
+      ? { position: "absolute", left: "0", right: "0", top: "0", height: "980px",
+          background: "linear-gradient(180deg, rgba(247,241,227,1) 0%, rgba(247,241,227,.97) 70%, rgba(247,241,227,0) 100%)" }
+      : { position: "absolute", left: "0", top: "0", bottom: "0", width: "1150px",
+          background: "linear-gradient(90deg, rgba(247,241,227,1) 0%, rgba(247,241,227,.97) 62%, rgba(247,241,227,0) 100%)" });
     const col = el("div", null, null, r);
-    Object.assign(col.style, { position: "absolute", left: "80px", top: "0", bottom: "0", width: "1000px", display: "flex",
-      flexDirection: "column", justifyContent: "center", alignItems: "flex-start", textAlign: "left" });
+    Object.assign(col.style, dik
+      ? { position: "absolute", left: "60px", right: "60px", top: "190px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }
+      : { position: "absolute", left: "80px", top: "0", bottom: "0", width: "1000px", display: "flex",
+          flexDirection: "column", justifyContent: "center", alignItems: "flex-start", textAlign: "left" });
     if (k.rozet) { const e = el("div", null, k.rozet, col); Object.assign(e.style, { background: CZ.tur, color: "#fff", fontWeight: 900, fontSize: "46px",
       padding: "10px 26px", borderRadius: "12px", letterSpacing: "2px", marginBottom: "26px", transform: "rotate(-2deg)" }); }
     (k.satirlar || []).forEach(t => { const e = el("div", "h", md(t), col);
