@@ -49,7 +49,8 @@
         "hud": {
           "halka": true,
           "iz": true,
-          "damla": true
+          "damla": true,
+          "saat": true
         },
         "ust": "FLORIDA · 1 KASIM",
         "buyuk": "1 DAKİKADA\n8 KM",
@@ -163,7 +164,8 @@
         },
         "hud": {
           "iz": true,
-          "veri": true
+          "veri": true,
+          "firtina": true
         }
       },
       "kaynak": "K3"
@@ -185,7 +187,9 @@
         },
         "hud": {
           "iz": true,
-          "kaynak": "ATC TELSİZ KAYDI · BASIN"
+          "kaynak": "ATC TELSİZ KAYDI · BASIN",
+          "saat": true,
+          "firtina": true
         }
       },
       "kaynak": "K4"
@@ -207,7 +211,8 @@
         },
         "hud": {
           "iz": true,
-          "veri": true
+          "veri": true,
+          "saat": true
         }
       }
     },
@@ -230,7 +235,8 @@
           "iz": true,
           "veri": true,
           "halka": true,
-          "damla": true
+          "damla": true,
+          "saat": true
         }
       },
       "kaynak": "K2"
@@ -253,7 +259,8 @@
         "hud": {
           "iz": true,
           "damla": true,
-          "kaynak": "ADS-B · FLIGHTRADAR24"
+          "kaynak": "ADS-B · FLIGHTRADAR24",
+          "saat": true
         },
         "ust": "DİKEY HIZ",
         "buyuk": "32.000+ ft/dk",
@@ -288,7 +295,8 @@
           "iz": true,
           "damla": true,
           "veri": true,
-          "kaynak": "FAA · ABC NEWS"
+          "kaynak": "FAA · ABC NEWS",
+          "saat": true
         }
       },
       "kaynak": "K2"
@@ -318,7 +326,8 @@
         "hud": {
           "iz": true,
           "damla": true,
-          "son": true
+          "son": true,
+          "saat": true
         }
       },
       "kaynak": "K5"
@@ -347,7 +356,8 @@
         },
         "hud": {
           "iz": true,
-          "son": true
+          "son": true,
+          "saat": true
         }
       },
       "kaynak": "K1"
@@ -375,7 +385,8 @@
           ]
         },
         "hud": {
-          "temsili": false
+          "temsili": false,
+          "saat": true
         }
       },
       "kaynak": "K6"
@@ -404,7 +415,8 @@
         },
         "hud": {
           "iz": true,
-          "damla": true
+          "damla": true,
+          "saat": true
         },
         "ust": "NEDEN?",
         "baslik": "HENÜZ\nBİLİNMİYOR",
@@ -436,7 +448,8 @@
         },
         "hud": {
           "iz": true,
-          "damla": true
+          "damla": true,
+          "saat": true
         },
         "ust": "NTSB İNCELEMESİ",
         "baslik": "İLK RAPOR\n~30 GÜN",
@@ -469,7 +482,8 @@
         "hud": {
           "iz": true,
           "damla": true,
-          "temsili": false
+          "temsili": false,
+          "saat": true
         },
         "alt": "Gelişmeleri takip et · abone ol",
         "boy": 100,
@@ -488,5 +502,6 @@
     "K7": "Neden belirlenmedi; buzlanma/türbülans uzman görüşü, bulgu değil — NBC Miami, aerocorner.com, Al Jazeera",
     "K8": "FAA ve NTSB inceliyor; ön rapor genelde ~30 gün içinde — FAA açıklaması, ntsb.gov uygulaması",
     "NOT": "3D rota temsilidir: basına yansıyan ADS-B değerleri (irtifa, dikey hız, sağa dönüş, son sinyal) ile kuruldu; ham iz verisi değil. Şehir çizgileri temsili."
-  }
+  },
+  "tema": "kagit"
 }

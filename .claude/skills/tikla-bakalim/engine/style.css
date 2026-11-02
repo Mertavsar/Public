@@ -190,3 +190,10 @@ html.s3d.yatay #capline { top: 960px; width: 1500px; font-size: 44px; }
 html.s3d #capline span.done { color: #f2f5f9; }
 html.s3d #capline span.on { color: #fff; background: #e3141b; border-radius: 10px; padding: 0 10px; text-shadow: none; box-decoration-break: clone; }
 html.s3d { --sari: #ff3b45; }
+
+/* 3D kâğıt teması: kanalın mühendis defteri dili */
+html.s3d.t3-kagit #stage { background: #f1e9d6; }
+html.s3d.t3-kagit { --sari: #e3141b; --ink: #2a2b33; }
+html.s3d.t3-kagit #capline { color: rgba(42,43,51,.32); text-shadow: 0 0 10px #f1e9d6, 0 0 4px #f1e9d6; }
+html.s3d.t3-kagit #capline span.done { color: #2a2b33; }
+html.s3d.t3-kagit #capline span.on { color: #fff; background: #e3141b; text-shadow: none; }

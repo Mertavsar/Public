@@ -46,14 +46,18 @@ function stateAt(s) {
 
 window.buildWorld3D = function (stage, tl) {
   const T = window.THREE;
+  // tema: "kagit" = kanalın mühendis defteri dili (krem kâğıt, mürekkep, kırmızı keçeli kalem)
+  const KG = tl.tema === "kagit";
+  document.documentElement.classList.add(KG ? "t3-kagit" : "t3-gece");
+  const BGC = KG ? 0xf1e9d6 : 0x05070d, INK = 0x2a2b33;
   const canvas = document.createElement("canvas");
   canvas.width = W; canvas.height = H;
   Object.assign(canvas.style, { position: "absolute", inset: "0", width: W + "px", height: H + "px" });
   stage.appendChild(canvas);
   const R = new T.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
-  R.setPixelRatio(1); R.setSize(W, H, false); R.setClearColor(0x05070d, 1);
+  R.setPixelRatio(1); R.setSize(W, H, false); R.setClearColor(BGC, 1);
   const scene = new T.Scene();
-  scene.fog = new T.FogExp2(0x05070d, .0038);
+  scene.fog = new T.FogExp2(BGC, KG ? .0019 : .0038);
   const cam = new T.PerspectiveCamera(FORMAT === "yatay" ? 45 : 62, W / H, .1, 2000);
   // dikeyde hedef ekranın ~%40'ında dursun (altyazı ve veri kutusu altta)
   if (FORMAT !== "yatay") cam.setViewOffset(W, H, 0, 190, W, H);
@@ -72,14 +76,34 @@ window.buildWorld3D = function (stage, tl) {
   const cityG = new T.BufferGeometry();
   cityG.setAttribute("position", new T.Float32BufferAttribute(cp, 3));
   cityG.setAttribute("color", new T.Float32BufferAttribute(cc, 3));
-  scene.add(new T.Points(cityG, new T.PointsMaterial({ size: .5, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: .9, depthWrite: false })));
+  if (!KG) scene.add(new T.Points(cityG, new T.PointsMaterial({ size: .5, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: .9, depthWrite: false })));
+  if (KG) {
+    const gl = [], gl2 = [], sea = [], hw = [];
+    for (let x = -460; x <= 150; x += 5) gl.push(x, 0, -320, x, 0, 320);
+    for (let z = -320; z <= 320; z += 5) gl.push(-460, 0, z, 150, 0, z);
+    for (let x = -460; x <= 150; x += 25) gl2.push(x, .01, -320, x, .01, 320);
+    for (let z = -320; z <= 320; z += 25) gl2.push(-460, .01, z, 150, .01, z);
+    for (let z = -320; z <= 320; z += 3) sea.push(158 + 6 * Math.sin(z * .05), .01, z, 460, .01, z);
+    for (const zz of [-110, 6, 94]) hw.push(-460, .02, zz, 150, .02, zz + 8);
+    for (const xx of [-210, -60, 90]) hw.push(xx, .02, -320, xx + 10, .02, 320);
+    const LS = (arr, col, op) => { const g = new T.BufferGeometry(); g.setAttribute("position", new T.Float32BufferAttribute(arr, 3));
+      scene.add(new T.LineSegments(g, new T.LineBasicMaterial({ color: col, transparent: true, opacity: op, depthWrite: false }))); };
+    LS(gl, INK, .1); LS(gl2, INK, .24); LS(sea, 0x2f7fd8, .3); LS(hw, INK, .65);
+    // şehir blokları: küçük mürekkep kareler (yerleşim)
+    const bl = [];
+    for (let i = 0; i < 2600; i++) { const x = -300 + rnd() * 440, z = -260 + rnd() * 520, w = .8 + rnd() * 1.6;
+      if (Math.hypot(x - 60, z - 60) < 200 || rnd() < .25) bl.push(x, .02, z, x + w, .02, z, x + w, .02, z, x + w, .02, z + w, x + w, .02, z + w, x, .02, z + w, x, .02, z + w, x, .02, z); }
+    LS(bl, INK, .38);
+  }
   // kıyı çizgisi + okyanus üstünde seyrek ızgara
   const coast = [];
   for (let z = -320; z < 320; z += 4) coast.push(150 + 6 * Math.sin(z * .05), .03, z, 150 + 6 * Math.sin((z + 4) * .05), .03, z + 4);
   for (let x = 170; x <= 460; x += 20) coast.push(x, .02, -320, x, .02, 320);
   for (let z = -320; z <= 320; z += 20) coast.push(160, .02, z, 460, .02, z);
   const coastG = new T.BufferGeometry(); coastG.setAttribute("position", new T.Float32BufferAttribute(coast, 3));
-  scene.add(new T.LineSegments(coastG, new T.LineBasicMaterial({ color: 0x5f7896, transparent: true, opacity: .35 })));
+  if (!KG) scene.add(new T.LineSegments(coastG, new T.LineBasicMaterial({ color: 0x5f7896, transparent: true, opacity: .35 })));
+  else { const cst = []; for (let z = -320; z < 320; z += 4) cst.push(150 + 6 * Math.sin(z * .05), .03, z, 150 + 6 * Math.sin((z + 4) * .05), .03, z + 4);
+    const g = new T.BufferGeometry(); g.setAttribute("position", new T.Float32BufferAttribute(cst, 3)); scene.add(new T.LineSegments(g, new T.LineBasicMaterial({ color: INK }))); }
 
   // --- yağmur: kısa dikey çizgiler; fırtına hücresinde yoğun (dalışın başladığı yer) ---
   const N = 16000, rp = [];
@@ -90,13 +114,20 @@ window.buildWorld3D = function (stage, tl) {
     rp.push(x, y, z, x - .15, y - l, z);
   }
   const ptsG = new T.BufferGeometry(); ptsG.setAttribute("position", new T.Float32BufferAttribute(rp, 3));
-  const pts = new T.LineSegments(ptsG, new T.LineBasicMaterial({ color: 0xc9d6e6, transparent: true, opacity: .28, depthWrite: false }));
+  const pts = new T.LineSegments(ptsG, new T.LineBasicMaterial({ color: KG ? 0x55708f : 0xc9d6e6, transparent: true, opacity: KG ? .2 : .28, depthWrite: false }));
   scene.add(pts);
 
+  let stormRing = null;
+  if (KG) {
+    const rr = []; for (let k = 0; k < 96; k++) { const a = k / 96 * Math.PI * 2, b = (k + .55) / 96 * Math.PI * 2;
+      for (const y of [.05, 70]) rr.push(30 + 70 * Math.cos(a), y, 20 + 60 * Math.sin(a), 30 + 70 * Math.cos(b), y, 20 + 60 * Math.sin(b)); }
+    const g = new T.BufferGeometry(); g.setAttribute("position", new T.Float32BufferAttribute(rr, 3));
+    stormRing = new T.LineSegments(g, new T.LineBasicMaterial({ color: 0x2f7fd8, transparent: true, opacity: .55 })); scene.add(stormRing);
+  }
   // --- tel kafes Learjet (burun +x, ~4 birim; gerçek boyutun çok üstünde — görünür olsun diye) ---
   const plane = new T.Group();
-  const fillM = new T.MeshBasicMaterial({ color: U3.turF, transparent: true, opacity: .26, side: T.DoubleSide, depthWrite: false });
-  const lineM = new T.LineBasicMaterial({ color: U3.tur });
+  const fillM = new T.MeshBasicMaterial({ color: KG ? 0xe3141b : U3.turF, transparent: true, opacity: KG ? .14 : .26, side: T.DoubleSide, depthWrite: false });
+  const lineM = new T.LineBasicMaterial({ color: KG ? INK : U3.tur });
   const add = (geo, wire) => {
     plane.add(new T.Mesh(geo, fillM));
     plane.add(new T.LineSegments(wire ? new T.WireframeGeometry(geo) : new T.EdgesGeometry(geo, 25), lineM));
@@ -120,9 +151,11 @@ window.buildWorld3D = function (stage, tl) {
   // --- iz, düşey damla çizgileri, son sinyal ---
   const trailG = new T.BufferGeometry();
   const trail = new T.Line(trailG, new T.LineBasicMaterial({ color: U3.sari, transparent: true, opacity: .95 }));
+  const markerM = new T.MeshBasicMaterial({ color: 0xe3141b, transparent: true, opacity: .85 });
+  let marker = null;
   scene.add(trail);
   const dropG = new T.BufferGeometry();
-  const drops = new T.LineSegments(dropG, new T.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: .3 }));
+  const drops = new T.LineSegments(dropG, new T.LineBasicMaterial({ color: KG ? INK : 0xffffff, transparent: true, opacity: KG ? .22 : .3 }));
   scene.add(drops);
   const last = stateAt(80);
   const lastDot = new T.Mesh(new T.SphereGeometry(.7, 12, 8), new T.MeshBasicMaterial({ color: U3.sari }));
@@ -151,6 +184,24 @@ window.buildWorld3D = function (stage, tl) {
   const repr = el("div", "", "temsili rota · basına yansıyan ADS-B verilerine göre", hud);
   Object.assign(repr.style, { position: "absolute", right: "40px", bottom: FORMAT === "yatay" ? "18px" : "438px", fontFamily: mono, fontSize: "18px", color: "rgba(232,238,246,.45)" });
 
+  const rul = el("div", null, null, hud);
+  Object.assign(rul.style, { position: "absolute", left: "70px", right: "70px", top: FORMAT === "yatay" ? "60px" : "1475px", height: "64px", fontFamily: mono, fontWeight: 800 });
+  rul.innerHTML = `<div style="position:absolute;left:0;right:0;top:30px;height:6px;border-radius:3px;background:${KG ? "rgba(42,43,51,.18)" : "rgba(255,255,255,.18)"}"></div>
+    <div class="rf" style="position:absolute;left:0;top:30px;height:6px;border-radius:3px;background:#e3141b;width:0"></div>
+    ${Array.from({ length: 9 }, (_, k) => `<div style="position:absolute;left:${k * 12.5}%;top:24px;width:2px;height:18px;margin-left:-1px;background:${KG ? "#2a2b33" : "#fff"};opacity:.5"></div>`).join("")}
+    <div class="rk" style="position:absolute;top:-6px;transform:translateX(-50%);font-size:26px;color:#fff;background:#e3141b;padding:0 10px;border-radius:8px">00:00</div>
+    <div style="position:absolute;right:0;top:44px;font-size:18px;color:${KG ? "#2a2b33" : "#fff"};opacity:.6">SON SİNYAL</div>
+    <div style="position:absolute;left:0;top:44px;font-size:18px;color:${KG ? "#2a2b33" : "#fff"};opacity:.6">TIRMANIŞ İSTEĞİ</div>`;
+  const rf = rul.querySelector(".rf"), rk = rul.querySelector(".rk");
+  if (KG) {
+    Object.assign(box.style, { color: "#2a2b33", background: "rgba(250,246,236,.95)", borderLeft: "8px solid #e3141b", boxShadow: "0 6px 18px rgba(60,40,20,.18)" });
+    Object.assign(chip.style, { background: "transparent", color: "#e3141b", border: "4px solid #e3141b", borderRadius: "6px", fontSize: "24px", transform: "translateX(-50%) rotate(-5deg)", padding: "4px 14px" });
+    lastLbl.style.textShadow = "0 0 8px #f1e9d6, 0 0 3px #f1e9d6";
+    repr.style.color = "rgba(42,43,51,.5)";
+    rings.forEach(c => c.setAttribute("stroke", "#e3141b"));
+  }
+  const stormLbl = el("div", null, "FIRTINA HÜCRESİ", hud);
+  Object.assign(stormLbl.style, { position: "absolute", fontFamily: mono, fontWeight: 900, fontSize: "24px", letterSpacing: "2px", color: "#2f7fd8", whiteSpace: "nowrap", opacity: 0 });
   const sc = tl.scenes.filter(s => s.tip === "uc3d");
   const sceneAt = t => { let i = 0; for (let k = 0; k < sc.length; k++) if (t >= sc[k].t0) i = k; return i; };
   const sAt = (s, t) => { const [a, b] = s.p.ucus || [0, 0]; return lerp(a, b, clamp((t - s.t0) / Math.max(.01, s.t1 - s.t0))); };
@@ -195,7 +246,23 @@ window.buildWorld3D = function (stage, tl) {
     dropG.setAttribute("position", new T.Float32BufferAttribute(dp.length ? dp : [0, 0, 0, 0, 0, 0], 3));
     drops.visible = dp.length > 0;
     lastDot.visible = !!hd.son && fs >= 79.5;
+    const dist0 = Math.hypot(P[0] - st.x, P[1] - st.y, P[2] - st.z);
+    if (KG) {
+      if (marker) { scene.remove(marker); marker.geometry.dispose(); marker = null; }
+      // keçeli kalem izi uçağın kuyruğunda biter (gövdeyi örtmesin); kalınlık mesafeye göre
+      const v = []; for (let k = 0; k < tp.length - 18; k += 3) v.push(new T.Vector3(tp[k], tp[k + 1], tp[k + 2]));
+      if (v.length >= 4 && hd.iz !== false) {
+        const rad = Math.min(.5, Math.max(.06, dist0 * .006));
+        marker = new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(v), Math.min(400, v.length * 2), rad, 6, false), markerM);
+        scene.add(marker);
+      }
+      trail.visible = false;
+    }
     R.render(scene, cam);
+    rul.style.opacity = hd.saat ? 1 : 0;
+    if (hd.saat) { const q = clamp(fs / 80); rf.style.width = q * 100 + "%"; rk.style.left = q * 100 + "%";
+      const sec = Math.max(0, Math.min(80, Math.round(fs))); rk.textContent = "0" + Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0"); }
+    if (stormRing) { const [sx, sy, sz] = proj(30, 70, -42); stormLbl.style.left = sx + "px"; stormLbl.style.top = sy + "px"; stormLbl.style.opacity = hd.firtina && sz < 1 ? 1 : 0; }
     // HUD
     const [px, py, pz] = proj(st.x, st.y, st.z);
     const dist = Math.hypot(P[0] - st.x, P[1] - st.y, P[2] - st.z);
@@ -208,7 +275,7 @@ window.buildWorld3D = function (stage, tl) {
     });
     box.style.opacity = hd.veri ? 1 : 0;
     if (hd.veri) {
-      const vsTxt = st.vs < -500 ? `<span style="color:#fff">−${fmt(Math.round(-st.vs / 250) * 250)} ft/dk</span>` : st.vs > 300 ? `+${fmt(st.vs)} ft/dk` : "0 ft/dk";
+      const vsTxt = st.vs < -500 ? `<span style="color:${KG ? "#e3141b" : "#fff"}">−${fmt(Math.round(-st.vs / 250) * 250)} ft/dk</span>` : st.vs > 300 ? `+${fmt(st.vs)} ft/dk` : "0 ft/dk";
       box.innerHTML = `<span style="color:#ff4d57">İRTİFA</span> ${fmt(Math.round(st.alt / 50) * 50)} ft · ${(st.alt * .3048 / 1000).toFixed(1).replace(".", ",")} km<br>` +
         `<span style="color:#ff4d57">DİKEY HIZ</span> ${vsTxt}`;
     }
@@ -227,10 +294,12 @@ SCENES.uc3d = (p, r) => {
     paddingTop: FORMAT === "yatay" ? "80px" : "330px" });
   const items = [];
   const mk = (txt, css, cls) => { const e = el("div", cls || null, md(txt), r); Object.assign(e.style, css); items.push(e); return e; };
+  const kg = document.documentElement.classList.contains("t3-kagit");
+  const ink = kg ? "#2a2b33" : "#fff", sh = kg ? "0 0 14px #f1e9d6, 0 0 5px #f1e9d6" : "0 4px 18px #000";
   if (p.ust) mk(p.ust, { color: "#fff", background: "#e3141b", fontWeight: 900, fontSize: "30px", letterSpacing: "3px", padding: "6px 20px", borderRadius: "10px", marginBottom: "10px" });
-  if (p.baslik) mk(p.baslik, { fontSize: (p.boy || 84) + "px", color: "#fff", textShadow: "0 4px 18px #000", margin: "8px 40px", textAlign: "center" }, "h");
-  if (p.buyuk) mk(p.buyuk, { fontSize: (p.boy || 150) + "px", color: "#fff", textShadow: "0 0 34px rgba(227,20,27,.75), 0 4px 18px #000" }, "h");
-  if (p.alt) mk(p.alt, { color: "rgba(232,238,246,.85)", fontWeight: 700, fontSize: "32px", marginTop: "8px", textShadow: "0 2px 10px #000", textAlign: "center", padding: "0 50px" });
+  if (p.baslik) mk(p.baslik, { fontSize: (p.boy || 84) + "px", color: ink, textShadow: sh, margin: "8px 40px", textAlign: "center" }, "h");
+  if (p.buyuk) mk(p.buyuk, { fontSize: (p.boy || 150) + "px", color: kg ? "#e3141b" : "#fff", textShadow: kg ? sh : "0 0 34px rgba(227,20,27,.75), 0 4px 18px #000" }, "h");
+  if (p.alt) mk(p.alt, { color: kg ? "#2a2b33" : "rgba(232,238,246,.85)", fontWeight: 700, fontSize: "32px", marginTop: "8px", textShadow: sh, textAlign: "center", padding: "0 50px" });
   if (p.logo && p.src) { const im = el("img", null, null, r); im.src = p.src;
     Object.assign(im.style, { width: "300px", height: "300px", borderRadius: "50%", marginTop: "30px", boxShadow: "0 0 0 8px #fff, 0 20px 50px rgba(0,0,0,.6)" }); items.push(im); }
   return lt => items.forEach((e, i) => slide(e, lt, .2 + i * .12, 0, 24, .45));
