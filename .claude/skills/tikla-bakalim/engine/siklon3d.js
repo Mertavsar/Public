@@ -57,12 +57,12 @@ window.build3D_siklon = function (stage, tl) {
   const fcG = new T.BufferGeometry(), fc = new T.LineSegments(fcG, new T.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: .7 })); scene.add(fc);
 
   // --- dalgalı okyanus (tel örgü yüzey; fırtınanın altında dalga büyür) ---
-  const OX = 90, OZ = 70, ocean = new T.PlaneGeometry(900, 700, OX, OZ); ocean.rotateX(-Math.PI / 2); ocean.translate(30, 0, 0);
+  const OX = 60, OZ = 46, ocean = new T.PlaneGeometry(900, 700, OX, OZ); ocean.rotateX(-Math.PI / 2); ocean.translate(30, 0, 0);
   const oBase = ocean.attributes.position.array.slice();
   const oceanM = new T.Mesh(ocean, new T.MeshBasicMaterial({ color: 0x2b5c9a, wireframe: true, transparent: true, opacity: .28, depthWrite: false }));
   scene.add(oceanM);
   // --- yağmur perdeleri (gözün çevresinde düşen çizgiler) ---
-  const RN = 5000, rainG = new T.BufferGeometry(), rainP = new Float32Array(RN * 6), rainM = [];
+  const RN = 2200, rainG = new T.BufferGeometry(), rainP = new Float32Array(RN * 6), rainM = [];
   for (let i = 0; i < RN; i++) rainM.push(10 + Math.pow(rnd(), .7) * 75, rnd() * Math.PI * 2, rnd());
   rainG.setAttribute("position", new T.BufferAttribute(rainP, 3));
   const rain = new T.LineSegments(rainG, new T.LineBasicMaterial({ color: 0xbcd0e8, transparent: true, opacity: .22, depthWrite: false })); scene.add(rain);
@@ -70,7 +70,7 @@ window.build3D_siklon = function (stage, tl) {
   const flashM = new T.SpriteMaterial({ map: dotTex, color: 0xdfe8ff, transparent: true, opacity: 0, depthWrite: false, blending: T.AdditiveBlending });
   const flashes = [0, 1, 2].map(() => { const sp = new T.Sprite(flashM.clone()); sp.scale.set(40, 40, 1); scene.add(sp); return sp; });
   // --- bulut sarmalı: 4 kol, göz duvarı yoğun; saat yönünün tersine döner (kuzey yarımküre) ---
-  const N = 22000, P = new Float32Array(N * 3), meta = [];
+  const N = 15000, P = new Float32Array(N * 3), meta = [];
   for (let i = 0; i < N; i++) {
     const wall = i < N * .3;
     const r = wall ? 7 + rnd() * 9 : 10 + Math.pow(rnd(), .8) * 80;
@@ -88,7 +88,8 @@ window.build3D_siklon = function (stage, tl) {
   cloudG.setAttribute("color", new T.BufferAttribute(CC, 3));
   const cloud = new T.Points(cloudG, new T.PointsMaterial({ vertexColors: true, size: 2.0, map: dotTex, sizeAttenuation: true, transparent: true, opacity: .4, depthWrite: false }));
   scene.add(cloud);
-  const haze = new T.Points(cloudG, new T.PointsMaterial({ color: 0xc8d6ea, size: 7, map: dotTex, sizeAttenuation: true, transparent: true, opacity: .06, depthWrite: false, blending: T.AdditiveBlending }));
+  const hazeG = new T.BufferGeometry(), HN = Math.floor(N / 5), HP = new Float32Array(HN * 3); hazeG.setAttribute("position", new T.BufferAttribute(HP, 3));
+  const haze = new T.Points(hazeG, new T.PointsMaterial({ color: 0xc8d6ea, size: 7, map: dotTex, sizeAttenuation: true, transparent: true, opacity: .06, depthWrite: false, blending: T.AdditiveBlending }));
   scene.add(haze);
   // göz halkası
   const eyeRing = new T.Mesh(new T.RingGeometry(6, 6.8, 64), new T.MeshBasicMaterial({ color: 0xff2d3a, side: T.DoubleSide, transparent: true, opacity: 0 }));
@@ -164,6 +165,8 @@ window.build3D_siklon = function (stage, tl) {
       P[k * 3] = ex + r * Math.cos(th); P[k * 3 + 1] = y0 * (.4 + .6 * pw); P[k * 3 + 2] = ez + r * Math.sin(th);
     }
     cloudG.attributes.position.needsUpdate = true;
+    for (let k = 0; k < HN; k++) { HP[k * 3] = P[k * 15]; HP[k * 3 + 1] = P[k * 15 + 1]; HP[k * 3 + 2] = P[k * 15 + 2]; }
+    hazeG.attributes.position.needsUpdate = true;
     if (Math.abs((cloud._pw || 1) - pw) > .01) { cloud._pw = pw;
       for (let k = 0; k < N * 3; k += 3) { CC[k] = lerp(.25, CCw[k], pw); CC[k + 1] = lerp(.55, CCw[k + 1], pw); CC[k + 2] = lerp(1, CCw[k + 2], pw); }
       cloudG.attributes.color.needsUpdate = true; }
