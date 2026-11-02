@@ -318,7 +318,12 @@ SCENES.uc3d = (p, r) => {
   Object.assign(r.style, { left: "0", right: "auto", top: "0", width: W + "px", height: H + "px", justifyContent: "flex-start",
     paddingTop: FORMAT === "yatay" ? "80px" : "330px" });
   const items = [];
-  const mk = (txt, css, cls) => { const e = el("div", cls || null, md(txt), r); Object.assign(e.style, css); items.push(e); return e; };
+  // koyu panel: parlak 3D sahne (beyaz bulut vb.) üstünde yazı okunsun
+  const kgx = document.documentElement.classList.contains("t3-kagit");
+  const host = (p.carp || p.panel) && !kgx ? el("div", null, null, r) : r;
+  if (host !== r) Object.assign(host.style, { display: "flex", flexDirection: "column", alignItems: "center", background: "rgba(4,7,14,.8)",
+    borderRadius: "26px", padding: "20px 38px 24px", margin: "0 40px", boxShadow: "0 20px 60px rgba(0,0,0,.6)" });
+  const mk = (txt, css, cls) => { const e = el("div", cls || null, md(txt), host); Object.assign(e.style, css); items.push(e); return e; };
   const kg = document.documentElement.classList.contains("t3-kagit");
   const ink = kg ? "#2a2b33" : "#fff", sh = kg ? "0 0 14px #f1e9d6, 0 0 5px #f1e9d6" : "0 4px 18px #000";
   if (p.ust) mk(p.ust, { color: "#fff", background: "#e3141b", fontWeight: 900, fontSize: "30px", letterSpacing: "3px", padding: "6px 20px", borderRadius: "10px", marginBottom: "10px" });
@@ -327,5 +332,12 @@ SCENES.uc3d = (p, r) => {
   if (p.alt) mk(p.alt, { color: kg ? "#2a2b33" : "rgba(232,238,246,.85)", fontWeight: 700, fontSize: "32px", marginTop: "8px", textShadow: sh, textAlign: "center", padding: "0 50px" });
   if (p.logo && p.src) { const im = el("img", null, null, r); im.src = p.src;
     Object.assign(im.style, { width: "300px", height: "300px", borderRadius: "50%", marginTop: "30px", boxShadow: "0 0 0 8px #fff, 0 20px 50px rgba(0,0,0,.6)" }); items.push(im); }
-  return lt => items.forEach((e, i) => slide(e, lt, .2 + i * .12, 0, 24, .45));
+  let fl = null;
+  if (p.carp) { fl = el("div", null, null, r); Object.assign(fl.style, { position: "absolute", inset: "0", background: "#fff", pointerEvents: "none" }); }
+  return lt => {
+    if (p.carp) {   // başlık ekrana çarpar: büyükten küçülür, beyaz flaş söner
+      items.forEach((e, i) => { const u = clamp((lt - i * .08) / .22); e.style.opacity = u > 0 ? 1 : 0; e.style.transform = `scale(${lerp(2.4, 1, eOut(u))}) rotate(${lerp(-4, 0, u)}deg)`; });
+      fl.style.opacity = Math.max(0, .75 - lt * 2.6);
+    } else items.forEach((e, i) => slide(e, lt, .2 + i * .12, 0, 24, .45));
+  };
 };

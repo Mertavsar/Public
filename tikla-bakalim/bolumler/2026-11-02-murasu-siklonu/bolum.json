@@ -43,22 +43,29 @@
         "kam": {
           "mod": "sabit",
           "konum": [
-            100,
-            62,
-            165
+            33,
+            650,
+            70
           ],
           "konum2": [
             72,
             40,
             128
           ],
-          "hedef": "goz"
+          "hedef": "goz",
+          "hizli": 2.2
         },
         "hud": {
-          "ruzgar": true
-        }
+          "ruzgar": true,
+          "ruzgarAlt": true,
+          "sars": true
+        },
+        "carp": true,
+        "baslik": "BİR HAFTADA\n*2. SİKLON*",
+        "alt": "İlki 3 can aldı · 180.000 kişi tahliye edildi",
+        "boy": 100
       },
-      "kaynak": "K1"
+      "kaynak": "K1, K5"
     },
     {
       "bolum": "hook",
@@ -86,7 +93,7 @@
         "hud": {
           "sehir": true
         },
-        "ust": "HİNDİSTAN · 2 KASIM 2026"
+        "ust": "28 EKİM ARNAB → 2 KASIM MURASU"
       },
       "kaynak": "K2"
     },
@@ -556,6 +563,7 @@
     "K2": "Bir haftada ikinci siklon; APSDMA: ~30.000 kişinin tahliyesi planlanıyor; AP, Tamil Nadu, Odisha'da okullar kapalı — https://www.aljazeera.com/news/2026/11/2/thousands-evacuated-as-india-braces-for-second-cyclone-in-a-week",
     "K3": "Karaya çıkış Nellore–Narsapur arası, Ongole yakını, 2 Kasım 23:30 – 3 Kasım 04:00 IST (IMD) — https://newsable.asianetnews.com/india/severe-cyclone-murasu-to-make-landfall-near-ongole-in-andhra-pradesh-articleshow-c3udkik",
     "K4": "Tropikal siklon oluşumu: ≥26,5 °C deniz suyu, buharlaşma ve gizli ısı, Coriolis etkisiyle dönüş (kuzey yarımkürede saat yönünün tersi), göz; karada sıcak su kaynağı kesildiği için zayıflama — NOAA National Hurricane Center / NOAA SciJinks",
-    "NOT": "3D rota temsilidir: IMD'nin konum, hız ve karaya çıkış bölgesi bilgilerine göre kuruldu. Bulut ölçeği ve yükseklik abartılıdır."
+    "NOT": "3D rota temsilidir: IMD'nin konum, hız ve karaya çıkış bölgesi bilgilerine göre kuruldu. Bulut ölçeği ve yükseklik abartılıdır.",
+    "K5": "Arnab siklonu 28 Ekim 2026'da Andhra Pradesh'e çok şiddetli siklonik fırtına olarak çıktı; en az 3 ölü, 180.000 kişi tahliye; 2013'teki Titli'den bu yana AP'ye çıkan ilk çok şiddetli fırtına — Al Jazeera (28 Ekim), ABC News, AccuWeather, Kathmandu Post"
   }
 }
