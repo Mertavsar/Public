@@ -80,7 +80,13 @@ window.build3D_siklon = function (stage, tl) {
     meta.push(r, th, y);
   }
   const cloudG = new T.BufferGeometry(); cloudG.setAttribute("position", new T.BufferAttribute(P, 3));
-  const cloud = new T.Points(cloudG, new T.PointsMaterial({ color: 0xf2f5fa, size: 2.0, map: dotTex, sizeAttenuation: true, transparent: true, opacity: .4, depthWrite: false, blending: T.AdditiveBlending }));
+  // kızılötesi uydu paleti: soğuk/yüksek bulut tepesi (göz duvarı) beyaz-kırmızı, dışa doğru turuncu → sarı → yeşil → camgöbeği
+  const IR = [[1, 1, 1], [1, .25, .3], [1, .55, .15], [1, .9, .2], [.35, .9, .4], [.2, .75, 1]];
+  const CC = new Float32Array(N * 3), CCw = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { const r = meta[i * 3], f = Math.min(.999, Math.max(0, (r - 6) / 80)) * (IR.length - 1), a = Math.floor(f), b = Math.min(IR.length - 1, a + 1), u = f - a;
+    for (let k = 0; k < 3; k++) { CC[i * 3 + k] = IR[a][k] * (1 - u) + IR[b][k] * u; CCw[i * 3 + k] = CC[i * 3 + k]; } }
+  cloudG.setAttribute("color", new T.BufferAttribute(CC, 3));
+  const cloud = new T.Points(cloudG, new T.PointsMaterial({ vertexColors: true, size: 2.0, map: dotTex, sizeAttenuation: true, transparent: true, opacity: .4, depthWrite: false }));
   scene.add(cloud);
   const haze = new T.Points(cloudG, new T.PointsMaterial({ color: 0xc8d6ea, size: 7, map: dotTex, sizeAttenuation: true, transparent: true, opacity: .06, depthWrite: false, blending: T.AdditiveBlending }));
   scene.add(haze);
@@ -129,6 +135,8 @@ window.build3D_siklon = function (stage, tl) {
   const camFor = (spec, h, u) => {
     const [ex, ez] = pos(h);
     if (spec.mod === "takip") return { p: [ex - spec.geri, spec.yuk, ez + spec.yan], q: [ex, 4, ez] };
+    if (spec.mod === "goz") { const a = (spec.aci || 0) + u * (spec.don || 1.2);     // gözün içinden duvara bakan, dönen kamera
+      return { p: [ex, spec.yuk || 2.5, ez], q: [ex + 20 * Math.cos(a), (spec.bak || 9), ez + 20 * Math.sin(a)] }; }
     const q = spec.hedef === "goz" ? [ex, 3, ez] : spec.hedef;
     const uu = spec.hizli ? 1 - Math.pow(1 - clamp(u * spec.hizli), 4) : eInOut(u);       // hizli: uzaydan dalış
     const p = spec.konum2 ? spec.konum.map((v, k) => lerp(v, spec.konum2[k], uu)) : spec.konum;
@@ -156,7 +164,12 @@ window.build3D_siklon = function (stage, tl) {
       P[k * 3] = ex + r * Math.cos(th); P[k * 3 + 1] = y0 * (.4 + .6 * pw); P[k * 3 + 2] = ez + r * Math.sin(th);
     }
     cloudG.attributes.position.needsUpdate = true;
-    cloud.material.opacity = .4 * (.35 + .65 * pw) * (hd.bulut !== undefined ? hd.bulut : 1);
+    if (Math.abs((cloud._pw || 1) - pw) > .01) { cloud._pw = pw;
+      for (let k = 0; k < N * 3; k += 3) { CC[k] = lerp(.25, CCw[k], pw); CC[k + 1] = lerp(.55, CCw[k + 1], pw); CC[k + 2] = lerp(1, CCw[k + 2], pw); }
+      cloudG.attributes.color.needsUpdate = true; }
+    cloud.material.opacity = .62 * (.35 + .65 * pw) * (hd.bulut !== undefined ? hd.bulut : 1);
+    const inEye = s.p.kam && s.p.kam.mod === "goz";            // göz içi: yakın noktalar dev olmasın (yavaşlatıyor)
+    cloud.material.size = inEye ? .8 : 2.0; haze.visible = !inEye; rain.visible = !inEye;
     // okyanus dalgası
     { const a = ocean.attributes.position.array;
       for (let k = 0; k < a.length; k += 3) { const x = oBase[k], z = oBase[k + 2];
@@ -207,6 +220,7 @@ window.build3D_siklon = function (stage, tl) {
     const fp = []; if (hd.tahmin) for (let k = Math.max(h, -48); k < 18; k += 1) { if (Math.floor(k) % 2) continue; const [x1, z1] = pos(k), [x2, z2] = pos(k + 1); fp.push(x1, .4, z1, x2, .4, z2); }
     fcG.setAttribute("position", new T.Float32BufferAttribute(fp.length ? fp : [0, 0, 0, 0, 0, 0], 3)); fc.visible = fp.length > 0;
     R.render(scene, cam);
+    canvas.style.filter = hd.bulanik ? "blur(10px) brightness(.4)" : "none";
     // HUD
     CITIES.forEach((c, k) => place(cityL[k], c[1], 0, c[2], hd.sehir, 0, -14));
     place(eyeL, ex, 3, ez, hd.goz, 30, -60);

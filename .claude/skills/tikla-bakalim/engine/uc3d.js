@@ -316,7 +316,7 @@ window.buildWorld3D = function (stage, tl) {
 // Ekran yazısı (üst orta) — 3D sahnenin üstüne
 SCENES.uc3d = (p, r) => {
   Object.assign(r.style, { left: "0", right: "auto", top: "0", width: W + "px", height: H + "px", justifyContent: "flex-start",
-    paddingTop: FORMAT === "yatay" ? "80px" : "330px" });
+    paddingTop: FORMAT === "yatay" ? "80px" : p.sahne ? "150px" : "330px" });
   const items = [];
   // koyu panel: parlak 3D sahne (beyaz bulut vb.) üstünde yazı okunsun
   const kgx = document.documentElement.classList.contains("t3-kagit");
@@ -332,9 +332,11 @@ SCENES.uc3d = (p, r) => {
   if (p.alt) mk(p.alt, { color: kg ? "#2a2b33" : "rgba(232,238,246,.85)", fontWeight: 700, fontSize: "32px", marginTop: "8px", textShadow: sh, textAlign: "center", padding: "0 50px" });
   if (p.logo && p.src) { const im = el("img", null, null, r); im.src = p.src;
     Object.assign(im.style, { width: "300px", height: "300px", borderRadius: "50%", marginTop: "30px", boxShadow: "0 0 0 8px #fff, 0 20px 50px rgba(0,0,0,.6)" }); items.push(im); }
+  const set = p.sahne && window.SIKLON_SAHNE && SIKLON_SAHNE[p.sahne] ? SIKLON_SAHNE[p.sahne](r) : null;
   let fl = null;
   if (p.carp) { fl = el("div", null, null, r); Object.assign(fl.style, { position: "absolute", inset: "0", background: "#fff", pointerEvents: "none" }); }
   return lt => {
+    if (set) set(lt);
     if (p.carp) {   // başlık ekrana çarpar: büyükten küçülür, beyaz flaş söner
       items.forEach((e, i) => { const u = clamp((lt - i * .08) / .22); e.style.opacity = u > 0 ? 1 : 0; e.style.transform = `scale(${lerp(2.4, 1, eOut(u))}) rotate(${lerp(-4, 0, u)}deg)`; });
       fl.style.opacity = Math.max(0, .75 - lt * 2.6);

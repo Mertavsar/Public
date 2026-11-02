@@ -153,11 +153,11 @@
           "hedef": "goz"
         },
         "hud": {
-          "buhar": true
+          "bulanik": true
         },
         "ust": "1 · SICAK DENİZ",
-        "buyuk": "26,5 °C+",
-        "boy": 120
+        "boy": 120,
+        "sahne": "kesit1"
       },
       "kaynak": "K4"
     },
@@ -185,9 +185,10 @@
           "hedef": "goz"
         },
         "hud": {
-          "buhar": true
+          "bulanik": true
         },
-        "ust": "2 · YÜKSELEN HAVA"
+        "ust": "2 · YÜKSELEN HAVA",
+        "sahne": "kesit2"
       }
     },
     {
@@ -214,9 +215,10 @@
           "hedef": "goz"
         },
         "hud": {
-          "akis": true
+          "bulanik": true
         },
-        "ust": "3 · DÖNEN HAVA"
+        "ust": "3 · DÖNEN HAVA",
+        "sahne": "kure"
       },
       "kaynak": "K4"
     },
@@ -265,22 +267,14 @@
           3
         ],
         "kam": {
-          "mod": "sabit",
-          "konum": [
-            23,
-            75,
-            85
-          ],
-          "konum2": [
-            23,
-            55,
-            72
-          ],
-          "hedef": "goz"
+          "mod": "goz",
+          "yuk": 2.5,
+          "bak": 10,
+          "don": 1.6
         },
-        "hud": {
-          "goz": true
-        }
+        "hud": {},
+        "ust": "FIRTINANIN GÖZÜ",
+        "alt": "sakin bölge · çevresi fırtına duvarı"
       },
       "kaynak": "K4"
     },
@@ -419,10 +413,9 @@
           ]
         },
         "hud": {
-          "kabarma": true,
-          "sehir": true,
-          "bulut": 0.25
-        }
+          "bulanik": true
+        },
+        "sahne": "kabarma"
       },
       "kaynak": "K1"
     },
@@ -454,11 +447,11 @@
           ]
         },
         "hud": {
-          "sehir": true
+          "bulanik": true
         },
-        "buyuk": "30.000",
-        "alt": "kişinin tahliyesi planlanıyor",
-        "boy": 130
+        "buyuk": "30.000 KİŞİ",
+        "boy": 96,
+        "sahne": "tahliye"
       },
       "kaynak": "K2"
     },
