@@ -178,3 +178,15 @@ html.cizim.t-neon #stage { background: radial-gradient(130% 100% at 50% 40%, #12
 html.cizim.t-neon #grid { opacity: .6; }
 html.cizim.t-kagit { --capink: #2a2b33; --kirmizi: #d0482f; }
 html.cizim.t-kagit #cap span { -webkit-text-stroke: 0 !important; paint-order: normal; text-shadow: 0 0 18px rgba(247,241,227,.95), 0 0 6px rgba(247,241,227,.95) !important; text-transform: uppercase; }
+
+/* 3D veri modu: siyah zemin, ışık lekesi/ızgara yok; altyazı küçük, ortada, iki satıra kadar, vurgu turkuaz */
+html.s3d #stage { background: #030508; }
+html.s3d .blob, html.s3d #grid { display: none; }
+html.s3d #cap { display: none; }
+html.s3d #capline { display: block; position: absolute; left: 50%; transform: translateX(-50%); top: 1150px; width: 900px;
+  white-space: normal; text-align: center; background: none; padding: 0; font-weight: 800; font-size: 46px; line-height: 1.28;
+  color: rgba(255,255,255,.32); text-shadow: 0 2px 10px #000; }
+html.s3d.yatay #capline { top: 960px; width: 1500px; font-size: 44px; }
+html.s3d #capline span.done { color: #f2f5f9; }
+html.s3d #capline span.on { color: #fff; background: #e3141b; border-radius: 10px; padding: 0 10px; text-shadow: none; box-decoration-break: clone; }
+html.s3d { --sari: #ff3b45; }

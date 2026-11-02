@@ -916,6 +916,7 @@ window.load = async function (tl, opts = {}) {
   const stage = document.getElementById("stage");
   BG = background(stage);
   if (tl.stil === "cizim") { document.documentElement.classList.add("cizim"); WORLD = window.buildWorld(stage, tl); }   // teknik çizim modu (cizim.js)
+  if (tl.stil === "3d") { document.documentElement.classList.add("s3d"); WORLD = window.buildWorld3D(stage, tl); }        // 3D veri modu (uc3d.js)
   stage.appendChild(document.getElementById("top"));
   const root = el("div", null, null, stage);
   BUILT = tl.scenes.map(s => {
@@ -928,7 +929,7 @@ window.load = async function (tl, opts = {}) {
   CTA = ctaLayer(stage);
   CARDFX = sectionCard(stage);
   WORDS = tl.words || [];
-  if (FORMAT === "yatay") buildLines();
+  if (FORMAT === "yatay" || tl.stil === "3d") buildLines();
   if (opts.cover) stage.classList.add("cover");
   // foto sahneleri: tüm görseller çözülmeden ilk kare çekilmesin (yoksa boş kare)
   await Promise.all([...document.images].map(i => i.decode().catch(() => console.error("GÖRSEL YÜKLENEMEDİ: " + i.src))));
@@ -965,9 +966,9 @@ window.seek = function (t) {
     b.r.style.opacity = fin * (1 - fo);
     b.r.style.filter = fo > 0 ? `blur(${fo * 10}px)` : fin < 1 ? `blur(${(1 - fin) * 6}px)` : "none";
     // tam ekran fotoğraf sahne kutusunun ölçeğini almaz; kendi Ken Burns hareketi var
-    const sc = (b.s.tip === "foto" && (b.s.p.kip || "tam") === "tam") || b.s.tip === "cizim" ? (1 - .03 * fo) : SCALE * z * (1 - .03 * fo);
+    const sc = (b.s.tip === "foto" && (b.s.p.kip || "tam") === "tam") || b.s.tip === "cizim" || b.s.tip === "uc3d" ? (1 - .03 * fo) : SCALE * z * (1 - .03 * fo);
     b.r.style.transform = `translateY(${(1 - fin) * 26 - fo * 30}px) scale(${sc})`;
-    if (b.s.tip === "cizim") b.r.style.filter = "none";
+    if (b.s.tip === "cizim" || b.s.tip === "uc3d") b.r.style.filter = "none";
   });
   // Bölüm şeridi
   const sec = cur && SECTIONS[cur.s.bolum];
@@ -990,7 +991,7 @@ window.seek = function (t) {
   tag.textContent = cur && cur.s.etiket ? cur.s.etiket : "";
   tag.style.opacity = cur && cur.s.etiket ? 1 : 0;
   document.querySelector("#bar b").style.width = (100 * clamp(t / TL.dur)) + "%";
-  if (FORMAT === "yatay") lineCaption(t); else wordCaption(t);
+  if (FORMAT === "yatay" || TL.stil === "3d") lineCaption(t); else wordCaption(t);
   document.getElementById("src").textContent = cur && cur.s.kaynak ? "Kaynak: " + cur.s.kaynak : "";
   CTA(t);
   CARDFX(t);

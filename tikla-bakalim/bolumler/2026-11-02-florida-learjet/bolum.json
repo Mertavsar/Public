@@ -1,0 +1,492 @@
+{
+  "baslik": "Florida'da düşen Learjet'in son dakikası — uçuş verisiyle (3D)",
+  "tarih": "2026-11-02",
+  "durum": "TASLAK — metin onayı ve ses bekleniyor",
+  "format": "dikey",
+  "stil": "3d",
+  "dunya": "learjet",
+  "gecis": false,
+  "vurgu": [
+    "ADS-B",
+    "buzlanma",
+    "sağa",
+    "veri"
+  ],
+  "altyazi": {
+    "Learjet altmış": "Learjet 60",
+    "dokuz kişi": "9 kişi",
+    "sekiz kilometre": "8 kilometre",
+    "on bir kilometrede": "11 kilometrede",
+    "otuz iki bin fitin": "32.000 fitin",
+    "beş yüz kilometreden": "500 kilometreden",
+    "on kilometrenin": "10 kilometrenin",
+    "iki buçuk kilometreye": "2,5 kilometreye",
+    "iki bin yedi yüz metrede": "2.700 metrede",
+    "bir ay": "1 ay"
+  },
+  "kapak": {
+    "ikon": "✈️",
+    "ust": "1 DAKİKADA",
+    "buyuk": "8 KM",
+    "alt": "DÜŞTÜ"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "uc3d",
+      "say": "Bir iş jeti, yaklaşık bir dakikada sekiz kilometre irtifa kaybetti.",
+      "p": {
+        "ucus": [
+          22,
+          72
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 8,
+          "yan": 16,
+          "yuk": 3
+        },
+        "hud": {
+          "halka": true,
+          "iz": true,
+          "damla": true
+        },
+        "ust": "FLORIDA · 1 KASIM",
+        "buyuk": "1 DAKİKADA\n8 KM",
+        "boy": 120
+      },
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "uc3d",
+      "say": "Florida'da dün yaşanan kazayı, uçağın kendi yayınladığı verilerle izleyelim.",
+      "p": {
+        "ucus": [
+          -62,
+          -50
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 16,
+          "yan": 7,
+          "yuk": 5
+        },
+        "hud": {
+          "iz": true
+        }
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Pazar öğlen, içinde dokuz kişinin bulunduğu bir Learjet altmış, Teksas'tan Bahamalar'a uçuyordu.",
+      "p": {
+        "ucus": [
+          -50,
+          -34
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 7,
+          "yan": -4,
+          "yuk": 1.5
+        },
+        "hud": {
+          "iz": true
+        },
+        "ust": "LEARJET 60 · N722BD",
+        "alt": "Austin (Teksas) → Kuzey Eleuthera (Bahamalar)"
+      },
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Uçaklar konumunu, hızını ve irtifasını sürekli yayınlar. Buna ADS-B deniyor.",
+      "p": {
+        "ucus": [
+          -34,
+          -21
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 12,
+          "yan": 5,
+          "yuk": 5
+        },
+        "hud": {
+          "iz": true,
+          "veri": true,
+          "kaynak": "ADS-B · AÇIK VERİ"
+        }
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Bu sinyaller sayesinde son dakikalar adım adım kayıtlı.",
+      "p": {
+        "ucus": [
+          -21,
+          -10
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            -60,
+            170,
+            120
+          ],
+          "hedef": "ucak"
+        },
+        "hud": {
+          "iz": true,
+          "halka": true
+        }
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Uçak yaklaşık on bir kilometrede, fırtınalı bir bölgeye girdi.",
+      "p": {
+        "ucus": [
+          -10,
+          0
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 18,
+          "yan": 11,
+          "yuk": 1
+        },
+        "hud": {
+          "iz": true,
+          "veri": true
+        }
+      },
+      "kaynak": "K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Pilotlar kuleye buzlanma ve türbülans bildirip, biraz daha yükselmek için izin istedi.",
+      "p": {
+        "ucus": [
+          0,
+          8
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 6,
+          "yan": 5,
+          "yuk": 1
+        },
+        "hud": {
+          "iz": true,
+          "kaynak": "ATC TELSİZ KAYDI · BASIN"
+        }
+      },
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Uçak kısa bir süre tırmandı.",
+      "p": {
+        "ucus": [
+          8,
+          15
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 8,
+          "yan": -6,
+          "yuk": 0
+        },
+        "hud": {
+          "iz": true,
+          "veri": true
+        }
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Ardından sağa dönerek hızla irtifa kaybetmeye başladı.",
+      "p": {
+        "ucus": [
+          15,
+          32
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 11,
+          "yan": 10,
+          "yuk": 6
+        },
+        "hud": {
+          "iz": true,
+          "veri": true,
+          "halka": true,
+          "damla": true
+        }
+      },
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Kayıtlara göre dikey hız dakikada otuz iki bin fitin üzerine çıktı.",
+      "p": {
+        "ucus": [
+          32,
+          56
+        ],
+        "kam": {
+          "mod": "takip",
+          "geri": 9,
+          "yan": -9,
+          "yuk": 4
+        },
+        "hud": {
+          "iz": true,
+          "damla": true,
+          "kaynak": "ADS-B · FLIGHTRADAR24"
+        },
+        "ust": "DİKEY HIZ",
+        "buyuk": "32.000+ ft/dk",
+        "boy": 104,
+        "alt": "≈ saatte 585 km aşağı"
+      },
+      "kaynak": "K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Yaklaşık bir dakikada, on kilometrenin üzerinden iki buçuk kilometreye indi.",
+      "p": {
+        "ucus": [
+          56,
+          74
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            120,
+            72,
+            110
+          ],
+          "hedef": [
+            60,
+            62,
+            32
+          ]
+        },
+        "hud": {
+          "iz": true,
+          "damla": true,
+          "veri": true,
+          "kaynak": "FAA · ABC NEWS"
+        }
+      },
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Son sinyal yaklaşık iki bin yedi yüz metrede geldi. Sonrasında veri kesiliyor.",
+      "p": {
+        "ucus": [
+          74,
+          80
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            95,
+            40,
+            100
+          ],
+          "hedef": [
+            50,
+            27,
+            63
+          ]
+        },
+        "hud": {
+          "iz": true,
+          "damla": true,
+          "son": true
+        }
+      },
+      "kaynak": "K5"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Uçak, Palm Beach yakınlarında bir yerleşim bölgesine, yolun yakınına düştü.",
+      "p": {
+        "ucus": [
+          80,
+          80
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            72,
+            26,
+            96
+          ],
+          "hedef": [
+            49.5,
+            0,
+            63
+          ]
+        },
+        "hud": {
+          "iz": true,
+          "son": true
+        }
+      },
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Uçaktaki dokuz kişi hayatını kaybetti. Yerde yaralanan olmadı.",
+      "p": {
+        "ucus": [
+          80,
+          80
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            50,
+            75,
+            65
+          ],
+          "hedef": [
+            49.5,
+            0,
+            63
+          ]
+        },
+        "hud": {
+          "temsili": false
+        }
+      },
+      "kaynak": "K6"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Kazanın nedeni henüz bilinmiyor. Buzlanma bir ihtimal, ama kesinleşmiş bir bulgu değil.",
+      "p": {
+        "ucus": [
+          80,
+          80
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            -30,
+            140,
+            200
+          ],
+          "hedef": [
+            40,
+            40,
+            30
+          ]
+        },
+        "hud": {
+          "iz": true,
+          "damla": true
+        },
+        "ust": "NEDEN?",
+        "baslik": "HENÜZ\nBİLİNMİYOR",
+        "boy": 96
+      },
+      "kaynak": "K7"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "uc3d",
+      "say": "NTSB inceleme başlattı. İlk raporun yaklaşık bir ay içinde çıkması bekleniyor.",
+      "p": {
+        "ucus": [
+          80,
+          80
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            160,
+            120,
+            200
+          ],
+          "hedef": [
+            40,
+            40,
+            30
+          ]
+        },
+        "hud": {
+          "iz": true,
+          "damla": true
+        },
+        "ust": "NTSB İNCELEMESİ",
+        "baslik": "İLK RAPOR\n~30 GÜN",
+        "boy": 96
+      },
+      "kaynak": "K8"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "uc3d",
+      "say": "Gelişmeleri takip etmek için abone ol.",
+      "p": {
+        "ucus": [
+          80,
+          80
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            60,
+            220,
+            240
+          ],
+          "hedef": [
+            40,
+            30,
+            30
+          ]
+        },
+        "hud": {
+          "iz": true,
+          "damla": true,
+          "temsili": false
+        },
+        "alt": "Gelişmeleri takip et · abone ol",
+        "boy": 100,
+        "logo": true,
+        "src": "logo.jpg"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "1 Kasım 2026, ~12:50 yerel saat; Learjet 60 N722BD, Austin–Kuzey Eleuthera; Cresthaven / Palm Beach County yerleşim bölgesi, yola yakın — NBC Miami canlı yayın, ABC News (Avustralya), Statesman, FAA açıklaması (theflightbrief.com)",
+    "K2": "FAA: 35.250 ft'ten 8.750 ft'e bir dakikadan biraz fazla sürede (ABC News, Wikipedia: 2026 Palm Beach County Learjet 60 crash); ADS-B Exchange: bir dakikada 27.000 ft (CNN)",
+    "K3": "Seyir ~35.000 ft, Naples yakınında; bölgede dağınık fırtınalar, iniş öncesi güçlü fırtına hücresinden geçti — Flightradar24 blog, Al Jazeera / Reuters",
+    "K4": "Mürettebat buzlanma, orta türbülans ve yağış bildirdi, 37.000 ft'e (2.000 ft) tırmanış istedi — Flightradar24 blog, NBC Miami (AP)",
+    "K5": "Kısa tırmanış (17:48 UTC) sonrası sağa dik dalış; dikey hız 32.000 ft/dk üstü; son sinyal 8.750 ft, 17:49:22 UTC — Flightradar24 blog. 32.000 ft/dk ≈ 9,75 km/dk ≈ 585 km/sa (hesap)",
+    "K6": "Uçaktaki 9 kişinin tamamı öldü (ABD Ulaştırma Bakanı Sean Duffy); yerde yaralanan yok (Florida Valisi DeSantis) — RNZ, The Nightly, NBC Miami",
+    "K7": "Neden belirlenmedi; buzlanma/türbülans uzman görüşü, bulgu değil — NBC Miami, aerocorner.com, Al Jazeera",
+    "K8": "FAA ve NTSB inceliyor; ön rapor genelde ~30 gün içinde — FAA açıklaması, ntsb.gov uygulaması",
+    "NOT": "3D rota temsilidir: basına yansıyan ADS-B değerleri (irtifa, dikey hız, sağa dönüş, son sinyal) ile kuruldu; ham iz verisi değil. Şehir çizgileri temsili."
+  }
+}
