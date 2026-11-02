@@ -130,7 +130,18 @@ def tighten(src, dst, keep=0.13, xf=0.012):
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(sr), "-ac", "1", "-i", "-", dst],
                    input=out.tobytes(), check=True)
     print(f"  {len(gaps)} duraksama kısaltıldı · {len(x)/sr:.2f}s -> {len(out)/sr:.2f}s")
-    return dst
+    # zaman haritası: özgün t → sıkışık t. Hizalama özgün seste yapılır (duraklar net,
+    # cümle sınırları doğru), sonra buradan geçirilir. Sıkışık seste hizalama kayıyordu.
+    offs, acc = [], 0.0
+    for i, (a, b) in enumerate(segs):
+        offs.append(acc - i * xf); acc += b - a
+    o = acc - (len(segs) - 1) * xf
+    def tmap(t):
+        for (a, b), of in zip(segs, offs):
+            if t <= b:
+                return of + max(0.0, t - a)
+        return o
+    return dst, tmap
 
 
 # ---------------------------------------------------------------- zamanlama
@@ -186,13 +197,15 @@ def display_words(words, table):
     return out
 
 
-def timeline(b, fmt, vo=None, work=None):
+def timeline(b, fmt, vo=None, work=None, align_src=None, tmap=None):
     sc = b["sahneler"]
     spoken_idx = [i for i, s in enumerate(sc) if (s.get("say") or "").strip()]
     text = " ".join(sc[i]["say"].strip() for i in spoken_idx)
     words = text.split()
     if vo:
-        items = sentalign(vo, text, b.get("vurgu", []), work)
+        items = sentalign(align_src or vo, text, b.get("vurgu", []), work)
+        if tmap:
+            items = [(w, tmap(s0), max(tmap(s0) + .05, tmap(e0)), c) for w, s0, e0, c in items]
         if len(items) != len(words):
             sys.exit(f"HATA: hizalama {len(items)} kelime döndü, metin {len(words)} kelime")
         end = max(dur_of(vo), items[-1][2]) + .5
@@ -498,12 +511,14 @@ def main():
         sys.exit("Durdu. Hataları düzelt.")
 
     vo = a.vo
+    align_src, tmap = None, None
     if vo and a.sikistir:
         print("   duraksama kısaltma")
-        vo = tighten(vo, f"{work}/vo_tight.wav")
+        align_src = vo
+        vo, tmap = tighten(vo, f"{work}/vo_tight.wav")
 
     print("2/7 zamanlama " + ("(sese hizalı, sentalign)" if vo else "(TAHMİNİ — ses yok, taslak)"))
-    tl, text = timeline(b, fmt, vo, work)
+    tl, text = timeline(b, fmt, vo, work, align_src, tmap)
     open(os.path.join(odir, "metin.txt"), "w", encoding="utf-8").write(
         "\n\n".join(s["say"].strip() for s in b["sahneler"] if (s.get("say") or "").strip()) + "\n")
     tl_path = os.path.join(odir, "cizelge.json")
