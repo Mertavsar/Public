@@ -42,6 +42,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0d1
   background-image: linear-gradient(#fff 2px, transparent 2px), linear-gradient(90deg, #fff 2px, transparent 2px); background-size: 120px 120px; }
 .ikon { position: absolute; left: 0; right: 0; top: 520px; text-align: center; font-size: 470px; line-height: 1;
   font-family: "Noto Color Emoji"; filter: drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+.nesne { position: absolute; left: 50%; border-radius: 10px; box-shadow: 0 0 0 6px #fff, 0 40px 80px rgba(0,0,0,.75); z-index: 2; }
 .shade { position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 42%, rgba(0,0,0,.78) 64%, rgba(0,0,0,.92) 100%); }
 .frame { position: absolute; inset: 0; border: 16px solid #e3141b; }
@@ -71,7 +72,8 @@ for (const k of cfg.kapaklar) {
   }).join("");
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div id="k">
     ${k.gorsel ? `<img class="bg" src="${url(k.gorsel)}" style="object-position:${k.odak || "50% 50%"}">` : `<div class="grid"></div>`}
-    ${k.ikon ? `<div class="ikon">${k.ikon}</div>` : ""}
+    ${k.ikon ? `<div class="ikon" style="${k.ikonTop ? "top:" + k.ikonTop + "px;" : ""}${k.ikonBoy ? "font-size:" + k.ikonBoy + "px;" : ""}">${k.ikon}</div>` : ""}
+    ${k.nesne ? `<img class="nesne" src="${url(k.nesne)}" style="width:${k.nesneBoy || 760}px;top:${k.nesneY || 560}px;transform:translateX(-50%) rotate(${k.nesneAci ?? -7}deg)">` : ""}
     <div class="shade"></div>
     <div class="logo"><img src="${url(cfg.logo)}"></div>
     <div class="blok" style="--b:${k.boy || 132}px">
