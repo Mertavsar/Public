@@ -63,6 +63,19 @@
    ],
    "boy": 130,
    "kredi": "Temsili 3D çizim · ADS-B verilerine göre"
+  },
+  {
+   "ad": "06-murasu",
+   "gorsel": "foto/murasu_3d.png",
+   "odak": "50% 50%",
+   "etiket": "DÜNYA · HİNDİSTAN",
+   "satirlar": [
+    "SAATTE 120 KM",
+    "[DEV GİRDAP]",
+    "HİNDİSTAN'A ÇARPIYOR"
+   ],
+   "boy": 124,
+   "kredi": "Temsili 3D çizim · IMD verilerine göre"
   }
  ]
 }
