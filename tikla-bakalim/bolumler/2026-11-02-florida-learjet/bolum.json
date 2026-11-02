@@ -34,47 +34,53 @@
     {
       "bolum": "hook",
       "tip": "uc3d",
-      "say": "Bir iş jeti, yaklaşık bir dakikada sekiz kilometre irtifa kaybetti.",
+      "say": "Bu jet, sadece bir dakikada sekiz kilometre düştü.",
       "p": {
         "ucus": [
-          22,
+          24,
           72
         ],
         "kam": {
           "mod": "takip",
-          "geri": 8,
-          "yan": 16,
-          "yuk": 3
+          "geri": -7,
+          "yan": 3.5,
+          "yuk": -2.5
         },
         "hud": {
-          "halka": true,
+          "sayac": true,
           "iz": true,
-          "damla": true,
           "saat": true
-        },
-        "ust": "FLORIDA · 1 KASIM",
-        "buyuk": "1 DAKİKADA\n8 KM",
-        "boy": 120
+        }
       },
       "kaynak": "K2"
     },
     {
       "bolum": "hook",
       "tip": "uc3d",
-      "say": "Florida'da dün yaşanan kazayı, uçağın kendi yayınladığı verilerle izleyelim.",
+      "say": "Peki o bir dakikada ne oldu? Kayıtları geri saralım.",
       "p": {
         "ucus": [
-          -62,
-          -50
+          72,
+          -48
         ],
         "kam": {
-          "mod": "takip",
-          "geri": 16,
-          "yan": 7,
-          "yuk": 5
+          "mod": "sabit",
+          "konum": [
+            120,
+            78,
+            110
+          ],
+          "hedef": [
+            40,
+            85,
+            20
+          ]
         },
         "hud": {
-          "iz": true
+          "geri": true,
+          "iz": true,
+          "sayac": true,
+          "saat": true
         }
       }
     },
@@ -84,7 +90,7 @@
       "say": "Pazar öğlen, içinde dokuz kişinin bulunduğu bir Learjet altmış, Teksas'tan Bahamalar'a uçuyordu.",
       "p": {
         "ucus": [
-          -50,
+          -48,
           -34
         ],
         "kam": {
@@ -104,11 +110,11 @@
     {
       "bolum": "ne",
       "tip": "uc3d",
-      "say": "Uçaklar konumunu, hızını ve irtifasını sürekli yayınlar. Buna ADS-B deniyor.",
+      "say": "Uçaklar konumunu, hızını ve irtifasını sürekli yayınlar. Buna ADS-B deniyor. Son dakika bu sayede saniye saniye kayıtlı.",
       "p": {
         "ucus": [
           -34,
-          -21
+          -12
         ],
         "kam": {
           "mod": "takip",
@@ -124,36 +130,12 @@
       }
     },
     {
-      "bolum": "ne",
-      "tip": "uc3d",
-      "say": "Bu sinyaller sayesinde son dakikalar adım adım kayıtlı.",
-      "p": {
-        "ucus": [
-          -21,
-          -10
-        ],
-        "kam": {
-          "mod": "sabit",
-          "konum": [
-            -60,
-            170,
-            120
-          ],
-          "hedef": "ucak"
-        },
-        "hud": {
-          "iz": true,
-          "halka": true
-        }
-      }
-    },
-    {
       "bolum": "neden",
       "tip": "uc3d",
       "say": "Uçak yaklaşık on bir kilometrede, fırtınalı bir bölgeye girdi.",
       "p": {
         "ucus": [
-          -10,
+          -12,
           0
         ],
         "kam": {
@@ -244,7 +226,7 @@
     {
       "bolum": "neden",
       "tip": "uc3d",
-      "say": "Kayıtlara göre dikey hız dakikada otuz iki bin fitin üzerine çıktı.",
+      "say": "Kayıtlara göre dikey hız dakikada otuz iki bin fitin üzerine çıktı. Bu, saatte beş yüz kilometreden fazla bir düşüş demek.",
       "p": {
         "ucus": [
           32,
@@ -335,7 +317,7 @@
     {
       "bolum": "etki",
       "tip": "uc3d",
-      "say": "Uçak, Palm Beach yakınlarında bir yerleşim bölgesine, yolun yakınına düştü.",
+      "say": "Uçak, Palm Beach yakınlarında bir yerleşim bölgesine düştü. Uçaktaki dokuz kişi hayatını kaybetti, yerde yaralanan olmadı.",
       "p": {
         "ucus": [
           80,
@@ -360,36 +342,7 @@
           "saat": true
         }
       },
-      "kaynak": "K1"
-    },
-    {
-      "bolum": "etki",
-      "tip": "uc3d",
-      "say": "Uçaktaki dokuz kişi hayatını kaybetti. Yerde yaralanan olmadı.",
-      "p": {
-        "ucus": [
-          80,
-          80
-        ],
-        "kam": {
-          "mod": "sabit",
-          "konum": [
-            50,
-            75,
-            65
-          ],
-          "hedef": [
-            49.5,
-            0,
-            63
-          ]
-        },
-        "hud": {
-          "temsili": false,
-          "saat": true
-        }
-      },
-      "kaynak": "K6"
+      "kaynak": "K1, K6"
     },
     {
       "bolum": "etki",

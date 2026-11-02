@@ -200,6 +200,20 @@ window.buildWorld3D = function (stage, tl) {
     repr.style.color = "rgba(42,43,51,.5)";
     rings.forEach(c => c.setAttribute("stroke", "#e3141b"));
   }
+  // HOOK: dev irtifa sayacı (ekranın üst-ortası) ve "geri sarma" efekti
+  const big = el("div", null, null, hud);
+  Object.assign(big.style, { position: "absolute", left: "0", right: "0", top: FORMAT === "yatay" ? "60px" : "250px", textAlign: "center", fontFamily: "M, sans-serif", fontWeight: 900 });
+  big.innerHTML = `<div style="display:inline-block;background:#e3141b;color:#fff;font-size:30px;letter-spacing:4px;padding:6px 20px;border-radius:10px">İRTİFA</div>
+    <div class="bn" style="font-size:${FORMAT === "yatay" ? 150 : 176}px;line-height:1;color:${KG ? "#e3141b" : "#fff"};letter-spacing:-4px;margin-top:8px;font-variant-numeric:tabular-nums"></div>
+    <div class="bm" style="font-size:40px;color:${KG ? "#2a2b33" : "#fff"};margin-top:6px"></div>`;
+  const bn = big.querySelector(".bn"), bm = big.querySelector(".bm");
+  if (KG) big.style.textShadow = "0 0 18px #f1e9d6, 0 0 6px #f1e9d6";
+  const scan = el("div", null, null, hud);
+  Object.assign(scan.style, { position: "absolute", inset: "0", opacity: 0,
+    background: "repeating-linear-gradient(0deg, rgba(42,43,51,.10) 0px, rgba(42,43,51,.10) 2px, transparent 2px, transparent 7px)" });
+  const rew = el("div", null, "⏪ GERİ SARILIYOR", hud);
+  Object.assign(rew.style, { position: "absolute", left: "50%", transform: "translateX(-50%)", top: FORMAT === "yatay" ? "330px" : "560px",
+    fontFamily: "M, sans-serif", fontWeight: 900, fontSize: "40px", letterSpacing: "3px", color: "#fff", background: "#2a2b33", padding: "10px 26px", borderRadius: "12px", opacity: 0 });
   const stormLbl = el("div", null, "FIRTINA HÜCRESİ", hud);
   Object.assign(stormLbl.style, { position: "absolute", fontFamily: mono, fontWeight: 900, fontSize: "24px", letterSpacing: "2px", color: "#2f7fd8", whiteSpace: "nowrap", opacity: 0 });
   const sc = tl.scenes.filter(s => s.tip === "uc3d");
@@ -260,6 +274,13 @@ window.buildWorld3D = function (stage, tl) {
     }
     R.render(scene, cam);
     rul.style.opacity = hd.saat ? 1 : 0;
+    big.style.opacity = hd.sayac ? 1 : 0;
+    if (hd.sayac) { bn.textContent = fmt(Math.round(st.alt / 10) * 10) + " ft"; bm.textContent = "≈ " + (st.alt * .3048 / 1000).toFixed(1).replace(".", ",") + " km"; }
+    const g = hd.geri ? 1 : 0;
+    scan.style.opacity = g;
+    rew.style.opacity = g * (Math.floor(t * 3) % 2 ? 1 : .55);
+    canvas.style.transform = g ? `translateX(${Math.round(Math.sin(t * 97) * 6)}px)` : "none";
+    canvas.style.filter = g ? "contrast(1.15) saturate(.7)" : "none";
     if (hd.saat) { const q = clamp(fs / 80); rf.style.width = q * 100 + "%"; rk.style.left = q * 100 + "%";
       const sec = Math.max(0, Math.min(80, Math.round(fs))); rk.textContent = "0" + Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0"); }
     if (stormRing) { const [sx, sy, sz] = proj(30, 70, -42); stormLbl.style.left = sx + "px"; stormLbl.style.top = sy + "px"; stormLbl.style.opacity = hd.firtina && sz < 1 ? 1 : 0; }
