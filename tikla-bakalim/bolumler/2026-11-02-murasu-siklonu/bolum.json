@@ -20,7 +20,9 @@
     "yüz kilometre": "100 kilometre",
     "yirmi iki kilometre": "22 kilometre",
     "bir buçuk metreye": "1,5 metreye",
-    "otuz bin kişiyi": "30.000 kişiyi"
+    "otuz bin kişiyi": "30.000 kişiyi",
+    "Saatte yüz yirmi kilometre": "Saatte 120 kilometre",
+    "Bir buçuk metreye": "1,5 metreye"
   },
   "kapak": {
     "ikon": "🌀",
@@ -32,53 +34,23 @@
     {
       "bolum": "hook",
       "tip": "uc3d",
-      "say": "Hindistan'ın doğu kıyısına bir haftada ikinci siklon geliyor.",
+      "say": "Saatte yüz yirmi kilometre hamle. Bir buçuk metreye varan deniz kabarması.",
       "p": {
         "saat": [
-          -6,
-          -2
+          -3,
+          -1
         ],
         "kam": {
           "mod": "sabit",
           "konum": [
-            170,
-            60,
-            200
+            100,
+            62,
+            165
           ],
           "konum2": [
-            115,
-            42,
-            150
-          ],
-          "hedef": "goz"
-        },
-        "hud": {
-          "sehir": true
-        },
-        "ust": "HİNDİSTAN · 2 KASIM"
-      },
-      "kaynak": "K2"
-    },
-    {
-      "bolum": "hook",
-      "tip": "uc3d",
-      "say": "Adı Murasu. Rüzgârın saatte yüz kilometreyi aşması, hamlelerin yüz yirmiye çıkması bekleniyor.",
-      "p": {
-        "saat": [
-          -2,
-          0
-        ],
-        "kam": {
-          "mod": "sabit",
-          "konum": [
-            165,
+            72,
             40,
-            205
-          ],
-          "konum2": [
-            140,
-            32,
-            180
+            128
           ],
           "hedef": "goz"
         },
@@ -91,7 +63,37 @@
     {
       "bolum": "hook",
       "tip": "uc3d",
-      "say": "Peki okyanusun ortasında böyle dev bir girdap nasıl doğar? Üç adımda bakalım.",
+      "say": "Ve bu, Hindistan'a bir haftada gelen ikinci siklon.",
+      "p": {
+        "saat": [
+          -1,
+          0
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            60,
+            190,
+            230
+          ],
+          "konum2": [
+            30,
+            170,
+            200
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "sehir": true
+        },
+        "ust": "HİNDİSTAN · 2 KASIM 2026"
+      },
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "uc3d",
+      "say": "Adı Murasu. Peki okyanusun ortasında böyle dev bir girdap nasıl doğar?",
       "p": {
         "saat": [
           0,
@@ -106,8 +108,8 @@
           ],
           "konum2": [
             23,
-            210,
-            110
+            205,
+            105
           ],
           "hedef": [
             23,

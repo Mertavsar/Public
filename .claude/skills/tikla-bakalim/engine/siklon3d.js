@@ -95,9 +95,9 @@ window.build3D_siklon = function (stage, tl) {
   const landL = lbl("KARAYA ÇIKIŞ (beklenen)", { fontSize: "24px", color: "#fff", border: "3px solid #fff", padding: "3px 12px", borderRadius: "8px" });
   const big = el("div", null, null, hud);
   Object.assign(big.style, { position: "absolute", left: "0", right: "0", top: FORMAT === "yatay" ? "60px" : "250px", textAlign: "center", fontWeight: 900, opacity: 0, textShadow: "0 4px 20px #000" });
-  big.innerHTML = `<div style="display:inline-block;background:#e3141b;color:#fff;font-size:30px;letter-spacing:4px;padding:6px 20px;border-radius:10px;text-shadow:none">RÜZGÂR</div>
+  big.innerHTML = `<div style="display:inline-block;background:#e3141b;color:#fff;font-size:30px;letter-spacing:4px;padding:6px 20px;border-radius:10px;text-shadow:none">RÜZGÂR HAMLESİ</div>
     <div class="bn" style="font-size:${FORMAT === "yatay" ? 140 : 168}px;line-height:1;color:#fff;letter-spacing:-3px;margin-top:8px">110 km/sa</div>
-    <div class="bm" style="font-size:38px;color:#fff;margin-top:6px">hamleler 120 km/sa</div>`;
+    <div class="bm" style="font-size:38px;color:#fff;margin-top:6px">hamle · sürekli 100–110 km/sa</div>`;
   const bn = big.querySelector(".bn");
   const repr = el("div", null, "temsili rota · IMD konum ve tahminlerine göre", hud);
   Object.assign(repr.style, { position: "absolute", right: "40px", bottom: FORMAT === "yatay" ? "18px" : "438px", fontSize: "18px", fontWeight: 700, color: "rgba(255,255,255,.45)" });
@@ -173,7 +173,7 @@ window.build3D_siklon = function (stage, tl) {
     place(surgeL, coastX(2) + 4, 6, 2, hd.kabarma && sg > .5, 30, -40);
     const [lx, lz] = pos(10); place(landL, lx, 0, lz, hd.tahmin, -110, 20);
     big.style.opacity = hd.ruzgar ? 1 : 0;
-    if (hd.ruzgar) bn.textContent = Math.round(lerp(60, 110, eOut(clamp((t - s.t0) / 1.6)))) + " km/sa";
+    if (hd.ruzgar) bn.textContent = Math.round(lerp(0, 120, eOut(clamp((t - s.t0) / 1.4)))) + " km/sa";
     clock.style.opacity = hd.saat ? 1 : 0;
     if (hd.saat) clock.innerHTML = `<span style="color:#ff4d57">SAAT</span> ${hhmm(h)}`;
     repr.style.opacity = hd.temsili === false ? 0 : (hd.rota || hd.tahmin ? 1 : 0);
