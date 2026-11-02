@@ -1,0 +1,553 @@
+{
+  "baslik": "Aylık yüzde 2 neden yıllık yüzde 30 yapıyor? Ekim enflasyonu yarın açıklanıyor",
+  "tarih": "2026-11-02",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "enflasyon",
+    "baz etkisi",
+    "birikim",
+    "yıllık"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "saat onda": "saat 10.00'da",
+    "yüzde iki virgül yirmi sekiz": "%2,28",
+    "yüzde yirmi dokuz virgül yirmi sekize": "%29,28'e",
+    "yüzde yirmi dokuz virgül yetmiş üç": "%29,73",
+    "yüzde bir virgül seksen dört": "%1,84",
+    "yüzde iki virgül yirmi": "%2,20",
+    "yüzde iki virgül elli beş": "%2,55",
+    "yüzde iki virgül iki": "%2,2",
+    "bin üç yüz liraya": "1.300 ₺'ye",
+    "bin liralık": "1.000 ₺'lik",
+    "elli bin liralık": "50.000 ₺'lik",
+    "bin yüz lira": "1.100 ₺",
+    "yüzde otuz": "%30",
+    "üç Kasım": "3 Kasım",
+    "on iki ay": "12 ay",
+    "yüzde otuz iki virgül seksen yediydi": "%32,87'ydi",
+    "yüzde yirmi dokuz virgül altı": "%29,6",
+    "yüzde on üç": "%13",
+    "üç buçuk puan": "3,5 puan"
+  },
+  "kapak": {
+    "ikon": "📊",
+    "ust": "AYLIK %2,2",
+    "buyuk": "YILLIK %30?",
+    "alt": "NASIL?"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "etiket": "YARIN 10.00",
+      "say": "Yarın sabah saat onda Türkiye'nin ekim enflasyonu açıklanıyor. Ekonomistlerin beklentisi, aylık yüzde iki virgül yirmi.",
+      "p": {
+        "ikon": "📊",
+        "etiket": "Ekim aylık enflasyon · beklenti",
+        "deger": 2.2,
+        "onek": "~%",
+        "ondalik": 2,
+        "yon": "up",
+        "ok_renk": "kirmizi",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Ekonomist ortalaması · *tahmini*"
+      },
+      "kaynak": "AA Finans anketi, CNBC-e anketi (K1)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "etiket": "3 SORU",
+      "say": "Peki aylık iki, yıllık otuz nasıl oluyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "AYLIK *%2*\nYILLIK *%30*?",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "etiket": "ABONE OL",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEM",
+          "*SADE DİLLE*"
+        ],
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "etiket": "AÇIKLANMA",
+      "say": "Türkiye İstatistik Kurumu, ekim rakamını üç Kasım salı günü açıklayacak.",
+      "p": {
+        "gun": "3",
+        "ay": "KASIM",
+        "gunadi": "SALI",
+        "saat": "10.00",
+        "not": "*Ekim* enflasyonu açıklanıyor"
+      },
+      "kaynak": "TÜİK takvimi, basın (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "EYLÜL",
+      "say": "Eylülde aylık enflasyon yüzde bir virgül seksen dört çıkmıştı. Yıllık ise yüzde yirmi dokuz virgül yetmiş üç.",
+      "p": {
+        "baslik": "Eylül 2026 · TÜİK",
+        "satirlar": [
+          {
+            "ikon": "⏱️",
+            "metin": "Aylık",
+            "deger": "%1,84",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🔁",
+            "metin": "Yıllık",
+            "deger": "%29,73",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Resmî TÜİK verisi"
+      },
+      "kaynak": "Ekonomist, Evrensel (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "BEKLENTİ",
+      "say": "Ekim için ekonomistler ortalama aylık yüzde iki virgül yirmi bekliyor. Bu henüz bir tahmin.",
+      "p": {
+        "ikon": "🔮",
+        "etiket": "Ekim · aylık · beklenti",
+        "deger": 2.2,
+        "onek": "~%",
+        "ondalik": 2,
+        "renk": "sari",
+        "sayma": false,
+        "not": "Tahminler *%1,25 – %2,70* arasında"
+      },
+      "kaynak": "AA Finans, 21 ekonomist (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "YILLIK BEKLENTİ",
+      "say": "Beklenti gerçekleşirse yıllık enflasyon, yüzde yirmi dokuz virgül yirmi sekize inebilir.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Ekim · yıllık · beklenti",
+        "deger": 29.28,
+        "onek": "~%",
+        "ondalik": 2,
+        "yon": "down",
+        "ok_renk": "yesil",
+        "renk": "sari",
+        "sayma": false,
+        "not": "Eylülde *%29,73* · (tahmini)"
+      },
+      "kaynak": "AA Finans (K1); formül: K2 + K3'ten kontrol"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "etiket": "BİR YIL ÖNCE",
+      "say": "Bir yıl önce, ekimde yıllık enflasyon yüzde otuz iki virgül seksen yediydi. Yani yaklaşık üç buçuk puan düşüş bekleniyor.",
+      "p": {
+        "baslik": "Yıllık enflasyon · Ekim",
+        "sol": {
+          "etiket": "EKİM 2025",
+          "deger": 32.87,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "EKİM 2026\n(beklenti)",
+          "deger": 29.28,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "−3,59 puan",
+        "not": "Ekim 2026 değeri tahmini"
+      },
+      "kaynak": "Capital, Ekonomist (K3); AA Finans (K1); fark: 32,87 − 29,28 = 3,59"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "YIL SONU",
+      "say": "Yıl sonu için de beklenti benzer. Ekonomistler yüzde yirmi dokuz virgül altı civarı görüyor.",
+      "p": {
+        "ikon": "🎯",
+        "etiket": "2026 yıl sonu · yıllık · beklenti",
+        "deger": 29.6,
+        "onek": "~%",
+        "ondalik": 1,
+        "renk": "sari",
+        "sayma": false,
+        "not": "AA Finans %29,64 · TCMB anketi %29,63 · *tahmini*"
+      },
+      "kaynak": "AA Finans, Matriks (K1); TCMB Piyasa Katılımcıları Anketi (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "etiket": "NEDEN",
+      "say": "Peki aylık küçük görünen artış, yıllıkta neden büyüyor?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "KÜÇÜK ARTIŞ\n*NEDEN BÜYÜYOR?*",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "1. SEBEP",
+      "say": "İlk sebep birikim. Her ay fiyatlar, bir önceki ayın üstüne biner. On iki ay sonra küçük artışlar büyür.",
+      "p": {
+        "baslik": "1. sebep · birikim",
+        "adimlar": [
+          {
+            "ikon": "1️⃣",
+            "metin": "Bu ay *%2* artış"
+          },
+          {
+            "ikon": "➕",
+            "metin": "Gelecek ay *üstüne* %2"
+          },
+          {
+            "ikon": "🏔️",
+            "metin": "12 ay: *~%30*"
+          }
+        ]
+      },
+      "kaynak": "Bileşik artış hesabı"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "etiket": "HESAP",
+      "say": "Bin liralık sepet her ay yüzde iki virgül iki artarsa, bir yılda yaklaşık bin üç yüz liraya çıkar.",
+      "p": {
+        "baslik": "Bir sepet · 12 ay",
+        "ikon": "🧺",
+        "ogeler": [
+          "1.000 ₺",
+          "×",
+          "her ay %2,2 · 12 ay",
+          "=",
+          "≈ 1.300 ₺"
+        ]
+      },
+      "kaynak": "Formül: 1.000 × 1,022^12 ≈ 1.298 ₺ (örnek hesap)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "etiket": "KARŞILAŞTIR",
+      "say": "Karşılaştıralım. Aylık yüzde bir, bir yılda yaklaşık yüzde on üç eder. Aylık yüzde iki virgül iki ise yaklaşık yüzde otuz.",
+      "p": {
+        "baslik": "Aylık artış sabit kalırsa · 12 ay sonra",
+        "sol": {
+          "etiket": "AYLIK %1",
+          "deger": 12.7,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "AYLIK %2,2",
+          "deger": 29.8,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 1,
+        "fark": "yaklaşık 2,3 kat",
+        "not": "Örnek hesap · bileşik artış"
+      },
+      "kaynak": "Formül: 1,01^12 ≈ 1,127 ; 1,022^12 ≈ 1,298 (örnek hesap)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEĞEN",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "SIRADA",
+          "*BAZ ETKİSİ* VAR"
+        ],
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "2. SEBEP",
+      "say": "İkinci sebep baz etkisi. Adı karışık, mantığı basit. Yıllık rakam, geçen yılın aynı ayıyla kıyaslanır.",
+      "p": {
+        "ikon": "🧩",
+        "satirlar": [
+          "BAZ ETKİSİ",
+          "= *GEÇEN YILLA*",
+          "KIYAS"
+        ],
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "etiket": "GEÇEN YIL",
+      "say": "Geçen yıl ekimde aylık enflasyon yüzde iki virgül elli beş çıkmıştı. Bu yıl beklenen ise yüzde iki virgül yirmi.",
+      "p": {
+        "baslik": "Ekim ayı · aylık enflasyon",
+        "satirlar": [
+          {
+            "ikon": "✅",
+            "metin": "Ekim 2025",
+            "deger": "%2,55",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "🔮",
+            "metin": "Ekim 2026 (beklenti)",
+            "deger": "~%2,20",
+            "renk": "sari"
+          }
+        ],
+        "not": "2025 gerçekleşen · 2026 tahmini"
+      },
+      "kaynak": "Capital, Ekonomist (K3); AA Finans (K1)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "NASIL",
+      "say": "Yüksek bir ay listeden çıkar, daha düşük bir ay girer. Bu yüzden yıllık rakam geriler.",
+      "p": {
+        "baslik": "Yıllık hesap · bir ay kayar",
+        "adimlar": [
+          {
+            "ikon": "👋",
+            "metin": "Ekim 2025 *%2,55* çıkar"
+          },
+          {
+            "ikon": "🆕",
+            "metin": "Ekim 2026 *~%2,20* girer"
+          },
+          {
+            "ikon": "📉",
+            "metin": "Yıllık *geriler*"
+          }
+        ]
+      },
+      "kaynak": "K1, K2, K3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "ÖZET",
+      "say": "Kısacası yıllık enflasyon, aylık artışların toplamı değil. Üst üste binmiş hâli.",
+      "p": {
+        "ikon": "🧱",
+        "satirlar": [
+          "YILLIK =",
+          "*ÜST ÜSTE*",
+          "BİNEN AYLAR"
+        ],
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "DİKKAT",
+      "say": "Yani yıllık rakam düşse bile fiyatlar yükselmeye devam eder. Sadece biraz daha yavaş yükselir.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "YILLIK DÜŞER",
+          "*FİYAT YİNE*",
+          "*ARTAR*"
+        ],
+        "boy": 96,
+        "not": "iki rakam aynı şeyi anlatmıyor"
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "3. SEBEP",
+      "say": "Üçüncü sebep sepet. Rakam, ortalama bir harcama sepetine göre hesaplanır.",
+      "p": {
+        "ikon": "🧺",
+        "satirlar": [
+          "ORTALAMA",
+          "*SEPET*"
+        ],
+        "boy": 110,
+        "not": "herkesin sepeti aynı değil"
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "etiket": "ETKİ",
+      "say": "Peki bu rakam bizi nasıl etkiler?",
+      "p": {
+        "ikon": "👀",
+        "metin": "BİZİ\n*NASIL ETKİLER?*",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "etiket": "KİM BAKAR",
+      "say": "Kira, maaş ve emekli zammı gibi pek çok hesap enflasyon rakamlarına bakar.",
+      "p": {
+        "baslik": "Enflasyona bakan hesaplar",
+        "satirlar": [
+          {
+            "ikon": "🏠",
+            "metin": "Kira artışı",
+            "deger": "enflasyon",
+            "renk": "sari"
+          },
+          {
+            "ikon": "👷",
+            "metin": "Maaş zammı",
+            "deger": "enflasyon",
+            "renk": "sari"
+          },
+          {
+            "ikon": "👵",
+            "metin": "Emekli zammı",
+            "deger": "enflasyon",
+            "renk": "sari"
+          }
+        ]
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "etiket": "İKİ RAKAM",
+      "say": "Haberde iki rakam göreceksin. Aylık olan, bu ay ne kadar arttığını söyler. Yıllık olan, son on iki ayı anlatır.",
+      "p": {
+        "baslik": "Haberde hangisine bakmalı?",
+        "satirlar": [
+          {
+            "ikon": "⏱️",
+            "metin": "Aylık",
+            "deger": "bu ay",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🔁",
+            "metin": "Yıllık",
+            "deger": "son 12 ay",
+            "renk": "mavi"
+          }
+        ],
+        "not": "İkisi farklı soruya cevap verir"
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "SOMUT",
+      "say": "Örnek verelim. Elli bin liralık aylık harcama, ortalama yüzde iki virgül iki artarsa, bir ayda bin yüz lira demek.",
+      "p": {
+        "baslik": "Aylık harcama · bir ay",
+        "ikon": "💸",
+        "ogeler": [
+          "50.000 ₺",
+          "×",
+          "%2,2",
+          "=",
+          "+1.100 ₺"
+        ]
+      },
+      "kaynak": "Formül: 50.000 × 0,022 = 1.100 ₺ (örnek hesap)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "SENİN SEPETİN",
+      "say": "Senin kendi enflasyonun farklı olabilir. Harcamanın çoğu kiraya ya da yakıta gidiyorsa sepetin ortalamadan ayrılır.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "SENİN SEPETİN",
+          "*ORTALAMADAN*",
+          "FARKLI OLABİLİR"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "NOT",
+      "say": "Not düşelim. Ekim rakamları beklentidir, salı günü farklı çıkabilir. Bu video yatırım tavsiyesi değildir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "RAKAMLAR",
+          "*BEKLENTİ*"
+        ],
+        "boy": 110,
+        "not": "2 Kasım 2026 itibarıyla · yatırım tavsiyesi değildir"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "etiket": "YORUM",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "MERAK ETTİĞİN KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Ekim 2026 beklentisi: AA Finans 21 ekonomist, aylık ort. %2,20 (aralık %1,25–2,70), yıllık %29,73→%29,28; CNBC-e anketi ort. %2,26; açıklama 3 Kasım 10.00 — https://www.ahaber.com.tr/ekonomi/2026/10/28/enflasyonda-yeni-tablo-21-ekonomistten-dikkat-ceken-ekim-ayi-ve-yil-sonu-tahmini ; https://istanbulticaretgazetesi.com/enflasyon-beklenti-anketi-sonuclandi-21-ekonomist-ile-yapildi-ekim-2026-enflasyon-beklentisi-ne-oldu ; https://www.cnbce.com/haberler/gozler-ekim-enflasyonunda-cnbc-e-anketinde-ekonomistlerin-beklentisi-belli-oldu-h40422",
+    "K2": "Eylül 2026 TÜİK: aylık %1,84, yıllık %29,73 (5 Ekim) — https://www.ekonomist.com.tr/ekonomi-haberleri/tuik-acikladi-eylul-2026-enflasyon-rakamlari-belli-oldu-79509 ; https://www.evrensel.net/haber/6003473/tuik-eylul-ayi-enflasyon-verilerini-acikladi-aylik-yuzde-184-yillik-2973",
+    "K3": "Ekim 2025 TÜİK: aylık %2,55, yıllık %32,87 — https://www.capital.com.tr/haberler/tum-haberler/tuik-2025-yili-ekim-ayi-enflasyon-rakamlarini-acikladi ; https://www.ekonomist.com.tr/haberler/tuik-ekim-ayi-enflasyon-rakamlari-aciklandi-67165",
+    "K4": "TCMB Piyasa Katılımcıları Anketi (Ekim): yıl sonu TÜFE beklentisi %29,63 — https://www.cnbce.com/veriler/piyasanin-beklentileri-belli-oldu-eylulde-enflasyon-tahmini-artti-buyume-tahmini-dustu-h39593 ; https://www.hisse.net/haber/tcmb-anketi-acikladi-dolar-ve-enflasyon-beklentisi-yukseldi-102556"
+  }
+}
