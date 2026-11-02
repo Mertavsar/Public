@@ -226,6 +226,8 @@ window.buildWorld3D = function (stage, tl) {
       return { p: [st.x - fx * g + rx * y, st.y + u, st.z - fz * g + rz * y], q: [st.x, st.y, st.z] };
     }
     const q = spec.hedef === "ucak" ? [st.x, st.y, st.z] : spec.hedef;
+    // sabit kamera da durmaz: konum2 verilmişse sahne boyunca oraya kayar
+    if (spec.konum2 && spec._u !== undefined) return { p: spec.konum.map((v, k) => lerp(v, spec.konum2[k], eInOut(spec._u))), q };
     return { p: spec.konum, q };
   };
   const proj = (x, y, z) => { const v = new T.Vector3(x, y, z).project(cam); return [(v.x + 1) / 2 * W, (1 - v.y) / 2 * H, v.z]; };
@@ -233,6 +235,8 @@ window.buildWorld3D = function (stage, tl) {
 
   return t => {
     const i = sceneAt(t), s = sc[i], hd = s.p.hud || {};
+    if (s.p.kam) s.p.kam._u = clamp((t - s.t0) / Math.max(.01, s.t1 - s.t0));
+    if (i > 0 && sc[i - 1].p.kam) sc[i - 1].p.kam._u = 1;
     const fs = sAt(s, t), st = stateAt(fs);
     // kamera: önceki sahnenin kamera tanımından bu sahneninkine yumuşak geçiş
     const cur = camFor(s.p.kam, st);
