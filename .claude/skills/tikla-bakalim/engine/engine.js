@@ -916,7 +916,11 @@ window.load = async function (tl, opts = {}) {
   const stage = document.getElementById("stage");
   BG = background(stage);
   if (tl.stil === "cizim") { document.documentElement.classList.add("cizim"); WORLD = window.buildWorld(stage, tl); }   // teknik çizim modu (cizim.js)
-  if (tl.stil === "3d") { document.documentElement.classList.add("s3d"); WORLD = window.buildWorld3D(stage, tl); }        // 3D veri modu (uc3d.js)
+  if (tl.stil === "3d") {   // 3D veri modu: uc3d.js (uçuş) veya dünyaya özel kurucu (siklon3d.js → build3D_siklon)
+    document.documentElement.classList.add("s3d");
+    const b3 = tl.dunya && window["build3D_" + tl.dunya];
+    WORLD = b3 ? b3(stage, tl) : window.buildWorld3D(stage, tl);
+  }
   stage.appendChild(document.getElementById("top"));
   const root = el("div", null, null, stage);
   BUILT = tl.scenes.map(s => {
