@@ -197,3 +197,12 @@ html.s3d.t3-kagit { --sari: #e3141b; --ink: #2a2b33; }
 html.s3d.t3-kagit #capline { color: rgba(42,43,51,.32); text-shadow: 0 0 10px #f1e9d6, 0 0 4px #f1e9d6; }
 html.s3d.t3-kagit #capline span.done { color: #2a2b33; }
 html.s3d.t3-kagit #capline span.on { color: #fff; background: #e3141b; text-shadow: none; }
+
+/* kâğıt kesme modu: altyazı zemin bandında, krem kâğıt şerit üstünde; etkin kelime kırmızı */
+html.kesme #stage { background: #10142c; }
+html.kesme .blob, html.kesme #grid, html.kesme #cap { display: none; }
+html.kesme #capline { display: block; position: absolute; left: 50%; top: 1560px; transform: translateX(-50%) rotate(-1deg); width: auto; max-width: 960px;
+  font-family: M; font-weight: 900; font-size: 50px; line-height: 1.22; text-align: center; color: rgba(22,22,28,.38);
+  background: #f4ecdb; padding: 14px 28px 16px; border-radius: 4px; box-shadow: 0 10px 22px rgba(0,0,0,.5), inset 0 0 0 3px rgba(0,0,0,.08); }
+html.kesme #capline span.done { color: #16161c; }
+html.kesme #capline span.on { color: #fff; background: #e3141b; border-radius: 8px; padding: 0 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }

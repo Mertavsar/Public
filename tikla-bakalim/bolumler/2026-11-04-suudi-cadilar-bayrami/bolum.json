@@ -1,0 +1,191 @@
+{
+ "baslik": "Suudi Arabistan'da Cadılar Bayramı — 2018 baskın, 2022 bedava giriş (kâğıt kesme)",
+ "tarih": "2026-11-04",
+ "durum": "ses: yapay zekâ (vidIQ Daniel), --sikistir",
+ "format": "dikey",
+ "stil": "kesme",
+ "gecis": false,
+ "vurgu": [
+  "gözaltı",
+  "bedava",
+  "baskın",
+  "yasağı",
+  "tepki"
+ ],
+ "altyazi": {
+  "dört yıl": "4 yıl",
+  "Dört yılda": "4 yılda",
+  "iki bin on sekiz": "2018",
+  "İki bin yirmi iki": "2022",
+  "On yedi": "17",
+  "İki bin on altıda": "2016'da",
+  "İki bin on sekizde": "2018'de",
+  "otuz beş": "35"
+ },
+ "kapak": {
+  "ikon": "🎃",
+  "ust": "SUUDİ ARABİSTAN'DA",
+  "buyuk": "CADILAR",
+  "alt": "BAYRAMI"
+ },
+ "kaynaklar": {
+  "K1": "Ekim 2018 Riyad: polis bir Cadılar Bayramı partisini bastı, 17 Filipinli kadın gözaltına alındı (sonra serbest); polis sözcüsü 'maske ve tuhaf kostümler' dedi — The National (thenationalnews.com/world/gcc/saudi-halloween-party-bust-sparks-debate-in-the-kingdom-1.785119), Philstar / Interaksyon (1 Kasım 2018), Al Bawaba",
+  "K2": "27–28 Ekim 2022: Genel Eğlence Otoritesi (GEA) Riyad Bulvarı 'Korku Hafta Sonu' — korkunç kostümle gelene bedava giriş; Riyad Sezonu etkinliği — Saudi Gazette (626295), Arab News (2189941), Tribune, Gulf News",
+  "K3": "13 Nisan 2016: Bakanlar Kurulu din polisinin (Haia) gözaltı yetkisini kaldırdı — Al Jazeera, CNN, HRW",
+  "K4": "18 Nisan 2018: Riyad'da 35 yıllık yasaktan sonra ilk sinema (AMC, Black Panther) — Euronews, Al Jazeera, Hollywood Reporter",
+  "K5": "Petrol sonrası çeşitlendirme: Vizyon 2030 kapsamında eğlence ve turizm yatırımları (GEA, Riyad Sezonu) — genel bilgi",
+  "K6": "2022 etkinliği sosyal medyada karışık tepki aldı — Daily Pakistan (31 Ekim 2022), Boston Globe (29 Ekim 2022)",
+  "NOT": "Çizimler temsilidir; harita yaklaşık sınırdır."
+ },
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "kesme",
+   "p": {
+    "set": "hook"
+   },
+   "say": "Aynı şehir, aynı kostüm: önce gözaltı, dört yıl sonra bedava giriş."
+  },
+  {
+   "bolum": "hook",
+   "tip": "kesme",
+   "p": {
+    "set": "baslik"
+   },
+   "say": "Burası Suudi Arabistan. Dört yılda ne değişti?"
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "takvim",
+    "yil": 2018,
+    "harita": true,
+    "pin": 0.9
+   },
+   "say": "Yıl iki bin on sekiz, başkent Riyad."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "baskin"
+   },
+   "say": "Komşular şikâyet ediyor, polis bir Cadılar Bayramı partisini basıyor."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "zincir"
+   },
+   "say": "On yedi Filipinli kadın gözaltına alınıyor."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "rapor"
+   },
+   "say": "Polisin açıklamasında maskeler ve tuhaf kostümler geçiyor."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "takvim",
+    "yillar": [
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "sure_yaprak": 0.32,
+    "bas": 0.25
+   },
+   "say": "Şimdi dört yıl ileri saralım."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "bulvar"
+   },
+   "say": "İki bin yirmi iki, Riyad Bulvarı."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "bilet"
+   },
+   "say": "Devletin eğlence kurumu duyuruyor: korkunç kostümle gelen, bedava girer."
+  },
+  {
+   "bolum": "ne",
+   "tip": "kesme",
+   "p": {
+    "set": "gecit"
+   },
+   "say": "Cadılar, zombiler, vampirler sokakları dolduruyor."
+  },
+  {
+   "bolum": "neden",
+   "tip": "kesme",
+   "p": {
+    "set": "soru"
+   },
+   "say": "Peki bu kadar hızlı değişim nasıl oldu?"
+  },
+  {
+   "bolum": "neden",
+   "tip": "kesme",
+   "p": {
+    "set": "rozet"
+   },
+   "say": "İki bin on altıda, din polisinin gözaltı yetkisi kaldırılıyor."
+  },
+  {
+   "bolum": "neden",
+   "tip": "kesme",
+   "p": {
+    "set": "sinema"
+   },
+   "say": "İki bin on sekizde, yani baskınla aynı yıl, otuz beş yıllık sinema yasağı bitiyor."
+  },
+  {
+   "bolum": "neden",
+   "tip": "kesme",
+   "p": {
+    "set": "petrol"
+   },
+   "say": "Ülke, petrolden sonrası için eğlenceye ve turizme yatırım yapıyor."
+  },
+  {
+   "bolum": "etki",
+   "tip": "kesme",
+   "p": {
+    "set": "telefon"
+   },
+   "say": "Ama herkes memnun değil, sosyal medyada tepki yağıyor."
+  },
+  {
+   "bolum": "etki",
+   "tip": "kesme",
+   "p": {
+    "set": "ikiyuz"
+   },
+   "say": "Kimine göre özgürlük, kimine göre gelenekten kopuş."
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kesme",
+   "p": {
+    "set": "kapanis",
+    "src": "logo.jpg"
+   },
+   "say": "Sence hangisi? Merak ettiysen, tıkla bakalım."
+  }
+ ]
+}

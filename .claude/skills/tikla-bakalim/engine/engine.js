@@ -916,6 +916,7 @@ window.load = async function (tl, opts = {}) {
   const stage = document.getElementById("stage");
   BG = background(stage);
   if (tl.stil === "cizim") { document.documentElement.classList.add("cizim"); WORLD = window.buildWorld(stage, tl); }   // teknik çizim modu (cizim.js)
+  if (tl.stil === "kesme") { document.documentElement.classList.add("kesme"); WORLD = window.buildKesme(stage, tl); }   // kâğıt kesme modu (kesme.js)
   if (tl.stil === "3d") {   // 3D veri modu: uc3d.js (uçuş) veya dünyaya özel kurucu (siklon3d.js → build3D_siklon)
     document.documentElement.classList.add("s3d");
     const b3 = tl.dunya && window["build3D_" + tl.dunya];
@@ -933,7 +934,7 @@ window.load = async function (tl, opts = {}) {
   CTA = ctaLayer(stage);
   CARDFX = sectionCard(stage);
   WORDS = tl.words || [];
-  if (FORMAT === "yatay" || tl.stil === "3d") buildLines();
+  if (FORMAT === "yatay" || tl.stil === "3d" || tl.stil === "kesme") buildLines();
   if (opts.cover) stage.classList.add("cover");
   // foto sahneleri: tüm görseller çözülmeden ilk kare çekilmesin (yoksa boş kare)
   await Promise.all([...document.images].map(i => i.decode().catch(() => console.error("GÖRSEL YÜKLENEMEDİ: " + i.src))));
@@ -995,7 +996,7 @@ window.seek = function (t) {
   tag.textContent = cur && cur.s.etiket ? cur.s.etiket : "";
   tag.style.opacity = cur && cur.s.etiket ? 1 : 0;
   document.querySelector("#bar b").style.width = (100 * clamp(t / TL.dur)) + "%";
-  if (FORMAT === "yatay" || TL.stil === "3d") lineCaption(t); else wordCaption(t);
+  if (FORMAT === "yatay" || TL.stil === "3d" || TL.stil === "kesme") lineCaption(t); else wordCaption(t);
   document.getElementById("src").textContent = cur && cur.s.kaynak ? "Kaynak: " + cur.s.kaynak : "";
   CTA(t);
   CARDFX(t);
