@@ -1,0 +1,540 @@
+{
+  "baslik": "GTA 6 neden bu kadar pahalı? Türkiye fiyatı 3.999 ₺ olarak bildirildi",
+  "tarih": "2026-11-04",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "GTA 6",
+    "fiyat",
+    "ön sipariş",
+    "indirim"
+  ],
+  "altyazi": {
+    "Ci Ti Ey beşin": "GTA 5'in",
+    "Ci Ti Ey beş": "GTA 5",
+    "Ci Ti Ey altı": "GTA 6",
+    "Üç soruda": "3 soruda",
+    "on dokuz Kasım": "19 Kasım",
+    "PlayStation beş": "PlayStation 5",
+    "iki yüz milyonun": "200 milyonun",
+    "yaklaşık seksen dolar": "yaklaşık 80 $",
+    "yetmiş dolar": "70 $",
+    "yaklaşık yüz dolar": "yaklaşık 100 $",
+    "dört bin ve beş bin lira": "4.000 ve 5.000 ₺",
+    "yaklaşık dört bin lira": "yaklaşık 4.000 ₺",
+    "iki bin yirmi beşti": "2025'ti",
+    "sekiz ile sekiz virgül iki milyar dolar": "8 – 8,2 milyar $",
+    "on dolar, yani yüzde on dört": "10 $, yani %14",
+    "yaklaşık elli lira": "yaklaşık 50 ₺",
+    "on altı bine yakın": "16.000'e yakın",
+    "Dört arkadaş": "4 arkadaş",
+    "Birinci nokta": "1. nokta",
+    "İkinci nokta": "2. nokta",
+    "Üçüncü nokta": "3. nokta",
+    "Üçüncü": "3.",
+    "üç şeye": "3 şeye",
+    "Üç noktaya": "3 noktaya"
+  },
+  "kapak": {
+    "ikon": "🎮",
+    "ust": "GTA 6",
+    "buyuk": "3.999 ₺",
+    "alt": "NEDEN?"
+  },
+  "cta": [
+    {
+      "sahne": 15,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "etiket": "BU AY ÇIKIYOR",
+      "say": "Ci Ti Ey altı, bu ay çıkıyor. Türkiye için bildirilen fiyatı, yaklaşık dört bin lira.",
+      "p": {
+        "ikon": "🎮",
+        "etiket": "GTA 6 · standart sürüm · Türkiye (bildirilen)",
+        "deger": 3999,
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "renk": "sari",
+        "sayma": false,
+        "not": "Resmî mağaza sayfasında *değişebilir*"
+      },
+      "kaynak": "Hürriyet, Milli Gazete (K3)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "etiket": "3 SORU",
+      "say": "Peki bir oyun neden bu kadar pahalı? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "OYUN NEDEN\n*BU KADAR PAHALI?*",
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "etiket": "ABONE OL",
+      "say": "Merak edilen konuları sade dille anlatıyoruz. Kaçırmamak için abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEMİ",
+          "*SADE ANLATIRIZ*"
+        ],
+        "boy": 100
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "etiket": "ÇIKIŞ GÜNÜ",
+      "say": "Oyun on dokuz Kasım perşembe günü çıkıyor. Ön siparişler haziranda başlamıştı.",
+      "p": {
+        "gun": "19",
+        "ay": "KASIM",
+        "gunadi": "PERŞEMBE",
+        "saat": "2026",
+        "not": "*GTA 6* çıkış günü"
+      },
+      "kaynak": "Take-Two bildirimi, Make Tech Easier, Hürriyet (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "PLATFORM",
+      "say": "Yalnızca PlayStation beş ve Xbox Series konsollarına geliyor. Bilgisayar sürümü için henüz tarih açıklanmadı.",
+      "p": {
+        "baslik": "GTA 6 · hangi cihaz?",
+        "satirlar": [
+          {
+            "ikon": "🎮",
+            "metin": "PlayStation 5",
+            "deger": "var",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "🕹️",
+            "metin": "Xbox Series X|S",
+            "deger": "var",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "💻",
+            "metin": "Bilgisayar",
+            "deger": "tarih yok",
+            "renk": "sari"
+          }
+        ]
+      },
+      "kaynak": "Take-Two, Gamebrief (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "etiket": "ÖNCEKİ OYUN",
+      "say": "Serinin önceki oyunu, Ci Ti Ey beş, iki yüz milyonun üzerinde sattı.",
+      "p": {
+        "ikon": "📦",
+        "etiket": "GTA V · satış adedi",
+        "deger": 200,
+        "onek": "",
+        "sonek": " milyon+",
+        "ondalik": 0,
+        "renk": "sari",
+        "sayma": false,
+        "not": "Take-Two bildirimleri *220 milyon* civarını gösteriyor"
+      },
+      "kaynak": "Take-Two sonuçları; Respawn, TweakTown (K7)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "etiket": "AMERİKA FİYATI",
+      "say": "Amerika'da standart sürüm yaklaşık seksen dolar. Büyük oyunlarda olağan fiyat, yetmiş dolar civarı.",
+      "p": {
+        "baslik": "Standart sürüm · ABD",
+        "sol": {
+          "etiket": "BÜYÜK OYUN\n(olağan)",
+          "deger": 69.99,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "GTA 6\nstandart",
+          "deger": 79.99,
+          "renk": "kirmizi"
+        },
+        "onek": "",
+        "sonek": " $",
+        "ondalik": 2,
+        "fark": "+10 $",
+        "not": "Sıfırdan başlayan ölçek"
+      },
+      "kaynak": "Make Tech Easier, Tech Insider (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "ULTIMATE",
+      "say": "Daha geniş Ultimate sürüm ise yaklaşık yüz dolar.",
+      "p": {
+        "baslik": "ABD ön sipariş fiyatı",
+        "satirlar": [
+          {
+            "ikon": "🎮",
+            "metin": "Standart sürüm",
+            "deger": "79,99 $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "👑",
+            "metin": "Ultimate sürüm",
+            "deger": "99,99 $",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Ön sipariş 25 Haziran 2026'da açıldı"
+      },
+      "kaynak": "Tech Insider, Yeni Şafak (K2)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "TÜRKİYE",
+      "say": "Türkiye için bildirilen fiyatlar, dört bin ve beş bin lira civarında. Resmî mağazada değişebilir.",
+      "p": {
+        "baslik": "Türkiye · basında bildirilen fiyat",
+        "satirlar": [
+          {
+            "ikon": "🎮",
+            "metin": "Standart sürüm",
+            "deger": "3.999 ₺",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "👑",
+            "metin": "Ultimate sürüm",
+            "deger": "4.999 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Resmî mağaza sayfasından *teyit edilemedi*"
+      },
+      "kaynak": "Hürriyet, Milli Gazete, Gazete Oksijen (K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "etiket": "ERTELEMELER",
+      "say": "Oyun çıkana kadar iki kez ertelendi. Önce hedef sonbahar iki bin yirmi beşti, sonra mayıs, şimdi kasım.",
+      "p": {
+        "baslik": "Çıkış tarihi nasıl kaydı?",
+        "adimlar": [
+          {
+            "ikon": "🍂",
+            "metin": "2025 sonbaharı · *ilk hedef*"
+          },
+          {
+            "ikon": "⏳",
+            "metin": "26 Mayıs 2026"
+          },
+          {
+            "ikon": "🚀",
+            "metin": "19 Kasım 2026"
+          }
+        ]
+      },
+      "kaynak": "GamesRadar, Tamindir (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "etiket": "NEDEN",
+      "say": "Peki fiyat neden yüksek? Üç noktaya bakalım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "FİYAT NEDEN\n*YÜKSEK?*",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "1. NOKTA",
+      "say": "Birinci nokta talep. Şirketin patronu, ön siparişlerin benzeri görülmemiş olduğunu söyledi.",
+      "p": {
+        "ikon": "📈",
+        "satirlar": [
+          "1 · TALEP",
+          "*ÖN SİPARİŞ*",
+          "BENZERİ YOK"
+        ],
+        "boy": 96,
+        "not": "Take-Two CEO'su Zelnick'in sözü"
+      },
+      "kaynak": "TechRadar, IBTimes (K5)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "TERİM",
+      "say": "Ön sipariş, oyunu çıkmadan önce satın almak demek. Talep yüksekken fiyatı yüksek tutmak kolaylaşır.",
+      "p": {
+        "ikon": "🛒",
+        "satirlar": [
+          "ÖN SİPARİŞ =",
+          "*ÇIKMADAN*",
+          "SATIN ALMAK"
+        ],
+        "boy": 96,
+        "not": "Son cümle genel ekonomi mantığıdır, şirket sözü değil"
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "etiket": "ŞİRKET BEKLENTİSİ",
+      "say": "Şirket, mart ayında biten mali yıl için sekiz ile sekiz virgül iki milyar dolar arası satış bekliyor. Ana sebep bu oyun.",
+      "p": {
+        "ikon": "💰",
+        "etiket": "Take-Two · mali yıl satış beklentisi",
+        "deger": 8,
+        "onek": "~",
+        "sonek": " milyar $",
+        "ondalik": 0,
+        "renk": "sari",
+        "sayma": false,
+        "not": "Beklenti aralığı *8 – 8,2 milyar $*"
+      },
+      "kaynak": "Take-Two, Business Wire, Rallies (K6)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEĞEN",
+      "say": "Videoyu beğenirsen daha çok kişiye ulaşıyor; kalbe dokunmayı unutma. Şimdi fiyatın mantığına geliyoruz.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "SIRADA",
+          "*FİYATIN MANTIĞI*"
+        ],
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "2. NOKTA",
+      "say": "İkinci nokta değer iddiası. Patron, oyunun fiyatından çok daha fazla değer sunduğunu söylüyor.",
+      "p": {
+        "ikon": "💎",
+        "satirlar": [
+          "2 · DEĞER",
+          "*İDDİASI*"
+        ],
+        "boy": 104,
+        "not": "CEO açıklamasının özeti"
+      },
+      "kaynak": "TechRadar, Windows Report (K10)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "etiket": "FARK",
+      "say": "Büyük oyunlarda yetmiş dolar olağan sayılıyor. Bu oyun çıtayı on dolar, yani yüzde on dört yukarı taşıyor.",
+      "p": {
+        "baslik": "Olağan fiyata göre fark",
+        "ikon": "📊",
+        "ogeler": [
+          "79,99 $",
+          "−",
+          "69,99 $",
+          "=",
+          "+10 $ (%14)"
+        ]
+      },
+      "kaynak": "Formül: 79,99 − 69,99 = 10 ; 10 ÷ 69,99 ≈ %14,3 (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "3. NOKTA",
+      "say": "Üçüncü nokta indirim. Patron, Ci Ti Ey beşin fiyatını uzun süre koruduklarını hatırlattı.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "3 · İNDİRİM",
+          "*UZUN SÜRE*",
+          "GELMEYEBİLİR"
+        ],
+        "boy": 88
+      },
+      "kaynak": "Beebom, Tech4Gamers, Gfinity (K8)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "DİKKAT",
+      "say": "Yani bekleyenin eli boş kalabilir. Ama şirket resmî bir indirim takvimi vermedi.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "GARANTİ",
+          "*DEĞİL*"
+        ],
+        "boy": 110,
+        "not": "Resmî indirim takvimi açıklanmadı"
+      },
+      "kaynak": "K8"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "etiket": "ETKİ",
+      "say": "Peki bu bizim cebimizi nasıl etkiler?",
+      "p": {
+        "ikon": "👀",
+        "metin": "CEBİMİZE\n*NE OLUR?*",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "KUR HESABI",
+      "say": "Türkiye fiyatını Amerika fiyatına bölersen, dolar başına yaklaşık elli lira çıkıyor.",
+      "p": {
+        "baslik": "Standart sürüm · fiyat oranı",
+        "ikon": "💵",
+        "ogeler": [
+          "3.999 ₺",
+          "÷",
+          "79,99 $",
+          "=",
+          "≈ 50 ₺ / $"
+        ]
+      },
+      "kaynak": "Formül: 3.999 ÷ 79,99 ≈ 49,99 (K2, K3)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "KUR",
+      "say": "Fiyat, dolar fiyatından türetilmiş görünüyor. Kur değişirse, liradaki fiyat da değişebilir.",
+      "p": {
+        "ikon": "💵",
+        "satirlar": [
+          "FİYAT",
+          "*DOLAR TEMELLİ*",
+          "GÖRÜNÜYOR"
+        ],
+        "boy": 88,
+        "not": "Çıkarım: resmî açıklama değil"
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "etiket": "SOMUT",
+      "say": "Örnek verelim. Dört arkadaş ayrı ayrı alırsa, toplam on altı bine yakın lira tutar.",
+      "p": {
+        "baslik": "Dört kişi · standart sürüm",
+        "ikon": "👥",
+        "ogeler": [
+          "4 kişi",
+          "×",
+          "3.999 ₺",
+          "=",
+          "15.996 ₺"
+        ]
+      },
+      "kaynak": "Formül: 4 × 3.999 = 15.996 (K3)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "etiket": "KONTROL",
+      "say": "Almadan önce üç şeye bak: mağaza fiyatı, konsolun, bir de bilgisayar sürümü.",
+      "p": {
+        "baslik": "Satın almadan önce",
+        "satirlar": [
+          {
+            "ikon": "🏷️",
+            "metin": "Resmî mağaza fiyatı",
+            "deger": "bak",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🎮",
+            "metin": "Konsolun",
+            "deger": "PS5 / Xbox",
+            "renk": "sari"
+          },
+          {
+            "ikon": "💻",
+            "metin": "Bilgisayar sürümü",
+            "deger": "tarih yok",
+            "renk": "sari"
+          }
+        ]
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "NOT",
+      "say": "Not düşelim. Fiyatlar ve tarihler değişebilir. Bu video alışveriş tavsiyesi değildir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "FİYATLAR",
+          "*DEĞİŞEBİLİR*"
+        ],
+        "boy": 104,
+        "not": "4 Kasım 2026 itibarıyla · alışveriş tavsiyesi değildir"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "etiket": "YORUM",
+      "say": "Sen ne düşünüyorsun, bu oyun bu paraya değer mi? Öğrenmek istediğin başka bir konuyu yorumlara yaz.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "MERAK ETTİĞİN KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Çıkış 19 Kasım 2026, PS5 ve Xbox Series X|S, PC açıklanmadı, ön sipariş 25 Haziran — https://maketecheasier.com/gta-6-release-date-price-preload/ ; https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026 ; https://www.hurriyet.com.tr/galeri-gta-6-ne-zaman-cikacak-fiyati-ne-kadar-olacak-gta-6-pc-cikis-tarihi-bilgileri-43257111",
+    "K2": "ABD fiyatı: standart 79,99 $, Ultimate 99,99 $; olağan büyük oyun fiyatı 69,99 $ — https://tech-insider.org/gta-6-price-leak-relief-79-99-standard-edition-2026/ ; https://maketecheasier.com/gta-6-release-date-price-preload/ ; https://www.yenisafak.com/gta-6-fiyati-belli-oldu-oyunun-cikis-ve-on-siparis-tarihi-resmi-olarak-aciklandi-h-4834460",
+    "K3": "Türkiye (basında bildirilen, resmî mağaza sayfasından doğrulanamadı): 3.999 ₺ / 4.999 ₺ — https://www.milligazete.com.tr/gta-6-turkiye-fiyati-ne-kadar-kac-tl-gta-6-kac-gb-ne-zaman-cikacak-ps5-ve-xbox-on-siparis-fiyatlari ; https://www.hurriyet.com.tr/galeri-gta-6-on-siparis-fiyati-belli-oldu-gta-6-turkiye-fiyati-belli-oldu-mu-ne-zaman-satisa-cikacak-43216957 ; https://gazeteoksijen.com/bilim-ve-teknoloji/gta-6-on-siparise-acildi-iste-turkiye-fiyati-280079",
+    "K4": "Erteleme geçmişi: 2025 sonbaharı → 26 Mayıs 2026 → 19 Kasım 2026 (6 Kasım 2025 duyurusu) — https://www.gamesradar.com/games/grand-theft-auto/gta-6-delayed-6-more-months-as-rockstar-commits-to-november-2026-and-says-sorry ; https://www.tamindir.com/haber/gta-6-ikinci-kez-ertelendi_101403/",
+    "K5": "CEO Zelnick: ön sipariş seviyesi 'benzeri görülmemiş' — https://www.techradar.com/gaming/the-level-of-pre-orders-is-unprecedented-take-two-reportedly-made-usd1-39-billion-in-sales-during-gta-6s-pre-order-period ; https://www.ibtimes.co.uk/gta-6-pre-orders-premium-pricing-strategy-1813809",
+    "K6": "Take-Two mali yıl 2027 net bookings beklentisi 8,0–8,2 milyar $ (Ağustos'ta yinelendi) — https://secure.businesswire.com/news/home/20260806868549/en/Take-Two-Interactive-Software-Inc.-Reports-Results-for-Fiscal-First-Quarter-2027 ; https://rallies.ai/news/take-two-forecasts-8-82b-fiscal-2027-bookings-confirms-november-19-gta-vi-launch ; https://www.marketbeat.com/instant-alerts/take-two-interactive-software-q4-earnings-call-highlights-2026-05-21/",
+    "K7": "GTA V satışı 200 milyon üzeri (220–230 milyon bildirildi) — https://respawn.outlookindia.com/gaming/gaming-news/gta-v-sales-hit-220m-copies-making-it-the-third-most-selling-game ; https://www.tweaktown.com/news/108775/grand-theft-auto-franchise-breaks-dollars10-2-billion-since-gta-vs-release/index.html ; https://www.psu.com/news/grand-theft-auto-v-sales-top-230-million-copies-red-dead-redemption-2-passes-85-million/",
+    "K8": "Zelnick: GTA V fiyatı 'çok uzun süre' korundu; indirim takvimi yok — https://beebom.com/gta-6-likely-wont-get-a-christmas-discount-says-take-two-ceo/ ; https://tech4gamers.com/gta-6-wont-be-discounted-2026/ ; https://www.gfinityesports.com/article/take-two-basically-says-dont-hold-your-breath-for-a-gta-6-discount",
+    "K10": "Zelnick: 'Tüketiciye ücretlendirdiğimizden çok daha fazla değer sunmayı hedefliyoruz' — https://techradar.com/gaming/our-goal-is-to-deliver-way-more-value-to-consumers-than-what-we-charge-them-take-two-ceo-says-gta-6-will-be-an-incredible-bargain-at-its-usd80-base-price ; https://windowsreport.com/take-two-defends-gta-6-price-calls-it-phenomenal-value-for-players/"
+  }
+}
