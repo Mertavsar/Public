@@ -375,14 +375,17 @@ SET.hook = (ctx, lt, D, p) => {
   silueti(ctx, 540, yari - 20, PAL.kir2, "rgba(255,120,90,.35)", 3, .62);
   karakter(ctx, "kabak", 540, yari - 40, 1.25, lt, { dans: false });
   // parmaklıklar iner
-  const k = Math.floor(lt * 12), dy = k < 1 ? -yari : k < 2 ? -yari * .35 : k < 3 ? 10 : 0;
-  const [sx, sy] = sars(lt, .17, 18);
+  const k = Math.floor(lt * 12), dy = k < 1 ? -yari * .25 : k < 2 ? 12 : 0;   // ilk karede parmaklık zaten iniyor
+  const [sx, sy] = sars(lt, .08, 18);
   ctx.translate(sx, dy + sy);
   for (let i = 0; i < 9; i++) PP(ctx, "bar" + i, () => path([rect(80 + i * 115, -10, 26, yari + 20)], 160 + i, 1.2), PAL.siyah, { d: 1.4 });
   PP(ctx, "barY", () => path([rect(60, 60, 960, 30), rect(60, yari - 120, 960, 30)], 170, 1.4), PAL.siyah, { d: 1.4 });
   ctx.restore();
-  serit(ctx, "2018", 170, 110, 64, pop(lt, .25), { bg: PAL.krem, rot: -5 });
-  muhur(ctx, "GÖZALTI", 760, 610, 74, lt, .5, -7);
+  serit(ctx, "2018", 170, 110, 64, pop(lt, .05), { bg: PAL.krem, rot: -5 });
+  muhur(ctx, "GÖZALTI", 760, 610, 74, lt, .3, -7);
+  // alt: 2022 açılana kadar karanlık, bekleyen sahne (gri boşluk kalmasın)
+  ctx.fillStyle = PAL.gece; ctx.fillRect(0, yari, W_, H_ - yari);
+  harfler(ctx, "4 YIL SONRA…", 540, yari + 330, 76, lt, .35, { hiz: .03, renk: "rgba(244,236,219,.85)" });
   // alt: aydınlık kum / festival
   const ac = b2 - .2;
   if (lt > ac) {
