@@ -176,14 +176,15 @@ def display_words(words, table):
     if not table:
         return words
     keys = sorted(((k.split(), v) for k, v in table.items()), key=lambda kv: -len(kv[0]))
-    norm = lambda w: re.sub(r"[.,!?;:…]+$", "", w).casefold()
+    trl = lambda w: w.replace("İ", "i").replace("I", "ı").lower()   # Türkçe küçük harf: "İki" == "iki"
+    norm = lambda w: trl(re.sub(r"[.,!?;:…]+$", "", w))
     out, i = [], 0
     while i < len(words):
         hit = None
         for ks, v in keys:
             seg = words[i:i + len(ks)]
             if len(seg) == len(ks) and len({w["p"] for w in seg}) == 1 and \
-                    [norm(w["w"]) for w in seg] == [k.casefold() for k in ks]:
+                    [norm(w["w"]) for w in seg] == [trl(k) for k in ks]:
                 hit = (len(ks), v); break
         if hit:
             n, v = hit
