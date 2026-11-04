@@ -20,7 +20,8 @@
   "On yedi": "17",
   "İki bin on altıda": "2016'da",
   "İki bin on sekizde": "2018'de",
-  "otuz beş": "35"
+  "otuz beş": "35",
+  "İki bin yirmi altıda": "2026'da"
  },
  "kapak": {
   "ikon": "🎃",
@@ -35,7 +36,8 @@
   "K4": "18 Nisan 2018: Riyad'da 35 yıllık yasaktan sonra ilk sinema (AMC, Black Panther) — Euronews, Al Jazeera, Hollywood Reporter",
   "K5": "Petrol sonrası çeşitlendirme: Vizyon 2030 kapsamında eğlence ve turizm yatırımları (GEA, Riyad Sezonu) — genel bilgi",
   "K6": "2022 etkinliği sosyal medyada karışık tepki aldı — Daily Pakistan (31 Ekim 2022), Boston Globe (29 Ekim 2022)",
-  "NOT": "Çizimler temsilidir; harita yaklaşık sınırdır."
+  "NOT": "Çizimler temsilidir; harita yaklaşık sınırdır.",
+  "K7": "2026: Riyad'da Cadılar Bayramı otel, restoran ve eğlence merkezlerinde (Gravity 'Dark Wonderland' korku odası + kostüm yarışması, otellerde kabak partileri), 29–31 Ekim 2026 — Destination KSA (destinationksa.com/en/spooky-season-2026-in-riyadh/), Saudi Nights (saudinights.com/riyadh/halloween-2026-in-riyadh/), haberler.com (1 Kasım 2026). 2026'da Bulvar'da 2022 benzeri 'Korku Hafta Sonu' kaydı bulunamadı."
  },
  "sahneler": [
   {
@@ -136,7 +138,7 @@
    "p": {
     "set": "soru"
    },
-   "say": "Peki bu kadar hızlı değişim nasıl oldu?"
+   "say": "Peki bu değişim nasıl oldu?"
   },
   {
    "bolum": "neden",
@@ -152,7 +154,7 @@
    "p": {
     "set": "sinema"
    },
-   "say": "İki bin on sekizde, yani baskınla aynı yıl, otuz beş yıllık sinema yasağı bitiyor."
+   "say": "Baskınla aynı yıl, otuz beş yıllık sinema yasağı da bitiyor."
   },
   {
    "bolum": "neden",
@@ -161,6 +163,14 @@
     "set": "petrol"
    },
    "say": "Ülke, petrolden sonrası için eğlenceye ve turizme yatırım yapıyor."
+  },
+  {
+   "bolum": "etki",
+   "tip": "kesme",
+   "p": {
+    "set": "y2026"
+   },
+   "say": "Bu yıl, iki bin yirmi altıda ise kutlamalar otellere ve eğlence merkezlerine taşındı, kostüm yarışmaları yapıldı."
   },
   {
    "bolum": "etki",

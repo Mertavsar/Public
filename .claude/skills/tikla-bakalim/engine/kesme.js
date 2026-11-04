@@ -290,6 +290,7 @@ function karakter(ctx, kind, x, y, s, lt, o = {}) {
     ctx.strokeStyle = "rgba(0,0,0,.28)"; ctx.lineWidth = 3; [-30, 30].forEach(x => { ctx.beginPath(); ctx.ellipse(x * .55, 0, 16, 46, 0, -1.2, 1.2); ctx.stroke(); });
     PP(ctx, "sap", () => path([[[-6, -46], [8, -46], [14, -70], [2, -66]]], 72, .8), PAL.yesil1, { d: .5 });
   } else {
+    if (kind === "cadi") PP(ctx, "csac", () => { const p = []; for (let k = 0; k <= 10; k++) p.push([-50 + k * 10, k % 2 ? 56 : 34]); p.push([50, -20]); p.push([-50, -20]); return path([p], 83, 1); }, PAL.tur1, { d: .6 });   // saç başın arkasında
     PP(ctx, "bas" + kind, () => path([ell(0, 0, 36, 40, 30)], 81, 1.2), ten, { d: 1 });
     // yüz: göz delikleri (koyu), ağız
     ctx.fillStyle = PAL.siyah; [-13, 13].forEach(ex => { ctx.beginPath(); ctx.ellipse(ex, -4, 5, zom ? 3 : 6, 0, 0, 7); ctx.fill(); });
@@ -298,8 +299,7 @@ function karakter(ctx, kind, x, y, s, lt, o = {}) {
     ctx.stroke();
     if (kind === "vampir") { PP(ctx, "vsac", () => path([[[-38, -6], [-36, -34], [-12, -46], [0, -24], [12, -46], [36, -34], [38, -6], [30, -24], [0, -40], [-30, -24]]], 82, 1), PAL.siyah, { d: .6 });
       ctx.fillStyle = "#fff"; [-6, 6].forEach(fx => { ctx.beginPath(); ctx.moveTo(fx - 3, 17); ctx.lineTo(fx, 26); ctx.lineTo(fx + 3, 17); ctx.fill(); }); }
-    if (kind === "cadi") { PP(ctx, "csac", () => { const p = []; for (let k = 0; k <= 10; k++) p.push([-44 + k * 8.8, k % 2 ? 40 : 20]); p.push([44, -20]); p.push([-44, -20]); return path([p], 83, 1); }, PAL.tur1, { d: .6 });
-      PP(ctx, "sapka", () => path([[[-74, -26], [74, -26], [70, -14], [-70, -14]], [[-38, -26], [-6, -130], [30, -150], [14, -118], [38, -26]]], 84, 1.4), PAL.siyah, { d: 1, ic: 3 });
+    if (kind === "cadi") { PP(ctx, "sapka", () => path([[[-74, -26], [74, -26], [70, -14], [-70, -14]], [[-38, -26], [-6, -130], [30, -150], [14, -118], [38, -26]]], 84, 1.4), PAL.siyah, { d: 1, ic: 3 });
       PP(ctx, "bant", () => path([rect(-36, -44, 74, 14)], 85, .8), PAL.tur, { d: .3 }); }
     if (zom) { PP(ctx, "zsac", () => path([[[-34, -20], [-20, -42], [-6, -30], [6, -46], [20, -32], [34, -40], [34, -18]]], 86, 1), "#4a4232", { d: .6 }); }
     if (kind === "insan") PP(ctx, "isac" + (o.sac || 0), () => path([[[-38, -2], [-34, -36], [0, -48], [34, -36], [38, -2], [26, -26], [-26, -26]]], 87, 1), o.sacr || "#4a2e1c", { d: .6 });
@@ -695,6 +695,37 @@ SET.petrol = (ctx, lt, D, p) => {
   ctx.restore();
   serit(ctx, "PETROLDEN SONRASI", 540, 300, 56, pop(lt, .1), { bg: PAL.siyah, ink: PAL.krem, rot: -2 });
   serit(ctx, "EĞLENCE + TURİZM", 760, 1340, 50, pop(lt, (p.don ?? .5) + 1), { bg: PAL.kir, ink: PAL.krem, bayrak: true, rot: 2 });
+  zemin(ctx, PAL.gece, 5);
+};
+// 14b · 2026: kutlama otel ve eğlence merkezlerinde — sahne, spot ışığı, kostüm yarışması, kupa
+SET.y2026 = (ctx, lt, D, p) => {
+  ctx.fillStyle = PAL.mor1; ctx.fillRect(0, 0, W_, H_);
+  for (let i = 0; i < 7; i++) PP(ctx, "duvar26_" + i, () => path([rect(i * 160 - 10, 0, 70, 1500)], 300 + i, 2), "rgba(0,0,0,.14)", { d: 0, duz: true });
+  // avize ışıkları (adımla parlayan)
+  cicekdizi(ctx, -30, 1110, 640, 50, lt, 16);
+  // sahne
+  PP(ctx, "sahne26", () => path([[[-20, 1200], [1100, 1200], [1100, 1300], [-20, 1300]]], 310, 1.6), PAL.kir1, { d: 1.6, ic: 7 });
+  // spot ışıkları adımla yarışmacılar arasında gezer
+  const xs = [250, 540, 830], sec = Math.floor(q(lt) * 1.6) % 3;
+  ctx.save(); ctx.globalCompositeOperation = "lighter";
+  xs.forEach((x, i) => { ctx.globalAlpha = i === sec ? .32 : .08; ctx.fillStyle = "#fff3cc"; ctx.beginPath(); ctx.moveTo(x - 30, 560); ctx.lineTo(x - 170, 1220); ctx.lineTo(x + 170, 1220); ctx.lineTo(x + 30, 560); ctx.closePath(); ctx.fill(); });
+  ctx.restore();
+  // yarışmacılar + numara kartı
+  [["cadi", 250], ["vampir", 540], ["kabak", 830]].forEach(([k, x], i) => {
+    karakter(ctx, k, x, 1205, .95, lt, { dans: i === sec, ofs: i * .2 });
+    ctx.save(); ctx.translate(x, 1110); PP(ctx, "no26", () => path([rect(-34, -26, 68, 52)], 320, 1), PAL.krem, { d: .7 });
+    ctx.font = font(34); ctx.fillStyle = PAL.siyah; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(i + 1), 0, 2); ctx.restore();
+  });
+  // kupa
+  const ku = pop(lt, p.kupa ?? D * .55);
+  if (ku) { ctx.save(); ctx.translate(830, 760); ctx.scale(ku, ku);
+    isikhavuzu(ctx, 0, 0, 140, "rgba(255,210,90,A)", .5);
+    PP(ctx, "kupa", () => path([[[-60, -70], [60, -70], [50, 0], [18, 22], [14, 60], [44, 70], [44, 86], [-44, 86], [-44, 70], [-14, 60], [-18, 22], [-50, 0]],
+      [[-60, -60], [-92, -52], [-80, -6], [-52, -6], [-56, -22], [-74, -24], [-78, -44], [-58, -46]], [[60, -60], [92, -52], [80, -6], [52, -6], [56, -22], [74, -24], [78, -44], [58, -46]]], 330, 1.2), PAL.sari, { d: 1.4, ic: 4 });
+    ctx.restore(); }
+  takvimYaprak(ctx, 2026, 230, 330, .62, { rot: -.06 });
+  serit(ctx, "KOSTÜM YARIŞMASI", 660, 300, 50, pop(lt, .2), { bg: PAL.kir, ink: PAL.krem, bayrak: true, rot: 2 });
+  serit(ctx, "OTEL · RESTORAN · EĞLENCE MERKEZİ", 540, 1380, 36, pop(lt, p.mekan ?? D * .25), { bg: PAL.krem, rot: -1 });
   zemin(ctx, PAL.gece, 5);
 };
 // 15 · Telefon: yorum balonları yağar
