@@ -1,0 +1,531 @@
+{
+  "baslik": "2027 yeniden değerleme oranı yüzde 27,83: vergi ve harçlara zam mı geliyor?",
+  "tarih": "2026-11-06",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "oran",
+    "zam",
+    "harç",
+    "27,83"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "yüzde yirmi yedi virgül seksen üç": "%27,83",
+    "yüzde yirmi beş virgül kırk dokuzdu": "%25,49'du",
+    "yüzde yirmi beş virgül kırk dokuz": "%25,49",
+    "yüzde on sekiz virgül doksan beş": "%18,95",
+    "yüzde yirmi dokuz virgül yetmiş yedi": "%29,77",
+    "üç Kasım": "3 Kasım",
+    "on iki aylık": "12 aylık",
+    "Bin liralık": "1.000 ₺'lik",
+    "bin iki yüz yetmiş sekiz lira": "1.278 ₺",
+    "bin yüz doksan lira": "1.190 ₺",
+    "seksen dokuz lira": "89 ₺"
+  },
+  "kapak": {
+    "ikon": "🧾",
+    "ust": "2027 İÇİN ORAN",
+    "buyuk": "%27,83",
+    "alt": "NE DEMEK?"
+  },
+  "cta": [
+    {
+      "sahne": 12,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Gelecek yıl devletin pek çok tutarı için kullanılacak oran belli oldu. Yüzde yirmi yedi virgül seksen üç.",
+      "p": {
+        "ikon": "🧾",
+        "etiket": "2027 için yeniden değerleme oranı",
+        "deger": 27.83,
+        "onek": "%",
+        "ondalik": 2,
+        "yon": "up",
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "3 Kasım 2026'da açıklandı"
+      },
+      "etiket": "ORAN",
+      "kaynak": "Matriks, CNBC-e, Milli Gazete (K1)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bu oran nedir, nereden çıkıyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "BU ORAN\n*NE DEMEK?*",
+        "boy": 120
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "GÜNDEM",
+          "*SADE DİLLE*"
+        ],
+        "boy": 104
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "takvim",
+      "say": "Türkiye İstatistik Kurumu, üç Kasım'da ekim enflasyonunu açıkladı. Aynı gün gelecek yılın oranı da kesinleşti.",
+      "p": {
+        "gun": "3",
+        "ay": "KASIM",
+        "gunadi": "SALI",
+        "saat": "2026",
+        "not": "Ekim verisi geldi, *2027 oranı* kesinleşti"
+      },
+      "etiket": "TARİH",
+      "kaynak": "Matriks, Forbes Türkiye (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "karsilastir",
+      "say": "Oranın adı, yeniden değerleme oranı. Geçen yıl yüzde yirmi beş virgül kırk dokuzdu. Bu yıl yüzde yirmi yedi virgül seksen üç.",
+      "p": {
+        "baslik": "Yeniden değerleme oranı",
+        "sol": {
+          "etiket": "2026 İÇİN\n(geçen yıl)",
+          "deger": 25.49,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2027 İÇİN\n(bu yıl)",
+          "deger": 27.83,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "+2,34 puan",
+        "not": ""
+      },
+      "etiket": "ORAN",
+      "kaynak": "Forbes Türkiye, Bloomberg HT (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Terimi sadeleştirelim. Devlet bazı tutarları liraya sabitler. Bu oran, o tutarların yıllık güncelleme çarpanı.",
+      "p": {
+        "ikon": "🧮",
+        "satirlar": [
+          "YENİDEN DEĞERLEME",
+          "= *GÜNCELLEME*",
+          "ÇARPANI"
+        ],
+        "boy": 88,
+        "not": "Sabit lira tutarları her yıl bu oranla güncellenebilir"
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Bu orana harçlar, motorlu taşıtlar vergisi ve bazı idari para cezaları bağlı.",
+      "p": {
+        "baslik": "Orana bağlanan kalemler",
+        "satirlar": [
+          {
+            "ikon": "🛂",
+            "metin": "Pasaport, ehliyet harçları",
+            "deger": "oran dayanak",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🚗",
+            "metin": "Motorlu taşıtlar vergisi",
+            "deger": "oran dayanak",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📄",
+            "metin": "Bazı idari para cezaları",
+            "deger": "oran dayanak",
+            "renk": "sari"
+          }
+        ],
+        "not": "Her kalemde aynı artış uygulanmayabilir"
+      },
+      "etiket": "KAPSAM",
+      "kaynak": "CNBC-e, Milli Gazete (K1, K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "akis",
+      "say": "Neden her yıl güncelleniyor? Çünkü fiyatlar artarken, sabit bir lira tutarı zamanla değer kaybeder.",
+      "p": {
+        "baslik": "Neden güncelleniyor?",
+        "adimlar": [
+          {
+            "ikon": "📈",
+            "metin": "Fiyatlar *artar*"
+          },
+          {
+            "ikon": "🪙",
+            "metin": "Sabit tutar *değer kaybeder*"
+          },
+          {
+            "ikon": "🔄",
+            "metin": "Tutar her yıl *güncellenir*"
+          }
+        ]
+      },
+      "etiket": "NEDEN VAR"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki bu oran nereden çıkıyor?",
+      "p": {
+        "ikon": "🔎",
+        "metin": "ORAN\n*NEREDEN ÇIKAR?*",
+        "boy": 112
+      },
+      "etiket": "2. SORU"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Kural şöyle. Ekim ayında, üretici fiyatlarının on iki aylık ortalamasındaki değişime bakılır. Sonuç, oran olur.",
+      "p": {
+        "baslik": "1. sebep · hesap kuralı",
+        "adimlar": [
+          {
+            "ikon": "📅",
+            "metin": "*Ekim* ayı gelir"
+          },
+          {
+            "ikon": "🏭",
+            "metin": "*Üretici fiyatları* (Yİ-ÜFE)"
+          },
+          {
+            "ikon": "📊",
+            "metin": "12 aylık ortalama = *oran*"
+          }
+        ]
+      },
+      "etiket": "1. SEBEP",
+      "kaynak": "Endeks24, Matriks (K1)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Üretici fiyatı, malı üretenin sattığı fiyattır. Biz markette tüketici fiyatını görürüz.",
+      "p": {
+        "ikon": "🏭",
+        "satirlar": [
+          "ÜRETİCİ FİYATI",
+          "= ÜRETİCİNİN",
+          "*SATTIĞI FİYAT*"
+        ],
+        "boy": 88,
+        "not": "Markette gördüğümüz: tüketici fiyatı"
+      },
+      "etiket": "İKİ FİYAT"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "SIRADA",
+          "*İKİ ENFLASYON* FARKI"
+        ],
+        "boy": 104
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Aynı ekim ayında yıllık tüketici enflasyonu yüzde yirmi dokuz virgül yetmiş yedi oldu. Oran ondan düşük.",
+      "p": {
+        "baslik": "Ekim 2026 · iki farklı ölçü",
+        "sol": {
+          "etiket": "YILLIK ENFLASYON\n(tüketici)",
+          "deger": 29.77,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "2027 ORANI\n(üretici ort.)",
+          "deger": 27.83,
+          "renk": "sari"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "−1,94 puan",
+        "not": "Farklı fiyat serileri, birebir kıyaslanmaz"
+      },
+      "etiket": "KARŞILAŞTIR",
+      "kaynak": "TÜİK, Zaman Türk, Endeks24 (K2, K1)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani oran, hissettiğimiz enflasyonla birebir aynı değil. Çünkü başka bir fiyat serisine bakıyor.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "ORAN ≠",
+          "*HİSSETTİĞİN*",
+          "ENFLASYON"
+        ],
+        "boy": 96,
+        "not": "Yorum · iki serinin farkından çıkarım"
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "İkinci mesele, oranın kesin zam demek olmaması. Geçen yıl oran yüzde yirmi beş virgül kırk dokuzdu, ama MTV ve bazı harçlara yüzde on sekiz virgül doksan beş uygulandı.",
+      "p": {
+        "baslik": "Geçen yıl · oran ve uygulanan",
+        "sol": {
+          "etiket": "İLAN EDİLEN\nORAN",
+          "deger": 25.49,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "MTV + BAZI HARÇLARDA\nUYGULANAN",
+          "deger": 18.95,
+          "renk": "yesil"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 2,
+        "fark": "−6,54 puan",
+        "not": "Cumhurbaşkanı kararı ile, aralık sonunda yayımlandı"
+      },
+      "etiket": "2. SEBEP",
+      "kaynak": "Euronews, Forbes Türkiye (K4)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu yıl ne olacağı henüz belli değil. Karar, yıl sonuna doğru bekleniyor.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "KARAR",
+          "*YIL SONUNA DOĞRU*",
+          "BEKLENİYOR"
+        ],
+        "boy": 88,
+        "not": "Cumhurbaşkanı bazı vergi ve harçlarda oranı değiştirebiliyor"
+      },
+      "etiket": "BELİRSİZ",
+      "kaynak": "Milli Gazete, YatırımX (K3)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu bizi nasıl etkiler?",
+      "p": {
+        "ikon": "👛",
+        "metin": "SENİN\n*CEBİNE* NE OLUR?",
+        "boy": 112
+      },
+      "etiket": "3. SORU"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Üç ihtimal var. Oran aynen uygulanabilir, düşürülebilir ya da yükseltilebilir.",
+      "p": {
+        "baslik": "Aralık kararında üç ihtimal",
+        "satirlar": [
+          {
+            "ikon": "✅",
+            "metin": "Oran aynen uygulanır",
+            "deger": "%27,83",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "⬇️",
+            "metin": "Oran düşürülür",
+            "deger": "daha az zam",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "⬆️",
+            "metin": "Oran yükseltilir",
+            "deger": "daha çok zam",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Hangisinin olacağı belli değil · kalemlere göre değişebilir"
+      },
+      "etiket": "İHTİMALLER",
+      "kaynak": "Milli Gazete, YatırımX (K3)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "hesap",
+      "say": "Basit bir örnek verelim. Bin liralık bir harç, bu oranla zamlanırsa yaklaşık bin iki yüz yetmiş sekiz lira olur.",
+      "p": {
+        "baslik": "Örnek · 1.000 ₺'lik bir harç",
+        "ikon": "🧮",
+        "ogeler": [
+          "1.000 ₺",
+          "×",
+          "1,2783",
+          "=",
+          "≈ 1.278 ₺"
+        ]
+      },
+      "etiket": "ÖRNEK HESAP",
+      "kaynak": "Hesap: 1.000 × 1,2783 (K1) · varsayımsal tutar"
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "say": "Oran yüzde on sekiz virgül doksan beş uygulanırsa, aynı harç yaklaşık bin yüz doksan lira olur. Fark, yaklaşık seksen dokuz lira.",
+      "p": {
+        "baslik": "Aynı 1.000 ₺'lik harç · iki ihtimal",
+        "sol": {
+          "etiket": "%27,83 İLE\n(yaklaşık)",
+          "deger": 1278,
+          "renk": "kirmizi"
+        },
+        "sag": {
+          "etiket": "%18,95 İLE\n(yaklaşık)",
+          "deger": 1190,
+          "renk": "sari"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "fark": "≈ 89 ₺ fark",
+        "not": "Varsayımsal örnek · gerçek harç tutarı değil"
+      },
+      "etiket": "İKİ İHTİMAL",
+      "kaynak": "Hesap: 1.000×1,2783 ; 1.000×1,1895"
+    },
+    {
+      "bolum": "etki",
+      "tip": "takvim",
+      "say": "Yeni tutarların, yeni yılın ilk gününden itibaren geçerli olması bekleniyor.",
+      "p": {
+        "gun": "1",
+        "ay": "OCAK",
+        "gunadi": "CUMA",
+        "saat": "2027",
+        "not": "Yeni tutarlar *geçerli olması bekleniyor*"
+      },
+      "etiket": "BAŞLANGIÇ",
+      "kaynak": "Matriks, Milli Gazete (K1, K3)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "say": "Pasaport, ehliyet ya da araç işlemi planlıyorsan, tutarları yıl sonunda tekrar kontrol et.",
+      "p": {
+        "baslik": "Yıl sonunda bakılacaklar",
+        "satirlar": [
+          {
+            "ikon": "🛂",
+            "metin": "Pasaport, ehliyet harcı",
+            "deger": "kontrol et",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🚗",
+            "metin": "Araç vergisi (MTV)",
+            "deger": "yeni tutar",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📰",
+            "metin": "Resmi Gazete kararı",
+            "deger": "takip et",
+            "renk": "yesil"
+          }
+        ],
+        "not": "Kesin tutarlar karardan sonra netleşir"
+      },
+      "etiket": "KONTROL"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bütçe yapıyorsan, gelecek yıl için bu kalemlere biraz pay ayırmak mantıklı olabilir.",
+      "p": {
+        "ikon": "💡",
+        "satirlar": [
+          "BÜTÇENE",
+          "*BİRAZ PAY*",
+          "AYIR"
+        ],
+        "boy": 96,
+        "not": "Genel bir fikir · tavsiye değildir"
+      },
+      "etiket": "BÜTÇE"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Not düşelim. Bu video yatırım ya da mali tavsiye değildir. Tutarlar, Resmi Gazete kararından sonra netleşir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "TUTARLAR",
+          "*KARARDAN SONRA*",
+          "NETLEŞİR"
+        ],
+        "boy": 88,
+        "not": "6 Kasım 2026 itibarıyla · tavsiye değildir"
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "MERAK ETTİĞİN KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 88
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "2027 yeniden değerleme oranı %27,83 (TÜİK ekim verisiyle 3 Kasım 2026'da kesinleşti; geçen yıl %25,49; Yİ-ÜFE 12 aylık ortalama değişimi) — https://x.com/MatriksHaber/status/2117518484636639522 ; https://www.forbes.com.tr/haberler/2027-yili-yeniden-degerleme-orani-belli-oldu ; https://www.bloomberght.com/2027-icin-yeniden-degerleme-orani-belli-oldu-3793170 ; https://www.cnbce.com/haberler/2027-yeniden-degerleme-orani-belli-oldu-vergi-harc-ve-cezalara-ne-kadar-zam-gelecek-h40886 ; https://www.endeks24.com/2027-yeniden-degerleme-orani-yuzde-27-83",
+    "K2": "Ekim 2026 TÜFE: aylık %2,58, yıllık %29,77 — https://www.timeturk.com/2026-ekim-enflasyonu-aciklandi-tufe-aylik-258-yillik-2977 ; https://cumhuriyet.com.tr/ekonomi/tuik-ekim-ayi-enflasyonunu-acikladi-2552715 ; https://www.qnbinvest.com.tr/investodak/qnbarastirma/ekim-2026-enflasyon-verileri-aciklandi",
+    "K3": "Kapsam ve Cumhurbaşkanı yetkisi: pasaport/ehliyet harçları, MTV, idari para cezaları; nihai tutarlar karar sonrası; tarih (1 Ocak 2027) — https://www.milligazete.com.tr/2027-yeniden-degerleme-orani-belli-oldu-vergi-harc-ve-cezalara-zam-geliyor ; https://www.yatirimx.com.tr/ekonomi/arac-sahiplerinin-gozu-bu-oranlarda-2027-mtv-zam-orani-belli-oldu/27570 ; https://www.timeturk.com/2027-yeniden-degerleme-orani-yuzde-2783-harc-mtv-ceza-tutarlari",
+    "K4": "2026 için oran %25,49, MTV/damga/bazı harçlara %18,95 uygulandı (karar aralık sonunda) — https://tr.euronews.com/2025/12/31/mtv-damga-vergisi-ve-bazi-harclara-2026-yili-icin-yuzde-1895-zam ; https://www.forbes.com.tr/ekonomi/2026-da-vergi-ve-harclarda-zam-orani-asagi-cekildi ; https://www.bloomberght.com/motorlu-tasitlar-vergisi-yuzde-18-95-artirildi-3765092"
+  }
+}
