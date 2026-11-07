@@ -5,14 +5,15 @@ Sen bu bilgisayarda çalışan Claude Code'sun. Görevin: **PDF Mind** ürünün
 **sunum videosu** üretmek. Soru sorman gerekirse hepsini TEK mesajda sor, sonra durmadan ilerle.
 Kısa konuş (CLAUDE.md "Konuşma kuralı"). Çalışma klasörü: `Public/sunumlar/pdf-mind/`.
 
-## 0. Ürünü bul (ilk adım)
-Sırayla dene, bulduğunda dur:
-1. Kullanıcı bir **URL** veya **klasör yolu** verdiyse onu kullan.
-2. Bilgisayarda ara: `pdf mind`, `pdfmind`, `pdf-mind` adlı klasör / proje / masaüstü uygulaması
-   (Belgeler, Masaüstü, kullanıcı klasörü; `node_modules` ve sistem klasörleri hariç).
-3. Bulamazsan kullanıcıya tek satırla sor: "PDF Mind'ın linki veya klasörü nerede?"
-Ürün bir kod deposuysa: README, `package.json`, rotalar/sayfalar, ayarlar ve ortam değişkeni örneklerini oku;
-yerelde çalıştır (`npm install` + dev sunucusu). Gizli anahtar gerekiyorsa kullanıcıdan iste, uydurma.
+## 0. Ürün ve hazır içerik
+- **Ürün:** PDF Mind — Flutter mobil uygulaması (Android/iOS, paket `com.docubrain.ai`), kod: GitHub `Mertavsar/PDF-Mind`
+  (bu bilgisayara klonla: `git clone https://github.com/Mertavsar/PDF-Mind` — Public'in yanına).
+- **Sunum metni hazır:** `SUNUM.md` koddan çıkarıldı (22 araç, planlar, teknik yapı). Sen kodla tekrar doğrula,
+  eksik/yanlışı düzelt; yoksa sıfırdan yazma.
+- **Ekran görüntüleri:** kullanıcı telefondan çekip `ekran/` klasörüne koyacak (`EKRAN_LISTESI.md`); ekran kayıtları `ekran/kayit/`.
+  Eksik olanları kullanıcıya tek listede bildir. Kendin çekmen gerekirse: Flutter SDK + Android emülatörü kur,
+  uygulamayı çalıştır (Firebase/RevenueCat yapılandırması gerekiyorsa kullanıcıdan iste, uydurma).
+- **Uygulama içindeki örnek yorumlar** ("Ahmet K.", "Zeynep A.") ve "Toplam X kişi Pro'ya geçti" gibi sayılar sunuma/videoya GİRMEZ.
 
 ## 1. Özellik envanteri (`ENVANTER.md`)
 Ürünü gerçekten kullanarak çıkar; tahmin yok:
@@ -35,7 +36,7 @@ Bilinmeyeni "bilinmiyor" diye işaretle. Pazarlama iddiası, rakip kıyası, kul
 - **Gizlilik:** gerçek kişisel veri/e-posta/fatura görünmesin; demo hesap ve örnek PDF kullan
   (örnek PDF'i kendin üret: 3–4 sayfalık, telifsiz bir makale/rapor). Görünen kişisel veriyi bulanıklaştır.
 
-## 3. Sunum dosyası (`SUNUM.md`) — `SUNUM_SABLON.md` yapısını doldur
+## 3. Sunum dosyası (`SUNUM.md`) — hazır taslağı doğrula, görselleri bağla
 Her özellik bölümü: **ne yapar → neden önemli → adım adım nasıl kullanılır (numaralı) → ekran görüntüsü
 (işaretli) → ipucu/sınır**. Görüntüler göreli yolla: `![Yükleme ekranı](ekran/isaretli/03-yukleme.png)`.
 Dil: sade Türkçe, kısa cümleler. Sonunda: SSS, sınırlar, sözlük, kaynaklar (ürün içi + resmî sayfalar).
