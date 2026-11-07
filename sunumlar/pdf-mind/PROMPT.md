@@ -43,6 +43,7 @@ Dil: sade Türkçe, kısa cümleler. Sonunda: SSS, sınırlar, sözlük, kaynakl
 Ayrıca `SUNUM.pdf` üret (Markdown → HTML → Playwright ile PDF; A4, kapak sayfası, içindekiler, sayfa numarası).
 
 ## 4. Video
+**Hazır plan:** `VIDEO_PLANI.md` (sahne sahne ekran, kamera, seslendirme, ekran yazısı) + `video_sahneler.json` + `seslendirme_uzun.txt` / `seslendirme_teaser.txt`. Planı uygula; sadece gerekirse süreleri gerçek ses süresine göre ayarla.
 Lemo-Opuscar kütüphanesini kullan (`~/lemo-opuscar`; eklenti komutu tanınmıyorsa `SKILL.md`, `DIRECTOR.md`,
 `TECHNIQUE.md` ve stil dosyasını doğrudan oku).
 - **Stil: `living-screencast`** (gerçek arayüz + imleç takibi, tıklamada yakınlaşma, pencere duvar kâğıdı
