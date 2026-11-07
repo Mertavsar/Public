@@ -1,8 +1,10 @@
 # PDF Mind — Ürün Sunumu
 > **Yapay Zekâ Destekli Belge Asistanı** · Android & iOS · Sürüm 11.0.5 · Kasım 2026
-> Kaynak: uygulamanın kendi kodu ve metinleri (`Mertavsar/PDF-Mind`). Görseller `ekran/` klasöründen; liste: `EKRAN_LISTESI.md`.
+> Kaynak: uygulamanın kendi kodu ve metinleri (`Mertavsar/PDF-Mind`). **Ekran görüntüleri uygulamanın kendi ekranlarıdır** (Flutter, iPhone 6,1" boyutu); sonuç ekranlarındaki içerik örnek belgelerle (Fotosentez ders notu, kira sözleşmesi, satış raporu) doldurulmuştur.
 
-![Kapak — ana ekran](ekran/01-ana-ekran.png)
+| | | |
+|---|---|---|
+| ![Ana ekran](ekran/01-ana-ekran.jpg) | ![Özet](ekran/10-ozet-sonuc.jpg) | ![Test](ekran/14-test-cevap.jpg) |
 
 ## İçindekiler
 1. Problem · 2. Çözüm · 3. Kimler için? · 4. İlk açılış · 5. Ana ekran ve gezinme · 6. Yapay zekâ araçları (12)
@@ -38,7 +40,7 @@ cevaplasın; aynı yerde tara, dönüştür, birleştir, imzala.
 | 🔬 Araştırmacı | Makaleler, akademik içerik | Özet, Karşılaştır, Basitleştir, Sohbet |
 | ⚖️ Hukuk | Sözleşmeler, hukuki belgeler | Risk Analizi, Karşılaştır, İmza |
 
-![Kullanım amacı seçimi](ekran/04-onboarding-amac.png)
+![Kullanım amacı seçimi](ekran/04-onboarding-amac.jpg)
 
 ---
 
@@ -50,7 +52,7 @@ cevaplasın; aynı yerde tara, dönüştür, birleştir, imzala.
 
 | | | |
 |---|---|---|
-| ![](ekran/02-onboarding-1.png) | ![](ekran/03-onboarding-2.png) | ![](ekran/05-onboarding-hediye.png) |
+| ![](ekran/02-onboarding-1.jpg) | ![](ekran/03-onboarding-2.jpg) | ![](ekran/04-onboarding-amac.jpg) |
 
 ## 5. Ana ekran ve gezinme
 - Alt menü: **Araçlar · Rehber · Geçmiş · Profil**
@@ -59,7 +61,7 @@ cevaplasın; aynı yerde tara, dönüştür, birleştir, imzala.
 
 | | |
 |---|---|
-| ![Ana ekran](ekran/isaretli/01-ana-ekran.png) | ![Yükleme penceresi](ekran/isaretli/06-yukle-modal.png) |
+| ![Ana ekran](ekran/01-ana-ekran.jpg) | ![Belge seçimi](ekran/11-sohbet-belge-sec.jpg) |
 
 ---
 
@@ -70,73 +72,74 @@ Sonuç ekranındaki işlem çubuğu: kopyalama, paylaşma, PDF/Word olarak dış
 ### 6.1 Özetle
 **Ne yapar:** Uzun belgeyi en önemli noktalarıyla kısa ve öz özetler.
 **Kullanım:** Özetle → PDF seç → madde madde özet gelir → kopyala/paylaş.
-![Özet sonucu](ekran/isaretli/10-ozet-sonuc.png)
+![Özet sonucu](ekran/10-ozet-sonuc.jpg)
 
 ### 6.2 PDF ile Sohbet
 **Ne yapar:** Belgeye soru sorarsın, cevap belgenin içeriğinden gelir.
 **Kullanım:** AI Sohbet → belge seç (son kullanılanlar veya yeni yükle) → hazır soru önerilerinden birine dokun veya yaz.
-![Sohbet](ekran/isaretli/11-sohbet.png)
+![Sohbet](ekran/11-sohbet-belge-sec.jpg)
 
 ### 6.3 Derin Analiz
 **Ne yapar:** Anahtar bulguları, kritik verileri ve önemli noktaları çıkarır; **puanlanmış analiz raporu** oluşturur.
-![Derin analiz raporu](ekran/isaretli/12-derin-analiz.png)
+![Derin analiz raporu](ekran/12-derin-analiz.jpg)
 
 ### 6.4 Test Hazırla
 **Ne yapar:** Belgeden **5 soruluk çoktan seçmeli test** ve cevap anahtarı üretir; sonunda **Test Özeti**.
 **Kullanım:** Test Hazırla → PDF seç → soruları çöz → doğru/yanlış ve özet.
 | | |
 |---|---|
-| ![Soru](ekran/isaretli/13-test-soru.png) | ![Test özeti](ekran/isaretli/14-test-ozet.png) |
+| ![Soru](ekran/13-test-soru.jpg) | ![Doğru cevap](ekran/14-test-cevap.jpg) |
 
 ### 6.5 Bilgi Kartları
 **Ne yapar:** En önemli bilgileri **soru–cevap kartlarına** dönüştürür; kart çevrilerek çalışılır.
-![Bilgi kartı](ekran/isaretli/15-bilgi-karti.png)
+| ![Kart ön yüz](ekran/15-bilgi-karti.jpg) | ![Kart arka yüz](ekran/15b-bilgi-karti-arka.jpg) |
+|---|---|
 
 ### 6.6 Boşluk Doldurma
 **Ne yapar:** Metinden boşluklu cümleler üretir (aktif hatırlama). **Zorluk:** Kolay (temel kavramlar) · Orta (teknik terimler) · Zor (çoklu kavram).
-![Zorluk seçimi ve sorular](ekran/isaretli/16-bosluk-doldurma.png)
+![Zorluk seçimi ve sorular](ekran/16-bosluk-doldurma.jpg)
 
 ### 6.7 Basitleştir
 **Ne yapar:** Hukuki, tıbbi, teknik metni **"çocuk seviyesinde"**, herkesin anlayacağı sade dile çevirir.
-![Basitleştir](ekran/isaretli/17-basitlestir.png)
+![Basitleştir](ekran/17-basitlestir.jpg)
 
 ### 6.8 Risk Analizi (Hukuk Uzmanı)
 **Ne yapar:** Sözleşme ve belgelerdeki **riskleri, kritik maddeleri** ve dikkat edilecek noktaları tespit eder ve **puanlar**.
 > Not: Hukuki danışmanlık yerine geçmez; ön inceleme aracıdır.
-![Risk analizi](ekran/isaretli/18-risk-analizi.png)
+![Risk analizi](ekran/18-risk-analizi.jpg)
 
 ### 6.9 Döküman Karşılaştır
 **Ne yapar:** İki PDF'i karşılaştırır; **kritik farklılıkları ve ortak noktaları** raporlar (ör. sözleşmenin eski/yeni sürümü).
-![Karşılaştırma](ekran/isaretli/19-karsilastir.png)
+![Karşılaştırma](ekran/19-karsilastir.jpg)
 
 ### 6.10 Tabloya Çıkar
 **Ne yapar:** PDF'teki tabloları otomatik bulur; **Markdown ve CSV** olarak verir, Excel'e aktarılır.
-![Tablo çıkarma](ekran/isaretli/20-tablo.png)
+![Tablo çıkarma](ekran/20-tablo.jpg)
 
 ### 6.11 Çalışma Seti
 **Ne yapar:** Tek PDF'ten **komple çalışma paketi**: özet (madde madde) · test · bilgi kartları · boşluk doldurma · basitleştirme · sohbet.
 "Bu dökümanla ne yapmak istersin?" ekranından seçilir.
-![Çalışma seti](ekran/isaretli/21-calisma-seti.png)
+![Çalışma seti](ekran/21-calisma-seti.jpg)
 
 ### 6.12 Çalışma Asistanı
 **Ne yapar:** Konuyu **özel öğretmen gibi adım adım** anlatır.
-![Çalışma asistanı](ekran/isaretli/22-calisma-asistani.png)
+![Çalışma asistanı](ekran/22-calisma-asistani.jpg)
 
 ---
 
 ## 7. Belge araçları
 | Araç | Ne yapar | Görsel |
 |---|---|---|
-| **Belge Tara** | Kamerayla kâğıdı tarar, kenarları algılar, PDF yapar | ![](ekran/isaretli/30-tara.png) |
-| **Görüntüden PDF'e** | Galeriden/kameradan bir veya çok fotoğrafı tek PDF yapar | ![](ekran/isaretli/31-img2pdf.png) |
-| **PDF'ten Görsele** | Her sayfayı yüksek kaliteli PNG/JPG olarak dışa aktarır | ![](ekran/isaretli/32-pdf2img.png) |
-| **PDF'ten Word'e** | Düzenlenebilir DOCX'e çevirir | ![](ekran/isaretli/33-word.png) |
-| **PDF'ten PowerPoint'e** | PDF'i sunuma (PPTX) dönüştürür | ![](ekran/isaretli/34-pptx.png) |
-| **PDF Birleştir** | En az iki PDF'i tek dosyada birleştirir | ![](ekran/isaretli/35-birlestir.png) |
-| **PDF Ayır** | PDF'i sayfalara/bölümlere ayırır | ![](ekran/isaretli/36-ayir.png) |
-| **PDF Şifrele** | PDF'e parola koyar | ![](ekran/isaretli/37-sifrele.png) |
-| **İmza** | Parmakla çizilen veya görsel imzayı PDF'e yerleştirir; **imza yalnızca cihazda işlenir** | ![](ekran/isaretli/38-imza.png) |
-| **Görüntü Formatı** | Görseli seçilen formata dönüştürür | ![](ekran/isaretli/39-gorsel-format.png) |
+| **Belge Tara** | Kamerayla kâğıdı tarar, kenarları algılar, PDF yapar | ![](ekran/30-tara.jpg) |
+| **Görüntüden PDF'e** | Galeriden/kameradan bir veya çok fotoğrafı tek PDF yapar | ![](ekran/31-img2pdf.jpg) |
+| **PDF'ten Görsele** | Her sayfayı yüksek kaliteli PNG/JPG olarak dışa aktarır | ![](ekran/32-pdf2img.jpg) |
+| **PDF'ten Word'e** | Düzenlenebilir DOCX'e çevirir | ![](ekran/33-word.jpg) |
+| **PDF'ten PowerPoint'e** | PDF'i sunuma (PPTX) dönüştürür | ![](ekran/34-pptx.jpg) |
+| **PDF Birleştir** | En az iki PDF'i tek dosyada birleştirir | ![](ekran/35-birlestir.jpg) |
+| **PDF Ayır** | PDF'i sayfalara/bölümlere ayırır | ![](ekran/36-ayir.jpg) |
+| **PDF Şifrele** | PDF'e parola koyar | ![](ekran/37-sifrele.jpg) |
+| **İmza** | Parmakla çizilen veya görsel imzayı PDF'e yerleştirir; **imza yalnızca cihazda işlenir** | ![](ekran/38-imza.jpg) |
+| **Görüntü Formatı** | Görseli seçilen formata dönüştürür | ![](ekran/39-gorsel-format.jpg) |
 
 ## 8. Kütüphane, geçmiş ve profil
 - **Kütüphane:** yüklenen belgeler; klasöre ekleme, yeniden adlandırma.
@@ -146,7 +149,7 @@ Sonuç ekranındaki işlem çubuğu: kopyalama, paylaşma, PDF/Word olarak dış
 
 | | | |
 |---|---|---|
-| ![Kütüphane](ekran/40-kutuphane.png) | ![Geçmiş](ekran/41-gecmis.png) | ![Profil](ekran/42-profil.png) |
+| ![Kütüphane](ekran/40-kutuphane.jpg) | ![Geçmiş](ekran/41-gecmis.jpg) | ![Ayarlar](ekran/44-ayarlar.jpg) |
 
 ## 9. Ücretsiz ve Pro
 | | Ücretsiz | Pro |
@@ -159,7 +162,8 @@ Sonuç ekranındaki işlem çubuğu: kopyalama, paylaşma, PDF/Word olarak dış
 
 **Planlar (uygulama metnindeki fiyatlar; mağaza fiyatı geçerlidir):** Haftalık ₺19,90 · Aylık ₺49,00 · Yıllık ₺399,90 (aylık ~₺33,32).
 Abonelik mağaza hesabından yönetilir ve iptal edilir; "Satın Alımları Geri Yükle" mevcuttur.
-![Premium ekranı](ekran/isaretli/50-premium.png)
+| ![Ana ekrandaki Pro kartı](ekran/01-ana-ekran.jpg) | ![SSS](ekran/45-sss.jpg) |
+|---|---|
 
 ## 10. Teknik yapı
 ```
@@ -183,10 +187,10 @@ Flutter uygulaması (Android/iOS)
 
 | Adım | Ekran |
 |---|---|
-| 1 Çalışma Seti seçimi | ![](ekran/isaretli/21-calisma-seti.png) |
-| 2 Özet | ![](ekran/isaretli/10-ozet-sonuc.png) |
-| 3 Test | ![](ekran/isaretli/13-test-soru.png) |
-| 4 Bilgi kartları | ![](ekran/isaretli/15-bilgi-karti.png) |
+| 1 Çalışma Seti seçimi | ![](ekran/21-calisma-seti.jpg) |
+| 2 Özet | ![](ekran/10-ozet-sonuc.jpg) |
+| 3 Test | ![](ekran/13-test-soru.jpg) |
+| 4 Bilgi kartları | ![](ekran/15-bilgi-karti.jpg) |
 
 ## 13. SSS
 - **Ücretsiz mi?** Evet; ilk kullanım ücretsiz, sonrası kısa reklamla. Pro reklamsız ve sınırsız.
