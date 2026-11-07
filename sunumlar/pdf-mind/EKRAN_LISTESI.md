@@ -1,4 +1,6 @@
 # PDF Mind — ekran görüntüsü listesi
+
+> ✅ Bu listedeki ekranların çoğu uygulamanın kendi kodundan otomatik çizildi (`ekran/`). Telefondan çekim sadece Premium, Profil, kamera ve yükleme penceresi için gerekli.
 Telefonda (tercihen iPhone 6,7" veya Android 1080×2400) çek, bu adlarla `sunumlar/pdf-mind/ekran/` klasörüne koy.
 Örnek PDF kullan (kişisel belge değil). Demo hesap; kişisel bilgi/e-posta görünmesin. Ayrıca her akışın **ekran kaydını**
 (video) da al: `ekran/kayit/NN-ad.mp4` — sunum videosunda gerçek arayüz hareketi bunlardan gelir.
