@@ -1,0 +1,533 @@
+{
+ "baslik": "Bilgisayar satışları yüzde 20 düştü ama fiyatlar neden artıyor? Bellek krizi",
+ "tarih": "2026-11-07",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "düştü",
+  "fiyat",
+  "bellek",
+  "RAM"
+ ],
+ "altyazi": {
+  "Üç soruda": "3 soruda",
+  "yaklaşık yüzde yirmi": "≈ %20",
+  "yüzde yirmi ile yirmi iki": "%20–22",
+  "yüzde yirmi ile yirmi yedi": "%20–27",
+  "yüzde on ile yirmi": "%10–20",
+  "yaklaşık altmış üç milyon": "≈ 62,7 milyon",
+  "yetmiş sekiz buçuk milyondu": "78,5 milyondu",
+  "yaklaşık otuz sekiz bin liradan": "37.999 ₺'den",
+  "kırk altı bin liraya": "45.999 ₺'ye",
+  "iki bin yirmi sekizin": "2028'in",
+  "yedi Kasım": "7 Kasım",
+  "Haziran'da": "Haziran'da"
+ },
+ "kapak": {
+  "ikon": "💻",
+  "ust": "BİLGİSAYAR SATIŞI",
+  "buyuk": "-%20",
+  "alt": "FİYAT NEDEN ARTIYOR?"
+ },
+ "cta": [
+  {
+   "sahne": 11,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Dünyada bilgisayar satışları, geçen yıla göre yaklaşık yüzde yirmi düştü. Fiyatlar ise düşmedi.",
+   "p": {
+    "ikon": "💻",
+    "etiket": "Küresel PC sevkiyatı · 3. çeyrek 2026 (yıllık)",
+    "deger": 20.1,
+    "onek": "-%",
+    "ondalik": 1,
+    "yon": "down",
+    "ok_renk": "kirmizi",
+    "renk": "beyaz",
+    "sayma": false,
+    "not": "IDC ön verisi · 8 Ekim 2026"
+   },
+   "etiket": "DÜŞÜŞ",
+   "kaynak": "IDC, itdaily (K1)"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Peki bilgisayarlara ne oldu? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "BİLGİSAYARLARA\n*NE OLDU?*",
+    "boy": 112
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Bu tür konuları basitçe anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "GÜNDEM",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Araştırma şirketi IDC'ye göre, yılın üçüncü çeyreğinde üreticilerden mağazalara yaklaşık altmış üç milyon bilgisayar gönderildi. Geçen yıl aynı dönemde yetmiş sekiz buçuk milyondu.",
+   "p": {
+    "baslik": "Dünya PC sevkiyatı · 3. çeyrek",
+    "sol": {
+     "etiket": "2025\n(geçen yıl)",
+     "deger": 78.5,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "2026\n(bu yıl)",
+     "deger": 62.7,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " mn",
+    "ondalik": 1,
+    "fark": "-%20,1",
+    "not": "Sevkiyat = üreticiden satış kanalına giden adet · ön veri"
+   },
+   "etiket": "SEVKİYAT",
+   "kaynak": "IDC, itdaily, neoteo (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Gartner, Omdia ve Counterpoint de benzer sonuç buldu. Hepsi yüzde yirmi ile yirmi iki arasında düşüş açıkladı.",
+   "p": {
+    "baslik": "Dört araştırma şirketi · yıllık düşüş",
+    "satirlar": [
+     {
+      "ikon": "📊",
+      "metin": "IDC",
+      "deger": "-%20,1",
+      "renk": "sari"
+     },
+     {
+      "ikon": "📊",
+      "metin": "Omdia",
+      "deger": "-%21,2",
+      "renk": "sari"
+     },
+     {
+      "ikon": "📊",
+      "metin": "Counterpoint",
+      "deger": "-%21",
+      "renk": "sari"
+     },
+     {
+      "ikon": "📊",
+      "metin": "Gartner",
+      "deger": "-%22,4",
+      "renk": "sari"
+     }
+    ],
+    "not": "Ön veriler · yöntemler farklı"
+   },
+   "etiket": "KARŞILAŞTIR",
+   "kaynak": "Gartner, Omdia, Counterpoint (K2)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "En sert düşüş HP'de oldu. Apple gibi bazı markalar ise daha az düştü.",
+   "p": {
+    "baslik": "Markalara göre düşüş · IDC",
+    "satirlar": [
+     {
+      "ikon": "🖥️",
+      "metin": "HP",
+      "deger": "-%30,9",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🖥️",
+      "metin": "Dell",
+      "deger": "-%25,0",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🖥️",
+      "metin": "Lenovo",
+      "deger": "-%22,6",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🍎",
+      "metin": "Apple",
+      "deger": "-%11,3",
+      "renk": "yesil"
+     }
+    ],
+    "not": "Yıllık sevkiyat değişimi · ön veri"
+   },
+   "etiket": "MARKALAR",
+   "kaynak": "IDC, MacTech (K1, K3)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Satışlar düşerken ortalama fiyatlar yükseldi. Gartner, bellek maliyetinin fiyatlara yansıdığını söylüyor.",
+   "p": {
+    "ikon": "🏷️",
+    "satirlar": [
+     "SATIŞ ~↓~",
+     "*FİYAT* ~↑~"
+    ],
+    "boy": 112,
+    "not": "Gartner: bileşen maliyet artışı ortalama fiyatları yükseltti"
+   },
+   "etiket": "FİYAT",
+   "kaynak": "Gartner, ITPro (K2)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki satışlar düşerken fiyatlar neden artıyor?",
+   "p": {
+    "ikon": "🔎",
+    "metin": "NEDEN\n*İKİSİ BİRDEN?*",
+    "boy": 112
+   },
+   "etiket": "2. SORU"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Cevap, bilgisayarın içindeki bir parçada: bellek, yani RAM. Açık işleri tutan kısa süreli hafızadır.",
+   "p": {
+    "ikon": "🧠",
+    "satirlar": [
+     "BELLEK",
+     "= *RAM*"
+    ],
+    "boy": 104,
+    "not": "Açık işleri tutan kısa süreli hafıza"
+   },
+   "etiket": "TERİM"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Yapay zekâ şirketleri dev veri merkezleri kuruyor. Bu merkezler çok miktarda özel bellek istiyor. Bellek fabrikaları da üretimi o yöne kaydırıyor. Bilgisayar ve telefon için daha az bellek kalıyor.",
+   "p": {
+    "baslik": "1. sebep · bellek kıtlığı",
+    "adimlar": [
+     {
+      "ikon": "🤖",
+      "metin": "Yapay zekâ *veri merkezleri*"
+     },
+     {
+      "ikon": "🧠",
+      "metin": "*Özel bellek* talebi artıyor"
+     },
+     {
+      "ikon": "🏭",
+      "metin": "Üretim oraya *kayıyor*"
+     },
+     {
+      "ikon": "💻",
+      "metin": "PC ve telefona *az* kalıyor"
+     }
+    ]
+   },
+   "etiket": "1. SEBEP",
+   "kaynak": "Tom's Hardware, Notebookcheck, TrendForce (K4)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "SIRADA",
+     "*FİYATIN* İÇİ"
+    ],
+    "boy": 104
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Az olunca fiyat artıyor. Bellek fiyatlarının yılın son çeyreğinde de yüzde on ile yirmi arasında artması bekleniyor.",
+   "p": {
+    "baslik": "Bellek fiyatı · 4. çeyrek beklentisi",
+    "satirlar": [
+     {
+      "ikon": "🧠",
+      "metin": "RAM · Eylül",
+      "deger": "+%10–15",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🧠",
+      "metin": "RAM · Ekim",
+      "deger": "≈ +%20",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "💾",
+      "metin": "Depolama · Eylül",
+      "deger": "+%15–20",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "TrendForce · çeyreklik değişim · tahmindir, kesin değildir"
+   },
+   "etiket": "FİYAT",
+   "kaynak": "TrendForce (K5)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Fabrikalar neden hemen üretimi artırmıyor? Çünkü yeni bellek fabrikası kurmak, yıllar alıyor.",
+   "p": {
+    "ikon": "🏗️",
+    "satirlar": [
+     "YENİ FABRİKA",
+     "*YILLAR* ALIYOR"
+    ],
+    "boy": 104,
+    "not": "Kapasite kısa sürede artmıyor"
+   },
+   "etiket": "ARZ",
+   "kaynak": "SoftwareSeni, TrendForce (K4)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Bir sebep daha var. Üreticiler zam gelmeden önce erken stok yaptı. İlk aylar yüksekti, üçüncü çeyrek zayıf kaldı.",
+   "p": {
+    "baslik": "2. sebep · erken alım",
+    "adimlar": [
+     {
+      "ikon": "📦",
+      "metin": "Zam beklentisiyle *erken stok*"
+     },
+     {
+      "ikon": "📈",
+      "metin": "İlk yarıda satış *yüksek*"
+     },
+     {
+      "ikon": "📉",
+      "metin": "3. çeyrekte *zayıf*"
+     }
+    ]
+   },
+   "etiket": "2. SEBEP",
+   "kaynak": "IDC, itdaily (K1)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu kıtlık ne kadar sürer? Bazı analizler, iki bin yirmi sekizin başını gösteriyor. Ama bu bir tahmin.",
+   "p": {
+    "ikon": "⏳",
+    "satirlar": [
+     "KITLIK",
+     "*2028 BAŞINA*",
+     "KADAR SÜREBİLİR"
+    ],
+    "boy": 88,
+    "not": "Tahmin · kesin değil"
+   },
+   "etiket": "TAHMİN",
+   "kaynak": "IDC, Counterpoint (K1, K6)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu bizi nasıl etkiler?",
+   "p": {
+    "ikon": "👛",
+    "metin": "SENİN\n*CEBİNE* NE OLUR?",
+    "boy": 112
+   },
+   "etiket": "3. SORU"
+  },
+  {
+   "bolum": "etki",
+   "tip": "karsilastir",
+   "say": "Türkiye'den bir örnek: en ucuz Mac, Haziran'da yaklaşık otuz sekiz bin liradan kırk altı bin liraya çıktı.",
+   "p": {
+    "baslik": "Apple Türkiye · en ucuz Mac · Haziran 2026",
+    "sol": {
+     "etiket": "ÖNCE",
+     "deger": 37999,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "SONRA",
+     "deger": 45999,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " ₺",
+    "ondalik": 0,
+    "fark": "+8.000 ₺"
+   },
+   "etiket": "ÖRNEK",
+   "kaynak": "Tamindir, Ekonomist (K7)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu zammın tek sebebi bellek olmayabilir. Döviz kuru da etkili olabilir.",
+   "p": {
+    "ikon": "⚖️",
+    "satirlar": [
+     "TEK SEBEP",
+     "*BELLEK*",
+     "OLMAYABİLİR"
+    ],
+    "boy": 96,
+    "not": "Yorum · tek neden olduğu kesin değil"
+   },
+   "etiket": "DİKKAT"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Aynı sebep telefonları ve ekran kartlarını da etkiliyor. Bu ürünlerde de fiyatlar yükselebilir.",
+   "p": {
+    "baslik": "Aynı bellek, başka ürünler",
+    "satirlar": [
+     {
+      "ikon": "📱",
+      "metin": "Telefon",
+      "deger": "pahalanabilir",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🎮",
+      "metin": "Ekran kartı",
+      "deger": "pahalanabilir",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "💻",
+      "metin": "Dizüstü",
+      "deger": "pahalanabilir",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Yorum · her üründe aynı oranda yansımaz"
+   },
+   "etiket": "DİĞER ÜRÜNLER",
+   "kaynak": "Habertürk, Tamindir (K8)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Yeni cihaz alacaksan, bellek ve depolama miktarına bak. Aynı fiyata daha az bellek verilmiş olabilir.",
+   "p": {
+    "baslik": "Almadan önce bakılacaklar",
+    "satirlar": [
+     {
+      "ikon": "🧠",
+      "metin": "RAM miktarı",
+      "deger": "karşılaştır",
+      "renk": "sari"
+     },
+     {
+      "ikon": "💾",
+      "metin": "Depolama (SSD)",
+      "deger": "karşılaştır",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🏷️",
+      "metin": "Fiyat geçmişi",
+      "deger": "takip et",
+      "renk": "sari"
+     }
+    ],
+    "not": "Genel bir fikir · tavsiye değildir"
+   },
+   "etiket": "KONTROL"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Düşüşün yılın son çeyreğinde de sürmesi bekleniyor. Tahminler yüzde yirmi ile yirmi yedi arasında.",
+   "p": {
+    "ikon": "📉",
+    "satirlar": [
+     "4. ÇEYREKTE DE",
+     "*DÜŞÜŞ*",
+     "BEKLENİYOR"
+    ],
+    "boy": 88,
+    "not": "Tahminler %20–27 arası"
+   },
+   "etiket": "BEKLENTİ",
+   "kaynak": "Counterpoint, IDC (K6)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video alışveriş ya da yatırım tavsiyesi değildir. Veriler ön sonuçlardır; yedi Kasım itibarıyla geçerlidir.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "VERİLER",
+     "*ÖN SONUÇ*"
+    ],
+    "boy": 96,
+    "not": "7 Kasım 2026 itibarıyla · tavsiye değildir"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz; sıradaki videoda biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "MERAK ETTİĞİN KONUYU",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "IDC 3Ç26 ön verisi: 62,7 milyon adet (78,5 milyon → -%20,1); HP 10,3 mn -%30,9, Dell 7,6 mn -%25,0, Lenovo 14,9 mn -%22,6, Apple 5,9 mn -%11,3; erken stok (pull-in) etkisi; kıtlığın 2028 başına kadar sürmesi beklentisi — https://idc.com/resource-center/press-releases/idc-pc-tracker-3q26 ; https://itdaily.com/news/business/pc-market-shrinks-by-20-percent-in-q3-after-early-inventory-build-up/ ; https://www.neoteo.com/en/idc-estimates-global-pc-shipments-fell-201-in-q3-2026 ; https://propakistani.pk/2026/10/10/pc-market-slumps-again-as-shipments-fall-20/",
+  "K2": "Gartner 3Ç26 ön verisi: 55,4 milyon (71,3 → -%22,4), bileşen maliyet artışı ortalama fiyatları yükseltti; Omdia: 58,1 mn -%21,2; Counterpoint: -%21 — https://www.gartner.com/en/newsroom/press-releases/2026-10-12-gartner-says-worldwide-pc-shipments-declined-22-point-4-percent-in-third-quarter-of-2026-as-component-cost-inflation-raised-asps ; https://www.itpro.com/infrastructure/gartner-pc-shipments-collapse-by-nearly-a-quarter ; https://omdia.tech.informa.com/pr/2026/oct/global-pc-shipments-fall-21percent-in-3q26-as-pull-forward-demand-subsides ; https://www.counterpointresearch.com/insights/global-pc-shipments-plunge-21-percent-in-q3-2026",
+  "K3": "Apple payı IDC verisinde %8,5 → %9,5 — https://www.mactech.com/2026/10/08/mac-sales-fall-in-the-third-quarter-but-apple-gains-in-global-pc-market-share/ ; IDC (K1)",
+  "K4": "Yapay zekâ veri merkezi talebi → özel bellek (HBM) → standart DRAM arzı daralıyor — https://www.tomshardware.com/pc-components/ram/hbm-is-eating-your-ram ; https://www.notebookcheck.net/Cloud-AI-is-devouring-the-world-s-memory-chips-and-PCs-and-phones-will-pay.1187268.0.html ; https://www.techspot.com/news/112652-pc-shipments-could-drop-20-year-end-ai.html",
+  "K5": "TrendForce 4Ç26: DRAM sözleşme fiyatı çeyreklik +%10–15 (30 Eylül), Ekim başlığı ≈ +%20; NAND +%15–20 (tahmin) — https://www.trendforce.com/presscenter/news/20260930-13258.html ; https://www.trendforce.com/news/2026-10-20/news-dram-prices-seen-rising-20-qoq-in-4q26-despite-slower-gains-ai-demand-tight-supply-support-outlook/",
+  "K6": "4Ç26 düşüş tahmini: Counterpoint ≈ -%27, IDC ≈ -%20; kıtlığın 2028 başına kadar sürmesi beklentisi (tahmin) — https://www.counterpointresearch.com/insights/global-pc-shipments-plunge-21-percent-in-q3-2026 ; https://itdaily.com/news/business/idc-decline-pc-sales/",
+  "K8": "Bellek krizinin telefon ve ekran kartı fiyatlarına yansıması (beklenti) — https://www.haberturk.com/yapay-zeka-talebi-gpulari-da-vurdu-nvidia-ve-amd-ekran-kartlarinda-zam-dalgasi-basliyor-3856182-teknoloji ; https://www.tamindir.com/haber/2026-telefon-bilgisayar-zam-donanim-dususu_102733/",
+  "K7": "Apple Türkiye Haziran 2026 Mac zammı: en ucuz model 37.999 ₺ → 45.999 ₺ (+8.000 ₺) — https://www.tamindir.com/haber/apple-mac-fiyatlari-zam_110225/ ; https://www.ekonomist.com.tr/teknoloji/apple-turkiye-fiyatlari-degisti-en-ucuz-macbook-45-bin-tl-yi-gecti-76082"
+ }
+}
