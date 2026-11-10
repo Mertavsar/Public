@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset=utf-8><style>
+@font-face{font-family:CinD;src:url(CinzelDecorative-Black.ttf)}
+@font-face{font-family:Cin;src:url('Cinzel[wght].ttf');font-weight:400 900}
+@font-face{font-family:M;font-weight:900;src:url(/home/user/Public/.claude/skills/tikla-bakalim/engine/fonts/montserrat-latin-900-normal.woff2)}
+@font-face{font-family:M;font-weight:900;src:url(/home/user/Public/.claude/skills/tikla-bakalim/engine/fonts/montserrat-latin-ext-900-normal.woff2);unicode-range:U+0100-02BA}
+body{margin:0;background:#888}.v{width:1600px;height:1600px;position:relative;overflow:hidden}
+</style></head><body>
+<svg width=0 height=0 style=position:absolute><defs>
+<linearGradient id=gold x1=0 y1=0 x2=0 y2=1><stop offset=0 stop-color="#fff1b8"/><stop offset=.45 stop-color="#e2b04a"/><stop offset=.55 stop-color="#b9842a"/><stop offset=1 stop-color="#ffe08a"/></linearGradient>
+<radialGradient id=night cx=.5 cy=.45 r=.6><stop offset=0 stop-color="#2a1520"/><stop offset=1 stop-color="#08060a"/></radialGradient>
+<radialGradient id=parch cx=.5 cy=.5 r=.6><stop offset=0 stop-color="#f3e6c6"/><stop offset=1 stop-color="#d9c08f"/></radialGradient>
+<filter id=grain><feTurbulence type=fractalNoise baseFrequency=.9 numOctaves=2 seed=4 /><feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0 0.12  0 0 0 .22 0"/><feComposite in2=SourceGraphic operator=in /></filter>
+<filter id=sh><feDropShadow dx=0 dy=10 stdDeviation=10 flood-color="#000" flood-opacity=".6"/></filter>
+<symbol id=cur viewBox="0 0 100 140"><path d="M8 6 L8 112 L34 88 L52 132 L72 123 L54 80 L90 80 Z" stroke-linejoin=round /></symbol>
+<symbol id=star8 viewBox="-10 -10 20 20"><polygon points="0,-10 2.6,-6.2 7.1,-7.1 6.2,-2.6 10,0 6.2,2.6 7.1,7.1 2.6,6.2 0,10 -2.6,6.2 -7.1,7.1 -6.2,2.6 -10,0 -6.2,-2.6 -7.1,-7.1 -2.6,-6.2"/></symbol>
+</defs></svg>
+
+<!-- A: Altın gece -->
+<div class=v id=A><svg viewBox="0 0 1600 1600" width=1600 height=1600>
+<rect width=1600 height=1600 fill="#08060a"/>
+<circle cx=800 cy=800 r=760 fill="url(#night)"/>
+<circle cx=800 cy=800 r=760 fill="url(#night)"/>
+<circle cx=800 cy=800 r=735 fill=none stroke="url(#gold)" stroke-width=34 />
+<circle cx=800 cy=800 r=690 fill=none stroke="#e2b04a" stroke-width=4 stroke-dasharray="2 18" opacity=.8 />
+<circle cx=800 cy=800 r=665 fill=none stroke="url(#gold)" stroke-width=6 />
+<g fill="url(#gold)"><use href="#star8" x=760 y=35 width=80 height=80 /><use href="#star8" x=760 y=1485 width=80 height=80 /><use href="#star8" x=35 y=760 width=80 height=80 /><use href="#star8" x=1485 y=760 width=80 height=80 /></g>
+<text x=760 y=780 text-anchor=middle font-family=CinD font-size=300 fill="url(#gold)" stroke="#5a3a10" stroke-width=6 filter="url(#sh)">TIKLA</text>
+<g filter="url(#sh)"><path d="M230 860 H1370 L1320 960 L1370 1060 H230 L280 960 Z" fill="#a8101a"/><path d="M230 860 H1370 L1320 960 L1370 1060 H230 L280 960 Z" fill=none stroke="url(#gold)" stroke-width=10 /></g>
+<text x=800 y=1003 text-anchor=middle font-family=Cin font-weight=900 font-size=150 letter-spacing=10 fill="#fff6e0">BAKALIM</text>
+<text x=800 y=1190 text-anchor=middle font-family=Cin font-weight=700 font-size=50 letter-spacing=12 fill="#e2b04a">HİKÂYE · TARİH · GİZEM</text>
+<g transform="translate(1150 330) rotate(-8)" filter="url(#sh)"><use href="#cur" width=230 height=322 fill="url(#gold)" stroke="#3a2408" stroke-width=7 /></g>
+<g stroke="url(#gold)" stroke-width=26 stroke-linecap=round><line x1=1130 y1=300 x2=1080 y2=230 /><line x1=1215 y1=270 x2=1215 y2=180 /><line x1=1300 y1=300 x2=1350 y2=235 /></g>
+</svg></div>
+
+<!-- B: Parşömen + mühür -->
+<div class=v id=B><svg viewBox="0 0 1600 1600" width=1600 height=1600>
+<rect width=1600 height=1600 fill="#d9c08f"/><circle cx=800 cy=800 r=780 fill="url(#parch)"/><rect width=1600 height=1600 fill="#d9c08f"/>
+<path d="M800 70 C1060 60 1290 170 1420 380 C1540 580 1550 860 1450 1080 C1340 1320 1080 1530 800 1530 C510 1540 260 1360 150 1100 C50 860 70 560 210 350 C350 150 560 75 800 70 Z" fill=none stroke="#8e1018" stroke-width=40 />
+<circle cx=800 cy=800 r=640 fill=none stroke="#8e1018" stroke-width=6 stroke-dasharray="40 14"/>
+<text x=760 y=760 text-anchor=middle font-family=CinD font-size=300 fill="#1d1410">TIKLA</text>
+<path d="M240 840 H1360 L1310 940 L1360 1040 H240 L290 940 Z" fill="#8e1018"/>
+<text x=800 y=983 text-anchor=middle font-family=Cin font-weight=900 font-size=150 letter-spacing=10 fill="#f3e6c6">BAKALIM</text>
+<text x=800 y=1170 text-anchor=middle font-family=Cin font-weight=700 font-size=50 letter-spacing=12 fill="#5b3b1c">HİKÂYE · TARİH · GİZEM</text>
+<g transform="translate(1150 320) rotate(-8)"><use href="#cur" width=230 height=322 fill="#1d1410" stroke="#f3e6c6" stroke-width=8 /></g>
+<g stroke="#8e1018" stroke-width=26 stroke-linecap=round><line x1=1130 y1=290 x2=1080 y2=220 /><line x1=1215 y1=260 x2=1215 y2=170 /><line x1=1300 y1=290 x2=1350 y2=225 /></g>
+</svg></div>
+
+<!-- C: Mevcut logonun koyu hikâye sürümü -->
+<div class=v id=C><svg viewBox="0 0 1600 1600" width=1600 height=1600>
+<rect width=1600 height=1600 fill="#0a0a0c"/><circle cx=800 cy=800 r=760 fill="#111014"/><circle cx=800 cy=800 r=760 fill="#111014"/>
+<circle cx=800 cy=800 r=730 fill=none stroke="#e3141b" stroke-width=46 />
+<circle cx=800 cy=800 r=680 fill=none stroke="#e2b04a" stroke-width=5 />
+<text x=730 y=760 text-anchor=middle font-family=M font-weight=900 font-style=italic font-size=330 fill="#fff" filter="url(#sh)">Tıkla</text>
+<g filter="url(#sh)"><rect x=230 y=840 width=1140 height=250 rx=60 fill="#e3141b"/></g>
+<text x=800 y=1030 text-anchor=middle font-family=M font-weight=900 font-style=italic font-size=230 fill="#fff">Bakalım</text>
+<g stroke="#e2b04a" stroke-width=14 stroke-linecap=round><line x1=480 y1=1170 x2=1120 y2=1170 /><line x1=640 y1=1215 x2=960 y2=1215 /></g>
+<g transform="translate(1150 330) rotate(-8)" filter="url(#sh)"><use href="#cur" width=230 height=322 fill="#fff" stroke="#0a0a0c" stroke-width=9 /></g>
+<g stroke="#e3141b" stroke-width=26 stroke-linecap=round><line x1=1130 y1=300 x2=1080 y2=230 /><line x1=1215 y1=270 x2=1215 y2=180 /><line x1=1300 y1=300 x2=1350 y2=235 /></g>
+</svg></div>
+</body></html>
