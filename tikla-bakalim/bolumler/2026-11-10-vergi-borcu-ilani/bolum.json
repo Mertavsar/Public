@@ -1,0 +1,451 @@
+{
+ "baslik": "Vergi borcu olanların isimleri açıklanacak: 5 milyon TL sınırı ne demek?",
+ "tarih": "2026-11-10",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "5 milyon",
+  "ilan",
+  "vergi borcu",
+  "liste"
+ ],
+ "altyazi": {
+  "elli altı binden fazla": "56 binden fazla",
+  "bir trilyon beş yüz milyar": "1,5 trilyon",
+  "bir trilyon beş yüz milyar liranın": "1,5 trilyon ₺'nin",
+  "Üç soruda": "3 soruda",
+  "on Kasım": "10 Kasım",
+  "beş milyon": "5 milyon",
+  "beş milyon liralık": "5 milyon ₺'lik",
+  "üçer milyon": "3'er milyon",
+  "altı milyon": "6 milyon",
+  "bir Aralıktan on beş Aralığa": "1–15 Aralık",
+  "on altı Aralıktan": "16 Aralık'tan",
+  "bir Aralıkta": "1 Aralık'ta",
+  "on altı Aralıkta": "16 Aralık'ta",
+  "yirmi yedi milyon": "≈ 27 milyon",
+  "elli altı binden": "56 binden"
+ },
+ "kapak": {
+  "ikon": "📢",
+  "ust": "VERGİ BORCU OLANLAR",
+  "buyuk": "5 MİLYON ₺",
+  "alt": "İSİMLER AÇIKLANACAK"
+ },
+ "cta": [
+  {
+   "sahne": 10,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Geçen yıl elli altı binden fazla mükellefin vergi borcu, isim isim ilan edildi. Toplam borç, bir trilyon beş yüz milyar liranın üzerindeydi.",
+   "p": {
+    "ikon": "📢",
+    "etiket": "Geçen yıl ilan edilen vergi borçlusu",
+    "deger": 56086,
+    "onek": "",
+    "sonek": " mükellef",
+    "ondalik": 0,
+    "renk": "beyaz",
+    "sayma": false,
+    "not": "5 milyon ₺ ve üzeri borç · Aralık 2025 listesi"
+   },
+   "etiket": "2025 LİSTESİ",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Bu yıl da liste geliyor. Peki ne oluyor, neden yapılıyor? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "VERGİ BORCU\n*İLAN EDİLİYOR*",
+    "boy": 108
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Bu tür konuları sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "GÜNDEM",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Resmî Gazete'de bir tebliğ yayımlandı. Tarih, on Kasım.",
+   "p": {
+    "gun": "10",
+    "ay": "KASIM",
+    "gunadi": "SALI",
+    "saat": "2026",
+    "not": "*Vergi borcu ilanı* tebliği yayımlandı"
+   },
+   "etiket": "RESMÎ GAZETE",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Eşik beş milyon lira. Bu tutar ve üzerinde vergi borcu olanların isimleri kamuoyuna açıklanacak.",
+   "p": {
+    "ikon": "🏛️",
+    "satirlar": [
+     "5 MİLYON ₺",
+     "*VE ÜZERİ*"
+    ],
+    "boy": 112
+   },
+   "etiket": "EŞİK",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Eşik, her vergi dairesi için ayrı uygulanıyor. İki daireye üçer milyon borcu olan biri, toplamı altı milyon olsa da listeye girmeyebilir.",
+   "p": {
+    "ikon": "🏢",
+    "satirlar": [
+     "HER DAİRE",
+     "*AYRI SAYILIR*"
+    ],
+    "boy": 104,
+    "not": "3 milyon + 3 milyon = listede olmayabilir"
+   },
+   "etiket": "DAİRE BAŞINA",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Açıklanan iki tür borç var. Biri, vadesi geçmiş ama ödenmemiş borçlar. Diğeri, kesinleşmiş vergi ve cezalar.",
+   "p": {
+    "baslik": "Listede ne var?",
+    "satirlar": [
+     {
+      "ikon": "⏳",
+      "metin": "Vadesi geçmiş borç",
+      "deger": "ÖDENMEDİ",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "⚖️",
+      "metin": "Kesinleşmiş vergi+ceza",
+      "deger": "KESİN",
+      "renk": "sari"
+     }
+    ],
+    "not": "Geçen yılki yapıya göre"
+   },
+   "etiket": "İKİ LİSTE",
+   "kaynak": "K2, K4"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Önce bir Aralıktan on beş Aralığa kadar, vergi dairelerinin ilan panolarında asılacak.",
+   "p": {
+    "gun": "1",
+    "ay": "ARALIK",
+    "gunadi": "SALI",
+    "saat": "1–15 ARALIK",
+    "not": "*Vergi dairesi panolarında* ilan"
+   },
+   "etiket": "1. AŞAMA",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Sonra on altı Aralıktan itibaren, Gelir İdaresi Başkanlığı'nın internet sitesinde yayımlanacak.",
+   "p": {
+    "gun": "16",
+    "ay": "ARALIK",
+    "gunadi": "ÇARŞAMBA",
+    "saat": "16–30 ARALIK",
+    "not": "*GİB internet sitesinde* yayın"
+   },
+   "etiket": "2. AŞAMA",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki isimler neden açıklanıyor?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "NEDEN\n*AÇIKLANIYOR?*",
+    "boy": 120
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN*"
+    ],
+    "boy": 96
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Mantık şu: Borcunu ödemeyenin adı herkese açıklanırsa, ödeme baskısı artabilir. Bu bir yorum; tebliğ amacı ayrıca yazmıyor olabilir.",
+   "p": {
+    "baslik": "Mantık (yorum)",
+    "adimlar": [
+     {
+      "ikon": "💸",
+      "metin": "Borç *ödenmedi*"
+     },
+     {
+      "ikon": "📢",
+      "metin": "İsim *ilan edilir*"
+     },
+     {
+      "ikon": "⚠️",
+      "metin": "Ödeme baskısı *artabilir*"
+     }
+    ]
+   },
+   "etiket": "MANTIK",
+   "kaynak": "Yorum"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu uygulama yeni değil. Geçen yıl aralıkta da aynı beş milyon liralık eşikle liste yayımlanmıştı.",
+   "p": {
+    "ikon": "🔁",
+    "satirlar": [
+     "HER YIL",
+     "*TEKRARLANIYOR*"
+    ],
+    "boy": 104
+   },
+   "etiket": "YENİ DEĞİL",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Geçen yılın listesinde elli altı binden fazla mükellef vardı. Toplam borçları bir trilyon beş yüz milyar liranın üzerindeydi.",
+   "p": {
+    "baslik": "Geçen yılın listesi",
+    "satirlar": [
+     {
+      "ikon": "👥",
+      "metin": "Mükellef",
+      "deger": "56.086",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "💰",
+      "metin": "Toplam borç",
+      "deger": "≈ 1,507 trilyon ₺",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Aralık 2025 · 5 milyon ₺ ve üzeri"
+   },
+   "etiket": "2025",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "hesap",
+   "say": "Bölersen, mükellef başına ortalama yaklaşık yirmi yedi milyon lira çıkar. Bu, tahmini bir ortalamadır.",
+   "p": {
+    "baslik": "Kişi başı ortalama borç (tahmini)",
+    "ikon": "🧮",
+    "ogeler": [
+     "1.507 milyar ₺",
+     "÷",
+     "56.086",
+     "≈",
+     "26,9 milyon ₺"
+    ]
+   },
+   "etiket": "ORTALAMA",
+   "kaynak": "K3 · kendi hesabımız"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Liste, borcun kesinleşmiş ya da vadesi geçmiş olduğunu gösterir. Başka bir hüküm taşımaz.",
+   "p": {
+    "ikon": "📄",
+    "satirlar": [
+     "LİSTE =",
+     "*BORÇ KAYDI*"
+    ],
+    "boy": 104
+   },
+   "etiket": "NE DEMEK",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu bizi nasıl etkiler?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Çoğu insan için etkisi yok. Sıradan bir vergi borcu, beş milyon liralık eşiğin çok altında kalır.",
+   "p": {
+    "ikon": "🙋",
+    "satirlar": [
+     "ÇOĞU KİŞİ",
+     "*LİSTEDE DEĞİL*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ÇOĞUNLUK",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Esnafsan ya da şirket ortağıysan, iş yaptığın firmaların adı listede çıkabilir. Ödeme riskini hesaba katmak isteyebilirsin.",
+   "p": {
+    "ikon": "🤝",
+    "satirlar": [
+     "İŞ YAPTIĞIN",
+     "*FİRMAYA BAK*"
+    ],
+    "boy": 104
+   },
+   "etiket": "İŞ ORTAĞI",
+   "kaynak": "Yorum"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Geçmiş yıllarda belirli bir tarihe kadar ödeyenler, açıklamadan çıkabiliyordu. Bu yılın tarihi için tebliğe bak.",
+   "p": {
+    "ikon": "⏰",
+    "satirlar": [
+     "SON TARİHİ",
+     "*TEBLİĞDE KONTROL ET*"
+    ],
+    "boy": 88
+   },
+   "etiket": "ÖDEME TARİHİ",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Borcun beş milyona yaklaşıyorsa, vergi dairene ya da muhasebecine danış. Listeler herkese açık olacak.",
+   "p": {
+    "ikon": "🏢",
+    "satirlar": [
+     "BORCUN VARSA",
+     "*DAİREYE DANIŞ*"
+    ],
+    "boy": 96
+   },
+   "etiket": "BORCUN VARSA",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Kısaca özetleyelim. Eşik beş milyon lira. Panolarda bir Aralıkta, internette on altı Aralıkta.",
+   "p": {
+    "baslik": "Kısaca",
+    "satirlar": [
+     {
+      "ikon": "🏛️",
+      "metin": "Eşik (daire başına)",
+      "deger": "5 milyon ₺",
+      "renk": "sari"
+     },
+     {
+      "ikon": "📌",
+      "metin": "Vergi dairesi panosu",
+      "deger": "1–15 Aralık",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "💻",
+      "metin": "GİB internet sitesi",
+      "deger": "16–30 Aralık",
+      "renk": "beyaz"
+     }
+    ]
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video hukuki ya da mali tavsiye değildir. Bilgiler on Kasım itibarıyla geçerlidir; ayrıntı için Resmî Gazete'ye bak.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "BİLGİLER",
+     "*10 KASIM İTİBARIYLA*"
+    ],
+    "boy": 88,
+    "not": "Tebliğ ayrıntıları için Resmî Gazete'ye bak"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz; sıradaki videoda biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "MERAK ETTİĞİN KONUYU",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "10 Kasım 2026 Resmî Gazete tebliği: eşik 5 milyon TL (vergi dairesi başına), vergi dairesi panoları 1–15 Aralık, GİB sitesi 16–30 Aralık — https://www.foreks.com/haber/detay/6af27d224b1852391445f845/PICNEWS/tr/5-milyon-tl-ve-uzeri-vergi-borcu-olanlar-aciklanacak-10-11-26/ ; https://www.karar.com/ekonomi-haberleri/vergi-borcu-olanlarin-isimleri-aciklanacak-5-milyon-tl-siniri-olacak-2083271 ; https://www.ekonomim.com/ekonomi/vergi-borcu-olanlarin-isimleri-aciklanacak-5-milyon-tl-siniri-haberi-930203 ; https://www.turkiyegazetesi.com.tr/ekonomi/vergi-borcu-olanlar-dikkat-5-milyon-tlyi-asan-borclar-kamuoyuna-aciklanacak-1828296",
+  "K2": "Daire başına eşik, iki liste (vadesi geçmiş borç / kesinleşmiş tarhiyat), önceki yıllarda belirli tarihe kadar ödeyenin muaf tutulması — https://www.alomaliye.com/2024/09/05/vadesi-gecmis-borclar-ile-kesinlesen-tarhiyatlarin-aciklanmasinda-bilinmesi-gerekenler-ve-celiskili-durumlar ; https://www.alomaliye.com/2024/09/03/vergi-usul-kanunu-genel-tebligi-sira-no-564/",
+  "K3": "Aralık 2025 listesi: 56.086 mükellef, ≈1,507 trilyon TL — https://www.ntv.com.tr/ntvpara/galeri-vergi-yuzsuzleri-listesi-aciklandi-56-bin-86-kisi-ve-kurulusun-1-trilyon-507-milyar-vergi-ve-cezasi-var-1703491 ; https://www.bloomberght.com/gib-vergi-borclulari-listesini-acikladi-3764052 ; https://www.24saatgazetesi.com/gib-vergi-borclularini-acikladi-56-bin-mukellefin-15-trilyon-lirayi-asan-borcu-var ; hesap: 1.507.000.000.000 ÷ 56.086 ≈ 26,9 milyon TL",
+  "K4": "2025'te de eşik 5 milyon TL; panolar 1–15 Aralık 2025, GİB 16–30 Aralık 2025 — https://www.haberturk.com/gib-vergi-borclularini-acikladi-3846041-ekonomi ; https://www.bloomberght.com/vergi-borcu-kesinlesen-mukelleflerin-listesi-aciklanacak-3757515"
+ }
+}
