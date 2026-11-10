@@ -1,0 +1,486 @@
+{
+ "baslik": "15 Kasım'da zorunlu kış lastiği başlıyor: kimi kapsıyor, ceza ne kadar?",
+ "tarih": "2026-11-08",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "zorunlu",
+  "ceza",
+  "yedi derece",
+  "kış lastiği"
+ ],
+ "altyazi": {
+  "yedi gün": "7 gün",
+  "altı bin liraya yakın": "≈ 6.000 ₺'ye yakın",
+  "on beş Kasım": "15 Kasım",
+  "On beş Nisan": "15 Nisan",
+  "iki bin yirmi yedi": "2027",
+  "beş bin sekiz yüz elli altı liraydı": "5.856 ₺'ydi",
+  "altı bin lira civarı": "≈ 6.000 ₺",
+  "yedi derece": "7 °C",
+  "yedi derecenin altına": "7 °C'nin altına",
+  "bir Aralıktı": "1 Aralık'tı",
+  "sekiz Kasım": "8 Kasım",
+  "Üç soruda": "3 soruda",
+  "beş ay": "5 ay"
+ },
+ "kapak": {
+  "ikon": "🚛",
+  "ust": "15 KASIM'DA BAŞLIYOR",
+  "buyuk": "≈ 6.000 ₺",
+  "alt": "CEZA KİMİN İÇİN?"
+ },
+ "cta": [
+  {
+   "sahne": 11,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Zorunlu kış lastiği uygulamasının başlamasına yedi gün kaldı. Kurala uymayan ticari araca, altı bin liraya yakın ceza kesilebilir.",
+   "p": {
+    "ikon": "🚛",
+    "etiket": "Zorunlu kış lastiğine kalan gün (15 Kasım)",
+    "deger": 7,
+    "onek": "",
+    "sonek": " gün",
+    "ondalik": 0,
+    "yon": "down",
+    "ok_renk": "sari",
+    "renk": "beyaz",
+    "sayma": false,
+    "not": "8 Kasım 2026 itibarıyla"
+   },
+   "etiket": "GERİ SAYIM",
+   "kaynak": "Bakanlık düzenlemesi (K1)"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Peki bu kural kimi kapsıyor, neden var? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "KIŞ LASTİĞİ\n*KİMİ KAPSIYOR?*",
+    "boy": 108
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Bu tür konuları sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "GÜNDEM",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Uygulama on beş Kasım pazar günü başlıyor.",
+   "p": {
+    "gun": "15",
+    "ay": "KASIM",
+    "gunadi": "PAZAR",
+    "saat": "2026",
+    "not": "*Zorunlu kış lastiği* başlıyor"
+   },
+   "etiket": "BAŞLANGIÇ",
+   "kaynak": "Cumhuriyet, Milli Gazete (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "On beş Nisan iki bin yirmi yedi perşembe günü sona eriyor. Yani kural tam beş ay sürüyor.",
+   "p": {
+    "gun": "15",
+    "ay": "NİSAN",
+    "gunadi": "PERŞEMBE",
+    "saat": "2027",
+    "not": "Uygulama *sona eriyor* · 5 ay"
+   },
+   "etiket": "BİTİŞ",
+   "kaynak": "Cumhuriyet, Milli Gazete (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Kural, şehirler arası yollarda yolcu ve yük taşıyan ticari araçlar için geçerli. Otobüs, kamyon, çekici ve tanker gibi araçlar bu grupta.",
+   "p": {
+    "baslik": "Kural kimin için?",
+    "satirlar": [
+     {
+      "ikon": "🚌",
+      "metin": "Otobüs",
+      "deger": "ZORUNLU",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🚛",
+      "metin": "Kamyon · çekici",
+      "deger": "ZORUNLU",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🛢️",
+      "metin": "Tanker",
+      "deger": "ZORUNLU",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Şehirler arası ticari taşımacılık"
+   },
+   "etiket": "KAPSAM",
+   "kaynak": "Milli Gazete, Bengütürk (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Özel otomobiller için ise yasal bir zorunluluk yok. Bakanlık sadece kış lastiği kullanmayı tavsiye ediyor.",
+   "p": {
+    "baslik": "Zorunlu mu?",
+    "satirlar": [
+     {
+      "ikon": "🚚",
+      "metin": "Ticari araç",
+      "deger": "ZORUNLU",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🚗",
+      "metin": "Özel otomobil",
+      "deger": "TAVSİYE",
+      "renk": "sari"
+     }
+    ],
+    "not": "Özel araçta ceza yok, öneri var"
+   },
+   "etiket": "ÖZEL ARAÇ",
+   "kaynak": "Haberler.com, Milli Gazete (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Kurala uymayan ticari araca idari para cezası kesiliyor. Önceki sezon tutar beş bin sekiz yüz elli altı liraydı. Bu sezon altı bin lira civarı bekleniyor.",
+   "p": {
+    "baslik": "İdari para cezası",
+    "satirlar": [
+     {
+      "ikon": "🧾",
+      "metin": "Önceki sezon",
+      "deger": "5.856 ₺",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "📈",
+      "metin": "Bu sezon (tahmini)",
+      "deger": "≈ 6.000 ₺",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Kesin tutar için Resmî Gazete / Bakanlık duyurusu"
+   },
+   "etiket": "CEZA",
+   "kaynak": "Sözcü, Haber7, Timeturk (K2)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki bu kural neden var?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "NEDEN\n*VAR?*",
+    "boy": 120
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Cevap bir sayıda saklı: yedi derece.",
+   "p": {
+    "ikon": "🌡️",
+    "satirlar": [
+     "7 °C",
+     "*SİHİRLİ EŞİK*"
+    ],
+    "boy": 112,
+    "ikon_boy": 240
+   },
+   "etiket": "EŞİK",
+   "kaynak": "Ulaştırma Bakanlığı tebliği (K3)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN*"
+    ],
+    "boy": 96
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Yaz lastiği soğukta sertleşir. Sertleşen lastik yolu daha az kavrar. Fren mesafesi de uzayabilir.",
+   "p": {
+    "baslik": "Hava 7 °C altına inince",
+    "adimlar": [
+     {
+      "ikon": "❄️",
+      "metin": "Hava *soğur*, asfalt soğur"
+     },
+     {
+      "ikon": "🚙",
+      "metin": "Yaz lastiği *sertleşir*"
+     },
+     {
+      "ikon": "🛑",
+      "metin": "Tutuş azalır, *fren uzayabilir*"
+     }
+    ]
+   },
+   "etiket": "SOĞUKTA",
+   "kaynak": "Bakanlık, uzman görüşleri (K3)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Kış lastiğinin bileşimi ise yumuşaktır. Soğukta sertleşmesin diye özel olarak üretilir.",
+   "p": {
+    "baslik": "Kış lastiği farkı",
+    "adimlar": [
+     {
+      "ikon": "🧪",
+      "metin": "Özel, *yumuşak* bileşim"
+     },
+     {
+      "ikon": "✅",
+      "metin": "Soğukta da *yolu kavrar*"
+     }
+    ]
+   },
+   "etiket": "FARK",
+   "kaynak": "Bakanlık tebliği (K3)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Kış lastiğinin deseni de farklıdır. Karlı ve buzlu yolda tutunmayı artırmak için tasarlanır.",
+   "p": {
+    "ikon": "❄️",
+    "satirlar": [
+     "ÖZEL DESEN +",
+     "*ÖZEL BİLEŞİM*"
+    ],
+    "boy": 96
+   },
+   "etiket": "DESEN",
+   "kaynak": "Haberler.com (K3)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yani mesele kar değil. Uzmanlara göre asıl sorun, soğuyan asfalt.",
+   "p": {
+    "ikon": "🛣️",
+    "satirlar": [
+     "SORUN KAR",
+     "DEĞİL: *SOĞUK*"
+    ],
+    "boy": 96,
+    "not": "Kar yağmasa da hava 7 °C altına inebilir"
+   },
+   "etiket": "SOĞUK ASFALT",
+   "kaynak": "Uzman görüşleri (K3)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Kuralın amacı, şehirler arası yollarda trafik güvenliğini artırmak.",
+   "p": {
+    "ikon": "🛡️",
+    "satirlar": [
+     "AMAÇ:",
+     "*YOL GÜVENLİĞİ*"
+    ],
+    "boy": 104
+   },
+   "etiket": "AMAÇ",
+   "kaynak": "Bakanlık düzenlemesi (K1)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu arada başlangıç tarihi daha önce bir Aralıktı. Sonradan on beş Kasım'a çekildi.",
+   "p": {
+    "ikon": "🔄",
+    "satirlar": [
+     "1 ARALIK →",
+     "*15 KASIM*"
+    ],
+    "boy": 104,
+    "not": "Dönem 5 aya uzadı, bir ay erken başlıyor"
+   },
+   "etiket": "TARİH DEĞİŞTİ",
+   "kaynak": "CNN Türk, Yeni Ankara (K4)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu bizi nasıl etkiler?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ticari araç kullanıyorsan lastiklerini bu hafta kontrol et. Ceza, araç işletenine kesiliyor.",
+   "p": {
+    "ikon": "🔧",
+    "satirlar": [
+     "TİCARİ ARAÇ:",
+     "*BU HAFTA KONTROL*"
+    ],
+    "boy": 92
+   },
+   "etiket": "TİCARİ ARAÇ",
+   "kaynak": "Yeni Ankara (K2)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Özel araçta zorunluluk yok. Ama hava yedi derecenin altına inecekse, düşünmeye değer.",
+   "p": {
+    "ikon": "🚗",
+    "satirlar": [
+     "ÖZEL ARAÇ:",
+     "*SEÇİM SENİN*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ÖZEL ARAÇ",
+   "kaynak": "Bakanlık tavsiyesi (K3)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Şehir içi için ayrıca valilik kararı çıkabiliyor. Bulunduğun ilin duyurusuna bak.",
+   "p": {
+    "ikon": "📍",
+    "satirlar": [
+     "ŞEHİR İÇİ:",
+     "*VALİLİK KARARI*"
+    ],
+    "boy": 96
+   },
+   "etiket": "İLİNE BAK",
+   "kaynak": "Yeni Ankara (K2)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Soğuklar bastırınca lastikçilerde yoğunluk olabilir. Erken davranmak, işini kolaylaştırır.",
+   "p": {
+    "ikon": "⏰",
+    "satirlar": [
+     "SON GÜNE",
+     "*BIRAKMA*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ERKEN DAVRAN"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Kısaca özetleyelim. Kural on beş Kasım'da başlıyor. Ticari araçlar için zorunlu, özel araçlar için tavsiye.",
+   "p": {
+    "baslik": "Kısaca",
+    "satirlar": [
+     {
+      "ikon": "🚦",
+      "metin": "Başlangıç",
+      "deger": "15 Kasım",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🚛",
+      "metin": "Ticari araç",
+      "deger": "ZORUNLU",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🚗",
+      "metin": "Özel araç",
+      "deger": "TAVSİYE",
+      "renk": "yesil"
+     }
+    ]
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video hukuki ya da alışveriş tavsiyesi değildir. Bilgiler sekiz Kasım itibarıyla geçerlidir; kesin ceza tutarı için Resmî Gazete'ye bak.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "BİLGİLER",
+     "*8 KASIM İTİBARIYLA*"
+    ],
+    "boy": 88,
+    "not": "Ceza tutarı bu sezon için kesin değil"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz; sıradaki videoda biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "MERAK ETTİĞİN KONUYU",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "Zorunlu kış lastiği: 15 Kasım 2026 – 15 Nisan 2027, şehirler arası ticari taşımacılık araçları; özel araç zorunlu değil — https://www.cumhuriyet.com.tr/turkiye/kis-lastigi-zorunlu-mu-zorunlu-kis-lastigi-uygulamasi-hangi-tarihlerde-2026-kis-lastigi-ne-kadar-2466353 ; https://www.milligazete.com.tr/2026-2027-kis-lastigi-takma-tarihi-kis-lastigi-zorunlulugu-ne-zaman-basliyor-hangi-araclarda-zorunlu ; https://www.benguturk.com/ekonomi/kis-lastigi-zorunlulugu-kimler-icin-gecerli-takmayanlara-ceza-ne-kadar-257722h",
+  "K2": "İdari para cezası: 5.856 TL (önceki sezon) ; yeni sezon için ≈ 6.000 TL bildiriliyor, kesin değil; ceza araç işleteni üzerinden, şehir içi için valilik kararı — https://www.sozcu.com.tr/15-kasim-a-kadar-aracina-taktirmayan-5-bin-856-tl-ceza-odeyecek-p252467 ; https://www.timeturk.com/15-kasimda-basliyor-taktirmayana-6-bin-tl-ceza-kesilecek ; https://www.istiklal.com.tr/ekonomi/arac-sahipleri-dikkat-kurala-uymayana-6-bin-tl-ceza-1109976h ; https://www.yeniankara.com.tr/otomotiv/ankarada-2026-kis-lastigi-uygulamasi-ne-zaman-basliyor-188218",
+  "K3": "Kış lastiği tanımı: 7 °C altında yol tutuşu için özel bileşim; Bakanlık özel araçlara tavsiye ediyor — https://www.haberler.com/7-derecenin-altinda-kis-lastigi-kullanilmali-11432500-haberi/ ; https://www.lexpera.com.tr/mevzuat/tebligler/kis-lastigi-kullanma-zorunlulugu-ile-ilgili-usul-ve-esaslar-hakkinda-teblig ; https://www.cnnturk.com/turkiye/zorunlu-kis-lastigi-uygulamasi-bu-tarihte-sona-erecek-2415977",
+  "K4": "Başlangıç tarihi 1 Aralık'tan 15 Kasım'a çekildi — https://cnnturk.com/ekonomi/kis-lastigi-zorunlulugu-1-aralikta-baslayacak-1590899 ; https://www.yeniankara.com.tr/otomotiv/ankarada-2026-kis-lastigi-uygulamasi-ne-zaman-basliyor-188218"
+ }
+}

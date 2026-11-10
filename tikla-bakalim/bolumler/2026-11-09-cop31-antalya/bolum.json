@@ -1,0 +1,536 @@
+{
+ "baslik": "COP31 Antalya'da başladı: Bu toplantı nedir, bizi nasıl etkiler?",
+ "tarih": "2026-11-09",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "COP",
+  "iklim",
+  "Antalya",
+  "net sıfır"
+ ],
+ "altyazi": {
+  "on iki": "12",
+  "dokuz Kasım": "9 Kasım",
+  "Yirmi Kasımda": "20 Kasım'da",
+  "on bir ve on iki Kasımda": "11–12 Kasım'da",
+  "bir buçuk dereceyi": "1,5 °C'yi",
+  "iki bin elli üçte": "2053'te",
+  "iki bin yirmi altı ve yirmi yedide": "2026–2027'de",
+  "COP otuz bir": "COP31",
+  "Üç soruda": "3 soruda"
+ },
+ "kapak": {
+  "ikon": "🌍",
+  "ust": "BUGÜN ANTALYA'DA BAŞLADI",
+  "buyuk": "COP31",
+  "alt": "BU NEDİR?"
+ },
+ "cta": [
+  {
+   "sahne": 14,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Bugün Antalya'da on iki günlük dev bir iklim toplantısı başladı. Adı COP otuz bir.",
+   "p": {
+    "ikon": "🌍",
+    "etiket": "COP31 · Antalya · 9–20 Kasım",
+    "deger": 12,
+    "onek": "",
+    "sonek": " gün",
+    "ondalik": 0,
+    "renk": "beyaz",
+    "sayma": false,
+    "not": "9 Kasım 2026 itibarıyla"
+   },
+   "etiket": "COP31",
+   "kaynak": "Resmî COP31 duyuruları (K1)"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Peki bu toplantı nedir, bizi ne ilgilendirir? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "COP31\n*BİZİ NE İLGİLENDİRİR?*",
+    "boy": 100
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Gündemi her gün sade dille anlatıyoruz. Abone olmayı unutma.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "GÜNDEM",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Toplantı dokuz Kasım pazartesi başladı. Yirmi Kasımda sona erecek.",
+   "p": {
+    "gun": "9",
+    "ay": "KASIM",
+    "gunadi": "PAZARTESİ",
+    "saat": "2026",
+    "not": "*COP31* başladı · 20 Kasım'da bitiyor"
+   },
+   "etiket": "BAŞLANGIÇ",
+   "kaynak": "Cumhuriyet, TRT Haber (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "COP, Taraflar Konferansı demek. Yani iklim için ülkelerin yıllık toplantısı.",
+   "p": {
+    "ikon": "🌐",
+    "satirlar": [
+     "COP =",
+     "*TARAFLAR KONFERANSI*"
+    ],
+    "boy": 80
+   },
+   "etiket": "COP NEDİR"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Bu yıl ev sahibi Türkiye. İlk kez bir COP'u biz ağırlıyoruz.",
+   "p": {
+    "ikon": "🇹🇷",
+    "satirlar": [
+     "İLK KEZ",
+     "*TÜRKİYE EV SAHİBİ*"
+    ],
+    "boy": 92
+   },
+   "etiket": "EV SAHİBİ",
+   "kaynak": "Habererk, Yeşil Haber (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Geçen yıl Türkiye ile Avustralya ev sahipliği için yarıştı. Sonunda ikisi uzlaştı.",
+   "p": {
+    "ikon": "🤝",
+    "satirlar": [
+     "TÜRKİYE + AVUSTRALYA",
+     "*UZLAŞTI*"
+    ],
+    "boy": 84
+   },
+   "etiket": "UZLAŞMA",
+   "kaynak": "Yeşil Haber, Wikipedia (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Görev paylaşımı var. Konferansın başkanı Türkiye'den Murat Kurum. Müzakereleri Avustralya'dan Chris Bowen yönetiyor.",
+   "p": {
+    "baslik": "Kim ne yapıyor?",
+    "satirlar": [
+     {
+      "ikon": "🇹🇷",
+      "metin": "Konferans",
+      "deger": "Murat Kurum",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "🇦🇺",
+      "metin": "Müzakere",
+      "deger": "Chris Bowen",
+      "renk": "beyaz"
+     }
+    ],
+    "not": "Konferans başkanı: Çevre Bakanı · Müzakere başkanı: Enerji Bakanı"
+   },
+   "etiket": "GÖREV",
+   "kaynak": "İlke TV, Aydınlık, Wikipedia (K1)"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Heyetler bu süre boyunca ortak bir metin üzerinde pazarlık ediyor. Metin genellikle herkesin onayıyla çıkıyor.",
+   "p": {
+    "ikon": "🗣️",
+    "satirlar": [
+     "ON İKİ GÜN",
+     "*PAZARLIK MASASI*"
+    ],
+    "boy": 92
+   },
+   "etiket": "PAZARLIK"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Liderler zirvesinin on bir ve on iki Kasımda yapılması planlanıyor.",
+   "p": {
+    "gun": "11",
+    "ay": "KASIM",
+    "gunadi": "ÇARŞAMBA",
+    "saat": "12 KASIM'A KADAR",
+    "not": "*Liderler zirvesi* (planlanan)"
+   },
+   "etiket": "ZİRVE",
+   "kaynak": "Wikipedia, İlke TV (K1)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki neden her yıl böyle bir toplantı yapılıyor?",
+   "p": {
+    "ikon": "❓",
+    "metin": "NEDEN HER YIL\n*TOPLANIYORLAR?*",
+    "boy": 108
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Çünkü dünya ısınıyor. Tek bir ülke bunu tek başına durduramaz.",
+   "p": {
+    "ikon": "🌡️",
+    "satirlar": [
+     "DÜNYA ISINIYOR",
+     "*TEK ÜLKE YETMEZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "ORTAK SORUN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Çünkü her ülkenin çıkarı farklı. Kimi petrol satıyor, kimi deniz yükselecek diye korkuyor.",
+   "p": {
+    "ikon": "⚔️",
+    "satirlar": [
+     "HERKESİN",
+     "*ÇIKARI FARKLI*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ÇIKAR FARKI"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN*"
+    ],
+    "boy": 96
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Paris Anlaşması'nda ülkeler ortak hedef koydu: ısınma bir buçuk dereceyi geçmesin.",
+   "p": {
+    "ikon": "🌡️",
+    "etiket": "Paris hedefi · ısınma sınırı",
+    "deger": 1.5,
+    "onek": "",
+    "sonek": " °C",
+    "ondalik": 1,
+    "renk": "sari",
+    "not": "Sanayi öncesine göre"
+   },
+   "etiket": "PARİS HEDEFİ",
+   "kaynak": "Resmî COP31 duyuruları, Kurum açıklamaları (K2)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Toplantıda ülkeler anlaşıyor. Sonra herkes kararı kendi yasalarına çeviriyor.",
+   "p": {
+    "baslik": "",
+    "adimlar": [
+     {
+      "ikon": "🤝",
+      "metin": "Ülkeler *anlaşır*"
+     },
+     {
+      "ikon": "📜",
+      "metin": "Herkes kendi *yasasını* çıkarır"
+     },
+     {
+      "ikon": "🏭",
+      "metin": "Şirketlere *kural* gelir"
+     }
+    ]
+   },
+   "etiket": "NASIL İŞLER"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Masadaki başlıklar: iklim parası, fosil yakıttan çıkış ve adil geçiş. En sert tartışmanın fosil yakıtta olması bekleniyor.",
+   "p": {
+    "baslik": "Masadaki ana başlıklar",
+    "satirlar": [
+     {
+      "ikon": "💰",
+      "metin": "İklim finansmanı",
+      "deger": "PARA",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🛢️",
+      "metin": "Fosil yakıttan çıkış",
+      "deger": "TAKVİM",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "⚖️",
+      "metin": "Adil geçiş",
+      "deger": "KORUMA",
+      "renk": "yesil"
+     }
+    ],
+    "not": "Kaynaklara göre beklenen başlıklar"
+   },
+   "etiket": "GÜNDEM",
+   "kaynak": "İlke TV, Wikipedia (K1)"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Gelişmekte olan ülkeler, geçişin bedelini yalnız onların ödememesini istiyor. Kavga çoğu zaman burada çıkıyor.",
+   "p": {
+    "ikon": "💰",
+    "satirlar": [
+     "BEDELİ",
+     "*KİM ÖDEYECEK?*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEDEL"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Adil geçiş, temiz enerjiye geçerken işini kaybedenleri korumak demek.",
+   "p": {
+    "ikon": "⚖️",
+    "satirlar": [
+     "ADİL GEÇİŞ =",
+     "*İŞİNİ KAYBEDENİ KORUMAK*"
+    ],
+    "boy": 80
+   },
+   "etiket": "TERİM"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "COP kararları cebimize doğrudan girmez. Ama ülkelerin yasalarına yön verir.",
+   "p": {
+    "ikon": "📌",
+    "satirlar": [
+     "KARARLAR",
+     "*YÖN GÖSTERİR*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ÖNEMLİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu bizi nasıl etkiler?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 120
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Türkiye iki bin elli üçte net sıfır emisyon hedefliyor. Yani atılan karbon kadar temizlemek.",
+   "p": {
+    "ikon": "🎯",
+    "satirlar": [
+     "2053",
+     "*NET SIFIR*"
+    ],
+    "boy": 120,
+    "not": "İklim Kanunu · Temmuz 2025"
+   },
+   "etiket": "HEDEF",
+   "kaynak": "Cumhurbaşkanlığı, Legal500 (K3)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Avrupa Birliği ise karbonlu ürüne sınırda ücret getirdi. Çelik, alüminyum, çimento gibi ürünler bu kapsamda.",
+   "p": {
+    "baslik": "AB karbon sınır düzenlemesi",
+    "adimlar": [
+     {
+      "ikon": "🏭",
+      "metin": "Karbonlu *üretim*"
+     },
+     {
+      "ikon": "🚢",
+      "metin": "AB sınırı"
+     },
+     {
+      "ikon": "💶",
+      "metin": "Ek *maliyet*"
+     }
+    ]
+   },
+   "etiket": "AB KURALI",
+   "kaynak": "Mondaq, Alalea (K4)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Bu yüzden Türkiye kendi karbon piyasasını kuruyor. Pilot dönem iki bin yirmi altı ve yirmi yedide.",
+   "p": {
+    "baslik": "Türkiye karbon piyasası · pilot 2026–2027",
+    "adimlar": [
+     {
+      "ikon": "🏭",
+      "metin": "Büyük tesisler *emisyon* bildirir"
+     },
+     {
+      "ikon": "🏷️",
+      "metin": "Karbonun *fiyatı* olur"
+     },
+     {
+      "ikon": "🇹🇷",
+      "metin": "Ödeme yurt içinde *kalabilir*"
+     }
+    ]
+   },
+   "etiket": "YERLİ PİYASA",
+   "kaynak": "iklim.gov.tr, Resmî Gazete, Ember (K5)"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu düzenlemeler önce büyük fabrikaları ilgilendiriyor. Fiyatlara yansıyıp yansımayacağı henüz belli değil.",
+   "p": {
+    "ikon": "🏭",
+    "satirlar": [
+     "ÖNCE SANAYİ",
+     "*SONRA FİYATLAR?*"
+    ],
+    "boy": 92
+   },
+   "etiket": "SORU İŞARETİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani toplantı Antalya'da ama sonuçları, ihracatçıdan fabrikaya kadar uzanabilir. Bunu takip etmekte fayda var.",
+   "p": {
+    "ikon": "🌍",
+    "satirlar": [
+     "TOPLANTI",
+     "*ANTALYA'DA*"
+    ],
+    "boy": 92
+   },
+   "etiket": "SONUÇ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Kısaca özetleyelim. Toplantı Antalya'da, hedef ısınmayı sınırlamak, ve etki önce sanayiden gelebilir.",
+   "p": {
+    "baslik": "Kısaca",
+    "satirlar": [
+     {
+      "ikon": "🌍",
+      "metin": "COP31 · Antalya",
+      "deger": "9–20 KASIM",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🌡️",
+      "metin": "Ortak hedef",
+      "deger": "1,5 °C",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "🏭",
+      "metin": "İlk etki",
+      "deger": "SANAYİ",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Program ve rakamlar değişebilir"
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video yatırım ya da hukuki tavsiye değildir. Bilgiler dokuz Kasım itibarıyla geçerlidir; program değişebilir.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "BİLGİLER",
+     "*9 KASIM İTİBARIYLA*"
+    ],
+    "boy": 88,
+    "not": "Resmî program için cop31.tr ve unfccc.int/cop31"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz; bir sonraki videoda biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "MERAK ETTİĞİN KONUYU",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "COP31: 9–20 Kasım 2026 Antalya, Türkiye ev sahibi/başkan (Murat Kurum), müzakere başkanı Avustralya (Chris Bowen), liderler zirvesi 11–12 Kasım (planlanan), gündem: finansman, fosil yakıt, adil geçiş — https://www.cumhuriyet.com.tr/turkiye/cop31-konferansi-antalya-da-basladi-2554562 ; https://www.sondakika.com/guncel/haber-cop31-yarin-antalya-da-basliyor-102-devlet-ve-20407112/ ; https://ilketv.com.tr/cop31-antalyada-basliyor-hangi-basliklar-one-cikacak-beklentileri-karsilayabilecek-mi/ ; https://yesilhaber.net/turkiye-cop-otuzbir-ev-sahipligi-antalya/ ; https://unfccc.int/cop31",
+  "K2": "Paris Anlaşması 1,5 °C hedefi; Bakan Kurum'un 1,5 derece çağrısı — https://unfccc.int/cop31 ; https://www.aydinlik.com.tr/haber/cop31-antalyada-basliyor-196-ulke-katiliyor-598148",
+  "K3": "2053 net sıfır hedefi; İklim Kanunu (7552) Temmuz 2025 — https://www.tccb.gov.tr/haberler/410/150389/-2053-yili-itibariyla-net-sifir-emisyon-hedefini-gerceklestirmeyi-ongoruyoruz- ; https://www.legal500.com/intelligence/turkey/environment/climate-law-enacted",
+  "K4": "AB sınırda karbon düzenlemesi (SKDM/CBAM): 2026'dan itibaren mali yükümlülük; çelik, alüminyum, çimento, gübre — https://www.mondaq.com/turkey/economic-analysis/1771516/2026ya-do%C4%9Fru-t%C3%BCrk-sanayisi-cbama-nas%C4%B1l-haz%C4%B1rlan%C4%B1yor ; https://alalea.com.tr/en/guides/cbam-and-ets",
+  "K5": "Türkiye Emisyon Ticaret Sistemi: pilot 2026–2027, yönetmelik 27 Ağustos 2026 — https://iklim.gov.tr/turkiye-emisyon-ticaret-sistemi-yururluge-girdi-haber-5000 ; https://www.resmigazete.gov.tr/eskiler/2026/08/20260827-7.htm ; https://ember-energy.org/tr/analizler/turkiye-emisyon-ticaret-sistemi-ne-getiriyor/"
+ }
+}
