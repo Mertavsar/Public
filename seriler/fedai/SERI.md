@@ -66,10 +66,14 @@ Her bölüm dosyasında iki dalın açılış sahnesi hazırdır → oy belli ol
   ekranda EFSANE etiketiyle.
 - Kaynaklar: `KAYNAKLAR.md`.
 
-## 10. Üretim akışı (bölüm başına)
-1. Bölüm dosyasındaki görsel promptlarla 7–9 görsel üret (Higgsfield / Midjourney / Flux), 9:16.
-2. Her görseli hareket promptuyla 5 sn videoya çevir (Kling / Seedance / Higgsfield), aynı stil bloğu.
-3. Seslendirme (Daniel veya sen) → boşluk kırpma → Tıkla Bakalım motoruyla altyazı + müzik + efekt + seçim kartı.
-4. Kapak + başlık + sabitlenmiş yorum ("🗡️ = A, 🌙 = B. En çok oy alan seçenek perşembe yayında.").
-5. 48 saat sonra oyları say, sonraki bölümün ilgili dalını üret.
-Her 5 bölümde bir: bölümleri birleştir + ara anlatım ekle → uzun video ("FEDAİ — 1. Kitap: Alamut").
+## 10. Üretim akışı (bölüm başına) — Manus + Google Flow
+1. **Görsel:** `BOLUM_0N_FLOW.md`'deki her kartın GÖRSEL promptunu Manus'a ver, 9:16 başlangıç karesi üret; en iyisini seç.
+2. **Video:** Google Flow → *Frames to Video* → kareyi yükle → VİDEO promptu → **8 sn**, dikey. Her kart = 1 klip.
+   Yüzük/el tutarlılığı için ilk el karesini *Ingredients* (referans) olarak sonraki kliplere ekle.
+   Flow'un ortam sesi kalabilir; konuşma ve müzik kapalı (prompt bunu söylüyor).
+3. **Klipleri** `seriler/fedai/bolumNN/klipler/01.mp4, 02.mp4…` olarak kaydet.
+4. **Kurgu (PC'deki Claude):** seslendirme (kendi sesin veya edge-tts Ahmet; vidIQ Daniel kredi varsa), boşluk kırpma, altyazı,
+   ney/daf müziği + efekt, "Siz seçtiniz" girişi, sonda seçim kartı, kapak.
+5. **Yayın:** başlık + sabitlenmiş yorum ("🗡️ = A, 🌙 = B. En çok oy alan seçenek sonraki bölümde.").
+6. 48 saat sonra oyları say → sonraki bölümün ilgili dal açılışını çek (1 klip).
+Her 5 bölümde bir: klipleri birleştir + ara anlatım → uzun video ("FEDAİ — 1. Kitap: Çağrı").
