@@ -1,0 +1,536 @@
+{
+ "baslik": "Altın neden düştü? Fed faiz artırırsa bize ne olur?",
+ "tarih": "2026-11-11",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "düştü",
+  "faiz",
+  "Fed",
+  "altın"
+ ],
+ "altyazi": {
+  "yüzde ikiden fazla": "%2'den fazla",
+  "Üç soruda": "3 soruda",
+  "On Kasım": "10 Kasım",
+  "yüzde sıfır virgül dört": "%0,4",
+  "yüzde sıfır virgül üçtü": "%0,3'tü",
+  "dört bin yüz kırk dolardan": "4.140 dolardan",
+  "dört bin on dolara": "4.010 dolara",
+  "altı bin beş yüz elli lira": "6.550 lira",
+  "yüzde üç yetmiş beş ile dört": "%3,75 ile %4",
+  "sekiz ve dokuz Aralıkta": "8–9 Aralık'ta",
+  "dokuz Aralık": "9 Aralık",
+  "yüzde otuz altı": "%36",
+  "on bir Kasım": "11 Kasım"
+ },
+ "kapak": {
+  "ikon": "🪙",
+  "ust": "ALTIN BİR GÜNDE",
+  "buyuk": "−%2",
+  "alt": "FED NE YAPACAK?"
+ },
+ "cta": [
+  {
+   "sahne": 10,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Altın bir günde yüzde ikiden fazla düştü. Sebep Türkiye'de değil; Amerika'da açıklanan tek bir sayı.",
+   "p": {
+    "ikon": "🪙",
+    "etiket": "Ons altın · 10 Kasım 2026 · bir günde",
+    "deger": 2,
+    "onek": "−%",
+    "sonek": "",
+    "ondalik": 0,
+    "yon": "down",
+    "ok_renk": "kirmizi",
+    "renk": "kirmizi",
+    "sayma": false,
+    "not": "Kaynağa göre %2,0–2,8 arası düşüş"
+   },
+   "etiket": "ALTIN DÜŞTÜ",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Üstelik Amerika faiz artırmaya hazırlanıyor. Peki bu bizi neden ilgilendiriyor? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "AMERİKA'NIN FAİZİ\n*BİZE NE?*",
+    "boy": 104
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Karışık ekonomi haberlerini her gün sadeleştiriyoruz. Kaçırmak istemiyorsan abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "EKONOMİ",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "On Kasım Salı günü, Amerika ekim ayı enflasyonunu açıkladı.",
+   "p": {
+    "gun": "10",
+    "ay": "KASIM",
+    "gunadi": "SALI",
+    "saat": "2026",
+    "not": "*ABD ekim enflasyonu* açıklandı"
+   },
+   "etiket": "VERİ GÜNÜ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Fiyatlar bir ayda yüzde sıfır virgül dört arttı. Beklenti yüzde sıfır virgül üçtü.",
+   "p": {
+    "baslik": "🇺🇸 ABD tüketici fiyatları · Ekim · aylık artış",
+    "sol": {
+     "etiket": "BEKLENTİ",
+     "deger": 0.3,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "AÇIKLANAN",
+     "deger": 0.4,
+     "renk": "kirmizi"
+    },
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "fark": "+0,1 puan",
+    "not": "Eylül: %0,6"
+   },
+   "etiket": "ENFLASYON",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Fark küçük görünüyor. Ama piyasada beklentinin üstü, kötü sürpriz demek.",
+   "p": {
+    "ikon": "⚠️",
+    "satirlar": [
+     "BEKLENTİNİN ÜSTÜ",
+     "= *KÖTÜ SÜRPRİZ*"
+    ],
+    "boy": 92
+   },
+   "etiket": "SÜRPRİZ"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Altının onsu gün içinde dört bin yüz kırk dolardan dört bin on dolara kadar indi.",
+   "p": {
+    "baslik": "🪙 Ons altın · 10 Kasım · gün içi",
+    "sol": {
+     "etiket": "EN YÜKSEK",
+     "deger": 4141,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "EN DÜŞÜK",
+     "deger": 4014,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 0,
+    "fark": "−127 $",
+    "not": "Ons ≈ 31,1 gram · gün içi değerler"
+   },
+   "etiket": "ONS ALTIN",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Gram altın da altı bin beş yüz elli lira civarına geriledi.",
+   "p": {
+    "ikon": "🪙",
+    "etiket": "Gram altın · 10 Kasım akşamı (yaklaşık)",
+    "deger": 6550,
+    "onek": "≈ ",
+    "sonek": " ₺",
+    "ondalik": 0,
+    "yon": "down",
+    "ok_renk": "kirmizi",
+    "renk": "sari",
+    "not": "Kaynağa göre 6.500 – 6.570 ₺ arası"
+   },
+   "etiket": "GRAM ALTIN",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki bir enflasyon sayısı altını neden düşürür?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "ENFLASYON GELDİ\n*ALTIN NEDEN DÜŞTÜ?*",
+    "boy": 96
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl mekanizma şimdi geliyor. Buraya kadar anladıysan videoya bir kalp bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "BURAYA KADAR TAMAMSA",
+     "*BİR KALP BIRAK*"
+    ],
+    "boy": 88
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Önce Fed'i tanıyalım. Fed, Amerika'nın merkez bankası. Doların faizine o karar verir.",
+   "p": {
+    "ikon": "🏦",
+    "satirlar": [
+     "FED",
+     "= *ABD MERKEZ BANKASI*"
+    ],
+    "boy": 96,
+    "not": "Doların faizine karar veren kurum"
+   },
+   "etiket": "FED NEDİR"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Enflasyon yüksek gelirse Fed faizi artırır. Amaç, harcamayı kısıp fiyatları soğutmak.",
+   "p": {
+    "baslik": "Faiz neden artar?",
+    "adimlar": [
+     {
+      "ikon": "📈",
+      "metin": "Enflasyon *yüksek*"
+     },
+     {
+      "ikon": "🏦",
+      "metin": "Fed faizi *artırır*"
+     },
+     {
+      "ikon": "🛒",
+      "metin": "Harcama *yavaşlar*"
+     }
+    ]
+   },
+   "etiket": "MANTIK"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Fed'in faizi şu an yüzde üç yetmiş beş ile dört arasında.",
+   "p": {
+    "ikon": "🏦",
+    "satirlar": [
+     "FED FAİZİ",
+     "*%3,75 – %4,00*"
+    ],
+    "boy": 104,
+    "not": "Eylülde artırıldı · 28 Ekim'de sabit kaldı"
+   },
+   "etiket": "BUGÜN",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "takvim",
+   "say": "Sıradaki toplantı sekiz ve dokuz Aralıkta. Piyasa, çeyrek puanlık artışı neredeyse kesin görüyor.",
+   "p": {
+    "gun": "9",
+    "ay": "ARALIK",
+    "gunadi": "ÇARŞAMBA",
+    "saat": "8–9 ARALIK",
+    "not": "*Artış bekleniyor* · piyasa ihtimali %85–98"
+   },
+   "etiket": "KARAR GÜNÜ",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Şimdi altına gelelim. Altın faiz vermez. Dolar faizi yükselince para altından dolara kayar.",
+   "p": {
+    "baslik": "Altın neden düşer?",
+    "adimlar": [
+     {
+      "ikon": "💵",
+      "metin": "Dolar faizi *yükselir*"
+     },
+     {
+      "ikon": "🪙",
+      "metin": "Altın *faiz vermez*"
+     },
+     {
+      "ikon": "🔀",
+      "metin": "Para *dolara kayar*"
+     },
+     {
+      "ikon": "📉",
+      "metin": "Ons altın *düşer*"
+     }
+    ]
+   },
+   "etiket": "MEKANİZMA",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yani altın, faiz artmadan düştü. Çünkü piyasa beklentiyi önceden fiyatlar.",
+   "p": {
+    "ikon": "⏩",
+    "satirlar": [
+     "PİYASA BEKLENTİYİ",
+     "*ÖNCEDEN FİYATLAR*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEKLENTİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu bizi nasıl etkiler?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Gram altın iki şeye bağlı: ons fiyatı ve dolar kuru.",
+   "p": {
+    "baslik": "Gram altın nasıl hesaplanır? (yaklaşık)",
+    "ikon": "🧮",
+    "ogeler": [
+     "4.050 $ × 50,2 ₺",
+     "÷",
+     "31,1 gram",
+     "≈",
+     "6.540 ₺"
+    ]
+   },
+   "etiket": "FORMÜL",
+   "kaynak": "K4, K6 · hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Ons düşerse gram da düşer. Ama dolar yükselirse bu düşüş kısmen telafi olur.",
+   "p": {
+    "baslik": "Türkiye'de gram altın",
+    "adimlar": [
+     {
+      "ikon": "📉",
+      "metin": "Ons düşer → gram ~düşer~"
+     },
+     {
+      "ikon": "💵",
+      "metin": "Dolar yükselir → gram +toparlar+"
+     }
+    ]
+   },
+   "etiket": "İKİ ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Altının varsa kısa vadede dalgalanma sürebilir. Karar günü dokuz Aralık.",
+   "p": {
+    "ikon": "🪙",
+    "satirlar": [
+     "ALTINDA DALGA",
+     "*SÜREBİLİR*"
+    ],
+    "boy": 104,
+    "not": "Fed kararı: 9 Aralık (bekleniyor)"
+   },
+   "etiket": "1 · ALTIN",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "İkinci etki dolar. Amerika'da faiz artınca dolar dünyada güçlenme eğilimine girer.",
+   "p": {
+    "ikon": "💵",
+    "satirlar": [
+     "FAİZ ARTAR",
+     "*DOLAR GÜÇLENEBİLİR*"
+    ],
+    "boy": 92,
+    "not": "Dolar/TL ≈ 50,2 · 11 Kasım"
+   },
+   "etiket": "2 · DOLAR",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Dolar yükselirse telefon, yakıt ve yurt dışı harcaması pahalanabilir.",
+   "p": {
+    "baslik": "Dolar yükselirse",
+    "satirlar": [
+     {
+      "ikon": "📱",
+      "metin": "Telefon",
+      "deger": "PAHALANABİLİR",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "⛽",
+      "metin": "Yakıt",
+      "deger": "PAHALANABİLİR",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "✈️",
+      "metin": "Yurt dışı",
+      "deger": "PAHALANABİLİR",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "İhtimal — kesin değil"
+   },
+   "etiket": "CEBİMİZ",
+   "kaynak": "Yorum"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Üçüncü etki faiz. Türkiye'de politika faizi yüzde otuz altı. Merkez Bankası indirim sürecinde.",
+   "p": {
+    "ikon": "🇹🇷",
+    "satirlar": [
+     "TÜRKİYE FAİZİ",
+     "*%36*"
+    ],
+    "boy": 112,
+    "not": "22 Ekim 2026 kararı · sıradaki toplantı 10 Aralık"
+   },
+   "etiket": "3 · FAİZ",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Fed faizi artırırsa bizde indirimler yavaşlayabilir. Bu bir ihtimal, kesin değil.",
+   "p": {
+    "ikon": "🐢",
+    "satirlar": [
+     "İNDİRİMLER",
+     "*YAVAŞLAYABİLİR*"
+    ],
+    "boy": 104,
+    "not": "İhtimal — kesin değil"
+   },
+   "etiket": "İHTİMAL",
+   "kaynak": "Yorum"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Özetleyelim. Enflasyon beklentiyi aştı. Fed'in faiz artırması bekleniyor. Altın bu yüzden düştü.",
+   "p": {
+    "baslik": "Kısaca",
+    "satirlar": [
+     {
+      "ikon": "📈",
+      "metin": "ABD enflasyonu (aylık)",
+      "deger": "%0,4",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🏦",
+      "metin": "Fed kararı (bekleniyor)",
+      "deger": "9 Aralık",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🪙",
+      "metin": "Ons altın (bir günde)",
+      "deger": "≈ −%2",
+      "renk": "kirmizi"
+     }
+    ]
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video yatırım tavsiyesi değildir. Rakamlar on bir Kasım itibarıyla geçerli; fiyatlar her an değişebilir.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "YATIRIM TAVSİYESİ",
+     "*DEĞİLDİR*"
+    ],
+    "boy": 96,
+    "not": "Rakamlar 11 Kasım 2026 itibarıyla"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sence Fed faizi artırır mı? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "ABD Ekim 2026 TÜFE (10 Kasım'da açıklandı): aylık %0,4, beklenti %0,3; çekirdek %0,3; Eylül %0,6. Yıllık oran yayımlanmadı — https://www.cnbc.com/2026/11/10/cpi-inflation-report-october-2026.html ; https://www.morningstar.com/economy/october-cpi-report-shows-inflation-04-monthly-rate-above-forecasts ; https://www.bls.gov/news.release/pdf/cpi.pdf ; https://www.haberturk.com/ekonomi/altin-abd-enflasyon-verisi-sonrasi-dustu-3926331",
+  "K2": "Fed faiz aralığı %3,75–4,00; 16 Eylül 2026'da çeyrek puan artırıldı, 28 Ekim 2026'da sabit (10'a 2 oy) — https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf ; https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html ; https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/fixed-income/fixed-income-perspectives/fomc-statement-october-2026/",
+  "K3": "8–9 Aralık 2026 Fed toplantısı; 25 baz puan artış ihtimali kaynağa göre %85–98 (CME FedWatch / LSEG); Reuters anketinde 101 ekonomistin tamamı 25 baz puan bekliyor — https://au.investing.com/news/economy-news/fed-rate-hike-odds-in-december-at-88-after-hot-cpi-cme-fedwatch-4760506 ; https://www.foreks.com/haber/detay/6af2eba795131d72027daa11/PICNEWS/tr/fed-de-aralik-ayi-faiz-artisi-beklentisi-yuzde-98-e-cikti-julius-baer-den-2027-tahmini-10-11-26/ ; https://www.fxstreet.com.tr/news/aralik-fed-faiz-artirimi-icin-oybirligiyle-beklenti-25-baz-puan-reuters-anketi-202611101326 ; https://www.tradingkey.com/analysis/economic/inflation/262298963-us-october-cpi-inflation-december-fed-50-basis-point-hike-odds-tradingkey",
+  "K4": "10 Kasım 2026: ons altın %2–2,8 düştü (gün içi 4.141 → 4.014 $; 4.021 $ −%2,8; 4.054 $ −%2,1); gram altın ≈ 6.500–6.570 TL; dolar ve tahvil faizi yükseldi — https://www.cnbc.com/2026/11/10/gold-edges-lower-as-focus-shifts-to-us-inflation-data.html ; https://www.mining.com/web/gold-price-falls-nearly-3-as-cpi-tops-forecasts-lifting-dollar-and-yields/ ; https://bigpara.hurriyet.com.tr/altin/haber/altin-fiyatlari-kritik-abd-verisi-ile-eridi-fiyatlarda-dusus-yuzde-2yi-asti_ID102286109/ ; https://www.cnbce.com/altin/abd-enflasyonu-altini-vurdu-fiyatlar-yuzde-2den-fazla-geriledi-g41485 ; https://paratic.com/abd-enflasyon-verisi-beklentinin-uzerinde-ons-altin-4040-dolara-indi/",
+  "K6": "Dolar/TL ≈ 50,2 (9 Kasım 50,18; 11 Kasım sabahı 50,23); TCMB politika faizi %36 (22 Ekim 2026), sıradaki PPK 10 Aralık 2026. Hesap: 4.050 × 50,2 ÷ 31,1 ≈ 6.537 TL — https://www.turkgun.com/ekonomi/dolar-kuru-bugun-ne-kadar-9-kasim-2026/414559 ; https://gazetearena.com/11-kasim-2026-guncel-doviz-kurlari ; https://www.doviz.com/faiz-kararlari ; https://www.tcmb.gov.tr/wps/wcm/connect/tr/tcmb+tr/main+menu/duyurular/basin/2026/duy2026-45"
+ }
+}
