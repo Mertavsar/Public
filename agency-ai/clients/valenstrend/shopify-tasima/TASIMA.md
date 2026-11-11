@@ -208,6 +208,16 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
   Kullanıcıya soruldu, cevaba göre iki ürün açılacak.
 - Liste (kod, ürün ID): `veri/yeni_koton_urunler_2026-10-28.json`.
 
+## Yeni Desenli Koton Eşarp ürünleri — 3. parti (11 Kasım 2026)
+
+- 13 fotoğraf (10:27 UTC) → 13 ürün: 765, 767–778 (766 yok). Hepsi yeniydi, eski sitede linkleri yok.
+- Ayarlar önceki partilerle aynı (250/330 TL, standart açıklama, takip kapalı + CONTINUE, 3 kanal).
+  koton-esarp 458 → 471; yeniler en üste alındı (778 → 765).
+- ID'ler: 765 10408751857750, 767 10408751890518, 768 10408751923286, 769 10408751956054, 770 10408751988822,
+  771 10408752021590, 772 10408752054358, 773 10408752087126, 774 10408752119894, 775 10408752152662,
+  776 10408752185430, 777 10408752218198, 778 10408752250966.
+- Hâlâ açık: 28 Ekim'deki iki "746" fotoğrafı (kullanıcıdan hangisinin 746 olduğu cevabı bekleniyor).
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
