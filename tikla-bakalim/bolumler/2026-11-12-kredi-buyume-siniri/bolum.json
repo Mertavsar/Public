@@ -1,0 +1,612 @@
+{
+ "baslik": "Kredi çekmek kolaylaşıyor mu? Merkez Bankası'nın kredi freni",
+ "tarih": "2026-11-12",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "kredi",
+  "sınır",
+  "fren",
+  "faiz"
+ ],
+ "altyazi": {
+  "yüzde üçten": "%3'ten",
+  "yüzde üç buçuğa": "%3,5'e",
+  "Üç soruda": "3 soruda",
+  "on bir Kasım": "11 Kasım",
+  "yüzde üçtü": "%3'tü",
+  "yüzde üç buçuk": "%3,5",
+  "yüzde beş buçuğa": "%5,5'e",
+  "yüzde iki buçuğa": "%2,5'e",
+  "yüz milyar liralık": "100 milyar liralık",
+  "üç milyar lira": "3 milyar lira",
+  "üç buçuk milyar": "3,5 milyar",
+  "yüzde otuza": "%30'a",
+  "yüzde dörtten üçe": "%4'ten %3'e",
+  "yüzde otuz altı": "%36",
+  "yüzde yirmi beşlik": "%25'lik",
+  "on iki Kasım": "12 Kasım",
+  "sekiz haftada": "8 haftada"
+ },
+ "kapak": {
+  "ikon": "🏦",
+  "ust": "KREDİ FRENİ GEVŞEDİ",
+  "buyuk": "%3 → %3,5",
+  "alt": "KREDİ KOLAYLAŞIR MI?"
+ },
+ "cta": [
+  {
+   "sahne": 12,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Merkez Bankası, ihtiyaç kredisindeki freni yüzde üçten yüzde üç buçuğa gevşetti.",
+   "p": {
+    "ikon": "🏦",
+    "etiket": "İhtiyaç kredisi · 8 haftalık büyüme sınırı",
+    "deger": 3.5,
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "yon": "up",
+    "ok_renk": "sari",
+    "renk": "sari",
+    "sayma": false,
+    "not": "Önceki sınır: %3 · 11 Kasım 2026"
+   },
+   "etiket": "KREDİ FRENİ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Peki kredi çekmek kolaylaşacak mı, faizler düşecek mi? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "KREDİ ÇEKMEK\n*KOLAYLAŞIYOR MU?*",
+    "boy": 100
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Böyle karışık kararları her gün sade dille çözüyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "KARIŞIK KARARLAR",
+     "*SADE DİLLE*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Karar on bir Kasım Çarşamba günü, Merkez Bankası duyurusuyla açıklandı.",
+   "p": {
+    "gun": "11",
+    "ay": "KASIM",
+    "gunadi": "ÇARŞAMBA",
+    "saat": "2026",
+    "not": "*Merkez Bankası* duyurusu"
+   },
+   "etiket": "KARAR GÜNÜ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Konunun adı kredi büyüme sınırı. Adı karışık, mantığı basit.",
+   "p": {
+    "ikon": "🧩",
+    "satirlar": [
+     "KREDİ",
+     "*BÜYÜME SINIRI*"
+    ],
+    "boy": 104
+   },
+   "etiket": "TERİM"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Bu sınır sana değil, bankaya konuyor. Bankanın toplam kredisi ne kadar büyüyebilir, onu belirliyor.",
+   "p": {
+    "ikon": "🏦",
+    "satirlar": [
+     "SINIR SANA DEĞİL",
+     "*BANKAYA*"
+    ],
+    "boy": 100,
+    "not": "Bankanın toplam kredisi 8 haftada en çok ne kadar büyüyebilir?"
+   },
+   "etiket": "KİME?",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "İhtiyaç ve taşıt kredilerinde sınır sekiz haftada yüzde üçtü. Şimdi yüzde üç buçuk.",
+   "p": {
+    "baslik": "💳🚗 İhtiyaç ve taşıt kredisi · 8 haftalık büyüme sınırı",
+    "sol": {
+     "etiket": "ESKİ",
+     "deger": 3,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "YENİ",
+     "deger": 3.5,
+     "renk": "sari"
+    },
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "fark": "+0,5 puan",
+    "not": ""
+   },
+   "etiket": "BİREYSEL",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Küçük işletme kredilerinde sınır yüzde beş buçuğa çıktı. Diğer firmalarda yüzde iki buçuğa.",
+   "p": {
+    "baslik": "İşletme kredileri (TL) · 8 haftalık sınır",
+    "satirlar": [
+     {
+      "ikon": "🏪",
+      "metin": "KOBİ",
+      "deger": "%5 → %5,5",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🏭",
+      "metin": "KOBİ dışı firmalar",
+      "deger": "%2 → %2,5",
+      "renk": "sari"
+     }
+    ],
+    "not": "KOBİ: küçük ve orta ölçekli işletme"
+   },
+   "etiket": "İŞLETMELER",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "hesap",
+   "say": "Bir örnek verelim. Bankanın yüz milyar liralık ihtiyaç kredisi olsun.",
+   "p": {
+    "baslik": "Örnek banka · yeni sınırla 8 haftada",
+    "ikon": "🧮",
+    "ogeler": [
+     "100 milyar ₺",
+     "×",
+     "%3,5",
+     "=",
+     "3,5 milyar ₺"
+    ]
+   },
+   "etiket": "ÖRNEK",
+   "kaynak": "Örnek hesap · 100 × 0,035 = 3,5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Eski sınırla sekiz haftada üç milyar lira daha verebiliyordu. Şimdi üç buçuk milyar.",
+   "p": {
+    "baslik": "Örnek banka · 8 haftada verebileceği ek kredi",
+    "sol": {
+     "etiket": "ESKİ SINIR",
+     "deger": 3,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "YENİ SINIR",
+     "deger": 3.5,
+     "renk": "sari"
+    },
+    "onek": "",
+    "sonek": " milyar ₺",
+    "ondalik": 1,
+    "fark": "+500 milyon ₺",
+    "not": "Örnek hesap · gerçek banka değil"
+   },
+   "etiket": "FARK",
+   "kaynak": "Örnek hesap"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki Merkez Bankası bankaların kredisine neden sınır koyuyor?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "KREDİYE NEDEN\n*SINIR VAR?*",
+    "boy": 108
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl mantık şimdi geliyor. Buraya kadar anlaşıldıysa videoya bir kalp bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "BURAYA KADAR TAMAMSA",
+     "*BİR KALP BIRAK*"
+    ],
+    "boy": 88
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Kredi bollaşınca insanlar daha çok harcar. Talep artar, fiyatlar yükselebilir.",
+   "p": {
+    "baslik": "Kredi ve fiyatlar",
+    "adimlar": [
+     {
+      "ikon": "💳",
+      "metin": "Kredi *bollaşır*"
+     },
+     {
+      "ikon": "🛒",
+      "metin": "Harcama *artar*"
+     },
+     {
+      "ikon": "📈",
+      "metin": "Fiyatlar ~yükselebilir~"
+     }
+    ]
+   },
+   "etiket": "MANTIK"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Enflasyon hâlâ yüksek. Ekimde yıllık yüzde otuza yakın açıklandı.",
+   "p": {
+    "ikon": "📈",
+    "etiket": "Yıllık enflasyon · Ekim 2026 (TÜİK)",
+    "deger": 29.77,
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 2,
+    "renk": "kirmizi",
+    "not": "3 Kasım 2026'da açıklandı"
+   },
+   "etiket": "ENFLASYON",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu yüzden Merkez Bankası krediyi frenle tutuyor. Sınır, o frenin adı.",
+   "p": {
+    "ikon": "🛑",
+    "satirlar": [
+     "BÜYÜME SINIRI",
+     "= *KREDİ FRENİ*"
+    ],
+    "boy": 100
+   },
+   "etiket": "FREN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Banka sınırı aşarsa bir yük gelir. Parasının bir kısmını Merkez Bankası'nda kilitli tutar.",
+   "p": {
+    "baslik": "Sınır aşılırsa",
+    "adimlar": [
+     {
+      "ikon": "🏦",
+      "metin": "Banka sınırı *aşar*"
+     },
+     {
+      "ikon": "🔒",
+      "metin": "Ek para ~kilitlenir~"
+     },
+     {
+      "ikon": "🐢",
+      "metin": "Kredi vermek *zorlaşır*"
+     }
+    ]
+   },
+   "etiket": "YAPTIRIM",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Buna zorunlu karşılık deniyor. Kilitli para krediye dönüşemez.",
+   "p": {
+    "ikon": "🔒",
+    "satirlar": [
+     "ZORUNLU KARŞILIK",
+     "= *KİLİTLİ PARA*"
+    ],
+    "boy": 96,
+    "not": "Bankanın Merkez Bankası'nda tutmak zorunda olduğu para"
+   },
+   "etiket": "TERİM",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "grafik",
+   "say": "Sınır mayısta sıkılaştırılmıştı. İhtiyaç kredisinde yüzde dörtten üçe inmişti.",
+   "p": {
+    "baslik": "İhtiyaç kredisi · 8 haftalık sınır",
+    "noktalar": [
+     [
+      "Mayıs öncesi",
+      4
+     ],
+     [
+      "23 Mayıs",
+      3,
+      true
+     ],
+     [
+      "11 Kasım",
+      3.5
+     ]
+    ],
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "renk": "sari",
+    "y_min": 2.5,
+    "y_max": 4.5,
+    "not": "Eksen sıfırdan başlamıyor"
+   },
+   "etiket": "2026",
+   "kaynak": "K1, K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Şimdi yarım puan geri açıldı. Yani fren kalkmadı, sadece biraz gevşedi.",
+   "p": {
+    "ikon": "🛑",
+    "satirlar": [
+     "FREN KALKMADI",
+     "*BİRAZ GEVŞEDİ*"
+    ],
+    "boy": 100,
+    "not": "%4 → %3 → %3,5"
+   },
+   "etiket": "SONUÇ",
+   "kaynak": "K1, K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Merkez Bankası'na göre amaç, finansal istikrarı ve para politikasının etkisini desteklemek.",
+   "p": {
+    "ikon": "🎯",
+    "satirlar": [
+     "AMAÇ:",
+     "*FİNANSAL İSTİKRAR*"
+    ],
+    "boy": 96,
+    "not": "Duyurudaki ifade: makrofinansal istikrar ve parasal aktarım mekanizması"
+   },
+   "etiket": "GEREKÇE",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin cebine nasıl dokunur?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Önce şunu bil: bu bir faiz kararı değil. Politika faizi hâlâ yüzde otuz altı.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "FAİZ KARARI DEĞİL",
+     "POLİTİKA FAİZİ *%36*"
+    ],
+    "boy": 88,
+    "not": "Sıradaki faiz toplantısı: 10 Aralık"
+   },
+   "etiket": "1 · FAİZ",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Senin kredi limitin de değişmedi. Değişen, bankanın toplam hareket alanı.",
+   "p": {
+    "ikon": "💳",
+    "satirlar": [
+     "SENİN LİMİTİN",
+     "*DEĞİŞMEDİ*"
+    ],
+    "boy": 104,
+    "not": "Değişen: bankanın kredi alanı"
+   },
+   "etiket": "2 · LİMİT",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Bankalar biraz daha fazla kredi verebilir. Başvuruların onaylanması bir miktar kolaylaşabilir.",
+   "p": {
+    "baslik": "Ne değişebilir?",
+    "satirlar": [
+     {
+      "ikon": "🏦",
+      "metin": "Kredi alanı",
+      "deger": "GENİŞLEDİ",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "✅",
+      "metin": "Kredi onayı",
+      "deger": "KOLAYLAŞABİLİR",
+      "renk": "sari"
+     }
+    ],
+    "not": "İhtimal — kesin değil"
+   },
+   "etiket": "3 · ONAY",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ama banka kredi vermek zorunda değil. Gelirine ve kredi notuna yine bakacak.",
+   "p": {
+    "ikon": "🔍",
+    "satirlar": [
+     "BANKA YİNE",
+     "*NOTUNA BAKACAK*"
+    ],
+    "boy": 100,
+    "not": "Gelir · kredi notu · teminat"
+   },
+   "etiket": "DİKKAT",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Faizler için uzmanlar büyük bir düşüş beklemiyor. Olursa sınırlı kalabilir.",
+   "p": {
+    "ikon": "📉",
+    "satirlar": [
+     "KREDİ FAİZİNDE",
+     "*SINIRLI ETKİ*"
+    ],
+    "boy": 100,
+    "not": "Uzman görüşü — kesin değil"
+   },
+   "etiket": "FAİZLER",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "karsilastir",
+   "say": "Yeni sınır yılda kabaca yüzde yirmi beşlik büyümeye denk geliyor. Bu, enflasyonun altında.",
+   "p": {
+    "baslik": "Yeni sınırın yıllık karşılığı · enflasyon",
+    "sol": {
+     "etiket": "KREDİ SINIRI\n(yıllık, yaklaşık)",
+     "deger": 25,
+     "renk": "sari"
+    },
+    "sag": {
+     "etiket": "ENFLASYON\n(Ekim: %29,77)",
+     "deger": 29.77,
+     "renk": "kirmizi"
+    },
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 0,
+    "fark": "sınır daha düşük",
+    "not": "Hesap bizim · bileşik, yaklaşık"
+   },
+   "etiket": "KIYAS",
+   "kaynak": "K1, K5 · hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Özetleyelim. Sınır bankaya konuyor. Yarım puan gevşedi. Ve bu bir faiz kararı değil.",
+   "p": {
+    "baslik": "Kısaca",
+    "satirlar": [
+     {
+      "ikon": "🏦",
+      "metin": "Sınır kime?",
+      "deger": "BANKAYA",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🛑",
+      "metin": "İhtiyaç · taşıt",
+      "deger": "%3 → %3,5",
+      "renk": "sari"
+     },
+     {
+      "ikon": "ℹ️",
+      "metin": "Politika faizi",
+      "deger": "%36 · AYNI",
+      "renk": "beyaz"
+     }
+    ]
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video kredi ya da yatırım tavsiyesi değildir. Bilgiler on iki Kasım itibarıyla geçerli.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "TAVSİYE",
+     "*DEĞİLDİR*"
+    ],
+    "boy": 104,
+    "not": "Bilgiler 12 Kasım 2026 itibarıyla"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sence kredi çekmek kolaylaşır mı? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "TCMB basın duyurusu 2026-49 (11 Kasım 2026): 8 haftalık kredi büyüme sınırı ihtiyaç ve taşıt kredilerinde %3 → %3,5; KOBİ TL kredilerinde %5 → %5,5; KOBİ dışı TL kredilerinde %2 → %2,5 — https://www.cnbce.com/piyasalar/merkez-bankasindan-kredi-buyumesine-yeni-ayar-ihtiyac-ve-tasit-kredilerinde-sinir-yukseldi-h41610 ; https://ekonomi.haber7.com/ekonomi/haber/3676110-merkez-bankasi-ihtiyac-ve-tasit-kredilerinde-buyume-sinirini-yukseltti ; https://www.ahaber.com.tr/ekonomi/2026/11/11/merkez-bankasindan-kredi-hamlesi-ihtiyac-tasit-ve-ticari-kredilerde-yeni-donem ; https://www.haberturk.com/ekonomi/son-dakika-merkez-bankasi-kredi-sinirlarini-yukseltti-3926658",
+  "K2": "Büyüme sınırı bankanın kredi artışına konan üst limittir; aşan banka ek zorunlu karşılık tesis eder (kredi yasağı değil) — https://www.bolgegazetesivan.com/limited-edition-ne-demek-kredi-buyume-siniri-ne-demek ; https://prozon.net/sirkuler/merkez-bankasi-kredi-buyume-sinirlarini-degistirdi/ ; https://www.bloomberght.com/tcmb-den-zorunlu-karsilik-duzenlemesi-3790044",
+  "K3": "23 Mayıs 2026 kararı: ihtiyaç (ve taşıt) kredisinde 8 haftalık sınır %4 → %3 — https://www.ahaber.com.tr/ekonomi/2026/05/23/merkez-bankasi-kredi-sinirlarini-dusurdu ; https://ticaretgazetesi.com.tr/2026/05/23/merkez-bankasindan-kredi-buyumesiyle-ilgili-yeni-adimlar/ ; https://prozon.net/sirkuler/merkez-bankasi-kredi-buyume-sinirlarini-degistirdi/",
+  "K4": "Gerekçe: makrofinansal istikrarın ve parasal aktarım mekanizmasının desteklenmesi; aynı duyuruda zorunlu karşılık uygulaması da değişti — https://ankahaber.net/haber/merkez-bankasi-kredi-buyume-sinirlarini-artirdi-ihtiyac-tasit-ve-ticari-kredilerde-yeni-oranlar-9752d25a ; https://kisadalga.net/haber/ekonomi/merkez-bankasindan-kredi-oran-karari-ihtiyac-tasit-ve-ticari-kredilerde-yeni-oranlar-141571 ; https://gazeteoksijen.com/turkiye/merkez-bankasi-kredi-buyume-sinirlarini-yukseltti-295707",
+  "K5": "TÜİK Ekim 2026 TÜFE (3 Kasım 2026): yıllık %29,77, aylık %2,58 — https://www.aa.com.tr/tr/ekonomi/enflasyon-rakamlari-aciklandi/4109355 ; https://gazeteoksijen.com/ekonomi/ekimde-enflasyon-yillik-yuzde-29-77-aylik-yuzde-2-58-oldu-294751 ; https://www.forbes.com.tr/ekonomi/ekim-enflasyonu-piyasa-beklentilerini-asarak-yuzde-2-58-artti",
+  "K6": "TCMB politika faizi %36 (22 Ekim 2026 kararı), bu kararla değişmedi; sıradaki PPK 10 Aralık 2026 — https://www.doviz.com/faiz-kararlari ; https://www.tcmb.gov.tr/wps/wcm/connect/tr/tcmb+tr/main+menu/duyurular/basin/2026/duy2026-45 ; https://www.karar.com/guncel-haberler/bireysel-kredi-faiz-oranlari-dusecek-mi-ihtiyac-kredisi-limiti-kac-oldu-2083699",
+  "K7": "Yorumlar: bireysel limit ve faiz doğrudan değişmedi; banka kredi vermek zorunda değil, kredi notu/teminat belirleyici; faizde ancak sınırlı düşüş beklentisi — https://www.karar.com/guncel-haberler/bireysel-kredi-faiz-oranlari-dusecek-mi-ihtiyac-kredisi-limiti-kac-oldu-2083699 ; https://hibya.com/kredi-buyume-sinirindaki-degisiklik-hangi-kredi-turunu-nasil-etkileyecek-1089789 ; https://www.yenicaggazetesi.com/merkez-bankasi-kredi-limitlerini-esnetti-tuketici-ve-kobiyi-ne-bekliyor-1090369h.htm ; https://onedio.com/haber/merkez-bankasi-kredi-freninde-gevsemeye-gitti-ihtiyac-ve-tasit-kredilerinde-sinir-yuzde-3-5-e-cikti-1394650"
+ }
+}
