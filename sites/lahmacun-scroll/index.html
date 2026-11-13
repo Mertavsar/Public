@@ -198,7 +198,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   .chap .tag { font-size: .72rem; }
   .chap p.keep { display: block; font-size: .98rem; }
   .lbl b { font-size: .62rem; letter-spacing: .12em; }
-  .lbl span { font-size: .86rem; }
+  .lbl span { display: none; }
   .bar {
     display: block; position: absolute; left: 0; right: 0; bottom: -14px;
     height: 3px; background: rgba(244, 239, 225, .2); border-radius: 3px; overflow: hidden;
@@ -682,23 +682,19 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     g.addColorStop(0, "#2c2723"); g.addColorStop(1, "#110f0d");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
-  // Where the footage sits on screen: always full screen (cover). On a tall phone only about a
-  // quarter of the wide shot fits, so the crop follows the action: the dough, the falling
-  // ingredients, then a slow pan along the lahmacun while it bakes. FOCUS = [video sec, u].
-  const FOCUS = [[0, 0.46], [3.4, 0.45], [5.0, 0.42], [7.9, 0.41], [9.0, 0.44], [10.4, 0.39], [12.0, 0.46],
-    [13.0, 0.42], [15.8, 0.40], [16.6, 0.24], [21.6, 0.62], [22.4, 0.46], [23.75, 0.42]];
-  function focusAt(t) {
-    for (let i = 1; i < FOCUS.length; i++) {
-      const [t0, u0] = FOCUS[i - 1], [t1, u1] = FOCUS[i];
-      if (t <= t1) return lerp(u0, u1, sm(t0, t1, t));
+  // Where the footage sits on screen. Wide screens: full-bleed cover. Tall phones: the shot is
+  // 16:9, so it stays still and shows the whole lahmacun (about 64% of the frame's width) in a
+  // band a little above centre; a soft, blurred copy of the same frame fills the rest of the screen.
+  const PHONE_SHOW = 0.64, PHONE_U = 0.40, PHONE_Y = 0.42;
+  const soft = document.createElement("canvas"), softCtx = soft.getContext("2d");
+  soft.width = 48; soft.height = 27;
+  function layout(iw, ih) {
+    if (H > W * 1.15) {
+      const sc = W / (PHONE_SHOW * iw), dh = ih * sc;
+      return { band: true, sc, ox: W / 2 - PHONE_U * iw * sc, oy: Math.max(64, H * PHONE_Y - dh / 2), iw, ih };
     }
-    return FOCUS[FOCUS.length - 1][1];
-  }
-  function layout(iw, ih, vt) {
-    const sc = Math.max(W / iw, H / ih), dw = iw * sc;
-    let ox = (W - dw) / 2;
-    if (H > W * 1.15) ox = clamp(W / 2 - focusAt(vt) * dw, W - dw, 0);
-    return { sc, ox, oy: (H - ih * sc) / 2, iw, ih };
+    const sc = Math.max(W / iw, H / ih);
+    return { band: false, sc, ox: (W - iw * sc) / 2, oy: (H - ih * sc) / 2, iw, ih };
   }
   function drawFrames(p) {
     const f = frameAt(mapKeys(p, frameKeys));
@@ -706,12 +702,31 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const a = ready(frames[i0]) ? frames[i0] : nearestFrame(i0);
     if (!a) { drawEmpty(); return; }
     const iw = a.naturalWidth, ih = a.naturalHeight;
-    const L = layout(iw, ih, mapKeys(p, KEYS) * DUR), dw = iw * L.sc, dh = ih * L.sc;
+    const L = layout(iw, ih), dw = iw * L.sc, dh = ih * L.sc;
     const b = frames[i1], blend = mixAmt > 0.02 && ready(b) && b !== a;
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
     ctx.fillStyle = "#100e0c"; ctx.fillRect(0, 0, W, H);
+    if (L.band) {
+      // tiny copy scaled up = a cheap blur that works in every browser
+      softCtx.drawImage(a, 0, 0, soft.width, soft.height);
+      const bs = Math.max(W / soft.width, H / soft.height) * 1.1;
+      ctx.globalAlpha = 0.55;
+      ctx.drawImage(soft, (W - soft.width * bs) / 2, (H - soft.height * bs) / 2, soft.width * bs, soft.height * bs);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = "rgba(12,10,8,.45)"; ctx.fillRect(0, 0, W, H);
+    }
     ctx.drawImage(a, L.ox, L.oy, dw, dh);
     if (blend) { ctx.globalAlpha = mixAmt; ctx.drawImage(b, L.ox, L.oy, dw, dh); ctx.globalAlpha = 1; }
+    if (L.band) {
+      // feather the band's top and bottom edges into the blurred fill
+      const f = Math.min(36, dh * 0.12);
+      let g = ctx.createLinearGradient(0, L.oy, 0, L.oy + f);
+      g.addColorStop(0, "rgba(18,15,12,.85)"); g.addColorStop(1, "rgba(18,15,12,0)");
+      ctx.fillStyle = g; ctx.fillRect(0, L.oy - 1, W, f + 1);
+      g = ctx.createLinearGradient(0, L.oy + dh - f, 0, L.oy + dh);
+      g.addColorStop(0, "rgba(18,15,12,0)"); g.addColorStop(1, "rgba(18,15,12,.85)");
+      ctx.fillStyle = g; ctx.fillRect(0, L.oy + dh - f, W, f + 1);
+    }
     view = L;
   }
   function pathAt(path, t) {
