@@ -8,7 +8,7 @@ menü ve final gelir.
 - `index.html`: sitenin tamamı (tek dosya).
 - `kaynak/sahne1-3.mp4`: Google Flow sahneleri (beze ve açılış, malzeme yağmuru, fırın).
 - `hazirla.sh`: sahneleri birleştirip `frames/` klasörüne kare dizisi çıkarır.
-- `frames/`: yayındaki sahne (282 kare, 17 MB) ve `manifest.json`.
+- `frames/`: yayındaki sahne (330 kare, 20 MB) ve `manifest.json`.
 - `foto/lahmacun.jpg`: işletmenin gerçek lahmacun fotoğrafı (final bölümü).
 
 ## Sahneyi yeniden üretmek
@@ -19,8 +19,13 @@ python3 -m http.server 8000   # http://localhost:8000
 ```
 
 Kareler JPG olarak canvas'a çizilir; kaydırmayla ileri geri sarmak her cihazda akıcıdır.
-Hareketli anlar (hamurun havada açılışı, kıymanın gelişi, alev) sık, durağan anlar seyrek
-alınır; plan `hazirla.sh` içindeki `PLAN`'dadır.
+
+Akıcılık için:
+- Kareler ölçülen görüntü değişimine göre seçilir: art arda iki kare arasındaki fark hep
+  aynı küçük miktardadır (alev ve hamurun havada dönüşü her karede, duran el seyrek).
+- Kaydırma, perde içinde görüntünün değişim hızına göre paylaştırılır (`FLOW`).
+- Sahne kaydırmayı kare hızından bağımsız, yumuşak bir gecikmeyle izler; sıradaki kareler
+  önceden açılır. Masaüstünde fare tekerleği Lenis ile yumuşatılır, telefonda doğal kaydırma kalır.
 
 ## Ayarlar (`index.html` içinde)
 

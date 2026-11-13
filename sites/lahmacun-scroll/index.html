@@ -37,6 +37,8 @@
   color-scheme: dark;
 }
 html { background: var(--stone); scroll-behavior: smooth; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
 body {
   margin: 0; background: var(--green-deep); color: var(--cream);
   font-family: var(--f-body); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased;
@@ -577,6 +579,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   </section>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (() => {
   "use strict";
@@ -661,11 +664,31 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     }
     return null;
   }
+  // Inside each chapter the scroll is shared out by how much the picture changes, not only by
+  // clock time: a still hand passes quickly, the dough toss and the flames get more scroll.
+  // FLOW = 0 is plain clock time, 1 is fully even visual change.
+  const FLOW = 0.6;
+  let cumChange = null;
+  function changeAt(v) {
+    const n = cumChange.length - 1, x = clamp(v) * n, i = Math.min(n - 1, Math.floor(x));
+    return lerp(cumChange[i], cumChange[i + 1], x - i);
+  }
+  function timeAtChange(c) {
+    let lo = 0, hi = cumChange.length - 1;
+    while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (cumChange[mid] <= c) lo = mid; else hi = mid; }
+    const span = cumChange[hi] - cumChange[lo];
+    return (lo + (span > 0 ? clamp((c - cumChange[lo]) / span) : 0)) / (cumChange.length - 1);
+  }
   function mapKeys(p, keys) {
     if (!keys) return p;
     for (let i = 1; i < keys.length; i++) {
       const [p0, v0] = keys[i - 1], [p1, v1] = keys[i];
-      if (p <= p1) return lerp(v0, v1, p1 > p0 ? clamp((p - p0) / (p1 - p0)) : 1);
+      if (p > p1) continue;
+      const k = p1 > p0 ? clamp((p - p0) / (p1 - p0)) : 1;
+      const lin = lerp(v0, v1, k);
+      if (!cumChange || v1 <= v0) return lin;
+      const even = timeAtChange(lerp(changeAt(v0), changeAt(v1), k));
+      return lerp(lin, even, FLOW);
     }
     return 1;
   }
@@ -701,6 +724,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const i0 = Math.floor(f), i1 = Math.min(frames.length - 1, i0 + 1), mixAmt = f - i0;
     const a = ready(frames[i0]) ? frames[i0] : nearestFrame(i0);
     if (!a) { drawEmpty(); return; }
+    predecode(i0);
     const iw = a.naturalWidth, ih = a.naturalHeight;
     const L = layout(iw, ih), dw = iw * L.sc, dh = ih * L.sc;
     const b = frames[i1], blend = mixAmt > 0.02 && ready(b) && b !== a;
@@ -773,6 +797,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     }
   }
 
+  function predecode(i) {
+    for (let j = i - 6; j <= i + 12; j++) {
+      const im = frames[j];
+      if (im && !im._dec && ready(im) && im.decode) { im._dec = true; im.decode().catch(() => { im._dec = false; }); }
+    }
+  }
+
   // ── Frame sources ──
   function useFrameUrls(urls, keys = null, times = null) {
     frameKeys = keys;
@@ -789,6 +820,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       const m = await res.json();
       if (!m.count) return;
       const path = m.path || "frames/", pad = m.pad || 4, ext = m.ext || "jpg";
+      cumChange = Array.isArray(m.cum) && m.cum.length > 2 ? m.cum : null;
       useFrameUrls(Array.from({ length: m.count }, (_, i) => `${path}${String(i + 1).padStart(pad, "0")}.${ext}`), KEYS, m.times);
     } catch (e) { /* no frames published: the stage stays on its stone background */ }
   }
@@ -820,9 +852,28 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     track.style.setProperty("--heat", (sm(fa, fa + 0.04, p) * (1 - sm(fb - 0.03, fb + 0.01, p)) * 0.85).toFixed(3));
     updateMarks(p);
   }
-  function tick() {
+  // Smooth wheel scrolling on desktop (Lenis); phones keep their native touch scrolling.
+  let lenis = null;
+  if (!reduce && typeof window.Lenis === "function" && matchMedia("(pointer: fine)").matches) {
+    try {
+      lenis = new window.Lenis({ lerp: 0.085, wheelMultiplier: 0.85, smoothWheel: true });
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const el = document.querySelector(a.getAttribute("href"));
+        if (el) { e.preventDefault(); lenis.scrollTo(el, { duration: 1.4 }); }
+      });
+    } catch (e) { lenis = null; }
+  }
+  // The scene trails the scroll a little, the same amount on 60 Hz and 120 Hz screens.
+  const EASE_MS = lenis ? 60 : 95;
+  let lastNow = 0;
+  function tick(now) {
+    if (lenis) lenis.raf(now);
+    const dt = lastNow ? Math.min(64, now - lastNow) : 16;
+    lastNow = now;
     const d = target - cur;
-    if (Math.abs(d) > 0.0004) { cur += reduce ? d : d * 0.14; dirty = true; }
+    if (Math.abs(d) > 0.00005) { cur += reduce ? d : d * (1 - Math.exp(-dt / EASE_MS)); dirty = true; }
     else if (cur !== target) { cur = target; dirty = true; }
     if (dirty && W && H) {
       if (frames) drawFrames(cur); else drawEmpty();

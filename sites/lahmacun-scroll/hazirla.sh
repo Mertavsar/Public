@@ -4,20 +4,13 @@
 # Birden fazla video verilirse önce uç uca birleştirilir (her sahnenin son karesi
 # sonrakinin ilk karesi olduğu için birleşim görünmez).
 #
-# Hareketli anlar sık, durağan anlar seyrek tutulur; böylece site hafif kalır.
-# PLAN, "kareAralığı:adım" listesidir (birleşik videoda 24 fps'te kare numarası, 0'dan).
-# Varsayılan plan Kuzu Lahmacun'un üç sahnelik videosuna göre ayarlıdır (her sahne 190 kare):
-#   Sahne 1  0-83:3      un serpme, beze (0–3,5 sn)
-#            84-120:1    hamurun havada açılıp inişi (3,5–5 sn)   → her kare
-#            121-189:2   el hamuru düzeltir
-#   Sahne 2  190-201:4   açılmış hamur
-#            202-310:2   tuz, biber, domates, sarımsak yağıyor
-#            311-335:1   kıyma katmanı geliyor                      → her kare
-#            336-379:2   maydanoz
-#   Sahne 3  380-416:2   el harcı bastırır
-#            417-475:4   durgun
-#            476-536:2   fırın alevi
-#            537-569:3   pişmiş lahmacun
+# Kareler görüntü değişimine göre seçilir: art arda iki seçili kare arasındaki fark hep
+# aynı küçük miktarda kalır. Alevin çıktığı, hamurun havada döndüğü anlarda her kare
+# alınır; elin durduğu anlarda seyrek alınır. Böylece kaydırma her yerde aynı akıcılıkta olur.
+#   HEDEF   seçilecek yaklaşık kare sayısı (varsayılan 330)
+#   ENSEYREK  iki seçili kare arasında en fazla kaç kaynak kare olabileceği (varsayılan 5)
+# manifest.json'a ayrıca her kaynak karenin birikimli görüntü değişimi ("cum") yazılır;
+# site bununla kaydırma hızını görüntünün değişim hızına göre dengeler.
 set -euo pipefail
 
 [ $# -ge 1 ] || { echo "Video dosyasını ver: ./hazirla.sh sahne1.mp4 [sahne2.mp4 ...]"; exit 1; }
@@ -26,10 +19,12 @@ fps="${FPS:-24}"
 width="${WIDTH:-1280}"
 quality="${QUALITY:-6}"    # JPEG kalitesi: 2 en iyi, 31 en kötü
 sharpen="${SHARPEN:-0.45}" # Flow 720p verdiği için hafif keskinleştirme; 0 kapatır
-plan="${PLAN:-0-83:3,84-120:1,121-189:2,190-201:4,202-310:2,311-335:1,336-379:2,380-416:2,417-475:4,476-536:2,537-569:3}"
+hedef="${HEDEF:-330}"
+enseyrek="${ENSEYREK:-5}"
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg bulunamadı. Mac: brew install ffmpeg"; exit 1; }
 command -v python3 >/dev/null || { echo "python3 bulunamadı."; exit 1; }
+python3 -c "import numpy, PIL" 2>/dev/null || { echo "python3 için numpy ve Pillow gerekli: pip install numpy pillow"; exit 1; }
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
@@ -51,23 +46,43 @@ ffmpeg -loglevel error -i "$in" -an \
 mkdir -p "$out"
 rm -f "$out"/*.jpg "$out"/manifest.json
 
-python3 - "$tmp" "$out" "$plan" <<'PY'
+python3 - "$tmp" "$out" "$hedef" "$enseyrek" <<'PY'
 import json, os, shutil, sys
-src, out, plan = sys.argv[1], sys.argv[2], sys.argv[3]
-total = len([f for f in os.listdir(src) if f.endswith(".jpg")])
-keep = set()
-for part in plan.split(","):
-    rng, step = part.split(":")
-    a, b = (int(x) for x in rng.split("-"))
-    keep.update(range(a, min(b, total - 1) + 1, int(step)))
-keep.update({0, total - 1})
-picked = sorted(i for i in keep if i < total)
+import numpy as np
+from PIL import Image
+src, out, hedef, enseyrek = sys.argv[1], sys.argv[2], int(sys.argv[3]), int(sys.argv[4])
+names = sorted(f for f in os.listdir(src) if f.startswith("k_") and f.endswith(".jpg"))
+total = len(names)
+small = np.stack([np.asarray(Image.open(os.path.join(src, f)).convert("L").resize((160, 90)), np.float32) for f in names])
+d = np.abs(np.diff(small, axis=0)).mean(axis=(1, 2))           # change between frame i and i+1
+cum = np.concatenate([[0.0], np.cumsum(d)])
+
+def pick(theta):
+    keep, acc, last = [0], 0.0, 0
+    for i in range(1, total):
+        acc += d[i - 1]
+        if acc >= theta or i - last >= enseyrek:
+            keep.append(i); acc, last = 0.0, i
+    if keep[-1] != total - 1: keep.append(total - 1)
+    return keep
+
+lo, hi = 0.01, float(cum[-1])                                     # bisect the step size to hit HEDEF
+for _ in range(40):
+    mid = (lo + hi) / 2
+    if len(pick(mid)) > hedef: lo = mid
+    else: hi = mid
+picked = pick(hi)
 for n, i in enumerate(picked, 1):
-    shutil.copy(os.path.join(src, f"k_{i + 1:05d}.jpg"), os.path.join(out, f"{n:04d}.jpg"))
-times = [round(i / (total - 1), 5) for i in picked]
+    shutil.copy(os.path.join(src, names[i]), os.path.join(out, f"{n:04d}.jpg"))
+steps = np.diff(cum[picked])
+manifest = {
+    "count": len(picked), "path": "frames/", "pad": 4, "ext": "jpg",
+    "times": [round(i / (total - 1), 5) for i in picked],
+    "cum": [round(float(c / cum[-1]), 5) for c in cum],
+}
 with open(os.path.join(out, "manifest.json"), "w") as fh:
-    json.dump({"count": len(picked), "path": "frames/", "pad": 4, "ext": "jpg", "times": times}, fh)
-print(f"{total} kareden {len(picked)} tanesi seçildi")
+    json.dump(manifest, fh, separators=(",", ":"))
+print(f"{total} kareden {len(picked)} tanesi seçildi; kare başı değişim ort. {steps.mean():.2f}, en çok {steps.max():.2f}")
 PY
 
 echo "Hazır: $(du -sh "$out" | cut -f1) → $out"
