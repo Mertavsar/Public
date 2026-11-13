@@ -44,7 +44,7 @@ ffmpeg -loglevel error -i "$in" -an \
   -q:v "$quality" "$tmp/k_%05d.jpg"
 
 mkdir -p "$out"
-rm -f "$out"/*.jpg "$out"/manifest.json
+rm -f "$out"/*.jpg "$out"/manifest.json "$out"/onizleme-*.jpg
 
 python3 - "$tmp" "$out" "$hedef" "$enseyrek" <<'PY'
 import json, os, shutil, sys
@@ -83,6 +83,21 @@ manifest = {
 with open(os.path.join(out, "manifest.json"), "w") as fh:
     json.dump(manifest, fh, separators=(",", ":"))
 print(f"{total} kareden {len(picked)} tanesi seçildi; kare başı değişim ort. {steps.mean():.2f}, en çok {steps.max():.2f}")
+PY
+
+# Önizleme paketi: bütün karelerin küçük hâli 8x6'lık birkaç büyük resimde. Site ilk girişte
+# önce bunları indirir (birkaç dosya, ~1-2 MB); kaydırma ilk saniyeden itibaren her karede
+# doğru görüntüyü gösterir, keskin kareler arkadan yerine oturur.
+ffmpeg -loglevel error -framerate 24 -i "$out/%04d.jpg" -vf "scale=320:180:flags=lanczos,tile=8x6" -q:v 7 "$out/onizleme-%d.jpg"
+python3 - "$out" <<'PY'
+import json, os, sys
+out = sys.argv[1]
+m = json.load(open(os.path.join(out, "manifest.json")))
+sheets = len([f for f in os.listdir(out) if f.startswith("onizleme-")])
+m["width"], m["height"] = 1280, 720
+m["preview"] = {"path": "frames/onizleme-%d.jpg", "sheets": sheets, "cols": 8, "rows": 6, "w": 320, "h": 180}
+json.dump(m, open(os.path.join(out, "manifest.json"), "w"), separators=(",", ":"))
+print(f"önizleme paketi: {sheets} dosya")
 PY
 
 echo "Hazır: $(du -sh "$out" | cut -f1) → $out"

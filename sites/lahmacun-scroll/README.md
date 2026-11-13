@@ -27,6 +27,17 @@ Akıcılık için:
 - Sahne kaydırmayı kare hızından bağımsız, yumuşak bir gecikmeyle izler; sıradaki kareler
   önceden açılır. Masaüstünde fare tekerleği Lenis ile yumuşatılır, telefonda doğal kaydırma kalır.
 
+İlk giriş için (önbellek boş):
+- `frames/onizleme-*.jpg`: bütün karelerin küçük hâli 7 dosyada (2,6 MB). Sayfa önce bunları
+  indirir; kaydırma ilk saniyeden her karede doğru görüntüyü gösterir. Keskin kareler aynı anda
+  4–6 tane, kullanıcının bulunduğu yere en yakın olandan başlayarak gelir ve ancak açıldıktan
+  sonra kullanılır.
+- Canvas hiçbir zaman videonun dolduramayacağı kadar piksel çizmez (bilgisayarda ~1x, telefonda
+  en fazla 1,5x); cihaz zorlanırsa kendiliğinden bir kademe düşer.
+- Telefondaki bulanık arka plan ayrı, küçük bir katmandır (`#softbg`); ekran kartı büyütür,
+  sadece kare değişince güncellenir.
+
+
 ## Ayarlar (`index.html` içinde)
 
 - `KEYS`: kaydırma ile video zamanını perdelere eşler.
