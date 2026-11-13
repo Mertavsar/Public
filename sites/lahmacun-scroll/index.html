@@ -594,24 +594,22 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   const DUR = 23.75;
   const CHAPTERS = [[0.04, 0.18], [0.18, 0.31], [0.31, 0.52], [0.52, 0.66], [0.66, 0.89], [0.89, 1.0001]];
   const KEYS = [[0, 0], [0.04, 0], [0.18, 3.4 / DUR], [0.31, 7.92 / DUR], [0.52, 12.95 / DUR], [0.66, 15.83 / DUR], [0.89, 22.3 / DUR], [1, 1]];
+  // Her nokta kare kare kontrol edildi: etiket ekranda gerçekten o ürünün olduğu yeri gösterir.
+  // Sahne 2 = +7,917 sn, Sahne 3 = +15,833 sn. path: [sn, u, v] listesi; akış kayıyorsa nokta onunla gider.
   const MARKS = [
-    [0, 0.4, 3.0, 0.48, 0.38, "l", -40, "Durum buğdayı unu", "Gaziantep ve Urfa'dan"],
-    [0, 1.3, null, 0.38, 0.62, "l", 40, "İstanbul'un suyu", ""],
-    [0, 1.9, null, 0.53, 0.58, "r", -30, "Kemah tuzu", "Erzincan'dan"],
-    [0, 2.5, null, 0.53, 0.65, "r", 50, "Firikleme", "en az 6 saat dinlenir"],
-    [1, 5.4, null, 0.70, 0.66, "r", -50, "İncecik taban", "çıtırlığın ilk şartı"],
-    [2, 8.4, 9.7, 0.45, 0.47, "l", -30, "Kemah tuzu · beyaz biber", ""],
-    [2, 9.8, 11.4, 0.37, 0.30, "l", -10, "Al, yeşil, topak biber", ""],
-    [2, 10.4, 11.5, 0.42, 0.62, "r", 40, "Domates", "kışın Antep salçası"],
-    [2, 11.5, 12.9, 0.49, 0.24, "r", -20, "Sarımsak ve baharat", ""],
-    [3, 13.05, null, 0.20, 0.67, "l", 30, "Balıkesir kuzusu", "but ve döş eti"],
-    [3, 13.4, null, 0.60, 0.63, "r", -40, "Zırh kıvamı", "elde çekilmiş incelik"],
-    [3, 13.9, 14.95, 0.31, 0.20, "l", -10, "Maydanoz", ""],
-    [4, 16.2, null, 0.26, 0.68, "l", 40, "Urfa taşı", "kümbet fırın"],
-    [4, 17.6, null, 0.45, 0.62, "r", -80, "Taşın harareti", "her yeri aynı pişirir"],
-    [4, 19.4, null, 0.70, 0.61, "r", -30, "Hep çıtır", "harca sebze suyu girmez"],
+    [0, 1.1, 3.0, 0.43, 0.30, "l", -30, "Un", "Antep ve Urfa durum buğdayı"],
+    [0, 1.6, null, 0.45, 0.60, "r", -60, "Hamur bezesi", "en az 6 saat firiklenir"],
+    [1, 5.3, null, 0.50, 0.68, "r", -60, "İncecik hamur", "çıtırlığın ilk şartı"],
+    [2, 8.45, 9.6, 0.41, 0.20, "l", -10, "Kemah tuzu", "Erzincan'dan", [[8.5, 0.40, 0.20], [9.0, 0.42, 0.20], [9.5, 0.39, 0.20]]],
+    [2, 10.82, null, 0.397, 0.686, "l", 30, "Al biber", ""],
+    [2, 10.92, null, 0.506, 0.648, "r", 50, "Yeşil biber", ""],
+    [2, 11.52, 12.82, 0.452, 0.335, "r", -40, "Sarımsak", ""],
+    [3, 13.67, null, 0.33, 0.70, "l", 40, "Kuzu kıyma", "Balıkesir · zırh kıvamı"],
+    [3, 13.97, 14.77, 0.425, 0.29, "r", -30, "Maydanoz", ""],
+    [4, 17.83, null, 0.36, 0.65, "r", -60, "Harç", "sebze suyu yok, hep çıtır"],
+    [4, 20.9, null, 0.672, 0.605, "r", -60, "Kenar kızarır", ""],
     [5, 22.4, null, 0.42, 0.66, "r", -70, "Sarımsaklı · soğanlı", "220 ₺"],
-  ].map(([c, t0, t1, u, v, side, dy, t, s]) => ({ c, t0, t1, u, v, side, dy, t, s }));
+  ].map(([c, t0, t1, u, v, side, dy, t, s, path]) => ({ c, t0, t1, u, v, side, dy, t, s, path }));
 
   const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   const lerp = (a, b, t) => a + (b - a) * t;
@@ -716,6 +714,14 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     if (blend) { ctx.globalAlpha = mixAmt; ctx.drawImage(b, L.ox, L.oy, dw, dh); ctx.globalAlpha = 1; }
     view = L;
   }
+  function pathAt(path, t) {
+    if (t <= path[0][0]) return [path[0][1], path[0][2]];
+    for (let i = 1; i < path.length; i++) {
+      const [t0, u0, v0] = path[i - 1], [t1, u1, v1] = path[i];
+      if (t <= t1) { const k = (t - t0) / (t1 - t0); return [lerp(u0, u1, k), lerp(v0, v1, k)]; }
+    }
+    const last = path[path.length - 1]; return [last[1], last[2]];
+  }
   const project = (u, v) => [view.ox + u * view.iw * view.sc, view.oy + v * view.ih * view.sc];
 
   // ── Callouts: a dot on the ingredient, a hairline elbow, its name ──
@@ -729,8 +735,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       if (vis <= 0.001) { m.g.style.display = "none"; m.lbl.style.opacity = 0; continue; }
       m.g.style.display = "";
       m.g.style.opacity = vis;
-      const [px, y] = project(m.u, m.v);
-      const x = clamp(px, 44, W - 44);   // on a phone the crop can leave a spot off screen: pull it in
+      const [mu, mv] = m.path ? pathAt(m.path, vt) : [m.u, m.v];
+      const [px, y] = project(mu, mv);
+      if (px < 8 || px > W - 8) { m.g.style.display = "none"; m.lbl.style.opacity = 0; continue; }
+      const x = px;
       const dir = m.side === "l" ? -1 : 1;
       const ringA = sm(m.t0, m.t0 + 0.25, vt), lineA = sm(m.t0 + 0.08, m.t0 + 0.4, vt), textA = sm(m.t0 + 0.22, m.t0 + 0.55, vt);
       m.dot.setAttribute("cx", x); m.dot.setAttribute("cy", y);
