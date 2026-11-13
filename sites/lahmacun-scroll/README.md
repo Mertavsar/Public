@@ -7,8 +7,9 @@ menü ve final gelir.
 
 - `index.html`: sitenin tamamı (tek dosya).
 - `kaynak/sahne1-3.mp4`: Google Flow sahneleri (beze ve açılış, malzeme yağmuru, fırın).
-- `hazirla.sh`: sahneleri birleştirip `frames/` klasörüne kare dizisi çıkarır.
-- `frames/`: yayındaki sahne (330 kare, 20 MB) ve `manifest.json`.
+- `hazirla.sh`: sahneleri birleştirip `frames/` ve `frames-mobil/` setlerini üretir.
+- `frames/`: bilgisayar sahnesi: 330 kare, 2x2'lik 83 pakette (`paket-N.jpg`), önizleme paketleri ve `manifest.json`.
+- `frames-mobil/`: telefon sahnesi: yalnızca telefonun gösterdiği orta bölge, 640 px; aynı düzen.
 - `foto/lahmacun.jpg`: işletmenin gerçek lahmacun fotoğrafı (final bölümü).
 
 ## Sahneyi yeniden üretmek
@@ -28,7 +29,7 @@ Akıcılık için:
   önceden açılır. Masaüstünde fare tekerleği Lenis ile yumuşatılır, telefonda doğal kaydırma kalır.
 
 İlk giriş için (önbellek boş):
-- `frames/onizleme-*.jpg`: bütün karelerin küçük hâli 7 dosyada (2,6 MB). Sayfa önce bunları
+- `onizleme-*.jpg`: bütün karelerin küçük hâli 7 dosyada. Sayfa önce bunları
   indirir; kaydırma ilk saniyeden her karede doğru görüntüyü gösterir. Keskin kareler aynı anda
   4–6 tane, kullanıcının bulunduğu yere en yakın olandan başlayarak gelir ve ancak açıldıktan
   sonra kullanılır.
@@ -36,6 +37,14 @@ Akıcılık için:
   en fazla 1,5x); cihaz zorlanırsa kendiliğinden bir kademe düşer.
 - Telefondaki bulanık arka plan ayrı, küçük bir katmandır (`#softbg`); ekran kartı büyütür,
   sadece kare değişince güncellenir.
+
+Telefonda ilk girişin keskin olması için:
+- Telefon ayrı bir set yükler (`frames-mobil/`): ekranda görünen orta bölge, ekranın ihtiyacı
+  kadar çözünürlükte. Kare başı ~1/3 boyut (12 MB'a karşı 22 MB).
+- Kareler 4'erli paketlerde gelir: istek sayısı 4'e bölünür (yavaş sunucuda ilk giriş hızlanır).
+- Keskin paketler kabadan inceye iner: önce bütün sahneye yayılmış her 4. paket, sonra aralar.
+  Tam karenin keskini yoksa en fazla 4 kare ötedeki keskin kare gösterilir; bulanık önizleme
+  yalnızca en baştaki bir iki saniye için yedektir.
 
 
 ## Ayarlar (`index.html` içinde)

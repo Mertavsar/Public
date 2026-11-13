@@ -603,7 +603,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   // MARKS: [perde, başlangıç sn, bitiş sn (null = perde sonuna kadar), u, v, taraf, dy, ad, alt satır]
   //   u,v = malzemenin videodaki yeri (0–1, sol üstten); taraf = yazı noktanın solunda (l) mı
   //   sağında (r) mı; dy = yazının noktaya göre dikey kayması (px). Yeni video gelince bunlar ayarlanır.
-  const CONFIG = { manifest: "frames/manifest.json", showLab: false };
+  const CONFIG = { manifest: "frames/manifest.json", mobileManifest: "frames-mobil/manifest.json", showLab: false };
   const DUR = 23.75;
   const CHAPTERS = [[0.04, 0.18], [0.18, 0.31], [0.31, 0.52], [0.52, 0.66], [0.66, 0.89], [0.89, 1.0001]];
   const KEYS = [[0, 0], [0.04, 0], [0.18, 3.4 / DUR], [0.31, 7.92 / DUR], [0.52, 12.95 / DUR], [0.66, 15.83 / DUR], [0.89, 22.3 / DUR], [1, 1]];
@@ -681,11 +681,21 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const k = i % per;
     return { img: sheet, sx: (k % preview.cols) * preview.w, sy: Math.floor(k / preview.cols) * preview.h, sw: preview.w, sh: preview.h };
   }
+  // frames[i]: where frame i sits inside its decoded pack image ({img, sx, sy, sw, sh}), or null.
   function sharpRect(i) {
-    const im = frames && frames[i];
-    return im ? { img: im, sx: 0, sy: 0, sw: im.naturalWidth, sh: im.naturalHeight } : null;
+    return (frames && i >= 0 && i < frames.length && frames[i]) || null;
   }
-  function frameRect(i) { return sharpRect(i) || previewRect(i); }
+  // A sharp frame a few frames away looks better than a soft copy of the exact one: the eye
+  // misses a tiny jump in time, not blur.
+  function nearSharpRect(i, reach = 4) {
+    if (!frames) return null;
+    for (let k = 0; k <= reach; k++) {
+      const r = sharpRect(i - k) || sharpRect(i + k);
+      if (r) return r;
+    }
+    return null;
+  }
+  function frameRect(i) { return nearSharpRect(i) || previewRect(i); }
   function nearestRect(i) {
     for (let k = 1; k < frames.length; k++) {
       const r = (i - k >= 0 && frameRect(i - k)) || (i + k < frames.length && frameRect(i + k));
@@ -775,8 +785,9 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     } else {
       ctx.fillStyle = "#100e0c"; ctx.fillRect(0, 0, W, H);
     }
-    ctx.drawImage(a.img, a.sx, a.sy, a.sw, a.sh, L.ox, L.oy, dw, dh);
-    if (blend) { ctx.globalAlpha = mixAmt; ctx.drawImage(b.img, b.sx, b.sy, b.sw, b.sh, L.ox, L.oy, dw, dh); ctx.globalAlpha = 1; }
+    const cx = L.ox + crop.x * dw, cw = crop.w * dw;
+    ctx.drawImage(a.img, a.sx, a.sy, a.sw, a.sh, cx, L.oy, cw, dh);
+    if (blend) { ctx.globalAlpha = mixAmt; ctx.drawImage(b.img, b.sx, b.sy, b.sw, b.sh, cx, L.oy, cw, dh); ctx.globalAlpha = 1; }
     if (L.band) {
       const fe = Math.min(36, dh * 0.12);
       let g = ctx.createLinearGradient(0, L.oy, 0, L.oy + fe);
@@ -835,51 +846,70 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     }
   }
 
+  // Keep the packs around the viewer decoded (a browser may drop decoded pixels of images
+  // it hasn't drawn for a while).
   function predecode(i) {
-    for (let j = i - 4; j <= i + 8; j++) {
-      const im = frames[j];
-      if (im && !im._dec && im.decode) { im._dec = true; im.decode().catch(() => { im._dec = false; }); }
+    for (let j = i - 4; j <= i + 8; j += 2) {
+      const r = sharpRect(j);
+      if (r && !r.img._dec && r.img.decode) { r.img._dec = true; r.img.decode().catch(() => { r.img._dec = false; }); }
     }
   }
 
-  // Sharp frames come in a few at a time, nearest to where the viewer is first (ahead before behind),
-  // and are only used once decoded, so drawing never waits on a download or a JPEG decode.
-  let frameUrls = [], pending = null, inFlight = 0, curIndex = 0;
-  const MAX_IN_FLIGHT = matchMedia("(pointer: coarse)").matches ? 4 : 6;
+  // Sharp frames arrive in packs (several frames in one image), a few packs at a time:
+  // coarse to fine across the whole show (every 4th pack, then every 2nd, then the rest), each
+  // level nearest to the viewer first; the pack holding the viewer's frames jumps the queue.
+  // A pack is used only once downloaded and decoded, so drawing never waits on either.
+  let units = [], pending = null, inFlight = 0, curIndex = 0;
+  const MAX_IN_FLIGHT = 6;
+  const levelCost = (k) => (k % 4 === 0 ? 0 : k % 2 === 0 ? 40 : 140);
   function pump() {
     while (inFlight < MAX_IN_FLIGHT && pending && pending.size) {
       let best = -1, bestD = Infinity;
-      for (const j of pending) {
-        const d = j >= curIndex ? j - curIndex : (curIndex - j) * 2.5;
-        if (d < bestD) { bestD = d; best = j; }
+      for (const k of pending) {
+        const u = units[k], mid = u.first + (u.n - 1) / 2;
+        const dist = mid >= curIndex ? mid - curIndex : (curIndex - mid) * 2.5;
+        const near = curIndex >= u.first - 3 && curIndex <= u.first + u.n + 2;
+        const d = near ? dist - 1000 : dist + levelCost(k);
+        if (d < bestD) { bestD = d; best = k; }
       }
       pending.delete(best);
       inFlight++;
-      const im = new Image(), list = frames;
+      const u = units[best], im = new Image(), list = frames;
       im.decoding = "async";
-      im.src = frameUrls[best];
+      im.src = u.url;
       (im.decode ? im.decode() : new Promise((ok, no) => { im.onload = ok; im.onerror = no; }))
-        .then(() => { if (frames === list) { im._dec = true; list[best] = im; if (Math.abs(best - curIndex) < 3) dirty = true; } })
+        .then(() => {
+          if (frames !== list) return;
+          im._dec = true;
+          const w = u.w || im.naturalWidth, h = u.h || im.naturalHeight;
+          for (let j = 0; j < u.n; j++) list[u.first + j] = { img: im, sx: (j % u.cols) * w, sy: Math.floor(j / u.cols) * h, sw: w, sh: h };
+          if (curIndex >= u.first - 4 && curIndex <= u.first + u.n + 3) dirty = true;
+        })
         .catch(() => {})
         .finally(() => { inFlight--; pump(); });
     }
   }
-  function useFrameUrls(urls, keys = null, times = null, prev = null) {
+  // crop: which part of the frame's width the loaded set covers (the phone set is cropped).
+  let crop = { x: 0, w: 1 }, setUrl = null, mobileMissing = false;
+  function useFrames({ count, unitList, keys = null, times = null, prev = null, part = null }) {
+    crop = part || { x: 0, w: 1 };
+    lastSoft = -1;
     frameKeys = keys;
-    frameTimes = times && times.length === urls.length ? times : null;
-    frameUrls = urls;
-    frames = new Array(urls.length).fill(null);
-    pending = new Set(urls.keys());
+    frameTimes = times && times.length === count ? times : null;
+    units = unitList;
+    frames = new Array(count).fill(null);
+    pending = new Set(units.keys());
     preview = null;
     if (prev) {
       const sheets = Array.from({ length: prev.sheets }, (_, k) => {
         const im = new Image(); im.decoding = "async";
+        if (k === 0) im.fetchPriority = "high";
         im.onload = () => { (im.decode ? im.decode() : Promise.resolve()).catch(() => {}).then(() => { dirty = true; }); };
         im.src = prev.path.replace("%d", k + 1);
         return im;
       });
       preview = { sheets, cols: prev.cols, rows: prev.rows, w: prev.w, h: prev.h };
-      // sharp frames start once the first preview sheet is in, so they don't compete with it
+      // sharp packs start once the first preview sheet is in, so they don't compete with it
       const start = () => pump();
       if (ready(sheets[0])) start(); else { sheets[0].addEventListener("load", start, { once: true }); sheets[0].addEventListener("error", start, { once: true }); }
     } else {
@@ -887,16 +917,29 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     }
     dirty = true;
   }
+  // single frames (the #dene lab): one unit per image
+  function useFrameUrls(urls) {
+    useFrames({ count: urls.length, unitList: urls.map((url, i) => ({ url, first: i, n: 1, cols: 1, w: 0, h: 0 })) });
+  }
+  // Tall phones get frames-mobil: only the middle of the frame the band shows, at the size the
+  // screen needs (about a third of the bytes); everything else gets the full frames.
+  const tall = () => H > W * 1.15;
+  const wantedSet = () => (tall() ? CONFIG.mobileManifest : CONFIG.manifest);
   async function loadManifest() {
     try {
-      const res = await fetch(CONFIG.manifest, { cache: "no-cache" });
+      setUrl = wantedSet();
+      let res = await fetch(setUrl, { cache: "no-cache" });
+      if (!res.ok && setUrl !== CONFIG.manifest) { mobileMissing = true; setUrl = CONFIG.manifest; res = await fetch(setUrl, { cache: "no-cache" }); }
       if (!res.ok) return;
       const m = await res.json();
-      if (!m.count) return;
-      const path = m.path || "frames/", pad = m.pad || 4, ext = m.ext || "jpg";
+      if (!m.count || !m.pack) return;
       cumChange = Array.isArray(m.cum) && m.cum.length > 2 ? m.cum : null;
       if (m.width && m.height) { SRC_W = m.width; SRC_H = m.height; resize(); }
-      useFrameUrls(Array.from({ length: m.count }, (_, i) => `${path}${String(i + 1).padStart(pad, "0")}.${ext}`), KEYS, m.times, m.preview || null);
+      const pk = m.pack, per = pk.cols * pk.rows;
+      const unitList = Array.from({ length: pk.packs }, (_, k) => ({
+        url: pk.path.replace("%d", k + 1), first: k * per, n: Math.min(per, m.count - k * per), cols: pk.cols, w: pk.w, h: pk.h,
+      }));
+      useFrames({ count: m.count, unitList, keys: KEYS, times: m.times, prev: m.preview || null, part: m.crop || null });
     } catch (e) { /* no frames published: the stage stays on its stone background */ }
   }
 
@@ -948,7 +991,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const rawDt = lastNow ? now - lastNow : 16;
     const dt = Math.min(64, rawDt);
     lastNow = now;
-    if (dirty && rawDt < 500) {
+    if (dirty && rawDt < 500 && pending && !pending.size && !inFlight) {
       slowFrames = rawDt > 28 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
       if (slowFrames > 24 && DPR > 1.01) { dprCap = Math.max(1, DPR - 0.5); slowFrames = 0; resize(); }
     }
@@ -964,7 +1007,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   }
 
   window.addEventListener("scroll", readScroll, { passive: true });
-  window.addEventListener("resize", () => { resize(); readScroll(); });
+  window.addEventListener("resize", () => {
+    resize(); readScroll();
+    if (setUrl && setUrl !== wantedSet() && !mobileMissing) loadManifest();
+  });
   resize(); readScroll(); cur = target;
   requestAnimationFrame(tick);
   loadManifest();
