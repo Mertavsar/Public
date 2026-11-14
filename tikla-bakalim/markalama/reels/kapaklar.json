@@ -1,0 +1,104 @@
+{
+ "logo": "../logo.jpg",
+ "cikti": "kapaklar",
+ "kapaklar": [
+  {
+   "ad": "01-90lar-1-milyon",
+   "gorsel": "foto/anadolu1990_sokak.jpg",
+   "odak": "55% 40%",
+   "etiket": "NOSTALJİ · 90'LAR",
+   "satirlar": [
+    "90'LARDA 1 MİLYONLA",
+    "[NE ALINIRDI?]",
+    "CEVAP ŞAŞIRTACAK"
+   ],
+   "boy": 118,
+   "kredi": "Foto: Karl Oppolzer · CC-BY-SA-3.0 · Wikimedia Commons",
+   "nesne": "foto/banknot_1milyon_1995.jpg",
+   "nesneBoy": 780,
+   "nesneY": 560,
+   "nesneAci": -8
+  },
+  {
+   "ad": "02-baraj-elektrik",
+   "gorsel": "foto/baraj_cizim.png",
+   "odak": "50% 50%",
+   "etiket": "NASIL ÇALIŞIR?",
+   "satirlar": [
+    "BARAJDAKİ SU",
+    "[ELEKTRİĞE]",
+    "NASIL DÖNÜŞÜR?"
+   ],
+   "boy": 130,
+   "ikon": "⚡",
+   "ikonTop": 470,
+   "ikonBoy": 300
+  },
+  {
+   "ad": "03-benzin-pahali",
+   "gorsel": null,
+   "ikon": "⛽📈",
+   "etiket": "GÜNDEM · EKONOMİ",
+   "satirlar": [
+    "BENZİN NEDEN",
+    "[BU KADAR]",
+    "PAHALI?"
+   ],
+   "boy": 136,
+   "ikonTop": 480,
+   "ikonBoy": 330
+  },
+  {
+   "ad": "04-fransa",
+   "gorsel": "foto/paris.jpg",
+   "odak": "50% 30%",
+   "etiket": "DÜNYA · FRANSA",
+   "satirlar": [
+    "FRANSA'DA",
+    "[NELER OLUYOR?]",
+    "1 DAKİKADA ANLATTIK"
+   ],
+   "boy": 130,
+   "kredi": "Foto: Jorge Royan · CC-BY-SA-3.0 · Wikimedia Commons"
+  },
+  {
+   "ad": "05-florida-learjet",
+   "gorsel": "foto/learjet_3d.png",
+   "odak": "50% 50%",
+   "etiket": "DÜNYA · VERİYLE",
+   "satirlar": [
+    "1 DAKİKADA",
+    "[8 KM DÜŞTÜ]",
+    "SON SANİYELER KAYITTA"
+   ],
+   "boy": 130,
+   "kredi": "Temsili 3D çizim · ADS-B verilerine göre"
+  },
+  {
+   "ad": "06-murasu",
+   "gorsel": "foto/murasu_3d.png",
+   "odak": "50% 50%",
+   "etiket": "DÜNYA · HİNDİSTAN",
+   "satirlar": [
+    "SAATTE 120 KM",
+    "[DEV GİRDAP]",
+    "HİNDİSTAN'A ÇARPIYOR"
+   ],
+   "boy": 124,
+   "kredi": "Temsili 3D çizim · IMD verilerine göre"
+  },
+  {
+   "ad": "07-suudi-cadilar",
+   "gorsel": "foto/suudi_kesme.png",
+   "odak": "50% 20%",
+   "etiket": "DÜNYA · SUUDİ ARABİSTAN",
+   "satirlar": [
+    "ÖNCE GÖZALTI",
+    "[SONRA BEDAVA]",
+    "CADILAR BAYRAMI"
+   ],
+   "boy": 124,
+   "kredi": "Temsili kâğıt kesme çizim"
+  }
+ ]
+}

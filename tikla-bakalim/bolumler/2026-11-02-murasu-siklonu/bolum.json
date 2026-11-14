@@ -1,0 +1,562 @@
+{
+  "baslik": "Murasu siklonu — siklon nasıl doğar, Hindistan kıyısını nasıl vuruyor (3D)",
+  "tarih": "2026-11-02",
+  "durum": "ses: yapay zekâ (vidIQ Daniel), --sikistir",
+  "format": "dikey",
+  "stil": "3d",
+  "dunya": "siklon",
+  "gecis": false,
+  "vurgu": [
+    "siklon",
+    "sıcak",
+    "gözü",
+    "kabarması",
+    "zayıflar"
+  ],
+  "altyazi": {
+    "yüz kilometreyi": "100 kilometreyi",
+    "yüz yirmiye": "120'ye",
+    "Yirmi altı derecenin": "26 derecenin",
+    "yüz kilometre": "100 kilometre",
+    "yirmi iki kilometre": "22 kilometre",
+    "bir buçuk metreye": "1,5 metreye",
+    "otuz bin kişiyi": "30.000 kişiyi",
+    "Saatte yüz yirmi kilometre": "Saatte 120 kilometre",
+    "Bir buçuk metreye": "1,5 metreye"
+  },
+  "kapak": {
+    "ikon": "🌀",
+    "ust": "HİNDİSTAN'A",
+    "buyuk": "SİKLON",
+    "alt": "NASIL DOĞAR?"
+  },
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "uc3d",
+      "say": "Saatte yüz yirmi kilometre hamle. Bir buçuk metreye varan deniz kabarması.",
+      "p": {
+        "saat": [
+          -3,
+          -1
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            33,
+            650,
+            70
+          ],
+          "konum2": [
+            72,
+            40,
+            128
+          ],
+          "hedef": "goz",
+          "hizli": 2.2
+        },
+        "hud": {
+          "ruzgar": true,
+          "ruzgarAlt": true,
+          "sars": true
+        },
+        "carp": true,
+        "baslik": "BİR HAFTADA\n*2. SİKLON*",
+        "alt": "İlki 3 can aldı · 180.000 kişi tahliye edildi",
+        "boy": 100
+      },
+      "kaynak": "K1, K5"
+    },
+    {
+      "bolum": "hook",
+      "tip": "uc3d",
+      "say": "Ve bu, Hindistan'a bir haftada gelen ikinci siklon.",
+      "p": {
+        "saat": [
+          -1,
+          0
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            60,
+            190,
+            230
+          ],
+          "konum2": [
+            30,
+            170,
+            200
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "sehir": true
+        },
+        "ust": "28 EKİM ARNAB → 2 KASIM MURASU"
+      },
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "uc3d",
+      "say": "Adı Murasu. Peki okyanusun ortasında böyle dev bir girdap nasıl doğar?",
+      "p": {
+        "saat": [
+          0,
+          0.5
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            23,
+            250,
+            150
+          ],
+          "konum2": [
+            23,
+            205,
+            105
+          ],
+          "hedef": [
+            23,
+            0,
+            59
+          ]
+        },
+        "hud": {},
+        "baslik": "SİKLON\nNASIL DOĞAR?",
+        "boy": 100
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Her şey sıcak denizle başlar. Yirmi altı derecenin üstündeki su hızla buharlaşır.",
+      "p": {
+        "saat": [
+          0.5,
+          1
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            165,
+            24,
+            205
+          ],
+          "konum2": [
+            145,
+            20,
+            185
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "bulanik": true
+        },
+        "ust": "1 · SICAK DENİZ",
+        "boy": 120,
+        "sahne": "kesit1"
+      },
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Isınan nemli hava yükselir, bulut olur ve ısı açığa çıkarır.",
+      "p": {
+        "saat": [
+          1,
+          1.5
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            150,
+            16,
+            175
+          ],
+          "konum2": [
+            130,
+            28,
+            160
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "bulanik": true
+        },
+        "ust": "2 · YÜKSELEN HAVA",
+        "sahne": "kesit2"
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Boşalan yere çevreden hava akar. Dünya döndüğü için bu hava düz değil, dönerek gelir.",
+      "p": {
+        "saat": [
+          1.5,
+          2
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            23,
+            150,
+            175
+          ],
+          "konum2": [
+            60,
+            140,
+            150
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "bulanik": true
+        },
+        "ust": "3 · DÖNEN HAVA",
+        "sahne": "kure"
+      },
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Kuzey yarımkürede bu dönüş saat yönünün tersinedir.",
+      "p": {
+        "saat": [
+          2,
+          2.5
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            23,
+            200,
+            64
+          ],
+          "konum2": [
+            23,
+            175,
+            66
+          ],
+          "hedef": [
+            23,
+            0,
+            59
+          ]
+        },
+        "hud": {
+          "akis": true
+        },
+        "buyuk": "↺",
+        "alt": "saat yönünün tersi · kuzey yarımküre",
+        "boy": 150
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "uc3d",
+      "say": "Ortada ise şaşırtıcı derecede sakin bir bölge kalır: fırtınanın gözü.",
+      "p": {
+        "saat": [
+          2.5,
+          3
+        ],
+        "kam": {
+          "mod": "goz",
+          "yuk": 2.5,
+          "bak": 10,
+          "don": 1.6
+        },
+        "hud": {},
+        "ust": "FIRTINANIN GÖZÜ",
+        "alt": "sakin bölge · çevresi fırtına duvarı"
+      },
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Murasu, pazartesi öğleden sonra Nellore'nin yaklaşık yüz kilometre doğusundaydı.",
+      "p": {
+        "saat": [
+          -1,
+          0
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            -10,
+            170,
+            215
+          ],
+          "konum2": [
+            0,
+            150,
+            195
+          ],
+          "hedef": [
+            0,
+            0,
+            40
+          ]
+        },
+        "hud": {
+          "sehir": true,
+          "rota": true,
+          "saat": true
+        }
+      },
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Saatte yirmi iki kilometre hızla kıyıya ilerliyordu.",
+      "p": {
+        "saat": [
+          0,
+          6
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            0,
+            150,
+            195
+          ],
+          "konum2": [
+            10,
+            135,
+            170
+          ],
+          "hedef": [
+            0,
+            0,
+            40
+          ]
+        },
+        "hud": {
+          "sehir": true,
+          "rota": true,
+          "tahmin": true,
+          "saat": true
+        }
+      },
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "neden",
+      "tip": "uc3d",
+      "say": "Meteoroloji dairesine göre gece Ongole yakınlarında karaya çıkması bekleniyor.",
+      "p": {
+        "saat": [
+          6,
+          10
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            70,
+            65,
+            100
+          ],
+          "konum2": [
+            35,
+            45,
+            65
+          ],
+          "hedef": [
+            -13,
+            0,
+            4
+          ]
+        },
+        "hud": {
+          "sehir": true,
+          "rota": true,
+          "tahmin": true,
+          "saat": true
+        }
+      },
+      "kaynak": "K1, K3"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "En büyük tehlikelerden biri fırtına kabarması. Alçak kıyılarda deniz bir buçuk metreye kadar yükselebilir.",
+      "p": {
+        "saat": [
+          10,
+          10.5
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            55,
+            16,
+            60
+          ],
+          "konum2": [
+            35,
+            12,
+            42
+          ],
+          "hedef": [
+            -12,
+            2,
+            5
+          ]
+        },
+        "hud": {
+          "bulanik": true
+        },
+        "sahne": "kabarma"
+      },
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Yetkililer yaklaşık otuz bin kişiyi tahliye etmeyi planlıyor. Bölgede okullar kapatıldı.",
+      "p": {
+        "saat": [
+          10.5,
+          11
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            -60,
+            95,
+            125
+          ],
+          "konum2": [
+            -85,
+            85,
+            100
+          ],
+          "hedef": [
+            -20,
+            0,
+            10
+          ]
+        },
+        "hud": {
+          "bulanik": true
+        },
+        "buyuk": "30.000 KİŞİ",
+        "boy": 96,
+        "sahne": "tahliye"
+      },
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Karaya çıkan siklon, enerjisini aldığı sıcak denizden koptuğu için zayıflar.",
+      "p": {
+        "saat": [
+          11,
+          16
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            40,
+            120,
+            125
+          ],
+          "konum2": [
+            -20,
+            110,
+            85
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "rota": true
+        }
+      },
+      "kaynak": "K4"
+    },
+    {
+      "bolum": "etki",
+      "tip": "uc3d",
+      "say": "Murasu'nun da Telangana'ya doğru ilerlerken zayıflaması bekleniyor.",
+      "p": {
+        "saat": [
+          16,
+          22
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            -20,
+            180,
+            70
+          ],
+          "konum2": [
+            -60,
+            170,
+            25
+          ],
+          "hedef": "goz"
+        },
+        "hud": {
+          "rota": true,
+          "sehir": true
+        }
+      },
+      "kaynak": "K1"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "uc3d",
+      "say": "Gelişmeleri takip etmek için abone ol.",
+      "p": {
+        "saat": [
+          22,
+          24
+        ],
+        "kam": {
+          "mod": "sabit",
+          "konum": [
+            110,
+            300,
+            260
+          ],
+          "konum2": [
+            70,
+            280,
+            225
+          ],
+          "hedef": [
+            0,
+            0,
+            0
+          ]
+        },
+        "hud": {
+          "rota": true,
+          "temsili": false
+        },
+        "logo": true,
+        "src": "logo.jpg",
+        "alt": "Gelişmeleri takip et · abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "IMD (Down To Earth): 2 Kasım 14:30'da Nellore'nin ~100 km doğusunda, ~22 km/sa; karaya şiddetli siklonik fırtına olarak çıkış, 100–110 km/sa sürekli rüzgâr, 120 km/sa hamle; 1,5 m'ye kadar kabarma; sonrasında zayıflayarak Telangana'ya — https://www.downtoearth.org.in/climate-change/cyclone-murasu-races-across-bay-of-bengal-imd-warns-of-storm-surges-up-to-15-metres",
+    "K2": "Bir haftada ikinci siklon; APSDMA: ~30.000 kişinin tahliyesi planlanıyor; AP, Tamil Nadu, Odisha'da okullar kapalı — https://www.aljazeera.com/news/2026/11/2/thousands-evacuated-as-india-braces-for-second-cyclone-in-a-week",
+    "K3": "Karaya çıkış Nellore–Narsapur arası, Ongole yakını, 2 Kasım 23:30 – 3 Kasım 04:00 IST (IMD) — https://newsable.asianetnews.com/india/severe-cyclone-murasu-to-make-landfall-near-ongole-in-andhra-pradesh-articleshow-c3udkik",
+    "K4": "Tropikal siklon oluşumu: ≥26,5 °C deniz suyu, buharlaşma ve gizli ısı, Coriolis etkisiyle dönüş (kuzey yarımkürede saat yönünün tersi), göz; karada sıcak su kaynağı kesildiği için zayıflama — NOAA National Hurricane Center / NOAA SciJinks",
+    "NOT": "3D rota temsilidir: IMD'nin konum, hız ve karaya çıkış bölgesi bilgilerine göre kuruldu. Bulut ölçeği ve yükseklik abartılıdır.",
+    "K5": "Arnab siklonu 28 Ekim 2026'da Andhra Pradesh'e çok şiddetli siklonik fırtına olarak çıktı; en az 3 ölü, 180.000 kişi tahliye; 2013'teki Titli'den bu yana AP'ye çıkan ilk çok şiddetli fırtına — Al Jazeera (28 Ekim), ABC News, AccuWeather, Kathmandu Post"
+  }
+}

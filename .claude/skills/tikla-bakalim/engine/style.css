@@ -140,3 +140,69 @@ html.dikey .ctahint { left: 0; right: 0; text-align: center; top: 1740px; }
 
 /* Kapak kipi */
 #stage.cover #cta, #stage.cover #top, #stage.cover #cap, #stage.cover #capline, #stage.cover #src, #stage.cover #tag, #stage.cover #bar { display: none; }
+
+/* Arayüz katmanları her zaman sahnenin üstünde — tam ekran foto sahnesi (z-index 2) onları örtmesin */
+#top, #cap, #capline, #tag, #src, #bar { z-index: 30; }
+/* açık renkli fotoğrafta da okunsun */
+html.yatay #tag { background: rgba(5, 10, 20, .72); }
+html.yatay #src { text-shadow: 0 1px 4px #000; }
+
+/* temiz: üstte yazı yok — bölüm şeridi, sahne etiketi, kaynak satırı gizli (kullanıcı isteği). bolum.json "ust_bant": true açar. */
+html.temiz #top, html.temiz #tag, html.temiz #src { display: none !important; }
+
+/* Teknik çizim (blueprint) modu: lacivert zemin, ince çift ızgara, ışık lekeleri yok.
+   Altyazı: kutusuz, büyük harf, konuşulmamış kelimeler görünmez (kelime kelime belirir). */
+html.cizim #stage { background: radial-gradient(120% 90% at 50% 40%, #13284a 0%, #0b1730 75%); }
+html.cizim .blob { display: none; }
+html.cizim #grid { opacity: 1; inset: 0; transform: none !important;
+  background-image: linear-gradient(rgba(140,180,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(140,180,255,.07) 1px, transparent 1px),
+    linear-gradient(rgba(140,180,255,.13) 2px, transparent 2px), linear-gradient(90deg, rgba(140,180,255,.13) 2px, transparent 2px);
+  background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px; }
+html.cizim.yatay #capline { background: none; text-transform: uppercase; letter-spacing: 1.5px; font-size: 54px; top: 955px;
+  text-shadow: 0 3px 14px rgba(0,0,0,.8); }
+html.cizim.yatay #capline span { opacity: 0; }
+html.cizim.yatay #capline span.done, html.cizim.yatay #capline span.on { opacity: 1; }
+
+/* Çizim temaları */
+html.cizim.t-kagit { --ink: #2a2b33; --sari: #e08a12; --dim: rgba(42,43,51,.6); }
+html.cizim.t-kagit #stage { background: radial-gradient(130% 100% at 50% 40%, #f7f1e3 0%, #e9dfc8 100%); }
+html.cizim.t-kagit #grid { background-image: linear-gradient(rgba(70,60,40,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(70,60,40,.07) 1px, transparent 1px),
+    linear-gradient(rgba(70,60,40,.12) 2px, transparent 2px), linear-gradient(90deg, rgba(70,60,40,.12) 2px, transparent 2px); }
+html.cizim.t-kagit.yatay #capline { color: rgba(42,43,51,.4); text-shadow: 0 2px 10px rgba(247,241,227,.9); }
+html.cizim.t-kagit.yatay #capline span.done { color: #2a2b33; }
+html.cizim.t-kagit.yatay #capline span.on { color: #d0482f; text-shadow: none; }
+html.cizim.t-kagit #bar b { background: #d0482f; }
+html.cizim.t-tahta #stage { background: radial-gradient(130% 100% at 50% 40%, #2a4a3c 0%, #17302a 100%); }
+html.cizim.t-tahta #grid { opacity: .5; }
+html.cizim.t-neon #stage { background: radial-gradient(130% 100% at 50% 40%, #121225 0%, #05050b 100%); }
+html.cizim.t-neon #grid { opacity: .6; }
+html.cizim.t-kagit { --capink: #2a2b33; --kirmizi: #d0482f; }
+html.cizim.t-kagit #cap span { -webkit-text-stroke: 0 !important; paint-order: normal; text-shadow: 0 0 18px rgba(247,241,227,.95), 0 0 6px rgba(247,241,227,.95) !important; text-transform: uppercase; }
+
+/* 3D veri modu: siyah zemin, ışık lekesi/ızgara yok; altyazı küçük, ortada, iki satıra kadar, vurgu turkuaz */
+html.s3d #stage { background: #030508; }
+html.s3d .blob, html.s3d #grid { display: none; }
+html.s3d #cap { display: none; }
+html.s3d #capline { display: block; position: absolute; left: 50%; transform: translateX(-50%); top: 1150px; width: 900px;
+  white-space: normal; text-align: center; background: none; padding: 0; font-weight: 800; font-size: 46px; line-height: 1.28;
+  color: rgba(255,255,255,.32); text-shadow: 0 2px 10px #000; }
+html.s3d.yatay #capline { top: 960px; width: 1500px; font-size: 44px; }
+html.s3d #capline span.done { color: #f2f5f9; }
+html.s3d #capline span.on { color: #fff; background: #e3141b; border-radius: 10px; padding: 0 10px; text-shadow: none; box-decoration-break: clone; }
+html.s3d { --sari: #ff3b45; }
+
+/* 3D kâğıt teması: kanalın mühendis defteri dili */
+html.s3d.t3-kagit #stage { background: #f1e9d6; }
+html.s3d.t3-kagit { --sari: #e3141b; --ink: #2a2b33; }
+html.s3d.t3-kagit #capline { color: rgba(42,43,51,.32); text-shadow: 0 0 10px #f1e9d6, 0 0 4px #f1e9d6; }
+html.s3d.t3-kagit #capline span.done { color: #2a2b33; }
+html.s3d.t3-kagit #capline span.on { color: #fff; background: #e3141b; text-shadow: none; }
+
+/* kâğıt kesme modu: altyazı zemin bandında, krem kâğıt şerit üstünde; etkin kelime kırmızı */
+html.kesme #stage { background: #10142c; }
+html.kesme .blob, html.kesme #grid, html.kesme #cap { display: none; }
+html.kesme #capline { display: block; position: absolute; left: 50%; top: 1560px; transform: translateX(-50%) rotate(-1deg); width: auto; max-width: 960px;
+  font-family: M; font-weight: 900; font-size: 50px; line-height: 1.22; text-align: center; color: rgba(22,22,28,.38);
+  background: #f4ecdb; padding: 14px 28px 16px; border-radius: 4px; box-shadow: 0 10px 22px rgba(0,0,0,.5), inset 0 0 0 3px rgba(0,0,0,.08); }
+html.kesme #capline span.done { color: #16161c; }
+html.kesme #capline span.on { color: #fff; background: #e3141b; border-radius: 8px; padding: 0 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }

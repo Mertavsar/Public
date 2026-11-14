@@ -51,6 +51,11 @@ Kurallar:
 
 ## Görsel
 
+> **Güncel marka (Kasım 2026, geçerli olan bu):** logo `tikla-bakalim/markalama/logo.jpg`; ana renkler **kırmızı `#e3141b`, beyaz, siyah**;
+> ekranın üstünde kalıcı yazı/bölüm şeridi **yok** (`ust_bant` kapalı); logo yalnızca sonda; Reels kapakları `scripts/reels_kapak.mjs`.
+> Aşağıdaki lacivert/sarı tablo eski 2D motorun varsayılanıdır; yeni işlerde (Lemo-Opuscar dahil) kırmızı-beyaz-siyah esas alınır.
+
+
 | Öğe | Değer |
 |---|---|
 | Tuval | yatay 1920×1080 (varsayılan, altın videosu) · dikey 1080×1920 — 30 fps |

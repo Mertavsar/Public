@@ -1,0 +1,283 @@
+{
+ "baslik": "Motorin neden benzinden 24 lira pahalı? Petrol düşerken dizel neden inmiyor",
+ "tarih": "2026-11-13",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": ["motorin", "benzin", "fark", "yasak"],
+ "altyazi": {
+  "yirmi dört lira": "24 lira",
+  "Üç soruda": "3 soruda",
+  "On iki Kasım'da": "12 Kasım'da",
+  "üç lira elli dört kuruş": "3,54 lira",
+  "yetmiş bir lira yirmi kuruşa": "71,20 liraya",
+  "doksan beş lira yirmi kuruşta": "95,20 liraya",
+  "iki liraydı": "2 liraydı",
+  "dokuz ayda": "9 ayda",
+  "on bir kat": "11 kat",
+  "doksan iki doların": "92 doların",
+  "yüzde altmıştan": "%60'tan",
+  "yüzde seksen beşini": "%85'ini",
+  "yüzde yirmiye": "%20'ye",
+  "elli litrelik": "50 litrelik",
+  "bin iki yüz lira": "1.200 lira",
+  "dört liraya": "4 liraya",
+  "yirmi lira": "20 lira",
+  "on üç Kasım": "13 Kasım"
+ },
+ "kapak": {
+  "ikon": "⛽",
+  "ust": "MOTORİN BENZİNDEN",
+  "buyuk": "+24 ₺",
+  "alt": "NEDEN PAHALI?"
+ },
+ "cta": [ { "sahne": 11, "gecikme": 0.3, "sure": 5.5 } ],
+ "sahneler": [
+  {
+   "bolum": "hook", "tip": "sayi",
+   "say": "İstanbul'da motorin, benzinden litre başına yirmi dört lira pahalı.",
+   "p": { "ikon": "⛽", "etiket": "Motorin − benzin farkı · 1 litre", "deger": 24, "onek": "+", "sonek": " ₺", "ondalik": 0,
+          "yon": "up", "renk": "kirmizi", "sayma": false, "not": "İstanbul Avrupa Yakası · 12 Kasım 2026" },
+   "etiket": "FARK", "kaynak": "K1"
+  },
+  {
+   "bolum": "hook", "tip": "soru",
+   "say": "Peki dizel nasıl bu kadar pahalandı? Üç soruda anlatayım.",
+   "p": { "ikon": "🤔", "metin": "MOTORİN NEDEN\n*BU KADAR PAHALI?*", "boy": 96 },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook", "tip": "baslik",
+   "say": "Karışık gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": { "ikon": "🔔", "satirlar": ["KARIŞIK GÜNDEM", "*SADE DİLLE*"], "boy": 100 },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne", "tip": "sayi",
+   "say": "On iki Kasım'da benzine üç lira elli dört kuruş indirim geldi.",
+   "p": { "ikon": "⛽", "etiket": "Benzine indirim · litre · 12 Kasım", "deger": 3.54, "onek": "−", "sonek": " ₺", "ondalik": 2,
+          "yon": "down", "renk": "yesil", "not": "Bazı kaynaklarda 3,40 ₺ · bölgeye göre değişir" },
+   "etiket": "İNDİRİM", "kaynak": "K2"
+  },
+  {
+   "bolum": "ne", "tip": "karsilastir",
+   "say": "İstanbul'da benzin yetmiş bir lira yirmi kuruşa indi. Motorin ise doksan beş lira yirmi kuruşta kaldı.",
+   "p": { "baslik": "⛽ İstanbul Avrupa · 1 litre · 12 Kasım",
+          "sol": { "etiket": "BENZİN", "deger": 71.20, "renk": "beyaz" },
+          "sag": { "etiket": "MOTORİN", "deger": 95.20, "renk": "kirmizi" },
+          "onek": "", "sonek": " ₺", "ondalik": 2, "fark": "+24,00 ₺", "not": "" },
+   "etiket": "POMPA", "kaynak": "K1"
+  },
+  {
+   "bolum": "ne", "tip": "karsilastir",
+   "say": "Oysa şubat başında aradaki fark sadece iki liraydı.",
+   "p": { "baslik": "⛽ İstanbul Avrupa · 1 litre · 1 Şubat 2026",
+          "sol": { "etiket": "BENZİN", "deger": 55.27, "renk": "beyaz" },
+          "sag": { "etiket": "MOTORİN", "deger": 57.43, "renk": "sari" },
+          "onek": "", "sonek": " ₺", "ondalik": 2, "fark": "+2,16 ₺", "not": "" },
+   "etiket": "ŞUBAT", "kaynak": "K3"
+  },
+  {
+   "bolum": "ne", "tip": "karsilastir",
+   "say": "Yani fark, dokuz ayda yaklaşık on bir kat büyüdü.",
+   "p": { "baslik": "Motorin − benzin farkı · 1 litre",
+          "sol": { "etiket": "ŞUBAT", "deger": 2.16, "renk": "beyaz" },
+          "sag": { "etiket": "KASIM", "deger": 24, "renk": "kirmizi" },
+          "onek": "", "sonek": " ₺", "ondalik": 2, "fark": "≈ 11 kat", "not": "Hesap bizim · 24 ÷ 2,16" },
+   "etiket": "9 AYDA", "kaynak": "K1, K3 · hesap bizim"
+  },
+  {
+   "bolum": "ne", "tip": "baslik",
+   "say": "Üstelik petrol ucuzluyor. Brent'in varili doksan iki doların altına indi.",
+   "p": { "ikon": "🛢️", "satirlar": ["PETROL", "+UCUZLUYOR+"], "boy": 108, "not": "Brent < 92 $ / varil · Kasım 2026" },
+   "etiket": "PETROL", "kaynak": "K4"
+  },
+  {
+   "bolum": "ne", "tip": "baslik",
+   "say": "Benzin bu düşüşe hemen uydu. Motorin ise çok yavaş geliyor.",
+   "p": { "ikon": "🐢", "satirlar": ["BENZİN +HIZLI+", "MOTORİN ~YAVAŞ~"], "boy": 96 },
+   "etiket": "HIZ", "kaynak": "K2, K9"
+  },
+  {
+   "bolum": "neden", "tip": "soru",
+   "say": "Peki aynı petrolden çıkan iki yakıt, neden bu kadar ayrıştı?",
+   "p": { "ikon": "🤔", "metin": "AYNI PETROL\n*NEDEN AYRI FİYAT?*", "boy": 96 },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden", "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi başlıyor. İşine yaradıysa videoya bir beğen bırak.",
+   "p": { "ikon": "❤️", "satirlar": ["İŞİNE YARADIYSA", "*BİR BEĞEN BIRAK*"], "boy": 92 },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden", "tip": "akis",
+   "say": "Rafineri bir varil petrolü ayrıştırır. İçinden hem benzin hem motorin çıkar.",
+   "p": { "baslik": "Rafineride ne olur?",
+          "adimlar": [ { "ikon": "🛢️", "metin": "1 varil *ham petrol*" },
+                       { "ikon": "🏭", "metin": "Rafineride *ayrışır*" },
+                       { "ikon": "⛽", "metin": "Benzin + *motorin*" } ] },
+   "etiket": "RAFİNERİ", "kaynak": "K10"
+  },
+  {
+   "bolum": "neden", "tip": "baslik",
+   "say": "Ama bu oranı istediğin gibi değiştiremezsin. Motorin azaldı diye varil sadece motorin vermez.",
+   "p": { "ikon": "⚖️", "satirlar": ["ORANI", "*DEĞİŞTİREMEZSİN*"], "boy": 92 },
+   "etiket": "ORAN", "kaynak": "K10"
+  },
+  {
+   "bolum": "neden", "tip": "liste",
+   "say": "Dünyada motorinin iki büyük satıcısı var. Körfez ülkeleri ve Rusya.",
+   "p": { "baslik": "Motorinin büyük satıcıları",
+          "satirlar": [ { "ikon": "🏜️", "metin": "Körfez ülkeleri", "deger": "BÜYÜK SATICI", "renk": "sari" },
+                        { "ikon": "🏭", "metin": "Rusya", "deger": "BÜYÜK SATICI", "renk": "sari" } ] },
+   "etiket": "ARZ", "kaynak": "K5, K6"
+  },
+  {
+   "bolum": "neden", "tip": "akis",
+   "say": "Şubat sonunda Körfez'de savaş başladı. Hürmüz'den geçen yakıt aksadı.",
+   "p": { "baslik": "Körfez",
+          "adimlar": [ { "ikon": "💥", "metin": "Şubat sonu: *savaş*" },
+                       { "ikon": "🚢", "metin": "Hürmüz'de geçiş ~aksadı~" },
+                       { "ikon": "📉", "metin": "Körfez motorini ~azaldı~" } ] },
+   "etiket": "KÖRFEZ", "kaynak": "K5"
+  },
+  {
+   "bolum": "neden", "tip": "akis",
+   "say": "Rusya'da rafineriler saldırıya uğradı. Rusya da temmuzda motorin ihracatını yasakladı.",
+   "p": { "baslik": "Rusya",
+          "adimlar": [ { "ikon": "💥", "metin": "Rafinerilere *saldırı*" },
+                       { "ikon": "🚫", "metin": "Temmuz: ihracat ~yasağı~" },
+                       { "ikon": "📅", "metin": "Yasak *Ocak sonuna* uzadı" } ] },
+   "etiket": "RUSYA", "kaynak": "K6"
+  },
+  {
+   "bolum": "neden", "tip": "sayi",
+   "say": "Uluslararası Enerji Ajansı'na göre bu iki bölgenin motorin ihracatı, eylülde yüzde altmıştan fazla düştü.",
+   "p": { "ikon": "📉", "etiket": "Orta Doğu + Rusya · net motorin ihracatı", "deger": 60, "onek": "−%", "sonek": "+", "ondalik": 0,
+          "yon": "down", "ok_renk": "kirmizi", "renk": "kirmizi", "not": "Eylül 2026, yıllık · IEA Ekim raporu" },
+   "etiket": "IEA", "kaynak": "K7"
+  },
+  {
+   "bolum": "neden", "tip": "baslik",
+   "say": "Bu, Türkiye'yi doğrudan etkiledi. Çünkü motorinin önemli bir kısmını dışarıdan alıyoruz.",
+   "p": { "ikon": "🚢", "satirlar": ["MOTORİNİN BİR KISMI", "*İTHAL*"], "boy": 92 },
+   "etiket": "TÜRKİYE", "kaynak": "K8"
+  },
+  {
+   "bolum": "neden", "tip": "karsilastir",
+   "say": "Geçen yıl ithal motorinin yüzde seksen beşini Rusya'dan alıyorduk. Ağustosta bu pay yüzde yirmiye indi.",
+   "p": { "baslik": "Türkiye'nin motorin ithalatında Rusya'nın payı",
+          "sol": { "etiket": "2025", "deger": 85, "renk": "beyaz" },
+          "sag": { "etiket": "AĞUSTOS 2026", "deger": 20, "renk": "kirmizi" },
+          "onek": "%", "sonek": "", "ondalik": 0, "fark": "−65 puan", "not": "Eylülde %19,74 (EPDK)" },
+   "etiket": "RUSYA PAYI", "kaynak": "K8"
+  },
+  {
+   "bolum": "neden", "tip": "liste",
+   "say": "Boşluğu Hindistan ve Amerika'dan gelen motorin doldurdu. Uzak yol, taşımayı da pahalandırabilir.",
+   "p": { "baslik": "Yeni tedarikçiler · Ağustos 2026",
+          "satirlar": [ { "ikon": "🚢", "metin": "Hindistan", "deger": "REKOR ALIM", "renk": "sari" },
+                        { "ikon": "🚢", "metin": "ABD", "deger": "REKOR ALIM", "renk": "sari" } ],
+          "not": "Kaynak: Kpler gemi takip verisi" },
+   "etiket": "YENİ ROTA", "kaynak": "K8"
+  },
+  {
+   "bolum": "neden", "tip": "baslik",
+   "say": "Motorin talebi ise kolay düşmez. Tır, traktör ve iş makinesi onsuz çalışmaz.",
+   "p": { "ikon": "🚛", "satirlar": ["MOTORİN TALEBİ", "*KOLAY DÜŞMEZ*"], "boy": 96 },
+   "etiket": "TALEP", "kaynak": "K10"
+  },
+  {
+   "bolum": "neden", "tip": "akis",
+   "say": "Arz azaldı, talep aynı kaldı. Petrol ucuzlasa da motorin pahalı kaldı.",
+   "p": { "baslik": "Özetle neden",
+          "adimlar": [ { "ikon": "📉", "metin": "Arz ~azaldı~" },
+                       { "ikon": "🚛", "metin": "Talep *aynı kaldı*" },
+                       { "ikon": "💸", "metin": "Motorin ~pahalı kaldı~" } ] },
+   "etiket": "SONUÇ"
+  },
+  {
+   "bolum": "etki", "tip": "soru",
+   "say": "Peki bu senin cebine nasıl dokunur?",
+   "p": { "ikon": "💡", "metin": "BİZİ NASIL\n*ETKİLER?*", "boy": 112 },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki", "tip": "hesap",
+   "say": "Dizel arabanın elli litrelik deposunu düşün. Benzinliye göre bin iki yüz lira fazla ödüyorsun.",
+   "p": { "baslik": "Bir depo · motorin − benzin farkı", "ikon": "🚗", "ogeler": ["50 litre", "×", "24 ₺", "=", "1.200 ₺"] },
+   "etiket": "DEPO HESABI", "kaynak": "K1 · hesap: 50 × 24 = 1.200"
+  },
+  {
+   "bolum": "etki", "tip": "baslik",
+   "say": "Araban benzinliyse de tamamen kurtulmuş sayılmazsın. Çünkü yükü taşıyan kamyonlar motorin yakıyor.",
+   "p": { "ikon": "🚚", "satirlar": ["YÜK MOTORİNLE", "*TAŞINIYOR*"], "boy": 96 },
+   "etiket": "NAKLİYE"
+  },
+  {
+   "bolum": "etki", "tip": "akis",
+   "say": "Nakliye pahalanınca bu maliyet market rafına yansıyabilir.",
+   "p": { "baslik": "Zincir",
+          "adimlar": [ { "ikon": "🚚", "metin": "Nakliye ~pahalanır~" },
+                       { "ikon": "🏷️", "metin": "Maliyet ~artar~" },
+                       { "ikon": "🛒", "metin": "Rafa ~yansıyabilir~" } ] },
+   "etiket": "FİYATLAR"
+  },
+  {
+   "bolum": "etki", "tip": "baslik",
+   "say": "Tarlada da durum benzer. Traktörün yakıtı çiftçinin maliyetini artırabilir.",
+   "p": { "ikon": "🚜", "satirlar": ["ÇİFTÇİNİN", "~MAZOT FATURASI~"], "boy": 100 },
+   "etiket": "TARIM"
+  },
+  {
+   "bolum": "etki", "tip": "karsilastir",
+   "say": "İyi haber de var. Cumartesi motorine dört liraya yakın indirim bekleniyor.",
+   "p": { "baslik": "⛽ Motorin · İstanbul Avrupa · 1 litre",
+          "sol": { "etiket": "BUGÜN", "deger": 95.20, "renk": "beyaz" },
+          "sag": { "etiket": "CUMARTESİ\n(tahmini)", "deger": 91.20, "renk": "yesil" },
+          "onek": "", "sonek": " ₺", "ondalik": 2, "fark": "≈ −4 ₺ (bekleniyor)", "not": "Kesinleşmedi · sektör kaynakları" },
+   "etiket": "14 KASIM", "kaynak": "K9"
+  },
+  {
+   "bolum": "etki", "tip": "baslik",
+   "say": "Ama bu indirim gelse bile fark yirmi lira civarında kalabilir.",
+   "p": { "ikon": "⚖️", "satirlar": ["FARK YİNE", "*~20 ₺*"], "boy": 108, "not": "Tahmini: 91,20 − 71,20 · benzin de değişebilir" },
+   "etiket": "FARK", "kaynak": "K1, K9 · hesap bizim"
+  },
+  {
+   "bolum": "etki", "tip": "baslik",
+   "say": "Farkın kapanması için Körfez'de sakinlik ve Rusya yasağının bitmesi gerekebilir.",
+   "p": { "ikon": "🕊️", "satirlar": ["FARK NE ZAMAN", "*KAPANIR?*"], "boy": 100, "not": "Yorum — kesin değil · Rusya yasağı Ocak sonuna kadar" },
+   "etiket": "SONRA?", "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "etki", "tip": "baslik",
+   "say": "Bu video yatırım tavsiyesi değildir. Fiyatlar on üç Kasım itibarıyla geçerli.",
+   "p": { "ikon": "ℹ️", "satirlar": ["TAVSİYE", "*DEĞİLDİR*"], "boy": 104, "not": "Fiyatlar 13 Kasım 2026 itibarıyla · bölgeye göre değişir" },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis", "tip": "baslik",
+   "say": "Sen dizel mi kullanıyorsun, benzinli mi? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": { "ikon": "💬", "satirlar": ["ÖĞRENMEK İSTEDİĞİNİ", "*YORUMLARA YAZ*"], "boy": 88 },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis", "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": { "metin": "TIKLA *BAKALIM*", "alt": "Gündemi basitçe öğrenmek için abone ol" }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "12 Kasım 2026 İstanbul Avrupa Yakası pompa fiyatları: benzin 71,20 TL, motorin 95,20 TL — https://www.cnnturk.com/ekonomi/akaryakit-indirimi-12-kasim-guncel-benzine-motorine-mazota-indirim-mi-geldi-ne-kadar-istanbul-ankara-izmir-akaryakit-fiyatlari-son-durum-3492184 ; https://sabah.com.tr/trend/galeri/ekonomi/son-dakika-akaryakita-indirim-gelecek-mi-benzin-motorin-ve-lpg-kac-tl-olacak-iste-guncel-fiyatlar ; https://www.haberlisin.com/benzine-340-tl-indirim-geldi-motorinde-gozler-14-kasimda",
+  "K2": "Benzine 12 Kasım 2026 00:01'den itibaren 3,54 TL indirim (bazı kaynaklarda 3,40 TL); nedeni Brent'teki düşüş — https://www.timeturk.com/benzine-gece-yarisi-354-tl-indirim-geliyor-istanbulda-7106-tl-olacak ; https://ekonomi.haber7.com/ekonomi/haber/3676121-son-dakika-akaryakita-indirim-geldi-bu-geceden-itibaren-fiyatlar-degisti ; https://www.milliyet.com.tr/ekonomi/benzine-indirim-geldi-motorine-de-yapilacak-iste-beklenen-fiyatlar-7699029",
+  "K3": "Şubat 2026 başı İstanbul Avrupa: 1 Şubat benzin 55,27 / motorin 57,43 TL; 6 Şubat benzin 55,38 / motorin 57,65 TL — https://bigpara.hurriyet.com.tr/ekonomi-haberleri/galeri-akaryakit-fiyatlari-1-subat-2026-benzine-ve-motorine-mazota-zam-yada-indirim-var-mi-mazot-ve-benzin-fiyatlari-ne-kadar_ID1624246/ ; https://www.tv5.com.tr/benzine-zam-ya-da-indirim-var-mi-iste-6-subat-2026-guncel-benzin-motorin-ve-lpg-fiyatlari",
+  "K4": "Brent varil fiyatı 92 doların altında (11–12 Kasım 2026, ~91 $) — https://uzmanpara.milliyet.com.tr/uzmanpara/brent-petrolun-varili-91-dolardan-islem-goruyor-7697835 ; https://www.timeturk.com/benzine-gece-yarisi-354-tl-indirim-geliyor-istanbulda-7106-tl-olacak ; https://www.riotimesonline.com/global-economy-briefing-november-12-2026/",
+  "K5": "Körfez motorin ihracatı savaşla aksadı (Mart–Ağustos Orta Doğu dizel arz kaybı ~770 bin varil/gün) — https://www.bloomberght.com/savas-dizel-arzindaki-kayiplari-artirdi-3788854 ; https://www.ttnews.com/articles/iran-war-diesel-supply-loss ; https://en.wikipedia.org/wiki/2026_Iran_war_fuel_crisis",
+  "K6": "Rusya: rafineri saldırıları sonrası Temmuz 2026'da üreticilere motorin ihracat yasağı; 31 Ekim'de Ocak 2027 sonuna uzatıldı, sınırlı istisnalar — https://gcaptain.com/russia-extends-ban-on-most-diesel-exports-through-january/ ; https://www.bloomberg.com/news/articles/2026-10-31/russia-extends-ban-on-most-diesel-exports-through-january ; https://www.themoscowtimes.com/2026/10/29/russia-to-extend-diesel-export-ban-use-quotas-to-fulfill-us-deal-sources-say-a94128",
+  "K7": "IEA Ekim 2026 Petrol Piyasası Raporu: Orta Doğu + Rusya net dizel ihracatı Eylül'de 1,3 mb/g düşüşle 820 kb/g, yıllık %60'tan fazla düşüş — https://www.iea.org/reports/oil-market-report-october-2026 ; https://www.bloomberght.com/savas-dizel-arzindaki-kayiplari-artirdi-3788854",
+  "K8": "Türkiye motorin ithalatı: Rusya'nın payı 2025'te %85 (EPDK), Ağustos 2026'da ~%20 (Kpler); Hindistan ve ABD'den rekor alım; EPDK Eylül raporunda Rusya payı %19,74 — https://gazeteoksijen.com/ekonomi/turkiye-motorinde-rotayi-degistirdi-abd-ve-hindistandan-ithalat-rekor-kirdi-287628 ; https://hydrocarbonprocessing.com/news/2026/08/turkey-boosts-diesel-imports-from-us-india-after-russia-ban-prompts-diversification/ ; https://www.forbes.com.tr/haberler/turkiye-de-benzin-satislari-yuzde-16-8-yukseldi",
+  "K9": "Motorine 14 Kasım 2026'dan itibaren ~4 TL indirim bekleniyor (kesinleşmedi); İstanbul'da ~91,20 TL tahmini — https://www.ekovitrin.com/benzin-indiriminin-ardindan-gozler-motorinde-4-tllik-indirim-icin-tarih-belli-oldu ; https://uzmanpara.milliyet.com.tr/uzmanpara/motorine-indirim-beklentisi-motorine-ne-zaman-indirim-yapilacak-istanbul-ankara-izmir-12-kasim-guncel-akaryakit-fiyatlari-7699709 ; https://www.sehrivangazetesi.com/akaryakita-super-indirim-geldi-iste-il-il-yeni-fiyatlar",
+  "K10": "Rafineri aynı hamdan benzin ve motorin çıkarır, oran sınırlı değişir; motorin talebi (tır, traktör, iş makinesi) esnek değil — https://www.ankaragundem.com.tr/gundem/motorin-neden-benzinden-daha-pahali-iste-fiyat-makasinin-arkasindaki-4-temel-neden-5368h ; https://www.freightwaves.com/news/diesel-101-why-truck-stop-diesel-is-still-above-6-a-gallon-as-crude-falls ; https://gosonar.com/freight-market-blog/why-diesel-is-outpacing-gas-in-2026-and-winter-could-make-it-worse"
+ }
+}

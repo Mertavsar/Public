@@ -1,0 +1,573 @@
+{
+  "baslik": "Google tek günde 500 milyar dolar neden kaybetti? Yapay zekâ aramayı mı yiyor?",
+  "tarih": "2026-10-31",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "kaybetti",
+    "yavaş",
+    "düşük",
+    "eksi"
+  ],
+  "altyazi": {
+    "yaklaşık beş yüz milyar dolar": "~500 milyar $",
+    "yaklaşık yüzde on üç": "yaklaşık %13",
+    "yüzde yirmi beş": "%25",
+    "yüz yirmi yedi virgül altı": "127,6",
+    "yüzde on iki": "%12",
+    "yaklaşık yüzde on beş": "yaklaşık %15",
+    "elli bir virgül dört": "51,4",
+    "eksi dokuz virgül bir": "-9,1",
+    "yirmi dokuz Ekim": "29 Ekim",
+    "Üç soruda": "3 soruda",
+    "üç soruda": "3 soruda",
+    "Üçüncü": "Üçüncü"
+  },
+  "kapak": {
+    "ikon": "📉",
+    "ust": "GOOGLE TEK GÜNDE",
+    "buyuk": "−500 MİLYAR $",
+    "alt": "NEDEN?"
+  },
+  "cta": [
+    {
+      "sahne": 9,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Google'ın sahibi Alphabet, tek günde yaklaşık beş yüz milyar dolar kaybetti.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Alphabet piyasa değeri · 29 Ekim 2026",
+        "deger": 500,
+        "onek": "−",
+        "sonek": " milyar $",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "tek günde · yaklaşık (kaynaklarda 475–500+)",
+        "sayma": false
+      },
+      "etiket": "BİR GÜNDE",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki Google'ın kendi yapay zekâsı, kendi gelirini mi yiyor? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "YAPAY ZEKÂ\n*GELİRİ Mİ YİYOR?*",
+        "boy": 96
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Bu tür konuları her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "SADE DİLLE",
+          "HER GÜN",
+          "*ABONE OL*"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Alphabet, çarşamba günü üçüncü çeyrek bilançosunu açıkladı.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "ALPHABET",
+          "ÜÇÜNCÜ ÇEYREK",
+          "*BİLANÇO*"
+        ],
+        "boy": 90
+      },
+      "etiket": "NE OLDU",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Alphabet, Google'ın çatı şirketi. Arama, YouTube ve Gemini hep onun.",
+      "p": {
+        "ikon": "🔍",
+        "satirlar": [
+          "ALPHABET =",
+          "GOOGLE'IN",
+          "*ÇATI ŞİRKETİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "KİM?"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Karne parlaktı. Gelir yüzde yirmi beş artarak yüz yirmi yedi virgül altı milyar dolara çıktı.",
+      "p": {
+        "baslik": "Alphabet · üçüncü çeyrek",
+        "satirlar": [
+          {
+            "ikon": "💵",
+            "metin": "Gelir",
+            "deger": "127,6 milyar $",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Geçen yıla göre",
+            "deger": "+%25",
+            "renk": "yesil"
+          }
+        ],
+        "not": "28 Ekim bilançosu"
+      },
+      "etiket": "KARNE",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Ama ertesi gün hisse yaklaşık yüzde on üç düştü. Halka arzdan beri en sert gün oldu.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Alphabet hissesi · 29 Ekim",
+        "deger": 13,
+        "onek": "−%",
+        "sonek": "",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "yaklaşık · kaynaklarda %12,6–13 · 2004'ten beri en sert gün",
+        "sayma": true
+      },
+      "etiket": "HİSSE",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki yatırımcı neden bu kadar korktu?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*KORKTU?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "İŞİNE YARADIYSA",
+          "BİR *BEĞEN*",
+          "BIRAK"
+        ],
+        "boy": 90
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Önce Google nasıl para kazanıyor? Sen bir şey ararsın, firmalar reklam verir.",
+      "p": {
+        "ikon": "💰",
+        "satirlar": [
+          "SEN ARARSIN",
+          "FİRMA *REKLAM*",
+          "VERİR"
+        ],
+        "boy": 84
+      },
+      "etiket": "PARA NASIL?"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Arama reklamı Google'ın en büyük para makinesi. Bu çeyrekte arama geliri yüzde on iki arttı.",
+      "p": {
+        "baslik": "Google arama ve diğer gelirler",
+        "satirlar": [
+          {
+            "ikon": "🔎",
+            "metin": "Arama geliri",
+            "deger": "63,3 milyar $",
+            "renk": "beyaz"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Geçen yıla göre",
+            "deger": "+%12",
+            "renk": "sari"
+          }
+        ],
+        "not": "üçüncü çeyrek"
+      },
+      "etiket": "ARAMA GELİRİ",
+      "kaynak": "K1, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "say": "Ama analistler yaklaşık yüzde on beş büyüme bekliyordu.",
+      "p": {
+        "baslik": "🔎 Arama geliri büyümesi",
+        "sol": {
+          "etiket": "BEKLENTİ\n(analist)",
+          "deger": 15,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "GERÇEKLEŞEN",
+          "deger": 12,
+          "renk": "kirmizi"
+        },
+        "onek": "%",
+        "sonek": "",
+        "ondalik": 0,
+        "fark": "−3 puan",
+        "not": "beklenti yaklaşık"
+      },
+      "etiket": "BEKLENTİ",
+      "kaynak": "K1, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani para büyüyor ama beklenenden yavaş. Yatırımcı da bunu cezalandırdı.",
+      "p": {
+        "ikon": "🐢",
+        "satirlar": [
+          "PARA BÜYÜYOR",
+          "AMA *YAVAŞ*"
+        ],
+        "boy": 100
+      },
+      "etiket": "YAVAŞLADI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki arama neden yavaşladı?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "ARAMA\n*NEDEN YAVAŞLADI?*",
+        "boy": 100
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Şirketin ticari işlerden sorumlu yöneticisi bir sebebi açıkça söyledi: yapay zekâ modunda kazanç düşük.",
+      "p": {
+        "ikon": "🗣️",
+        "satirlar": [
+          "YÖNETİCİ",
+          "AÇIKÇA SÖYLEDİ:",
+          "*KAZANÇ DÜŞÜK*"
+        ],
+        "boy": 84
+      },
+      "etiket": "AÇIKLAMA",
+      "kaynak": "K5, K6"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yapay zekâ modu, Google'ın sohbet gibi cevap veren yeni arama biçimi.",
+      "p": {
+        "ikon": "🤖",
+        "satirlar": [
+          "YAPAY ZEKÂ MODU",
+          "= SOHBET GİBİ",
+          "*CEVAP VEREN ARAMA*"
+        ],
+        "boy": 76
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Zincir şöyle: kullanıcı yapay zekâya soruyor, cevap hazır geliyor, reklamdan gelen para şimdilik düşük kalıyor.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "💬",
+            "metin": "Kullanıcı yapay zekâya *soruyor*"
+          },
+          {
+            "ikon": "✅",
+            "metin": "Cevap *hazır* geliyor"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Reklam geliri *şimdilik düşük*"
+          }
+        ]
+      },
+      "etiket": "ZİNCİR",
+      "kaynak": "K5, K6"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Ama kullanıcı kaçmıyor. Google'ın patronu Pichai'ye göre arama sayısı son beş yılın en hızlı artışında.",
+      "p": {
+        "ikon": "🚀",
+        "satirlar": [
+          "KULLANICI",
+          "KAÇMIYOR",
+          "*ARAMA SAYISI ARTIYOR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "İLGİ",
+      "kaynak": "K4, K6"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani şirketin anlatımına göre sorun ilgi değil, kazanç. İlgi büyüyor, para henüz yetişmedi.",
+      "p": {
+        "ikon": "⚖️",
+        "satirlar": [
+          "SORUN İLGİ DEĞİL",
+          "*KAZANÇ*"
+        ],
+        "boy": 100
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "neden",
+      "tip": "liste",
+      "say": "Bir de masraf var. Yatırım harcaması iki katına yakın artarak elli bir virgül dört milyar dolar oldu.",
+      "p": {
+        "baslik": "Alphabet · üç aylık yatırım harcaması",
+        "satirlar": [
+          {
+            "ikon": "🏗️",
+            "metin": "Harcama",
+            "deger": "51,4 milyar $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Geçen yıla göre",
+            "deger": "+%114",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "veri merkezi ve yapay zekâ altyapısı"
+      },
+      "etiket": "MASRAF",
+      "kaynak": "K4, K7"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "say": "Kasaya girenden yatırım çıkınca, geriye eksi dokuz virgül bir milyar dolar kaldı.",
+      "p": {
+        "ikon": "🕳️",
+        "etiket": "Serbest nakit akışı · 3. çeyrek",
+        "deger": 9.1,
+        "onek": "−",
+        "sonek": " milyar $",
+        "ondalik": 1,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "kasaya giren − yatırım harcaması",
+        "sayma": true
+      },
+      "etiket": "NAKİT",
+      "kaynak": "K4, K7"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Yani Google hem yeni işe çok para harcıyor, hem eski işinden beklenenden az kazanıyor.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "YENİ İŞE *ÇOK HARCAMA*",
+          "ESKİ İŞTEN",
+          "*BEKLENENDEN AZ*"
+        ],
+        "boy": 70
+      },
+      "etiket": "İKİ BASKI"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Şirket yapay zekâ modunda reklamı genişletiyor. Gelirin zamanla düzeleceğini söylüyor. Tutup tutmayacağı belli değil.",
+      "p": {
+        "ikon": "🧪",
+        "satirlar": [
+          "REKLAM GENİŞLİYOR",
+          "GELİR ZAMANLA",
+          "*DÜZELİR Mİ?*"
+        ],
+        "boy": 80
+      },
+      "etiket": "BELİRSİZ",
+      "kaynak": "K5, K6"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin gündelik hayatına nasıl dokunur?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "SENİN\n*CEBİNE?*",
+        "boy": 120
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Aramada yapay zekâ cevapları artıyor. Bir şey ararken gördüğün reklamlar değişebilir.",
+      "p": {
+        "ikon": "📱",
+        "satirlar": [
+          "ARAMADA",
+          "YAPAY ZEKÂ CEVAPLARI",
+          "*ARTIYOR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "ARAMA"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Google ücretsiz görünüyor çünkü reklamla dönüyor. Bu model zorlanırsa, ücretli paketler gündeme gelebilir.",
+      "p": {
+        "ikon": "💳",
+        "satirlar": [
+          "ÜCRETSİZ",
+          "ÇÜNKÜ REKLAMLA DÖNÜYOR",
+          "*ÜCRETLİ PAKET GELEBİLİR*"
+        ],
+        "boy": 70
+      },
+      "etiket": "OLASILIK"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Yurt dışı hisse fonun varsa, içinde Alphabet olabilir. Fonun içeriğine bakmak iyi olur.",
+      "p": {
+        "ikon": "📂",
+        "satirlar": [
+          "YURT DIŞI FON",
+          "İÇİNDE *ALPHABET*",
+          "OLABİLİR"
+        ],
+        "boy": 84
+      },
+      "etiket": "FON"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu video yatırım tavsiyesi değil. Tek günlük düşüşe bakıp karar vermemek iyi bir kural.",
+      "p": {
+        "ikon": "🚫",
+        "satirlar": [
+          "YATIRIM",
+          "TAVSİYESİ",
+          "*DEĞİLDİR*"
+        ],
+        "boy": 90
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: Google'ın yapay zekâ araması büyüyor ama şimdilik daha az kazandırıyor. Borsa bunu cezalandırdı.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "YAPAY ZEKÂ ARAMASI",
+          "BÜYÜYOR",
+          "*KAZANÇ DÜŞÜK*"
+        ],
+        "boy": 76
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Rakamlar yirmi dokuz Ekim verilerine göre. Sonradan değişebilir.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "VERİLER",
+          "29 EKİM 2026",
+          "*SONRADAN DEĞİŞEBİLİR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Alphabet 29 Ekim 2026'da yaklaşık %12,6–13 düştü, ~475–500 milyar $ değer kaybı, 2004 halka arzından beri en sert gün — https://www.cnbc.com/2026/10/29/alphabet-google-microsoft-msft-shares-today-earnings.html ; https://finance.yahoo.com/markets/article/alphabet-heads-for-a-500-billion-drop-in-market-value-the-biggest-in-its-history-134824763.html",
+    "K2": "Aynı düşüş Türkçe kaynaklarda — https://www.haberturk.com/ekonomi/google-in-cati-sirketi-alphabet-te-tarihi-dusus-450-mslyar-dolar-silindi-3923587 ; https://n24.com.tr/sirket/alphabette-yapay-zeka-faturasi-500-milyar-dolar-kayip",
+    "K3": "Bilanço 28 Ekim 2026'da (piyasa kapanışından sonra) açıklandı — https://www.cnbc.com/2026/10/28/alphabet-googl-earnings-q3-2026.html",
+    "K4": "Gelir 127,6 milyar $ (+%25); yatırım harcaması 51,4 milyar $; Pichai: sorgu büyümesi son 5 yılın en yüksek seviyesinde — https://www.cnbc.com/2026/10/28/alphabet-googl-earnings-q3-2026.html ; https://www.investing.com/news/transcripts/earnings-call-transcript-alphabet-q3-2026-profit-miss-sparks-10-afterhours-drop-93CH-4981037",
+    "K5": "Arama ve diğer gelir +%12 (63,3 milyar $), beklenti ~%15; Schindler: AI Mode'da düşük gelir — https://www.searchenginejournal.com/google-search-growth-slows-again-ai-mode/594862/ ; https://www.medianama.com/2026/10/223-google-expand-ai-mode-ads-search-revenue-growth-slows/",
+    "K6": "AI Mode/AI Overviews'ta reklam genişletiliyor, sorgu büyümesi — https://www.medianama.com/2026/10/223-google-expand-ai-mode-ads-search-revenue-growth-slows/ ; https://ppc.land/googles-ad-growth-slows-to-10-5-as-ai-mode-ads-go-to-10-more-markets/",
+    "K7": "Yatırım harcaması +%114 (51,36 milyar $), serbest nakit akışı ≈ −9,1 milyar $ — https://www.investing.com/news/transcripts/earnings-call-transcript-alphabet-q3-2026-profit-miss-sparks-10-afterhours-drop-93CH-4981037 ; https://www.takvim.com.tr/dunya/alphabet-hisselerinde-2004ten-bu-yana-en-sert-dusus-6543427"
+  }
+}

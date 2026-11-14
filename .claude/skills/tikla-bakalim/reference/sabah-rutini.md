@@ -21,7 +21,7 @@ SABAH (rutin, kullanıcı uyurken)            KULLANICI                 AYNI OTU
 
 ```bash
 which ffmpeg || (apt-get update -q && apt-get install -y -q --no-install-recommends ffmpeg)
-python3 -c "import numpy, scipy" || pip install -q numpy scipy
+python3 -c "import numpy, scipy" || python3 -m pip install -q numpy scipy   # düz pip başka bir Python'a kurabiliyor
 ```
 
 Ortamın kurulum betiği (setup script) bunu zaten yapıyorsa atlanır.

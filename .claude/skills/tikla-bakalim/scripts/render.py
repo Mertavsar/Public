@@ -130,7 +130,18 @@ def tighten(src, dst, keep=0.13, xf=0.012):
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(sr), "-ac", "1", "-i", "-", dst],
                    input=out.tobytes(), check=True)
     print(f"  {len(gaps)} duraksama kısaltıldı · {len(x)/sr:.2f}s -> {len(out)/sr:.2f}s")
-    return dst
+    # zaman haritası: özgün t → sıkışık t. Hizalama özgün seste yapılır (duraklar net,
+    # cümle sınırları doğru), sonra buradan geçirilir. Sıkışık seste hizalama kayıyordu.
+    offs, acc = [], 0.0
+    for i, (a, b) in enumerate(segs):
+        offs.append(acc - i * xf); acc += b - a
+    o = acc - (len(segs) - 1) * xf
+    def tmap(t):
+        for (a, b), of in zip(segs, offs):
+            if t <= b:
+                return of + max(0.0, t - a)
+        return o
+    return dst, tmap
 
 
 # ---------------------------------------------------------------- zamanlama
@@ -165,14 +176,15 @@ def display_words(words, table):
     if not table:
         return words
     keys = sorted(((k.split(), v) for k, v in table.items()), key=lambda kv: -len(kv[0]))
-    norm = lambda w: re.sub(r"[.,!?;:…]+$", "", w).casefold()
+    trl = lambda w: w.replace("İ", "i").replace("I", "ı").lower()   # Türkçe küçük harf: "İki" == "iki"
+    norm = lambda w: trl(re.sub(r"[.,!?;:…]+$", "", w))
     out, i = [], 0
     while i < len(words):
         hit = None
         for ks, v in keys:
             seg = words[i:i + len(ks)]
             if len(seg) == len(ks) and len({w["p"] for w in seg}) == 1 and \
-                    [norm(w["w"]) for w in seg] == [k.casefold() for k in ks]:
+                    [norm(w["w"]) for w in seg] == [trl(k) for k in ks]:
                 hit = (len(ks), v); break
         if hit:
             n, v = hit
@@ -186,13 +198,15 @@ def display_words(words, table):
     return out
 
 
-def timeline(b, fmt, vo=None, work=None):
+def timeline(b, fmt, vo=None, work=None, align_src=None, tmap=None):
     sc = b["sahneler"]
     spoken_idx = [i for i, s in enumerate(sc) if (s.get("say") or "").strip()]
     text = " ".join(sc[i]["say"].strip() for i in spoken_idx)
     words = text.split()
     if vo:
-        items = sentalign(vo, text, b.get("vurgu", []), work)
+        items = sentalign(align_src or vo, text, b.get("vurgu", []), work)
+        if tmap:
+            items = [(w, tmap(s0), max(tmap(s0) + .05, tmap(e0)), c) for w, s0, e0, c in items]
         if len(items) != len(words):
             sys.exit(f"HATA: hizalama {len(items)} kelime döndü, metin {len(words)} kelime")
         end = max(dur_of(vo), items[-1][2]) + .5
@@ -216,6 +230,22 @@ def timeline(b, fmt, vo=None, work=None):
         else:
             t0, t1 = end, end + float(s["sure"])
             end = t1
+        p = dict(s.get("p", {}))
+        if p.get("src") and not p["src"].startswith("file://"):
+            # foto sahnesi: yol bölüm klasörüne göre; lisans .json yan dosyasından kredi satırı
+            path = os.path.join(b["_dir"], p["src"])
+            if not os.path.exists(path):
+                sys.exit(f"HATA: foto yok: {path}")
+            meta = path + ".json"
+            if os.path.exists(meta) and "kredi" not in p:
+                m = json.load(open(meta, encoding="utf-8"))
+                lic = (m.get("lisans") or [""])[0].upper().replace("CC-", "CC ").replace("-", " ")
+                if lic.startswith("PD"):
+                    lic = "Kamu malı"
+                yaz = re.sub(r"https?://\S+", "", m.get("yazar", "")).strip()
+                p["kredi"] = "Foto: " + (f"{yaz} · " if yaz else "") + f"{lic} · Wikimedia Commons"
+            p["src"] = "file://" + os.path.abspath(path)
+        s = dict(s, p=p)
         scenes.append({"t0": t0, "t1": t1, "tip": s["tip"], "bolum": s["bolum"],
                        "p": s.get("p", {}), "kaynak": s.get("kaynak"), "etiket": s.get("etiket")})
     # Abone ol / beğen çağrısı: {"sahne": N (1'den), "gecikme": sn, "sure": sn}
@@ -225,7 +255,7 @@ def timeline(b, fmt, vo=None, work=None):
         d = float(c.get("sure", 5.0))
         cta.append({"t0": round(s0, 3), "t1": round(min(s0 + d, end), 3),
                     "abone": round(s0 + 1.3, 3), "begen": round(s0 + 2.4, 3)})
-    return {"format": fmt, "gecis": b.get("gecis", True), "dur": round(end, 3), "scenes": scenes,
+    return {"format": fmt, "gecis": b.get("gecis", True), "bolum_adlari": b.get("bolum_adlari"), "ust_bant": b.get("ust_bant", False), "stil": b.get("stil"), "dunya": b.get("dunya"), "tema": b.get("tema"), "adim_atla": b.get("adim_atla"), "dur": round(end, 3), "scenes": scenes,
             "cta": cta, "words": display_words(tl_words, b.get("altyazi"))}, text
 
 
@@ -466,6 +496,7 @@ def main():
     a = ap.parse_args()
 
     b = json.load(open(a.bolum, encoding="utf-8"))
+    b["_dir"] = os.path.dirname(os.path.abspath(a.bolum))
     fmt = a.format or b.get("format", "yatay")
     base = os.path.dirname(os.path.abspath(a.bolum))
     out = a.out or os.path.join(base, "cikti", "video.mp4" if a.vo else "taslak.mp4")
@@ -481,12 +512,14 @@ def main():
         sys.exit("Durdu. Hataları düzelt.")
 
     vo = a.vo
+    align_src, tmap = None, None
     if vo and a.sikistir:
         print("   duraksama kısaltma")
-        vo = tighten(vo, f"{work}/vo_tight.wav")
+        align_src = vo
+        vo, tmap = tighten(vo, f"{work}/vo_tight.wav")
 
     print("2/7 zamanlama " + ("(sese hizalı, sentalign)" if vo else "(TAHMİNİ — ses yok, taslak)"))
-    tl, text = timeline(b, fmt, vo, work)
+    tl, text = timeline(b, fmt, vo, work, align_src, tmap)
     open(os.path.join(odir, "metin.txt"), "w", encoding="utf-8").write(
         "\n\n".join(s["say"].strip() for s in b["sahneler"] if (s.get("say") or "").strip()) + "\n")
     tl_path = os.path.join(odir, "cizelge.json")

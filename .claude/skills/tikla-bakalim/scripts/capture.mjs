@@ -24,7 +24,7 @@ const tl = JSON.parse(fs.readFileSync(args.timeline, "utf8"));
 const fps = +(args.fps || 30);
 
 
-const browser = await pw.chromium.launch();
+const browser = await pw.chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });
 const [vw, vh] = tl.format === "yatay" ? [1920, 1080] : [1080, 1920];
 const page = await browser.newPage({ viewport: { width: vw, height: vh }, deviceScaleFactor: 1 });
 page.on("pageerror", e => { console.error("SAYFA HATASI:", e.message); process.exit(2); });

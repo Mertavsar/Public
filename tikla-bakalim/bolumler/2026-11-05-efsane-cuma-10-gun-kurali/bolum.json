@@ -1,0 +1,547 @@
+{
+  "baslik": "Efsane Cuma indirimi gerçek mi? 10 gün kuralı ve sahte indirim",
+  "tarih": "2026-11-05",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "indirim",
+    "ceza",
+    "10 gün",
+    "gerçek"
+  ],
+  "altyazi": {
+    "Üç soruda": "3 soruda",
+    "yüzde seksen indirim": "%80 indirim",
+    "bir milyon liradan fazla": "1,08 milyon ₺'den fazla",
+    "on bir Kasım'da": "11 Kasım'da",
+    "yirmi yedi Kasım": "27 Kasım",
+    "yüzde otuz üç": "%33",
+    "son on dört günün": "son 14 günün",
+    "sekiz yüz liraya": "800 ₺'ye",
+    "yüzde yirmidir": "%20'dir",
+    "bin liraysa": "1.000 ₺ ise",
+    "bin beş yüze": "1.500 ₺'ye",
+    "Bin liralık": "1.000 ₺'lik",
+    "tekrar bine": "tekrar 1.000 ₺'ye",
+    "bir Ağustos'ta": "1 Ağustos'ta",
+    "on güne": "10 güne",
+    "On gün önce": "10 gün önce",
+    "eski fiyat da bin": "eski fiyat da 1.000 ₺",
+    "kırk milyon": "40 milyon",
+    "on günden": "10 günden",
+    "Not düşelim": "Not düşelim",
+    "10 Eylül": "10 Eylül"
+  },
+  "kapak": {
+    "ikon": "🏷️",
+    "ust": "EFSANE CUMA",
+    "buyuk": "İNDİRİM %80?",
+    "alt": "GERÇEK Mİ?"
+  },
+  "cta": [
+    {
+      "sahne": 14,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "etiket": "SAHTE İNDİRİM",
+      "say": "Bir internet sitesi, sepette yüzde seksen indirim dedi. Reklam Kurulu ona bir milyon liradan fazla ceza kesti.",
+      "p": {
+        "ikon": "⚖️",
+        "etiket": "Sahte indirim reklamına verilen ceza",
+        "deger": 1083706,
+        "sonek": " ₺",
+        "ondalik": 0,
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "Reklam Kurulu · 10 Eylül 2026 kararı"
+      },
+      "kaynak": "Reklam Kurulu kararı (K1)"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "etiket": "3 SORU",
+      "say": "Peki indirim ne zaman gerçek, ne zaman sahte? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "İNDİRİM\n*GERÇEK Mİ?*",
+        "boy": 120
+      }
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "etiket": "ABONE OL",
+      "say": "Alışveriş tuzaklarını sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "ALIŞVERİŞ TUZAKLARI",
+          "*SADE DİLLE*"
+        ],
+        "boy": 96
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "TAKVİM",
+      "say": "Kasım, indirim ayı. Önce on bir Kasım'da bekâr günü kampanyaları, sonra yirmi yedi Kasım cuma günü Efsane Cuma geliyor.",
+      "p": {
+        "baslik": "Kasım 2026 · büyük indirim günleri",
+        "satirlar": [
+          {
+            "ikon": "🛍️",
+            "metin": "11.11 · Çarşamba",
+            "deger": "11 Kasım",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🔥",
+            "metin": "Efsane Cuma",
+            "deger": "27 Kasım",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Bazı siteler kampanyayı daha erken başlatıyor"
+      },
+      "kaynak": "Milli Gazete, Politikam (K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "etiket": "İNDİRİM YAĞMURU",
+      "say": "Bazı siteler kampanyayı erkenden başlatıyor. Her yerde büyük indirim yazıyor.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "HER YERDE",
+          "*%50 · %70 · %80*"
+        ],
+        "boy": 96,
+        "not": "Örnek reklam ifadeleri"
+      },
+      "kaynak": "Politikam, İndigo Dergisi (K3)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "etiket": "İNDİRİM NEDİR",
+      "say": "Önce bir şeyi netleştirelim. İndirim, ürünün eski fiyatından daha ucuza satılması demek. Mesele, o eski fiyatın gerçek olup olmaması.",
+      "p": {
+        "ikon": "🏷️",
+        "satirlar": [
+          "İNDİRİM =",
+          "*ESKİ FİYATTAN*",
+          "DAHA UCUZA"
+        ],
+        "boy": 88,
+        "not": "Asıl soru: eski fiyat gerçek miydi?"
+      }
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "etiket": "KİM BAKIYOR",
+      "say": "Bu işe bakan kurum, Reklam Kurulu. Ticaret Bakanlığı bünyesinde çalışıyor ve yanıltıcı reklamlara ceza verebiliyor.",
+      "p": {
+        "ikon": "🏛️",
+        "satirlar": [
+          "REKLAM KURULU",
+          "*YANILTICI REKLAMA*",
+          "CEZA VERİR"
+        ],
+        "boy": 88,
+        "not": "Ticaret Bakanlığı"
+      },
+      "kaynak": "Ticaret Bakanlığı, basın (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "etiket": "ÖRNEK VAKA",
+      "say": "Eylülde Reklam Kurulu, bir internet sitesine yüzde seksen indirim reklamı yüzünden ceza verdi. Ürünler, söylenen yüksek fiyattan satılmamıştı.",
+      "p": {
+        "baslik": "Reklam Kurulu · 10 Eylül 2026",
+        "satirlar": [
+          {
+            "ikon": "📢",
+            "metin": "Reklam",
+            "deger": "“sepette %80 indirim”",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🔍",
+            "metin": "İnceleme",
+            "deger": "eski fiyattan satılmamış",
+            "renk": "kirmizi"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Ceza",
+            "deger": "1.083.706 ₺",
+            "renk": "kirmizi"
+          }
+        ],
+        "not": "Reklamlar durduruldu"
+      },
+      "kaynak": "Sabah, Marketing Türkiye, Gazete Oksijen (K1)"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "etiket": "İNCELEME",
+      "say": "Üstelik reklamda son on dört günün en düşük fiyatı yazıyordu. Bakanlığa göre indirimli fiyat zaten sürekli uygulanıyordu.",
+      "p": {
+        "ikon": "🕵️",
+        "satirlar": [
+          "“SON 14 GÜNÜN",
+          "EN DÜŞÜK FİYATI”",
+          "*AMA FİYAT HEP AYNI*"
+        ],
+        "boy": 80,
+        "not": "Reklam Kurulu incelemesine göre"
+      },
+      "kaynak": "Sabah, Marketing Türkiye (K1)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "etiket": "NEDEN",
+      "say": "Peki bu oyun nasıl oynanıyor?",
+      "p": {
+        "ikon": "🎭",
+        "metin": "SAHTE İNDİRİM\n*NASIL İŞLER?*",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "1. SEBEP",
+      "say": "Yöntem basit. Önce fiyat yükseltilir, sonra eski fiyatın üstü çizilir, sonra büyük bir indirim yazılır.",
+      "p": {
+        "baslik": "1. sebep · fiyat oyunu",
+        "adimlar": [
+          {
+            "ikon": "📈",
+            "metin": "Fiyat önce *yükselir*"
+          },
+          {
+            "ikon": "✂️",
+            "metin": "Eski fiyatın *üstü çizilir*"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "*Büyük indirim* yazılır"
+          }
+        ]
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "NEDEN İŞE YARAR",
+      "say": "Peki bu neden işe yarıyor? Çünkü çoğumuz geçen haftanın fiyatını hatırlamıyoruz. Üstü çizili rakam, fırsat gibi görünüyor.",
+      "p": {
+        "ikon": "🧠",
+        "satirlar": [
+          "ÇOĞU KİŞİ",
+          "*GEÇEN HAFTANIN*",
+          "FİYATINI HATIRLAMAZ"
+        ],
+        "boy": 80,
+        "not": "Yorum"
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "etiket": "ÖRNEK HESAP",
+      "say": "Örnek verelim. Bin liralık ürün bin beş yüze çıkarılıp tekrar bine indirilirse, yüzde otuz üç indirim yazar. Oysa fiyat hiç değişmedi.",
+      "p": {
+        "baslik": "Ürün aslında 1.000 ₺ idi",
+        "ikon": "🧮",
+        "ogeler": [
+          "1.500 ₺",
+          "−",
+          "1.000 ₺",
+          "=",
+          "500 ₺ “indirim”"
+        ]
+      },
+      "kaynak": "Örnek hesap: (1.500 − 1.000) ÷ 1.500 = %33,3"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "BEĞEN",
+      "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "SIRADA",
+          "*10 GÜN KURALI* VAR"
+        ],
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "neden",
+      "tip": "takvim",
+      "etiket": "2. SEBEP",
+      "say": "Bakanlık bunu durdurmak için kural getirdi. Kural, bir Ağustos'ta yürürlüğe girdi.",
+      "p": {
+        "gun": "1",
+        "ay": "AĞUSTOS",
+        "gunadi": "CUMARTESİ",
+        "saat": "2026",
+        "not": "İndirimli satış kuralı *yürürlüğe girdi*"
+      },
+      "kaynak": "Dünya, CNBC-e, NTV, Karar (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "etiket": "10 GÜN KURALI",
+      "say": "Kural şöyle: İndirim başlamadan önceki on güne bakılır. O günlerin en düşük fiyatı, eski fiyat sayılır.",
+      "p": {
+        "baslik": "10 gün kuralı",
+        "adimlar": [
+          {
+            "ikon": "📅",
+            "metin": "İndirimden önceki *10 gün*"
+          },
+          {
+            "ikon": "🔎",
+            "metin": "*En düşük* fiyat bulunur"
+          },
+          {
+            "ikon": "🏷️",
+            "metin": "O fiyat *eski fiyat* sayılır"
+          }
+        ]
+      },
+      "kaynak": "Dünya, CNBC-e, Karar (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "karsilastir",
+      "etiket": "ÖRNEĞE UYGULA",
+      "say": "Örneğe dönelim. On gün önce fiyat bindi. Kurala göre eski fiyat da bin sayılır. Yani gerçek indirim sıfır.",
+      "p": {
+        "baslik": "Örnek ürün · kurala göre",
+        "sol": {
+          "etiket": "ETİKETTEKİ\nESKİ FİYAT",
+          "deger": 1500,
+          "renk": "kirmizi"
+        },
+        "sag": {
+          "etiket": "KURALA GÖRE\nESKİ FİYAT",
+          "deger": 1000,
+          "renk": "yesil"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "fark": "gerçek indirim: 0 ₺",
+        "not": "Örnek hesap · son 10 günde fiyat 1.000 ₺ idi"
+      },
+      "kaynak": "Örnek hesap (K2 kuralı)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "sayi",
+      "etiket": "CEZA",
+      "say": "Cezalar da küçük değil. Haberlere göre, kurala uymayanlara kırk milyon liraya kadar idari para cezası verilebiliyor.",
+      "p": {
+        "ikon": "🚨",
+        "etiket": "İdari para cezası · üst sınır",
+        "deger": 40,
+        "onek": "≈",
+        "sonek": " milyon ₺",
+        "ondalik": 0,
+        "renk": "kirmizi",
+        "sayma": false,
+        "not": "*Haberlere göre* · tutar yıllık güncellenir"
+      },
+      "kaynak": "Ekonomi basını (K2)"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "etiket": "SINIR",
+      "say": "Ama kural her şeyi çözmez. Fiyat on günden önce yükseltilmişse, kural bunu yakalamayabilir.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "FİYAT 10 GÜNDEN",
+          "ÖNCE *YÜKSELDİYSE?*"
+        ],
+        "boy": 88,
+        "not": "Yorum · kuralın mantığından çıkarım"
+      },
+      "kaynak": "Kural mantığından çıkarım (K2)"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "etiket": "3. SORU",
+      "say": "Peki bu bizi nasıl etkiler?",
+      "p": {
+        "ikon": "🛒",
+        "metin": "SENİN\n*SEPETİNE* NE OLUR?",
+        "boy": 104
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "HAZIRLIK",
+      "say": "En kolay yol, önceden hazırlanmak. Almak istediğin ürünün fiyatını bugünden takip et.",
+      "p": {
+        "ikon": "📝",
+        "satirlar": [
+          "BUGÜNDEN",
+          "*FİYAT TAKİBİ*"
+        ],
+        "boy": 110
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "liste",
+      "etiket": "KONTROL LİSTESİ",
+      "say": "Üç şeye bak: ürünün bugünkü fiyatı, geçen haftaki fiyatı ve başka sitedeki fiyatı.",
+      "p": {
+        "baslik": "İndirimden önce üç kontrol",
+        "satirlar": [
+          {
+            "ikon": "📸",
+            "metin": "Bugünkü fiyat",
+            "deger": "not al",
+            "renk": "sari"
+          },
+          {
+            "ikon": "⏪",
+            "metin": "Geçen haftaki fiyat",
+            "deger": "karşılaştır",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🔀",
+            "metin": "Başka sitedeki fiyat",
+            "deger": "bak",
+            "renk": "sari"
+          }
+        ],
+        "not": "Ekran görüntüsü almak işini kolaylaştırır"
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "karsilastir",
+      "etiket": "GERÇEK İNDİRİM",
+      "say": "Gerçek indirim nasıl görünür? Ürün on gün boyunca bin liraysa ve sonra sekiz yüz liraya inerse, indirim yüzde yirmidir.",
+      "p": {
+        "baslik": "Gerçek indirim örneği",
+        "sol": {
+          "etiket": "SON 10 GÜN",
+          "deger": 1000,
+          "renk": "beyaz"
+        },
+        "sag": {
+          "etiket": "İNDİRİMLİ\nFİYAT",
+          "deger": 800,
+          "renk": "yesil"
+        },
+        "onek": "",
+        "sonek": " ₺",
+        "ondalik": 0,
+        "fark": "gerçek indirim: %20",
+        "not": "Örnek hesap: (1.000 − 800) ÷ 1.000 = %20"
+      },
+      "kaynak": "Örnek hesap"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "TOPLAM TUTAR",
+      "say": "Taksit ve kargo ücretine de bak. Önemli olan, sonunda cebinden çıkacak toplam tutar.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "KARGO + TAKSİT",
+          "*TOPLAM TUTARA*",
+          "DAHİL"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "ASIL SORU",
+      "say": "İndirim oranına değil, ödeyeceğin paraya bak. Bu ürün sana gerçekten lazım mı, onu da sor.",
+      "p": {
+        "ikon": "🤔",
+        "satirlar": [
+          "ORANA DEĞİL",
+          "*ÖDEYECEĞİN*",
+          "*PARAYA* BAK"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "etiket": "NOT",
+      "say": "Not düşelim. Bu video alışveriş tavsiyesi değildir. Kampanya tarihleri mağazaya göre değişebilir.",
+      "p": {
+        "ikon": "ℹ️",
+        "satirlar": [
+          "TARİHLER",
+          "*MAĞAZAYA GÖRE*",
+          "DEĞİŞEBİLİR"
+        ],
+        "boy": 88,
+        "not": "5 Kasım 2026 itibarıyla · alışveriş tavsiyesi değildir"
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "etiket": "YORUM",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "MERAK ETTİĞİN KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 88
+      }
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için abone ol"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Reklam Kurulu 10 Eylül 2026 (373. toplantı): 'sepette %80 indirim' / 'son 14 günün en düşük fiyatı' reklamı, 1.083.706 ₺ idari para cezası, reklamlar durduruldu — https://www.sabah.com.tr/ekonomi/yuzde-80-indirim-reklami-pahaliya-patladi-bakanlik-1-milyon-83-bin-lira-ceza-kesti-7693297 ; https://www.marketingturkiye.com.tr/haberler/sahte-indirim-reklamina-1-milyon-tl-ceza/ ; https://gazeteoksijen.com/ekonomi/ticaret-bakanligi-acikladi-yaniltici-indirim-reklamina-1-milyon-83-bin-tl-ceza-294673",
+    "K2": "Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği değişikliği (RG 1 Temmuz 2026, sayı 33297): 1 Ağustos 2026'dan itibaren indirim öncesi fiyat = indirimden önceki son 10 günün en düşük fiyatı; ceza üst sınırı haberlerde ~39,9–40 milyon ₺ — https://www.dunya.com/ekonomi/kampanyalarda-yaniltici-fiyatlarin-onune-gecilecek-indirim-oyununa-10-gun-kurali-haberi-838442 ; https://www.cnbce.com/haberler/indirim-reklamlarinda-yeni-donem-son-10-gunun-en-dusuk-fiyati-esas-alinacak-h34012 ; https://www.karar.com/ekonomi-haberleri/indirimli-satis-reklamlarinda-yeni-donem-1-agustosta-zorunlu-olacak-2062418 ; https://www.alomaliye.com/2026/09/02/indirimli-satislarda-yeni-donem/",
+    "K3": "11.11 = 11 Kasım 2026 Çarşamba; Efsane Cuma/Black Friday = 27 Kasım 2026 Cuma; bazı siteler kampanyayı erken başlattı — https://www.milligazete.com.tr/kasim-indirimleri-2026-hangi-tarihte-efsane-cuma-1111-ve-cyber-monday-takvimi ; https://www.politikam.com/1111-ve-black-friday-tarihleri-belli-oldu-kasim-ayinda-buyuk-alisveris-kampanyalari-hangi-gun-baslayacak ; https://indigodergisi.com/2026/10/kasim-indirimleri-2026/"
+  }
+}

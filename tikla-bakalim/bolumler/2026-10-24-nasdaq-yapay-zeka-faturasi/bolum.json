@@ -1,0 +1,534 @@
+{
+  "baslik": "Nasdaq bir günde neden düştü? Meta'nın yapay zekâ faturası borsayı nasıl korkuttu?",
+  "tarih": "2026-10-24",
+  "durum": "ses bekliyor",
+  "format": "yatay",
+  "vurgu": [
+    "düştü",
+    "fatura",
+    "eksi",
+    "korktu"
+  ],
+  "altyazi": {
+    "yüzde iki virgül altı": "%2,6",
+    "Yüzde iki virgül altı": "%2,6",
+    "yüzde yirmi altı": "%26",
+    "yüzde yedi": "%7",
+    "Üç soruda": "3 soruda",
+    "üç soruda": "3 soruda",
+    "yirmi iki Ekim": "22 Ekim",
+    "Yirmi iki Ekim": "22 Ekim",
+    "altmış dört virgül altı": "64,6",
+    "yüz otuz beş": "135",
+    "yüz kırk beş": "145",
+    "otuz iki virgül sekiz": "32,8",
+    "otuz dört virgül dokuz": "34,9",
+    "eksi iki virgül on iki": "-2,12"
+  },
+  "kapak": {
+    "ikon": "📉",
+    "ust": "NASDAQ BİR GÜNDE",
+    "buyuk": "−%2,6",
+    "alt": "NEDEN?"
+  },
+  "cta": [
+    {
+      "sahne": 12,
+      "gecikme": 0.3,
+      "sure": 5.5
+    }
+  ],
+  "sahneler": [
+    {
+      "bolum": "hook",
+      "tip": "sayi",
+      "say": "Nasdaq bir günde yüzde iki virgül altı düştü. Sebep, yapay zekâ faturası.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Nasdaq · 22 Ekim 2026",
+        "deger": 2.6,
+        "onek": "−%",
+        "sonek": "",
+        "ondalik": 1,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "bir günde · yaklaşık",
+        "sayma": false
+      },
+      "etiket": "BİR GÜNDE",
+      "kaynak": "K1, K2"
+    },
+    {
+      "bolum": "hook",
+      "tip": "soru",
+      "say": "Peki bir şirket harcama yaptı diye borsa neden düşer? Üç soruda anlatayım.",
+      "p": {
+        "ikon": "🤔",
+        "metin": "HARCAMA\n*NEDEN KORKUTTU?*",
+        "boy": 100
+      },
+      "etiket": "3 SORU"
+    },
+    {
+      "bolum": "hook",
+      "tip": "baslik",
+      "say": "Gündemi her gün sade dille anlatıyoruz. Abone olmayı unutma.",
+      "p": {
+        "ikon": "🔔",
+        "satirlar": [
+          "SADE DİLLE",
+          "HER GÜN",
+          "*ABONE OL*"
+        ],
+        "boy": 90
+      },
+      "etiket": "ABONE OL"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Önce ne oldu? Meta üçüncü çeyrek bilançosunu açıkladı.",
+      "p": {
+        "ikon": "📊",
+        "satirlar": [
+          "META",
+          "ÜÇÜNCÜ ÇEYREK",
+          "*BİLANÇO*"
+        ],
+        "boy": 90
+      },
+      "etiket": "NE OLDU",
+      "kaynak": "K6, K7"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Meta, Facebook, Instagram ve WhatsApp'ın sahibi. Bilanço da şirketin üç aylık karnesi.",
+      "p": {
+        "ikon": "🧾",
+        "satirlar": [
+          "BİLANÇO =",
+          "ŞİRKETİN",
+          "*ÜÇ AYLIK KARNESİ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Karne iyiydi. Gelir yüzde yirmi altı artarak altmış dört virgül altı milyar dolara çıktı.",
+      "p": {
+        "baslik": "Meta · üçüncü çeyrek",
+        "satirlar": [
+          {
+            "ikon": "💵",
+            "metin": "Gelir",
+            "deger": "64,6 milyar $",
+            "renk": "yesil"
+          },
+          {
+            "ikon": "📈",
+            "metin": "Geçen yıla göre",
+            "deger": "+%26",
+            "renk": "yesil"
+          }
+        ],
+        "not": "Gelir beklentiyi geçti"
+      },
+      "etiket": "KARNE",
+      "kaynak": "K6, K7"
+    },
+    {
+      "bolum": "ne",
+      "tip": "liste",
+      "say": "Ama şirket bu yılki harcama tahminini yüz otuz beş ile yüz kırk beş milyar dolar yaptı.",
+      "p": {
+        "baslik": "Meta · 2026 yatırım harcaması",
+        "satirlar": [
+          {
+            "ikon": "🏗️",
+            "metin": "Harcama aralığı",
+            "deger": "135–145 milyar $",
+            "renk": "sari"
+          },
+          {
+            "ikon": "🧠",
+            "metin": "Neye gidiyor?",
+            "deger": "yapay zekâ altyapısı",
+            "renk": "mavi"
+          }
+        ],
+        "not": "şirketin kendi tahmini"
+      },
+      "etiket": "HARCAMA",
+      "kaynak": "K5, K6"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Bu paranın büyük kısmı veri merkezi ve çip demek. Yapay zekâyı çalıştıran fabrikalar gibi düşün.",
+      "p": {
+        "ikon": "🏭",
+        "satirlar": [
+          "VERİ MERKEZİ",
+          "+ ÇİP",
+          "*YAPAY ZEKÂ FABRİKASI*"
+        ],
+        "boy": 76
+      },
+      "etiket": "NEYE?",
+      "kaynak": "K5"
+    },
+    {
+      "bolum": "ne",
+      "tip": "sayi",
+      "say": "Ertesi gün Meta hissesi yaklaşık yüzde yedi düştü.",
+      "p": {
+        "ikon": "📉",
+        "etiket": "Meta hissesi · 22 Ekim",
+        "deger": 7,
+        "onek": "−%",
+        "sonek": "",
+        "ondalik": 0,
+        "yon": "down",
+        "ok_renk": "kirmizi",
+        "renk": "kirmizi",
+        "not": "yaklaşık · kaynaklarda %6,98–7,5",
+        "sayma": true
+      },
+      "etiket": "META HİSSESİ",
+      "kaynak": "K3, K4"
+    },
+    {
+      "bolum": "ne",
+      "tip": "baslik",
+      "say": "Çip hisseleri de düştü. Satış, yapay zekâ zincirine yayıldı.",
+      "p": {
+        "ikon": "⛓️",
+        "satirlar": [
+          "ÇİP HİSSELERİ",
+          "DE DÜŞTÜ",
+          "*ZİNCİR SATIŞ*"
+        ],
+        "boy": 84
+      },
+      "etiket": "ZİNCİR",
+      "kaynak": "K2, K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "soru",
+      "say": "Peki yatırımcı neden korktu?",
+      "p": {
+        "ikon": "🤔",
+        "metin": "NEDEN\n*KORKTU?*",
+        "boy": 120
+      },
+      "etiket": "NEDEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Videoyu beğenirsen daha çok kişiye ulaşıyor. Kalbe dokunmayı unutma, asıl ilginç kısım şimdi.",
+      "p": {
+        "ikon": "❤️",
+        "satirlar": [
+          "BEĞENİRSEN",
+          "DAHA ÇOK KİŞİYE",
+          "*ULAŞIYOR*"
+        ],
+        "boy": 90
+      },
+      "etiket": "BEĞEN"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Önce bir terim: serbest nakit akışı. Kasaya girenden yatırım harcaması çıkınca kalan para.",
+      "p": {
+        "ikon": "💰",
+        "satirlar": [
+          "SERBEST NAKİT",
+          "AKIŞI =",
+          "*GİREN − YATIRIM*"
+        ],
+        "boy": 80
+      },
+      "etiket": "TERİM"
+    },
+    {
+      "bolum": "neden",
+      "tip": "hesap",
+      "say": "Meta üç ayda otuz iki virgül sekiz milyar dolar nakit kazandı. Otuz dört virgül dokuz milyar dolar harcadı.",
+      "p": {
+        "baslik": "Meta · üçüncü çeyrek nakit hesabı",
+        "ikon": "🧮",
+        "ogeler": [
+          "32,79 milyar $",
+          "−",
+          "34,91 milyar $",
+          "=",
+          "−2,12 milyar $"
+        ]
+      },
+      "etiket": "NAKİT HESABI",
+      "kaynak": "K6, K8 · 32,79 − 34,91 = −2,12"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Sonuç eksi iki virgül on iki milyar dolar. On yıldan uzun sürede ilk eksi çeyrek.",
+      "p": {
+        "ikon": "⚠️",
+        "satirlar": [
+          "ON YILDAN FAZLA",
+          "SÜREDE İLK",
+          "*EKSİ ÇEYREK*"
+        ],
+        "boy": 76
+      },
+      "etiket": "İLK KEZ",
+      "kaynak": "K6, K8"
+    },
+    {
+      "bolum": "neden",
+      "tip": "akis",
+      "say": "Zincir şöyle: harcama artıyor, serbest nakit eksiye düşüyor, yatırımcı getiriyi soruyor.",
+      "p": {
+        "baslik": "",
+        "adimlar": [
+          {
+            "ikon": "🏗️",
+            "metin": "Harcama *artıyor*"
+          },
+          {
+            "ikon": "💸",
+            "metin": "Serbest nakit *eksiye düştü*"
+          },
+          {
+            "ikon": "🤔",
+            "metin": "Yatırımcı: *getiri nerede?*"
+          }
+        ]
+      },
+      "etiket": "SEBEP ZİNCİRİ"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Meta ayrıca oy hakkı olmayan yeni hisse çıkaracak. Şirket, bunun yapay zekâ için para bulmaya yardım edeceğini söyledi.",
+      "p": {
+        "ikon": "🗳️",
+        "satirlar": [
+          "OY HAKKI OLMAYAN",
+          "YENİ HİSSE",
+          "*PARA BULMAK İÇİN*"
+        ],
+        "boy": 70
+      },
+      "etiket": "YENİ HİSSE",
+      "kaynak": "K7, K5"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Asıl korku şu: bu harcama kâra dönmezse ne olur? Bunu şimdi kimse kesin bilmiyor.",
+      "p": {
+        "ikon": "❓",
+        "satirlar": [
+          "HARCAMA KÂRA",
+          "DÖNMEZSE?",
+          "*KİMSE KESİN BİLMİYOR*"
+        ],
+        "boy": 76
+      },
+      "etiket": "KORKU",
+      "kaynak": "K2, K4"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bir şirketin harcaması, başka bir şirketin gelirdir. Çip satanlar bu paraya güveniyor.",
+      "p": {
+        "ikon": "💱",
+        "satirlar": [
+          "BİRİNİN HARCAMASI",
+          "BAŞKASININ GELİRİ",
+          "*ÇİP ŞİRKETLERİ*"
+        ],
+        "boy": 76
+      },
+      "etiket": "BAĞ",
+      "kaynak": "K2"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Harcama yavaşlarsa ya da para bulmak zorlaşırsa, onların geliri de baskı altına girebilir.",
+      "p": {
+        "ikon": "🔗",
+        "satirlar": [
+          "HARCAMA YAVAŞLARSA",
+          "GELİR DE",
+          "*BASKI ALTINA GİREBİLİR*"
+        ],
+        "boy": 70
+      },
+      "etiket": "OLASILIK"
+    },
+    {
+      "bolum": "neden",
+      "tip": "baslik",
+      "say": "Bu tek günlük bir tepki. Kalıcı olup olmayacağı henüz belli değil.",
+      "p": {
+        "ikon": "⏳",
+        "satirlar": [
+          "TEK GÜNLÜK",
+          "TEPKİ",
+          "*KALICI MI? BELLİ DEĞİL*"
+        ],
+        "boy": 76
+      },
+      "etiket": "BELİRSİZ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "soru",
+      "say": "Peki bu senin cebine nasıl dokunur?",
+      "p": {
+        "ikon": "💡",
+        "metin": "SANA\n*NE OLUR?*",
+        "boy": 120
+      },
+      "etiket": "ETKİ"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu masrafın bir kısmı ürünlere yansıyabilir. Yeni ücretli özellikler gelebilir. Bu bir tahmin, haber değil.",
+      "p": {
+        "ikon": "📲",
+        "satirlar": [
+          "MASRAF ÜRÜNLERE",
+          "YANSIYABİLİR",
+          "*BU BİR TAHMİN*"
+        ],
+        "boy": 76
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Yurt dışı hisse fonun varsa, içinde bu şirketler olabilir. Böyle günlerde fon da dalgalanabilir.",
+      "p": {
+        "ikon": "📉",
+        "satirlar": [
+          "YURT DIŞI",
+          "HİSSE FONU",
+          "*DALGALANABİLİR*"
+        ],
+        "boy": 84
+      },
+      "etiket": "FONLAR"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Ertesi gün Borsa İstanbul da gün içinde sert düştü. Tek sebep bu değil, ama dış piyasa baskısı da sayılıyor.",
+      "p": {
+        "ikon": "🇹🇷",
+        "satirlar": [
+          "BORSA İSTANBUL",
+          "GÜN İÇİNDE",
+          "*SERT DÜŞTÜ*"
+        ],
+        "boy": 80
+      },
+      "etiket": "TÜRKİYE",
+      "kaynak": "K9"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Bu video yatırım tavsiyesi değil. Tek günlük harekete bakıp karar vermemek iyi bir kural.",
+      "p": {
+        "ikon": "🚫",
+        "satirlar": [
+          "YATIRIM",
+          "TAVSİYESİ",
+          "*DEĞİLDİR*"
+        ],
+        "boy": 90
+      },
+      "etiket": "UYARI"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Kısacası: Meta yapay zekâya çok harcıyor, nakit eksiye geçti, borsa ürktü. Sonuç belirsiz.",
+      "p": {
+        "ikon": "✅",
+        "satirlar": [
+          "ÇOK HARCAMA",
+          "EKSİ NAKİT",
+          "*BORSA ÜRKTÜ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "ÖZET"
+    },
+    {
+      "bolum": "etki",
+      "tip": "baslik",
+      "say": "Rakamlar yirmi iki Ekim verilerine göre. Sonradan değişebilir.",
+      "p": {
+        "ikon": "📌",
+        "satirlar": [
+          "VERİLER",
+          "22 EKİM 2026",
+          "*SONRADAN DEĞİŞEBİLİR*"
+        ],
+        "boy": 80
+      },
+      "etiket": "NOT"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "baslik",
+      "say": "Sen ne düşünüyorsun? Öğrenmek istediğin başka bir konuyu yorumlara yaz, sıradaki videoda biz anlatalım.",
+      "p": {
+        "ikon": "💬",
+        "satirlar": [
+          "SIRADAKİ KONUYU",
+          "*YORUMLARA YAZ*"
+        ],
+        "boy": 90
+      },
+      "etiket": "YORUM"
+    },
+    {
+      "bolum": "kapanis",
+      "tip": "kapanis",
+      "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+      "p": {
+        "metin": "TIKLA *BAKALIM*",
+        "alt": "Gündemi basitçe öğrenmek için takip et"
+      }
+    }
+  ],
+  "kaynaklar": {
+    "K1": "Nasdaq 22 Ekim 2026'da yaklaşık %2,6 düştü (Reuters aktarımı: Haziran başından beri en sert gün), S&P 500 %1,21 — https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-drop-over-1-093849296.html ; https://www.cnbc.com/2026/10/21/stock-market-today-live-updates.html",
+    "K2": "Satışın nedeni yapay zekâ harcaması endişeleri; çip hisseleri de düştü (Nasdaq %2,68 olarak da veriliyor) — https://www.ekoturk.com/borsa/dunya-borsalari/yapay-zeka-harcamalari-wall-streette-teknoloji-hisselerini-baskiladi/ ; https://gazeteoksijen.com/ekonomi/yapay-zeka-yatirimlari-endise-yaratti-wall-streette-teknoloji-hisselerine-satis-dalgasi-basladi-293670",
+    "K3": "Meta hissesi 22 Ekim'de yaklaşık %7 düştü (kaynaklara göre %6,98–7,5) — https://www.bloomberght.com/meta-hisselerinde-harcama-planini-artirmasindan-sonra-sert-dusus-3792280",
+    "K4": "Meta hisse düşüşü ve neden — https://tr.investing.com/news/stock-market-news/meta-platforms-hissesi-neden-bugun-dusuyor-93CH-4109137 ; https://www.fxstreet.com.tr/news/meta-platformsin-hisse-bolunmesi-negatif-fcf-artan-capex-nasdaqi-asagi-cekiyor-202610221554",
+    "K5": "Meta 2026 sermaye harcaması beklentisi 135–145 milyar $; oy hakkı olmayan hisse — https://www.bloomberg.com/news/articles/2026-10-21/meta-boosts-bet-on-ai-with-new-spending-outlook-stock-offering ; https://www.aichatdaily.com/ai-business/meta-narrows-2026-capex-135b-145b-plans-nonvoting",
+    "K6": "Meta Q3 2026: gelir 64,6 milyar $ (+%26), harcama 34,91 milyar $, işletme nakdi 32,79 milyar $, serbest nakit −2,12 milyar $ — https://www.aichatdaily.com/ai-business/meta-narrows-2026-capex-135b-145b-plans-nonvoting ; https://siliconangle.com/2026/10/21/meta-beats-on-revenue-and-splits-its-stock-two-for-one-with-non-voting-class-c-shares/",
+    "K7": "Meta bilançosu 21 Ekim 2026, iki bölü bir bölünme + oy hakkı olmayan C sınıfı hisse — https://siliconangle.com/2026/10/21/meta-beats-on-revenue-and-splits-its-stock-two-for-one-with-non-voting-class-c-shares/",
+    "K8": "On yıldan uzun sürede ilk negatif serbest nakit akışı — https://cryptobriefing.com/meta-negative-free-cash-flow-ai-spending/ ; https://www.xtb.com/en/market-analysis/record-breaking-meta-though-with-a-cash-loss-investors-for-now-are-buying-zuckerberg-s-plan-anyway",
+    "K9": "BIST 100 23 Ekim'de gün içinde sert düştü; nedenler arasında küresel satış baskısı (kapanış oranı kaynaklarda farklı, ekranda yüzde verilmedi) — https://tr.euronews.com/2026/10/23/borsa-istanbulda-ciddi-dusus-bist-100-endeksi-11-bin-puanin-altina-indi ; https://www.nefes.com.tr/borsa-istanbulda-tarihi-dusus-kayiplar-yuzde-4u-asti-160089"
+  }
+}

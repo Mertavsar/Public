@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+<defs><radialGradient id="g" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff2b0"/><stop offset=".4" stop-color="#f2c94c"/><stop offset="1" stop-color="#a8701a"/></radialGradient>
+<linearGradient id="r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e53935"/><stop offset="1" stop-color="#9e1b1b"/></linearGradient>
+<symbol id="c" viewBox="-50 -50 100 100"><circle r="48" fill="#7a4e0c"/><circle r="45" fill="url(#g)"/><circle r="34" fill="none" stroke="#a8741a" stroke-width="3"/><path d="M6 -16 a18 18 0 1 0 0 32 a14 14 0 1 1 0 -32z" fill="#b8801f"/><ellipse cx="-16" cy="-20" rx="14" ry="6" fill="#fff" opacity=".35" transform="rotate(-30 -16 -20)"/><path d="M0 -60 v16" stroke="#ddd" stroke-width="3"/></symbol></defs>
+<path d="M40 60 C 300 140, 600 140, 860 60 L 860 170 C 600 250, 300 250, 40 170 Z" fill="url(#r)"/>
+<path d="M40 60 C 300 140, 600 140, 860 60" stroke="#ffcdd2" stroke-width="4" fill="none" opacity=".6"/>
+<line x1="90" y1="148.74182034503272" x2="90" y2="190.74182034503272" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="42" y="190.74182034503272" width="96" height="96" transform="rotate(6 90 238.74182034503272)"/>
+<line x1="180" y1="168.9797739440809" x2="180" y2="305.9797739440809" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="132" y="305.9797739440809" width="96" height="96" transform="rotate(-6 180 353.9797739440809)"/>
+<line x1="270" y1="183.43545508625817" x2="270" y2="225.43545508625817" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="222" y="225.43545508625817" width="96" height="96" transform="rotate(6 270 273.4354550862582)"/>
+<line x1="360" y1="192.10886377156453" x2="360" y2="329.10886377156453" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="312" y="329.10886377156453" width="96" height="96" transform="rotate(-6 360 377.10886377156453)"/>
+<line x1="450" y1="195.0" x2="450" y2="237.0" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="402" y="237.0" width="96" height="96" transform="rotate(6 450 285.0)"/>
+<line x1="540" y1="192.10886377156456" x2="540" y2="329.10886377156453" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="492" y="329.10886377156453" width="96" height="96" transform="rotate(-6 540 377.10886377156453)"/>
+<line x1="630" y1="183.43545508625817" x2="630" y2="225.43545508625817" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="582" y="225.43545508625817" width="96" height="96" transform="rotate(6 630 273.4354550862582)"/>
+<line x1="720" y1="168.9797739440809" x2="720" y2="305.9797739440809" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="672" y="305.9797739440809" width="96" height="96" transform="rotate(-6 720 353.9797739440809)"/>
+<line x1="810" y1="148.74182034503275" x2="810" y2="190.74182034503275" stroke="#d4af37" stroke-width="3"/>
+<use href="#c" x="762" y="190.74182034503275" width="96" height="96" transform="rotate(6 810 238.74182034503275)"/>
+</svg>

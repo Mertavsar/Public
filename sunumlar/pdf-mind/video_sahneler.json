@@ -1,0 +1,297 @@
+{
+ "format": "1920x1080",
+ "fps": 30,
+ "toplam_sure_sn": 205,
+ "sahneler": [
+  {
+   "id": "h1",
+   "bolum": "Hook",
+   "sure": 4,
+   "ekranlar": [
+    "13-test-soru.jpg"
+   ],
+   "kamera": "Telefon ekranı hızla büyüyerek gelir; soruya hızlı yakınlaşma",
+   "seslendirme": "Yüz sayfalık bir PDF'i iki dakikada öğrenmek ister misin?",
+   "ekran_yazisi": "100 SAYFA → 2 DAKİKA"
+  },
+  {
+   "id": "h2",
+   "bolum": "Hook",
+   "sure": 4,
+   "ekranlar": [
+    "14-test-cevap.jpg"
+   ],
+   "kamera": "'B) Su' şıkkına imleç tıklar, yeşil yanar, hafif sarsıntı",
+   "seslendirme": "PDF Mind ile özet, test ve bilgi kartı tek dokunuşta.",
+   "ekran_yazisi": "PDF MIND"
+  },
+  {
+   "id": "p1",
+   "bolum": "Problem",
+   "sure": 6,
+   "ekranlar": [],
+   "kamera": "Maskot (PDF sayfası karakteri) devasa bir PDF yığınının altında ezilir, terler",
+   "seslendirme": "Ders notları, raporlar, sözleşmeler… Okumaya vakit yok, önemli bilgi metnin içinde kayboluyor.",
+   "ekran_yazisi": "Okumaya vakit yok"
+  },
+  {
+   "id": "p2",
+   "bolum": "Problem",
+   "sure": 5,
+   "ekranlar": [],
+   "kamera": "Maskot ekranda beş ayrı uygulama simgesi arasında koşturur",
+   "seslendirme": "Özet için bir uygulama, PDF birleştirmek için başka bir uygulama…",
+   "ekran_yazisi": "5 uygulama?"
+  },
+  {
+   "id": "t1",
+   "bolum": "Tanışma",
+   "sure": 8,
+   "ekranlar": [
+    "01-ana-ekran.jpg"
+   ],
+   "kamera": "Telefon ortada, yavaş yaklaşma; üstteki Belge Tara / AI Sohbet / Özetle kartları sırayla parlar",
+   "seslendirme": "Hepsi tek yerde: PDF Mind. Yapay zekâ destekli belge asistanı.",
+   "ekran_yazisi": "Yapay Zekâ Destekli Belge Asistanı"
+  },
+  {
+   "id": "t2",
+   "bolum": "Tanışma",
+   "sure": 6,
+   "ekranlar": [
+    "01-ana-ekran.jpg"
+   ],
+   "kamera": "Kamera aşağı kayar: AI Araçları ızgarası; alt menü vurgulanır",
+   "seslendirme": "Ana ekranda yapay zekâ araçları ve dönüştürücüler; altta Araçlar, Rehber, Geçmiş ve Profil.",
+   "ekran_yazisi": "12 AI aracı + 10 belge aracı"
+  },
+  {
+   "id": "o1",
+   "bolum": "İlk açılış",
+   "sure": 6,
+   "ekranlar": [
+    "02-onboarding-1.jpg"
+   ],
+   "kamera": "Tanıtım sayfası, sağdan sola kaydırma geçişiyle",
+   "seslendirme": "İlk açılışta kısa bir tanıtım seni karşılar.",
+   "ekran_yazisi": "Akıllı PDF Analizi"
+  },
+  {
+   "id": "o2",
+   "bolum": "İlk açılış",
+   "sure": 7,
+   "ekranlar": [
+    "04-onboarding-amac.jpg"
+   ],
+   "kamera": "İmleç 'Öğrenci'ye tıklar, kart seçilir",
+   "seslendirme": "Ne için kullanacağını seçersin: öğrenci, profesyonel, araştırmacı ya da hukuk. Araçlar sana göre önerilir.",
+   "ekran_yazisi": "Sana özel öneriler"
+  },
+  {
+   "id": "a1",
+   "bolum": "AI · Özetle",
+   "sure": 10,
+   "ekranlar": [
+    "10-ozet-sonuc.jpg"
+   ],
+   "kamera": "Özet metnine kaydırma; 'Sınavda dikkat' kutusuna yakınlaşma",
+   "seslendirme": "Özetle: uzun belgeyi en önemli noktalarıyla madde madde verir; sınavda dikkat edilecekleri bile ayırır.",
+   "ekran_yazisi": "ÖZETLE"
+  },
+  {
+   "id": "a2",
+   "bolum": "AI · Sohbet",
+   "sure": 8,
+   "ekranlar": [
+    "11-sohbet-belge-sec.jpg"
+   ],
+   "kamera": "'Dosya Seç' butonuna imleç; maskot butondan zıplar",
+   "seslendirme": "PDF ile Sohbet: belgeni seç, aklına takılanı sor; cevap belgenin içinden gelir.",
+   "ekran_yazisi": "PDF İLE SOHBET"
+  },
+  {
+   "id": "a3",
+   "bolum": "AI · Derin Analiz",
+   "sure": 9,
+   "ekranlar": [
+    "12-derin-analiz.jpg"
+   ],
+   "kamera": "Analiz puanı rozetine yakınlaşma (%86 sayaçla dolar), bulgulara kaydırma",
+   "seslendirme": "Derin Analiz: anahtar bulguları ve eksikleri çıkarır, belgeye puan verir.",
+   "ekran_yazisi": "DERİN ANALİZ"
+  },
+  {
+   "id": "a4",
+   "bolum": "AI · Test",
+   "sure": 9,
+   "ekranlar": [
+    "13-test-soru.jpg"
+   ],
+   "kamera": "Soru kartı, ardından 14-test-cevap'a geçiş: doğru şık yeşil",
+   "seslendirme": "Test Hazırla: belgeden çoktan seçmeli sorular üretir, cevabını anında görürsün.",
+   "ekran_yazisi": "TEST HAZIRLA"
+  },
+  {
+   "id": "a5",
+   "bolum": "AI · Bilgi Kartları",
+   "sure": 8,
+   "ekranlar": [
+    "15-bilgi-karti.jpg"
+   ],
+   "kamera": "Kart 3D döner → 15b-bilgi-karti-arka.jpg",
+   "seslendirme": "Bilgi Kartları: önemli bilgileri soru-cevap kartlarına çevirir; dokun, çevir, ezberle.",
+   "ekran_yazisi": "BİLGİ KARTLARI"
+  },
+  {
+   "id": "a6",
+   "bolum": "AI · Boşluk Doldurma",
+   "sure": 8,
+   "ekranlar": [
+    "16-bosluk-doldurma.jpg"
+   ],
+   "kamera": "Boşluğa harf harf 'kloroplast' yazılır; zorluk rozeti vurgulanır",
+   "seslendirme": "Boşluk Doldurma: kolay, orta ya da zor; aktif hatırlamayla kalıcı öğrenme.",
+   "ekran_yazisi": "BOŞLUK DOLDURMA"
+  },
+  {
+   "id": "a7",
+   "bolum": "AI · Basitleştir",
+   "sure": 8,
+   "ekranlar": [
+    "17-basitlestir.jpg"
+   ],
+   "kamera": "'En basit haliyle' kutusuna yakınlaşma; maskot gözlüklerini çıkarır",
+   "seslendirme": "Basitleştir: karmaşık metni herkesin anlayacağı sade bir dile çevirir.",
+   "ekran_yazisi": "BASİTLEŞTİR"
+  },
+  {
+   "id": "a8",
+   "bolum": "AI · Risk Analizi",
+   "sure": 10,
+   "ekranlar": [
+    "18-risk-analizi.jpg"
+   ],
+   "kamera": "Puan %58'e kırmızıya döner; 'Madde 7' bulgusuna yakınlaşma",
+   "seslendirme": "Risk Analizi: sözleşmedeki riskli maddeleri bulur ve puanlar. İmzadan önce neye dikkat edeceğini bilirsin.",
+   "ekran_yazisi": "RİSK ANALİZİ"
+  },
+  {
+   "id": "a9",
+   "bolum": "AI · Karşılaştır",
+   "sure": 9,
+   "ekranlar": [
+    "19-karsilastir.jpg"
+   ],
+   "kamera": "'Belge A → Belge B' satırlarında ok animasyonu",
+   "seslendirme": "Döküman Karşılaştır: iki sürüm arasındaki farkları ve ortak noktaları tek raporda gösterir.",
+   "ekran_yazisi": "KARŞILAŞTIR"
+  },
+  {
+   "id": "a10",
+   "bolum": "AI · Tablo",
+   "sure": 8,
+   "ekranlar": [
+    "20-tablo.jpg"
+   ],
+   "kamera": "Tablo satırları tek tek belirir; 'Excel olarak indir' butonu parlar",
+   "seslendirme": "Tabloya Çıkar: PDF'teki tabloları bulur, Excel'e aktarmaya hazırlar.",
+   "ekran_yazisi": "TABLOYA ÇIKAR"
+  },
+  {
+   "id": "a11",
+   "bolum": "AI · Çalışma Seti",
+   "sure": 9,
+   "ekranlar": [
+    "21-calisma-seti.jpg"
+   ],
+   "kamera": "Özet / Test / Kartlar sekmeleri sırayla seçilir",
+   "seslendirme": "Çalışma Seti: tek PDF'ten özet, test ve kartlar tek seferde. Sınava hazırlanmanın en hızlı yolu.",
+   "ekran_yazisi": "ÇALIŞMA SETİ"
+  },
+  {
+   "id": "a12",
+   "bolum": "AI · Çalışma Asistanı",
+   "sure": 9,
+   "ekranlar": [
+    "22-calisma-asistani.jpg"
+   ],
+   "kamera": "'Ana Fikir' kutusu, ardından kavramlar sırayla açılır",
+   "seslendirme": "Çalışma Asistanı: konuyu özel bir öğretmen gibi adım adım anlatır, sonunda seni sınar.",
+   "ekran_yazisi": "ÇALIŞMA ASİSTANI"
+  },
+  {
+   "id": "d1",
+   "bolum": "Belge araçları",
+   "sure": 12,
+   "ekranlar": [
+    "30-tara.jpg",
+    "31-img2pdf.jpg",
+    "33-word.jpg",
+    "34-pptx.jpg"
+   ],
+   "kamera": "Hızlı montaj: her ekran 3 sn, kart çevirme geçişi",
+   "seslendirme": "Belge araçları da cebinde: kâğıdı tara, fotoğrafı PDF yap, Word'e ve PowerPoint'e dönüştür…",
+   "ekran_yazisi": "TARA · DÖNÜŞTÜR"
+  },
+  {
+   "id": "d2",
+   "bolum": "Belge araçları",
+   "sure": 10,
+   "ekranlar": [
+    "35-birlestir.jpg",
+    "36-ayir.jpg",
+    "37-sifrele.jpg",
+    "38-imza.jpg"
+   ],
+   "kamera": "Hızlı montaj; imza ekranında imza kendini çizer",
+   "seslendirme": "…birleştir, ayır, şifrele ve tek dokunuşla imzala. İmzan yalnızca cihazında işlenir.",
+   "ekran_yazisi": "BİRLEŞTİR · İMZALA"
+  },
+  {
+   "id": "k1",
+   "bolum": "Kütüphane",
+   "sure": 8,
+   "ekranlar": [
+    "40-kutuphane.jpg",
+    "41-gecmis.jpg"
+   ],
+   "kamera": "İki telefon yan yana kayar",
+   "seslendirme": "Tüm belgelerin kütüphanende, yaptığın her işlem geçmişinde; sonuçlara istediğin an dön.",
+   "ekran_yazisi": "KÜTÜPHANE · GEÇMİŞ"
+  },
+  {
+   "id": "k2",
+   "bolum": "Ayarlar",
+   "sure": 6,
+   "ekranlar": [
+    "44-ayarlar.jpg",
+    "45-sss.jpg"
+   ],
+   "kamera": "Yan yana; 'Dil Seçimi' ve SSS başlıkları vurgulanır",
+   "seslendirme": "Türkçe ve İngilizce arayüz, tema seçimi ve yardım merkezi.",
+   "ekran_yazisi": "TR · EN"
+  },
+  {
+   "id": "f1",
+   "bolum": "Ücretsiz · Pro",
+   "sure": 10,
+   "ekranlar": [
+    "01-ana-ekran.jpg"
+   ],
+   "kamera": "Ana ekrandaki Pro kartına yakınlaşma; yanında Ücretsiz/Pro tablo animasyonu",
+   "seslendirme": "Ücretsiz başla: ilk kullanım hediye, sonrası kısa bir reklamla. Pro ile reklamsız, sınırsız ve daha büyük belgeler.",
+   "ekran_yazisi": "ÜCRETSİZ BAŞLA"
+  },
+  {
+   "id": "c1",
+   "bolum": "Kapanış",
+   "sure": 8,
+   "ekranlar": [
+    "13-test-soru.jpg"
+   ],
+   "kamera": "Açılıştaki maskot şimdi PDF yığınının tepesinde oturuyor; telefon küçülür, logo",
+   "seslendirme": "Yüz sayfa artık iki dakika. PDF Mind'ı indir, ilk analizin bizden.",
+   "ekran_yazisi": "PDF MIND · App Store · Google Play"
+  }
+ ]
+}

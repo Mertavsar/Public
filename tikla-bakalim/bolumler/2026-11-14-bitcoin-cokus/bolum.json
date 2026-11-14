@@ -1,0 +1,632 @@
+{
+ "baslik": "Bitcoin neden çöktü? Rekordan yarı yarıya düşüşün 3 sebebi",
+ "tarih": "2026-11-14",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "Bitcoin",
+  "kaldıraç",
+  "likidasyon",
+  "düştü"
+ ],
+ "altyazi": {
+  "yetmiş bin doların": "70 bin doların",
+  "Üç soruda": "3 soruda",
+  "yüz yirmi altı bin doları": "126 bin doları",
+  "On üç Kasım'da": "13 Kasım'da",
+  "altmış yedi bin beş yüz dolara": "67.500 dolara",
+  "on bir bin dolar": "11 bin dolar",
+  "bir milyar iki yüz milyon dolarlık": "1,2 milyar dolarlık",
+  "yüzde sıfır virgül dört": "%0,4",
+  "sıfır virgül üç": "0,3",
+  "bir buçuk milyar dolara": "1,5 milyar dolara",
+  "Beş günde": "5 günde",
+  "Bin lirayla": "1.000 lirayla",
+  "on bin liralık": "10.000 liralık",
+  "yüzde on": "%10",
+  "bin liran": "1.000 liran",
+  "onda dokuzundan": "10'da 9'undan",
+  "üç milyondan": "3 milyondan",
+  "bin dolarlık": "1.000 dolarlık",
+  "beş yüz elli dolara": "550 dolara",
+  "dokuz Aralık'ta": "9 Aralık'ta",
+  "on üç Kasım": "13 Kasım"
+ },
+ "kapak": {
+  "ikon": "₿",
+  "ust": "BITCOIN REKORDAN",
+  "buyuk": "−%45",
+  "alt": "NEDEN ÇÖKTÜ?"
+ },
+ "cta": [
+  {
+   "sahne": 10,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Bitcoin yetmiş bin doların altına düştü. Rekorunun neredeyse yarısını kaybetti.",
+   "p": {
+    "ikon": "📉",
+    "etiket": "Bitcoin · rekordan düşüş",
+    "deger": 45,
+    "onek": "−%",
+    "sonek": "",
+    "ondalik": 0,
+    "yon": "down",
+    "renk": "kirmizi",
+    "sayma": false,
+    "not": "126.000 $ → ~69.000 $ · 13 Kasım 2026 · hesap bizim",
+    "ok_renk": "kirmizi"
+   },
+   "etiket": "ÇÖKÜŞ",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Peki bu düşüş nereden çıktı? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "BITCOIN NEDEN\n*ÇÖKTÜ?*",
+    "boy": 104
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Karışık piyasaları her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "KARIŞIK PİYASA",
+     "*SADE DİLLE*"
+    ],
+    "boy": 100
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "grafik",
+   "say": "Geçen yıl ekimde Bitcoin, yüz yirmi altı bin doları görmüştü.",
+   "p": {
+    "baslik": "₿ Bitcoin fiyatı (dolar)",
+    "noktalar": [
+     [
+      "Eki 2025",
+      126000,
+      true
+     ],
+     [
+      "Kas 2025",
+      101600
+     ],
+     [
+      "5 Kas 2026",
+      80200
+     ],
+     [
+      "13 Kas 2026",
+      69100
+     ]
+    ],
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 0,
+    "renk": "kirmizi",
+    "y_min": 60000,
+    "y_max": 130000,
+    "not": "Eksen sıfırdan başlamıyor · rekor 6 Ekim 2025"
+   },
+   "etiket": "REKOR",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "On üç Kasım'da ise fiyat yetmiş bin doların altına indi.",
+   "p": {
+    "baslik": "₿ 1 Bitcoin · dolar",
+    "sol": {
+     "etiket": "REKOR\nEKİM 2025",
+     "deger": 126000,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "13 KASIM\n2026",
+     "deger": 69100,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 0,
+    "fark": "≈ −%45",
+    "not": "Hesap bizim · 69.100 ÷ 126.000"
+   },
+   "etiket": "BUGÜN",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Gün içinde altmış yedi bin beş yüz dolara kadar geriledi.",
+   "p": {
+    "ikon": "⬇️",
+    "etiket": "Gün içi dip · 13 Kasım 2026",
+    "deger": 67500,
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 0,
+    "yon": "down",
+    "renk": "kirmizi",
+    "not": "Kaynağa göre 67.380–67.568 $",
+    "ok_renk": "kirmizi"
+   },
+   "etiket": "DİP",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Sadece bir haftada yaklaşık on bir bin dolar eridi.",
+   "p": {
+    "baslik": "₿ 1 Bitcoin · dolar · 1 hafta",
+    "sol": {
+     "etiket": "5 KASIM",
+     "deger": 80200,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "13 KASIM",
+     "deger": 69100,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 0,
+    "fark": "≈ −11.000 $",
+    "not": ""
+   },
+   "etiket": "1 HAFTA",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Bir günde bir milyar iki yüz milyon dolarlık pozisyon zorla kapatıldı.",
+   "p": {
+    "ikon": "💥",
+    "etiket": "Kripto piyasası · 24 saatte zorla kapanan",
+    "deger": 1.2,
+    "onek": "",
+    "sonek": " milyar $",
+    "ondalik": 1,
+    "yon": "down",
+    "renk": "kirmizi",
+    "not": "CoinGlass verisi · kaynağa göre 1,23–1,26 milyar $",
+    "ok_renk": "kirmizi"
+   },
+   "etiket": "24 SAAT",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki milyarlarca dolar neden bir anda buhar oldu?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "MİLYARLAR\n*NEDEN BUHAR OLDU?*",
+    "boy": 92
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. İşine yaradıysa videoya bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN BIRAK*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Birinci sebep Amerika'dan geldi. Enflasyon beklenenden yüksek çıktı.",
+   "p": {
+    "ikon": "🇺🇸",
+    "satirlar": [
+     "1. SEBEP",
+     "~ABD ENFLASYONU~"
+    ],
+    "boy": 100
+   },
+   "etiket": "SEBEP 1",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "karsilastir",
+   "say": "Ekimde fiyatlar yüzde sıfır virgül dört arttı. Beklenti sıfır virgül üçtü.",
+   "p": {
+    "baslik": "🇺🇸 ABD enflasyonu · Ekim · aylık",
+    "sol": {
+     "etiket": "BEKLENTİ",
+     "deger": 0.3,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "GERÇEKLEŞEN",
+     "deger": 0.4,
+     "renk": "kirmizi"
+    },
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "fark": "beklentinin üstünde",
+    "not": "Açıklama: 10 Kasım 2026"
+   },
+   "etiket": "ENFLASYON",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Fiyatlar inmeyince Amerika Merkez Bankası faizi artırabilir. Piyasa aralıkta artırım bekliyor.",
+   "p": {
+    "baslik": "Zincir",
+    "adimlar": [
+     {
+      "ikon": "🔥",
+      "metin": "Enflasyon ~inmiyor~"
+     },
+     {
+      "ikon": "🏦",
+      "metin": "Fed faizi *artırabilir*"
+     },
+     {
+      "ikon": "📅",
+      "metin": "Aralık: artırım *bekleniyor*"
+     }
+    ]
+   },
+   "etiket": "FED",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Faiz artınca bankadaki dolar bile kazandırır. Riskli varlıklar cazibesini kaybeder.",
+   "p": {
+    "ikon": "⚖️",
+    "satirlar": [
+     "FAİZ ARTARSA",
+     "RİSK ~CAZİBE KAYBEDER~"
+    ],
+    "boy": 88
+   },
+   "etiket": "RİSK",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "İkinci sebep büyük fonlar. Beş günde Bitcoin fonlarından bir buçuk milyar dolara yakın para çıktı.",
+   "p": {
+    "ikon": "🏦",
+    "etiket": "ABD Bitcoin ETF'leri · 5–11 Kasım · net çıkış",
+    "deger": 1.44,
+    "onek": "−",
+    "sonek": " milyar $",
+    "ondalik": 2,
+    "yon": "down",
+    "renk": "kirmizi",
+    "not": "Her gün çıkış · Farside verisi",
+    "ok_renk": "kirmizi"
+   },
+   "etiket": "SEBEP 2",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu fonlar, borsadan Bitcoin almanın kolay yolu. Satış gelince fiyat baskılanır.",
+   "p": {
+    "ikon": "🧺",
+    "satirlar": [
+     "ETF = BORSADAN",
+     "*BITCOIN SEPETİ*"
+    ],
+    "boy": 92
+   },
+   "etiket": "ETF NEDİR?",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Üçüncü sebep ise en büyüğü. Adı kaldıraç.",
+   "p": {
+    "ikon": "🎢",
+    "satirlar": [
+     "3. SEBEP",
+     "*KALDIRAÇ*"
+    ],
+    "boy": 112
+   },
+   "etiket": "SEBEP 3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "hesap",
+   "say": "Kaldıraç, borçla büyük oynamak demek. Bin lirayla, on bin liralık işlem açarsın.",
+   "p": {
+    "baslik": "Kaldıraç nasıl çalışır? (temsili)",
+    "ikon": "🎢",
+    "ogeler": [
+     "1.000 ₺",
+     "×",
+     "10 kat",
+     "=",
+     "10.000 ₺"
+    ]
+   },
+   "etiket": "KALDIRAÇ",
+   "kaynak": "Temsili örnek · hesap bizim"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Fiyat yüzde on düşerse ne olur? Kendi bin liran tamamen gider.",
+   "p": {
+    "baslik": "10.000 ₺'lik işlem · temsili",
+    "adimlar": [
+     {
+      "ikon": "📉",
+      "metin": "Fiyat ~%10 düşer~"
+     },
+     {
+      "ikon": "➖",
+      "metin": "Zarar ~1.000 ₺~"
+     },
+     {
+      "ikon": "🫙",
+      "metin": "Senin paran ~sıfır~"
+     }
+    ]
+   },
+   "etiket": "%10 DÜŞÜŞ",
+   "kaynak": "Temsili · 10.000 × %10 = 1.000 · masraflar hariç"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Borsa o an işlemini zorla kapatır. Buna likidasyon deniyor.",
+   "p": {
+    "ikon": "🔨",
+    "satirlar": [
+     "ZORLA KAPATMA",
+     "= *LİKİDASYON*"
+    ],
+    "boy": 100
+   },
+   "etiket": "LİKİDASYON",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Zorla satış fiyatı biraz daha düşürür. Bu da sıradaki kişiyi patlatır.",
+   "p": {
+    "baslik": "Domino etkisi",
+    "adimlar": [
+     {
+      "ikon": "🔨",
+      "metin": "Zorla *satış*"
+     },
+     {
+      "ikon": "📉",
+      "metin": "Fiyat ~düşer~"
+     },
+     {
+      "ikon": "💥",
+      "metin": "Yeni *likidasyon*"
+     },
+     {
+      "ikon": "🔁",
+      "metin": "Döngü ~hızlanır~"
+     }
+    ]
+   },
+   "etiket": "DOMİNO"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "O gün kapatılanların onda dokuzundan fazlası, yükseliş bekleyenlerdi.",
+   "p": {
+    "ikon": "🐂",
+    "etiket": "Zorla kapatılanlar içinde yükseliş bekleyenlerin payı",
+    "deger": 90,
+    "onek": "%",
+    "sonek": "+",
+    "ondalik": 0,
+    "renk": "kirmizi",
+    "not": "Kaynağa göre %90–96 · CoinGlass"
+   },
+   "etiket": "YÜKSELİŞÇİLER",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Özetle: enflasyon korkuttu, fonlar sattı, kaldıraç düşüşü hızlandırdı.",
+   "p": {
+    "baslik": "Özetle neden",
+    "adimlar": [
+     {
+      "ikon": "🇺🇸",
+      "metin": "Enflasyon ~korkuttu~"
+     },
+     {
+      "ikon": "🏦",
+      "metin": "Fonlar ~sattı~"
+     },
+     {
+      "ikon": "🎢",
+      "metin": "Kaldıraç ~hızlandırdı~"
+     }
+    ]
+   },
+   "etiket": "SONUÇ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin cebine nasıl dokunur?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Türkiye'de üç milyondan fazla kişinin kripto hesabında bakiyesi var.",
+   "p": {
+    "ikon": "🇹🇷",
+    "etiket": "Kripto hesabında bakiyesi olan kişi · Türkiye",
+    "deger": 3.2,
+    "onek": "",
+    "sonek": " milyon",
+    "ondalik": 1,
+    "renk": "sari",
+    "not": "MKK · Temmuz 2026 · toplam işlem yapan 5,6 milyon"
+   },
+   "etiket": "TÜRKİYE",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Rekorda bin dolarlık Bitcoin alan, bugün beş yüz elli dolara yakın görüyor.",
+   "p": {
+    "baslik": "Rekorda alınan 1.000 $'lık Bitcoin bugün",
+    "ikon": "₿",
+    "ogeler": [
+     "1.000 $",
+     "×",
+     "69.100 ÷ 126.000",
+     "=",
+     "≈ 548 $"
+    ]
+   },
+   "etiket": "HESAP",
+   "kaynak": "K1, K2 · hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "En sert darbeyi kaldıraç kullananlar aldı. Küçük bir düşüşte her şeyi kaybedebiliyorlar.",
+   "p": {
+    "ikon": "⚠️",
+    "satirlar": [
+     "KALDIRAÇ",
+     "~HER ŞEYİ GÖTÜREBİLİR~"
+    ],
+    "boy": 92
+   },
+   "etiket": "DİKKAT",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "etki",
+   "tip": "takvim",
+   "p": {
+    "gun": "9",
+    "ay": "ARALIK",
+    "gunadi": "ÇARŞAMBA",
+    "saat": "22:00 TSİ",
+    "not": "*Fed faiz kararı* (bekleniyor)"
+   },
+   "say": "Sıradaki kritik gün dokuz Aralık'ta. Amerika'nın faiz kararı açıklanacak.",
+   "etiket": "SIRADAKİ",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Artırım gelirse baskı sürebilir. Ama kimse yönü kesin bilemez.",
+   "p": {
+    "ikon": "🔮",
+    "satirlar": [
+     "YÖN",
+     "*KESİN DEĞİL*"
+    ],
+    "boy": 108,
+    "not": "Yorum — tahmin değildir"
+   },
+   "etiket": "SONRA?"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video yatırım tavsiyesi değildir. Rakamlar on üç Kasım itibarıyla geçerli.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "TAVSİYE",
+     "*DEĞİLDİR*"
+    ],
+    "boy": 104,
+    "not": "Fiyatlar 13 Kasım 2026 itibarıyla · anlık değişir"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sen bu düşüşü nasıl yorumluyorsun? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "Bitcoin fiyatı: 5 Kasım 2026 80.221 $, 12 Kasım 73.208 $, 13 Kasım sabahı ~69.135 $; bir yıl önce ~101.600 $ — https://fortune.com/article/price-of-bitcoin-11-13-2026/ ; https://fortune.com/article/price-of-bitcoin-11-05-2026/ ; https://fortune.com/article/price-of-bitcoin-11-12-2026/ ; https://www.kucoin.com/news/flash/bitcoin-falls-below-69-000-amid-liquidations-and-weaker-demand",
+  "K2": "Bitcoin rekoru 6 Ekim 2025: ~126.080–126.210 $; 13 Kasım 2026 70 bin $ altı (Coinbase 69.212 $), gün içi dip 67.380–67.568 $ — https://www.bloomberg.com/news/articles/2025-10-06/bitcoin-bitcoin-hovers-near-record-after-topping-125-000-on-sunday ; https://www.kucoin.com/news/flash/bitcoin-s-126-210-all-time-high-turns-one-year-old ; https://www.endeks24.com/bitcoin-70-bin-dolarin-altina-indi-19-agustos-tan-beri-en-dusuk-duzeyde ; https://www.cryptotimes.io/2026/11/14/bitcoin-price-today-btc-slides-to-67k-as-1-26b-crypto-liquidations-hit-longs-fed-hike-bets-rise/ ; https://kucoin.com/tr/news/flash/bitcoin-price-rebounds-above-69k-after-selloff-as-72k-liquidity-builds",
+  "K3": "13 Kasım 2026, 24 saatte kripto likidasyonu ~1,23–1,26 milyar $ (CoinGlass); büyük çoğunluğu yükseliş (long) pozisyonu — Bitcoin'de %96,4, toplamda ~%90 — https://www.cryptotimes.io/2026/11/14/bitcoin-price-today-btc-slides-to-67k-as-1-26b-crypto-liquidations-hit-longs-fed-hike-bets-rise/ ; https://adbytes.media/blog/bitcoin-falls-below-70000-as-crypto-liquidations-top-12-billion-and-etf-outflows-mount ; https://www.kucoin.com/news/flash/bitcoin-falls-below-69-000-amid-liquidations-and-weaker-demand ; https://decrypt.co/383214/bitcoin-drops-to-69k-on-concentrated-liquidation-and-weakening-demand",
+  "K4": "ABD Ekim 2026 TÜFE (10 Kasım): aylık %0,4, beklenti %0,3 — https://abc7ny.com/story/consumer-prices-increased-04-october-higher-expected/20029965/ ; https://www.vinetur.com/en/amp/20261111110822/us-consumer-prices-rose-04-in-october-after-septembers-faster-gain.html ; https://www.bls.gov/news.release/cpi.htm",
+  "K5": "Fed 8–9 Aralık 2026 toplantısı; 25 baz puan artış ihtimali ~%85–88 (CME FedWatch) — https://au.investing.com/news/economy-news/fed-rate-hike-odds-in-december-at-88-after-hot-cpi-cme-fedwatch-4760506 ; https://econcurrents.substack.com/p/13-november-2026-market-close-and ; https://www.fxstreet.com.tr/news/aralik-fed-faiz-artirimi-icin-oybirligiyle-beklenti-25-baz-puan-reuters-anketi-202611101326",
+  "K6": "ABD spot Bitcoin ETF'leri: 5–11 Kasım 2026 her gün net çıkış, toplam 1,438 milyar $ (Farside); 12 Kasım altıncı gün çıkış 284 milyon $ (SoSoValue) — https://decrypt.co/383122/bitcoin-etfs-bleed-1-4b-in-five-days-as-investors-cut-risk ; https://www.goodman-macro.com/en/articles/20261113-crypto-flows/ ; https://www.coindesk.com/markets/2026/11/11/bitcoin-sits-out-stock-rebound-as-etf-outflows-extend-to-fourth-day",
+  "K7": "MKK (Temmuz 2026): Türkiye'de kripto platformlarında işlem yapan ~5,6 milyon, aktif bakiyesi olan ~3,2 milyon kişi — https://webrazzi.com/2026/07/16/turkiye-kripto-varlik-piyasasinin-guncel-verileri ; https://www.forbes.com.tr/ekonomi/turkiye-de-kripto-varlik-yatirimci-sayisi-ilk-kez-aciklandi"
+ }
+}
