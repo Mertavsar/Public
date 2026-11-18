@@ -8,7 +8,7 @@
 <meta name="description" content="Buyurun, Lahm-ı Acîn yemeye. Durum buğdayı unu, Balıkesir kuzusu, Urfa taşından fırın. Kuzu Lahmacun & Kilis Tava, Erenköy.">
 <meta name="theme-color" content="#0b5236">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" href="logo.svg" as="image" type="image/svg+xml">
+<link rel="preload" href="logo-beyaz.svg" as="image" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Kaushan+Script&display=swap">
@@ -66,7 +66,7 @@ a { color: inherit; }
 
 /* ── Logo (vector, from the brand's own artwork: sharp at any size) ── */
 .brand { display: inline-block; line-height: 0; text-decoration: none; }
-.brand img { display: block; height: 100%; width: auto; aspect-ratio: 1822 / 869; }
+.brand img { display: block; height: 100%; width: auto; aspect-ratio: 3168 / 1203; }
 
 /* ── Fixed bar ── */
 .topbar {
@@ -77,7 +77,7 @@ a { color: inherit; }
   transition: background-color .3s ease, box-shadow .3s ease;
 }
 body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgba(244, 239, 225, .12); }
-.topbar .brand { height: 52px; opacity: var(--brand-o, 1); }
+.topbar .brand { height: 40px; opacity: var(--brand-o, 1); }
 .topbar nav { display: flex; align-items: center; gap: 4px; }
 .topbar nav a.nav { font-weight: 700; font-size: .9rem; text-decoration: none; padding: 10px 12px; border-radius: 999px; }
 .topbar nav a.nav:hover { background: rgba(244, 239, 225, .12); }
@@ -140,7 +140,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   background: radial-gradient(ellipse 75% 65% at 50% 50%, rgba(10, 9, 7, .62) 0%, rgba(10, 9, 7, .9) 100%);
   will-change: opacity, transform;
 }
-.intro .logo { display: block; width: clamp(150px, min(19vw, 30vh), 280px); height: auto; aspect-ratio: 1822 / 869; margin-bottom: .9rem; box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .7); }
+.intro .logo { display: block; width: clamp(190px, min(24vw, 38vh), 360px); height: auto; aspect-ratio: 3168 / 1203; margin-bottom: 1.1rem; filter: drop-shadow(0 6px 24px rgba(0, 0, 0, .6)); }
 .intro .script { font-size: clamp(2.6rem, min(7vw, 11vh), 5.6rem); line-height: 1; color: var(--cream); }
 .intro h1 { font-size: clamp(2.2rem, min(8.4vw, 13vh), 7.6rem); color: var(--cream); text-shadow: 0 6px 40px rgba(0, 0, 0, .6); }
 .intro h1 em { font-style: normal; color: var(--tomato); }
@@ -188,7 +188,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 @media (max-width: 1099px) { .rail-wrap { display: none; } }
 
 @media (max-width: 760px) {
-  .topbar .brand { height: 40px; }
+  .topbar .brand { height: 32px; }
   .topbar nav a.nav { display: none; }
   .overlay { padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
   .chap h2 { font-size: clamp(1.45rem, 6.6vw, 2rem); margin: .55rem 0 .15rem; }
@@ -284,76 +284,66 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 
 /* ── Menü ── */
 .menu { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green); padding-block: clamp(80px, 11vw, 140px); }
-/* dishes: the lahmacun is the hero tile; the rest are smaller. A dish without its own photo yet
-   shows the oven mark from the logo instead of a stock picture. */
-.dishes { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.dish.feature { grid-column: 1 / -1; }
-@media (min-width: 900px) { .dishes { grid-template-columns: repeat(4, minmax(0, 1fr)); } .dish.feature { grid-column: span 2; grid-row: span 2; } }
-.dish {
-  background: var(--paper), var(--cream); color: var(--ink); border-radius: 16px; overflow: hidden; min-width: 0;
-  display: grid; grid-template-rows: auto 1fr; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .55);
-}
-.dish .ph { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--green-deep); }
-.dish.feature .ph { aspect-ratio: 16 / 10; }
-@media (min-width: 900px) { .dish.feature { grid-template-rows: 1fr auto; } .dish.feature .ph { aspect-ratio: auto; height: 100%; min-height: 320px; } }
-.dish .ph.empty { display: grid; place-items: center; color: rgba(244, 239, 225, .22); background: radial-gradient(ellipse at 50% 120%, var(--green-hi), var(--green-deep) 70%); }
-.dish .ph.empty svg { width: 42%; height: auto; }
-.dish-body { padding: 18px 20px 20px; display: grid; gap: 12px; align-content: start; }
-.dish.feature .dish-body { padding: 24px 28px 28px; }
-.dish h3 { margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 112; text-transform: uppercase; font-size: 1.25rem; line-height: 1; color: var(--green); }
-.dish.feature h3 { font-size: clamp(2rem, 4vw, 2.8rem); }
-.dish-body p { margin: 0; color: var(--ink-dim); }
-.dish-body.row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
-.dish .price { font-family: var(--f-display); font-weight: 900; font-size: 1.25rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.dish .ph.empty svg { display: block; }
+.cards { display: grid; gap: 20px; }
+@media (min-width: 900px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+.card { background: var(--paper), var(--cream); color: var(--ink); border-radius: 14px; padding: 22px 22px 26px; display: grid; gap: 18px; align-content: start; min-width: 0; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .55); }
+.card .tag { font-size: 1.05rem; justify-self: start; margin-left: -6px; }
+.menu-note { margin: 28px 0 0; color: var(--cream-dim); }
 .prices { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .prices li { display: flex; align-items: baseline; gap: 8px; font-weight: 700; font-size: 1.08rem; }
 .prices .dots { flex: 1; min-width: 20px; border-bottom: 3px dotted rgba(20, 20, 20, .55); transform: translateY(-5px); }
 .prices b { font-family: var(--f-display); font-weight: 900; font-size: 1.25rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .menu-note { margin: 28px 0 0; color: var(--cream-dim); }
 
-/* ── Galeri ── */
-.galeri { background: var(--stone); padding-block: clamp(80px, 11vw, 140px); }
-.bento { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 46vw; }
-.g { position: relative; margin: 0; border-radius: 14px; overflow: hidden; background: #2a2622; min-width: 0; }
-.g1, .g4 { grid-column: 1 / -1; }
-.g1 { grid-row: span 2; }
-@media (min-width: 900px) {
-  .bento { gap: 16px; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: clamp(220px, 21vw, 380px); }
-  .g1 { grid-column: span 7; grid-row: span 2; }
-  .g2, .g3 { grid-column: span 5; }
-  .g4 { grid-column: 1 / -1; grid-row: span 1; }
+/* ── Galeri: full-bleed slider; the active photo is centred, its neighbours peek in ── */
+.galeri { background: var(--stone); padding-block: clamp(80px, 11vw, 140px); --slide-w: min(84vw, 1400px); }
+.gal-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.gal-head .sec-head { margin-bottom: clamp(28px, 4vw, 48px); }
+.gal-ctrl { display: flex; align-items: center; gap: 10px; margin-bottom: clamp(28px, 4vw, 48px); }
+.gal-count { font-family: var(--f-display); font-weight: 800; letter-spacing: .14em; font-size: .9rem; color: var(--cream-dim); font-variant-numeric: tabular-nums; margin-right: 8px; }
+.gal-btn { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(244, 239, 225, .35); background: none; color: var(--cream); cursor: pointer; display: grid; place-items: center; transition: background-color .2s ease, border-color .2s ease; }
+.gal-btn:hover { background: var(--cream); color: var(--stone); border-color: var(--cream); }
+.gal-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.slider {
+  position: relative; display: flex; gap: clamp(12px, 1.6vw, 22px); overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
+  padding-inline: calc((100% - var(--slide-w)) / 2);
 }
-.gi { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
-.gi img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.001); transition: transform 1.1s cubic-bezier(.2, .7, .2, 1), filter .6s ease; }
-.g:hover .gi img { transform: scale(1.05); }
-.g figcaption {
-  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none; display: grid; gap: 2px;
-  padding: 48px clamp(14px, 2vw, 26px) clamp(12px, 1.6vw, 22px);
-  background: linear-gradient(to top, rgba(10, 9, 7, .82), rgba(10, 9, 7, 0));
+.slider::-webkit-scrollbar { display: none; }
+.slider:focus-visible .slide.is-active { outline: 3px solid var(--tomato); outline-offset: 4px; }
+.slide {
+  position: relative; flex: 0 0 var(--slide-w); margin: 0; aspect-ratio: 16 / 9; max-height: 80vh; max-height: 80dvh;
+  border-radius: 18px; overflow: hidden; background: #2a2622; scroll-snap-align: center; scroll-snap-stop: always;
+  opacity: .45; transition: opacity .6s ease;
 }
-.g figcaption .script { font-size: clamp(1.25rem, 2.2vw, 2rem); line-height: 1.05; color: #fff; }
-.g figcaption small { font-weight: 700; font-size: clamp(.68rem, .9vw, .78rem); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
-.g::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(244, 239, 225, .1); pointer-events: none; }
-@media (max-width: 899px) {
-  .g2 figcaption small, .g3 figcaption small { display: none; }
-  .g2 figcaption, .g3 figcaption { padding: 32px 12px 10px; }
-  .g2 figcaption .script, .g3 figcaption .script { font-size: 1.05rem; }
+.slide.is-active { opacity: 1; }
+.slide .gi { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.slide img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 1.6s cubic-bezier(.2, .7, .2, 1); }
+.slide.is-active img { transform: scale(1); }
+.slide figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none; display: grid; gap: 4px;
+  padding: 80px clamp(18px, 3vw, 40px) clamp(16px, 2.4vw, 34px);
+  background: linear-gradient(to top, rgba(10, 9, 7, .85), rgba(10, 9, 7, 0));
+  opacity: 0; transform: translateY(12px); transition: opacity .6s ease .2s, transform .7s ease .2s;
 }
-/* reveal: each tile rises in once as it enters the screen */
-.js-reveal .g { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
-.js-reveal .g.in { opacity: 1; transform: none; }
-.js-reveal .g2 { transition-delay: .08s; } .js-reveal .g3 { transition-delay: .16s; } .js-reveal .g4 { transition-delay: .1s; }
-.gal { columns: 2 220px; column-gap: 14px; margin-top: 16px; }
-@media (min-width: 900px) { .gal { columns: 4 240px; } }
-.gal .gi { height: auto; }
-.gal button {
-  display: block; width: 100%; margin: 0 0 14px; padding: 0; border: 0; border-radius: 12px; overflow: hidden;
-  background: #2a2622; cursor: zoom-in; break-inside: avoid; position: relative;
+.slide.is-active figcaption { opacity: 1; transform: none; }
+.slide figcaption .script { font-size: clamp(1.6rem, 3.4vw, 3rem); line-height: 1; color: #fff; }
+.slide figcaption small { font-weight: 700; font-size: clamp(.7rem, 1vw, .82rem); letter-spacing: .16em; text-transform: uppercase; color: var(--cream-dim); }
+.slide::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(244, 239, 225, .1); pointer-events: none; }
+@media (max-width: 760px) {
+  .galeri { --slide-w: 86vw; }
+  .slide { aspect-ratio: 4 / 3; border-radius: 14px; }
+  .gal-btn { width: 44px; height: 44px; }
 }
-.gal img { display: block; width: 100%; height: auto; transition: transform .5s ease; }
-.gal button:hover img { transform: scale(1.04); }
-.gal:empty { display: none; }
+/* progress: the active bar fills while the slide shows; autoplay moves on when it is full */
+.gal-dots { display: flex; gap: 8px; margin-top: 22px; justify-content: center; }
+.gal-dots button { width: 34px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; align-items: center; }
+.gal-dots i { display: block; height: 3px; border-radius: 3px; background: rgba(244, 239, 225, .22); overflow: hidden; transition: background-color .3s ease; }
+.gal-dots button.is-active { width: 64px; }
+.gal-dots button.is-active i::after { content: ""; display: block; height: 100%; width: 100%; background: var(--tomato); transform-origin: left; animation: galFill var(--gal-ms, 6000ms) linear forwards; }
+.galeri.paused .gal-dots i::after { animation-play-state: paused; }
+.galeri.static .gal-dots i::after { animation: none; }
+@keyframes galFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .sec-foot { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
 .sec-foot .src { color: inherit; opacity: .65; font-size: .82rem; }
 
@@ -434,7 +424,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   margin-top: clamp(72px, 9vw, 120px); padding-top: 24px; border-top: 2px solid rgba(244, 239, 225, .18);
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; color: var(--cream-dim); font-size: .85rem; width: 100%;
 }
-.foot .brand { height: 68px; }
+.foot .brand { height: 56px; }
 
 /* ── Lab (internal: only with #dene) ── */
 .lab { margin-top: 40px; padding: 20px; border: 2px dashed rgba(244, 239, 225, .35); border-radius: 12px; display: grid; gap: 12px; max-width: 46rem; text-align: left; }
@@ -448,7 +438,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .cue i, .marquee div { animation: none; }
-  .js-reveal .g { opacity: 1; transform: none; transition: none; }
+  .slide, .slide img, .slide figcaption { transition: none; }
   .chap { transition: none; }
 }
 </style>
@@ -457,13 +447,6 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 <div class="site" lang="tr">
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="ovenmark" viewBox="0 17 120 63">
-      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M8 74a52 52 0 0 1 104 0"/><path d="M27 74a33 33 0 0 1 66 0"/><path d="M4 76h112"/>
-        <path d="M27.6 66.5 9.5 61M33.7 52.6 18.8 41M45 42.8 37.4 26M60 41V22.5M75 42.8 82.6 26M86.3 52.6l14.9-11.6M92.4 66.5l18.1-5.5"/>
-      </g>
-      <path fill="currentColor" d="M60 50c5 6 9 9.5 9 15a9 9 0 0 1-18 0c0-3.6 2-5.6 3.6-7.4.3 2.6 1.6 4 3 4.4-.8-4.4.5-8.4 2.4-12Z"/>
-    </symbol>
     <defs>
       <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0 0 10 5 0 10z" fill="#f4efe1"/>
@@ -472,7 +455,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   </svg>
 
   <header class="topbar" id="topbar">
-    <a class="brand" href="#track" aria-label="Kuzu Lahmacun — başa dön"><img src="logo.svg" alt="Kuzu Lahmacun" width="97" height="46"></a>
+    <a class="brand" href="#track" aria-label="Kuzu Lahmacun — başa dön"><img src="logo-beyaz.svg" alt="Kuzu Lahmacun" width="105" height="40"></a>
     <nav aria-label="Bölümler">
       <a class="nav" href="#hikaye">Hikâye</a>
       <a class="nav" href="#sir">Sır</a>
@@ -497,7 +480,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <div id="labels" aria-hidden="true"></div>
 
       <div class="intro" id="hero">
-        <img class="logo" src="logo.svg" alt="Kuzu Lahmacun" width="280" height="134" fetchpriority="high">
+        <img class="logo" src="logo-beyaz.svg" alt="Kuzu Lahmacun" width="360" height="137" fetchpriority="high">
         <p class="script">Buyurun</p>
         <h1 class="display">Lahm-ı Acîn<br><em>yemeye</em></h1>
         <p class="who">Lahmacun · Kilis Tava · Erenköy</p>
@@ -650,74 +633,60 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         <p class="tag">Menü</p>
         <h2 class="display" id="menuTitle">Fırından sofraya</h2>
       </div>
-      <div class="dishes">
-        <article class="dish feature">
-          <img class="ph" src="foto/lahmacun-firin-m.jpg" srcset="foto/lahmacun-firin-k.jpg 720w, foto/lahmacun-firin-m.jpg 1200w, foto/lahmacun-firin.jpg 2000w" sizes="(min-width: 900px) 50vw, 100vw" alt="Fırının önünde, kâğıdın üstünde iki dilim lahmacun" loading="lazy" decoding="async" width="2000" height="1116" style="object-position: 60% 50%">
-          <div class="dish-body">
-            <h3>Lahmacun</h3>
-            <p>İncecik hamur, Balıkesir kuzusu, Urfa taşında. Hep çıtır.</p>
-            <ul class="prices">
-              <li><span>Sarımsaklı</span><i class="dots"></i><b>220 ₺</b></li>
-              <li><span>Soğanlı</span><i class="dots"></i><b>220 ₺</b></li>
-            </ul>
-          </div>
-        </article>
-        <article class="dish" data-dish="kilis-tava">
-          <img class="ph" src="foto/kilis-tava-k.jpg" srcset="foto/kilis-tava-k.jpg 720w, foto/kilis-tava-m.jpg 1200w, foto/kilis-tava.jpg 2000w" sizes="(min-width: 900px) 25vw, 50vw" alt="Bakır tepside Kilis tava: köz domates, biber ve soğan" loading="lazy" decoding="async" width="2000" height="1125" style="object-position: 35% 55%">
-          <div class="dish-body row"><h3>Kilis Tava</h3><b class="price">700 ₺</b><p>Tepside; köz domates, biber ve soğanla.</p></div>
-        </article>
-        <article class="dish" data-dish="sutlac">
-          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
-          <div class="dish-body row"><h3>Sütlaç</h3><b class="price">200 ₺</b></div>
-        </article>
-        <article class="dish" data-dish="katmer">
-          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
-          <div class="dish-body row"><h3>Katmer</h3><b class="price">600 ₺</b></div>
-        </article>
-        <article class="dish">
-          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
-          <div class="dish-body"><h3>Çorba · İçecekler</h3><p>Çorbalarımız ve içeceklerimiz de menüde.</p></div>
-        </article>
+      <div class="cards">
+        <article class="card"><h3 class="tag">Lahmacun</h3><ul class="prices">
+          <li><span>Sarımsaklı</span><i class="dots"></i><b>220 ₺</b></li>
+          <li><span>Soğanlı</span><i class="dots"></i><b>220 ₺</b></li></ul></article>
+        <article class="card"><h3 class="tag">Kilis Tava</h3><ul class="prices">
+          <li><span>Kilis Tava</span><i class="dots"></i><b>700 ₺</b></li></ul></article>
+        <article class="card"><h3 class="tag">Tatlılar</h3><ul class="prices">
+          <li><span>Sütlaç</span><i class="dots"></i><b>200 ₺</b></li>
+          <li><span>Katmer</span><i class="dots"></i><b>600 ₺</b></li></ul></article>
       </div>
+      <p class="menu-note">Çorbalarımız ve içeceklerimiz de menüde.</p>
     </div>
   </section>
 
-  <section class="galeri band" id="galeri" aria-labelledby="galTitle">
-    <div class="wrap">
+  <section class="galeri" id="galeri" aria-labelledby="galTitle">
+    <div class="band"><div class="wrap gal-head">
       <div class="sec-head">
         <p class="tag red">Galeri</p>
         <h2 class="display" id="galTitle">Fırının başından</h2>
-        <p>Erenköy'de bir gün: fırının önü, ustanın küreği, kurulan sofra.</p>
+        <p>Erenköy'de bir gün: fırının önü, kurulan sofra, ustanın küreği.</p>
       </div>
-      <div class="bento">
-        <figure class="g g1">
-          <button type="button" class="gi" data-full="foto/sofra.jpg" data-cap="Sofra kuruldu · Lahmacun, Kilis tava, ayran ve yeşillik" aria-label="Sofra kuruldu: büyüt">
-            <img src="foto/sofra-m.jpg" srcset="foto/sofra-k.jpg 720w, foto/sofra-m.jpg 1200w, foto/sofra.jpg 2000w" sizes="(min-width: 900px) 58vw, 100vw" alt="Kurulmuş sofra: lahmacunlar, Kilis tava, ayran, soğan salatası ve ekmek" loading="lazy" decoding="async" width="2000" height="1125" style="object-position: 50% 55%">
-          </button>
-          <figcaption><span class="script">Sofra kuruldu</span><small>Lahmacun, Kilis tava, ayran ve yeşillik</small></figcaption>
-        </figure>
-        <figure class="g g2">
-          <button type="button" class="gi" data-full="foto/lahmacun-firin.jpg" data-cap="Fırından yeni çıktı · Kâğıdın üstünde, sıcak sıcak" aria-label="Fırından yeni çıktı: büyüt">
-            <img src="foto/lahmacun-firin-m.jpg" srcset="foto/lahmacun-firin-k.jpg 720w, foto/lahmacun-firin-m.jpg 1200w, foto/lahmacun-firin.jpg 2000w" sizes="(min-width: 900px) 42vw, 50vw" alt="Fırının önünde iki dilim lahmacun" loading="lazy" decoding="async" width="2000" height="1116" style="object-position: 62% 50%">
-          </button>
-          <figcaption><span class="script">Fırından yeni çıktı</span><small>Kâğıdın üstünde, sıcak sıcak</small></figcaption>
-        </figure>
-        <figure class="g g3">
-          <button type="button" class="gi" data-full="foto/kilis-tava.jpg" data-cap="Kilis tava · Köz domates, biber ve soğanla" aria-label="Kilis tava: büyüt">
-            <img src="foto/kilis-tava-m.jpg" srcset="foto/kilis-tava-k.jpg 720w, foto/kilis-tava-m.jpg 1200w, foto/kilis-tava.jpg 2000w" sizes="(min-width: 900px) 42vw, 50vw" alt="Bakır tepside Kilis tava" loading="lazy" decoding="async" width="2000" height="1125" style="object-position: 40% 55%">
-          </button>
-          <figcaption><span class="script">Kilis tava</span><small>Köz domates, biber ve soğanla</small></figcaption>
-        </figure>
-        <figure class="g g4">
-          <button type="button" class="gi" data-full="foto/lahmacun.jpg" data-cap="Ustanın küreğinde · İncecik, kenarları kızarmış" aria-label="Ustanın küreğinde: büyüt">
-            <img src="foto/lahmacun-m.jpg" srcset="foto/lahmacun-k.jpg 720w, foto/lahmacun-m.jpg 1200w, foto/lahmacun.jpg 2000w" sizes="100vw" alt="Ahşap tezgâhta, küreğin üstünde lahmacun" loading="lazy" decoding="async" width="2000" height="1116" style="object-position: 50% 66%">
-          </button>
-          <figcaption><span class="script">Ustanın küreğinde</span><small>İncecik, kenarları kızarmış</small></figcaption>
-        </figure>
+      <div class="gal-ctrl">
+        <span class="gal-count" id="galCount" aria-live="polite">01 / 04</span>
+        <button type="button" class="gal-btn" id="galPrev" aria-label="Önceki fotoğraf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+        <button type="button" class="gal-btn" id="galNext" aria-label="Sonraki fotoğraf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
       </div>
-      <div class="gal" id="gal"></div>
-      <div class="sec-foot"><a class="btn" href="https://www.google.com/maps?cid=13202010269743240704" target="_blank" rel="noopener">Tüm fotoğraflar Google'da</a></div>
+    </div></div>
+    <div class="slider" id="slider" tabindex="0" aria-roledescription="carousel" aria-label="Fotoğraflar">
+      <figure class="slide is-active" role="group" aria-roledescription="slayt" aria-label="1 / 4: Fırından yeni çıktı">
+        <button type="button" class="gi" data-full="foto/lahmacun-firin.jpg" data-cap="Fırından yeni çıktı · Kâğıdın üstünde, sıcak sıcak" aria-label="Fırından yeni çıktı: büyüt">
+          <img src="foto/lahmacun-firin-m.jpg" srcset="foto/lahmacun-firin-k.jpg 720w, foto/lahmacun-firin-m.jpg 1200w, foto/lahmacun-firin.jpg 2000w" sizes="(min-width: 760px) 84vw, 86vw" alt="Fırının önünde, kâğıdın üstünde iki dilim lahmacun" decoding="async" width="2000" height="1116" style="object-position: 60% 50%">
+        </button>
+        <figcaption><span class="script">Fırından yeni çıktı</span><small>Kâğıdın üstünde, sıcak sıcak</small></figcaption>
+      </figure>
+      <figure class="slide" role="group" aria-roledescription="slayt" aria-label="2 / 4: Sofra kuruldu">
+        <button type="button" class="gi" data-full="foto/sofra.jpg" data-cap="Sofra kuruldu · Lahmacun, Kilis tava, ayran ve yeşillik" aria-label="Sofra kuruldu: büyüt">
+          <img src="foto/sofra-m.jpg" srcset="foto/sofra-k.jpg 720w, foto/sofra-m.jpg 1200w, foto/sofra.jpg 2000w" sizes="(min-width: 760px) 84vw, 86vw" alt="Kurulmuş sofra: lahmacunlar, Kilis tava, ayran, soğan salatası ve ekmek" loading="lazy" decoding="async" width="2000" height="1125" style="object-position: 50% 55%">
+        </button>
+        <figcaption><span class="script">Sofra kuruldu</span><small>Lahmacun, Kilis tava, ayran ve yeşillik</small></figcaption>
+      </figure>
+      <figure class="slide" role="group" aria-roledescription="slayt" aria-label="3 / 4: Kilis tava">
+        <button type="button" class="gi" data-full="foto/kilis-tava.jpg" data-cap="Kilis tava · Köz domates, biber ve soğanla" aria-label="Kilis tava: büyüt">
+          <img src="foto/kilis-tava-m.jpg" srcset="foto/kilis-tava-k.jpg 720w, foto/kilis-tava-m.jpg 1200w, foto/kilis-tava.jpg 2000w" sizes="(min-width: 760px) 84vw, 86vw" alt="Bakır tepside Kilis tava: köz domates, biber ve soğan" loading="lazy" decoding="async" width="2000" height="1125" style="object-position: 40% 55%">
+        </button>
+        <figcaption><span class="script">Kilis tava</span><small>Köz domates, biber ve soğanla</small></figcaption>
+      </figure>
+      <figure class="slide" role="group" aria-roledescription="slayt" aria-label="4 / 4: Ustanın küreğinde">
+        <button type="button" class="gi" data-full="foto/lahmacun.jpg" data-cap="Ustanın küreğinde · İncecik, kenarları kızarmış" aria-label="Ustanın küreğinde: büyüt">
+          <img src="foto/lahmacun-m.jpg" srcset="foto/lahmacun-k.jpg 720w, foto/lahmacun-m.jpg 1200w, foto/lahmacun.jpg 2000w" sizes="(min-width: 760px) 84vw, 86vw" alt="Ahşap tezgâhta, küreğin üstünde lahmacun" loading="lazy" decoding="async" width="2000" height="1116" style="object-position: 50% 62%">
+        </button>
+        <figcaption><span class="script">Ustanın küreğinde</span><small>İncecik, kenarları kızarmış</small></figcaption>
+      </figure>
     </div>
+    <div class="band"><div class="wrap"><div class="gal-dots" id="galDots"><button type="button" aria-label="1. fotoğraf" class="is-active" aria-current="true"><i></i></button><button type="button" aria-label="2. fotoğraf"><i></i></button><button type="button" aria-label="3. fotoğraf"><i></i></button><button type="button" aria-label="4. fotoğraf"><i></i></button></div></div></div>
   </section>
 
   <section class="yorum band" id="yorumlar" aria-labelledby="revTitle">
@@ -732,7 +701,6 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       </div>
       <div class="revs" id="revs"></div>
       <div class="sec-foot">
-        <a class="btn red" href="https://www.google.com/maps?cid=13202010269743240704" target="_blank" rel="noopener">Google'da bütün yorumları oku</a>
         <small class="src">Yorumlar ve puan Google'dan alınır.</small>
       </div>
     </div>
@@ -762,7 +730,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     <div class="wrap">
       <p class="tag red">Erenköy</p>
       <h2 class="display" id="finalTitle">Var mısınız?<em>Lahm-ı Acîn yemeye!</em></h2>
-      <img class="final-photo" src="foto/sofra-m.jpg" srcset="foto/sofra-k.jpg 720w, foto/sofra-m.jpg 1200w, foto/sofra.jpg 2000w" sizes="(min-width: 1360px) 1280px, 100vw" alt="Kurulmuş sofra: lahmacunlar, Kilis tava, ayran, soğan salatası ve ekmek" loading="lazy" decoding="async" width="2000" height="1125">
+      <img class="final-photo" src="foto/lahmacun-m.jpg" srcset="foto/lahmacun-k.jpg 720w, foto/lahmacun-m.jpg 1200w, foto/lahmacun.jpg 2000w" sizes="(min-width: 1360px) 1280px, 100vw" alt="Taş fırından yeni çıkmış lahmacun, ustanın küreğinde" loading="lazy" decoding="async" width="2000" height="1116">
       <p class="script">Buyurun… Afiyet olsun.</p>
       <p class="note">Gaziantep ve Urfa'da yetişmiş ustalarımızın elinden, yöre taşından fırınımızda; hijyen bizde olmazsa olmaz.</p>
       <dl class="visit" id="visit" hidden></dl>
@@ -785,7 +753,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       </section>
 
       <footer class="foot">
-        <span class="brand"><img src="logo.svg" alt="Kuzu Lahmacun" width="143" height="68" loading="lazy"></span>
+        <span class="brand"><img src="logo-beyaz.svg" alt="Kuzu Lahmacun" width="147" height="56" loading="lazy"></span>
         <span>© 2026 Kuzu Lahmacun &amp; Kilis Tava</span>
       </footer>
     </div>
@@ -1287,26 +1255,90 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     loadManifest();
   });
 
-  // ── Galeri: büyük görünüm (tık, ok tuşları, telefonda kaydırma) ve görünüme girince yükselen kareler ──
+  // ── Galeri: slider (oklar, noktalar, parmakla kaydırma, kendiliğinden ilerleme) ve tam ekran görünüm ──
   (() => {
-    const galeri = document.getElementById("galeri"), lb = document.getElementById("lb");
+    const galeri = document.getElementById("galeri"), slider = document.getElementById("slider");
+    const slides = [...slider.querySelectorAll(".slide")], dots = [...document.querySelectorAll("#galDots button")];
+    const count = document.getElementById("galCount"), N = slides.length, MS = 6000;
+    const pad = (n) => String(n).padStart(2, "0");
+    galeri.style.setProperty("--gal-ms", `${MS}ms`);
+    let cur = 0, timer = 0, inView = false, hover = false, holdUntil = 0, lbOpen = false;
+
+    const setActive = (i) => {
+      if (i === cur && slides[i].classList.contains("is-active")) return;
+      cur = i;
+      slides.forEach((el, k) => el.classList.toggle("is-active", k === i));
+      dots.forEach((el, k) => {
+        el.classList.remove("is-active"); el.removeAttribute("aria-current");
+        if (k === i) { void el.offsetWidth; el.classList.add("is-active"); el.setAttribute("aria-current", "true"); }
+      });
+      count.textContent = `${pad(i + 1)} / ${pad(N)}`;
+      arm();
+    };
+    const goTo = (i, smooth = true) => {
+      i = (i + N) % N;
+      const el = slides[i];
+      slider.scrollTo({ left: el.offsetLeft - (slider.clientWidth - el.clientWidth) / 2, behavior: smooth && !reduce ? "smooth" : "auto" });
+      setActive(i);
+    };
+    // which slide is centred, as the user swipes or the snap settles
+    let raf = 0;
+    slider.addEventListener("scroll", () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const mid = slider.scrollLeft + slider.clientWidth / 2;
+        let best = 0, bd = Infinity;
+        slides.forEach((el, k) => { const d = Math.abs(el.offsetLeft + el.clientWidth / 2 - mid); if (d < bd) { bd = d; best = k; } });
+        if (best !== cur) setActive(best);
+      });
+    }, { passive: true });
+
+    // autoplay only while the gallery is on screen, nobody is touching it and motion is welcome
+    const playing = () => !reduce && inView && !hover && !lbOpen && !document.hidden && performance.now() > holdUntil;
+    function arm() {
+      clearTimeout(timer);
+      galeri.classList.toggle("paused", !playing());
+      if (playing()) timer = setTimeout(() => goTo(cur + 1), MS);
+    }
+    const hold = () => { holdUntil = performance.now() + 9000; arm(); setTimeout(arm, 9100); };
+    if (reduce) galeri.classList.add("static");
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; arm(); }, { threshold: 0.35 }).observe(slider);
+    slider.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") { hover = true; arm(); } });
+    slider.addEventListener("pointerleave", () => { hover = false; arm(); });
+    slider.addEventListener("touchstart", hold, { passive: true });
+    document.addEventListener("visibilitychange", arm);
+
+    document.getElementById("galPrev").addEventListener("click", () => { hold(); goTo(cur - 1); });
+    document.getElementById("galNext").addEventListener("click", () => { hold(); goTo(cur + 1); });
+    dots.forEach((d, k) => d.addEventListener("click", () => { hold(); goTo(k); }));
+    slider.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); hold(); goTo(cur + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); hold(); goTo(cur - 1); }
+    });
+    addEventListener("resize", () => goTo(cur, false));
+
+    // full screen: click a photo (a side photo first slides to the centre)
+    const lb = document.getElementById("lb");
     const lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap"), lbCount = document.getElementById("lbCount");
-    let items = [], at = 0;
+    let at = 0;
     const show = (i) => {
-      at = (i + items.length) % items.length;
-      const b = items[at];
+      at = (i + N) % N;
+      const b = slides[at].querySelector(".gi");
       lbImg.src = b.dataset.full; lbImg.alt = b.querySelector("img").alt;
       lbCap.textContent = b.dataset.cap || "";
-      lbCount.textContent = `${at + 1} / ${items.length}`;
-      [-1, 1].forEach((d) => { const n = items[(at + d + items.length) % items.length]; if (n) new Image().src = n.dataset.full; });
+      lbCount.textContent = `${pad(at + 1)} / ${pad(N)}`;
+      [-1, 1].forEach((d) => { new Image().src = slides[(at + d + N) % N].querySelector(".gi").dataset.full; });
     };
-    galeri.addEventListener("click", (e) => {
+    slider.addEventListener("click", (e) => {
       const b = e.target.closest(".gi");
-      if (!b || typeof lb.showModal !== "function") return;
-      items = [...galeri.querySelectorAll(".gi")];
-      show(items.indexOf(b)); lb.showModal(); if (lenis) lenis.stop();
+      if (!b) return;
+      const i = slides.indexOf(b.closest(".slide"));
+      if (i !== cur) { hold(); goTo(i); return; }
+      if (typeof lb.showModal !== "function") return;
+      show(i); lb.showModal(); lbOpen = true; arm(); if (lenis) lenis.stop();
     });
-    lb.addEventListener("close", () => { if (lenis) lenis.start(); lbImg.removeAttribute("src"); });
+    lb.addEventListener("close", () => { lbOpen = false; if (lenis) lenis.start(); lbImg.removeAttribute("src"); goTo(at, false); hold(); });
     document.getElementById("lbX").addEventListener("click", () => lb.close());
     document.getElementById("lbPrev").addEventListener("click", () => show(at - 1));
     document.getElementById("lbNext").addEventListener("click", () => show(at + 1));
@@ -1319,13 +1351,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       const dx = e.changedTouches[0].clientX - x0; x0 = null;
       if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
     });
-    if (!reduce && "IntersectionObserver" in window) {
-      document.documentElement.classList.add("js-reveal");
-      const io = new IntersectionObserver((es) => es.forEach((en) => {
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
-      }), { rootMargin: "0px 0px -8% 0px" });
-      galeri.querySelectorAll(".g").forEach((el) => io.observe(el));
-    }
+    requestAnimationFrame(() => goTo(0, false));
   })();
 
   // ── Google: yorumlar, puan, galeri, adres ─────────────────────────────────
@@ -1353,17 +1379,6 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       const p = el.querySelector("p"), b = el.querySelector(".more");
       if (p.scrollHeight > p.clientHeight + 4) b.hidden = false;
       b.addEventListener("click", () => { el.classList.toggle("open"); b.textContent = el.classList.contains("open") ? "Kısalt" : "Devamını oku"; });
-    });
-    // Google photos go under the restaurant's own photos, in the same lightbox
-    document.getElementById("gal").innerHTML = (g.photos || []).map((ph) => `<button type="button" class="gi"
-      data-full="${esc(ph.src)}" data-cap="${ph.by ? `Fotoğraf: ${esc(ph.by)} · Google` : "Google"}" aria-label="Fotoğrafı büyüt">
-      <img src="${esc(ph.thumb)}" alt="${esc(g.name)} fotoğrafı" loading="lazy" decoding="async" width="${ph.tw}" height="${ph.th}"></button>`).join("");
-    // menu tiles: a Google photo picked for a dish (google/yer.json "menu": { "kilis-tava": "google/....jpg" })
-    Object.entries(g.menu || {}).forEach(([k, src]) => {
-      const ph = document.querySelector(`.dish[data-dish="${k}"] .ph.empty`);
-      if (!ph) return;
-      const img = new Image(); img.className = "ph"; img.src = src; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
-      ph.replaceWith(img);
     });
     const visit = document.getElementById("visit"), rows = [];
     if (g.address) rows.push(["Adres", `<a href="${esc(g.mapsUri)}" target="_blank" rel="noopener">${esc(g.address)}</a>`]);

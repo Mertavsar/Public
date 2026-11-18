@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""İşletmenin Google kaydından puanı, yorumları, fotoğrafları, adresi ve saatleri çeker.
+"""İşletmenin Google kaydından puanı, yorumları, adresi, telefonu ve saatleri çeker.
 
 Kullanım:
     GOOGLE_API_KEY=... python3 google-cek.py
 
-Çıktı: google/yer.json ve google/ altındaki fotoğraflar. Site bu dosyayı okur; dosya yoksa
-Yorumlar ve Galeri bölümleri yalnızca Google sayfasına giden butonlarla görünür.
+Çıktı: google/yer.json ve yorum yazarlarının küçük profil fotoğrafları. Site bu dosyayı okur;
+dosya yoksa Yorumlar bölümünde yalnızca başlık görünür. Galeri, işletmenin kendi fotoğraflarıdır (foto/).
 
 Doğru işletme: "Kuzu Lahmacun" adında başka bir işletme de var. Bu betik yalnızca aşağıdaki
 CID'ye sahip kaydı kabul eder (müşterinin verdiği Google Haritalar linkindeki
@@ -51,18 +51,6 @@ def yer_bul():
     sys.exit(f"Müşterinin kaydı (cid={CID}) arama sonuçlarında yok; yanlış işletmeyi almamak için durdum.\n{liste}")
 
 
-def foto_kaydet(ad, n):
-    meta = json.loads(istek(f"{API}/{ad}/media?maxWidthPx=1600&skipHttpRedirect=true"))
-    with urllib.request.urlopen(meta["photoUri"], timeout=60) as r:
-        im = Image.open(io.BytesIO(r.read())).convert("RGB")
-    im.thumbnail((1600, 1600), Image.LANCZOS)
-    im.save(os.path.join(OUT, f"foto-{n}.jpg"), quality=84, optimize=True, progressive=True)
-    k = im.copy()
-    k.thumbnail((720, 720), Image.LANCZOS)
-    k.save(os.path.join(OUT, f"foto-{n}-k.jpg"), quality=80, optimize=True, progressive=True)
-    return k.size
-
-
 def avatar_kaydet(url, n):
     try:
         with urllib.request.urlopen(url, timeout=30) as r:
@@ -79,7 +67,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     pid = yer_bul()
     alanlar = ("id,displayName,formattedAddress,shortFormattedAddress,nationalPhoneNumber,rating,userRatingCount,"
-               "googleMapsUri,regularOpeningHours,reviews,photos")
+               "googleMapsUri,regularOpeningHours,reviews")
     y = json.loads(istek(f"{API}/places/{pid}?languageCode=tr", fields=alanlar))
     if f"cid={CID}" not in y.get("googleMapsUri", ""):
         sys.exit("Ayrıntılar başka bir kayda ait çıktı; durdum.")
@@ -98,27 +86,17 @@ def main():
             "rating": r.get("rating"), "when": r.get("relativePublishTimeDescription", ""), "text": metin,
         })
 
-    fotolar = []
-    for i, ph in enumerate(y.get("photos", [])[:10], 1):
-        tw, th = foto_kaydet(ph["name"], i)
-        kim = ", ".join(a.get("displayName", "") for a in ph.get("authorAttributions", []))
-        fotolar.append({"src": f"google/foto-{i}.jpg", "thumb": f"google/foto-{i}-k.jpg", "tw": tw, "th": th, "by": kim})
-
-    eski = {}
     hedef = os.path.join(OUT, "yer.json")
-    if os.path.exists(hedef):
-        eski = json.load(open(hedef))
     veri = {
         "cid": CID, "placeId": y["id"], "name": y.get("displayName", {}).get("text", ""),
         "address": y.get("formattedAddress", ""), "phone": y.get("nationalPhoneNumber", ""),
         "rating": y.get("rating"), "count": y.get("userRatingCount"), "mapsUri": y.get("googleMapsUri", ""),
         "hours": y.get("regularOpeningHours", {}).get("weekdayDescriptions", []),
-        "reviews": yorumlar, "photos": fotolar,
-        "menu": eski.get("menu", {}),   # elle seçilen menü fotoğrafları korunur
+        "reviews": yorumlar,
     }
     json.dump(veri, open(hedef, "w"), ensure_ascii=False, indent=1)
     print(f"{veri['name']} | {veri['address']}\npuan {veri['rating']} ({veri['count']} değerlendirme), "
-          f"{len(yorumlar)} yorum, {len(fotolar)} fotoğraf → {hedef}")
+          f"{len(yorumlar)} yorum → {hedef}")
 
 
 if __name__ == "__main__":

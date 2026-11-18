@@ -3,7 +3,7 @@
 Site lahmacunun hikâyesini anlatır. Kaydırma sahnesi altı perde: hamur, açılış, iç, et,
 fırın, servis. Havada dökülen her malzemenin adı, düştüğü yerden çıkan ince bir çizgiyle
 yazılır. Ardından kısa lahm-ı acîn yazısı, göç hikâyesi, dört kalem (hamur, et, iç, fırın),
-ustanın sözlüğü, görselli menü, galeri, Google yorumları, merak edilenler (SSS) ve final gelir.
+ustanın sözlüğü, menü, galeri (işletmenin fotoğraflarıyla slider), Google yorumları, merak edilenler (SSS) ve final gelir.
 
 - `index.html`: sitenin tamamı (tek dosya).
 - `kaynak/sahne1-3.mp4`: Google Flow sahneleri (beze ve açılış, malzeme yağmuru, fırın).
@@ -11,9 +11,9 @@ ustanın sözlüğü, görselli menü, galeri, Google yorumları, merak edilenle
 - `frames/`: bilgisayar sahnesi: 330 kare, 2x2'lik 83 pakette (`paket-N.jpg`), önizleme paketleri ve `manifest.json`.
 - `frames-mobil/`: telefon sahnesi: yalnızca telefonun gösterdiği orta bölge, 640 px; aynı düzen.
 - `foto/`: işletmenin kendi fotoğrafları (lahmacun, lahmacun-firin, kilis-tava, sofra), her biri üç boyutta:
-  2000 px, `-m` 1200 px, `-k` 720 px. Tarayıcı ekranına uyanı indirir. Menüde, galeride ve finalde kullanılır.
+  2000 px, `-m` 1200 px, `-k` 720 px. Tarayıcı ekranına uyanı indirir. Galeride (slider) kullanılır; finalde lahmacun.
 - `logo.svg`: markanın logosu, orijinalinden (`kaynak/logo-orijinal.webp`) vektöre çevrildi; her boyutta
-  keskin. Üst çubukta, girişte ve sayfa sonunda kullanılır. `favicon.svg`: logodaki fırın, tarayıcı sekmesi için.
+  keskin. Sitede yeşil kutusuz, şeffaf hâli (`logo-beyaz.svg`) kullanılır: üst çubukta, girişte ve sayfa sonunda. `favicon.svg`: logodaki fırın, tarayıcı sekmesi için.
 
 ## Sahneyi yeniden üretmek
 
@@ -50,22 +50,20 @@ Telefonda ilk girişin keskin olması için:
   yalnızca en baştaki bir iki saniye için yedektir.
 
 
-## Google: yorumlar, galeri, adres ve saatler
+## Google: yorumlar, puan, adres ve saatler
 
 ```bash
 GOOGLE_API_KEY=... python3 google-cek.py
 ```
 
-`google/yer.json` ve `google/` altındaki fotoğrafları yazar; site bu dosyayı okur. Google Cloud'da
-"Places API (New)" açık bir anahtar gerekir. Yorumlar Google'ın seçtiği en fazla 5 yorumdur.
+`google/yer.json` dosyasını yazar; site bu dosyayı okur. Google Cloud'da "Places API (New)" açık bir
+anahtar gerekir. Yorumlar Google'ın seçtiği en fazla 5 yorumdur.
 
 - Doğru işletme: "Kuzu Lahmacun" adında rakip bir işletme daha var. Betik yalnızca müşterinin
   linkindeki kaydı (CID 13202010269743240704) kabul eder; arama başka yer döndürürse durur.
-- Dosya yoksa Yorumlar ve Galeri yalnızca Google sayfasına giden butonla görünür; hiçbir şey uydurulmaz.
-- Menüde fotoğrafı olmayan ürün, logodaki fırın işaretiyle görünür. Ürüne fotoğraf atamak için
-  `google/yer.json` içindeki `"menu"` alanına `"kilis-tava": "google/foto-3.jpg"` gibi yazılır
-  (anahtarlar: `kilis-tava`, `sutlac`, `katmer`).
-- Bütün "Yol tarifi" butonları müşterinin kendi Google kaydını açar (arama değil).
+- Dosya yoksa Yorumlar bölümünde yalnızca başlık görünür; hiçbir şey uydurulmaz.
+- Site ziyaretçiyi Google'a göndermez; yalnızca "Yol tarifi" butonları işletmenin kendi Google
+  Haritalar kaydını açar.
 
 ## Ayarlar (`index.html` içinde)
 
@@ -78,7 +76,7 @@ GOOGLE_API_KEY=... python3 google-cek.py
 
 ## Doldurulacaklar
 
-- Menünün kesik kalan kısmı: çorba adı ve içecekler; sütlaç ve katmer fotoğrafları.
+- Menünün kesik kalan kısmı: çorba adı ve içecekler.
 - SSS'ye işletmenin cevaplaması gereken sorular: paket servis / yemek uygulamaları, rezervasyon,
   çalışma saatleri, otopark.
 - Adres, telefon, çalışma saatleri: `google-cek.py` çalışınca Google kaydından gelir.
