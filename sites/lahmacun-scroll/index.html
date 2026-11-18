@@ -874,7 +874,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     if (!W || !H) return;
     const phone = H > W * 1.15;
     const need = 1 / layout(SRC_W, SRC_H).sc;
-    DPR = clamp(need, 1, Math.min(window.devicePixelRatio || 1, phone ? 1.5 : 2, dprCap));
+    // computer: draw at the screen's real resolution (Windows 125/150% scaling, retina), so the
+    // browser never stretches the canvas a second time; phone: no more pixels than the video has
+    const dpr = window.devicePixelRatio || 1;
+    DPR = phone ? clamp(need, 1, Math.min(dpr, 1.5, dprCap)) : Math.min(Math.max(1, dpr), 2);
     canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     MARKS.forEach((m) => { m.lw = 0; });
@@ -974,9 +977,12 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const sc = Math.max(W / iw, H / ih);
     return { band: false, sc, ox: (W - iw * sc) / 2, oy: (H - ih * sc) / 2, iw, ih };
   }
-  let lastSoft = -1;
+  let lastSoft = -1, snapped = true;
   function drawFrames(p) {
-    const f = frameAt(mapKeys(p, frameKeys));
+    // while scrolling, neighbouring frames may cross-fade; once the page rests, the scene settles
+    // on one whole frame, never a half-and-half mix (which reads as a soft double image)
+    let f = frameAt(mapKeys(p, frameKeys));
+    if (snapped) f = Math.round(f);
     const i0 = Math.floor(f), i1 = Math.min(frames.length - 1, i0 + 1), mixAmt = f - i0;
     curIndex = i0;
     const a = frameRect(i0) || nearestRect(i0);
@@ -1205,7 +1211,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   }
   // The scene trails the scroll a little, the same amount on 60 Hz and 120 Hz screens.
   const EASE_MS = lenis ? 60 : 95;
-  let lastNow = 0, slowFrames = 0;
+  let lastNow = 0, slowFrames = 0, lastMove = 0;
   function tick(now) {
     if (lenis) lenis.raf(now);
     const rawDt = lastNow ? now - lastNow : 16;
@@ -1213,11 +1219,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     lastNow = now;
     if (dirty && rawDt < 500 && pending && !pending.size && !inFlight) {
       slowFrames = rawDt > 28 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
-      if (slowFrames > 24 && DPR > 1.01) { dprCap = Math.max(1, DPR - 0.5); slowFrames = 0; resize(); }
+      // only phones step their resolution down when they struggle; a computer keeps full quality
+      if (slowFrames > 24 && DPR > 1.01 && H > W * 1.15) { dprCap = Math.max(1, DPR - 0.5); slowFrames = 0; resize(); }
     }
     const d = target - cur;
-    if (Math.abs(d) > 0.00005) { cur += reduce ? d : d * (1 - Math.exp(-dt / EASE_MS)); dirty = true; }
-    else if (cur !== target) { cur = target; dirty = true; }
+    if (Math.abs(d) > 0.00005) { cur += reduce ? d : d * (1 - Math.exp(-dt / EASE_MS)); dirty = true; lastMove = now; snapped = false; }
+    else if (cur !== target) { cur = target; dirty = true; lastMove = now; snapped = false; }
+    else if (!snapped && now - lastMove > 140) { snapped = true; dirty = true; }
     if (dirty && W && H) {
       if (frames) drawFrames(cur); else drawEmpty();
       updateUI(cur);

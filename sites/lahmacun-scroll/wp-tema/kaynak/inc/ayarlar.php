@@ -148,6 +148,8 @@ function kuzu_ayarlar_sayfa() {
 			<?php submit_button( 'Değişiklikleri kaydet' ); ?>
 		</form>
 
+		<?php kuzu_kare_kontrol_karti(); ?>
+
 		<div class="card">
 			<h2>Yorumları şimdi yenile</h2>
 			<?php if ( is_array( $durum ) ) : ?>
@@ -162,4 +164,55 @@ function kuzu_ayarlar_sayfa() {
 		</div>
 	</div>
 	<?php
+}
+
+/**
+ * Görsel kontrolü: sitenin kendi adresinden bir kare paketi indirilir ve boyutu beklenenle
+ * karşılaştırılır. Barındırma ya da CDN görselleri küçültüyor veya başka biçime çeviriyorsa
+ * video sitede bulanık görünür; panel bunu söyler.
+ */
+function kuzu_kare_kontrol_karti() {
+	$m_yol = get_template_directory() . '/assets/sahne/frames/manifest.json';
+	$u     = wp_upload_dir( null, false );
+	if ( ! file_exists( $m_yol ) ) {
+		$m_yol = $u['basedir'] . '/kuzu-sahne/frames/manifest.json';
+	}
+	$m = file_exists( $m_yol ) ? json_decode( (string) file_get_contents( $m_yol ), true ) : null;
+	echo '<div class="card" id="kare-kontrol"><h2>Video kalitesi kontrolü</h2>';
+	if ( ! is_array( $m ) || empty( $m['pack'] ) ) {
+		echo '<p class="kuzu-durum hata">Kaydırma sahnesinin kareleri bulunamadı. Temayı tam zip ile yükleyin ya da kareler zip\'ini <code>wp-content/uploads/</code> içine açın.</p></div>';
+		return;
+	}
+	$bek_w = (int) $m['pack']['w'] * (int) $m['pack']['cols'];
+	$bek_h = (int) $m['pack']['h'] * (int) $m['pack']['rows'];
+	$url   = kuzu_sahne_uri() . 'frames/paket-1.jpg?kontrol=' . time();
+	$r     = wp_remote_get(
+		$url,
+		array(
+			'timeout' => 15,
+			'headers' => array(
+				'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36',
+				'Accept'     => 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+			),
+		)
+	);
+	if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
+		$neden = is_wp_error( $r ) ? $r->get_error_message() : 'HTTP ' . wp_remote_retrieve_response_code( $r );
+		echo '<p class="kuzu-durum hata">Kare dosyası sitenin adresinden indirilemedi (' . esc_html( $neden ) . '). Bu kontrol yapılamadı.</p></div>';
+		return;
+	}
+	$govde = (string) wp_remote_retrieve_body( $r );
+	$boyut = @getimagesizefromstring( $govde ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+	$tip   = (string) wp_remote_retrieve_header( $r, 'content-type' );
+	$kb    = round( strlen( $govde ) / 1024 );
+	$yerel = (int) @filesize( str_replace( trailingslashit( get_template_directory_uri() ), trailingslashit( get_template_directory() ), strtok( $url, '?' ) ) ) / 1024; // phpcs:ignore
+	if ( $boyut && (int) $boyut[0] === $bek_w && (int) $boyut[1] === $bek_h ) {
+		echo '<p class="kuzu-durum">Kareler sunucudan tam boyutta geliyor (' . (int) $boyut[0] . '×' . (int) $boyut[1] . ', ' . esc_html( $tip ) . ', ' . (int) $kb . ' KB). Video, kaynağın verdiği en yüksek kalitede gösteriliyor.</p>';
+	} else {
+		$gelen = $boyut ? ( (int) $boyut[0] . '×' . (int) $boyut[1] ) : 'okunamadı';
+		echo '<p class="kuzu-durum hata"><b>Sunucu kareleri değiştiriyor:</b> olması gereken ' . (int) $bek_w . '×' . (int) $bek_h . ', gelen ' . esc_html( $gelen ) . ' (' . esc_html( $tip ) . ', ' . (int) $kb . ' KB'
+			. ( $yerel ? ', dosyanın kendisi ' . (int) $yerel . ' KB' : '' ) . '). Video bu yüzden bulanık görünür.</p>'
+			. '<p>Çözüm: barındırmanın görsel optimizasyonunu (Hostinger: hPanel → Performans / CDN; LiteSpeed Cache → Görsel Optimizasyonu) kapatın ya da <code>wp-content/themes/kuzu-lahmacun/</code> klasörünü hariç tutun. Sonra CDN önbelleğini temizleyip bu sayfayı yenileyin.</p>';
+	}
+	echo '</div>';
 }
