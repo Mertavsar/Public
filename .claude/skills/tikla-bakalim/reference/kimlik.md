@@ -31,6 +31,18 @@ kaydırmak zor.
 Hook tek bilgi taşır ve bir **sayı** içerir. Soru ile açılan hook ikinci cümle
 olur: "Peki neden? Üç soruda anlatayım."
 
+### Hook kuralı — "nasıl çalışıyor" videoları (kullanıcı kuralı, unutma)
+
+Referans: gırgır videosu (700 bin+). Hook **iki kısa cümle**dir:
+1. **Şaşırtan sonuç / paradoks** — videonun en etkili anı, düz bir gerçek gibi:
+   "Karadenizli balıkçılar koca bir hamsi sürüsünü tek ağla yakalıyor."
+2. **Sırrı saklayan yarım cevap** — merak boşluğu açar, cevabı vermez:
+   "Ama asıl sır ağın altında."
+3. Sonra hemen geri sar: "Baştan anlatayım." Cevap en sonda gelir.
+
+Yapma: izlenme sayısı, "çok sordunuz", "bu videoda anlatacağım" gibi meta giriş;
+kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay anlatılır.
+
 ## Etkileşim cümleleri — metnin içine giydirilir (kullanıcı kuralı)
 
 Her metinde **üç** etkileşim anı var. Reklam gibi değil, anlatının parçası gibi:
