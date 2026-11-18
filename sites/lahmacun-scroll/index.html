@@ -951,6 +951,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   // 16:9, so it stays still in a band a little above centre, as tall as about 56% of the screen
   // (showing 50–64% of the frame's width: the lahmacun with at most its very edges cropped);
   // a soft, blurred copy of the same frame fills the rest of the screen.
+  const FADE = [[0, 1], [0.2, 0.8], [0.4, 0.52], [0.6, 0.27], [0.8, 0.09], [1, 0]];
   const PHONE_FILL = 0.56, PHONE_MIN = 0.50, PHONE_MAX = 0.64, PHONE_U = 0.41, PHONE_Y = 0.44;
   const soft = document.getElementById("softbg"), softCtx = soft.getContext("2d");
   soft.width = 48; soft.height = 27;
@@ -994,13 +995,16 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     ctx.drawImage(a.img, a.sx, a.sy, a.sw, a.sh, cx, L.oy, cw, dh);
     if (blend) { ctx.globalAlpha = mixAmt; ctx.drawImage(b.img, b.sx, b.sy, b.sw, b.sh, cx, L.oy, cw, dh); ctx.globalAlpha = 1; }
     if (L.band) {
-      const fe = Math.min(36, dh * 0.12);
-      let g = ctx.createLinearGradient(0, L.oy, 0, L.oy + fe);
-      g.addColorStop(0, "rgba(18,15,12,.85)"); g.addColorStop(1, "rgba(18,15,12,0)");
-      ctx.fillStyle = g; ctx.fillRect(0, L.oy - 1, W, fe + 1);
-      g = ctx.createLinearGradient(0, L.oy + dh - fe, 0, L.oy + dh);
-      g.addColorStop(0, "rgba(18,15,12,0)"); g.addColorStop(1, "rgba(18,15,12,.85)");
-      ctx.fillStyle = g; ctx.fillRect(0, L.oy + dh - fe, W, fe + 1);
+      // phone: the band's top and bottom dissolve into the blurred copy behind it (no hard edge);
+      // an eased alpha ramp over ~22% of the band, erased from the canvas itself
+      const fe = Math.round(dh * 0.22);
+      ctx.globalCompositeOperation = "destination-out";
+      for (const [y0, y1] of [[L.oy, L.oy + fe], [L.oy + dh, L.oy + dh - fe]]) {
+        const g = ctx.createLinearGradient(0, y0, 0, y1);
+        FADE.forEach(([o, al]) => g.addColorStop(o, `rgba(0,0,0,${al})`));
+        ctx.fillStyle = g; ctx.fillRect(0, Math.min(y0, y1) - 1, W, fe + 2);
+      }
+      ctx.globalCompositeOperation = "source-over";
     }
     view = L;
   }
