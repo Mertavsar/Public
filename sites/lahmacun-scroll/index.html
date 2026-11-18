@@ -881,7 +881,8 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const per = preview.cols * preview.rows, sheet = preview.sheets[Math.floor(i / per)];
     if (!ready(sheet)) return null;
     const k = i % per;
-    return { img: sheet, sx: (k % preview.cols) * preview.w, sy: Math.floor(k / preview.cols) * preview.h, sw: preview.w, sh: preview.h };
+    const pw = sheet.naturalWidth / preview.cols, ph = sheet.naturalHeight / preview.rows;
+    return { img: sheet, sx: (k % preview.cols) * pw, sy: Math.floor(k / preview.cols) * ph, sw: pw, sh: ph };
   }
   // frames[i]: where frame i sits inside its decoded pack image ({img, sx, sy, sw, sh}), or null.
   function sharpRect(i) {
@@ -947,15 +948,17 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
   // Where the footage sits on screen. Wide screens: full-bleed cover. Tall phones: the shot is
-  // 16:9, so it stays still and shows the whole lahmacun (about 64% of the frame's width) in a
-  // band a little above centre; a soft, blurred copy of the same frame fills the rest of the screen.
-  const PHONE_SHOW = 0.64, PHONE_U = 0.40, PHONE_Y = 0.42;
+  // 16:9, so it stays still in a band a little above centre, as tall as about 56% of the screen
+  // (showing 50–64% of the frame's width: the lahmacun with at most its very edges cropped);
+  // a soft, blurred copy of the same frame fills the rest of the screen.
+  const PHONE_FILL = 0.56, PHONE_MIN = 0.50, PHONE_MAX = 0.64, PHONE_U = 0.41, PHONE_Y = 0.44;
   const soft = document.getElementById("softbg"), softCtx = soft.getContext("2d");
   soft.width = 48; soft.height = 27;
   const stage = canvas.parentElement;
   function layout(iw, ih) {
     if (H > W * 1.15) {
-      const sc = W / (PHONE_SHOW * iw), dh = ih * sc;
+      const show = Math.min(PHONE_MAX, Math.max(PHONE_MIN, (W / (PHONE_FILL * H)) * (ih / iw)));
+      const sc = W / (show * iw), dh = ih * sc;
       return { band: true, sc, ox: W / 2 - PHONE_U * iw * sc, oy: Math.max(64, H * PHONE_Y - dh / 2), iw, ih };
     }
     const sc = Math.max(W / iw, H / ih);
@@ -1024,7 +1027,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       m.g.style.opacity = vis;
       const [mu, mv] = m.path ? pathAt(m.path, vt) : [m.u, m.v];
       const [px, y] = project(mu, mv);
-      if (px < 8 || px > W - 8) { m.g.style.display = "none"; m.lbl.style.opacity = 0; continue; }
+      if (px < 22 || px > W - 22) { m.g.style.display = "none"; m.lbl.style.opacity = 0; continue; }
       const x = px;
       const dir = m.side === "l" ? -1 : 1;
       const ringA = sm(m.t0, m.t0 + 0.25, vt), lineA = sm(m.t0 + 0.08, m.t0 + 0.4, vt), textA = sm(m.t0 + 0.22, m.t0 + 0.55, vt);
@@ -1083,7 +1086,9 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         .then(() => {
           if (frames !== list) return;
           im._dec = true;
-          const w = u.w || im.naturalWidth, h = u.h || im.naturalHeight;
+          // tile size from the decoded image itself, not the manifest: if a host or CDN serves the pack
+          // downsized, the crop still lands on the right frame
+          const w = im.naturalWidth / (u.cols || 1), h = im.naturalHeight / (u.rows || 1);
           for (let j = 0; j < u.n; j++) list[u.first + j] = { img: im, sx: (j % u.cols) * w, sy: Math.floor(j / u.cols) * h, sw: w, sh: h };
           if (curIndex >= u.first - 4 && curIndex <= u.first + u.n + 3) dirty = true;
         })
@@ -1139,7 +1144,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       if (m.width && m.height) { SRC_W = m.width; SRC_H = m.height; resize(); }
       const pk = m.pack, per = pk.cols * pk.rows;
       const unitList = Array.from({ length: pk.packs }, (_, k) => ({
-        url: BASE + pk.path.replace("%d", k + 1), first: k * per, n: Math.min(per, m.count - k * per), cols: pk.cols, w: pk.w, h: pk.h,
+        url: BASE + pk.path.replace("%d", k + 1), first: k * per, n: Math.min(per, m.count - k * per), cols: pk.cols, rows: pk.rows, w: pk.w, h: pk.h,
       }));
       useFrames({ count: m.count, unitList, keys: KEYS, times: m.times, prev: m.preview || null, part: m.crop || null });
     } catch (e) { /* no frames published: the stage stays on its stone background */ }
