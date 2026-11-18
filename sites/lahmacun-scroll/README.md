@@ -10,7 +10,8 @@ ustanın sözlüğü, görselli menü, galeri, Google yorumları, merak edilenle
 - `hazirla.sh`: sahneleri birleştirip `frames/` ve `frames-mobil/` setlerini üretir.
 - `frames/`: bilgisayar sahnesi: 330 kare, 2x2'lik 83 pakette (`paket-N.jpg`), önizleme paketleri ve `manifest.json`.
 - `frames-mobil/`: telefon sahnesi: yalnızca telefonun gösterdiği orta bölge, 640 px; aynı düzen.
-- `foto/lahmacun.jpg`: işletmenin gerçek lahmacun fotoğrafı (final bölümü).
+- `foto/`: işletmenin kendi fotoğrafları (lahmacun, lahmacun-firin, kilis-tava, sofra), her biri üç boyutta:
+  2000 px, `-m` 1200 px, `-k` 720 px. Tarayıcı ekranına uyanı indirir. Menüde, galeride ve finalde kullanılır.
 - `logo.svg`: markanın logosu, orijinalinden (`kaynak/logo-orijinal.webp`) vektöre çevrildi; her boyutta
   keskin. Üst çubukta, girişte ve sayfa sonunda kullanılır. `favicon.svg`: logodaki fırın, tarayıcı sekmesi için.
 
@@ -77,7 +78,7 @@ GOOGLE_API_KEY=... python3 google-cek.py
 
 ## Doldurulacaklar
 
-- Menünün kesik kalan kısmı: çorba adı ve içecekler; Kilis tava, sütlaç ve katmer fotoğrafları.
+- Menünün kesik kalan kısmı: çorba adı ve içecekler; sütlaç ve katmer fotoğrafları.
 - SSS'ye işletmenin cevaplaması gereken sorular: paket servis / yemek uygulamaları, rezervasyon,
   çalışma saatleri, otopark.
 - Adres, telefon, çalışma saatleri: `google-cek.py` çalışınca Google kaydından gelir.
