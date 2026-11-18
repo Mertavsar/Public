@@ -83,7 +83,7 @@ def main():
         yorumlar.append({
             "author": a.get("displayName", ""), "uri": a.get("uri", ""),
             "photo": avatar_kaydet(a["photoUri"], i) if a.get("photoUri") else None,
-            "rating": r.get("rating"), "when": r.get("relativePublishTimeDescription", ""), "text": metin,
+            "rating": r.get("rating"), "date": r.get("publishTime", ""), "text": metin,
         })
 
     hedef = os.path.join(OUT, "yer.json")

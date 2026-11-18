@@ -359,7 +359,14 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   background: linear-gradient(90deg, #f2a516 calc(var(--r) / 5 * 100%), rgba(20, 20, 20, .18) 0);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.revs { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+/* one swipeable row, whatever the number of reviews: no orphan card on a second line */
+.revs {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(min(84vw, 270px), 1fr); gap: 16px; align-items: start;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 4px var(--gutter-r) 18px var(--gutter-l); scroll-padding-inline: var(--gutter-l);
+}
+.revs::-webkit-scrollbar { display: none; }
+.rev { scroll-snap-align: start; }
 .rev {
   background: #fff; border-radius: 14px; padding: 22px; display: grid; gap: 12px; align-content: start; min-width: 0;
   box-shadow: 0 1px 0 rgba(20, 20, 20, .08), 0 18px 36px -24px rgba(0, 0, 0, .35);
@@ -409,7 +416,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .final h2 em { font-style: normal; color: var(--tomato); display: block; }
 .final .script { font-size: clamp(1.8rem, 4.6vw, 3.4rem); color: var(--cream); }
 .final .note { margin: 0; max-width: 54ch; color: var(--cream-dim); }
-.visit { margin: 6px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 40px; }
+.visit { margin: 6px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 18px 48px; }
 .visit div { display: grid; gap: 2px; }
 .visit dt { font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .72rem; color: var(--ember); }
 .visit dd { margin: 0; color: var(--cream); }
@@ -720,10 +727,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         <details class="q"><summary>İç harcında neler var?</summary><p>Al biber, yeşil biber, topak yeşil biber, domates (kışın Antep salçası), sarımsak ve baharat. Harç 2–4 saat buzdolabında dinlenip lezzetlenir.</p></details>
         <details class="q"><summary>Lahmacun alevde mi pişiyor?</summary><p>Hayır, taşta pişer. Fırınımız Urfa yöresinin fırın taşlarından, kümbet biçiminde örüldü; sabah erkenden yakılır, taştan gelen ısıyla bütün malzeme aynı derecede pişer.</p></details>
         <details class="q"><summary>Lahmacundan başka neler var?</summary><p>Kilis tava, çorbalarımız, sütlaç ve katmer. İçecekler de menüde.</p></details>
-        <details class="q"><summary>Neredesiniz?</summary><p>Erenköy'deyiz. Yol tarifi için Google Haritalar'daki sayfamızı açabilirsiniz.</p></details>
+        <details class="q"><summary>Neredesiniz?</summary><p>Erenköy'deyiz: Hatboyu Sokak No: 3A, Kadıköy/İstanbul. Yol tarifi için sayfanın başındaki “Yol tarifi” butonuna dokunun.</p></details>
+        <details class="q"><summary>Kaçta açıksınız?</summary><p>Hafta içi 11:00–21:00, cumartesi ve pazar 11:00–22:00.</p></details>
+        <details class="q"><summary>Telefonla ulaşabilir miyim?</summary><p>Evet: <a href="tel:+905334404327">0533 440 43 27</a>.</p></details>
       </div>
     </div>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Lahmacununuz neden bu kadar çıtır?", "acceptedAnswer": {"@type": "Answer", "text": "Taban incecik açılır ve harca sebze suyu karışmaz. Urfa taşından kümbet fırında, taş zeminden gelen ısıyla pişer; bu yüzden lahmacun hep çıtır ve gevrek kalır."}}, {"@type": "Question", "name": "Hangi et kullanılıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Balıkesir kuzusunun özel seçilmiş but ve döş eti. Zırhla, zırh kıvamında çekilir; sadece tuz ve beyaz biberle hazırlanır."}}, {"@type": "Question", "name": "Hamur nasıl hazırlanıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Gaziantep ve Urfa'da yetişen durum buğdayının unu, İstanbul'un suyu ve Erzincan'ın Kemah tuzu. Hamur en az altı saat önceden hazırlanır; dinlenmeden (firiklenmeden) üretime alınmaz."}}, {"@type": "Question", "name": "İç harcında neler var?", "acceptedAnswer": {"@type": "Answer", "text": "Al biber, yeşil biber, topak yeşil biber, domates (kışın Antep salçası), sarımsak ve baharat. Harç 2–4 saat buzdolabında dinlenip lezzetlenir."}}, {"@type": "Question", "name": "Lahmacun alevde mi pişiyor?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır, taşta pişer. Fırınımız Urfa yöresinin fırın taşlarından, kümbet biçiminde örüldü; sabah erkenden yakılır, taştan gelen ısıyla bütün malzeme aynı derecede pişer."}}, {"@type": "Question", "name": "Lahmacundan başka neler var?", "acceptedAnswer": {"@type": "Answer", "text": "Kilis tava, çorbalarımız, sütlaç ve katmer. İçecekler de menüde."}}, {"@type": "Question", "name": "Neredesiniz?", "acceptedAnswer": {"@type": "Answer", "text": "Erenköy'deyiz. Yol tarifi için Google Haritalar'daki sayfamızı açabilirsiniz."}}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Lahmacununuz neden bu kadar çıtır?", "acceptedAnswer": {"@type": "Answer", "text": "Taban incecik açılır ve harca sebze suyu karışmaz. Urfa taşından kümbet fırında, taş zeminden gelen ısıyla pişer; bu yüzden lahmacun hep çıtır ve gevrek kalır."}}, {"@type": "Question", "name": "Hangi et kullanılıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Balıkesir kuzusunun özel seçilmiş but ve döş eti. Zırhla, zırh kıvamında çekilir; sadece tuz ve beyaz biberle hazırlanır."}}, {"@type": "Question", "name": "Hamur nasıl hazırlanıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Gaziantep ve Urfa'da yetişen durum buğdayının unu, İstanbul'un suyu ve Erzincan'ın Kemah tuzu. Hamur en az altı saat önceden hazırlanır; dinlenmeden (firiklenmeden) üretime alınmaz."}}, {"@type": "Question", "name": "İç harcında neler var?", "acceptedAnswer": {"@type": "Answer", "text": "Al biber, yeşil biber, topak yeşil biber, domates (kışın Antep salçası), sarımsak ve baharat. Harç 2–4 saat buzdolabında dinlenip lezzetlenir."}}, {"@type": "Question", "name": "Lahmacun alevde mi pişiyor?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır, taşta pişer. Fırınımız Urfa yöresinin fırın taşlarından, kümbet biçiminde örüldü; sabah erkenden yakılır, taştan gelen ısıyla bütün malzeme aynı derecede pişer."}}, {"@type": "Question", "name": "Lahmacundan başka neler var?", "acceptedAnswer": {"@type": "Answer", "text": "Kilis tava, çorbalarımız, sütlaç ve katmer. İçecekler de menüde."}}, {"@type": "Question", "name": "Neredesiniz?", "acceptedAnswer": {"@type": "Answer", "text": "Erenköy'deyiz: Hatboyu Sokak No: 3A, Kadıköy/İstanbul."}}, {"@type": "Question", "name": "Kaçta açıksınız?", "acceptedAnswer": {"@type": "Answer", "text": "Hafta içi 11:00–21:00, cumartesi ve pazar 11:00–22:00."}}, {"@type": "Question", "name": "Telefonla ulaşabilir miyim?", "acceptedAnswer": {"@type": "Answer", "text": "Evet: 0533 440 43 27."}}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Kuzu Lahmacun", "servesCuisine": "Türk mutfağı, lahmacun", "telephone": "+90 533 440 43 27", "address": {"@type": "PostalAddress", "streetAddress": "Hatboyu Sk. No:3A, Çeşme Mah., Erenköy", "addressLocality": "Kadıköy", "addressRegion": "İstanbul", "postalCode": "34738", "addressCountry": "TR"}, "geo": {"@type": "GeoCoordinates", "latitude": 40.9740336, "longitude": 29.0753408}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "11:00", "closes": "21:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "11:00", "closes": "22:00"}], "hasMap": "https://www.google.com/maps?cid=13202010269743240704"}</script>
   </section>
 
   <section class="final band" id="ziyaret" aria-labelledby="finalTitle">
@@ -1367,10 +1377,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       document.getElementById("score").hidden = false;
     }
     const revs = document.getElementById("revs");
-    revs.innerHTML = (g.reviews || []).filter((r) => r.text).map((r) => `
+    revs.innerHTML = (g.reviews || []).filter((r) => r.text && Number(r.rating) === 5).map((r) => `
       <article class="rev">
         <header>${r.photo ? `<img src="${esc(r.photo)}" alt="" loading="lazy" width="42" height="42">` : ""}
-          <div><a href="${esc(r.uri || g.mapsUri)}" target="_blank" rel="noopener">${esc(r.author)}</a><small>${esc(r.when)}</small></div></header>
+          <div><a href="${esc(r.uri || g.mapsUri)}" target="_blank" rel="noopener">${esc(r.author)}</a><small>${esc(r.date ? new Date(r.date).toLocaleDateString("tr-TR", { month: "long", year: "numeric" }) : "")}</small></div></header>
         <span class="stars" style="--r:${Number(r.rating) || 0}" aria-label="${r.rating} yıldız">★★★★★</span>
         <p>${esc(r.text)}</p>
         <button class="more" type="button" hidden>Devamını oku</button>
@@ -1381,9 +1391,15 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       b.addEventListener("click", () => { el.classList.toggle("open"); b.textContent = el.classList.contains("open") ? "Kısalt" : "Devamını oku"; });
     });
     const visit = document.getElementById("visit"), rows = [];
-    if (g.address) rows.push(["Adres", `<a href="${esc(g.mapsUri)}" target="_blank" rel="noopener">${esc(g.address)}</a>`]);
+    if (g.address) rows.push(["Adres", esc(g.address.replace(/,\s*Türkiye$/, ""))]);
     if (g.phone) rows.push(["Telefon", `<a href="tel:${esc(g.phone.replace(/\s/g, ""))}">${esc(g.phone)}</a>`]);
-    if (g.hours && g.hours.length) rows.push(["Çalışma saatleri", g.hours.map(esc).join("<br>")]);
+    if (g.hours && g.hours.length) {
+      // "Pazartesi: 11:00–21:00" × 7 → "Pazartesi–Cuma 11:00–21:00", "Cumartesi–Pazar 11:00–22:00"
+      const days = g.hours.map((h) => { const k = h.indexOf(":"); return [h.slice(0, k).trim(), h.slice(k + 1).trim()]; });
+      const groups = [];
+      days.forEach(([d, t]) => { const last = groups[groups.length - 1]; if (last && last.t === t) last.to = d; else groups.push({ from: d, to: d, t }); });
+      rows.push(["Çalışma saatleri", groups.map((x) => `${esc(x.from === x.to ? x.from : `${x.from}–${x.to}`)} ${esc(x.t)}`).join("<br>")]);
+    }
     if (rows.length) { visit.innerHTML = rows.map(([t, d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join(""); visit.hidden = false; }
   }
   const loadGoogle = () => fetch("google/yer.json").then((r) => (r.ok ? r.json() : null)).then((g) => g && renderGoogle(g)).catch(() => {});
