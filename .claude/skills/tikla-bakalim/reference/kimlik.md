@@ -40,6 +40,16 @@ Referans: gırgır videosu (700 bin+). Hook **iki kısa cümle**dir:
    "Ama asıl sır ağın altında."
 3. Sonra hemen geri sar: "Baştan anlatayım." Cevap en sonda gelir.
 
+### Merak zinciri + döngü (kullanıcı kuralı)
+
+- **Her adım bir sonrakini merak ettirir.** Adım bitince kısa bir soru ya da yarım bilgi
+  ("Ama ağ dipte duruyorsa, balık nasıl yakalanıyor?", "Peki balıkçı sürüyü nasıl görüyor?").
+  Cevap bir sonraki adımda gelir. 2–3 köprü yeter, her cümle soru olmasın.
+- **Son ile baş birleşir (döngü).** Son cümle yarım kalır ve videonun ilk cümlesiyle tamamlanır;
+  izleyici başa döndüğünü fark etmeden tekrar izler. Örnek son: "…tıkla bakalım. Ve bugün hâlâ,"
+  → baş: "İzmir Karaburunlu balıkçılar kefali…". Görüntüde de son kare ilk kareyle aynı kadraja
+  döner (aynı açı, aynı ışık), müzik kesilmeden bağlanır.
+
 Yapma: izlenme sayısı, "çok sordunuz", "bu videoda anlatacağım" gibi meta giriş;
 kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay anlatılır.
 

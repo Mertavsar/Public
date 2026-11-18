@@ -1,10 +1,10 @@
-ÇÖKERTME DALYAN — SESLENDİRME (ElevenLabs: dil Turkish, model Eleven v3)
-Etiketler dışında metni değiştirme; kelime senkronu buna göre yapılıyor.
+ÇÖKERTME DALYAN — SESLENDİRME v2 (merak zinciri + döngü)
+ElevenLabs: dil Turkish, model Eleven v3. Etiketler dışında metni değiştirme.
 
 [curious] İzmir Karaburunlu balıkçılar kefali, bütün gün denize bakarak yakalıyor. [mysterious] Ama asıl sır, denizin dibinde. [short pause] Baştan anlatayım. Böyle merak edilen şeyleri basitçe anlatıyoruz, abone olmayı unutma.
 
-Bu yöntemin adı çökertme dalyan. Karaburun'da yüz yılı aşkın süredir yaşatılıyor. Sabah erkenden denize iki direk dikiliyor. Kocaman bir ağ, bu direklere bağlanıp denizin dibine seriliyor. Ağ, kefal sürülerinin geçiş yoluna kuruluyor. İplerin ucu ise kayalıklardaki küçük bir kulübeye uzanıyor. [short pause] Balıkçı kulübeye çıkıyor ve bütün gün bekliyor. [excited] Asıl ilginç kısım şimdi geliyor. İşine yaradıysa bir beğen bırak.
+Bu yöntemin adı çökertme dalyan. Karaburun'da yüz yılı aşkın süredir yaşatılıyor. Sabah erkenden denize iki direk dikiliyor. Kocaman bir ağ, bu direklere bağlanıp denizin dibine seriliyor. Ağ, kefal sürülerinin geçiş yoluna kuruluyor. [curious] Ama ağ dipte duruyorsa, balık nasıl yakalanıyor? [short pause] İplerin ucu, kayalıklardaki küçük bir kulübeye uzanıyor. Balıkçı kulübeye çıkıyor ve bütün gün bekliyor. [excited] Asıl ilginç kısım şimdi geliyor. İşine yaradıysa bir beğen bırak.
 
-[suspenseful] Balıkçı gözünü denizden hiç ayırmıyor. Çünkü ağın üstünde bir parıltı görürse, sürü tam oradadır. [short pause] İşte o an, iki ipi aynı anda çekiyor. [amazed] Dipteki ağ kalkıyor ve kefaller içinde hapsoluyor. [excited] Sonra küçük bir tekneyle ağa giriliyor ve balıklar toplanıyor. Bazen günde yüz balık geliyor, bazen hiç gelmiyor. [short pause] Balıkçıların dediği gibi: Gözün hep denizde olacak.
+[curious] Peki balıkçı, sürünün geldiğini nasıl anlıyor? [suspenseful] Gözünü denizden hiç ayırmıyor. Çünkü ağın üstünde bir parıltı görürse, sürü tam oradadır. [short pause] İşte o an, iki ipi aynı anda çekiyor. [amazed] Dipteki ağ kalkıyor ve kefaller içinde hapsoluyor. [excited] Sonra küçük bir tekneyle ağa giriliyor ve balıklar toplanıyor. [curious] Peki ya sürü hiç gelmezse? [short pause] Bazen günde yüz balık geliyor, bazen hiç gelmiyor. Balıkçıların dediği gibi: Gözün hep denizde olacak.
 
-Başka hangi avcılığı merak ediyorsun? Yorumlara yaz. Merak ettiysen, tıkla bakalım.
+Başka hangi avcılığı merak ediyorsun? Yorumlara yaz. Merak ettiysen, tıkla bakalım. [mysterious] Çünkü bugün hâlâ,
