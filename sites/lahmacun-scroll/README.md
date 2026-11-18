@@ -9,7 +9,7 @@ ustanın sözlüğü, menü, galeri (işletmenin fotoğraflarıyla slider), Goog
 - `kaynak/sahne1-3.mp4`: Google Flow sahneleri (beze ve açılış, malzeme yağmuru, fırın).
 - `hazirla.sh`: sahneleri birleştirip `frames/` ve `frames-mobil/` setlerini üretir.
 - `frames/`: bilgisayar sahnesi: 330 kare, 2x2'lik 83 pakette (`paket-N.jpg`), önizleme paketleri ve `manifest.json`.
-- `frames-mobil/`: telefon sahnesi: yalnızca telefonun gösterdiği orta bölge, 640 px; aynı düzen.
+- `frames-mobil/`: telefon sahnesi: yalnızca telefonun gösterdiği orta bölge, kaynağın kendi çözünürlüğünde (870 px); aynı düzen.
 - `foto/`: işletmenin kendi fotoğrafları (lahmacun, lahmacun-firin, kilis-tava, sofra), her biri üç boyutta:
   2000 px, `-m` 1200 px, `-k` 720 px. Tarayıcı ekranına uyanı indirir. Galeride (slider) kullanılır; finalde lahmacun.
 - `logo.svg`: markanın logosu, orijinalinden (`kaynak/logo-orijinal.webp`) vektöre çevrildi; her boyutta
@@ -66,7 +66,7 @@ Akıcılık için:
 
 Telefonda ilk girişin keskin olması için:
 - Telefon ayrı bir set yükler (`frames-mobil/`): ekranda görünen orta bölge, ekranın ihtiyacı
-  kadar çözünürlükte. Kare başı ~1/3 boyut (12 MB'a karşı 22 MB).
+  kaynağın tam çözünürlüğünde (16 MB'a karşı 22 MB).
 - Kareler 4'erli paketlerde gelir: istek sayısı 4'e bölünür (yavaş sunucuda ilk giriş hızlanır).
 - Keskin paketler kabadan inceye iner: önce bütün sahneye yayılmış her 4. paket, sonra aralar.
   Tam karenin keskini yoksa en fazla 4 kare ötedeki keskin kare gösterilir; bulanık önizleme

@@ -12,7 +12,8 @@
 # Çıktı iki set:
 #   frames/        bilgisayar: tam kare 1280x720, 2x2'lik paketlerde (paket-N.jpg)
 #   frames-mobil/  telefon: yalnızca telefonun gösterdiği orta bölge (genişliğin %6–74'ü),
-#                  640 px, 2x2'lik paketlerde; kare başı ~1/3 boyut
+#                  kaynağın kendi çözünürlüğünde (1280'lik karede 870 px; büyütme/küçültme yok),
+#                  2x2'lik paketlerde
 # Her sette ayrıca bütün karelerin küçük hâli 8x6'lık önizleme paketlerinde (onizleme-N.jpg):
 # site önce bunları indirir, kaydırma ilk saniyeden her karede doğru görüntüyü gösterir.
 # Paketler hem dosya sayısını hem istek sayısını 4'e böler; yavaş sunucuda ilk giriş hızlanır.
@@ -99,7 +100,7 @@ sel="$tmp/sel/%04d.jpg"
 ffmpeg -loglevel error -framerate 24 -i "$sel" -vf "tile=2x2" -q:v "$quality" "$out/paket-%d.jpg"
 ffmpeg -loglevel error -framerate 24 -i "$sel" -vf "scale=320:180:flags=lanczos,tile=8x6" -q:v 7 "$out/onizleme-%d.jpg"
 # phone: only the middle the phone shows, at the size the screen needs
-ffmpeg -loglevel error -framerate 24 -i "$sel" -vf "crop=iw*0.68:ih:iw*0.06:0,scale=640:-2:flags=lanczos,tile=2x2" -q:v 6 "$mob/paket-%d.jpg"
+ffmpeg -loglevel error -framerate 24 -i "$sel" -vf "crop=trunc(iw*0.68/2)*2:ih:iw*0.06:0,tile=2x2" -q:v 6 "$mob/paket-%d.jpg"
 ffmpeg -loglevel error -framerate 24 -i "$sel" -vf "crop=iw*0.68:ih:iw*0.06:0,scale=320:-2:flags=lanczos,tile=8x6" -q:v 9 "$mob/onizleme-%d.jpg"
 
 python3 - "$tmp" "$out" "$mob" <<'PY'
