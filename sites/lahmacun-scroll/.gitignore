@@ -1,2 +1,5 @@
 # Google’dan çekilen veri (yorumlar, profil fotoğrafları): depoda tutulmaz, google-cek.py ile üretilir
 google/
+
+# WordPress tema zip’leri: wp-tema/olustur.py üretir, depoya konmaz
+wp-tema/dagitim/

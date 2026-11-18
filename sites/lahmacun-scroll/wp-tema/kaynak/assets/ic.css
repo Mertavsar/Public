@@ -1,0 +1,14 @@
+/* Ana sayfa dışındaki sayfalar: site.css'in renkleri ve yazıları, sade bir okuma düzeni. */
+body.ic { background: var(--green-deep); }
+.ic .topbar { position: sticky; background: var(--green-deep); box-shadow: 0 1px 0 rgba(244, 239, 225, .12); }
+.ic .topbar nav a.nav { display: inline-block; }
+.ic-main { padding-block: clamp(56px, 8vw, 110px); min-height: 70vh; }
+.ic-wrap { max-width: 52rem; }
+.ic-yazi + .ic-yazi { margin-top: 64px; }
+.ic h1.display { font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 28px; }
+.ic-icerik { font-size: 1.06rem; color: var(--cream); }
+.ic-icerik a { color: var(--cream); text-decoration-color: var(--tomato); text-underline-offset: 3px; }
+.ic-icerik h2, .ic-icerik h3 { font-family: var(--f-display); font-weight: 800; margin: 1.6em 0 .5em; line-height: 1.15; }
+.ic-icerik img { max-width: 100%; height: auto; border-radius: 12px; }
+.ic-alt { padding-bottom: 32px; }
+.ic-alt .foot { margin-top: 0; }

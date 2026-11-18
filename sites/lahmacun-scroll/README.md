@@ -15,6 +15,29 @@ ustanın sözlüğü, menü, galeri (işletmenin fotoğraflarıyla slider), Goog
 - `logo.svg`: markanın logosu, orijinalinden (`kaynak/logo-orijinal.webp`) vektöre çevrildi; her boyutta
   keskin. Sitede yeşil kutusuz, şeffaf hâli (`logo-beyaz.svg`) kullanılır: üst çubukta, girişte ve sayfa sonunda. `favicon.svg`: logodaki fırın, tarayıcı sekmesi için.
 
+## WordPress teması
+
+```bash
+python3 wp-tema/olustur.py 1.0.0     # sürüm numarası: her güncellemede bir artırın
+```
+
+`index.html` tek kaynaktır; betik onu WordPress temasına çevirir ve `wp-tema/dagitim/` altına üç zip yazar:
+
+- `kuzu-lahmacun-<sürüm>.zip` (~35 MB): Görünüm → Temalar → Yeni ekle → Tema yükle → Etkinleştir.
+  Güncellemede aynı yoldan yüklenir; WordPress "Yüklenen ile değiştir" der. Paneldeki ayarlar korunur.
+- Sunucu büyük zip'i kabul etmezse: `kuzu-lahmacun-<sürüm>-hafif.zip` (~2 MB) tema olarak,
+  `kuzu-sahne-kareler.zip` hosting dosya yöneticisiyle `wp-content/uploads/` içine açılır
+  (`wp-content/uploads/kuzu-sahne/frames/...`). Tema kareleri kendisi bulur.
+
+Panel (sol menüde **Kuzu Lahmacun**): iletişim ve saatler, menü (`Kategori | Ürün | Fiyat`), merak edilenler,
+kayan bant, galeri (Medya'dan seçilir, sürükleyerek sıralanır), Google API anahtarı ve "Yorumları şimdi yenile".
+Yorumlar günde bir kez kendiliğinden yenilenir, sitede yalnızca 5 yıldızlılar görünür. Kaydırma sahnesi, perde
+yazıları ve tasarım koddadır: değişiklik `index.html`'de yapılır, yeni sürüm zip'i üretilir.
+
+`index.html` içindeki `<!--wp:...-->` işaretleri panelden gelen bölümlerin yeridir; silinmemeli.
+Üç zip de bir WordPress 6.8 kurulumunda yüklenip denendi (ilk kurulum, güncelleme, panelden kayıt,
+galeri seçimi, yorum çekme, hafif zip).
+
 ## Sahneyi yeniden üretmek
 
 ```bash
