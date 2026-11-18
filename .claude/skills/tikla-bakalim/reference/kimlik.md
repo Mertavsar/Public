@@ -43,6 +43,15 @@ Referans: gırgır videosu (700 bin+). Hook **iki kısa cümle**dir:
 Yapma: izlenme sayısı, "çok sordunuz", "bu videoda anlatacağım" gibi meta giriş;
 kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay anlatılır.
 
+### Görsel kurallar — "nasıl çalışıyor" videoları (kullanıcı kuralı)
+
+- **Üstte bölüm şeridi YOK** ("1 · AĞI KUR / 2 · BEKLE / 3 · ASIL SIR" gibi).
+  Kullanıcı: "çok Claude olduğu belli oluyor". Bölüm kartı, adım numarası da koyma.
+- **Süreci tek mekânda anlatma.** Her adım nerede oluyorsa orada göster: tekne
+  denizin üstünde (havadan), ağ suyun altında, kesit görünüm (yüzey + dip + ağ
+  aynı karede), toplama teknede. Sürekli su altı = "hep aynı yer" şikâyeti.
+- Mekanizma anı (asıl sır) yakın plan ve yavaş; gerisi hızlı, değişken açılar.
+
 ## Etkileşim cümleleri — metnin içine giydirilir (kullanıcı kuralı)
 
 Her metinde **üç** etkileşim anı var. Reklam gibi değil, anlatının parçası gibi:
