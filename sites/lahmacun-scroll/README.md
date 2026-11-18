@@ -11,6 +11,8 @@ menü ve final gelir.
 - `frames/`: bilgisayar sahnesi: 330 kare, 2x2'lik 83 pakette (`paket-N.jpg`), önizleme paketleri ve `manifest.json`.
 - `frames-mobil/`: telefon sahnesi: yalnızca telefonun gösterdiği orta bölge, 640 px; aynı düzen.
 - `foto/lahmacun.jpg`: işletmenin gerçek lahmacun fotoğrafı (final bölümü).
+- `logo.svg`: markanın logosu, orijinalinden (`kaynak/logo-orijinal.webp`) vektöre çevrildi; her boyutta
+  keskin. Üst çubukta, girişte ve sayfa sonunda kullanılır. `favicon.svg`: logodaki fırın, tarayıcı sekmesi için.
 
 ## Sahneyi yeniden üretmek
 
@@ -59,6 +61,5 @@ Telefonda ilk girişin keskin olması için:
 ## Doldurulacaklar
 
 - Menünün kesik kalan kısmı: çorba adı ve içecekler.
-- Orijinal logo dosyası (şu an menüden çizilmiş bir benzeri).
 - Adres, telefon, çalışma saatleri; yol tarifi şimdilik Google Haritalar araması.
 - Sahne 3'te lahmacun alevle pişiyor; işletmenin metni "harlı ateşte değil, taşta" diyor.

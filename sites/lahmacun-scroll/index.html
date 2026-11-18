@@ -7,6 +7,8 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Buyurun, Lahm-ı Acîn yemeye. Durum buğdayı unu, Balıkesir kuzusu, Urfa taşından fırın. Kuzu Lahmacun & Kilis Tava, Erenköy.">
 <meta name="theme-color" content="#0b5236">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="logo.svg" as="image" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Kaushan+Script&display=swap">
@@ -29,8 +31,8 @@
   --f-display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
   --f-body: "Archivo", -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-script: "Kaushan Script", "Brush Script MT", cursive;
-  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
-  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --gutter-l: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px));
+  --gutter-r: max(clamp(16px, 4vw, 56px), env(safe-area-inset-right, 0px));
   --brush: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 64' preserveAspectRatio='none'%3E%3Cpath fill='%23141414' d='M8 14C40 6 120 9 200 6s150-3 192 2l-8 8 14 6-10 8 11 8-9 8 6 9c-66 5-146 3-216 5S50 61 10 57l8-8-15-8 11-8-12-8 10-6Z'/%3E%3Cpath fill='%23141414' opacity='.55' d='M30 4 360 1l-4 3-322 3ZM40 61l300-2-6 4-290 1Z'/%3E%3C/svg%3E");
   --brush-red: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 64' preserveAspectRatio='none'%3E%3Cpath fill='%23d8342a' d='M8 14C40 6 120 9 200 6s150-3 192 2l-8 8 14 6-10 8 11 8-9 8 6 9c-66 5-146 3-216 5S50 61 10 57l8-8-15-8 11-8-12-8 10-6Z'/%3E%3C/svg%3E");
   --paper: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -47,7 +49,7 @@ body {
 [hidden] { display: none !important; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--tomato); outline-offset: 3px; }
-.wrap { max-width: 72rem; margin: 0 auto; }
+.wrap { max-width: 120rem; margin: 0 auto; }
 .band { padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
 .script { font-family: var(--f-script); font-weight: 400; margin: 0; }
 .tag {
@@ -62,32 +64,20 @@ a { color: inherit; }
   text-transform: uppercase; line-height: .9; letter-spacing: -.015em; text-wrap: balance;
 }
 
-/* ── Logo lockup (bar + footer) ── */
-.lockup {
-  display: inline-grid; grid-template-columns: auto auto auto; align-items: center; column-gap: .3em; row-gap: .24em;
-  font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 112;
-  text-transform: uppercase; line-height: .86; letter-spacing: -.01em; color: var(--cream); text-decoration: none;
-}
-.lockup .l-left { text-align: right; }
-.lockup .l-left span, .lockup .l-right span { display: block; }
-.lockup .oven { width: auto; height: 1.62em; aspect-ratio: 120 / 63; }
-.lockup .l-loc {
-  grid-column: 1 / -1; display: flex; align-items: center; gap: .6em; justify-content: center; padding-left: .5em;
-  font-size: .28em; font-weight: 700; letter-spacing: .5em; font-variation-settings: "wdth" 125;
-}
-.lockup .l-loc::before, .lockup .l-loc::after { content: ""; flex: 1; height: 2px; background: currentColor; opacity: .8; }
+/* ── Logo (vector, from the brand's own artwork: sharp at any size) ── */
+.brand { display: inline-block; line-height: 0; text-decoration: none; }
+.brand img { display: block; height: 100%; width: auto; aspect-ratio: 1822 / 869; }
 
 /* ── Fixed bar ── */
 .topbar {
   position: fixed; z-index: 20; top: 0; left: 0; right: 0;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding-top: calc(10px + env(safe-area-inset-top, 0px)); padding-bottom: 10px;
-  padding-left: max(clamp(16px, 4vw, 48px), env(safe-area-inset-left, 0px));
-  padding-right: max(clamp(16px, 4vw, 48px), env(safe-area-inset-right, 0px));
+  padding-left: var(--gutter-l); padding-right: var(--gutter-r);
   transition: background-color .3s ease, box-shadow .3s ease;
 }
 body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgba(244, 239, 225, .12); }
-.topbar .lockup { font-size: 15px; opacity: var(--brand-o, 1); }
+.topbar .brand { height: 52px; opacity: var(--brand-o, 1); }
 .topbar nav { display: flex; align-items: center; gap: 4px; }
 .topbar nav a.nav { font-weight: 700; font-size: .9rem; text-decoration: none; padding: 10px 12px; border-radius: 999px; }
 .topbar nav a.nav:hover { background: rgba(244, 239, 225, .12); }
@@ -150,7 +140,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   background: radial-gradient(ellipse 75% 65% at 50% 50%, rgba(10, 9, 7, .62) 0%, rgba(10, 9, 7, .9) 100%);
   will-change: opacity, transform;
 }
-.intro .oven { width: clamp(70px, 9vw, 120px); height: auto; aspect-ratio: 120 / 63; margin-bottom: .6rem; }
+.intro .logo { display: block; width: clamp(150px, min(19vw, 30vh), 280px); height: auto; aspect-ratio: 1822 / 869; margin-bottom: .9rem; box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .7); }
 .intro .script { font-size: clamp(2.6rem, min(7vw, 11vh), 5.6rem); line-height: 1; color: var(--cream); }
 .intro h1 { font-size: clamp(2.2rem, min(8.4vw, 13vh), 7.6rem); color: var(--cream); text-shadow: 0 6px 40px rgba(0, 0, 0, .6); }
 .intro h1 em { font-style: normal; color: var(--tomato); }
@@ -169,8 +159,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .overlay {
   position: absolute; inset: 0; pointer-events: none;
   padding-top: calc(84px + env(safe-area-inset-top, 0px)); padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
-  padding-left: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px));
-  padding-right: max(clamp(16px, 4vw, 56px), env(safe-area-inset-right, 0px));
+  padding-left: var(--gutter-l); padding-right: var(--gutter-r);
 }
 .frame { position: relative; height: 100%; text-shadow: 0 2px 16px rgba(8, 7, 5, .75); }
 .chaps { position: absolute; right: 0; bottom: 0; width: min(27rem, 100%); display: grid; }
@@ -199,7 +188,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 @media (max-width: 1099px) { .rail-wrap { display: none; } }
 
 @media (max-width: 760px) {
-  .topbar .lockup { font-size: 12px; }
+  .topbar .brand { height: 40px; }
   .topbar nav a.nav { display: none; }
   .overlay { padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
   .chap h2 { font-size: clamp(1.45rem, 6.6vw, 2rem); margin: .55rem 0 .15rem; }
@@ -312,7 +301,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .final .script { font-size: clamp(1.8rem, 4.6vw, 3.4rem); color: var(--cream); }
 .final .note { margin: 0; max-width: 54ch; color: var(--cream-dim); }
 .final-photo {
-  width: min(100%, 980px); aspect-ratio: 16 / 9; border-radius: 22px; margin-top: 18px;
+  width: min(100%, 1280px); aspect-ratio: 16 / 9; border-radius: 22px; margin-top: 18px;
   background: url("foto/lahmacun.jpg") center / cover no-repeat, rgb(46, 44, 42);
   box-shadow: 0 0 0 8px var(--stone), 0 0 0 10px rgba(244, 239, 225, .3), 0 30px 60px -20px rgba(0, 0, 0, .7);
 }
@@ -321,7 +310,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   margin-top: clamp(72px, 9vw, 120px); padding-top: 24px; border-top: 2px solid rgba(244, 239, 225, .18);
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; color: var(--cream-dim); font-size: .85rem; width: 100%;
 }
-.foot .lockup { font-size: 18px; }
+.foot .brand { height: 68px; }
 
 /* ── Lab (internal: only with #dene) ── */
 .lab { margin-top: 40px; padding: 20px; border: 2px dashed rgba(244, 239, 225, .35); border-radius: 12px; display: grid; gap: 12px; max-width: 46rem; text-align: left; }
@@ -343,14 +332,6 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 <div class="site" lang="tr">
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="oven" viewBox="0 17 120 63">
-      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M8 74a52 52 0 0 1 104 0"/><path d="M27 74a33 33 0 0 1 66 0"/><path d="M4 76h112"/>
-        <path d="M27.6 66.5 9.5 61M33.7 52.6 18.8 41M45 42.8 37.4 26M60 41V22.5M75 42.8 82.6 26M86.3 52.6l14.9-11.6M92.4 66.5l18.1-5.5"/>
-        <path d="M44 74a16 16 0 0 1 32 0"/>
-      </g>
-      <path fill="currentColor" d="M60 50c5 6 9 9.5 9 15a9 9 0 0 1-18 0c0-3.6 2-5.6 3.6-7.4.3 2.6 1.6 4 3 4.4-.8-4.4.5-8.4 2.4-12Z"/>
-    </symbol>
     <defs>
       <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0 0 10 5 0 10z" fill="#f4efe1"/>
@@ -359,12 +340,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   </svg>
 
   <header class="topbar" id="topbar">
-    <a class="lockup" href="#track" aria-label="Kuzu Lahmacun, Kilis Tava, Erenköy — başa dön">
-      <span class="l-left" aria-hidden="true"><span>Kuzu</span><span>Lahmacun</span></span>
-      <svg class="oven" viewBox="0 0 120 63" aria-hidden="true"><use href="#oven"/></svg>
-      <span class="l-right" aria-hidden="true"><span>Kilis</span><span>Tava</span></span>
-      <span class="l-loc" aria-hidden="true">Erenköy</span>
-    </a>
+    <a class="brand" href="#track" aria-label="Kuzu Lahmacun — başa dön"><img src="logo.svg" alt="Kuzu Lahmacun" width="97" height="46"></a>
     <nav aria-label="Bölümler">
       <a class="nav" href="#hikaye">Hikâye</a>
       <a class="nav" href="#sir">Sır</a>
@@ -386,10 +362,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <div id="labels" aria-hidden="true"></div>
 
       <div class="intro" id="hero">
-        <svg class="oven" viewBox="0 0 120 63" aria-hidden="true"><use href="#oven"/></svg>
+        <img class="logo" src="logo.svg" alt="Kuzu Lahmacun" width="280" height="134" fetchpriority="high">
         <p class="script">Buyurun</p>
         <h1 class="display">Lahm-ı Acîn<br><em>yemeye</em></h1>
-        <p class="who">Kuzu Lahmacun · Kilis Tava · Erenköy</p>
+        <p class="who">Lahmacun · Kilis Tava · Erenköy</p>
         <p class="cue" aria-hidden="true">Kaydır, şov başlasın<i></i></p>
       </div>
 
@@ -577,12 +553,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       </section>
 
       <footer class="foot">
-        <span class="lockup" aria-label="Kuzu Lahmacun, Kilis Tava, Erenköy">
-          <span class="l-left" aria-hidden="true"><span>Kuzu</span><span>Lahmacun</span></span>
-          <svg class="oven" viewBox="0 0 120 63" aria-hidden="true"><use href="#oven"/></svg>
-          <span class="l-right" aria-hidden="true"><span>Kilis</span><span>Tava</span></span>
-          <span class="l-loc" aria-hidden="true">Erenköy</span>
-        </span>
+        <span class="brand"><img src="logo.svg" alt="Kuzu Lahmacun" width="143" height="68" loading="lazy"></span>
         <span>© 2026 Kuzu Lahmacun &amp; Kilis Tava</span>
       </footer>
     </div>
