@@ -217,7 +217,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 @keyframes slide { to { transform: translateX(-50%); } }
 
 /* ── Lügat ── */
-.lugat { background: var(--paper), var(--cream); color: var(--ink); padding-block: clamp(80px, 11vw, 140px); }
+.lugat { background: var(--paper), var(--cream); color: var(--ink); padding-block: clamp(56px, 7vw, 100px); }
 .lugat-grid { display: grid; gap: clamp(32px, 6vw, 80px); align-items: start; }
 @media (min-width: 900px) { .lugat-grid { grid-template-columns: 1.15fr 1fr; } }
 .entry { border-top: 3px solid var(--ink); padding-top: 22px; display: grid; gap: 10px; }
@@ -226,10 +226,12 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .entry ol { margin: 6px 0 0; padding-left: 1.4em; font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 700; line-height: 1.3; }
 .entry ol li::marker { color: var(--tomato); font-weight: 900; }
 .entry .script { color: var(--tomato); font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-top: 8px; }
-.lugat-text { display: grid; gap: 18px; font-size: 1.1rem; }
-.lugat-text p { margin: 0; max-width: 46ch; }
-.lugat-text .pill { display: grid; gap: 4px; border-left: 4px solid var(--tomato); padding: 4px 0 4px 16px; }
-.lugat-text .pill b { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: .95rem; letter-spacing: .03em; }
+.lugat-text { display: grid; gap: 28px; align-content: center; height: 100%; }
+.lugat-text .lead { margin: 0; max-width: 40ch; font-size: clamp(1.2rem, 1.9vw, 1.55rem); line-height: 1.45; font-weight: 500; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.facts li { display: grid; gap: 2px; border-top: 4px solid var(--tomato); padding-top: 12px; min-width: 0; }
+.facts b { font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110; text-transform: uppercase; font-size: clamp(1rem, 1.8vw, 1.35rem); line-height: 1.05; color: var(--green); }
+.facts span { color: var(--ink-dim); font-size: .92rem; }
 
 /* ── Göç ── */
 .goc { background: var(--stone); padding-block: clamp(80px, 11vw, 140px); }
@@ -282,15 +284,100 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 
 /* ── Menü ── */
 .menu { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green); padding-block: clamp(80px, 11vw, 140px); }
-.cards { display: grid; gap: 20px; }
-@media (min-width: 900px) { .cards { grid-template-columns: repeat(3, 1fr); } }
-.card { background: var(--paper), var(--cream); color: var(--ink); border-radius: 14px; padding: 22px 22px 26px; display: grid; gap: 18px; align-content: start; min-width: 0; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .55); }
-.card .tag { font-size: 1.05rem; justify-self: start; margin-left: -6px; }
+/* dishes: the lahmacun is the hero tile; the rest are smaller. A dish without its own photo yet
+   shows the oven mark from the logo instead of a stock picture. */
+.dishes { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dish.feature { grid-column: 1 / -1; }
+@media (min-width: 900px) { .dishes { grid-template-columns: repeat(4, minmax(0, 1fr)); } .dish.feature { grid-column: span 2; grid-row: span 2; } }
+.dish {
+  background: var(--paper), var(--cream); color: var(--ink); border-radius: 16px; overflow: hidden; min-width: 0;
+  display: grid; grid-template-rows: auto 1fr; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .55);
+}
+.dish .ph { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--green-deep); }
+.dish.feature .ph { aspect-ratio: 16 / 10; }
+@media (min-width: 900px) { .dish.feature { grid-template-rows: 1fr auto; } .dish.feature .ph { aspect-ratio: auto; height: 100%; min-height: 320px; } }
+.dish .ph.empty { display: grid; place-items: center; color: rgba(244, 239, 225, .22); background: radial-gradient(ellipse at 50% 120%, var(--green-hi), var(--green-deep) 70%); }
+.dish .ph.empty svg { width: 42%; height: auto; }
+.dish-body { padding: 18px 20px 20px; display: grid; gap: 12px; align-content: start; }
+.dish.feature .dish-body { padding: 24px 28px 28px; }
+.dish h3 { margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 112; text-transform: uppercase; font-size: 1.25rem; line-height: 1; color: var(--green); }
+.dish.feature h3 { font-size: clamp(2rem, 4vw, 2.8rem); }
+.dish-body p { margin: 0; color: var(--ink-dim); }
+.dish-body.row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.dish .price { font-family: var(--f-display); font-weight: 900; font-size: 1.25rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dish .ph.empty svg { display: block; }
 .prices { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .prices li { display: flex; align-items: baseline; gap: 8px; font-weight: 700; font-size: 1.08rem; }
 .prices .dots { flex: 1; min-width: 20px; border-bottom: 3px dotted rgba(20, 20, 20, .55); transform: translateY(-5px); }
 .prices b { font-family: var(--f-display); font-weight: 900; font-size: 1.25rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .menu-note { margin: 28px 0 0; color: var(--cream-dim); }
+
+/* ── Galeri ── */
+.galeri { background: var(--stone); padding-block: clamp(80px, 11vw, 140px); }
+.gal { columns: 2 220px; column-gap: 14px; }
+@media (min-width: 900px) { .gal { columns: 4 240px; } }
+.gal button {
+  display: block; width: 100%; margin: 0 0 14px; padding: 0; border: 0; border-radius: 12px; overflow: hidden;
+  background: #2a2622; cursor: zoom-in; break-inside: avoid; position: relative;
+}
+.gal img { display: block; width: 100%; height: auto; transition: transform .5s ease; }
+.gal button:hover img { transform: scale(1.04); }
+.gal:empty { display: none; }
+.sec-foot { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.sec-foot .src { color: inherit; opacity: .65; font-size: .82rem; }
+
+/* ── Yorumlar ── */
+.yorum { background: var(--paper), var(--cream); color: var(--ink); padding-block: clamp(80px, 11vw, 140px); }
+.yorum .sec-head h2 { color: var(--green); }
+.score { display: flex; align-items: center; gap: 18px; margin: -12px 0 32px; }
+.score b { font-family: var(--f-display); font-weight: 900; font-size: clamp(3.4rem, 7vw, 5.4rem); line-height: .85; color: var(--green); font-variant-numeric: tabular-nums; }
+.score div { display: grid; gap: 4px; }
+.score small { font-weight: 700; color: var(--ink-dim); }
+.stars {
+  --r: 5; font-size: 1.5rem; letter-spacing: .08em; line-height: 1; width: max-content;
+  background: linear-gradient(90deg, #f2a516 calc(var(--r) / 5 * 100%), rgba(20, 20, 20, .18) 0);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.revs { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.rev {
+  background: #fff; border-radius: 14px; padding: 22px; display: grid; gap: 12px; align-content: start; min-width: 0;
+  box-shadow: 0 1px 0 rgba(20, 20, 20, .08), 0 18px 36px -24px rgba(0, 0, 0, .35);
+}
+.rev header { display: flex; align-items: center; gap: 12px; }
+.rev header img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex: none; background: var(--green); }
+.rev header a { font-weight: 800; text-decoration: none; }
+.rev header small { display: block; color: var(--ink-dim); font-size: .8rem; }
+.rev .stars { font-size: 1.05rem; }
+.rev p { margin: 0; color: var(--ink-dim); display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
+.rev.open p { display: block; }
+.rev .more { justify-self: start; background: none; border: 0; padding: 0; font: inherit; font-weight: 800; color: var(--green); cursor: pointer; text-decoration: underline; }
+
+/* ── SSS ── */
+.sss { background: var(--green-deep); padding-block: clamp(80px, 11vw, 140px); }
+.sss-grid { display: grid; gap: 24px; }
+@media (min-width: 980px) { .sss-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 64px; align-items: start; } .sss .sec-head { position: sticky; top: 110px; } }
+.qs { border-top: 2px solid rgba(244, 239, 225, .22); }
+.q { border-bottom: 2px solid rgba(244, 239, 225, .14); }
+.q summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0;
+  font-family: var(--f-display); font-weight: 800; font-variation-settings: "wdth" 105; font-size: clamp(1.1rem, 1.8vw, 1.35rem); line-height: 1.2;
+}
+.q summary::-webkit-details-marker { display: none; }
+.q summary::after { content: "+"; flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--tomato); color: #fff; font-size: 1.4rem; font-weight: 700; transition: transform .25s ease; }
+.q[open] summary::after { transform: rotate(45deg); }
+.q p { margin: 0; padding: 0 56px 24px 0; color: var(--cream-dim); max-width: 62ch; }
+
+/* ── Lightbox ── */
+.lb { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(8, 7, 5, .94); color: var(--cream); }
+.lb::backdrop { background: rgba(8, 7, 5, .6); }
+.lb figure { margin: 0; height: 100%; display: grid; place-items: center; align-content: center; gap: 12px; padding: 64px max(16px, 6vw) 40px; }
+.lb img { max-width: 100%; max-height: calc(100dvh - 140px); border-radius: 10px; }
+.lb figcaption { font-size: .85rem; color: var(--cream-dim); }
+.lb button { position: absolute; border: 0; background: rgba(244, 239, 225, .12); color: #fff; cursor: pointer; border-radius: 50%; width: 48px; height: 48px; font-size: 1.6rem; display: grid; place-items: center; }
+.lb button:hover { background: rgba(244, 239, 225, .24); }
+.lb-x { top: 16px; right: 16px; }
+.lb-nav { top: 50%; transform: translateY(-50%); }
+.lb-nav.prev { left: 12px; } .lb-nav.next { right: 12px; }
 
 /* ── Finale ── */
 .final { background: var(--stone); padding-block: clamp(90px, 12vw, 160px) 40px; text-align: center; position: relative; overflow: hidden; }
@@ -300,6 +387,11 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .final h2 em { font-style: normal; color: var(--tomato); display: block; }
 .final .script { font-size: clamp(1.8rem, 4.6vw, 3.4rem); color: var(--cream); }
 .final .note { margin: 0; max-width: 54ch; color: var(--cream-dim); }
+.visit { margin: 6px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 40px; }
+.visit div { display: grid; gap: 2px; }
+.visit dt { font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: .72rem; color: var(--ember); }
+.visit dd { margin: 0; color: var(--cream); }
+.visit a { text-decoration: none; }
 .final-photo {
   width: min(100%, 1280px); aspect-ratio: 16 / 9; border-radius: 22px; margin-top: 18px;
   background: url("foto/lahmacun.jpg") center / cover no-repeat, rgb(46, 44, 42);
@@ -332,6 +424,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 <div class="site" lang="tr">
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="ovenmark" viewBox="0 17 120 63">
+      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 74a52 52 0 0 1 104 0"/><path d="M27 74a33 33 0 0 1 66 0"/><path d="M4 76h112"/>
+        <path d="M27.6 66.5 9.5 61M33.7 52.6 18.8 41M45 42.8 37.4 26M60 41V22.5M75 42.8 82.6 26M86.3 52.6l14.9-11.6M92.4 66.5l18.1-5.5"/>
+      </g>
+      <path fill="currentColor" d="M60 50c5 6 9 9.5 9 15a9 9 0 0 1-18 0c0-3.6 2-5.6 3.6-7.4.3 2.6 1.6 4 3 4.4-.8-4.4.5-8.4 2.4-12Z"/>
+    </symbol>
     <defs>
       <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M0 0 10 5 0 10z" fill="#f4efe1"/>
@@ -345,7 +444,10 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <a class="nav" href="#hikaye">Hikâye</a>
       <a class="nav" href="#sir">Sır</a>
       <a class="nav" href="#menu">Menü</a>
-      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Kuzu+Lahmacun+Kilis+Tava+Erenk%C3%B6y" target="_blank" rel="noopener">
+      <a class="nav" href="#galeri">Galeri</a>
+      <a class="nav" href="#yorumlar">Yorumlar</a>
+      <a class="nav" href="#sss">SSS</a>
+      <a class="btn" href="https://www.google.com/maps?cid=13202010269743240704" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
         Yol tarifi
       </a>
@@ -426,16 +528,18 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   <section class="lugat band" id="hikaye" aria-labelledby="lugatTitle">
     <div class="wrap lugat-grid">
       <div class="entry">
-        <p class="tag red">Lügat</p>
+        <p class="tag red">Lahm-ı Acîn</p>
         <h2 class="word" id="lugatTitle">lahm-ı acîn</h2>
-        <p class="gram">isim · Arapça · bugünkü adıyla lahmacun</p>
-        <ol><li>Etli hamur.</li><li>Mezopotamya'dan bugüne binlerce yıllık azık.</li></ol>
+        <p class="gram">Arapça · “etli hamur” · bugünkü adıyla lahmacun</p>
         <p class="script">Adı bile tarifini söylüyor.</p>
       </div>
       <div class="lugat-text">
-        <p>Lahmacun Mezopotamya ve Orta Doğu kökenli, binlerce yıllık bir yemek. İncecik açılan hamurun üstüne elde kıyılmış et ve baharat konur, açık ateşte ya da ilkel fırınlarda pişirilirdi.</p>
-        <div class="pill"><b>Seferin azığı</b><span>Hem doyurucu hem çabuk yapıldığı için seferdeki askerin, yoldaki yolcunun azığıydı.</span></div>
-        <div class="pill"><b>Bugün de aynı mantık</b><span>İnce hamur, elde çekilmiş et, taşın ısısı. Gerisi ustanın eli.</span></div>
+        <p class="lead">Mezopotamya'dan bugüne binlerce yıllık bir lezzet. İncecik açılan hamurun üstüne elde kıyılmış et ve baharat; hem doyurucu hem çabuk olduğu için seferdeki askerin, yoldaki yolcunun azığıydı.</p>
+        <ul class="facts">
+          <li><b>Binlerce yıl</b><span>Mezopotamya kökenli</span></li>
+          <li><b>Etli hamur</b><span>adının anlamı</span></li>
+          <li><b>Taşta</b><span>pişer, alevde değil</span></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -513,18 +617,86 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         <p class="tag">Menü</p>
         <h2 class="display" id="menuTitle">Fırından sofraya</h2>
       </div>
-      <div class="cards">
-        <article class="card"><h3 class="tag">Lahmacun</h3><ul class="prices">
-          <li><span>Sarımsaklı</span><i class="dots"></i><b>220 ₺</b></li>
-          <li><span>Soğanlı</span><i class="dots"></i><b>220 ₺</b></li></ul></article>
-        <article class="card"><h3 class="tag">Kilis Tava</h3><ul class="prices">
-          <li><span>Kilis Tava</span><i class="dots"></i><b>700 ₺</b></li></ul></article>
-        <article class="card"><h3 class="tag">Tatlılar</h3><ul class="prices">
-          <li><span>Sütlaç</span><i class="dots"></i><b>200 ₺</b></li>
-          <li><span>Katmer</span><i class="dots"></i><b>600 ₺</b></li></ul></article>
+      <div class="dishes">
+        <article class="dish feature">
+          <img class="ph" src="foto/lahmacun.jpg" alt="Taş fırından yeni çıkmış lahmacun" loading="lazy" decoding="async" width="1600" height="900">
+          <div class="dish-body">
+            <h3>Lahmacun</h3>
+            <p>İncecik hamur, Balıkesir kuzusu, Urfa taşında. Hep çıtır.</p>
+            <ul class="prices">
+              <li><span>Sarımsaklı</span><i class="dots"></i><b>220 ₺</b></li>
+              <li><span>Soğanlı</span><i class="dots"></i><b>220 ₺</b></li>
+            </ul>
+          </div>
+        </article>
+        <article class="dish" data-dish="kilis-tava">
+          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
+          <div class="dish-body row"><h3>Kilis Tava</h3><b class="price">700 ₺</b></div>
+        </article>
+        <article class="dish" data-dish="sutlac">
+          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
+          <div class="dish-body row"><h3>Sütlaç</h3><b class="price">200 ₺</b></div>
+        </article>
+        <article class="dish" data-dish="katmer">
+          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
+          <div class="dish-body row"><h3>Katmer</h3><b class="price">600 ₺</b></div>
+        </article>
+        <article class="dish">
+          <div class="ph empty" aria-hidden="true"><svg viewBox="0 0 120 63"><use href="#ovenmark"/></svg></div>
+          <div class="dish-body"><h3>Çorba · İçecekler</h3><p>Çorbalarımız ve içeceklerimiz de menüde.</p></div>
+        </article>
       </div>
-      <p class="menu-note">Çorbalarımız ve içeceklerimiz de menüde.</p>
     </div>
+  </section>
+
+  <section class="galeri band" id="galeri" aria-labelledby="galTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tag red">Galeri</p>
+        <h2 class="display" id="galTitle">Fırının başından</h2>
+        <p>Fotoğraflar işletmemizin Google sayfasından.</p>
+      </div>
+      <div class="gal" id="gal"></div>
+      <div class="sec-foot"><a class="btn" href="https://www.google.com/maps?cid=13202010269743240704" target="_blank" rel="noopener">Tüm fotoğraflar Google'da</a></div>
+    </div>
+  </section>
+
+  <section class="yorum band" id="yorumlar" aria-labelledby="revTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tag">Yorumlar</p>
+        <h2 class="display" id="revTitle">Misafirlerimiz ne diyor?</h2>
+      </div>
+      <div class="score" id="score" hidden>
+        <b id="scoreNum"></b>
+        <div><span class="stars" id="scoreStars" aria-hidden="true">★★★★★</span><small id="scoreCount"></small></div>
+      </div>
+      <div class="revs" id="revs"></div>
+      <div class="sec-foot">
+        <a class="btn red" href="https://www.google.com/maps?cid=13202010269743240704" target="_blank" rel="noopener">Google'da bütün yorumları oku</a>
+        <small class="src">Yorumlar ve puan Google'dan alınır.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="sss band" id="sss" aria-labelledby="sssTitle">
+    <div class="wrap sss-grid">
+      <div class="sec-head">
+        <p class="tag red">Merak edilenler</p>
+        <h2 class="display" id="sssTitle">Sıkça sorulanlar</h2>
+        <p>Aklınıza takılan başka bir şey olursa ustamıza sorun; seve seve anlatır.</p>
+      </div>
+      <div class="qs">
+        <details class="q"><summary>Lahmacununuz neden bu kadar çıtır?</summary><p>Taban incecik açılır ve harca sebze suyu karışmaz. Urfa taşından kümbet fırında, taş zeminden gelen ısıyla pişer; bu yüzden lahmacun hep çıtır ve gevrek kalır.</p></details>
+        <details class="q"><summary>Hangi et kullanılıyor?</summary><p>Balıkesir kuzusunun özel seçilmiş but ve döş eti. Zırhla, zırh kıvamında çekilir; sadece tuz ve beyaz biberle hazırlanır.</p></details>
+        <details class="q"><summary>Hamur nasıl hazırlanıyor?</summary><p>Gaziantep ve Urfa'da yetişen durum buğdayının unu, İstanbul'un suyu ve Erzincan'ın Kemah tuzu. Hamur en az altı saat önceden hazırlanır; dinlenmeden (firiklenmeden) üretime alınmaz.</p></details>
+        <details class="q"><summary>İç harcında neler var?</summary><p>Al biber, yeşil biber, topak yeşil biber, domates (kışın Antep salçası), sarımsak ve baharat. Harç 2–4 saat buzdolabında dinlenip lezzetlenir.</p></details>
+        <details class="q"><summary>Lahmacun alevde mi pişiyor?</summary><p>Hayır, taşta pişer. Fırınımız Urfa yöresinin fırın taşlarından, kümbet biçiminde örüldü; sabah erkenden yakılır, taştan gelen ısıyla bütün malzeme aynı derecede pişer.</p></details>
+        <details class="q"><summary>Lahmacundan başka neler var?</summary><p>Kilis tava, çorbalarımız, sütlaç ve katmer. İçecekler de menüde.</p></details>
+        <details class="q"><summary>Neredesiniz?</summary><p>Erenköy'deyiz. Yol tarifi için Google Haritalar'daki sayfamızı açabilirsiniz.</p></details>
+      </div>
+    </div>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Lahmacununuz neden bu kadar çıtır?", "acceptedAnswer": {"@type": "Answer", "text": "Taban incecik açılır ve harca sebze suyu karışmaz. Urfa taşından kümbet fırında, taş zeminden gelen ısıyla pişer; bu yüzden lahmacun hep çıtır ve gevrek kalır."}}, {"@type": "Question", "name": "Hangi et kullanılıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Balıkesir kuzusunun özel seçilmiş but ve döş eti. Zırhla, zırh kıvamında çekilir; sadece tuz ve beyaz biberle hazırlanır."}}, {"@type": "Question", "name": "Hamur nasıl hazırlanıyor?", "acceptedAnswer": {"@type": "Answer", "text": "Gaziantep ve Urfa'da yetişen durum buğdayının unu, İstanbul'un suyu ve Erzincan'ın Kemah tuzu. Hamur en az altı saat önceden hazırlanır; dinlenmeden (firiklenmeden) üretime alınmaz."}}, {"@type": "Question", "name": "İç harcında neler var?", "acceptedAnswer": {"@type": "Answer", "text": "Al biber, yeşil biber, topak yeşil biber, domates (kışın Antep salçası), sarımsak ve baharat. Harç 2–4 saat buzdolabında dinlenip lezzetlenir."}}, {"@type": "Question", "name": "Lahmacun alevde mi pişiyor?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır, taşta pişer. Fırınımız Urfa yöresinin fırın taşlarından, kümbet biçiminde örüldü; sabah erkenden yakılır, taştan gelen ısıyla bütün malzeme aynı derecede pişer."}}, {"@type": "Question", "name": "Lahmacundan başka neler var?", "acceptedAnswer": {"@type": "Answer", "text": "Kilis tava, çorbalarımız, sütlaç ve katmer. İçecekler de menüde."}}, {"@type": "Question", "name": "Neredesiniz?", "acceptedAnswer": {"@type": "Answer", "text": "Erenköy'deyiz. Yol tarifi için Google Haritalar'daki sayfamızı açabilirsiniz."}}]}</script>
   </section>
 
   <section class="final band" id="ziyaret" aria-labelledby="finalTitle">
@@ -534,8 +706,9 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <div class="final-photo" role="img" aria-label="Taş fırından yeni çıkmış lahmacun, ustanın tahtasında"></div>
       <p class="script">Buyurun… Afiyet olsun.</p>
       <p class="note">Gaziantep ve Urfa'da yetişmiş ustalarımızın elinden, yöre taşından fırınımızda; hijyen bizde olmazsa olmaz.</p>
+      <dl class="visit" id="visit" hidden></dl>
       <div class="actions">
-        <a class="btn red" href="https://www.google.com/maps/search/?api=1&amp;query=Kuzu+Lahmacun+Kilis+Tava+Erenk%C3%B6y" target="_blank" rel="noopener">
+        <a class="btn red" href="https://www.google.com/maps?cid=13202010269743240704" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
           Yol tarifi al
         </a>
@@ -559,6 +732,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     </div>
   </section>
 </div>
+
+<dialog class="lb" id="lb" aria-label="Fotoğraf">
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-x" id="lbX" type="button" aria-label="Kapat">✕</button>
+  <button class="lb-nav prev" id="lbPrev" type="button" aria-label="Önceki">‹</button>
+  <button class="lb-nav next" id="lbNext" type="button" aria-label="Sonraki">›</button>
+</dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
@@ -1046,6 +1226,70 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     labStatus.textContent = "Asıl sahneye dönüldü.";
     loadManifest();
   });
+
+  // ── Google: yorumlar, puan, galeri, adres ─────────────────────────────────
+  // google/yer.json, google-cek.py'nin işletmenin kendi Google kaydından (CID ile doğrulanmış)
+  // çektiği veridir. Dosya yoksa bölümler Google sayfasına giden butonlarla kalır; hiçbir şey uydurulmaz.
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const trNum = (n, d = 0) => Number(n).toLocaleString("tr-TR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  function renderGoogle(g) {
+    if (g.rating) {
+      document.getElementById("scoreNum").textContent = trNum(g.rating, 1);
+      document.getElementById("scoreStars").style.setProperty("--r", g.rating);
+      document.getElementById("scoreCount").textContent = `Google'da ${trNum(g.count || 0)} değerlendirme`;
+      document.getElementById("score").hidden = false;
+    }
+    const revs = document.getElementById("revs");
+    revs.innerHTML = (g.reviews || []).filter((r) => r.text).map((r) => `
+      <article class="rev">
+        <header>${r.photo ? `<img src="${esc(r.photo)}" alt="" loading="lazy" width="42" height="42">` : ""}
+          <div><a href="${esc(r.uri || g.mapsUri)}" target="_blank" rel="noopener">${esc(r.author)}</a><small>${esc(r.when)}</small></div></header>
+        <span class="stars" style="--r:${Number(r.rating) || 0}" aria-label="${r.rating} yıldız">★★★★★</span>
+        <p>${esc(r.text)}</p>
+        <button class="more" type="button" hidden>Devamını oku</button>
+      </article>`).join("");
+    revs.querySelectorAll(".rev").forEach((el) => {
+      const p = el.querySelector("p"), b = el.querySelector(".more");
+      if (p.scrollHeight > p.clientHeight + 4) b.hidden = false;
+      b.addEventListener("click", () => { el.classList.toggle("open"); b.textContent = el.classList.contains("open") ? "Kısalt" : "Devamını oku"; });
+    });
+    const photos = g.photos || [];
+    const gal = document.getElementById("gal");
+    gal.innerHTML = photos.map((ph, i) => `<button type="button" data-i="${i}" aria-label="Fotoğrafı büyüt">
+      <img src="${esc(ph.thumb)}" alt="${esc(g.name)} fotoğrafı" loading="lazy" decoding="async" width="${ph.tw}" height="${ph.th}"></button>`).join("");
+    const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+    let at = 0;
+    const show = (i) => {
+      at = (i + photos.length) % photos.length;
+      lbImg.src = photos[at].src;
+      lbCap.textContent = photos[at].by ? `Fotoğraf: ${photos[at].by} · Google` : "Google";
+    };
+    gal.addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-i]");
+      if (!b || typeof lb.showModal !== "function") return;
+      show(+b.dataset.i); lb.showModal(); if (lenis) lenis.stop();
+    });
+    lb.addEventListener("close", () => { if (lenis) lenis.start(); });
+    document.getElementById("lbX").addEventListener("click", () => lb.close());
+    document.getElementById("lbPrev").addEventListener("click", () => show(at - 1));
+    document.getElementById("lbNext").addEventListener("click", () => show(at + 1));
+    lb.addEventListener("click", (e) => { if (e.target === lb || e.target.tagName === "FIGURE") lb.close(); });
+    lb.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") show(at - 1); if (e.key === "ArrowRight") show(at + 1); });
+    // menu tiles: a Google photo picked for a dish (google/yer.json "menu": { "kilis-tava": "google/....jpg" })
+    Object.entries(g.menu || {}).forEach(([k, src]) => {
+      const ph = document.querySelector(`.dish[data-dish="${k}"] .ph.empty`);
+      if (!ph) return;
+      const img = new Image(); img.className = "ph"; img.src = src; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+      ph.replaceWith(img);
+    });
+    const visit = document.getElementById("visit"), rows = [];
+    if (g.address) rows.push(["Adres", `<a href="${esc(g.mapsUri)}" target="_blank" rel="noopener">${esc(g.address)}</a>`]);
+    if (g.phone) rows.push(["Telefon", `<a href="tel:${esc(g.phone.replace(/\s/g, ""))}">${esc(g.phone)}</a>`]);
+    if (g.hours && g.hours.length) rows.push(["Çalışma saatleri", g.hours.map(esc).join("<br>")]);
+    if (rows.length) { visit.innerHTML = rows.map(([t, d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join(""); visit.hidden = false; }
+  }
+  const loadGoogle = () => fetch("google/yer.json").then((r) => (r.ok ? r.json() : null)).then((g) => g && renderGoogle(g)).catch(() => {});
+  if ("requestIdleCallback" in window) requestIdleCallback(loadGoogle, { timeout: 2500 }); else setTimeout(loadGoogle, 1200);
 })();
 </script>
 </body>

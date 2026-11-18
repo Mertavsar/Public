@@ -2,8 +2,8 @@
 
 Site lahmacunun hikâyesini anlatır. Kaydırma sahnesi altı perde: hamur, açılış, iç, et,
 fırın, servis. Havada dökülen her malzemenin adı, düştüğü yerden çıkan ince bir çizgiyle
-yazılır. Ardından lügat, göç hikâyesi, dört kalem (hamur, et, iç, fırın), ustanın sözlüğü,
-menü ve final gelir.
+yazılır. Ardından kısa lahm-ı acîn yazısı, göç hikâyesi, dört kalem (hamur, et, iç, fırın),
+ustanın sözlüğü, görselli menü, galeri, Google yorumları, merak edilenler (SSS) ve final gelir.
 
 - `index.html`: sitenin tamamı (tek dosya).
 - `kaynak/sahne1-3.mp4`: Google Flow sahneleri (beze ve açılış, malzeme yağmuru, fırın).
@@ -49,6 +49,23 @@ Telefonda ilk girişin keskin olması için:
   yalnızca en baştaki bir iki saniye için yedektir.
 
 
+## Google: yorumlar, galeri, adres ve saatler
+
+```bash
+GOOGLE_API_KEY=... python3 google-cek.py
+```
+
+`google/yer.json` ve `google/` altındaki fotoğrafları yazar; site bu dosyayı okur. Google Cloud'da
+"Places API (New)" açık bir anahtar gerekir. Yorumlar Google'ın seçtiği en fazla 5 yorumdur.
+
+- Doğru işletme: "Kuzu Lahmacun" adında rakip bir işletme daha var. Betik yalnızca müşterinin
+  linkindeki kaydı (CID 13202010269743240704) kabul eder; arama başka yer döndürürse durur.
+- Dosya yoksa Yorumlar ve Galeri yalnızca Google sayfasına giden butonla görünür; hiçbir şey uydurulmaz.
+- Menüde fotoğrafı olmayan ürün, logodaki fırın işaretiyle görünür. Ürüne fotoğraf atamak için
+  `google/yer.json` içindeki `"menu"` alanına `"kilis-tava": "google/foto-3.jpg"` gibi yazılır
+  (anahtarlar: `kilis-tava`, `sutlac`, `katmer`).
+- Bütün "Yol tarifi" butonları müşterinin kendi Google kaydını açar (arama değil).
+
 ## Ayarlar (`index.html` içinde)
 
 - `KEYS`: kaydırma ile video zamanını perdelere eşler.
@@ -60,6 +77,8 @@ Telefonda ilk girişin keskin olması için:
 
 ## Doldurulacaklar
 
-- Menünün kesik kalan kısmı: çorba adı ve içecekler.
-- Adres, telefon, çalışma saatleri; yol tarifi şimdilik Google Haritalar araması.
+- Menünün kesik kalan kısmı: çorba adı ve içecekler; Kilis tava, sütlaç ve katmer fotoğrafları.
+- SSS'ye işletmenin cevaplaması gereken sorular: paket servis / yemek uygulamaları, rezervasyon,
+  çalışma saatleri, otopark.
+- Adres, telefon, çalışma saatleri: `google-cek.py` çalışınca Google kaydından gelir.
 - Sahne 3'te lahmacun alevle pişiyor; işletmenin metni "harlı ateşte değil, taşta" diyor.
