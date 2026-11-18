@@ -51,6 +51,9 @@ kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay
   denizin üstünde (havadan), ağ suyun altında, kesit görünüm (yüzey + dip + ağ
   aynı karede), toplama teknede. Sürekli su altı = "hep aynı yer" şikâyeti.
 - Mekanizma anı (asıl sır) yakın plan ve yavaş; gerisi hızlı, değişken açılar.
+- **Hazır görsele yakınlaşma + su dalgalanması + etiket ("canlı fotoğraf") stili İPTAL.**
+  Çökertme dalyan denemesinde kullanıcı: "berbat, iptal et bu tarzı". Kullanıcı görsel atarsa
+  ya gerçek hareket (Higgsfield görselden video) ya da kodla 3D sahne; fotoğrafa Ken Burns yok.
 
 ## Etkileşim cümleleri — metnin içine giydirilir (kullanıcı kuralı)
 
