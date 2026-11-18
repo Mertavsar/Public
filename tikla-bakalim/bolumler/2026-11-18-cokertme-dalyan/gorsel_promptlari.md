@@ -54,7 +54,7 @@ no duplicate people, no oversaturated colors.
 
 Sağdaki "Cümle" sütunu, karenin seslendirmede hangi cümleye denk geldiğini gösterir.
 
-### 01 — HOOK · "Karaburunlu balıkçılar kefali, bütün gün denize bakarak yakalıyor."
+### 01 — HOOK · "İzmir Karaburunlu balıkçılar kefali, bütün gün denize bakarak yakalıyor."
 ```
 [ORTAK STİL] [KARAKTER] sitting inside a small weathered wooden lookout hut built on stilts about
 3 meters high on top of pale limestone rocks at the water's edge. The hut is made of sun-bleached
@@ -86,7 +86,7 @@ Two thin wooden poles stick out of the water a short distance offshore. Clear mi
 high altitude, vertical framing with the coastline running diagonally. [NEGATİF]
 ```
 
-### 05 — "Bu yöntemin adı çökertme dalyan. İzmir Karaburun'da yüz yılı aşkın süredir yaşatılıyor."
+### 05 — "Bu yöntemin adı çökertme dalyan. Karaburun'da yüz yılı aşkın süredir yaşatılıyor."
 ```
 [ORTAK STİL] Wide eye-level photograph from the water toward the shore: a small rocky cove with the
 weathered wooden lookout hut on 3-meter stilts on the limestone rocks, a wooden ladder leading up to
