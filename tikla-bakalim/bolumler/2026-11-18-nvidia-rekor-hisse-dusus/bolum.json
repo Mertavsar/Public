@@ -1,0 +1,678 @@
+{
+ "baslik": "Nvidia rekor kırdı, hissesi neden düşüyor? Yapay zekâ balonu sorusu",
+ "tarih": "2026-11-18",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "Nvidia",
+  "rekor",
+  "düştü",
+  "balon"
+ ],
+ "altyazi": {
+  "yüz on beş milyar dolarlık": "115 milyar dolarlık",
+  "Üç soruda": "3 soruda",
+  "yüz dokuz milyar": "109 milyar",
+  "yüz yedi milyarı": "107 milyarı",
+  "yüz otuz milyar dolar": "130 milyar dolar",
+  "altı Ekim'deki": "6 Ekim'deki",
+  "on iki Kasım'da": "12 Kasım'da",
+  "yedi yüz otuz milyar dolar": "730 milyar dolar",
+  "dört yüz on milyar dolardı": "410 milyar dolardı",
+  "Bin dolarlık": "1.000 dolarlık",
+  "altı yüz seksen dolar": "680 dolar",
+  "Beş Kasım'da": "5 Kasım'da",
+  "iki trilyon dolardan": "2 trilyon dolardan",
+  "on üç Kasım": "13 Kasım",
+  "bir trilyon dolara": "1 trilyon dolara"
+ },
+ "kapak": {
+  "ikon": "🤖",
+  "ust": "NVIDIA REKOR KIRDI",
+  "buyuk": "−%32",
+  "alt": "HİSSE NEDEN DÜŞÜYOR?"
+ },
+ "cta": [
+  {
+   "sahne": 15,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Nvidia üç ayda yüz on beş milyar dolarlık satış yaptı. Bir yılda iki katına çıktı.",
+   "p": {
+    "ikon": "🤖",
+    "etiket": "Nvidia · 3 aylık satış",
+    "deger": 115.8,
+    "onek": "",
+    "sonek": " milyar $",
+    "ondalik": 1,
+    "yon": "up",
+    "renk": "yesil",
+    "sayma": false,
+    "not": "Ağu–Eki 2026 çeyreği · bir yıl öncesine göre +%103",
+    "ok_renk": "yesil"
+   },
+   "etiket": "REKOR",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Ama hissesi, rekorunun neredeyse üçte bir altında. Peki neden? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "📉",
+    "etiket": "Nvidia hissesi · rekordan düşüş",
+    "deger": 32,
+    "onek": "−%",
+    "sonek": "",
+    "ondalik": 0,
+    "yon": "down",
+    "renk": "kirmizi",
+    "sayma": false,
+    "not": "239,24 $ (6 Ekim) → 162,85 $ (13 Kasım) · hesap bizim",
+    "ok_renk": "kirmizi"
+   },
+   "etiket": "AMA",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Karmaşık teknoloji haberlerini sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "KARMAŞIK TEKNOLOJİ",
+     "*SADE DİLLE*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Önce kısa bilgi. Nvidia, yapay zekânın çalıştığı çipleri üretiyor.",
+   "p": {
+    "ikon": "🧠",
+    "satirlar": [
+     "NVIDIA =",
+     "*YAPAY ZEKÂ ÇİPİ*"
+    ],
+    "boy": 100
+   },
+   "etiket": "NVIDIA KİM?"
+  },
+  {
+   "bolum": "ne",
+   "tip": "akis",
+   "say": "Sohbet botlarının arkasındaki dev bilgisayarlar, bu çiplerle çalışıyor.",
+   "p": {
+    "baslik": "Yapay zekâ nasıl çalışır?",
+    "adimlar": [
+     {
+      "ikon": "💬",
+      "metin": "Sen *soru sorarsın*"
+     },
+     {
+      "ikon": "🏢",
+      "metin": "Veri merkezi *hesaplar*"
+     },
+     {
+      "ikon": "🧩",
+      "metin": "İçinde *Nvidia çipi*"
+     }
+    ]
+   },
+   "etiket": "ÇİP"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Dün gece açıklanan sonuçlar beklentiyi aştı. Piyasa yüz dokuz milyar bekliyordu.",
+   "p": {
+    "baslik": "🤖 Nvidia · 3 aylık satış · milyar $",
+    "sol": {
+     "etiket": "BEKLENTİ",
+     "deger": 109.1,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "GERÇEKLEŞEN",
+     "deger": 115.8,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": "",
+    "ondalik": 1,
+    "fark": "beklentinin üstünde",
+    "not": "Açıklama: 17 Kasım 2026 (ABD saatiyle)"
+   },
+   "etiket": "BEKLENTİ",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Bunun yüz yedi milyarı, veri merkezlerine satılan çiplerden geldi.",
+   "p": {
+    "ikon": "🏢",
+    "etiket": "Veri merkezi satışı · 3 ay",
+    "deger": 107.6,
+    "onek": "",
+    "sonek": " milyar $",
+    "ondalik": 1,
+    "yon": "up",
+    "renk": "yesil",
+    "not": "Toplam satışın ~%93'ü · hesap bizim",
+    "ok_renk": "yesil"
+   },
+   "etiket": "VERİ MERKEZİ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Şirket, gelecek üç ay için yüz otuz milyar dolar bekliyor.",
+   "p": {
+    "ikon": "🔭",
+    "etiket": "Gelecek çeyrek satış hedefi (bekleniyor)",
+    "deger": 130,
+    "onek": "~",
+    "sonek": " milyar $",
+    "ondalik": 0,
+    "yon": "up",
+    "renk": "sari",
+    "not": "Şirket tahmini · ±%3 · kesin değil",
+    "ok_renk": "sari"
+   },
+   "etiket": "HEDEF",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Buna rağmen hisse, altı Ekim'deki rekorundan beri sert düşüyor.",
+   "p": {
+    "baslik": "📉 1 Nvidia hissesi · dolar",
+    "sol": {
+     "etiket": "REKOR\n6 EKİM",
+     "deger": 239.24,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "13 KASIM",
+     "deger": 162.85,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 2,
+    "fark": "≈ −%32",
+    "not": "Kapanış fiyatları · hesap bizim"
+   },
+   "etiket": "HİSSE",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Sonuçlar gelince hisse önce yükseldi, sonra kararsız kaldı.",
+   "p": {
+    "ikon": "🎢",
+    "satirlar": [
+     "İLK TEPKİ",
+     "*KARARSIZ*"
+    ],
+    "boy": 108,
+    "not": "Seans sonrası işlemler · 17 Kasım"
+   },
+   "etiket": "İLK TEPKİ",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "p": {
+    "gun": "12",
+    "ay": "KASIM",
+    "gunadi": "PERŞEMBE",
+    "saat": "",
+    "not": "Kurucu CEO *görevi bıraktı*"
+   },
+   "say": "Üstelik şirketin kurucusu Jensen Huang, on iki Kasım'da görevi bıraktı.",
+   "etiket": "AYRILIK",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Şirket sebebini açıklamadı. Yerine geçici olarak finans direktörü geçti.",
+   "p": {
+    "ikon": "🪑",
+    "satirlar": [
+     "GEÇİCİ CEO:",
+     "*FİNANS DİREKTÖRÜ*"
+    ],
+    "boy": 92,
+    "not": "Colette Kress · kalıcı isim aranıyor"
+   },
+   "etiket": "GEÇİCİ",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki rekor kıran bir şirketin hissesi neden düşer?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "REKOR VAR,\n*HİSSE NEDEN DÜŞÜYOR?*",
+    "boy": 88
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN BIRAK*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Birinci sebep basit. Borsa bugünü değil, yarını fiyatlar.",
+   "p": {
+    "ikon": "🔮",
+    "satirlar": [
+     "1. SEBEP",
+     "BORSA *YARINI* FİYATLAR"
+    ],
+    "boy": 92
+   },
+   "etiket": "SEBEP 1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Hisseyi alan, gelecekteki kârı bugünden öder. Beklenti zaten çok yüksekti.",
+   "p": {
+    "baslik": "Hisse fiyatı nasıl oluşur?",
+    "adimlar": [
+     {
+      "ikon": "🔭",
+      "metin": "Gelecek *kâr beklentisi*"
+     },
+     {
+      "ikon": "💵",
+      "metin": "Bugünden *fiyata girer*"
+     },
+     {
+      "ikon": "📈",
+      "metin": "Beklenti ~zaten tavan~"
+     }
+    ]
+   },
+   "etiket": "BEKLENTİ"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yani iyi haber yetmiyor. Yatırımcı, daha da iyisini görmek istiyor.",
+   "p": {
+    "ikon": "🎯",
+    "satirlar": [
+     "İYİ HABER",
+     "~YETMİYOR~"
+    ],
+    "boy": 108
+   },
+   "etiket": "ÇITA"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "İkinci sebep daha büyük. Nvidia'nın parası, birkaç dev müşteriden geliyor.",
+   "p": {
+    "ikon": "🏦",
+    "satirlar": [
+     "2. SEBEP",
+     "*BİRKAÇ DEV MÜŞTERİ*"
+    ],
+    "boy": 92
+   },
+   "etiket": "SEBEP 2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Amazon, Google, Microsoft ve Meta bu yıl yaklaşık yedi yüz otuz milyar dolar harcıyor.",
+   "p": {
+    "baslik": "2026 yatırım harcaması (şirket planları)",
+    "satirlar": [
+     {
+      "ikon": "📦",
+      "metin": "Amazon",
+      "deger": "~220 milyar $",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🔎",
+      "metin": "Google",
+      "deger": "~200 milyar $",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🪟",
+      "metin": "Microsoft",
+      "deger": "~175 milyar $",
+      "renk": "sari"
+     },
+     {
+      "ikon": "👥",
+      "metin": "Meta",
+      "deger": "~140 milyar $",
+      "renk": "sari"
+     }
+    ],
+    "not": "Toplam ≈ 730 milyar $ · tahmini · yapay zekâ dışı dahil"
+   },
+   "etiket": "4 DEV",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "karsilastir",
+   "say": "Geçen yıl bu rakam, dört yüz on milyar dolardı.",
+   "p": {
+    "baslik": "4 dev şirketin yatırım harcaması · milyar $",
+    "sol": {
+     "etiket": "2025",
+     "deger": 410,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "2026\n(plan)",
+     "deger": 730,
+     "renk": "sari"
+    },
+    "onek": "",
+    "sonek": "",
+    "ondalik": 0,
+    "fark": "≈ 1,8 kat",
+    "not": "Yapay zekâ dışı yatırımlar dahil · tahmini"
+   },
+   "etiket": "HARCAMA",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu paranın bir kısmı borçla bulunuyor. Soru şu: bu yatırım geri dönecek mi?",
+   "p": {
+    "ikon": "❓",
+    "satirlar": [
+     "BU PARA",
+     "*GERİ DÖNECEK Mİ?*"
+    ],
+    "boy": 96
+   },
+   "etiket": "SORU",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Dönmezse harcama kısılabilir. Kısılırsa ilk etkilenen, çipi satan olur.",
+   "p": {
+    "baslik": "Yatırımcının korkusu (senaryo)",
+    "adimlar": [
+     {
+      "ikon": "💸",
+      "metin": "Kazanç ~gecikir~"
+     },
+     {
+      "ikon": "✂️",
+      "metin": "Harcama ~kısılabilir~"
+     },
+     {
+      "ikon": "🧩",
+      "metin": "Çip satışı ~yavaşlayabilir~"
+     }
+    ]
+   },
+   "etiket": "KORKU"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "İnternetin konuştuğu yapay zekâ balonu sorusu tam olarak bu.",
+   "p": {
+    "ikon": "🫧",
+    "satirlar": [
+     "YAPAY ZEKÂ",
+     "*BALON MU?*"
+    ],
+    "boy": 108
+   },
+   "etiket": "BALON?"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Üçüncü sebep belirsizlik. Kurucu gidince, yatırımcı tedirgin oldu.",
+   "p": {
+    "ikon": "🧭",
+    "satirlar": [
+     "3. SEBEP",
+     "~LİDERLİK BELİRSİZ~"
+    ],
+    "boy": 92
+   },
+   "etiket": "SEBEP 3",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Özetle: beklenti tavandaydı, harcama soru işareti, liderlik belirsiz.",
+   "p": {
+    "baslik": "Özetle neden",
+    "adimlar": [
+     {
+      "ikon": "🔮",
+      "metin": "Beklenti ~tavanda~"
+     },
+     {
+      "ikon": "🏦",
+      "metin": "Harcama *soru işareti*"
+     },
+     {
+      "ikon": "🧭",
+      "metin": "Liderlik ~belirsiz~"
+     }
+    ]
+   },
+   "etiket": "SONUÇ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin cebine nasıl dokunur?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Rekorda bin dolarlık Nvidia hissesi alan, bugün altı yüz seksen dolar civarı görüyor.",
+   "p": {
+    "baslik": "Rekorda alınan 1.000 $'lık Nvidia hissesi",
+    "ikon": "📉",
+    "ogeler": [
+     "1.000 $",
+     "×",
+     "162,85 ÷ 239,24",
+     "=",
+     "≈ 680 $"
+    ]
+   },
+   "etiket": "HESAP",
+   "kaynak": "K3 · hesap bizim · 13 Kasım kapanışı"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Beş Kasım'da yapay zekâ hisseleri, bir günde iki trilyon dolardan fazla değer kaybetti.",
+   "p": {
+    "ikon": "💥",
+    "etiket": "Nasdaq 100 · 5 Kasım · bir günde silinen değer",
+    "deger": 2.3,
+    "onek": "~",
+    "sonek": " trilyon $",
+    "ondalik": 1,
+    "yon": "down",
+    "renk": "kirmizi",
+    "not": "Kaynağa göre 2,3–2,5 trilyon $",
+    "ok_renk": "kirmizi"
+   },
+   "etiket": "TEK GÜN",
+   "kaynak": "K8"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yurt dışı hisse ya da teknoloji fonun varsa, bu dalgalanma doğrudan sana dokunur.",
+   "p": {
+    "ikon": "💼",
+    "satirlar": [
+     "TEKNOLOJİ FONUN",
+     "*VARSA DİKKAT*"
+    ],
+    "boy": 96
+   },
+   "etiket": "FON"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Büyük düşüşlerde yatırımcı riskten kaçabilir. Bu, gelişen piyasaları da sarsabilir.",
+   "p": {
+    "baslik": "Olası zincir (yorum)",
+    "adimlar": [
+     {
+      "ikon": "📉",
+      "metin": "Teknoloji ~sarsılır~"
+     },
+     {
+      "ikon": "🏃",
+      "metin": "Yatırımcı *riskten kaçabilir*"
+     },
+     {
+      "ikon": "🌍",
+      "metin": "Gelişen piyasalar ~etkilenebilir~"
+     }
+    ]
+   },
+   "etiket": "ZİNCİR"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Yine de harcama durmuyor. Gelecek yıl bir trilyon dolara ulaşması bekleniyor.",
+   "p": {
+    "ikon": "🏗️",
+    "etiket": "Dev bulut şirketleri · 2027 yatırım (bekleniyor)",
+    "deger": 1,
+    "onek": "~",
+    "sonek": " trilyon $",
+    "ondalik": 0,
+    "yon": "up",
+    "renk": "sari",
+    "not": "Tahmini · Goldman Sachs ~1,2 trilyon $ · Moody's ~1 trilyon $",
+    "ok_renk": "sari"
+   },
+   "etiket": "2027",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani balon mu, değil mi? Bunu bugün kimse kesin bilemez.",
+   "p": {
+    "ikon": "🔮",
+    "satirlar": [
+     "BALON MU?",
+     "*KESİN DEĞİL*"
+    ],
+    "boy": 108,
+    "not": "Yorum — tahmin değildir"
+   },
+   "etiket": "SONRA?"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video yatırım tavsiyesi değildir. Fiyatlar on üç Kasım kapanışına göre.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "TAVSİYE",
+     "*DEĞİLDİR*"
+    ],
+    "boy": 104,
+    "not": "Hisse fiyatları 13 Kasım 2026 kapanışı · anlık değişir"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sence yapay zekâ bir balon mu? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "Nvidia 3. çeyrek (mali 2027, 25 Ekim 2026'da biten) sonuçları, 17 Kasım 2026: satış 115,8 milyar $ (+%103), veri merkezi 107,6 milyar $, gelecek çeyrek hedefi ~130 milyar $ ±%3 — https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027 ; https://www.investing.com/news/company-news/nvidia-q3-fy27-slides-revenue-doubles-to-1158b-on-ai-demand-93CH-5034317 ; https://blockchain.news/news/nvidia-q3-fy27-financial-results ; https://www.stocktitan.net/sec-filings/NVDA/8-k-nvidia-corp-reports-material-event-1b8846aa7232.html ; https://finance.biggo.com/news/a35c2b80-8a21-463b-9e3e-1286e70905f8",
+  "K2": "Beklenti ~109,1–109,3 milyar $ (LSEG / Visible Alpha) — https://www.cnbc.com/2026/11/17/stocks-moving-the-most-today-live-updates.html ; https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/11/nvidia-earnings-preview-q3-2027",
+  "K3": "Nvidia rekor kapanış 239,24 $ (6 Ekim 2026), 13 Kasım 2026 kapanış 162,85 $ (−%32) — https://www.macrotrends.net/stocks/charts/NVDA/nvidia/stock-price-history ; https://www.atlasbig.com/companies/nvidia/stock-price ; https://fourweekmba.com/nvidia-stock/",
+  "K4": "Sonuç sonrası seans dışı işlemler: önce +%2–5, sonra kazanç geri verildi — https://www.fool.com/investing/2026/11/17/nvidia-sales-double-under-an-interim-ceo-rapid-earnings-reaction/ ; https://www.livewiremarkets.com/wires/live-blog-nvidia-earnings-a-nervous-market-puts-the-ai-trade-to-the-test ; https://www.marketscreener.com/news/asia-stocks-choppy-after-nvidia-earnings-as-anthropic-pricing-looms-ce785edcde8ef622",
+  "K5": "Jensen Huang 12 Kasım 2026'da CEO'luktan ayrıldı; şirket sebep açıklamadı; CFO Colette Kress geçici CEO — https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html ; https://www.npr.org/2026/11/12/nx-s1-6038865/ceo-jensen-huang-resigns-from-chip-giant-nvidia ; https://www.aljazeera.com/news/2026/11/12/why-did-nvidia-ceo-jensen-huang-resign-and-who-is-colette-kress",
+  "K6": "Amazon, Alphabet, Microsoft, Meta 2026 yatırım harcaması planı ~720–745 milyar $ (Amazon ~220, Alphabet 195–205, Microsoft ~170–175, Meta 135–145); 2025 ~410 milyar $ — https://www.exent.ai/resources/big-tech-ai-spending-2026 ; https://valueaddvc.com/blog/big-tech-ai-capex-in-2025-microsoft-google-meta-amazon-and-the-spending-race ; https://www.forbes.com/sites/jasonkirsch/2026/10/07/big-tech-will-spend-over-700-billion-on-ai-this-year-follow-the-money-not-the-hype/",
+  "K7": "2027 yatırım harcaması tahmini ~1–1,2 trilyon $; borç/tahvil ile finansman — https://www.pymnts.com/?p=4233514 ; https://datacenterdynamics.com/en/news/moodys-hyperscaler-capex-forecasts-marked-up-by-85bn-to-close-in-on-1trn-by-2027/ ; https://www.roic.ai/news/goldman-sachs-sees-ai-capex-at-12-trillion-by-2027-fueling-debt-financed-buildout-09-25-2026",
+  "K8": "5 Kasım 2026 yapay zekâ satışı: Nasdaq 100'den ~2,3–2,5 trilyon $ silindi — https://www.swissinfo.ch/eng/nasdaq-100-wipes-out-%242%2e3-trillion-in-ai-selloff%3a-markets-wrap/92330151 ; https://yourstory.com/ai-story/ai-stocks-crash-wall-street-trillion-rout ; https://fortune.com/2026/11/05/tech-stocks-are-suffering-the-biggest-selloff-since-covid-as-investors-see-premature-end-to-ai-datacenter-boom/"
+ }
+}
