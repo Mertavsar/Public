@@ -30,3 +30,22 @@ Yeni sohbette önce bunu ve `kimlik.md`'yi oku.
 - Lemo-Opuscar (99 kod-animasyon stili) bulut oturumda kurulamadı; kullanıcının Windows bilgisayarında
   yerel Code oturumunda kullanılır: `claude plugin marketplace add lemomo-ai/lemo-opuscar` →
   `claude plugin install lemo-opuscar@lemolab` → `/effort high` → `/lemo-opuscar:lemo-opuscar <istek>`.
+
+## Karma stil sistemi (kullanıcı kararı, "nasıl çalışıyor" videoları)
+
+Tek filmde, sahnenin işine göre dört Lemo-Opuscar stili:
+
+| Sahne işi | Stil (klasör) | Ne zaman |
+|---|---|---|
+| Yer / giriş / döngü kapanışı | 3D Map Explainer (`map-explainer`) | Hook: Dünya/harita → köye iniş; son kare aynı haritaya döner |
+| Köy, deniz, insanlar, gündelik an | Low-poly Isometric Island (`lowpoly-island`) | Tekne çıkıyor, balıkçı bekliyor, toplama |
+| Mekanizma / asıl sır | Line-Art Cutaway (`hardcore-info`) | Su üstü + su altı + düzenek aynı karede, yavaş |
+| Sayı, kıyas, sonuç | Isometric Infographic (`iso-infographic`) | "günde yüz balık", ölçüler, karşılaştırma |
+
+Tek film gibi durması için:
+- Ortak palet: marka kırmızısı `#e3141b`, beyaz, siyah + deniz mavisi. Her stil bu paletle boyanır.
+- Stil değişimi **eşleşen kadrajla** yapılır (morph/match cut): low-poly tekne → aynı açıdan çizgi kesite
+  dönüşür; kesitten geri low-poly'ye. Sert kesme yok.
+- Tek font ailesi, tek altyazı stili; üstte bölüm şeridi yok.
+- Stil sayısı en fazla 4; her stil en az 2 sahne sürer (sürekli zıplama olmasın).
+- Ses/müzik tüm film boyunca kesintisiz; stil değişimi seste whoosh ile vurgulanmaz.
