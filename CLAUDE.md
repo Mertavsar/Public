@@ -6,6 +6,8 @@ Ajans, müşteri, reklam, satış veya haftalık rapor ile ilgili her işte önc
 `agency-ai/CLAUDE.md` dosyasını oku — sistemin çalışma prensipleri, sorumluluk
 sınırları ve kanıt disiplini oradadır. Uzmanlık modülleri `.claude/skills/` altındadır.
 
+Önceki oturumların dersleri: `.claude/skills/tikla-bakalim/reference/dersler.md` (yeni sohbette oku).
+
 Beğenilen bir Shorts formatında yeni video için `.claude/skills/format-kopyala/` kullanılır.
 
 Video kurgusu ajans akışının dışındadır: kullanıcı klip veya seslendirme attığında

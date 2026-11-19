@@ -1,0 +1,32 @@
+# Öğrenilen dersler (Kasım 2026 oturumları)
+
+Yeni sohbette önce bunu ve `kimlik.md`'yi oku.
+
+## Beğenilenler
+- **Gırgır videosu (700 bin+)** referans format: şaşırtan sonuç → sırrı saklayan yarım cevap →
+  "Baştan anlatayım" → adımlar → cevap en sonda. Ayrıntı `kimlik.md` "Hook kuralı".
+- **Fanyalı ağ / çökertme dalyan**: three.js gerçekçi 3D sahne (su altı + kesit görünüm + yüzey + tekne),
+  kare kare Playwright ile yakalama. Mekân her adımda değişir.
+- **Dünyadan yakınlaşma girişi** (çökertme v2): video doğrudan uzaydan Dünya ile açılır, gerçek haritayla
+  (NASA Blue Marble + Natural Earth sınırları) İzmir Karaburun'a iner; son kare yine Dünya'ya döner (döngü).
+  Başlık fontu: Inter Display Black Italic.
+- **PDF Mind (uygulama tanıtımı, gerçek çekim)**: `uygulama-tanitim/pdfmind/`. Sabitleme (vidstab),
+  minimal cam çip yazılar, ortalı, tek vurgu rengi #FFD54A, 2–3 kelimelik altyazı, ses temizleme zinciri,
+  −14 LUFS. Kullanıcı "son saniyede indirin" kısmını istemedi.
+
+## Beğenilmeyenler (tekrarlama)
+- Üstte "1 · AĞI KUR / 2 · BEKLE" bölüm şeridi → "çok Claude olduğu belli oluyor".
+- Sürekli su altı → "hep aynı yer". Süreci gerçek mekânlarında göster.
+- Fotoğraf + yakınlaşma + dalgalanma ("canlı fotoğraf") → "berbat, iptal".
+- Meta girişler ("700 bin izlendi", "çok sordunuz", "merak ettiniz").
+- Kaba manken/CGI karakter denemesi → gerçekçi sahne stili tercih edildi.
+- Ses efekti çok hafif değişince "hepsi aynı" → ses değiştirmede belirgin fark (pitch 0.76–1.22, telsiz bandı).
+
+## Teknik notlar
+- Konuşma müziğin net üstünde: master −14 LUFS; müzik Kevin MacLeod (CC BY, künye ekle).
+- Bilgi uydurma yok; her sayı iki kaynakta (bölüm klasöründe `analiz.md`).
+- Kullanıcı videolarını / ham çekimleri repoya commit etme (repo herkese açık).
+- Mağaza/marka logosu kullanma; yazılı kart yeter.
+- Lemo-Opuscar (99 kod-animasyon stili) bulut oturumda kurulamadı; kullanıcının Windows bilgisayarında
+  yerel Code oturumunda kullanılır: `claude plugin marketplace add lemomo-ai/lemo-opuscar` →
+  `claude plugin install lemo-opuscar@lemolab` → `/effort high` → `/lemo-opuscar:lemo-opuscar <istek>`.
