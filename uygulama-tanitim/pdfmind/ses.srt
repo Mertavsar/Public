@@ -1,0 +1,47 @@
+1
+00:00:01,350 --> 00:00:02,350
+Arkadaşlar merhaba.
+
+2
+00:00:02,690 --> 00:00:06,230
+Yeni çıkardığımız uygulamamızı
+geliştirmeye devam ediyoruz
+
+3
+00:00:07,050 --> 00:00:09,110
+ve tabii ki Cloud Code ile
+
+4
+00:00:12,270 --> 00:00:18,290
+Cloud Code şu anda emulatör üzerinden
+uygulamamı tek tek analiz ediyor.
+
+5
+00:00:18,590 --> 00:00:20,549
+Her sayfasını tarıyor.
+
+6
+00:00:20,770 --> 00:00:24,850
+Her sayfayı detaylı inceleyip
+kullanıcı deneyimi için-
+
+7
+00:00:27,113 --> 00:00:29,453
+En uygun düzenlemeyi yapmaya çalışıyor.
+
+8
+00:00:31,334 --> 00:00:36,954
+PDFMind uygulamamız yeni
+sürümüyle yakında Play Store'da,
+
+9
+00:00:38,894 --> 00:00:40,593
+App Store'da yayında olacak.
+
+10
+00:00:41,654 --> 00:00:43,034
+Şu anda eski sürümü yayında.
+
+11
+00:00:44,654 --> 00:00:48,134
+İncelemek isteyenleri indirmesini isteriz
