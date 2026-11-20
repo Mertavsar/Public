@@ -218,6 +218,20 @@ PDF'ini aldı). Cloudflare'de AAAA yoktu; değişen sadece 2 kayıt:
   776 10408752185430, 777 10408752218198, 778 10408752250966.
 - Hâlâ açık: 28 Ekim'deki iki "746" fotoğrafı (kullanıcıdan hangisinin 746 olduğu cevabı bekleniyor).
 
+## Ana sayfa banner'ları (19–20 Kasım 2026)
+
+- Üstteki hero (banner_fresh_sal): kullanıcı 19 Kasım'da editörden "5 Al 1 Hediye" görselini koydu
+  (WhatsApp_Image_2026-11-19_at_16.46.43.jpg), bağlantı koton-esarp. Görseldeki "1250 TL üzeri alışverişe 1 koton eşarp
+  hediye" vaadinin sitede karşılığı YOK (tek indirim: 5 ürün al 1 koton eşarp hediye, BXGY). Kullanıcıya iletildi.
+- 20 Kasım: 2x2 banner ızgarası kaldırıldı; her ürün listesinin üstüne kendi banner'ı kondu (vt-banner-grid, 1 sütun):
+  Koton ← luks-koton-esarp.webp (Rengarenk Koton), Organik Soft Eşarp ← _1, Organik Soft Şal ← _2, Kampanyalı ← _3.
+  (Dosya adları yanıltıcı; eşleşme ekran görüntüsüyle doğrulandı. Eski ızgaranın linkleri zaten doğruydu.)
+  vt-banner-grid.liquid: `sizes` sütun sayısına göre hesaplanıyor (tek sütunda bulanık görsel olmasın diye).
+- Canlı temada (Güncelleme 7) theme_publish iki kez "changed_on_shopify" ile reddedildi (içerik birebir aynıydı).
+  Kullanıcı onayıyla kopya alındı: "Güncelleme 8 (Kategori banner'ları)" 168030339158, değişiklik orada kaydedildi.
+  Araç bu kopyayı yayınlamadı ("only agent-created themes"); kullanıcı Shopify'dan yayınlayacak. Güncelleme 7 yedek.
+- Kullanılmayan dosya: valens-5al1-hediye-mobil.jpg (kullanıcı telefon kırpımı istemedi).
+
 ## Kaynak mağaza özeti
 
 | Öğe | Sayı / not |
