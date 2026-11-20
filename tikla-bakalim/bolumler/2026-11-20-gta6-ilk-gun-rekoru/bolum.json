@@ -1,0 +1,643 @@
+{
+ "baslik": "GTA 6 ilk gün rekor kırdı mı? 2 milyar dolar nasıl oldu",
+ "tarih": "2026-11-20",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "GTA 6",
+  "rekor",
+  "tahmini",
+  "ön sipariş"
+ ],
+ "altyazi": {
+  "Ci Ti Ey beşindi": "GTA 5'ti",
+  "Ci Ti Ey beş": "GTA 5",
+  "Ci Ti Ey altı": "GTA 6",
+  "iki milyar dolar": "2 milyar dolar",
+  "on dokuz Kasım": "19 Kasım",
+  "PlayStation beş": "PlayStation 5",
+  "yirmi milyon": "20 milyon",
+  "Yirmi milyon": "20 milyon",
+  "bir milyar sekiz yüz kırk milyon": "1,84 milyar",
+  "iki milyar üç yüz altmış milyona": "2,36 milyara",
+  "on bir milyon": "11 milyon",
+  "sekiz yüz on beş milyon dolar": "815 milyon dolar",
+  "on üç yıl": "13 yıl",
+  "seksen dolar": "80 $",
+  "bir milyar altı yüz milyon": "1,6 milyar",
+  "dört bin lira": "4.000 ₺",
+  "beş bin lira": "5.000 ₺",
+  "kırk milyon": "40 milyon",
+  "Birinci": "1.",
+  "İkinci": "2.",
+  "Üçüncü": "3."
+ },
+ "kapak": {
+  "ikon": "🎮",
+  "ust": "GTA 6 İLK GÜN",
+  "buyuk": "~2 MİLYAR $",
+  "alt": "REKOR MU?"
+ },
+ "cta": [
+  {
+   "sahne": 13,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Ci Ti Ey altı, ilk günde yaklaşık iki milyar dolar kazandırdı.",
+   "p": {
+    "ikon": "🎮",
+    "etiket": "GTA 6 · ilk gün geliri (tahmini)",
+    "deger": 2,
+    "onek": "~",
+    "sonek": " milyar $",
+    "ondalik": 0,
+    "yon": "up",
+    "renk": "yesil",
+    "sayma": false,
+    "not": "Tahminler 1,65–2,36 milyar $ arası · resmî rakam yok",
+    "ok_renk": "yesil"
+   },
+   "etiket": "TAHMİNİ",
+   "kaynak": "K2, K3"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Ama asıl sır oyunun kendisinde değil. Baştan anlatayım.",
+   "p": {
+    "ikon": "🤫",
+    "satirlar": [
+     "ASIL SIR",
+     "*OYUNDA DEĞİL*"
+    ],
+    "boy": 104
+   },
+   "etiket": "SIR"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "GÜNDEMİ",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Ci Ti Ey altı, on dokuz Kasım perşembe günü çıktı.",
+   "p": {
+    "gun": "19",
+    "ay": "KASIM",
+    "gunadi": "PERŞEMBE",
+    "saat": "",
+    "not": "*GTA 6* satışa çıktı"
+   },
+   "etiket": "ÇIKIŞ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "PlayStation beş ve Xbox Series konsollarına geldi. Bilgisayar sürümü için tarih yok.",
+   "p": {
+    "baslik": "Hangi cihazda?",
+    "satirlar": [
+     {
+      "ikon": "🎮",
+      "metin": "PlayStation 5",
+      "deger": "ÇIKTI",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "🟩",
+      "metin": "Xbox Series X|S",
+      "deger": "ÇIKTI",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "🖥️",
+      "metin": "Bilgisayar",
+      "deger": "TARİH YOK",
+      "renk": "sari"
+     }
+    ],
+    "not": "Rockstar, PC tarihini açıklamadı"
+   },
+   "etiket": "CİHAZ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Şirket, Take-Two, talebin beklentilerin çok üstünde olduğunu söyledi. Ama kesin bir satış rakamı vermedi.",
+   "p": {
+    "ikon": "🤐",
+    "satirlar": [
+     "RESMÎ RAKAM",
+     "~HENÜZ YOK~"
+    ],
+    "boy": 104,
+    "not": "Take-Two: talep beklentilerin çok üstünde"
+   },
+   "etiket": "RESMÎ?",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Ölçüm şirketi Sensor Tower, ilk günde yirmi milyon civarı kopya sattığını tahmin ediyor.",
+   "p": {
+    "ikon": "📦",
+    "etiket": "GTA 6 · ilk gün satış (tahmini)",
+    "deger": 20,
+    "onek": "~",
+    "sonek": " milyon kopya",
+    "ondalik": 0,
+    "yon": "up",
+    "renk": "sari",
+    "not": "Tahminler 17–25 milyon arası · ön siparişler dahil",
+    "ok_renk": "sari"
+   },
+   "etiket": "TAHMİN",
+   "kaynak": "K2, K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Bu tahmin gün içinde bile değişti. Sabah bir milyar sekiz yüz kırk milyon dolardı, sonra iki milyar üç yüz altmış milyona çıktı.",
+   "p": {
+    "baslik": "💵 Sensor Tower · ilk gün geliri · milyar $",
+    "sol": {
+     "etiket": "SABAH\nTAHMİNİ",
+     "deger": 1.84,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "SONRAKİ\nTAHMİN",
+     "deger": 2.36,
+     "renk": "sari"
+    },
+    "onek": "",
+    "sonek": "",
+    "ondalik": 2,
+    "fark": "+0,52 milyar $",
+    "not": "Resmî rakam değil · hesap bizim"
+   },
+   "etiket": "DEĞİŞTİ",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Çünkü bu rakamlar sayaçtan okunmuyor. Mağaza verisinden tahmin ediliyor.",
+   "p": {
+    "ikon": "🔍",
+    "satirlar": [
+     "RAKAMLAR",
+     "*TAHMİNE DAYALI*"
+    ],
+    "boy": 104,
+    "not": "Sensor Tower mağaza verisinden tahmin eder"
+   },
+   "etiket": "NEDEN FARKLI?",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Önceki rekor Ci Ti Ey beşindi. İlk gün on bir milyon kopya satmıştı.",
+   "p": {
+    "baslik": "🎮 İlk 24 saatte satılan kopya · milyon",
+    "sol": {
+     "etiket": "GTA 5\n(2013 · Guinness)",
+     "deger": 11.21,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "GTA 6\n(tahmini)",
+     "deger": 20,
+     "renk": "sari"
+    },
+    "onek": "~",
+    "sonek": "",
+    "ondalik": 0,
+    "fark": "≈ 1,8 kat",
+    "not": "GTA 6 değeri tahmindir · hesap bizim"
+   },
+   "etiket": "REKOR",
+   "kaynak": "K4, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Para rekoru da öyle. Ci Ti Ey beş, ilk gün sekiz yüz on beş milyon dolar kazanmıştı.",
+   "p": {
+    "baslik": "💵 İlk 24 saat geliri · milyon $",
+    "sol": {
+     "etiket": "GTA 5\n(2013 · Guinness)",
+     "deger": 815.7,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "GTA 6\n(tahmini)",
+     "deger": 2000,
+     "renk": "sari"
+    },
+    "onek": "~",
+    "sonek": "",
+    "ondalik": 0,
+    "fark": "≈ 2,5 kat",
+    "not": "GTA 6 değeri tahmindir · hesap bizim"
+   },
+   "etiket": "PARA",
+   "kaynak": "K4, K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki bu kadar insan neden aynı gün oyunu aldı?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "NEDEN BU\n*KADAR SATTI?*",
+    "boy": 104
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN BIRAK*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Birinci sebep bekleyiş. Önceki oyun on üç yıl önce çıkmıştı.",
+   "p": {
+    "ikon": "⏳",
+    "etiket": "1. sebep · Ci Ti Ey 5'ten bu yana",
+    "deger": 13,
+    "onek": "",
+    "sonek": " yıl",
+    "ondalik": 0,
+    "yon": "up",
+    "renk": "sari",
+    "not": "GTA 5: Eylül 2013 · GTA 6: Kasım 2026",
+    "ok_renk": "sari"
+   },
+   "etiket": "SEBEP 1",
+   "kaynak": "K4, K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Üstelik oyun iki kez ertelendi. Bekleyiş daha da uzadı.",
+   "p": {
+    "baslik": "Çıkış tarihi nasıl kaydı?",
+    "adimlar": [
+     {
+      "ikon": "🍂",
+      "metin": "Önce: *Sonbahar 2025*"
+     },
+     {
+      "ikon": "🌷",
+      "metin": "Sonra: *Mayıs 2026*"
+     },
+     {
+      "ikon": "📅",
+      "metin": "Sonunda: *19 Kasım 2026*"
+     }
+    ]
+   },
+   "etiket": "ERTELEME",
+   "kaynak": "K1, K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "İkinci sebep ön sipariş. Satışın büyük kısmı, çıkıştan önce yapılmıştı.",
+   "p": {
+    "ikon": "🛒",
+    "satirlar": [
+     "2. SEBEP",
+     "*ÖN SİPARİŞ*"
+    ],
+    "boy": 104
+   },
+   "etiket": "SEBEP 2",
+   "kaynak": "K8"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Ön sipariş, oyunu çıkmadan almak demek. İlk gün tahmini, aylarca süren bu siparişleri de içeriyor.",
+   "p": {
+    "baslik": "İlk gün sayısı nasıl şişiyor?",
+    "adimlar": [
+     {
+      "ikon": "🛒",
+      "metin": "Aylar önce *ön sipariş*"
+     },
+     {
+      "ikon": "🔓",
+      "metin": "Çıkış günü *oyun açılır*"
+     },
+     {
+      "ikon": "📊",
+      "metin": "Tahmine *hepsi dahil*"
+     }
+    ]
+   },
+   "etiket": "ŞİŞME",
+   "kaynak": "K8, K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Üçüncü sebep fiyat. Oyun pahalı olunca, aynı kopya daha çok para eder.",
+   "p": {
+    "ikon": "🏷️",
+    "satirlar": [
+     "3. SEBEP",
+     "*PAHALI OYUN*"
+    ],
+    "boy": 104,
+    "not": "Standart ~80 $ · Ultimate ~100 $"
+   },
+   "etiket": "SEBEP 3",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "hesap",
+   "say": "Yirmi milyon kopya çarpı seksen dolar, yaklaşık bir milyar altı yüz milyon eder.",
+   "p": {
+    "baslik": "Basit hesap: kopya × fiyat",
+    "ikon": "🧮",
+    "ogeler": [
+     "20 milyon",
+     "×",
+     "80 $",
+     "=",
+     "≈ 1,6 milyar $"
+    ]
+   },
+   "etiket": "HESAP",
+   "kaynak": "K5 · hesap bizim · Ultimate sürüm toplamı yukarı çeker"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Gerçek gelir daha yüksek de olabilir. Çünkü Ultimate sürümün fiyatı yüz dolar.",
+   "p": {
+    "ikon": "💎",
+    "etiket": "GTA 6 Ultimate · ABD fiyatı",
+    "deger": 99.99,
+    "onek": "",
+    "sonek": " $",
+    "ondalik": 2,
+    "yon": "up",
+    "renk": "sari",
+    "not": "Standart sürüm: 79,99 $",
+    "ok_renk": "sari"
+   },
+   "etiket": "ULTIMATE",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Özetle: uzun bekleyiş, aylar öncesinden gelen siparişler ve yüksek fiyat.",
+   "p": {
+    "baslik": "Özetle neden",
+    "adimlar": [
+     {
+      "ikon": "⏳",
+      "metin": "*13 yıl* bekleyiş"
+     },
+     {
+      "ikon": "🛒",
+      "metin": "*Ön siparişler* dahil"
+     },
+     {
+      "ikon": "🏷️",
+      "metin": "*Yüksek fiyat*"
+     }
+    ]
+   },
+   "etiket": "SONUÇ"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Ama bunların hepsi tahmin. Gerçek rakamı, Take-Two açıklayacak.",
+   "p": {
+    "ikon": "📢",
+    "satirlar": [
+     "GERÇEK RAKAMI",
+     "*TAKE-TWO AÇIKLAYACAK*"
+    ],
+    "boy": 84,
+    "not": "Resmî açıklama bekleniyor"
+   },
+   "etiket": "BEKLENİYOR",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin cebine nasıl dokunur?",
+   "p": {
+    "ikon": "💡",
+    "metin": "BİZİ NASIL\n*ETKİLER?*",
+    "boy": 112
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Türkiye mağazasında bildirilen fiyat, standart sürüm için dört bin lira civarı. Ultimate sürüm, beş bin lira.",
+   "p": {
+    "baslik": "GTA 6 · Türkiye fiyatı (bildirilen)",
+    "satirlar": [
+     {
+      "ikon": "🎮",
+      "metin": "Standart",
+      "deger": "3.999 ₺",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "💎",
+      "metin": "Ultimate",
+      "deger": "4.999 ₺",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Mağazada değişebilir"
+   },
+   "etiket": "FİYAT",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Yani Ultimate sürüm, tam bin lira daha pahalı.",
+   "p": {
+    "baslik": "Ultimate farkı",
+    "ikon": "💎",
+    "ogeler": [
+     "4.999 ₺",
+     "−",
+     "3.999 ₺",
+     "=",
+     "1.000 ₺"
+    ]
+   },
+   "etiket": "FARK",
+   "kaynak": "K5 · hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bilgisayarda oynayanlar ise bekleyecek. Çıkış tarihi henüz açıklanmadı.",
+   "p": {
+    "ikon": "🖥️",
+    "satirlar": [
+     "BİLGİSAYAR",
+     "*TARİH YOK*"
+    ],
+    "boy": 108
+   },
+   "etiket": "PC",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Oyunu almayı düşünüyorsan, fiyatı resmî mağazadan kontrol et. Fiyat değişebilir.",
+   "p": {
+    "ikon": "🧾",
+    "satirlar": [
+     "FİYATI",
+     "*RESMÎ MAĞAZADAN BAK*"
+    ],
+    "boy": 92,
+    "not": "Bildirilen fiyatlar değişebilir"
+   },
+   "etiket": "KONTROL",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Analist kuruluş Morgan Stanley, ilk aylarda kırk milyon kopya satılmasını bekliyor.",
+   "p": {
+    "ikon": "🏦",
+    "etiket": "Morgan Stanley beklentisi (tahmini)",
+    "deger": 40,
+    "onek": "~",
+    "sonek": " milyon kopya",
+    "ondalik": 0,
+    "yon": "up",
+    "renk": "sari",
+    "not": "Dönem kaynaklara göre değişiyor · kesin değil",
+    "ok_renk": "sari"
+   },
+   "etiket": "BEKLENTİ",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Rekor satış sürerse, diğer oyun şirketleri de fiyat çıtasını yukarı çekebilir.",
+   "p": {
+    "baslik": "Olası zincir (yorum)",
+    "adimlar": [
+     {
+      "ikon": "📈",
+      "metin": "Rekor satış *sürerse*"
+     },
+     {
+      "ikon": "🏷️",
+      "metin": "Fiyat çıtası *yükselebilir*"
+     },
+     {
+      "ikon": "🛒",
+      "metin": "Oyunlar *pahalanabilir*"
+     }
+    ]
+   },
+   "etiket": "ZİNCİR"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani rekor gerçek mi? Büyük ihtimalle evet. Ama rakam resmî değil.",
+   "p": {
+    "ikon": "🔮",
+    "satirlar": [
+     "REKOR MU?",
+     "*BÜYÜK İHTİMALLE*"
+    ],
+    "boy": 104,
+    "not": "Yorum — resmî rakam açıklanana kadar tahmindir"
+   },
+   "etiket": "SONUÇ"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sence oyun bu fiyata değer mi? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "GTA 6 çıkışı 19 Kasım 2026 (PS5, Xbox Series; PC tarihi yok) — https://rockstarreport.com/features/gta-6-release-date-tracker ; https://www.redbull.com/int-en/gta-6-updates-patch-notes ; https://www.cbsnews.com/news/grand-theft-auto-6-release-date-price-what-to-know/",
+  "K2": "İlk gün tahminleri (resmî değil): Sensor Tower ~19,1 mn kopya/1,84 mlr $ (sabah), ~24,6 mn/2,36 mlr $ (sonra); Take-Two rakam vermedi — https://www.mensjournal.com/news/gta-6-sales-19-million-copies-gta-v-record ; https://www.archyde.com/gta-vi-sales-top-2-36-billion-in-24-hours-sensor-tower-finds/ ; https://mlq.ai/news/gta-vi-sales-pass-2-billion-within-a-day-of-launch-sensor-tower-estimates-as-take-two-gives-no-figure-of-its-own/ ; https://www.thestatesman.com/entertainment/biggest-entertainment-launch-ever-gta-6-pulls-in-over-2-billion-on-day-one-industry-estimate-says-1503664665.html",
+  "K3": "Mağaza verisine dayalı tahmin ~17,07 mn dijital kopya / 1,65 mlr $ — https://finance.biggo.com/news/27aca2cb9e7c40f8",
+  "K4": "GTA 5 rekoru: 24 saatte 11,21 mn kopya, 815,7 mn $ (Guinness, 17 Eylül 2013) — https://www.guinnessworldrecords.com/news/2013/10/confirmed-grand-theft--auto-breaks-six-sales-world-records-51900 ; https://www.gamespot.com/news/guinness-claims-gtav-day-one-sales-total-112-million-copies-6415455 ; https://www.playstationlifestyle.net/?p=280577",
+  "K5": "Fiyat: ABD 79,99 $ / 99,99 $; Türkiye bildirilen 3.999 ₺ / 4.999 ₺ — https://www.milligazete.com.tr/gta-6-turkiye-fiyati-2026-standart-surum-kac-tl-ultimate-edition-ne-kadar-on-siparis-nereden-verilir ; https://www.politikam.com/gta-6-turkiye-fiyati-kac-tl-standard-ve-ultimate-farki ; https://www.tamindir.com/haber/gta-6-turkiye-fiyati-aciklandi_108848/",
+  "K6": "Morgan Stanley ~40 mn kopya beklentisi; Take-Two 2027 mali yıl hedefi 8,0–8,2 mlr $ — https://www.boerse-global.de/take-two-gta-6-koennte-40-millionen-mal-verkauft-werden/827913 ; https://seekingalpha.com/news/4629018-take-two-backs-its-booking-guidance-with-gta-6-loaded-for-release",
+  "K7": "Ertelemeler: Sonbahar 2025 → Mayıs 2026 → Kasım 2026 — https://rockstarreport.com/features/gta-6-release-date-tracker ; https://www.techradar.com/news/gta-6-release-date-of-2025-seems-more-likely-after-new-reports",
+  "K8": "Sensor Tower sabah tahmini aylar süren ön siparişleri içeriyor; ön siparişler Haziran 2026'da açıldı — https://www.mensjournal.com/news/gta-6-sales-19-million-copies-gta-v-record ; https://www.turkgun.com/bilim-teknoloji/playstation-store-xbox-store-gta-6-on-siparis-fiyatlari/381887"
+ }
+}
