@@ -56,3 +56,9 @@ Tek film gibi durması için:
 - Reddedilen: Montserrat + kırmızı kutu + sarı soru kutusu + seri rozeti + imleç + köşe logo → "berbat".
   "Denizin Sırları" rozeti de istenmedi.
 - Alt cümle soru değil, kaynaklı vurucu gerçek: "Tek bir ipe yüzlerce iğne diziliyor, hepsi tek tek yemleniyor."
+- Kapak görseli (kullanıcı: "bu tarz realistik görseller lazım", dip trolü örneği): **gerçekçi yarı su üstü /
+  yarı su altı kesit fotoğraf**. Üst yarı: tekne ve gökyüzü (başlık buraya). Alt yarı: düzenek su altında,
+  balıklar. Görsel yazısız üretilir, yazıyı `seri_kapak.mjs` ekler. İstem kalıbı:
+  "Vertical 9:16 photorealistic split-level shot, half above / half below the waterline, upper half: <tekne/kıyı>,
+  calm sky with empty space at the top for a title, lower half underwater: <mekanizma>, clear water, sun rays,
+  fish, cinematic, high detail, no text, no labels, no arrows"
