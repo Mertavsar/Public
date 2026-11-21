@@ -28,7 +28,7 @@ const css0 = `@font-face{font-family:AN;src:url(${F}Anton-Regular.ttf)}@font-fac
 #k{position:relative;width:1080px;height:1920px;overflow:hidden}.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.45) 30%,rgba(0,0,0,.25) 40%,rgba(0,0,0,0) 52%)}
 .col{position:absolute;left:84px;top:${"${"}TOP}px;width:910px}
-.u{display:inline-block;background:#e3141b;color:#fff;font-family:PS;font-size:36px;letter-spacing:3px;padding:8px 18px 6px;margin:0 0 18px 6px}
+.u{display:inline-block;white-space:nowrap;background:#e3141b;color:#fff;font-family:PS;font-size:36px;letter-spacing:3px;padding:8px 18px 6px;margin:0 0 18px 6px}
 .t{display:inline-block;white-space:nowrap;font-family:AN;color:#fff;font-size:250px;line-height:.98;letter-spacing:2px;text-shadow:0 6px 30px rgba(0,0,0,.45)}
 .c{margin:22px 0 0 6px;width:880px;font-family:PS;font-size:50px;line-height:1.25;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.75)}
 .c b{font-weight:inherit;box-shadow:inset 0 -12px 0 #e3141b}`;

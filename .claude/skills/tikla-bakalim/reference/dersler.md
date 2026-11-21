@@ -62,3 +62,6 @@ Tek film gibi durması için:
   "Vertical 9:16 photorealistic split-level shot, half above / half below the waterline, upper half: <tekne/kıyı>,
   calm sky with empty space at the top for a title, lower half underwater: <mekanizma>, clear water, sun rays,
   fish, cinematic, high detail, no text, no labels, no arrows"
+- Kapak metni = gırgır hook'u: kırmızı etikette **şaşırtan sonuç** ("DENİZE BAKARAK BALIK TUTUYORLAR",
+  "TEK İPE YÜZLERCE İĞNE"), başlıkta adı, alt cümlede **sırrı saklayan yarım cevap** ("Ağ denizin dibinde
+  duruyor. Asıl sır, iplerin ucunda."). "Balık avı taktiği" gibi açıklayıcı etiket kullanıcı tarafından reddedildi.
