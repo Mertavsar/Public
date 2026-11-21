@@ -3,7 +3,8 @@
 // vurgu kelimesi kırmızı alt çizgiyle. Seri rozeti, kutu, logo, imleç YOK (kullanıcı: "berbat").
 // Instagram ızgarası 3:4 kırpar (y 240–1680): başlık ve cümle bu alanın üst kısmında.
 //   node seri_kapak.mjs kapak.json
-// "cumleY": cümleyi ayrı konuma koy (ör. su altı yarısına). "ust": küçük kırmızı etiket (ne olduğunu ilk bakışta söyler), "baslik" <br> ile iki satır olabilir.
+// Kullanıcı: yazı görseli kapatmasın (yazı sadece üst gökyüzü bandında), logo sağ altta olsun.
+// "boy": başlık px. "sag": true → yazı sağa yaslı. "cumleY": cümleyi ayrı konuma koy (ör. su altı yarısına). "ust": küçük kırmızı etiket (ne olduğunu ilk bakışta söyler), "baslik" <br> ile iki satır olabilir.
 // { "cikti": "out", "kapaklar": [ { "ad": "paraketa", "gorsel": "foto.jpg", "odak": "50% 50%",
 //   "baslik": "PARAKETA", "cumle": "Tek bir ipe <b>yüzlerce iğne</b><br>diziliyor..." } ] }
 // Cümle kaynaklı bir gerçek olmalı (bölümün analiz.md'si); uydurma yok.
@@ -17,6 +18,7 @@ let pw;
 try { pw = require("playwright"); }
 catch { pw = require(path.join(execSync("npm root -g").toString().trim(), "playwright")); }
 const HERE = path.dirname(fileURLToPath(import.meta.url));
+const LOGO = "file://" + path.resolve(HERE, "../../../../tikla-bakalim/markalama/logo.jpg");
 const F = "file://" + path.resolve(HERE, "../engine/fonts") + "/";
 const cfgPath = path.resolve(process.argv[2]);
 const cfg = JSON.parse(fs.readFileSync(cfgPath, "utf8"));
@@ -26,7 +28,8 @@ fs.mkdirSync(out, { recursive: true });
 const css0 = `@font-face{font-family:AN;src:url(${F}Anton-Regular.ttf)}@font-face{font-family:PS;src:url(${F}Poppins-SemiBold.ttf)}
 *{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 #k{position:relative;width:1080px;height:1920px;overflow:hidden}.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.45) 30%,rgba(0,0,0,.25) 40%,rgba(0,0,0,0) 52%)}
+.sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.3) 20%,rgba(0,0,0,0) 30%)}
+.logo{position:absolute;right:50px;top:1490px;width:150px;height:150px;border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.5)}
 .col{position:absolute;left:84px;top:${"${"}TOP}px;width:910px}
 .u{display:inline-block;white-space:nowrap;background:#e3141b;color:#fff;font-family:PS;font-size:36px;letter-spacing:3px;padding:8px 18px 6px;margin:0 0 18px 6px}
 .t{display:inline-block;white-space:nowrap;font-family:AN;color:#fff;font-size:250px;line-height:.98;letter-spacing:2px;text-shadow:0 6px 30px rgba(0,0,0,.45)}
@@ -40,11 +43,11 @@ for (const k of cfg.kapaklar) {
   const css = css0.replace("${TOP}", k.top || 330);
   fs.writeFileSync(tmp, `<!doctype html><meta charset=utf-8><style>${css}</style><div id="k">
 <img class="bg" src="${img}" style="object-position:${k.odak || "50% 50%"}"><div class="sh"></div>
-<div class="col">${k.ust ? `<div class="u">${k.ust}</div><br>` : ""}<div class="t">${k.baslik}</div>${k.cumleY ? "" : `<div class="c">${k.cumle}</div>`}</div>${k.cumleY ? `<div class="c" style="position:absolute;left:84px;top:${k.cumleY}px">${k.cumle}</div>` : ""}</div>`);
+<div class="col" style="${k.sag ? "left:auto;right:84px;text-align:right" : ""}">${k.ust ? `<div class="u">${k.ust}</div><br>` : ""}<div class="t" style="font-size:${k.boy || 250}px">${k.baslik}</div>${k.cumleY ? "" : `<div class="c">${k.cumle}</div>`}</div>${k.logo === false ? "" : `<img class="logo" src="${LOGO}">`}${k.cumleY ? `<div class="c" style="position:absolute;left:84px;top:${k.cumleY}px">${k.cumle}</div>` : ""}</div>`);
   await pg.goto("file://" + tmp);
   await pg.evaluate(() => document.fonts.ready);
   await pg.waitForTimeout(300);
-  await pg.evaluate(() => { const t = document.querySelector(".t"); let f = 250;
+  await pg.evaluate(() => { const t = document.querySelector(".t"); let f = parseFloat(getComputedStyle(t).fontSize);
     while (t.getBoundingClientRect().width > 900 && f > 80) { f -= 4; t.style.fontSize = f + "px"; } });
   const f = path.join(out, k.ad + ".jpg");
   await pg.screenshot({ path: f, type: "jpeg", quality: 92 });

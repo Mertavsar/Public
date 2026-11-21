@@ -65,3 +65,6 @@ Tek film gibi durması için:
 - Kapak metni = gırgır hook'u: kırmızı etikette **şaşırtan sonuç** ("DENİZE BAKARAK BALIK TUTUYORLAR",
   "TEK İPE YÜZLERCE İĞNE"), başlıkta adı, alt cümlede **sırrı saklayan yarım cevap** ("Ağ denizin dibinde
   duruyor. Asıl sır, iplerin ucunda."). "Balık avı taktiği" gibi açıklayıcı etiket kullanıcı tarafından reddedildi.
+- **Yazı görseli kapatmaz** (kullanıcı: "yazılar görseli kapatıyor, logo yok, çok kötü"). Sadece üst gökyüzü
+  bandında: kırmızı hook etiketi + tek satır başlık (~150 px). Alt cümle yok. Logo sağ altta. Görselde boş
+  tarafa yasla (`sag`). Görselin alt 3/4'ü tamamen temiz kalır.
