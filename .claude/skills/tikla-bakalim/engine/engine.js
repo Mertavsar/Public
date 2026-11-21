@@ -177,7 +177,7 @@ SCENES.karsilastir = (p, r) => {
     return { col, v, bar, lb, c, h: H * c.deger / max };
   });
   const diff = p.fark ? el("div", "h", md(p.fark), r) : null;
-  if (diff) Object.assign(diff.style, { fontSize: "74px", background: "var(--kirmizi)", color: "#fff", padding: "10px 34px", borderRadius: "22px", marginTop: "34px" });
+  if (diff) Object.assign(diff.style, { fontSize: "74px", background: cvar(p.fark_renk || "kirmizi"), color: "#fff", padding: "10px 34px", borderRadius: "22px", marginTop: "34px" });
   const note = p.not ? el("div", "note", md(p.not), r) : null;
   if (note) note.style.marginTop = "26px";
   return (lt, d) => {

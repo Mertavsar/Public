@@ -29,7 +29,7 @@ Bir sahneye 4'ten fazla sıralı öğe koyma — cümle bitmeden gösterilemez.
   "onek": "", "sonek": " ₺", "ondalik": 2, "fark": "+12,48 ₺", "not": "" }
 ```
 Çubuklar **sıfırdan** başlar (ölçek dürüst). Fark küçük görünüyorsa küçüktür —
-`fark` rozeti vurguyu taşır. Sıra: sol çubuk → sağ çubuk → fark rozeti.
+`fark` rozeti vurguyu taşır. Sıra: sol çubuk → sağ çubuk → fark rozeti. `fark_renk` (varsayılan `kirmizi`) — fark lehimize ise `yesil`.
 
 ### `liste` — 2–4 kalem
 ```json
