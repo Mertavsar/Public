@@ -49,3 +49,10 @@ Tek film gibi durması için:
 - Tek font ailesi, tek altyazı stili; üstte bölüm şeridi yok.
 - Stil sayısı en fazla 4; her stil en az 2 sahne sürer (sürekli zıplama olmasın).
 - Ses/müzik tüm film boyunca kesintisiz; stil değişimi seste whoosh ile vurgulanmaz.
+
+## Kapak (kullanıcı kararı, Kasım 2026)
+- Seçilen: **B / belgesel** — `scripts/seri_kapak.mjs`. Dev Anton başlık sola yaslı, altında 1–2 satır
+  gerçek bilgi cümlesi (Poppins SemiBold, vurgu kırmızı alt çizgi).
+- Reddedilen: Montserrat + kırmızı kutu + sarı soru kutusu + seri rozeti + imleç + köşe logo → "berbat".
+  "Denizin Sırları" rozeti de istenmedi.
+- Alt cümle soru değil, kaynaklı vurucu gerçek: "Tek bir ipe yüzlerce iğne diziliyor, hepsi tek tek yemleniyor."
