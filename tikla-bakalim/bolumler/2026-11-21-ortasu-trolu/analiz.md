@@ -27,15 +27,19 @@ yakın kısmından** çekilen trol ağı (K1 tanımı). Türkiye'de **sadece çi
 | Hamsi için ayrıca İzin Belgesi zorunlu | K1 |
 | Marmara, Ege ve Akdeniz'de ortasu trolü yasak; Karadeniz'de trolün yasak olduğu yerlerde de yasak | K1 |
 | Karadeniz'de 24 m'den sığ suda ve 15 Nisan–31 Ağustos arasında yasak | K1 |
+| Ege ve Akdeniz'de ortasu trolü yasak — 2026 metninde de duruyor (aramada mevzuat.gov.tr güncel metni) | K1 |
+| Karadeniz'de Bulgaristan sınırı–Zonguldak Baba Burnu arası ortasu trolüyle hamsi avı 15.00–09.00 arası; dışında ağ denizde bulundurulamaz (2026/25 değişikliği, RG 16.09.2026 sayı 33372) | K7 |
+| 2026 sezonunda Karadeniz'de gırgır ve ortasu trolüyle hamsi/istavrit avı 15 Eylül'de başladı | K7 |
 | Hamsi kotası: kota dolunca av biter | K1 |
 
 ## Videoda KULLANMA (doğrulanamadı / kaynaklar çelişiyor)
 - Ağ ağzı ölçüsü: Türkçe ikincil kaynaklarda 30–60 m genişlik; yabancı kaynaklarda büyük çift trollerde 200 m'yi
   aşan ağızlar. Türkiye için kesin sayı verme → "onlarca metre".
 - Çekim süresi (30–120 dk) tek ikincil kaynakta → kullanma.
-- Hamsi av saatleri (15.00–09.00) 2026 değişikliğinde ortasu trolüne de uygulanıyor olabilir; metin doğrulanmadı → kullanma.
 - Samsun'un birinci olduğu haberi tarihsiz → kullanma.
 - Yunus / yan av tartışması: bu videonun konusu değil, kaynaksız iddia yok.
+
+- K7 — 2026/25 değişikliği haberleri: https://www.denizhaber.net/balikcilikta-yeni-kurallar-resmi-gazetede-haber-126194.htm · https://www.mahalligundem.com/balikcilikta-yeni-kurallar-resmi-gazetede/83716 · https://www.resmigazeteozeti.com/tarih/2026-09-16
 
 ## Ne DEĞİLDİR?
 - **Dip trolü değil:** dip trolü tabanda sürüklenir ve ağzını trol kapıları açar. Ortasu trolü dibe değmez, kapısı yok.
