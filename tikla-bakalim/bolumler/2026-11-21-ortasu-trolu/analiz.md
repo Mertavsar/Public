@@ -16,6 +16,10 @@ yakın kısmından** çekilen trol ağı (K1 tanımı). Türkiye'de **sadece çi
 | 5 | Derinlik **tekne hızı ve halat boyuyla** ayarlanır; ağın üstündeki sensör ağın derinliğini gösterir, kaptan ağı sürünün hizasına getirir | K3, K5 |
 | 6 | Ağ toplanır, balık tekneye alınır | K3 |
 
+## Zorluk (metinde)
+- Ana tekne yardımcı tekneyle iletişim kurup aradaki mesafeyi ayarlar; mesafe ağzın açıklığını belirler (K3, K5) → tekneler yaklaşırsa ağız daralır (bu ilişkiden çıkarım).
+- Av sezonu: Karadeniz'de 15 Nisan–31 Ağustos yasak (K1) → av eylülden nisan ortasına, sonbahar-kış aylarında.
+
 ## Kurallar (Türkiye)
 | Kural | Kaynak |
 |---|---|
