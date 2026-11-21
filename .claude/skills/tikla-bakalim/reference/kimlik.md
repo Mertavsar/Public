@@ -50,7 +50,10 @@ Referans: gırgır videosu (700 bin+). Hook **iki kısa cümle**dir:
   → baş: "İzmir Karaburunlu balıkçılar kefali…". Görüntüde de son kare ilk kareyle aynı kadraja
   döner (aynı açı, aynı ışık), müzik kesilmeden bağlanır.
 
-Yapma: izlenme sayısı, "çok sordunuz", "bu videoda anlatacağım" gibi meta giriş;
+İstisna (kullanıcı kararı, ortasu trolü): takipçi isteğiyle gelen konuda hook'tan önce TEK kısa cümle
+"En çok sorduğunuz avcılık geldi." olabilir; hemen ardından paradoks gelir.
+
+Yapma: izlenme sayısı,, "bu videoda anlatacağım" gibi meta giriş;
 kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay anlatılır.
 
 ### Görsel kurallar — "nasıl çalışıyor" videoları (kullanıcı kuralı)
