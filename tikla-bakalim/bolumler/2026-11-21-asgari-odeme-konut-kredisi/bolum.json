@@ -1,0 +1,650 @@
+{
+ "baslik": "Kredi kartında asgari ödeme düştü: İyi haber mi, tuzak mı?",
+ "tarih": "2026-11-21",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "asgari",
+  "faiz",
+  "tuzak",
+  "basamak"
+ ],
+ "altyazi": {
+  "yüzde kırktan yüzde otuza": "%40'tan %30'a",
+  "Be De De Ka": "BDDK",
+  "On dokuz Kasım'da": "19 Kasım'da",
+  "yüz bine kadarsa yüzde yirmi": "100 bine kadarsa %20",
+  "yüzde kırk": "%40",
+  "Yüz ile iki yüz bin arası": "100 ile 200 bin arası",
+  "yüzde otuz": "%30",
+  "yüz elli bin": "150 bin",
+  "elli bin lira": "50 bin lira",
+  "yirmi bin liraydı": "20 bin liraydı",
+  "on beş bin lira": "15 bin lira",
+  "Beş milyonluk": "5 milyonluk",
+  "bir milyon": "1 milyon",
+  "dört milyona": "4 milyona",
+  "yüz bini": "100 bini",
+  "Bir Ekim'de": "1 Ekim'de",
+  "elli binden yüz bine": "50 binden 100 bine",
+  "Elli bin": "50 bin",
+  "on beş binini": "15 binini",
+  "otuz beş bin": "35 bin",
+  "bin üç yüz liraya": "1.300 liraya",
+  "yirmi bir Kasım": "21 Kasım",
+  "Üç soruda": "3 soruda"
+ },
+ "kapak": {
+  "ikon": "💳",
+  "ust": "ASGARİ ÖDEME DÜŞTÜ",
+  "buyuk": "%40 → %30",
+  "alt": "İYİ HABER Mİ, TUZAK MI?"
+ },
+ "cta": [
+  {
+   "sahne": 16,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Bazı kredi kartlarında asgari ödeme, bir gecede yüzde kırktan yüzde otuza indi.",
+   "p": {
+    "ikon": "💳",
+    "etiket": "Kredi kartı asgari ödeme oranı",
+    "deger": 30,
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 0,
+    "yon": "down",
+    "ok_renk": "yesil",
+    "renk": "yesil",
+    "sayma": false,
+    "not": "100–200 bin ₺ limit · önceden %40"
+   },
+   "etiket": "YENİ ORAN",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Kulağa iyi haber gibi geliyor. Ama küçük bir tuzağı var. Peki neden? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "İYİ HABER Mİ,\n*TUZAK MI?*",
+    "boy": 104
+   },
+   "etiket": "SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Paranı ilgilendiren kararları sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "PARANI İLGİLENDİREN",
+     "*SADE DİLLE*"
+    ],
+    "boy": 90
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "On dokuz Kasım'da bankaları denetleyen kurum, Be De De Ka, iki karar aldı.",
+   "p": {
+    "gun": "19",
+    "ay": "KASIM",
+    "gunadi": "PERŞEMBE",
+    "not": "*BDDK* iki karar aldı · 20 Kasım'da duyuruldu"
+   },
+   "etiket": "KARAR GÜNÜ",
+   "kaynak": "K1, K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Biri kredi kartlarını, diğeri konut kredisini ilgilendiriyor.",
+   "p": {
+    "baslik": "İki karar",
+    "satirlar": [
+     {
+      "ikon": "💳",
+      "metin": "Kredi kartı",
+      "deger": "asgari ödeme",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🏠",
+      "metin": "Konut kredisi",
+      "deger": "ikinci ev",
+      "renk": "sari"
+     }
+    ],
+    "not": "BDDK karar no: 11605 · 11604"
+   },
+   "etiket": "İKİ KARAR",
+   "kaynak": "K1, K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Önce kısa bilgi. Asgari ödeme, kart borcunun en az ödenmesi gereken kısmı.",
+   "p": {
+    "ikon": "💳",
+    "satirlar": [
+     "ASGARİ ÖDEME",
+     "= *EN AZ ÖDEME*"
+    ],
+    "boy": 100
+   },
+   "etiket": "TERİM"
+  },
+  {
+   "bolum": "ne",
+   "tip": "akis",
+   "say": "Gerisini sonraki aya devredersin. Ama devreden kısma faiz işler.",
+   "p": {
+    "baslik": "Asgari ödeme nasıl çalışır?",
+    "adimlar": [
+     {
+      "ikon": "🧾",
+      "metin": "Dönem borcu gelir"
+     },
+     {
+      "ikon": "✅",
+      "metin": "*Asgarisini* ödersin"
+     },
+     {
+      "ikon": "🔁",
+      "metin": "Kalan *sonraki aya*"
+     },
+     {
+      "ikon": "📈",
+      "metin": "Kalana ~faiz~ işler"
+     }
+    ]
+   },
+   "etiket": "MANTIK"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Şimdiye kadar iki kademe vardı. Limit yüz bine kadarsa yüzde yirmi, üstündeyse yüzde kırk.",
+   "p": {
+    "baslik": "Önceki kural · asgari ödeme",
+    "satirlar": [
+     {
+      "ikon": "💳",
+      "metin": "Limit 100 bin ₺'ye kadar",
+      "deger": "%20",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "💳",
+      "metin": "Limit 100 bin ₺ üstü",
+      "deger": "%40",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "Dönem borcunun yüzdesi"
+   },
+   "etiket": "ESKİ KURAL",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Yeni kararla araya bir basamak eklendi. Yüz ile iki yüz bin arası, artık yüzde otuz.",
+   "p": {
+    "baslik": "Yeni kural · asgari ödeme",
+    "satirlar": [
+     {
+      "ikon": "💳",
+      "metin": "100 bin ₺'ye kadar",
+      "deger": "%20",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "🆕",
+      "metin": "100–200 bin ₺",
+      "deger": "%30",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "💳",
+      "metin": "200 bin ₺ üstü",
+      "deger": "%40",
+      "renk": "beyaz"
+     }
+    ],
+    "not": "Limit = kartın toplam limiti"
+   },
+   "etiket": "YENİ KURAL",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Bir örnek verelim. Limitin yüz elli bin, borcun elli bin lira olsun.",
+   "p": {
+    "ikon": "🧾",
+    "satirlar": [
+     "LİMİT 150 BİN ₺",
+     "BORÇ *50 BİN ₺*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ÖRNEK"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Eskiden asgari ödemen yirmi bin liraydı. Şimdi on beş bin lira.",
+   "p": {
+    "baslik": "💳 50 bin ₺ borç · 150 bin ₺ limit · asgari ödeme",
+    "sol": {
+     "etiket": "ESKİ (%40)",
+     "deger": 20000,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "YENİ (%30)",
+     "deger": 15000,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": " ₺",
+    "ondalik": 0,
+    "fark": "−5.000 ₺",
+    "fark_renk": "yesil",
+    "not": "50.000 × 0,40 · 50.000 × 0,30"
+   },
+   "etiket": "HESAP",
+   "kaynak": "K1 · hesap bizim"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "İkinci karar konut kredisinde. Bir evi olan, ikinci evi alırken zorlanıyordu.",
+   "p": {
+    "ikon": "🏠",
+    "satirlar": [
+     "1 EVİ OLAN",
+     "*2. EVİ* ALIRKEN"
+    ],
+    "boy": 100
+   },
+   "etiket": "KONUT",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Beş milyonluk bir evde en fazla bir milyon kredi çekebiliyordu. Şimdi dört milyona kadar.",
+   "p": {
+    "baslik": "🏠 5 milyon ₺ ev · C enerji sınıfı · azami kredi",
+    "sol": {
+     "etiket": "ESKİ",
+     "deger": 1,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "YENİ",
+     "deger": 4,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": " milyon ₺",
+    "ondalik": 0,
+    "fark": "4 katı",
+    "fark_renk": "yesil",
+    "not": "Azami tutar · banka gelir şartına ayrıca bakar"
+   },
+   "etiket": "AZAMİ KREDİ",
+   "kaynak": "K3, K4 · hesap bizim"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Çünkü sınırlama artık sadece en az iki evi olanlara uygulanıyor.",
+   "p": {
+    "ikon": "🏘️",
+    "satirlar": [
+     "SINIRLAMA ARTIK",
+     "*2+ EVİ* OLANA"
+    ],
+    "boy": 96,
+    "not": "Kendisi, eşi ve 18 yaş altı çocukları birlikte sayılır"
+   },
+   "etiket": "YENİ EŞİK",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki Be De De Ka bunu neden yaptı?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "PEKİ\n*NEDEN?*",
+    "boy": 120
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Buraya kadar işine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "ASIL İLGİNÇ KISIM",
+     "*ŞİMDİ*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Önce şunu söyleyelim. Kararlarda resmi bir gerekçe açıklanmadı.",
+   "p": {
+    "ikon": "📄",
+    "satirlar": [
+     "RESMİ GEREKÇE",
+     "*AÇIKLANMADI*"
+    ],
+    "boy": 100
+   },
+   "etiket": "NOT",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Ama tabloya bakınca bir sebep göze çarpıyor. Fiyatlar arttıkça kart limitleri de büyüyor.",
+   "p": {
+    "baslik": "Neden kademe gerekti?",
+    "adimlar": [
+     {
+      "ikon": "🛒",
+      "metin": "Fiyatlar *artıyor*"
+     },
+     {
+      "ikon": "💳",
+      "metin": "Limitler *büyüyor*"
+     },
+     {
+      "ikon": "⚠️",
+      "metin": "Kart ~üst kademeye~ geçiyor"
+     }
+    ]
+   },
+   "etiket": "SEBEP"
+  },
+  {
+   "bolum": "neden",
+   "tip": "karsilastir",
+   "say": "Limit yüz bini bir lira geçince, asgari ödeme bir anda iki katına çıkıyordu.",
+   "p": {
+    "baslik": "💳 Eski kural · asgari ödeme oranı",
+    "sol": {
+     "etiket": "LİMİT\n100.000 ₺",
+     "deger": 20,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "LİMİT\n100.001 ₺",
+     "deger": 40,
+     "renk": "kirmizi"
+    },
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 0,
+    "fark": "2 katı",
+    "not": ""
+   },
+   "etiket": "UÇURUM",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Buna bir uçurum diyebiliriz. Yeni basamak, bu uçurumu yumuşatıyor.",
+   "p": {
+    "ikon": "🪜",
+    "satirlar": [
+     "UÇURUM YERİNE",
+     "*BASAMAK*"
+    ],
+    "boy": 100
+   },
+   "etiket": "BASAMAK"
+  },
+  {
+   "bolum": "neden",
+   "tip": "takvim",
+   "say": "Bu ilk adım da değil. Bir Ekim'de sınır, elli binden yüz bine çıkmıştı.",
+   "p": {
+    "gun": "1",
+    "ay": "EKİM",
+    "gunadi": "PERŞEMBE",
+    "not": "Sınır *50 bin → 100 bin ₺*"
+   },
+   "etiket": "ÖNCEKİ ADIM",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Konut kararında da gerekçe yok. Bazı uzmanlar, ev talebinin artabileceğini söylüyor.",
+   "p": {
+    "ikon": "🏠",
+    "satirlar": [
+     "EV TALEBİ",
+     "*ARTABİLİR*"
+    ],
+    "boy": 100,
+    "not": "Uzman yorumu · kesin değil"
+   },
+   "etiket": "YORUM",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Özetle: limitler büyüdü, kural geride kaldı, araya basamak eklendi.",
+   "p": {
+    "baslik": "Özet",
+    "adimlar": [
+     {
+      "ikon": "💳",
+      "metin": "Limitler *büyüdü*"
+     },
+     {
+      "ikon": "📏",
+      "metin": "Kural ~geride kaldı~"
+     },
+     {
+      "ikon": "🪜",
+      "metin": "Araya *basamak*"
+     }
+    ]
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin cebine nasıl dokunur?",
+   "p": {
+    "ikon": "👛",
+    "metin": "SENİN CEBİNE\n*NASIL DOKUNUR?*",
+    "boy": 96
+   },
+   "etiket": "ETKİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "İyi tarafı şu. Ay sonu sıkışınca, daha az ödeyip nefes alırsın.",
+   "p": {
+    "ikon": "😮‍💨",
+    "satirlar": [
+     "DAHA AZ ÖDE,",
+     "+NEFES AL+"
+    ],
+    "boy": 100
+   },
+   "etiket": "İYİ TARAF"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ama tuzak burada. Ödemediğin her lira, sonraki aya faizle geçer.",
+   "p": {
+    "ikon": "⚠️",
+    "satirlar": [
+     "ÖDEMEDİĞİN HER LİRA",
+     "~FAİZLE~ DEVREDER"
+    ],
+    "boy": 88
+   },
+   "etiket": "TUZAK"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Elli bin borcun on beş binini ödersen, otuz beş bin devreder.",
+   "p": {
+    "baslik": "Asgariyi ödersen",
+    "ikon": "🔁",
+    "ogeler": [
+     "50.000 ₺",
+     "−",
+     "15.000 ₺",
+     "=",
+     "35.000 ₺"
+    ]
+   },
+   "etiket": "DEVREDEN",
+   "kaynak": "hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Bu kısma, aylık bin üç yüz liraya kadar faiz işleyebilir. Vergiler hariç.",
+   "p": {
+    "baslik": "Bir aylık faiz · Kasım tavan oranı · vergiler hariç",
+    "ikon": "📈",
+    "ogeler": [
+     "35.000 ₺",
+     "×",
+     "%3,75",
+     "=",
+     "≈1.312 ₺"
+    ]
+   },
+   "etiket": "FAİZ",
+   "kaynak": "K5 · hesap bizim · bankanın oranı daha düşük olabilir"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani sadece asgariyle ilerlersen, borç çok yavaş erir.",
+   "p": {
+    "ikon": "🐌",
+    "satirlar": [
+     "SADECE ASGARİYLE",
+     "BORÇ *YAVAŞ ERİR*"
+    ],
+    "boy": 92
+   },
+   "etiket": "DİKKAT"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Tek evin varsa ve ikinci evi düşünüyorsan, kredi kapısı genişledi.",
+   "p": {
+    "ikon": "🔑",
+    "satirlar": [
+     "İKİNCİ EV İÇİN",
+     "+KAPI GENİŞLEDİ+"
+    ],
+    "boy": 96
+   },
+   "etiket": "KONUT",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ama bu bir faiz indirimi değil. Faiz aynı, sadece çekilebilecek tutar arttı.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "FAİZ AYNI",
+     "TUTAR *ARTTI*"
+    ],
+    "boy": 104,
+    "not": "Karar faiz oranlarını değiştirmiyor"
+   },
+   "etiket": "FARK",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bu video finansal tavsiye değildir. Bilgiler yirmi bir Kasım itibarıyla.",
+   "p": {
+    "ikon": "ℹ️",
+    "satirlar": [
+     "TAVSİYE",
+     "*DEĞİLDİR*"
+    ],
+    "boy": 104,
+    "not": "Bilgiler 21 Kasım 2026 itibarıyla · bankanıza danışın"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Sen asgariyle mi ödüyorsun, tamamını mı? Öğrenmek istediğin konuyu da yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ASGARİ Mİ,",
+     "*TAMAMI MI?*"
+    ],
+    "boy": 104
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "BDDK 19 Kasım 2026 tarihli 11605 sayılı karar: asgari ödeme limit ≤100 bin ₺ %20, 100–200 bin ₺ %30 (önce %40), >200 bin ₺ %40; 20 Kasım'da duyuruldu; gerekçe metni haberlerde yok — https://www.haber3.com/ekonomi/tum-kredi-karti-sahiplerine-mujde-asgari-odeme-oranlari-degisti-haberi-6269656 ; https://www.ahaber.com.tr/gundem/2026/11/20/kredi-karti-sahipleri-dikkat-bddk-asgari-odeme-oranlarini-yeniden-belirledi ; https://www.sozcu.com.tr/son-dakika-kredi-kartlarinda-asgari-odeme-oranlarinda-degisiklik-p383076 ; https://www.karar.com/ekonomi-haberleri/son-dakika-kredi-kartlarinda-asgari-odeme-tutari-degisti-2085327 ; https://www.politikam.com/bddk-kredi-karti-asgari-odeme-oranlari-degisti-yuzde-20-30-40-limit-karari",
+  "K2": "BDDK 1 Ekim 2026 kararı (11581/11582): asgari ödeme limit eşiği 50 bin ₺'den 100 bin ₺'ye; ≤100 bin %20, üstü %40 — https://www.hurriyet.com.tr/gundem/bddkdan-cep-telefonu-kredileri-ve-kredi-karti-asgari-odemelerine-yeni-duzenleme-43327724 ; https://www.milligazete.com.tr/kredi-karti-asgari-odeme-tutari-2026-yuzde-kac-oldu-asgari-odeme-dusuruldu-mu-hangi-limitlere-uygulaniyor-nasil-hesa ; https://www.gazetebirlik.com/ekonomi/kredi-karti-asgari-odeme-orani-kac-oldu-2026-100-bin-tl-limiti-asanlar-ne-kadar-odeyecek-oran-degisti-mi-ne-zaman-gecerli/1107346",
+  "K3": "BDDK 19 Kasım 2026 tarihli 11604 sayılı karar: kredi/değer oranını %75 azaltan uygulama artık en az 2 konutu olanlara (önce en az 1); kendisi+eşi+18 yaş altı çocuk; %50 ve altı hisse sayılmaz — https://www.endeks24.com/bddk-konut-kredisi-yuzde-75-azaltim-sartini-en-az-iki-konuta-cikardi ; https://www.cnnturk.com/ekonomi/bddkdan-konut-kredisi-karari-iki-ve-uzeri-konutu-olanlara-yuzde-75-siniri-3495887 ; https://gulcehaber.com/gundem/bddk-konut-kredisi-sinirlamasinda-kapsami-daraltti-427795.html ; https://www.alomaliye.com/2026/11/21/bddkdan-konut-kredisine-yeni-sinir/",
+  "K4": "BDDK 29 Ocak 2026 tarihli 11364 sayılı karar: değeri ≤5 milyon ₺ konutta azami kredi/değer A-B %90, C %80, diğer %70. Örnek hesap: 5 milyon × %80 = 4 milyon; %75 azaltımla %20 → 1 milyon — https://www.alomaliye.com/2026/01/31/konut-kredilerinde-ve-konut-teminatli-kredilerde-uygulanacak-kredi-deger-orani-ve-azami-kredi-tutari-11364/ ; https://www.cnnturk.com/ekonomi/konut-kredisi-2026-konut-kredilerinde-ezber-bozuldu-bddkdan-kritik-degisiklik-2390975",
+  "K5": "TCMB Kasım 2026 azami aylık akdi faiz: dönem borcu 30–180 bin ₺ için %3,75 (değişmedi). Hesap: 35.000 × 0,0375 = 1.312,5 ₺, KKDF/BSMV hariç — https://haberton.com/kredi-karti-borcunun-sadece-asgarisini-odeyenler-dikkat-2026-faiz-oranlari-ve-yeni-odeme-sartlari-aciklandi/ ; https://www.ekonomim.com/ekonomi/faiz-indirimi-kredi-kartlarina-neden-yansimiyor-alaattin-aktas-yil-sonu-icin-uyardi-haberi-928626",
+  "K6": "11604 sayılı karar faiz oranı indirimi içermiyor, kredi tutarının konut değerine oranını düzenliyor — https://www.gencgazete.net/bddkdan-konut-kredilerinde-yeni-karar-ikinci-ev-alacaklar-icin-sartlar-degisti ; https://www.saraymedya.com/haber/ikinci-ev-alacaklara-buyuk-kolaylik-bddk-kredi-sinirini-degistirdi_326201/",
+  "K7": "Uzman yorumu: kararın konut talebini ve fiyatları artırabileceği (yorum, kesin değil) — https://www.yenicaggazetesi.com/iris-cibre-ve-hakan-akcam-yenicaga-degerlendirdi-bddknin-karari-fiyatlari-yukseltebilir-1092413h.htm"
+ }
+}
