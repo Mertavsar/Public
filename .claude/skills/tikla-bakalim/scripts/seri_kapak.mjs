@@ -3,7 +3,7 @@
 // vurgu kelimesi kırmızı alt çizgiyle. Seri rozeti, kutu, logo, imleç YOK (kullanıcı: "berbat").
 // Instagram ızgarası 3:4 kırpar (y 240–1680): başlık ve cümle bu alanın üst kısmında.
 //   node seri_kapak.mjs kapak.json
-// "ust": küçük kırmızı etiket (ne olduğunu ilk bakışta söyler), "baslik" <br> ile iki satır olabilir.
+// "cumleY": cümleyi ayrı konuma koy (ör. su altı yarısına). "ust": küçük kırmızı etiket (ne olduğunu ilk bakışta söyler), "baslik" <br> ile iki satır olabilir.
 // { "cikti": "out", "kapaklar": [ { "ad": "paraketa", "gorsel": "foto.jpg", "odak": "50% 50%",
 //   "baslik": "PARAKETA", "cumle": "Tek bir ipe <b>yüzlerce iğne</b><br>diziliyor..." } ] }
 // Cümle kaynaklı bir gerçek olmalı (bölümün analiz.md'si); uydurma yok.
@@ -40,7 +40,7 @@ for (const k of cfg.kapaklar) {
   const css = css0.replace("${TOP}", k.top || 330);
   fs.writeFileSync(tmp, `<!doctype html><meta charset=utf-8><style>${css}</style><div id="k">
 <img class="bg" src="${img}" style="object-position:${k.odak || "50% 50%"}"><div class="sh"></div>
-<div class="col">${k.ust ? `<div class="u">${k.ust}</div><br>` : ""}<div class="t">${k.baslik}</div><div class="c">${k.cumle}</div></div></div>`);
+<div class="col">${k.ust ? `<div class="u">${k.ust}</div><br>` : ""}<div class="t">${k.baslik}</div>${k.cumleY ? "" : `<div class="c">${k.cumle}</div>`}</div>${k.cumleY ? `<div class="c" style="position:absolute;left:84px;top:${k.cumleY}px">${k.cumle}</div>` : ""}</div>`);
   await pg.goto("file://" + tmp);
   await pg.evaluate(() => document.fonts.ready);
   await pg.waitForTimeout(300);
