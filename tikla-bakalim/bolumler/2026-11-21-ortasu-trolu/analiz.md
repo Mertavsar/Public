@@ -27,7 +27,8 @@ yakın kısmından** çekilen trol ağı (K1 tanımı). Türkiye'de **sadece çi
 | Hamsi için ayrıca İzin Belgesi zorunlu | K1 |
 | Marmara, Ege ve Akdeniz'de ortasu trolü yasak; Karadeniz'de trolün yasak olduğu yerlerde de yasak | K1 |
 | Karadeniz'de 24 m'den sığ suda ve 15 Nisan–31 Ağustos arasında yasak | K1 |
-| Ege ve Akdeniz'de ortasu trolü yasak — 2026 metninde de duruyor (aramada mevzuat.gov.tr güncel metni) | K1 |
+| Ege ve Akdeniz'de ortasu trolü GENEL OLARAK yasak; İSTİSNA: 9. md. 4. fıkra (a)(b) alanlarında 12 milin dışında serbest (alanların koordinatları doğrulanamadı) → videoda "genel olarak yasak, birkaç istisna bölge" de, "tamamen yasak" deme | K1 |
+| Karıştırılan: Akdeniz'de DİP trolü 15 Nisan–15 Eylül yasak, kalan dönem serbest (ortasu trolü değil) | K1 |
 | Karadeniz'de Bulgaristan sınırı–Zonguldak Baba Burnu arası ortasu trolüyle hamsi avı 15.00–09.00 arası; dışında ağ denizde bulundurulamaz (2026/25 değişikliği, RG 16.09.2026 sayı 33372) | K7 |
 | 2026 sezonunda Karadeniz'de gırgır ve ortasu trolüyle hamsi/istavrit avı 15 Eylül'de başladı | K7 |
 | Hamsi kotası: kota dolunca av biter | K1 |

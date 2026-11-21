@@ -1,4 +1,4 @@
-ORTASU TROLÜ — SESLENDİRME v7 (format gırgır, ElevenLabs v3 etiketli, excited ağırlıklı)
+ORTASU TROLÜ — SESLENDİRME v8 (format gırgır, ElevenLabs v3 etiketli, excited ağırlıklı)
 ElevenLabs: dil Turkish, model Eleven v3, speed 1.0, stability 65–70. Etiketler dışında metni değiştirme.
 
 [excited] En çok merak edilen konu: ortasu trolü! [curious] Bu iki tekne birbirinden uzaklaştıkça, aradaki hamsiler kaçamıyor. [mysterious] Çünkü aralarında, suyun ortasında asılı duran görünmez bir tuzak var. [short pause] [excited] Adım adım göstereyim. Bu videoyu paylaş ve abone ol ki herkes, balıkçıların ne kadar zor bir işle uğraştığını görsün ve sofrasındaki balığın oraya nasıl geldiğini anlasın.
@@ -9,4 +9,4 @@ ElevenLabs: dil Turkish, model Eleven v3, speed 1.0, stability 65–70. Etiketle
 
 [serious] Ve bu iş, göründüğü kadar kolay değil. İki tekne sürekli haberleşerek aynı hızda gitmek ve aradaki mesafeyi korumak zorunda. Tekneler birbirine yaklaşırsa ağın ağzı daralır, sürü kaçar. [excited] Üstelik av sezonu eylülde açılıp nisan ortasına kadar sürüyor; yani bütün bunlar Karadeniz'in en sert aylarında, dalgaların arasında yapılıyor. Batı Karadeniz'de hamsi ise sadece öğleden sonra üçten sabah dokuza kadar avlanabiliyor; mesai geceyi de içine alıyor. [amazed] Sonunda sürü, ağın daralan ucunda toplanıyor ve ağ tekneye çekiliyor.
 
-[serious] Bu ağ Türkiye'de sadece Karadeniz'de, sadece iki gemiyle ve sadece izinle kullanılabiliyor. Marmara'da, Ege'de ve Akdeniz'de tamamen yasak. Karadeniz'de bile yirmi dört metreden sığ sularda ve nisan ortasından ağustos sonuna kadar kullanılamıyor. [excited] Sıradaki avcılık hangisi olsun? Yorumlarda sen seç. Merak ettiysen, tıkla bakalım! [mysterious] Ve şu an Karadeniz'de bir yerde, iki tekne yine birbirinden uzaklaşıyor.
+[serious] Bu ağ sadece iki gemiyle ve sadece izinle çekilebiliyor. Marmara'da, Ege'de ve Akdeniz'de ise genel olarak yasak; yalnızca birkaç istisna bölgede, kıyıdan uzakta izin var. Karadeniz'de bile yirmi dört metreden sığ sularda ve nisan ortasından ağustos sonuna kadar kullanılamıyor. [excited] Sıradaki avcılık hangisi olsun? Yorumlarda sen seç. Merak ettiysen, tıkla bakalım! [mysterious] Ve şu an Karadeniz'de bir yerde, iki tekne yine birbirinden uzaklaşıyor.
