@@ -156,6 +156,9 @@ const branch = new THREE.Group(); branch.position.set(0, 160, 1400); grove.add(b
   branch.userData.olives = [];
   for (let i = 0; i < 7; i++) { const o = makeOlive(COL.green); const a = bp[1 + i]; o.position.set(a.x + (rnd() - .5) * 2, a.y - 3.2 - rnd(), a.z + (rnd() - .5) * 2); o.scale.setScalar(1); branch.add(o); branch.userData.olives.push(o); } }
 
+const biteCut = makeCutOlive(COL.green, 220); biteCut.visible = false; scene.add(biteCut);
+const BURST = new THREE.InstancedMesh(new THREE.SphereGeometry(.07, 8, 6), new THREE.MeshStandardMaterial({ color: 0xff2a2a, emissive: 0xd00000, emissiveIntensity: 1.2 }), 160); BURST.frustumCulled = false; scene.add(BURST);
+const BU = []; for (let i = 0; i < 160; i++) BU.push({ d: V(rnd() - .5, rnd() - .5, rnd() * .8 + .2).normalize(), sp: 3 + rnd() * 6 });
 // stüdyolar (yerin altında, birbirinden uzak)
 const SY = -60000;
 const P_CUT = V(0, SY, 0), P_JAR = V(4000, SY, 0), P_KUP = V(8000, SY, 0), P_MIC = V(12000, SY, 0), P_FAC = V(20000, SY, 0), P_TAB = V(30000, SY, 0), P_CEL = V(36000, SY, 0);
@@ -254,7 +257,13 @@ const fadeIO = (lt, d, a = .3) => sm(lt / a) * (1 - sm((lt - d + a) / a));
 const A = (P, x, y, z) => P.clone().add(V(x, y, z));
 function base(o) { return Object.assign({ out: false, gold: false, dots: [0, 0, 0], leak: 0, chg: 0, crack: 0, micro: 0, cellar: false, chip: null, cta: null, logo: 0, pick: 0 }, o); }
 const BR = V(0, 160, 1400);
-S.bite = (lt, d) => { const u = sm(lt / d); camSet(A(BR, lerp(8, 4, u), -2, lerp(52, 46, u)), A(BR, 0, -4, 0), 40); return base({ out: true, pick: ease(clamp((lt - .3) / (d - .3))) }); };
+S.bite = (lt, d) => {
+  const f = lt / d, sw = ease(clamp(f / .5));                                     // 0–50%: bahçenin üstünden dala süzülme
+  const p0 = V(900, 900, 4200), p1 = A(BR, 6, -2, 46), mid = V(200, 260, 2400);
+  const p = p0.clone().multiplyScalar((1 - sw) * (1 - sw)).add(mid.clone().multiplyScalar(2 * sw * (1 - sw))).add(p1.clone().multiplyScalar(sw * sw));
+  const tg = V(0, 200, 0).lerp(A(BR, 0, -4, 0), sw); camSet(p, tg, lerp(50, 40, sw));
+  const pk = ease(clamp((f - .48) / .25)), bt = clamp((f - .76) / .24);          // koparma, sonra ısırma
+  return base({ out: true, gold: true, pick: pk, bite: bt }); };
 const TAB = (lt, d, o = {}) => { const u = sm(lt / d); camSet(A(P_TAB, lerp(-8, 8, u), lerp(62, 58, u), lerp(78, 72, u)), A(P_TAB, -6, 2, -6), 40); return base(o); };
 S.table0 = TAB;
 S.secret0 = (lt, d) => { const u = sm(lt / d), c = P_CUT; camSet(A(c, 0, .2, lerp(14, 12, u)), c, 38); return base({ dots: [sm((lt - .4) / 1.2), 0, 0], only: 0 }); };
@@ -296,7 +305,15 @@ function apply(st, T) {
   // dal: bir zeytin koparılıp kameraya gelir
   branch.userData.olives.forEach((o, i) => { o.rotation.z = Math.sin(T * 1.2 + i) * .06; });
   { const o = branch.userData.olives[3]; const base0 = o.userData.p0 || (o.userData.p0 = o.position.clone()); const k = st.pick || 0;
-    o.position.copy(base0).lerp(V(4, -4, 16), k); o.rotation.y = k * 2; }
+    o.position.copy(base0).lerp(V(5.6, -2.4, 37), k); o.rotation.y = k * 2; }
+  // ısırma: koparılan zeytin kesite dönüşür, acı parçacıkları saçılır
+  { const o = branch.userData.olives[3]; const on = (st.bite || 0) > 0; o.visible = !on; biteCut.visible = on;
+    for (let i = 0; i < 160; i++) { dummy.scale.setScalar(0); dummy.position.set(0, -9e4, 0); dummy.updateMatrix(); BURST.setMatrixAt(i, dummy.matrix); }
+    if (on) { o.getWorldPosition(tmpV); biteCut.position.copy(tmpV); biteCut.lookAt(camera.position); const k = sm(st.bite / .25); biteCut.scale.setScalar(lerp(.6, 1, k));
+      biteCut.updateMatrixWorld(true); biteCut.userData.plane.setFromNormalAndCoplanarPoint(V(0, 0, -1).applyQuaternion(biteCut.quaternion), biteCut.position); setDots(biteCut, 1, T);
+      const e = st.bite; for (let i = 0; i < 160; i++) { const b = BU[i]; const dl = b.d.clone().applyQuaternion(biteCut.quaternion); dummy.position.copy(biteCut.position).addScaledVector(dl, .8 + e * b.sp * 1.6);
+        dummy.scale.setScalar(1.6 - e); dummy.updateMatrix(); BURST.setMatrixAt(i, dummy.matrix); } }
+    BURST.instanceMatrix.needsUpdate = true; }
   // kesitler
   cutPlanes();
   cuts.forEach((c, i) => { c.visible = st.only == null || st.only === i; setDots(c, st.dots[i] || 0, T); });
