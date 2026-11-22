@@ -68,6 +68,14 @@ kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay
   Çökertme dalyan denemesinde kullanıcı: "berbat, iptal et bu tarzı". Kullanıcı görsel atarsa
   ya gerçek hareket (Higgsfield görselden video) ya da kodla 3D sahne; fotoğrafa Ken Burns yok.
 
+
+### Avcılık videoları — tarafsızlık kuralı (kullanıcı kuralı, KESİN)
+- **Sadece av yöntemini anlat.** Hiçbir avcıyı, yöntemi ya da sektörü kötüleme.
+- "Yasak", "kaçak", "ceza", "kota aşılırsa", "balıkların sonu geliyor", "denizler tükeniyor", "yan av",
+  "deniz tabanına zarar" gibi suçlayan ya da çevreci-tartışmalı ifade YOK. Haritada kırmızı ✕ / "YASAK" etiketi YOK.
+- Kural/mevzuat ancak yöntemi anlamak için şartsa nötr dille: "izinle yapılıyor", "belirli dönemde yapılıyor".
+- Sebep: kanalın izleyicisi balıkçılar; suçlayıcı dil tehdit ve linç riski doğurur.
+
 ## Etkileşim cümleleri — metnin içine giydirilir (kullanıcı kuralı)
 
 Her metinde **üç** etkileşim anı var. Reklam gibi değil, anlatının parçası gibi:
