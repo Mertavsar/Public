@@ -569,16 +569,17 @@ function ctaAnim(lt, d) {
   const k = (d - .25) / 3.4;                                    // kısa: en fazla ~3 sn
   const tt = lt / k, a = sm(lt / .25) * (1 - sm((lt - d + .25) / .25));
   c.style.opacity = a; c.style.transform = `translateY(${(1 - sm(lt / .35)) * 60}px)`;
-  const P = { s: [1060, 1500], logo: [215, 1000], sub: [390, 1075], sh: [640, 1075] };
+  const bs = $("bSub"); if (tt > 2.05) { bs.textContent = "✓ Abone olundu"; bs.classList.add("done"); } else { bs.textContent = "Abone ol"; bs.classList.remove("done"); }
+  const ty = (1 - sm(lt / .25)) * 60, ctr = el => { const r = $(el).getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2 - ty]; };
+  const P = { s: [1060, 1500], logo: ctr("ctaLogo"), sub: ctr("bSub"), sh: ctr("bSh") };
   const path = [[0, "s"], [.9, "logo"], [1.5, "logo"], [1.9, "sub"], [2.3, "sub"], [2.7, "sh"], [3.4, "sh"]];
   let x = P.s[0], y = P.s[1];
   for (let i = 0; i < path.length - 1; i++) { const [t0, p0] = path[i], [t1, p1] = path[i + 1]; if (tt >= t0) { const f = ease((tt - t0) / (t1 - t0)); x = lerp(P[p0][0], P[p1][0], f); y = lerp(P[p0][1], P[p1][1], f); } }
-  cur.style.opacity = a * sm((tt - .1) / .2); cur.style.transform = `translate(${x - 20}px,${y - 10}px)`;
+  cur.style.opacity = a * sm((tt - .1) / .2); cur.style.transform = `translate(${x - 18}px,${y - 9}px)`;
   const clicks = [[1.0, "logo"], [2.0, "sub"], [2.8, "sh"]]; let ro = 0, rx = 0, ry = 0, rs = 1;
   for (const [ct, p] of clicks) { const e = tt - ct; if (e >= 0 && e < .45) { ro = 1 - e / .45; rs = 1 + e * 9; rx = P[p][0]; ry = P[p][1]; } }
   rip.style.opacity = ro * a; rip.style.left = rx + "px"; rip.style.top = ry + "px"; rip.style.transform = `scale(${rs})`;
   const lb = tt - 1.0; $("ctaLogo").style.transform = `scale(${lb > 0 && lb < .3 ? 1 + .12 * Math.sin(lb / .3 * Math.PI) : 1})`;
-  const bs = $("bSub"); if (tt > 2.05) { bs.textContent = "✓ Abone olundu"; bs.classList.add("done"); } else { bs.textContent = "Abone ol"; bs.classList.remove("done"); }
   $("bSh").style.background = tt > 2.85 ? "#e3141b" : "#111";
 }
 function captions(T) {
