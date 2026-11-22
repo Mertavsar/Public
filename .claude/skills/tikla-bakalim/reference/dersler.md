@@ -68,3 +68,10 @@ Tek film gibi durması için:
 - **Yazı görseli kapatmaz** (kullanıcı: "yazılar görseli kapatıyor, logo yok, çok kötü"). Sadece üst gökyüzü
   bandında: kırmızı hook etiketi + tek satır başlık (~150 px). Alt cümle yok. Logo sağ altta. Görselde boş
   tarafa yasla (`sag`). Görselin alt 3/4'ü tamamen temiz kalır.
+
+## Kaynak kullanımı (kullanıcı kuralı)
+Her videoda iki ayrı kaynak katmanı olur ve kullanıcıya üretimden ÖNCE gösterilir:
+1. **Bilgi kaynakları** (`analiz.md`): her cümle en az iki kaynağa bağlı; kaynaksız cümle metne girmez.
+2. **Görsel referanslar** (`gorsel_referans.md`): yöntemin gerçek çekimleri (YouTube/haber videosu, Wikimedia, FAO/ICCAT
+   şemaları). 3D sahneler bunlara bakılarak kurulur (gemi tipi, ağ şekli, kafes, renkler). Her sahne için
+   "hangi referansa göre" notu. Referans bulunamayan sahne "temsili" diye işaretlenir.
