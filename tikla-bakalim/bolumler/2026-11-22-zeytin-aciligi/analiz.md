@@ -24,5 +24,5 @@ Tarafsızlık: hiçbir yöntem/üretici kötülenmez ("soda aromayı götürür"
 - K2 — Charoenprasert & Mitchell, "Factors Influencing Phenolic Compounds in Table Olives" (UC Davis): https://mitchell.ucdavis.edu/sites/g/files/dgvnsk916/files/2017-05/2012_Olive%20Reivew_Charoenprasert.pdf
 - K3 — "Understanding the Characteristics of Oleuropein for Table Olive Processing": https://www.walshmedicalmedia.com/open-access/understanding-the-characteristics-of-oleuropein-for-table-olive-processing-2157-7110.1000328.pdf
 - K4 — Sarkaç, "Sofralık zeytin üzerine" (2025): https://sarkac.org/2025/01/sofralik-zeytin-uzerine/
-- K5 — Sabah, zeytin acılığı: https://www.sabah.com.tr/yasam/evde-zeytin-kuracaklar-dikkat-aciligini-azaltmanin-puf-noktasi-bu-ayrintida-saklı-7688128
+- K5 — Sabah, zeytin acılığı: https://www.sabah.com.tr/yasam/evde-zeytin-kuracaklar-dikkat-aciligini-azaltmanin-puf-noktasi-bu-ayrintida-sakli-7688128
 - K6 — "Table Olives: More than a Fermented Food" (ResearchGate): https://www.researchgate.net/publication/339298169_Table_Olives_More_than_a_Fermented_Food
