@@ -1,0 +1,369 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:AN;src:url(fonts/Anton-Regular.ttf)}
+@font-face{font-family:PS;src:url(fonts/Poppins-SemiBold.ttf)}
+@font-face{font-family:PB;src:url(fonts/Poppins-BlackItalic.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#c{position:absolute;inset:0}
+.ov{position:absolute;inset:0;pointer-events:none}
+#vig{background:radial-gradient(120% 80% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.45) 100%)}
+#title{position:absolute;left:0;right:0;top:300px;text-align:center;color:#fff;opacity:0}
+#title .k{display:inline-block;background:#e3141b;font-family:PS;font-size:40px;letter-spacing:4px;padding:10px 22px 6px}
+#title .b{font-family:AN;font-size:250px;line-height:1;margin-top:18px;text-shadow:0 10px 40px rgba(0,0,0,.55)}
+#cap{position:absolute;left:60px;right:60px;top:1230px;text-align:center;font-family:PS;font-size:70px;line-height:1.15;color:#fff;
+ text-shadow:0 0 2px #000,0 4px 0 rgba(0,0,0,.55),0 8px 30px rgba(0,0,0,.6)}
+#cap span{transition:none}
+#cap .on{color:#ffd54a}
+.lab{position:absolute;transform:translate(-50%,-50%);font-family:PS;font-size:40px;color:#fff;white-space:nowrap;
+ background:rgba(8,14,20,.62);border:2px solid rgba(255,255,255,.85);padding:8px 20px 4px;border-radius:12px;opacity:0}
+.lab.red{border-color:#e3141b;background:rgba(227,20,27,.85)}
+.lab.big{font-family:AN;font-size:64px;letter-spacing:1px;padding:6px 24px 2px}
+#chip{position:absolute;left:50%;top:1060px;transform:translateX(-50%);display:flex;align-items:center;gap:18px;
+ background:#fff;color:#111;font-family:PS;font-size:42px;padding:16px 34px 12px;border-radius:60px;opacity:0;white-space:nowrap;
+ box-shadow:0 12px 40px rgba(0,0,0,.45)}
+#chip i{font-style:normal;display:inline-block;background:#e3141b;color:#fff;border-radius:40px;padding:4px 18px 0;font-size:36px}
+#panel{position:absolute;left:250px;top:250px;width:580px;height:580px;opacity:0}
+#map{position:absolute;inset:0;opacity:0}
+#logo{position:absolute;left:50%;top:560px;width:420px;height:420px;margin-left:-210px;border-radius:50%;opacity:0;
+ box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#flash{background:#fff;opacity:0}
+#cta{position:absolute;left:90px;width:900px;top:860px;background:rgba(255,255,255,.96);border-radius:36px;padding:34px 40px;opacity:0;
+ display:grid;grid-template-columns:150px 1fr;gap:10px 30px;align-items:center;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+#ctaLogo{width:150px;height:150px;border-radius:50%;grid-row:span 2}
+#cta .nm{font-family:AN;font-size:66px;color:#111;line-height:1}
+#cta small{display:block;font-family:PS;font-size:30px;color:#666;margin-top:8px}
+#cta .row{display:flex;gap:20px}
+#cta .btn{font-family:PS;font-size:38px;background:#e3141b;color:#fff;border-radius:50px;padding:14px 34px 10px}
+#cta .btn.w{background:#111}
+#cta .btn.done{background:#d9d9d9;color:#333}
+#cur{position:absolute;left:0;top:0;opacity:0;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+#rip{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:6px solid #e3141b;opacity:0}
+#lines{position:absolute;inset:0}
+</style>
+<script type="importmap">{"imports":{"three":"./lib/node_modules/three/build/three.module.js","three/addons/":"./lib/node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<canvas id="lines" class="ov" width="1080" height="1920"></canvas>
+<canvas id="map" width="1080" height="1920"></canvas>
+<canvas id="panel" width="900" height="900"></canvas>
+<div id="vig" class="ov"></div>
+<div id="title"><span class="k">EN ÇOK MERAK EDİLEN</span><div class="b">ORTASU TROLÜ</div></div>
+<div id="labs" class="ov"></div>
+<div id="chip"></div>
+<img id="logo" src="logo.jpg">
+<div id="cta"><img src="logo.jpg" id="ctaLogo"><div class="nm">Tıkla Bakalım<small>Merak edilen her şey, basitçe</small></div>
+ <div class="row"><div class="btn" id="bSub">Abone ol</div><div class="btn w" id="bSh">↗ Paylaş</div></div></div>
+<div id="rip"></div>
+<svg id="cur" viewBox="0 0 120 130" width="110" height="120"><path d="M20 10 L20 108 L44 86 L60 122 L80 113 L64 78 L98 78 Z" fill="#fff" stroke="#111" stroke-width="7" stroke-linejoin="round"/></svg>
+<div id="cap"></div>
+<div id="flash" class="ov"></div>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+// ---------- yardımcılar ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const sm = t => { t = clamp(t); return t * t * (3 - 2 * t); };
+const ease = t => { t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const rnd = (() => { let s = 12345; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const $ = id => document.getElementById(id);
+
+const TL = await (await fetch("timeline.json")).json();
+
+// ================= ZEYTİN: sahne (birim = cm) =================
+const renderer = new THREE.WebGLRenderer({ canvas: $("c"), antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(1080, 1920, false); renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.localClippingEnabled = true;
+const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(45, 1080 / 1920, 0.05, 200000);
+scene.fog = new THREE.FogExp2(0xdfe9f0, 0.00002);
+{ const pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromScene(new RoomEnvironment(), .04).texture; }
+const hemi = new THREE.HemisphereLight(0xe8f1ff, 0x5a4a32, 1.1); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff1d6, 2.4); sun.position.set(-3, 5, 4); scene.add(sun);
+const tmpV = V(0, 0, 0), dummy = new THREE.Object3D();
+
+// ---- gökyüzü ----
+const skyU = { uTop: { value: new THREE.Color(0x3f8fe0) }, uHor: { value: new THREE.Color(0xeaf3f8) }, uSun: { value: V(-.4, .5, .6).normalize() }, uSunC: { value: new THREE.Color(0xfff1d6) } };
+const sky = new THREE.Mesh(new THREE.SphereGeometry(150000, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: `varying vec3 vD; void main(){ vD = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
+  fragmentShader: `uniform vec3 uTop,uHor,uSun,uSunC; varying vec3 vD; void main(){ float h = clamp(vD.y,-.2,1.); vec3 c = mix(uHor, uTop, pow(clamp(h,0.,1.),.55));
+   float s = max(dot(normalize(vD), normalize(uSun)),0.); c += uSunC*(pow(s,500.)*2. + pow(s,10.)*.25); gl_FragColor = vec4(c,1.); }` }));
+scene.add(sky);
+
+// ---- yardımcı: stüdyo kubbesi ----
+function studio(pos, R, top, bot) {
+  const m = new THREE.Mesh(new THREE.SphereGeometry(R, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, fog: false, uniforms: { a: { value: new THREE.Color(top) }, b: { value: new THREE.Color(bot) } },
+    vertexShader: `varying float vY; void main(){ vY = normalize(position).y; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
+    fragmentShader: `uniform vec3 a,b; varying float vY; void main(){ gl_FragColor = vec4(mix(b,a,smoothstep(-.6,.8,vY)),1.); }` }));
+  m.position.copy(pos); scene.add(m); return m;
+}
+
+// ---- zeytin modeli ----
+const OLIVE_G = new THREE.SphereGeometry(1, 40, 28); OLIVE_G.scale(1.05, 1.38, 1.05);
+const COL = { green: 0x6e8f2a, purple: 0x5a2d45, black: 0x1f1a22, brine: 0x8a8a3a };
+function oliveMat(c, clip) { return new THREE.MeshPhysicalMaterial({ color: c, roughness: .32, clearcoat: .7, clearcoatRoughness: .25, side: clip ? THREE.DoubleSide : THREE.FrontSide, clippingPlanes: clip || [] }); }
+function makeOlive(c, clip) {
+  const g = new THREE.Group(); g.add(new THREE.Mesh(OLIVE_G, oliveMat(c, clip)));
+  const st = new THREE.Mesh(new THREE.CylinderGeometry(.06, .08, .9, 6), new THREE.MeshStandardMaterial({ color: 0x5b6b2a })); st.position.y = 1.7; st.rotation.z = .2; g.add(st); return g;
+}
+// kesit zeytin: arka yarı + kesit yüzeyi + çekirdek + acı parçacıkları (kırmızı)
+function makeCutOlive(c, n) {
+  const g = new THREE.Group(); const plane = new THREE.Plane(V(0, 0, -1), 0); g.userData.plane = plane;
+  const skin = new THREE.Mesh(OLIVE_G, oliveMat(c, [plane])); g.add(skin);
+  const capG = new THREE.CircleGeometry(1, 48); capG.scale(.98, 1.33, 1);
+  const capM = new THREE.MeshStandardMaterial({ color: 0xc9c06a, roughness: .7 }); const cap = new THREE.Mesh(capG, capM); cap.position.z = .001; g.add(cap);
+  const rim = new THREE.Mesh(new THREE.RingGeometry(.96, 1.0, 48), new THREE.MeshStandardMaterial({ color: c })); rim.scale.set(.98, 1.33, 1); rim.position.z = .002; g.add(rim);
+  const pitG = new THREE.CircleGeometry(.42, 32); pitG.scale(1, 1.55, 1); const pit = new THREE.Mesh(pitG, new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: .8 })); pit.position.z = .003; g.add(pit);
+  const P = new THREE.InstancedMesh(new THREE.SphereGeometry(.045, 8, 6), new THREE.MeshStandardMaterial({ color: 0xff2a2a, emissive: 0xc00000, emissiveIntensity: .9 }), n);
+  const pts = []; for (let i = 0; i < n; i++) { let x, y; do { x = (rnd() * 2 - 1) * .92; y = (rnd() * 2 - 1) * 1.25; } while (x * x / .85 + y * y / 1.56 > 1 || (x * x / .18 + y * y / .42 < 1));
+    pts.push(V(x, y, .02 + rnd() * .04)); dummy.position.copy(pts[i]); dummy.updateMatrix(); P.setMatrixAt(i, dummy.matrix); }
+  g.add(P); g.userData.P = P; g.userData.pts = pts; return g;
+}
+function setDots(g, k, T) { const P = g.userData.P, n = P.count, show = Math.round(n * k);
+  for (let i = 0; i < n; i++) { const p = g.userData.pts[i]; dummy.position.set(p.x + Math.sin(T * 2 + i) * .01, p.y + Math.cos(T * 1.7 + i) * .01, p.z);
+    dummy.scale.setScalar(i < show ? 1 + .25 * Math.sin(T * 4 + i) : 0); dummy.updateMatrix(); P.setMatrixAt(i, dummy.matrix); } P.instanceMatrix.needsUpdate = true; }
+
+// ================= SETLER =================
+// 1) BAHÇE (dış mekân, origin)
+const grove = new THREE.Group(); scene.add(grove);
+{ const gg = new THREE.PlaneGeometry(40000, 40000, 160, 160); gg.rotateX(-Math.PI / 2); const p = gg.attributes.position, c = [];
+  for (let i = 0; i < p.count; i++) { const x = p.getX(i), z = p.getZ(i); const far = clamp((Math.hypot(x, z) - 4000) / 12000);
+    const h = Math.sin(x * .0006) * Math.sin(z * .0005) * 900 * far + Math.sin(x * .004 + z * .003) * 15; p.setY(i, h);
+    const n = .5 + .5 * Math.sin(x * .02) * Math.sin(z * .017); c.push(lerp(.42, .3, n), lerp(.36, .4, n), lerp(.22, .18, n)); }
+  gg.setAttribute("color", new THREE.Float32BufferAttribute(c, 3)); gg.computeVertexNormals();
+  grove.add(new THREE.Mesh(gg, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, color: 0x8f9478 }))); }
+const leafCol = new THREE.MeshStandardMaterial({ color: 0x6f7f4f, roughness: .9, flatShading: true });
+const trunkCol = new THREE.MeshStandardMaterial({ color: 0x6a5a48, roughness: 1, flatShading: true });
+function makeTree(s) {
+  const t = new THREE.Group();
+  const pts = []; for (let i = 0; i <= 6; i++) pts.push(V(Math.sin(i * 1.3 + s) * 18, i * 38, Math.cos(i * 1.1 + s) * 14));
+  t.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 16, 26, 7), trunkCol));
+  for (let k = 0; k < 9; k++) { const b = new THREE.Mesh(new THREE.IcosahedronGeometry(110 + rnd() * 80, 1), leafCol);
+    b.position.set((rnd() - .5) * 320, 260 + rnd() * 180, (rnd() - .5) * 320); b.scale.y = .75; t.add(b); }
+  return t;
+}
+for (let r = -3; r <= 3; r++) for (let c = 0; c < 8; c++) { const tr = makeTree(r * 7 + c); tr.position.set(r * 800 + (c % 2) * 120, 0, -c * 800 - 300); tr.rotation.y = rnd() * 6; grove.add(tr); }
+// dal (bahçede, kameraya yakın)
+const branch = new THREE.Group(); branch.position.set(0, 160, 1400); grove.add(branch);
+{ const bp = []; for (let i = 0; i <= 8; i++) bp.push(V(-30 + i * 7.5, Math.sin(i * .6) * 3 - i * .8, Math.cos(i * .8) * 2));
+  branch.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(bp), 40, .45, 8), trunkCol));
+  const lg = new THREE.SphereGeometry(1, 12, 6); lg.scale(4.2, .1, .75);
+  const lm = new THREE.MeshStandardMaterial({ color: 0x55663a, roughness: .6, side: THREE.DoubleSide });
+  for (let i = 0; i < 26; i++) { const l = new THREE.Mesh(lg, lm); const u = i / 26; const a = bp[Math.floor(u * 8)];
+    l.position.set(a.x + (rnd() - .5) * 3, a.y + (rnd() - .5) * 3, a.z + (rnd() - .5) * 3); l.rotation.set(rnd() * 1.5 - .75, rnd() * 6, rnd() * 1.2 - .6); branch.add(l); }
+  branch.userData.olives = [];
+  for (let i = 0; i < 7; i++) { const o = makeOlive(COL.green); const a = bp[1 + i]; o.position.set(a.x + (rnd() - .5) * 2, a.y - 3.2 - rnd(), a.z + (rnd() - .5) * 2); o.scale.setScalar(1); branch.add(o); branch.userData.olives.push(o); } }
+
+// stüdyolar (yerin altında, birbirinden uzak)
+const SY = -60000;
+const P_CUT = V(0, SY, 0), P_JAR = V(4000, SY, 0), P_KUP = V(8000, SY, 0), P_MIC = V(12000, SY, 0), P_FAC = V(20000, SY, 0), P_TAB = V(30000, SY, 0), P_CEL = V(36000, SY, 0);
+studio(P_CUT, 300, 0x2b3a2a, 0x0c120c); studio(P_JAR, 400, 0x3b3a34, 0x14120f); studio(P_KUP, 600, 0x4a3628, 0x160f0a);
+studio(P_MIC, 900, 0x1d6a6a, 0x05222a); studio(P_FAC, 6000, 0xcfd8de, 0x6a737a); studio(P_TAB, 600, 0x6b4a30, 0x24170e); studio(P_CEL, 1500, 0x5a4434, 0x150e09);
+
+// 2) KESİT ZEYTİNLER
+const cuts = [makeCutOlive(COL.green, 260), makeCutOlive(COL.purple, 260), makeCutOlive(COL.black, 260)];
+cuts.forEach((c, i) => { c.position.copy(P_CUT).add(V((i - 1) * 2.6, 0, 0)); scene.add(c); });
+{ const pl = new THREE.Mesh(new THREE.CircleGeometry(40, 48), new THREE.MeshStandardMaterial({ color: 0x2a2620, roughness: .9 })); pl.rotation.x = -Math.PI / 2; pl.position.copy(P_CUT).add(V(0, -1.6, 0)); scene.add(pl); }
+cuts.forEach(c => c.updateMatrixWorld(true));
+function cutPlanes() { cuts.forEach(c => { c.updateMatrixWorld(true); const n = V(0, 0, -1).applyQuaternion(c.quaternion); c.userData.plane.setFromNormalAndCoplanarPoint(n, c.position); }); }
+
+// 3) KAVANOZ + KESME TAHTASI
+const jar = new THREE.Group(); jar.position.copy(P_JAR); scene.add(jar);
+const waterM = new THREE.MeshStandardMaterial({ color: 0xbfe6f0, transparent: true, opacity: .35, roughness: .05, depthWrite: false });
+{ const glassM = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: .18, roughness: .05, metalness: 0, clearcoat: 1, depthWrite: false });
+  const gl = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 14, 48, 1, true), glassM); gl.position.y = 7; jar.add(gl);
+  const bot = new THREE.Mesh(new THREE.CircleGeometry(6, 48), glassM); bot.rotation.x = -Math.PI / 2; bot.position.y = .05; jar.add(bot);
+  const w = new THREE.Mesh(new THREE.CylinderGeometry(5.8, 5.8, 11, 48), waterM); w.position.y = 5.6; jar.add(w); jar.userData.water = w;
+  const tb = new THREE.Mesh(new THREE.BoxGeometry(260, 2, 160), new THREE.MeshStandardMaterial({ color: 0x9a6b3f, roughness: .8 })); tb.position.y = -1; jar.add(tb);
+  jar.userData.ol = []; for (let i = 0; i < 9; i++) { const o = makeOlive(COL.green); o.children[1].visible = false; o.position.set(Math.cos(i * 2.4) * 3.2 * Math.sqrt((i + 1) / 9), 1.6 + Math.floor(i / 4) * 2.4, Math.sin(i * 2.4) * 3.2 * Math.sqrt((i + 1) / 9)); o.rotation.z = i; jar.add(o); jar.userData.ol.push(o); } }
+const LEAK = new THREE.InstancedMesh(new THREE.SphereGeometry(.09, 6, 5), new THREE.MeshStandardMaterial({ color: 0xff3030, emissive: 0xb00000, emissiveIntensity: .8 }), 400); LEAK.frustumCulled = false; scene.add(LEAK);
+const LK = []; for (let i = 0; i < 400; i++) LK.push({ o: i % 9, a: rnd(), d: V(rnd() - .5, rnd() - .3, rnd() - .5).normalize(), sp: .5 + rnd() });
+// karşılaştırma: sağlam vs kırık (iki küçük kap)
+const cmp = new THREE.Group(); cmp.position.copy(P_JAR).add(V(180, 0, 0)); scene.add(cmp);
+{ const glassM = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: .16, roughness: .05, clearcoat: 1, depthWrite: false });
+  for (const x of [-5, 5]) { const b = new THREE.Mesh(new THREE.CylinderGeometry(3.6, 3.2, 8, 40, 1, true), glassM); b.position.set(x, 4, 0); cmp.add(b);
+    const w = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.1, 6.5, 40), new THREE.MeshStandardMaterial({ color: 0xbfe6f0, transparent: true, opacity: .3, depthWrite: false })); w.position.set(x, 3.4, 0); cmp.add(w); }
+  const a = makeOlive(COL.green); a.position.set(-5, 2.2, 0); cmp.add(a);
+  const h1 = makeOlive(COL.green), h2 = makeOlive(COL.green); h1.scale.set(1, 1, .55); h2.scale.set(1, 1, .55); h1.position.set(5, 2.2, -.5); h2.position.set(5.5, 2, .7); h2.rotation.y = .6; h2.children[1].visible = false; cmp.add(h1, h2);
+  for (let k = 0; k < 3; k++) { const s = new THREE.Mesh(new THREE.BoxGeometry(.06, 1.6, .2), new THREE.MeshStandardMaterial({ color: 0xc9c06a })); s.position.set(5 + (k - 1) * .35, 2.2, -1.1); cmp.add(s); }
+  const tb = new THREE.Mesh(new THREE.BoxGeometry(200, 1.5, 140), new THREE.MeshStandardMaterial({ color: 0x9a6b3f, roughness: .8 })); tb.position.y = -.75; cmp.add(tb); }
+const CL = new THREE.InstancedMesh(new THREE.SphereGeometry(.08, 6, 5), new THREE.MeshStandardMaterial({ color: 0xff3030, emissive: 0xb00000, emissiveIntensity: .8 }), 300); CL.frustumCulled = false; scene.add(CL);
+const CLK = []; for (let i = 0; i < 300; i++) CLK.push({ r: i < 40 ? 0 : 1, a: rnd(), d: V(rnd() - .5, rnd() * .8 - .2, rnd() - .5).normalize(), sp: .5 + rnd() });
+
+// 4) KÜP (salamura)
+const kup = new THREE.Group(); kup.position.copy(P_KUP); scene.add(kup);
+const kupClip = new THREE.Plane(V(0, 0, -1), 0);
+{ const prof = []; const H = 60; for (let i = 0; i <= 24; i++) { const v = i / 24, y = v * H; const r = 10 + 20 * Math.sin(Math.PI * Math.pow(v, .85)) * (v < .92 ? 1 : .6) + (v > .92 ? 2 : 0); prof.push(new THREE.Vector2(r, y)); }
+  const kg = new THREE.LatheGeometry(prof, 64);
+  const km = new THREE.MeshStandardMaterial({ color: 0xb5643a, roughness: .85, side: THREE.DoubleSide, clippingPlanes: [kupClip] }); kup.add(new THREE.Mesh(kg, km)); kup.userData.km = km;
+  const brine = new THREE.Mesh(new THREE.CylinderGeometry(27, 18, 44, 48, 1, false, 0, Math.PI), new THREE.MeshStandardMaterial({ color: 0xc7d9a0, transparent: true, opacity: .35, side: THREE.DoubleSide, depthWrite: false }));
+  brine.position.y = 25; brine.rotation.y = Math.PI / 2; kup.add(brine);
+  const top = new THREE.Mesh(new THREE.CircleGeometry(27, 48, Math.PI, Math.PI), new THREE.MeshStandardMaterial({ color: 0xe2ecd0, transparent: true, opacity: .5 })); top.rotation.x = -Math.PI / 2; top.position.y = 47; kup.add(top);
+  const OI = new THREE.InstancedMesh(OLIVE_G, oliveMat(COL.black), 160); let n = 0;
+  for (let i = 0; i < 400 && n < 160; i++) { const y = 8 + rnd() * 36, r = rnd() * 20, a = Math.PI + rnd() * Math.PI; const x = Math.cos(a) * r, z = Math.sin(a) * r; if (z > 0) continue;
+    dummy.position.set(x, y, z - .5); dummy.rotation.set(rnd() * 6, rnd() * 6, 0); dummy.scale.setScalar(1.6); dummy.updateMatrix(); OI.setMatrixAt(n++, dummy.matrix); }
+  OI.count = n; kup.add(OI); kup.userData.OI = OI;
+  const fl = new THREE.Mesh(new THREE.CircleGeometry(400, 48), new THREE.MeshStandardMaterial({ color: 0x5a4636, roughness: 1 })); fl.rotation.x = -Math.PI / 2; kup.add(fl); }
+kup.updateMatrixWorld(true); kupClip.setFromNormalAndCoplanarPoint(V(0, 0, -1), P_KUP);
+// kiler (aylar): küp sırası
+const cellar = new THREE.Group(); cellar.position.copy(P_CEL); scene.add(cellar);
+{ const fl = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000), new THREE.MeshStandardMaterial({ color: 0x4a3a2c, roughness: 1 })); fl.rotation.x = -Math.PI / 2; cellar.add(fl);
+  for (let i = 0; i < 7; i++) { const k = new THREE.Mesh(kup.children[0].geometry, new THREE.MeshStandardMaterial({ color: 0xb5643a, roughness: .85 })); k.position.set((i - 3) * 75, 0, -Math.abs(i - 3) * 20); cellar.add(k);
+    const lid = new THREE.Mesh(new THREE.CylinderGeometry(13, 13, 2, 32), new THREE.MeshStandardMaterial({ color: 0x8a6a4a })); lid.position.set(k.position.x, 61, k.position.z); cellar.add(lid); } }
+const cellarLight = new THREE.SpotLight(0xffd9a0, 0, 4000, .5, .6); scene.add(cellarLight); scene.add(cellarLight.target);
+
+// 5) MİKRO ÖLÇEK
+const micro = new THREE.Group(); micro.position.copy(P_MIC); scene.add(micro);
+{ const wall = new THREE.Mesh(new THREE.SphereGeometry(400, 64, 32), new THREE.MeshStandardMaterial({ color: 0x4a5a22, roughness: .6 })); wall.position.set(0, 0, -440); micro.add(wall); }
+const NM = 260, MOL = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1.2, 1), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x220000, roughness: .4 }), NM);
+MOL.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(NM * 3), 3); micro.add(MOL);
+const MI = []; for (let i = 0; i < NM; i++) MI.push({ p: V((rnd() - .5) * 90, (rnd() - .5) * 150, -30 + rnd() * 40), ph: rnd() * 6, t: rnd() });
+const NB = 14, BAC = new THREE.InstancedMesh(new THREE.CapsuleGeometry(1.6, 6, 6, 12), new THREE.MeshStandardMaterial({ color: 0x8fe08a, emissive: 0x2a7a2a, emissiveIntensity: .6, transparent: true, opacity: .85, roughness: .3 }), NB); micro.add(BAC);
+const BI = []; for (let i = 0; i < NB; i++) BI.push({ c: V((rnd() - .5) * 70, (rnd() - .5) * 120, -10 + rnd() * 20), r: 8 + rnd() * 14, ph: rnd() * 6, sp: .4 + rnd() * .5 });
+
+// 6) FABRİKA
+const fac = new THREE.Group(); fac.position.copy(P_FAC); scene.add(fac);
+{ const fl = new THREE.Mesh(new THREE.PlaneGeometry(12000, 12000), new THREE.MeshStandardMaterial({ color: 0x9aa3a8, roughness: .7 })); fl.rotation.x = -Math.PI / 2; fac.add(fl);
+  const st = new THREE.MeshStandardMaterial({ color: 0xd9dfe3, metalness: .9, roughness: .22 });
+  for (let r = 0; r < 2; r++) for (let i = 0; i < 6; i++) { const t = new THREE.Group(); const body = new THREE.Mesh(new THREE.CylinderGeometry(120, 120, 420, 40), st); body.position.y = 260; t.add(body);
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(120, 32, 12, 0, 6.3, 0, 1.2), st); dome.position.y = 470; t.add(dome);
+    const legs = new THREE.Mesh(new THREE.CylinderGeometry(100, 110, 60, 24, 1, true), st); legs.position.y = 30; t.add(legs);
+    const pipe = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, 700, 10), st); pipe.rotation.z = Math.PI / 2; pipe.position.set(0, 520, 0); if (i === 0) t.add(pipe);
+    t.position.set(i * 330 - 820, 0, r * -420); fac.add(t); }
+  // açık tank: yeşil zeytin + çözelti
+  const open = new THREE.Mesh(new THREE.CylinderGeometry(160, 160, 160, 48, 1, true), st); open.position.set(0, 80, 420); fac.add(open);
+  const liq = new THREE.Mesh(new THREE.CircleGeometry(158, 48), new THREE.MeshStandardMaterial({ color: 0xd8d6a8, transparent: true, opacity: .55 })); liq.rotation.x = -Math.PI / 2; liq.position.set(0, 150, 420); fac.add(liq); fac.userData.liq = liq;
+  const FO = new THREE.InstancedMesh(OLIVE_G, oliveMat(COL.green), 300); for (let i = 0; i < 300; i++) { const a = rnd() * 6.28, r = Math.sqrt(rnd()) * 150; dummy.position.set(Math.cos(a) * r, 148 + rnd() * 2, 420 + Math.sin(a) * r); dummy.rotation.set(rnd() * 6, rnd() * 6, 0); dummy.scale.setScalar(2.2); dummy.updateMatrix(); FO.setMatrixAt(i, dummy.matrix); } fac.add(FO); }
+
+// 7) SOFRA
+const table = new THREE.Group(); table.position.copy(P_TAB); scene.add(table);
+{ const tp = new THREE.Mesh(new THREE.BoxGeometry(900, 6, 600), new THREE.MeshStandardMaterial({ color: 0x8a5a34, roughness: .7 })); tp.position.y = -3; table.add(tp);
+  const pl = new THREE.Mesh(new THREE.LatheGeometry([new THREE.Vector2(0, 0), new THREE.Vector2(9, 0), new THREE.Vector2(10, .6), new THREE.Vector2(12, 1.6), new THREE.Vector2(12.4, 1.8)], 48), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .15, clearcoat: 1, side: THREE.DoubleSide })); table.add(pl);
+  for (let i = 0; i < 22; i++) { const o = makeOlive(i % 3 === 0 ? COL.green : COL.black); o.children[1].visible = false; const a = i * 2.4, r = Math.sqrt(i / 22) * 7.5; o.position.set(Math.cos(a) * r, 1.6 + (i > 12 ? 1.4 : 0), Math.sin(a) * r); o.rotation.set(Math.PI / 2 + rnd(), rnd() * 6, 0); table.add(o); }
+  const bread = new THREE.Mesh(new THREE.SphereGeometry(9, 24, 16), new THREE.MeshStandardMaterial({ color: 0xc8935a, roughness: .9 })); bread.scale.set(1.6, .7, 1); bread.position.set(-30, 4, -10); table.add(bread);
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 2.8, 9, 32, 1, true), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: .2, clearcoat: 1, depthWrite: false })); glass.position.set(22, 4.5, -14); table.add(glass);
+  const tea = new THREE.Mesh(new THREE.CylinderGeometry(3, 2.6, 6, 32), new THREE.MeshStandardMaterial({ color: 0xa8321a, transparent: true, opacity: .85 })); tea.position.set(22, 3.2, -14); table.add(tea); }
+// ================= 2D + çekimler + uygula =================
+const LN = $("lines").getContext("2d");
+function proj(p) { const v = p.clone().project(camera); return [(v.x + 1) / 2 * 1080, (1 - v.y) / 2 * 1920, v.z]; }
+const S = {};
+const camSet = (p, tg, fov = 40) => { camera.position.copy(p); camera.lookAt(tg); camera.fov = fov; camera.updateProjectionMatrix(); };
+const fadeIO = (lt, d, a = .3) => sm(lt / a) * (1 - sm((lt - d + a) / a));
+const A = (P, x, y, z) => P.clone().add(V(x, y, z));
+function base(o) { return Object.assign({ out: false, gold: false, dots: [0, 0, 0], leak: 0, chg: 0, crack: 0, micro: 0, cellar: false, chip: null, cta: null, logo: 0, pick: 0 }, o); }
+const BR = V(0, 160, 1400);
+S.bite = (lt, d) => { const u = sm(lt / d); camSet(A(BR, lerp(8, 4, u), -2, lerp(52, 46, u)), A(BR, 0, -4, 0), 40); return base({ out: true, pick: ease(clamp((lt - .3) / (d - .3))) }); };
+const TAB = (lt, d, o = {}) => { const u = sm(lt / d); camSet(A(P_TAB, lerp(-8, 8, u), lerp(62, 58, u), lerp(78, 72, u)), A(P_TAB, -6, 2, -6), 40); return base(o); };
+S.table0 = TAB;
+S.secret0 = (lt, d) => { const u = sm(lt / d), c = P_CUT; camSet(A(c, 0, .2, lerp(14, 12, u)), c, 38); return base({ dots: [sm((lt - .4) / 1.2), 0, 0], only: 0 }); };
+const GRV = (lt, d, o = {}) => { const u = sm(lt / d); camSet(V(lerp(500, 300, u), lerp(240, 220, u), lerp(1900, 1700, u)), V(-200, 260, -1500), 46); return base(Object.assign({ out: true }, o)); };
+S.step = GRV;
+S.cta = (lt, d) => GRV(lt, d, { cta: lt, ctaD: d });
+S.oleu = (lt, d) => { const c = P_CUT; camSet(A(c, .3, .2, lerp(12, 11, lt / d)), c, 38); return base({ dots: [1, 0, 0], only: 0 }); };
+S.ripe = (lt, d) => { const u = sm(lt / (d * .7)); camSet(A(P_CUT, 0, .3, 19), A(P_CUT, 0, 0, 0), 38); return base({ dots: [1, lerp(1, .55, u), lerp(1, .3, u)] }); };
+const JAR = (lt, d, o = {}, z0 = 54, z1 = 50) => { const u = sm(lt / d); camSet(A(P_JAR, lerp(-6, -3, u), 13, lerp(z0, z1, u)), A(P_JAR, 0, 6, 0), 40); return base(o); };
+S.howq = (lt, d) => JAR(lt, d, { leak: .15 });
+S.water0 = (lt, d) => JAR(lt, d, { leak: .35 });
+S.water = (lt, d) => JAR(lt, d, { leak: sm(lt / (d * .6)), chg: sm((lt - d * .7) / (d * .2)) });
+S.push = (lt, d) => JAR(lt, d, { leak: .6 }, 50, 44);
+S.like = (lt, d) => JAR(lt, d, { leak: .7, chip: ["like", fadeIO(lt, d)] }, 44, 42);
+const CMP = (lt, d, o = {}) => { const u = sm(lt / d), c = cmp.position; camSet(A(c, 0, lerp(11, 9, u), lerp(40, 34, u)), A(c, 0, 3, 0), 40); return base(o); };
+S.crackq = (lt, d) => CMP(lt, d, { crack: .2 });
+S.crack = (lt, d) => CMP(lt, d, { crack: sm(lt / 1) });
+const KUP = (lt, d, o = {}) => { const u = sm(lt / d); camSet(A(P_KUP, lerp(60, 40, u), lerp(80, 70, u), lerp(185, 170, u)), A(P_KUP, 0, 28, 0), 40); return base(o); };
+S.magic = KUP;
+S.microbe = (lt, d) => { const u = sm(lt / d); camSet(A(P_MIC, lerp(-10, 10, u), 0, lerp(150, 120, u)), A(P_MIC, 0, 0, -20), 45); return base({ micro: clamp((lt - .4) / (d - .8)) }); };
+S.months = (lt, d) => { const u = lt / d; camSet(A(P_CEL, lerp(-80, 80, u), 150, 620), A(P_CEL, 0, 30, -20), 42); return base({ cellar: true, cel: u }); };
+S.factory = (lt, d) => { const u = sm(lt / d); camSet(A(P_FAC, lerp(1100, 800, u), lerp(620, 520, u), lerp(1500, 1350, u)), A(P_FAC, -150, 200, 100), 46); return base({}); };
+S.patience = TAB;
+const OUT = (lt, d, o = {}) => GRV(lt, d, Object.assign({ gold: true }, o));
+S.outro = OUT;
+S.comment = (lt, d) => OUT(lt, d, { chip: ["comment", fadeIO(lt, d)] });
+S.sign = (lt, d) => OUT(lt, d, { logo: sm(lt / .4) });
+S.loop = (lt, d) => KUP(lt, d);
+
+const CHIPS = { like: "<i>❤</i> İşine yaradıysa beğen", comment: "<i>💬</i> Sıradaki konuyu sen seç" };
+const gold = new THREE.Color(1, .78, .18), red = new THREE.Color(1, .14, .14), tmpC = new THREE.Color();
+function apply(st, T) {
+  // gökyüzü / ışık
+  if (st.gold) { skyU.uTop.value.set(0x35609a); skyU.uHor.value.set(0xf6c27c); skyU.uSunC.value.set(0xffc27a); sun.color.set(0xffd09a); skyU.uSun.value.set(-.6, .12, -.8).normalize(); }
+  else { skyU.uTop.value.set(0x3f8fe0); skyU.uHor.value.set(0xeaf3f8); skyU.uSunC.value.set(0xfff1d6); sun.color.set(0xfff1d6); skyU.uSun.value.set(-.4, .5, .6).normalize(); }
+  sun.position.copy(skyU.uSun.value).multiplyScalar(10); sky.position.copy(camera.position);
+  scene.fog.density = st.out ? .000008 : 0; scene.fog.color.set(st.gold ? 0xf0c890 : 0xdfe9f0);
+  renderer.toneMappingExposure = st.cellar ? 1.2 : 1.0;
+  // dal: bir zeytin koparılıp kameraya gelir
+  branch.userData.olives.forEach((o, i) => { o.rotation.z = Math.sin(T * 1.2 + i) * .06; });
+  { const o = branch.userData.olives[3]; const base0 = o.userData.p0 || (o.userData.p0 = o.position.clone()); const k = st.pick || 0;
+    o.position.copy(base0).lerp(V(4, -4, 16), k); o.rotation.y = k * 2; }
+  // kesitler
+  cutPlanes();
+  cuts.forEach((c, i) => { c.visible = st.only == null || st.only === i; setDots(c, st.dots[i] || 0, T); });
+  if (st.only === 0) { cuts[0].position.copy(P_CUT); } else { cuts[0].position.copy(P_CUT).add(V(-2.6, 0, 0)); } cutPlanes();
+  // kavanoz sızıntısı
+  const wc = new THREE.Color(0xbfe6f0).lerp(new THREE.Color(0xc98a5a), st.leak * (1 - st.chg) * .8); jar.userData.water.material.color.copy(wc);
+  for (let i = 0; i < 400; i++) { const f = LK[i], o = jar.userData.ol[f.o]; o.getWorldPosition(tmpV);
+    const dist = ((f.a + T * f.sp * .12) % 1) * 5 * st.leak; const p = tmpV.clone().addScaledVector(f.d, 1.2 + dist);
+    const r = Math.hypot(p.x - P_JAR.x, p.z - P_JAR.z); if (r > 5.4) { p.x = P_JAR.x + (p.x - P_JAR.x) * 5.4 / r; p.z = P_JAR.z + (p.z - P_JAR.z) * 5.4 / r; }
+    p.y = Math.min(p.y, P_JAR.y + 10.8); dummy.position.copy(p); dummy.scale.setScalar(st.leak > 0 && i < 400 * st.leak ? 1 - st.chg : 0); dummy.updateMatrix(); LEAK.setMatrixAt(i, dummy.matrix); }
+  LEAK.instanceMatrix.needsUpdate = true;
+  // kırık / sağlam karşılaştırma
+  for (let i = 0; i < 300; i++) { const f = CLK[i], c0 = cmp.position.clone().add(f.r ? V(5.2, 2.1, 0) : V(-5, 2.2, 0));
+    const dist = f.r ? ((f.a + T * f.sp * .3) % 1) * 3 : ((f.a + T * f.sp * .05) % 1) * 1.6; const p = c0.addScaledVector(f.d, 1.3 + dist);
+    dummy.position.copy(p); dummy.scale.setScalar(st.crack > 0 && (f.r || i < 40) ? (f.r ? st.crack : st.crack) : 0); dummy.updateMatrix(); CL.setMatrixAt(i, dummy.matrix); }
+  CL.instanceMatrix.needsUpdate = true;
+  // mikro: kırmızı → altın
+  for (let i = 0; i < NM; i++) { const m = MI[i]; const conv = st.micro > m.t; const e = clamp((st.micro - m.t) * 8);
+    dummy.position.copy(m.p).add(V(Math.sin(T * .7 + m.ph) * 2, Math.cos(T * .6 + m.ph) * 2, 0)); dummy.rotation.set(T * .5 + m.ph, T * .3, 0); dummy.scale.setScalar(1 + (e > 0 && e < 1 ? .6 * Math.sin(e * Math.PI) : 0));
+    dummy.updateMatrix(); MOL.setMatrixAt(i, dummy.matrix); tmpC.copy(red).lerp(gold, e); MOL.setColorAt(i, tmpC); }
+  MOL.instanceMatrix.needsUpdate = true; MOL.instanceColor.needsUpdate = true;
+  for (let i = 0; i < NB; i++) { const b = BI[i], a = b.ph + T * b.sp; dummy.position.set(b.c.x + Math.cos(a) * b.r, b.c.y + Math.sin(a * .8) * b.r * 1.4, b.c.z + Math.sin(a) * 4);
+    dummy.rotation.set(0, 0, a + Math.PI / 2 + Math.sin(T * 3 + i) * .2); dummy.updateMatrix(); BAC.setMatrixAt(i, dummy.matrix); } BAC.instanceMatrix.needsUpdate = true;
+  // kiler: pencere ışığı gün boyu döner
+  cellarLight.intensity = st.cellar ? 9 : 0; if (st.cellar) { const a = lerp(-1, 1, (st.cel * 2.5) % 1); cellarLight.position.copy(P_CEL).add(V(a * 600, 700, 500)); cellarLight.target.position.copy(P_CEL).add(V(0, 30, 0)); cellarLight.target.updateMatrixWorld(); }
+  // 2D
+  LN.clearRect(0, 0, 1080, 1920);
+  const ch = $("chip"); if (st.chip) { ch.innerHTML = CHIPS[st.chip[0]]; ch.style.opacity = st.chip[1]; ch.style.transform = `translateX(-50%) translateY(${(1 - st.chip[1]) * 30}px)`; } else ch.style.opacity = 0;
+  $("logo").style.opacity = st.logo; $("logo").style.transform = `scale(${.8 + .2 * st.logo})`;
+  ctaAnim(st.cta ?? null, st.ctaD);
+}
+function ctaAnim(lt, d) {
+  const c = $("cta"), cur = $("cur"), rip = $("rip"); if (lt == null) { c.style.opacity = 0; cur.style.opacity = 0; rip.style.opacity = 0; return; }
+  d = Math.min(d, 3.1); if (lt > d) { c.style.opacity = 0; cur.style.opacity = 0; rip.style.opacity = 0; return; }
+  const k = (d - .25) / 3.4;                                    // kısa: en fazla ~3 sn
+  const tt = lt / k, a = sm(lt / .25) * (1 - sm((lt - d + .25) / .25));
+  c.style.opacity = a; c.style.transform = `translateY(${(1 - sm(lt / .35)) * 60}px)`;
+  const bs = $("bSub"); if (tt > 2.05) { bs.textContent = "✓ Abone olundu"; bs.classList.add("done"); } else { bs.textContent = "Abone ol"; bs.classList.remove("done"); }
+  const ty = (1 - sm(lt / .25)) * 60, ctr = el => { const r = $(el).getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2 - ty]; };
+  const P = { s: [1060, 1500], logo: ctr("ctaLogo"), sub: ctr("bSub"), sh: ctr("bSh") };
+  const path = [[0, "s"], [.9, "logo"], [1.5, "logo"], [1.9, "sub"], [2.3, "sub"], [2.7, "sh"], [3.4, "sh"]];
+  let x = P.s[0], y = P.s[1];
+  for (let i = 0; i < path.length - 1; i++) { const [t0, p0] = path[i], [t1, p1] = path[i + 1]; if (tt >= t0) { const f = ease((tt - t0) / (t1 - t0)); x = lerp(P[p0][0], P[p1][0], f); y = lerp(P[p0][1], P[p1][1], f); } }
+  cur.style.opacity = a * sm((tt - .1) / .2); cur.style.transform = `translate(${x - 18}px,${y - 9}px)`;
+  const clicks = [[1.0, "logo"], [2.0, "sub"], [2.8, "sh"]]; let ro = 0, rx = 0, ry = 0, rs = 1;
+  for (const [ct, p] of clicks) { const e = tt - ct; if (e >= 0 && e < .45) { ro = 1 - e / .45; rs = 1 + e * 9; rx = P[p][0]; ry = P[p][1]; } }
+  rip.style.opacity = ro * a; rip.style.left = rx + "px"; rip.style.top = ry + "px"; rip.style.transform = `scale(${rs})`;
+  const lb = tt - 1.0; $("ctaLogo").style.transform = `scale(${lb > 0 && lb < .3 ? 1 + .12 * Math.sin(lb / .3 * Math.PI) : 1})`;
+  $("bSh").style.background = tt > 2.85 ? "#e3141b" : "#111";
+}
+function captions(T) {
+  const c = $("cap"); let html = "";
+  for (const s of TL.S) { if (T < s.s - .05 || T > s.e + .15) continue;
+    // 2–3 kelimelik parçalar
+    const W = s.words; const chunks = []; let cur = [];
+    for (const w of W) { cur.push(w); if (cur.length >= 3 || /[,.!?;:]$/.test(w.w)) { chunks.push(cur); cur = []; } } if (cur.length) chunks.push(cur);
+    for (const ch of chunks) if (T >= ch[0].s - .05 && T < ch[ch.length - 1].e + .12) html = ch.map(w => `<span class="${T >= w.s && T < w.e + .05 ? "on" : ""}">${w.w}</span>`).join(" ");
+  }
+  c.innerHTML = html;
+}
+window.seek = (T) => {
+  let cur = TL.S[0], i = 0;
+  for (let k = 0; k < TL.S.length; k++) if (T >= TL.S[k].s - .09) { cur = TL.S[k]; i = k; }
+  const nxt = TL.S[i + 1]; const end = nxt ? nxt.s - .09 : TL.END; const st0 = cur.s - .09;
+  const st = S[cur.id](T - st0, end - st0, T); apply(st, T); if (!location.search.includes('nocap')) captions(T); else $("cap").innerHTML = "";
+  renderer.render(scene, camera);
+  return cur.id;
+};
+window.END = TL.END; window.ready = true;
+</script></body></html>
