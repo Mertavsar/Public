@@ -1,0 +1,675 @@
+{
+ "baslik": "Benzine gelen indirimin sırrı: Bir virgül fiyatı nasıl değiştirdi?",
+ "tarih": "2026-11-22",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "yoğunluk",
+  "virgül",
+  "indirim",
+  "vergi"
+ ],
+ "altyazi": {
+  "Yirmi bir Kasım": "21 Kasım",
+  "yaklaşık üç lira": "≈3 lira",
+  "Üç soruda": "3 soruda",
+  "Yirmi Kasım'da": "20 Kasım'da",
+  "sıfır virgül yedi yüz yetmiş beşti": "0,775'ti",
+  "sıfır virgül yedi yüz elli beş": "0,755",
+  "yetmiş bir liradan": "71,30 liradan",
+  "altmış sekiz liraya": "68,35 liraya",
+  "bir lira seksen altı kuruşluk": "1,86 liralık",
+  "yaklaşık bir lirayı": "≈1 lirayı",
+  "yedi yüz yetmiş beş gram": "775 gram",
+  "yedi yüz elli beş gram": "755 gram",
+  "otuz beş litre": "35 litre",
+  "yüzde iki buçuk": "%2,5",
+  "yaklaşık bir liraya": "≈1 liraya",
+  "yedi yüz yirmi": "720",
+  "Elli litrelik": "50 litrelik",
+  "yaklaşık elli beş lira": "≈55 lira",
+  "yaklaşık yüz kırk yedi lira": "≈147 lira",
+  "Bir Aralık'ta": "1 Aralık'ta",
+  "on bir liradan": "11,36 liradan",
+  "yaklaşık on beş liraya": "≈14,83 liraya",
+  "yaklaşık dört lira": "≈4 lira",
+  "on gün": "10 gün",
+  "yirmi iki Kasım": "22 Kasım"
+ },
+ "kapak": {
+  "ikon": "⛽",
+  "ust": "BENZİNE İNDİRİMİN SIRRI",
+  "buyuk": "0,775 → 0,755",
+  "alt": "BU SAYI NE?"
+ },
+ "cta": [
+  {
+   "sahne": 14,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Yirmi bir Kasım gecesi benzine yaklaşık üç lira indirim geldi.",
+   "p": {
+    "ikon": "⛽",
+    "etiket": "Benzine indirim · 1 litre · 21 Kasım",
+    "deger": 2.95,
+    "onek": "−",
+    "sonek": " ₺",
+    "ondalik": 2,
+    "yon": "down",
+    "renk": "yesil",
+    "sayma": false,
+    "not": "İstanbul Avrupa · dağıtıcıya göre 2,90–2,95 ₺"
+   },
+   "etiket": "İNDİRİM",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Ama bu indirimin bir kısmı petrolden değil, bir virgülden geldi.",
+   "p": {
+    "ikon": "🔢",
+    "satirlar": [
+     "PETROLDEN DEĞİL,",
+     "*BİR VİRGÜLDEN*"
+    ],
+    "boy": 96
+   },
+   "etiket": "SIR",
+   "kaynak": "K1, K5"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Bir virgül fiyatı nasıl değiştirir? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "BİR VİRGÜL\n*FİYATI DEĞİŞTİRİR Mİ?*",
+    "boy": 92
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Cebini ilgilendiren gündemi her gün sade anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "CEBİNİ İLGİLENDİREN",
+     "*SADE DİLLE*"
+    ],
+    "boy": 88
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Yirmi Kasım'da Resmi Gazete'de küçük bir karar çıktı.",
+   "p": {
+    "gun": "20",
+    "ay": "KASIM",
+    "gunadi": "CUMA",
+    "not": "*EPDK* kararı · sayı 15056"
+   },
+   "etiket": "RESMİ GAZETE",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Enerji Piyasası Düzenleme Kurumu, benzin hesabındaki tek bir sayıyı değiştirdi.",
+   "p": {
+    "ikon": "🏛️",
+    "satirlar": [
+     "EPDK",
+     "*TEK SAYIYI* DEĞİŞTİRDİ"
+    ],
+    "boy": 92
+   },
+   "etiket": "KARAR",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Bu sayının adı yoğunluk. Eskiden sıfır virgül yedi yüz yetmiş beşti.",
+   "p": {
+    "ikon": "⚖️",
+    "etiket": "Benzin yoğunluğu · ton / m³ · eski",
+    "deger": 0.775,
+    "onek": "",
+    "sonek": "",
+    "ondalik": 3,
+    "renk": "beyaz",
+    "sayma": false,
+    "not": "Fiyat hesabında kullanılan değer"
+   },
+   "etiket": "YOĞUNLUK",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Şimdi sıfır virgül yedi yüz elli beş.",
+   "p": {
+    "baslik": "⚖️ Benzin yoğunluğu · fiyat hesabı",
+    "sol": {
+     "etiket": "ESKİ",
+     "deger": 0.775,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "YENİ",
+     "deger": 0.755,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": "",
+    "ondalik": 3,
+    "fark": "−%2,58",
+    "fark_renk": "yesil",
+    "not": "Ton / m³ · 20 Kasım 2026'dan itibaren"
+   },
+   "etiket": "YENİ DEĞER",
+   "kaynak": "K1, K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Motorinde ise bu sayı aynı kaldı.",
+   "p": {
+    "ikon": "🚚",
+    "satirlar": [
+     "MOTORİN",
+     "*0,845* · AYNI"
+    ],
+    "boy": 100
+   },
+   "etiket": "MOTORİN",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Ertesi gece İstanbul'da benzin, yetmiş bir liradan altmış sekiz liraya indi.",
+   "p": {
+    "baslik": "⛽ Benzin · İstanbul Avrupa · 1 litre",
+    "sol": {
+     "etiket": "20 KASIM",
+     "deger": 71.3,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "21 KASIM",
+     "deger": 68.35,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": " ₺",
+    "ondalik": 2,
+    "fark": "−2,95 ₺",
+    "fark_renk": "yesil",
+    "not": "Dağıtıcıya göre ±5 kuruş"
+   },
+   "etiket": "POMPA",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Oysa sektör, bir lira seksen altı kuruşluk indirim bekliyordu.",
+   "p": {
+    "baslik": "⛽ Benzine indirim · 1 litre",
+    "sol": {
+     "etiket": "BEKLENEN",
+     "deger": 1.86,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "GELEN",
+     "deger": 2.95,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": " ₺",
+    "ondalik": 2,
+    "fark": "≈ +1,09 ₺",
+    "fark_renk": "yesil",
+    "not": "Beklenti: sektör kaynakları, 20 Kasım"
+   },
+   "etiket": "BEKLENTİ",
+   "kaynak": "K3, K4"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Aradaki yaklaşık bir lirayı, o küçük sayı getirdi.",
+   "p": {
+    "ikon": "🔢",
+    "satirlar": [
+     "FAZLADAN",
+     "*≈ 1 LİRA*"
+    ],
+    "boy": 110,
+    "not": "Sektör kaynakları: 1,09 ₺ · başka bir hesap: ≈1,2 ₺ (tahmini)"
+   },
+   "etiket": "FARK",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki benzinin ağırlığı, pompadaki fiyatı neden değiştirsin?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "AĞIRLIK\n*FİYATI NEDEN DEĞİŞTİRİR?*",
+    "boy": 88
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Şimdi işin sırrına geldik. İşine yaradıysa beğen bırak, kalbe dokun.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİN SIRRI",
+     "*ŞİMDİ*"
+    ],
+    "boy": 104
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Benzin dünyada tonla alınıp satılır. Ama pompada litreyle satılır.",
+   "p": {
+    "baslik": "Bir yakıt, iki birim",
+    "adimlar": [
+     {
+      "ikon": "🚢",
+      "metin": "Dünyada *tonla* alınır"
+     },
+     {
+      "ikon": "⛽",
+      "metin": "Pompada *litreyle* satılır"
+     }
+    ]
+   },
+   "etiket": "TON / LİTRE",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Tonu litreye çevirmek için tek soru sorulur: Bir litre kaç kilo?",
+   "p": {
+    "ikon": "⚖️",
+    "satirlar": [
+     "1 LİTRE",
+     "*KAÇ KİLO?*"
+    ],
+    "boy": 110
+   },
+   "etiket": "ÇEVİRİ",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Eski hesapta bir litre, yedi yüz yetmiş beş gram sayılıyordu. Yeni hesapta yedi yüz elli beş gram.",
+   "p": {
+    "baslik": "1 litre benzin kaç gram sayılıyor?",
+    "satirlar": [
+     {
+      "ikon": "📜",
+      "metin": "Eski hesap",
+      "deger": "775 g",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "🆕",
+      "metin": "Yeni hesap",
+      "deger": "755 g",
+      "renk": "yesil"
+     }
+    ],
+    "not": "Yoğunluk 0,775 → 0,755 ton / m³"
+   },
+   "etiket": "GRAM",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "karsilastir",
+   "say": "Litre hafifleyince, bir tondan otuz beş litre daha fazla çıkmış sayılıyor.",
+   "p": {
+    "baslik": "🛢️ 1 ton benzin kaç litre sayılıyor?",
+    "sol": {
+     "etiket": "ESKİ",
+     "deger": 1290,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "YENİ",
+     "deger": 1325,
+     "renk": "yesil"
+    },
+    "onek": "",
+    "sonek": " L",
+    "ondalik": 0,
+    "fark": "+35 litre",
+    "fark_renk": "yesil",
+    "not": "1.000 ÷ 0,775 ≈ 1.290 · 1.000 ÷ 0,755 ≈ 1.325"
+   },
+   "etiket": "HESAP",
+   "kaynak": "K1 · hesap bizim"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Ton fiyatı aynıyken, aynı para daha çok litreye bölünür.",
+   "p": {
+    "baslik": "Neden ucuzlar?",
+    "adimlar": [
+     {
+      "ikon": "💵",
+      "metin": "Ton fiyatı *aynı*"
+     },
+     {
+      "ikon": "🔢",
+      "metin": "Litre sayısı *arttı*"
+     },
+     {
+      "ikon": "📉",
+      "metin": "Litre başı +ucuzladı+"
+     }
+    ]
+   },
+   "etiket": "MANTIK",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Böylece rafineri payı, litrede yaklaşık yüzde iki buçuk düştü.",
+   "p": {
+    "ikon": "🏭",
+    "etiket": "Rafineri payı · litre başına",
+    "deger": 2.58,
+    "onek": "−%",
+    "sonek": "",
+    "ondalik": 2,
+    "yon": "down",
+    "renk": "yesil",
+    "not": "Ton fiyatı sabitken · vergiler hariç"
+   },
+   "etiket": "RAFİNERİ",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Ama pompadaki en büyük vergi, litre başına sabit bir tutar.",
+   "p": {
+    "ikon": "🧾",
+    "satirlar": [
+     "ÖTV",
+     "*LİTRE BAŞINA SABİT*"
+    ],
+    "boy": 92,
+    "not": "Kasım 2026: 95 oktan benzinde 11,36 ₺ / litre"
+   },
+   "etiket": "VERGİ",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "O yüzden pompada etkisi, yaklaşık bir liraya denk geldi.",
+   "p": {
+    "ikon": "⛽",
+    "satirlar": [
+     "POMPADA",
+     "*≈ 1 LİRA*"
+    ],
+    "boy": 110,
+    "not": "Tahmini · sektör kaynakları 1,09 ₺"
+   },
+   "etiket": "POMPA",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Peki neden şimdi? Kurum resmi bir gerekçe açıklamadı.",
+   "p": {
+    "ikon": "📄",
+    "satirlar": [
+     "RESMİ GEREKÇE",
+     "*AÇIKLANMADI*"
+    ],
+    "boy": 96
+   },
+   "etiket": "GEREKÇE",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Ama bir ipucu var. Standart benzin, litrede yedi yüz yirmi ile yedi yüz yetmiş beş gram arası.",
+   "p": {
+    "baslik": "Standart benzin · 1 litre · 15 °C",
+    "satirlar": [
+     {
+      "ikon": "⬇️",
+      "metin": "Alt sınır",
+      "deger": "720 g",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "⬆️",
+      "metin": "Üst sınır",
+      "deger": "775 g",
+      "renk": "sari"
+     }
+    ],
+    "not": "Tüpraş 95 oktan ürün özellikleri · Avrupa standardı"
+   },
+   "etiket": "İPUCU",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yani eski hesap, benzini en ağır hâliyle sayıyordu. Yeni değer de hâlâ bu aralıkta.",
+   "p": {
+    "ikon": "🏋️",
+    "satirlar": [
+     "ESKİ HESAP",
+     "*EN AĞIR HÂLİ*"
+    ],
+    "boy": 100,
+    "not": "Eski değer 0,775 = üst sınır · yeni 0,755 aralığın içinde"
+   },
+   "etiket": "ÖZET",
+   "kaynak": "K1, K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin cebine ne kadar dokunuyor?",
+   "p": {
+    "ikon": "👛",
+    "metin": "SENİN CEBİNE\n*NE KADAR?*",
+    "boy": 100
+   },
+   "etiket": "CEBİN"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Elli litrelik bir depo düşün. Sadece bu değişiklik, yaklaşık elli beş lira kazandırır.",
+   "p": {
+    "baslik": "Bir depo · sadece yoğunluk etkisi",
+    "ikon": "🚗",
+    "ogeler": [
+     "50 litre",
+     "×",
+     "≈1,09 ₺",
+     "=",
+     "≈55 ₺"
+    ]
+   },
+   "etiket": "DEPO HESABI",
+   "kaynak": "K5 · hesap bizim · tahmini"
+  },
+  {
+   "bolum": "etki",
+   "tip": "hesap",
+   "say": "Tüm indirimle birlikte, depo yaklaşık yüz kırk yedi lira ucuzladı.",
+   "p": {
+    "baslik": "Bir depo · tüm indirim",
+    "ikon": "🚗",
+    "ogeler": [
+     "50 litre",
+     "×",
+     "2,95 ₺",
+     "=",
+     "≈147 ₺"
+    ]
+   },
+   "etiket": "DEPO HESABI",
+   "kaynak": "K4 · hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "takvim",
+   "say": "Ama sevinmeden önce takvime bak. Bir Aralık'ta benzinin vergisi zaten artacak.",
+   "p": {
+    "gun": "1",
+    "ay": "ARALIK",
+    "gunadi": "SALI",
+    "not": "~ÖTV artışı~ · eylülde karara bağlandı"
+   },
+   "etiket": "TAKVİM",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "karsilastir",
+   "say": "Litre başına vergi, on bir liradan yaklaşık on beş liraya çıkıyor.",
+   "p": {
+    "baslik": "🧾 95 oktan benzin · ÖTV · 1 litre",
+    "sol": {
+     "etiket": "KASIM",
+     "deger": 11.36,
+     "renk": "beyaz"
+    },
+    "sag": {
+     "etiket": "1 ARALIK",
+     "deger": 14.83,
+     "renk": "kirmizi"
+    },
+    "onek": "",
+    "sonek": " ₺",
+    "ondalik": 2,
+    "fark": "+3,47 ₺",
+    "not": "Cumhurbaşkanı Kararı 11822 · 30 Eylül 2026"
+   },
+   "etiket": "ÖTV",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Diğer her şey aynı kalırsa, pompaya yaklaşık dört lira zam gelebilir.",
+   "p": {
+    "ikon": "⛽",
+    "etiket": "1 Aralık · benzin · 1 litre (tahmini)",
+    "deger": 4.16,
+    "onek": "+",
+    "sonek": " ₺",
+    "ondalik": 2,
+    "yon": "up",
+    "renk": "kirmizi",
+    "not": "3,47 ₺ ÖTV farkı + %20 KDV · petrol ve kur sabitse"
+   },
+   "etiket": "TAHMİNİ",
+   "kaynak": "K6 · hesap bizim"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani bu indirim, on gün sonra fazlasıyla geri gelebilir.",
+   "p": {
+    "ikon": "🔁",
+    "satirlar": [
+     "İNDİRİM",
+     "~GERİ GELEBİLİR~"
+    ],
+    "boy": 100,
+    "not": "21 Kasım → 1 Aralık · tahmini"
+   },
+   "etiket": "DİKKAT",
+   "kaynak": "K4, K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Son fiyatı yine petrol ve dolar belirleyecek. Bilgiler yirmi iki Kasım itibarıyla.",
+   "p": {
+    "ikon": "🛢️",
+    "satirlar": [
+     "SON SÖZ",
+     "*PETROL VE DOLAR*"
+    ],
+    "boy": 100,
+    "not": "Bilgiler 22 Kasım 2026 itibarıyla"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Öğrenmek istediğin konuyu yorumlara yaz, bir sonraki videoda biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "SIRADAKİ KONU",
+     "*SENDEN*"
+    ],
+    "boy": 104
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "EPDK 19 Kasım 2026 tarihli 15056 sayılı kurul kararı, 20 Kasım 2026 Resmî Gazete: benzin yoğunluğu 0,775 → 0,755 ton/m³, motorin 0,845 aynı; gerekçe açıklanmadı — https://www.memurlar.net/haber/1184679/epdk-benzin-fiyat-hesabinda-yogunluk-degerini-degistirdi.html ; https://www.endeks24.com/epdk-benzin-fiyat-takibinde-yogunluk-degerini-0-775-ten-0-755-e-indirdi ; https://www.gzt.com/ekonomi/epdkdan-akaryakit-fiyatlarini-ilgilendiren-yeni-karar-benzin-yogunluk-katsayisi-dusuruldu-4280843 ; https://www.milligazete.com.tr/benzinin-fiyat-hesabinda-sessiz-degisiklik-0775-yerine-artik-0755-kullanilacak",
+  "K2": "Yoğunluk, ton cinsinden izlenen uluslararası fiyatın litreye çevrilmesinde kullanılır; ton fiyatı sabitken litre bedeli %2,58 düşer (0,02 ÷ 0,775) — https://www.endeks24.com/epdk-benzin-fiyat-takibinde-yogunluk-degerini-0-775-ten-0-755-e-indirdi ; https://www.enerjigunlugu.net/benzinde-yogunluk-degeri-yuzde-258-dustu-70647h.htm",
+  "K3": "Sektör kaynakları: 21 Kasım 00.01'den itibaren benzine 1,86 ₺ indirim bekleniyordu — https://www.cumhuriyet.com.tr/ekonomi/benzinde-hesap-degisti-indirim-kapida-gozler-21-kasim-da-2557795 ; https://paratic.com/benzine-1-8-tl-indirim-bekleniyor-fiyatlar-degisecek/",
+  "K4": "21 Kasım 2026 gerçekleşen indirim ≈2,90–2,95 ₺; İstanbul Avrupa 71,30 → 68,35 ₺ (bir listede 71,24 → 68,31; Petrol Ofisi 68,40) — https://www.emlakhaberajansi.com/benzine-295-lira-indirim-istanbulda-litresi-6835-lira.html ; https://fiyatinedir.net/akaryakit-indirim-21-kasim-2026/ ; https://www.turkgun.com/ekonomi/benzine-indirim-21-kasim-2026-guncel-akaryakit-fiyatlari/418526 ; https://www.afyonturkeligazetesi.com/motorin-ve-benzine-indirim-21-kasim-akaryakit-fiyatlari/151149",
+  "K5": "İndirimin ≈1,09 ₺'si yoğunluk düzenlemesinden (sektör kaynakları); başka bir hesapta ≈1,2 ₺ — tahmini — https://www.duzcehurhaber.com/benzine-295-tl-indirim-geldi-duzcede-fiyatlar-degisti-4908560 ; https://www.malatyaguncel.com/benzine-2-95-lira-indirim-fiyatlar-70-liranin-alt-3123043h.htm",
+  "K6": "Cumhurbaşkanı Kararı 11822 (30 Eylül 2026): 95 oktan benzin ÖTV Ekim 7,90 ₺, 1–30 Kasım 11,36 ₺, 1 Aralık'tan itibaren 14,8277 ₺/litre. Pompa etkisi (3,4677 × 1,20 ≈ 4,16 ₺) diğer kalemler sabitse tahmini — https://www.memurlar.net/haber/1179660/benzinin-otv-tutarlari-yeniden-belirlendi.html ; https://www.gazetevatan.com/galeri/benzinde-otv-sistemi-degisti-ekim-kasim-ve-aralik-icin-yeni-tutarlar-belli-oldu-2412806 ; https://www.foreks.com/haber/detay/6abdc37024008d7d4373a111/PICNEWS/tr/benzin-icin-otv-tutarlari-yeniden-belirlendi-01-10-26/ ; https://otopusula.net/otohaber/benzin-otv-ekim-kasim-aralik-2026-kademeli-artis",
+  "K7": "Kurşunsuz benzin 95 yoğunluk sınırı 720–775 kg/m³ (15 °C) — https://tupras.com.tr/assets/img/article/newsletters/urun-spesifikasyonu-kursunsuz-benzin-95-oktan.pdf ; https://standards.iteh.ai/catalog/standards/cen/0676e1d2-e089-4198-840a-d5909fe0b938/cen-tr-18238-2025"
+ }
+}
