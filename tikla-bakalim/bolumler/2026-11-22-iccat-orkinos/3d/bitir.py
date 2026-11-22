@@ -9,6 +9,7 @@ FPS = 30
 old = json.load(open("timeline.json"))
 OS = old["S"]; OEND = old["END"]; NFR = len(os.listdir("fr"))
 SESSIZ = "--sessiz" in sys.argv
+CIKAR = next((a.split("=",1)[1].split(",") for a in sys.argv if a.startswith("--cikar=")), [])
 run = lambda c: subprocess.run(c, shell=True, check=True)
 
 def cta_clicks(S, END):                       # film.html ctaAnim ile aynı hesap
@@ -20,11 +21,15 @@ if SESSIZ:
     NS, NEND, caps = OS, OEND, None
 else:
     vo = sys.argv[1]
-    txt = " ".join(s["text"] for s in OS); open("metin.txt", "w").write(txt)
+    KEEP = [s for s in OS if s["id"] not in CIKAR]
+    txt = " ".join(s["text"] for s in KEEP); open("metin.txt", "w").write(txt)
     run(f"python3 /home/user/Public/.claude/skills/viral-edit/scripts/sentalign.py --audio '{vo}' --text metin.txt --out caps.json")
     caps = json.load(open("caps.json")); sents = json.load(open("caps.sentences.json"))
-    assert len(sents) == len(OS), f"cümle sayısı tutmuyor: {len(sents)} / {len(OS)} — metin birebir okunmamış"
-    NS = [dict(id=o["id"], s=n["s"], e=n["e"]) for o, n in zip(OS, sents)]
+    assert len(sents) == len(KEEP), f"cümle sayısı tutmuyor: {len(sents)} / {len(KEEP)} — metin birebir okunmamış"
+    kn = {o["id"]: n for o, n in zip(KEEP, sents)}; NS = []
+    for j, o in enumerate(OS):
+        if o["id"] in kn: NS.append(dict(id=o["id"], s=kn[o["id"]]["s"], e=kn[o["id"]]["e"]))
+        else: nx = next(kn[x["id"]] for x in OS[j:] if x["id"] in kn); NS.append(dict(id=o["id"], s=nx["s"], e=nx["s"], cut=True))
     NEND = round(sents[-1]["e"] + .7, 2)
 
 # yeni → eski zaman eşlemesi (parçalı doğrusal)
@@ -55,6 +60,7 @@ ass = ["[Script Info]", "ScriptType: v4.00+", "PlayResX: 1080", "PlayResY: 1920"
 if caps:
     k = 0
     for s in NS:
+        if s.get("cut"): continue
         n = len([o for o in OS if o["id"] == s["id"]][0]["text"].split()); W_ = caps[k:k + n]; k += n
         chunks, cur = [], []
         for w in W_:
