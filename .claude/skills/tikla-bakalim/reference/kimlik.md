@@ -69,7 +69,13 @@ kanal/konu adıyla açılış; soru ile açılış. İlk kelimeden itibaren olay
   ya gerçek hareket (Higgsfield görselden video) ya da kodla 3D sahne; fotoğrafa Ken Burns yok.
 
 
-### Avcılık videoları — tarafsızlık kuralı (kullanıcı kuralı, KESİN)
+### Tarafsızlık kuralı — TÜM videolar (kullanıcı kuralı, KESİN, en öncelikli)
+Hiçbir videoda bir yöntemi, mesleği ya da insanların işini "zararlı", "yanlış", "tehlikeli", "çevreye zarar"
+gibi gösteren tek bir cümle, sahne, etiket ya da kapak yazısı olmaz. Metin, sahne ve kapak yazılmadan önce bu
+kurala göre kontrol edilir. Eleştirel/çevreci kaynakların (dernek kampanyaları vb.) yorumları kullanılmaz;
+onlardan yalnızca yöntemin nasıl çalıştığına dair nötr teknik bilgi alınabilir.
+
+#### Avcılık videoları — ek ayrıntı
 - **Sadece av yöntemini anlat.** Hiçbir avcıyı, yöntemi ya da sektörü kötüleme.
 - "Yasak", "kaçak", "ceza", "kota aşılırsa", "balıkların sonu geliyor", "denizler tükeniyor", "yan av",
   "deniz tabanına zarar" gibi suçlayan ya da çevreci-tartışmalı ifade YOK. Haritada kırmızı ✕ / "YASAK" etiketi YOK.
