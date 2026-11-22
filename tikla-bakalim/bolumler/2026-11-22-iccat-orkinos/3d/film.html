@@ -595,7 +595,7 @@ window.seek = (T) => {
   let cur = TL.S[0], i = 0;
   for (let k = 0; k < TL.S.length; k++) if (T >= TL.S[k].s - .09) { cur = TL.S[k]; i = k; }
   const nxt = TL.S[i + 1]; const end = nxt ? nxt.s - .09 : TL.END; const st0 = cur.s - .09;
-  const st = S[cur.id](T - st0, end - st0, T); apply(st, T); captions(T);
+  const st = S[cur.id](T - st0, end - st0, T); apply(st, T); if (!location.search.includes('nocap')) captions(T); else $("cap").innerHTML = "";
   renderer.render(scene, camera);
   return cur.id;
 };
