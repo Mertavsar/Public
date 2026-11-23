@@ -570,12 +570,18 @@ MOODS.grey = { top: 0x56687a, hor: 0xb9c3cc, deep: 0x123a50, sunc: 0xdfe6ec, sun
 SN.R = 60; SN.D = 48;
 
 // ---- hamsi sürüsü ----
-const hamsiG = (() => { const b = new THREE.SphereGeometry(.5, 10, 6); b.scale(1.8, .36, .24); const t = new THREE.ConeGeometry(.24, .5, 4); t.rotateZ(Math.PI / 2); t.translate(-1.05, 0, 0); t.scale(1, 1, .3);
-  const a = b.toNonIndexed(), c = t.toNonIndexed(), p = new Float32Array(a.attributes.position.count * 3 + c.attributes.position.count * 3); p.set(a.attributes.position.array); p.set(c.attributes.position.array, a.attributes.position.count * 3);
-  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(p, 3)); g.computeVertexNormals();
-  const cc = new Float32Array(p.length); for (let i = 0; i < p.length; i += 3) { const k = clamp((p[i + 1] + .02) / .16); cc[i] = lerp(1, .3, k); cc[i + 1] = lerp(1, .55, k); cc[i + 2] = lerp(1, .68, k); }
-  g.setAttribute("color", new THREE.BufferAttribute(cc, 3)); return g; })();
-const NH = 1800, HAM = new THREE.InstancedMesh(hamsiG, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: .9, roughness: .18, emissive: 0x16323e, envMapIntensity: 1.6 }), NH);
+const hamsiG = (() => {
+  const P = [], C = [], push = (a, b, c, ca, cb, cc) => { P.push(...a, ...b, ...c); C.push(...ca, ...cb, ...cc); };
+  const NS = 22, NK = 12, L0 = -.9, L1 = 1.0, R = u => .02 + .2 * Math.pow(Math.sin(Math.PI * Math.pow(u, .75)), .9);
+  const pt = (u, k) => { const th = k / NK * Math.PI * 2, r = R(u); return [lerp(L0, L1, u), Math.sin(th) * r * 1.05, Math.cos(th) * r * .55]; };
+  const col = p => { const h = p[1]; return h > .07 ? [.18, .42, .5] : (h > .015 ? [.82, .9, .95] : [.97, .98, 1]); };
+  for (let i = 0; i < NS; i++) for (let k = 0; k < NK; k++) { const a = pt(i / NS, k), b = pt((i + 1) / NS, k), c = pt((i + 1) / NS, k + 1), d = pt(i / NS, k + 1);
+    push(a, b, c, col(a), col(b), col(c)); push(a, c, d, col(a), col(c), col(d)); }
+  const fin = [.55, .7, .75], t = (a, b, c) => push(a, b, c, fin, fin, fin);
+  t([-.88, 0, 0], [-1.22, .3, 0], [-1.05, 0, 0]); t([-.88, 0, 0], [-1.05, 0, 0], [-1.22, -.3, 0]);
+  t([.05, .2, 0], [-.18, .19, 0], [-.05, .38, 0]); t([-.45, -.12, 0], [-.62, -.1, 0], [-.52, -.26, 0]);
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(P, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(C, 3)); g.computeVertexNormals(); return g; })();
+const NH = 1800, HAM = new THREE.InstancedMesh(hamsiG, new THREE.MeshPhysicalMaterial({ color: 0xffffff, vertexColors: true, metalness: .85, roughness: .16, iridescence: .7, iridescenceIOR: 1.4, clearcoat: .5, emissive: 0x0e2a34, envMapIntensity: 1.8, side: THREE.DoubleSide }), NH);
 HAM.frustumCulled = false; scene.add(HAM);
 const HI = []; for (let i = 0; i < NH; i++) HI.push({ th: rnd() * 6.283, r: Math.sqrt(rnd()), y: rnd(), ph: rnd() * 6.283, sp: .7 + rnd() * .6, u: rnd(), v: rnd() });
 const predator = new THREE.Mesh(tuna.geometry, new THREE.MeshStandardMaterial({ vertexColors: true, metalness: .55, roughness: .3 })); predator.visible = false; scene.add(predator);
@@ -604,6 +610,9 @@ function placeHamsi(st, T) {
   HAM.instanceMatrix.needsUpdate = true;
 }
 
+// ---- kurşun yaka ----
+const LEADS = new THREE.InstancedMesh(new THREE.CylinderGeometry(.45, .45, 1.1, 10), new THREE.MeshStandardMaterial({ color: 0x3a3f44, metalness: .6, roughness: .45 }), 120); LEADS.frustumCulled = false; scene.add(LEADS);
+function updateLeads(on) { LEADS.visible = on; if (!on) return; for (let i = 0; i < 120; i++) { seinePt(i / 120, 1, tmpV); dummy.position.copy(tmpV); dummy.rotation.set(0, -(SN.a0 + i / 120 * SN.close * 6.283), Math.PI / 2); dummy.scale.setScalar(1); dummy.updateMatrix(); LEADS.setMatrixAt(i, dummy.matrix); } LEADS.instanceMatrix.needsUpdate = true; }
 // ---- halkalar + büzme halatı ----
 const NR = 36, RINGS = new THREE.InstancedMesh(new THREE.TorusGeometry(.9, .16, 8, 18), new THREE.MeshStandardMaterial({ color: 0xb8c0c6, metalness: .9, roughness: .25 }), NR); RINGS.frustumCulled = false; scene.add(RINGS);
 const pline = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial({ color: 0xffb21a, roughness: .6, emissive: 0x3a2400 })); pline.frustumCulled = false; scene.add(pline);
@@ -648,7 +657,9 @@ const pblock = new THREE.Group(); { const blk = new THREE.Mesh(new THREE.Cylinde
   const band = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 30, 1, 60), new THREE.MeshStandardMaterial({ color: 0x2c5f74, roughness: 1, side: THREE.DoubleSide, transparent: true, opacity: .9 })); band.position.set(1.6, -15, 0); pblock.add(band); pblock.userData.band = band; }
 scene.add(pblock);
 // ---- kepçe + kasalar ----
-const brail = new THREE.Mesh(new THREE.SphereGeometry(2.2, 18, 12), new THREE.MeshStandardMaterial({ color: 0xcdd6dc, metalness: .7, roughness: .3 })); brail.scale.set(1, 1.3, 1); scene.add(brail);
+const brail = new THREE.Group(); { const bag = new THREE.Mesh(new THREE.SphereGeometry(2.4, 18, 12), new THREE.MeshStandardMaterial({ color: 0xdfe8ee, metalness: .85, roughness: .2 })); bag.scale.set(1, 1.2, 1); brail.add(bag);
+  const net = new THREE.Mesh(new THREE.SphereGeometry(2.55, 16, 10), new THREE.MeshBasicMaterial({ color: 0x2c5f74, wireframe: true })); net.scale.set(1, 1.2, 1); brail.add(net);
+  const rope = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, 12, 6), new THREE.MeshStandardMaterial({ color: 0x2a2d30 })); rope.position.y = 8.5; brail.add(rope); } scene.add(brail);
 const crates = new THREE.Group(); { const cm = new THREE.MeshStandardMaterial({ color: 0x2b7ad9, roughness: .6 }), fm = new THREE.MeshStandardMaterial({ color: 0xdfe7ec, metalness: .8, roughness: .25 }), im = new THREE.MeshStandardMaterial({ color: 0xf4fbff, roughness: .2, transparent: true, opacity: .85 });
   for (let i = 0; i < 24; i++) { const c = new THREE.Mesh(new THREE.BoxGeometry(1.6, .5, 1), cm); c.position.set((i % 4) * 1.7, Math.floor(i / 8) * .55, Math.floor((i % 8) / 4) * 1.1); crates.add(c);
     const f = new THREE.Mesh(new THREE.BoxGeometry(1.45, .08, .88), fm); f.position.copy(c.position).add(V(0, .26, 0)); crates.add(f);
@@ -690,7 +701,7 @@ const UNDER = (lt, d, o = {}) => { const u = sm(lt / d); camSet(V(lerp(40, 30, u
   return G(Object.assign({ seine: 1, purse: .55, ham: "seine", hC: V(0, -18, 0), hR: 38, hH: 16 }, o)); };
 const BALL = (lt, d, o = {}) => { const a = .6 + lt / d * .6; camSet(V(Math.cos(a) * 46, -16, Math.sin(a) * 46), V(0, -20, 0), 50); return G(Object.assign({ ham: "ball", hC: V(0, -20, 0), hR: 16 }, o)); };
 const SHIPV = (lt, d, o = {}, mood = "day") => { const u = sm(lt / d); camSet(V(lerp(70, 60, u), lerp(14, 12, u), lerp(46, 40, u)), V(-4, 6, 0), 40); return G(Object.assign({ mood, ship: { p: V(0, 0, 0), h: 0, run: true } }, o)); };
-const DECK = (lt, d, o = {}) => { const u = sm(lt / d); camSet(V(lerp(40, 34, u), lerp(26, 24, u), lerp(34, 30, u)), V(-3, 5, 0), 42); return G(Object.assign({ ship: { p: V(0, 0, 0), h: 0 }, crew: 1 }, o)); };
+const DECK = (lt, d, o = {}) => { const u = sm(lt / d); camSet(V(lerp(62, 56, u), lerp(30, 28, u), lerp(50, 46, u)), V(-4, 5, 0), 40); return G(Object.assign({ ship: { p: V(0, 0, 0), h: 0 }, crew: 1 }, o)); };
 const HARB = (lt, d, mood, dir = 1) => { const u = lt / d; camSet(V(170, 20, 110), V(0, 8, -40), 42);
   return G({ mood, harbor: 1, ship: { p: V(lerp(-60, 60, dir > 0 ? u : 1 - u), 0, -20), h: dir > 0 ? 0 : Math.PI, run: true } }); };
 const SONAR = (lt, d, o = {}) => { const u = sm(lt / d); camSet(V(lerp(70, 60, u), -6, lerp(80, 70, u)), V(0, -16, 0), 50); return G(Object.assign({ ship: { p: V(0, 0, 0), h: 0 }, sonar: 1, ham: "ball", hC: V(0, -34, 0), hR: 12 }, o)); };
@@ -721,20 +732,20 @@ const S2 = {
   encircle: (lt, d) => { const u = ease(clamp(lt / (d * .92))); camSet(V(-190, 180, 150), V(0, -12, 0), 44); return G({ xray: .5, seine: 1, close: Math.max(.12, u), ship: ON(Math.max(.12, u)), skiff: ON(0), ham: "ball", hC: V(0, -14, 0), hR: 18 }); },
   floats: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(30, 34, u), -9, lerp(22, 20, u)), V(58, -1, 8), 54); return G({ seine: 1, ham: "seine", hC: V(0, -14, 0), hR: 40, hH: 12 }); },
   lead: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(30, 34, u), -40, lerp(22, 20, u)), V(58, -47, 8), 54); return G({ seine: 1, ham: "seine", hC: V(0, -20, 0), hR: 40, hH: 14 }); },
-  wall: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(-30, -20, u), -24, lerp(10, 0, u)), V(60, -24, 0), 62); return G({ seine: 1, ham: "seine", hC: V(0, -18, 0), hR: 40, hH: 18 }); },
+  wall: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(150, 140, u), -22, lerp(60, 40, u)), V(30, -24, 0), 50); return G({ seine: 1, ham: "seine", hC: V(0, -18, 0), hR: 40, hH: 18 }); },
   kulac: (lt, d) => { camSet(V(0, 10.5, lerp(-36, -38, lt / d)), V(0, 9, -60), 36); return G({ mood: "day", harbor: 1, kulac: sm(lt / .6) }); },
-  push: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(10, 20, u), -62, lerp(40, 34, u)), V(40, -46, 20), 52); return G({ seine: 1, ham: "seine", hC: V(0, -26, 0), hR: 40, hH: 20 }); },
-  like: (lt, d) => { camSet(V(20, -62, 34), V(40, -46, 20), 52); return G({ seine: 1, ham: "seine", hC: V(0, -26, 0), hR: 40, hH: 20, chip: ["like", fadeIO(lt, d)] }); },
-  escape: (lt, d) => { camSet(V(20, -66, 34), V(40, -50, 20), 54); return G({ seine: 1, ham: "seine", hC: V(0, -36, 0), hR: 44, hH: 14 }); },
+  push: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(150, 135, u), -70, lerp(70, 60, u)), V(30, -40, 0), 50); return G({ seine: 1, ham: "seine", hC: V(0, -26, 0), hR: 40, hH: 20 }); },
+  like: (lt, d) => { camSet(V(135, -70, 60), V(30, -40, 0), 50); return G({ seine: 1, ham: "seine", hC: V(0, -26, 0), hR: 40, hH: 20, chip: ["like", fadeIO(lt, d)] }); },
+  escape: (lt, d) => { camSet(V(130, -72, 56), V(30, -44, 0), 50); return G({ seine: 1, ham: "seine", hC: V(0, -36, 0), hR: 44, hH: 14 }); },
   rings: (lt, d) => RINGV(lt, d),
   pline: (lt, d) => RINGV(lt, d, { glowLine: 1 }),
   pursing: (lt, d) => { const u = ease(clamp(lt / d)); camSet(V(0, -110, 90), V(0, -36, 0), 52); return G({ seine: 1, rings: 1, purse: u, ham: "seine", hC: V(0, -22, 0), hR: lerp(40, 28, u), hH: lerp(18, 12, u) }); },
   pursed: (lt, d) => { const a = lt / d; camSet(V(Math.cos(a) * 90, -100, Math.sin(a) * 90 + 30), V(0, -34, 0), 52); return G({ seine: 1, rings: 1, purse: 1, ham: "seine", hC: V(0, -20, 0), hR: 28, hH: 12 }); },
   pursedAir: (lt, d) => AIR(lt, d, { purse: 1, hR: 32 }),
   haul: (lt, d) => { const u = sm(lt / d); SN.R = lerp(60, 34, u); camSet(V(-150, 140, 110), V(0, -6, 0), 44); return G({ xray: .5, seine: 1, purse: 1, ship: ON(1), ham: "seine", hC: V(0, -6, 0), hR: lerp(32, 22, u), hH: 8, hS: 1.7 }); },
-  pblock: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(12, 9, u), lerp(15, 14, u), lerp(12, 10, u)), V(0, 13, -4), 42); return G({ ship: { p: V(0, 0, -4), h: 0 }, pblock: 1, crew: 1 }); },
+  pblock: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(44, 38, u), lerp(22, 20, u), lerp(34, 30, u)), V(-2, 8, -4), 42); return G({ ship: { p: V(0, 0, -4), h: 0 }, pblock: 1, crew: 1 }); },
   hand: (lt, d) => DECK(lt, d, { crewPull: 1 }),
-  brail: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(36, 30, u), lerp(18, 16, u), lerp(32, 28, u)), V(-6, 4, -4), 42); return G({ ship: { p: V(0, 0, 0), h: 0 }, brail: lt, crates: 1, crew: 1 }); },
+  brail: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(48, 42, u), lerp(24, 22, u), lerp(40, 36, u)), V(-8, 4, -4), 42); return G({ ship: { p: V(0, 0, 0), h: 0 }, brail: lt, crates: 1, crew: 1 }); },
   market: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(-30, -28, u), 10, lerp(-47, -49, u)), V(-41, 6, -60), 42); return G({ mood: "dawn", harbor: 1, crates: 2, ship: { p: V(-80, 0, -30), h: Math.PI } }); },
   outro: (lt, d) => AIR(lt, d, { purse: .3 }),
   comment: (lt, d) => AIR(lt, d, { purse: .3, chip: ["comment", fadeIO(lt, d)] }),
@@ -744,9 +755,9 @@ for (const k in S2) S[k] = S2[k];
 
 function apply2(st, T) {
   if (!st.haulR) { if (S2.haul !== undefined && !st.__haul) {} }
-  placeHamsi(st, T);
+  placeHamsi(st, T); updateLeads(st.seine > 0 && SN.close > .02);
   updateRings(!!st.rings); if (st.rings) pline.material.emissive.set(st.glowLine ? 0xffa000 : 0x3a2400);
-  predator.visible = !!st.pred; if (st.pred) { predator.position.copy(st.pred); predator.scale.setScalar(2.6); predator.rotation.set(0, Math.atan2(-(-4 - 8), 100) * 0, Math.sin(T * 6) * .1); }
+  predator.visible = !!st.pred; if (st.pred) { predator.position.copy(st.pred); predator.scale.setScalar(4); predator.rotation.set(0, Math.atan2(-(-4 - 8), 100) * 0, Math.sin(T * 6) * .1); }
   plank.visible = !!st.plank; if (st.plank) plank.position.set(0, -20, 0);
   // sonar konisi + darbeler
   sCone.visible = !!st.sonar; pulses.forEach(p => p.visible = false);
@@ -764,7 +775,7 @@ function apply2(st, T) {
   kulac.visible = !!st.kulac; if (st.kulac) { kulac.position.set(0, 5, -60); kulac.rotation.y = Math.PI / 2; kulac.updateMatrixWorld(true);
     const a = V(0, 2.05, -1.45).applyMatrix4(kulac.matrixWorld), b = V(0, 2.05, 1.45).applyMatrix4(kulac.matrixWorld); spanLine(a.add(V(0, 1.2, 0)), b.add(V(0, 1.2, 0)), st.kulac); }
   pblock.visible = !!st.pblock; if (st.pblock) { pblock.position.set(0, 14, -4); pblock.userData.blk.rotation.y = T * 3; pblock.userData.band.position.y = -15 + Math.sin(T * 3) * .2; }
-  brail.visible = st.brail != null; if (st.brail != null) { const k = (st.brail * .5) % 1, up = k < .5 ? k * 2 : (1 - k) * 2; brail.position.set(lerp(-18, -6, up), lerp(-1, 7, up), -6); brail.material.color.set(0xcdd6dc); }
+  brail.visible = st.brail != null; if (st.brail != null) { const k = (st.brail * .5) % 1, up = k < .5 ? k * 2 : (1 - k) * 2; brail.position.set(lerp(-18, -6, up), lerp(-1, 7, up), -6); }
   crates.visible = !!st.crates; if (st.crates === 1) { crates.position.copy(V(-7, 2.4, -1.5).applyMatrix4(ship.matrixWorld)); crates.rotation.y = ship.rotation.y; } else if (st.crates === 2) { crates.position.set(-44, 5.2, -61); crates.rotation.y = 0; }
   if (st.echo != null) { const pn = $("panel"); pn.style.left = "960px"; pn.style.top = "90px"; pn.style.width = "900px"; pn.style.height = "900px"; echogram(st.echo, sm(st.echo / .4)); }
   if (st.clock != null) clockDial(st.clock, sm(st.clock / .3));
