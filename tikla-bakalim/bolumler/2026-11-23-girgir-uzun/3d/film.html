@@ -572,7 +572,7 @@ SN.R = 60; SN.D = 48;
 // ---- hamsi sürüsü ----
 const hamsiG = (() => {
   const P = [], C = [], push = (a, b, c, ca, cb, cc) => { P.push(...a, ...b, ...c); C.push(...ca, ...cb, ...cc); };
-  const NS = 22, NK = 12, L0 = -.9, L1 = 1.0, R = u => .02 + .2 * Math.pow(Math.sin(Math.PI * Math.pow(u, .75)), .9);
+  const NS = 16, NK = 10, L0 = -.9, L1 = 1.0, R = u => .02 + .2 * Math.pow(Math.sin(Math.PI * Math.pow(u, .75)), .9);
   const pt = (u, k) => { const th = k / NK * Math.PI * 2, r = R(u); return [lerp(L0, L1, u), Math.sin(th) * r * 1.05, Math.cos(th) * r * .55]; };
   const col = p => { const h = p[1]; return h > .07 ? [.18, .42, .5] : (h > .015 ? [.82, .9, .95] : [.97, .98, 1]); };
   for (let i = 0; i < NS; i++) for (let k = 0; k < NK; k++) { const a = pt(i / NS, k), b = pt((i + 1) / NS, k), c = pt((i + 1) / NS, k + 1), d = pt(i / NS, k + 1);
@@ -581,7 +581,7 @@ const hamsiG = (() => {
   t([-.88, 0, 0], [-1.22, .3, 0], [-1.05, 0, 0]); t([-.88, 0, 0], [-1.05, 0, 0], [-1.22, -.3, 0]);
   t([.05, .2, 0], [-.18, .19, 0], [-.05, .38, 0]); t([-.45, -.12, 0], [-.62, -.1, 0], [-.52, -.26, 0]);
   const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(P, 3)); g.setAttribute("color", new THREE.Float32BufferAttribute(C, 3)); g.computeVertexNormals(); return g; })();
-const NH = 1800, HAM = new THREE.InstancedMesh(hamsiG, new THREE.MeshPhysicalMaterial({ color: 0xffffff, vertexColors: true, metalness: .85, roughness: .16, iridescence: .7, iridescenceIOR: 1.4, clearcoat: .5, emissive: 0x0e2a34, envMapIntensity: 1.8, side: THREE.DoubleSide }), NH);
+const NH = 1800, HAM = new THREE.InstancedMesh(hamsiG, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: .88, roughness: .15, emissive: 0x0e2a34, envMapIntensity: 2.0 }), NH);
 HAM.frustumCulled = false; scene.add(HAM);
 const HI = []; for (let i = 0; i < NH; i++) HI.push({ th: rnd() * 6.283, r: Math.sqrt(rnd()), y: rnd(), ph: rnd() * 6.283, sp: .7 + rnd() * .6, u: rnd(), v: rnd() });
 const predator = new THREE.Mesh(tuna.geometry, new THREE.MeshStandardMaterial({ vertexColors: true, metalness: .55, roughness: .3 })); predator.visible = false; scene.add(predator);
