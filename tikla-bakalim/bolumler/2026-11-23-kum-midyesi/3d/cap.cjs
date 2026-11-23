@@ -8,7 +8,7 @@ const W = __dirname; const MIME = { html: "text/html", js: "text/javascript", js
   pg.on("pageerror", e => console.error("PAGEERR", e.message)); pg.on("console", m => { if (m.type() === "error") console.error("CONSOLE", m.text()); });
   await pg.route("http://midye.local/**", r => { const p = path.join(W, decodeURIComponent(new URL(r.request().url()).pathname));
     if (!fs.existsSync(p)) return r.fulfill({ status: 404, body: "" }); r.fulfill({ status: 200, body: fs.readFileSync(p), contentType: MIME[p.split(".").pop()] || "application/octet-stream" }); });
-  await pg.goto("http://midye.local/film.html" + (process.env.NOCAP ? "?nocap=1" : "")); await pg.waitForFunction(() => window.ready === true, null, { timeout: 120000 });
+  await pg.goto("http://midye.local/film.html" + "?x=1" + (process.env.NOCAP ? "&nocap=1" : "") + (process.env.EN ? "&en=1" : "")); await pg.waitForFunction(() => window.ready === true, null, { timeout: 120000 });
   await pg.evaluate(() => document.fonts.ready);
   const dir = mode === "at" ? b : out; fs.mkdirSync(dir, { recursive: true });
   const times = mode === "at" ? a.split(",").map(Number) : Array.from({ length: +b - +a }, (_, i) => (+a + i) / 30);

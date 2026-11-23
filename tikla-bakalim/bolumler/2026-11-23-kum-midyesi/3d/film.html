@@ -694,6 +694,9 @@ function spanLine(a, b, alpha) { if (alpha <= 0) return; const [x1, y1] = proj(a
 
 // ================= KUM MİDYESİ çekimleri (dikey 1080×1920) =================
 // Ölçek: 1 birim ≈ 1 m. Su derinliği 14 m. Midyeler görünürlük için ~3 kat büyük çizilir.
+const EN = location.search.includes("en=1");
+if (EN) { document.querySelectorAll("#ctaLogo,#logo").forEach(e => e.src = "logo_en.jpg"); document.querySelector("#cta .nm").innerHTML = "Sea Secrets<small>Fishing, explained simply</small>"; $("bSh").textContent = "↗ Share";
+  CHIPS.like = "<i>❤</i> Like if it's useful"; CHIPS.comment = "<i>💬</i> Pick the next one"; }
 const SY = -14;                                   // kum tabanı
 const CL = .1;                                    // midye yarıçapı (çizim)
 // ---- kum ----
@@ -853,8 +856,8 @@ function mapItaly(t, a) {
   const N = R.length - 1, upto = p * N; g.moveTo(X(R[0][0]), Y(R[0][1]));
   for (let i = 1; i <= N; i++) { const f = clamp(upto - (i - 1)); if (f <= 0) break; g.lineTo(X(lerp(R[i - 1][0], R[i][0], f)), Y(lerp(R[i - 1][1], R[i][1], f))); } g.stroke(); g.setLineDash([]);
   const pulse = (lo, la, al) => { g.globalAlpha = al; g.fillStyle = "#e3141b"; g.beginPath(); g.arc(X(lo), Y(la), 16, 0, 7); g.fill(); const r = 16 + 40 * ((t * 1.2) % 1); g.strokeStyle = `rgba(227,20,27,${1 - (r - 16) / 40})`; g.lineWidth = 4; g.beginPath(); g.arc(X(lo), Y(la), r, 0, 7); g.stroke(); g.globalAlpha = 1; };
-  pulse(30.3, 41.2, 1); g.font = "52px AN"; g.fillStyle = "#fff"; g.textAlign = "center"; g.fillText("KARADENİZ", X(34.5), Y(43.4));
-  const e = sm((t - 1.4) / .4); if (e > 0) { pulse(12.5, 41.9, e); g.globalAlpha = e; g.font = "64px AN"; g.fillText("İTALYA", X(12.6), Y(44.6)); g.globalAlpha = 1; }
+  pulse(30.3, 41.2, 1); g.font = "52px AN"; g.fillStyle = "#fff"; g.textAlign = "center"; g.fillText(EN ? "BLACK SEA" : "KARADENİZ", X(34.5), Y(43.4));
+  const e = sm((t - 1.4) / .4); if (e > 0) { pulse(12.5, 41.9, e); g.globalAlpha = e; g.font = "64px AN"; g.fillText(EN ? "ITALY" : "İTALYA", X(9.2), Y(38.4)); g.globalAlpha = 1; }
   g.textAlign = "left";
 }
 
@@ -911,7 +914,7 @@ function apply2(st, T) {
   // derinlik çizgisi (yüzey → kum): 2D ölçü
   if (st.depth) { const a = V(-22, -.2, 0), b = V(-22, sandAt(-22, 0), 0); dimLine2(a, b, st.depth, "20 m"); }
   if (st.ton != null) { const n = Math.min(10, Math.floor(st.ton / .32) + 1), al = sm(st.ton / .3); LN.save(); LN.globalAlpha = al; LN.textAlign = "center"; LN.font = "230px AN"; LN.fillStyle = "#fff";
-    LN.shadowColor = "rgba(0,0,0,.5)"; LN.shadowBlur = 30; LN.fillText(`${n} TON`, 540, 520); LN.restore(); LN.textAlign = "left"; }
+    LN.shadowColor = "rgba(0,0,0,.5)"; LN.shadowBlur = 30; LN.fillText(EN ? `${n} TONNES` : `${n} TON`, 540, 520); LN.restore(); LN.textAlign = "left"; }
   if (st.italy != null) mapItaly(st.italy, sm(st.italy / .3));
   if (st.plateOn) { renderer.toneMappingExposure = 1.05; scene.fog.density = 0; }
 }
@@ -925,7 +928,7 @@ function ctaAnim(lt, d) {
   const k = (d - .25) / 3.4;                                    // kısa: en fazla ~3 sn
   const tt = lt / k, a = sm(lt / .25) * (1 - sm((lt - d + .25) / .25));
   c.style.opacity = a; c.style.transform = `translateY(${(1 - sm(lt / .35)) * 60}px)`;
-  const bs = $("bSub"); if (tt > 2.05) { bs.textContent = "✓ Abone olundu"; bs.classList.add("done"); } else { bs.textContent = "Abone ol"; bs.classList.remove("done"); }
+  const bs = $("bSub"); if (tt > 2.05) { bs.textContent = EN ? "✓ Subscribed" : "✓ Abone olundu"; bs.classList.add("done"); } else { bs.textContent = EN ? "Subscribe" : "Abone ol"; bs.classList.remove("done"); }
   const ty = (1 - sm(lt / .25)) * 60, ctr = el => { const r = $(el).getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2 - ty]; };
   const P = { s: [1060, 1500], logo: ctr("ctaLogo"), sub: ctr("bSub"), sh: ctr("bSh") };
   const path = [[0, "s"], [.9, "logo"], [1.5, "logo"], [1.9, "sub"], [2.3, "sub"], [2.7, "sh"], [3.4, "sh"]];

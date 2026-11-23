@@ -1,0 +1,16 @@
+EP02 — BLACK SEA CLAMS · VOICEOVER v1 (English, ElevenLabs v3 tags). Same 3D as Tıkla Bakalım "kum midyesi" (25 sentences = 25 shots, keep sentence count).
+Paste the text between the ==== lines exactly.
+====
+[excited] The clams in your spaghetti alle vongole may come from the bottom of the Black Sea. [mysterious] But almost nobody knows how they get out of it. [short pause] Let me show you, step by step. [warm] Share this video and subscribe, so everyone can see the journey behind their dinner.
+
+[curious] This little shellfish is the striped venus clam. [warm] Turkish fishermen call it chik-chik. [calm] It lives close to the shore, buried in the sand, in water less than twenty meters deep. [curious] So how do you get a clam out of the sand? [excited] With water!
+
+[excited] The boat lowers a steel cage to the seabed behind it. A powerful pump on board draws in seawater and sends it down a hose to the cage. [amazed] Jets of water at the front of the cage loosen the sand. The sand lifts like a cloud, and the clams tumble into the cage. [warm] Give this video a like if it's useful.
+
+[curious] But how do you separate the clams from the sand? [mysterious] Here's the secret. The bottom of the cage is made of steel bars with small gaps. [excited] Sand and small clams fall back through the gaps, while the big ones stay inside. [amazed] So the cage sorts its own catch, right on the seabed.
+
+[excited] When it's full, the cage is pulled up and the clams are emptied onto the deck. [amazed] One boat can bring in up to ten tonnes in a single day. [warm] Most of them are exported, and Italy is the biggest buyer. And that's how a clam from the Black Sea ends up in a bowl of spaghetti.
+
+[excited] Tell us in the comments which seafood we should explain next. [mysterious] Because right now, on the bottom of the Black Sea, a cage is moving through the sand.
+====
+Sources: tikla-bakalim/bolumler/2026-11-23-kum-midyesi/analiz.md (K1–K10).
