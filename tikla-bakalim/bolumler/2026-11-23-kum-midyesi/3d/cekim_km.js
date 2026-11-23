@@ -18,10 +18,10 @@ function clamGeo(seg = 14, rng = 7) {
     const r = Math.hypot(x + 1, z) / 2;                                    // menteşeden uzaklık
     y *= .42 * (1 - .25 * r); x *= 1.0; z *= .88 - .1 * (x + 1) * .5; p.setXYZ(i, x, y, z);
     const ring = .5 + .5 * Math.sin(r * 46), zig = Math.sin(Math.atan2(z, x + 1) * 26 + r * 8) > .55 && r > .25;
-    let cr = .88 - .16 * ring, cg = .8 - .18 * ring, cb = .64 - .2 * ring; if (zig) { cr = .48; cg = .3; cb = .18; } if (Math.abs(y) < .03) { cr *= .7; cg *= .7; cb *= .7; }
+    let cr = .97 - .12 * ring, cg = .86 - .16 * ring, cb = .68 - .2 * ring; if (r > .72) { cg *= .9; cb *= .8; } if (zig) { cr = .58; cg = .27; cb = .12; } if (Math.abs(y) < .03) { cr *= .7; cg *= .7; cb *= .7; }
     c.push(cr, cg, cb); }
   g.setAttribute("color", new THREE.Float32BufferAttribute(c, 3)); g.computeVertexNormals(); return g; }
-const clamMat = new THREE.MeshStandardMaterial({ vertexColors: true, color: 0xb9ad98, roughness: .45, metalness: .05, envMapIntensity: .3 });
+const clamMat = new THREE.MeshStandardMaterial({ vertexColors: true, color: 0xe2d6c2, roughness: .4, metalness: .05, envMapIntensity: .3 });
 // ---- tarla: kafes yolundaki ve çevredeki midyeler ----
 const X0 = -24, X1 = 34, W2 = 1.55;               // kafes yolu |z| < W2
 const NC = 3200, CI = [];
@@ -30,7 +30,7 @@ for (let i = 0; i < NC; i++) { const path = i < 1500; const x = X0 + rnd() * (X1
 { const pb = CI.filter(c => c.path && !c.small).sort((a, b) => a.x - b.x); pb.forEach((c, k) => c.rank = k); CI.NBIG = pb.length; }
 const CLAMS = new THREE.InstancedMesh(clamGeo(), clamMat, NC); CLAMS.frustumCulled = false; scene.add(CLAMS);
 // büyük tek midye (yakın plan)
-const bigClam = new THREE.Mesh(clamGeo(64, 32), new THREE.MeshStandardMaterial({ vertexColors: true, color: 0xc2b6a0, roughness: .35, metalness: .05, envMapIntensity: .3 })); bigClam.visible = false; scene.add(bigClam);
+const bigClam = new THREE.Mesh(clamGeo(64, 32), new THREE.MeshStandardMaterial({ vertexColors: true, color: 0xe6dac6, roughness: .3, metalness: .05, envMapIntensity: .3 })); bigClam.visible = false; scene.add(bigClam);
 // ---- hidrolik kafes (direç) ----
 const DL = 2.6, DW = 3.5, DH = 1.1;               // ağız +x yönünde
 const DR = new THREE.Group(); scene.add(DR);
@@ -72,11 +72,11 @@ const bags = []; for (let i = 0; i < 10; i++) { const g = new THREE.Group(); con
   scene.add(g); bags.push(g); }
 // ---- makarna tabağı (vongole) ----
 const P_PL = V(4000, 300, 0); const plate = new THREE.Group(); plate.position.copy(P_PL); scene.add(plate);
-{ const wood = new THREE.Mesh(new THREE.BoxGeometry(80, 1, 80), new THREE.MeshStandardMaterial({ color: 0x8a5a34, roughness: .7 })); wood.position.y = -.5; plate.add(wood);
-  const cloth = new THREE.Mesh(new THREE.BoxGeometry(14, .05, 30), new THREE.MeshStandardMaterial({ color: 0xf3efe6, roughness: .9 })); cloth.position.set(-7, .03, 0); plate.add(cloth);
+{ const wood = new THREE.Mesh(new THREE.BoxGeometry(80, 1, 80), new THREE.MeshStandardMaterial({ color: 0x5a341f, roughness: .55 })); wood.position.y = -.5; plate.add(wood);
+  const cloth = new THREE.Mesh(new THREE.BoxGeometry(14, .05, 30), new THREE.MeshStandardMaterial({ color: 0xc4482e, roughness: .9 })); cloth.position.set(-7, .03, 0); plate.add(cloth);
   const pl = new THREE.Mesh(new THREE.LatheGeometry([new THREE.Vector2(0, 0), new THREE.Vector2(4.2, 0), new THREE.Vector2(4.7, .3), new THREE.Vector2(6.2, .9), new THREE.Vector2(6.4, 1.0), new THREE.Vector2(6.3, .82), new THREE.Vector2(4.6, .2), new THREE.Vector2(0, .14)], 64),
-    new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .2, side: THREE.DoubleSide })); pl.position.y = .06; plate.add(pl);
-  const pm = new THREE.MeshStandardMaterial({ color: 0xf3cf6a, roughness: .45 });
+    new THREE.MeshStandardMaterial({ color: 0x1b3550, roughness: .18, metalness: .1, side: THREE.DoubleSide })); pl.position.y = .06; plate.add(pl);
+  const pm = new THREE.MeshStandardMaterial({ color: 0xeea21a, roughness: .3, emissive: 0x221200, envMapIntensity: .6 });
   for (let k = 0; k < 90; k++) { const pts2 = []; const r0 = .3 + rnd() * 3.2, a0 = rnd() * 6.28, turns = .7 + rnd() * 1.2;
     for (let s = 0; s <= 24; s++) { const u = s / 24, a = a0 + u * turns * 6.28, r = r0 * (1 - .3 * Math.sin(u * 3.14)) + Math.sin(u * 9 + k) * .2; pts2.push(V(Math.cos(a) * r, .45 + (1 - r / 4) * 1.4 + u * .25 + Math.sin(u * 7 + k) * .08, Math.sin(a) * r)); }
     const t = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts2), 40, .055, 6), pm); plate.add(t); }
@@ -84,11 +84,11 @@ const P_PL = V(4000, 300, 0); const plate = new THREE.Group(); plate.position.co
   for (let k = 0; k < 14; k++) { const a = k / 14 * 6.28 + rnd() * .3, r = 1.2 + rnd() * 2.4; const g = new THREE.Group(); g.position.set(Math.cos(a) * r, 1.6 + (1 - r / 4) * .8, Math.sin(a) * r); g.rotation.y = rnd() * 6.28;
     const top = new THREE.Mesh(sh, clamMat); top.scale.setScalar(.42); top.rotation.z = -1.1; top.position.set(-.35, .25, 0); g.add(top);
     const bot = new THREE.Mesh(sh, clamMat); bot.scale.setScalar(.42); bot.position.y = .02; g.add(bot);
-    const meat = new THREE.Mesh(new THREE.SphereGeometry(.22, 12, 8), new THREE.MeshStandardMaterial({ color: 0xf0b48a, roughness: .5 })); meat.scale.y = .5; meat.position.y = .14; g.add(meat); plate.add(g); }
-  for (let k = 0; k < 60; k++) { const a = rnd() * 6.28, r = rnd() * 3.6; const p = new THREE.Mesh(new THREE.SphereGeometry(.035, 6, 4), new THREE.MeshStandardMaterial({ color: 0x2f8a2a })); p.position.set(Math.cos(a) * r, 2.1 + (1 - r / 4) * .4, Math.sin(a) * r); plate.add(p); }
+    const meat = new THREE.Mesh(new THREE.SphereGeometry(.13, 12, 8), new THREE.MeshStandardMaterial({ color: 0xd9733a, roughness: .35, emissive: 0x2a0c00 })); meat.scale.y = .5; meat.position.y = .14; g.add(meat); plate.add(g); }
+  for (let k = 0; k < 130; k++) { const a = rnd() * 6.28, r = rnd() * 3.6, chili = k % 4 === 0; const p = new THREE.Mesh(chili ? new THREE.BoxGeometry(.07, .02, .05) : new THREE.SphereGeometry(.045, 6, 4), new THREE.MeshStandardMaterial({ color: chili ? 0xe3141b : 0x3fae35, emissive: chili ? 0x3a0000 : 0x0a2a08 })); p.position.set(Math.cos(a) * r, 2.1 + (1 - r / 4) * .4, Math.sin(a) * r); plate.add(p); }
   const fork = new THREE.Mesh(new THREE.BoxGeometry(.35, .08, 9), new THREE.MeshStandardMaterial({ color: 0xd8dde0, metalness: .9, roughness: .2 })); fork.position.set(-8, .12, 1); plate.add(fork);
-  const wall = new THREE.Mesh(new THREE.PlaneGeometry(200, 120), new THREE.MeshStandardMaterial({ color: 0xe9d8b8, roughness: 1 })); wall.position.set(0, 30, -40); plate.add(wall);
-  const lamp = new THREE.PointLight(0xffd9a0, 90, 0, 1.6); lamp.position.set(6, 14, 8); plate.add(lamp); }
+  const wall = new THREE.Mesh(new THREE.PlaneGeometry(200, 120), new THREE.MeshStandardMaterial({ color: 0x3b2a22, roughness: 1 })); wall.position.set(0, 30, -40); plate.add(wall);
+  const lamp = new THREE.PointLight(0xffd29a, 150, 0, 1.6); lamp.position.set(6, 14, 8); plate.add(lamp); const rim = new THREE.PointLight(0x9fd0ff, 60, 0, 1.6); rim.position.set(-8, 6, -10); plate.add(rim); }
 plate.visible = false;
 
 // ---- kafes kinematiği ----
@@ -198,7 +198,7 @@ const S3 = {
     return K({ xray: .5, boat: { p: V(x + BOATX, 0, 0), h: 0 }, dr: { x: p.x, y: p.y, lifted: 1, capX: x, full: 1, tilt: -dmp * .9, dump: dmp, noLines: 0 }, pile: dmp }); },
   ton: (lt, d) => { const u = sm(lt / d); camSet(V(BOATX + lerp(9, 7, u), lerp(12, 11, u), lerp(14, 12, u)), V(BOATX - 4, 1.5, 0), 48); return K({ boat: { p: V(BOATX, 0, 0), h: 0 }, bags: 10, bagT: lt, ton: lt, pile: 1 }); },
   export: (lt) => { camSet(V(0, 300, 1), V(0, 0, 0)); return K({ italy: lt }); },
-  plate: (lt, d) => { const u = sm(lt / d), a = .3 + u * .5; camSet(P_PL.clone().add(V(Math.cos(a) * 11, lerp(9, 7.5, u), Math.sin(a) * 11)), P_PL.clone().add(V(0, 1.2, 0)), 44); return K({ plateOn: 1, noField: 1 }); },
+  plate: (lt, d) => { const u = sm(lt / d), a = .3 + u * .5; camSet(P_PL.clone().add(V(Math.cos(a) * 14, lerp(11, 9, u), Math.sin(a) * 14)), P_PL.clone().add(V(0, 1, 0)), 44); return K({ plateOn: 1, noField: 1 }); },
   comment: (lt, d) => { const x = 26 + lt * VD; UW(V(x + 2.5, SY + 3, 7), V(x - 1, SY + .4, 0), 54); return K({ dr: RUN(lt, 26), chip: ["comment", fadeIO(lt, d)] }); },
   loop: (lt, d) => { const x = 28 + lt * VD, u = sm(lt / d); UW(V(x + lerp(5, 3, u), SY + lerp(3.8, 2.8, u), lerp(9, 6, u)), V(x - .4, SY + .4, 0), 54); return K({ dr: RUN(lt, 28) }); },
 };
