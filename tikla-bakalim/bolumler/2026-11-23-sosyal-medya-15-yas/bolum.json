@@ -1,0 +1,721 @@
+{
+ "baslik": "Sosyal medyada 15 yaş sınırı: Uygulama yaşını nereden bilecek?",
+ "tarih": "2026-11-23",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "yasak",
+  "e-Devlet",
+  "anahtar",
+  "doğrulama"
+ ],
+ "altyazi": {
+  "her on çocuktan yedisi": "10 çocuktan 7'si",
+  "Bir Kasım'dan": "1 Kasım'dan",
+  "on beş yaş": "15 yaş",
+  "Üç soruda": "3 soruda",
+  "Bir Kasım'da": "1 Kasım'da",
+  "on beş yaşından": "15 yaşından",
+  "On beş ile on sekiz": "15 ile 18",
+  "On beş mi, on sekiz mi": "15 mi, 18 mi",
+  "Altı ile on yaş": "6 ile 10 yaş",
+  "Her on çocuktan biri": "Her 10 çocuktan biri",
+  "on altı yaş": "16 yaş",
+  "dört milyon yedi yüz bin": "4,7 milyon",
+  "otuz bir Mart'a": "31 Mart'a",
+  "üç yüz otuz milyon": "330 milyon",
+  "on beşini": "15'ini",
+  "yirmi üç Kasım": "23 Kasım",
+  "iki sorunun": "2 sorunun"
+ },
+ "kapak": {
+  "ikon": "🔑",
+  "ust": "SOSYAL MEDYADA",
+  "buyuk": "15 YAŞ",
+  "alt": "YAŞINI NEREDEN BİLECEK?"
+ },
+ "cta": [
+  {
+   "sahne": 13,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Türkiye'de her on çocuktan yedisi sosyal medya kullanıyor.",
+   "p": {
+    "ikon": "📱",
+    "etiket": "Sosyal medya kullanan çocuklar · 6–17 yaş",
+    "deger": 69.8,
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "renk": "sari",
+    "sayma": false,
+    "not": "TÜİK · Kasım 2026"
+   },
+   "etiket": "TÜİK",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Ama bir Kasım'dan beri, on beş yaş altına kapı kapandı.",
+   "p": {
+    "ikon": "🚪",
+    "satirlar": [
+     "15 YAŞ ALTINA",
+     "~KAPI KAPANDI~"
+    ],
+    "boy": 100
+   },
+   "etiket": "YENİ KURAL",
+   "kaynak": "K2, K3"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Asıl ilginç olan şu: Sıra sadece çocuklarda değil, sende de.",
+   "p": {
+    "ikon": "🫵",
+    "satirlar": [
+     "SIRA",
+     "*SENDE DE*"
+    ],
+    "boy": 110
+   },
+   "etiket": "SÜRPRİZ",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Ne oldu, neden oldu, bizi nasıl etkiliyor? Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "NE OLDU?\n*3 SORUDA*",
+    "boy": 110
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Gündemi her gün sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "GÜNDEM",
+     "*SADE DİLLE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Bir Kasım'da, sosyal medyada yaş sınırı resmen başladı.",
+   "p": {
+    "gun": "1",
+    "ay": "KASIM",
+    "gunadi": "PAZAR",
+    "not": "*15 yaş sınırı* yürürlükte · 2026"
+   },
+   "etiket": "YÜRÜRLÜK",
+   "kaynak": "K2, K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Platformlar artık on beş yaşından küçüklere hesap açamıyor.",
+   "p": {
+    "ikon": "🚫",
+    "satirlar": [
+     "15 YAŞ ALTI",
+     "~HESAP YOK~"
+    ],
+    "boy": 104
+   },
+   "etiket": "YASAK",
+   "kaynak": "K2, K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Instagram, TikTok, YouTube, Facebook ve X bu kuralın içinde.",
+   "p": {
+    "baslik": "Kapsamdaki platformlar (örnek)",
+    "satirlar": [
+     {
+      "ikon": "📸",
+      "metin": "Instagram · Facebook",
+      "deger": "✓",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "🎵",
+      "metin": "TikTok",
+      "deger": "✓",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "▶️",
+      "metin": "YouTube",
+      "deger": "✓",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "✖️",
+      "metin": "X",
+      "deger": "✓",
+      "renk": "beyaz"
+     }
+    ],
+    "not": "Yükümlülük sosyal ağ sağlayıcılarda"
+   },
+   "etiket": "KAPSAM",
+   "kaynak": "K3, K4"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Anne baba izin verse bile, bu kural değişmiyor.",
+   "p": {
+    "ikon": "👨‍👩‍👧",
+    "satirlar": [
+     "VELİ İZNİ",
+     "~İSTİSNA DEĞİL~"
+    ],
+    "boy": 100
+   },
+   "etiket": "VELİ",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "On beş ile on sekiz arası ise yasak değil, ama kurallar farklı.",
+   "p": {
+    "baslik": "Yaşa göre sosyal medya",
+    "satirlar": [
+     {
+      "ikon": "🚫",
+      "metin": "15 yaş altı",
+      "deger": "Hesap yok",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🛡️",
+      "metin": "15–18 yaş",
+      "deger": "Korumalı hesap",
+      "renk": "sari"
+     },
+     {
+      "ikon": "👤",
+      "metin": "18 yaş ve üstü",
+      "deger": "Normal hesap",
+      "renk": "beyaz"
+     }
+    ]
+   },
+   "etiket": "15–18 YAŞ",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Hesap gizli başlıyor. Aileye süre ve harcama sınırı araçları geliyor.",
+   "p": {
+    "baslik": "15–18 yaş · korumalı hesap",
+    "satirlar": [
+     {
+      "ikon": "🔒",
+      "metin": "Hesap varsayılan gizli",
+      "deger": "✓",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "⏱️",
+      "metin": "Kullanım süresi kontrolü",
+      "deger": "✓",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "💳",
+      "metin": "Harcama sınırı",
+      "deger": "✓",
+      "renk": "yesil"
+     }
+    ],
+    "not": "Ebeveyn araçları · yönetmelik"
+   },
+   "etiket": "KORUMA",
+   "kaynak": "K4, K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki bir uygulama, senin kaç yaşında olduğunu nereden bilecek?",
+   "p": {
+    "ikon": "🕵️",
+    "metin": "YAŞINI\n*NEREDEN BİLECEK?*",
+    "boy": 96
+   },
+   "etiket": "NASIL?"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım burada. İşine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "ASIL SIR",
+     "*ŞİMDİ*"
+    ],
+    "boy": 110
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Cevap e-Devlet. Orada sana özel bir dijital anahtar üretiliyor.",
+   "p": {
+    "ikon": "🔑",
+    "satirlar": [
+     "e-DEVLET",
+     "*DİJİTAL ANAHTAR*"
+    ],
+    "boy": 96,
+    "not": "Resmî adı: yaş doğrulama belirteci"
+   },
+   "etiket": "ANAHTAR",
+   "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Anahtarı alıyorsun, uygulamaya veriyorsun, uygulama da yaşını kontrol ediyor.",
+   "p": {
+    "baslik": "Yaş doğrulama · üç adım",
+    "adimlar": [
+     {
+      "ikon": "🏛️",
+      "metin": "e-Devlet'te *anahtar al*"
+     },
+     {
+      "ikon": "📲",
+      "metin": "Uygulamaya *yükle*"
+     },
+     {
+      "ikon": "✅",
+      "metin": "Uygulama +yaşı kontrol eder+"
+     }
+    ]
+   },
+   "etiket": "3 ADIM",
+   "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "İşin sırrı şu: Bu anahtarda adın ve kimlik numaran yok.",
+   "p": {
+    "ikon": "🙈",
+    "satirlar": [
+     "AD YOK",
+     "*KİMLİK NO YOK*"
+    ],
+    "boy": 104
+   },
+   "etiket": "GİZLİLİK",
+   "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "İçinde sadece iki sorunun cevabı var. On beş mi, on sekiz mi?",
+   "p": {
+    "baslik": "Anahtarın içinde ne var?",
+    "satirlar": [
+     {
+      "ikon": "1️⃣",
+      "metin": "15 yaşını doldurdu mu?",
+      "deger": "Evet / Hayır",
+      "renk": "sari"
+     },
+     {
+      "ikon": "2️⃣",
+      "metin": "18 yaşını doldurdu mu?",
+      "deger": "Evet / Hayır",
+      "renk": "sari"
+     }
+    ],
+    "not": "Doğum tarihi paylaşılmıyor"
+   },
+   "etiket": "İÇERİK",
+   "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yani uygulama kim olduğunu değil, hangi yaş grubunda olduğunu öğreniyor.",
+   "p": {
+    "ikon": "🧩",
+    "satirlar": [
+     "KİM OLDUĞUN DEĞİL,",
+     "*YAŞ GRUBUN*"
+    ],
+    "boy": 84
+   },
+   "etiket": "MANTIK",
+   "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki bu kural neden şimdi geldi?",
+   "p": {
+    "ikon": "❓",
+    "metin": "NEDEN\n*ŞİMDİ?*",
+    "boy": 120
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "karsilastir",
+   "say": "Çünkü sosyal medya çok erken başlıyor. Altı ile on yaş arası çocukların bile yarısı orada.",
+   "p": {
+    "baslik": "📱 Sosyal medya kullanan çocuklar",
+    "sol": {
+     "etiket": "6–10 YAŞ",
+     "deger": 50.2,
+     "renk": "sari"
+    },
+    "sag": {
+     "etiket": "11–17 YAŞ",
+     "deger": 83.4,
+     "renk": "kirmizi"
+    },
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "fark": "Her 10 gençten 8'i",
+    "fark_renk": "kirmizi",
+    "not": "TÜİK · Kasım 2026"
+   },
+   "etiket": "TÜİK",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Her on çocuktan biri, siber zorbalığa uğradığını söylüyor.",
+   "p": {
+    "ikon": "⚠️",
+    "etiket": "Siber zorbalığa uğrayan çocuklar · 6–17 yaş",
+    "deger": 10.2,
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "renk": "kirmizi",
+    "sayma": true,
+    "not": "TÜİK · Kasım 2026"
+   },
+   "etiket": "RİSK",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yeni kanunun amacı, çocukları bu risklerden korumak.",
+   "p": {
+    "ikon": "🛡️",
+    "satirlar": [
+     "AMAÇ",
+     "*ÇOCUĞU KORUMAK*"
+    ],
+    "boy": 100,
+    "not": "7578 sayılı Kanun · Mayıs 2026"
+   },
+   "etiket": "AMAÇ",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "takvim",
+   "say": "Bunu deneyen ilk ülke biz değiliz. Avustralya, geçen yıl on altı yaş sınırı getirdi.",
+   "p": {
+    "gun": "10",
+    "ay": "ARALIK",
+    "gunadi": "2025",
+    "not": "*Avustralya* · 16 yaş sınırı"
+   },
+   "etiket": "DÜNYADA",
+   "kaynak": "K8"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "İlk günlerde dört milyon yedi yüz bin hesap kapatıldı ya da kısıtlandı.",
+   "p": {
+    "ikon": "🇦🇺",
+    "etiket": "Avustralya · kapatılan / kısıtlanan hesap",
+    "deger": 4.7,
+    "onek": "",
+    "sonek": " milyon",
+    "ondalik": 1,
+    "renk": "kirmizi",
+    "sayma": true,
+    "not": "eSafety açıklaması · ilk günler"
+   },
+   "etiket": "AVUSTRALYA",
+   "kaynak": "K8"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Ama bazı gençlerin yasağı aşmanın yolunu bulduğu da haberlere yansıdı.",
+   "p": {
+    "ikon": "🧗",
+    "satirlar": [
+     "BAZILARI",
+     "*YOLUNU BULDU*"
+    ],
+    "boy": 100
+   },
+   "etiket": "DENEYİM",
+   "kaynak": "K9"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Türkiye'de kurala uymayan platforma önce para cezası, sonra reklam yasağı geliyor.",
+   "p": {
+    "baslik": "Uymayan platforma ne olur?",
+    "adimlar": [
+     {
+      "ikon": "💸",
+      "metin": "*Para cezası*"
+     },
+     {
+      "ikon": "📵",
+      "metin": "Türkiye'den *reklam yasağı*"
+     },
+     {
+      "ikon": "🐢",
+      "metin": "Mahkeme kararıyla ~yavaşlatma~"
+     }
+    ]
+   },
+   "etiket": "YAPTIRIM",
+   "kaynak": "K10"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Yine uymazsa, mahkeme kararıyla internet hızı yavaşlatılabiliyor.",
+   "p": {
+    "ikon": "🐢",
+    "satirlar": [
+     "BANT",
+     "~DARALTMA~"
+    ],
+    "boy": 110,
+    "not": "Kaynaklara göre %50'den %90'a kadar"
+   },
+   "etiket": "SON ADIM",
+   "kaynak": "K10"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Çocuğa ya da aileye ise herhangi bir ceza yok.",
+   "p": {
+    "ikon": "👨‍👩‍👧",
+    "satirlar": [
+     "AİLEYE CEZA",
+     "+YOK+"
+    ],
+    "boy": 110
+   },
+   "etiket": "AİLE",
+   "kaynak": "K5, K10"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu senin telefonuna nasıl dokunuyor?",
+   "p": {
+    "ikon": "📱",
+    "metin": "SENİN TELEFONUNA\n*NE OLACAK?*",
+    "boy": 92
+   },
+   "etiket": "SENİN HESABIN"
+  },
+  {
+   "bolum": "etki",
+   "tip": "takvim",
+   "say": "Eski hesapların da otuz bir Mart'a kadar en az bir kez doğrulanması gerekiyor.",
+   "p": {
+    "gun": "31",
+    "ay": "MART",
+    "gunadi": "2027",
+    "not": "Mevcut hesaplar için *son tarih*"
+   },
+   "etiket": "SON TARİH",
+   "kaynak": "K3, K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Bu da yaklaşık üç yüz otuz milyon hesap demek.",
+   "p": {
+    "ikon": "👥",
+    "etiket": "Doğrulanacak hesap · Türkiye (tahmini)",
+    "deger": 330,
+    "onek": "≈",
+    "sonek": " milyon",
+    "ondalik": 0,
+    "renk": "sari",
+    "sayma": true,
+    "not": "Haber kaynaklarının tahmini"
+   },
+   "etiket": "TAHMİNİ",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani on beşini çoktan geçtiysen bile, bu sıra sana da gelecek.",
+   "p": {
+    "ikon": "⏳",
+    "satirlar": [
+     "SIRA",
+     "*SANA DA GELECEK*"
+    ],
+    "boy": 100
+   },
+   "etiket": "HERKES",
+   "kaynak": "K3, K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ama dikkat. Yetkililer, sahte doğrulama linklerine karşı uyarıyor.",
+   "p": {
+    "ikon": "🎣",
+    "satirlar": [
+     "SAHTE LİNK",
+     "~DİKKAT~"
+    ],
+    "boy": 110,
+    "not": "Dezenformasyonla Mücadele Merkezi uyarısı"
+   },
+   "etiket": "UYARI",
+   "kaynak": "K11"
+  },
+  {
+   "bolum": "etki",
+   "tip": "liste",
+   "say": "Doğrulama sadece e-Devlet sitesinden ya da resmi uygulamasından yapılıyor.",
+   "p": {
+    "baslik": "Güvenli doğrulama",
+    "satirlar": [
+     {
+      "ikon": "🌐",
+      "metin": "turkiye.gov.tr",
+      "deger": "✓",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "📲",
+      "metin": "Resmî e-Devlet uygulaması",
+      "deger": "✓",
+      "renk": "yesil"
+     },
+     {
+      "ikon": "✉️",
+      "metin": "SMS / e-posta linki",
+      "deger": "✗",
+      "renk": "kirmizi"
+     }
+    ]
+   },
+   "etiket": "GÜVENLİ YOL",
+   "kaynak": "K7, K11"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Mesajla gelen linke tıklama. Şifreni kimseyle paylaşma.",
+   "p": {
+    "ikon": "🔐",
+    "satirlar": [
+     "ŞİFREN",
+     "*SADECE SENDE*"
+    ],
+    "boy": 104
+   },
+   "etiket": "KURAL",
+   "kaynak": "K11"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ayrıntıları her platform ayrıca duyuracak. Bilgiler yirmi üç Kasım itibarıyla.",
+   "p": {
+    "ikon": "📌",
+    "satirlar": [
+     "AYRINTILAR",
+     "*PLATFORMLARDA*"
+    ],
+    "boy": 100,
+    "not": "Bilgiler 23 Kasım 2026 itibarıyla"
+   },
+   "etiket": "NOT"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Öğrenmek istediğin başka bir konu varsa yorumlara yaz. Bir sonrakini biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "SIRADAKİ KONU",
+     "*SENDEN*"
+    ],
+    "boy": 104
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone olmayı unutma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "TÜİK Çocuklarda Bilişim Teknolojileri Kullanım Araştırması 2026 (20 Kasım 2026): 6–17 yaş sosyal medya %69,8; 6–10 yaş %50,2; 11–17 yaş %83,4; siber zorbalık %10,2 — https://anlatilaninotesi.com.tr/20261120/tuikin-arastirmasi-ortaya-cikardi-cocuklarin-yuzde-90i-internet-kullaniyor-kitap-okumayi-ve-aileyle-1110484868.html ; https://www.malatyaguncel.com/tuik-cocuklarin-yuzde-92-7-si-internet-kullaniyor-3122916h.htm ; https://www.yozgatcamlik.com/teknoloji/tuik-acikladi-turkiyede-cocuklarin-yuzde-698i-sosyal-medya-kullaniyor-22171058h",
+  "K2": "7578 sayılı Kanun (TBMM kabul 22 Nisan 2026, Resmî Gazete 1 Mayıs 2026), 5651 sayılı Kanun ek 4. madde; 15 yaş hükmü 1 Kasım 2026'da yürürlükte — https://www.ozgunlaw.com/haberler/sosyal-medyada-15-yas-siniri-duzenlemesi-iceren-kanun-degisikligi-resmi-gazetede-yayimlandi-4605 ; https://www.yilmaztatlihukuk.com/post/turkiyede-cocuklar-icin-sosyal-medya-yasagi-7578-sayili-kanun ; https://www.endeks24.com/sosyal-medya-15-yas-siniri-yururluge-girdi",
+  "K3": "Yönetmelik (Resmî Gazete 10 Ekim 2026, sayı 33396), yürürlük 1 Kasım 2026; mevcut hesaplar 31 Mart 2027'ye kadar en az bir kez doğrulanacak — https://www.aa.com.tr/tr/gundem/-sosyal-medyada-yas-sinirlamasina-iliskin-yonetmelik-resmi-gazetede/4084136 ; https://tr.euronews.com/2026/11/01/15-yas-altina-sosyal-medya-yasagi-basladi-platformlari-hangi-kurallar-bekliyor ; https://www.haberturk.com/bilgi/foto/15-yas-alti-sosyal-medya-yasagi-basliyor-yas-dogrulamasi-nasil-yapilir-hangi-uygulamalari-kapsayacak-3923995",
+  "K4": "Kapsam: Instagram, TikTok, YouTube, Facebook, X; YouTube Türkiye 15 yaş altı hesapları kapatmak zorunda kalabileceğini açıkladı — https://www.haberturk.com/bilgi/foto/15-yas-alti-sosyal-medya-yasagi-basliyor-yas-dogrulamasi-nasil-yapilir-hangi-uygulamalari-kapsayacak-3923995 ; https://www.haberler.com/teknoloji/15-yas-alti-sosyal-medya-duzenlemesi-1-kasim-da-20320253-haberi/ ; https://www.milligazete.com.tr/1-kasim-sosyal-medya-yasagi-dogru-mu-kimleri-kapsiyor-instagram-tiktok-youtube-ve-x-kapanacak-mi",
+  "K5": "Veli onayıyla istisna yok; 15–18 yaş için ayrıştırılmış hizmet (gizli hesap, ebeveyn araçları: süre, harcama, konum); çocuğa/veliye ceza yok — https://www.forbes.com.tr/hukuk/turkiye-de-sosyal-ag-saglayicilarina-getirilen-cocuklara-ozgu-ayristirilmis-hizmet-sunulmasi-ve-yas-dogrulamaya-iliskin-yeni-duzenlemeler ; https://musavirlerkulubu.com.tr/makale/sosyal-ag-saglayicilarda-cocuklara-ozgu-ayristirilmis-hizmet-ve-yas-dogrulama-yonetmeligi ; https://www.hukukihaber.net/cocugunuzun-sosyal-medya-hesabi-kapanacak-mi-yeni-kurallar-haklar-ve-sorumluluklar ; https://www.habermemur.net/youtube-turkiyeden-15-yas-alti-aciklamasi-hesaplar-kapatilmak-zorunda-kalabilir/",
+  "K6": "e-Devlet yaş doğrulama belirteci: kimlik bilgisi paylaşılmaz, yalnız 15/18 eşiği; ≈330 milyon hesap, ≈64–67 milyon kullanıcı (haber tahmini) — https://www.yeniasir.com.tr/yasam/2026/11/01/sosyal-medyada-330-milyon-hesaba-e-devlet-dogrulamasi-yeni-duzenleme-nasil-olacak ; https://www.nefes.com.tr/sosyal-medyada-e-devlet-zorunlulugu-330-milyon-hesap-icin-yeni-donem-10-soruda-merak-edilenler-161804 ; https://www.teknoblog.com/turkiye-de-sosyal-medya-yas-dogrulamasi-nasil-yapilacak/",
+  "K7": "Belirteç üç adımda: e-Devlet'te üret, platforma yükle, platform teyit eder; resmî kanal turkiye.gov.tr ve e-Devlet uygulaması — https://imer.av.tr/rehber/sosyal-medya-yas-dogrulama ; https://www.timeturk.com/sosyal-medyada-yas-dogrulama-basladi-e-devletten-nasil-yapilacak ; https://www.milligazete.com.tr/e-devlet-yas-dogrulama-kodu-nasil-alinir-hangi-ekrana-girilir-kimler-alabilir-instagramda-nasil-kullanilir",
+  "K8": "Avustralya 16 yaş sınırı 10 Aralık 2025; ilk günlerde 4,7 milyondan fazla hesap kapatıldı/kısıtlandı (eSafety); uymayana 49,5 milyon AUD'a kadar ceza — https://medyascope.tv/2026/01/16/avustralya-da-cocuklara-sosyal-medya-yasagi-47-milyon-hesap-kapatildi/ ; https://www.ntv.com.tr/dunya/sosyal-medya-yasagi-devreye-girdi-5-milyona-yakin-hesap-kapandi-1707671 ; https://www.diken.com.tr/?p=1679650",
+  "K9": "Avustralya'da bazı gençlerin yasağı aştığına dair haberler — https://www.donanimhaber.com/avustralya-daki-gencler-sosyal-medya-yasagini-asmayi-basardi--199649 ; https://www.teknoblog.com/avustralya-sosyal-medya-yasagi-cocuklar-etkisi/",
+  "K10": "Yaptırım sırası: idari para cezası → Türkiye'den yeni reklam yasağı → mahkeme kararıyla bant daraltma (kaynaklara göre %50, sonra %90'a kadar); yükümlülük platformda — https://www.multibem.com.tr/15-yas-alti-sosyal-medya-yasagi/ ; https://www.elci.av.tr/makale/15-yas-alti-sosyal-medya-yasagi-e-devlet-yas-dogrulama-1-kasim-2026-217 ; https://www.ntv.com.tr/gundem/galeri-15-yas-altina-sosyal-yasagi-hakkinda-merak-edilenler-5-soru-5-cevapta-yeni-duzenleme-1721314",
+  "K11": "DMM ve emniyet: sahte yaş doğrulama linklerine karşı uyarı; SMS/e-posta linki kullanılmamalı, resmi kurumlar şifre istemez — https://www.istiklal.com.tr/gundem/sosyal-medya-hesaplari-icin-yeni-donem-dmm-uyardi-1108950h ; https://www.sabah.com.tr/yasam/sosyal-medyada-15-yas-siniri-sonrasi-egmden-kritik-uyari-bu-mesaji-sakin-acmayin-7694143"
+ }
+}
