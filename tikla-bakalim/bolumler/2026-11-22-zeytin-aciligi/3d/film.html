@@ -59,6 +59,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
 <svg id="cur" viewBox="0 0 120 130" width="110" height="120"><path d="M20 10 L20 108 L44 86 L60 122 L80 113 L64 78 L98 78 Z" fill="#fff" stroke="#111" stroke-width="7" stroke-linejoin="round"/></svg>
 <div id="cap"></div>
 <div id="flash" class="ov"></div>
+<div id="seriT" style="position:absolute;left:0;right:0;top:420px;text-align:center;opacity:0;color:#fff">
+ <span style="display:inline-block;background:#e3141b;font-family:PS;font-size:44px;letter-spacing:5px;padding:12px 26px 8px">YENİ SERİ</span>
+ <div style="font-family:AN;font-size:230px;line-height:1;margin-top:20px;text-shadow:0 10px 40px rgba(0,0,0,.5)">ZEYTİN</div>
+ <div style="font-family:AN;font-size:120px;line-height:1;margin-top:6px;letter-spacing:12px;text-shadow:0 10px 40px rgba(0,0,0,.5)">SERİSİ</div></div>
 <script type="module">
 import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
@@ -72,7 +76,7 @@ const rnd = (() => { let s = 12345; return () => (s = (s * 16807) % 2147483647) 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const $ = id => document.getElementById(id);
 
-const TL = await (await fetch("timeline.json")).json();
+const TL = await (await fetch(new URLSearchParams(location.search).get("tl") || "timeline.json")).json();
 
 // ================= ZEYTİN: sahne (birim = cm) =================
 const renderer = new THREE.WebGLRenderer({ canvas: $("c"), antialias: true, preserveDrawingBuffer: true });
@@ -159,6 +163,17 @@ const branch = new THREE.Group(); branch.position.set(0, 160, 1400); grove.add(b
 const biteCut = makeCutOlive(COL.green, 220); biteCut.visible = false; scene.add(biteCut);
 const BURST = new THREE.InstancedMesh(new THREE.SphereGeometry(.07, 8, 6), new THREE.MeshStandardMaterial({ color: 0xff2a2a, emissive: 0xd00000, emissiveIntensity: 1.2 }), 160); BURST.frustumCulled = false; scene.add(BURST);
 const BU = []; for (let i = 0; i < 160; i++) BU.push({ d: V(rnd() - .5, rnd() - .5, rnd() * .8 + .2).normalize(), sp: 3 + rnd() * 6 });
+// GİRİŞ: su altı (balık) → yüzeye çıkış → zeytin bahçesi
+const P_SEA = V(46000, -60000, 0); studio(P_SEA, 2500, 0x4fb3d9, 0x05324d);
+const fishG = (() => { const b = new THREE.SphereGeometry(.5, 12, 8); b.scale(1.7, .42, .26); const t = new THREE.ConeGeometry(.28, .6, 4); t.rotateZ(Math.PI / 2); t.translate(-1, 0, 0); t.scale(1, 1, .3);
+  const a = b.toNonIndexed(), c = t.toNonIndexed(), p = new Float32Array(a.attributes.position.count * 3 + c.attributes.position.count * 3); p.set(a.attributes.position.array); p.set(c.attributes.position.array, a.attributes.position.count * 3);
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(p, 3)); g.computeVertexNormals(); return g; })();
+const NFI = 700, FSH = new THREE.InstancedMesh(fishG, new THREE.MeshStandardMaterial({ color: 0xdfe9ef, metalness: .9, roughness: .2, envMapIntensity: 1.6 }), NFI); FSH.frustumCulled = false; scene.add(FSH);
+const FIN = []; for (let i = 0; i < NFI; i++) FIN.push({ th: rnd() * 6.28, r: 20 + rnd() * 90, y: (rnd() - .5) * 140, sp: .6 + rnd() * .6, ph: rnd() * 6 });
+const rayT = (() => { const c = document.createElement("canvas"); c.width = 64; c.height = 256; const g = c.getContext("2d"); const gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, "rgba(255,255,255,.6)"); gr.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = gr; g.fillRect(0, 0, 64, 256); const gx = g.createLinearGradient(0, 0, 64, 0); gx.addColorStop(0, "rgba(0,0,0,1)"); gx.addColorStop(.5, "rgba(0,0,0,0)"); gx.addColorStop(1, "rgba(0,0,0,1)"); g.globalCompositeOperation = "destination-out"; g.fillStyle = gx; g.fillRect(0, 0, 64, 256); return new THREE.CanvasTexture(c); })();
+const SRAYS = new THREE.Group(); scene.add(SRAYS);
+for (let i = 0; i < 14; i++) { const m = new THREE.Mesh(new THREE.PlaneGeometry(30 + rnd() * 40, 900), new THREE.MeshBasicMaterial({ map: rayT, transparent: true, opacity: .22, blending: THREE.AdditiveBlending, depthWrite: false, color: 0xbfefff, side: THREE.DoubleSide }));
+  m.position.copy(P_SEA).add(V((rnd() - .5) * 600, 200, -200 - rnd() * 300)); m.rotation.z = .2; SRAYS.add(m); }
 // stüdyolar (yerin altında, birbirinden uzak)
 const SY = -60000;
 const P_CUT = V(0, SY, 0), P_JAR = V(4000, SY, 0), P_KUP = V(8000, SY, 0), P_MIC = V(12000, SY, 0), P_FAC = V(20000, SY, 0), P_TAB = V(30000, SY, 0), P_CEL = V(36000, SY, 0);
@@ -243,8 +258,8 @@ const fac = new THREE.Group(); fac.position.copy(P_FAC); scene.add(fac);
 // 7) SOFRA
 const table = new THREE.Group(); table.position.copy(P_TAB); scene.add(table);
 { const tp = new THREE.Mesh(new THREE.BoxGeometry(900, 6, 600), new THREE.MeshStandardMaterial({ color: 0x8a5a34, roughness: .7 })); tp.position.y = -3; table.add(tp);
-  const pl = new THREE.Mesh(new THREE.LatheGeometry([new THREE.Vector2(0, 0), new THREE.Vector2(9, 0), new THREE.Vector2(10, .6), new THREE.Vector2(12, 1.6), new THREE.Vector2(12.4, 1.8)], 48), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .15, clearcoat: 1, side: THREE.DoubleSide })); table.add(pl);
-  for (let i = 0; i < 22; i++) { const o = makeOlive(i % 3 === 0 ? COL.green : COL.black); o.children[1].visible = false; const a = i * 2.4, r = Math.sqrt(i / 22) * 7.5; o.position.set(Math.cos(a) * r, 1.6 + (i > 12 ? 1.4 : 0), Math.sin(a) * r); o.rotation.set(Math.PI / 2 + rnd(), rnd() * 6, 0); table.add(o); }
+  const pl = new THREE.Mesh(new THREE.LatheGeometry([new THREE.Vector2(0, .35), new THREE.Vector2(9, .35), new THREE.Vector2(10, .95), new THREE.Vector2(12, 1.95), new THREE.Vector2(12.5, 2.15), new THREE.Vector2(12.3, 1.85), new THREE.Vector2(10.2, .75), new THREE.Vector2(8.6, .12), new THREE.Vector2(0, .12)].reverse(), 64), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: .15, clearcoat: 1, side: THREE.DoubleSide })); table.add(pl);
+  for (let i = 0; i < 22; i++) { const o = makeOlive(i % 3 === 0 ? COL.green : COL.black); o.children[1].visible = false; const a = i * 2.4, r = Math.sqrt(i / 22) * 7.5; o.position.set(Math.cos(a) * r, 1.85 + (i > 12 ? 1.4 : 0), Math.sin(a) * r); o.rotation.set(Math.PI / 2 + rnd(), rnd() * 6, 0); table.add(o); }
   const bread = new THREE.Mesh(new THREE.SphereGeometry(9, 24, 16), new THREE.MeshStandardMaterial({ color: 0xc8935a, roughness: .9 })); bread.scale.set(1.6, .7, 1); bread.position.set(-30, 4, -10); table.add(bread);
   const glass = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 2.8, 9, 32, 1, true), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: .2, clearcoat: 1, depthWrite: false })); glass.position.set(22, 4.5, -14); table.add(glass);
   const tea = new THREE.Mesh(new THREE.CylinderGeometry(3, 2.6, 6, 32), new THREE.MeshStandardMaterial({ color: 0xa8321a, transparent: true, opacity: .85 })); tea.position.set(22, 3.2, -14); table.add(tea); }
@@ -255,8 +270,12 @@ const S = {};
 const camSet = (p, tg, fov = 40) => { camera.position.copy(p); camera.lookAt(tg); camera.fov = fov; camera.updateProjectionMatrix(); };
 const fadeIO = (lt, d, a = .3) => sm(lt / a) * (1 - sm((lt - d + a) / a));
 const A = (P, x, y, z) => P.clone().add(V(x, y, z));
-function base(o) { return Object.assign({ out: false, gold: false, dots: [0, 0, 0], leak: 0, chg: 0, crack: 0, micro: 0, cellar: false, chip: null, cta: null, logo: 0, pick: 0 }, o); }
+function base(o) { return Object.assign({ sea: 0, flash: 0, title: 0, out: false, gold: false, dots: [0, 0, 0], leak: 0, chg: 0, crack: 0, micro: 0, cellar: false, chip: null, cta: null, logo: 0, pick: 0 }, o); }
 const BR = V(0, 160, 1400);
+S.seri = (lt, d) => { const f = lt / d;
+  if (f < .3) { const u = ease(f / .3); camSet(A(P_SEA, Math.sin(lt * .4) * 30, lerp(-250, 160, u), lerp(420, 300, u)), A(P_SEA, 0, lerp(-120, 260, u), 0), 55); return base({ sea: 1, flash: sm((f - .23) / .07) }); }
+  const u = ease((f - .3) / .7); camSet(V(lerp(-1800, -600, u), lerp(1400, 700, u), lerp(5200, 3400, u)), V(lerp(-200, 0, u), 150, 0), lerp(55, 48, u));
+  return base({ out: true, gold: true, flash: 1 - sm((f - .3) / .08), title: sm((f - .3) / .06) }); };
 S.bite = (lt, d) => {
   const f = lt / d, sw = ease(clamp(f / .5));                                     // 0–50%: bahçenin üstünden dala süzülme
   const p0 = V(900, 900, 4200), p1 = A(BR, 6, -2, 46), mid = V(200, 260, 2400);
@@ -306,6 +325,11 @@ function apply(st, T) {
   branch.userData.olives.forEach((o, i) => { o.rotation.z = Math.sin(T * 1.2 + i) * .06; });
   { const o = branch.userData.olives[3]; const base0 = o.userData.p0 || (o.userData.p0 = o.position.clone()); const k = st.pick || 0;
     o.position.copy(base0).lerp(V(5.6, -2.4, 37), k); o.rotation.y = k * 2; }
+  // giriş balıkları
+  FSH.visible = !!st.sea; SRAYS.visible = !!st.sea;
+  if (st.sea) { for (let i = 0; i < NFI; i++) { const f = FIN[i], a = f.th + T * .35 * f.sp; dummy.position.copy(P_SEA).add(V(Math.cos(a) * f.r, f.y + Math.sin(T + f.ph) * 3, Math.sin(a) * f.r));
+      const dd = V(-Math.sin(a), 0, Math.cos(a)); dummy.lookAt(dummy.position.clone().add(dd)); dummy.rotateY(-Math.PI / 2); dummy.scale.setScalar(6); dummy.updateMatrix(); FSH.setMatrixAt(i, dummy.matrix); } FSH.instanceMatrix.needsUpdate = true; }
+  $("flash").style.opacity = st.flash || 0; $("seriT").style.opacity = st.title || 0; $("seriT").style.transform = `scale(${lerp(1.25, 1, st.title || 0)})`;
   // ısırma: koparılan zeytin kesite dönüşür, acı parçacıkları saçılır
   { const o = branch.userData.olives[3]; const on = (st.bite || 0) > 0; o.visible = !on; biteCut.visible = on;
     for (let i = 0; i < 160; i++) { dummy.scale.setScalar(0); dummy.position.set(0, -9e4, 0); dummy.updateMatrix(); BURST.setMatrixAt(i, dummy.matrix); }

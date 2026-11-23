@@ -4,6 +4,7 @@ Kareler (fr/, altyazısız, tahmini zamanlama) sesin cümle sürelerine esnetili
 altyazı ASS katmanı olarak eklenir, ses + müzik + tık miksi yapılır.
 Ses yoksa: python3 bitir.py --sessiz → taslak.mp4 (sadece müzik, altyazısız)."""
 import json, os, subprocess, sys, re
+MOFF = float(os.environ.get("MOFF", "0"))
 W = os.path.dirname(os.path.abspath(__file__)); os.chdir(W)
 FPS = 30
 old = json.load(open("timeline.json"))
@@ -86,7 +87,7 @@ if SESSIZ:
 else:
     run(f"ffmpeg -loglevel error -y -i '{vo}' -i muzik.mp3 -i click.wav -i click.wav -i click.wav -filter_complex \""
         f"[0]aresample=48000,aformat=channel_layouts=stereo,highpass=f=70,acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120,loudnorm=I=-15:TP=-2:LRA=9[v];"
-        f"[1]atrim=0:{D},aformat=channel_layouts=stereo,loudnorm=I=-36:TP=-9,afade=in:d=1.2,afade=out:st={D-1.5}:d=1.5[m];{cl}"
+        f"[1]atrim={MOFF}:{MOFF+D},asetpts=N/SR/TB,aformat=channel_layouts=stereo,volume=0.0692" + ("" if MOFF else ",afade=in:d=1.2") + f",afade=out:st={D-1.5}:d=1.5[m];{cl}"
         f"[v][m][c0][c1][c2]amix=inputs=5:normalize=0:duration=first,apad=whole_dur={D},loudnorm=I=-14:TP=-1.5:LRA=11\" -ar 48000 mix.wav")
 vf = "" if SESSIZ else "-vf \"ass=altyazi.ass:fontsdir=fonts\""
 name = "taslak.mp4" if SESSIZ else "final.mp4"
