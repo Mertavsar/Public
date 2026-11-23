@@ -1,0 +1,22 @@
+EP01 LONG (16:9) — HOW NORWEGIAN FISHERMEN CATCH A WHOLE SCHOOL OF MACKEREL · VOICEOVER v1
+ElevenLabs v3 tags. Paste the text between the ==== lines exactly as written (alignment depends on it).
+Shorts cut from the long video: [S1] [S2] [S3] markers — each block starts with its own hook.
+====
+[excited] Norwegian fishermen catch an entire school of mackerel with a single net. [mysterious] Hundreds of tonnes, in one go. But the real secret isn't the net. It's what happens underneath it. [short pause] Let me show you, step by step. [warm] If you like seeing how the food on your plate is caught, share this video and subscribe.
+
+[S3] [curious] It all begins in late summer. Mackerel spend the summer feeding far out in the Norwegian Sea. [excited] When autumn comes, they gather in huge, dense schools and move south, past the coast of Norway towards Shetland. And that is when the boats go out.
+
+[curious] But how do you find a school of fish in an ocean that big? [excited] With sound. The boat sends a sound pulse down into the water. It hits the fish and bounces back, and on the sonar screen, a cloud appears. [amazed] That cloud is millions of mackerel.
+
+[excited] Now the captain has to be quick. A small boat drops into the water and holds one end of the net. The big vessel races around the school in a wide circle, laying out the net behind it. [amazed] This net is around seven hundred meters long and two hundred meters deep. That's deeper than a sixty-story building is tall. [calm] Floats along the top keep it at the surface. Weights along the bottom pull it straight down. [excited] When the circle is closed, the school is surrounded by a wall of net. [warm] If you're enjoying this, give the video a like.
+
+[S1] [curious] But wait. The bottom is still open. Couldn't the fish just swim out underneath? [mysterious] This is the real secret. Along the bottom of the net runs a line of metal rings, with one long rope threaded through all of them. [suspenseful] The crew starts winching in that rope. Slowly, the bottom of the net pulls together, like a drawstring bag. [amazed] And now there's no way out. The whole school is inside.
+
+[excited] Then the net is hauled in, piece by piece, by a big hydraulic block on deck, and the circle gets smaller and smaller, until the fish are packed close to the side of the boat.
+
+[S2] [curious] So how do you get hundreds of tonnes of fish on board? [excited] Not with a crane. With a pump. A wide hose goes into the net, and the fish are lifted up with water, straight into tanks of ice-cold seawater, kept close to zero degrees. [amazed] On a modern Norwegian vessel, those tanks can hold more than two and a half million liters. That's more than an Olympic swimming pool. [warm] Keeping the fish cold from the very first minute is what keeps it fresh until it reaches the shore.
+
+[warm] So the next time you see mackerel on a plate, remember: it was found by sound, surrounded by a net taller than a skyscraper, and closed from below like a bag.
+
+[excited] Which fishing method should we explain next? Tell us in the comments. [mysterious] Because right now, somewhere off the coast of Norway, a sonar screen is lighting up.
+====
