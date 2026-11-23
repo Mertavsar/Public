@@ -13,7 +13,7 @@ CIKAR = next((a.split("=",1)[1].split(",") for a in sys.argv if a.startswith("--
 run = lambda c: subprocess.run(c, shell=True, check=True)
 
 def cta_clicks(S, END):                       # film.html ctaAnim ile aynı hesap
-    i = [k for k, s in enumerate(S) if s["id"] == "cta"][0]
+    i = [k for k, s in enumerate(S) if s["id"].split("#")[0] == "cta"][0]
     st = S[i]["s"] - .09; nxt = S[i + 1]["s"] - .09; d = min(nxt - st, 3.1); k = (d - .25) / 3.4
     return [st + c * k for c in (1.0, 2.0, 2.8)]
 
