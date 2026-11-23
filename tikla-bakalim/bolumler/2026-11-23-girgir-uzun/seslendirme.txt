@@ -1,10 +1,12 @@
-GIRGIR — UZUN YATAY (16:9) SESLENDİRME v1. Orijinal Shorts cümleleri (★) aynen; yeni bölümler kaynaklı. ElevenLabs v3.
+GIRGIR — UZUN YATAY (16:9) SESLENDİRME v2. Orijinal Shorts cümleleri (★) aynen; yeni bölümler kaynaklı. ElevenLabs v3.
 
 [excited] Karadenizli balıkçılar koca bir hamsi sürüsünü tek ağla yakalıyor. [mysterious] Ama asıl sır, ağın altında. [short pause] Baştan anlatayım. Böyle merak edilen şeyleri basitçe anlatıyoruz, abone olmayı unutma.
 
-[excited] Bu yöntemin adı gırgır. Bir gırgır teknesinde otuza yakın kişi birlikte çalışabiliyor. [curious] Peki bu kadar insan neden gerekiyor? Çünkü bu iş, saniyelerin önemli olduğu bir takım oyunu. [serious] Tekneler çoğu zaman akşam denize açılıyor ve gece boyunca sürünün peşinde. Şanslı bir gecenin sonunda sabah limana hamsiyle dönüyorlar.
+[excited] Bu yöntemin adı gırgır. Bir gırgır teknesinde otuza yakın kişi birlikte çalışabiliyor. [curious] Peki bu kadar insan neden gerekiyor? Çünkü bu iş, saniyelerin önemli olduğu bir takım oyunu. [curious] Peki ne zaman denize çıkılıyor? [excited] Hamsi sezonu sonbaharda açılıyor ve en bereketli günleri kışa denk geliyor. Karadeniz'de gırgırla hamsi avı öğleden sonra üçten sabah dokuza kadar yapılıyor. [serious] Bu yüzden tekneler çoğu zaman akşamüstü limandan çıkıyor ve gece boyunca sürünün peşinde. Şanslı bir gecenin sonunda sabah limana hamsiyle dönüyorlar.
 
-[excited] Tekne denize açılıyor ve önce sürüyü arıyor. Bunun için sonar kullanılıyor. Ses dalgası suya iniyor, sürüye çarpıp geri dönüyor. [amazed] Ekranda koca bir balık bulutu beliriyor. [curious] Kaptan bu ekrana bakarak sürünün ne kadar büyük olduğunu ve kaç metre derinde yüzdüğünü görüyor. Karar artık onun.
+[curious] Peki hamsi neden hep sürü halinde yüzüyor? [amazed] Çünkü sürü, küçük bir balık için en güvenli yer. Bir yırtıcı yaklaştığında binlerce hamsi bir anda tek bir şekle dönüşüyor ve saldırganın gözünü şaşırtıyor. [excited] Üstelik sürü halinde yüzmek, tıpkı bisikletçilerin arka arkaya dizilmesi gibi, daha az enerji harcatıyor. Yiyeceği bulmak da kalabalıkla daha kolay.
+
+[excited] Tekne denize açılıyor ve önce sürüyü arıyor. Bunun için sonar kullanılıyor. Ses dalgası suya iniyor, sürüye çarpıp geri dönüyor. [curious] Yankının ne kadar sürede geri döndüğü, sürünün kaç metre derinde olduğunu söylüyor. Balıkların içindeki küçük hava kesesi sesi güçlü yansıtıyor. [amazed] Ekranda koca bir balık bulutu beliriyor. [curious] Kaptan bu ekrana bakarak sürünün ne kadar büyük olduğunu görüyor. Karar artık onun.
 
 [suspenseful] Sürü bulununca küçük bir tekne denize iniyor. Ağın bir ucunu o tutuyor. [excited] Büyük tekne sürünün etrafında daire çizerek ağı bırakıyor. Ağın üstünde mantarlar var. Suyun yüzünde kalıyor. Altında kurşunlar var. Ağı aşağı çekiyor. [amazed] Böylece denizin içinde dev bir duvar oluşuyor. Bu ağ yüzlerce metre uzunluğunda olabiliyor. [curious] Balıkçılar ağı metreyle değil kulaçla ölçüyor. Bir kulaç, kollarını iki yana açtığında iki elinin arası kadar.
 

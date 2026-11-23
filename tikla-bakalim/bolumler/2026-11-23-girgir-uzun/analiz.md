@@ -13,6 +13,10 @@ Tarih: 23 Kasım 2026 · Orijinal Shorts metni (700 bin+) aynen korunur, araya k
 | Tekneler akşam açılıp gece/sabah dönebiliyor; balık buzlanıp kasalara konuyor | K6 |
 | Sezon sonbaharda açılır | K7 |
 
+| Karadeniz'de gırgırla hamsi avı 15.00–09.00 | K8 |
+| Sürünün faydası: yırtıcıdan korunma (binlerce balık tek şekil), daha az enerji (peloton benzetmesi), besin bulma | K9, K10 |
+| Sonar: ses darbesi, yankı süresi = derinlik; yüzme kesesindeki hava güçlü yansıtır | K11, K12 |
+
 KULLANMA: kota, yasak, "aşırı avcılık", av miktarı düşüşü, kesin metre (mevzuat sınırları).
 
 ## Kaynaklar
@@ -23,3 +27,8 @@ KULLANMA: kota, yasak, "aşırı avcılık", av miktarı düşüşü, kesin metr
 - K5 — Seine fishing (power block, FAO alıntısı): https://en.wikipedia.org/wiki/Seine_fishing
 - K6 — NTV, Karadeniz'de hamsi bolluğu: https://www.ntv.com.tr/turkiye/galeri-karadenizde-hamsi-bollugu,eCHwA0snvUGpXaP8oFkekQ
 - K7 — TRT Haber, Hamsi sezonu: https://www.trthaber.com/haber/turkiye/hamsi-sezonu-erken-acildi-921506.html
+- K8 — 6/1 Tebliğ 2024/20 (FAO kopyası): https://faolex.fao.org/docs/pdf/tur231911.pdf
+- K9 — WHOI, How do fish swim in schools: https://www.whoi.edu/ocean-learning-hub/ocean-facts/how-do-fish-swim-in-schools
+- K10 — Popular Science, Fish schools in turbulent water: https://www.popsci.com/science/fish-schools/ · UTMSI: https://utmsi.utexas.edu/?p=4824
+- K11 — NOAA, Fish sonar: https://oceanservice.noaa.gov/facts/fish-sonar.html
+- K12 — DOSITS, Fish finding sonar: https://dosits.org/galleries/technology-gallery/observing-and-monitoring-marine-animals/fish-finding-sonar
