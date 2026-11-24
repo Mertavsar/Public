@@ -1,0 +1,719 @@
+{
+ "baslik": "Güneş'e en yakın gezegene gitmek neden 8 yıl sürdü? BepiColombo Merkür'de",
+ "tarih": "2026-11-24",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "Merkür",
+  "Güneş",
+  "fren",
+  "Plüton"
+ ],
+ "altyazi": {
+  "sekiz yılda": "8 yılda",
+  "Üç soruda": "3 soruda",
+  "Yirmi bir Kasım": "21 Kasım",
+  "iki bin on sekizde": "2018'de",
+  "dokuz milyar kilometre": "9 milyar kilometre",
+  "iki buçuk kat": "2,5 kat",
+  "on bir yıl önce": "11 yıl önce",
+  "sekiz yıl": "8 yıl",
+  "dokuz kez": "9 kez",
+  "Bir kez": "1 kez",
+  "iki kez": "2 kez",
+  "altı kez": "6 kez",
+  "iki bin yirmi dörtte": "2024'te",
+  "on bir ay": "11 ay",
+  "on katı": "10 katı",
+  "dört yüz otuz dereceyi": "430 dereceyi",
+  "eksi yüz seksene": "−180'e",
+  "dokuz Aralık'ta": "9 Aralık'ta"
+ },
+ "kapak": {
+  "ikon": "🛰️",
+  "ust": "EN YAKIN GEZEGENE",
+  "buyuk": "8 YIL",
+  "alt": "NEDEN?"
+ },
+ "cta": [
+  {
+   "sahne": 14,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Bir uzay aracı, Güneş'e en yakın gezegene tam sekiz yılda vardı.",
+   "p": {
+    "ikon": "🛰️",
+    "etiket": "BepiColombo · Merkür yolculuğu",
+    "deger": 8,
+    "onek": "",
+    "sonek": " YIL",
+    "ondalik": 0,
+    "renk": "sari",
+    "sayma": false,
+    "not": "Fırlatma Ekim 2018 → varış Kasım 2026"
+   },
+   "etiket": "8 YIL",
+   "kaynak": "K1, K3"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Üstelik oraya varmak, Plüton'a gitmekten daha çok enerji istiyor.",
+   "p": {
+    "ikon": "☀️",
+    "satirlar": [
+     "MERKÜR",
+     "~PLÜTON'DAN ZOR~"
+    ],
+    "boy": 104,
+    "not": "ESA: Plüton'un yanından geçmeye göre"
+   },
+   "etiket": "PARADOKS",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Asıl sır, Güneş'in çekiminde saklı. Üç soruda anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "ASIL SIR\n*GÜNEŞİN ÇEKİMİNDE*",
+    "boy": 96
+   },
+   "etiket": "3 SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Uzayı ve gündemi sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "UZAY VE GÜNDEM",
+     "*SADE DİLLE*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Yirmi bir Kasım akşamı, BepiColombo Merkür'ün yörüngesine girdi.",
+   "p": {
+    "gun": "21",
+    "ay": "KASIM",
+    "gunadi": "CUMARTESİ",
+    "saat": "21:24 TSİ",
+    "not": "Merkür *yörüngesine girdi*"
+   },
+   "etiket": "VARIŞ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Bu, Avrupa ile Japonya'nın ortak görevi. İçinde iki ayrı araç var.",
+   "p": {
+    "ikon": "🤝",
+    "satirlar": [
+     "AVRUPA + JAPONYA",
+     "*2 ARAÇ, 1 GÖREV*"
+    ],
+    "boy": 92,
+    "not": "ESA (MPO) · JAXA (Mio)"
+   },
+   "etiket": "ORTAK GÖREV",
+   "kaynak": "K9"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Yolculuk iki bin on sekizde, Güney Amerika'dan bir fırlatmayla başladı.",
+   "p": {
+    "gun": "20",
+    "ay": "EKİM 2018",
+    "gunadi": "CUMARTESİ",
+    "saat": "",
+    "not": "Ariane 5 · *Fransız Guyanası*"
+   },
+   "etiket": "FIRLATMA",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Yol boyunca neredeyse dokuz milyar kilometre katetti.",
+   "p": {
+    "ikon": "🧭",
+    "etiket": "Katedilen yol",
+    "deger": 9,
+    "onek": "~",
+    "sonek": " milyar km",
+    "ondalik": 0,
+    "renk": "sari",
+    "not": "Kaynaklara göre 8,5–9 milyar km · tahmini"
+   },
+   "etiket": "YOL",
+   "kaynak": "K11"
+  },
+  {
+   "bolum": "ne",
+   "tip": "karsilastir",
+   "say": "Oysa Merkür, Güneş'e bizden iki buçuk kat daha yakın.",
+   "p": {
+    "baslik": "☀️ Güneş'e ortalama uzaklık · milyon km",
+    "sol": {
+     "etiket": "DÜNYA",
+     "deger": 150,
+     "renk": "mavi"
+    },
+    "sag": {
+     "etiket": "MERKÜR",
+     "deger": 58,
+     "renk": "sari"
+    },
+    "onek": "",
+    "sonek": "",
+    "ondalik": 0,
+    "fark": "≈ 2,6 kat yakın",
+    "fark_renk": "sari",
+    "not": "Ortalama değerler · hesap bizim"
+   },
+   "etiket": "UZAKLIK",
+   "kaynak": "K13"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Bu, Merkür'ün yörüngesine giren ikinci araç. İlki on bir yıl önce görevini bitirdi.",
+   "p": {
+    "ikon": "🥈",
+    "satirlar": [
+     "2. ZİYARETÇİ",
+     "*İLKİ: MESSENGER*"
+    ],
+    "boy": 96,
+    "not": "NASA MESSENGER · 2011–2015"
+   },
+   "etiket": "TARİH",
+   "kaynak": "K9"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Varışta küçük bir sorun da çıktı. Fren ateşlemesi planlanandan kısa sürdü.",
+   "p": {
+    "ikon": "⚠️",
+    "satirlar": [
+     "FREN ATEŞLEMESİ",
+     "~KISA SÜRDÜ~"
+    ],
+    "boy": 92,
+    "not": "Sebep: yazılım sorunu (ESA)"
+   },
+   "etiket": "SORUN",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Ama ESA'ya göre araç güvende ve Merkür'ün çevresinde dönüyor.",
+   "p": {
+    "ikon": "✅",
+    "satirlar": [
+     "ARAÇ",
+     "+GÜVENDE+"
+    ],
+    "boy": 110,
+    "not": "Kısa ateşlemenin etkisi henüz açıklanmadı"
+   },
+   "etiket": "DURUM",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki en yakın gezegene gitmek neden sekiz yıl sürdü?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "EN YAKINA\n*NEDEN 8 YIL?*",
+    "boy": 110
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. Hoşuna gittiyse beğen butonuna dokun.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "HOŞUNA GİTTİYSE",
+     "*BİR BEĞEN BIRAK*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Sebep tek kelime: Güneş'in çekimi.",
+   "p": {
+    "ikon": "🧲",
+    "satirlar": [
+     "SEBEP:",
+     "*GÜNEŞİN ÇEKİMİ*"
+    ],
+    "boy": 100
+   },
+   "etiket": "SEBEP",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Güneş'e doğru ilerledikçe araç, yokuş aşağı inen bir top gibi hızlanır.",
+   "p": {
+    "baslik": "Güneş'e doğru yolculuk",
+    "adimlar": [
+     {
+      "ikon": "🌍",
+      "metin": "Dünya'dan *çıkış*"
+     },
+     {
+      "ikon": "☀️",
+      "metin": "Güneş *çeker*"
+     },
+     {
+      "ikon": "⚡",
+      "metin": "Araç ~hızlanır~"
+     }
+    ]
+   },
+   "etiket": "HIZLANMA",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Sorun gitmek değil, durmak. Hızlı gelen araç Merkür'ün yanından geçip gider.",
+   "p": {
+    "ikon": "🏎️",
+    "satirlar": [
+     "SORUN GİTMEK DEĞİL",
+     "~DURMAK~"
+    ],
+    "boy": 88
+   },
+   "etiket": "FREN",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Üstelik Merkür küçük, havası yok ve Güneş'in etrafında çok hızlı dönüyor.",
+   "p": {
+    "baslik": "Merkür'de durmak neden zor?",
+    "satirlar": [
+     {
+      "ikon": "🪶",
+      "metin": "Çekimi",
+      "deger": "zayıf",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🌫️",
+      "metin": "Havayla fren",
+      "deger": "yok",
+      "renk": "sari"
+     },
+     {
+      "ikon": "💨",
+      "metin": "Yörünge hızı",
+      "deger": "~48 km/sn",
+      "renk": "sari"
+     }
+    ],
+    "not": "Güneş çevresinde ortalama hız"
+   },
+   "etiket": "ZORLUK",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Bu yüzden ESA, Merkür'e gitmenin Plüton'dan çok enerji istediğini söylüyor.",
+   "p": {
+    "ikon": "🔋",
+    "satirlar": [
+     "ESA'YA GÖRE",
+     "*PLÜTON'DAN ÇOK ENERJİ*"
+    ],
+    "boy": 84
+   },
+   "etiket": "ENERJİ",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Peki çözüm ne? Yakıt yerine gezegenleri fren gibi kullanmak.",
+   "p": {
+    "ikon": "🪐",
+    "satirlar": [
+     "ÇÖZÜM:",
+     "*GEZEGEN FRENİ*"
+    ],
+    "boy": 100
+   },
+   "etiket": "ÇÖZÜM",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Araç bir gezegenin yanından geçerken, onun çekimiyle hızını değiştirir.",
+   "p": {
+    "baslik": "Yakın geçiş nasıl işler?",
+    "adimlar": [
+     {
+      "ikon": "🪐",
+      "metin": "Gezegene *yaklaş*"
+     },
+     {
+      "ikon": "🧲",
+      "metin": "Çekim *hızı değiştirir*"
+     },
+     {
+      "ikon": "⛽",
+      "metin": "Yakıttan +tasarruf+"
+     }
+    ]
+   },
+   "etiket": "YAKIN GEÇİŞ",
+   "kaynak": "K4, K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Bunu dokuz kez yaptı. Bir kez Dünya, iki kez Venüs, altı kez Merkür.",
+   "p": {
+    "baslik": "9 yakın geçiş",
+    "satirlar": [
+     {
+      "ikon": "🌍",
+      "metin": "Dünya",
+      "deger": "1 kez · 2020",
+      "renk": "mavi"
+     },
+     {
+      "ikon": "🌕",
+      "metin": "Venüs",
+      "deger": "2 kez · 2020–21",
+      "renk": "turuncu"
+     },
+     {
+      "ikon": "🌑",
+      "metin": "Merkür",
+      "deger": "6 kez · 2021–25",
+      "renk": "sari"
+     }
+    ]
+   },
+   "etiket": "9 GEÇİŞ",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Her geçiş aracı biraz daha yavaşlattı. Bedeli ise zamandı.",
+   "p": {
+    "ikon": "⏳",
+    "satirlar": [
+     "YAKIT YERİNE",
+     "*ZAMAN*"
+    ],
+    "boy": 110
+   },
+   "etiket": "BEDEL",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Ayrıca iki bin yirmi dörtte motorlarda güç sorunu çıktı. Varış on bir ay ertelendi.",
+   "p": {
+    "baslik": "Gecikme",
+    "satirlar": [
+     {
+      "ikon": "📅",
+      "metin": "İlk plan",
+      "deger": "Aralık 2025",
+      "renk": "beyaz"
+     },
+     {
+      "ikon": "⚠️",
+      "metin": "2024 · itki gücü",
+      "deger": "düştü",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "✅",
+      "metin": "Yeni varış",
+      "deger": "Kasım 2026",
+      "renk": "yesil"
+     }
+    ]
+   },
+   "etiket": "GECİKME",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "sayi",
+   "say": "Bir de sıcak var. Merkür'de güneş ışığı, Dünya'dakinin on katı.",
+   "p": {
+    "ikon": "☀️",
+    "etiket": "Merkür'de güneş ışığı · Dünya'ya göre",
+    "deger": 10,
+    "onek": "~",
+    "sonek": " KAT",
+    "ondalik": 0,
+    "renk": "sari",
+    "not": "ESA: yaklaşık 10–11 kat"
+   },
+   "etiket": "SICAK",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Yüzey gündüz dört yüz otuz dereceyi bulur, gece eksi yüz seksene düşer.",
+   "p": {
+    "baslik": "Merkür yüzeyi",
+    "satirlar": [
+     {
+      "ikon": "🔥",
+      "metin": "Gündüz",
+      "deger": "430 °C'ye kadar",
+      "renk": "turuncu"
+     },
+     {
+      "ikon": "🌙",
+      "metin": "Gece",
+      "deger": "−180 °C'ye kadar",
+      "renk": "mavi"
+     }
+    ],
+    "not": "Uç değerler · ekvator"
+   },
+   "etiket": "SICAKLIK",
+   "kaynak": "K8"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Aracın dış yüzeyi, kurşunu eritecek kadar ısınabiliyor.",
+   "p": {
+    "ikon": "🛡️",
+    "satirlar": [
+     "DIŞ YÜZEY",
+     "*~450 °C*"
+    ],
+    "boy": 110,
+    "not": "ESA: kurşunu eritecek kadar"
+   },
+   "etiket": "ISI KALKANI",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki Merkür'e gitmek bizi nasıl etkiler?",
+   "p": {
+    "ikon": "🌍",
+    "metin": "PEKİ BİZE\n*NE FAYDASI VAR?*",
+    "boy": 100
+   },
+   "etiket": "BİZE ETKİSİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Önce açık konuşalım. Cebine bugün doğrudan bir etkisi yok.",
+   "p": {
+    "ikon": "👛",
+    "satirlar": [
+     "CEBİNE ETKİSİ",
+     "*BUGÜN YOK*"
+    ],
+    "boy": 100
+   },
+   "etiket": "AÇIK KONUŞALIM"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ama Merkür'de Güneş rüzgârı, Dünya'dakinden çok daha sert esiyor.",
+   "p": {
+    "ikon": "🌬️",
+    "satirlar": [
+     "GÜNEŞ RÜZGÂRI",
+     "*ÇOK DAHA SERT*"
+    ],
+    "boy": 96,
+    "not": "Güneş'ten akan yüklü parçacıklar"
+   },
+   "etiket": "GÜNEŞ RÜZGÂRI",
+   "kaynak": "K12"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Güneş fırtınaları uyduları, GPS'i ve elektrik hatlarını etkileyebilir.",
+   "p": {
+    "baslik": "Güneş fırtınası Dünya'ya ulaşırsa",
+    "adimlar": [
+     {
+      "ikon": "☀️",
+      "metin": "Güneş *fırtınası*"
+     },
+     {
+      "ikon": "🛰️",
+      "metin": "Uydu ve GPS ~aksayabilir~"
+     },
+     {
+      "ikon": "⚡",
+      "metin": "Şebeke ~etkilenebilir~"
+     }
+    ]
+   },
+   "etiket": "UZAY HAVASI",
+   "kaynak": "K14"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Japon aracı Mio bu rüzgârı ölçecek. Bu, uzay havasını anlamaya yardım edebilir.",
+   "p": {
+    "ikon": "📡",
+    "satirlar": [
+     "MİO ÖLÇECEK",
+     "*UZAY HAVASI*"
+    ],
+    "boy": 100,
+    "not": "Beklenti · kesin sonuç değil"
+   },
+   "etiket": "MİO",
+   "kaynak": "K12"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bir de çözülmemiş bir sır var. Merkür'ün demir çekirdeği, boyuna göre devasa.",
+   "p": {
+    "ikon": "🧩",
+    "satirlar": [
+     "DEV DEMİR",
+     "*ÇEKİRDEK*"
+    ],
+    "boy": 104,
+    "not": "Çekirdek, yarıçapın ~%85'i"
+   },
+   "etiket": "SIR",
+   "kaynak": "K15"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Bunun cevabı, Dünya gibi kayalık gezegenlerin nasıl oluştuğunu anlatabilir.",
+   "p": {
+    "ikon": "🌍",
+    "satirlar": [
+     "DÜNYA NASIL",
+     "*OLUŞTU?*"
+    ],
+    "boy": 104,
+    "not": "Bilim insanlarının beklentisi"
+   },
+   "etiket": "KÖKEN",
+   "kaynak": "K15"
+  },
+  {
+   "bolum": "etki",
+   "tip": "takvim",
+   "say": "İki aracın dokuz Aralık'ta ayrılması, bilimin Nisan'da başlaması planlanıyor.",
+   "p": {
+    "gun": "9",
+    "ay": "ARALIK",
+    "gunadi": "ÇARŞAMBA",
+    "saat": "",
+    "not": "*Ayrılık* 9–10 Aralık · bilim Nisan 2027 (planlanan)"
+   },
+   "etiket": "SIRADA NE VAR",
+   "kaynak": "K10"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani en yakın komşuya gitmek, en uzağa gitmekten zor olabiliyor.",
+   "p": {
+    "ikon": "🏁",
+    "satirlar": [
+     "EN YAKIN",
+     "*EN ZOR YOL*"
+    ],
+    "boy": 110
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Öğrenmek istediğin bir uzay ya da gündem konusu varsa yorumlara yaz.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone ol, sıradaki videoyu kaçırma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "Yörüngeye giriş 21 Kasım 2026, ateşleme 18:24 UTC (21:24 TSİ) — https://www.airturkhaber.com/haberler/bepicolombo-merkur-yorungesinde/ ; https://dijitaliyidir.com/bepicolombo-merkur-yorungesine-girdi-sekiz-yillik-yolculuk-basariyla-tamamlandi/ ; https://www.space.com/space-exploration/missions/esa-jaxa-bepicolomobo-mission-mercury-orbit-arrival",
+  "K2": "Ateşleme yazılım sorunu yüzünden planlanandan kısa sürdü; ESA: araç güvende, kararlı yörüngede — https://thenextweb.com/news/bepicolombo-mercury-orbit-software-glitch ; https://gizmodo.com/bepicolombo-reached-mercury-after-8-years-theres-just-one-problem-2000843996 ; https://www.chip.com.tr/guncel/bepicolombo-merkure-ulasti-ama-motoru-planlanandan-erken-sustu_185508.html",
+  "K3": "Fırlatma 20 Ekim 2018, Ariane 5, Kourou (Fransız Guyanası) — https://www.esa.int/For_Media/Press_Releases/BepiColombo_blasts_off_to_investigate_Mercury_s_mysteries ; https://science.nasa.gov/mission/bepicolombo/",
+  "K4": "9 yakın geçiş: 1 Dünya (2020), 2 Venüs (2020, 2021), 6 Merkür (2021–2025) — https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Journey_to_Mercury ; https://interactive.guim.co.uk/uploader/embed/2018/10/bepicolombo-zip/giv-3902qqE6hQHtgzjN/",
+  "K5": "Güneş çekimi aracı hızlandırır, zorluk frenlemek; Merkür'de atmosfer yok, ortalama yörünge hızı ~48 km/sn; ESA: Plüton'a gitmekten fazla enerji — https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Why_does_it_take_so_long_to_get_to_Mercury ; https://www.popsci.com/science/bepicolombo-mercury/ ; https://spacedaily.com/t-bepicolombo-mercury-orbit-braking-pluto-energy/",
+  "K6": "2024 itki/güç sorunu, varış Aralık 2025 → Kasım 2026 (11 ay) — https://www.space.com/bepicolombo-thruster-issues-mercury-arrival-delay-2026 ; https://europeanspaceflight.com/?p=3598 ; https://www.theregister.com/2024/09/03/bepicolombo_trajectory_change/",
+  "K7": "Güneş ışığı Dünya'nın ~10–11 katı; dış yüzey ~450 °C (kurşunu eritecek kadar) — https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/High_temperature_challenge ; https://www.esa.int/Enabling_Support/Space_Engineering_Technology/How_we_heat-proofed_ESA_s_Mercury_mission",
+  "K8": "Merkür yüzeyi gündüz ~430 °C, gece ~−180 °C (uç değerler) — https://www.britannica.com/place/Mercury-planet ; https://acikders.ankara.edu.tr/mod/resource/view.php?id=17160",
+  "K9": "ESA–JAXA ortak görevi (MPO + Mio); MESSENGER'dan (2011–2015) sonra Merkür yörüngesine giren ikinci görev — https://www.airturkhaber.com/haberler/bepicolombo-merkur-yorungesinde/ ; https://www.space.com/space-exploration/missions/esa-jaxa-bepicolomobo-mission-mercury-orbit-arrival",
+  "K10": "Ayrılma 9–10 Aralık 2026, bilim Nisan 2027 (planlanan) — https://www.airturkhaber.com/haberler/bepicolombo-merkur-yorungesinde/ ; https://www.esa.int/ESA_Multimedia/Images/2018/10/BepiColombo_arrival_at_Mercury_timeline",
+  "K11": "Katedilen yol ~8,5 milyar km (CORDIS) / ~9 milyar km (Guardian) — https://cordis.europa.eu/article/id/124185-trending-science-europes-first-mission-to-mercury-lifts-off-to-explore-its-mysteries ; https://interactive.guim.co.uk/uploader/embed/2018/10/bepicolombo-zip/giv-3902qqE6hQHtgzjN/",
+  "K12": "Merkür'de Güneş rüzgârı Dünya'dakinden ~10 kat güçlü; Mio manyetosferi ve Güneş rüzgârını ölçer — https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Mercury_Magnetospheric_Orbiter_Mio ; https://arxiv.org/pdf/2103.16778",
+  "K13": "Güneş'e ortalama uzaklık: Merkür ~57,9 milyon km (0,387 AB), Dünya ~150 milyon km — https://acikders.ankara.edu.tr/mod/resource/view.php?id=17160 ; https://www.britannica.com/place/Mercury-planet",
+  "K14": "Güneş fırtınaları uydu, GPS ve elektrik şebekelerini etkileyebilir — https://www.swpc.noaa.gov/impacts ; https://www.cumhuriyet.com.tr/yasam/gunes-in-kozmik-etkisi-buyuyor-jeomanyetik-firtinalar-teknolojiyi-nasil-etkiliyor-2518493",
+  "K15": "Merkür çekirdeği yarıçapın ~%85'i; sebebi tartışmalı (gezegen oluşumu) — https://www.nationalgeographic.com/science/article/mercury-massive-metal-heart ; https://www.astronomy.com/science/why-does-mercury-have-such-a-large-core/"
+ }
+}
