@@ -126,29 +126,29 @@ const MID = 37 + 18;                                                      // ort
 const near = (i, dx, dy, dz) => { const s = SOCKS[i]; return V(s.x + dx, TOP - 3.5 + dy, s.z + dz); };
 const S4 = {
   hook: (lt, d) => { const u = sm(lt / d); UW(V(lerp(-6, -2, u), -6, 12), V(lerp(-6, -2, u) + 4, -5, 0), 62); return K({}); },
-  nofeed: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 1.4, TOP - 3 + .2, s.z + 2.2), V(s.x, TOP - 3.2, s.z), 44); return K({ plk: 1, gape: 1 }); },
+  nofeed: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 2.4, TOP - 3 + .2, s.z + 4.6), V(s.x, TOP - 3.2, s.z), 50); return K({ plk: 1, gape: 1 }); },
   step: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(-36, -30, u), lerp(26, 22, u), lerp(30, 26, u)), V(-2, -3, 0), 52); return K({ xray: .5, boat: { p: V(-20, 0, 13), h: 0, run: true } }); },
   cta: (lt, d) => { const u = sm(lt / d); UW(V(lerp(2, 4, u), -7, 10), V(lerp(2, 4, u) + 3, -5, 0), 60); return K({ cta: lt, ctaD: d }); },
-  name: (lt, d) => { UW(V(.8, -9.6, 3.4), V(0, -10, 0), 36); return K({ noFarm: 1, big: lt }); },
+  name: (lt, d) => { UW(V(1.2, -9.5, 5.6), V(0, -10, 0), 44); return K({ noFarm: 1, big: lt }); },
   live: (lt) => { camSet(V(0, 300, 1), V(0, 0, 0)); return K({ seas: lt, noFarm: 1 }); },
   two: (lt, d) => { if (lt < d * .5) { const u = sm(lt / (d * .5)); UW(V(P_BED.x + lerp(3, 1, u), SY + 3, lerp(9, 8, u)), V(P_BED.x, SY + .8, 0), 54); return K({}); } const u = sm((lt - d * .5) / (d * .5)); UW(V(lerp(-8, -5, u), -6, 11), V(lerp(-8, -5, u) + 4, -5, 0), 62); return K({}); },
   howq: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(-14, -10, u), 4, lerp(20, 16, u)), V(0, 0, 0), 52); return K({ grow: 1 }); },
   rope: (lt, d) => { const u = ease(clamp(lt / (d * .8))); UW(V(-1, -4, 9), V(0, -4.5, 0), 58); return K({ noFarm: 1, single: u, boat: { p: V(3, 0, -2), h: Math.PI / 2 } }); },
   larvae: (lt, d) => { UW(V(lt * .2, -4, 3.2), V(lt * .2, -4.2, 0), 46); return K({ noFarm: 1, single: 1, lar: 1 }); },
-  attach: (lt, d) => { UW(V(.6, -3.6, 2.6), V(0, -4.2, 0), 46); return K({ noFarm: 1, single: 1, lar: 1, attach: clamp(lt / (d * .9)), spat: 1, singleSpat: 1 }); },
-  like: (lt, d) => { UW(V(.6, -3.6, 2.6), V(0, -4.2, 0), 46); return K({ noFarm: 1, single: 1, lar: .5, attach: 1, spat: 1, singleSpat: 1, chip: ["like", fadeIO(lt, d)] }); },
+  attach: (lt, d) => { UW(V(.8, -3.6, 3.8), V(0, -4.2, 0), 48); return K({ noFarm: 1, single: 1, lar: 1, attach: clamp(lt / (d * .9)), spat: 1, singleSpat: 1 }); },
+  like: (lt, d) => { UW(V(.8, -3.6, 3.8), V(0, -4.2, 0), 48); return K({ noFarm: 1, single: 1, lar: .5, attach: 1, spat: 1, singleSpat: 1, chip: ["like", fadeIO(lt, d)] }); },
   socks: (lt, d) => { const s = SOCKS[MID], u = sm(lt / d); UW(V(s.x + lerp(2.6, 2, u), -4, s.z + lerp(4.2, 3.4, u)), V(s.x, -4.5, s.z), 50); return K({ grow: 0, net: lerp(0, .7, sm(lt / 1.2)) }); },
   longline: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(-34, -28, u), lerp(10, 8, u), lerp(24, 20, u)), V(-6, -4, 0), 56); return K({ xray: .5, grow: .4, net: .6 }); },
-  whofeeds: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 1.8, TOP - 3 + .3, s.z + 2.6), V(s.x, TOP - 3.2, s.z), 44); return K({ grow: .7 }); },
-  secret: (lt, d) => { const u = ease(clamp(lt / d)); UW(V(lerp(1.4, .6, u), -10 + lerp(.4, .25, u), lerp(3.2, 1.8, u)), V(.2, -10, 0), 38); return K({ noFarm: 1, big: 2, gapeK: u }); },
-  filter: (lt, d) => { UW(V(.9, -9.7, 2.2), V(.1, -10, 0), 40); return K({ noFarm: 1, big: 2, gapeK: 1, plkBig: 1 }); },
-  liters: (lt, d) => { UW(V(2.2, -9.4, 4.6), V(.6, -9.6, 0), 44); return K({ noFarm: 1, big: 2, gapeK: 1, plkBig: 1, liters: lt }); },
+  whofeeds: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 2.6, TOP - 3 + .3, s.z + 4.8), V(s.x, TOP - 3.2, s.z), 50); return K({ grow: .7 }); },
+  secret: (lt, d) => { const u = ease(clamp(lt / d)); UW(V(lerp(2, 1.2, u), -10 + lerp(.5, .3, u), lerp(7, 5, u)), V(.1, -10, 0), 44); return K({ noFarm: 1, big: 2, gapeK: u }); },
+  filter: (lt, d) => { UW(V(1.3, -9.6, 5), V(.1, -10, 0), 44); return K({ noFarm: 1, big: 2, gapeK: 1, plkBig: 1 }); },
+  liters: (lt, d) => { UW(V(2, -9.3, 6.6), V(.4, -9.8, 0), 46); return K({ noFarm: 1, big: 2, gapeK: 1, plkBig: 1, liters: lt }); },
   seafeeds: (lt, d) => { const u = sm(lt / d); UW(V(lerp(-10, -6, u), -8, 14), V(-2, -5, 0), 62); return K({ plk: 1, plkWide: 1 }); },
   growth: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 2.4, -4.2, s.z + 3.6), V(s.x, -4.6, s.z), 50); return K({ grow: sm(lt / (d * .9)), net: .6 }); },
-  kg: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 1.6, -4.2, s.z + 2.6), V(s.x, -4.4, s.z), 48); return K({ grow: 1, net: .5, kg: lt }); },
+  kg: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 2.4, -4.2, s.z + 4.4), V(s.x, -4.4, s.z), 50); return K({ grow: 1, net: .5, kg: lt }); },
   harvest: (lt, d) => { const u = ease(clamp(lt / (d * .5))), k = clamp((lt - d * .5) / (d * .4)); camSet(V(10, 9, 14), V(1, 1.5, 0), 50);
     return K({ boat: { p: V(0, 0, 0), h: 0 }, hsock: u, pile: k, crates: k }); },
-  plate: (lt, d) => { const u = sm(lt / d), a = .4 + u * .5; camSet(P_PL.clone().add(V(Math.cos(a) * 12, lerp(10, 8.5, u), Math.sin(a) * 12)), P_PL.clone().add(V(0, .5, 0)), 44); return K({ plateOn: 1, noFarm: 1 }); },
+  plate: (lt, d) => { const u = sm(lt / d), a = .4 + u * .5; camSet(P_PL.clone().add(V(Math.cos(a) * 19, lerp(19, 17, u), Math.sin(a) * 19)), P_PL.clone().add(V(0, .3, 0)), 46); return K({ plateOn: 1, noFarm: 1 }); },
   comment: (lt, d) => { const u = sm(lt / d); UW(V(lerp(8, 10, u), -7, 10), V(lerp(8, 10, u) + 3, -5, 0), 60); return K({ chip: ["comment", fadeIO(lt, d)] }); },
   loop: (lt, d) => { const u = sm(lt / d); UW(V(lerp(-14, -6, u), -6, 12), V(lerp(-14, -6, u) + 4, -5, 0), 62); return K({}); },
 };
@@ -180,7 +180,7 @@ function apply2(st, T) {
       p.setXYZ(i, x, y, z); } p.needsUpdate = true; PLK.material.size = st.plkBig ? .05 : .09; }
   // büyük midye
   bigM.visible = st.big != null; if (bigM.visible) { bigM.position.set(0, -10, 0); const gk = st.big === 2 ? (st.gapeK ?? 0) : .2 + .1 * Math.sin(T); bigM.userData.top.rotation.z = gk * .22; bigM.userData.top.position.y = .02 + gk * .06;
-    bigM.rotation.set(.15, st.big === 2 ? -.5 : -.6 + st.big * .3, .05); bigM.scale.setScalar(1.2); }
+    bigM.rotation.set(.15, st.big === 2 ? -.45 : -.6 + st.big * .25, 1.0); bigM.scale.setScalar(1.1); }
   // hasat
   hSock.visible = st.hsock != null; if (hSock.visible) { const a = V(-5, 2.6, 0).multiplyScalar(.6).applyMatrix4(mb.matrixWorld); hSock.position.set(a.x - 1.2, lerp(-4, 4.2, st.hsock), a.z + 2.6); hSock.rotation.z = lerp(0, -.5, st.hsock); }
   deckPile.visible = (st.pile || 0) > 0; if (deckPile.visible) { for (let i = 0; i < 700; i++) { const r = PR[i + 7000], a = r[0] * 6.28, rr = Math.sqrt(r[1]) * 2.2, h = (1 - rr / 2.2) * 1.2;
