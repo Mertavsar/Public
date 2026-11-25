@@ -17,6 +17,7 @@ require_once __DIR__ . '/inc/varsayilan.php';
 require_once __DIR__ . '/inc/ayarlar.php';
 require_once __DIR__ . '/inc/google.php';
 require_once __DIR__ . '/inc/bolumler.php';
+require_once __DIR__ . '/inc/ozellestir.php';
 
 add_action(
 	'after_setup_theme',

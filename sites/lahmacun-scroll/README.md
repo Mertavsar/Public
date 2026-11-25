@@ -37,6 +37,10 @@ kayan bant, galeri (Medya'dan seçilir, sürükleyerek sıralanır), Google API 
 Yorumlar günde bir kez kendiliğinden yenilenir, sitede yalnızca 5 yıldızlılar görünür. Kaydırma sahnesi, perde
 yazıları ve tasarım koddadır: değişiklik `index.html`'de yapılır, yeni sürüm zip'i üretilir.
 
+Videolar ve paket sipariş linkleri ayrıca **Görünüm → Özelleştir → Kuzu Lahmacun** içinde: link yapıştırılınca
+sağdaki önizleme o bölüme iner ve videoyu yerinde gösterir; **Yayımla** ile sitede. İki ekran aynı ayarı düzenler.
+Görünüm menüsünde ayarlar sayfasına kısayol var.
+
 `index.html` içindeki `<!--wp:...-->` işaretleri panelden gelen bölümlerin yeridir; silinmemeli.
 Üç zip de bir WordPress 6.8 kurulumunda yüklenip denendi (ilk kurulum, güncelleme, panelden kayıt,
 galeri seçimi, yorum çekme, hafif zip).
