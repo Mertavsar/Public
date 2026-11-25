@@ -1,16 +1,19 @@
-EP03 — MUSSELS ON A ROPE · VOICEOVER v1 (English, ElevenLabs v3 tags). Same 3D as Tıkla Bakalım "midye dolmanın midyesi" (25 sentences = 25 shots, keep sentence count).
+EP03 — NOBODY FEEDS THESE MUSSELS · VOICEOVER v2 (English, high-RPM audience: US/UK/Canada/Northern Europe)
+Same 3D as Tıkla Bakalım mussel episode; EN-only scenes: map (Prince Edward Island + Galicia) and plate (moules-frites). 25 sentences = 25 shots.
 Paste the text between the ==== lines exactly.
 ====
-[excited] These mussels grow hanging from a rope in the sea. [mysterious] And nobody ever feeds them. [short pause] Here's how Turkey's famous stuffed mussels begin, step by step. [warm] Share this video and subscribe, so everyone can see how much work goes into it.
+[mysterious] Nobody ever fed the mussels on your plate. [excited] They grew fat hanging from a rope in the sea. [short pause] Here's how mussels are farmed, step by step. [warm] Share this video and subscribe, so everyone can see how much work goes into it.
 
-[curious] This is the Mediterranean mussel, also called the black mussel. [calm] In Turkey, it lives naturally in the Aegean, the Sea of Marmara and the Black Sea. [warm] The mussels for stuffed mussels are gathered from these natural beds, and also grown on sea farms. [curious] So how do you farm mussels in the sea?
+[curious] Whether you eat them steamed in white wine or with a pile of fries, many of these mussels start life the same way. [calm] From Prince Edward Island in Canada to Galicia in Spain, they're grown on ropes in the sea. [warm] Some are gathered from wild beds, but many come from sea farms like this one. [curious] So how do you farm a mussel?
 
-[excited] It all starts with a rope hanging in the water. [mysterious] Millions of tiny mussel larvae drift through the sea, almost invisible. [amazed] They attach to the rope on their own, sometimes tens of thousands on a single meter! [warm] Give this video a like if it's useful.
+[excited] It starts with a single rope hanging in the water. [mysterious] Millions of tiny mussel larvae drift through the sea, almost invisible. [amazed] They grab onto the rope all by themselves, sometimes tens of thousands on a single meter! [warm] Give this video a like if it's useful.
 
-[excited] Once the young mussels grow a little, they're packed into mesh socks. The socks hang down from long lines held up by floats. [curious] So who feeds them? [mysterious] Here's the secret. [amazed] A mussel filters seawater and eats the tiny plankton inside it. A five-centimeter mussel can filter five liters of water in an hour! So the sea itself feeds them.
+[excited] Once they grow a little, farmers pack them into mesh socks. The socks hang from long lines, held up by floats. [curious] So who feeds them? [mysterious] Here's the secret. [amazed] A mussel pumps seawater through its body and catches the tiny plankton inside. A mussel just five centimeters long can filter five liters of water an hour, more than a gallon! So the sea itself is their food.
 
-[excited] A one-centimeter baby grows into a mussel several centimeters long. [amazed] One meter of rope can hold almost eight kilos of mussels. [excited] When they're ready, the lines are pulled onto the boat, and the mussels are separated, cleaned and sorted by size. [warm] And one day, they end up on a plate, stuffed with spiced rice and served with lemon.
+[excited] In one to two years, a baby the size of a fingernail grows into a full mussel. [amazed] A single meter of rope can carry almost eight kilos of mussels, about seventeen pounds. [excited] Then the lines are pulled onto the boat, and the mussels are cleaned and sorted by size. [warm] And finally, they're steamed with garlic and white wine, and served with a pile of crispy fries.
 
 [excited] Tell us in the comments which seafood we should explain next. [mysterious] Because right now, somewhere in the sea, millions of mussels are growing on a rope.
 ====
-Sources: tikla-bakalim/bolumler/2026-11-24-midye-dolma-midyesi/analiz.md (K1–K9).
+Sources: TR analiz.md (K1–K9) + PEI Government (socks, longlines, 18–24 months, 80% of Canadian production) https://www.princeedwardisland.ca/en/information/fisheries-tourism-sport-and-culture/mussels ;
+DFO Farmed mussels (18–24 months, plankton) https://www.dfo-mpo.gc.ca/aquaculture/sector-secteur/species-especes/mussels-moules-eng.htm ;
+Eurofish Galicia (rafts, ~3,300, largest in Europe) https://eurofish.dk/?p=7730

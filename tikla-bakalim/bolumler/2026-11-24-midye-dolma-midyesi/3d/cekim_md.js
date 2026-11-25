@@ -1,5 +1,7 @@
 // ================= MİDYE DOLMANIN MİDYESİ (dikey 1080×1920) =================
-const EN = false;
+const EN = location.search.includes("en=1");
+if (EN) { document.querySelectorAll("#ctaLogo,#logo").forEach(e => e.src = "logo_en.jpg"); document.querySelector("#cta .nm").innerHTML = "Sea Secrets<small>Fishing, explained simply</small>"; $("bSh").textContent = "↗ Share";
+  CHIPS.like = "<i>❤</i> Like if it's useful"; CHIPS.comment = "<i>💬</i> Pick the next one"; }
 // 1 birim ≈ 1 m. Halat çiftliği: yüzeyde şamandıralar, ana halat -1.5 m, çoraplar 6 m sarkıyor. Midyeler ~2 kat büyük çizilir.
 const SY = -22;
 const DOT = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"); const r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
@@ -110,7 +112,7 @@ function mapSeas(t, a) {
   const gr = g.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, "#1f86b8"); gr.addColorStop(1, "#155f88"); g.fillStyle = gr; g.fillRect(0, 0, 1080, 1920);
   for (const o of DUNYA) { const xs = o.r; if (xs.every(([lo]) => lo < lon0 - 8 || lo > lon0 + span + 8)) continue;
     g.beginPath(); xs.forEach(([lo, la], i) => i ? g.lineTo(X(lo), Y(la)) : g.moveTo(X(lo), Y(la))); g.closePath(); g.fillStyle = o.c === "TUR" ? "#f1ebdc" : "#8d9a9e"; g.fill(); g.strokeStyle = "#0e3550"; g.lineWidth = 1.5; g.stroke(); }
-  const L = [[25.3, 38.6, "EGE", .2], [28.0, 40.75, "MARMARA", .7], [34.5, 42.9, "KARADENİZ", 1.2]];
+  const L = [[25.3, 38.6, EN ? "AEGEAN" : "EGE", .2], [28.0, 40.75, "MARMARA", .7], [34.5, 42.9, EN ? "BLACK SEA" : "KARADENİZ", 1.2]];
   g.textAlign = "center"; L.forEach(([lo, la, nm, t0]) => { const e = sm((t - t0) / .35); if (e <= 0) return; g.globalAlpha = e;
     for (let j = 0; j < 7; j++) { const aa = PR[j][0] * 6.28, rr = PR[j][1] * 40; g.fillStyle = "#0b1d2a"; g.beginPath(); g.ellipse(X(lo) + Math.cos(aa) * rr, Y(la) + Math.sin(aa) * rr * .6, 11, 6, aa, 0, 7); g.fill(); }
     const r = 30 + 40 * ((t * 1.1 + t0) % 1); g.strokeStyle = `rgba(255,213,74,${1 - (r - 30) / 40})`; g.lineWidth = 5; g.beginPath(); g.arc(X(lo), Y(la), r, 0, 7); g.stroke();
@@ -118,6 +120,44 @@ function mapSeas(t, a) {
   g.textAlign = "left";
 }
 
+
+// ---- EN: moules-frites (tencere + patates külahı) ----
+const P_PL2 = V(4000, 300, 400); const pot = new THREE.Group(); pot.position.copy(P_PL2); scene.add(pot);
+{ const wood = new THREE.Mesh(new THREE.BoxGeometry(80, 1, 80), new THREE.MeshStandardMaterial({ color: 0x5a341f, roughness: .55 })); wood.position.y = -.5; pot.add(wood);
+  const wall = new THREE.Mesh(new THREE.PlaneGeometry(200, 120), new THREE.MeshStandardMaterial({ color: 0x2f2620, roughness: 1 })); wall.position.set(0, 30, -40); pot.add(wall);
+  const body = new THREE.Mesh(new THREE.LatheGeometry([new THREE.Vector2(0, 0), new THREE.Vector2(3.4, 0), new THREE.Vector2(3.9, .4), new THREE.Vector2(4.1, 2.6), new THREE.Vector2(4.25, 2.8), new THREE.Vector2(4.05, 2.8), new THREE.Vector2(3.85, 2.6), new THREE.Vector2(3.7, .5), new THREE.Vector2(0, .4)], 64),
+    new THREE.MeshStandardMaterial({ color: 0x1b1c1f, roughness: .35, metalness: .4, side: THREE.DoubleSide })); pot.add(body);
+  for (const s of [-1, 1]) { const h = new THREE.Mesh(new THREE.TorusGeometry(.55, .14, 8, 16, Math.PI), body.material); h.position.set(s * 4.3, 2.3, 0); h.rotation.set(0, s > 0 ? Math.PI / 2 : -Math.PI / 2, Math.PI / 2); pot.add(h); }
+  const broth = new THREE.Mesh(new THREE.CircleGeometry(3.75, 48), new THREE.MeshStandardMaterial({ color: 0xa8843e, roughness: .15, emissive: 0x1a1000 })); broth.rotation.x = -Math.PI / 2; broth.position.y = 2.3; pot.add(broth);
+  const half = musselGeo(24, 12), meat = new THREE.MeshStandardMaterial({ color: 0xf08a3a, roughness: .4, emissive: 0x3a1200 }), nac = new THREE.MeshStandardMaterial({ color: 0xc8c6e0, roughness: .2, metalness: .5 });
+  for (let k = 0; k < 80; k++) { const a = PR[k + 300][0] * 6.28, r = Math.sqrt(PR[k + 300][1]) * 3.3, h0 = 2.6 + (1 - r / 3.3) * 1.3 + PR[k + 300][2] * .3;
+    const g = new THREE.Group(); g.position.set(Math.cos(a) * r, h0, Math.sin(a) * r); g.rotation.set((PR[k + 300][3] - .5) * .6, PR[k + 300][0] * 9, (PR[k + 300][2] - .5) * .6);
+    const b = new THREE.Mesh(half, musMat); b.scale.set(.75, .32, .75); g.add(b); const ib = new THREE.Mesh(half, nac); ib.scale.set(.7, .18, .68); ib.position.y = .06; g.add(ib);
+    const m = new THREE.Mesh(new THREE.SphereGeometry(1, 12, 8), meat); m.scale.set(.42, .1, .2); m.position.set(.05, .1, 0); g.add(m);
+    const t = new THREE.Mesh(half, musMat); t.scale.set(.75, .32, .75); t.position.set(-.55, .45, 0); t.rotation.z = -.9; g.add(t); pot.add(g); }
+  for (let k = 0; k < 70; k++) { const a = rnd() * 6.28, r = rnd() * 3.3; const p = new THREE.Mesh(new THREE.SphereGeometry(.06, 6, 4), new THREE.MeshStandardMaterial({ color: 0x3fae35, emissive: 0x0a2a08 })); p.position.set(Math.cos(a) * r, 3.4 + rnd() * .5, Math.sin(a) * r); pot.add(p); }
+  const cone = new THREE.Mesh(new THREE.ConeGeometry(1.6, 5, 32, 1, true), new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: .8, side: THREE.DoubleSide })); cone.rotation.x = Math.PI; cone.position.set(6.8, 2.6, 1.5); pot.add(cone);
+  const stripe = new THREE.Mesh(new THREE.CylinderGeometry(1.42, 1.3, .35, 32, 1, true), new THREE.MeshStandardMaterial({ color: 0xe3141b, side: THREE.DoubleSide })); stripe.position.set(6.8, 4.25, 1.5); pot.add(stripe);
+  const holder = new THREE.Mesh(new THREE.CylinderGeometry(.9, 1.1, .8, 24), new THREE.MeshStandardMaterial({ color: 0x3a3a3a, metalness: .6, roughness: .3 })); holder.position.set(6.8, .4, 1.5); pot.add(holder);
+  const fry = new THREE.MeshStandardMaterial({ color: 0xeeb23a, roughness: .5, emissive: 0x2a1600 });
+  for (let k = 0; k < 60; k++) { const f = new THREE.Mesh(new THREE.BoxGeometry(.2, 2.2 + PR[k + 500][0], .2), fry); const a = PR[k + 500][1] * 6.28, r = Math.sqrt(PR[k + 500][2]) * 1.2;
+    f.position.set(6.8 + Math.cos(a) * r, 5 + PR[k + 500][3] * .6, 1.5 + Math.sin(a) * r); f.rotation.set((PR[k + 500][3] - .5) * .7, 0, Math.cos(a) * .35); pot.add(f); }
+  const lamp = new THREE.PointLight(0xffd29a, 170, 0, 1.6); lamp.position.set(6, 16, 10); pot.add(lamp); const rim = new THREE.PointLight(0x9fd0ff, 60, 0, 1.6); rim.position.set(-8, 7, -10); pot.add(rim); }
+pot.visible = false;
+// ---- EN harita: Kanada (PEI) + İspanya (Galiçya) ----
+function mapAtl(t, a) {
+  const c = $("map"); c.style.opacity = a; const g = MP; g.clearRect(0, 0, 1080, 1920); if (a <= 0) return;
+  const lon0 = -70, lat0 = 66, span = 66, k = 1080 / span, py = 520; const X = lo => (lo - lon0) * k, Y = la => py + (lat0 - la) * k * 1.3;
+  const gr = g.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, "#1f86b8"); gr.addColorStop(1, "#155f88"); g.fillStyle = gr; g.fillRect(0, 0, 1080, 1920);
+  for (const o of DUNYA) { const xs = o.r; if (xs.every(([lo]) => lo < lon0 - 10 || lo > lon0 + span + 10)) continue;
+    g.beginPath(); xs.forEach(([lo, la], i) => i ? g.lineTo(X(lo), Y(la)) : g.moveTo(X(lo), Y(la))); g.closePath(); g.fillStyle = (o.c === "CAN" || o.c === "ESP") ? "#f1ebdc" : "#8d9a9e"; g.fill(); g.strokeStyle = "#0e3550"; g.lineWidth = 1.5; g.stroke(); }
+  const L = [[-63.2, 46.3, "CANADA", .2, -70], [-8.8, 42.5, "SPAIN", .9, -70]];
+  g.textAlign = "center"; L.forEach(([lo, la, nm, t0, dy]) => { const e = sm((t - t0) / .35); if (e <= 0) return; g.globalAlpha = e;
+    g.fillStyle = "#e3141b"; g.beginPath(); g.arc(X(lo), Y(la), 16, 0, 7); g.fill();
+    const r = 18 + 40 * ((t * 1.1 + t0) % 1); g.strokeStyle = `rgba(255,213,74,${1 - (r - 18) / 40})`; g.lineWidth = 5; g.beginPath(); g.arc(X(lo), Y(la), r, 0, 7); g.stroke();
+    g.font = "64px AN"; g.fillStyle = "#fff"; g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 12; g.fillText(nm, X(lo), Y(la) + dy); g.shadowBlur = 0; g.globalAlpha = 1; });
+  g.textAlign = "left";
+}
 // ================= çekimler =================
 const K = (o) => base(Object.assign({ tuna: "hide", ham: "hide", mood: "day" }, o));
 const UW = (p, tg, fov = 50) => camSet(p, tg, fov);
@@ -148,7 +188,7 @@ const S4 = {
   kg: (lt, d) => { const s = SOCKS[MID]; UW(V(s.x + 2.4, -4.2, s.z + 4.4), V(s.x, -4.4, s.z), 50); return K({ grow: 1, net: .5, kg: lt }); },
   harvest: (lt, d) => { const u = ease(clamp(lt / (d * .5))), k = clamp((lt - d * .5) / (d * .4)); camSet(V(10, 9, 14), V(1, 1.5, 0), 50);
     return K({ boat: { p: V(0, 0, 0), h: 0 }, hsock: u, pile: k, crates: k }); },
-  plate: (lt, d) => { const u = sm(lt / d), a = .4 + u * .5; camSet(P_PL.clone().add(V(Math.cos(a) * 19, lerp(19, 17, u), Math.sin(a) * 19)), P_PL.clone().add(V(0, .3, 0)), 46); return K({ plateOn: 1, noFarm: 1 }); },
+  plate: (lt, d) => { const u = sm(lt / d), a = .4 + u * .5; const C0 = EN ? P_PL2.clone().add(V(2.4, 1.5, 0)) : P_PL.clone().add(V(0, .3, 0)); camSet(C0.clone().add(V(Math.cos(a) * 19, lerp(16, 14, u), Math.sin(a) * 19)), C0, 46); return K({ plateOn: 1, noFarm: 1 }); },
   comment: (lt, d) => { const u = sm(lt / d); UW(V(lerp(8, 10, u), -7, 10), V(lerp(8, 10, u) + 3, -5, 0), 60); return K({ chip: ["comment", fadeIO(lt, d)] }); },
   loop: (lt, d) => { const u = sm(lt / d); UW(V(lerp(-14, -6, u), -6, 12), V(lerp(-14, -6, u) + 4, -5, 0), 62); return K({}); },
 };
@@ -161,7 +201,7 @@ function apply2(st, T) {
   [predator, plank, bigH, harbor, kulac, brail, crates, pblock, sCone, RINGS, pline].forEach(o => { if (o && o.visible !== undefined && !Array.isArray(o)) o.visible = false; }); crew.forEach(o => o.visible = false); pulses.forEach(o => o.visible = false);
   putBoat(mb, st.boat || null, T);
   const under = camera.position.y < 0; ceil.visible = under; if (under) { ceil.position.set(camera.position.x, -.35, camera.position.z); scene.fog.color.set(0x2f9cc4); scene.fog.density = .045; renderer.toneMappingExposure = 1.0; }
-  seabed.visible = !st.plateOn; plate.visible = !!st.plateOn; if (st.plateOn) { scene.fog.density = 0; renderer.toneMappingExposure = 1.05; }
+  seabed.visible = !st.plateOn; plate.visible = !!st.plateOn && !EN; pot.visible = !!st.plateOn && EN; if (st.plateOn) { scene.fog.density = 0; renderer.toneMappingExposure = 1.05; }
   placeFarm(st, T);
   rocks.visible = BEDM.visible = !st.noFarm;
   // tek ip (yavru tutunması)
@@ -186,9 +226,9 @@ function apply2(st, T) {
   deckPile.visible = (st.pile || 0) > 0; if (deckPile.visible) { for (let i = 0; i < 700; i++) { const r = PR[i + 7000], a = r[0] * 6.28, rr = Math.sqrt(r[1]) * 2.2, h = (1 - rr / 2.2) * 1.2;
       const p = V(-3 + Math.cos(a) * rr * 1.4, 2.3 + r[2] * h, Math.sin(a) * rr).multiplyScalar(1).applyMatrix4(mb.matrixWorld); dummy.position.copy(p); dummy.rotation.set(r[1] * 6, r[2] * 6, r[3] * 6); dummy.scale.setScalar(r[3] < st.pile ? .2 : 0); dummy.updateMatrix(); deckPile.setMatrixAt(i, dummy.matrix); } deckPile.instanceMatrix.needsUpdate = true; }
   crt.forEach((c, i) => { const v = (st.crates || 0) > i / 6; c.visible = v; if (v) { c.position.copy(V(-9 + (i % 3) * 1.6, 2.6, i < 3 ? -1.4 : 1.4).applyMatrix4(mb.matrixWorld)); c.rotation.y = mb.rotation.y; } });
-  if (st.seas != null) mapSeas(st.seas, sm(st.seas / .3));
+  if (st.seas != null) (EN ? mapAtl : mapSeas)(st.seas, sm(st.seas / .3));
   const big2 = (txt, al) => { LN.save(); LN.globalAlpha = al; LN.textAlign = "center"; LN.font = "220px AN"; LN.fillStyle = "#fff"; LN.shadowColor = "rgba(0,0,0,.5)"; LN.shadowBlur = 30; LN.fillText(txt, 540, 560); LN.restore(); LN.textAlign = "left"; };
-  if (st.liters != null) { const n = Math.min(5, Math.floor(st.liters / .45) + 1); big2(`${n} LİTRE`, sm(st.liters / .3)); }
+  if (st.liters != null) { const n = Math.min(5, Math.floor(st.liters / .45) + 1); big2(EN ? `${n} LITERS` : `${n} LİTRE`, sm(st.liters / .3)); }
   if (st.kg != null) { const n = Math.min(8, Math.floor(st.kg / .3) + 1); big2(`${n} KG`, sm(st.kg / .3)); }
 }
 const _applyBase = apply; apply = (st, T) => { _applyBase(st, T); apply2(st, T); };
