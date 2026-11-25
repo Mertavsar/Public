@@ -264,3 +264,114 @@ function kuzu_google_json() {
 	}
 	echo '<script type="application/json" id="kuzu-google">' . wp_json_encode( $out, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP ) . '</script>' . "\n";
 }
+
+/** YouTube linkinden video kimliği: shorts/, youtu.be/, watch?v=, embed/, live/ biçimleri. */
+function kuzu_youtube_id( $url ) {
+	if ( preg_match( '~(?:youtube\.com/(?:shorts/|embed/|live/|watch\?(?:.*&)?v=)|youtu\.be/)([A-Za-z0-9_-]{11})~', (string) $url, $m ) ) {
+		return $m[1];
+	}
+	return preg_match( '~^[A-Za-z0-9_-]{11}$~', trim( (string) $url ) ) ? trim( (string) $url ) : '';
+}
+
+/** Paneldeki "link | başlık" satırları. */
+function kuzu_video_listesi() {
+	$out = array();
+	foreach ( kuzu_satirlar( kuzu_ayar( 'videolar' ) ) as $satir ) {
+		$p  = array_map( 'trim', explode( '|', $satir, 2 ) );
+		$id = kuzu_youtube_id( $p[0] );
+		if ( $id ) {
+			$out[] = array( $id, isset( $p[1] ) ? $p[1] : '' );
+		}
+	}
+	return $out;
+}
+
+function kuzu_nav_videolar() {
+	if ( kuzu_video_listesi() ) {
+		echo '<a class="nav" href="#videolar">Videolar</a>';
+	}
+}
+
+/** Videolar: video eklenmediyse bölüm hiç görünmez. YouTube oynatıcısı yalnızca tıklanınca yüklenir. */
+function kuzu_videolar() {
+	$v = kuzu_video_listesi();
+	if ( ! $v ) {
+		return;
+	}
+	$play = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+	?>
+<section class="videolar band" id="videolar" aria-labelledby="vidTitle">
+    <div class="wrap">
+      <div class="rev-head">
+        <div class="sec-head">
+          <p class="tag red">Videolar</p>
+          <h2 class="display" id="vidTitle"><?php echo esc_html( kuzu_ayar( 'video_baslik' ) ); ?></h2>
+          <p><?php echo esc_html( kuzu_ayar( 'video_yazi' ) ); ?></p>
+        </div>
+        <div class="rev-ctrl">
+          <button type="button" class="gal-btn" id="vidPrev" aria-label="Önceki videolar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+          <button type="button" class="gal-btn" id="vidNext" aria-label="Sonraki videolar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="vids" id="vids">
+	<?php foreach ( $v as $x ) :
+		list( $id, $baslik ) = $x;
+		$etiket = $baslik ? $baslik : 'Kuzu Lahmacun videosu';
+		?>
+        <figure class="vid">
+          <button type="button" class="vid-kare" data-yt="<?php echo esc_attr( $id ); ?>" aria-label="<?php echo esc_attr( 'Videoyu oynat: ' . $etiket ); ?>">
+            <img src="https://i.ytimg.com/vi/<?php echo esc_attr( $id ); ?>/oardefault.jpg" data-yedek="https://i.ytimg.com/vi/<?php echo esc_attr( $id ); ?>/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="405" height="720">
+            <span class="vid-oyna" aria-hidden="true"><?php echo $play; // sabit SVG ?></span>
+          </button>
+		<?php if ( $baslik ) : ?>
+          <figcaption><?php echo esc_html( $baslik ); ?></figcaption>
+		<?php endif; ?>
+        </figure>
+	<?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+	<?php
+}
+
+/** Paket sipariş linkleri: sabit platformlar + "Ad | link" satırları. */
+function kuzu_siparis_listesi() {
+	$sabit = array(
+		'siparis_yemeksepeti' => array( 'Yemeksepeti', '#fa0050' ),
+		'siparis_trendyol'    => array( 'Trendyol Yemek', '#f27a1a' ),
+		'siparis_getir'       => array( 'Getir Yemek', '#5d3ebc' ),
+		'siparis_migros'      => array( 'Migros Yemek', '#ff7e00' ),
+	);
+	$out = array();
+	foreach ( $sabit as $k => $x ) {
+		$u = trim( (string) kuzu_ayar( $k ) );
+		if ( $u ) {
+			$out[] = array( $x[0], $u, $x[1] );
+		}
+	}
+	foreach ( kuzu_satirlar( kuzu_ayar( 'siparis_diger' ) ) as $satir ) {
+		$p = array_map( 'trim', explode( '|', $satir, 2 ) );
+		if ( 2 === count( $p ) && $p[0] && $p[1] ) {
+			$out[] = array( $p[0], $p[1], '#d8342a' );
+		}
+	}
+	return $out;
+}
+
+function kuzu_siparis( $yer ) {
+	$l = kuzu_siparis_listesi();
+	if ( ! $l ) {
+		return;
+	}
+	$ok   = '<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+	$btns = '';
+	foreach ( $l as $x ) {
+		$btns .= "\n          " . '<a class="sip" href="' . esc_url( $x[1] ) . '" style="--marka:' . esc_attr( $x[2] ) . '" target="_blank" rel="noopener"><i></i>' . esc_html( $x[0] ) . $ok . '</a>';
+	}
+	if ( 'menu' === $yer ) {
+		echo "\n      " . '<div class="siparis">' . "\n        " . '<p class="siparis-baslik">Eve sipariş</p>' . "\n        " . '<div class="siparis-btns">' . $btns . "\n        </div>\n      </div>";
+	} else {
+		echo "\n      " . '<div class="siparis-btns final-sip">' . $btns . "\n      </div>";
+	}
+}

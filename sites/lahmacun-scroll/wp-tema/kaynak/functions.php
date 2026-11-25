@@ -71,3 +71,26 @@ add_action(
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
 	}
 );
+
+/**
+ * Sürüm geçişleri: tema güncellenince bir kez çalışır.
+ * 1.1.0: sitede "Lahm-ı Acîn" yerine her yerde "Lahmacun" (panelde kaydedilmiş yazılar dahil).
+ */
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'kuzu_tema_surum' ) === KUZU_SURUM ) {
+			return;
+		}
+		$a = get_option( 'kuzu_ayarlar' );
+		if ( is_array( $a ) ) {
+			foreach ( $a as $k => $v ) {
+				if ( is_string( $v ) && 'google_anahtar' !== $k ) {
+					$a[ $k ] = str_replace( array( 'Lahm-ı Acîn', 'LAHM-I ACÎN', 'lahm-ı acîn', 'Lahm-ı acîn' ), array( 'Lahmacun', 'LAHMACUN', 'lahmacun', 'Lahmacun' ), $v );
+				}
+			}
+			update_option( 'kuzu_ayarlar', $a );
+		}
+		update_option( 'kuzu_tema_surum', KUZU_SURUM );
+	}
+);

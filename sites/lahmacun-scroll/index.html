@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kuzu Lahmacun</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Buyurun, Lahm-ı Acîn yemeye. Durum buğdayı unu, Balıkesir kuzusu, Urfa taşından fırın. Kuzu Lahmacun & Kilis Tava, Erenköy.">
+<meta name="description" content="Buyurun, lahmacun yemeye. Durum buğdayı unu, Balıkesir kuzusu, Urfa taşından fırın. Kuzu Lahmacun & Kilis Tava, Erenköy.">
 <meta name="theme-color" content="#0b5236">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="logo-beyaz.svg" as="image" type="image/svg+xml">
@@ -261,6 +261,57 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .yol b { font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110; text-transform: uppercase; font-size: 1.3rem; line-height: 1.05; }
 .yol span { color: var(--cream-dim); font-size: .98rem; }
 
+/* ── Videolar: YouTube Shorts in cream-ringed 9:16 frames. A thumbnail stands in until a video is
+   clicked; only then is YouTube's player loaded, one at a time, so the page stays light. ── */
+.videolar { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green-deep); padding-block: clamp(80px, 11vw, 140px); }
+.vids {
+  display: grid; grid-auto-flow: column; grid-auto-columns: min(68vw, 290px); gap: clamp(22px, 2.4vw, 32px); align-items: start;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 12px var(--gutter-r) 24px var(--gutter-l); scroll-padding-inline: var(--gutter-l);
+}
+.vids::-webkit-scrollbar { display: none; }
+.vid { margin: 0; display: grid; gap: 16px; scroll-snap-align: start; min-width: 0; }
+.vid-kare {
+  position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; padding: 0; border: 0; cursor: pointer; overflow: hidden;
+  border-radius: 22px; background: #1a1714; color: #fff;
+  outline: 2px solid rgba(244, 239, 225, .38); outline-offset: 6px; box-shadow: 0 34px 60px -26px rgba(0, 0, 0, .85);
+}
+.vid-kare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.vid-kare::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 9, 7, .55), rgba(10, 9, 7, 0) 45%); pointer-events: none; }
+.vid-kare:hover img { transform: scale(1.04); }
+.vid-kare iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vid-kare.oynuyor::after, .vid-kare.oynuyor .vid-oyna { display: none; }
+.vid-oyna {
+  position: absolute; left: 50%; top: 50%; z-index: 1; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--tomato); box-shadow: 0 10px 30px -6px rgba(216, 52, 42, .7); transition: transform .25s ease;
+}
+.vid-oyna svg { width: 30px; height: 30px; fill: #fff; margin-left: 4px; }
+.vid-kare:hover .vid-oyna { transform: scale(1.08); }
+.vid figcaption { font-family: var(--f-display); font-weight: 800; font-variation-settings: "wdth" 105; font-size: 1.02rem; line-height: 1.25; color: var(--cream); padding-inline: 4px; }
+.vid.bos .vid-kare { cursor: default; background: repeating-linear-gradient(135deg, rgba(244, 239, 225, .04) 0 14px, rgba(244, 239, 225, .07) 14px 28px), #14211b; }
+.vid.bos .vid-oyna { background: rgba(244, 239, 225, .14); box-shadow: none; }
+.vid-not { position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font-weight: 800; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
+
+/* ── Sipariş: delivery-app links as quiet cream pills, each marked with its app's colour ── */
+.siparis { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.siparis-baslik { margin: 0; font-family: var(--f-display); font-weight: 900; font-variation-settings: "wdth" 110; text-transform: uppercase; letter-spacing: .06em; font-size: 1rem; color: var(--cream); }
+.siparis-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.sip {
+  display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px 11px 14px; border-radius: 999px; text-decoration: none;
+  background: var(--cream); color: var(--ink); font-weight: 800; font-size: .95rem; transition: transform .2s ease, box-shadow .2s ease;
+}
+.sip i { width: 12px; height: 12px; border-radius: 50%; background: var(--marka); box-shadow: 0 0 0 3px color-mix(in srgb, var(--marka) 22%, transparent); }
+.sip .ok { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+.sip:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .55), inset 0 0 0 2px var(--marka); }
+.final-sip { justify-content: center; margin-top: 4px; }
+.final-sip .sip { background: rgba(244, 239, 225, .08); color: var(--cream); box-shadow: inset 0 0 0 1px rgba(244, 239, 225, .3); }
+.final-sip .sip:hover { box-shadow: inset 0 0 0 2px var(--marka); }
+@media (max-width: 760px) {
+  .siparis-btns { display: grid; grid-template-columns: 1fr 1fr; width: 100%; gap: 8px; }
+  .sip { justify-content: center; padding: 11px 8px; font-size: .84rem; gap: 7px; }
+  .sip .ok { display: none; }
+}
+
 /* ── Dört kalem ── */
 .sir { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green); padding-block: clamp(80px, 11vw, 140px); }
 .sec-head { display: grid; gap: 14px; justify-items: start; margin-bottom: clamp(36px, 5vw, 60px); }
@@ -481,6 +532,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <a class="nav" href="#hikaye">Hikâye</a>
       <a class="nav" href="#sir">Sır</a>
       <a class="nav" href="#menu">Menü</a>
+      <!--wp:nav-videolar--><a class="nav" href="#videolar">Videolar</a><!--/wp:nav-videolar-->
       <a class="nav" href="#galeri">Galeri</a>
       <a class="nav" href="#yorumlar">Yorumlar</a>
       <a class="nav" href="#sss">SSS</a>
@@ -503,7 +555,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       <div class="intro" id="hero">
         <img class="logo" src="logo-beyaz.svg" alt="Kuzu Lahmacun" width="360" height="137" fetchpriority="high">
         <p class="script">Buyurun</p>
-        <h1 class="display">Lahm-ı Acîn<br><em>yemeye</em></h1>
+        <h1 class="display">Lahmacun<br><em>yemeye</em></h1>
         <p class="who">Lahmacun · Kilis Tava · Erenköy</p>
         <p class="cue" aria-hidden="true">Kaydır, şov başlasın<i></i></p>
       </div>
@@ -558,16 +610,16 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   </section>
 
   <!--wp:bant--><div class="marquee" aria-hidden="true"><div>
-    <span>Buyurun</span><span>Lahm-ı Acîn</span><span>Etli hamur</span><span>Urfa taşında</span><span>Balıkesir kuzusu</span><span>Afiyet olsun</span>
-    <span>Buyurun</span><span>Lahm-ı Acîn</span><span>Etli hamur</span><span>Urfa taşında</span><span>Balıkesir kuzusu</span><span>Afiyet olsun</span>
+    <span>Buyurun</span><span>Lahmacun</span><span>Etli hamur</span><span>Urfa taşında</span><span>Balıkesir kuzusu</span><span>Afiyet olsun</span>
+    <span>Buyurun</span><span>Lahmacun</span><span>Etli hamur</span><span>Urfa taşında</span><span>Balıkesir kuzusu</span><span>Afiyet olsun</span>
   </div></div><!--/wp:bant-->
 
   <section class="lugat band" id="hikaye" aria-labelledby="lugatTitle">
     <div class="wrap lugat-grid">
       <div class="entry">
-        <p class="tag red">Lahm-ı Acîn</p>
-        <h2 class="word" id="lugatTitle">lahm-ı acîn</h2>
-        <p class="gram">Arapça · “etli hamur” · bugünkü adıyla lahmacun</p>
+        <p class="tag red">Lahmacun</p>
+        <h2 class="word" id="lugatTitle">lahmacun</h2>
+        <p class="gram">Arapça kökenli · adının anlamı “etli hamur”</p>
         <p class="script">Adı bile tarifini söylüyor.</p>
       </div>
       <div class="lugat-text">
@@ -580,6 +632,28 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
       </div>
     </div>
   </section>
+
+  <!--wp:videolar--><section class="videolar band" id="videolar" aria-labelledby="vidTitle">
+    <div class="wrap">
+      <div class="rev-head">
+        <div class="sec-head">
+          <p class="tag red">Videolar</p>
+          <h2 class="display" id="vidTitle">Fırından canlı</h2>
+          <p>Ustanın elinden, fırının başından kısa videolar.</p>
+        </div>
+        <div class="rev-ctrl">
+          <button type="button" class="gal-btn" id="vidPrev" aria-label="Önceki videolar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+          <button type="button" class="gal-btn" id="vidNext" aria-label="Sonraki videolar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="vids" id="vids">
+        <figure class="vid bos"><div class="vid-kare"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vid-not">YouTube Shorts<br>videosu</span></div><figcaption>Video 1</figcaption></figure>
+        <figure class="vid bos"><div class="vid-kare"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vid-not">YouTube Shorts<br>videosu</span></div><figcaption>Video 2</figcaption></figure>
+        <figure class="vid bos"><div class="vid-kare"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vid-not">YouTube Shorts<br>videosu</span></div><figcaption>Video 3</figcaption></figure>
+        <figure class="vid bos"><div class="vid-kare"><span class="vid-oyna" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vid-not">YouTube Shorts<br>videosu</span></div><figcaption>Video 4</figcaption></figure>
+      </div>
+    </div>
+  </section><!--/wp:videolar-->
 
   <section class="goc band" aria-labelledby="gocTitle">
     <div class="wrap">
@@ -665,6 +739,15 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
           <li><span>Katmer</span><i class="dots"></i><b>600 ₺</b></li></ul></article>
       </div>
       <p class="menu-note">Çorbalarımız ve içeceklerimiz de menüde.</p><!--/wp:menu-->
+      <!--wp:siparis-menu--><div class="siparis">
+        <p class="siparis-baslik">Eve sipariş</p>
+        <div class="siparis-btns">
+          <a class="sip" href="#" style="--marka:#fa0050" target="_blank" rel="noopener"><i></i>Yemeksepeti<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="sip" href="#" style="--marka:#f27a1a" target="_blank" rel="noopener"><i></i>Trendyol Yemek<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="sip" href="#" style="--marka:#5d3ebc" target="_blank" rel="noopener"><i></i>Getir Yemek<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="sip" href="#" style="--marka:#ff7e00" target="_blank" rel="noopener"><i></i>Migros Yemek<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div><!--/wp:siparis-menu-->
     </div>
   </section>
 
@@ -759,7 +842,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   <section class="final band" id="ziyaret" aria-labelledby="finalTitle">
     <div class="wrap">
       <p class="tag red">Erenköy</p>
-      <h2 class="display" id="finalTitle">Var mısınız?<em>Lahm-ı Acîn yemeye!</em></h2>
+      <h2 class="display" id="finalTitle">Var mısınız?<em>Lahmacun yemeye!</em></h2>
       <img class="final-photo" src="foto/lahmacun-m.jpg" srcset="foto/lahmacun-k.jpg 720w, foto/lahmacun-m.jpg 1200w, foto/lahmacun.jpg 2000w" sizes="(min-width: 1360px) 1280px, 100vw" alt="Taş fırından yeni çıkmış lahmacun, ustanın küreğinde" loading="lazy" decoding="async" width="2000" height="1116">
       <p class="script">Buyurun… Afiyet olsun.</p>
       <p class="note">Gaziantep ve Urfa'da yetişmiş ustalarımızın elinden, yöre taşından fırınımızda; hijyen bizde olmazsa olmaz.</p>
@@ -771,6 +854,12 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
         </a>
         <a class="btn" href="#menu">Menüye bak</a>
       </div>
+      <!--wp:siparis-final--><div class="siparis-btns final-sip">
+          <a class="sip" href="#" style="--marka:#fa0050" target="_blank" rel="noopener"><i></i>Yemeksepeti<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="sip" href="#" style="--marka:#f27a1a" target="_blank" rel="noopener"><i></i>Trendyol Yemek<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="sip" href="#" style="--marka:#5d3ebc" target="_blank" rel="noopener"><i></i>Getir Yemek<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          <a class="sip" href="#" style="--marka:#ff7e00" target="_blank" rel="noopener"><i></i>Migros Yemek<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div><!--/wp:siparis-final-->
 
 <!--wp:lab-->      <section class="lab" id="lab" aria-labelledby="labTitle" hidden>
         <h3 id="labTitle">Flow videosunu dene</h3>
@@ -1402,6 +1491,59 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     });
     requestAnimationFrame(() => goTo(0, false));
   })();
+
+  // ── Videolar: oklar, küçük resim yedeği, tıklayınca YouTube oynatıcısı (aynı anda bir tane) ──
+  (() => {
+    const vids = document.getElementById("vids");
+    if (!vids) return;
+    const vp = document.getElementById("vidPrev"), vn = document.getElementById("vidNext");
+    const step = () => { const c = vids.querySelector(".vid"); return c ? c.offsetWidth + 28 : vids.clientWidth * 0.8; };
+    const ends = () => {
+      vp.disabled = vids.scrollLeft < 4;
+      vn.disabled = vids.scrollLeft + vids.clientWidth >= vids.scrollWidth - 4;
+      vp.hidden = vn.hidden = vids.scrollWidth <= vids.clientWidth + 4;
+    };
+    vp.onclick = () => vids.scrollBy({ left: -step(), behavior: reduce ? "auto" : "smooth" });
+    vn.onclick = () => vids.scrollBy({ left: step(), behavior: reduce ? "auto" : "smooth" });
+    vids.addEventListener("scroll", ends, { passive: true });
+    addEventListener("resize", ends);
+    ends();
+    // Shorts have a vertical cover (oardefault); if YouTube has none it sends a tiny grey stand-in
+    vids.querySelectorAll("img[data-yedek]").forEach((im) => {
+      const swap = () => { if (im.dataset.yedek && (!im.naturalWidth || im.naturalWidth <= 120)) { im.src = im.dataset.yedek; delete im.dataset.yedek; } };
+      im.addEventListener("load", swap); im.addEventListener("error", swap);
+      if (im.complete) swap();
+    });
+    let acik = null;
+    const kapat = () => {
+      if (!acik) return;
+      acik.querySelector("iframe")?.remove();
+      acik.classList.remove("oynuyor");
+      acik = null;
+    };
+    vids.addEventListener("click", (e) => {
+      const k = e.target.closest(".vid-kare[data-yt]");
+      if (!k || k === acik) return;
+      kapat();
+      const id = k.dataset.yt;
+      const f = document.createElement("iframe");
+      f.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=${encodeURIComponent(id)}`;
+      f.title = k.getAttribute("aria-label") || "YouTube videosu";
+      f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      f.allowFullscreen = true;
+      k.appendChild(f); k.classList.add("oynuyor"); acik = k;
+    });
+    // the playing video stops once the videos row scrolls out of sight
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([en]) => { if (!en.isIntersecting) kapat(); }, { threshold: 0 }).observe(vids);
+    }
+  })();
+
+  // ── Sipariş butonları: önizlemede link henüz yoksa tıklanınca bir şey olmaz ──
+  document.querySelectorAll('.sip[href="#"]').forEach((a) => {
+    a.removeAttribute("target"); a.title = "Link panelden eklenecek";
+    a.addEventListener("click", (e) => e.preventDefault());
+  });
 
   // ── Google: yorumlar, puan, galeri, adres ─────────────────────────────────
   // google/yer.json, google-cek.py'nin işletmenin kendi Google kaydından (CID ile doğrulanmış)

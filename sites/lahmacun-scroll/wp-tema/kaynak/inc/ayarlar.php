@@ -25,13 +25,16 @@ function kuzu_ayarlar_temizle( $g ) {
 	$eski = get_option( 'kuzu_ayarlar', array() );
 	$g    = is_array( $g ) ? wp_unslash( $g ) : array();
 	$out  = array();
-	foreach ( array( 'telefon', 'adres', 'menu_notu', 'galeri_yazi', 'yer_id', 'cid' ) as $k ) {
+	foreach ( array( 'telefon', 'adres', 'menu_notu', 'galeri_yazi', 'video_baslik', 'video_yazi', 'yer_id', 'cid' ) as $k ) {
 		$out[ $k ] = sanitize_text_field( $g[ $k ] ?? '' );
 	}
-	foreach ( array( 'saatler', 'menu', 'bant' ) as $k ) {
+	foreach ( array( 'saatler', 'menu', 'bant', 'videolar', 'siparis_diger' ) as $k ) {
 		$out[ $k ] = sanitize_textarea_field( $g[ $k ] ?? '' );
 	}
 	$out['sss']    = wp_kses( $g['sss'] ?? '', array( 'a' => array( 'href' => true, 'target' => true, 'rel' => true ), 'b' => array(), 'strong' => array(), 'em' => array(), 'br' => array() ) );
+	foreach ( array( 'siparis_yemeksepeti', 'siparis_trendyol', 'siparis_getir', 'siparis_migros' ) as $k ) {
+		$out[ $k ] = esc_url_raw( trim( (string) ( $g[ $k ] ?? '' ) ) );
+	}
 	$out['galeri'] = implode( ',', array_filter( array_map( 'absint', explode( ',', (string) ( $g['galeri'] ?? '' ) ) ) ) );
 	$yeni          = trim( sanitize_text_field( $g['google_anahtar'] ?? '' ) );
 	$out['google_anahtar'] = '' !== $yeni ? $yeni : ( is_array( $eski ) ? ( $eski['google_anahtar'] ?? '' ) : '' );
@@ -100,6 +103,44 @@ function kuzu_ayarlar_sayfa() {
 					kartlar ilk yazıldıkları sırayla dizilir. Örnek: <code>Çorbalar | Mercimek | 120 ₺</code></p>
 				<textarea rows="10" name="<?php echo esc_attr( $ad( 'menu' ) ); ?>"><?php echo esc_textarea( kuzu_ayar( 'menu' ) ); ?></textarea>
 				<p><label>Menünün altındaki not<br><input class="regular-text" name="<?php echo esc_attr( $ad( 'menu_notu' ) ); ?>" value="<?php echo esc_attr( kuzu_ayar( 'menu_notu' ) ); ?>"></label></p>
+			</div>
+
+			<div class="card" id="videolar">
+				<h2>Videolar (YouTube Shorts)</h2>
+				<p class="ipucu">Her satıra bir video: <code>YouTube linki | başlık</code>. Başlık isteğe bağlı. Shorts, normal video ve youtu.be linkleri olur.
+					Örnek: <code>https://youtube.com/shorts/AbCdEfGhIjK | Fırından yeni çıktı</code>. Hiç video yoksa bölüm sitede görünmez.</p>
+				<textarea rows="6" name="<?php echo esc_attr( $ad( 'videolar' ) ); ?>"><?php echo esc_textarea( kuzu_ayar( 'videolar' ) ); ?></textarea>
+				<?php
+				$hatali = array();
+				foreach ( kuzu_satirlar( kuzu_ayar( 'videolar' ) ) as $sat ) {
+					if ( ! kuzu_youtube_id( trim( explode( '|', $sat )[0] ) ) ) {
+						$hatali[] = $sat;
+					}
+				}
+				if ( $hatali ) {
+					echo '<p class="kuzu-durum hata">Şu satırlarda YouTube linki tanınmadı: ' . esc_html( implode( ' · ', $hatali ) ) . '</p>';
+				}
+				?>
+				<p><label>Bölüm başlığı<br><input class="regular-text" name="<?php echo esc_attr( $ad( 'video_baslik' ) ); ?>" value="<?php echo esc_attr( kuzu_ayar( 'video_baslik' ) ); ?>"></label></p>
+				<p><label>Başlığın altındaki yazı<br><input class="regular-text" name="<?php echo esc_attr( $ad( 'video_yazi' ) ); ?>" value="<?php echo esc_attr( kuzu_ayar( 'video_yazi' ) ); ?>"></label></p>
+			</div>
+
+			<div class="card" id="siparis">
+				<h2>Paket sipariş linkleri</h2>
+				<p class="ipucu">İşletmenin her platformdaki sayfasının linkini yapıştırın. Boş bırakılan platformun butonu görünmez; hiçbiri yoksa
+					"Eve sipariş" alanı hiç görünmez. Butonlar menünün altında ve sayfanın sonunda çıkar.</p>
+				<?php
+				foreach ( array(
+					'siparis_yemeksepeti' => 'Yemeksepeti',
+					'siparis_trendyol'    => 'Trendyol Yemek',
+					'siparis_getir'       => 'Getir Yemek',
+					'siparis_migros'      => 'Migros Yemek',
+				) as $k => $etiket ) :
+					?>
+					<p><label><?php echo esc_html( $etiket ); ?> linki<br><input class="regular-text" type="url" placeholder="https://" name="<?php echo esc_attr( $ad( $k ) ); ?>" value="<?php echo esc_attr( kuzu_ayar( $k ) ); ?>"></label></p>
+				<?php endforeach; ?>
+				<p><label>Diğer (her satıra <code>Ad | link</code>, ör. <code>WhatsApp sipariş | https://wa.me/905334404327</code>)<br>
+					<textarea rows="3" name="<?php echo esc_attr( $ad( 'siparis_diger' ) ); ?>"><?php echo esc_textarea( kuzu_ayar( 'siparis_diger' ) ); ?></textarea></label></p>
 			</div>
 
 			<div class="card">

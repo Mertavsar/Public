@@ -59,6 +59,10 @@ php_bolum = {
     "sss": "<?php kuzu_sss(); ?>",
     "ziyaret": "<?php kuzu_ziyaret(); ?>",
     "yil": "© <?php echo esc_html( wp_date( 'Y' ) ); ?>",
+    "videolar": "<?php kuzu_videolar(); ?>",
+    "nav-videolar": "<?php kuzu_nav_videolar(); ?>",
+    "siparis-menu": "<?php kuzu_siparis( 'menu' ); ?>",
+    "siparis-final": "<?php kuzu_siparis( 'final' ); ?>",
     "lab": None,   # deneme kutusu sitede gizli kalır
 }
 for ad, yerine in php_bolum.items():
@@ -133,6 +137,14 @@ varsayilan = {
     "bant": "\n".join(bant),
     "galeri": "",
     "galeri_yazi": galeri_yazi,
+    "videolar": "",
+    "video_baslik": strip_tags(re.search(r'id="vidTitle">(.*?)</h2>', s).group(1)),
+    "video_yazi": strip_tags(re.search(r'id="vidTitle">.*?</h2>\s*<p>(.*?)</p>', s, flags=re.S).group(1)),
+    "siparis_yemeksepeti": "",
+    "siparis_trendyol": "",
+    "siparis_getir": "",
+    "siparis_migros": "",
+    "siparis_diger": "",
     "yer_id": "ChIJN83oJADHyhQRANYaoWT2Nrc",
     "cid": "13202010269743240704",
 }

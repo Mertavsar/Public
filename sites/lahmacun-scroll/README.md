@@ -1,9 +1,10 @@
 # Kuzu Lahmacun: lezzet şovu
 
-Site lahmacunun hikâyesini anlatır. Kaydırma sahnesi altı perde: hamur, açılış, iç, et,
+Site lahmacunun hikâyesini anlatır (sitede her yerde "Lahmacun" yazılır). Kaydırma sahnesi altı perde: hamur, açılış, iç, et,
 fırın, servis. Havada dökülen her malzemenin adı, düştüğü yerden çıkan ince bir çizgiyle
 yazılır. Ardından kısa lahm-ı acîn yazısı, göç hikâyesi, dört kalem (hamur, et, iç, fırın),
-ustanın sözlüğü, menü, galeri (işletmenin fotoğraflarıyla slider), Google yorumları, merak edilenler (SSS) ve final gelir.
+ustanın sözlüğü, menü ve paket sipariş butonları, galeri (işletmenin fotoğraflarıyla slider), Google yorumları,
+merak edilenler (SSS) ve final gelir. Kısa yazının hemen altında YouTube Shorts videoları (çerçeveli, 9:16).
 
 - `index.html`: sitenin tamamı (tek dosya).
 - `kaynak/sahne1-3.mp4`: Google Flow sahneleri (beze ve açılış, malzeme yağmuru, fırın).
@@ -29,7 +30,9 @@ python3 wp-tema/olustur.py 1.0.0     # sürüm numarası: her güncellemede bir 
   `kuzu-sahne-kareler.zip` hosting dosya yöneticisiyle `wp-content/uploads/` içine açılır
   (`wp-content/uploads/kuzu-sahne/frames/...`). Tema kareleri kendisi bulur.
 
-Panel (sol menüde **Kuzu Lahmacun**): iletişim ve saatler, menü (`Kategori | Ürün | Fiyat`), merak edilenler,
+Panel (sol menüde **Kuzu Lahmacun**): iletişim ve saatler, menü (`Kategori | Ürün | Fiyat`), videolar
+(`YouTube linki | başlık`; oynatıcı yalnızca tıklanınca yüklenir), paket sipariş linkleri (Yemeksepeti, Trendyol
+Yemek, Getir, Migros ve `Ad | link` satırları; boş olan buton görünmez), merak edilenler,
 kayan bant, galeri (Medya'dan seçilir, sürükleyerek sıralanır), Google API anahtarı ve "Yorumları şimdi yenile".
 Yorumlar günde bir kez kendiliğinden yenilenir, sitede yalnızca 5 yıldızlılar görünür. Kaydırma sahnesi, perde
 yazıları ve tasarım koddadır: değişiklik `index.html`'de yapılır, yeni sürüm zip'i üretilir.
