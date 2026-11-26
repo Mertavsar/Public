@@ -72,7 +72,7 @@ const rnd = (() => { let s = 12345; return () => (s = (s * 16807) % 2147483647) 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const $ = id => document.getElementById(id);
 
-const TL = await (await fetch("timeline.json")).json();
+const TL = await (await fetch(location.search.includes("en=1") ? "timeline_en.json" : "timeline.json")).json();
 const MAP = await (await fetch("harita.json")).json();
 
 // ---------- renderer / sahne ----------
@@ -938,7 +938,7 @@ function apply2(st, T) {
   placeHamsi({ ham: "hide" }, T);
   [predator, plank, bigH, harbor, kulac, brail, crates, pblock, sCone, RINGS, pline, LEADS].forEach(o => { if (o && o.visible !== undefined) o.visible = false; }); crew.forEach(o => o.visible = false); pulses.forEach(o => o.visible = false);
   const set = st.set; hall.visible = set === "hall"; studio.visible = set === "studio"; outs.visible = set === "out"; plate.visible = set === "plate";
-  scene.fog.density = 0; renderer.toneMappingExposure = set === "out" ? .95 : .9; sea.visible = false; bed.visible = false; abyss.visible = false;
+  if (set !== "sea") { scene.fog.density = 0; renderer.toneMappingExposure = set === "out" ? .95 : .9; sea.visible = false; bed.visible = false; abyss.visible = false; } else sea.visible = true;
   [SNOW, SWIRL, LARV, MOTE, FLOW, PEL, HOTF, STEAM].forEach(p => p.visible = false); HERO.visible = HERO2.visible = GHOST.visible = pip.visible = false; SMALL.forEach(m => m.visible = false);
   // toplu ıstakozlar (salon)
   if (hall.visible) { LI.forEach((l, i) => { const hide = (st.hero === "cell" || st.empty) && l.r === HC.r && l.ix === HC.ix && l.iz === HC.iz; const p = cellPos(l.r, l.ix, l.iz);
@@ -969,15 +969,15 @@ function apply2(st, T) {
   if (set === "studio") { MOTE.visible = true; const p = MOTE.geometry.attributes.position; for (let i = 0; i < 700; i++) { const r = PR[i + 7000]; p.setXYZ(i, P_S.x + (r[0] - .5) * 30, P_S.y + r[1] * 12 + Math.sin(T * .3 + i) * .2, P_S.z + (r[2] - .5) * 24); } p.needsUpdate = true; }
   // su akışı
   if (st.flow) { FLOW.visible = true; const p = FLOW.geometry.attributes.position; for (let i = 0; i < 1600; i++) { const r = PR[i + 1000], f = (T * .25 + r[0]) % 1; p.setXYZ(i, P_H.x + RACKX[HC.r] + (r[1] - .5) * NXC * CS, P_H.y + TOPY + .3 + r[2] * .12, P_H.z - NZC + f * NZC * CS); } p.needsUpdate = true;
-    bigTxt(EN ? "64–72°F" : "18–22°C", sm(st.temp / .3), 520); }
+    bigTxt(EN ? "65–70°F" : "18–22°C", sm(st.temp / .3), 520); }
   if (st.cold) { SNOW.visible = true; const c = HCP(), p = SNOW.geometry.attributes.position; for (let i = 0; i < 900; i++) { const r = PR[i]; p.setXYZ(i, c.x + (r[0] - .5) * 8, c.y + .5 + ((r[1] - T * .05 * (.5 + r[2])) % 1 + 1) % 1 * 6, c.z + (r[3] - .5) * 8); } p.needsUpdate = true;
     bigTxt(EN ? "COLD" : "SOĞUK", 1, 520, "#bfeaff"); }
   if (st.warm) bigTxt(EN ? "WARM" : "SICAK", 1, 520, "#ffb347");
   // yem
   if (st.pel != null) { PEL.visible = true; const c = HCP(), p = PEL.geometry.attributes.position; for (let i = 0; i < 240; i++) { const r = PR[i + 8000], t0 = r[0] * 2.5, e = clamp((st.pel - t0) / 1.4);
       p.setXYZ(i, c.x + (r[1] - .5) * 1.6, c.y + .15 + (1 - e) * 4.5, c.z + (r[2] - .5) * 1.6); } p.needsUpdate = true; }
-  if (st.kg != null) { const a = sm(st.kg / .3), c = HCP(); const [x1, y1] = proj(c.clone().add(V(-.2, 1.6, 0))); bigTxt(EN ? "1 KG FEED" : "1 KG YEM", a, 470, "#ffd54a", 120, 540); bigTxt(EN ? "= 1 KG LOBSTER" : "= 1 KG ISTAKOZ", sm((st.kg - .8) / .3), 610, "#fff", 120, 540); }
-  if (st.grow != null) { const a = sm((st.grow - st.growD * .45) / .3); bigTxt(EN ? "300 G" : "300 GRAM", sm(st.grow / .3), 470); bigTxt(EN ? "8 INCHES" : "20 CM", a, 640, "#ffd54a", 160); }
+  if (st.kg != null) { const a = sm(st.kg / .3), c = HCP(); const [x1, y1] = proj(c.clone().add(V(-.2, 1.6, 0))); bigTxt(EN ? "1 LB FEED" : "1 KG YEM", a, 470, "#ffd54a", 120, 540); bigTxt(EN ? "= 1 LB LOBSTER" : "= 1 KG ISTAKOZ", sm((st.kg - .8) / .3), 610, "#fff", 120, 540); }
+  if (st.grow != null) { const a = sm((st.grow - st.growD * .45) / .3); bigTxt(EN ? "10 OZ" : "300 GRAM", sm(st.grow / .3), 470); bigTxt(EN ? "8 INCHES" : "20 CM", a, 640, "#ffd54a", 160); }
   // dış: LED, sıcak su, buhar
   if (outs.visible) { const col = new THREE.Color(); for (let i = 0; i < LEDN; i++) { const on = ((T * 3 + PR[i][0] * 7) % 1) < .7; col.set(on ? (PR[i][1] < .7 ? 0x5affaa : 0x5ab8ff) : 0x1a2a22); LEDS.setColorAt(i, col); } LEDS.instanceColor.needsUpdate = true;
     if (st.hot) { HOTF.visible = true; const p = HOTF.geometry.attributes.position; for (let i = 0; i < 220; i++) { const r = PR[i + 600], f = (T * .35 + r[0]) % 1; p.setXYZ(i, P_O.x - 7 + f * 17, P_O.y + 3 + (r[1] - .5) * .5, P_O.z + 3 + (r[2] - .5) * .5 + 1.2); } p.needsUpdate = true;
@@ -994,8 +994,51 @@ function apply2(st, T) {
       const t0 = .1 + i * .07 + (i > 4 ? -.07 : 0), e = keep ? 0 : sm((k - t0) / .12); m.position.set(c.x + ((i % 3) - 1) * 2.4 + (r[0] - .5) * .5, c.y, c.z + (Math.floor(i / 3) - 1.5) * 2.2 + (r[1] - .5) * .4); m.rotation.set(0, r[2] * 6.28 + Math.sin(T + i) * .3, 0); m.scale.setScalar(.6 * (1 - e) + .001); m.material.opacity = 1 - e; });
     bigTxt("%90", sm((k - .55) / .1), 520, "#ffd54a", 240); }
 }
+
+// ================= EN (Sea Secrets) ek sahneler =================
+const roll = new THREE.Group(); plate.add(roll);
+{ const bunM = STD(0xd99a4e, { roughness: .7, emissive: 0x1a0a00 }), meatR = STD(0xe2502e, { roughness: .45, emissive: 0x2a0800 }), meatW = STD(0xf7e6d6, { roughness: .5 }), herb = STD(0x3fae35, { emissive: 0x0a2a08 });
+  for (const z of [-2.1, 2.1]) { const g = new THREE.Group(); g.position.set(-.6, .55, z); g.rotation.y = .12;
+    const bun = new THREE.Mesh(new THREE.CapsuleGeometry(1.45, 4.6, 8, 20), bunM); bun.rotation.z = Math.PI / 2; bun.scale.set(.8, 1, 1); g.add(bun);
+    const slit = new THREE.Mesh(new THREE.BoxGeometry(5.6, .5, 1.3), STD(0xf0d9a8)); slit.position.y = .9; g.add(slit);
+    for (let k = 0; k < 60; k++) { const r = PR[k + (z > 0 ? 6200 : 6300)]; const c = new THREE.Mesh(new THREE.DodecahedronGeometry(.32 + r[0] * .18, 0), r[1] < .55 ? meatR : meatW); c.position.set((r[2] - .5) * 5.4, 1.2 + r[3] * .45, (r[0] - .5) * 1.2); c.rotation.set(r[1] * 6, r[2] * 6, r[3] * 6); g.add(c); }
+    for (let k = 0; k < 40; k++) { const r = PR[k + 6500]; const h = new THREE.Mesh(new THREE.SphereGeometry(.06, 5, 4), herb); h.position.set((r[0] - .5) * 5, 1.75 + r[1] * .2, (r[2] - .5) * 1.1); g.add(h); }
+    roll.add(g); } }
+function mapUK(t, a) {
+  const c = $("map"); c.style.opacity = a; const g = MP; g.clearRect(0, 0, 1080, 1920); if (a <= 0) return;
+  const lon0 = -11, lat0 = 59.5, span = 15, k = 1080 / span, py = 330; const X = lo => (lo - lon0) * k, Y = la => py + (lat0 - la) * k * 1.6;
+  const gr = g.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, "#1f86b8"); gr.addColorStop(1, "#155f88"); g.fillStyle = gr; g.fillRect(0, 0, 1080, 1920);
+  for (const o of DUNYA) { const xs = o.r; if (xs.every(([lo]) => lo < lon0 - 8 || lo > lon0 + span + 8)) continue;
+    g.beginPath(); xs.forEach(([lo, la], i) => i ? g.lineTo(X(lo), Y(la)) : g.moveTo(X(lo), Y(la))); g.closePath(); g.fillStyle = o.c === "GBR" ? "#f1ebdc" : "#8d9a9e"; g.fill(); g.strokeStyle = "#0e3550"; g.lineWidth = 1.5; g.stroke(); }
+  const [lo, la] = [-4.95, 50.45], e = sm((t - .3) / .35); if (e <= 0) return; g.globalAlpha = e;
+  g.fillStyle = "#e3141b"; g.beginPath(); g.arc(X(lo), Y(la), 18, 0, 7); g.fill();
+  const r = 20 + 46 * ((t * 1.1) % 1); g.strokeStyle = `rgba(255,213,74,${1 - (r - 20) / 46})`; g.lineWidth = 6; g.beginPath(); g.arc(X(lo), Y(la), r, 0, 7); g.stroke();
+  g.textAlign = "center"; g.font = "80px AN"; g.fillStyle = "#fff"; g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 12; g.fillText("CORNWALL", X(lo) + 40, Y(la) + 110); g.shadowBlur = 0; g.globalAlpha = 1; g.textAlign = "left";
+}
+if (EN) {
+  const PLT = (lt, d, o = {}) => { const u = sm(lt / d), a = .5 + u * .5; const C0 = P_PL.clone().add(V(-.5, 1, 0)); camSet(C0.clone().add(V(Math.cos(a) * 17, lerp(16, 13, u), Math.sin(a) * 17)), C0, 46); return K(Object.assign({ set: "plate" }, o)); };
+  const T4 = Object.assign({}, S);
+  Object.assign(S, {
+    hook: (lt, d) => PLT(lt, d, { cash: lt }),
+    wild: (lt, d) => { const u = sm(lt / d); camSet(SD(lerp(-11.5, -10, u), 3, lerp(2.4, 1.6, u)), SD(0, .8, 0), 55); return K({ set: "studio", hero: "studio", gs: 1.5, word: ["WILD", lt] }); },
+    room: (lt, d) => T4.room(lt, d),
+    step: (lt, d) => T4.whyq(lt, d), step2: (lt, d) => T4.step(lt, d),
+    tr: (lt) => { camSet(OU(0, 60, 80), OU(0, 0, 0)); return K({ set: "out", ukm: lt }); },
+    plate: (lt, d) => PLT(lt, d),
+    answerq: (lt, d) => { const u = sm(lt / d); camSet(V(lerp(230, 215, u), 120, 0), V(0, -6, 0), 50); return K({ set: "sea", farm: true, tuna: "farm", xray: .55 }); },
+    fight2: (lt, d) => T4.fight(lt + 2.2, d + 2.2),
+    cheap: (lt, d) => { const r = T4.step(lt, d); r.cash = lt; return r; },
+    loop: (lt, d) => PLT(lt, d, { cash: lt }),
+  });
+}
+function apply3(st, T) {
+  plate.userData.cl.visible = !EN; roll.visible = EN;
+  if (st.ukm != null) mapUK(st.ukm, sm(st.ukm / .3));
+  if (st.cash != null) bigTxt("$$$", sm(st.cash / .3), 520, "#ffd54a", 300);
+  if (st.word) bigTxt(st.word[0], sm(st.word[1] / .3), 520, "#fff", 240);
+}
 function bigTxt(txt, al, y = 560, col = "#fff", size = 220, x = 540) { if (al <= 0) return; LN.save(); LN.globalAlpha = al; LN.textAlign = "center"; LN.font = `${size}px AN`; LN.fillStyle = col; LN.shadowColor = "rgba(0,0,0,.55)"; LN.shadowBlur = 30; LN.fillText(txt, x, y); LN.restore(); LN.textAlign = "left"; }
-const _applyBase = apply; apply = (st, T) => { _applyBase(st, T); apply2(st, T); if (window.DBG) window.DBG(); };
+const _applyBase = apply; apply = (st, T) => { _applyBase(st, T); apply2(st, T); apply3(st, T); };
 
 
 function ctaAnim(lt, d) {
