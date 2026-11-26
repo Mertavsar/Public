@@ -263,18 +263,23 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 
 /* ── Videolar: YouTube Shorts in cream-ringed 9:16 frames. A thumbnail stands in until a video is
    clicked; only then is YouTube's player loaded, one at a time, so the page stays light. ── */
-.videolar { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green-deep); padding-block: clamp(80px, 11vw, 140px); }
+.videolar { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green-deep); padding-block: clamp(52px, 6vw, 88px); }
+/* compact: a short header, so the videos are on screen as soon as the section is */
+.videolar .sec-head { margin-bottom: clamp(18px, 2.4vw, 30px); gap: 10px; }
+.videolar .sec-head h2 { font-size: min(3.4rem, max(4.6vw, 2rem), 9.2vw - 4px); }
+.videolar .sec-head p { font-size: 1rem; }
+.videolar .rev-ctrl { margin-bottom: clamp(18px, 2.4vw, 30px); }
 .vids {
-  display: grid; grid-auto-flow: column; grid-auto-columns: min(68vw, 290px); gap: clamp(22px, 2.4vw, 32px); align-items: start;
+  display: grid; grid-auto-flow: column; grid-auto-columns: clamp(150px, 42vw, 208px); gap: clamp(14px, 1.6vw, 22px); align-items: start;
   overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
-  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 12px var(--gutter-r) 24px var(--gutter-l); scroll-padding-inline: var(--gutter-l);
+  margin-inline: calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding: 8px var(--gutter-r) 14px var(--gutter-l); scroll-padding-inline: var(--gutter-l);
 }
 .vids::-webkit-scrollbar { display: none; }
-.vid { margin: 0; display: grid; gap: 16px; scroll-snap-align: start; min-width: 0; }
+.vid { margin: 0; display: grid; gap: 10px; scroll-snap-align: start; min-width: 0; }
 .vid-kare {
   position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; padding: 0; border: 0; cursor: pointer; overflow: hidden;
-  border-radius: 22px; background: #1a1714; color: #fff;
-  outline: 2px solid rgba(244, 239, 225, .38); outline-offset: 6px; box-shadow: 0 34px 60px -26px rgba(0, 0, 0, .85);
+  border-radius: 16px; background: #1a1714; color: #fff;
+  outline: 1.5px solid rgba(244, 239, 225, .38); outline-offset: 4px; box-shadow: 0 22px 40px -20px rgba(0, 0, 0, .85);
 }
 .vid-kare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
 .vid-kare::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 9, 7, .55), rgba(10, 9, 7, 0) 45%); pointer-events: none; }
@@ -282,15 +287,16 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .vid-kare iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .vid-kare.oynuyor::after, .vid-kare.oynuyor .vid-oyna { display: none; }
 .vid-oyna {
-  position: absolute; left: 50%; top: 50%; z-index: 1; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%;
+  position: absolute; left: 50%; top: 50%; z-index: 1; width: 50px; height: 50px; margin: -25px 0 0 -25px; border-radius: 50%;
   display: grid; place-items: center; background: var(--tomato); box-shadow: 0 10px 30px -6px rgba(216, 52, 42, .7); transition: transform .25s ease;
 }
-.vid-oyna svg { width: 30px; height: 30px; fill: #fff; margin-left: 4px; }
+.vid-oyna svg { width: 22px; height: 22px; fill: #fff; margin-left: 3px; }
 .vid-kare:hover .vid-oyna { transform: scale(1.08); }
-.vid figcaption { font-family: var(--f-display); font-weight: 800; font-variation-settings: "wdth" 105; font-size: 1.02rem; line-height: 1.25; color: var(--cream); padding-inline: 4px; }
+.vid figcaption { font-family: var(--f-display); font-weight: 800; font-variation-settings: "wdth" 105; font-size: .9rem; line-height: 1.25; color: var(--cream); padding-inline: 2px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .vid.bos .vid-kare { cursor: default; background: repeating-linear-gradient(135deg, rgba(244, 239, 225, .04) 0 14px, rgba(244, 239, 225, .07) 14px 28px), #14211b; }
 .vid.bos .vid-oyna { background: rgba(244, 239, 225, .14); box-shadow: none; }
-.vid-not { position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font-weight: 800; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
+.vid-not { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-weight: 800; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-dim); }
 
 /* ── Sipariş: delivery-app links as quiet cream pills, each marked with its app's colour ── */
 .siparis { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
@@ -1501,7 +1507,13 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
     const vids = document.getElementById("vids");
     if (!vids) return;
     const vp = document.getElementById("vidPrev"), vn = document.getElementById("vidNext");
-    const step = () => { const c = vids.querySelector(".vid"); return c ? c.offsetWidth + 28 : vids.clientWidth * 0.8; };
+    // one click moves as many whole cards as fit (at least one)
+    const step = () => {
+      const c = vids.querySelector(".vid");
+      if (!c) return vids.clientWidth * 0.8;
+      const w = c.offsetWidth + (parseFloat(getComputedStyle(vids).columnGap) || 16);
+      return Math.max(1, Math.floor((vids.clientWidth - 40) / w)) * w;
+    };
     const ends = () => {
       vp.disabled = vids.scrollLeft < 4;
       vn.disabled = vids.scrollLeft + vids.clientWidth >= vids.scrollWidth - 4;
