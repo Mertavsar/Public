@@ -75,3 +75,8 @@ Her videoda iki ayrı kaynak katmanı olur ve kullanıcıya üretimden ÖNCE gö
 2. **Görsel referanslar** (`gorsel_referans.md`): yöntemin gerçek çekimleri (YouTube/haber videosu, Wikimedia, FAO/ICCAT
    şemaları). 3D sahneler bunlara bakılarak kurulur (gemi tipi, ağ şekli, kafes, renkler). Her sahne için
    "hangi referansa göre" notu. Referans bulunamayan sahne "temsili" diye işaretlenir.
+
+## Seslendirme metni formatı (2026-11-26)
+Kullanıcıya verilen seslendirme metni HER ZAMAN ElevenLabs v3 etiketli paragraf düzeninde olur
+(`[excited] … [mysterious] … [short pause] … [warm] …`), dosyada `====` blokları arasında.
+Düz satır satır liste verme — kullanıcı "elevenlabs tarzında yaz" diye kızdı. Şablon: midye dolma / ıstakoz seslendirme.txt.

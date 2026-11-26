@@ -1,6 +1,6 @@
 import json, re
 txt = open("/home/user/Public/tikla-bakalim/bolumler/2026-11-26-ciftlik-istakozu/seslendirme.txt").read().split("\n====\n")[1]
-txt = re.sub(r"\s+", " ", txt).strip()
+txt = re.sub(r"\[[^\]]*\]", "", txt); txt = re.sub(r"\s+", " ", txt).strip()
 sents = [s.strip() for s in re.findall(r"[^.!?]+[.!?]", txt)]
 ids = "hook room hot whyq step cta name live tr mother hatch tanks molt mini like rooms flow cold warm dc pipe feed kg growth plate answerq fight ninety comment comment2 loop".split()
 assert len(ids) == len(sents), (len(ids), len(sents), sents)
