@@ -13,3 +13,4 @@
 | K9 | Tabak boyu 20 cm / 300 g; iki yıl hazır yemle; yem dönüşümü 1,00–1,14 kg yem / kg | globalseafood (K1, K3 linkleri) |
 
 Notlar: Hiçbir balıkçı/yöntem kötülenmiyor; "yasak/tükeniyor/zarar" yok. Veri merkezi çiftliği "anlaştı / ısıtacak" (gelecek) diye anlatılıyor — işletmede olduğu teyit edilmedi.
+| K10 | Çanakkale: ÇOMÜ + Dardanel yumurtadan yavru ıstakoz üretti, 300 yavru Çanakkale Boğazı'na bırakıldı | https://www.ntv.com.tr/turkiye/yavru-istakozlar-denize-salindi,c6tAcbPR-EKY2DDzD_6MBg ; https://acikerisim.comu.edu.tr/items/b1c33bb4-b1dd-450b-b33c-3bcaf77fb7b2/full |

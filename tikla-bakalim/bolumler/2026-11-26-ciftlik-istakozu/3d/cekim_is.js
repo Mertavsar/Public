@@ -189,6 +189,17 @@ function mapNor(t, a) {
   g.textAlign = "center"; g.font = "80px AN"; g.fillStyle = "#fff"; g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 12; g.fillText(EN ? "NORWAY" : "NORVEÇ", X(12), Y(64.5)); g.shadowBlur = 0; g.globalAlpha = 1; g.textAlign = "left";
 }
 
+function mapTr(t, a) {
+  const c = $("map"); c.style.opacity = a; const g = MP; g.clearRect(0, 0, 1080, 1920); if (a <= 0) return;
+  const lon0 = 22.5, lat0 = 44, span = 23, k = 1080 / span, py = 520; const X = lo => (lo - lon0) * k, Y = la => py + (lat0 - la) * k * 1.3;
+  const gr = g.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, "#1f86b8"); gr.addColorStop(1, "#155f88"); g.fillStyle = gr; g.fillRect(0, 0, 1080, 1920);
+  for (const o of DUNYA) { const xs = o.r; if (xs.every(([lo]) => lo < lon0 - 8 || lo > lon0 + span + 8)) continue;
+    g.beginPath(); xs.forEach(([lo, la], i) => i ? g.lineTo(X(lo), Y(la)) : g.moveTo(X(lo), Y(la))); g.closePath(); g.fillStyle = o.c === "TUR" ? "#f1ebdc" : "#8d9a9e"; g.fill(); g.strokeStyle = "#0e3550"; g.lineWidth = 1.5; g.stroke(); }
+  const [lo, la] = [26.4, 40.15], e = sm((t - .3) / .35); if (e <= 0) return; g.globalAlpha = e;
+  g.fillStyle = "#e3141b"; g.beginPath(); g.arc(X(lo), Y(la), 18, 0, 7); g.fill();
+  const r = 20 + 46 * ((t * 1.1) % 1); g.strokeStyle = `rgba(255,213,74,${1 - (r - 20) / 46})`; g.lineWidth = 6; g.beginPath(); g.arc(X(lo), Y(la), r, 0, 7); g.stroke();
+  g.textAlign = "center"; g.font = "80px AN"; g.fillStyle = "#fff"; g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 12; g.fillText(EN ? "TURKEY" : "ÇANAKKALE", X(lo) + 60, Y(la) - 80); g.shadowBlur = 0; g.globalAlpha = 1; g.textAlign = "left";
+}
 // ================= çekimler =================
 const K = (o) => base(Object.assign({ tuna: "hide", ham: "hide", mood: "day", amp: 0 }, o));
 const H = (x, y, z) => P_H.clone().add(V(x, y, z)), SD = (x, y, z) => P_S.clone().add(V(x, y, z)), OU = (x, y, z) => P_O.clone().add(V(x, y, z));
@@ -203,6 +214,7 @@ const S4 = {
   cta: (lt, d) => { TRAY(.5 + sm(lt / d) * .5); return K({ set: "hall", cta: lt, ctaD: d }); },
   name: (lt, d) => { const u = sm(lt / d); camSet(OU(lerp(40, 30, u), 22, lerp(70, 62, u)), OU(2, 3, 0), 50); return K({ set: "out", leds: 1 }); },
   live: (lt) => { camSet(OU(0, 60, 80), OU(0, 0, 0)); return K({ set: "out", nor: lt }); },
+  tr: (lt) => { camSet(OU(0, 60, 80), OU(0, 0, 0)); return K({ set: "out", trm: lt }); },
   mother: (lt, d) => { const u = sm(lt / d); camSet(SD(lerp(-11.5, -10.5, u), 2.2, lerp(2.4, 1.6, u)), SD(0, .7, 0), 55); return K({ set: "studio", hero: "studio", gs: 1.5, eggs: 1, roll: 0 }); },
   hatch: (lt, d) => { camSet(SD(-11.5, 3.4, 2.2), SD(0, 2.2, 0), 58); return K({ set: "studio", hero: "studio", gs: 1.5, eggs: 1, roll: 0, larv: lt }); },
   tanks: (lt, d) => { const u = sm(lt / d); camSet(H(lerp(4, 2, u), 9, CON_Z + lerp(13, 11, u)), H(-12, 3.8, CON_Z), 50); return K({ set: "hall", swirl: 1 }); },
@@ -276,7 +288,7 @@ function apply2(st, T) {
   if (outs.visible) { const col = new THREE.Color(); for (let i = 0; i < LEDN; i++) { const on = ((T * 3 + PR[i][0] * 7) % 1) < .7; col.set(on ? (PR[i][1] < .7 ? 0x5affaa : 0x5ab8ff) : 0x1a2a22); LEDS.setColorAt(i, col); } LEDS.instanceColor.needsUpdate = true;
     if (st.hot) { HOTF.visible = true; const p = HOTF.geometry.attributes.position; for (let i = 0; i < 220; i++) { const r = PR[i + 600], f = (T * .35 + r[0]) % 1; p.setXYZ(i, P_O.x - 7 + f * 17, P_O.y + 3 + (r[1] - .5) * .5, P_O.z + 3 + (r[2] - .5) * .5 + 1.2); } p.needsUpdate = true;
       STEAM.visible = true; const q = STEAM.geometry.attributes.position; for (let i = 0; i < 300; i++) { const r = PR[i + 900], f = (T * .2 + r[0]) % 1; q.setXYZ(i, P_O.x + 18 + (r[1] - .5) * 20 + f * 2, P_O.y + 7.5 + f * 8, P_O.z + 2 + (r[2] - .5) * 10); } q.needsUpdate = true; STEAM.material.opacity = .3; } }
-  if (st.nor != null) mapNor(st.nor, sm(st.nor / .3));
+  if (st.nor != null) mapNor(st.nor, sm(st.nor / .3)); if (st.trm != null) mapTr(st.trm, sm(st.trm / .3));
   // halka (tek hücreyi göster)
   if (st.ring != null && hall.visible) { const c = HCP(); const [x, y] = proj(c); const r = 70 + 30 * Math.sin(T * 4); LN.save(); LN.globalAlpha = sm(st.ring / .4); LN.strokeStyle = "#ffd54a"; LN.lineWidth = 8; LN.beginPath(); LN.arc(x, y, r, 0, 7); LN.stroke(); LN.restore(); }
   // ortak tank: kavga
