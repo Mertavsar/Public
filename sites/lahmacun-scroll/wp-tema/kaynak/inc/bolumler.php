@@ -335,26 +335,45 @@ function kuzu_videolar() {
 	<?php
 }
 
-/** Paket sipariş linkleri: sabit platformlar + "Ad | link" satırları. */
-function kuzu_siparis_listesi() {
-	$sabit = array(
+/**
+ * Eve sipariş butonları: panelde satır satır yönetilir (ad, link, ikon, renk, sıra).
+ * Yeni alan hiç kaydedilmediyse 1.1.x'teki sabit alanlardan (Yemeksepeti, Trendyol...) okunur.
+ */
+function kuzu_siparis_satirlari() {
+	$a = get_option( 'kuzu_ayarlar', array() );
+	if ( is_array( $a ) && isset( $a['siparis'] ) && is_array( $a['siparis'] ) ) {
+		return $a['siparis'];
+	}
+	$out = array();
+	foreach ( array(
 		'siparis_yemeksepeti' => array( 'Yemeksepeti', '#fa0050' ),
 		'siparis_trendyol'    => array( 'Trendyol Yemek', '#f27a1a' ),
 		'siparis_getir'       => array( 'Getir Yemek', '#5d3ebc' ),
 		'siparis_migros'      => array( 'Migros Yemek', '#ff7e00' ),
-	);
-	$out = array();
-	foreach ( $sabit as $k => $x ) {
-		$u = trim( (string) kuzu_ayar( $k ) );
-		if ( $u ) {
-			$out[] = array( $x[0], $u, $x[1] );
+	) as $k => $x ) {
+		if ( is_array( $a ) && ! empty( $a[ $k ] ) ) {
+			$out[] = array( 'ad' => $x[0], 'link' => $a[ $k ], 'ikon' => 0, 'renk' => $x[1] );
 		}
 	}
-	foreach ( kuzu_satirlar( kuzu_ayar( 'siparis_diger' ) ) as $satir ) {
-		$p = array_map( 'trim', explode( '|', $satir, 2 ) );
-		if ( 2 === count( $p ) && $p[0] && $p[1] ) {
-			$out[] = array( $p[0], $p[1], '#d8342a' );
+	if ( is_array( $a ) && ! empty( $a['siparis_diger'] ) ) {
+		foreach ( kuzu_satirlar( $a['siparis_diger'] ) as $satir ) {
+			$p = array_map( 'trim', explode( '|', $satir, 2 ) );
+			if ( 2 === count( $p ) && $p[0] && $p[1] ) {
+				$out[] = array( 'ad' => $p[0], 'link' => $p[1], 'ikon' => 0, 'renk' => '#d8342a' );
+			}
 		}
+	}
+	return $out;
+}
+
+function kuzu_siparis_listesi() {
+	$out = array();
+	foreach ( kuzu_siparis_satirlari() as $r ) {
+		if ( empty( $r['ad'] ) || empty( $r['link'] ) ) {
+			continue;
+		}
+		$ikon  = ! empty( $r['ikon'] ) ? wp_get_attachment_image_url( (int) $r['ikon'], 'medium' ) : '';
+		$out[] = array( $r['ad'], $r['link'], ! empty( $r['renk'] ) ? $r['renk'] : '#d8342a', $ikon ? $ikon : '' );
 	}
 	return $out;
 }
@@ -367,7 +386,8 @@ function kuzu_siparis( $yer ) {
 	$ok   = '<svg class="ok" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
 	$btns = '';
 	foreach ( $l as $x ) {
-		$btns .= "\n          " . '<a class="sip" href="' . esc_url( $x[1] ) . '" style="--marka:' . esc_attr( $x[2] ) . '" target="_blank" rel="noopener"><i></i>' . esc_html( $x[0] ) . $ok . '</a>';
+		$isaret = $x[3] ? '<img class="sip-ikon" src="' . esc_url( $x[3] ) . '" alt="" width="22" height="22" loading="lazy" decoding="async">' : '<i></i>';
+		$btns  .= "\n          " . '<a class="sip" href="' . esc_url( $x[1] ) . '" style="--marka:' . esc_attr( $x[2] ) . '" target="_blank" rel="noopener">' . $isaret . esc_html( $x[0] ) . $ok . '</a>';
 	}
 	if ( 'menu' === $yer ) {
 		echo "\n      " . '<div class="siparis">' . "\n        " . '<p class="siparis-baslik">Eve sipariş</p>' . "\n        " . '<div class="siparis-btns">' . $btns . "\n        </div>\n      </div>";

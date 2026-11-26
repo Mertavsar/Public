@@ -31,13 +31,13 @@ python3 wp-tema/olustur.py 1.0.0     # sürüm numarası: her güncellemede bir 
   (`wp-content/uploads/kuzu-sahne/frames/...`). Tema kareleri kendisi bulur.
 
 Panel (sol menüde **Kuzu Lahmacun**): iletişim ve saatler, menü (`Kategori | Ürün | Fiyat`), videolar
-(`YouTube linki | başlık`; oynatıcı yalnızca tıklanınca yüklenir), paket sipariş linkleri (Yemeksepeti, Trendyol
-Yemek, Getir, Migros ve `Ad | link` satırları; boş olan buton görünmez), merak edilenler,
+(`YouTube linki | başlık`; oynatıcı yalnızca tıklanınca yüklenir), eve sipariş butonları (satır satır: ikon
+Medya'dan, ad, link, renk; sürükleyerek sıralanır; "+ Yemeksepeti" gibi hızlı ekle düğmeleri), merak edilenler,
 kayan bant, galeri (Medya'dan seçilir, sürükleyerek sıralanır), Google API anahtarı ve "Yorumları şimdi yenile".
 Yorumlar günde bir kez kendiliğinden yenilenir, sitede yalnızca 5 yıldızlılar görünür. Kaydırma sahnesi, perde
 yazıları ve tasarım koddadır: değişiklik `index.html`'de yapılır, yeni sürüm zip'i üretilir.
 
-Videolar ve paket sipariş linkleri ayrıca **Görünüm → Özelleştir → Kuzu Lahmacun** içinde: link yapıştırılınca
+Videolar ayrıca **Görünüm → Özelleştir → Kuzu Lahmacun** içinde: link yapıştırılınca
 sağdaki önizleme o bölüme iner ve videoyu yerinde gösterir; **Yayımla** ile sitede. İki ekran aynı ayarı düzenler.
 Görünüm menüsünde ayarlar sayfasına kısayol var.
 

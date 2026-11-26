@@ -28,12 +28,21 @@ function kuzu_ayarlar_temizle( $g ) {
 	foreach ( array( 'telefon', 'adres', 'menu_notu', 'galeri_yazi', 'video_baslik', 'video_yazi', 'yer_id', 'cid' ) as $k ) {
 		$out[ $k ] = sanitize_text_field( $g[ $k ] ?? '' );
 	}
-	foreach ( array( 'saatler', 'menu', 'bant', 'videolar', 'siparis_diger' ) as $k ) {
+	foreach ( array( 'saatler', 'menu', 'bant', 'videolar' ) as $k ) {
 		$out[ $k ] = sanitize_textarea_field( $g[ $k ] ?? '' );
 	}
 	$out['sss']    = wp_kses( $g['sss'] ?? '', array( 'a' => array( 'href' => true, 'target' => true, 'rel' => true ), 'b' => array(), 'strong' => array(), 'em' => array(), 'br' => array() ) );
-	foreach ( array( 'siparis_yemeksepeti', 'siparis_trendyol', 'siparis_getir', 'siparis_migros' ) as $k ) {
-		$out[ $k ] = esc_url_raw( trim( (string) ( $g[ $k ] ?? '' ) ) );
+	// Eve sipariş butonları: satır sırası, ekrandaki (sürüklenmiş) sıradır
+	$out['siparis'] = array();
+	foreach ( (array) ( $g['siparis'] ?? array() ) as $r ) {
+		$r    = (array) $r;
+		$ad_  = sanitize_text_field( $r['ad'] ?? '' );
+		$link = esc_url_raw( trim( (string) ( $r['link'] ?? '' ) ) );
+		if ( '' === $ad_ || '' === $link ) {
+			continue;
+		}
+		$renk             = sanitize_hex_color( $r['renk'] ?? '' );
+		$out['siparis'][] = array( 'ad' => $ad_, 'link' => $link, 'ikon' => absint( $r['ikon'] ?? 0 ), 'renk' => $renk ? $renk : '#d8342a' );
 	}
 	$out['galeri'] = implode( ',', array_filter( array_map( 'absint', explode( ',', (string) ( $g['galeri'] ?? '' ) ) ) ) );
 	$yeni          = trim( sanitize_text_field( $g['google_anahtar'] ?? '' ) );
@@ -84,6 +93,12 @@ function kuzu_ayarlar_sayfa() {
 			.kuzu-galeri span{display:block;padding:4px 6px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 			.kuzu-durum{padding:8px 12px;border-left:4px solid #00a32a;background:#f6f7f7}
 			.kuzu-durum.hata{border-left-color:#d63638}
+			.kuzu-sip td{vertical-align:middle}
+			.kuzu-sip input[type=text],.kuzu-sip input[type=url]{width:100%}
+			.kuzu-sip .tutamak{cursor:move;color:#8c8f94;font-size:16px;letter-spacing:-2px;text-align:center}
+			.kuzu-sip .sip-ikon-onizleme img{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:6px;border-radius:4px;background:#f0f0f1}
+			.kuzu-sip input[type=color]{width:44px;height:30px;padding:0;border:1px solid #8c8f94;border-radius:4px}
+			.kuzu-sip-ekle .button{margin:2px 0}
 		</style>
 
 		<form method="post" action="options.php">
@@ -126,21 +141,24 @@ function kuzu_ayarlar_sayfa() {
 			</div>
 
 			<div class="card" id="siparis">
-				<h2>Paket sipariş linkleri</h2>
-				<p class="ipucu">İşletmenin her platformdaki sayfasının linkini yapıştırın. Boş bırakılan platformun butonu görünmez; hiçbiri yoksa
-					"Eve sipariş" alanı hiç görünmez. Butonlar menünün altında ve sayfanın sonunda çıkar.</p>
-				<?php
-				foreach ( array(
-					'siparis_yemeksepeti' => 'Yemeksepeti',
-					'siparis_trendyol'    => 'Trendyol Yemek',
-					'siparis_getir'       => 'Getir Yemek',
-					'siparis_migros'      => 'Migros Yemek',
-				) as $k => $etiket ) :
+				<h2>Eve sipariş butonları</h2>
+				<p class="ipucu">Her satır bir buton: <b>ikon</b>, <b>ad</b>, <b>link</b> ve <b>renk</b>. Soldaki tutamaktan sürükleyerek sıralayın.
+					İkon için Medya'dan platformun logosunu seçin (arka planı şeffaf PNG en iyisi); ikon yoksa renkli nokta görünür.
+					Ad ya da linki boş olan satır kaydedilmez. Hiç buton yoksa "Eve sipariş" alanı sitede görünmez.</p>
+				<table class="widefat kuzu-sip">
+					<thead><tr><th style="width:28px"></th><th style="width:150px">İkon</th><th>Ad</th><th>Link</th><th style="width:70px">Renk</th><th style="width:50px"></th></tr></thead>
+					<tbody id="kuzu-sip-satirlar">
+					<?php foreach ( kuzu_siparis_satirlari() as $i => $r ) { kuzu_sip_satir( 's' . $i, $r ); } ?>
+					</tbody>
+				</table>
+				<template id="kuzu-sip-sablon"><?php kuzu_sip_satir( '__i__', array() ); ?></template>
+				<p class="kuzu-sip-ekle">Ekle:
+					<?php
+					foreach ( array( array( 'Yemeksepeti', '#fa0050' ), array( 'Trendyol Yemek', '#f27a1a' ), array( 'Getir Yemek', '#5d3ebc' ), array( 'Migros Yemek', '#ff7e00' ), array( 'WhatsApp sipariş', '#25d366' ), array( '', '#d8342a' ) ) as $h ) {
+						echo '<button type="button" class="button" data-ad="' . esc_attr( $h[0] ) . '" data-renk="' . esc_attr( $h[1] ) . '">+ ' . esc_html( $h[0] ? $h[0] : 'Boş satır' ) . '</button> ';
+					}
 					?>
-					<p><label><?php echo esc_html( $etiket ); ?> linki<br><input class="regular-text" type="url" placeholder="https://" name="<?php echo esc_attr( $ad( $k ) ); ?>" value="<?php echo esc_attr( kuzu_ayar( $k ) ); ?>"></label></p>
-				<?php endforeach; ?>
-				<p><label>Diğer (her satıra <code>Ad | link</code>, ör. <code>WhatsApp sipariş | https://wa.me/905334404327</code>)<br>
-					<textarea rows="3" name="<?php echo esc_attr( $ad( 'siparis_diger' ) ); ?>"><?php echo esc_textarea( kuzu_ayar( 'siparis_diger' ) ); ?></textarea></label></p>
+				</p>
 			</div>
 
 			<div class="card">
@@ -256,4 +274,26 @@ function kuzu_kare_kontrol_karti() {
 			. '<p>Çözüm: barındırmanın görsel optimizasyonunu (Hostinger: hPanel → Performans / CDN; LiteSpeed Cache → Görsel Optimizasyonu) kapatın ya da <code>wp-content/themes/kuzu-lahmacun/</code> klasörünü hariç tutun. Sonra CDN önbelleğini temizleyip bu sayfayı yenileyin.</p>';
 	}
 	echo '</div>';
+}
+
+/** Eve sipariş tablosunun bir satırı (şablon için $i = '__i__'). */
+function kuzu_sip_satir( $i, $r ) {
+	$n    = function ( $k ) use ( $i ) { return 'kuzu_ayarlar[siparis][' . $i . '][' . $k . ']'; };
+	$ikon = (int) ( $r['ikon'] ?? 0 );
+	$url  = $ikon ? wp_get_attachment_image_url( $ikon, 'thumbnail' ) : '';
+	?>
+	<tr class="kuzu-sip-satir">
+		<td class="tutamak" title="Sürükleyerek sırala">⋮⋮</td>
+		<td>
+			<input type="hidden" class="sip-ikon-id" name="<?php echo esc_attr( $n( 'ikon' ) ); ?>" value="<?php echo $ikon ? (int) $ikon : ''; ?>">
+			<span class="sip-ikon-onizleme"><?php echo $url ? '<img src="' . esc_url( $url ) . '" alt="">' : ''; ?></span>
+			<button type="button" class="button button-small sip-ikon-sec"><?php echo $url ? 'Değiştir' : 'İkon seç'; ?></button>
+			<button type="button" class="button-link sip-ikon-sil"<?php echo $url ? '' : ' hidden'; ?>>Kaldır</button>
+		</td>
+		<td><input type="text" class="sip-ad" name="<?php echo esc_attr( $n( 'ad' ) ); ?>" value="<?php echo esc_attr( $r['ad'] ?? '' ); ?>" placeholder="Yemeksepeti"></td>
+		<td><input type="url" name="<?php echo esc_attr( $n( 'link' ) ); ?>" value="<?php echo esc_attr( $r['link'] ?? '' ); ?>" placeholder="https://"></td>
+		<td><input type="color" class="sip-renk" name="<?php echo esc_attr( $n( 'renk' ) ); ?>" value="<?php echo esc_attr( ! empty( $r['renk'] ) ? $r['renk'] : '#d8342a' ); ?>"></td>
+		<td><button type="button" class="button-link button-link-delete sip-sil">Sil</button></td>
+	</tr>
+	<?php
 }

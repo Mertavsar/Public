@@ -198,7 +198,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 @media (max-width: 760px) {
   .topbar .brand { height: 32px; }
   .topbar nav a.nav { display: none; }
-  .topbar .btn { padding: 7px 12px; font-size: .8rem; margin-left: 0; }
+  .topbar .btn { padding: 7px 12px; font-size: .8rem; margin-left: 0; min-height: 40px; }
   .overlay { padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
   .chap h2 { font-size: clamp(1.45rem, 6.6vw, 2rem); margin: .55rem 0 .15rem; }
   .chaps { left: 0; right: 0; width: auto; }
@@ -301,6 +301,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
   background: var(--cream); color: var(--ink); font-weight: 800; font-size: .95rem; transition: transform .2s ease, box-shadow .2s ease;
 }
 .sip i { width: 12px; height: 12px; border-radius: 50%; background: var(--marka); box-shadow: 0 0 0 3px color-mix(in srgb, var(--marka) 22%, transparent); }
+.sip-ikon { width: 22px; height: 22px; object-fit: contain; border-radius: 5px; flex: none; }
 .sip .ok { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
 .sip:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .55), inset 0 0 0 2px var(--marka); }
 .final-sip { justify-content: center; margin-top: 4px; }

@@ -59,35 +59,18 @@ add_action(
 		$ayar( 'video_yazi', 'sanitize_text_field' );
 		$wp_customize->add_control( 'kuzu_ayarlar[video_yazi]', array( 'section' => 'kuzu_videolar', 'type' => 'text', 'label' => 'Başlığın altındaki yazı' ) );
 
-		// Paket sipariş
+		// Eve sipariş butonları (ikon, sıra) ayarlar sayfasındaki tabloda yönetilir.
 		$wp_customize->add_section(
 			'kuzu_siparis',
 			array(
-				'title'       => 'Paket sipariş linkleri',
+				'title'       => 'Eve sipariş butonları',
 				'panel'       => 'kuzu',
 				'priority'    => 20,
-				'description' => 'Boş bırakılan platformun butonu görünmez.',
+				'description' => 'Butonların adı, linki, ikonu, rengi ve sırası: <a href="' . esc_url( admin_url( 'admin.php?page=kuzu-ayarlar#siparis' ) ) . '">Kuzu Lahmacun ayarları → Eve sipariş butonları</a>.',
 			)
 		);
-		foreach ( array(
-			'siparis_yemeksepeti' => 'Yemeksepeti linki',
-			'siparis_trendyol'    => 'Trendyol Yemek linki',
-			'siparis_getir'       => 'Getir Yemek linki',
-			'siparis_migros'      => 'Migros Yemek linki',
-		) as $k => $etiket ) {
-			$ayar( $k, 'esc_url_raw' );
-			$wp_customize->add_control( 'kuzu_ayarlar[' . $k . ']', array( 'section' => 'kuzu_siparis', 'type' => 'url', 'label' => $etiket, 'input_attrs' => array( 'placeholder' => 'https://' ) ) );
-		}
-		$ayar( 'siparis_diger', 'sanitize_textarea_field' );
-		$wp_customize->add_control(
-			'kuzu_ayarlar[siparis_diger]',
-			array(
-				'section'     => 'kuzu_siparis',
-				'type'        => 'textarea',
-				'label'       => 'Diğer',
-				'description' => 'Her satıra <code>Ad | link</code>, ör. <code>WhatsApp sipariş | https://wa.me/905334404327</code>',
-			)
-		);
+		$wp_customize->add_setting( 'kuzu_bilgi', array( 'type' => 'option', 'capability' => 'manage_options', 'sanitize_callback' => '__return_empty_string' ) );
+		$wp_customize->add_control( 'kuzu_bilgi', array( 'section' => 'kuzu_siparis', 'type' => 'hidden' ) );
 	}
 );
 
