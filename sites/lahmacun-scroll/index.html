@@ -316,7 +316,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 /* ── Dört kalem ── */
 .sir { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--green-hi) 0%, rgba(18, 112, 74, 0) 70%), var(--green); padding-block: clamp(80px, 11vw, 140px); }
 .sec-head { display: grid; gap: 14px; justify-items: start; margin-bottom: clamp(36px, 5vw, 60px); }
-.sec-head h2 { font-size: clamp(2.4rem, 6.4vw, 5rem); }
+.sec-head h2 { font-size: min(5rem, max(6.4vw, 2.4rem), 9.2vw - 4px); }
 .sec-head p { margin: 0; max-width: 48ch; font-size: 1.1rem; color: var(--cream-dim); }
 .kalem { display: grid; gap: 20px; }
 @media (min-width: 900px) { .kalem { grid-template-columns: repeat(2, 1fr); } }
@@ -450,6 +450,9 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .sss { background: var(--green-deep); padding-block: clamp(80px, 11vw, 140px); }
 .sss-grid { display: grid; gap: 24px; }
 @media (min-width: 980px) { .sss-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 64px; align-items: start; } .sss .sec-head { position: sticky; top: 110px; } }
+/* the heading sizes to its own column, not the window: "SORULANLAR" can't wrap, so it must always fit */
+.sss .sec-head { container-type: inline-size; min-width: 0; }
+.sss .sec-head h2 { font-size: clamp(1.9rem, 11cqi, 5rem); }
 .qs { border-top: 2px solid rgba(244, 239, 225, .22); }
 .q { border-bottom: 2px solid rgba(244, 239, 225, .14); }
 .q summary {
@@ -478,7 +481,7 @@ body.past-stage .topbar { background: var(--green-deep); box-shadow: 0 1px 0 rgb
 .final { background: var(--stone); padding-block: clamp(90px, 12vw, 160px) 40px; text-align: center; position: relative; overflow: hidden; }
 .final::before { content: ""; position: absolute; inset: auto 0 0 0; height: 70%; background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(255, 110, 40, .32), rgba(255, 110, 40, 0) 70%); pointer-events: none; }
 .final .wrap { position: relative; display: grid; justify-items: center; gap: 22px; }
-.final h2 { font-size: clamp(3rem, 11vw, 9rem); }
+.final h2 { font-size: min(9rem, max(11vw, 3rem), 13vw - 4px); }
 .final h2 em { font-style: normal; color: var(--tomato); display: block; }
 .final .script { font-size: clamp(1.8rem, 4.6vw, 3.4rem); color: var(--cream); }
 .final .note { margin: 0; max-width: 54ch; color: var(--cream-dim); }
