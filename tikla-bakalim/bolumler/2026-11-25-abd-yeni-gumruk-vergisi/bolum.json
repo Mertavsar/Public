@@ -1,0 +1,732 @@
+{
+ "baslik": "Mahkeme iptal etti, vergi geri döndü: ABD'nin yeni gümrük vergisi",
+ "tarih": "2026-11-25",
+ "durum": "ses bekliyor",
+ "format": "yatay",
+ "vurgu": [
+  "vergi",
+  "iptal",
+  "kapı",
+  "Türkiye"
+ ],
+ "altyazi": {
+  "yüzde on iki buçukluk": "%12,5'lik",
+  "yüzde on iki buçuk": "%12,5",
+  "Yirmi Şubat'ta": "20 Şubat'ta",
+  "Dokuz yargıçtan altısı": "9 yargıçtan 6'sı",
+  "dört gün sonra": "4 gün sonra",
+  "yüzde onluk": "%10'luk",
+  "yüz elli gün": "150 gün",
+  "yirmi dört Temmuz'da": "24 Temmuz'da",
+  "Altmış ülkeye": "60 ülkeye",
+  "yüzde on ya da": "%10 ya da",
+  "on altı ekonomiye": "16 ekonomiye",
+  "yüzde ikiden": "%2'den",
+  "üç yüz bir": "301",
+  "yüzde on beş": "%15",
+  "on bir Mart iki bin yirmi yedi": "11 Mart 2027",
+  "on altılık": "16'lık",
+  "on altı milyar doların": "16 milyar doların"
+ },
+ "kapak": {
+  "ikon": "⚖️",
+  "ust": "ABD MAHKEMESİ İPTAL ETTİ",
+  "buyuk": "VERGİ DÖNDÜ",
+  "alt": "NASIL?"
+ },
+ "cta": [
+  {
+   "sahne": 17,
+   "gecikme": 0.3,
+   "sure": 5.5
+  }
+ ],
+ "sahneler": [
+  {
+   "bolum": "hook",
+   "tip": "sayi",
+   "say": "Amerika, Türkiye'den gelen mallara yüzde on iki buçuk ek vergi alıyor.",
+   "p": {
+    "ikon": "🚢",
+    "etiket": "ABD'nin Türk mallarına ek gümrük vergisi",
+    "deger": 12.5,
+    "onek": "%",
+    "sonek": "",
+    "ondalik": 1,
+    "yon": "up",
+    "ok_renk": "kirmizi",
+    "renk": "kirmizi",
+    "sayma": false,
+    "not": "24 Temmuz 2026'dan beri"
+   },
+   "etiket": "EK VERGİ",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Oysa Amerikan Yüksek Mahkemesi, bu vergileri şubatta iptal etmişti.",
+   "p": {
+    "ikon": "⚖️",
+    "satirlar": [
+     "MAHKEME İPTAL ETTİ",
+     "~VERGİ GİTMEDİ~"
+    ],
+    "boy": 100
+   },
+   "etiket": "PARADOKS",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "hook",
+   "tip": "soru",
+   "say": "Asıl sır, kanunların arasında saklı. Baştan anlatayım.",
+   "p": {
+    "ikon": "🤔",
+    "metin": "VERGİ NASIL\n*GERİ DÖNDÜ?*",
+    "boy": 110
+   },
+   "etiket": "SORU"
+  },
+  {
+   "bolum": "hook",
+   "tip": "baslik",
+   "say": "Dünyayı sarsan kararları sade dille anlatıyoruz. Kaçırmamak için abone ol.",
+   "p": {
+    "ikon": "🔔",
+    "satirlar": [
+     "DÜNYA GÜNDEMİ",
+     "*SADE DİLLE*"
+    ],
+    "boy": 96
+   },
+   "etiket": "ABONE OL"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Yirmi Şubat'ta Amerikan Yüksek Mahkemesi önemli bir karar verdi.",
+   "p": {
+    "gun": "20",
+    "ay": "ŞUBAT 2026",
+    "gunadi": "CUMA",
+    "not": "ABD *Yüksek Mahkemesi*"
+   },
+   "etiket": "KARAR GÜNÜ",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Dokuz yargıçtan altısı dedi ki: Başkan bu vergileri bu yolla koyamaz.",
+   "p": {
+    "ikon": "🧑‍⚖️",
+    "satirlar": [
+     "6'YA 3",
+     "*VERGİLER İPTAL*"
+    ],
+    "boy": 110,
+    "not": "Learning Resources – Trump davası"
+   },
+   "etiket": "KARAR",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Önce kısa bilgi. Gümrük vergisi, yurt dışından gelen mala kesilen vergi.",
+   "p": {
+    "ikon": "🛃",
+    "satirlar": [
+     "GÜMRÜK VERGİSİ",
+     "= *KAPIDAKİ VERGİ*"
+    ],
+    "boy": 96
+   },
+   "etiket": "TERİM"
+  },
+  {
+   "bolum": "ne",
+   "tip": "akis",
+   "say": "Bu vergiyi malı satan ülke değil, Amerika'daki alıcı şirket öder.",
+   "p": {
+    "baslik": "Vergiyi kim öder?",
+    "adimlar": [
+     {
+      "ikon": "🏭",
+      "metin": "Türkiye'de *üretim*"
+     },
+     {
+      "ikon": "🚢",
+      "metin": "ABD *gümrüğü*"
+     },
+     {
+      "ikon": "🏪",
+      "metin": "ABD'li alıcı ~öder~"
+     }
+    ]
+   },
+   "etiket": "KİM ÖDER",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Karardan sonra şirketler, ödedikleri vergiyi geri istemeye başladı.",
+   "p": {
+    "ikon": "💸",
+    "satirlar": [
+     "İTHALATÇILAR",
+     "*PARAYI GERİ İSTİYOR*"
+    ],
+    "boy": 88,
+    "not": "İade süreci ABD Ticaret Mahkemesi'nde"
+   },
+   "etiket": "İADE",
+   "kaynak": "K2"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Ama sadece dört gün sonra, yüzde onluk geçici bir vergi geldi.",
+   "p": {
+    "gun": "24",
+    "ay": "ŞUBAT 2026",
+    "gunadi": "SALI",
+    "not": "Tüm ithalata *%10* geçici vergi"
+   },
+   "etiket": "YENİ VERGİ",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Bu vergiyi başka bir kanun koydu. Ama sınırı vardı: en fazla yüz elli gün.",
+   "p": {
+    "ikon": "⏱️",
+    "satirlar": [
+     "GEÇİCİ VERGİ",
+     "*EN FAZLA 150 GÜN*"
+    ],
+    "boy": 96,
+    "not": "Uzatma yetkisi sadece Kongre'de"
+   },
+   "etiket": "SÜRE SINIRI",
+   "kaynak": "K3"
+  },
+  {
+   "bolum": "ne",
+   "tip": "takvim",
+   "say": "Süre yirmi dört Temmuz'da doldu. Aynı gece yerine yeni vergiler geldi.",
+   "p": {
+    "gun": "24",
+    "ay": "TEMMUZ 2026",
+    "gunadi": "CUMA",
+    "not": "Geçici vergi bitti · *yenisi başladı*"
+   },
+   "etiket": "DEVİR",
+   "kaynak": "K3, K5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "liste",
+   "say": "Altmış ülkeye, yüzde on ya da yüzde on iki buçuk vergi kondu.",
+   "p": {
+    "baslik": "Temmuz'daki yeni vergi",
+    "satirlar": [
+     {
+      "ikon": "🌍",
+      "metin": "Kapsanan ülke",
+      "deger": "60",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🔹",
+      "metin": "Alt dilim",
+      "deger": "%10",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🔸",
+      "metin": "Üst dilim",
+      "deger": "%12,5",
+      "renk": "kirmizi"
+     }
+    ],
+    "not": "AB ve Tayvan için ayrı hesap"
+   },
+   "etiket": "60 ÜLKE",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "baslik",
+   "say": "Türkiye; Çin, Vietnam ve Tayland'la birlikte üst dilimde.",
+   "p": {
+    "ikon": "🇹🇷",
+    "satirlar": [
+     "TÜRKİYE",
+     "~%12,5~ DİLİMİNDE"
+    ],
+    "boy": 104,
+    "not": "Kaynakların çoğu %12,5 · bir tabloda %13"
+   },
+   "etiket": "TÜRKİYE",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Ve bu hafta, on altı ekonomiye yeni bir vergi daha bekleniyor.",
+   "p": {
+    "ikon": "🌐",
+    "etiket": "Yeni vergi beklenen ekonomi",
+    "deger": 16,
+    "onek": "",
+    "sonek": "",
+    "ondalik": 0,
+    "renk": "sari",
+    "sayma": true,
+    "not": "Açıklama bekleniyor · oranlar belli değil"
+   },
+   "etiket": "YENİ DALGA",
+   "kaynak": "K6, K7"
+  },
+  {
+   "bolum": "ne",
+   "tip": "sayi",
+   "say": "Haber çıkınca, teknoloji borsası Nasdaq'ın vadelileri yüzde ikiden fazla düştü.",
+   "p": {
+    "ikon": "📉",
+    "etiket": "Nasdaq 100 vadeli işlemleri · 24 Kasım",
+    "deger": 2,
+    "onek": "−%",
+    "sonek": "",
+    "ondalik": 0,
+    "yon": "down",
+    "ok_renk": "kirmizi",
+    "renk": "kirmizi",
+    "sayma": false,
+    "not": "%2'nin üzerinde · gün içi · çip hisseleri öncü"
+   },
+   "etiket": "PİYASA",
+   "kaynak": "K8"
+  },
+  {
+   "bolum": "neden",
+   "tip": "soru",
+   "say": "Peki mahkeme iptal ettiyse, vergiler nasıl geri dönüyor?",
+   "p": {
+    "ikon": "🤔",
+    "metin": "İPTAL EDİLDİYSE\n*NASIL GERİ DÖNDÜ?*",
+    "boy": 96
+   },
+   "etiket": "NEDEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Asıl ilginç kısım şimdi geliyor. İşine yaradıysa bir beğen bırak.",
+   "p": {
+    "ikon": "❤️",
+    "satirlar": [
+     "İŞİNE YARADIYSA",
+     "*BİR BEĞEN BIRAK*"
+    ],
+    "boy": 92
+   },
+   "etiket": "BEĞEN"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Sebep şu: Mahkeme vergiyi değil, kullanılan yetkiyi iptal etti.",
+   "p": {
+    "ikon": "🔑",
+    "satirlar": [
+     "İPTAL EDİLEN:",
+     "*YETKİ, VERGİ DEĞİL*"
+    ],
+    "boy": 96,
+    "not": "Acil durum yasası (IEEPA) vergi yetkisi vermiyor"
+   },
+   "etiket": "SEBEP",
+   "kaynak": "K1"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Başkanın elinde vergi koymak için başka kanunlar da var.",
+   "p": {
+    "baslik": "Vergi koymanın kapıları",
+    "satirlar": [
+     {
+      "ikon": "🚫",
+      "metin": "Acil durum yasası",
+      "deger": "iptal",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "⏱️",
+      "metin": "Bölüm 122",
+      "deger": "150 gün",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🔍",
+      "metin": "Bölüm 301",
+      "deger": "soruşturmayla",
+      "renk": "sari"
+     }
+    ],
+    "not": "1974 Ticaret Kanunu"
+   },
+   "etiket": "KAPILAR",
+   "kaynak": "K1, K3, K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "En güçlüsü Bölüm üç yüz bir. Adı karışık, mantığı basit.",
+   "p": {
+    "ikon": "📜",
+    "satirlar": [
+     "BÖLÜM 301",
+     "= *ÖNCE SORUŞTUR*"
+    ],
+    "boy": 104
+   },
+   "etiket": "TERİM",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Önce soruşturma açılır. Haksız rekabet bulunursa, vergi konur.",
+   "p": {
+    "baslik": "Bölüm 301 nasıl işler?",
+    "adimlar": [
+     {
+      "ikon": "🔍",
+      "metin": "Soruşturma *açılır*"
+     },
+     {
+      "ikon": "⚖️",
+      "metin": "Haksızlık *bulunur*"
+     },
+     {
+      "ikon": "💰",
+      "metin": "Vergi ~konur~"
+     }
+    ]
+   },
+   "etiket": "MEKANİZMA",
+   "kaynak": "K4"
+  },
+  {
+   "bolum": "neden",
+   "tip": "takvim",
+   "say": "Mart ayında bu yolla iki büyük soruşturma açıldı.",
+   "p": {
+    "gun": "11",
+    "ay": "MART 2026",
+    "gunadi": "ÇARŞAMBA",
+    "not": "*İki soruşturma* · 11–12 Mart"
+   },
+   "etiket": "SORUŞTURMA",
+   "kaynak": "K5, K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Biri zorla çalıştırma, diğeri aşırı üretim kapasitesi üzerine.",
+   "p": {
+    "baslik": "İki soruşturma",
+    "satirlar": [
+     {
+      "ikon": "⛓️",
+      "metin": "Zorla çalıştırma",
+      "deger": "60 ülke",
+      "renk": "kirmizi"
+     },
+     {
+      "ikon": "🏭",
+      "metin": "Aşırı kapasite",
+      "deger": "16 ekonomi",
+      "renk": "sari"
+     }
+    ],
+    "not": "İlki Temmuz'da yürürlükte · ikincisi karar bekliyor"
+   },
+   "etiket": "İKİ DOSYA",
+   "kaynak": "K5, K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Aşırı kapasite şu demek: Bir ülke, satabileceğinden fazla üretiyor.",
+   "p": {
+    "ikon": "🏭",
+    "satirlar": [
+     "AŞIRI KAPASİTE",
+     "= *FAZLA ÜRETİM*"
+    ],
+    "boy": 84
+   },
+   "etiket": "TERİM",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "akis",
+   "say": "Amerika'ya göre fazla mal ucuza satılıyor, kendi fabrikaları zorlanıyor.",
+   "p": {
+    "baslik": "ABD'nin gerekçesi",
+    "adimlar": [
+     {
+      "ikon": "📦",
+      "metin": "Fazla *üretim*"
+     },
+     {
+      "ikon": "🏷️",
+      "metin": "~Ucuz~ ihracat"
+     },
+     {
+      "ikon": "🏚️",
+      "metin": "ABD fabrikası *zorlanır*"
+     }
+    ]
+   },
+   "etiket": "GEREKÇE",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "liste",
+   "say": "Listede Çin, Avrupa Birliği, Japonya, Kore ve Meksika da var.",
+   "p": {
+    "baslik": "16 ekonomi",
+    "satirlar": [
+     {
+      "ikon": "🌏",
+      "metin": "Asya",
+      "deger": "Çin, Japonya, Kore +9",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🌍",
+      "metin": "Avrupa",
+      "deger": "AB, İsviçre, Norveç",
+      "renk": "sari"
+     },
+     {
+      "ikon": "🌎",
+      "metin": "Amerika",
+      "deger": "Meksika",
+      "renk": "sari"
+     }
+    ],
+    "not": "Hindistan, Tayvan, Vietnam, Tayland, Malezya, Endonezya, Singapur, Bangladeş, Kamboçya"
+   },
+   "etiket": "HEDEFTEKİLER",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "neden",
+   "tip": "baslik",
+   "say": "Oranlar henüz resmi değil. Bazı ülkeler için yüzde on beş ve üstü konuşuluyor.",
+   "p": {
+    "ikon": "📊",
+    "satirlar": [
+     "BEKLENEN ORAN",
+     "*%15 VE ÜSTÜ*"
+    ],
+    "boy": 100,
+    "not": "Basın haberleri · tahmini, resmi değil"
+   },
+   "etiket": "BEKLENTİ",
+   "kaynak": "K7"
+  },
+  {
+   "bolum": "neden",
+   "tip": "takvim",
+   "say": "Soruşturmanın kanuni son tarihi ise on bir Mart iki bin yirmi yedi.",
+   "p": {
+    "gun": "11",
+    "ay": "MART 2027",
+    "gunadi": "PERŞEMBE",
+    "not": "Karar için *en geç* bu tarih"
+   },
+   "etiket": "SON TARİH",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "soru",
+   "say": "Peki bu vergi kavgası bizi nasıl etkiler?",
+   "p": {
+    "ikon": "🇹🇷",
+    "metin": "PEKİ BİZİ\n*NASIL ETKİLER?*",
+    "boy": 104
+   },
+   "etiket": "BİZE ETKİSİ"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Önce iyi haber: Türkiye, bu yeni on altılık listede yok.",
+   "p": {
+    "ikon": "✅",
+    "satirlar": [
+     "TÜRKİYE",
+     "+LİSTEDE YOK+"
+    ],
+    "boy": 110,
+    "not": "Aşırı kapasite soruşturması"
+   },
+   "etiket": "İYİ HABER",
+   "kaynak": "K6"
+  },
+  {
+   "bolum": "etki",
+   "tip": "sayi",
+   "say": "Türkiye, Amerika'ya yılda on altı milyar doların üstünde mal satıyor.",
+   "p": {
+    "ikon": "📦",
+    "etiket": "Türkiye'nin ABD'ye ihracatı · 2024",
+    "deger": 16.4,
+    "onek": "",
+    "sonek": " milyar $",
+    "ondalik": 1,
+    "renk": "sari",
+    "sayma": true,
+    "not": "TÜİK verisi"
+   },
+   "etiket": "İHRACAT",
+   "kaynak": "K9"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Rakipler yeni vergi öderse, Türk malı Amerika'da görece ucuz kalabilir.",
+   "p": {
+    "baslik": "Olası senaryo",
+    "adimlar": [
+     {
+      "ikon": "🧾",
+      "metin": "Rakibe ~yeni vergi~"
+     },
+     {
+      "ikon": "🏷️",
+      "metin": "Türk malı görece *ucuz*"
+     },
+     {
+      "ikon": "📈",
+      "metin": "Sipariş +artabilir+"
+     }
+    ]
+   },
+   "etiket": "FIRSAT?"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Ama unutma: Yüzde on iki buçukluk vergi zaten ödeniyor.",
+   "p": {
+    "ikon": "🧾",
+    "satirlar": [
+     "MEVCUT VERGİ",
+     "~%12,5 DEVAM EDİYOR~"
+    ],
+    "boy": 92
+   },
+   "etiket": "ÖTE YANDAN",
+   "kaynak": "K5"
+  },
+  {
+   "bolum": "etki",
+   "tip": "akis",
+   "say": "Ticaret savaşı büyürse dünya ekonomisi yavaşlayabilir. Bu, ihracatçıyı da etkileyebilir.",
+   "p": {
+    "baslik": "Kavga büyürse",
+    "adimlar": [
+     {
+      "ikon": "🌐",
+      "metin": "Ticaret ~yavaşlar~"
+     },
+     {
+      "ikon": "📉",
+      "metin": "Talep ~düşebilir~"
+     },
+     {
+      "ikon": "🏭",
+      "metin": "İhracatçı *etkilenebilir*"
+     }
+    ]
+   },
+   "etiket": "RİSK"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Kısacası oranlar açıklanınca, kazanan ve kaybeden netleşecek.",
+   "p": {
+    "ikon": "🔎",
+    "satirlar": [
+     "ORANLAR GELİNCE",
+     "*TABLO NETLEŞECEK*"
+    ],
+    "boy": 96
+   },
+   "etiket": "TAKİP"
+  },
+  {
+   "bolum": "etki",
+   "tip": "baslik",
+   "say": "Yani vergi iptal edildi ama sadece kapı değişti. Vergi kaldı.",
+   "p": {
+    "ikon": "🚪",
+    "satirlar": [
+     "KAPI DEĞİŞTİ",
+     "~VERGİ KALDI~"
+    ],
+    "boy": 110
+   },
+   "etiket": "ÖZET"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "baslik",
+   "say": "Öğrenmek istediğin başka bir konu varsa yorumlara yaz, biz anlatalım.",
+   "p": {
+    "ikon": "💬",
+    "satirlar": [
+     "ÖĞRENMEK İSTEDİĞİNİ",
+     "*YORUMLARA YAZ*"
+    ],
+    "boy": 88
+   },
+   "etiket": "YORUM"
+  },
+  {
+   "bolum": "kapanis",
+   "tip": "kapanis",
+   "say": "Abone ol, sıradaki videoyu kaçırma. Merak ettiysen, tıkla bakalım.",
+   "p": {
+    "metin": "TIKLA *BAKALIM*",
+    "alt": "Gündemi basitçe öğrenmek için abone ol"
+   }
+  }
+ ],
+ "kaynaklar": {
+  "K1": "ABD Yüksek Mahkemesi 20 Şubat 2026, 6–3, Learning Resources v. Trump: IEEPA gümrük vergisi yetkisi vermiyor — https://budgetmodel.wharton.upenn.edu/p/2026-02-20-supreme-court-tariff-ruling/ ; https://www.hklaw.com/en/insights/publications/2026/02/supreme-court-strikes-down-ieepa-tariffs ; https://www.millerchevalier.com/publication/supreme-court-finds-ieepa-tariffs-unlawful-what-you-need-know",
+  "K2": "Vergiyi ithalatçı öder; iade talepleri ve ABD Ticaret Mahkemesi (CIT) süreci — https://www.aoshearman.com/en/insights/scotus-rejects-ieepa-tariffs-refund-opportunities-and-uncertainty-emerge ; https://www.flexport.com/blog/the-supreme-courts-ieepa-tariff-ruling-next-steps-potential-refunds-and/",
+  "K3": "Bölüm 122: %10 küresel vergi 24 Şubat 2026, en fazla 150 gün; 24 Temmuz 2026'da sona erdi — https://www.whitecase.com/insight-alert/trump-administration-imposes-10-section-122-tariff-plan-replace-ieepa-tariffs ; https://www.ttnews.com/articles/trump-tariffs-expire-july-24 ; https://aa.com.tr/en/economy/explainer-why-trump-s-temporary-global-tariffs-are-expiring-and-what-comes-next/4006931",
+  "K4": "1974 Ticaret Kanunu Bölüm 301: soruşturma → haksız uygulama tespiti → yaptırım — https://en.wikipedia.org/wiki/Section_301_of_the_Trade_Act_of_1974 ; https://www.congress.gov/crs-product/IF12125",
+  "K5": "Zorla çalıştırma 301 vergileri 24 Temmuz 2026: 60 ülke, %10 / %12,5; Türkiye %12,5 (Hogan Lovells tablosunda %13) — https://htshero.com/tariffs/section-301-forced-labor ; https://turkishpress.com/us-forced-labor-tariffs-turkiye ; https://zonos.com/docs/guides/country-guides/united-states/section-301-forced-labor ; https://www.bakerdonelson.com/forced-labor-section-301-tariffs-imposed-to-replace-expiring-section-122-tariffs-what-importers-need-to-know",
+  "K6": "Aşırı kapasite 301 soruşturması 11 Mart 2026, 16 ekonomi (Türkiye yok), karar en geç 11 Mart 2027 — https://ustr.gov/about/policy-offices/press-office/press-releases/2026/march/ustr-initiates-section-301-investigations-relating-structural-excess-capacity-and-production ; https://ecovadis.com/blog/section-301-structural-excess-capacity/ ; https://www.endeks24.com/abd-yeni-gumruk-vergilerini-aciklamaya-hazirlaniyor-16-ortak-sorusturmada ; https://dimerco.com/news-press/section-301-excess-capacity-tariffs-expected-to-be-announced-for-16-countries/",
+  "K7": "Açıklama bu hafta bekleniyor, oranlar resmi değil; bazı ülkeler için %15 ve üstü konuşuluyor (tahmini) — https://www.dunya.com/ekonomi/trumptan-16-ekonomiye-yeni-gumruk-vergisi-hazirligi-haberi-848785 ; https://startupfortune.com/white-house-readies-new-section-301-tariffs-on-china-the-eu-and-others/ ; https://www.fxstreet.com.tr/news/abd-cin-ve-diger-ticaret-ortaklarina-yonelik-yeni-gumruk-tarifeleri-hazirliyor-wsj-202611241339",
+  "K8": "24 Kasım: Nasdaq 100 vadelileri %2'nin üzerinde düştü, çip hisseleri öncü — https://www.fxstreet.com.tr/news/abd-cin-ve-diger-ticaret-ortaklarina-yonelik-yeni-gumruk-tarifeleri-hazirliyor-wsj-202611241339 ; https://kucoin.com/tr/news/flash/trump-s-proposed-tariffs-trigger-nasdaq-selloff-ai-and-chip-stocks-hit-hardest ; https://www.bloomberght.com/sondakika",
+  "K9": "Türkiye'nin ABD'ye ihracatı 2024: 16,4 milyar $ (TÜİK) — https://www.tim.org.tr/files/downloads/Ulke_Bilgi_Notları/ABD_Ulke_Bilgi_Notu.pdf ; https://www.sozcu.com.tr/ihracat-artisinda-abd-basi-cekti-p128673"
+ }
+}
