@@ -14,6 +14,9 @@ Bu klasörde sadece kareleri çizip videoyu birleştirmek kalıyor. Ekran kartı
 
 ## Çalıştır
 ```
+node gpu-test.cjs         # önce: ekran kartı kullanılıyor mu? (NVIDIA/AMD/Intel adı görünmeli)
+```
+```
 node render.cjs 4          # kareler → fr/   (yaklaşık 3011 kare)
 python bitir.py vo.mp3     # → final.mp4 (altyazı + müzik + ses)
 ```
