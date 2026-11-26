@@ -23,22 +23,22 @@ function mergeG(list) { const P = [], N = [], C = []; const col = new THREE.Colo
 const PAL = { live: { b: 0x14305e, b2: 0x1f4a86, leg: 0x2c5a9e, tip: 0xf0a640, ant: 0xc8642c, eye: 0x0a0a0a },
   cooked: { b: 0xd2381c, b2: 0xe2562a, leg: 0xe8642e, tip: 0xf6dcb4, ant: 0xd2381c, eye: 0x1a0a06 } };
 const SPH = (w = 14, h = 9) => new THREE.SphereGeometry(1, w, h), CYL = (a, b, h, s = 8) => new THREE.CylinderGeometry(a, b, h, s), CON = (r, h, s = 10) => new THREE.ConeGeometry(r, h, s);
-function partsBody(P, lo) { const s = lo ? [8, 5] : [16, 10], L = [];
+function partsBody(P, lo) { const s = lo ? [7, 4] : [16, 10], L = [];
   L.push([SPH(...s), MX(.32, .05, 0, 0, 0, 0, .64, .3, .3), P.b]);
   L.push([SPH(...s), MX(.62, .1, 0, 0, 0, -.12, .32, .2, .22), P.b2]);
   L.push([CON(.1, .42, 8), MX(1.0, .12, 0, 0, 0, -Math.PI / 2), P.b]);
   for (const s2 of [-1, 1]) L.push([SPH(6, 4), MX(.86, .2, s2 * .1, 0, 0, 0, .055), P.eye]);
-  for (let j = 0; j < 4; j++) for (const s2 of [-1, 1]) { const x = .52 - j * .17; L.push([CYL(.025, .018, .55, 5), MX(x, -.2, s2 * .32, s2 * 1.05, 0, 0), P.leg]); L.push([CYL(.018, .012, .4, 5), MX(x + .02, -.36, s2 * .58, s2 * .25, 0, 0), P.leg]); }
+  for (let j = 0; j < (lo ? 2 : 4); j++) for (const s2 of [-1, 1]) { const x = .52 - j * (lo ? .3 : .17); L.push([CYL(.025, .018, .55, 5), MX(x, -.2, s2 * .32, s2 * 1.05, 0, 0), P.leg]); L.push([CYL(.018, .012, .4, 5), MX(x + .02, -.36, s2 * .58, s2 * .25, 0, 0), P.leg]); }
   for (const s2 of [-1, 1]) { const d = V(1, .12, s2 * .32).normalize(), L0 = 2.3; const c = V(1.0, .14, s2 * .07).add(d.clone().multiplyScalar(L0 / 2));
     _o.position.copy(c); _o.quaternion.setFromUnitVectors(V(0, 1, 0), d); _o.scale.set(1, 1, 1); _o.updateMatrix(); L.push([CYL(.006, .02, L0, 4), _o.matrix.clone(), P.ant]);
     const d2 = V(1, .4, s2 * .1).normalize(); _o.position.copy(V(1.0, .16, s2 * .04).add(d2.clone().multiplyScalar(.3))); _o.quaternion.setFromUnitVectors(V(0, 1, 0), d2); _o.updateMatrix(); L.push([CYL(.006, .012, .6, 4), _o.matrix.clone(), P.ant]); }
-  for (let k = 0; k < 10; k++) L.push([SPH(5, 3), MX(.1 + PR[k][0] * .5, .05 + PR[k][1] * .2, (PR[k][2] - .5) * .5, 0, 0, 0, .035), 0xc9b04a, 0]);
+  if (!lo) for (let k = 0; k < 10; k++) L.push([SPH(5, 3), MX(.1 + PR[k][0] * .5, .05 + PR[k][1] * .2, (PR[k][2] - .5) * .5, 0, 0, 0, .035), 0xc9b04a, 0]);
   return L; }
-function partsTail(P, lo) { const s = lo ? [8, 5] : [14, 9], L = [];
+function partsTail(P, lo) { const s = lo ? [6, 4] : [14, 9], L = [];
   for (let i = 0; i < 6; i++) L.push([SPH(...s), MX(-.08 - i * .17, .03 - i * .012, 0, 0, 0, 0, .13, .2 - i * .014, .25 - i * .02), i % 2 ? P.b2 : P.b]);
   for (let k = -2; k <= 2; k++) { const a = k * .38; L.push([SPH(...s), MX(-1.12 - Math.cos(a) * .14, -.03, Math.sin(a) * .16, 0, a, 0, .22, .025, .075), P.b2]); }
   return L; }
-function partsClaw(P, s2, lo) { const s = lo ? [8, 5] : [16, 10], L = [];
+function partsClaw(P, s2, lo) { const s = lo ? [7, 4] : [16, 10], L = [];
   L.push([CYL(.06, .055, .42, 6), MX(.16, 0, s2 * .11, 0, -s2 * .55, Math.PI / 2), P.b]);
   L.push([CYL(.07, .06, .36, 6), MX(.48, .02, s2 * .27, 0, -s2 * .25, Math.PI / 2), P.b2]);
   L.push([SPH(...s), MX(.86, .02, s2 * .36, 0, -s2 * .12, 0, .3, .13, .17), P.b]);
@@ -52,7 +52,7 @@ const lobMatC = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 
 function lobsterGeoLo(P) { const L = [...partsBody(P, 1), ...partsTail(P, 1).map(([g, m, c]) => [g, MX(-.24, 0, 0).multiply(m), c])];
   for (const s2 of [-1, 1]) { const sh = MX(.72, -.02, s2 * .16); partsClaw(P, s2, 1).forEach(([g, m, c, v]) => L.push([g, sh.clone().multiply(m), c, v])); partsFinger(P).forEach(([g, m, c, v]) => L.push([g, sh.clone().multiply(MX(1.2, .06, s2 * .43, 0, 0, .15)).multiply(m), c, v])); }
   return mergeG(L); }
-const LOGEO = lobsterGeoLo(PAL.live);
+const LOGEO = lobsterGeoLo(PAL.live); window.LOGEO = LOGEO; window.RND = renderer;
 // animasyonlu kahraman ıstakoz
 function makeLobster(P = PAL.live, mat = lobMat) {
   const g = new THREE.Group(); g.add(new THREE.Mesh(mergeG(partsBody(P)), mat));
@@ -301,4 +301,6 @@ function apply2(st, T) {
     bigTxt("%90", sm((k - .55) / .1), 520, "#ffd54a", 240); }
 }
 function bigTxt(txt, al, y = 560, col = "#fff", size = 220, x = 540) { if (al <= 0) return; LN.save(); LN.globalAlpha = al; LN.textAlign = "center"; LN.font = `${size}px AN`; LN.fillStyle = col; LN.shadowColor = "rgba(0,0,0,.55)"; LN.shadowBlur = 30; LN.fillText(txt, x, y); LN.restore(); LN.textAlign = "left"; }
-const _applyBase = apply; apply = (st, T) => { _applyBase(st, T); apply2(st, T); };
+const _applyBase = apply; apply = (st, T) => { _applyBase(st, T); apply2(st, T); if (window.DBG) window.DBG(); };
+
+
